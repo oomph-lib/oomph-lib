@@ -350,8 +350,12 @@ namespace oomph
     // Set the replacement blocks.
     for (unsigned d = 0; d < Dim; d++) 
     {
+      // The dof-block located in the block-ordering.
       unsigned block_i = 2*d+1;
-      this->set_replacement_dof_block(block_i,block_i,
+
+      // The dof-block located in the dof-ordering.
+      unsigned dof_block_i = Dim + d;
+      this->set_replacement_dof_block(dof_block_i,dof_block_i,
                                       solid_matrix_pt(block_i,block_i));
     }
 
@@ -429,8 +433,12 @@ namespace oomph
     // Set the replacement blocks.
     for (unsigned d = 0; d < Dim; d++) 
     {
+      // The dof-block located in the block-ordering.
       unsigned block_i = 2*d+1;
-      this->set_replacement_dof_block(block_i,block_i,
+
+      // Then dof-block located in the dof-ordering.
+      unsigned dof_block_i = Dim + d;
+      this->set_replacement_dof_block(dof_block_i,dof_block_i,
                                       solid_matrix_pt(block_i,block_i));
     }
 

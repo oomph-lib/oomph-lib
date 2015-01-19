@@ -424,6 +424,7 @@ namespace oomph
   /// Constructor for SimpleOneDofOnly
   SimpleOneDofOnly() : BlockPreconditioner<MATRIX>()
    {
+     Subsidiary_preconditioner_pt = 0;
    } // end_of_constructor
 
  
@@ -465,7 +466,7 @@ namespace oomph
   
   /// \short Vector of pointers to preconditioners/inexact solvers 
   /// for each diagonal block
-  Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
+  Preconditioner* Subsidiary_preconditioner_pt;
 
  };
 
@@ -494,7 +495,7 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
-#endif 
+#endif
 
 
   // Set up the generic block look up scheme
@@ -522,27 +523,205 @@ namespace oomph
   // Extract the number of blocks
   unsigned nblock_types = this->nblock_types();
 
-  // Resize the storage for the diagonal blocks
-  Diagonal_block_preconditioner_pt.resize(nblock_types);
-
-  // Create the subsidiary preconditioners
-  for (unsigned i=0;i<nblock_types;i++)
-   {
-    Diagonal_block_preconditioner_pt[i] = new SuperLUPreconditioner;
-   }
+  Subsidiary_preconditioner_pt = new SuperLUPreconditioner;
 
   // Setup preconditioners
-  for (unsigned i=0;i<nblock_types;i++)
+  CRDoubleMatrix block = this->get_block(0,0);
+    
+  // Set up preconditioner (i.e. lu-decompose the block)
+  Subsidiary_preconditioner_pt->setup(&block);
+ }
+ 
+ 
+ //============================================================================
+ /// Preconditioner solve for the diagonal preconditioner: 
+ /// Apply preconditioner to r and return z, so that P z = r, where
+ /// P is the block diagonal matrix constructed from the original 
+ /// linear system.
+ //============================================================================
+ template<typename MATRIX> 
+ void SimpleOneDofOnly<MATRIX>::
+ preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ {   
+  // Split up rhs vector into sub-vectors, re-arranged to match
+  // the matrix blocks
+  DoubleVector block_r;
+  this->get_block_vector(0,r,block_r);
+
+  // Solution of block solves
+  DoubleVector block_z;
+  Subsidiary_preconditioner_pt->preconditioner_solve(block_r, block_z);
+  
+  // Copy solution in block vectors block_z back to z
+  this->return_block_vector(0,block_z,z);
+ }
+
+ //=========================start_of_clean_up_for_simple=======================
+ /// The clean up function.
+ //============================================================================
+ template<typename MATRIX> 
+ void SimpleOneDofOnly<MATRIX>::clean_up_my_memory()
+ { 
+  // Delete diagonal preconditioners (approximate solvers)
+    if(Subsidiary_preconditioner_pt!=0)
+     {
+      delete Subsidiary_preconditioner_pt;
+      Subsidiary_preconditioner_pt=0;
+     }
+ } // End of clean_up_my_memory function.
+ 
+
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+
+
+//=========================start_of_diagonal_class=============================
+/// \short CoarseTwoIntoOne block diagonal preconditioner which works with
+/// only two DOF types. If more than two DOF types are passed to this
+/// preconditioner then they must be coarsened via a parameter to the 
+/// function turn_into_subsidiary_block_preconditioner(...).
+//=============================================================================
+ template<typename MATRIX> 
+ class CoarseTwoIntoOne : public BlockPreconditioner<MATRIX>
+ {
+  
+ public :
+  
+  /// Constructor for CoarseTwoIntoOne
+  CoarseTwoIntoOne() : BlockPreconditioner<MATRIX>()
+   {
+     Subsidiary_preconditioner_pt = 0;
+   } // end_of_constructor
+
+ 
+  /// Destructor - delete the diagonal solvers (subsidiary preconditioners)
+  ~CoarseTwoIntoOne()
+   {
+    this->clean_up_my_memory();
+   }
+
+  /// clean up the memory
+  virtual void clean_up_my_memory();
+     
+  /// Broken copy constructor
+  CoarseTwoIntoOne(const CoarseTwoIntoOne&) 
+   { 
+    BrokenCopy::broken_copy("CoarseTwoIntoOne");
+   } 
+ 
+  /// Broken assignment operator
+  void operator=(const CoarseTwoIntoOne&) 
+   {
+    BrokenCopy::broken_assign("CoarseTwoIntoOne");
+   }
+
+
+  /// \short Setup the preconditioner 
+  void setup();
+  
+  // This is put in to override the default behaviour of name hiding, which
+  // "hides", but does not override, base class functions with the same name
+  // as a derived class function even if the argument differ to allow for 
+  // overloading. This is not a problem when using base class pointers.
+  using Preconditioner::setup;
+
+  /// Apply preconditioner to r, i.e. return solution of P z = r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+  
+ private :
+  
+  /// \short Vector of pointers to preconditioners/inexact solvers 
+  /// for each diagonal block
+  Preconditioner* Subsidiary_preconditioner_pt;
+
+ };
+
+ //=========================start_of_setup_for_simple==========================
+ /// The setup function.
+ //============================================================================
+ template<typename MATRIX> 
+ void CoarseTwoIntoOne<MATRIX>::setup()
+ {
+  // clean the memory
+  this->clean_up_my_memory();
+
+#ifdef PARANOID
+  // This preconditioner only works for 2 dof types
+  unsigned n_dof_types = this->ndof_types();
+
+  // Output the number of dof types.
+  std::cout << "CoarseTwoIntoOne ndof_types: " << n_dof_types << std::endl; 
+  
+  if (n_dof_types!=2)
+   {
+    std::stringstream tmp;
+    tmp << "This preconditioner only works for problems with 2 dof types\n"
+        << "Yours has " << n_dof_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+
+
+  // Set up the generic block look up scheme
+  this->block_setup();
+
+
+#ifdef PARANOID
+  unsigned n_block_types = this->nblock_types();
+
+  std::cout << "CoarseTwoIntoOne nblock_types: " 
+            << n_block_types << std::endl; 
+
+  if (n_block_types!=2)
+   {
+    std::stringstream tmp;
+    tmp << "There are supposed to be two block types.\n"
+        << "Yours has " << n_block_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+
+
+  // Extract the number of blocks
+  unsigned nblock_types = this->nblock_types();
+
+  // Create the subsidiary preconditioners
+//   {
+    SimpleOneDofOnly<CRDoubleMatrix>* block_prec_pt = 
+      new SimpleOneDofOnly<CRDoubleMatrix>;
+    Subsidiary_preconditioner_pt = block_prec_pt;
+//   }
+
+  // Setup preconditioners
+//  for (unsigned i=0;i<nblock_types;i++)
    {
     // Get block -- this makes a copy of the relevant entries in the
     // full Jacobian (i.e. the matrix of the linear system we're
     // actually trying to solve); we can do with this copy whatever
     // we want...
-    CRDoubleMatrix block;
-    this->get_block(i,i,block);
+//    CRDoubleMatrix block;
+//    this->get_block(i,i,block);
     
+    unsigned n_sub_dof_types = 1;
+    Vector<Vector<unsigned> >doftype_coarsen_map(n_sub_dof_types);
+    doftype_coarsen_map[0].resize(2);
+    doftype_coarsen_map[0][0]=0;
+    doftype_coarsen_map[0][1]=1;
+
+    Vector<unsigned>doftype_in_master(2);
+    doftype_in_master[0] = 0;
+    doftype_in_master[1] = 1;
+
+    block_prec_pt->turn_into_subsidiary_block_preconditioner(this,
+        doftype_in_master,doftype_coarsen_map);
+
     // Set up preconditioner (i.e. lu-decompose the block)
-    Diagonal_block_preconditioner_pt[i]->setup(&block);
+    block_prec_pt->setup(this->matrix_pt());
     
     // Done with this block now, so the diagonal block that we extracted
     // above can go out of scope. Its LU decomposition (which is the only 
@@ -560,51 +739,59 @@ namespace oomph
  /// linear system.
  //============================================================================
  template<typename MATRIX> 
- void SimpleOneDofOnly<MATRIX>::
+ void CoarseTwoIntoOne<MATRIX>::
  preconditioner_solve(const DoubleVector& r, DoubleVector& z)
  {   
-  // Get number of blocks
-  unsigned nblock_types = this->nblock_types();
-
-  // Split up rhs vector into sub-vectors, re-arranged to match
-  // the matrix blocks
-  Vector<DoubleVector> block_r;
-  this->get_block_vectors(r,block_r);
-
-  // Solution of block solves
-  Vector<DoubleVector> block_z(nblock_types);
-  for (unsigned i = 0; i < nblock_types; i++)
-   {
-    Diagonal_block_preconditioner_pt[i]->preconditioner_solve(block_r[i],
-                                                              block_z[i]);
-   }
-  
-  // Copy solution in block vectors block_z back to z
-  this->return_block_vectors(block_z,z);
+   Subsidiary_preconditioner_pt->preconditioner_solve(r,z);
  }
 
  //=========================start_of_clean_up_for_simple=======================
  /// The clean up function.
  //============================================================================
  template<typename MATRIX> 
- void SimpleOneDofOnly<MATRIX>::clean_up_my_memory()
+ void CoarseTwoIntoOne<MATRIX>::clean_up_my_memory()
  { 
   // Delete diagonal preconditioners (approximate solvers)
-  unsigned n_block = Diagonal_block_preconditioner_pt.size();
-  for (unsigned i=0;i<n_block;i++)
-   {
-    if(Diagonal_block_preconditioner_pt[i]!=0)
+    if(Subsidiary_preconditioner_pt!=0)
      {
-      delete Diagonal_block_preconditioner_pt[i];
-      Diagonal_block_preconditioner_pt[i]=0;
+      delete Subsidiary_preconditioner_pt;
+      Subsidiary_preconditioner_pt=0;
      }
-   }
  } // End of clean_up_my_memory function.
- 
 
- ///////////////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2136,7 +2323,7 @@ namespace oomph
         // number of rows in block matrix (j,i).
         // We use the actual nrow, not the local one here as this block may
         // need to be gotten from another processor.
-        const unsigned long block_ncol 
+        const unsigned long dof_block_ncol 
           = this->dof_block_distribution_pt(j)->nrow();
 
         // Storage for replacement matrices:
@@ -2152,7 +2339,7 @@ namespace oomph
         replacement_row_start.resize(dof_block_nrow_local+1,0);
 
         Replacement_matrix_pt(i,j)=
-         new CRDoubleMatrix(dof_block_dist_pt, block_ncol, replacement_value,
+         new CRDoubleMatrix(dof_block_dist_pt, dof_block_ncol, replacement_value,
                             replacement_column_index, replacement_row_start);
 
         // Replace, note that this is the DOF-ordering, as opposed to the
@@ -2626,11 +2813,9 @@ namespace oomph
   // Clean up memory
   this->clean_up_my_memory();
 
-
-#ifdef PARANOID
-
   // This preconditioner only works for 5 dof types
   unsigned n_dof_types = this->ndof_types();
+#ifdef PARANOID
   if (n_dof_types!=5)
    {
     std::stringstream tmp;
@@ -2642,34 +2827,40 @@ namespace oomph
    }
 #endif
 
-  // Setup block.
-  this->block_setup();
 
   // Call block setup with the Vector [0,0,1,1,1] to:
   // Merge DOF types 0 and 1 into block type 0.
   // Merge DOF types 2, 3 and 4 into block type 1.
-  
+  Vector<unsigned> dof_to_block_map(n_dof_types,0);
+  dof_to_block_map[0] = 0;
+  dof_to_block_map[1] = 0;
+  dof_to_block_map[2] = 1;
+  dof_to_block_map[3] = 1;
+  dof_to_block_map[4] = 1;
+  this->block_setup(dof_to_block_map);
 
-  // Replacement.
-  Replacement_matrix_pt.resize(5,5,0);
-  for(unsigned i=0;i<5;i++)
+
+  // Replace all the off-diagonal DOF blocks.
+  Replacement_matrix_pt.resize(n_dof_types,n_dof_types,0);
+  for(unsigned i=0;i<n_dof_types;i++)
    {
-    for(unsigned j=0;j<5;j++)
+    for(unsigned j=0;j<n_dof_types;j++)
      {
       if(i!=j)
        {
-        // Get the block's (row!) distribution.
-        LinearAlgebraDistribution* block_dist_pt=
-         this->block_distribution_pt(i);
+        // Get the DOF block's (row!) distribution.
+        LinearAlgebraDistribution* dof_block_dist_pt=
+         this->dof_block_distribution_pt(i);
          
-        // Number of rows in block matrix (i,j).
-        unsigned long block_nrow = block_dist_pt->nrow_local();
+        // Number of rows in DOF block matrix (i,j).
+        const unsigned long dof_block_nrow = dof_block_dist_pt->nrow_local();
 
         // Number of columns in block matrix (i,j) is the same as the number
         // of rows in block matrix (j,i).
         // We use the actual nrow, not the local one here as this block may
         // need to be gotten from another processor.
-        unsigned long block_ncol = this->block_distribution_pt(j)->nrow();
+        const unsigned long dof_block_ncol 
+          = this->dof_block_distribution_pt(j)->nrow();
 
         // Storage for replacement matrices:
         // Values
@@ -2680,10 +2871,10 @@ namespace oomph
         Vector<int> replacement_row_start;
 
         // Need one row start per row, and one for the nnz, all of which are 0.
-        replacement_row_start.resize(block_nrow+1,0);
+        replacement_row_start.resize(dof_block_nrow+1,0);
 
         Replacement_matrix_pt(i,j)=
-         new CRDoubleMatrix(block_dist_pt, block_ncol, replacement_value,
+         new CRDoubleMatrix(dof_block_dist_pt, dof_block_ncol, replacement_value,
                             replacement_column_index, replacement_row_start);
 
         // Replace.
@@ -2749,36 +2940,36 @@ namespace oomph
 
   // Set up off diagonal
   // number of block types  
-  unsigned nblock_types = 2;
+  unsigned nblock_types = this->nblock_types();
   // Storage for the off diagonal matrix vector products.
   Off_diagonal_matrix_vector_products.resize(nblock_types,nblock_types,0);
-  // Data type indicating which blocks from the preconditioner matrix we want
-  VectorMatrix<BlockSelector> required_block(2,3);
-  for(unsigned i=0;i<3;i++)
-   {
-    for(unsigned j=0;j<2;j++)
-     {
-      required_block[j][i].select_block(j,i+2,true);   
-     }// End for over j (y)
-   }// End for loop over i (x)
+//  // Data type indicating which blocks from the preconditioner matrix we want
+//  VectorMatrix<BlockSelector> required_block(2,3);
+//  for(unsigned i=0;i<3;i++)
+//   {
+//    for(unsigned j=0;j<2;j++)
+//     {
+//      required_block[j][i].select_block(j,i+2,true);   
+//     }// End for over j (y)
+//   }// End for loop over i (x)
   
    
   // Get the block
-  CRDoubleMatrix block_matrix = this->get_concatenated_block(required_block);
+  CRDoubleMatrix block_matrix = this->get_block(0,1);
 
   // Copy the block into a "multiplier" class. If trilinos is being
   // used this should also be faster than oomph-lib's multiphys.
   Off_diagonal_matrix_vector_products(0,1) = new MatrixVectorProduct();
 
-  n_sub_dof_types=3;
-  Vector<unsigned> dof_map(n_sub_dof_types);
-  dof_map[0]=2;
-  dof_map[1]=3;
-  dof_map[2]=4;
-  block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
+//  n_sub_dof_types=3;
+//  Vector<unsigned> dof_map(n_sub_dof_types);
+//  dof_map[0]=2;
+//  dof_map[1]=3;
+//  dof_map[2]=4;
+//  block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
 
   this->setup_matrix_vector_product(
-   Off_diagonal_matrix_vector_products(0,1),&block_matrix,dof_map);
+   Off_diagonal_matrix_vector_products(0,1),&block_matrix,1);
  }// End of setup
  
  
@@ -2803,22 +2994,26 @@ namespace oomph
   // Split up rhs vector into sub-vectors, re-arranged to match
   // the matrix blocks
   DoubleVector r_0;
-  unsigned block0_size=2;
-  Vector<unsigned> block0_vec_number(block0_size);
-  for(unsigned i=0;i<block0_size;i++)
-   {
-    block0_vec_number[i]=i;
-   }
-  this->get_concatenated_block_vector(block0_vec_number,r,r_0);
-     
+//  unsigned block0_size=2;
+//  Vector<unsigned> block0_vec_number(block0_size);
+//  for(unsigned i=0;i<block0_size;i++)
+//   {
+//    block0_vec_number[i]=i;
+//   }
+//  this->get_concatenated_block_vector(block0_vec_number,r,r_0);
+ 
+  this->get_block_vector(0,r,r_0);
+
   DoubleVector z_1;
-  unsigned block1_size=3;
-  Vector<unsigned> block1_vec_number(block1_size);
-  for(unsigned i=0;i<block1_size;i++)
-   {
-    block1_vec_number[i]=i+2;
-   }
-  this->get_concatenated_block_vector(block1_vec_number,z,z_1);
+//  unsigned block1_size=3;
+//  Vector<unsigned> block1_vec_number(block1_size);
+//  for(unsigned i=0;i<block1_size;i++)
+//   {
+//    block1_vec_number[i]=i+2;
+//   }
+//  this->get_concatenated_block_vector(block1_vec_number,z,z_1);
+
+  this->get_block_vector(1,z,z_1);
 
   // Multiply by (0,1) off diagonal.
   DoubleVector temp;
@@ -2831,8 +3026,9 @@ namespace oomph
   // Therefore we first put the actual (2x1) rhs vector block_r[0] into the
   // "big" (4x1) vector big_r. 
   DoubleVector big_r(z.distribution_pt());
-  this->return_concatenated_block_vector(block0_vec_number,r_0,big_r);
-    
+//  this->return_concatenated_block_vector(block0_vec_number,r_0,big_r);
+   
+ this->return_block_vector(0,r_0,big_r); 
   // Now apply the subsidiary block preconditioner that acts on the
   // "top left" 2x2 sub-system (only!). The subsidiary preconditioner 
   // will extract the relevant (2x1) "sub-vectors" from the "big" (4x1)
@@ -2893,5 +3089,366 @@ namespace oomph
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
+ 
+
+
+//==================start_of_coarse_two_plus_two_plus_one_class================
+/// \short Block diagonal preconditioner for system with 5 dof types
+/// assembled into a 2x2 block system, with (0,0) block containing
+/// the first two dof types, the (1,1) block containing the remaining,
+/// (1,1) block is itself solved by a (2x2) block preconditioner!
+//=============================================================================
+ template<typename MATRIX> 
+ class OnePlusFourWithTwoCoarse : 
+  public BlockPreconditioner<MATRIX>
+ {
+  
+ public :
+  
+  /// Constructor for OnePlusFourWithTwoCoarse
+  OnePlusFourWithTwoCoarse() : 
+   BlockPreconditioner<MATRIX>(),
+   First_subsidiary_preconditioner_pt(0),
+   Second_subsidiary_preconditioner_pt(0)
+   {
+   } // end_of_constructor
+  
+  
+  /// Destructor - delete the diagonal solvers (subsidiary preconditioners)
+  ~OnePlusFourWithTwoCoarse()
+   {
+    this->clean_up_my_memory();
+   }    
+  
+  /// clean up the memory
+  virtual void clean_up_my_memory();
+
+  /// Broken copy constructor
+  OnePlusFourWithTwoCoarse
+  (const OnePlusFourWithTwoCoarse&) 
+   { 
+    BrokenCopy::broken_copy(
+     "OnePlusFourWithTwoCoarse");
+   } 
+  
+  /// Broken assignment operator
+  void operator=(const 
+                 OnePlusFourWithTwoCoarse&) 
+   {
+    BrokenCopy::broken_assign(
+     "OnePlusFourWithTwoCoarse");
+   }
+  
+  /// Apply preconditioner to r, i.e. return z such that P z = r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+  
+  /// \short Setup the preconditioner 
+  virtual void setup();
+  
+ private :
+  
+  /// \short Pointer to preconditioners/inexact solver
+  /// for (0,0) block
+  Preconditioner* First_subsidiary_preconditioner_pt;
+  
+  /// \short Pointer to preconditioners/inexact solver
+  /// for (1,1) block
+  Preconditioner* Second_subsidiary_preconditioner_pt;
+
+  // Matrix of pointers to replacement matrx blocks
+  DenseMatrix<CRDoubleMatrix*> Replacement_matrix_pt;
+
+  /// Matrix of matrix vector product operators for the off diagonals.
+  DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
+ };
+
+ //===============start_of_setup_for_coarse_two_plus_two_plus_one=============
+ /// The setup function.
+ //===========================================================================
+ template<typename MATRIX> 
+ void OnePlusFourWithTwoCoarse<MATRIX>::setup()
+ {
+  // Clean up memory
+  this->clean_up_my_memory();
+
+  // This preconditioner only works for 5 dof types
+  unsigned n_dof_types = this->ndof_types();
+#ifdef PARANOID
+  if (n_dof_types!=5)
+   {
+    std::stringstream tmp;
+    tmp << "This preconditioner only works for problems with 5 dof types\n"
+        << "Yours has " << n_dof_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+
+  // Call block setup with the Vector [0,1,1,1,1] to:
+  // Merge DOF type 0 into block type 0.
+  // Merge DOF types 1, 2, 3 and 4 into block type 1.
+  Vector<unsigned> dof_to_block_map(n_dof_types,0);
+  dof_to_block_map[0] = 0;
+  dof_to_block_map[1] = 1;
+  dof_to_block_map[2] = 1;
+  dof_to_block_map[3] = 1;
+  dof_to_block_map[4] = 1;
+  this->block_setup(dof_to_block_map);
+
+
+  // Replace all the off-diagonal DOF blocks.
+  Replacement_matrix_pt.resize(n_dof_types,n_dof_types,0);
+  for(unsigned i=0;i<n_dof_types;i++)
+   {
+    for(unsigned j=0;j<n_dof_types;j++)
+     {
+      if(i!=j)
+       {
+        // Get the DOF block's (row!) distribution.
+        LinearAlgebraDistribution* dof_block_dist_pt=
+         this->dof_block_distribution_pt(i);
+         
+        // Number of rows in DOF block matrix (i,j).
+        const unsigned long dof_block_nrow = dof_block_dist_pt->nrow_local();
+
+        // Number of columns in block matrix (i,j) is the same as the number
+        // of rows in block matrix (j,i).
+        // We use the actual nrow, not the local one here as this block may
+        // need to be gotten from another processor.
+        const unsigned long dof_block_ncol 
+          = this->dof_block_distribution_pt(j)->nrow();
+
+        // Storage for replacement matrices:
+        // Values
+        Vector<double> replacement_value(0);
+        // Column index
+        Vector<int> replacement_column_index(0);
+        // Row start
+        Vector<int> replacement_row_start;
+
+        // Need one row start per row, and one for the nnz, all of which are 0.
+        replacement_row_start.resize(dof_block_nrow+1,0);
+
+        Replacement_matrix_pt(i,j)=
+         new CRDoubleMatrix(dof_block_dist_pt, dof_block_ncol, replacement_value,
+                            replacement_column_index, replacement_row_start);
+
+        // Replace.
+        this->set_replacement_dof_block(i,j,Replacement_matrix_pt(i,j));
+       }// End of if
+     }// End of j loop.
+   }// End of i loop.
+
+  // Create the subsidiary preconditioners
+  //--------------------------------------
+
+  {
+   // First subsidiary precond is a block diagonal preconditioner itself.
+   // Put in owns cope so block_prec_pt goes out of scope.
+   UpperTriangular<CRDoubleMatrix>* block_prec_pt=
+    new UpperTriangular<CRDoubleMatrix>;
+   First_subsidiary_preconditioner_pt=block_prec_pt;
+
+   // Turn first_sub into a subsidiary preconditioner, declaring which
+   // of the five dof types in the present (master) preconditioner
+   // correspond to the dof types in the subsidiary block preconditioner
+   unsigned n_sub_dof_types=1;
+   Vector<unsigned> dof_map(n_sub_dof_types);
+   dof_map[0]=0;
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map); 
+   // Perform setup
+   block_prec_pt->setup(this->matrix_pt());
+  }
+  pause("Doing the new stuff"); 
+  
+
+  // Second subsidiary precond is a block diagonal preconditioner itself
+//  UpperTriangular<CRDoubleMatrix>* block_prec_pt=
+//   new UpperTriangular<CRDoubleMatrix>;
+//  Second_subsidiary_preconditioner_pt=block_prec_pt;
+
+
+  CoarseTwoIntoOne<CRDoubleMatrix>* block_prec_pt=
+   new CoarseTwoIntoOne<CRDoubleMatrix>;
+  Second_subsidiary_preconditioner_pt=block_prec_pt;
+
+
+  // 
+  unsigned n_sub_dof_types=2;
+  Vector<Vector<unsigned> > doftype_coarsen_map_coarse(n_sub_dof_types);
+  doftype_coarsen_map_coarse[0].resize(2);
+  doftype_coarsen_map_coarse[1].resize(2);
+  doftype_coarsen_map_coarse[0][0]=0;
+  doftype_coarsen_map_coarse[0][1]=1;
+  doftype_coarsen_map_coarse[1][0]=2;
+  doftype_coarsen_map_coarse[1][1]=3;
+
+  Vector<unsigned> doftype_in_master_coarse(4);
+  doftype_in_master_coarse[0]=1;
+  doftype_in_master_coarse[1]=2;
+  doftype_in_master_coarse[2]=3;
+  doftype_in_master_coarse[3]=4;
+   
+  block_prec_pt->
+   turn_into_subsidiary_block_preconditioner(this,doftype_in_master_coarse,
+                                             doftype_coarsen_map_coarse);
+  pause("About to setup prec"); 
+  
+  // Perform setup
+  block_prec_pt->setup(this->matrix_pt());
+  pause("Done the setup for CoarseTwoIntoOne"); 
+  
+
+  // Set up off diagonal
+  // number of block types  
+  unsigned nblock_types = this->nblock_types();
+  // Storage for the off diagonal matrix vector products.
+  Off_diagonal_matrix_vector_products.resize(nblock_types,nblock_types,0);
+//  // Data type indicating which blocks from the preconditioner matrix we want
+//  VectorMatrix<BlockSelector> required_block(2,3);
+//  for(unsigned i=0;i<3;i++)
+//   {
+//    for(unsigned j=0;j<2;j++)
+//     {
+//      required_block[j][i].select_block(j,i+2,true);   
+//     }// End for over j (y)
+//   }// End for loop over i (x)
+  
+   
+  // Get the block
+  CRDoubleMatrix block_matrix = this->get_block(0,1);
+
+  // Copy the block into a "multiplier" class. If trilinos is being
+  // used this should also be faster than oomph-lib's multiphys.
+  Off_diagonal_matrix_vector_products(0,1) = new MatrixVectorProduct();
+
+//  n_sub_dof_types=3;
+//  Vector<unsigned> dof_map(n_sub_dof_types);
+//  dof_map[0]=2;
+//  dof_map[1]=3;
+//  dof_map[2]=4;
+//  block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
+
+  this->setup_matrix_vector_product(
+   Off_diagonal_matrix_vector_products(0,1),&block_matrix,1);
+ }// End of setup
+ 
+ 
+ //=============================================================================
+ /// Preconditioner solve for the coarse one plus two plus two with subsidiary 
+ /// and replacement preconditioner: 
+ /// Apply preconditoner to r and return z, so that P z = r, where
+ /// P is the block diagonal matrix constructed from the original 
+ /// linear system.
+ //=============================================================================
+ template<typename MATRIX> 
+ void OnePlusFourWithTwoCoarse<MATRIX>::
+ preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ {   
+  // Now apply the subsidiary block preconditioner that acts on the
+  // "bottom right" 3x3 sub-system (only!). The subsidiary preconditioner 
+  // will extract the relevant (4x1) "sub-vectors" from the "big" (5x1)
+  // vector big_r and treat it as the rhs, r, of P z = r
+  // where P is 3x3 block diagonal.
+  Second_subsidiary_preconditioner_pt->preconditioner_solve(r,z);
+   
+  // Split up rhs vector into sub-vectors, re-arranged to match
+  // the matrix blocks
+  DoubleVector r_0;
+//  unsigned block0_size=2;
+//  Vector<unsigned> block0_vec_number(block0_size);
+//  for(unsigned i=0;i<block0_size;i++)
+//   {
+//    block0_vec_number[i]=i;
+//   }
+//  this->get_concatenated_block_vector(block0_vec_number,r,r_0);
+ 
+  this->get_block_vector(0,r,r_0);
+
+  DoubleVector z_1;
+//  unsigned block1_size=3;
+//  Vector<unsigned> block1_vec_number(block1_size);
+//  for(unsigned i=0;i<block1_size;i++)
+//   {
+//    block1_vec_number[i]=i+2;
+//   }
+//  this->get_concatenated_block_vector(block1_vec_number,z,z_1);
+
+  this->get_block_vector(1,z,z_1);
+
+  // Multiply by (0,1) off diagonal.
+  DoubleVector temp;
+  Off_diagonal_matrix_vector_products(0,1)->multiply(z_1,temp);
+  r_0 -= temp;
+
+  // Block solve for first diagonal block. Since the associated subsidiary 
+  // preconditioner is a block preconditioner itself, it will extract 
+  // the required (2x1) block rhs from a "big" (4x1) rhs vector, big_r.
+  // Therefore we first put the actual (2x1) rhs vector block_r[0] into the
+  // "big" (4x1) vector big_r. 
+  DoubleVector big_r(z.distribution_pt());
+//  this->return_concatenated_block_vector(block0_vec_number,r_0,big_r);
+   
+ this->return_block_vector(0,r_0,big_r); 
+  // Now apply the subsidiary block preconditioner that acts on the
+  // "top left" 2x2 sub-system (only!). The subsidiary preconditioner 
+  // will extract the relevant (2x1) "sub-vectors" from the "big" (4x1)
+  // vector big_r and treat it as the rhs, r, of P z = r
+  // where P is 2x2 block diagonal. Once the system is solved,
+  // the result is automatically put back into the appropriate places 
+  // of the "big" (4x1) vector z:
+  First_subsidiary_preconditioner_pt->preconditioner_solve(big_r,z);
+ }// End of solve
+ 
+ //=============start_of_clean_up_for_coarse_one_plus_two_plus_two===========
+/// The clean up function.
+//===========================================================================
+ template<typename MATRIX> 
+ void OnePlusFourWithTwoCoarse<MATRIX>::
+ clean_up_my_memory()
+ {     
+  // Delete diagonal preconditioners (approximate solvers)
+  if(First_subsidiary_preconditioner_pt!=0)
+   {
+    delete First_subsidiary_preconditioner_pt;
+    First_subsidiary_preconditioner_pt = 0;
+   }
+  if(Second_subsidiary_preconditioner_pt!=0)
+   {
+    delete Second_subsidiary_preconditioner_pt;
+    Second_subsidiary_preconditioner_pt = 0;
+   }
+
+  // Clean up the replacement matricies.
+  for(unsigned i=0,ni=Replacement_matrix_pt.nrow();i<ni;i++)
+   {
+    for(unsigned j=0,nj=Replacement_matrix_pt.ncol();j<nj;j++)
+     {
+      if(Replacement_matrix_pt(i,j)!=0)
+       {
+        delete Replacement_matrix_pt(i,j);
+        Replacement_matrix_pt(i,j)=0;
+       }
+     } // End loop over j.
+   } // End loop over i.
+
+  // Delete anything in Off_diagonal_matrix_vector_products
+  for(unsigned i=0,ni=Off_diagonal_matrix_vector_products.nrow();i<ni;i++)
+   {
+    for(unsigned j=0,nj=Off_diagonal_matrix_vector_products.ncol();j<nj;j++)
+     {
+      if(Off_diagonal_matrix_vector_products(i,j) != 0)
+       {    
+        delete Off_diagonal_matrix_vector_products(i,j);
+        Off_diagonal_matrix_vector_products(i,j) = 0;
+       }
+     }// End of loop over rows.
+   }// End of loop over columns.
+
+ } // End of clean_up_my_memory function.
+
+
 }
 #endif

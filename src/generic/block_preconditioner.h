@@ -2872,6 +2872,12 @@ class BlockSelector
   /// \short Set replacement dof-level blocks.
   /// Only dof-level blocks can be set. This is important due to how the
   /// dof type coarsening feature operates.
+  ///
+  /// IMPORTANT: The block indices (block_i, block_j) is the dof-level 
+  /// ordering, NOT the block-ordering. The block-ordering is determined by
+  /// the parameters given to block_setup(...).
+  /// The DOF-ordering is determined by the two-level ordering scheme of 
+  /// first the elements, then the meshes.
   void set_replacement_dof_block(const unsigned &block_i, 
       const unsigned &block_j,
       CRDoubleMatrix* replacement_dof_block_pt)
@@ -2887,18 +2893,35 @@ class BlockSelector
           OOMPH_EXCEPTION_LOCATION);
     }
 
-    // Check that the most fine grain mapping has been used in block_setup(...)
-    // i.e. nblock_types() == ndof_types()
-    if(ndof_types() != nblock_types())
+
+    // Range checking for replacement dof block.
+    unsigned para_ndof_types = this->ndof_types();
+
+    if((block_i >= para_ndof_types) ||
+       (block_j >= para_ndof_types))
     {
       std::ostringstream err_msg;
-      err_msg << "ndof_types() != nblock_types()\n"
-              << "Only the dof-level blocks can be replaced.\n"
-              << "Please re-think your blocking scheme.\n";
+      err_msg << "Replacement dof block (" 
+              << block_i << "," << block_j << ") is outside of range:\n"
+              << para_ndof_types;
       throw OomphLibError(err_msg.str(),
           OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
     }
+
+
+//    // Check that the most fine grain mapping has been used in block_setup(...)
+//    // i.e. nblock_types() == ndof_types()
+//    if(ndof_types() != nblock_types())
+//    {
+//      std::ostringstream err_msg;
+//      err_msg << "ndof_types() != nblock_types()\n"
+//              << "Only the dof-level blocks can be replaced.\n"
+//              << "Please re-think your blocking scheme.\n";
+//      throw OomphLibError(err_msg.str(),
+//          OOMPH_CURRENT_FUNCTION,
+//          OOMPH_EXCEPTION_LOCATION);
+//    }
 
     // Check that the replacement block pt is not null
     if(replacement_dof_block_pt == 0)
@@ -2925,7 +2948,8 @@ class BlockSelector
     // Check if the distribution matches. Determine which natural ordering dof
     // this should go to. I.e. we convert from dof-block index to dof index.
     // Luckily, this is stored in Block_to_dof_map_coarse.
-    const unsigned para_dof_block_i = Block_to_dof_map_coarse[block_i][0];
+//    const unsigned para_dof_block_i = Block_to_dof_map_coarse[block_i][0];
+    const unsigned para_dof_block_i = block_i;
 
     if(*dof_block_distribution_pt(para_dof_block_i) !=
        *replacement_dof_block_pt->distribution_pt() )
@@ -2938,6 +2962,23 @@ class BlockSelector
           OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
     }
+
+    // Now that we know the distribution of the replacement block is 
+    // correct, we check the number of columns.
+    const unsigned para_dof_block_j = block_j;
+    unsigned para_replacement_block_ncol = replacement_dof_block_pt->ncol();
+    unsigned para_required_ncol 
+      = dof_block_distribution_pt(para_dof_block_j)->nrow();
+    if(para_replacement_block_ncol != para_required_ncol)
+    {
+      std::ostringstream err_msg;
+      err_msg << "Replacement dof block has ncol = " 
+              << para_replacement_block_ncol << ".\n"
+              << "But required ncol is " << para_required_ncol << ".\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
 #endif
     
     // Block_to_dof_map_coarse[x][0] sense because we only can use this if 
@@ -2945,12 +2986,14 @@ class BlockSelector
     //
     // We use this indirection so that the placement of the pointer is 
     // consistent with internal_get_block(...).
-    const unsigned dof_block_i = Block_to_dof_map_coarse[block_i][0];
-    const unsigned dof_block_j = Block_to_dof_map_coarse[block_j][0];
+//    const unsigned dof_block_i = Block_to_dof_map_coarse[block_i][0];
+//    const unsigned dof_block_j = Block_to_dof_map_coarse[block_j][0];
 
-    Replacement_dof_block_pt(dof_block_i,dof_block_j) 
+//    Replacement_dof_block_pt(dof_block_i,dof_block_j) 
+//      = replacement_dof_block_pt;
+
+    Replacement_dof_block_pt(block_i,block_j) 
       = replacement_dof_block_pt;
-
   }
 
   /// \short Check if any of the meshes are distributed. This is equivalent

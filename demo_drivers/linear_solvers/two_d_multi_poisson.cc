@@ -352,6 +352,25 @@ else if (CommandLineArgs::
    // Set preconditioner
    solver_pt->preconditioner_pt()=block_prec_pt;
   }
+else if (CommandLineArgs::
+         command_line_flag_has_been_set(
+          "--one_plus_four_with_two_coarse"))
+  {
+   oomph_info << "Using 1+4 block diagonal preconditioner with \n"
+              << "two level coarsening.\n";
+
+   // Create preconditioner
+   OnePlusFourWithTwoCoarse<CRDoubleMatrix>* 
+    block_prec_pt = new 
+    OnePlusFourWithTwoCoarse<CRDoubleMatrix>;
+   
+   // Set mesh
+   block_prec_pt->set_nmesh(1);
+   block_prec_pt->set_mesh(0,mesh_pt());
+   
+   // Set preconditioner
+   solver_pt->preconditioner_pt()=block_prec_pt;
+  }
 else
   {
    // Create preconditioner
@@ -501,6 +520,10 @@ int main(int argc, char* argv[])
 
  CommandLineArgs::specify_command_line_flag
   ("--coarse_two_plus_two_plus_one");
+
+
+ CommandLineArgs::specify_command_line_flag
+  ("--one_plus_four_with_two_coarse");
 
  // Parse command line
  CommandLineArgs::parse_and_assign();
