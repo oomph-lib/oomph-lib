@@ -2067,7 +2067,14 @@ class BlockSelector
           OOMPH_EXCEPTION_LOCATION);
     }
 #endif
-    return mesh_pt(i)->ndof_types();
+    if(Ndof_types_in_mesh.size() == 0)
+    {
+      return mesh_pt(i)->ndof_types();
+    }
+    else
+    {
+      return Ndof_types_in_mesh[i];
+    }
   } // EOFunc ndof_types_in_mesh(...)
 
   /// \short Return true if this preconditioner is a subsidiary
