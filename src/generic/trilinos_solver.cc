@@ -97,10 +97,10 @@ namespace oomph
   unsigned rnrow_local = cr_matrix_pt->nrow_local();
   unsigned rnnz = cr_matrix_pt->nnz();
 
-  oomph_info << "rnrow = " << rnrow << std::endl; 
-  oomph_info << "rncol = " << rncol << std::endl; 
-  oomph_info << "rnrow_local = " << rnrow_local << std::endl; 
-  oomph_info << "rnnz = " << rnnz << std::endl; 
+//  oomph_info << "rnrow = " << rnrow << std::endl; 
+//  oomph_info << "rncol = " << rncol << std::endl; 
+//  oomph_info << "rnrow_local = " << rnrow_local << std::endl; 
+//  oomph_info << "rnnz = " << rnnz << std::endl; 
   
 
   const OomphCommunicator* const comm_pt = MPI_Helpers::communicator_pt();
@@ -111,7 +111,7 @@ namespace oomph
 
   if(Dump_matrices)
   {
-    oomph_info << "About to output jac and res" << std::endl;
+    oomph_info << "RAYRAY About to output jac and res" << std::endl;
 
     std::ostringstream jac_ss;
     jac_ss << "raw_lin_system/jac" 
@@ -165,6 +165,8 @@ namespace oomph
   // and use them.
   if(Use_replacement_mat_res)
   {
+    oomph_info << "RAYRAY using replacement" << std::endl; 
+    
     // Recall that we have my_rank and nproc
     std::ostringstream np_rank_oss;
     np_rank_oss << "np" << nproc << "r" << my_rank;
@@ -249,9 +251,9 @@ namespace oomph
       row_nline_file >> row_nlines;
     }
 
-    oomph_info << "val_nlines: " << val_nlines << std::endl; 
-    oomph_info << "col_nlines: " << col_nlines << std::endl; 
-    oomph_info << "row_nlines: " << row_nlines << std::endl; 
+//    oomph_info << "val_nlines: " << val_nlines << std::endl; 
+//    oomph_info << "col_nlines: " << col_nlines << std::endl; 
+//    oomph_info << "row_nlines: " << row_nlines << std::endl; 
    
     // Now we load in the values in file jac1_np<NP>r<R>_val, this is in
     // e.g. jac1_np2r0_val. This is located in val_fname_oss 
@@ -311,10 +313,6 @@ namespace oomph
     cr_matrix_pt->build_without_copy(rncol,val_nlines,
                                      val_array,col_array,row_array);
 
-    
-
-
-
     // Now build the residual this is stored in
     // res<TETNUM>_np<NP>r<RANK>
     std::ostringstream res_fname_oss;
@@ -350,8 +348,10 @@ namespace oomph
     
     pause("Hello again!"); 
     }
-
-
+  }
+  else
+  {
+    oomph_info << "RAYRAY not using replacements" << std::endl; 
   }
 
 
