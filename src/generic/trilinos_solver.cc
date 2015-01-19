@@ -47,6 +47,8 @@ namespace oomph
  void TrilinosAztecOOSolver::solve(Problem* const &problem_pt,
                                    DoubleVector &solution)
  {
+   oomph_info << "RAYRAY: solve() begin" << std::endl; 
+   
 
 
 //   MemoryUsage::doc_memory_usage("start of TrilinosAztecOOSolver::solve");
@@ -58,6 +60,8 @@ namespace oomph
 
   // if we were previously using a problem based solve then we should delete
   // the oomphlib matrix as it was created during the last solve
+  oomph_info << "RAYRAY: Using_problem_based_solve: " << Using_problem_based_solve << std::endl; 
+  
   if (Using_problem_based_solve)
    {
     delete Oomph_matrix_pt;
@@ -84,7 +88,26 @@ namespace oomph
   // create the jacobian
   CRDoubleMatrix* cr_matrix_pt = new CRDoubleMatrix;
   Oomph_matrix_pt = cr_matrix_pt;
+  oomph_info << "RAYRAY: About to get Jacobian" << std::endl;
   problem_pt->get_jacobian(residual,*cr_matrix_pt);
+
+  const OomphCommunicator* const comm_pt = MPI_Helpers::communicator_pt();
+  // my rank and number of processors. 
+  // This is used later for putting the data.
+  const unsigned my_rank = comm_pt->my_rank();
+  const unsigned nproc = comm_pt->nproc();
+
+  std::ostringstream jac_ss;
+  jac_ss << "raw_lin_system/jac" << Tetgen_number << "_np" << nproc << "r" << my_rank;
+  cr_matrix_pt->sparse_indexed_output(jac_ss.str(),15,true);
+
+  std::ostringstream residual_ss;
+  residual_ss << "raw_lin_system/residual" << Tetgen_number << "_np" << nproc << "r" << my_rank;
+  residual.output_local_values_with_offset(residual_ss.str(),15);
+
+
+  oomph_info << "RAYRAY: Got Jacobian" << std::endl; 
+  
   this->build_distribution(residual.distribution_pt());
 
   // record the end time and compute the matrix setup time
@@ -114,8 +137,12 @@ namespace oomph
 //   MemoryUsage::doc_memory_usage("before trilinos solve");
 //   MemoryUsage::insert_comment_to_continous_top("before trilinos solve ");
 
+  oomph_info << "RAYRAY: About to solve" << std::endl; 
+  
   // continue solving using matrix based solve function
   solve(Oomph_matrix_pt, residual, solution);
+  oomph_info << "RAYRAY: End of solve" << std::endl; 
+  
 
 
 //   MemoryUsage::doc_memory_usage("after trilinos solve");
@@ -129,6 +156,7 @@ namespace oomph
 //    "end of TrilinosAztecOOSolver::solve");
 
 
+   oomph_info << "RAYRAY: solve() end" << std::endl; 
 }
 
 
