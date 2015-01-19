@@ -1497,6 +1497,24 @@ public:
  /// \short Access function to max Newton iterations before giving up.
  unsigned& max_newton_iterations() {return Max_newton_iterations;}
 
+ /// \short Access function to Problem_is_nonlinear.
+ void problem_is_nonlinear(const bool& prob_lin)
+ {
+   Problem_is_nonlinear = prob_lin;
+ }
+
+ /// \short Access function to storage for convergence data.
+ ConvergenceData*& convergence_data_pt() {return Convergence_data_pt;}
+
+ /// \short Const access function to storage for convergence data.
+ const ConvergenceData* convergence_data_pt() const
+ {return Convergence_data_pt;}
+
+ /// \short Check if we can record convergence data (if a pointer exists
+ /// then record it).
+ bool record_convergence_data() const
+ {return convergence_data_pt() != 0;}
+
  /// \short Access function to max residuals in Newton iterations before giving
  /// up.
  double& max_residuals() {return Max_residuals;}
