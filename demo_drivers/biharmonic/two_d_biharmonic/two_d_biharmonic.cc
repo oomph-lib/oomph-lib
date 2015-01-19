@@ -467,6 +467,46 @@ void print_elemental_jacobian(const unsigned& element_number,
   //  }
 }
 
+
+void print_connectivity_matrix(const Problem* const problem_pt)
+{
+  const Mesh* const mesh_pt = problem_pt->mesh_pt();
+
+  const unsigned n_element = mesh_pt->nelement();
+  const unsigned n_ele_1d = sqrt(n_element);
+
+  // Set up out file
+  std::ostringstream filenamestream;
+  filenamestream << "biharmonic_connectivity_matrix_noel_"
+                 << n_ele_1d;
+
+   std::ofstream outfile;
+   outfile.open(filenamestream.str().c_str());
+
+  // Loop through the number of elements
+  for (unsigned ele_i = 0; ele_i < n_element; ele_i++) 
+  {
+      // Get pointer to the element
+  GeneralisedElement* elem_pt 
+    = mesh_pt->element_pt(ele_i);
+
+    // For each element, loop through it's degrees of freedom.
+    const unsigned n_element_dof = elem_pt->ndof();
+
+    for (unsigned dof_i = 0; dof_i < n_element_dof; dof_i++)
+    {
+      // Per dof, get the global equation number
+      unsigned long global_eqn = elem_pt->eqn_number(dof_i);
+
+      outfile << dof_i << " " << global_eqn << "\n";
+    }
+  }
+
+  outfile.close();
+
+}
+
+
 //=============================================================================
 /// main
 //=============================================================================
@@ -536,7 +576,10 @@ int main(int argc, char *argv[])
     }
     else
     {
-      print_elemental_jacobian(element_number,&problem);
+      // Print connectivity matrix for milan
+      print_connectivity_matrix(&problem);
+
+//      print_elemental_jacobian(element_number,&problem);
     }
   }
   else

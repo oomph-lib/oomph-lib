@@ -1220,7 +1220,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     double t_end_block_setup = TimingHelpers::timer();
     
     some_time_variable = t_end_block_setup - t_start_block_setup;
-    std::cout << "LGR_PREC:: block_setup: " << some_time_variable << std::endl;
+    oomph_info << "LGR_PREC:: block_setup: " << some_time_variable << std::endl;
     some_time_variable = 0.0;
 
 
