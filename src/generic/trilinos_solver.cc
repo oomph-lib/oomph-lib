@@ -90,12 +90,27 @@ namespace oomph
   Oomph_matrix_pt = cr_matrix_pt;
   oomph_info << "RAYRAY: About to get Jacobian" << std::endl;
   problem_pt->get_jacobian(residual,*cr_matrix_pt);
+  oomph_info << "RAYRAY: Got Jacobian" << std::endl;
+
+  unsigned rnrow = cr_matrix_pt->nrow();
+  unsigned rncol = cr_matrix_pt->ncol();
+  unsigned rnrow_local = cr_matrix_pt->nrow_local();
+  unsigned rnnz = cr_matrix_pt->nnz();
+
+  oomph_info << "rnrow = " << rnrow << std::endl; 
+  oomph_info << "rncol = " << rncol << std::endl; 
+  oomph_info << "rnrow_local = " << rnrow_local << std::endl; 
+  oomph_info << "rnnz = " << rnnz << std::endl; 
+  
 
   const OomphCommunicator* const comm_pt = MPI_Helpers::communicator_pt();
   // my rank and number of processors. 
   // This is used later for putting the data.
   const unsigned my_rank = comm_pt->my_rank();
   const unsigned nproc = comm_pt->nproc();
+
+  oomph_info << "About to output jac and res" << std::endl; 
+  
 
   std::ostringstream jac_ss;
   jac_ss << "raw_lin_system/jac" << Tetgen_number << "_np" << nproc << "r" << my_rank;
@@ -106,7 +121,7 @@ namespace oomph
   residual.output_local_values_with_offset(residual_ss.str(),15);
 
 
-  oomph_info << "RAYRAY: Got Jacobian" << std::endl; 
+  oomph_info << "Done output of jac and res" << std::endl; 
   
   this->build_distribution(residual.distribution_pt());
 
