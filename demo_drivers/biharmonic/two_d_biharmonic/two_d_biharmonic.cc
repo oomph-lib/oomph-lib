@@ -91,8 +91,8 @@ namespace BiharmonicTestFunctions1
 
  void surface_load(const Vector<double>& x, double& f)
  {
-   f = 1.0;
-  // f = 72*x[0]*x[1];
+   //f = 1.0;
+   f = 72*x[0]*x[1];
  }
 
 
