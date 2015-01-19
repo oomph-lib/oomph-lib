@@ -927,7 +927,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
   {
     First_NS_solve = true;
     // For debugging
-    bool Doc_time = false;
+    //bool Doc_time = false;
 
     double t_start_clean_up_memory = TimingHelpers::timer();
     // clean
@@ -2621,7 +2621,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
             }
             // Get the pressure dofs
             // NOTE: This is not used for the LSC case.
-            else if (this->block_number(eqn_number)==p_dof_number) // RAY_TOCHANGE
+            else if (this->block_number(eqn_number)== (int)p_dof_number) // RAY_TOCHANGE
             {
              // if (L_prec_type != Exact_lsc_block_preconditioner)
               {
