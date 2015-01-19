@@ -80,6 +80,12 @@ namespace oomph
      // size mesh pt correctly
      this->set_nmesh(1);
      Bulk_element_mesh_pt = 0;
+
+     // RAYRAY by default, we do not want to print the subblocks
+     Print_subblocks = false;
+     Subblock_dir = "";
+     Fullblock_dir = "";
+     First_solve = false;
     }
    
    /// destructor - cleans up preconditioners and delete matrices
@@ -131,6 +137,17 @@ namespace oomph
     {
      return Bulk_element_mesh_pt;
     }
+
+   void print_subblocks(std::string &subblock_dir)
+   {
+     Subblock_dir = subblock_dir;
+     Print_subblocks = true;
+   }
+
+   void set_fullblock_dir(std::string &strstr)
+   {
+     Fullblock_dir = strstr;
+   }
    
     private:
 
@@ -154,6 +171,14 @@ namespace oomph
 
    /// the bulk element mesh pt
    Mesh* Bulk_element_mesh_pt;
+
+   /// RAYRAY flag to print block matrix
+   bool Print_subblocks;
+   std::string Subblock_dir;
+   std::string Fullblock_dir;
+
+   /// RAYRAY rhs outout
+   bool First_solve;
   };
  
  

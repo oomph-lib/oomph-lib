@@ -34,7 +34,29 @@
 using namespace oomph;
 
 
+namespace RayParam
+{
 
+  // Variables to set up problem.
+  bool Unclamp_right_bound = false;
+  unsigned Noel = 0;
+  int X_min = 0;
+  int X_max = 0;
+  int Y_min = 0;
+  int Y_max = 0;
+
+  bool Print_connectivity_mat = false;
+  bool Print_natural_jacobian = false;
+  bool Print_subblocks = false;
+  bool Print_elemental_jacobian = false;
+
+  std::string Matbase_str = "";
+
+  std::string Connectivity_dir = "";
+  std::string Natural_jac_dir = "";
+  std::string Blocked_dir = "";
+  std::string Elemental_dir = "";
+}
 
 
 //=============================================================================
@@ -69,7 +91,8 @@ namespace BiharmonicTestFunctions1
 
  void surface_load(const Vector<double>& x, double& f)
  {
-  f = 72*x[0]*x[1];
+   f = 1.0;
+  // f = 72*x[0]*x[1];
  }
 
 
@@ -161,7 +184,12 @@ public:
 
    // clamp edge on all boundaries
    set_dirichlet_boundary_condition(0,u_SW,dudn_SW);
-   set_dirichlet_boundary_condition(1,u_NE,dudn_NE);
+   if(!RayParam::Unclamp_right_bound)
+   {
+     oomph_info << "Clamping right boundary" << std::endl; 
+     
+     set_dirichlet_boundary_condition(1,u_NE,dudn_NE);
+   }
    set_dirichlet_boundary_condition(2,u_NE,dudn_NE);
    set_dirichlet_boundary_condition(3,u_SW,dudn_SW);
 
@@ -185,8 +213,6 @@ public:
    this->get_jacobian(res,jac);
 
    jac.sparse_indexed_output(jac_str,15,true);
-
-
  }
 };
 
@@ -477,49 +503,52 @@ void print_connectivity_matrix(const Problem* const problem_pt)
 
   // Set up out file
   std::ostringstream filenamestream;
-  filenamestream << "biharmonic_connectivity_matrix_noel_"
-                 << n_ele_1d;
+  filenamestream << RayParam::Connectivity_dir
+    << "/"
+    << RayParam::Matbase_str;
 
-   std::ofstream outfile;
-   outfile.open(filenamestream.str().c_str());
+
+  std::ofstream outfile;
+  outfile.open(filenamestream.str().c_str());
 
   // Loop through the number of elements
   for (unsigned ele_i = 0; ele_i < n_element; ele_i++) 
   {
     outfile << "Element number: " << ele_i << std::endl;
 
-      // Get pointer to the element
-  FiniteElement* elem_pt 
-    = mesh_pt->finite_element_pt(ele_i);
+    // Get pointer to the element
+    FiniteElement* elem_pt 
+      = mesh_pt->finite_element_pt(ele_i);
 
-  unsigned nnod=elem_pt->nnode();
+    unsigned nnod=elem_pt->nnode();
 
-  for (unsigned nod_i = 0; nod_i < nnod; nod_i++) 
-  {
-    outfile << "Node number: " << nod_i << std::endl;
-    // Get the node
-    Node* nod_pt = elem_pt->node_pt(nod_i);
-    const unsigned nval = nod_pt->nvalue();
-
-    for (unsigned val_i = 0; val_i < nval; val_i++) 
+    for (unsigned nod_i = 0; nod_i < nnod; nod_i++) 
     {
-      outfile << val_i << " ";
-      long eqn_num = nod_pt->eqn_number(val_i);
-      outfile << eqn_num << " ";
-      if(!nod_pt->is_pinned(val_i))
+      outfile << "Node number: " << nod_i << std::endl;
+
+      // Get the node
+      Node* nod_pt = elem_pt->node_pt(nod_i);
+      const unsigned nval = nod_pt->nvalue();
+
+      outfile << "x: " << nod_pt->x(0) 
+              << ", y: " << nod_pt->x(1) 
+              << std::endl;
+
+      for (unsigned val_i = 0; val_i < nval; val_i++) 
       {
-        outfile << elem_pt->local_eqn_number(eqn_num) << " ";
-      }
+        outfile << val_i << " ";
+        long eqn_num = nod_pt->eqn_number(val_i);
+        outfile << eqn_num << " ";
+        if(!nod_pt->is_pinned(val_i))
+        {
+          outfile << elem_pt->local_eqn_number(eqn_num) << " ";
+        }
 
-      outfile << "\n";
-    }
-  }
-
-
-  }
-
+        outfile << "\n";
+      } // for values in node
+    } // for node
+  } // for elements
   outfile.close();
-
 }
 
 
@@ -536,66 +565,203 @@ int main(int argc, char *argv[])
   doc_info.set_directory("RESLT");
   doc_info.number()=0;
 
+
+  // Store commandline arguments
+  CommandLineArgs::setup(argc,argv);
+
+  CommandLineArgs::specify_command_line_flag("--unclamp_right_bound");
+
+  // Need to make a string to reflect the type of problem
+  CommandLineArgs::specify_command_line_flag("--noel", 
+      &RayParam::Noel);
+  CommandLineArgs::specify_command_line_flag("--xmin", 
+      &RayParam::X_min);
+  CommandLineArgs::specify_command_line_flag("--xmax", 
+      &RayParam::X_max);
+  CommandLineArgs::specify_command_line_flag("--ymin", 
+      &RayParam::Y_min);
+  CommandLineArgs::specify_command_line_flag("--ymax", 
+      &RayParam::Y_max);
+
+  CommandLineArgs::specify_command_line_flag("--connectivity_mat",
+      &RayParam::Connectivity_dir);
+  CommandLineArgs::specify_command_line_flag("--natural_jacobian",
+      &RayParam::Natural_jac_dir);
+  CommandLineArgs::specify_command_line_flag("--sub_blocks",
+      &RayParam::Blocked_dir);
+  CommandLineArgs::specify_command_line_flag("--elemental_jacobian",
+      &RayParam::Elemental_dir);
+
+  // Parse the above flags.
+  CommandLineArgs::parse_and_assign();
+  CommandLineArgs::doc_specified_flags();
+
+
+
+  // If there is more than one argument, we Milan's tests.
   if(argc > 1)
   {
-    // Check that we have the correct number of arguments.
-    // arg 1: number of elements in 1D
-    //
-    // Domain:
-    // arg 2: x min
-    // arg 3: y min
-    // arg 4: x_max
-    // arg 5: y max
-    //
-    // arg 6: element_number (number of the element to print)
-#ifdef PARANOID
-    if(argc != 7)
-    {
-      std::ostringstream err_stream;
-      err_stream << "Please supply 6 command line arguments:\n"
-        << "1 - The number of elements in 1D\n"
-        << "2 - x min of the domain\n"
-        << "3 - x max of the domain\n"
-        << "4 - y min of the domain\n"
-        << "5 - y max of the domain\n"
-        << "6 - the element number to do stuff with...\n"
-        << std::endl;
-      throw OomphLibError(err_stream.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
 
-    // Parse the command line arguments.
-    const unsigned n_element = atoi(argv[1]);
-    const int x_min = atoi(argv[2]);
-    const int x_max = atoi(argv[3]);
-    const int y_min = atoi(argv[4]);
-    const int y_max = atoi(argv[5]);
-    const int element_number = atoi(argv[6]);
+  if(CommandLineArgs::command_line_flag_has_been_set(
+        "--unclamp_right_bound"))
+  {
+    RayParam::Unclamp_right_bound = true;
+    RayParam::Matbase_str = "twod_bihar_right_bound_neumann";
+  }
+  else
+  {
+    RayParam::Unclamp_right_bound = false;
+    RayParam::Matbase_str = "twod_bihar_clamp_all_bound";
+  }
 
-    oomph_info << "n_element: " << n_element << std::endl;
-    oomph_info << "x_min: " << x_min << std::endl;
-    oomph_info << "x_max: " << x_max << std::endl;
-    oomph_info << "y_min: " << y_min << std::endl;
-    oomph_info << "y_max: " << y_max << std::endl;
-    oomph_info << "element_number: " << element_number << std::endl; 
+  if(!CommandLineArgs::command_line_flag_has_been_set("--noel"))
+  {
+    std::ostringstream err_stream;
+    err_stream << "Please set --noel." << std::endl;
+    throw OomphLibError(err_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+  }
+  else
+  {
+    std::ostringstream str_ss;
+    str_ss << RayParam::Matbase_str << "_Noel" << RayParam::Noel;
+    RayParam::Matbase_str = str_ss.str();
+  }
 
-    BiharmonicTestProblem1 problem(x_min,x_max,y_min,y_max,n_element);
+  if(!CommandLineArgs::command_line_flag_has_been_set("--xmin"))
+  {
+    std::ostringstream err_stream;
+    err_stream << "Please set --xmin." << std::endl;
+    throw OomphLibError(err_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+  }
+  if(!CommandLineArgs::command_line_flag_has_been_set("--xmax"))
+  {
+    std::ostringstream err_stream;
+    err_stream << "Please set --xmax." << std::endl;
+    throw OomphLibError(err_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+  }
+  if(!CommandLineArgs::command_line_flag_has_been_set("--ymin"))
+  {
+    std::ostringstream err_stream;
+    err_stream << "Please set --ymin." << std::endl;
+    throw OomphLibError(err_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+  }
+  if(!CommandLineArgs::command_line_flag_has_been_set("--ymax"))
+  {
+    std::ostringstream err_stream;
+    err_stream << "Please set --ymax." << std::endl;
+    throw OomphLibError(err_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+  }
 
-    if(element_number < 0)
+  if(CommandLineArgs::command_line_flag_has_been_set("--connectivity_mat"))
+  {
+    RayParam::Print_connectivity_mat = true;
+  }
+  else
+  {
+    RayParam::Print_connectivity_mat = false;
+  }
+
+  if(CommandLineArgs::command_line_flag_has_been_set("--natural_jacobian"))
+  {
+    RayParam::Print_natural_jacobian = true;
+  }
+  else
+  {
+    RayParam::Print_natural_jacobian = false;
+  }
+
+  if(CommandLineArgs::command_line_flag_has_been_set("--sub_blocks"))
+  {
+    RayParam::Print_subblocks = true;
+  }
+  else
+  {
+    RayParam::Print_subblocks = false;
+  }
+
+  if(CommandLineArgs::command_line_flag_has_been_set("--elemental_jacobian"))
+  {
+    RayParam::Print_elemental_jacobian = true;
+  }
+  else
+  {
+    RayParam::Print_elemental_jacobian = false;
+  }
+
+
+
+    oomph_info << "n_element: " << RayParam::Noel << std::endl;
+    oomph_info << "x_min: " << RayParam::X_min << std::endl;
+    oomph_info << "x_max: " << RayParam::X_max << std::endl;
+    oomph_info << "y_min: " << RayParam::Y_min << std::endl;
+    oomph_info << "y_max: " << RayParam::Y_max << std::endl;
+
+    BiharmonicTestProblem1 problem(RayParam::X_min,
+                                   RayParam::X_max,
+                                   RayParam::Y_min,
+                                   RayParam::Y_max,
+                                   RayParam::Noel);
+
+    BiharmonicPreconditioner my_prec;
+    my_prec.bulk_element_mesh_pt() = problem.bulk_element_mesh_pt();
+    my_prec.preconditioner_type() = 0;
+
+    IterativeLinearSolver* solver_pt = new  CG<CRDoubleMatrix>;
+    solver_pt->preconditioner_pt() = &my_prec;
+
+    // Apply the solver
+    problem.linear_solver_pt() = solver_pt;
+
+    if(RayParam::Print_natural_jacobian)
     {
       std::ostringstream dump_stream;
-      dump_stream << "two_d_biharmonic_jac_clamped_Noel_" << n_element;
+      dump_stream << RayParam::Natural_jac_dir 
+                  << "/"
+                  << RayParam::Matbase_str;
       std::string dump_str = dump_stream.str();
       problem.dump_jacobian(dump_str);
     }
-    else
-    {
-      // Print connectivity matrix for milan
-      print_connectivity_matrix(&problem);
 
-//      print_elemental_jacobian(element_number,&problem);
+    if(RayParam::Print_connectivity_mat)
+    {
+      print_connectivity_matrix(&problem);
+    }
+
+//    if(RayParam::Print_elemental_jacobian)
+//    {
+//      //print_elemental_jacobian(&problem);
+//    }
+
+    if(RayParam::Print_subblocks)
+    {
+      std::ostringstream dump_stream;
+      dump_stream << RayParam::Blocked_dir 
+                  << "/"
+                  << RayParam::Matbase_str;
+      std::string dump_str = dump_stream.str();
+
+      my_prec.print_subblocks(dump_str);
+
+      std::ostringstream dump_ss;
+      dump_ss << RayParam::Natural_jac_dir
+              << "/"
+              << RayParam::Matbase_str;
+      std::string another_dump_str = dump_ss.str();
+
+      my_prec.set_fullblock_dir(another_dump_str);
+
+      problem.newton_solve();
+
     }
   }
   else
