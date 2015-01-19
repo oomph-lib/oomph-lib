@@ -652,7 +652,8 @@ namespace oomph
  //============================================================================
  /// output the contents of the vector
  //============================================================================
- void DoubleVector::output(std::ostream &outfile, const int &output_precision)
+ void DoubleVector::output(std::ostream &outfile, 
+                           const int &output_precision) const
   {
    // temp pointer to values
    double* temp;
@@ -736,7 +737,7 @@ namespace oomph
  /// output the local contents of the vector
  //============================================================================
  void DoubleVector::output_local_values(std::ostream &outfile,
-                                        const int &output_precision)
+                                        const int &output_precision) const
   {
    // Number of local rows.
    unsigned nrow_local = this->nrow_local();
@@ -766,7 +767,7 @@ namespace oomph
  /// output the local contents of the vector with the first row offset.
  //============================================================================
  void DoubleVector::output_local_values_with_offset(
-     std::ostream &outfile, const int &output_precision)
+     std::ostream &outfile, const int &output_precision) const
   {
    // Number of local rows.
    unsigned nrow_local = this->nrow_local();

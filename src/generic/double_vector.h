@@ -260,10 +260,10 @@ class CRDoubleMatrix;
  double* values_pt() const {return Values_pt;}
 
  /// output the global contents of the vector
- void output(std::ostream &outfile,const int& output_precision = -1);
+ void output(std::ostream &outfile,const int& output_precision = -1) const;
 
  /// output the global contents of the vector
- void output(std::string filename,const int& output_precision = -1)
+ void output(std::string filename,const int& output_precision = -1) const
   {
     // Open file
     std::ofstream some_file;
@@ -274,11 +274,11 @@ class CRDoubleMatrix;
 
  /// output the local contents of the vector
  void output_local_values(std::ostream &outfile,
-                          const int& output_precision = -1);
+                          const int& output_precision = -1) const;
 
  /// output the local contents of the vector
  void output_local_values(std::string filename,
-                          const int& output_precision = -1)
+                          const int& output_precision = -1) const
   {
     // Open file
     std::ofstream some_file;
@@ -289,11 +289,11 @@ class CRDoubleMatrix;
 
  /// output the local contents of the vector
  void output_local_values_with_offset(std::ostream &outfile,
-                                      const int& output_precision = -1);
+                                      const int& output_precision = -1) const;
 
  /// output the local contents of the vector
  void output_local_values_with_offset(std::string filename,
-                                      const int& output_precision = -1)
+                                      const int& output_precision = -1) const
   {
     // Open file
     std::ofstream some_file;
