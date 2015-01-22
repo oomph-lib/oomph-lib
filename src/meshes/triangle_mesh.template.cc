@@ -6487,9 +6487,7 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
   // Now fill the data structures
   
   // Store outer polygon
-  // We are assuming that there is only one outer polygon
-  this->Outer_boundary_pt.resize(1);
-  this->Outer_boundary_pt[0] = polygons_pt[index_outer];
+  this->Outer_boundary_pt = polygons_pt[index_outer];
   
   this->Internal_polygon_pt.resize(npolygons-1);
   for (unsigned i = 0; i < npolygons; i++)
