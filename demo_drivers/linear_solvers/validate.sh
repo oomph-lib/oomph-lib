@@ -5,7 +5,7 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 
 #Set the number of tests to be checked
-NUM_TESTS=82
+NUM_TESTS=83
 
 # Threshold for number of iterations in comparison of convergence histories
 #===========================================================================
@@ -39,6 +39,7 @@ cat  RESLT/soln0.dat > multi_poisson_simple_prec_results.dat
 cat  RESLT/iterative_solver_convergence.dat > simple_iterative_solver_convergence.dat
 
 if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
@@ -78,6 +79,7 @@ cat  RESLT/iterative_solver_convergence.dat > two_plus_three_iterative_solver_co
 
 if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
     ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/multi_poisson_two_plus_three_prec_results.dat.gz  \
@@ -113,6 +115,7 @@ cat  RESLT/soln0.dat > multi_poisson_two_plus_three_upper_triangular_prec_result
 cat  RESLT/iterative_solver_convergence.dat > two_plus_three_upper_triangular_iterative_solver_convergence.dat
 
 if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
@@ -150,6 +153,7 @@ cat  RESLT/iterative_solver_convergence.dat > two_plus_three_upper_triangular_wi
 
 if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
     ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/multi_poisson_two_plus_three_upper_triangular_with_sub_prec_results.dat.gz  \
@@ -184,6 +188,7 @@ cat  RESLT/soln0.dat > multi_poisson_two_plus_three_upper_triangular_with_two_su
 cat  RESLT/iterative_solver_convergence.dat > two_plus_three_upper_triangular_with_two_sub_iterative_solver_convergence.dat
 
 if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
@@ -220,6 +225,7 @@ cat  RESLT/iterative_solver_convergence.dat > two_plus_three_upper_triangular_wi
 
 if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
     ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/multi_poisson_two_plus_three_upper_triangular_with_replace_prec_results.dat.gz  \
@@ -254,6 +260,7 @@ cat  RESLT/soln0.dat > multi_poisson_coarse_two_plus_two_plus_one_prec_results.d
 cat  RESLT/iterative_solver_convergence.dat > coarse_two_plus_two_plus_one_iterative_solver_convergence.dat
 
 if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
@@ -291,6 +298,7 @@ cat  RESLT/iterative_solver_convergence.dat > one_plus_four_with_two_coarse_iter
 
 if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
     ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/multi_poisson_one_plus_four_with_two_coarse_results.dat.gz  \
@@ -299,7 +307,7 @@ else
     #Compare number of iterations against reference data and append
     ../$OOMPH_ROOT_DIR/bin/compare_file_length_with_tolerance.bash \
         one_plus_four_with_two_coarse_iterative_solver_convergence.dat \
-        ../validata/one_plus_four_with_two_coarse_iterative_solver_convergence.dat.gz \
+        ../validata/one_plus_four_with_two_coarse_iterative_solver_convergence.dat \
         $threshold_for_number_of_iterations \
         >>  validation.log
 fi
@@ -327,6 +335,7 @@ cat  RESLT/soln0.dat > multi_poisson_upper_triangular_prec_results.dat
 cat  RESLT/iterative_solver_convergence.dat > upper_triangular_iterative_solver_convergence.dat
 
 if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
