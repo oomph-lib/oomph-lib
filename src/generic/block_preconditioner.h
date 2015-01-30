@@ -1289,7 +1289,7 @@ class BlockSelector
 
     // Check that the col indices in the first row are within the range
     // nblock_types()
-    for (unsigned col_i = 0; col_i < para_selected_block_nrow; col_i++)
+    for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++)
     {
       const unsigned para_b_i = selected_block[0][col_i].row_index();
       const unsigned para_b_j = selected_block[0][col_i].column_index();
