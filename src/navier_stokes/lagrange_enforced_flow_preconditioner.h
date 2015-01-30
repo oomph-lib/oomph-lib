@@ -57,10 +57,11 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
   /// subsidiary linear systems.
   Preconditioner* get_lagrange_multiplier_preconditioner()
   {
-   InnerIterationPreconditioner
-    <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>* prec_pt = 
-    new InnerIterationPreconditioner
-    <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>;
+    InnerIterationPreconditioner
+      <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>* prec_pt = 
+        new InnerIterationPreconditioner
+          <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>;
+
    // Note: This makes CG a proper "inner iteration" for
    // which GMRES (may) no longer converge. We should really
    // use FGMRES or GMRESR for this. However, here the solver
@@ -76,83 +77,85 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 }
 
 
-  //=============================================================================
-  /// \short The preconditioner for the Lagrange multiplier constrained
-  /// Navier-Stokes equations. The velocity components are constrained by
-  /// Lagrange multiplier, which are applied via OOMPH-LIB's FACE elements.
-  /// 
-  /// A Vector of meshes is taken, each mesh contains a different type of
-  /// block preconditionable element. Each element must not only classify it's 
-  /// own degrees of freedom but also the associated dof from the 'bulk' element.
-  /// 
-  /// The first mesh in the Vector Mesh_pt is assumed to be the 'bulk' mesh.
-  /// The rest are assumed to contain FACEELMENTS applying the required 
-  /// constraint.
-  /// 
-  /// Thus the most general block structure (in 3D) is: 
-  /// 
-  ///  0 1 2 3   4 5 6 7  8  ..x   x+0 x+1 x+2 x+3 x+4 
-  /// [u v w p] [u v w l1 l2 ...] [u   v   w   l1  l2 ...] ... 
-  ///   Bulk       Surface 1             Surface 2         ... 
-  /// 
-  /// where the dof types in [] are the dof types in each mesh.
-  /// It is assumed that in all surface mesh (after the bulk mesh), the first
-  /// spatial dimension number of dof types are the constrained velocity.
-  /// 
-  /// Consider the case of imposing parallel outflow (3 constrained velocity
-  /// dof types and 2 lagrange multiplier dof types) and tangential flow (3
-  /// constrained velocity dof types and 1 lagrange multiplier dof type)
-  /// along two different boundaries in 3D. The resulting natural block dof
-  /// type structure is: 
-  /// [0 1 2 3] [4  5  6   7   8 ] [9  10 11 12 ]
-  /// [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1]
-  /// 
-  /// Given that we know the spatial dimension of the problem, this information
-  /// can be conveniently stored in a Vector N_doftype_in_mesh = [4, 5, 4]. This
-  /// Vector will be used to re-order the dof types to group together the
-  /// velocity, pressure, then lagrange dof types like so: 
-  /// 
-  ///  0 4  9  1 5  10  2 6  11    3    7   8  12   
-  /// [u up ut v vp vt  w wp wt ] [p] [Lp1 Lp2 Lt1] 
-  ///
-  ///    0 4  9  1 5  10  2 6  11  3  7   8  12   
-  ///    u up ut v vp vt  w wp wt  p Lp1 Lp2 Lt1  
-  ///  ..... this is too hard to do without Latex....
-  ///
-  /// We use the preconditioner in the form... check my first year report...
-  /// 
-  /// Giving rise to the blocked Jacobian:
-  /// F G^t
-  ///      L
-  /// D   
-  ///  L
-  /// 
-  /// Here F is the momemtum block, G the discrete gradient operator,
-  /// and D the discrete divergence operator. (For unstabilised elements, 
-  /// we have D = G^T and in much of the literature the divergence matrix is 
-  /// denoted by B.) The L blocks
-  //=============================================================================
-  class LagrangeEnforcedflowPreconditioner
-    : public BlockPreconditioner<CRDoubleMatrix>
+//=============================================================================
+/// \short The preconditioner for the Lagrange multiplier constrained 
+/// Navier-Stokes equations. The velocity components are constrained by 
+/// Lagrange multiplier, which are applied via OOMPH-LIB's FACE elements.
+/// 
+/// A Vector of meshes is taken, each mesh contains a different type of
+/// block preconditionable element. Each element must not only classify it's 
+/// own degrees of freedom but also the associated dof from the 'bulk' 
+/// element.
+/// 
+/// The first mesh in the Vector Mesh_pt is assumed to be the 'bulk' mesh.
+/// The rest are assumed to contain FACEELMENTS applying the required 
+/// constraint.
+/// 
+/// Thus the most general block structure (in 3D) is: 
+/// 
+///  0 1 2 3   4 5 6 7  8  ..x   x+0 x+1 x+2 x+3 x+4 
+/// [u v w p] [u v w l1 l2 ...] [u   v   w   l1  l2 ...] ... 
+///   Bulk       Surface 1             Surface 2         ... 
+/// 
+/// where the dof types in [] are the dof types in each mesh.
+/// It is assumed that in all surface mesh (after the bulk mesh), the first
+/// spatial dimension number of dof types are the constrained velocity.
+/// 
+/// Consider the case of imposing parallel outflow (3 constrained velocity
+/// dof types and 2 lagrange multiplier dof types) and tangential flow (3
+/// constrained velocity dof types and 1 lagrange multiplier dof type)
+/// along two different boundaries in 3D. The resulting natural block dof
+/// type structure is: 
+/// [0 1 2 3] [4  5  6   7   8 ] [9  10 11 12 ]
+/// [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1]
+/// 
+/// Given that we know the spatial dimension of the problem, this information
+/// can be conveniently stored in a Vector N_doftype_in_mesh = [4, 5, 4]. This
+/// Vector will be used to re-order the dof types to group together the
+/// velocity, pressure, then lagrange dof types like so: 
+/// 
+///  0 4  9  1 5  10  2 6  11    3    7   8  12   
+/// [u up ut v vp vt  w wp wt ] [p] [Lp1 Lp2 Lt1] 
+///
+///    0 4  9  1 5  10  2 6  11  3  7   8  12   
+///    u up ut v vp vt  w wp wt  p Lp1 Lp2 Lt1  
+///  ..... this is too hard to do without Latex....
+///
+/// We use the preconditioner in the form... check my first year report...
+/// 
+/// Giving rise to the blocked Jacobian:
+/// F G^t
+///      L
+/// D   
+///  L
+/// 
+/// Here F is the momentum block, G the discrete gradient operator,
+/// and D the discrete divergence operator. (For unstabilised elements, 
+/// we have D = G^T and in much of the literature the divergence matrix is 
+/// denoted by B.) The L blocks
+//=============================================================================
+class LagrangeEnforcedflowPreconditioner 
+  : public BlockPreconditioner<CRDoubleMatrix>
+{
+  public:
+
+  /// \short This preconditioner includes the option to use subsidiary 
+  /// operators other than SuperLUPreconditioner for this problem. 
+  /// This is the typedef of a function that should return an instance
+  /// of a subsidiary preconditioning operator.  This preconditioner is 
+  /// responsible for the destruction of the subsidiary preconditioners.
+  typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
+
+  /// Constructor - sets the defaults for control flags
+  LagrangeEnforcedflowPreconditioner():BlockPreconditioner<CRDoubleMatrix>()
   {
-    public:
-
-      /// \short This preconditioner includes the option to use subsidiary 
-      /// operators other than SuperLUPreconditioner for this problem. 
-      /// This is the typedef of a function that should return an instance
-      /// of a subsidiary preconditioning operator.  This preconditioner is 
-      /// responsible for the destruction of the subsidiary preconditioners.
-      typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
-
-      /// Constructor - sets the defaults for control flags
-      LagrangeEnforcedflowPreconditioner():BlockPreconditioner<CRDoubleMatrix>()
-    {
-      // Null the pointers:
-      // The Navier Stokes preconditioner pointer.
-      Navier_stokes_preconditioner_pt = 0;
-      // Null the function pointer which is used to create the subsidiary
-      // preconditioners for the W block(s)
-      Lagrange_multiplier_subsidiary_preconditioner_function_pt = 0;
+    // Null the pointers:
+    // The Navier Stokes preconditioner pointer.
+    Navier_stokes_preconditioner_pt = 0;
+    
+    // Null the function pointer which is used to create the subsidiary
+    // preconditioners for the W block(s)
+    Lagrange_multiplier_subsidiary_preconditioner_function_pt = 0;
 
       // Set the vector of preconditioner pointers for the W block(s) to zero.
       Lagrange_multiplier_preconditioner_pt.resize(0,0);
@@ -1251,7 +1254,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     
 
 
-    Doc_prec = true;
+    Doc_prec = false;
 
     if(Doc_prec)
     {
@@ -1353,7 +1356,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
       }
     }// if Doc_prec
 
-    pause("Dumped!"); 
+    //pause("Dumped!"); 
     
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1779,14 +1782,111 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 //      std::cout << "============================================" << std::endl; 
 //      std::cout << "============================================" << std::endl; 
 //      std::cout << "============================================" << std::endl; 
-      for (unsigned row_i = spatial_dim; row_i < N_velocity_doftypes; row_i++) 
+
+    // Recall that the dof type ordering is:
+    // The general ordering for the DOF types (for this program, in 3D) is
+    //
+    //  0 1 2 3   4 5 6 7  8  ..x   x+0 x+1 x+2 x+3 x+4
+    // [u v w p] [u v w l1 l2 ...] [u   v   w   l1  l2 ...] ...
+    //
+    // Eg:
+    // [0 1 2 3] [4  5  6   7   8 ] [9  10 11 12 ]
+    // [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1]
+    //
+    // With these information we can construct the desired block structure:
+    //   0 1 2   3  4  5    6  7  8    9   10  11  12
+    // | u v w | up vp wp | ut vt wt | p | Lp1 Lp2 Lt1 |
+    //
+    // So we need to map:
+    // 3 -> 4
+    // 4 -> 5
+    // 5 -> 6
+    //
+    // 6 -> 9
+    // 7 -> 10
+    // 8 -> 11
+    //
+    // Actually, it will be easier to go from:
+    //
+    // 1 -> 4
+    // 2 -> 5
+    // 3 -> 6
+    //
+    // 4 -> 9
+    // 5 -> 10
+    // 6 -> 11
+    //
+    // Since we just get the number of dof types in the meshes, and we know
+    // the number of meshes.
+
+//    oomph_info << "My_nmesh: " << My_nmesh << std::endl;
+//    for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++) 
+//    {
+//      oomph_info << "Doftypes in mesh " 
+//                 << mesh_i << ": " 
+//                 << My_ndof_types_in_mesh[mesh_i] << std::endl; 
+//      
+//    }
+    
+    unsigned blocked_row_i = spatial_dim;
+    unsigned blocked_col_i = spatial_dim;
+    unsigned doftype_row_running_total = My_ndof_types_in_mesh[0];
+    unsigned doftype_col_running_total = My_ndof_types_in_mesh[0];
+
+    for (unsigned row_mesh_i = 1; row_mesh_i < My_nmesh; row_mesh_i++) 
+    {
+      // Get the indirection for the mesh
+      for (unsigned row_dim_i = 0; row_dim_i < spatial_dim; row_dim_i++) 
       {
-        for (unsigned col_i = spatial_dim; col_i < N_velocity_doftypes; col_i++) 
+        const unsigned doftype_row_i = doftype_row_running_total 
+                                       + row_dim_i;
+
+        // Now do the same for the columns
+        for (unsigned col_mesh_i = 1; col_mesh_i < My_nmesh; col_mesh_i++) 
         {
-          this->set_replacement_dof_block(row_i,col_i,
-                                          v_aug_pt(row_i,col_i));
+          for (unsigned col_dim_i = 0; col_dim_i < spatial_dim; col_dim_i++)
+          {
+            const unsigned doftype_col_i = doftype_col_running_total
+                                           + col_dim_i;
+
+            this->set_replacement_dof_block(
+                    doftype_row_i,doftype_col_i,
+                    v_aug_pt(blocked_row_i,blocked_col_i));
+           
+//            oomph_info << "(" << blocked_row_i << "," 
+//                              << blocked_col_i << ")" 
+//                       << " -> " 
+//                       << "(" << doftype_row_i << ","
+//                              << doftype_col_i << ")" << std::endl; 
+            
+            blocked_col_i++;
+          }
+
+          // Update the column dof type running total
+          doftype_col_running_total += My_ndof_types_in_mesh[col_mesh_i];
         }
+        // reset the blocked col i and the running total for the next row
+        blocked_col_i = spatial_dim;
+        doftype_col_running_total = My_ndof_types_in_mesh[0];
+
+        // Update the blocked row_i
+        blocked_row_i++;
       }
+      // Update the row dof type running total
+      doftype_row_running_total += My_ndof_types_in_mesh[row_mesh_i];
+    }
+//    pause("remember me!"); 
+    
+
+
+//     for (unsigned row_i = spatial_dim; row_i < N_velocity_doftypes; row_i++) 
+//      {
+//        for (unsigned col_i = spatial_dim; col_i < N_velocity_doftypes; col_i++) 
+//        {
+//          this->set_replacement_dof_block(row_i,col_i,
+//                                          v_aug_pt(row_i,col_i));
+//        }
+//      }
 
     // AT this point, we have created the augmented fluid block in v_aug_pt
     // and the w block in w_pt.
