@@ -217,8 +217,8 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
    oomph_info << "Using simple block triangular preconditioner\n";
 
    // Create preconditioner
-   Simple<CRDoubleMatrix>* block_prec_pt=
-    new Simple<CRDoubleMatrix>;
+   Diagonal<CRDoubleMatrix>* block_prec_pt=
+    new Diagonal<CRDoubleMatrix>;
    
    // Set mesh
    block_prec_pt->set_nmesh(1);

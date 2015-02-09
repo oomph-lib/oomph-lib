@@ -51,75 +51,77 @@
 
 namespace oomph
 {
+
 //=============================================================================
 /// \short Data structure to store information about a certain "block" or
 /// sub-matrix from the overall matrix in the block preconditioning framework.
-/// 
-/// It stores four variables:
-/// 
-/// 1) The row and column indices of the block. 
-/// Ray: For re-usability, whether these refer to the dof-level or block-level 
-/// indices, the internal or external enumeration is entirely up to the user.
 ///
-/// 2) Wanted: a boolean to indicate if we want this block. Hence the name
-/// "BlockSelector". If a block is not wanted a replacement block of 0s is
-/// used that is the same size, this is so that the desired shape can be kept
-/// without using that block.
-///
-/// 3) Block_pt: Pointer to the block.
-///
-/// Example of use: We want to concatenate Jacobian blocks:
+/// Example of use: Let's assume we want to form a concatenated matrix
+/// from the blocks of a Jacobian matrix that contains the following blocks:
 /// 
 /// [J_00, J_01, J_02
 ///  J_10, J_11, J_12
 ///  J_20, J_21, J_22]
 /// 
-/// We can create a VectorMatrix of BlockSelector objects indicating which
-/// indices (i,j) is required and if we want them or not.
+/// so that the new matrix has the entries
 ///
-/// In this case we want to create a matrix using J_00 as the new matrix's 
-/// M_01; J_01 as M_00; J_20 as M_11; and have M_10 be a 0 matrix so that
-/// M is upper triangular.
+/// [ J_01, J_00 
+///   J_21,   0  ] 
 /// 
+/// where "0" indicates zero matrix of the required size.
+/// 
+/// To do this we create a 2x2 (the block size of the new concatenated
+/// matrix) VectorMatrix of BlockSelectors and then declare for each
+/// entry the block indices in the original matrix and if the entry
+/// is to be included (and copied from the corresponding entry in 
+/// the Jacobian (final boolean argument true) or if the block is
+/// to be omitted and replaced by an appropriately sized zero matrix.
+/// For the example above this would be done as follows:
+///
 /// VectorMatrix<BlockSelector> required_block(2,2);
 /// required_block[0][0].select_block(0,1,true);
 /// required_block[0][1].select_block(0,0,true);
-/// required_block[1][0].select_block(1,0,false);
-/// required_block[1][1].select_block(1,1,true);
+/// required_block[1][0].select_block(2,1,true);
+/// required_block[1][1].select_block(2,0,false);
 ///
+/// and the concatenated matrix would then be built as
+/// 
 /// CRDoubleMatrix concatenated_block1 
 ///   = get_concatenated_block(required_block);
 ///
-/// Suppose that we do not want block J_01, so that we have a diagonal matrix,
-/// then we simply set Wanted to false  by invoking the 
-/// BlockSelector::do_not_want_block() function and call
-/// get_concatenated_block(...) again:
+/// Note that it is necessary to identify the row and column indices of any
+/// omitted blocks (here block J_20 in the original matrix) to enable
+/// the correct setup of the sparse matrix storage. 
+/// 
+/// The initial assignment of the boolean may be over-written with the
+/// do_not_want_block() member function; this can again be reversed
+/// with the want_block() counterpart. So if we call
 ///
-/// required_block[0][1].do_not_want_block();
+/// required_block[0][0].do_not_want_block();
 ///
+/// and the build a new conctatenated matrix with
+/// 
 /// CRDoubleMatrix concatenated_block2
 ///   = get_concatenated_block(required_block);
 ///
-/// ===========================================================================
-/// Aside: note that we still need to know the row/column indices of the 
-/// unwanted blocks. This is due to the method of concatenation. Both the
-/// rows and columns are permuted, thus we need to know the distribution of
-/// of all the blocks. This is also used for correctness checks. See the
-/// get_concatenated_block() function for more details.
-/// ===========================================================================
+/// the resulting matrix would the anti-diagonal matrix
 ///
-/// The Block_pt variable is used to store a pointer to a CRDoubleMatrix.
-/// This can be used to point to a modified/replaced block instead of getting
-/// the block from the Jacobian via get_block(...).
-///
-/// Note: if Block_pt is not null then Wanted must be true. But Wanted can be 
-/// true whilst Block_pt is null.
-/// That is, (Block_pt =/= null) => (Wanted == true)
+/// [   0  , J_00 
+///   J_21 ,   0  ] 
 /// 
-/// This design decision was taken since if Block_pt is set, then we would want
-/// to use it. So if Wanted = false, then it may be a mistake. If block_pt is
-/// not null, but later, the block is not required, then to set Wanted to 
-/// false, the function BlockSelector::null_block_pt() must be called first.
+/// Finally it is possible to specify a replacement block 
+/// by specifying a pointer to an appropriately sized matrix
+/// that is to be used instead of the block in the Jacobian 
+/// matrix, so if replacement_block_pt points to a matrix, R, say,
+/// of the same size as J_01, then 
+/// 
+/// selected_block[0][0].select_block(0,1,true,replacement_block_pt);
+///
+/// then the resulting concatenated matrix would contain 
+///
+/// [   R  , J_00 
+///   J_21 ,   0  ] 
+/// 
 //=============================================================================
 class BlockSelector
 {
@@ -130,26 +132,26 @@ class BlockSelector
   BlockSelector()
   {
     // Needs to be set to zero because if the build function leaves the
-    // Block_pt alone if block_pt = 0 (the default argument).
-    Block_pt = 0;
+    // Replacement_block_pt alone if replacement_block_pt = 0 (the default argument).
+    Replacement_block_pt = 0;
     this->build(0,0,false);
   }
 
  /// \short Constructor, takes the row and column indices 
  /// and a boolean indicating if the block is required or not. The optional
- /// parameter block_pt is set to null. If the block is not required a block
+ /// parameter replacement_block_pt is set to null. If the block is not required a block
  /// of the correct dimensions full of 0s is used.
  BlockSelector(const unsigned& row_index, 
                const unsigned& column_index, 
                const bool& wanted,
-               CRDoubleMatrix* block_pt = 0)
+               CRDoubleMatrix* replacement_block_pt = 0)
   {
 #ifdef PARANOID
-   if((wanted == false) && (block_pt !=0))
+   if((wanted == false) && (replacement_block_pt !=0))
     {
      std::ostringstream err_msg;
      err_msg << "Trying to construct a BlockSelector object with:\n" 
-             << "block_pt != 0 and wanted == false"
+             << "replacement_block_pt != 0 and wanted == false"
              << "If you require the block, please set wanted == true.\n";
      throw OomphLibError(err_msg.str(),
                          OOMPH_CURRENT_FUNCTION,
@@ -158,11 +160,11 @@ class BlockSelector
 #endif
    
    // Needs to be set to zero because if the build function leaves the
-   // Block_pt alone if block_pt = 0 (the default argument).
+   // Replacement_block_pt alone if replacement_block_pt = 0 (the default argument).
    // Thus if it is not set here, it would not be initialised to null.
-   Block_pt = 0;
+   Replacement_block_pt = 0;
    
-   this->build(row_index,column_index,wanted,block_pt);
+   this->build(row_index,column_index,wanted,replacement_block_pt);
   }
 
   /// \short Default destructor.
@@ -174,14 +176,14 @@ class BlockSelector
   void select_block(const unsigned& row_index, 
                     const unsigned& column_index, 
                     const bool& wanted,
-                    CRDoubleMatrix* block_pt = 0)
+                    CRDoubleMatrix* replacement_block_pt = 0)
   {
 #ifdef PARANOID
-    if((wanted == false) && (block_pt !=0))
+    if((wanted == false) && (replacement_block_pt !=0))
     {
       std::ostringstream err_msg;
       err_msg << "Trying to construct a BlockSelector object with:\n" 
-        << "block_pt != 0 and wanted == false"
+        << "replacement_block_pt != 0 and wanted == false"
         << "If you require the block, please set wanted == true.\n";
       throw OomphLibError(err_msg.str(),
           OOMPH_CURRENT_FUNCTION,
@@ -189,8 +191,9 @@ class BlockSelector
     }
 #endif
 
-    this->build(row_index,column_index,wanted,block_pt);
+    this->build(row_index,column_index,wanted,replacement_block_pt);
   }
+
 
   /// \short Indicate that we require the block (set Wanted to true).
   void want_block()
@@ -202,35 +205,35 @@ class BlockSelector
   void do_not_want_block()
   {
 #ifdef PARANOID
-    if(Block_pt !=0)
+    if(Replacement_block_pt !=0)
     {
       std::ostringstream err_msg;
-      err_msg << "Trying to set Wanted = false, but block_pt is not null.\n" 
-        << "Please call null_block_pt()\n"
+      err_msg << "Trying to set Wanted = false, but replacement_block_pt is not null.\n"
+        << "Please call null_replacement_block_pt()\n"
         << "(remember to free memory if necessary)\n";
       throw OomphLibError(err_msg.str(),
           OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION); 
+          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
 
     Wanted = false;
   }
 
-  /// \short Set Block_pt to null.
-  void null_block_pt()
+  /// \short Set Replacement_block_pt to null.
+  void null_replacement_block_pt()
   {
-    Block_pt = 0;
+    Replacement_block_pt = 0;
   }
 
-  /// \short set Block_pt.
-  void set_block_pt(CRDoubleMatrix* block_pt)
+  /// \short set Replacement_block_pt.
+  void set_replacement_block_pt(CRDoubleMatrix* replacement_block_pt)
   {
 #ifdef PARANOID
     if(Wanted == false)
     {
       std::ostringstream err_msg;
-      err_msg << "Trying to set block_pt, but Wanted == false.\n" 
+      err_msg << "Trying to set replacement_block_pt, but Wanted == false.\n" 
         << "Please call want_block()\n";
       throw OomphLibError(err_msg.str(),
           OOMPH_CURRENT_FUNCTION,
@@ -238,13 +241,13 @@ class BlockSelector
     }
 #endif
 
-    Block_pt = block_pt;
+    Replacement_block_pt = replacement_block_pt;
   }
 
-  /// \short Returns Block_pt
-  CRDoubleMatrix* block_pt() const
+  /// \short Returns Replacement_block_pt
+  CRDoubleMatrix* replacement_block_pt() const
   {
-    return Block_pt;
+    return Replacement_block_pt;
   }
 
   /// \short Set the row index.
@@ -279,14 +282,14 @@ class BlockSelector
 
 
   /// \short Output function, outputs the Row_index, Column_index, Wanted and
-  /// the address of the Block_pt.
+  /// the address of the Replacement_block_pt.
   friend std::ostream& operator<<(std::ostream& o_stream,
                            const BlockSelector& block_selector)
   {
     o_stream << "Row_index = " << block_selector.row_index() << ", "
              << "Column_index = " << block_selector.column_index() << ", "
              << "Wanted = " << block_selector.wanted() << ", "
-             << "Block_pt = " << block_selector.block_pt() << ".";
+             << "Replacement_block_pt = " << block_selector.replacement_block_pt() << ".";
 
     return o_stream;
   }
@@ -294,26 +297,26 @@ class BlockSelector
   private:
 
   /// Build function, sets the Row_index, Column_index and Wanted variables.
-  /// the Block_pt is only set if it is not null. Otherwise it is left alone.
+  /// the Replacement_block_pt is only set if it is not null. Otherwise it is left alone.
   void build(const unsigned& row_index, 
       const unsigned& column_index, 
       const bool& wanted,
-      CRDoubleMatrix* block_pt = 0)
+      CRDoubleMatrix* replacement_block_pt = 0)
   {
     Row_index = row_index;
     Column_index = column_index;
     Wanted = wanted;
 
-    // Only set the block_pt if it is wanted. Otherwise we leave it alone.
-    // All constructors should set Block_pt to 0.
-    if(block_pt != 0)
+    // Only set the replacement_block_pt if it is wanted. Otherwise we leave it alone.
+    // All constructors should set Replacement_block_pt to 0.
+    if(replacement_block_pt != 0)
     {
 #ifdef PARANOID
       if(Wanted == false)
       {
         std::ostringstream err_msg;
-        err_msg << "Trying to set block_pt, but Wanted == false.\n"
-                << "Please either not set the block_pt or call the function\n"
+        err_msg << "Trying to set replacement_block_pt, but Wanted == false.\n"
+                << "Please either not set the replacement_block_pt or call the function\n"
                 << "do_not_want_block()";
         throw OomphLibError(err_msg.str(),
             OOMPH_CURRENT_FUNCTION,
@@ -321,7 +324,7 @@ class BlockSelector
       }
 #endif
 
-      Block_pt = block_pt;
+      Replacement_block_pt = replacement_block_pt;
     }
   }
 
@@ -335,7 +338,7 @@ class BlockSelector
   bool Wanted;
 
   /// Pointer to the block.
-  CRDoubleMatrix* Block_pt;
+  CRDoubleMatrix* Replacement_block_pt;
 
 };
 
@@ -1088,6 +1091,7 @@ class BlockSelector
                            MATRIX& output_block,
                            const bool& ignore_replacement_block = false) const;
 
+
   /// \short Returns a concatenation of the block matrices specified by the
   /// argument selected_block. The VectorMatrix selected_block must be 
   /// correctly sized as it is used to determine the number of sub block 
@@ -1098,7 +1102,7 @@ class BlockSelector
   /// BlockSelector::Row_index - Refers to the row index of the block.
   /// BlockSelector::Column_index - Refers to the column index of the block.
   /// BlockSelector::Wanted - Do we want the block?
-  /// BlockSelector::Block_pt - If not null, this block will be used instead of
+  /// BlockSelector::Replacement_block_pt - If not null, this block will be used instead of
   ///                           get_block(Row_index,Column_index).
   ///
   /// For example, assume that we have a matrix of the following blocking:
@@ -1360,7 +1364,7 @@ class BlockSelector
       for (unsigned block_j = 0; block_j < para_selected_block_ncol; block_j++)
       {
         const CRDoubleMatrix* tmp_block_pt 
-          = selected_block[block_i][block_j].block_pt();
+          = selected_block[block_i][block_j].replacement_block_pt();
 
         if(tmp_block_pt != 0)
         {
@@ -1413,7 +1417,7 @@ class BlockSelector
       {
         // Cache the block_pt
         const CRDoubleMatrix* tmp_block_pt 
-          = selected_block[block_i][block_j].block_pt();
+          = selected_block[block_i][block_j].replacement_block_pt();
 
         if(tmp_block_pt != 0)
         {
@@ -1536,7 +1540,7 @@ class BlockSelector
         if(block_wanted)
         {
           CRDoubleMatrix* tmp_block_pt 
-            = selected_block[block_i][block_j].block_pt();
+            = selected_block[block_i][block_j].replacement_block_pt();
 
           if(tmp_block_pt == 0)
           {

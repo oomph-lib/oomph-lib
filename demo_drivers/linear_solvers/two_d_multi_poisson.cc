@@ -219,8 +219,8 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
    oomph_info << "Using simple block triangular preconditioner\n";
 
    // Create preconditioner
-   Simple<CRDoubleMatrix>* block_prec_pt=
-    new Simple<CRDoubleMatrix>;
+   Diagonal<CRDoubleMatrix>* block_prec_pt=
+    new Diagonal<CRDoubleMatrix>;
    
    // Set mesh
    block_prec_pt->set_nmesh(1);
@@ -521,7 +521,6 @@ int main(int argc, char* argv[])
  CommandLineArgs::specify_command_line_flag
   ("--coarse_two_plus_two_plus_one");
 
-
  CommandLineArgs::specify_command_line_flag
   ("--one_plus_four_with_two_coarse");
 
@@ -544,8 +543,8 @@ int main(int argc, char* argv[])
  // Step number
  doc_info.number()=0;
  
- std::cout << "\n\nSolving for TanhSolnForMultiPoisson::Alpha="
-           << TanhSolnForMultiPoisson::Alpha << std::endl << std::endl;
+ oomph_info << "\n\nSolving for TanhSolnForMultiPoisson::Alpha="
+            << TanhSolnForMultiPoisson::Alpha << std::endl << std::endl;
  
  // Solve the problem
  problem.newton_solve();

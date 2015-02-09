@@ -28,8 +28,10 @@ mkdir Validation
 cd Validation
 cp ../*partition.dat .
 
+
 # Validation for simple block precond
 #------------------------------------
+if [ -f ../two_d_multi_poisson ]; then
 
 echo "Simple block preconditioner for 'multi-poisson' "
 mkdir RESLT
@@ -381,6 +383,34 @@ else
 fi
 
 mv RESLT RESLT_multi_poisson_upper_triangular_prec
+
+
+# if we don't have trilinos we can't run the multi poisson self tests...
+
+else
+    echo " " 
+    echo "Cannot run multi poisson block preconditioners; requires trilinos"
+    echo " " 
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+    echo "dummy [OK] -- for multi poisson block preconditioners; can only run with trilinos" >> validation.log
+fi
+
 
 # Validation for rectangular driven cavity
 #-----------------------------------------

@@ -51,46 +51,45 @@ namespace oomph
 /// demo purposes. There's a much better version in src/generic!
 //=============================================================================
  template<typename MATRIX> 
- class Simple : public BlockPreconditioner<MATRIX>
+ class Diagonal : public BlockPreconditioner<MATRIX>
  {
   
  public :
   
-  /// Constructor for Simple
-  Simple() : BlockPreconditioner<MATRIX>()
+  /// Constructor for Diagonal preconditioner
+  Diagonal() : BlockPreconditioner<MATRIX>()
    {
    } // end_of_constructor
 
  
-  /// Destructor - delete the diagonal solvers (subsidiary preconditioners)
-  ~Simple()
+  /// \short Destructor - delete the subsidiary preconditioners (solvers for
+  /// linear systems involving diagonal block)
+  ~Diagonal()
    {
     this->clean_up_my_memory();
    }
-
+  
   /// clean up the memory
   virtual void clean_up_my_memory();
      
   /// Broken copy constructor
-  Simple(const Simple&) 
+  Diagonal(const Diagonal&) 
    { 
-    BrokenCopy::broken_copy("Simple");
+    BrokenCopy::broken_copy("Diagonal");
    } 
  
   /// Broken assignment operator
-  void operator=(const Simple&) 
+  void operator=(const Diagonal&) 
    {
-    BrokenCopy::broken_assign("Simple");
+    BrokenCopy::broken_assign("Diagonal");
    }
 
 
   /// \short Setup the preconditioner 
   void setup();
   
-  // This is put in to override the default behaviour of name hiding, which
-  // "hides", but does not override, base class functions with the same name
-  // as a derived class function even if the argument differ to allow for 
-  // overloading. This is not a problem when using base class pointers.
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
   using Preconditioner::setup;
 
   /// Apply preconditioner to r, i.e. return solution of P z = r
@@ -104,25 +103,23 @@ namespace oomph
 
  };
 
- //=========================start_of_setup_for_simple==========================
+ //=========================start_of_setup_for_simple========================
  /// The setup function.
  //============================================================================
  template<typename MATRIX> 
- void Simple<MATRIX>::setup()
+ void Diagonal<MATRIX>::setup()
  {
   // clean the memory
   this->clean_up_my_memory();
 
-  // Set up the generic block look up scheme
+  // Set up the generic block lookup scheme
   this->block_setup();
 
   // Extract the number of blocks
-  const unsigned nblock_types = this->nblock_types();
-
-  // Resize the storage for the diagonal blocks
-  Diagonal_block_preconditioner_pt.resize(nblock_types);
+  unsigned nblock_types = this->nblock_types();
 
   // Create the subsidiary preconditioners
+  Diagonal_block_preconditioner_pt.resize(nblock_types);
   for (unsigned i=0;i<nblock_types;i++)
    {
     Diagonal_block_preconditioner_pt[i] = new SuperLUPreconditioner;
@@ -131,7 +128,7 @@ namespace oomph
   // Setup preconditioners
   for (unsigned i=0;i<nblock_types;i++)
    {
-    // Get block -- this makes a copy of the relevant entries in the
+    // Get block -- this makes a deep copy of the relevant entries in the
     // full Jacobian (i.e. the matrix of the linear system we're
     // actually trying to solve); we can do with this copy whatever
     // we want...
@@ -143,7 +140,7 @@ namespace oomph
     
     // Done with this block now, so the diagonal block that we extracted
     // above can go out of scope. Its LU decomposition (which is the only 
-    // thing we need to apply the preconditoner in the preconditoner_solve(...)
+    // thing we need to apply the preconditioner in the preconditioner_solve(...)
     // function) is retained in the associated sub-preconditioner/(in)exact 
     // solver(SuperLU).
    }
@@ -157,7 +154,7 @@ namespace oomph
  /// linear system.
  //============================================================================
  template<typename MATRIX> 
- void Simple<MATRIX>::
+ void Diagonal<MATRIX>::
  preconditioner_solve(const DoubleVector& r, DoubleVector& z)
  {   
   // Get number of blocks
@@ -184,7 +181,7 @@ namespace oomph
  /// The clean up function.
  //============================================================================
  template<typename MATRIX> 
- void Simple<MATRIX>::clean_up_my_memory()
+ void Diagonal<MATRIX>::clean_up_my_memory()
  { 
   // Delete diagonal preconditioners (approximate solvers)
   unsigned n_block = Diagonal_block_preconditioner_pt.size();
@@ -203,6 +200,8 @@ namespace oomph
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
 
+
+// hierher tidy
 
 //=========================start_of_diagonal_class=============================
 /// \short SimpleTwoDofOnly block diagonal preconditioner which works with
@@ -397,6 +396,8 @@ namespace oomph
  ///////////////////////////////////////////////////////////////////////////////
 
 
+// hierher tidy
+
 //=========================start_of_diagonal_class=============================
 /// \short SimpleOneDofOnly block diagonal preconditioner which works with
 /// only one DOF type. If more than one DOF type is passed to this
@@ -556,6 +557,8 @@ namespace oomph
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
 
+
+// hierher tidy
 
 //=========================start_of_diagonal_class=============================
 /// \short CoarseTwoIntoOne block diagonal preconditioner which works with
@@ -787,17 +790,15 @@ namespace oomph
  
   /// \short Setup the preconditioner 
   void setup();
-
-  // This is put in to override the default behaviour of name hiding, which
-  // "hides", but does not override, base class functions with the same name
-  // as a derived class function even if the argument differ to allow for 
-  // overloading. This is not a problem when using base class pointers.
+  
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
   using Preconditioner::setup;
 
  private:  
 
-  /// Matrix of matrix vector product operators for the off diagonals
-  DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
+  /// Pointers to matrix vector product operators for the off diagonals
+  DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_product_pt;
 
   /// \short Vector of pointers to preconditioners/inexact solvers 
   /// for each diagonal block
@@ -816,56 +817,60 @@ namespace oomph
   // Set up the block look up schemes
   this->block_setup();
 
-
-  // number of block types  
+  // Number of block types  
   unsigned nblock_types = this->nblock_types();
-  std::cout << "nblock:" << nblock_types << std::endl;
 
-  // storage for the off diagonal matrix vector products
-  Off_diagonal_matrix_vector_products.resize(nblock_types,nblock_types,0);
+  // Storage for the pointers to the off diagonal matrix vector products
+  // and the the subsidiary preconditioners (inexact solvers) for the diagonal 
+  // blocks
+  Off_diagonal_matrix_vector_product_pt.resize(nblock_types,nblock_types,0);
   Block_preconditioner_pt.resize(nblock_types);
 
-  // build the preconditioners and matrix vector products
+  // Build the preconditioners and matrix vector products
   for(unsigned i = 0; i < nblock_types; i++)
    {
     // Create the subsidiary preconditioners
     Block_preconditioner_pt[i] = new SuperLUPreconditioner;
-
+    
+    // Put in braces so block matrix goes out of scope when done...
     {
-     // Get block -- this makes a copy of the relevant entries in the
+     // Get block -- this makes a deep copy of the relevant entries in the
      // full Jacobian (i.e. the matrix of the linear system we're
      // actually trying to solve); we can do with this copy whatever
      // we want...
      CRDoubleMatrix block;
      this->get_block(i,i,block);
-    
+     
      // Set up preconditioner (i.e. lu-decompose the block)
      Block_preconditioner_pt[i]->setup(&block);
-    
+     
      // Done with this block now, so the diagonal block that we extracted
      // above can go out of scope. Its LU decomposition (which is the only 
-     // thing we need to apply the preconditoner in the 
-     // preconditoner_solve(...) function) is retained in the associated 
+     // thing we need to apply the preconditioner in the 
+     // preconditioner_solve(...) function) is retained in the associated 
      // sub-preconditioner/(in)exact solver(SuperLU).
-    }
+
+    } // end of brace to make block go out of scope
      
-    // next setup the off diagonal mat vec operators
+    // Next set up the off diagonal mat vec operators
     for(unsigned j=i+1;j<nblock_types;j++)
      {
-      // Get the block
+      // Get the off diagonal block
       CRDoubleMatrix block_matrix = this->get_block(i,j);
 
-      // Copy the block into a "multiplier" class. If trilinos is being
-      // used this should also be faster than oomph-lib's multiplys.
-      Off_diagonal_matrix_vector_products(i,j) = new MatrixVectorProduct();
+      // Create a matrix vector product operator
+      Off_diagonal_matrix_vector_product_pt(i,j) = new MatrixVectorProduct();
 
+      // Setup the matrix vector product for the currrent block matrix
+      // and specify the column in the "big matrix" as final argument.
+      // This is needed for things to work properly in parallel -- don't ask!
       this->setup_matrix_vector_product(
-       Off_diagonal_matrix_vector_products(i,j),&block_matrix,j);
+       Off_diagonal_matrix_vector_product_pt(i,j),&block_matrix,j);
+
       // Done with this block now, so the diagonal block that we extracted
-      // above can go out of scope. Its LU decomposition (which is the only 
-      // thing we need to apply the preconditoner in the 
-      // preconditoner_solve(...) function) is retained in the associated 
-      // sub-preconditioner/(in)exact solver(SuperLU).
+      // above can go out of scope. The MatrixVectorProduct operator retains
+      // its own copy of whatever data it needs.
+
      } // End for loop over j
    } // End for loop over i
  } // End setup(...)
@@ -883,7 +888,7 @@ namespace oomph
   // Get number of blocks
   unsigned n_block = this->nblock_types();
 
-  // vector of vectors for each section of residual vector
+  // vector of vectors for each section of rhs vector
   Vector<DoubleVector> block_r;
   
   // rearrange the vector r into the vector of block vectors block_r
@@ -900,7 +905,7 @@ namespace oomph
     for (unsigned j=i+1;j<n_block;j++)
      {
       DoubleVector temp;
-      Off_diagonal_matrix_vector_products(i,j)->multiply(block_z[j],temp);
+      Off_diagonal_matrix_vector_product_pt(i,j)->multiply(block_z[j],temp);
       block_r[i] -= temp;
      } // End for over j
 
@@ -920,14 +925,14 @@ namespace oomph
  void UpperTriangular<MATRIX>::clean_up_my_memory()
  {     
   // Delete anything in Off_diagonal_matrix_vector_products
-  for(unsigned i=0,ni=Off_diagonal_matrix_vector_products.nrow();i<ni;i++)
+  for(unsigned i=0,ni=Off_diagonal_matrix_vector_product_pt.nrow();i<ni;i++)
    {
-    for(unsigned j=0,nj=Off_diagonal_matrix_vector_products.ncol();j<nj;j++)
+    for(unsigned j=0,nj=Off_diagonal_matrix_vector_product_pt.ncol();j<nj;j++)
      {
-      if(Off_diagonal_matrix_vector_products(i,j) != 0)
+      if(Off_diagonal_matrix_vector_product_pt(i,j) != 0)
        {    
-        delete Off_diagonal_matrix_vector_products(i,j);
-        Off_diagonal_matrix_vector_products(i,j) = 0;
+        delete Off_diagonal_matrix_vector_product_pt(i,j);
+        Off_diagonal_matrix_vector_product_pt(i,j) = 0;
        }
      }
    }
@@ -955,17 +960,15 @@ namespace oomph
 //=============================================================================
  template<typename MATRIX> 
  class TwoPlusThree : public BlockPreconditioner<MATRIX>
- {
- public :
-  
+  {
+    public :
+   
   /// Constructor for TwoPlusThree
   TwoPlusThree() : BlockPreconditioner<MATRIX>(),
-                  First_subsidiary_preconditioner_pt(0),
-                  Second_subsidiary_preconditioner_pt(0)
-   {
-   } // end_of_constructor
-  
-  
+   First_subsidiary_preconditioner_pt(0),
+   Second_subsidiary_preconditioner_pt(0)
+    {} // end_of_constructor
+    
   /// Destructor - delete the diagonal solvers (subsidiary preconditioners)
   ~TwoPlusThree()
    {
@@ -1014,7 +1017,9 @@ namespace oomph
   // Clean up memory.
   this->clean_up_my_memory();
 
+  // How many dof types do we have?
   unsigned n_dof_types = this->ndof_types();
+
 #ifdef PARANOID
   // This preconditioner only works for 5 dof types
   if (n_dof_types!=5)
@@ -1029,7 +1034,7 @@ namespace oomph
 #endif
 
 
-  // Combine into two major blocks, one containing dof types 0 and 1, the
+  // Combine into two blocks, one containing dof types 0 and 1, the
   // final one dof types 2-4. In general we want:
   // dof_to_block_map[dof_type] = block type
   Vector<unsigned> dof_to_block_map(n_dof_types);
@@ -1041,8 +1046,8 @@ namespace oomph
   this->block_setup(dof_to_block_map);
 
   // Show that it worked ok:
-  oomph_info << "Preconditioner has " << this->nblock_types() 
-             << " block types\n";
+  oomph_info << "Preconditioner has " 
+             << this->nblock_types() << " block types\n";
   
   // Create the subsidiary preconditioners
   First_subsidiary_preconditioner_pt= new SuperLUPreconditioner;
@@ -1051,19 +1056,20 @@ namespace oomph
   // Set diagonal solvers/preconditioners; put in own scope
   // so variable block goes out of scope
   {
-   CRDoubleMatrix block = this->get_block(0,0);
-   oomph_info << "Block size of block 0: " << block.nrow() << std::endl;
-   
+   CRDoubleMatrix block;
+   this->get_block(0,0,block);
+
    // Set up preconditioner (i.e. lu-decompose the block)
    First_subsidiary_preconditioner_pt->setup(&block);
   }
   {
-   CRDoubleMatrix block = this->get_block(1,1);
-   oomph_info << "Block size of block 1: " << block.nrow() << std::endl;
+   CRDoubleMatrix block;
+   this->get_block(1,1,block);
    
    // Set up preconditioner (i.e. lu-decompose the block)
    Second_subsidiary_preconditioner_pt->setup(&block);
   }
+
  } // End of setup
  
  
@@ -1125,8 +1131,8 @@ namespace oomph
 
 
 //=================start_of_two_plus_three_upper_triangular_class==============
-/// \short Upper two plus three triangular preconditioner for a system with
-///  5 dof types.
+/// \short Upper triangular two plus three triangular preconditioner for a 
+/// system with  5 dof types.
 //=============================================================================
  template<typename MATRIX> 
  class TwoPlusThreeUpperTriangular 
@@ -1138,8 +1144,9 @@ namespace oomph
   /// Constructor.
   TwoPlusThreeUpperTriangular()  :
    BlockPreconditioner<MATRIX>(),
-   First_subsidiary_preconditioner_pt(0),
-   Second_subsidiary_preconditioner_pt(0)
+    Off_diagonal_matrix_vector_product_pt(0),
+    First_subsidiary_preconditioner_pt(0),
+    Second_subsidiary_preconditioner_pt(0)
    {
    }
  
@@ -1169,17 +1176,15 @@ namespace oomph
  
   /// \short Setup the preconditioner 
   void setup();
-
-  // This is put in to override the default behaviour of name hiding, which
-  // "hides", but does not override, base class functions with the same name
-  // as a derived class function even if the argument differ to allow for 
-  // overloading. This is not a problem when using base class pointers.
+  
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
   using Preconditioner::setup;
 
  private:  
 
-  /// Matrix of matrix vector product operators for the off diagonals
-  DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
+  /// Pointer to matrix vector product operator for the single off diagonals
+  MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
   /// \short Pointer to preconditioners/inexact solver
   /// for (0,0) block
@@ -1225,52 +1230,48 @@ namespace oomph
   dof_to_block_map[3]=1;
   dof_to_block_map[4]=1;
   this->block_setup(dof_to_block_map);
-
-  // number of block types  
-  unsigned nblock_types = this->nblock_types();
-  
-  // Show that it worked ok:
-  oomph_info << "Preconditioner has " << nblock_types
-             << " block types\n";
   
   // Create the subsidiary preconditioners
   First_subsidiary_preconditioner_pt= new SuperLUPreconditioner;
   Second_subsidiary_preconditioner_pt= new SuperLUPreconditioner;
 
-  // storage for the off diagonal matrix vector products
-  Off_diagonal_matrix_vector_products.resize(nblock_types,nblock_types,0);
-
   // Set diagonal solvers/preconditioners; put in own scope
   // so block goes out of scope
   {
+
    CRDoubleMatrix block;
    this->get_block(0,0,block);
-   oomph_info << "Block size of block 0: " << block.nrow() << std::endl;
    
    // Set up preconditioner (i.e. lu-decompose the block)
    First_subsidiary_preconditioner_pt->setup(&block);
+
   }
   {
+
    CRDoubleMatrix block;
    this->get_block(1,1,block);
-   oomph_info << "Block size of block 1: " << block.nrow() << std::endl;
    
    // Set up preconditioner (i.e. lu-decompose the block)
    Second_subsidiary_preconditioner_pt->setup(&block);
-  }
+
+  } // end setup of last subsidiary preconditioner
+
 
   // next setup the off diagonal mat vec operators
   {
    // Get the block
    CRDoubleMatrix block_matrix = this->get_block(0,1);
 
-   // Copy the block into a "multiplier" class. If trilinos is being
-   // used this should also be faster than oomph-lib's multiphys.
-   Off_diagonal_matrix_vector_products(0,1) = new MatrixVectorProduct();
+   // Create matrix vector product
+   Off_diagonal_matrix_vector_product_pt = new MatrixVectorProduct();
 
+   // Set it up -- note that the block column index refers to the
+   // block enumeration (not the dof enumeration)
+   unsigned block_column_index=1;
    this->setup_matrix_vector_product(
-    Off_diagonal_matrix_vector_products(0,1),&block_matrix,1);
+    Off_diagonal_matrix_vector_product_pt,&block_matrix,block_column_index);
   }
+ 
  }
 
  //=============================================================================
@@ -1301,7 +1302,7 @@ namespace oomph
   // Solve (0,1) off diagonal.
   // Substitute
   DoubleVector temp;
-  Off_diagonal_matrix_vector_products(0,1)->multiply(block_z[1],temp);
+  Off_diagonal_matrix_vector_product_pt->multiply(block_z[1],temp);
   block_r[0] -= temp;   
 
   // Solve (0,0) diagonal block system
@@ -1319,18 +1320,13 @@ namespace oomph
  template<typename MATRIX> 
  void TwoPlusThreeUpperTriangular<MATRIX>::clean_up_my_memory()
  {     
-  // Delete anything in Off_diagonal_matrix_vector_products
-  for(unsigned i=0,ni=Off_diagonal_matrix_vector_products.nrow();i<ni;i++)
+  // Delete of diagonal matrix vector product
+  if (Off_diagonal_matrix_vector_product_pt != 0)
    {
-    for(unsigned j=0,nj=Off_diagonal_matrix_vector_products.ncol();j<nj;j++)
-     {
-      if(Off_diagonal_matrix_vector_products(i,j) != 0)
-       {
-        delete Off_diagonal_matrix_vector_products(i,j);
-        Off_diagonal_matrix_vector_products(i,j) = 0;
-       }
-     }
+    delete Off_diagonal_matrix_vector_product_pt;
+    Off_diagonal_matrix_vector_product_pt = 0;
    }
+
   //Clean up subsidiary preconditioners.
   if(First_subsidiary_preconditioner_pt!=0)
    {
@@ -1344,13 +1340,16 @@ namespace oomph
    }
  } // End of clean_up_my_memory function.
 
+
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
+
 //=========start_of_two_plus_three_upper_triangular_with_sub_class=============
-/// \short Upper block triangular with subsidiary preconditioner for a system 
-/// with 5 dof types.
+/// \short Upper block triangular with subsidiary block preconditioners 
+/// for a system with 5 dof types.
 //=============================================================================
  template<typename MATRIX> 
  class TwoPlusThreeUpperTriangularWithOneLevelSubsidiary 
@@ -1362,8 +1361,9 @@ namespace oomph
   /// Constructor.
   TwoPlusThreeUpperTriangularWithOneLevelSubsidiary() :
    BlockPreconditioner<MATRIX>(),
-   First_subsidiary_preconditioner_pt(0),
-   Second_subsidiary_preconditioner_pt(0)
+    Off_diagonal_matrix_vector_product_pt(0),
+    First_subsidiary_preconditioner_pt(0),
+    Second_subsidiary_preconditioner_pt(0)
    {
    }
  
@@ -1373,15 +1373,15 @@ namespace oomph
     this->clean_up_my_memory();
    }
 
-  /// clean up the memory
-  virtual void clean_up_my_memory();
+  /// Clean up the memory
+  void clean_up_my_memory();
  
   /// Broken copy constructor
   TwoPlusThreeUpperTriangularWithOneLevelSubsidiary
   (const TwoPlusThreeUpperTriangularWithOneLevelSubsidiary&) 
    { 
-    BrokenCopy::broken_copy(
-      "TwoPlusThreeUpperTriangularWithOneLevelSubsidiary");
+    BrokenCopy::broken_copy
+     ("TwoPlusThreeUpperTriangularWithOneLevelSubsidiary");
    } 
  
   /// Broken assignment operator
@@ -1398,16 +1398,14 @@ namespace oomph
   /// \short Setup the preconditioner 
   void setup();
 
-  // This is put in to override the default behaviour of name hiding, which
-  // "hides", but does not override, base class functions with the same name
-  // as aderived class function even if the argument differ to allow for 
-  // overloading. This is not a problem when using base class pointers.
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
   using Preconditioner::setup;
 
  private:  
 
-  /// Matrix of matrix vector product operators for the off diagonals
-  DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
+  /// Pointer to matrix vector product operators for the off diagonal block
+  MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
   /// \short Pointer to preconditioners/inexact solver
   /// for (0,0) block
@@ -1427,7 +1425,7 @@ namespace oomph
   // clean the memory
   this->clean_up_my_memory();
 
-  // number of block types  
+  // number of dof types  
   unsigned n_dof_types = this->ndof_types();
 
 #ifdef PARANOID
@@ -1443,9 +1441,8 @@ namespace oomph
    }
 #endif
 
-
-  // Combine into two major blocks, one containing dof types 0 and 1, the
-  // final one dof types 2-4. In general we want
+  // Combine "dof blocks" into two compound blocks, one containing dof 
+  // types 0 and 1, the final one dof types 2-4. In general we want:
   // dof_to_block_map[dof_type] = block type
   Vector<unsigned> dof_to_block_map(n_dof_types);
   dof_to_block_map[0]=0;
@@ -1454,121 +1451,126 @@ namespace oomph
   dof_to_block_map[3]=1;
   dof_to_block_map[4]=1;
   this->block_setup(dof_to_block_map);
-
-  // Show that it worked:
-  unsigned nblock_types = this->nblock_types();
-  oomph_info << "Preconditioner has " << this->nblock_types() 
-             << " block types\n";
   
-  // Create the subsidiary preconditioners.
+  // Create the subsidiary block preconditioners.  
   {
-   // First subsidiary precond is a block diagonal preconditioner itself.
-   // Put in owns cope so block_prec_pt goes out of scope.
+   // Block upper triangular block preconditioner for compound 
+   // 2x2 top left block in "big" 5x5 matrix
    UpperTriangular<CRDoubleMatrix>* block_prec_pt=
     new UpperTriangular<CRDoubleMatrix>;
    First_subsidiary_preconditioner_pt=block_prec_pt;
 
-   // Turn first_sub into a subsidiary preconditioner, declaring which
+   // Turn into a subsidiary preconditioner, declaring which
    // of the five dof types in the present (master) preconditioner
-   // correspond to the dof types in the subsidiary block preconditioner
+   // correspond to the dof types in the subsidiary block preconditioner:
+   // dof_map[dof_block_ID_in_subsdiary] = dof_block_ID_in_master. Also 
+   // pass pointer to present (master) preconditioner.
    unsigned n_sub_dof_types=2;
    Vector<unsigned> dof_map(n_sub_dof_types);
    dof_map[0]=0;
    dof_map[1]=1;
-   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);    
-   // Perform setup
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
+    
+   // Setup: Pass pointer to full-size matrix!
    block_prec_pt->setup(this->matrix_pt());
   }
 
-  // Second subsidiary precond is a block diagonal preconditioner itself
-  UpperTriangular<CRDoubleMatrix>* block_prec_pt=
-   new UpperTriangular<CRDoubleMatrix>;
-  Second_subsidiary_preconditioner_pt=block_prec_pt;
-
-  // Turn second_sub into a subsidiary preconditioner, declaring which
-  // of the five dof types in the present (master) preconditioner
-  // correspond to the dof types in the subsidiary block preconditioner
-  unsigned n_sub_dof_types=3;
-  Vector<unsigned> dof_map(n_sub_dof_types);
-  dof_map[0]=2;
-  dof_map[1]=3;
-  dof_map[2]=4;
-  block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);    
-  // Perform setup
-  block_prec_pt->setup(this->matrix_pt());
-
-  // storage for the off diagonal matrix vector products
-  Off_diagonal_matrix_vector_products.resize(nblock_types,nblock_types,0);
-  // next setup the off diagonal mat vec operators
   {
-   // Get the block
+   // Block upper triangular for 3x3 bottom right block in "big" 5x5 matrix
+   UpperTriangular<CRDoubleMatrix>* block_prec_pt=
+    new UpperTriangular<CRDoubleMatrix>;
+   Second_subsidiary_preconditioner_pt=block_prec_pt;
+   
+   // Turn second_sub into a subsidiary preconditioner, declaring which
+   // of the five dof types in the present (master) preconditioner
+   // correspond to the dof types in the subsidiary block preconditioner:
+   // dof_map[dof_block_ID_in_subsdiary] = dof_block_ID_in_master. Also 
+   // pass pointer to present (master) preconditioner.
+   unsigned n_sub_dof_types=3;
+   Vector<unsigned> dof_map(n_sub_dof_types);
+   dof_map[0]=2;
+   dof_map[1]=3;
+   dof_map[2]=4;
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);    
+
+   // Setup: Pass pointer to full-size matrix!
+   block_prec_pt->setup(this->matrix_pt());
+  }
+  
+  // Setup the off-diagonal mat vec operator
+  {
+   // Get the off-diagonal block: the top-right block in the present
+   // block preconditioner (which views the system matrix as comprising
+   // 2x2 blocks).
    CRDoubleMatrix block_matrix = this->get_block(0,1);
-
-   // Copy the block into a "multiplier" class. If trilinos is being
-   // used this should also be faster than oomph-lib's multiply.
-   Off_diagonal_matrix_vector_products(0,1) = new MatrixVectorProduct();
-
+   
+   // Create matrix vector product
+   Off_diagonal_matrix_vector_product_pt = new MatrixVectorProduct();
+   
+   // Setup: Final argument indicates block column in the present
+   // block preconditioner (which views the system matrix as comprising
+   // 2x2 blocks).
    this->setup_matrix_vector_product(
-    Off_diagonal_matrix_vector_products(0,1),&block_matrix,1);
+    Off_diagonal_matrix_vector_product_pt,&block_matrix,1);
   }
  
  }
 
  //=============================================================================
- /// Preconditioner solve for the one plus four upper triangular with 
- /// subsidiary  preconditioner: 
- /// Apply preconditioner to r and return z, so that P z = r, where
- /// P is the block diagonal matrix constructed from the original 
- /// linear system.
+ /// Preconditioner solve 
  //=============================================================================
  template<typename MATRIX> 
  void TwoPlusThreeUpperTriangularWithOneLevelSubsidiary<MATRIX>::
- preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ preconditioner_solve(const DoubleVector& z, DoubleVector& y)
  {
-  // Solve (1,1) diagonal block system
-  // Now apply the subsidiary block preconditioner that acts on the
+  // Solve "bottom right" (1,1) diagonal block system, using the 
+  // subsidiary block preconditioner that acts on the
   // "bottom right" 3x3 sub-system (only!). The subsidiary preconditioner 
   // will extract the relevant (3x1) "sub-vectors" from the "big" (5x1)
-  // vector big_r and treat it as the rhs, r, of P z = r
-  // where P is 3x3 block diagonal. Once the system is solved,
+  // vector z and treat it as the rhs, r, of P y = z
+  // where P is 3x3 a block matrix. Once the system is solved,
   // the result is automatically put back into the appropriate places 
-  // of the "big" (5x1) vector z:
-  Second_subsidiary_preconditioner_pt->preconditioner_solve(r,z);
+  // of the "big" (5x1) vector y:
+  Second_subsidiary_preconditioner_pt->preconditioner_solve(z,y);
     
-  // Get number of blocks
-  const unsigned n_block = this->nblock_types();
+  // Now extract the "bottom" (3x1) block vector from the full-size (5x1)
+  // solution vector that we've just computed -- note that index 1
+  // refers to the block enumeration the in the current preconditioner
+  // (which has two blocks!)
+  DoubleVector block_y;
+  this->get_block_vector(1,y,block_y);
 
-  // Split up rhs vector into sub-vectors, re-arranged to match
-  // the matrix blocks
-  Vector<DoubleVector> block_r;
-  this->get_block_vectors(r,block_r);
-
-  // Create storage for solution of block solves
-  Vector<DoubleVector> block_z(n_block);
-
-  // Solve (0,1) off diagonal.
-  // Substitute
-  this->get_block_vectors(z,block_z);
+  // Evaluate matrix vector product of just-extracted (3x1) solution 
+  // vector with off-diagonal block and store in temporary vector
   DoubleVector temp;
-  Off_diagonal_matrix_vector_products(0,1)->multiply(block_z[1],temp);
-  block_r[0] -= temp;   
+  Off_diagonal_matrix_vector_product_pt->multiply(block_y,temp);
+
+  // Extract "upper" (2x1) block vector from full-size (5x1) rhs 
+  // vector (as passed into this function)...
+  DoubleVector block_z;
+  this->get_block_vector(0,z,block_z);
+
+  // ...and subtract matrix vector product computed above
+  block_z -= temp;   
 
   // Block solve for first diagonal block. Since the associated subsidiary 
   // preconditioner is a block preconditioner itself, it will extract 
-  // the required (2x1) block rhs from a "big" (5x1) rhs vector, big_r.
-  // Therefore we first put the actual (2x1) rhs vector block_r[0] into the
-  // "big" (5x1) vector big_r. 
-  DoubleVector big_r(z.distribution_pt());
-  this->return_block_vector(0,block_r[0],big_r);
-     
+  // the required (2x1) block from a "big" (5x1) rhs vector.
+  // Therefore we first put the actual (2x1) rhs vector block_z into a
+  // "big" (5x1) vector big_z whose row distribution matches that of the
+  // "big" right hand side vector, z, that was passed into this function.
+  DoubleVector big_z(z.distribution_pt());
+  this->return_block_vector(0,block_z,big_z);
+ 
   // Now apply the subsidiary block preconditioner that acts on the
-  // "upper left" 2x2 sub-system (only!). The subsidiary preconditioner 
-  // will extract the relevant (2x1) "sub-vectors" from the "big" (5x1)
-  // vector big_r and treat it as the rhs, r, of P z = r
-  // where P is 2x2 block diagonal. Once the system is solved,
-  // the result is automatically put back into the appropriate places 
-  // of the "big" (5x1) vector z:
-  First_subsidiary_preconditioner_pt->preconditioner_solve(big_r,z);
+  // "upper left" (2x2) sub-system (only!). The subsidiary preconditioner 
+  // will extract the relevant (2x1) block vector from the "big" (5x1)
+  // vector big_r and treat it as the rhs, z, of its P y = z
+  // where P is upper left 2x2 block diagonal of the big system. 
+  // Once the system is solved, the result is automatically put back 
+  // into the appropriate places of the "big" (5x1) vector y which is 
+  // returned by the current function, so no further action is required.
+  First_subsidiary_preconditioner_pt->preconditioner_solve(big_z,y);
  }
 
  //====start_of_clean_up_for_two_plus_three_upper_triangular_with_sub_class=====
@@ -1578,18 +1580,10 @@ namespace oomph
  void TwoPlusThreeUpperTriangularWithOneLevelSubsidiary<MATRIX>::
  clean_up_my_memory()
  {     
-  // Delete anything in Off_diagonal_matrix_vector_products
-  for(unsigned i=0,ni=Off_diagonal_matrix_vector_products.nrow();i<ni;i++)
-   {
-    for(unsigned j=0,nj=Off_diagonal_matrix_vector_products.ncol();j<nj;j++)
-     {
-      if(Off_diagonal_matrix_vector_products(i,j) != 0)
-       {
-        delete Off_diagonal_matrix_vector_products(i,j);
-        Off_diagonal_matrix_vector_products(i,j) = 0;
-       }
-     }
-   }
+  // Delete off-diagonal matrix vector product
+  delete Off_diagonal_matrix_vector_product_pt;
+  Off_diagonal_matrix_vector_product_pt = 0;
+
   //Clean up subsidiary preconditioners.
   if(First_subsidiary_preconditioner_pt!=0)
    {
@@ -1606,6 +1600,8 @@ namespace oomph
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
+// hierher tidy
 
 //====================start_of_two_plus_one_class=============================
 /// \short Block diagonal preconditioner for system with 3 dof types
@@ -1659,10 +1655,8 @@ namespace oomph
   /// \short Setup the preconditioner 
   void setup();
 
-  // This is put in to override the default behaviour of name hiding, which
-  // "hides", but does not override, base class functions with the same name
-  // as a derived class function even if the argument differ to allow for 
-  // overloading. This is not a problem when using base class pointers.
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
   using Preconditioner::setup;
 
 
@@ -1706,6 +1700,7 @@ namespace oomph
 
   // Combine into two major blocks, one containing dofs 0 and 1, the
   // final one dof, 2.
+
   Vector<unsigned> dof_to_block_map(3);
   dof_to_block_map[0]=0;
   dof_to_block_map[1]=0;
@@ -1842,6 +1837,10 @@ namespace oomph
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
 
+
+
+// hierher this hasn't been tidied up yet (it is used though!)
+
 //=========start_of_two_plus_three_upper_triangular_with_two_sub_class=========
 /// \short Upper block triangular with a two level subsidiary preconditioner 
 /// for a system with 5 dof types.
@@ -1856,7 +1855,7 @@ namespace oomph
   /// Constructor.
   TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary() :
    BlockPreconditioner<MATRIX>(),
-   Off_diagonal_matrix_vector_products(0),
+   Off_diagonal_matrix_vector_product_pt(0),
    First_subsidiary_preconditioner_pt(0),
    Second_subsidiary_preconditioner_pt(0)
    {
@@ -1893,16 +1892,15 @@ namespace oomph
   /// \short Setup the preconditioner 
   void setup();
 
-  // This is put in to override the default behaviour of name hiding, which
-  // "hides", but does not override, base class functions with the same name
-  // as a derived class function even if the argument differ to allow for 
-  // overloading. This is not a problem when using base class pointers.
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
   using Preconditioner::setup;
 
  private:  
 
   /// Matrix of matrix vector product operators for the off diagonals
-  DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
+// hierher do we need the matrix?
+  DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_product_pt;
 
   /// \short Pointer to preconditioners/inexact solver
   /// for (0,0) block
@@ -1951,7 +1949,7 @@ namespace oomph
   this->block_setup(dof_to_block_map);
 
   // Show that it worked ok:
-  const unsigned nblock_types = this->nblock_types();
+  unsigned nblock_types = this->nblock_types();
   oomph_info << "Preconditioner has " << this->nblock_types() 
              << " block types\n";
   
@@ -1966,7 +1964,7 @@ namespace oomph
    // Turn first_sub into a subsidiary preconditioner, declaring which
    // of the five dof types in the present (master) preconditioner
    // correspond to the dof types in the subsidiary block preconditioner
-   const unsigned n_sub_dof_types=2;
+   unsigned n_sub_dof_types=2;
    Vector<unsigned> dof_map(n_sub_dof_types);
    dof_map[0]=0;
    dof_map[1]=1;
@@ -1983,7 +1981,7 @@ namespace oomph
   // Turn second_sub into a subsidiary preconditioner, declaring which
   // of the five dof types in the present (master) preconditioner
   // correspond to the dof types in the subsidiary block preconditioner
-  const unsigned n_sub_dof_types=3;
+  unsigned n_sub_dof_types=3;
   Vector<unsigned> dof_map(n_sub_dof_types);
   dof_map[0]=2;
   dof_map[1]=3;
@@ -1993,7 +1991,7 @@ namespace oomph
   block_prec_pt->setup(this->matrix_pt());
 
   // storage for the off diagonal matrix vector products
-  Off_diagonal_matrix_vector_products.resize(nblock_types,nblock_types,0);
+  Off_diagonal_matrix_vector_product_pt.resize(nblock_types,nblock_types,0);
   // next setup the off diagonal mat vec operators
   {
    // Get the block
@@ -2001,10 +1999,10 @@ namespace oomph
 
    // Copy the block into a "multiplier" class. If trilinos is being
    // used this should also be faster than oomph-lib's multiphys.
-   Off_diagonal_matrix_vector_products(0,1) = new MatrixVectorProduct();
+   Off_diagonal_matrix_vector_product_pt(0,1) = new MatrixVectorProduct();
 
    this->setup_matrix_vector_product(
-    Off_diagonal_matrix_vector_products(0,1),&block_matrix,1);
+    Off_diagonal_matrix_vector_product_pt(0,1),&block_matrix,1);
   }
  
  }
@@ -2045,7 +2043,7 @@ namespace oomph
   // Substitute
   this->get_block_vectors(z,block_z);
   DoubleVector temp;
-  Off_diagonal_matrix_vector_products(0,1)->multiply(block_z[1],temp);
+  Off_diagonal_matrix_vector_product_pt(0,1)->multiply(block_z[1],temp);
   block_r[0] -= temp;   
 
   // Block solve for first diagonal block. Since the associated subsidiary 
@@ -2073,15 +2071,15 @@ namespace oomph
  void TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary<MATRIX>::
  clean_up_my_memory()
  {     
-  // Delete anything in Off_diagonal_matrix_vector_products
-  for(unsigned i=0,ni=Off_diagonal_matrix_vector_products.nrow();i<ni;i++)
+  // Delete anything in Off_diagonal_matrix_vector_product_pt
+  for(unsigned i=0,ni=Off_diagonal_matrix_vector_product_pt.nrow();i<ni;i++)
    {
-    for(unsigned j=0,nj=Off_diagonal_matrix_vector_products.ncol();j<nj;j++)
+    for(unsigned j=0,nj=Off_diagonal_matrix_vector_product_pt.ncol();j<nj;j++)
      {
-      if(Off_diagonal_matrix_vector_products(i,j) != 0)
+      if(Off_diagonal_matrix_vector_product_pt(i,j) != 0)
        {
-        delete Off_diagonal_matrix_vector_products(i,j);
-        Off_diagonal_matrix_vector_products(i,j) = 0;
+        delete Off_diagonal_matrix_vector_product_pt(i,j);
+        Off_diagonal_matrix_vector_product_pt(i,j) = 0;
        }
      }
    }
@@ -2098,9 +2096,14 @@ namespace oomph
    }
  } // End of clean_up_my_memory function.
 
+
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
+
+// hierher tidy (this is from Ray)
 
 //=============start_of_two_plus_three_upper_triangular_with_replace_class=====
 /// \short Block diagonal preconditioner for system with 5 dof types
@@ -2431,233 +2434,6 @@ namespace oomph
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-//====================start_of_one_plus_one_class=============================
-/// \short Block diagonal preconditioner for system with 2 dof types
-/// assembled into a 2x2 block system, with (0,0) block containing
-/// the first dof types, the (1,1) block containing the last one.
-/// Both blocks are solved by subsidiary upper triangular block 
-/// preconditioners.
-/// This class is no longer used anywhere.
-//=============================================================================
- template<typename MATRIX> 
- class OnePlusOneUpperTriangularPreconditioner : 
-  public BlockPreconditioner<MATRIX>
- {
-  
- public :
-  
-  /// Constructor for OnePlusOneUpperTriangularPreconditioner
-  OnePlusOneUpperTriangularPreconditioner() : 
-   BlockPreconditioner<MATRIX>(),
-   First_subsidiary_preconditioner_pt(0),
-   Second_subsidiary_preconditioner_pt(0),
-   Off_diagonal_matrix_vector_product_pt(0)
-   {
-   } // end_of_constructor
-  
-  
-  /// Destructor - delete the diagonal solvers (subsidiary preconditioners)
-  ~OnePlusOneUpperTriangularPreconditioner()
-   {
-    this->clean_up_my_memory();
-   }
-
-  virtual void clean_up_my_memory();
-     
-  /// Broken copy constructor
-  OnePlusOneUpperTriangularPreconditioner
-  (const OnePlusOneUpperTriangularPreconditioner&) 
-   { 
-    BrokenCopy::broken_copy("OnePlusOneUpperTriangularPreconditioner");
-   } 
-  
-  /// Broken assignment operator
-  void operator=(const OnePlusOneUpperTriangularPreconditioner&) 
-   {
-    BrokenCopy::broken_assign("OnePlusOneUpperTriangularPreconditioner");
-   }
-  
-  /// Apply preconditioner to r, i.e. return z such that P z = r
-  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
-  
-  /// \short Setup the preconditioner 
-  void setup();
-
-  // This is put in to override the default behaviour of name hiding, which
-  // "hides", but does not override, base class functions with the same name
-  // as a derived class function even if the argument differ to allow for 
-  // overloading. This is not a problem when using base class pointers.
-  using Preconditioner::setup;
-
-
- private :
-  
-  /// \short Pointer to preconditioners/inexact solver
-  /// for (0,0) block
-  Preconditioner* First_subsidiary_preconditioner_pt;
-  
-  /// \short Pointer to preconditioners/inexact solver
-  /// for (1,1) block
-  Preconditioner* Second_subsidiary_preconditioner_pt;
-  
-  /// Matrix vector product operators for the off diagonals.
-  MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
- };
-
- //================start_of_setup_for_two_plus_one_preconditioner=============
- /// The setup function.
- //===========================================================================
- template<typename MATRIX> 
- void OnePlusOneUpperTriangularPreconditioner<MATRIX>::setup()
- {
-  // Clean up memory.
-  this->clean_up_my_memory();
-
-  unsigned n_dof_types = this->ndof_types();
-#ifdef PARANOID
-  // This preconditioner only works for 2 dof types
-  if (n_dof_types!=2)
-   {
-    std::stringstream tmp;
-    tmp << "This preconditioner only works for problems with 2 dof types\n"
-        << "Yours has " << n_dof_types;
-    throw OomphLibError(tmp.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
-  // The dof types are the same as the desired blocking.
-  this->block_setup();
-
-  // Create the subsidiary preconditioners
-  //--------------------------------------
-  {
-   // Limit scope of variables such as block_prec_pt
-   // First one:
-   UpperTriangular<CRDoubleMatrix>* block_prec_pt=
-    new UpperTriangular<CRDoubleMatrix>;
-   First_subsidiary_preconditioner_pt=block_prec_pt;
-  
-   // Turn it into a subsidiary preconditioner, declaring which
-   // of the three dof types in the present (master) preconditioner
-   // correspond to the dof types in the subsidiary block preconditioner
-   unsigned n_sub_dof_types=1;
-
-   Vector<unsigned> dof_map(n_sub_dof_types);
-   dof_map[0] = 0;
-   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
-  
-   // Perform setup
-   block_prec_pt->setup(this->matrix_pt());
-  }
-
-  // Second one:
-  UpperTriangular<CRDoubleMatrix>* block_prec_pt=
-   new UpperTriangular<CRDoubleMatrix>;
-  Second_subsidiary_preconditioner_pt=block_prec_pt;
-  
-  // Turn it into a subsidiary preconditioner, declaring which
-  // of the three dof types in the present (master) preconditioner
-  // correspond to the dof types in the subsidiary block preconditioner i.e.
-  // arguments: dof_map[doc_in_subsidiary]=dof_in_present
-  unsigned n_sub_dof_types=1;
-
-  Vector<unsigned> dof_map(n_sub_dof_types);
-  dof_map[0] = 1;
-  block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
-  
-  // Perform setup
-  block_prec_pt->setup(this->matrix_pt()); 
-
-
-  // Set up off diagonal matrix vector product operator.
-  // Get the block
-  CRDoubleMatrix block_matrix = this->get_block(0,1);
-  Off_diagonal_matrix_vector_product_pt = new MatrixVectorProduct();
-  this->setup_matrix_vector_product(
-   Off_diagonal_matrix_vector_product_pt,&block_matrix,1);
- }
- 
- 
- //=============================================================================
- /// Preconditioner solve for the two plus one diagonal preconditioner: 
- /// Apply preconditioner to r and return z, so that P z = r, where
- /// P is the block diagonal matrix constructed from the original 
- /// linear system.
- //=============================================================================
- template<typename MATRIX> 
- void OnePlusOneUpperTriangularPreconditioner<MATRIX>::
- preconditioner_solve(const DoubleVector& r, DoubleVector& z)
- {   
-  // Solve (1,1) diagonal block system
-  // Now apply the subsidiary block preconditioner that acts on the
-  // "bottom right" 1x1 sub-system (only!). The subsidiary preconditioner 
-  // will extract the relevant (1x1) "sub-vectors" from the "big" (2x1)
-  // vector big_r and treat it as the rhs, r, of P z = r
-  // where P is 1x1 block diagonal. Once the system is solved,
-  // the result is automatically put back into the appropriate places 
-  // of the "big" (2x1) vector z:
-  Second_subsidiary_preconditioner_pt->preconditioner_solve(r,z);
-
-  // Solve (0,1) off diagonal.
-  // Substitute
-  DoubleVector temp;
-  DoubleVector z_1;
-  this->get_block_vector(1,z,z_1);
-  Off_diagonal_matrix_vector_product_pt->multiply(z_1,temp);
-
-  // Get r_0 from the RHS and modify it accordingly.
-  DoubleVector r_0;
-  this->get_block_vector(0,r,r_0);
-  r_0 -= temp;   
-
-  
-  // Block solve for first diagonal block. Since the associated subsidiary 
-  // preconditioner is a block preconditioner itself, it will extract 
-  // the required (1x1) block rhs from a "big" (2x1) rhs vector, big_r.
-  // Therefore we first put the actual (1x1) rhs vector r_0 into the
-  // "big" (2x1) vector big_r. 
-  DoubleVector big_r(z.distribution_pt());
-  this->return_block_vector(0,r_0,big_r);
-    
-  // Now apply the subsidiary block preconditioner that acts on the
-  // "top left" 1x1 sub-system (only!). The subsidiary preconditioner 
-  // will extract the relevant (1x1) "sub-vectors" from the "big" (2x1)
-  // vector big_r and treat it as the rhs, r, of P z = r
-  // where P is 1x1 block diagonal. Once the system is solved,
-  // the result is automatically put back into the appropriate places 
-  // of the "big" (2x1) vector z:
-  First_subsidiary_preconditioner_pt->preconditioner_solve(big_r,z);
- }
-
- //================start_of_clean_up_for_two_plus_one_preconditioner==========
- /// The clean up function.
- //===========================================================================
- template<typename MATRIX> 
- void OnePlusOneUpperTriangularPreconditioner<MATRIX>::clean_up_my_memory()
- {     
-  // Delete diagonal preconditioners (approximate solvers)
-  if(First_subsidiary_preconditioner_pt!=0)
-   {
-    delete First_subsidiary_preconditioner_pt;
-    First_subsidiary_preconditioner_pt = 0;
-   }
-  if(Second_subsidiary_preconditioner_pt!=0)
-   {
-    delete Second_subsidiary_preconditioner_pt;
-    Second_subsidiary_preconditioner_pt = 0;
-   }
-  if(Off_diagonal_matrix_vector_product_pt!=0)
-   {
-    delete  Off_diagonal_matrix_vector_product_pt;
-    Off_diagonal_matrix_vector_product_pt = 0;
-   }
- } // End of clean_up_my_memory function.
-
- ///////////////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////////////
 
 //==================start_of_coarse_two_plus_two_plus_one_class================
 /// \short Block diagonal preconditioner for system with 5 dof types
@@ -3321,6 +3097,11 @@ namespace oomph
    }// End of loop over columns.
 
  } // End of clean_up_my_memory function.
+
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
 
 }

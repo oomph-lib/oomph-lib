@@ -1810,7 +1810,7 @@ namespace oomph
   ///  b1] (on p1).
   ///
   /// Note (1): The out vector may not be uniformly distributed even
-  /// if the the in vectors have uniform distributions. The nrow_local of the
+  /// if the in vectors have uniform distributions. The nrow_local of the
   /// out vector will be the sum of the nrow_local of the in vectors.
   /// Try this out with two distributions of global rows 3 and 5, uniformly
   /// distributed across two processors. Compare this against a distribution

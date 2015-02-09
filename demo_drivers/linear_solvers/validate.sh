@@ -352,16 +352,6 @@ fi
 
 mv RESLT RESLT_multi_poisson_upper_triangular_prec
 
-
-
-#####################hierher##############
-
-
-
-
-
-
-
 # Validation for rectangular driven cavity
 #-----------------------------------------
 

@@ -179,7 +179,8 @@ double QSpectralPoissonElement<DIM,NNODE_1D>::
 
  //Loop over the test functions and derivatives and set them equal to the
  //shape functions
- for(unsigned i=0;i<NNODE_1D;i++)
+ unsigned nnod=this->nnode();
+ for(unsigned i=0;i<nnod;i++)
   {
    test[i] = psi[i]; 
    for(unsigned j=0;j<DIM;j++)

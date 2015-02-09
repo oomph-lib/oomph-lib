@@ -45,7 +45,7 @@ check_mpi_run_command ()
     rm -f bin/minimal_mpi_test
 
     # Complile and run
-    $full_command;
+    eval "$full_command"
     success="$_mpi_run_command bin/minimal_mpi_test"
 
     if $success; then

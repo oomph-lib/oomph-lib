@@ -9,13 +9,13 @@ check_PROGRAMS= \
 driven_cavity \
 direct_solver_test \
 airy_cantilever \
-fsi_channel_with_leaflet \
-two_d_multi_poisson
+fsi_channel_with_leaflet
+
 
 # Do we have the TRILINOS library?
 #=================================
 if OOMPH_HAS_TRILINOS
-   check_PROGRAMS += TrilinosSolver_test
+   check_PROGRAMS += TrilinosSolver_test two_d_multi_poisson
 endif
 
 #----------------------------------------------------------------------
@@ -67,19 +67,10 @@ fsi_channel_with_leaflet_LDADD = \
                      $(EXTERNAL_LIBS) $(FLIBS)
 
 
-#-----------------------------------------------------------------------
-
-# Sources for executable
-two_d_multi_poisson_SOURCES = two_d_multi_poisson.cc
-
-
-# Required libraries:
-# $(FLIBS) is included in case the solver involves fortran sources.
-two_d_multi_poisson_LDADD = -L@libdir@ -lgeneric \
-	$(EXTERNAL_LIBS) $(FLIBS)
 
 
 #-----------------------------------------------------------------------
+
 # Do we have the TRILINOS library?
 #=================================
 if OOMPH_HAS_TRILINOS
@@ -96,6 +87,17 @@ TrilinosSolver_test_SOURCES = TrilinosSolver_test.cc
 TrilinosSolver_test_LDADD = -L@libdir@ -lpoisson -lgeneric \
                        $(EXTERNAL_LIBS) \
                        $(FLIBS)
+
+#-----------------------------------------------------------------------
+
+# Sources for executable
+two_d_multi_poisson_SOURCES = two_d_multi_poisson.cc 
+
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+two_d_multi_poisson_LDADD = -L@libdir@ -lgeneric \
+	$(EXTERNAL_LIBS) $(FLIBS)
 
 endif
 

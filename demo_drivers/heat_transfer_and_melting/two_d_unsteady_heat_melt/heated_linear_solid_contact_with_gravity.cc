@@ -2940,18 +2940,18 @@ public:
    // to update a fluid mesh in an FSI problem, say.
    Bulk_mesh_pt->set_lagrangian_nodal_coordinates();
 
-   DoubleVector r;
-   CRDoubleMatrix jac;
+   // DoubleVector r;
+   // CRDoubleMatrix jac;
 
-   oomph_info << "SETTING UP JAC FOR OUTPUT OF MOST RECENT JAC\n";
-   get_jacobian(r,jac);
-   oomph_info << "DONE SETTING UP JAC FOR OUTPUT OF MOST RECENT JAC\n";
-   jac.sparse_indexed_output("most_recent_jacobian.dat");
+   // oomph_info << "SETTING UP JAC FOR OUTPUT OF MOST RECENT JAC\n";
+   // get_jacobian(r,jac);
+   // oomph_info << "DONE SETTING UP JAC FOR OUTPUT OF MOST RECENT JAC\n";
+   // jac.sparse_indexed_output("most_recent_jacobian.dat");
 
-   ofstream descr_file;
-   descr_file.open("most_recent_description.dat");
-   describe_dofs(descr_file);
-   descr_file.close();
+   // ofstream descr_file;
+   // descr_file.open("most_recent_description.dat");
+   // describe_dofs(descr_file);
+   // descr_file.close();
   }
   
 
@@ -4631,6 +4631,13 @@ int main(int argc, char* argv[])
 {
  //feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
 
+
+
+ // hierher
+ Multi_domain_functions::Nx_bin=10000;
+ Multi_domain_functions::Ny_bin=10000;
+
+
  FiniteElement::Accept_negative_jacobian=true;
 
  // Store command line arguments
@@ -4801,7 +4808,7 @@ int main(int argc, char* argv[])
   }
 
 
- exit(0);
+// exit(0);
 
  // // Now increase resolution
  // //------------------------ 

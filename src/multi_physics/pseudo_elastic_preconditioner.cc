@@ -887,7 +887,7 @@ namespace oomph
     }
   }
 
-  required_blocks[1][1].set_block_pt(s11_pt);
+  required_blocks[1][1].set_replacement_block_pt(s11_pt);
 
   CRDoubleMatrix s_prec_pt = this->get_concatenated_block(required_blocks);
 

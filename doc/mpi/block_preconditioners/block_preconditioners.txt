@@ -7,6 +7,7 @@ discussing the implementation of a simple block diagonal
 preconditioner, ...
 
 
+ADD: HOW TO USE (PASS MESH)
 
 The aim of the block preconditioning framework is to provide a simple 
 environment to facilitate the implementation of distributed block 
@@ -48,7 +49,11 @@ Block preconditioning requires special enumeration schemes for the unknowns
 corresponding to each type of DOF are grouped together and enumerated 
 consecutively. This leads to a natural block structure of the linear systems.
 
-For instance, linear elasticity problems (discussed <a href="../../../linear_elasticity/periodic_load/html/index.html">here</A>) involve the solid (the nodal positions in the solid domain) degrees of freedom (DOFs). Consider the two-dimensional case, we begin by reordering the linear system to group together the two types of DOF 
+For instance, linear elasticity problems (discussed 
+<a href="../../../linear_elasticity/periodic_load/html/index.html">here</A>) 
+involve the solid (the nodal positions in the solid domain) degrees of
+freedom (DOFs). Consider the two-dimensional case, we begin by
+reordering the linear system to group together the two types of DOF
 
 \f[
 \left[ 
@@ -114,92 +119,131 @@ the two sub-blocks are solved directly.
 \section generic_implementation Framework Overview
 
 The above example shows that the application of block preconditioners
-require several generic steps:
+typically require several generic steps:
 
 -# The classification of the DOFs.
--# The application of subsidiary preconditioning operators.
+-# The application of subsidiary preconditioning operators such as 
+   the solution of linear systems or the evaluation of matrix-vector 
+   products with some of the blocks that are extracted from the
+   original linear system.
+   
 
 The following subsections describe how these tasks are performed
 within \c oomph-lib's block preconditioning framework.
 
 \subsection block_preconditionable_elements Block Preconditionable Elements
 
-The classification of DOFs is implemented at an elemental level. The class \c GeneralisedElement
+The classification of DOFs is implemented at an elemental level. 
+The class \c GeneralisedElement
 contains two broken virtual methods that must be re-implemented to
 label the DOFs with their type. The methods are:
 
 - \c GeneralisedElement::ndof_types() must return the number of DOF types
   associated with an element.
-- \c GeneralisedElement::get_dof_numbers_for_unknowns(...) must return a list of pairs
-  comprising a map from global equation number to DOF type for all unknowns
-  in the element.
+- \c GeneralisedElement::get_dof_numbers_for_unknowns(...) must return
+  a list of pairs comprising a map from global equation number to 
+  DOF type for all unknowns in the element.
 
-These are already implemented for many elements. For instance the two-dimensional FSI channel with leaflet problem has two types of element:
-
-- \c RefineableQTaylorHoodElement<2> are the fluid elements. They have three types of DOF; \f$x\f$-velocity DOFs are labelled \c 0, \f$y\f$-velocity DOFs are labelled \c 1 and
-  the pressure DOFs are labelled \c 2.
-- \c FSIHermiteBeamElement are the wall elements and have one type of
-  DOF (the nodal position) labelled \c 0.
-
-The linear elasticity elements are made block-preconditionable with a wrapper
-around the element implemented in the driver code.
+These are already implemented for many elements. If not, the functions
+are easy to write. For instance, \c oomph-lib's linear elasticity
+elements can easily be made block-preconditionable with a wrapper around the element:
 
 \dontinclude two_d_linear_elasticity_with_simple_block_diagonal_preconditioner.cc
 \skipline  start_of_mylinearelasticityelement
 \until };
-Thus, in the \c MyLinearElasticityElement<2> we have two types of DOF; corresponding to the \f$x\f$ and \f$y\f$ directions. They are enumerated \c 0 and \c 2 respectively.
+Thus, in the two-dimensional \c MyLinearElasticityElement<2> we 
+have two types of DOF, corresponding to the displacements in the 
+\f$x\f$ and \f$y\f$ directions. They are enumerated \c 0 and \c 1, respectively.
 
 \subsection dof_types_and_block_types DOF Types and Block Types
 
-In the block diagonal preconditioner for the two-dimensional linear elasticity problem, there are two block types. There are also two DOF types. However, in more complicated preconditioners, such as the <a href="../../../preconditioners/lsc_navier_stokes/html/index.html"> Least-Squares Commutator (LSC) Navier-Stokes preconditioner</A>, there are more DOF types than there are block types. The relationship between DOF types, block types, elemental DOF type classification and meshes are:
+In the block diagonal preconditioner for the two-dimensional linear
+elasticity problem, we have DOF types that correspond directly to
+the blocks in the (re-ordered) Jacobian matrix. However, it is
+possible to combine the blocks associated with multiple DOFs into a
+single block in which case the number of blocks is smaller than the
+number of DOF types. The relationship between DOF types, block types, 
+the elemental DOF type classification and meshes are as follows
 
-- \b Elemental \b DOF \b type \b classification: Each element classifies it's own DOF type in the function \c get_dof_numbers_for_unknowns(...). In the case of \c MyLinearElasticityElement<2> elements, the DOF types are classified as \c 0 and \c 1. For \c QTaylorHoodElement<2> elements, the DOF types are classified as \c 0 and \c 1 for the \f$x\f$ and \f$y\f$-velocities, and \c 2 for the pressure \f$p\f$. 
-
-- \b Role \b of \b mehes: Each mesh acts as a container for a set of DOF type classifications for a particular element. If two different elements types are put in to the same mesh, then their \c ndof_types() should return the same number and their DOF type classifications will be treated the same. For example, the \c QTaylorHoodElement<2> classifies the DOF types as follows:
- - \c 0 \f$x\f$-velocity
- - \c 1 \f$y\f$-velocity
- - \c 2 \f$p\f$-pressure
- .
- If we wish to impose parallel outflow along a boundary, we attach \c ImposeParallelOutflowElement<ELEMENT>, see <a href="../../../navier_stokes/vmtk_fluid/html/index.html"> demo problem: Steady finite-Reynolds-number flow through an iliac bifurcation </A>, these \c FaceElements classifies the bulk DOF types as follows:
- - \c 0 \f$x\f$-constrained velocity
- - \c 1 \f$y\f$-constrained velocity
- - \c 2 \f$L\f$-Lagrange multiplier
- .
- Although the \c ndof_types() for these two different elements are the same, there are clearly six distinct DOF types. To ensure that the block preconditioning framework treats these as different DOF types, we must have two meshes for the two different type of elements. If we put the two elements in the same mesh, then the block preconditioning framework will not distinguish between the two \c 0 DOF types, \c 1 DOF types and \c 2 DOF types.
-- \b DOF \b types \b in \b the \b block \b preconditioner: The different meshes instructs the block preconditioning framework how to order the DOF types (the \c ndof_types() function provides an offset). For example, consider the above \c vmtk problem, the first mesh (the bulk mesh) says the first three DOF types are \c 0 , \c 1 and \c 2 (we know that this corresponds to the \f$x\f$ and \f$y\f$-velocities and pressure). At this stage the offset is \c 0 and the DOF types in the block preconditioner are \c 0+0 , \c 1+0 and \c 2+0. The second mesh (the surface mesh) also has DOF types \c 0 , \c 1 and \c 2, but because it is a different mesh, the offset is now updated to the sum of the \c ndof_types() of the first element in all previous meshes (hence it is vital that the \c ndof_types() of all the elements in a single mesh is the same, although the elements may be different), in this case it is \c 3. The DOF types in the block preconditioner for the surface mesh DOF types are \c 0+3 , \c 1+3 \c 2+3 (which we know corresponds to the constrained \f$x\f$ and \f$y\f$-velocities and the Lagrange multiplier DOF type). It is important to note that the order of the meshes determines how the DOF types are enumerated in the block preconditioner, the block preconditioner should handle the ordering of the meshes, the user should use functions such as \c set_navier_stokes_mesh(...) in the case of the \c NavierStokesSchurComplementPreconditioner.
-Note: Each DOF can be classified more than once. The classification should be the last mesh visited by the block preconditioning framework. This should not be an issue if you do not have discontinuous boundary conditions.
-- \b Block \b types: The block types are the sub-blocks of matrices the block preconditioner works with. They may contain more than one DOF type or be as fine grain as the number of DOF types. Note: There can not be more block types than there are DOF types in the block preconditioner. For example, in case of the the LSC preconditioner (in 2D) we have three DOF types (\f$x\f$ and \f$y\f$-velocities and pressure), but it works with just two block types (velocity block and pressure block). The setup of the block types are handled by the function... \c block_setup(...) ! The setup of the blocks and DOF types will be discussed in more detail later on.
-
-\subsection subsidiary_preconditioners Master and Subsidiary Preconditioners
-
-Consider the again the <a href="../../../preconditioners/lsc_navier_stokes/html/index.html"> Least-Squares Commutator (LSC) Navier-Stokes preconditioner</A>.
-If we decide to approximate the \f$ {\bf F}\f$ block (the momentum block) by the diagonal blocks, we can pass the block diagonal preconditioner discussed in <a href="../../../mpi/distributed_general_purpose_block_preconditioners/html/index.html">(Distributed) General-Purpose Block Preconditioners</A> for the LSC preconditioner to use as a subsidiary preconditioner via the function \c set_f_preconditioner(...). We can do the same with the pressure solve with the function \c set_p_preconditioner(...). We refer to these preconditioners as subsidiary preconditioners. \c Oomph-lib's block preconditioning framework facilitates the the reuse of existing preconditioners as subsidiary preconditioners.
-
-
-It is important to note that we do not need to consider the \b block structure of subsidiary block preconditioners when developing master preconditioners. However, the master preconditioner must know the DOF type ordering of the subsidiary preconditioner. For example, if the LSC preconditioner is a subsidiary preconditioner (as is the case of the FSI preconditioner), the FSI preconditioner must ensure that the last DOF type given to the LSC preconditioner is the pressure DOF type.
-
-
-# TS: Start here
+- \b Elemental \b DOF \b type \b classification: Each element
+  classifies its own DOF type  in the function 
+  \c get_dof_numbers_for_unknowns(...). In the case of
+  \c MyLinearElasticityElement<2> elements, the DOF types are classified
+  as \c 0 and \c 1; for \c QTaylorHoodElement<2> Navier-Stokes 
+  elements, the DOF types
+  are classified as \c 0 and \c 1 for the \f$x\f$ and \f$y
+  \f$-velocities, and \c 2 for the pressure \f$p\f$; etc
+  .
+- \b Role \b of \b meshes: When classifying the degrees of freedom into
+  DOF types and blocks types, the block preconditioning framework
+  visits all elements that make contributions to the Jacobian matrix
+  and associates the global equation number with the DOF type
+  specified by the element. The block preconditioning framework is
+  given access to the elements via (possibly multiple) meshes (here
+  simply interpreted as containers for elements), each of 
+  which is assumed to contain elements of a single type. The total
+  number of DOF types in the block preconditioner is the
+  sum of the DOF types of the elements in the meshes. For
+  instance, in a 2D fluid-structure interaction problem we have two
+  different element types, the solid elements (which contain the
+  x- and y- solid-displacements, u_x and u_y, respectively, assumed to be 
+  enumerated as DOF types
+  0 and 1 by these elements) and the fluid elements (which contain the
+  x- and y- fluid velocities, v_x and v_y,  and the pressure, p, assumed to 
+  be enumerated as DOF types
+  0, 1 and 2 by these elements). Assuming the mesh of solid elements
+  is specified as mesh 0 and the mesh of fluid elements is mesh 1, the
+  block preconditioner has a total of five DOF types which represent,
+  in order, u_x, u_y, v_x, v_y, p. Note that if certain degrees of
+  freedom are classified by multiple elements the most recent
+  assignment of the DOF type over-writes previous assignments.
+  The order in which meshes are specified therefore matters. 
+  .
+- \b Block \b types: The block types are the sub-blocks of the system matrix
+  (the Jacobian matrix from the Newton method) that the block
+  preconditioner works with. They may contain more than one
+  DOF type or be as fine grained as the number of DOF types (though
+  there can not be more block types than there are DOF types in the
+  block preconditioner). For example, in case of the the Navier-Stokes LSC
+  preconditioner (in 2D) we have three DOF types (\f$x\f$ and
+  \f$y\f$-velocities and pressure), but the preconditioner works with 
+  just two block types (forming the velocity and pressure blocks). The setup
+  of the block types is handled by the function \c block_setup(...) discussed
+  below.
 
 \section multi_poisson Simple preconditioner examples
 
-In order to illustrate the usage of the Block Preconditioning
-Framework we shall make use of a made up problem, named
-multi-poisson, governed by the equations
-
+We will now illustrate the capabilities of the block preconditioning
+framework by considering a system of \f$ N \f$ coupled PDEs 
 \f[ 
-(i+1) ( \frac{\partial^2 u_i}{\partial x_j^2} 
-+ \beta \sum_{k=0}^{k<N} u_k )  = f_i(x_j) \ \ \ \ i=0,...,N-1
+\left( \frac{\partial^2 u_i}{\partial x_j^2} 
++ \beta \sum_{k=1}^{N} u_k \right)  = f_i(x_j) \ \ \ \ i=1,...,N
+\ \ \ \ \ \ \ \ \ \ \ \ @E[eqn:multi_poisson_pde]@
 \f]
+for the  \f$ N \f$ fields  \f$ u_i(x_j) \f$. If  \f$ \beta=0 \f$,
+the system represents  \f$ N \f$ (uncoupled) Poisson equations,
+each with their own source function  \f$ f_i(x_j). \f$ If  \f$ \beta
+\ne 0 \f$ the PDE for \f$ u_i(x_j) \f$ is affected by all other
+fields via the Helmholtz-like second term on the left-hand-side.
 
-The linear system to be solved in the course of the Newton method,
+
+The \c MultiPoissonElements implement a discretise the equations 
+with standard Galerkin-type finite elements in which each field
+is treated as its own DOF type. If  \f$ N = 5, \f$ the linear system 
+to be solved in the course of the Newton method,
 \f[
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
 {\bf J} \ \delta {\bf x} = -{\bf r},
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+@E[eqn:newton_system]@
 \f]
 has a \f$5 \times 5\f$  block structure implying that, following a re-numbering
 of the unknowns, the matrix and the vectors can be written as
 \f[
-\label{diag_reordered_linear_system}
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\;
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 {\bf J} = 
 \left(
 \begin{array}{ccccc}
@@ -234,13 +278,12 @@ r_{5}  \\
 \right).
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 @E[eqn:orig_linear_system]@
 \f]
 We wish to solve this linear system by preconditioned Krylov subspace methods,
 using a block preconditioner \f${\bf P}\f$ formed (formally) 
-from the blocks of the original system matrix \f${\bf }J\f$. The
+from the blocks of the system matrix \f${\bf }J\f$. As
+discussed above, the
 application of the preconditioner (typically once per iteration of the
 Krylov solver) then requires the solution of linear systems of the form
 \f$
@@ -260,13 +303,6 @@ e.g. by performing a small number of multigrid cycles, say.
 actually have to be associated with a specific matrix -- it simply has
 to act as a linear operator that ``turns \f${\bf z}\f$ into \f${\bf y}\f$'').
 
-The block preconditioning framework facilitates the construction of a
-block preconditioner from the entries of the matrix
-\f${\bf J}\f$ which is assumed to represent the Jacobian matrix arising in the
-Newton-based solution of a system of equations that is assembled
-from ``block-preconditionable'' elements, i.e. elements
-that implement the functions \c ndof_types() and
-\c get_dof_numbers_for_unknowns(...), mentioned above. 
 A specific block preconditioner must be derived from the
 \c BlockPreconditioner base class and must implement two 
 pure virtual member functions of the underlying \c Preconditioner
@@ -275,7 +311,8 @@ class:
 called once during the solution of a given linear system
 by any of \c oomph-lib 's Krylov subspace solvers. It typically 
 extracts a  certain number of blocks from the matrix \f${\bf J}\f$, possibly 
-manipulates them, and performs any preliminary computations required 
+manipulates its local copies of these blocks, and performs any 
+preliminary computations required 
 to allow the rapid subsequent application of \f${\bf P}^{-1}\f$.
 - \c void \c Preconditioner::preconditioner_solve(\f$\bf{z}\f$,\f$\bf{y}\f$):
 This function applies \f${\bf P}^{-1}\f$ to the input argument
@@ -286,23 +323,31 @@ We will discuss the implementation of these functions (and associated
 capabilities of the block preconditioning framework)
 in a number of increasingly complex block preconditioners
 for the solution of the \f$5 \times 5\f$ linear system 
+defined by equations (@R[eqn:newton_system]@) and
 (@R[eqn:orig_linear_system]@). We stress that the purpose
 of this exercise is not the development of particularly clever
 preconditioners but simply an excuse to demonstrate the use of the
-available ``machinery'', listed here:
+available ``machinery''. Specifically we will demonstrate how to:
 
-- Extraction of selected blocks from the Jacobian.
+- extract selected blocks from the system matrix (the Jacobian matrix).
 
-- Off diagonal matrix vector products.
+- perform matrix vector products with selected off-diagonal blocks.
 
-- Solving linear systems associated with these blocks by way of direct
- solver and/or subsidiary preconditioners. Including cases where the
- subsidiary preconditioners are block preconditioners themselves.
+- solve linear systems associated with selected blocks, using either a
+  direct solver and/or subsidiary preconditioners, including cases where the
+  subsidiary preconditioners are block preconditioners themselves.
 
-- Replacement and modification of selected blocks.
+- replace and modify selected blocks and how to make make such
+  modified blocks available to subsidiary block preconditioners.
 
-- Concatenation and Coarsening of several blocks, as well as covering
- when to use each.
+- concatenate and coarsen blocks.
+
+
+
+
+*** hierher how to call *** 
+
+hierher kill below
 
 These will be illustrated through the following preconditioners (and
 associated sub-preconditioners):
@@ -370,14 +415,24 @@ associated sub-preconditioners):
  
  - Coarsening.
 
-\subsection diagonal Diagonal
+
+hierher kill above
+
+\subsection diagonal A Block Diagonal Preconditioner
+
+NEW BITS: How to extract matrix blocks and corresponding block vectors
+from their full-size counterparts.
+
 \subsubsection diag_theory Theory
-# TS: Include image
 
 The simplest possible block preconditioner is a block-diagonal 
 preconditioner, formed by retaining only the diagonal blocks of
 \f${\bf J}\f$, so that
 \f[
+
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 {\bf P} = 
 \left(
 \begin{array}{ccccc}
@@ -391,10 +446,6 @@ J_{11} & & & & \\
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-
 @E[eqn:diag_reordered_linear_system]@
 \f]
 The application of this preconditioner (i.e. the solution of the
@@ -402,6 +453,10 @@ linear system \f${\bf P} {\bf
   y} ={\bf z}\f$ for \f${\bf y}\f$) requires the solution of the 
 five much smaller linear systems
 \f[
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \begin{array}{c}
 {\bf J}_{11} \ {\bf y}_1 = {\bf z}_1, \\
 {\bf J}_{22} \ {\bf y}_2 = {\bf z}_2, \\
@@ -412,17 +467,13 @@ five much smaller linear systems
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 @E[eqn:diag_prec]@
 \f]
 where we have assumed that the two vectors \f${\bf y}\f$ and \f${\bf z}\f$
 are re-ordered into ``block vectors'' in the same way as 
 the vectors \f$\delta {\bf x}\f$ and \f${\bf r}\f$ in 
-(@R[eqn:orig_linear_system]@) "the original linear system" are re-ordered into
-the ``block vectors'' in (@R[eqn:diag_reordered_linear_system]@).
+"the original linear system" (@R[eqn:newton_system]@) are re-ordered into
+the ``block vectors'' in (@R[eqn:orig_linear_system]@).
 
 The implementation of the preconditioning operations in 
 (@R[eqn:diag_prec]@)  can naturally be subdivided into two
@@ -439,31 +490,31 @@ extract matrix blocks from the original matrix
 the \c BlockPreconditioner::block\_setup() function]. 
 - Extract the five diagonal blocks \f${\bf J}_{ii}\f$ 
 (for \f$i=1,...,5\f$) [using the 
-\c BlockPreconditioner::get\_block(...)} function.
+\c BlockPreconditioner::get\_block(...) function].
 - Compute and store the LU decomposition of the diagonal blocks
 to allow the rapid solution of the systems \f${\bf J}_{ii} \ {\bf y}_i = 
 {\bf z}_i\f$ (for \f$i=1,...,5\f$) during the \c preconditioner\_solve(...)
-phase by back-substitution. [Note that, following the
-computation of the LU decomposition, the diagonal matrix
-blocks are longer required and can be deleted.]
+phase by back-substitution. [This is done by calling the \c setup(...)
+function of the subsidiary preconditioner/inexact solver. Following this,
+the diagonal matrix blocks are longer required and can be deleted.]
 
 Once the \c setup() phase has been completed, the solution of the linear
 system \f${\bf P} {\bf y} = {\bf z}\f$ by the \c preconditioner\_solve(...) 
 function involves the following steps:
 - Extract the five ``block vectors'' \f${\bf z}_i\f$ (for \f$i=1,...,5\f$)
 from the vector \f${\bf z}\f$ [using the 
-\c BlockPreconditioner::get\_block\_vector(...) function].
+\c BlockPreconditioner::get\_block\_vectors(...) function].
 - Solve the linear systems \f${\bf J}_{ii} \ {\bf y}_i = 
 {\bf z}_i\f$ for the vectors \f${\bf y}_i\f$ (for \f$i=1,...,5\f$)  using 
 the LU decomposition of the diagonal blocks \f${\bf J}_{ii}\f$ 
 (for \f$i=1,...,5\f$) created during the \c setup() phase.
 - Combine the five ``block vectors'' \f${\bf y}_i\f$ (for \f$i=1,...,5\f$)
 to the full-length vector \f${\bf y}\f$ [using the 
-\c BlockPreconditioner::return\_block\_vector(...) function].
+\c BlockPreconditioner::return\_block\_vectors(...) function].
 
 \subsubsection diag_implementation Implementation as a BlockPreconditioner
 Here is a sample implementation of the diagonal block preconditioner
-as a class \c Simple, derived from the \c BlockPreconditioner base 
+as a class \c Diagonal, derived from the \c BlockPreconditioner base 
 class. The class provides storage for the subsidiary preconditioners
 that solve the linear systems associated with the diagonal blocks, 
 implements the \c setup() and \c preconditioner\_solve(...)
@@ -477,40 +528,49 @@ which does what it says.
 
 \subsubsection diag_setup The setup() function
 
-The first thing that must be called at the beginning of every \c
-setup(...) function is \c clean_up_my_memory(). This cleans up any
-dynamically allocated memory.
+As mentioned above, a \c Preconditioner's \c setup() function is
+called at the beginning of the \c IterativeLinearSolver's 
+\c solve(...) function. In time-dependent and/or nonlinear
+problems many (different) linear systems have to be solved by the same
+linear solver (and the associated preconditioner) throughout the code 
+execution. To avoid memory leaks it is therefore 
+important to free up any memory that may have been allocated in
+previous uses of the preconditioner. The \c setup() function of 
+all block preconditioner should therefore always 
+start by freeing up such memory. This is best done by using a helper
+function that can also be called from the destructor. 
 
 \skip start_of_setup_for_simple
 \until this->clean_up_my_memory();
 
-Next, \c this->block_setup() is called, to set up any data structures
-and/or lookup tables required to extract the desired blocks from the
-Jacobian.
+Next we call the \c block_setup() function to set up the internal data
+structures and lookup tables required to extract blocks from the
+system matrix.
 
 \skip //
 \until this->block_setup();
 
-Due to the class working on any sized square matrix, \c
-this->nblock_types() is called and the result stored in \c
-nblock_types, an \c unsigned, so we know the number of blocks to
-iterate over. The \c private data member \c Diagonal_block_preconditioner_pt
-is resized to \c nblock_types and then looped over, with each element
-being assigned a \c new preconditioner (inexact solver). In this case
-we have used SuperLU, an inbuilt preconditioner type that applies an
-LU decomposition and find the exact solution of whatever block is
-handed to it.
+We create five subsidiary preconditioners (all exact solvers -- SuperLU
+in its incarnation as a preconditioner) for the solution of the
+linear systems involving the diagonal blocks:
 
 \skip //
 \until }
 
-Each preconditioner then needs to be set up itself. This requires
-getting a block from the Jacobian, supplied via the function 
-\c get\_block(i,j,block) which returns a deep copy of the required
-matrix, from the (i,j) block of the Jacobian, to the supplied
-\c CRDoubleMatrix, \c block. The \c block may then go out of scope, as
-a deep copy is made of whatever elements are necessary from the
-subsidiary preconditioner.
+
+Next we set up the subsidiary preconditioner by
+extracting the diagonal blocks from the system matrix
+and passing them to the subsidiary preconditioners. 
+
+Note that each preconditioner is expected to retain a copy
+of whatever data it needs to subsequently perform its 
+\c preconditioner_solve(...)
+function. The deep copy of the block that is returned by the
+\c get\_block(...) function can therefore be deleted (here simply
+go out of scope) once the subsidiary preconditioner has been set up.
+(In the specific case of the \c SuperLUPreconditioner, the \c setup(...)
+function computes and stores the LU decomposition of the matrix;
+the matrix itself is then no longer required). 
 
 \skip //
 \until }
@@ -518,84 +578,93 @@ subsidiary preconditioner.
 
 \subsubsection diag_solve The preconditioner_solve() function
 
-In order to solve via the sub-preconditioners, the right hand side
-vector is required to be split into blocks matching that used by the
-preconditioners. This is done automatically for you by
-\c this->get_block_vectors(r,block_r). \c r, is given to you as an
-argument of the \c  preconditioner_solve(...) function when it is
-called, \c block_r must be created beforehand, but need not be sized.
+To apply the preconditioner to a given vector, r, we first
+extract the five block-vectors whose sizes (and permutations) match
+that of the diagonal matrix blocks, using the
+\c get_block_vectors(...) function.
+
 
 \skip //======
 \until this->get_block
 
-The associated solution blocks \c block_z are created similarly to \c block_r,
-however they require initialisation to size \c nblock_types, which is
-found similarly to in the \c setup(...) function. The \c
-Diagonal_block_preconditioner_pt are looped over and their associated \c
-preconditioner_solve(...) called, supplying the necessary elements
-from \c block_r and \c block_z.
+We then provide storage for the five solution vectors and obtain them
+by applying the subsidiary preconditioners' \c
+preconditioner_solve(...) function:
 
 \skip //
 \until }
 
-Finally the solutions in \c block_z are returned via \c
-this->return_block_vectors(block_z,z). Which places the results back
-into the \c DoubleVector \c z.
+Finally the solutions in \c block_z are returned into the 
+full-length solution vector \c z via a call to 
+\c return_block_vectors(...). 
 
 \skip //
-\until ;
+\until }
 
 \subsubsection diag_clean The clean_up_my_memory() function
-The clean up memory functions purpose is to delete any existing
-private data (and null it for safety purposes).
+The clean-up function (which is called by the \c setup()
+function and the destructor) frees the memory that is
+allocated when a new linear system is solved -- here the
+subsidiary preconditioners and their associated data (the
+LU decompositions of the diagonal blocks).
+
 
 \skip //
 \until // End of clean_up_my_memory function.
 
-The reason that this is required is the preconditioner is called as
-part of a linear solver program and may be used multiple times for
-various nonlinear solves over the course of the program. An obvious
-example of this is a time dependent problem. 
+\subsubsection diag_comments Comments and Exercises
 
-Therefore to stop the build-up of unnecessary memory \c
-clean_up_my_memory() is called twice. Once at the beginning of 
-\c setup() to avoid leakage if the preconditioner is reused, and the
-second time is in the destructor (\c ~Simple()) to avoid memory leaks
-if potential loops create and destroy the preconditioner, either
-through \c new and \c delete or the preconditioner going out of scope.
+- \c The function \c get_block_vectors(r,block_r) extracts the five
+  (or, in general, \c nblock_type() ) block vectors \c block_r from the
+  full-length vector \c r. The sizes of the block vectors (and the 
+  permutation of their entries relative
+  to their order in the full length vector \c r) match that of the
+  matrix blocks. There is an alternative function \c get_block_vector(...)
+  (note the missing s) which extracts a single block vector; see ***
+  hierher *** for an example of its use.
+  An equivalent version exists for the \c return_block_vector[s]
+  functions. hierher why shoudldn't we "mix them"?
+- In the example above we used an "exact preconditioner" (direct solver)
+  to solve the five linear systems associated with the diagonal blocks.
+  However, the (approximate) solution of these linear systems can 
+  be performed by any other matrix-based preconditioner, such as 
+  \c oomph-lib's diagonal preconditioner, \c
+  MatrixBasedDiagPreconditioner, discussed in 
+  <a href="../../../linear_solvers/html/index.html">another tutorial</a>.
+  hierher actually mention it there. The setup and application of this
+  preconditioner is obviously much faster than for the \c
+  SuperLUPreconditioner. Its setup merely requires the extraction of the 
+  diagonal  entries and storage of their inverses (rather than the
+  computation of the LU decomposition), while the application 
+  simply requires the multiplication of the input vector by the 
+  pre-computed inverses of the diagonal entries (rather than a
+  back-substitution). However, the preconditioner is clearly not
+  "as good" and therefore results in a larger number of iterations
+  in the iterative linear solver. In fact, using the diagonal preconditioner
+  for the approximate solution of the five linear systems involving the
+  diagonal blocks is mathematically equivalent to using the
+  diagonal preconditioner on the entire matrix. Try it out! 
+  hierher tony can this be re-instated?
 
-\subsubsection diag_comments Comments
 
-- In \ref diag_setup
+###############################################################################
+###############################################################################
+###############################################################################
 
- - \c this->blocksetup() is called with no arguments. This is because
-   the correspondence between the DoFs and the blocks is merely the
-   identity matrix; however in more complicated cases, such as in \ref
-   one_plus_four, this may not be the desired arrangement and arguments
-   may be supplied. 
 
- - \c get_block(i,j,block) takes account of whether the preconditioner
-   you are in is a subsidiary preconditioner, such as is the the case
-   in \ref coarse_one_plus_two_plus_two_with_sub_and_replace, then it
-   will take account of replacement in the master preconditioner.
+\subsection upper_triangular A Block Upper Triangular Preconditioner
 
-- In \ref diag_solve
+NEW BITS: How to set up matrix vector products with off-diagonal blocks
 
- - \c this->get_block_vectors(r,block_r) is used to get the vector 
-   \c r, however cases involving concatenation or coarsening require
-   calling different versions of the \c get_ functions.
-
-  - The same applies to \c return_; additionally unless you are using
-    subsidiary preconditioners your \c return_ should always match your 
-    \c get_, in this case both are \c block_vectors(...).
-
-\subsection upper_triangular Upper Triangular
 \subsubsection upper_triangular_theory Theory
-# TS: Include image
-Another possible preconditioner is the upper triangular
+
+Next we consider the implementation of an upper triangular
 preconditioner, formed by retaining only the blocks in the upper right
-hand side of \f${\bf J}\f$, including the diagonals.
+hand part of \f${\bf J}\f$, including the diagonals.
 \f[
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 {\bf P} = 
 \left(
 \begin{array}{ccccc}
@@ -609,17 +678,19 @@ J_{11} & J_{12} & J_{13} & J_{14} & J_{15} \\
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 @E[eqn:upper_triangular_reordered_linear_system]@
 \f]
 The application of this preconditioner (i.e. the solution of the
 linear system \f${\bf P} {\bf
-  y} ={\bf z}\f$ for \f${\bf y}\f$) requires the solution of the 
+  y} ={\bf z}\f$ for \f${\bf y}\f$) again requires the solution of 
 five much smaller linear systems
 \f[
-\begin{array}{c}
+
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\begin{array}{l}
 {\bf J}_{11} \ {\bf y}_1 = {\bf z}_1 - {\bf J}_{15} \ {\bf y}_5 - {\bf J}_{14} \ {\bf y}_4 - {\bf J}_{13} \ {\bf y}_3 - {\bf J}_{12} \ {\bf y}_2, \\
 {\bf J}_{22} \ {\bf y}_2 = {\bf z}_2 - {\bf J}_{25} \ {\bf y}_5 - {\bf J}_{24} \ {\bf y}_4 - {\bf J}_{23} \ {\bf y}_3, \\
 {\bf J}_{33} \ {\bf y}_3 = {\bf z}_3 - {\bf J}_{35} \ {\bf y}_5 - {\bf J}_{34} \ {\bf y}_4, \\
@@ -629,21 +700,25 @@ five much smaller linear systems
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 @E[eqn:upper_triangular_prec]@
 \f]
-where we have assumed that the two vectors \f${\bf y}\f$ and \f${\bf z}\f$
+where we have again assumed that the two vectors 
+\f${\bf y}\f$ and \f${\bf z}\f$
 are re-ordered into ``block vectors'' in the same way as 
 the vectors \f$\delta {\bf x}\f$ and \f${\bf r}\f$ in 
-(@R[eqn:orig_linear_system]@) "the original linear system" are re-ordered into
-the ``block vectors'' in
-(@R[eqn:upper_triangular_reordered_linear_system]@).
+"the original linear system" (@R[eqn:newton_system]@) are re-ordered into
+the ``block vectors'' in (@R[eqn:orig_linear_system]@).
+
+The main difference to the block diagonal preconditioner considered
+before is that the right hand sides of the linear systems have to be
+modified. We start by solving the final equation for \f$ {\bf y}_5
+\f$. We then multiply this vector by the off-diagonal block \f$ {\bf J}_{45}
+\f$, subtract the result from \f$ {\bf z}_4 \f$ and use the result of
+this operation as the right-hand-side for the linear system that determines
+\f$ {\bf y}_4\f$,  etc.
 
 The implementation of the preconditioning operations in 
-(@R[eqn:upper_triangular_prec]@)  can naturally be subdivided into two
+(@R[eqn:upper_triangular_prec]@)  can again be subdivided into two
 distinct \c setup() and \c preconditioner\_solve(...) phases.
 Assuming that the linear systems in (@R[eqn:upper_triangular_prec]@)
 are solved exactly by a direct solver (an ``exact preconditioner'')
@@ -657,29 +732,28 @@ extract matrix blocks from the original matrix
 the \c BlockPreconditioner::block\_setup() function]. 
 - Extract the five diagonal blocks \f${\bf J}_{ii}\f$ 
 (for \f$i=1,...,5\f$) [using the 
-\c BlockPreconditioner::get\_block(...)} function.
+\c BlockPreconditioner::get\_block(...) function].
 - Compute and store the LU decomposition of the diagonal blocks
 to allow the rapid solution of the systems \f${\bf J}_{ii} \ {\bf y}_i = 
 {\bf z}_i\f$ (for \f$i=1,...,5\f$) during the \c preconditioner\_solve(...)
-phase by back-substitution. [Note that, following the
-computation of the LU decomposition, the diagonal matrix
-blocks are longer required and can be deleted.]
-- Extract the off diagonal blocks from \f${\bf J}\f$  [and store them
-in a \c DenseMatrix of template type \c MatrixVectorProduct. This is
-used to calculate the product between the off diagonal blocks and the
-relevant \f${\bf y}_i\f$. Using the 
-\c setup_matrix_vector_product(...) function. Note that, following the
-setup, the off-diagonal matrix blocks are longer required and can be
-deleted.]
+phase by back-substitution. [This is done by calling the \c setup(...)
+function of the subsidiary preconditioner/inexact solver. Following this,
+the diagonal matrix blocks are longer required and can be deleted.]
+- Extract the relevant off-diagonal blocks from \f${\bf J}\f$ and create 
+\c MatrixVectorProduct operators. [The matrix vector products are 
+set up using the 
+\c setup_matrix_vector_product(...) function. As with the subsidiary
+preconditioners, the \c MatrixVectorProduct operators retain their own
+copy of any required data, so the off-diagonal matrix blocks can be
+deleted (or be allowed to go out of scope) following the setup.]
 
 \subsubsection upper_triangular_implementation Implementation as a BlockPreconditioner
 Here is a sample implementation of the upper triangular block preconditioner
 as a class \c UpperTriangular, derived from the \c BlockPreconditioner base 
 class. The class provides storage for the subsidiary preconditioners
 that solve the linear systems associated with the diagonal blocks, and
-the \c MatrixVectorProduct's used to calculate the effect of the off
-diagonal elements of \f${\bf J}\f$ on the residual; implements the \c
-setup() and \c preconditioner\_solve(...) functions, and provides a
+the \c MatrixVectorProduct operators. We also implement the \c
+setup() and \c preconditioner\_solve(...) functions, and provide a
 helper function \c clean\_up\_my\_memory() which does what it says.
 
 \dontinclude multi_poisson_block_preconditioners.h
@@ -687,121 +761,137 @@ helper function \c clean\_up\_my\_memory() which does what it says.
 \until };
 
 \subsubsection upper_triangular_setup The setup() function
-
-The first thing that must be called at the beginning of every \c
-setup(...) function is \c clean_up_my_memory(). This cleans up any
-dynamically allocated memory.
+As before, we start by cleaning up the memory and set up
+the generic block preconditioner functionality by calling 
+\c block_setup().
 
 \skip start_of_setup_for_upper_triangular
-\until this->clean_up_my_memory();
-
-Next, \c this->block_setup() is called, to set up any data structures
-and/or lookup tables required to extract the desired blocks from the
-Jacobian.
-
-\skip //
 \until this->block_setup();
 
-Due to the class working on any sized square matrix, \c
-this->nblock_types() is called and the result stored in \c
-nblock_types, an \c unsigned, so we know the number of blocks to
-iterate over. The storage for the diagonal preconditioners and the off
-diagonal matrix products are then resized appropriately.
+We provide storage for the (pointers to the) matrix vector products
+and the subsidiary preconditioners.
 
 \skip //
 \until Block_preconditioner_pt.resize(nblock_types);
 
-The subsidiary preconditioners are then assigned a \c new
-preconditioner (inexact solver). In this case
-we have used SuperLU, an inbuilt preconditioner type that applies an
-LU decomposition and find the exact solution of whatever block is
-handed to it. Inside the same loop the preconditioners are then set
-up. This requires getting a block from the Jacobian, supplied via the
-function  \c get\_block(i,j,block) which returns a deep copy of the
-required matrix, from the (i,j) block of the Jacobian, to the supplied
-\c CRDoubleMatrix, \c block. The \c block may then go out of scope, as
-a deep copy is made of whatever elements are necessary from the
-subsidiary preconditioner.
+Next we create the subsidiary preconditioners which we will use to 
+solve the linear systems involving the diagonal blocks.
 
-Similar logic applies to the \c Off_diagonal_matrix_vector_products.
+\until end of brace
+
+We then extract the relevant off-diagonal blocks (those above the
+diagonal) from the full matrix, create a \c MatrixVectorProduct 
+operator for each and 
+use the \c BlockPreconditioner::setup_matrix_vector_product(...) function
+to make them fully functional. Note that the final argument to this
+function (the column index of the off-diagonal block in its block enumeration
+within the current preconditioner) is required to set up additional lookup
+tables that are required to ensure the correct operation of this object
+in cases when the preconditioner operates in parallel. The details are
+messy and not worth explaining here -- just do it!
+
+
+*** hierher COMMENT: forward reference to hand-built compound matrix ***
 
 \skip //
-\until // End for loop over i
+\until // End setup
 
 \subsubsection upper_triangular_solve The preconditioner_solve() function
-
-In order to solve via the sub-preconditioners, the right hand side
-vector is required to be split into blocks matching that used by the
-preconditioners. This is done automatically for you by
-\c this->get_block_vectors(r,block_r). \c r, is given to you as an
-argument of the \c  preconditioner_solve(...) function when it is
-called, \c block_r must be created beforehand, but need not be sized.
+As in the block diagonal preconditioner, we start by extracting the
+block vectors from the full-length vector, \c r.
 
 \skip //======
 \until this->get_block
 
-The associated solution blocks \c block_z are created similarly to \c block_r,
-however they require initialisation to size \c nblock_types, which is
-found similarly to in the \c setup(...) function. 
-
-\skip //
-\until Vector<DoubleVector> block_z(n_block);
-
-Due to the off diagonal elements the RHS, \c block_r, is required to
-be changed via back substitution of the previous solutions. As the
-preconditioner is upper diagonal the last element must be iterated
-over first to allow the result from its \c  preconditioner_solve(...)
-to be used in the next back substitution.
+Next we provide storage for the solution vectors and 
+work backwards through the (block)-rows of the (block-)linear
+system (@R[eqn:upper_triangular_prec]@). Following each linear solve
+we update the right-hand-side of the next linear system, as discussed
+above.
 
 \skip //
 \until // End for over i
 
-Finally the solutions in \c block_z are returned via \c
-this->return_block_vectors(block_z,z). Which places the results back
-into the \c DoubleVector \c z.
+Finally, the solutions in \c block_z are combined via \c
+return_block_vectors(...) which places the results back
+into the full-length vector \c z that is returned by this function.
 
 \skip //
-\until ;
+\until }
 
 \subsubsection upper_triangular_clean The clean_up_my_memory() function
-The clean up memory functions purpose is to delete any existing
-private data (and null it for safety purposes).
+The clean up memory functions again deletes any data that was
+allocated in the setup function -- here the subsidiary preconditioners
+(and their LU decompositions) and the matrix-vector product operators.
 
 \skip //
 \until // End of clean_up_my_memory function.
 
-\subsection two_plus_three Two Plus Three
+
+
+
+######################################################################
+######################################################################
+######################################################################
+
+
+
+\subsection two_plus_three Combining multiple dof types into compound blocks. Part 1
+
+NEW BITS: How to combine multi dof types into compound blocks
+
 \subsubsection two_plus_three_theory Theory
-
-In this example we retain only the blocks belonging to the 1st and 2nd
-dofs, and the blocks beloing to the 3rd, 4th and 5th dofs; such that
-
-\f${\bf J}\f$, so that
+So far we have illustrated how to implement block preconditioners 
+for cases where the DOF types (as identified by the elements) 
+correspond directly to 
+the block types. This is appropriate for our model PDE system 
+(@R[eqn:multi_poisson_pde]@) in which the five fields (and the governing
+equations) are all of the same type. In many applications,
+particularly in multi-physics problems, it
+may be desireable to combine similar/related DOF types into single
+blocks. For instance, in a 2D fluid-structure interaction problem,
+we may wish to distinguish between the two solid (x and y solid
+displacements) and three fluid (x and y fluid velocities and the pressure)
+DOFs and employ subsidiary preconditioners that act directly on 
+the two distinct solid and fluid blocks. A basic block diagonal 
+preconditioner for such a problem that ignores the coupling between 
+fluid and solid DOFs has the following structure 
 \f[
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 {\bf P} = 
 \left(
-\begin{array}{ccccc}
+\begin{array}{cc|ccc}
 J_{11} & J_{12} & & & \\
 J_{21} & J_{22} &  &  & \\
+\hline 
  & & J_{33} & J_{34} & J_{35} \\
  & & J_{43} & J_{44} & J_{45} \\
  & & J_{53} & J_{54}  & J_{55} \\
 \end{array}
-\right).
+\right)
+=
+\left(
+\begin{array}{c|c}
+B_{11}  & \\
+\hline
+        & B_{22} \\
+\end{array}
+\right)
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-@E[eqn:two_plus_three_reordered_linear_system]@
 \f]
+where \f$ B_{11} \f$ and \f$ B_{22} \f$ are the blocks
+formed from the corresponding "DOF blocks" (the \f$
+J_{ij} \f$ matrices).
 The application of this preconditioner (i.e. the solution of the
 linear system \f${\bf P} {\bf
   y} ={\bf z}\f$ for \f${\bf y}\f$) requires the solution of the 
 two smaller linear systems
 \f[
-\begin{array}{c}
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \left(
 \begin{array}{cc}
 J_{11} & J_{12} \\
@@ -818,16 +908,17 @@ z_1 \\
 z_2 \\
 \end{array}
 \right)
-\\
+\mbox{\ \ \ \ \ \ \ or \ \ \ \ \ \ }
+B_{11} \ Y_1 = Z_1
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+@E[eqn:two_plus_three_prec1]@
+\f]
+and
+\f[
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-@E[eqn:two_plus_three_prec]@
-\\
 \left(
 \begin{array}{ccc}
 J_{33} & J_{34} & J_{35} \\
@@ -847,167 +938,182 @@ z_4 \\
 z_5 \\
 \end{array}
 \right)
-\end{array}
+\mbox{\ \ \ \ \ \ \ or \ \ \ \ \ \ }
+B_{22} \ Y_2 = Z_2.
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+@E[eqn:two_plus_three_prec2]@
 \f]
-where we have assumed that the two vectors \f${\bf y}\f$ and \f${\bf z}\f$
-are re-ordered into ``block vectors'' in the same way as 
-the vectors \f$\delta {\bf x}\f$ and \f${\bf r}\f$ in 
-(@R[eqn:orig_linear_system]@) "the original linear system" are re-ordered into
-the ``block vectors'' in
-(@R[eqn:two_plus_three_reordered_linear_system]@).
-The implementation of the preconditioning operations in 
-(@R[eqn:diag_prec]@)  can naturally be subdivided into two
-distinct \c setup() and \c preconditioner\_solve(...) phases.
-Assuming that the linear systems in (@R[eqn:two_plus_three_prec]@) are
+
+A key feature of the block preconditioning framework is the ability
+to combine DOF types in this manner so that the preconditioner can 
+operate directly with blocks \f$ B_{11} \f$ and \f$ B_{22} \f$ and
+the corresponding block vectors  \f$ Y_1, Y_2, Z_1 \f$ and \f$ Z_2 \f$.
+
+Assuming again that the linear systems in
+(@R[eqn:two_plus_three_prec1]@) and (@R[eqn:two_plus_three_prec2]@) are
 solved exactly by a direct solver (an ``exact preconditioner'') that 
 can pre-compute and store the LU decomposition of the diagonal matrix blocks,
+\f$ B_{11} \f$ and \f$ B_{22} \f$, 
 the \c setup() phase involves the following operations
 [text in square brackets refers to their \c oomph-lib specific 
 implementation]:
 - Set up any data structures/lookup tables that are required to 
-extract matrix blocks from the original matrix
-\f${\bf J}\f$ [by calling
-the \c BlockPreconditioner::block\_setup(...) function]. 
-- Extract the two diagonal blocks [using the 
-\c BlockPreconditioner::get\_block(...)} function.
+extract the matrix blocks \f$ B_{11} \f$ and \f$ B_{22} \f$ and
+the associated block vectors [by calling
+the \c BlockPreconditioner::block\_setup(...) function -- this time 
+with arguments that specify the mapping between "DOF types" and 
+"block types"]. 
+- Extract the two diagonal blocks, \f$ B_{11} \f$ and \f$ B_{22}\f$  [using the 
+\c BlockPreconditioner::get\_block(...) function].
 - Compute and store the LU decomposition of the diagonal blocks
 to allow the rapid solution of the systems during the
  \c preconditioner\_solve(...)
-phase by back-substitution. [Note that, following the
-computation of the LU decomposition, the diagonal matrix
-blocks are longer required and can be deleted.]
+phase by back-substitution.[This is done by calling the \c setup(...)
+function of the subsidiary preconditioner/inexact solver. Following this,
+the diagonal matrix blocks are longer required and can be deleted.]
 
 Once the \c setup() phase has been completed, the solution of the linear
 system \f${\bf P} {\bf y} = {\bf z}\f$ by the \c preconditioner\_solve(...) 
 function involves the following steps:
-- Extract the two ``block vectors'' \f${\bf z}_i\f$ (for \f$i=1,2\f$)
+- Extract the two ``block vectors'' \f${\bf Z}_i\f$ (for \f$i=1,2\f$)
 from the vector \f${\bf z}\f$ [using the 
-\c BlockPreconditioner::get\_block\_vector(...) function].
-- Solve the linear systems \f${\bf J}_{ii} \ {\bf y}_i = 
-{\bf z}_i\f$ for the vectors \f${\bf y}_i\f$ (for \f$i=1,2\f$)  using 
-the LU decomposition of the diagonal blocks \f${\bf J}_{ii}\f$ 
+\c BlockPreconditioner::get\_block\_vectors(...) function].
+- Solve the linear systems \f${\bf B}_{ii} \ {\bf Y}_i = 
+{\bf Z}_i\f$ for the vectors \f${\bf Y}_i\f$ (for \f$i=1,2\f$)  using 
+the LU decomposition of the diagonal blocks \f${\bf B}_{ii}\f$ 
 (for \f$i=1,2\f$) created during the \c setup() phase.
-- Combine the two ``block vectors'' \f${\bf y}_i\f$ (for \f$i=1,...,5\f$)
+- Combine the two ``block vectors'' \f${\bf Y}_i\f$ (for \f$i=1,...,2\f$)
 to the full-length vector \f${\bf y}\f$ [using the 
-\c BlockPreconditioner::return\_block\_vector(...) function].
+\c BlockPreconditioner::return\_block\_vectors(...) function].
 
 \subsubsection two_plus_three_implementation Implementation as a BlockPreconditioner
 
+The implementation of the preconditioner closely follows that of the 
+block diagonal preconditioner discussed above, the main difference
+being that the current preconditioner only ever operates 
+with exactly two blocks. Therefore store pointers to the two 
+subsidiary preconditioners (rather than a vector of pointers 
+that can store an arbitrary number of these).
+
+\skip start_of_two_plus_three_class
+\until };
+
 \subsubsection two_plus_three_setup The setup() function
 
-The first thing that must be called at the beginning of every \c
-setup(...) function is \c clean_up_my_memory(). This cleans up any
-dynamically allocated memory.
+As usual, we start by freeing up any previously allocated memory. 
+Since this preconditioner assumes explicity that the problem involves
+five DOF types we check that this is actually the case.
 
 \skip start_of_setup_for_two_plus_three
-\until this->clean_up_my_memory();
-
-Next we check that the number of degrees of freedom is 5, as the
-preconditioner is designed to only work for that number. The check is
-only necessary if \c OOMPH-LIB is complied with the \c PARANOID flag,
-and as such is inside an \c #ifdef statement.
-
-\skip #ifdef
 \until #endif
 
-Now that we have know we 5 dof types we create a \c Vector of \c unsigned to
-map the dofs to the blocks. This map is passed to block setup so that
-\c get_block(...) will work in the new scheme.
+To indicate that several DOF types are to be combined into 
+single blocks, we specify the mapping between DOF types and block types
+as an argument to the \c block_setup(...) function
+This is done by creating vector of length \c ndof_type()
+in which each entry indicates the block that the corresponding
+DOF is supposed to end up in:
 
 \skip //
 \until this->block_setup(dof_to_block_map);
 
-The preconditioners are then created and the appropriate blocks from
-\f${\bf J}\f$ are passed to them.
+To show that this actually worked, we output the number of blocks
+(which should be -- and indeed is -- equal to two).
+
+\skip Show that it 
+\until types
+
+Next we create the two subsidiary preconditioners and call their
+\c setup(...) functions, passing the two diagonal blocks
+ \f${\bf B}_{11} \f$  and \f${\bf B}_{22} \f$  to them.
 
 \skip // Create the subsidiary preconditioners
 \until // End of setup
 
 \subsubsection two_plus_three_solve The preconditioner_solve() function
 
-In order to solve via the sub-preconditioners, the right hand side
-vector is required to be split into blocks matching that used by the
-preconditioners. This is done automatically for you by
-\c this->get_block_vectors(r,block_r). \c r, is given to you as an
-argument of the \c  preconditioner_solve(...) function when it is
-called, \c block_r must be created beforehand, but need not be sized.
+The \c preconditioner_solve(...) function is equivalent to that
+in the \c Diagonal preconditioner discussed above, though here it simply
+acts on a 2x2 block system. 
 
-The \c this->get_block_vectors function is aware of the blocking
-scheme, that was created in the \c setup(...) function, and therefore
-requires no extra arguments.
+
 
 \skip //======
-\until this->get_block
-
-The associated solution blocks \c block_z are created similarly to \c block_r,
-however they require initialisation to size \c nblock_types, which is
-found similarly to in the \c setup(...) function.
-
-\skip //
-\until Vector<DoubleVector> block_z(n_block);
-
-The two systems are then solved.
-
-\skip //
-\until block_z[1])
-
-Finally the computed \c block_z are returned to the original \c z. 
-
-\skip //
-\until this->
+\until }
 
 \subsubsection two_plus_three_clean The clean_up_my_memory() function
 
-The clean up memory functions purpose is to delete any existing
-private data (and null it for safety purposes).
+The clean up memory functions again deletes the allocated storage --
+here the subsidiary preconditioners.
 
 \skip //
 \until // End of clean_up_my_memory function.
 
-The reason that this is required is the preconditioner is called as
-part of a linear solver program and may be used multiple times for
-various nonlinear solves over the course of the program. An obvious
-example of this is a time dependent problem. 
 
-Therefore to stop the build-up of unnecessary memory \c
-clean_up_my_memory() is called twice. Once at the beginning of 
-\c setup() to avoid leakage if the preconditioner is reused, and the
-second time is in the destructor (\c ~Simple()) to avoid memory leaks
-if potential loops create and destroy the preconditioner, either
-through \c new and \c delete or the preconditioner going out of scope.
+##################################################################
+##################################################################
+##################################################################
 
-\subsection two_plus_three_upper_triangular Two plus three upper triangular
+
+
+
+
+\subsection two_plus_three_upper_triangular Combining multiple dof types into compound blocks. Part 2: How to deal with off-diagonal blocks
+
+
+
+NEW BITS: How to setup matrix vector products when multiple dof types
+have been combined into single blocks
+
 \subsubsection two_plus_three_upper_triangular_theory Theory
-# TS: Include image
-
-In this example we retain only the blocks belonging to the 1st and 2nd
-dofs, and the blocks beloing to the 3rd, 4th and 5th dofs, along with
-the upper diagonals; such that
+The extension of the preconditioner introduced in the
+previous section to block-triangular form is
+straightforward: We use the same dof-to-block mapping as before but 
+now retain the off-diagonal block \f$ B_{12} \f$ so that the 
+preconditioner has the structure:
 \f[
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 {\bf P} = 
 \left(
-\begin{array}{ccccc}
+\begin{array}{cc|ccc}
 J_{11} & J_{12} & J_{13} & J_{14} & J_{15} \\
 J_{21} & J_{22} & J_{13} & J_{14} & J_{15} \\
+\hline
  & & J_{33} & J_{34} & J_{35} \\
  & & J_{43} & J_{44} & J_{45} \\
  & & J_{53} & J_{54} & J_{55} \\
+\end{array}
+\right)
+=
+\left(
+\begin{array}{c|c}
+B_{11}  & B_{12}\\
+\hline
+        & B_{22} \\
 \end{array}
 \right).
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 @E[eqn:two_plus_three_upper_triangular_reordered_linear_system]@
 \f]
-The application of this preconditioner (i.e. the solution of the
+
+In the FSI context where \f$ B_{11} \f$  and \f$ B_{22} \f$ 
+represent the solid and fluid sub-blocks, respectively, the inclusion
+of the off-diagonal block \f$ B_{12} \f$ incorporates the effect of
+fluid DOFs (via pressure and shear stress) onto the solid equations.
+Since this captures "more of the physics" the preconditioner can be
+expected to be better than its block diagonal counterpart.
+
+The application of the preconditioner (i.e. the solution of the
 linear system \f${\bf P} {\bf
   y} ={\bf z}\f$ for \f${\bf y}\f$) requires the solution of the 
 two smaller linear systems
 \f[
-\begin{array}{c}
+\ \ \ \ \
 \left(
 \begin{array}{cc}
 J_{11} & J_{12} \\
@@ -1035,16 +1141,15 @@ y_4 \\
 y_5 \\
 \end{array}
 \right)
-\\
+\mbox{\ \ \ \ \ \ \ \ \ or \ \ \ \ \ \  \ \ }
+B_{11} Y_1 =  Z_1 - B_{12} Y_2
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-@E[eqn:two_plus_three_upper_triangular_prec]@
-\\
+@E[eqn:two_plus_three_upper_triangular_prec1]@
+\f]
+and 
+\f[
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
 \left(
 \begin{array}{ccc}
 J_{33} & J_{34} & J_{35} \\
@@ -1064,219 +1169,207 @@ z_4 \\
 z_5 \\
 \end{array}
 \right)
-\end{array}
+\mbox{\ \ \ \ \ \ \ \ \ or \ \ \ \ \ \  \ \ }
+B_{22} Y_2 =  Z_2.
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\ \ \ 
+@E[eqn:two_plus_three_upper_triangular_prec2]@
 \f]
-where we have assumed that the two vectors \f${\bf y}\f$ and \f${\bf z}\f$
-are re-ordered into ``block vectors'' in the same way as 
-the vectors \f$\delta {\bf x}\f$ and \f${\bf r}\f$ in 
-(@R[eqn:orig_linear_system]@) "the original linear system" are re-ordered into
-the ``block vectors'' in
-(@R[eqn:two_plus_three_upper_triangular_reordered_linear_system]@).
-The implementation of the preconditioning operations in 
-(@R[eqn:diag_prec]@)  can naturally be subdivided into two
-distinct \c setup() and \c preconditioner\_solve(...) phases.
-Assuming that the linear systems in (@R[eqn:two_plus_three_prec]@) are
-solved exactly by a direct solver (an ``exact preconditioner'') that 
-can pre-compute and store the LU decomposition of the diagonal matrix blocks,
-the \c setup() phase involves the following operations
-[text in square brackets refers to their \c oomph-lib specific 
-implementation]:
-- Set up any data structures/lookup tables that are required to 
-extract matrix blocks from the original matrix
-\f${\bf J}\f$ [by calling
-the \c BlockPreconditioner::block\_setup(...) function]. 
-- Extract the two diagonal blocks [using the 
-\c BlockPreconditioner::get\_block(...)} function.
-- Compute and store the LU decomposition of the diagonal blocks
-to allow the rapid solution of the systems during the
- \c preconditioner\_solve(...)
-phase by back-substitution. [Note that, following the
-computation of the LU decomposition, the diagonal matrix
-blocks are longer required and can be deleted.]
-- Extract the off diagonal blocks from J [and store them in a \c
-DenseMatrix of template type \c Matrix-VectorProduct . This is used to
-calculate the product between the off diagonal blocks and the relevant
-\c y_i . Using the \c setup_matrix_vector_product(...) function. Note
-that, following the setup, the off-diagonal matrix blocks are longer
-required and can be deleted.]
-
-Once the \c setup() phase has been completed, the solution of the linear
-system \f${\bf P} {\bf y} = {\bf z}\f$ by the \c preconditioner\_solve(...) 
-function involves the following steps:
-- Extract the two ``block vectors'' \f${\bf z}_i\f$ (for \f$i=1,2\f$)
-from the vector \f${\bf z}\f$ [using the 
-\c BlockPreconditioner::get\_block\_vector(...) function].
-- Solve the linear systems \f${\bf J}_{ii} \ {\bf y}_i = 
-{\bf z}_i\f$ for the vectors \f${\bf y}_i\f$ (for \f$i=1,2\f$)  using 
-the LU decomposition of the diagonal blocks \f${\bf J}_{ii}\f$ 
-(for \f$i=1,2\f$) created during the \c setup() phase. using the
-results from the previous step, backsubstitute 
-- Combine the two ``block vectors'' \f${\bf y}_i\f$ (for \f$i=1,...,5\f$)
-to the full-length vector \f${\bf y}\f$ [using the 
-\c BlockPreconditioner::return\_block\_vector(...) function].
-
-
 
 \subsubsection two_plus_three_upper_triangular_implementation Implementation as a BlockPreconditioner
 
+The implementation is very similar to that in the previous example --
+we simply provide additional storage for the (single) matrix vector
+product operator required for the multiplication with \f$ B_{12} \f$
+when updating the right-hand-side in equation
+(@R[eqn:two_plus_three_upper_triangular_prec1]@).
+
+\skip start_of_two_plus_three_upper_triangular_class
+\until }; 
+
+
 \subsubsection two_plus_three_upper_triangular_setup The setup() function
 
-The first thing that must be called at the beginning of every \c
-setup(...) function is \c clean_up_my_memory(). This cleans up any
-dynamically allocated memory.
+As before, we start by freeing up any previously allocated memory
+and check that the number of DOF types is correct.
 
 \skip start_of_setup_for_two_plus_three_upper_triangular
-\until this->clean_up_my_memory();
-
-Next we check that the number of degrees of freedom is 5, as the
-preconditioner is designed to only work for that number. The check is
-only necessary if \c OOMPH-LIB is complied with the \c PARANOID flag,
-and as such is inside an \c #ifdef statement.
-
-\skip //
 \until #endif
 
-Now that we have 5 dof types we create a \c Vector of \c unsigned to
-map the dofs to the blocks. This map is passed to block setup so that
-\c get_block(...) will work in the new scheme.
+The block setup is again performed with a dof-to-block mapping
+that results in a block preconditioner with 2x2 blocks.
 
 \skip //
 \until this->block_setup(dof_to_block_map);
 
-The preconditioners are then created and the \c DenseMatrix for the
-off diagonal vector products is resized.
+We create the two subsidiary preconditioners and pass the 
+two diagonal blocks \f$ B_{11} \f$ and  \f$ B_{22} \f$
+to their \c setup() functions. As before, the deep copies
+of these matrices is then allowed to go out of scope, freeing
+up the memory, since the subsidiary preconditioners retain whatever
+information they require.
 
 \skip // Create the subsidiary preconditioners
-\until Off_diag
+\until end setup of last
 
-We then call the preconditioner's \c setup(...) functions, passing in
-a reference to the extracted \c block, remembering that we have
-changed the scheme from the identity matrix with \c block_setup(...).
-
-\skip // 
-\until }
-\until }
-
-Finally we setup the off diagonal vector products, again recalling the
-new block scheme.
+Finally we create and set up the off-diagonal vector product. Note
+that the block column index refers to the block enumeration, 
+so the block column index of \f$ B_{12} \f$ is 1 (in a C++ zero-based
+enumeration!). 
 
 \skip //
 \until }
+
 
 \subsubsection two_plus_three_upper_triangular_solve The preconditioner_solve() function
 
-In order to solve via the sub-preconditioners, the right hand side
-vector is required to be split into blocks matching that used by the
-preconditioners. This is done automatically for you by
-\c this->get_block_vectors(r,block_r). \c r, is given to you as an
-argument of the \c  preconditioner_solve(...) function when it is
-called, \c block_r must be created beforehand, but need not be sized.
-
-The \c this->get_block_vectors function is aware of the blocking
-scheme, that was created in the \c setup(...) function, and therefore
-requires no extra arguments.
+The application of the preconditioner is the exact equivalent of that
+of the general-purpose block triangular preconditioner discussed
+above, restricted to a 2x2 system:
 
 \skip //======
-\until this->get_block
-
-The associated solution blocks \c block_z are created similarly to \c block_r,
-however they require initialisation to size \c nblock_types, which is
-found similarly to in the \c setup(...) function.
-
-\skip //
-\until Vector<DoubleVector> block_z(n_block);
-
-The (1,1) system is then solved, so that it may be back substituted to
-change the RHS, \c r, for the solution to the (0,0) block.
-
-\skip //
-\until block_z[0])
-
-Finally the computed \c block_z are returned to the original \c z. 
-
-\skip //
-\until this->
+\until }
 
 \subsubsection two_plus_three_upper_triangular_clean The clean_up_my_memory() function
 
-The clean up memory functions purpose is to delete any existing
-private data (and null it for safety purposes).
+As before, this function frees up any memory that has been allocated
+in the \c setup() function.
 
 \skip //
 \until // End of clean_up_my_memory function.
 
-The reason that this is required is the preconditioner is called as
-part of a linear solver program and may be used multiple times for
-various nonlinear solves over the course of the program. An obvious
-example of this is a time dependent problem. 
 
-Therefore to stop the build-up of unnecessary memory \c
-clean_up_my_memory() is called twice. Once at the beginning of 
-\c setup() to avoid leakage if the preconditioner is reused, and the
-second time is in the destructor (\c ~Simple()) to avoid memory leaks
-if potential loops create and destroy the preconditioner, either
-through \c new and \c delete or the preconditioner going out of scope.
+######################################################################
+######################################################################
+######################################################################
 
 
-\subsection two_plus_three_upper_triangular_with_sub Two plus three upper triangular with subsidiary
+\subsection two_plus_three_upper_triangular_with_sub Using subsidiary block preconditioners
+
+NEW BITS: How to use subsidiary block preconditioners to
+(approximately) solve linear systems constructed from subsets of
+dof-blocks.
+ 
 \subsubsection two_plus_three_upper_triangular_with_sub_theory Theory
-# TS: Include image
 
-In this example we retain only the blocks belonging to the 1st and 2nd
-dofs, and the blocks beloing to the 3rd, 4th and 5th dofs, along with
-the upper diagonals; such that
+The two previous examples were motivated by the observation that in 
+multi-physics problems (such as fluid-structure interaction) it is
+natural to combine "related" DOF blocks into compound block
+matrices. We showed that the block preconditioning framework makes
+it easy to extract such matrices from the original
+system matrix and demonstrated how to solve linear systems involving these 
+matrices with separate subsidiary preconditioners.  
+One problem with this approach is that, once a compound matrix
+has been created (by the \c get_block(...) function), all 
+information about its DOF types is lost, making it impossible to 
+employ block preconditioners as subsidiary preconditioners. 
+
+We will now revisit the 2x2 block triangular preconditioner 
+described in the previous example and demonstrate how to employ
+subsidiary block preconditioners to (approximately) solve linear
+systems involving matrices formed (formally) by compound matrices
+that are constructed from multiple DOF-level blocks. From a
+mathematical point of view, the structure of
+the preconditioner therefore remains unchanged and is given by
 \f[
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 {\bf P} = 
 \left(
-\begin{array}{ccccc}
+\begin{array}{cc|ccc}
 J_{11} & J_{12} & J_{13} & J_{14} & J_{15} \\
 J_{21} & J_{22} & J_{13} & J_{14} & J_{15} \\
+\hline
  & & J_{33} & J_{34} & J_{35} \\
  & & J_{43} & J_{44} & J_{45} \\
  & & J_{53} & J_{54} & J_{55} \\
+\end{array}
+\right)=
+\left(
+\begin{array}{c|c}
+B_{11}  & B_{12}\\
+\hline
+        & B_{22} \\
 \end{array}
 \right).
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
-@E[eqn:two_plus_three_upper_triangular_with_sub_reordered_linear_system]@
+@E[eqn:two_plus_three_upper_triangular_with_sub]@
 \f]
-The application of this preconditioner (i.e. the solution of the
-linear system \f${\bf P} {\bf
-  y} ={\bf z}\f$ for \f${\bf y}\f$) requires the solution of the 
-two smaller linear systems
+We will continue to use a dof-to-block mapping to view this as
+the 2x2 block matrix shown on the right. This makes it easy to 
+extract the compound off-diagonal block  \f$ B_{12} \f$ from the
+system matrix when setting up the matrix-vector product (as before).
+The setup of the subsidiary block preconditioners used to (approximately)
+solve the linear systems involving \f$ B_{11} \f$ and \f$ B_{22}\f$ 
+is handled differently:
+- When calling the subsidiary block preconditioner's 
+  \c setup(...) function we pass a pointer to the 
+  entire system matrix, i.e. the matrix containing, formally, 
+  all the DOF-level blocks in equation (@R[eqn:orig_linear_system]@).
+.
+- We then turn the preconditioner into a subsidiary block
+  preconditioner, using its member function 
+  \c turn_into_subsidiary_block_preconditioner(...) whose arguments 
+  specify which of the DOF-level blocks in the current (master) 
+  preconditioner are to be used by the subsidiary block preconditioner.
+.
+The subsidiary block preconditioner is thus given access to all
+the information required to extract the relevant data directly from the
+original system matrix (and any associated full-length vectors).
+It is in fact a key design principle of the block preconditiong
+framework that <b>subsidiary block preconditioners
+are given access to the "full size" matrices and vectors, but only
+operate on the subset of data that they are "in charge of".</b>
+
+When employing subsidiary block preconditioners for the approximate 
+solution of the two smaller linear systems
 \f[
 \begin{array}{c}
+\underbrace{
 \left(
 \begin{array}{cc}
 J_{11} & J_{12} \\
 J_{21} & J_{22} \\
 \end{array}
-\right) \left(
+\right) 
+}_{B_{11}}
+\underbrace{
+\left(
 \begin{array}{c}
 y_1 \\
 y_2 \\
 \end{array}
-\right) = \left(
+\right)
+}_{Y_{1}}
+ = 
+\underbrace{
+\left(
 \begin{array}{c}
 z_1 \\ 
 z_2 \\
 \end{array}
-\right) - \left(
+\right)
+}_{{\bf Z}_1} - 
+\underbrace{
+\left(
 \begin{array}{ccc}
 J_{13} & J_{14} & J_{15} \\
 J_{23} & J_{24} & J_{25}  \\
 \end{array}
-\right) \left(
+\right)
+}_{B_{12}}
+\underbrace{
+\left(
 \begin{array}{c}
 y_3 \\
 y_4 \\
 y_5 \\
 \end{array}
 \right)
+}_{{\bf Y}_2}
 \\
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
@@ -1287,38 +1380,45 @@ y_5 \\
 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
 @E[eqn:two_plus_three_upper_triangular_with_sub_prec]@
 \\
+\underbrace{
 \left(
 \begin{array}{ccc}
 J_{33} & J_{34} & J_{35} \\
 J_{43} & J_{44} & J_{45} \\
 J_{53} & J_{54} & J_{55} \\
 \end{array}
-\right) \left(
+\right)
+}_{B_{22}}
+\underbrace{
+\left(
 \begin{array}{c}
 y_3 \\
 y_4 \\
 y_5 \\
 \end{array}
-\right) = \left(
+\right)
+}_{{\bf Y}_2}
+ = 
+\underbrace{
+\left(
 \begin{array}{c}
 z_3 \\ 
 z_4 \\
 z_5 \\
 \end{array}
 \right)
+}_{{\bf Z}_2},
 \end{array}
 \f]
-where we have assumed that the two vectors \f${\bf y}\f$ and \f${\bf z}\f$
-are re-ordered into ``block vectors'' in the same way as 
-the vectors \f$\delta {\bf x}\f$ and \f${\bf r}\f$ in 
-(@R[eqn:orig_linear_system]@) "the original linear system" are re-ordered into
-the ``block vectors'' in
-(@R[eqn:two_plus_three_upper_triangular_with_sub_reordered_linear_system]@).
-
-The systems in (@R[eqn:two_plus_three_upper_triangular_with_sub_reordered_linear_system]@) are
-then solved by subsidiary preconditioners themselves. The subsidiary
-preconditioners do upper triangular solves changing the systems respectively
-to
+the subsidiary preconditioners that operate on 
+the linear systems involving \f$ B_{11} \f$ and \f$ B_{22} \f$ 
+therefore retain access to the 
+relevant DOF-level blocks. Hence, if we employ the block triangular 
+preconditioner discussed above to (approximately) solve the
+two linear systems in equation 
+(@R[eqn:two_plus_three_upper_triangular_with_sub_prec]@),
+the complete preconditioning operation is described by the
+following equations:
 \f[
 \begin{array}{c}
 \left(
@@ -1326,28 +1426,42 @@ to
 J_{11} & J_{12} \\
  & J_{22} \\
 \end{array}
-\right) \left(
+\right) 
+\left(
 \begin{array}{c}
 y_1 \\
 y_2 \\
 \end{array}
-\right) = \left(
+\right) 
+= 
+\underbrace{
+\underbrace{
+\left(
 \begin{array}{c}
 z_1 \\ 
 z_2 \\
 \end{array}
-\right) - \left(
+\right)
+}_{{\bf Z}_1}
+ - 
+\underbrace{
+\left(
 \begin{array}{ccc}
 J_{13} & J_{14} & J_{15} \\
 J_{23} & J_{24} & J_{25}  \\
 \end{array}
-\right) \left(
+\right)
+}_{B_{12}}
+\underbrace{
+\left(
 \begin{array}{c}
 y_3 \\
 y_4 \\
 y_5 \\
 \end{array}
 \right)
+}_{{\bf Y}_2}
+}_{\widehat{\bf Z}_1}
 \\
 \left(
 \begin{array}{ccc}
@@ -1367,86 +1481,125 @@ z_3 \\
 z_4 \\
 z_5 \\
 \end{array}
-\right)
+\right).
 \end{array}
 \f]
+Note that when we wrote the block triangular preconditioner 
+we did not have to be aware of the fact that it may subsequently be used
+as a subsidiary block preconditioner. The
+internal data structures implemented in the \c BlockPreconditioner
+base class ensure that when we call \c get_block(0,0,block_matrix)
+in the subsidiary block preconditioner acting on \f$ B_{22} \f$, 
+\c block_matrix will 
+receive a deep copy of \f$ J_{33} \f$, extracted from the full system matrix. 
+Similarly, a call to \c get_block_vectors(r,block_r) will
+extract the three block vectors \f$ {\bf r}_3, {\bf r}_4 \f$
+and \f${\bf r}_5 \f$ from the full-length vector \f$ {\bf r} \f$,
+while \c return_block_vectors(block_z,z) will return the
+three solution vectors \f$ {\bf z_3}, {\bf z_4} \f$ and 
+\f$ {\bf z_5} \f$ to the appropriate entries in the full-length
+vector \f$ {\bf z}. \f$
 
-The implementation of the preconditioning operations in 
-(@R[eqn:diag_prec]@)  can naturally be subdivided into two
+
+The implementation of the preconditioning operations
+can again be subdivided into two
 distinct \c setup() and \c preconditioner\_solve(...) phases.
-Assuming that the linear systems in (@R[eqn:two_plus_three_prec]@) are
-solved exactly by a direct solver (an ``exact preconditioner'') that 
-can pre-compute and store the LU decomposition of the diagonal matrix blocks,
-the \c setup() phase involves the following operations
-[text in square brackets refers to their \c oomph-lib specific 
-implementation]:
-- Set up any data structures/lookup tables that are required to 
-extract matrix blocks from the original matrix
-\f${\bf J}\f$ [by calling
-the \c BlockPreconditioner::block\_setup(...) function]. 
-- Extract the two diagonal blocks [using the 
-\c BlockPreconditioner::get\_block(...)} function.
-- Pass the diagonal blocks to the subsidiary preconditioners, and call
-their \c setup(...) functions.
-- Extract the off diagonal blocks from J [and store them in a \c
-DenseMatrix of template type \c Matrix-VectorProduct . This is used to
-calculate the product between the off diagonal blocks and the relevant
-\c y_i . Using the \c setup_matrix_vector_product(...) function. Note
-that, following the setup, the off-diagonal matrix blocks are longer
-required and can be deleted.]
+- Set up the data structures/lookup tables that map DOF types
+  0 and 1 to block 0 and DOF types 2, 3 and 4 to block 1 [by calling
+  the \c BlockPreconditioner::block\_setup(...) function
+  with arguments that specify the mapping between "DOF types" and 
+  "block types" as before]. 
+- Create two instances of the block triangular preconditioner
+  (or any other block preconditioner) and turn them into the 
+  subsidiary preconditioners for the current (master) preconditioner,
+  specifying which DOF types in the master preconditioner the
+  subsidiary block preconditioners are to work with.
+- Extract the compound off-diagonal block \f$ B_{12}\f$  and create 
+  a \c MatrixVectorProduct operator. 
 
 Once the \c setup() phase has been completed, the solution of the linear
 system \f${\bf P} {\bf y} = {\bf z}\f$ by the \c preconditioner\_solve(...) 
 function involves the following steps:
-- Extract the two ``block vectors'' \f${\bf z}_i\f$ (for \f$i=1,2\f$)
-from the vector \f${\bf z}\f$ [using the 
-\c BlockPreconditioner::get\_block\_vector(...) function].
-- Solve the linear systems \f${\bf J}_{ii} \ {\bf y}_i = 
-{\bf z}_i\f$ for the vectors \f${\bf y}_i\f$ (for \f$i=1,2\f$)  using 
-the LU decomposition of the diagonal blocks \f${\bf J}_{ii}\f$ 
-(for \f$i=1,2\f$) created during the \c setup() phase. using the
-results from the previous step, backsubstitute 
-- Combine the two ``block vectors'' \f${\bf y}_i\f$ (for \f$i=1,2\f$)
-to the full-length vector \f${\bf y}\f$ [using the 
-\c BlockPreconditioner::return\_block\_vector(...) function].
+- Solve the linear systems \f$ {\bf B}_{22} \ {\bf Y}_2 = 
+{\bf Z}_2\f$ using the subsidiary block preconditioner that works
+with  \f$ {\bf B}_{22} \f$. [The subsidiary block preconditioner's
+\c preconditioner_solve(...) function is given access to the 
+full-size vectors \f$ {\bf z} \f$ and \f$ {\bf y} \f$ and
+extracts/returns \f$ {\bf Z}_2 \f$
+and \f$ {\bf Y}_2\f$ directly from/into these.]
+- Extract the solution vector \f$ {\bf Y}_2 \f$ from the just udated full-length
+vector \f$ {\bf y} \f$, perform the matrix vector product with
+\f$ B_{12} \f$ and store the result in a temporary vector \f$ {\bf t} \f$.
+- Extract the block vector \f$ {\bf Z}_1\f$ from the full-length
+vector \f$ {\bf z} \f$, subtract \f$ {\bf t} \f$
+from it, and return the result, \f$ \widehat{\bf Z}_1 = 
+{\bf Z}_1 - B_{12} {\bf Z}_2 \f$
+into the appropriate entries into the
+full-length vector \f$ {\bf z} \f$.
+- Solve the linear systems \f$ {\bf B}_{11} \ {\bf Y}_1 = 
+\widehat{\bf Z}_1 = {\bf Z}_1 - B_{12} {\bf Z}_2 \f$ using the subsidiary block 
+preconditioner that works
+with  \f$ {\bf B}_{11} \f$. [The subsidiary block preconditioner's
+\c preconditioner_solve(...) function is given access to the 
+full-size vectors \f$ {\bf z} \f$ and \f$ {\bf y} \f$ and
+extracts/returns \f$ \widehat{\bf Z}_1 \f$
+and \f$ {\bf Y}_1\f$ directly from/into these; recall that the 
+relevant entries in \f$ {\bf z}\f$ have been over-written 
+in the previous step so that \f$ \widehat{\bf Z}_1 \f$ contains 
+the updated right hand side.]
+
 
 \subsubsection two_plus_three_upper_triangular_with_sub_implementation Implementation as a BlockPreconditioner
 
+The implementation of the precondition is completely equivalent to the
+corresponding block triangular preconditioner considered in the
+previous example:
+
+\skip start_of_two_plus_three_upper_triangular_with_sub_class
+\until }; 
+
+
+
 \subsubsection two_plus_three_upper_triangular_with_sub_setup The setup() function
-
-
-The first thing that must be called at the beginning of every \c
-setup(...) function is \c clean_up_my_memory(). This cleans up any
-dynamically allocated memory.
+As usual we free up any memory and check that the number of dof types
+is appropriate for this preconditioner:
 
 \skip start_of_setup_for_two_plus_three_upper_triangular
-\until this->clean_up_my_memory();
-
-Next we check that the number of degrees of freedom is 5, as the
-preconditioner is designed to only work for that number. The check is
-only necessary if \c OOMPH-LIB is complied with the \c PARANOID flag,
-and as such is inside an \c #ifdef statement.
-
-\skip //
 \until #endif
 
-Now that we have 5 dof types we create a \c Vector of \c unsigned to
-map the dofs to the blocks. This map is passed to block setup so that
-\c get_block(...) will work in the new scheme.
+Next we define the block structure of the preconditioner, using
+a dof-to-block mapping to combine dofs 0 and 1 into block 0,
+and dofs 2, 3 and 4 into block 1:
 
 \skip //
 \until this->block_setup(dof_to_block_map);
+ 
+Next we create the block triangular preconditioner used
+to (approximately) solve linear systems involving 
+the compound "top left" 2x2 block:
+\skip // Create the subsidiary block preconditioners
+\until First_sub
 
-The preconditioners are then created, as they are block
-preconditioners themselves they require turning into subsidiary
-preconditioners. This takes a map of the dofs in the subsidiary
-preconditioner to the dofs in the master preconditioner.
+We turn this preconditioner into a subsidiary block preconditioner, specifying
+the pointer to the current (master) preconditioner and the
+mapping between dof types in the present and the subsidiary
+block preconditioners (here the identity):
+\until turn_into_subsid
+ 
+When calling the subsidiary block preconditioners \c setup(...)
+function we pass a pointer to the full matrix:
+\until }
 
-\skip // Create the subsidiary preconditioners
-\until block_prec_pt->setup(this->matrix_pt());
 
-The off diagonal matrix vector products are then resized appropriately
-and created.
+The second subsidiary block preconditioner (for the 3x3 "bottom right"
+compound matrix) is created similarly,  though the mapping between
+dof-types is now no longer the identity but maps dof types 2, 3 and 4
+in the current (master) preconditioner to dof types 0, 1 and 2
+in the subsidiary block preconditioner:
+\until }
+
+The setup of the matrix-vector product with the off-diagonal matrix 
+is unchanged from the previous example:
 
 \skip //
 \until }
@@ -1454,47 +1607,56 @@ and created.
 
 \subsubsection two_plus_three_upper_triangular_with_sub_solve The preconditioner_solve() function
 
-Firstly the (1,1) block is solved, so that it can be back substituted
-in later. This is done by passing the \c r and \c z \c DoubleVectors
-to it, from which it extracts the required blocks automatically.
+As discussed in the theory section, we start by (approximately)
+solving the system \f$ B_{22} Y_2 = Z_2 \f$, using the second
+subsidiary block preconditioner which automatically 
+extracts \f$ Z_2 \f$ from the full length vector \c z
+and returns the result \f$ Y_2 \f$ into the appropriate entries
+of the full length vector \c y.
 
 \skip //
-\until Second_subsidiary_preconditioner_pt->preconditioner_solve(r,z);
+\until Second_subsidiary_preconditioner_pt->preconditioner_solve(z,y);
 
-The RHS then needs to be gotten, so that it can be used for the off
-diagonal matrix vector product calculations, this is done with the \c
-get_block_vectors(...) functions. The \c z are taken in a similar
-fashion and then the off diagonal calculation is preformed.
+We now extract the block vector \f$ Y_2 \f$ from the full-length
+vector \c y,
+\until get_block_vector
+
+multiply it by \f$ B_{12} \f$, using the \c MatrixVectorProduct
+operator,
+\until Off_diagonal
+
+and subtract the result from \f$ Z_1 \f$ (which we extract from the
+full length vector \c z ):
 
 \skip //
-\until block_r[0] -= temp; 
+\until block_z -= temp; 
 
-As the RHS has been modified, a new \c DoubleVector needs to be
-created to pass to the \c first_subsidiary_preconditioner_pt. This is
-then passed to the preconditioner, which returns the relevant results.
+\c block_z now contains the updated right hand side, \f$ \widehat{{\bf
+Z}_1}\f$, for the linear system to be (approximately) solved by the
+first subsidiary block preconditioner. We therefore return 
+\f$ \widehat{{\bf Z}_1}\f$ to the appropriate entries into a full
+length vector of the same size as right hand side vector \c z:
+
+\until return_block_vector
+
+We then pass this vector to first subsidiary preconditoner which 
+updates the appropriate entires in the full-length solution vector \c
+y which can therefore be returned directly by this function:
 
 \skip //
 \until }
 
 \subsubsection two_plus_three_upper_triangular_with_sub_clean The clean_up_my_memory() function
 
-The clean up memory functions purpose is to delete any existing
-private data (and null it for safety purposes).
+As usual, we use this helper function to free up any memory 
+allocated in the \c setup() function to avoid memory leaks.
 
 \skip //
 \until // End of clean_up_my_memory function.
 
-The reason that this is required is the preconditioner is called as
-part of a linear solver program and may be used multiple times for
-various nonlinear solves over the course of the program. An obvious
-example of this is a time dependent problem. 
 
-Therefore to stop the build-up of unnecessary memory \c
-clean_up_my_memory() is called twice. Once at the beginning of 
-\c setup() to avoid leakage if the preconditioner is reused, and the
-second time is in the destructor (\c ~Simple()) to avoid memory leaks
-if potential loops create and destroy the preconditioner, either
-through \c new and \c delete or the preconditioner going out of scope.
+#####################################################################
+#####################################################################
 
 
 \subsection two_plus_three_upper_triangular_with_replace Two plus three upper triangular with replacement
@@ -1502,8 +1664,8 @@ through \c new and \c delete or the preconditioner going out of scope.
 \subsubsection two_plus_three_upper_triangular_with_replace_theory Theory
 
 In this example we retain only the blocks belonging to the 1st and 2nd
-dofs, and the blocks beloing to the 3rd, 4th and 5th dofs, then
-replace any dof level blocks that are not on the diagonals with a
+DOFs, and the blocks beloing to the 3rd, 4th and 5th DOFs, then
+replace any DOF level blocks that are not on the diagonals with a
 replacement block, \f$R_{ij}\f$; such that
 
 \f${\bf J}\f$, so that
@@ -1593,7 +1755,7 @@ z_5 \\
 where we have assumed that the two vectors \f${\bf y}\f$ and \f${\bf z}\f$
 are re-ordered into ``block vectors'' in the same way as 
 the vectors \f$\delta {\bf x}\f$ and \f${\bf r}\f$ in 
-(@R[eqn:orig_linear_system]@) "the original linear system" are re-ordered into
+"the original linear system" (@R[eqn:orig_linear_system]@) are re-ordered into
 the ``block vectors'' in
 (@R[eqn:two_plus_three_reordered_linear_system]@).
 
@@ -1665,10 +1827,10 @@ implementation]:
 extract matrix blocks from the original matrix
 \f${\bf J}\f$ [by calling
 the \c BlockPreconditioner::block\_setup(...) function]. 
-- Extract the off diagonal blocks [using the 
-\c BlockPreconditioner::get\_block(...)} function,
+- Extract the off-diagonal blocks [using the 
+\c BlockPreconditioner::get\_block(...) function],
 and replace them, in this case they are replaced by blocks full of 0s,
-leading to an equivalence with the \c Simple preconditioner.
+leading to an equivalence with the \c Diagonal preconditioner.
 - Pass the new blocks, along with the blocking scheme to the
 subsidiary preconditioners.
 
@@ -1677,7 +1839,7 @@ system \f${\bf P} {\bf y} = {\bf z}\f$ by the \c preconditioner\_solve(...)
 function involves the following steps:
 - Extract the two ``block vectors'' \f${\bf z}_i\f$ (for \f$i=1,2\f$)
 from the vector \f${\bf z}\f$ [using the 
-\c BlockPreconditioner::get\_block\_vector(...) function].
+\c BlockPreconditioner::get\_block\_vectors(...) function].
 - Solve the linear systems \f${\bf J}_{ii} \ {\bf y}_i = 
 {\bf z}_i\f$ for the vectors \f${\bf y}_i\f$ (for \f$i=1,2\f$).
 - Combine the two ``block vectors'' \f${\bf y}_i\f$ (for \f$i=1,...,5\f$)
@@ -1727,12 +1889,12 @@ The replacement matrix is then passed to the \c set_replacement_dof_block matrix
 \until }
 \until }
 
-The preconditioners and off diagonal products are then created and the preconditioners are setup.
+The preconditioners and off-diagonal products are then created and the preconditioners are setup.
 
 \skip //
 \until }
 
-The off diagonal vector products require setting up in a more complex way than previously however as there is no predefined block to pass to it from the \c block_setup(...), instead we must make use of concatenation.
+The off-diagonal vector products require setting up in a more complex way than previously however as there is no predefined block to pass to it from the \c block_setup(...), instead we must make use of concatenation.
 
 The first step in concatenation is to define the desired block. This is done by creating a \c VectorMatrix<BlockSelector>, \c BlockSelector is created purely for this, and is made use of via a \c select_block(...) function. To this is passed the matrix co-ordinates and generally a \c bool equal to \c true. 
 
@@ -1744,7 +1906,7 @@ We then request the block, using the \c get_concatenated_block(...) function, wh
 \skip //
 \until CR
 
-The rest of the setup for the off diagonals is done as per usual.
+The rest of the setup for the off-diagonals is done as per usual.
 
 \skip //
 \until }
@@ -1767,7 +1929,7 @@ from and the \c Vector<DoubleVector> we wish to place the result into.
 \skip //
 \until this->
 
-With the vectors now setup the off diagonal matrix products and the first subsidiary preconditioner can be applied.
+With the vectors now setup the off-diagonal matrix products and the first subsidiary preconditioner can be applied.
 
 \skip //
 \until }
@@ -1788,7 +1950,7 @@ example of this is a time dependent problem.
 Therefore to stop the build-up of unnecessary memory \c
 clean_up_my_memory() is called twice. Once at the beginning of 
 \c setup() to avoid leakage if the preconditioner is reused, and the
-second time is in the destructor (\c ~Simple()) to avoid memory leaks
+second time is in the destructor (\c ~Diagonal()) to avoid memory leaks
 if potential loops create and destroy the preconditioner, either
 through \c new and \c delete or the preconditioner going out of scope.
 
@@ -1843,7 +2005,7 @@ coarsened into a 2x2 system.
 Both take the 2x2 system, do an upper triangular solve on each of the
 diagonal blocks, which for the purposes of the blocks is equivalent to
 an LU decomposition, with modification of the right hand side as
-apropriate for the off diagonal block. 
+apropriate for the off-diagonal block. 
 \f[
 {\bf P} = 
 \left(
@@ -1922,18 +2084,18 @@ We desire the second preconditioner to act on a coarsened system, as such we fir
 
 The first thing that requires is a \c Vector<Vector<unsigned>>. The first \c Vector indicates the "coarse" blocks that will be created in the subsidiary preconditioner.
 
-The second \c Vector indicates the dofs in the master preconditioner that go into the "coarse" blocks specified by the first \c Vector; ie the blocks in the subsidiary preconditioner.
+The second \c Vector indicates the DOFs in the master preconditioner that go into the "coarse" blocks specified by the first \c Vector; ie the blocks in the subsidiary preconditioner.
 
 \skip unsigned n_sub_dof_types=2;
 \until doftype_coarsen_map_coarse[1][0]
 
 However the \c unsigned values stored do not directly refer to the
-doftypes in the master preconditioner, instead they go via a secondary
+DOF types in the master preconditioner, instead they go via a secondary
 \c Vector. The values in the \c doftype_coarsen_map_coarse refer to
 the index of \c doftype_in_master_coarse. This means that if \c doftype_in_master_coarse[0] is 1 then if
 \c doftype_coarsen_map_coarse[i][j]=0 the ith "coarse" block in the
 subsidiary preconditioner contains at least j of the master's blocks,
-and the jth block in the ith "coarse" block is the dof of the master
+and the jth block in the ith "coarse" block is the DOF of the master
 preconditioner stored in \c doftype_in_master_coarse[0], which in this example is 1.
 
 \skip Vector<unsigned> doftype_in_master_coarse
@@ -1944,7 +2106,7 @@ The subsidiary preconditioner is then turned into a subsidiary by passing the ma
 \skip block_prec_pt->
 \until  doftype_coarsen_map_coarse);
 
-The preconditioner and concatenated off digonals are then setup as per normal.
+The preconditioner and concatenated off-digonals are then setup as per normal.
 
 \skip //
 \until }// End of setup
@@ -1964,7 +2126,7 @@ coarsening scheme to that used in \c setup().
 \until this->get_concatenated_block_vector(block1_vec_number,z,z_1);
 
 The rest of the solve is done as per normal for a 2 plus 3 system with
-an off diagonal, using subsidiary preconditioners.
+an off-diagonal, using subsidiary preconditioners.
 
 \skip //
 \until }
@@ -1985,7 +2147,7 @@ example of this is a time dependent problem.
 Therefore to stop the build-up of unnecessary memory \c
 clean_up_my_memory() is called twice. Once at the beginning of 
 \c setup() to avoid leakage if the preconditioner is reused, and the
-second time is in the destructor (\c ~Simple()) to avoid memory leaks
+second time is in the destructor (\c ~Diagonal()) to avoid memory leaks
 if potential loops create and destroy the preconditioner, either
 through \c new and \c delete or the preconditioner going out of scope.
 
