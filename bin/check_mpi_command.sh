@@ -41,7 +41,7 @@ check_mpi_run_command ()
 
     # Test the compilation of an mpi example
     full_command="$_cxx_compile_command -o bin/minimal_mpi_test bin/minimal_mpi_test.cc"
-    printf "Testing mpi compilation command: " $full_command
+    printf "Testing mpi compilation command: $full_command\n"
     rm -f bin/minimal_mpi_test
 
     # Complile and run
@@ -165,7 +165,7 @@ check_mpi_np_run_command()
     # Check that we can compile
     rm -f bin/minimal_mpi_variablenp_test
     full_command="$_cxx_compile_command -o bin/minimal_mpi_variablenp_test bin/minimal_mpi_variablenp_test.cc"
-    $full_command
+    eval "$full_command"
 
     if [ ! -e bin/minimal_mpi_variablenp_test ]; then
         echo " " 
