@@ -952,10 +952,16 @@ void LagrangeEnforcedflowPreconditioner::setup()
   // clean
   this->clean_up_memory();
   double t_end_clean_up_memory = TimingHelpers::timer();
-  
-  double t_clean_up_memory = t_end_clean_up_memory - t_start_clean_up_memory;
+ 
+  if(Doc_time)
+  { 
+    const double t_clean_up_memory = t_end_clean_up_memory 
+                                     - t_start_clean_up_memory;
 
-  oomph_info << "LGR: clean_up_memory: " << t_clean_up_memory << std::endl;
+    oomph_info << "LGR: clean_up_memory: " 
+               << t_clean_up_memory << std::endl;
+  }
+
 
 #ifdef PARANOID
     // Paranoid check that meshes have been set.
@@ -986,8 +992,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
     }
   }
 
- //   std::cout << "ndof_types: " << this->ndof_types() << std::endl; 
-    
 
   // To construct the desired block structure for this preconditioner, with
   // assumption on the natural ordering of the DOF types, we require only the
@@ -2387,7 +2391,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
       
     double t_turn_into_sub = t_end_turn_into_subsidairy - t_start_turn_into_subsidairy;
 
-    oomph_info << "LGR_PREC: turn_into_subsidairy: " << t_turn_into_sub << std::endl;
+    oomph_info << "LGR: turn_into_subsidairy: " << t_turn_into_sub << std::endl;
     //    pause("After turn_into..."); 
 
 

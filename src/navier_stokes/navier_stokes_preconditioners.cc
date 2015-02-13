@@ -252,7 +252,7 @@ namespace oomph
     oomph_info << "Time for block_setup(...) [sec]: "
                << block_setup_time << "\n";
    }
-  oomph_info << "LSC: block_setup " << block_setup_time << std::endl; 
+  oomph_info << "LSC: block_setup: " << block_setup_time << std::endl; 
   
 
   // determine whether the F preconditioner is a block preconditioner (and
@@ -278,7 +278,7 @@ namespace oomph
                << get_B_time << "\n";
    }
 
-  oomph_info << "LSC: get block B get_B_time " << get_B_time << std::endl; 
+  oomph_info << "LSC: get block B get_B_time: " << get_B_time << std::endl; 
 
   if (doc_block_matrices)
    {
