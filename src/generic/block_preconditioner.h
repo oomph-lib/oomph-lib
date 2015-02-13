@@ -175,9 +175,11 @@ class BlockSelector
     {
       std::ostringstream warning_msg;
       warning_msg << "Warning: BlockSelector destructor is called but...\n"
-                  << "block_pt() is not null.\n"
+                  << "replacement_block_pt() is not null.\n"
                   << "Please remember to null this via the function\n"
-                  << "BlockSelector::null_block_pt()" << std::endl;
+                  << "BlockSelector::null_replacement_block_pt()\n" 
+                  << "Row_index: " << Row_index << "\n"
+                  << "Column_index: " << Column_index << std::endl;
       
       OomphLibWarning(warning_msg.str(),
                       OOMPH_CURRENT_FUNCTION,
@@ -196,9 +198,11 @@ class BlockSelector
     if((wanted == false) && (replacement_block_pt !=0))
     {
       std::ostringstream err_msg;
-      err_msg << "Trying to construct a BlockSelector object with:\n" 
+      err_msg << "Trying to select block with:\n" 
         << "replacement_block_pt != 0 and wanted == false"
-        << "If you require the block, please set wanted == true.\n";
+        << "If you require the block, please set wanted == true.\n"
+        << "row_index: " << row_index << "\n"
+        << "column_index: " << column_index << "\n";
       throw OomphLibError(err_msg.str(),
           OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION); 
@@ -224,7 +228,9 @@ class BlockSelector
       std::ostringstream warning_msg;
       warning_msg << "Trying to set Wanted = false, but replacement_block_pt is not null.\n"
         << "Please call null_replacement_block_pt()\n"
-        << "(remember to free memory if necessary)\n";
+        << "(remember to free memory if necessary)\n"
+        << "Row_index: " << Row_index << "\n"
+        << "Column_index: " << Column_index << "\n";
           OomphLibWarning(warning_msg.str(),
           OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
@@ -250,7 +256,9 @@ class BlockSelector
     {
       std::ostringstream err_msg;
       err_msg << "Trying to set replacement_block_pt, but Wanted == false.\n" 
-        << "Please call want_block()\n";
+        << "Please call want_block()\n"
+        << "Row_index: " <<  Row_index << "\n"
+        << "Column_index: " << Column_index << "\n";
       throw OomphLibError(err_msg.str(),
             OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION); 
@@ -302,10 +310,10 @@ class BlockSelector
   friend std::ostream& operator<<(std::ostream& o_stream,
                            const BlockSelector& block_selector)
   {
-    o_stream << "Row_index = " << block_selector.row_index() << ", "
-             << "Column_index = " << block_selector.column_index() << ", "
-             << "Wanted = " << block_selector.wanted() << ", "
-             << "Replacement_block_pt = " << block_selector.replacement_block_pt() << ".";
+    o_stream << "Row_index = " << block_selector.row_index() << "\n"
+             << "Column_index = " << block_selector.column_index() << "\n"
+             << "Wanted = " << block_selector.wanted() << "\n"
+             << "Replacement_block_pt = " << block_selector.replacement_block_pt();
 
     return o_stream;
   }
@@ -333,7 +341,9 @@ class BlockSelector
         std::ostringstream err_msg;
         err_msg << "Trying to set replacement_block_pt, but Wanted == false.\n"
                 << "Please either not set the replacement_block_pt or call the function\n"
-                << "do_not_want_block()";
+                << "do_not_want_block()\n"
+                << "Row_index: " << Row_index << "\n"
+                << "Column_index: " << Column_index << "\n";
         throw OomphLibError(err_msg.str(),
             OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION); 

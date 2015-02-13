@@ -36,11 +36,33 @@ using namespace oomph;
 //======================================================================
 int main(int argc, char* argv[])
 {
-  // Create the output file.
-  std::ostringstream out_stream;
-  out_stream << "OUTPUT";
-  std::ofstream out_file;
-  out_file.open(out_stream.str().c_str());
+  // Store command line arguments
+  CommandLineArgs::setup(argc,argv);
+
+  CommandLineArgs::specify_command_line_flag(
+      "--test_default_constructor");
+  CommandLineArgs::specify_command_line_flag(
+      "--test_constructor_with_param");
+  CommandLineArgs::specify_command_line_flag(
+      "--test_select_block_function");
+  CommandLineArgs::specify_command_line_flag(
+      "--test_want_block_function");
+  CommandLineArgs::specify_command_line_flag(
+      "--test_do_not_want_block_function");
+  CommandLineArgs::specify_command_line_flag(
+      "--test_do_not_want_block_function_replace");
+  CommandLineArgs::specify_command_line_flag(
+      "--test_set_row_index_function");
+  CommandLineArgs::specify_command_line_flag(
+      "--test_set_column_index_function");
+
+
+  // Parse the above flags.
+  CommandLineArgs::parse_and_assign();
+  CommandLineArgs::doc_specified_flags();
+
+
+
 
   // Testing the default constructor.
   // This sets the Replacement_block_pt to 0
@@ -51,121 +73,195 @@ int main(int argc, char* argv[])
   //            Wanted = false
   //
   // We check this.
-  BlockSelector block_selector_default;
-  out_file << "Test 1: default constructor:\n";
-  out_file << block_selector_default.replacement_block_pt() << "\n";
-  out_file << block_selector_default.row_index() << "\n";
-  out_file << block_selector_default.column_index() << "\n";
-  out_file << block_selector_default.wanted() << "\n";
-  out_file << std::endl;
-
-  //////////////////////////////////////////////////////////////////////////
-
-  // Testing the second constructor (with parameters)
-  BlockSelector block_selector_without_replacement(1,2,true);
-  out_file << "Test 2: constructor with param, no replacement:\n";
-  out_file << block_selector_without_replacement.replacement_block_pt() << "\n";
-  out_file << block_selector_without_replacement.row_index() << "\n";
-  out_file << block_selector_without_replacement.column_index() << "\n";
-  out_file << block_selector_without_replacement.wanted() << "\n";
-  out_file << std::endl;
- 
-  //////////////////////////////////////////////////////////////////////////
-
-  // Testing second constructor given a replacement matrix.
-  CRDoubleMatrix testmat;
-  BlockSelector block_selector_with_replacement(3,4,true,&testmat);
-  out_file << "Test 3: constructor with param, with replacement:\n";
-  if(block_selector_with_replacement.replacement_block_pt() == &testmat)
+  if(CommandLineArgs::command_line_flag_has_been_set(
+     "--test_default_constructor"))
   {
-    // This worked.
-    out_file << "1" << std::endl;
+    // Create the output file.
+    std::ostringstream out_stream_name;
+    out_stream_name << "OUTFILE_default_constructor_test";
+    std::ofstream out_file;
+    out_file.open(out_stream_name.str().c_str());
+
+    BlockSelector block_selector_default;
+    out_file << block_selector_default << "\n";
+
+    out_file.close();
+  }
+  // Testing the constructor with parameters but no replacement block.
+  // We test both wanted and not wanted versions.
+  else if(CommandLineArgs::command_line_flag_has_been_set(
+          "--test_constructor_with_param"))
+  {
+    // Create the output file.
+    std::ostringstream out_stream_name1;
+    out_stream_name1 << "OUTFILE_constructor_with_param_wanted";
+    std::ofstream out_file1;
+    out_file1.open(out_stream_name1.str().c_str());
+    
+    BlockSelector block_selector_with_param_wanted(1,2,true);
+    out_file1 << block_selector_with_param_wanted << "\n";
+    
+    out_file1.close();
+
+
+    // Create the output file.
+    std::ostringstream out_stream_name2;
+    out_stream_name2 << "OUTFILE_constructor_with_param_not_wanted";
+    std::ofstream out_file2;
+    out_file2.open(out_stream_name2.str().c_str());
+    
+    BlockSelector block_selector_with_param_not_wanted(3,4,false);
+    out_file2 << block_selector_with_param_not_wanted << "\n";
+    
+    out_file2.close();
+
+
+    // Create the output file.
+    std::ostringstream out_stream_name3;
+    out_stream_name3 << "OUTFILE_constructor_with_param_replace";
+    std::ofstream out_file3;
+    out_file3.open(out_stream_name3.str().c_str());
+    
+    CRDoubleMatrix testmat;
+    BlockSelector block_selector_with_param_replace(5,6,true,&testmat);
+    out_file3 << block_selector_with_param_replace << "\n";
+    block_selector_with_param_replace.null_replacement_block_pt();
+    
+    out_file3.close();
+  }
+  // Once the BlockSelector is constructed, you can use the select_block()
+  // function to select the block you want. We test this.
+  else if(CommandLineArgs::command_line_flag_has_been_set(
+          "--test_select_block_function"))
+  {
+    // Create the output file.
+    std::ostringstream out_stream_name1;
+    out_stream_name1 << "OUTFILE_select_block_wanted";
+    std::ofstream out_file1;
+    out_file1.open(out_stream_name1.str().c_str());
+    
+    BlockSelector block_selector_wanted;
+    block_selector_wanted.select_block(1,2,true);
+    out_file1 << block_selector_wanted << "\n";
+    out_file1.close();
+
+
+    // Create the output file.
+    std::ostringstream out_stream_name2;
+    out_stream_name2 << "OUTFILE_select_block_not_wanted";
+    std::ofstream out_file2;
+    out_file2.open(out_stream_name2.str().c_str());
+    
+    BlockSelector block_selector_not_wanted;
+    block_selector_not_wanted.select_block(3,4,false);
+    out_file2 << block_selector_not_wanted << "\n";
+    out_file2.close();
+
+
+    // Create the output file.
+    std::ostringstream out_stream_name3;
+    out_stream_name3 << "OUTFILE_select_block_replace";
+    std::ofstream out_file3;
+    out_file3.open(out_stream_name3.str().c_str());
+    
+    CRDoubleMatrix testmat;
+    BlockSelector block_selector_replace;
+    block_selector_replace.select_block(5,6,true,&testmat);
+    out_file3 << block_selector_replace << "\n";
+    block_selector_replace.null_replacement_block_pt();
+    out_file3.close();
+  }
+  // Testing  BlockSelector::want_block().
+  else if(CommandLineArgs::command_line_flag_has_been_set(
+          "--test_want_block_function"))
+  {
+    // Create the output file.
+    std::ostringstream out_stream_name;
+    out_stream_name << "OUTFILE_want_block";
+    std::ofstream out_file;
+    out_file.open(out_stream_name.str().c_str());
+    
+    BlockSelector block_selector(1,2,false);
+    block_selector.want_block();
+    out_file << block_selector << "\n";
+    out_file.close();
+  }
+  // Testing  BlockSelector::do_not_want_block().
+  // There are two tests:
+  // If no replacement block is set, then calling do_not_want_block simply
+  // sets Wanted to false.
+  // If a replacement block is set, it nulls the pointer, gives a warning 
+  // (if paranoid is turned on), then sets Wanted to false.
+  else if(CommandLineArgs::command_line_flag_has_been_set(
+          "--test_do_not_want_block_function"))
+  {
+    // Create the output file.
+    std::ostringstream out_stream_name;
+    out_stream_name << "OUTFILE_do_not_want_block";
+    std::ofstream out_file;
+    out_file.open(out_stream_name.str().c_str());
+    
+    BlockSelector block_selector(1,2,true);
+    block_selector.do_not_want_block();
+    out_file << block_selector << "\n";
+    out_file.close(); 
+  }
+  else if(CommandLineArgs::command_line_flag_has_been_set(
+          "--test_do_not_want_block_function_replace"))
+  {
+    // Create the output file.
+    std::ostringstream out_stream_name;
+    out_stream_name << "OUTFILE_do_not_want_block_replace";
+    std::ofstream out_file;
+    out_file.open(out_stream_name.str().c_str());
+   
+    CRDoubleMatrix testmat; 
+    BlockSelector block_selector(1,2,true,&testmat);
+    block_selector.do_not_want_block();
+    out_file << block_selector << "\n";
+    out_file.close(); 
+  }
+  // Testing  BlockSelector::set_row_index().
+  else if(CommandLineArgs::command_line_flag_has_been_set(
+          "--test_set_row_index_function"))
+  {
+    // Create the output file.
+    std::ostringstream out_stream_name;
+    out_stream_name << "OUTFILE_set_row_index";
+    std::ofstream out_file;
+    out_file.open(out_stream_name.str().c_str());
+   
+    BlockSelector block_selector;
+    block_selector.set_row_index(42);
+    out_file << block_selector << "\n";
+    out_file.close(); 
+  }
+  // Testing  BlockSelector::set_row_index().
+  else if(CommandLineArgs::command_line_flag_has_been_set(
+          "--test_set_column_index_function"))
+  {
+    // Create the output file.
+    std::ostringstream out_stream_name;
+    out_stream_name << "OUTFILE_set_column_index";
+    std::ofstream out_file;
+    out_file.open(out_stream_name.str().c_str());
+   
+    BlockSelector block_selector;
+    block_selector.set_column_index(42);
+    out_file << block_selector << "\n";
+    out_file.close(); 
   }
   else
   {
-    // This did not work.
-    out_file << "0" << std::endl;
+    std::ostringstream err_msg;
+    err_msg << "No test is recognised.\n"
+            << "Please set the appropriate command line flag." 
+            << std::endl;
+
+    throw OomphLibError(err_msg.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION); 
   }
-  out_file << block_selector_with_replacement.row_index() << "\n";
-  out_file << block_selector_with_replacement.column_index() << "\n";
-  out_file << block_selector_with_replacement.wanted() << "\n";
-  out_file << std::endl;
-
-  //////////////////////////////////////////////////////////////////////////
-
-  // Testing  BlockSelector::want_block() from block_selector_default.
-  // This is currently set to false, we print this out to make sure.
-  out_file << "Test 4: Test Block_selector::want_block()\n";
-  out_file << "block_selector_default.wanted(): "
-           << block_selector_default.wanted() << std::endl;
-  // Now we want the block.
-  block_selector_default.want_block();
-  out_file << "block_selector_default.wanted(): "
-           << block_selector_default.wanted() << std::endl;
-  out_file << std::endl;
-
-  // Set it back so the destructor does not complain when it goes out of 
-  // scope.
-  block_selector_default.do_not_want_block();
-
-  //////////////////////////////////////////////////////////////////////////
-  
-  // Now testing the do_not_want_block functionality.
-  // The do_not_want_block() gives a warning if a replacement block is set.
-  //   it then nulls the block pointer.
-  //   then sets the boolean Wanted to false.
-  // If no replacement is set, i.e. replacement_block_pt() is 0, then it simply set the
-  // boolean Wanted to false without complaining. We test both these actions.
-  
-  // No replacement set:
-  out_file << "Test 5.1: Calling do_not_want_block() "
-           << "with no replacement set:" << std::endl;
-  out_file << "block_selector_without_replacement.wanted(): " 
-           << block_selector_without_replacement.wanted() << std::endl;
-  block_selector_without_replacement.do_not_want_block();
-  out_file << "block_selector_without_replacement.wanted(): " 
-           << block_selector_without_replacement.wanted() << std::endl;
-
-  out_file << "Test 5.2: Calling do_not_want_block() "
-           << "with replacement block set:" << std::endl;
-  out_file << "block_selector_with_replacement.wanted(): "
-           << block_selector_with_replacement.wanted() << std::endl;
-  block_selector_with_replacement.do_not_want_block();
-  out_file << "block_selector_with_replacement.wanted(): "
-           << block_selector_with_replacement.wanted() << std::endl;
-  out_file << std::endl;
-  
-  
-  //////////////////////////////////////////////////////////////////////////
-
-  // Test 6
-  out_file << "Test 6: Test BlockSelector::set_row_index(...)\n";
-  // This is currently set to 1.
-  out_file << "block_selector_without_replacement.row_index(): "
-           << block_selector_without_replacement.row_index() << std::endl;
-  // Now change it to 5
-  block_selector_without_replacement.set_row_index(5);
-  // Output
-  out_file << "block_selector_without_replacement.row_index(): "
-           << block_selector_without_replacement.row_index() << std::endl;
-  out_file << std::endl;
-
-  //////////////////////////////////////////////////////////////////////////
-
-  // Test 7
-  out_file << "Test 7: Test BlockSelector::set_column_index(...)\n";
-  // This is currently set to 2.
-  out_file << "block_selector_without_replacement.column_index(): "
-           << block_selector_without_replacement.column_index() << std::endl;
-  // Now change it to 6
-  block_selector_without_replacement.set_column_index(6);
-  // Output
-  out_file << "block_selector_without_replacement.column_index(): "
-           << block_selector_without_replacement.column_index() << std::endl;
-  out_file << std::endl;
-
-
-  out_file.close();
 
   return(EXIT_SUCCESS);
 } // end_of_main
