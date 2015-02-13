@@ -170,6 +170,20 @@ class BlockSelector
   /// \short Default destructor.
   virtual ~BlockSelector()
   {
+#ifdef PARANOID
+    if(Block_pt != 0)
+    {
+      std::ostringstream warning_msg;
+      warning_msg << "Warning: BlockSelector destructor is called but...\n"
+                  << "block_pt() is not null.\n"
+                  << "Please remember to null this via the function\n"
+                  << "BlockSelector::null_block_pt()" << std::endl;
+      
+      OomphLibWarning(warning_msg.str(),
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
   }
 
   /// \short Select a block.
@@ -207,15 +221,17 @@ class BlockSelector
 #ifdef PARANOID
     if(Replacement_block_pt !=0)
     {
-      std::ostringstream err_msg;
-      err_msg << "Trying to set Wanted = false, but replacement_block_pt is not null.\n"
+      std::ostringstream warning_msg;
+      warning_msg << "Trying to set Wanted = false, but replacement_block_pt is not null.\n"
         << "Please call null_replacement_block_pt()\n"
         << "(remember to free memory if necessary)\n";
-      throw OomphLibError(err_msg.str(),
+      throw OomphLibWarning(warning_msg.str(),
           OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+      
+    null_block_pt();
 
     Wanted = false;
   }
@@ -236,8 +252,8 @@ class BlockSelector
       err_msg << "Trying to set replacement_block_pt, but Wanted == false.\n" 
         << "Please call want_block()\n";
       throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION); 
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION); 
     }
 #endif
 

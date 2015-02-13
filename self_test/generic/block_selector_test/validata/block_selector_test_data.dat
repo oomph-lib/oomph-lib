@@ -1,0 +1,56 @@
+Test 1: default constructor:
+0
+0
+0
+0
+
+Test 2: constructor with param, no replacement:
+0
+1
+2
+1
+
+Test 3: constructor with param, with replacement:
+1
+3
+4
+1
+
+Test 4: Test Block_selector::want_block()
+block_selector_default.wanted(): 0
+block_selector_default.wanted(): 1
+
+Test 5.1: Calling do_not_want_block() with no replacement set:
+block_selector_without_replacement.wanted(): 1
+block_selector_without_replacement.wanted(): 0
+Test 5.2: Calling do_not_want_block() with replacement block set:
+block_selector_with_replacement.wanted(): 1
+block_selector_with_replacement.wanted(): 0
+
+Test 6: Test BlockSelector::set_row_index(...)
+block_selector_without_replacement.row_index(): 1
+block_selector_without_replacement.row_index(): 5
+
+Test 7: Test BlockSelector::set_column_index(...)
+block_selector_without_replacement.column_index(): 2
+block_selector_without_replacement.column_index(): 6
+
+
+
+======================================================================
+Oomph-lib WARNING
+
+ at /home/ray/oomphlib/mpi_debug_paranoid/build/include/generic/block_preconditioner.h:230
+
+ in void oomph::BlockSelector::do_not_want_block()
+
+--------------------------------------------------------
+
+Warning: Trying to set Wanted = false, but block_pt is not null.
+I am nulling it.
+Row_index: 3
+Column_index: 4
+
+
+======================================================================
+
