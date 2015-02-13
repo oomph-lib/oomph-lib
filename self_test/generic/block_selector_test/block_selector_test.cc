@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
   out_file.open(out_stream.str().c_str());
 
   // Testing the default constructor.
-  // This sets the Block_pt to 0
+  // This sets the Replacement_block_pt to 0
   // then calls BlockSelector::build(0,0,false)
   //
   // Which sets Row_index = 0
@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
   // We check this.
   BlockSelector block_selector_default;
   out_file << "Test 1: default constructor:\n";
-  out_file << block_selector_default.block_pt() << "\n";
+  out_file << block_selector_default.replacement_block_pt() << "\n";
   out_file << block_selector_default.row_index() << "\n";
   out_file << block_selector_default.column_index() << "\n";
   out_file << block_selector_default.wanted() << "\n";
@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
   // Testing the second constructor (with parameters)
   BlockSelector block_selector_without_replacement(1,2,true);
   out_file << "Test 2: constructor with param, no replacement:\n";
-  out_file << block_selector_without_replacement.block_pt() << "\n";
+  out_file << block_selector_without_replacement.replacement_block_pt() << "\n";
   out_file << block_selector_without_replacement.row_index() << "\n";
   out_file << block_selector_without_replacement.column_index() << "\n";
   out_file << block_selector_without_replacement.wanted() << "\n";
@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
   CRDoubleMatrix testmat;
   BlockSelector block_selector_with_replacement(3,4,true,&testmat);
   out_file << "Test 3: constructor with param, with replacement:\n";
-  if(block_selector_with_replacement.block_pt() == &testmat)
+  if(block_selector_with_replacement.replacement_block_pt() == &testmat)
   {
     // This worked.
     out_file << "1" << std::endl;
@@ -114,7 +114,7 @@ int main(int argc, char* argv[])
   // The do_not_want_block() gives a warning if a replacement block is set.
   //   it then nulls the block pointer.
   //   then sets the boolean Wanted to false.
-  // If no replacement is set, i.e. block_pt() is 0, then it simply set the
+  // If no replacement is set, i.e. replacement_block_pt() is 0, then it simply set the
   // boolean Wanted to false without complaining. We test both these actions.
   
   // No replacement set:
@@ -166,10 +166,6 @@ int main(int argc, char* argv[])
 
 
   out_file.close();
-
-  // Cleanup: Null the block_pt from block_selector_with_replacement.
-  // (Otherwise it will complain when the destructor is called)
-  block_selector_with_replacement.null_block_pt();
 
   return(EXIT_SUCCESS);
 } // end_of_main

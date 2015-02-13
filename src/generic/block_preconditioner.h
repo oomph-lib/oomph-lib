@@ -171,7 +171,7 @@ class BlockSelector
   virtual ~BlockSelector()
   {
 #ifdef PARANOID
-    if(Block_pt != 0)
+    if(Replacement_block_pt != 0)
     {
       std::ostringstream warning_msg;
       warning_msg << "Warning: BlockSelector destructor is called but...\n"
@@ -225,13 +225,13 @@ class BlockSelector
       warning_msg << "Trying to set Wanted = false, but replacement_block_pt is not null.\n"
         << "Please call null_replacement_block_pt()\n"
         << "(remember to free memory if necessary)\n";
-      throw OomphLibWarning(warning_msg.str(),
+          OomphLibWarning(warning_msg.str(),
           OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
     }
 #endif
       
-    null_block_pt();
+    null_replacement_block_pt();
 
     Wanted = false;
   }
