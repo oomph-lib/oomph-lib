@@ -98,9 +98,15 @@ configure_options_file="$(AbsPath $configure_options_file)"
 # Now switch to the oomph lib directory
 cd "$oomph_root"
 
-# Force generate config files if this is a brand new build.
+# Force generate config files if we are missing important files
 if [ ! -e configure ]; then
     echo "No ./configure found, assuming this is a new build and regenerating everything."
+    generate_config_files="true"
+elif [ ! -e Makefile ]; then
+    echo "No Makefile found in root, I assume you did a distclean so I'll regenerate everything."
+    generate_config_files="true"
+elif [ ! -e Makefile.in ]; then
+    echo "No Makefile.in found in root, no idea how you managed that but I'll regenerate everything anyway"
     generate_config_files="true"
 fi
 
