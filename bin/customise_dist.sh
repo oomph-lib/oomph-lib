@@ -82,15 +82,12 @@ echo " "
 echo "====================================================================="
 echo " "
 echo "Choose customisation flag [0,1,2,3,4,5 -- default: 0] "
-reply=`OptionRead`
+customisation_flag=`OptionRead 0`
 
-if (test \( $reply -eq 1 \) -o \( $reply -eq 2 \) -o \( $reply -eq 3 \) -o \( $reply -eq 4 \) -o \( $reply -eq 5 \) ) ; then
-    customisation_flag=$reply
-else
-    customisation_flag=0
+if (test ! \( $customisation_flag -eq 0 \) -o \( $customisation_flag -eq 1 \) -o \( $customisation_flag -eq 2 \) -o \( $customisation_flag -eq 3 \) -o \( $customisation_flag -eq 4 \) -o \( $customisation_flag -eq 5 \) ) ; then
+    echo "unrecognised option $customisation_flag"
+    exit 5
 fi
-echo " "
-
 
 
 # Default flags for all default customisations
@@ -168,7 +165,7 @@ if (test $customisation_flag -eq 0) ; then
     echo "Do you wish to retain the nondist_figures directories"
     echo " in the distribution? [y/n - default: n]"
     echo " "
-    keep_nondist_figures=`OptionRead`
+    keep_nondist_figures=`OptionRead n`
 
 fi
 
@@ -207,7 +204,7 @@ if (test $customisation_flag -eq 0) ; then
     echo "Do you wish to wipe the contents of the validata "
     echo "directories? [y/n - default: n]"
     echo " "
-    wipe_validata=`OptionRead`
+    wipe_validata=`OptionRead n`
 
 fi
 
@@ -251,7 +248,7 @@ if (test $customisation_flag -eq 0) ; then
     echo "Do you wish to retain the subversion directories in "
     echo "the distribution? [y/n -- default: n]"
     echo " "
-    keep_svn=`OptionRead`
+    keep_svn=`OptionRead n`
 
 fi
 
@@ -308,7 +305,7 @@ if test -e `pwd`/external_src/oomph_hsl/frontal.f; then
             echo "hsl sources in frontal.f: "
             echo "       Do you want to wipe? [y/n/t -- default: n]"
             echo " "
-            wipe_hsl=`OptionRead`
+            wipe_hsl=`OptionRead n`
         fi
 
         if test "$wipe_hsl" = "t"  ; then
@@ -361,7 +358,7 @@ if test -e `pwd`/external_src/oomph_arpack/all_arpack_sources.f; then
             echo "ARPACK sources in all_arpack_sources.f: "
             echo "    Do you want to wipe? [y/n/t -- default: n]"
             echo " "
-            wipe_arpack=`OptionRead`
+            wipe_arpack=`OptionRead n`
         fi
         if test "$wipe_arpack" = "t"  ; then
             echo " "
@@ -404,7 +401,7 @@ if (test $customisation_flag -eq 0) ; then
     echo "doc directory: "
     echo "        Do you want to wipe? [y/n/t -- default: n]"
     echo " "
-    wipe_doc=`OptionRead`
+    wipe_doc=`OptionRead n`
 fi
 if test "$wipe_doc" = "t"  ; then
     echo " "
@@ -441,7 +438,7 @@ if (test -d $orig_dir/private); then
         echo "private directories: "
         echo "        Do you want to include? [y/n/t -- default: n]"
         echo " "
-        include_private_directories=`OptionRead`
+        include_private_directories=`OptionRead n`
     fi
 else
     include_private_directories="n"
@@ -489,7 +486,7 @@ if (test $customisation_flag -eq 0) ; then
     echo "user_drivers directories: "
     echo "       Do you want to wipe the non-demo ones? [y/n/t --default: n]"
     echo " "
-    wipe_user_drivers=`OptionRead`
+    wipe_user_drivers=`OptionRead n`
 fi
 if test "$wipe_user_drivers" = "t"  ; then
     echo " "
@@ -548,9 +545,9 @@ if (test $customisation_flag -eq 0) ; then
     echo " "
     echo " "
     echo "user_src directory: "
-    echo "       Do you want to wipe the non-demo ones? [y/n/t]"
+    echo "       Do you want to wipe the non-demo ones? [y/n/t --default: n]"
     echo " "
-    wipe_user_src=`OptionRead`
+    wipe_user_src=`OptionRead n`
 fi
 if test "$wipe_user_src" = "t"  ; then
     echo " "
