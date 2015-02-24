@@ -14,7 +14,7 @@ if (test $# != 3); then
     echo "the relative path from the original to the dist directory. "
     echo " "
     echo "exiting... "
-    exit
+    exit 5
 else
     echo " "
     orig_dir=$1
