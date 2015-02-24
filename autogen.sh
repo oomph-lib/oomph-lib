@@ -252,30 +252,45 @@ fi
 
 confdir="config/configure.ac_scripts"
 
-# Ensure required files exist
-touch "$confdir/makefile_list"
-
 # Generate a sorted list of all the makefiles in the project, wrap it into
 # an autoconfigure command and put it into a file.
-find -type f -name "Makefile.am" \
-    | sed -e 's:Makefile\.am$:Makefile:' -e 's:^./::' \
-    | sort \
-    | cat <(echo "# GENERATED FILE, DO NOT MODIFY.") \
-    <(echo "AC_CONFIG_FILES([") - <(echo "])") \
-    > "$confdir/new_makefile_list"
+makefile_list="$(find -path './external_distributions' -prune \
+                    -o -type f -name 'Makefile.am' -print \
+                | sed -e 's:Makefile\.am:Makefile:' -e 's:^./::' \
+                | sort)"
 
-# A bit more explanation of the above command: First we find all
-# Makefile.ams in the project, then we remove the .am to get a list of
-# Makefiles to create (we also remove the "./" here because the autotools
-# don't like it). Next we sort the output (so that the resulting list is
-# deterministic). Finally we concatenate the list together with some
-# autoconfig commands to create the final file.
+# A bit more explanation of the above command:
+# First we find all Makefile.ams in the project except those in
+# ./external_distributions (because that is where hypre/trilinos/etc live
+# and we don't want to build those directly).
 
+# Then we remove the .am using sed to get a list of Makefiles to create. We
+# also remove the "./" here because the autotools don't like it.
+
+# Finally we sort the output so that the order of the resulting list is
+# deterministic.
+
+
+# Create the file containing the list of Makefiles
+cat > "$confdir/new_makefile_list" <<EOF
+# GENERATED FILE, DO NOT MODIFY.
+AC_CONFIG_FILES([
+$makefile_list
+external_distributions/Makefile
+external_distributions/hypre/Makefile
+external_distributions/trilinos/Makefile
+external_distributions/mumps_and_scalapack/Makefile
+])
+EOF
+# In case you haven't seen it before: this writes the lines between <<EOF
+# and EOF into the file $confdir/new_makefile_list. Variables are
+# substituted as normal.
 
 # If we found some new dirs then write it into the list file that is
 # included in configure.ac and tell the user. The fact that we have
 # modified a file included in configure.ac will cause make to rerun
 # autoconf and configure.
+touch "$confdir/makefile_list"
 if ! diff -q "$confdir/new_makefile_list" "$confdir/makefile_list" > /dev/null 2>&1; 
 then
     echo "New/removed directories detected and $confdir/makefile_list updated,"
