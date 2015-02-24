@@ -27,6 +27,7 @@ build_dir=""
 make_options=""
 extra_configure_options=""
 generate_config_files="false"
+only_generate_config_files="false"
 configure_options_file="config/configure_options/current"
 
 # If "current" configure options does not exist then use "default".
@@ -37,7 +38,7 @@ fi
 
 
 # Parse command line arguments
-while getopts ":hrd:c:b:j:sk" opt; do
+while getopts ":hrd:c:b:j:sko" opt; do
     case $opt in
         h)
             echo "Options for autogen.sh:"
@@ -55,6 +56,12 @@ while getopts ":hrd:c:b:j:sk" opt; do
             ;;
         b)
             build_dir="$OPTARG"
+            ;;
+
+        o)
+            only_generate_config_files="true"
+            generate_config_files="true"
+            echo "Regenerating the config files only"
             ;;
 
         # flags for make
@@ -130,7 +137,7 @@ fi
 
 # If this is a new build or a forced rebuild then we need to do some extra
 # stuff.
-if $generate_config_files == "true"; then
+if [[ $generate_config_files == "true" ]]; then
 
     # If we are regenerating config files then clean up the helper scripts
     #========================================================================
@@ -308,6 +315,13 @@ if $generate_config_files == "true"; then
     autoreconf --install
 
 fi
+
+
+if [[ $only_generate_config_files == "true" ]]; then
+    # Done, exit with success code
+    exit 0
+fi
+
 
 # Set up configure options
 #============================================================================

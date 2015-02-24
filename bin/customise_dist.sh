@@ -1,5 +1,8 @@
 #! /bin/sh
 
+set -o errexit
+set -o nounset
+
 #------------------------------------------------------------------------------
 # Shell script to customise distribution -- gives user the option to
 # wipe/re-install selected sub-directories before tar-ing up.
@@ -60,6 +63,23 @@ OptionRead()
     echo $Opt
 }
 
+RegenerateConfigFiles()
+{
+    set -o errexit
+    set -o nounset
+
+    oomph_dist_dir="$1"
+
+    # Use autogen.sh to generate an updated configure.ac etc. with the
+    # correct list of Makefiles.
+    cd "$oomph_dist_dir"
+    ./autogen.sh -o -r
+
+    # automake has problems if the packaged distribution doesn't contain a
+    # doc dir, but the doc dir won't be copied if --enable-supress-doc is
+    # set in the configure options. So we create the dir here.
+    mkdir -p "doc"
+}
 
 
 echo " "
@@ -84,7 +104,7 @@ echo " "
 echo "Choose customisation flag [0,1,2,3,4,5 -- default: 0] "
 customisation_flag=`OptionRead 0`
 
-if (test ! \( $customisation_flag -eq 0 \) -o \( $customisation_flag -eq 1 \) -o \( $customisation_flag -eq 2 \) -o \( $customisation_flag -eq 3 \) -o \( $customisation_flag -eq 4 \) -o \( $customisation_flag -eq 5 \) ) ; then
+if (test ! \( \( $customisation_flag -eq 0 \) -o \( $customisation_flag -eq 1 \) -o \( $customisation_flag -eq 2 \) -o \( $customisation_flag -eq 3 \) -o \( $customisation_flag -eq 4 \) -o \( $customisation_flag -eq 5 \) \) ) ; then
     echo "unrecognised option $customisation_flag"
     exit 5
 fi
@@ -303,21 +323,9 @@ if test -e `pwd`/external_src/oomph_hsl/frontal.f; then
             echo " "
             echo " "
             echo "hsl sources in frontal.f: "
-            echo "       Do you want to wipe? [y/n/t -- default: n]"
+            echo "       Do you want to wipe? [y/n -- default: n]"
             echo " "
             wipe_hsl=`OptionRead n`
-        fi
-
-        if test "$wipe_hsl" = "t"  ; then
-            echo " "
-            echo "=========================================================="
-            echo " "
-            echo "Terminating customisation of distribution."
-            echo "Remaining directories/files get included automatically"
-            echo " "
-            echo "=========================================================="
-            echo " "
-            exit
         fi
         if test "$wipe_hsl" = "y"  ; then
             echo "Wiping " `pwd`/external_src/oomph_hsl/frontal.f
@@ -356,20 +364,9 @@ if test -e `pwd`/external_src/oomph_arpack/all_arpack_sources.f; then
             echo " "
             echo " "
             echo "ARPACK sources in all_arpack_sources.f: "
-            echo "    Do you want to wipe? [y/n/t -- default: n]"
+            echo "    Do you want to wipe? [y/n -- default: n]"
             echo " "
             wipe_arpack=`OptionRead n`
-        fi
-        if test "$wipe_arpack" = "t"  ; then
-            echo " "
-            echo "=========================================================="
-            echo " "
-            echo "Terminating customisation of distribution."
-            echo "Remaining directories/files get included automatically"
-            echo " "
-            echo "=========================================================="
-            echo " "
-            exit
         fi
         if test "$wipe_arpack" = "y"  ; then
             echo "Wiping " `pwd`/external_src/oomph_arpack/all_arpack_sources.f
@@ -399,25 +396,13 @@ if (test $customisation_flag -eq 0) ; then
     echo " "
     echo " "
     echo "doc directory: "
-    echo "        Do you want to wipe? [y/n/t -- default: n]"
+    echo "        Do you want to wipe? [y/n -- default: n]"
     echo " "
     wipe_doc=`OptionRead n`
-fi
-if test "$wipe_doc" = "t"  ; then
-    echo " "
-    echo "================================================================="
-    echo " "
-    echo "Terminating customisation of distribution."
-    echo "Remaining directories/files get included automatically"
-    echo " "
-    echo "================================================================="
-    echo " "
-    exit
 fi
 if test "$wipe_doc" = "y"  ; then
     echo "Wiping " `pwd`/doc
     rm -rf `pwd`/doc
-    rm -f `pwd`/config/configure.ac_scripts/doc.dir_list
     echo "done"
 else
     echo "Not wiping " `pwd`/doc
@@ -436,26 +421,12 @@ if (test -d $orig_dir/private); then
         echo " "
         echo " "
         echo "private directories: "
-        echo "        Do you want to include? [y/n/t -- default: n]"
+        echo "        Do you want to include? [y/n -- default: n]"
         echo " "
         include_private_directories=`OptionRead n`
     fi
 else
     include_private_directories="n"
-fi
-if test "$include_private_directories" = "t"; then
-    echo " "
-    echo "================================================================="
-    echo " "
-    echo "Terminating customisation of distribution."
-    echo "Remaining directories/files get included automatically"
-    echo " "
-    echo "================================================================="
-    echo " "
-    if test "$keep_svn" = "n"; then
-        rm -rf `find $dist_dir/private -name .svn`
-    fi
-    exit
 fi
 if test "$include_private_directories" = "y"; then
     echo " "
@@ -466,9 +437,6 @@ if test "$include_private_directories" = "y"; then
 else
     echo "Not including " `pwd`/private
     rm -rf $dist_dir/private
-    rm -f `pwd`/config/configure.ac_scripts/private_user_drivers.dir_list
-    rm -f `pwd`/config/configure.ac_scripts/private_user_src.dir_list
-    rm -f `pwd`/config/configure.ac_scripts/private.dir_list
 fi
 
 
@@ -484,23 +452,11 @@ if (test $customisation_flag -eq 0) ; then
     echo " "
     echo " "
     echo "user_drivers directories: "
-    echo "       Do you want to wipe the non-demo ones? [y/n/t --default: n]"
+    echo "       Do you want to wipe the non-demo ones? [y/n --default: n]"
     echo " "
     wipe_user_drivers=`OptionRead n`
 fi
-if test "$wipe_user_drivers" = "t"  ; then
-    echo " "
-    echo "================================================================="
-    echo " "
-    echo "Terminating customisation of distribution."
-    echo "Remaining directories/files get included automatically"
-    echo " "
-    echo "================================================================="
-    echo " "
-    #Regenerate the config files in case other directories have been wiped
-    `pwd`/bin/regenerate_config_files.sh `pwd`
-    exit
-fi
+
 
 if test "$wipe_user_drivers" = "y"  ; then
     echo "Wiping non-demo directories in  `pwd`/user_drivers"
@@ -528,12 +484,6 @@ if test "$wipe_user_drivers" = "y"  ; then
     mv oomphs_own_tmp_directory/joe_cool .
     rm -rf  oomphs_own_tmp_directory
     cd $RETURN_DIR
-    # Finally: Overwrite the list of user driver directories in
-    # config/configure.ac_scripts/user_drivers.dir_list by default which
-    # only contains the two demo ones
-    cp -f  `pwd`/config/configure.ac_scripts/user_drivers.dir_list.default \
-       `pwd`/config/configure.ac_scripts/user_drivers.dir_list
-
 else
     echo "Not wiping " `pwd`/user_drivers
 fi
@@ -545,22 +495,9 @@ if (test $customisation_flag -eq 0) ; then
     echo " "
     echo " "
     echo "user_src directory: "
-    echo "       Do you want to wipe the non-demo ones? [y/n/t --default: n]"
+    echo "       Do you want to wipe the non-demo ones? [y/n --default: n]"
     echo " "
     wipe_user_src=`OptionRead n`
-fi
-if test "$wipe_user_src" = "t"  ; then
-    echo " "
-    echo "================================================================="
-    echo " "
-    echo "Terminating customisation of distribution."
-    echo "Remaining directories/files get included automatically"
-    echo " "
-    echo "================================================================="
-    echo " "
-    #Regenerate the config files in case other directories have been wiped
-    `pwd`/bin/regenerate_config_files.sh `pwd`
-    exit
 fi
 if test "$wipe_user_src" = "y"  ; then
 
@@ -588,17 +525,16 @@ if test "$wipe_user_src" = "y"  ; then
     mv oomphs_own_tmp_directory/jack_cool .
     rm -rf  oomphs_own_tmp_directory
     cd $RETURN_DIR
-    # Finally: Overwrite the list of user src directories in
-    # config/configure.ac_scripts/user_src.dir_list
-    # by default which only contains the demo one
-    cp -f  `pwd`/config/configure.ac_scripts/user_src.dir_list.default \
-       `pwd`/config/configure.ac_scripts/user_src.dir_list
     echo "done"
 
 else
     echo "Not wiping " `pwd`/user_src
 fi
 
+
+
+# Done with the customisation, now do some clean up
+# ============================================================
 
 # Remove the temporary empty frontal.f and all_arpack_sources.f files that
 # might have been created in the original tree If this is not done the
@@ -614,12 +550,18 @@ if ( [ -e $arpack_file ] && [ ! -s $arpack_file ] ); then
     rm $arpack_file;
 fi;
 
+
+# Automake (Makefile.am in oomph root) requires that the doc dir at least
+# exists, so create it
+mkdir -p "$dist_dir/doc"
+
+
 # End the customisation procedure by regenerating the config files
-`pwd`/bin/regenerate_config_files.sh `pwd`
+RegenerateConfigFiles "$dist_dir"
 
 # ...but replace the symbolic links by the files themselves
 mkdir tmp_junk
 find . -type l -exec cp {} tmp_junk \;
 find . -type l -exec rm -f {} \;
-mv tmp_junk/* .
+mv tmp_junk/* . || true # allow this to fail if there are no files in tmp_junk/*
 rm -rf tmp_junk
