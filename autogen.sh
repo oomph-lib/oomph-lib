@@ -254,28 +254,15 @@ confdir="config/configure.ac_scripts"
 
 # Ensure required files exist
 touch "$confdir/makefile_list"
-mkdir -p private
 
 # Generate a sorted list of all the makefiles in the project, wrap it into
-# an autoconfigure command and put it into a file. Specify which dirs to
-# search in to ensure that external_distributions is ignored.
-makefile_list=$(find bin src demo_drivers self_test doc external_src \
-    user_drivers user_src private \
-    -type f -name "Makefile.am" \
+# an autoconfigure command and put it into a file.
+find -type f -name "Makefile.am" \
     | sed -e 's:Makefile\.am$:Makefile:' -e 's:^./::' \
-    | sort)
-
-# Create the file containing the list of Makefiles
-echo "# GENERATED FILE, DO NOT MODIFY." > "$confdir/new_makefile_list"
-echo "AC_CONFIG_FILES([" >> "$confdir/new_makefile_list"
-echo "$makefile_list" >> "$confdir/new_makefile_list"
-echo "Makefile" >> "$confdir/new_makefile_list"
-echo "external_distributions/Makefile" >> "$confdir/new_makefile_list"
-echo "external_distributions/hypre/Makefile" >> "$confdir/new_makefile_list"
-echo "external_distributions/trilinos/Makefile" >> "$confdir/new_makefile_list"
-echo "external_distributions/mumps_and_scalapack/Makefile" >> "$confdir/new_makefile_list"
-echo "])" >> "$confdir/new_makefile_list"
-
+    | sort \
+    | cat <(echo "# GENERATED FILE, DO NOT MODIFY.") \
+    <(echo "AC_CONFIG_FILES([") - <(echo "])") \
+    > "$confdir/new_makefile_list"
 
 # A bit more explanation of the above command: First we find all
 # Makefile.ams in the project, then we remove the .am to get a list of
