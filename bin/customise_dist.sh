@@ -319,7 +319,7 @@ if test -e `pwd`/external_src/oomph_hsl/frontal.f; then
             echo " "
             exit
         fi
-        if test "$wipe_hsl" == "y"  ; then
+        if test "$wipe_hsl" = "y"  ; then
             echo "Wiping " `pwd`/external_src/oomph_hsl/frontal.f
             rm -f `pwd`/external_src/oomph_hsl/frontal.f
         else
@@ -371,7 +371,7 @@ if test -e `pwd`/external_src/oomph_arpack/all_arpack_sources.f; then
             echo " "
             exit
         fi
-        if test "$wipe_arpack" == "y"  ; then
+        if test "$wipe_arpack" = "y"  ; then
             echo "Wiping " `pwd`/external_src/oomph_arpack/all_arpack_sources.f
             rm -f `pwd`/external_src/oomph_arpack/all_arpack_sources.f
         else
@@ -414,7 +414,7 @@ if test "$wipe_doc" = "t"  ; then
     echo " "
     exit
 fi
-if test "$wipe_doc" == "y"  ; then
+if test "$wipe_doc" = "y"  ; then
     echo "Wiping " `pwd`/doc
     rm -rf `pwd`/doc
     rm -f `pwd`/config/configure.ac_scripts/doc.dir_list
@@ -502,7 +502,7 @@ if test "$wipe_user_drivers" = "t"  ; then
     exit
 fi
 
-if test "$wipe_user_drivers" == "y"  ; then
+if test "$wipe_user_drivers" = "y"  ; then
     echo "Wiping non-demo directories in  `pwd`/user_drivers"
     RETURN_DIR=`pwd`
     echo $RETURN_DIR
@@ -562,7 +562,7 @@ if test "$wipe_user_src" = "t"  ; then
     `pwd`/bin/regenerate_config_files.sh `pwd`
     exit
 fi
-if test "$wipe_user_src" == "y"  ; then
+if test "$wipe_user_src" = "y"  ; then
 
     echo "Wiping non-demo directories in  `pwd`/user_src"
     RETURN_DIR=`pwd`
