@@ -453,7 +453,10 @@ if (test $customisation_flag -eq 0) ; then
     echo " "
     echo "user_drivers directories: "
     echo "       Do you want to wipe the non-demo ones? [y/n --default: n]"
-    echo " "
+    echo " " 
+    echo "[Note that if directories are not (manually) included in the"
+    echo " user_drivers/Makefile.am SUBDIRS variable then they will automatically"
+    echo " not be included in the tar file.]"
     wipe_user_drivers=`OptionRead n`
 fi
 
@@ -498,6 +501,9 @@ if (test $customisation_flag -eq 0) ; then
     echo "user_src directory: "
     echo "       Do you want to wipe the non-demo ones? [y/n --default: n]"
     echo " "
+    echo "[Note that if directories are not (manually) included in the"
+    echo " user_src/Makefile.am SUBDIRS variable then they will automatically"
+    echo " not be included in the tar file.]"
     wipe_user_src=`OptionRead n`
 fi
 if test "$wipe_user_src" = "y"  ; then
