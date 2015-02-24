@@ -139,36 +139,6 @@ fi
 # stuff.
 if [[ $generate_config_files == "true" ]]; then
 
-    # If we are regenerating config files then clean up the helper scripts
-    #========================================================================
-    SCRIPT_LIST="config.guess config.sub depcomp install-sh ltmain.sh missing aclocal.m4 mkinstalldirs"
-
-    echo " "
-    echo "Wiping the symbolic links to the autoconf/automake helper scripts"
-    echo "[This is recommended if you have moved the sources to a different"
-    echo " machine without packaging them up with make dist. The symbolic "
-    echo " links tend to be machine-specific so it's best to force "
-    echo " autoconf/automake to rebuild them on the new machine]."
-    echo " "
-    echo "As a backup: Here are the old symbolic links:"
-    echo " "
-
-    for script in $SCRIPT_LIST
-    do
-        if (test -L $script); then
-            ls -L $script
-            ls -l $script > old_symbolic_links.txt
-        fi
-    done
-
-    echo " "
-    echo "We have stored this information in old_symbolic_links.txt"
-    echo " "
-    echo "Wiping them..."
-    rm -f  $SCRIPT_LIST
-    echo "Done"
-
-
     # David Shepherd's automake compatability fix
     #=========================================================================
 
@@ -310,10 +280,15 @@ fi
 # all the autotools magic now.
 if $generate_config_files == "true"; then
 
+    # The --force option used below overwrites our INSTALL file, so back it
+    # up and replace it.
+    cp INSTALL backup_INSTALL
+
     # Run all the autotools and just do the right things to generate
     # configure, Makefile.in and all the dependency relationships.
-    autoreconf --install
+    autoreconf --install --force
 
+    mv backup_INSTALL INSTALL
 fi
 
 
