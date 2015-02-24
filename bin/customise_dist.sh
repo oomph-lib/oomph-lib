@@ -466,6 +466,7 @@ if test "$wipe_user_drivers" = "y"  ; then
     # Get all files in user driver directory
     FILE_AND_DIR_LIST=`ls -d *`
     # Temporary storage for the directories
+    touch oomphs_own_tmp_directory
     rm -rf oomphs_own_tmp_directory
     mkdir oomphs_own_tmp_directory
     # Move the directories into temporary storage
@@ -508,6 +509,7 @@ if test "$wipe_user_src" = "y"  ; then
     # Get all files in user src directory
     FILE_AND_DIR_LIST=`ls -d *`
     # Temporary storage for the directories
+    touch oomphs_own_tmp_directory
     rm -rf oomphs_own_tmp_directory
     mkdir oomphs_own_tmp_directory
     # Move the directories into temporary storage
