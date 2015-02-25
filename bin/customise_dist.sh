@@ -141,20 +141,18 @@ fi
 
 # Default flags for "package up everything"
 #------------------------------------------
-# [NOTE: "t" means "terminate" customisation]
-#--------------------------------------------
 echo "Flag: " $customisation_flag
 if (test $customisation_flag -eq 1 ) ; then
     echo "Packaging up the lot..."
     keep_nondist_figures="y"
     keep_svn="y"
-    wipe_hsl="t"
-    wipe_arpack="t"
-    wipe_user_drivers="t"
-    wipe_user_src="t"
+    wipe_hsl="n"
+    wipe_arpack="n"
+    wipe_user_drivers="n"
+    wipe_user_src="n"
     wipe_doc="n"
     wipe_validata="n"
-    include_private_directories="t"
+    include_private_directories="y"
 fi
 
 #///////////////////////////////////////////////////////////////////////////
