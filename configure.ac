@@ -718,19 +718,89 @@ AC_ARG_ENABLE(use-gfortran-libraries-for-oomph-flapack,
 # status of ADD_LGFORTRAN_TO_OOMPH_LAPACK in any Makefile.am
 AM_CONDITIONAL(ADD_LGFORTRAN_TO_OOMPH_LAPACK, test x$use_gfortran_libraries_for_oomph_flapack = xtrue)
 
+
+
+
+# Auto-detect directories in private/*
+# -----------------------------------------------------------------------
+
+# This information is used in "Makefile.am"s within private/ to include
+# directories from private/ when running `make dist`. In particular it has
+# nothing to do with the creation of Makefile s by configure.
+
+
 # Do we have private directory?
-#---------------------------------
 AC_CHECK_FILES(private,
                echo "Found private"; have_private_directory=true,
                have_private_directory=false)
 AM_CONDITIONAL(HAVE_PRIVATE_DIRECTORY, test x$have_private_directory = xtrue)
 
+
 # Define subdirectories in private directory
 if test x$have_private_directory = xtrue; then  \
+
   PRIVATE_DIR="private"; \
+
+  # A hack to exclude the private/external_src directory from DIST_SUBDIRS
+  # (it's handled by EXTRA_DIST)
+  PRIVATE_SUBDIRECTORIES=`cd private/ && echo */ | tr ' ' '\n' | grep -v 'external_src' | tr '\n' ' '`; \
+  echo "Do have private subdirectories" $PRIVATE_SUBDIRECTORIES; \
+
+else \
+
+  PRIVATE_DIR="";\
+  PRIVATE_SUBDIRECTORIES=""; \
+  echo "Don't have private subdirectories: " $PRIVATE_SUBDIRECTORIES; \
+
 fi;
 
 AC_SUBST(PRIVATE_DIR)
+AC_SUBST(PRIVATE_SUBDIRECTORIES)
+
+# Do we have private user sources?
+AC_CHECK_FILES(private/user_src,
+               echo "Found private/user_src"; have_private_user_sources=true,
+               have_private_user_sources=false)
+AM_CONDITIONAL(HAVE_PRIVATE_USER_SRC, test x$have_private_user_sources = xtrue)
+
+
+# Define subdirectories in private user src directory
+if test x$have_private_user_sources = xtrue; then  \
+
+  PRIVATE_USER_SRC_SUBDIRECTORIES=`cd private/user_src/ && echo */`
+  echo "Do have private/user_src: " $PRIVATE_USER_SRC_SUBDIRECTORIES; \
+
+else \
+
+  PRIVATE_USER_SRC_SUBDIRECTORIES=""; \
+  echo "Don't have private/user_src: " $PRIVATE_USER_SRC_SUBDIRECTORIES; \
+
+fi;
+
+AC_SUBST(PRIVATE_USER_SRC_SUBDIRECTORIES)
+
+# Do we have private user drivers?
+AC_CHECK_FILES(private/user_drivers,
+               echo "Found private/user_drivers"; have_private_user_drivers=true,
+               have_private_user_drivers=false)
+AM_CONDITIONAL(HAVE_PRIVATE_USER_DRIVERS, test x$have_private_user_drivers = xtrue)
+
+
+# Define subdirectories in private user drivers directory
+if test x$have_private_user_drivers = xtrue; then  \
+
+  PRIVATE_USER_DRIVER_SUBDIRECTORIES=`cd private/user_drivers/ && echo */`
+  echo "Do have private/user_drivers: " $PRIVATE_USER_DRIVER_SUBDIRECTORIES; \
+
+else \
+
+  PRIVATE_USER_DRIVER_SUBDIRECTORIES=""; \
+  echo "Don't have private/user_drivers: " $PRIVATE_USER_DRIVER_SUBDIRECTORIES; \
+
+fi;
+
+AC_SUBST(PRIVATE_USER_DRIVER_SUBDIRECTORIES)
+
 
 
 # Initialiase flags that contains all external libraries that come with
