@@ -718,7 +718,19 @@ AC_ARG_ENABLE(use-gfortran-libraries-for-oomph-flapack,
 # status of ADD_LGFORTRAN_TO_OOMPH_LAPACK in any Makefile.am
 AM_CONDITIONAL(ADD_LGFORTRAN_TO_OOMPH_LAPACK, test x$use_gfortran_libraries_for_oomph_flapack = xtrue)
 
+# Do we have private directory?
+#---------------------------------
+AC_CHECK_FILES(private,
+               echo "Found private"; have_private_directory=true,
+               have_private_directory=false)
+AM_CONDITIONAL(HAVE_PRIVATE_DIRECTORY, test x$have_private_directory = xtrue)
 
+# Define subdirectories in private directory
+if test x$have_private_directory = xtrue; then  \
+  PRIVATE_DIR="private"; \
+fi;
+
+AC_SUBST(PRIVATE_DIR)
 
 
 # Initialiase flags that contains all external libraries that come with
