@@ -68,7 +68,7 @@ else
     ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/OUTFILE_constructor_with_param_not_wanted  \
         OUTFILE_constructor_with_param_not_wanted >> validation.log
 
-    ./.././validate_helper.sh ./../validata/OUTFILE_constructor_with_param_replace \
+    ./.././compare_block_selector_nonnull_replacement_block_pt.sh ./../validata/OUTFILE_constructor_with_param_replace \
         OUTFILE_constructor_with_param_replace >> validation.log 
 fi
 
@@ -97,7 +97,7 @@ else
     ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/OUTFILE_select_block_not_wanted  \
         OUTFILE_select_block_not_wanted >> validation.log
 
-    ./.././validate_helper.sh ./../validata/OUTFILE_select_block_replace \
+    ./.././compare_block_selector_nonnull_replacement_block_pt.sh ./../validata/OUTFILE_select_block_replace \
         OUTFILE_select_block_replace >> validation.log 
 fi
 
@@ -159,6 +159,31 @@ else
     ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/OUTFILE_do_not_want_block_replace  \
         OUTFILE_do_not_want_block_replace >> validation.log
 fi
+
+
+# Get the current directory so we can go back to it.
+CURRDIR=`pwd`
+
+# Go to the parent directory (where there is a Makefile)
+cd ..
+
+# This function prints variables from a Makefile
+makefile_location="Makefile"
+get_makefile_variable()
+{
+    echo "print-var:; @echo \$($1)" | make -f - -f $makefile_location print-var
+}
+
+# Extract c++ compilation command: define a new make command which prints
+# the variables we want then call it.
+cxx_compile_command="$(get_makefile_variable CXX) $(get_makefile_variable CXXFLAGS)"
+
+# Return to our testing directory.
+cd $CURRDIR
+
+# If paranoid is on, we check that the warning is outputted.
+# Otherwise we insert a dummy okay.
+
 
 ## Now check for the warning.
 REPLACEWARNING=$(grep "Oomph-lib WARNING" do_not_want_block_warning)
