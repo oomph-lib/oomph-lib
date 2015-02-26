@@ -39,10 +39,11 @@ F2Col_index=$(grep "Column_index = " $FILE2 | awk '{print $NF}')
 F2Wanted=$(grep "Wanted = " $FILE2 | awk '{print $NF}')
 F2Replacement_block_pt=$(grep "Replacement_block_pt = " $FILE2 | awk '{print $NF}')
 
+
 if [ "$F1Replacement_block_pt" = "0" ]
 then
     echo " [FAILED] BlockSelector 1's Replacement_block_pt is null"
-elif [ "$F2Replacement_block_pt" = "0"]
+elif [ "$F2Replacement_block_pt" = "0" ]
 then
     echo " [FAILED] BlockSelector 2's Replacement_block_pt is null"
 elif [ "$F1Row_index" -ne "$F2Row_index" ]

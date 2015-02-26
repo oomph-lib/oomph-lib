@@ -178,22 +178,32 @@ get_makefile_variable()
 # the variables we want then call it.
 cxx_compile_command="$(get_makefile_variable CXX) $(get_makefile_variable CXXFLAGS)"
 
+# Whilst we're here, we source the constains function.
+. $OOMPH_ROOT_DIR/bin/string_contains.sh
+
 # Return to our testing directory.
 cd $CURRDIR
 
 # If paranoid is on, we check that the warning is outputted.
 # Otherwise we insert a dummy okay.
+contains "$cxx_compile_command" "DPARANOID"
+containsRet=$? # Get the return value of the most recent function.
 
-
-## Now check for the warning.
-REPLACEWARNING=$(grep "Oomph-lib WARNING" do_not_want_block_warning)
-WARNSTR="WARNING"
-
-if test "${REPLACEWARNING#*$WARNSTR}" != "$REPLACEWARNING"
+# In bash, 0 is true.
+if [ "$containsRet" -eq "0" ]
 then
-  echo " [OK] found the warning." >> validation.log
+  ## Now check for the warning.
+  REPLACEWARNING=$(grep "Oomph-lib WARNING" do_not_want_block_warning)
+  WARNSTR="WARNING"
+
+  if test "${REPLACEWARNING#*$WARNSTR}" != "$REPLACEWARNING"
+  then
+    echo " [OK] found the warning." >> validation.log
+  else
+    echo " [FAILED] cannot find warning." >> validation.log
+  fi
 else
-  echo " [FAILED] cannot find warning." >> validation.log
+  echo " dummy [OK] -- Compiled without paranoia." >> validation.log
 fi
 
 ###########################################################################
