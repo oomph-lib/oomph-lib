@@ -19,6 +19,9 @@
 # 
 # Command line arguments: file 1
 #                         file 2
+# 
+# The file formats should be the exact format of the BlockSelector's <<
+# operator.
 #
 #---------------------------------------------------------------------------
 
