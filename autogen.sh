@@ -206,12 +206,12 @@ if [[ $generate_config_files == "true" ]]; then
 
         # Enforce serial tests and require automake version 1.12 or above (just
         # in case someone does something really weird..)
-        echo 'AM_INIT_AUTOMAKE([1.12 serial-tests])' >> $automake_init_command_file
+        echo 'AM_INIT_AUTOMAKE([1.12 serial-tests foreign])' >> $automake_init_command_file
     else
         echo "Not setting serial tests option in configure.ac because your version"
         echo "of automake is old enough to use it by default (older than 1.12.0)."
 
-        echo 'AM_INIT_AUTOMAKE' >> $automake_init_command_file
+        echo 'AM_INIT_AUTOMAKE([foreign]))' >> $automake_init_command_file
     fi
 
 
@@ -279,16 +279,9 @@ fi
 # If this is a new build or a forced rebuild then we need to explicitly run
 # all the autotools magic now.
 if $generate_config_files == "true"; then
-
-    # The --force option used below overwrites our INSTALL file, so back it
-    # up and replace it.
-    cp INSTALL backup_INSTALL
-
     # Run all the autotools and just do the right things to generate
     # configure, Makefile.in and all the dependency relationships.
     autoreconf --install --force
-
-    mv backup_INSTALL INSTALL
 fi
 
 
