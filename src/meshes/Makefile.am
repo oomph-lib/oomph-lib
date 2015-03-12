@@ -128,4 +128,6 @@ include $(srcdir)/mesh_clean.aux
 
 # Cleanup: Kill automatically generated combined header files
 distclean-local: 
-	rm -f mesh_names.aux mesh_instructions.aux mesh_clean.aux $(libname).h
+	rm -f $(libname).h
+# DON'T DELETE THESE (CHANGE FOLLOWING DAVID'S REWRITE)
+#	rm -f mesh_names.aux mesh_instructions.aux mesh_clean.aux $(libname).h
