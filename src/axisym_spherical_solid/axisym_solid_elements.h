@@ -378,7 +378,7 @@ class AxisymmetricPVDEquations : public virtual SolidFiniteElement
     }
    
    //Return the volume, need to multiply by 2pi
-   return(8.0*atan(1.0)*sum);
+   return(2.0*MathematicalConstants::Pi*sum);
   }
 
  /// Assign the contribution to the residual using only finite differences
@@ -1185,7 +1185,7 @@ public virtual SolidFiniteElement
     }
    
    //Return the volume
-   return(8.0*atan(1.0)*sum);
+   return(2.0*MathematicalConstants::Pi*sum);
   }
  
  /// Return the interpolated_solid_pressure 

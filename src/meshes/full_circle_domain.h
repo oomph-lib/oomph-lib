@@ -210,7 +210,7 @@ private:
    }
 
    //Define pi
-   const double pi = 4.0*atan(1.0);
+   const double pi = MathematicalConstants::Pi;
 
    // Which macro element?
    // --------------------

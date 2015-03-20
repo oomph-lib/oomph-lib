@@ -90,14 +90,14 @@ namespace BrokenCopy
 }
 
 
-//======================================================================
-/// Namespace for mathematical constants
-//======================================================================
-namespace MathematicalConstants
-{
- /// Guess what...
- double Pi=4.0*std::atan(1.0);
-}
+// //======================================================================
+// /// Namespace for mathematical constants
+// //======================================================================
+// namespace MathematicalConstants
+// {
+//  /// Guess what...
+//  double Pi=4.0*std::atan(1.0);
+// }
 
 
 

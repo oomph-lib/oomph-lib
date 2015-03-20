@@ -63,7 +63,7 @@ void gll_nodes(const unsigned &Nnode, Vector<double> &x)
       else mid=p/2+1;
       for(unsigned j=1;j<mid;j++) 
 	{
-	  z=-std::cos(j*pi/double(p));
+	  z=-std::cos(j*MathematicalConstants::Pi/double(p));
 	  do{
            del= dlegendre(p,z)/ddlegendre(p,z);
            zold=z;
@@ -115,7 +115,7 @@ void gl_nodes(const unsigned &Nnode, Vector<double> &x)
    else mid=p/2+1;
    for(unsigned j=0;j<mid;j++) 
     {
-     z=-std::cos((2.0*j+1.0)*pi/(2*double(p)+2.0));
+     z=-std::cos((2.0*j+1.0)*MathematicalConstants::Pi/(2*double(p)+2.0));
      do{
       del = legendre(p+1,z)/dlegendre(p+1,z);
       zold=z;

@@ -92,7 +92,8 @@ namespace BrokenCopy
 //=======================================
 namespace MathematicalConstants
 {
- extern double Pi;
+ /// 50 digits from maple
+ const double Pi=3.1415926535897932384626433832795028841971693993751;
 }
 
 

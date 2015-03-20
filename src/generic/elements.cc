@@ -5527,10 +5527,8 @@ void FaceElement::continuous_tangent_and_outer_unit_normal
 #ifdef PARANOID
      // Check that the angle between the direction vector and the normal
      // is not less than 10 degrees
-     double pi=4.0*std::atan(1.0);
-
      if(VectorHelpers::angle(direction_vector,unit_normal) < 
-        (10.0 * pi/180.0))
+        (10.0 * MathematicalConstants::Pi/180.0))
       {
        std::ostringstream err_stream;
        err_stream << "The angle between the unit normal and the \n"

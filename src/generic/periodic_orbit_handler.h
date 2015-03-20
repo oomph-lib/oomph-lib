@@ -708,7 +708,7 @@ private:
                                         &initial_guess,
                                         const double &omega) : 
   Problem_pt(problem_pt), N_element_in_period(n_element_in_period), 
-  Omega(omega/(8.0*atan(1.0)))
+  Omega(omega/(2.0*MathematicalConstants::Pi))
   {
    //Store the current number of degrees of freedom
    Ndof = problem_pt->ndof();

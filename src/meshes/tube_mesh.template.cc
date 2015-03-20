@@ -132,7 +132,7 @@ TubeMesh<ELEMENT>::TubeMesh(GeomObject* volume_pt,
  bool stopit=false;
 
  // Define pine
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
 
  // Loop over elements
  for (unsigned ielem=0;ielem<nelem;ielem++)

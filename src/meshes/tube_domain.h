@@ -247,8 +247,7 @@ Vector<double>& f)
    //Local storage for positions on the boundaries
    Vector<double> pos_1(3), pos_2(3);
 
-   //Define pi
-   const double pi = 4.0*atan(1.0);
+   const double pi = MathematicalConstants::Pi;
 
    // Which macro element?
    // --------------------
