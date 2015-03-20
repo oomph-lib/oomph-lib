@@ -45,8 +45,8 @@ check_mpi_run_command ()
     rm -f bin/minimal_mpi_test
 
     # Complile and run
-    eval "$full_command"
-    success=eval "$_mpi_run_command bin/minimal_mpi_test"
+    `echo $full_command`
+    success=`echo $_mpi_run_command bin/minimal_mpi_test`
 
     if $success; then
         printf " [Passed]\n"
