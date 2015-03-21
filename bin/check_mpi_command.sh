@@ -44,11 +44,21 @@ check_mpi_run_command ()
     printf "Testing mpi compilation command: $full_command\n"
     rm -f bin/minimal_mpi_test
 
-    # Complile and run
-    `echo $full_command`
-    success=`echo $_mpi_run_command bin/minimal_mpi_test`
+    # Compile
+    set +e
+    `echo $full_command` 
+    set -e
 
-    if $success; then
+    # run it
+    set +e
+    `echo $_mpi_run_command bin/minimal_mpi_test ` > bin/minimal_mpi_test.out
+    result=`grep 'This worked'  bin/minimal_mpi_test.out | wc | awk '{print $1}'`
+    set -e
+
+    echo "RESULT: " $result
+
+    if [ "$result" -eq "2" ]
+    then
         printf " [Passed]\n"
         return 0 
     else
@@ -193,6 +203,7 @@ check_mpi_np_run_command()
     fi
 
     # Check that we can run with variable numbers of cores
+    set +e
 
     MPI_RUN_ON_NP_COMMAND=$(echo $_mpi_np_run_command | sed -e "s/OOMPHNP/1/g")
     $MPI_RUN_ON_NP_COMMAND bin/minimal_mpi_variablenp_test
@@ -205,6 +216,8 @@ check_mpi_np_run_command()
 
     MPI_RUN_ON_NP_COMMAND=$(echo $_mpi_np_run_command | sed -e "s/OOMPHNP/4/g")
     $MPI_RUN_ON_NP_COMMAND bin/minimal_mpi_variablenp_test
+
+    set -e
 
     rm -f bin/minimal_mpi_variablenp_test
     variablenp_outputs="mpi_seltest_np1rank0 mpi_seltest_np2rank0 mpi_seltest_np2rank1 mpi_seltest_np3rank0 mpi_seltest_np3rank1 mpi_seltest_np3rank2 mpi_seltest_np4rank0 mpi_seltest_np4rank1 mpi_seltest_np4rank2 mpi_seltest_np4rank3"

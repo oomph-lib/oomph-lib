@@ -340,7 +340,10 @@ if [[ "$new_configure_options" != "$old_configure_options" || "$generate_config_
     # (automatically passes if no variable MPI_RUN_COMMAND in makefile).
     # This needs to go after configure so that we can use the generated
     # Makefile to (robustly) get the run and compile commands.
+    set +e
     ./bin/check_mpi_command.sh Makefile
+    set -e
+
 fi
 
 

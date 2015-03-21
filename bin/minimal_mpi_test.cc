@@ -58,6 +58,6 @@ int main(int argc, char **argv)
   }
 
  std::cout << "This worked" << std::endl;
-
+ 
  return 0;
 } //end of main
