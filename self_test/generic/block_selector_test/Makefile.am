@@ -24,3 +24,5 @@ block_selector_test_LDADD = \
 # the include directory which we specify with -I
 AM_CPPFLAGS +=   -I@includedir@  
 
+
+EXTRA_DIST+=compare_block_selector_nonnull_replacement_block_pt.sh

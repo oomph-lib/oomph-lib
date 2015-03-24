@@ -12,3 +12,4 @@ basic_ode_SOURCES = basic_ode.cc validate.sh
 basic_ode_LDADD = -L@libdir@ -lode -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 
+EXTRA_DIST+=zeros
