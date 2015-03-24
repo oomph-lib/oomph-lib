@@ -106,7 +106,7 @@ class TriangleFaceTestProblem : public Problem
 public:
 
  /// Constructor
- TriangleFaceTestProblem(const unsigned& h_power,const bool &permute);
+ TriangleFaceTestProblem(const unsigned& h_power,const bool &permute=false);
  
  /// Destructor (empty)
  ~TriangleFaceTestProblem(){};
@@ -158,7 +158,7 @@ string FileStem<TPoissonElement<2,4> >::Stem = "cubic";
 //========================================================================
 template<class ELEMENT>
 TriangleFaceTestProblem<ELEMENT>::
-TriangleFaceTestProblem(const unsigned& h_power,const bool &permute=false) : 
+TriangleFaceTestProblem(const unsigned& h_power,const bool &permute) : 
  H_power(h_power)
 { 
  //Create mesh and assign element lengthscale h

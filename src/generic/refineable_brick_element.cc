@@ -42,7 +42,7 @@ namespace oomph
 ///  in right order so that tecplot can draw a cube without crossed lines
 //========================================================================
 void RefineableQElement<3>::output_corners(std::ostream& outfile, 
-                                            const std::string& colour="BLACK")
+                                            const std::string& colour)
  const
 {
  

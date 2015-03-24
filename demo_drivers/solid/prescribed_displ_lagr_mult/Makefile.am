@@ -12,7 +12,8 @@ prescribed_displ_lagr_mult_SOURCES = prescribed_displ_lagr_mult.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
-prescribed_displ_lagr_mult_LDADD = -L@libdir@ -lsolid -lconstitutive -lgeneric \
+prescribed_displ_lagr_mult_LDADD = -L@libdir@ -lsolid -lconstitutive \
+                          -lgeneric \
                     $(EXTERNAL_LIBS) $(FLIBS)
 
 #-------------------------------------------------------------------
@@ -22,7 +23,8 @@ prescribed_displ_lagr_mult2_SOURCES = prescribed_displ_lagr_mult2.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
-prescribed_displ_lagr_mult2_LDADD = -L@libdir@ -lsolid -lconstitutive -lgeneric \
+prescribed_displ_lagr_mult2_LDADD = -L@libdir@ -lsolid -lconstitutive \
+                       -lgeneric \
                     $(EXTERNAL_LIBS) $(FLIBS)
 
 
@@ -33,7 +35,7 @@ prescribed_displ_lagr_mult_precond_SOURCES = prescribed_displ_lagr_mult_precond.
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
-prescribed_displ_lagr_mult_precond_LDADD = -L@libdir@ -lmulti_physics -lsolid -lconstitutive -lgeneric \
+prescribed_displ_lagr_mult_precond_LDADD = -L@libdir@ -lmulti_physics -lsolid -lconstitutive -lnavier_stokes -lgeneric \
                     $(EXTERNAL_LIBS) $(FLIBS)
 
 #-------------------------------------------------------------------

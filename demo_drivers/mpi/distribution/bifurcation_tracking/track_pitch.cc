@@ -249,7 +249,11 @@ public:
 
  //No actions to be taken before each solve step
  void actions_before_newton_convergence_check() 
-  {change_length(); set_boundary_conditions(); this->synchronise_all_dofs();}
+  {change_length(); set_boundary_conditions();
+#ifdef OOMPH_HAS_MPI
+   this->synchronise_all_dofs();
+#endif
+  }
 
  //Function to change the length of the domain
  void change_length() 

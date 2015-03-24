@@ -18,6 +18,7 @@ fourier_decomposed_acoustic_fsi_SOURCES = fourier_decomposed_acoustic_fsi.cc
 fourier_decomposed_acoustic_fsi_LDADD =  -L@libdir@ \
 	-lfourier_decomposed_helmholtz \
         -ltime_harmonic_fourier_decomposed_linear_elasticity  \
+        -lnavier_stokes \
         -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #---------------------------------------------------------------------
@@ -30,6 +31,7 @@ unstructured_fourier_decomposed_acoustic_fsi_SOURCES = unstructured_fourier_deco
 unstructured_fourier_decomposed_acoustic_fsi_LDADD =  -L@libdir@ \
 	-lfourier_decomposed_helmholtz \
         -ltime_harmonic_fourier_decomposed_linear_elasticity  \
+        -lnavier_stokes \
         -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 #---------------------------------------------------------------------
 
@@ -41,6 +43,7 @@ adaptive_unstructured_fourier_decomposed_acoustic_fsi_SOURCES = unstructured_fou
 adaptive_unstructured_fourier_decomposed_acoustic_fsi_LDADD =  -L@libdir@ \
 	-lfourier_decomposed_helmholtz \
         -ltime_harmonic_fourier_decomposed_linear_elasticity  \
+        -lnavier_stokes \
         -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 adaptive_unstructured_fourier_decomposed_acoustic_fsi_CXXFLAGS = -DADAPTIVE

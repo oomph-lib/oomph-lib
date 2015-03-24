@@ -59,7 +59,7 @@ class Mesh1D : public virtual Mesh
 public:
  //Constructor, which is where all the work takes place
  Mesh1D(const unsigned &N1, const unsigned &N2, 
-        TimeStepper* time_stepper_pt);
+        TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper);
  //Access functions for private data
  const unsigned &n1() const {return N1;}
  const unsigned &n2() const {return N2;}
@@ -79,8 +79,7 @@ public:
 template <class ELEMENT>
 Mesh1D<ELEMENT>::Mesh1D(const unsigned &n1,
                         const unsigned &n2, 
-                        TimeStepper* time_stepper_pt
-                        =&Mesh::Default_TimeStepper)
+                        TimeStepper* time_stepper_pt)
 {
 
  //Set the internal values

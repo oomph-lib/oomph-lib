@@ -196,7 +196,7 @@ public:
 
  /// Constructor
  TFaceTestProblem(const unsigned& h_power, const unsigned &rotate,
-                  const bool &single_element);
+                  const bool &single_element=true);
  
  /// Destructor (empty)
  ~TFaceTestProblem(){};
@@ -223,7 +223,7 @@ private:
 template<class ELEMENT>
 TFaceTestProblem<ELEMENT>::
 TFaceTestProblem(const unsigned& h_power, const unsigned &rotate,
-                 const bool &single_element=true) : 
+                 const bool &single_element) : 
  H_power(h_power)
 { 
  //Create a unique stem for the files, depending on the element type

@@ -15,6 +15,7 @@ unstructured_acoustic_fsi_SOURCES = unstructured_acoustic_fsi.cc
 # $(FLIBS) is included in case the solver involves fortran sources.
 unstructured_acoustic_fsi_LDADD =  -L@libdir@ -lhelmholtz \
                       -ltime_harmonic_linear_elasticity  \
+                      -lnavier_stokes \
                       -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 
@@ -27,6 +28,7 @@ acoustic_fsi_SOURCES = acoustic_fsi.cc
 # $(FLIBS) is included in case the solver involves fortran sources.
 acoustic_fsi_LDADD =  -L@libdir@ -lhelmholtz \
                       -ltime_harmonic_linear_elasticity  \
+                      -lnavier_stokes \
                       -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #---------------------------------------------------------------------

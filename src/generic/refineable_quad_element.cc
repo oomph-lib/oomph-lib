@@ -1395,7 +1395,7 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
 ///  Print corner nodes, use colour (default "BLACK")
 //====================================================================
 void RefineableQElement<2>::output_corners(std::ostream& outfile, 
-                                            const std::string& colour="BLACK") const
+                                            const std::string& colour) const
 {
  Vector<double> s(2);
  Vector<double> corner(2);

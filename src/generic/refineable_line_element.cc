@@ -616,7 +616,7 @@ namespace oomph
  ///  Print corner nodes, use colour (default "BLACK")
  //==========================================================================
  void RefineableQElement<1>::output_corners(
-  std::ostream& outfile,const std::string& colour="BLACK") const
+  std::ostream& outfile,const std::string& colour) const
  {
   // Allocate storage for local coordinate s
   Vector<double> s(1);

@@ -354,6 +354,10 @@ template class RefineableQAdvectionDiffusionReactionElement<1,3,3>;
 template class RefineableQAdvectionDiffusionReactionElement<1,3,4>;
 
 //Two reagents
+template class RefineableQAdvectionDiffusionReactionElement<2,1,2>;
+template class RefineableQAdvectionDiffusionReactionElement<2,1,3>;
+template class RefineableQAdvectionDiffusionReactionElement<2,1,4>;
+
 template class RefineableQAdvectionDiffusionReactionElement<2,2,2>;
 template class RefineableQAdvectionDiffusionReactionElement<2,2,3>;
 template class RefineableQAdvectionDiffusionReactionElement<2,2,4>;
