@@ -211,7 +211,7 @@ if [[ $generate_config_files == "true" ]]; then
         echo "Not setting serial tests option in configure.ac because your version"
         echo "of automake is old enough to use it by default (older than 1.12.0)."
 
-        echo 'AM_INIT_AUTOMAKE([foreign]))' >> $automake_init_command_file
+        echo 'AM_INIT_AUTOMAKE([foreign])' >> $automake_init_command_file
     fi
 
 
