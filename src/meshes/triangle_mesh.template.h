@@ -2405,22 +2405,75 @@ private:
        OOMPH_EXCEPTION_LOCATION);
     }
 #endif
-
-   // If the closed curve is already a polygon it is not necessary
-   // to create a new one, just return it!!!
-   TriangleMeshPolygon *out_polygon_pt =
-     dynamic_cast<TriangleMeshPolygon*>(closed_curve_pt);
-   if (out_polygon_pt!=0)
+   
+   // Provide storage for accompanying polylines
+   Vector<TriangleMeshCurveSection*> my_boundary_polyline_pt(nb);
+   // Store refinement tolerance
+   Vector<double> refinement_tolerance(nb);
+   // Store unrefinement tolerance
+   Vector<double> unrefinement_tolerance(nb);
+   // Store max. length
+   Vector<double> max_length(nb);
+   
+   // Loop over boundaries that make up this boundary
+   for (unsigned b=0;b<nb;b++)
     {
-     for (unsigned b=0;b<nb;b++)
+     // Get pointer to the curve segment boundary that makes up
+     // this part of the boundary
+     TriangleMeshCurviLine *curviline_pt =
+      dynamic_cast<TriangleMeshCurviLine*>(
+       closed_curve_pt->curve_section_pt(b));
+     
+     TriangleMeshPolyLine *polyline_pt =
+      dynamic_cast<TriangleMeshPolyLine*>(
+       closed_curve_pt->curve_section_pt(b));
+     
+     if (curviline_pt != 0)
       {
        // Boundary id
-       unsigned bnd_id =
-         out_polygon_pt->curve_section_pt(b)->boundary_id();
-
+       unsigned bnd_id = curviline_pt->boundary_id();
+       
+       // Build associated polyline
+       my_boundary_polyline_pt[b] =
+        curviline_to_polyline(curviline_pt, bnd_id);
+       
+       // Copy the unrefinement tolerance
+       unrefinement_tolerance[b] = curviline_pt->unrefinement_tolerance();
+       // Copy the refinement tolerance
+       refinement_tolerance[b] = curviline_pt->refinement_tolerance();
+       // Copy the maximum length
+       max_length[b] = curviline_pt->maximum_length();
+       
        // Updates bnd_id<--->curve section map
-       Boundary_curve_section_pt[bnd_id] =
-         out_polygon_pt->curve_section_pt(b);
+       Boundary_curve_section_pt[bnd_id] = my_boundary_polyline_pt[b];
+         
+       // Keep track of curve sections that need to be deleted!!!
+       Free_curve_section_pt.insert(my_boundary_polyline_pt[b]);
+
+       // Keep track...
+       if (bnd_id>max_bnd_id_local)
+        {
+         max_bnd_id_local=bnd_id;
+        }
+
+      }
+     else if (polyline_pt != 0)
+      {
+       // Boundary id
+       unsigned bnd_id=polyline_pt->boundary_id();
+       
+       // Pass the pointer of the already existing polyline
+       my_boundary_polyline_pt[b] = polyline_pt;
+       
+       // Copy the unrefinement tolerance
+       unrefinement_tolerance[b] = polyline_pt->unrefinement_tolerance();
+       // Copy the refinement tolerance
+       refinement_tolerance[b] = polyline_pt->refinement_tolerance();
+       // Copy the maximum length
+       max_length[b] = polyline_pt->maximum_length();
+       
+       // Updates bnd_id<--->curve section map
+       Boundary_curve_section_pt[bnd_id] = my_boundary_polyline_pt[b];
 
        // Keep track...
        if (bnd_id>max_bnd_id_local)
@@ -2428,113 +2481,54 @@ private:
          max_bnd_id_local=bnd_id;
         }
       }
-
-     return out_polygon_pt;
-
-    }
-   else // It wasn't a polygon, we need to create a new one
-    {
-     // Provide storage for accompanying polylines
-     Vector<TriangleMeshCurveSection*> my_boundary_polyline_pt(nb);
-
-     // Loop over boundaries that make up this boundary
-     for (unsigned b=0;b<nb;b++)
+     else
       {
-       // Get pointer to the curve segment boundary that makes up
-       // this part of the boundary
-       TriangleMeshCurviLine *curviline_pt =
-         dynamic_cast<TriangleMeshCurviLine*>(
-           closed_curve_pt->curve_section_pt(b));
+       std::ostringstream error_stream;
+       error_stream
+        << "The 'curve_segment' is not a curviline neither a\n "
+        << "polyline: What is it?\n"
+        << std::endl;
+       throw OomphLibError(
+        error_stream.str(),
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+      }
 
-       TriangleMeshPolyLine *polyline_pt =
-         dynamic_cast<TriangleMeshPolyLine*>(
-           closed_curve_pt->curve_section_pt(b));
-
-       if (curviline_pt != 0)
-        {
-         // Boundary id
-         unsigned bnd_id = curviline_pt->boundary_id();
-
-         // Build associated polyline
-         my_boundary_polyline_pt[b] =
-          curviline_to_polyline(curviline_pt, bnd_id);
-         
-	 // Copy the unrefinement and refinement information
-	 my_boundary_polyline_pt[b]->set_unrefinement_tolerance(
-          curviline_pt->unrefinement_tolerance());
-	 my_boundary_polyline_pt[b]->set_refinement_tolerance(
-          curviline_pt->refinement_tolerance());
-
-	 // Copy the maximum length constraint
-	 my_boundary_polyline_pt[b]->set_maximum_length(
-          curviline_pt->maximum_length());
-         
-         // Updates bnd_id<--->curve section map
-         Boundary_curve_section_pt[bnd_id] = my_boundary_polyline_pt[b];
-         
-         // Keep track of curve sections that need to be deleted!!!
-         Free_curve_section_pt.insert(my_boundary_polyline_pt[b]);
-
-         // Keep track...
-         if (bnd_id>max_bnd_id_local)
-          {
-           max_bnd_id_local=bnd_id;
-          }
-
-        }
-       else if (polyline_pt != 0)
-        {
-         // Boundary id
-         unsigned bnd_id=polyline_pt->boundary_id();
-
-         // Pass the pointer of the already existing polyline
-         my_boundary_polyline_pt[b] = polyline_pt;
-
-         // Updates bnd_id<--->curve section map
-         Boundary_curve_section_pt[bnd_id] = my_boundary_polyline_pt[b];
-
-         // Keep track...
-         if (bnd_id>max_bnd_id_local)
-          {
-           max_bnd_id_local=bnd_id;
-          }
-
-        }
-       else
-        {
-         std::ostringstream error_stream;
-         error_stream
-         << "The 'curve_segment' is not a curviline neither a\n "
-         << "polyline: What is it?\n"
-         << std::endl;
-         throw OomphLibError(
-           error_stream.str(),
-           OOMPH_CURRENT_FUNCTION,
-           OOMPH_EXCEPTION_LOCATION);
-        }
-
-      } //end of loop over boundaries
-
-     // Create a new polygon by using the new created polylines
-     TriangleMeshPolygon *output_polygon_pt =
-       new TriangleMeshPolygon(my_boundary_polyline_pt,
-         closed_curve_pt->internal_point());
-
-     // Keep track of new created polygons that need to be deleted!!!
-     Free_polygon_pt.insert(output_polygon_pt);
-
-     // Pass on refinement information
-     output_polygon_pt->set_polyline_refinement_tolerance(
-       closed_curve_pt->polyline_refinement_tolerance());
-     output_polygon_pt->set_polyline_unrefinement_tolerance(
-       closed_curve_pt->polyline_unrefinement_tolerance());
-
-     return output_polygon_pt;
-
-    }
+    } //end of loop over boundaries
+   
+   // Create a new polygon by using the new created polylines
+   TriangleMeshPolygon *output_polygon_pt =
+    new TriangleMeshPolygon(my_boundary_polyline_pt,
+                            closed_curve_pt->internal_point());
+   
+   // Keep track of new created polygons that need to be deleted!!!
+   Free_polygon_pt.insert(output_polygon_pt);
+   
+   // Pass on refinement information
+   output_polygon_pt->set_polyline_refinement_tolerance(
+    closed_curve_pt->polyline_refinement_tolerance());
+   output_polygon_pt->set_polyline_unrefinement_tolerance(
+    closed_curve_pt->polyline_unrefinement_tolerance());
+   
+   // Loop over boundaries that make up this boundary and copy
+   // refinement, unrefinement and max length information
+   for (unsigned b=0;b<nb;b++)
+     {
+       // Set the unrefinement and refinement information
+       my_boundary_polyline_pt[b]->
+         set_unrefinement_tolerance(unrefinement_tolerance[b]);
+       
+       my_boundary_polyline_pt[b]->
+         set_refinement_tolerance(refinement_tolerance[b]);
+       
+       // Copy the maximum length constraint
+       my_boundary_polyline_pt[b]->set_maximum_length(max_length[b]);
+     }
+   
+   return output_polygon_pt;
 
   }
-
+  
   // \short Helper function that creates and returns an open curve with
   /// the polyline representation of its constituent curve sections. The
   /// new created open curve is deleted when the TriangleMesh destructor
@@ -2547,7 +2541,13 @@ private:
 
    // Provide storage for accompanying polylines
    Vector<TriangleMeshCurveSection*> my_boundary_polyline_pt(nb);
-
+   // Store refinement tolerance
+   Vector<double> refinement_tolerance(nb);
+   // Store unrefinement tolerance
+   Vector<double> unrefinement_tolerance(nb);
+   // Store max. length
+   Vector<double> max_length(nb);
+   
    //Loop over the number of curve sections on the open curve
    for (unsigned i = 0; i < nb; i++)
     {
@@ -2568,16 +2568,13 @@ private:
        // Build associated polyline
        my_boundary_polyline_pt[i] =
          curviline_to_polyline(curviline_pt, bnd_id);
-
-       // Copy the unrefinement and refinement information
-       my_boundary_polyline_pt[i]->set_unrefinement_tolerance(
-        curviline_pt->unrefinement_tolerance());
-       my_boundary_polyline_pt[i]->set_refinement_tolerance(
-        curviline_pt->refinement_tolerance());
        
-       // Copy the maximum length constraint
-       my_boundary_polyline_pt[i]->set_maximum_length(
-        curviline_pt->maximum_length());
+       // Copy the unrefinement tolerance
+       unrefinement_tolerance[i] = curviline_pt->unrefinement_tolerance();
+       // Copy the refinement tolerance
+       refinement_tolerance[i] = curviline_pt->refinement_tolerance();
+       // Copy the maximum length
+       max_length[i] = curviline_pt->maximum_length();
        
        // Pass the connection information to the polyline representation
        compute_connection_information(
@@ -2603,11 +2600,17 @@ private:
 
        // Storage pointer
        my_boundary_polyline_pt[i] = polyline_pt;
-
+       
+       // Copy the unrefinement tolerance
+       unrefinement_tolerance[i] = polyline_pt->unrefinement_tolerance();
+       // Copy the refinement tolerance
+       refinement_tolerance[i] = polyline_pt->refinement_tolerance();
+       // Copy the maximum length
+       max_length[i] = polyline_pt->maximum_length();
+       
        // Pass the connection information to the polyline representation
-       compute_connection_information(
-         polyline_pt, my_boundary_polyline_pt[i]);
-
+       compute_connection_information(polyline_pt, my_boundary_polyline_pt[i]);
+       
        // Updates bnd_id<--->curve section map
        Boundary_curve_section_pt[bnd_id] = my_boundary_polyline_pt[i];
 
@@ -2627,7 +2630,7 @@ private:
        << std::endl;
        throw OomphLibError(error_stream.str(),
                            OOMPH_CURRENT_FUNCTION,
-         OOMPH_EXCEPTION_LOCATION);
+                           OOMPH_EXCEPTION_LOCATION);
       }
 
     } // end of loop over boundaries
@@ -2644,7 +2647,22 @@ private:
      open_curve_pt->polyline_refinement_tolerance());
    output_open_polyline_pt->set_polyline_unrefinement_tolerance(
      open_curve_pt->polyline_unrefinement_tolerance());
-
+   
+   // Loop over boundaries that make up this boundary and copy
+   // refinement, unrefinement and max length information
+   for (unsigned b=0;b<nb;b++)
+     {
+       // Set the unrefinement and refinement information
+       my_boundary_polyline_pt[b]->
+         set_unrefinement_tolerance(unrefinement_tolerance[b]);
+       
+       my_boundary_polyline_pt[b]->
+         set_refinement_tolerance(refinement_tolerance[b]);
+       
+       // Copy the maximum length constraint
+       my_boundary_polyline_pt[b]->set_maximum_length(max_length[b]);
+     }
+   
    return output_open_polyline_pt;
 
   }
