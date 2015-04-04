@@ -453,7 +453,13 @@ public:
  /// Get the contents of the specified bin
  Vector<std::pair<FiniteElement*,Vector<double> > >& bin_content(
   const unsigned& bin_number);
- 
+
+ /// Get the contents of all bins
+ Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > bin_content() const
+  {
+   return Bin_object_coord_pairs;
+  }
+
  ///Calculate the bin numbers of all the neighbours to "bin" given the level
  void get_neighbouring_bins_helper(const unsigned& bin_number, 
                                    const unsigned& level,

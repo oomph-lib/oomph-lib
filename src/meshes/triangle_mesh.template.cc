@@ -2372,6 +2372,11 @@ const Vector<double>& elem_error)
   Vector<double> target_area(elem_error.size());
   double min_angle=compute_area_target(elem_error,
     target_area);
+
+
+  // std::ofstream hierher;
+  // hierher.open("overall_target_areas.dat");
+  
   // Get maximum target area
   unsigned n=target_area.size();
   double max_area=0.0;
@@ -2380,7 +2385,18 @@ const Vector<double>& elem_error)
    {
     if (target_area[e]>max_area) max_area=target_area[e];
     if (target_area[e]<min_area) min_area=target_area[e];
+
+    // hierher << (finite_element_pt(e)->node_pt(0)->x(0)+
+    //             finite_element_pt(e)->node_pt(1)->x(0)+
+    //             finite_element_pt(e)->node_pt(2)->x(0))/3.0 << " "
+    //         << (finite_element_pt(e)->node_pt(0)->x(1)+
+    //             finite_element_pt(e)->node_pt(1)->x(1)+
+    //             finite_element_pt(e)->node_pt(2)->x(1))/3.0 << " "
+    //         << target_area[e] << std::endl;
    }
+
+//  hierher.close();
+
 
   oomph_info << "Maximum target area: " << max_area << std::endl;
   oomph_info << "Minimum target area: " << min_area << std::endl;
@@ -2680,9 +2696,15 @@ const Vector<double>& elem_error)
     unsigned iter=0;
     while (!done)
      {
+
+      // Accept by default but overwrite if things go wrong below
+      done=true;
+
       double t_start=TimingHelpers::timer();
       if (Do_area_transfer_by_projection)
        {
+
+        oomph_info << "Doing area transfer by projection\n";
 
         // "Project" target areas from current mesh onto uniform
         //------------------------------------------------------
@@ -2733,8 +2755,8 @@ const Vector<double>& elem_error)
             // Use max. rather than min area of any element overlapping the
             // the current element, otherwise we get a rapid outward diffusion
             // of small elements
-            target_area_map[ext_el_pt]=std::max(target_area_map[ext_el_pt],
-              target_area[e]);
+            target_area_map[ext_el_pt]=std::max(target_area_map[ext_el_pt], 
+                                                target_area[e]);
            }
 
           // Switch off projection capability          
@@ -2747,9 +2769,9 @@ const Vector<double>& elem_error)
          }
        }
       // Do by direct diffused bin lookup
-
       else
        {
+        oomph_info << "Doing area transfer by bins\n";
 
         // Adjust size of bins
         unsigned backup_bin_x=Multi_domain_functions::Nx_bin;
@@ -2769,7 +2791,9 @@ const Vector<double>& elem_error)
         Multi_domain_functions::Ny_bin=backup_bin_y;
 
         // Fill bin by diffusion
+        oomph_info << "going into diffusion bit...\n";
         tmp_mesh_geom_obj_pt->fill_bin_by_diffusion();
+        oomph_info << "back from diffusion bit...\n";
 
         // Get ready for next assignment of target areas
         target_area_map.clear();
@@ -2830,8 +2854,8 @@ const Vector<double>& elem_error)
                   // the current element, otherwise we get a rapid outward 
                   // diffusion of small elements
                   target_area_map[ext_el_pt]=
-                  std::max(target_area_map[ext_el_pt],
-                    target_area[e]);
+                   std::max(target_area_map[ext_el_pt],
+                            target_area[e]);
                  }
                }
               else
@@ -2847,6 +2871,32 @@ const Vector<double>& elem_error)
            }
          }
 
+
+
+        // // hierher
+        // {
+        //  hierher.open("binned_target_areas.dat");
+        //  Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > bin_content=
+        //   tmp_mesh_geom_obj_pt->bin_content();
+        //  unsigned nbin=bin_content.size();
+        //  for (unsigned b=0;b<nbin;b++)
+        //   {
+        //    unsigned nentry=bin_content[b].size();
+        //    for (unsigned entry=0;entry<nentry;entry++)
+        //     {
+        //      FiniteElement* el_pt=bin_content[b][entry].first;
+        //      GeneralisedElement* gen_el_pt=bin_content[b][entry].first;
+        //      Vector<double> s=bin_content[b][entry].second;
+        //      Vector<double> x(2);
+        //      el_pt->interpolated_x(s,x);
+        //      hierher << x[0] << " " << x[1] << " " << target_area_map[gen_el_pt] << std::endl;
+        //     }
+        //   }
+        //  hierher.close();
+        // }
+        
+
+
         //Delete the temporary geometric object
         delete tmp_mesh_geom_obj_pt;
 
@@ -2856,9 +2906,12 @@ const Vector<double>& elem_error)
       << iter << ") " << TimingHelpers::timer()-t_start
       << std::endl;
 
+
+      // hierher.open(("target_areas_intermediate_mesh"+
+      //               StringConversion::to_string(iter)+".dat").c_str());
+
       // Now copy into target area for temporary mesh but limit to
       // the equivalent of one sub-division per iteration
-      done=true;
       unsigned nel_new=tmp_new_mesh_pt->nelement();
       Vector<double> new_target_area(nel_new);
       for (unsigned e=0;e<nel_new;e++)
@@ -2885,7 +2938,27 @@ const Vector<double>& elem_error)
             done=false;
            }
          }
+
+        // hierher 
+        //  << (tmp_new_mesh_pt->finite_element_pt(e)->node_pt(0)->x(0)+
+        //      tmp_new_mesh_pt->finite_element_pt(e)->node_pt(1)->x(0)+
+        //      tmp_new_mesh_pt->finite_element_pt(e)->node_pt(2)->x(0))/3.0 << " "
+        //  << (tmp_new_mesh_pt->finite_element_pt(e)->node_pt(0)->x(1)+
+        //      tmp_new_mesh_pt->finite_element_pt(e)->node_pt(1)->x(1)+
+        //      tmp_new_mesh_pt->finite_element_pt(e)->node_pt(2)->x(1))/3.0 << " "
+        //  << new_target_area[e] << std::endl;
+        
        }
+      
+      // if (done) 
+      //  {
+      //   oomph_info << "All area adjustments accomodated by area reduction by a factor of 3\n";
+      //  }
+      // else
+      //  {
+      //   oomph_info << "NOT all area adjustments accomodated by area reduction by a factor of 3\n";
+      //  }
+      // hierher.close();
 
       // Now create the new mesh from TriangulateIO structure
       //-----------------------------------------------------
