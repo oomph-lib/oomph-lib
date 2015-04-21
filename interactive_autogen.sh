@@ -83,13 +83,14 @@ echo " "
 
 
 echo "Self tests"
-echo "======"
+echo "=========="
 echo "Following the installation of oomph-lib you can run a comprehensive set of"
 echo "self tests with 'make check -k' or with './bin/parallel_self_test.py'. The"
 echo "latter version tends to be much faster because it performs multiple"
 echo "self-tests at the same time."
-
-if YesNoRead "Would you like to automatically run self tests (serially) if the build is successful?" "n"; then
+echo " " 
+echo "Would you like to automatically run self tests "
+if YesNoRead "(serially) if the build is successful?" "n"; then
     run_self_tests="true"
 else
     run_self_tests="false"
@@ -107,7 +108,8 @@ if [[ -f $configure_options_file ]]; then
     echo " "
     echo "Configure options are: "
     cat "$configure_options_file" | ProcessOptionsFile
-    echo
+    echo " "
+    echo " " 
     if YesNoRead "Is this OK?" "y"; then
         accept_configure_options="true"
     else

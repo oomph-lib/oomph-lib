@@ -68,7 +68,6 @@ fsi_channel_with_leaflet_LDADD = \
 
 
 
-
 #-----------------------------------------------------------------------
 
 # Do we have the TRILINOS library?

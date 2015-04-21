@@ -199,6 +199,10 @@ public:
  }
 
 
+
+ /// \short Default constructor
+ AxisymmetricPoroelasticityTractionElement(){}
+ 
  /// Reference to the traction function pointer
  void (* &traction_fct_pt())(const double& time,
                              const Vector<double>& x,
@@ -256,10 +260,15 @@ public:
   double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
   unsigned n_dim = this->nodal_dimension();
   
+  // Find out how many nodes there are
+  unsigned n_node = nnode();
+
   Vector<double> x(n_dim);
   Vector<double> s(n_dim-1);
   Vector<double> s_bulk(n_dim);
   Vector<double> disp(n_dim);
+  Shape psi(n_node);
+  DShape dpsids(n_node,n_dim-1);
 
   // Tecplot header info
   outfile << this->tecplot_zone_string(n_plot);
@@ -271,17 +280,21 @@ public:
     // Get local coordinates of plot point
     this->get_s_plot(iplot,n_plot,s);
     
-    // Get Eulerian and Lagrangian coordinates
+    //Call the derivatives of the shape function at the knot point
+    this->dshape_local(s,psi,dpsids);
+    
+    // Get pointer to bulk element
+    ELEMENT* bulk_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
+    s_bulk=local_coordinate_in_bulk(s);
+
+    
+    // Get Eulerian coordinates
     this->interpolated_x(s,x);
     
     // Outer unit normal
     Vector<double> unit_normal(n_dim);
     outer_unit_normal(s,unit_normal);
-    
-    // Get pointer to bulk element
-    ELEMENT* bulk_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
-    s_bulk=local_coordinate_in_bulk(s);
-     
+         
     /// Calculate the FE representation of u -- the skeleton displacement
     bulk_pt->interpolated_u(s_bulk,disp);
 
@@ -295,6 +308,42 @@ public:
 
     // Get permeability from the bulk poroelasticity element
     const double permeability=bulk_pt->permeability();
+
+
+    // Surface area: S = 2 \pi \int r \sqrt((dr/ds)^2+(dz/ds)^2) ds
+    //                 = 2 \pi \int r \sqrt( 1 + ( (dr/ds)/(dz/ds) )^2 ) dz/ds ds
+    //                 = 2 \pi \int J dz
+    // where J is an objective measure of the length of the line element
+    // (indep of local coordinates) so should be the same from fluid
+    // and solid.
+
+    // Get deformed and undeformed tangent vectors
+    Vector<double> interpolated_t1(2,0.0);
+    Vector<double> interpolated_T1(2,0.0);
+    for(unsigned l=0;l<n_node;l++)
+     {
+      //Loop over directional components
+      for(unsigned i=0;i<2;i++)
+       {
+        //Index at which the nodal value is stored
+        unsigned u_nodal_index = bulk_pt->u_index_axisym_poroelasticity(i);
+
+        interpolated_t1[i] += this->nodal_position(l,i)*dpsids(l,0);
+        interpolated_T1[i] += (this->nodal_position(l,i)+
+                               nodal_value(l,u_nodal_index))*dpsids(l,0);
+       }
+     }
+    
+    //Set the Jacobian of the undeformed line element
+    double J_undef = sqrt(1.0+
+                          (interpolated_t1[0]*interpolated_t1[0])/
+                          (interpolated_t1[1]*interpolated_t1[1]))*x[0];
+
+
+    //Set the Jacobian of the deformed line element
+    double J_def = sqrt(1.0+
+                        (interpolated_T1[0]*interpolated_T1[0])/
+                        (interpolated_T1[1]*interpolated_T1[1]))*(x[0]+disp[0]);
 
     // Dummy
     unsigned ipt=0;
@@ -315,6 +364,9 @@ public:
                  unit_normal,
                  pressure);
     
+    // Get correction factor for geometry
+    double lagr_euler_translation_factor=
+     lagrangian_eulerian_translation_factor(s);
     
     //Output the x,y,..
     for(unsigned i=0;i<n_dim;i++) 
@@ -357,6 +409,15 @@ public:
     // Output FE representation of p at s_bulk
     outfile <<  bulk_pt->interpolated_p(s_bulk) << " "; // column 17
     
+    // Output undeformed jacobian
+    outfile << J_undef << " "; // column 18
+
+    // Output deformed jacobian
+    outfile << J_def << " "; // column 19
+
+    // Lagranian/Eulerian translation factor
+    outfile << lagr_euler_translation_factor << " "; // column 20
+
     outfile << std::endl;
    }
    
@@ -372,6 +433,80 @@ public:
  void output(FILE* file_pt, const unsigned &n_plot)
  {FaceGeometry<ELEMENT>::output(file_pt,n_plot);}
 
+
+ 
+ /// \short Ratio of lengths of line elements (or annular surface areas)
+ /// in the undeformed and deformed configuration (needed to translate
+ /// normal flux correctly between small displacement formulation used
+ /// here and the possibly large displacement NSt formulation used in
+ /// FSI problems. Maths is as follows:
+ /// Surface area: A = 2 \pi \int r \sqrt((dr/ds)^2+(dz/ds)^2) ds
+ ///                 = 2 \pi \int J ds
+ /// This function returns the ratio of J in the undeformed
+ /// configuration (used here) to that in the deformed configuration
+ /// where (r,z) = (r,z)_undef + (u_r,u_z).
+ double lagrangian_eulerian_translation_factor(const Vector<double>& s)
+ {
+  // Get continuous time from timestepper of first node
+  unsigned n_dim = this->nodal_dimension();
+  
+  // Find out how many nodes there are
+  unsigned n_node = nnode();
+
+  Vector<double> x(n_dim);
+  Vector<double> s_bulk(n_dim);
+  Vector<double> disp(n_dim);
+  Shape psi(n_node);
+  DShape dpsids(n_node,n_dim-1);
+
+  //Call the derivatives of the shape function at the knot point
+  this->dshape_local(s,psi,dpsids);
+  
+  // Get pointer to bulk element
+  ELEMENT* bulk_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
+  s_bulk=local_coordinate_in_bulk(s);
+  
+  // Get Eulerian coordinates
+  this->interpolated_x(s,x);
+  
+  // Outer unit normal
+  Vector<double> unit_normal(n_dim);
+  outer_unit_normal(s,unit_normal);
+  
+  /// Calculate the FE representation of u -- the skeleton displacement
+  bulk_pt->interpolated_u(s_bulk,disp);
+  
+  // Get deformed and undeformed tangent vectors
+  Vector<double> interpolated_t1(2,0.0);
+  Vector<double> interpolated_T1(2,0.0);
+  for(unsigned l=0;l<n_node;l++)
+   {
+    //Loop over directional components
+    for(unsigned i=0;i<2;i++)
+     {
+      //Index at which the nodal value is stored
+      unsigned u_nodal_index = bulk_pt->u_index_axisym_poroelasticity(i);
+      
+      interpolated_t1[i] += this->nodal_position(l,i)*dpsids(l,0);
+      interpolated_T1[i] += (this->nodal_position(l,i)+
+                             nodal_value(l,u_nodal_index))*dpsids(l,0);
+     }
+   }
+  
+  //Set the Jacobian of the undeformed line element
+  double J_undef = sqrt(interpolated_t1[0]*interpolated_t1[0]+
+                        interpolated_t1[1]*interpolated_t1[1])*x[0];
+  
+  
+  //Set the Jacobian of the deformed line element
+  double J_def = sqrt(interpolated_T1[0]*interpolated_T1[0]+
+                      interpolated_T1[1]*interpolated_T1[1])*(x[0]+disp[0]);
+  
+  double return_val=1.0;
+  if (J_def!=0.0) return_val=J_undef/J_def;
+  return return_val;
+
+ }
 
  /// \short Compute traction vector at specified local coordinate
  /// Should only be used for post-processing; ignores dependence
@@ -393,7 +528,7 @@ public:
  /// q_skeleton = \int \partial u_displ / \partial t \cdot n ds 
  /// q_seepage  = \int k q \cdot n ds 
  void contribution_to_total_porous_flux(double& skeleton_flux_contrib,
-                                        double& seepage_flux_contrib)
+                                        double& seepage_flux_contrib)  
  {
 
 
@@ -925,8 +1060,9 @@ public:
    this->set_ninteraction(1);
   }
  
-
-
+ /// \short Default constructor
+ FSILinearisedAxisymPoroelasticTractionElement(){}
+ 
  /// \short Output function -- overloaded version -- ignores 
  /// n_plot since fsi elements can only evaluate traction at
  /// Gauss points.

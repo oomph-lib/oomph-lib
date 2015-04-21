@@ -387,6 +387,107 @@ namespace oomph
    this->fill_in_generic_residual_contribution(residuals,jacobian,1);
   }
 
+
+  /// Calculate the FE representation of the divergence of the
+  /// skeleton velocity, div(du/dt), and its
+  /// components: 1/r diff(r*du_r/dt,r) and diff(du_z/dt,z).
+  double interpolated_div_du_dt(const Vector<double> &s,
+                                Vector<double>& div_dudt_components) const
+  {
+   //Find number of nodes
+   unsigned n_node = nnode();
+
+   //Local shape function
+   Shape psi(n_node);
+   DShape dpsidx(n_node,2);
+
+   //Find values of shape function
+   dshape_eulerian(s,psi,dpsidx);
+
+   // Local coordinates
+   double r=interpolated_x(s,0);
+
+   // Assemble the "cartesian-like" contributions
+   for(unsigned i=0;i<2;i++)
+    {
+     // Initialise
+     div_dudt_components[i] = 0.0;
+
+     // Loop over the local nodes and sum the "cartesian-like"
+     // contributions
+     for(unsigned l=0;l<n_node;l++)
+      {
+       div_dudt_components[i] += du_dt(l,i)*dpsidx(l,i);
+      }
+    }
+
+   // Radial skeleton veloc
+   double dur_dt=0.0;
+   for(unsigned l=0;l<n_node;l++)
+    {
+     dur_dt+=du_dt(l,0)*psi(l);
+    }
+
+   // Add geometric component to radial contribution
+   div_dudt_components[0]+=dur_dt/r;
+
+   // Return sum
+   return div_dudt_components[0]+div_dudt_components[1];
+  }
+
+
+  /// Calculate the FE representation of the divergence of the
+  /// skeleton displ, div(u), and its
+  /// components: 1/r diff(r*u_r,r) and diff(u_z,z).
+  double interpolated_div_u(const Vector<double> &s,
+                                Vector<double>& div_u_components) const
+  {
+   //Find number of nodes
+   unsigned n_node = nnode();
+
+   //Local shape function
+   Shape psi(n_node);
+   DShape dpsidx(n_node,2);
+
+   //Find values of shape function
+   dshape_eulerian(s,psi,dpsidx);
+
+   // Local coordinates
+   double r=interpolated_x(s,0);
+
+   // Assemble the "cartesian-like" contributions
+   for(unsigned i=0;i<2;i++)
+    {
+     //Get nodal index at which i-th velocity is stored
+     unsigned u_nodal_index = u_index_axisym_poroelasticity(i);
+
+     // Initialise
+     div_u_components[i] = 0.0;
+
+     // Loop over the local nodes and sum the "cartesian-like"
+     // contributions
+     for(unsigned l=0;l<n_node;l++)
+      {
+       div_u_components[i] += nodal_value(l,u_nodal_index)*dpsidx(l,i);
+      }
+    }
+
+   // Radial skeleton displ
+   double ur=0.0;
+   for(unsigned l=0;l<n_node;l++)
+    {
+     ur+=nodal_value(l,u_index_axisym_poroelasticity(0))*psi(l);
+    }
+
+   // Add geometric component to radial contribution
+   div_u_components[0]+=ur/r;
+
+   // Return sum
+   return div_u_components[0]+div_u_components[1];
+  }
+
+
+
   /// Calculate the FE representation of u
   void interpolated_u(const Vector<double> &s,
                       Vector<double>& disp) const
@@ -596,6 +697,7 @@ namespace oomph
    return q_i;
   }
 
+
   /// Calculate the FE representation of div u
   void interpolated_div_q(const Vector<double> &s, double &div_q) const
   {
@@ -645,6 +747,9 @@ namespace oomph
      div_q+=interpolated_q(s,0)/interpolated_x(s,0);
     }
   }
+
+
+
 
   /// Calculate the FE representation of div q and return it
   double interpolated_div_q(const Vector<double> &s) const
@@ -991,7 +1096,7 @@ namespace oomph
  }
  
  /// \short Output solution in data vector at local cordinates s:
- /// r,z,u_r,u_z,q_r,q_z,div_q,p
+ /// r,z,u_r,u_z,q_r,q_z,div_q,p,durdt,duzdt
  void point_output_data(const Vector<double> &s, Vector<double>& data)
  {
   // Output the components of the position
@@ -1017,6 +1122,25 @@ namespace oomph
   
   // Output FE representation of p at s
   data.push_back(interpolated_p(s));
+
+  // Skeleton velocity
+  Vector<double> du_dt(2);
+  interpolated_du_dt(s,du_dt);
+  data.push_back(du_dt[0]);
+  data.push_back(du_dt[1]);
+
+  // Get divergence of skeleton velocity and its components
+  Vector<double> div_dudt_components(2);
+  data.push_back(interpolated_div_du_dt(s,div_dudt_components));
+  data.push_back(div_dudt_components[0]);
+  data.push_back(div_dudt_components[1]);
+
+  // Get divergence of skeleton displacement and its components
+  Vector<double> div_u_components(2);
+  data.push_back(interpolated_div_u(s,div_u_components));
+  data.push_back(div_u_components[0]);
+  data.push_back(div_u_components[1]);
+
  }
 
 
