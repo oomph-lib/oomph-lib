@@ -1,8 +1,9 @@
 #! /bin/bash
 
-# TODO:    automatic hypre/trilinos pull source + install?
-
+# Crash if any sub command crashes
 set -o errexit
+
+# Crash if any unset variables are used
 set -o nounset
 
 
@@ -13,359 +14,316 @@ set -o nounset
 # this will need to change a little.
 oomph_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Load helper functions
-source "${oomph_root}/bin/autogen_helpers.sh"
-
-
-
-# Handle command line input
-# ============================================================
-
-
-# Default values for arguments
-build_dir=""
-make_options=""
-extra_configure_options=""
-generate_config_files="false"
-only_generate_config_files="false"
-configure_options_file="config/configure_options/current"
-
-# If "current" configure options does not exist then use "default".
-if [[ ! -f "${oomph_root}/config/configure_options/current" ]]; then
-    echo "No current configure options found, copying over the default options"
-    cp "${oomph_root}/config/configure_options/default" "${oomph_root}/config/configure_options/current"
-fi
-
-
-# Parse command line arguments
-while getopts ":hrd:c:b:j:sko" opt; do
-    case $opt in
-        h)
-            echo "Options for autogen.sh:"
-            echo
-            EchoUsage
-            exit 0
-            ;;
-
-        r)
-            generate_config_files="true"
-            echo "Doing a complete rebuild from scratch."
-            ;;
-        c)
-            configure_options_file="$OPTARG"
-            ;;
-        b)
-            build_dir="$OPTARG"
-            ;;
-
-        o)
-            only_generate_config_files="true"
-            generate_config_files="true"
-            echo "Regenerating the config files only"
-            ;;
-
-        # flags for make
-        j)
-            job_option="--jobs $OPTARG"
-            make_options="$make_options $job_option"
-            echo "Added make option $job_option"
-            ;;
-        k)
-            k_option="--keep-going"
-            make_options="$make_options $k_option"
-            echo "Added make option $k_option"
-            ;;
-        s)
-            silent_option="--silent LIBTOOLFLAGS=--silent"
-            make_options="$make_options $silent_option"
-            extra_configure_options="$extra_configure_options -q"
-            echo "Added make option $silent_option, configure option -q"
-            ;;
-
-
-        \?)
-            echo "Invalid option: -$OPTARG" >&2
-            echo "Valid options are:"
-            echo
-            EchoUsage
-            exit 3
-            ;;
-    esac
-done
-
-# and for build dir 
-if [[ $build_dir == "" ]]; then
-    build_dir=${oomph_root}/build
-fi
-
-# Convert some things to absolute paths
-build_dir="$(AbsPath $build_dir)"
-configure_options_file="$(AbsPath $configure_options_file)"
-
-# Now switch to the oomph lib directory
 cd "$oomph_root"
 
-# Force generate config files if we are missing important files
-if [ ! -e configure ]; then
-    echo "No ./configure found, assuming this is a new build and regenerating everything."
-    generate_config_files="true"
-elif [ ! -e Makefile ]; then
-    echo "No Makefile found in root, I assume you did a distclean so I'll regenerate everything."
-    generate_config_files="true"
-elif [ ! -e Makefile.in ]; then
-    echo "No Makefile.in found in root, no idea how you managed that but I'll regenerate everything anyway"
-    generate_config_files="true"
+# Load helper functions
+source bin/autogen_helpers.sh
+
+
+# Initialise command line flags (single dash, single letter!)
+# for David's non-interactive autogen.sh
+non_interactive_flags=""
+
+# Do you want to rebuild from scratch?
+#-------------------------------------
+#If so specify --rebuild as command line argument. Default is 
+# to just do the normal ".configure, make, make install, make check" sequence.
+
+#Bail out if more than two command line arguments
+if (test $# -gt 2); then 
+  echo " "
+  echo "ERROR: Too many command line options!"
+  echo "------"
+  echo " "
+  EchoUsageForInteractiveScript
+fi   
+
+
+#Process the command line options
+raw_build=false;
+make_options=" ";
+while (test $# -gt 0)
+do
+   case "$1" in
+     #Set the rebuild flag
+     --rebuild) 
+      echo "             [Doing complete rebuild from scratch.]"
+      raw_build=true
+      non_interactive_flags=`echo $non_interactive_flags`" -r ";;
+     #Set the jobs flag
+     --jobs*)
+      make_options="$1"
+      non_interactive_flags=`echo $non_interactive_flags`" -j "`echo $1| awk '{print substr($0,8)}'`;;
+     #Anything else bail out     
+      *)  
+       echo " "
+       echo "ERROR: Unrecognised command line option!"
+       echo "------"
+       echo " "
+       EchoUsageForInteractiveScript;;
+   esac
+   shift
+done
+
+
+
+if (test "$raw_build" = "false"); then
+   echo "                     [Doing normal build.]"
+fi   
+
+
+
+#====================================================================
+# Start Q/A session
+#====================================================================
+
+echo " "
+echo "============================================================= "
+echo "        oomph-lib interactive installation script" 
+echo "============================================================= "
+echo " "
+
+
+# Choose build directory (for lib,include)
+build_dir="$oomph_root/build"
+
+echo " "
+echo " "
+echo "I'm going to install the distribution (the lib and include directories)"
+echo "in:"
+echo " "
+echo "    " $build_dir
+echo " "
+echo " "
+if ! YesNoRead "Is this OK?" "y"; then
+    printf "Specify build directory [e.g. /home/joe_user/build] :"
+    build_dir=$(OptionRead)
 fi
 
-if [ ! -e $configure_options_file ]; then
-    echo "Configure options file $configure_options_file does not exist"
-    exit 8
+echo " "
+echo "============================================================= "
+echo " "
+echo "Build directory is: " 
+echo " " 
+echo "     " $build_dir
+echo " " 
+echo "--> The include directory will be in: "
+echo " " 
+echo "    " $build_dir"/include" 
+echo " " 
+echo "--> The lib directory will be in: "
+echo " " 
+echo "    " $build_dir"/lib" 
+echo " "
+echo "etc.       " 
+echo " "
+echo "============================================================= "
+echo " "
+
+# Wipe previous builds
+#---------------------
+if (test -d  $build_dir); then 
+    echo " "
+    echo "Note: Build directory " $build_dir " exists."
+    echo " "
+    #OptionPrompt "Do you want to wipe it [y/n -- default: n]"
+    #reply=`OptionRead`
+    #if test "$reply" = "y" -o "$reply" = "Y" ; then 
+    if YesNoRead "Do you want to wipe it" "n"; then
+       echo " "
+       echo "Sorry to be over-cautious here, but we'd better double-check"
+       echo "before we delete some of your precious files..."
+       echo " "
+       echo "The contents of " $build_dir " are:"
+       echo " "
+       ls -l  $build_dir
+       echo " "
+       if YesNoRead "Are you still sure you want to wipe it" "n"; then
+          echo " "
+          echo "Wiping it..."
+          rm -f -r $build_dir
+          echo "Done"
+       fi
+    fi
 fi
 
-# Print information about command line options selected
-echo
-echo "Building using the oomph-lib source in \"$PWD\""
-echo "Using configure options file \"$configure_options_file\""
-echo "Placing built files in \"$build_dir\""
-if [[ $make_options != "" ]]; then
-    echo "Using make options: \"$make_options\""
+
+echo "Self tests"
+echo "=========="
+echo "Following the installation of oomph-lib you can run a comprehensive set of"
+echo "self tests with 'make check -k' or with './bin/parallel_self_test.py'. The"
+echo "latter version tends to be much faster because it performs multiple"
+echo "self-tests at the same time."
+echo " " 
+echo "Would you like to automatically run self tests "
+if YesNoRead "(serially) if the build is successful?" "n"; then
+    run_self_tests="true"
+else
+    run_self_tests="false"
 fi
-if [[ $extra_configure_options != "" ]]; then
-    echo "Using extra configure options \"$extra_configure_options\""
-fi
 
 
-# If this is a new build or a forced rebuild then we need to do some extra
-# stuff.
-if [[ $generate_config_files == "true" ]]; then
+# Choose configure options file
+#------------------------------
 
-    # David Shepherd's automake compatability fix
-    #=========================================================================
+configure_options_file="config/configure_options/current"
 
-    # This is an awful hack but I can't find any other way to handle it :(
+# If the current file exists then ask if it is ok
+if [[ -f $configure_options_file ]]; then
 
-    # If we have automake version more recent than 1.13 then the default is to
-    # use the new parallel self test harness which doesn't work with
-    # parallel_self_tests.py (and doesn't actually run tests in parallel
-    # without a major rewrite of all Makefile.am s). So we need to disable it.
-    # However the command to disable the new test harness was only introduced
-    # in version 1.12 which is still very new! So it looks like the only way
-    # around this for now is to modify configure.ac here if the automake
-    # version is greater than 1.12.
-
-    # Version comparison function from
-    # http://stackoverflow.com/questions/3511006/how-to-compare-versions-of-some-products-in-unix-shell
-    # We can't use the much simpler sort -V, or bash code because might not
-    # have them on some systems...
-    version_greater_equal_1_12_0()
-    {
-        # Put each value into a variable
-        v1=$(echo $1 | cut -d "." --output-delimiter=" " -f 1)
-        v2=$(echo $1 | cut -d "." --output-delimiter=" " -f 2)
-        v3=$(echo $1 | cut -d "." --output-delimiter=" " -f 3)
-
-        # The values to compare against
-        c1=1
-        c2=12
-        c3=0
-
-        # Test each value and echo the result
-        if test $v1 -gt $c1; then
-            echo "1"
-        elif test $v1 -eq $c1; then
-            if test $v2 -gt $c2; then
-                echo "1"
-            elif test $v2 -eq $c2; then
-                if test $v3 -ge $c3; then
-                    echo "1"
-                else
-                    echo "0"
-                fi
-            else
-                echo "0"
-            fi
-        else
-            echo "0"
-        fi
-    }
-
-
-    # Now we need to get the automake version (hopefully they don't change the
-    # formatting of the --version output! Don't think there's any other way to
-    # get the version).
-    automake_version=$(automake --version | head -1 | tr ' ' '\n' | tail -1)
-
-    # Create the file to contain the automake init command
-    automake_init_command_file="config/configure.ac_scripts/automake_init_command_file"
-    echo '# File generated by autogen.sh, DO NOT MODIFY' > $automake_init_command_file
-
-    # Check automake version and pick the command to use
-    echo "Detected automake version $automake_version"
-    if test $(version_greater_equal_1_12_0 $automake_version) -gt 0; then
-        echo "I'm modifying configure.ac to use serial self tests in automake because you have a recent enough version of automake."
-
-        # Enforce serial tests and require automake version 1.12 or above (just
-        # in case someone does something really weird..)
-        echo 'AM_INIT_AUTOMAKE([1.12 serial-tests foreign])' >> $automake_init_command_file
+    echo " "
+    echo " "
+    echo "Configure options"
+    echo "================="
+    echo "Configure options are: "
+    cat "$configure_options_file" | ProcessOptionsFile
+    echo " "
+    echo " " 
+    if YesNoRead "Is this OK?" "y"; then
+        accept_configure_options="true"
     else
-        echo "Not setting serial tests option in configure.ac because your version"
-        echo "of automake is old enough to use it by default (older than 1.12.0)."
+        accept_configure_options="false"
+    fi
 
-        echo 'AM_INIT_AUTOMAKE([foreign])' >> $automake_init_command_file
+    # Otherwise have to choose one interactively
+else
+    accept_configure_options="false"
+fi
+
+
+# Continue asking if the options are OK until approved
+while [[ $accept_configure_options != "true" ]]; do
+
+    # Get list of options files
+    configure_option_files="$(find config/configure_options -type f | sort)"
+
+    echo " "
+    echo "======================================================================"
+    echo 
+    echo "Choose an alternative configuration file "
+    # Loop over files and display a menu
+    count=0
+    for file in $configure_option_files
+    do
+        #Increase the counter
+        count=$(expr $count + 1)
+        echo $count ": " $(basename $file)
+    done
+
+    echo
+    echo "Enter the Desired configuration file [1-"$count"]"
+    echo "Enter 0 to specify the options on the command line"
+
+    # Read in the Desired File and validate it
+    file_number=$(OptionRead)
+    if (( $file_number >= $count )) || (( $file_number < 0 )); then
+        # Error and go to start of loop
+        echo "File number out of range, trying again." 1>&2
+        continue
     fi
 
 
-    # ??ds not really sure why this is here or what it does
-    echo
-    echo "Building Auxillary Files in /src/meshes"
-    ./bin/build_mesh_makefile.sh .
+    # If options are to be read from the command line then store the
+    # options in the file config/configure_options/current
+    if [[ "$file_number" == "0" ]]; then
+        echo 
+        echo "Enter options"
+        configure_options=$(OptionRead)
+        echo $configure_options > "config/configure_options/new_options_file"
+        configure_options_file="config/configure_options/new_options_file"
 
-fi
-
-
-
-# Autodetection of Makefiles to generate
-#============================================================================
-
-confdir="config/configure.ac_scripts"
-
-# Generate a sorted list of all the makefiles in the project, wrap it into
-# an autoconfigure command and put it into a file.
-makefile_list="$(find -path './external_distributions' -prune \
-                    -o -type f -name 'Makefile.am' -print \
-                | sed -e 's:Makefile\.am:Makefile:' -e 's:^./::' \
-                | sort)"
-
-# A bit more explanation of the above command:
-# First we find all Makefile.ams in the project except those in
-# ./external_distributions (because that is where hypre/trilinos/etc live
-# and we don't want to build those directly).
-
-# Then we remove the .am using sed to get a list of Makefiles to create. We
-# also remove the "./" here because the autotools don't like it.
-
-# Finally we sort the output so that the order of the resulting list is
-# deterministic.
-
-
-# Create the file containing the list of Makefiles
-cat > "$confdir/new_makefile_list" <<EOF
-# GENERATED FILE, DO NOT MODIFY.
-AC_CONFIG_FILES([
-$makefile_list
-external_distributions/Makefile
-external_distributions/hypre/Makefile
-external_distributions/trilinos/Makefile
-external_distributions/mumps_and_scalapack/Makefile
-])
-EOF
-# In case you haven't seen it before: this writes the lines between <<EOF
-# and EOF into the file $confdir/new_makefile_list. Variables are
-# substituted as normal.
-
-# If we found some new dirs then write it into the list file that is
-# included in configure.ac and tell the user. The fact that we have
-# modified a file included in configure.ac will cause make to rerun
-# autoconf and configure.
-touch "$confdir/makefile_list"
-if ! diff -q "$confdir/new_makefile_list" "$confdir/makefile_list" > /dev/null 2>&1; 
-then
-    echo "New/removed directories detected and $confdir/makefile_list updated,"
-    echo "./configure will be rerun automatically by make."
-    mv "$confdir/new_makefile_list" "$confdir/makefile_list"
-fi
-
-
-# If this is a new build or a forced rebuild then we need to explicitly run
-# all the autotools magic now.
-if $generate_config_files == "true"; then
-    # Run all the autotools and just do the right things to generate
-    # configure, Makefile.in and all the dependency relationships.
-    autoreconf --install --force
-fi
-
-
-if [[ $only_generate_config_files == "true" ]]; then
-    # Done, exit with success code
-    exit 0
-fi
-
-
-# Set up configure options
-#============================================================================
-
-# Read the options from the files and convert them into a single one-line string
-new_configure_options=$(ProcessOptionsFile < "$configure_options_file")
-old_configure_options=$(ProcessOptionsFile < config/configure_options/current)
-
-# If configure options have changed then we need to reconfigure
-if [[ "$new_configure_options" != "$old_configure_options" || "$generate_config_files" == "true" ]]; then
-
-    # Slight problem here: if we change the options and add a new
-    # driver at the same time then configure will end up being rerun twice.
-    # Don't think there's anything we can do about it
-
-    echo "Using configure options:"
-    cat "$configure_options_file" | ProcessOptionsFile
-    echo
+    # Otherwise copy the desired options file to config/configure_options/current
+    else 
+        # Use cut to extract the nth entry in the list
+        configure_options_file="$(echo $configure_option_files | cut -d \  -f $file_number)"
+    fi
 
     # Check that the options are in the correct order
     configure_options_are_ok="$(CheckOptions $configure_options_file)"
     if test "$configure_options_are_ok" != ""; then
 
-        echo 1>&2
+        echo " " 1>&2
         echo "===============================================================" 1>&2
         echo "Error message from autogen.sh:" 1>&2
-        echo  1>&2
+        echo " "  1>&2
         echo $configure_options_are_ok 1>&2
-        echo  1>&2
+        echo " "  1>&2
         echo "===============================================================" 1>&2
         
-        # Failed
-        exit 4
+        # Fail, go back to start of while loop
+        continue
     fi
 
-    # Update current options, unless the files are the same
-    if [[ "$(AbsPath $configure_options_file)" != "$(AbsPath config/configure_options/current)" ]]; then
-        cp "$configure_options_file" "config/configure_options/current"
+    # Ask if these options are OK
+    echo " "
+    echo "Configure options are: "
+    cat "$configure_options_file" | ProcessOptionsFile
+    echo 
+    if YesNoRead "Is this OK?" "y"; then
+        accept_configure_options="true"
+    else
+        accept_configure_options="false"
     fi
 
-    # Finally run configure itself to convert "Makefile.in"s into "Makefile"s
-    echo
-    echo "Running ./configure --prefix $build_dir $new_configure_options $extra_configure_options"
-    echo
-    /bin/sh -c "./configure --prefix $build_dir $new_configure_options $extra_configure_options"
+done
 
-    # Test that the mpi commands work with these configure options
-    # (automatically passes if no variable MPI_RUN_COMMAND in makefile).
-    # This needs to go after configure so that we can use the generated
-    # Makefile to (robustly) get the run and compile commands.
-    set +e
-    ./bin/check_mpi_command.sh Makefile
-    set -e
+echo
+echo
+echo "Build behaviour after failure"
+echo "============================="
+echo "You can build/install/test the library using \"make -k\". This "
+echo "keeps going after a failure and therefore builds/tests whatever "
+echo "it can, but makes it harder to spot errors."
+echo " "
+if YesNoRead "Build with \"make -k\"?" "y"; then
+      non_interactive_flags=`echo $non_interactive_flags`" -k "
+fi
+echo " "
 
+
+echo
+echo
+echo "Minimise output from make process"
+echo "================================="
+echo "You can run ask for make to be run (more) silently, (via the "
+echo "\"make -s\" option) which doesn't echo commands. "
+echo " "
+if YesNoRead "Build with \"make -s\"?" "n"; then
+      non_interactive_flags=`echo $non_interactive_flags`" -s "
+fi
+echo " "
+
+#====================================================================
+# Start actual build process
+#====================================================================
+
+
+# Call non-interactive autogen
+build_command="./non_interactive_autogen.sh -b $build_dir -c ${oomph_root}/$configure_options_file $non_interactive_flags"
+echo "The interactive part of the build process is over."
+echo "Running $build_command"
+
+
+$build_command
+
+# Run tests if requested
+if test "$run_self_tests" == "true"; then
+    self_test_command="make check -k"
+    echo "Running self test command: $self_test_command"
+    $self_test_command
 fi
 
 
-# make is smart enough to automatically rerun automake, configure etc. if
-# they are needed for other reasons (e.g if we have added new dirs to one
-# of the dir lists or modified a Makefile.am).
-
-
-
-# Build!
-# ============================================================
-
-
-# Make all libraries
+echo " "
+echo "=============================================================== "
+echo " "
+echo "autogen.sh has finished! If you can't spot any error messages" 
+echo "above this, oomph-lib should now be ready to use... " 
+echo " " 
+echo "If you encounter any problems, please study the installation" 
+echo "instructions and the FAQ before contacting the developers. " 
 echo
-echo "Running `make $make_options` in $PWD"
-make $make_options
-echo "done"
-
-
-# Install the libraries (in build directory specified above)
-# echo
-# echo "running `make $make_options install` in $PWD"
-make $make_options install
-echo "done"
+echo "To run self tests you can use 'make check -k' or './bin/parallel_self_test.py'"
+echo " "
+echo "=============================================================== "
+echo " "

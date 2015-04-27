@@ -160,3 +160,21 @@ AbsPath()
         echo "$dir" | sed -e 's|[^/]\+/\.\./||g' -e 's|\./||g'
     fi
 }
+
+
+#This little function echo's the usage information
+EchoUsageForInteractiveScript()
+{
+        echo "Usage: "
+        echo "------ "
+        echo " "
+        echo "[without flags]: Normal \"./configure; make; make install; make check\" sequence."
+        echo " "
+        echo " --rebuild     : Complete re-configure, followed by normal build sequence."
+        echo " "
+        echo "--jobs[=N]     :  Run N make jobs simultaneously."
+        echo "                  Useful for speeding up the build on multi-core processors." 
+        exit
+}
+
+

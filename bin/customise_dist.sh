@@ -73,7 +73,7 @@ RegenerateConfigFiles()
     # Use autogen.sh to generate an updated configure.ac etc. with the
     # correct list of Makefiles.
     cd "$oomph_dist_dir"
-    ./autogen.sh -o -r
+    ./non_interactive_autogen.sh -o -r
 
     # automake has problems if the packaged distribution doesn't contain a
     # doc dir, but the doc dir won't be copied if --enable-supress-doc is

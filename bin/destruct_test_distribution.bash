@@ -5,6 +5,11 @@
 # with (nearly) all configure options.
 #======================================================
 
+
+echo "LIKELY TO BE BROKEN AFTER DAVID/MATTHIAS'S REWRITE; NEED TO UPDATE"
+echo "THE RESPONSES"
+exit
+
 #------------------------------------------------------
 # Tar file that contains the distribution [Adjust]
 #------------------------------------------------------

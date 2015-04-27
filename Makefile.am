@@ -79,7 +79,7 @@ DIST_SUBDIRS = user_drivers $(sub_dirs) $(doc_dirs) self_test $(PRIVATE_DIR)
 EXTRA_DIST = \
 validate.sh \
 autogen.sh \
-interactive_autogen.sh \
+non_interactive_autogen.sh \
 config \
 depcomp config.guess config.sub install-sh .gitignore
 
