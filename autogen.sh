@@ -40,8 +40,7 @@ fi
 
 
 #Process the command line options
-raw_build=false;
-make_options=" ";
+raw_build=false
 while (test $# -gt 0)
 do
    case "$1" in
@@ -52,7 +51,6 @@ do
       non_interactive_flags=`echo $non_interactive_flags`" -r ";;
      #Set the jobs flag
      --jobs*)
-      make_options="$1"
       non_interactive_flags=`echo $non_interactive_flags`" -j "`echo $1| awk '{print substr($0,8)}'`;;
      #Anything else bail out     
       *)  

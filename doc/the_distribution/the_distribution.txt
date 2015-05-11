@@ -68,77 +68,51 @@ The entire distribution will now be contained in the sub-directory
 
 \subsection standard_install Option 1: Standard installation
 
-Change into the \c oomph-lib directory and run the \c interactive_autogen.sh
+Change into the \c oomph-lib directory and run the \c autogen.sh
 build script:
 
 \code
 cd oomph-lib-0.90
-./interactive_autogen.sh
+./autogen.sh
 \endcode
 
 This build script will ask a few questions, e.g. to verify that the default
 build directory (<code> oomph-lib-0.90/build </code>) is appropriate before
 starting the build.
 
-By default, \c interactive_autogen.\c sh will build the library and the
+By default, \c autogen.\c sh will build the library and the
 demo codes with certain default settings (using the gcc compilers with full
 optimisation, no debugging, no PARANOIA, and fully installed header files
 rather than symbolic links). These are appropriate if you wish to install
 the library once-and-for-all and do not anticipate any changes to their
 sources. The section \ref custom_install provides more details on the
-various options). `interactive_autogen.sh` will display the configure
+various options). `autogen.sh` will display the configure
 options and ask for confirmation that they are appropriate. If you are
-unsure if they are, simply answer "y" -- the default will be fine.
+unsure if they are, simply hit return -- the default will be fine.
 
-The following flags for `interactive_autogen.sh` may be of interest:
+The following flags for `autogen.sh` may be of interest:
 
-- `-j n`: Run the build process using `n` cores. This can greatly speed
+- `--jobs=n`: Run the build process using `n` cores. This can greatly speed
   up build times and is strongly recommended if you have a multicore
   machine.
 
-- `-r`: Rebuild the configuration files from scratch. This is useful if you
+- `--rebuild`: Rebuild the configuration files from scratch. This is 
+  useful if you
   believe you may have somehow broken the build process, but should not be
   necessary normally.
 
-- `-s`: Silent mode, greatly reduce the amount of output from `make` (all
-  error messages and warnings are still shown).
 
+Under the hood `autogen.sh` simply collects settings in a
+question and answer manner then calls a non-interactive script 
+`non_interactive_autogen.sh` (yes, really!) with the appropriate
+flags. If you prefer you can simply call `non_interactive_autogen.sh` 
+directly. 
 
-Under the hood `interactive_autogen.sh` simply collects settings in a
-question and answer manner then calls `autogen.sh` with the appropriate
-flags. If you prefer you can simply call `autogen.sh` directly. Important
-flags for `autogen.sh` are:
-
-- `-C`: specify the path to the configure options file, by default the file
-  `current` is used (corresponding to the same options as the previous
-  build). If `current` does not exist the file `default` is used.
-
-- `-b`: specify the build directory, the default is `build`.
-
-In addition the flags discussed above for `interactive_autogen.sh` can be
-used.
-
-The self-tests can be initiated outside of `interactive_autogen.sh` using
+The self-tests can be initiated outside of `autogen.sh` using
 `make check -k` (to run on a single core) or `./bin/parallel_self_test.py`
 (to run on all available cores). These commands will compile and run all
 the demo codes and verify their output. This is an optional step and can be
-very time consuming, especially if run on a small number of cores.To run
-the self tests immediately after a successful `autogen.sh` simply use
-`bash`'s short-circuit and operator (`&&`), e.g.
-
-    ./autogen.sh && make check
-
-Running `interactive_autogen.sh -h` or `autogen.sh -h` will provide a
-complete list of the available command line flags for both . Note that
-command line flags specified to `interactive_autogen.sh -h` may overrule
-options selected by the question and answer process.
-
-
-A typical complete build and self-test command on a multicore machine might
-look like:
-
-    ./autogen.sh -C path/to/configure/options -j 8 -s && ./bin/parallel_self_tests.py
-
+very time consuming, especially if run on a small number of cores. 
 
 \subsection manual_install Manual installation
 
@@ -147,7 +121,7 @@ build/install process manually, using the standard \c configure; \c make;
 \c make \c install; \c make \c check; sequence. Note that this will *only*
 work when building the tar file version (i.e. not the version from svn
 which still requires the configure script to be generated). In this case,
-the library will be compiled with GNU's default compiler options ("-O2 -g")
+the library will be compiled with GNU's default compiler options ("-O3 -g")
 and the libraries and include files will be installed in \c /usr/local/
 unless you specify a different directory with the \c --prefix argument to
 the \c configure command. Here's an example of a manual installation
@@ -192,8 +166,8 @@ the \c configure command. Here's an example of a manual installation
 
 \subsection custom_install Configuration options
 
-The build scripts allow you to specify a file of configure options (either
-interactively or using the `-C` flag). For instance, you may wish to
+The build scripts allow you to specify a file of configure options. 
+For instance, you may wish to
 specify another compiler, change the optimisation level, allow for
 debugging or range checking, etc. Previously used sets of options are
 stored in various files in the sub-directory `config/configure_options/`.
@@ -216,6 +190,21 @@ homepage</a> you may wish to suppress this step.
 To achieve this, specify the configure option
 
     --enable-suppress-doc
+
+\subsubsection no_doc Suppressing the build of the pdf version of the documentation:
+By default the tutorials are built as html files (which are best accessed by
+starting from the local copy of the \c oomph-lib homepage, which is in
+`doc/html/index.html`) and as pdf files
+(which are accessible via a link at the bottom of the relevant html-based
+tutorial). In the past we have sometimes had problems with 
+\c doxygen (and hence the entire build process!) hanging while the 
+pdf files are generated. To avoid this (by not even attempting
+to create the pdf files) specify the configure option
+
+    --enable-suppress-pdf-doc
+
+(or better: update to a more recent version of \c doxygen -- for
+instance version 1.8.6 works).
 
 \subsubsection sym_links Replace library headers by symbolic links to the sources
 During the build process \c oomph-lib's various libraries are installed in
@@ -292,13 +281,7 @@ timesteppers, linear and nonlinear solvers, mesh-adaptation routines,
 etc.) 
 
 The other libraries  (\c poisson, \c navier-stokes,...)
-define elements for the solution of specific systems of PDEs. Not
-all of these will be required for all applications and you can
-reduce the overall build time by excluding certain
-sub-libraries from the build process. For instance, if you 
-specify the \c configure option \c --enable-suppress-poisson, 
-the Poisson equation library (and the associated demo problems; see below) 
-will not be built.
+define elements for the solution of specific systems of PDEs. 
 
 Finally, the \c src/meshes subdirectory contains several fully 
 functional \c Meshes (and, where appropriate, the associated
@@ -331,26 +314,12 @@ we only include the double precision sources for
 neither the complex nor the single-precision versions are required 
 within \c oomph-lib.
 
-If you have local (possibly optimised) versions of any of these
-libraries installed on your machine, you can, of course, link against 
-those instead. Simply replace \c oomph-lib's own version 
-(prefixed by \c "oomph" --  so \c oomph-lib's copy of the
-\c SuperLU library is called \c oomph_superlu) from the definition of the
-\c EXTERNAL_LIBS variable in the file 
-\c /config/configure.ac_scripts/start with your own, then run 
-\c autogen. \c sh \c --rebuild. If you don't have \c autotools
-installed on your machine, perform the replacement directly in
-the file \c configure.ac in the \c oomph-lib home directory.
-For the blas and lapack libraries, we provide a more sophisticated
-procedure for specifying local versions of the libraries; 
-see the discussion in \ref external_src for details.
-
 \subsection ext_dist The external_distributions directory
 
 \c oomph-lib provides interfaces to various third-party libraries
 whose sources are too big to be included in the \c oomph-lib 
 distribution. If you wish to use these we expect you to install them
-yourself. To facilite this task, we provide the option
+yourself. To facilitate this task, we provide the option
 to let the \c oomph-lib build machinery perform the installation
 for you. If you place a copy of the tar file into the appropriate 
 sub-directory in \c external_distributions, \c oomph-lib will build 
@@ -372,9 +341,9 @@ the Poisson equation.
 \c demo_drivers contain shell scripts that validate the output
 from the demo codes by comparing the computed results against the
 reference results stored in the \c validata sub-directories.
-The comparison is peformed with the \c python 
+The comparison is performed with the \c python 
 script \c bin/fpdiff.\c py which tolerates slight differences due
-to the unavaidable variations in roundoff error on different 
+to the unavoidable variations in roundoff error on different 
 platforms and/or at different optimisation levels. The validation
 scripts can either be executed individually in each sub-directory
 or for all sub-directories by issuing the command
@@ -404,11 +373,10 @@ install the \c oomph-lib libraries and demo codes are generated
 by  <A HREF="http://www.gnu.org/software/autoconf/">autoconf</A> and
 <A HREF="http://www.gnu.org/software/automake/">automake</A>. 
 If these powerful tools are installed on your machine,
-you can incude your own libraries and driver codes into the
+you can include your own libraries and driver codes into the
 fully-automated \c oomph-lib build process. Store your code in 
-suitably named sub-directories in \c user_src and \c user_drivers
-and update \c config/configure. See \ref own for more details.
-
+suitably named sub-directories in \c user_src and \c user_drivers.
+See \ref own for more details.
 
 
 <HR>
@@ -484,7 +452,7 @@ you can link against it by specifying the configure option
 preconditioners from the
 <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">
 Scalable Linear Solvers Project</a>. The wrappers are only built
-if \c Hypre is avaibable on your machine. If your local  
+if \c Hypre is available on your machine. If your local  
 copy of the \c Hypre library installed in 
 \code
 /home/mheil/local/hypre
@@ -543,7 +511,7 @@ unpacked \c Hypre sources but not the tar file and the library itself.
 preconditioners from the
 <a href="http://trilinos.sandia.gov/">
 Trilinos Project</a>. The wrappers are only built
-if \c Trilinos is avaibable on your machine. If your local  
+if \c Trilinos is available on your machine. If your local  
 copy of the \c Trilinos library installed in 
 \code
 /home/mheil/local/trilinos
@@ -558,22 +526,27 @@ drwxr-xr-x    2 mheil    users       16384 Dec 20 15:35 include
 drwxr-xr-x    2 mheil    users        4096 Dec 20 15:35 lib
 \endcode
 you can get \c oomph-lib to link against it (and to compile
-\c oomph-lib's wrappers to \c Trilnos's solvers and preconditioners)
+\c oomph-lib's wrappers to \c Trilinos's solvers and preconditioners)
 by specifying the configure option
 \code
 --with-trilinos=/home/mheil/local/trilinos
 \endcode
 
 
-\b Note: \c oomph-lib should work with major version numbers 9 and 10
-of the Trilinos library.
+\b Note: \c oomph-lib should work with major version numbers 9, 10 and 11
+of the Trilinos library, and for revision numbers from 11 onwards you will
+need to have \c cmake installed on your machine.
 If these versions of \c Trilinos are not available on your machine you
 can get the latest version from the <a href="http://trilinos.sandia.gov/">
-Trilinos web site </a> or download the older version below
+Trilinos web site </a> or download some of the older versions below
 
-<CENTER>
-<a href="http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-9.0.2.tar.gz">http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-9.0.2.tar.gz</a>
-</CENTER>
+<UL>
+<LI><a href="http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-9.0.2.tar.gz">http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-9.0.2.tar.gz</a>
+<LI><a href="http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-10.8.5-Source.tar.gz">http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-10.8.5-Source.tar.gz</a>
+<LI><a href="http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-11.4.3-Source.tar.gz">http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-11.4.3-Source.tar.gz</a>
+</UL>
+
+\c oomph-lib works with all of these.
 
 You can either build the library yourself
 or get \c oomph-lib to build it for you. To do this simply place a copy of the
@@ -612,7 +585,7 @@ unpacked \c Trilinos sources but not the tar file and the library itself.
 </CENTER>
 
 <CENTER>
-The compilation of \c Trilinos can take \b a very long time! 
+The compilation of \c Trilinos can take a very long time! 
 
 We strongly recommend installing \c oomph-lib without it in the first
 instance.
@@ -782,7 +755,7 @@ make
        directory -- you don't have to change this!).
      - the libraries (\c oomph-lib or otherwise) that you wish to link
        against. This is done with the usual \c -l flag that you
-       will be familar with from your compiler. Have a look at the
+       will be familiar with from your compiler. Have a look at the
        comments regarding the order of the libraries!
      \n\n
    - The \c INCLUDES variable specifies where to find the include
@@ -791,7 +764,7 @@ make
      location. 
      \n\n
    - If you have multiple driver codes, add the name of all
-     exectuables to the \c noinst_PROGRAMS variable, and specify
+     executables to the \c noinst_PROGRAMS variable, and specify
      the \c *_SOURCES and \c *_LDADD variables
      for each one. 
      \n\n
@@ -802,11 +775,10 @@ make
 \subsubsection add_src Adding new libraries and linking against them from driver codes
 
 The above instructions should be sufficient to get you started.
-You can create multiple sub-directories for different projects
-(just remember to register the directories, otherwise they will not 
-get included in the build process) and each sub-directory may, 
-of course, contain multiple files, separated into header and
-source files. automake will ensure that only those files that have been
+You can create multiple sub-directories for different projects 
+and each sub-directory may, of course, contain multiple files, 
+separated into header and source files. \c automake will ensure that 
+only those files that have been
 changed will be recompiled when you issue the \c make
 command. However, at some point you may wish to package some of your sources 
 into your own library and maybe even offer it for permanent inclusion into
@@ -819,7 +791,7 @@ into its own library and installed in the standard location.
  The steps required to include your own library into the \c oomph-lib
 build process are very similar to those required to
 add additional user drivers. As before, the \c user_src directory 
-already contains a sample directory \c jack_cool, to faciliate
+already contains a sample directory \c jack_cool, to facilitate
 the procedure. We therefore suggest the following sequence of steps:
 -# Go to the \c user_src directory and create a new 
    directory, e.g.
@@ -864,8 +836,8 @@ Linking directly against \c oomph-lib's (sub-)libraries
 is slightly complicated by cross-compilation issues arising from
 the fact that the \c oomph-lib distribution includes a few C and Fortran 
 sources. When linking is done (by the C++ compiler) one usually has to 
-explicity specify a few compiler-specific Fortran libraries.
-The beauty of the autools approach described above is that these libraries
+explicitly specify a few compiler-specific Fortran libraries.
+The beauty of the \c autotools approach described above is that these libraries
 (and any other flags that need to be passed to the compiler/linker)
 are determined and specified automatically. Doing this manually 
 is no fun! Have a look at
@@ -887,7 +859,7 @@ Here is the version that was generated one of our machines:
 
 The version that is generated during the build process
 on your machine provides template for your own customised
-makefiles. When modifying the sample to different driver codes, 
+Makefiles. When modifying the sample to different driver codes, 
 you should not (have to) edit any of the "installation specific"
 variables. Simply specify the \c oomph-lib (sub-)libraries that you wish to 
 link against in the \c OOMPH_LIB-LIBS variable (in the example shown

@@ -703,6 +703,14 @@ AM_CONDITIONAL(SYMBOLIC_LINKS_FOR_HEADERS, test x$want_sym_link = xtrue)
 
 
 
+# Find user_src subdirectories
+USER_SRC_SUBDIRECTORIES=`cd user_src/ && echo */`
+AC_SUBST(USER_SRC_SUBDIRECTORIES)
+
+# Find user_drivers subdirectories
+USER_DRIVERS_SUBDIRECTORIES=`cd user_drivers/ && echo */`
+AC_SUBST(USER_DRIVERS_SUBDIRECTORIES)
+
 
 # Link gfortran libraries when building oomph_flapack library
 # This is a workaround to a problem with the latest versions of

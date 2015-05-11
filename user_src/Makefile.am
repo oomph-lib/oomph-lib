@@ -1,6 +1,5 @@
-# The src directories that will be included by make dist. Add directories
-# here to include them in the resulting tar file.
-DIST_SUBDIRS = $(SUBDIRS) jack_cool
+SUBDIRS = $(USER_SRC_SUBDIRECTORIES)
+DIST_SUBDIRS = $(SUBDIRS)
 
 # Extra actions for clean and distclean
 distclean-local:

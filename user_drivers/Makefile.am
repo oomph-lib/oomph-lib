@@ -1,6 +1,5 @@
-# The driver directories that will be included by make dist. Add
-# directories here to include them in the resulting tar file.
-DIST_SUBDIRS = joe_cool jack_cool
+SUBDIRS = $(USER_DRIVERS_SUBDIRECTORIES)
+DIST_SUBDIRS = $(USER_DRIVERS_SUBDIRECTORIES)
 
 # Extra actions for clean and distclean
 distclean-local:
