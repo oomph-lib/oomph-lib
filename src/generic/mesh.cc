@@ -7950,13 +7950,14 @@ unsigned Mesh::ndof_types() const
 {
  // Remains -1 if we don't have any elements on this processor.
  int int_ndof_types = -1;
- if (nelement() > 0)
+ unsigned nel=nelement();
+ if (nel > 0)
   {
    int_ndof_types = element_pt(0)->ndof_types();
 #ifdef PARANOID
    // Check that every element in this mesh has the same number of
    // types of DOF.
-   for (unsigned i = 1; i < nelement(); i++)
+   for (unsigned i = 1; i < nel; i++)
     {
      if (int_ndof_types != int(element_pt(i)->ndof_types()) )
       {
@@ -7965,10 +7966,14 @@ unsigned Mesh::ndof_types() const
         << "Every element in the mesh must have the same number of "
         << "types of DOF for ndof_types() to work\n"
         << "Element 0 has " << int_ndof_types << " DOF types\n"
-        << "Element " << i << " has "
-        << element_pt(i)->ndof_types() << " DOF types";
+        << "Element " << i << " [out of a total of " << nel << " ] has "
+        << element_pt(i)->ndof_types() << " DOF types"
+        << "Element types are: Element 0:" << typeid(*element_pt(0)).name() 
+        << "\n"
+        << "           Current Element  :" << typeid(*element_pt(i)).name() 
+        << "\n";
        throw OomphLibError(error_message.str(),
-OOMPH_CURRENT_FUNCTION,
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }

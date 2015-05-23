@@ -175,7 +175,11 @@ namespace oomph
     if (Nproc_for_prec[p] == 0)
      {
       std::ostringstream error_message;
-      error_message << "Not enough processors for the preconditioners.";
+      error_message << "We only have " << nproc << " processor[s]!\n"
+                    << "This is not enough to perform the " << Nprec 
+                    << " block solves in parallel! Sorry! \n"
+                    << "Please run this with more processors or disable the\n"
+                    << "request for two-level paralellism.\n"; 
       throw OomphLibError(error_message.str(),
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);

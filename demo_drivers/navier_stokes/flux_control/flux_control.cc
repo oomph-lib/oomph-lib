@@ -1180,7 +1180,6 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_flux_control_elements()
    // Build the corresponding flux control element
    NavierStokesFluxControlElement<ELEMENT>* flux_element_pt = new 
     NavierStokesFluxControlElement<ELEMENT>(bulk_elem_pt, face_index);
-//   flux_element_pt->dim() = 2;
 
    //Add the new element to its mesh
    Outflow_flux_control_sub_mesh_pt->add_element_pt(flux_element_pt);     
@@ -1195,8 +1194,7 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_flux_control_elements()
 
  // Set the block id for the pressure unknown in this element for the 
  // preconditioning, in 2D the Navier-Stokes pressure is in block 2
- flux_control_el_pt->ndof_number_for_unknown() = 0;
- flux_control_el_pt->dim() = 2;
+ flux_control_el_pt->dof_number_for_unknown() = 2;
 
  // Add NetFluxControlElement to its mesh
  Outflow_flux_control_master_mesh_pt->
@@ -1353,7 +1351,6 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_impedance_elements()
      // Build the corresponding flux control element
      NavierStokesFluxControlElement<ELEMENT>* flux_element_pt = new 
       NavierStokesFluxControlElement<ELEMENT>(bulk_elem_pt, face_index);
-//     flux_element_pt->dim() = 2;
 
      //Add the new element to its mesh
      Outflow_flux_control_sub_mesh_pt->add_element_pt(flux_element_pt);     
@@ -1385,7 +1382,6 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_impedance_elements()
    NetFluxControlElementForWomersleyPressureControl* flux_control_element
    = new NetFluxControlElementForWomersleyPressureControl
       (Outflow_flux_control_sub_mesh_pt, pressure_control_element);
-   flux_control_element->dim() = 2;
 
    Outflow_impedance_master_mesh_pt->add_element_pt(flux_control_element);
   }

@@ -144,8 +144,9 @@ class NetFluxControlElement : public virtual GeneralisedElement
      flux_el_pt->add_pressure_data(Pressure_data_pt);
     }
    
-   // Default value for Ndof_number_for_unknown 
-   Ndof_number_for_unknown = 0;
+   // Default value for Dof_number_for_unknown, indiating that it's 
+   // uninitialised
+   Dof_number_for_unknown = UINT_MAX;
   }
 
  
@@ -165,8 +166,8 @@ class NetFluxControlElement : public virtual GeneralisedElement
    BrokenCopy::broken_assign("NetFluxControlElement");
   }
  
- /// 
- unsigned& dim() { return Dim; }
+ /// Spatial dimension of the problem
+ unsigned dim() const {return Dim;} 
  
  /// \short Function to return a pointer to the Data object whose
  /// single value is the pressure applied by the
@@ -195,30 +196,40 @@ class NetFluxControlElement : public virtual GeneralisedElement
 
 
  /// \short The number of "DOF types" that degrees of freedom in this element
- /// are sub-divided into - set to Ndof_number_for_unknown+1
+ /// are sub-divided into - it's set to Dof_number_for_unknown+1
  /// because it's expected this element is added to a fluid mesh 
  /// containing navier stokes elements
- /// RAYRAY - the comment above is incorrect. The person who wrote this should
- /// fix it.
  unsigned ndof_types() const
   {
-   return Dim+1;
+#ifdef PARANOID
+   if (Dof_number_for_unknown==UINT_MAX)
+    {
+     std::ostringstream error_message;
+     error_message << "Dof_number_for_unknown hasn't been set yet!\n"
+                   << "Please do so using the dof_number_for_unknown()\n"
+                   << "access function\n";
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif   
+   return Dof_number_for_unknown+1;
   }
 
- /// \short Function to set / get the id number of the "DOF type" to which 
- /// the degree of freedom in this element is added to. 
- /// This should be set to the number id of the Navier-Stokes pressure DOF type
+ /// \short Function to set / get the nodal value of the "DOF type" to which 
+ /// the degree of freedom in this element (the pressure that enforces
+ /// the required volume flux!) is added to. 
+ /// This should be set to the Navier-Stokes pressure DOF type
  /// (usually the dimension of the problem, for example, in 3D, the DOF types 
- /// for Navier-Stokes elements are usually labelled 0, 1, 2, 3 for u, v and w 
+ /// for single-physics Navier-Stokes elements are usually 
+ /// labelled 0, 1, 2, 3 for u, v and w 
  /// velocities and pressure respectively. It is important to note that this is
- /// dimension dependent, so should not be hard coded in!! This should not be
+ /// dimension dependent, so should not be hard coded in!! In particularly,
+ /// this should not simply be
  /// set to the dimension of the problem if there is further splitting of the
  /// velocity DOF types) if this element is added to a fluid mesh containing 
  /// Navier-Stokes elements.
- /// RAYRAY - The default is 0, there does not seem to be a check to see if the
- /// user has set this variable, the default value would almost always fail if
- /// this element is inserted into the Navier-Stokes bulk mesh. 
- unsigned& ndof_number_for_unknown() {return Ndof_number_for_unknown; }
+ unsigned& dof_number_for_unknown() {return Dof_number_for_unknown; }
 
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
@@ -226,18 +237,31 @@ class NetFluxControlElement : public virtual GeneralisedElement
  /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) The single degree of freedom is given the 
- /// DOF type number of Ndof_number_for_unknown since it's expected this 
+ /// DOF type number of Dof_number_for_unknown since it's expected this 
  /// unknown is added to the Navier-Stokes pressure DOF block (it is also
- /// assumed that the user has set the Ndof_number_for_unknown variable to
- /// the velocity DOF type using the function ndof_number_for_unknown()).
+ /// assumed that the user has set the Dof_number_for_unknown variable to
+ /// the velocity DOF type using the function dof_number_for_unknown()).
  void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long, unsigned> >& dof_lookup_list) const
   {
+#ifdef PARANOID
+   if (Dof_number_for_unknown==UINT_MAX)
+    {
+     std::ostringstream error_message;
+     error_message << "Dof_number_for_unknown hasn't been set yet!\n"
+                   << "Please do so using the dof_number_for_unknown()\n"
+                   << "access function\n";
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif   
+
    // pair to store dof lookup prior to being added to list
    std::pair<unsigned,unsigned> dof_lookup;
  
    dof_lookup.first = this->eqn_number(0);
-   dof_lookup.second = Ndof_number_for_unknown;
+   dof_lookup.second = Dof_number_for_unknown;
      
    // add to list
    dof_lookup_list.push_front(dof_lookup);
@@ -302,7 +326,7 @@ private:
  /// number id of the Navier-Stokes pressure DOF block (which is dimension
  /// dependent!) if this element is added to a fluid mesh 
  /// containing navier stokes elements
- unsigned Ndof_number_for_unknown;
+ unsigned Dof_number_for_unknown;
 
  /// spatial dim of NS system
  unsigned Dim;

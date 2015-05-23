@@ -762,7 +762,7 @@ namespace oomph
              << "the optional argument set true to allow multiple element\n"
              << "types in the same mesh.\n"
              << "Note: A minimal requirement is that the elements in the same\n"
-             << "mesh MUST have the same number types DOFs.";
+             << "mesh MUST have the same number of DOF types.";
             throw OomphLibError(error_message.str(),
                                 OOMPH_CURRENT_FUNCTION,
                                 OOMPH_EXCEPTION_LOCATION);
