@@ -142,6 +142,12 @@ namespace oomph
    Subsidiary_preconditioner_creation_function_pt = sub_prec_fn;
   }
 
+  /// Reset the subsidiary preconditioner function to its default
+  void reset_subsidiary_preconditioner_function_to_default()
+  {
+   Subsidiary_preconditioner_creation_function_pt = 
+    &PreconditionerCreationFunctions::create_super_lu_preconditioner;
+  }
   /// \short Set the subsidiary preconditioner to use for block i. The
   /// subsidiary preconditioner should have been created using new (the
   /// general purpose block preconditioner will delete it later). If null
