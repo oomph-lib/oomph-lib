@@ -8570,7 +8570,7 @@ OOMPH_CURRENT_FUNCTION,
 /// magnitude epsilon
 //======================================================================
 void Problem::add_eigenvector_to_dofs(const double &epsilon,
-                                      DoubleVector &eigenvector)
+                                      const DoubleVector &eigenvector)
 {
  unsigned long n_dof = ndof();
  //Check that the eigenvector has the correct size

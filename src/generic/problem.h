@@ -1818,7 +1818,7 @@ public:
  /// the constat epsilon to the dofs in the problem so that
  /// it can be output by the usual routines
  void add_eigenvector_to_dofs(const double &epsilon,
-                              DoubleVector &eigenvector);
+                              const DoubleVector &eigenvector);
 
 
  /// \short Store the current values of the degrees of freedom

@@ -52,6 +52,115 @@ namespace oomph
 //////////////////////////////////////////////////////////////////
 
 //=======================================================================
+/// Get strain (3x3 entries; r, z, phi)
+//=======================================================================
+ void AxisymmetricLinearElasticityEquations::
+ get_strain(const Vector<double>& s, DenseMatrix<double>& strain)
+ {
+  //Find out how many nodes there are
+  unsigned n_node = this->nnode();
+  
+    
+#ifdef PARANOID
+  //Find out how many positional dofs there are
+  unsigned n_position_type = this->nnodal_position_type();
+  
+  if(n_position_type != 1)
+   {
+    throw OomphLibError(
+     "AxisymmetricLinearElasticity is not yet implemented for more than one position type",
+     OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  //Find the indices at which the local displacements are stored
+  unsigned u_nodal_index[3];
+  for(unsigned i=0;i<3;i++) 
+   {
+    u_nodal_index[i] = this->
+    u_index_axisymmetric_linear_elasticity(i);  
+   }
+  
+  //Set up memory for the shape functions
+  Shape psi(n_node);
+  
+  // Derivs only w.r.t. r [0] and z [1]
+  DShape dpsidx(n_node,2);
+    
+  //Storage for Eulerian coordinates (r,z; initialised to zero)
+  Vector<double> interpolated_x(2,0.0);
+  
+  // Displacements u_r,u_z,u_theta
+  Vector<double> interpolated_u(3,0.0);
+  
+  //Calculate interpolated values of the derivatives w.r.t.
+  //Eulerian coordinates
+  DenseMatrix<double> interpolated_dudx(3,2,0.0);
+  
+  
+  //Calculate displacements and derivatives 
+  for(unsigned l=0;l<n_node;l++)
+   {
+    //Calculate the coordinates 
+    for(unsigned i=0;i<2;i++)
+     {
+      interpolated_x[i] += this->raw_nodal_position(l,i)*psi(l);
+     }
+
+    //Get the nodal displacements
+    for(unsigned i=0;i<3;i++)
+     {
+      const double u_value 
+       = this->raw_nodal_value(l,u_nodal_index[i]);
+      interpolated_u[i]+=u_value*psi(l);
+      
+      //Loop over derivative directions
+      for(unsigned j=0;j<2;j++)
+       {
+        interpolated_dudx(i,j) += u_value*dpsidx(l,j);
+       }
+     }
+   }
+  
+  
+  // define shorthand notation for regularly-occurring terms
+  double r = interpolated_x[0];
+  
+  // r component of displacement
+  double ur = interpolated_u[0]; 
+  
+  // theta component of displacement
+  double uth = interpolated_u[2];
+  
+  // derivatives w.r.t. r and z:
+  double durdr = interpolated_dudx(0,0);
+  double durdz = interpolated_dudx(0,1);
+  double duzdr = interpolated_dudx(1,0);
+  double duzdz = interpolated_dudx(1,1);
+  double duthdr = interpolated_dudx(2,0);
+  double duthdz = interpolated_dudx(2,1);
+  
+
+  // e_rr
+  strain(0,0)=durdr;
+  // e_rz
+  strain(0,1)=durdz+duzdr;
+  strain(1,0)=durdz+duzdr;
+  // e_rphi
+  strain(0,2)=duthdr-uth/r;
+  strain(2,0)=duthdr-uth/r;
+  // e_zz
+  strain(1,1)=duzdz;
+  // e_zphi
+  strain(1,2)=duthdz;
+  strain(2,1)=duthdz;
+  // e_phiphi
+  strain(2,2)=ur/r;
+  
+ }
+ 
+//=======================================================================
 /// Compute the residuals for the axisymmetric (in cyl. polars)
 /// linear elasticity equations in. Flag indicates if we want Jacobian too.
 //=======================================================================

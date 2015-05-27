@@ -7,7 +7,8 @@ axisym_linear_elasticity_elements.cc
 # Define the headers
 headers =  \
 axisym_linear_elasticity_elements.h \
-axisym_linear_elasticity_traction_elements.h
+axisym_linear_elasticity_traction_elements.h \
+Taxisym_linear_elasticity_elements.h
 
 # Define name of library
 libname = axisym_linear_elasticity
