@@ -10889,7 +10889,8 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
      dt_rescaling_factor = 
       std::pow((epsilon/error), (1.0/(1.0+time_stepper_pt()->order())));
 
-     oomph_info << "Timestep scaling factor is  " << dt_rescaling_factor << std::endl;
+     oomph_info << "Timestep scaling factor is  " 
+                << dt_rescaling_factor << std::endl;
      oomph_info << "Estimated timestepping error is " << error << std::endl;
     } //End of if adaptive flag
 
@@ -10907,7 +10908,8 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
     {
      oomph_info << "Tried to increase dt by the ratio " << dt_rescaling_factor
                 << " which is above the maximum (" << DTSF_max_increase
-                << "). Attempting to increase by the maximum ratio instead.";
+                << "). Attempting to increase by the maximum ratio instead."
+                << std::endl;
      new_dt_candidate = DTSF_max_increase * dt_actual;
     }
    // If we have already rejected the timestep then don't do this check
@@ -10924,7 +10926,8 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
         << "         would lower dt below \n"
         << "         Problem::Minimum_dt_but_still_proceed="
         <<           Minimum_dt_but_still_proceed << "\n"
-        << "         ---> We're continuing with present timestep.\n";
+        << "         ---> We're continuing with present timestep.\n"
+        << std::endl;
        dt_rescaling_factor=1.0;
        // ??ds shouldn't we set new_dt_candidate =
        // Minimum_dt_but_still_proceed here, rather than not changing dt at
@@ -10935,8 +10938,8 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
        // Otherwise reject
        oomph_info << "Timestep would decrease by " << dt_rescaling_factor
                   << " which is less than the minimum scaling factor " 
-                  << DTSF_min_decrease << std::endl
-                  << "TIMESTEP REJECTED" << std::endl;
+                  << DTSF_min_decrease << std::endl;
+       oomph_info << "TIMESTEP REJECTED" << std::endl;
        REJECT_TIMESTEP=1;
       }
 
