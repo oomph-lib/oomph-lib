@@ -1890,45 +1890,45 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //    }
 
  /// RRR NEW REPLACEMENT STUFF 
-//  {
-//    // Create the inverse to dof_to_block_map
-//    Vector<unsigned> temp_block_to_dof_map(n_dof_types,0);
-//    for (unsigned dof_i = 0; dof_i < n_dof_types; dof_i++) 
+  {
+    // Create the inverse to dof_to_block_map
+    Vector<unsigned> temp_block_to_dof_map(n_dof_types,0);
+    for (unsigned dof_i = 0; dof_i < n_dof_types; dof_i++) 
+    {
+      temp_block_to_dof_map[dof_to_block_map[dof_i]] = dof_i;
+    }
+
+    // print it out to check.
+
+//    std::cout << "dof_to_block_map:" << std::endl;
+//    for (unsigned iii = 0; iii < dof_to_block_map.size(); iii++) 
 //    {
-//      temp_block_to_dof_map[dof_to_block_map[dof_i]] = dof_i;
+//      std::cout << dof_to_block_map[iii] << std::endl; 
 //    }
 //
-//    // print it out to check.
-//
-////    std::cout << "dof_to_block_map:" << std::endl;
-////    for (unsigned iii = 0; iii < dof_to_block_map.size(); iii++) 
-////    {
-////      std::cout << dof_to_block_map[iii] << std::endl; 
-////    }
-////
-////    std::cout << std::endl;
-////    std::cout << "block_to_dof_map: " << std::endl;
-////    for (unsigned iii = 0; iii < block_to_dof_map.size(); iii++) 
-////    {
-////      std::cout << block_to_dof_map[iii] << std::endl; 
-////    }
-//    
-//   
-//   // Now do the replacement of all blocks in v_aug_pt 
-//   for (unsigned block_row_i = 0; 
-//        block_row_i < N_velocity_doftypes; block_row_i++) 
-//   {
-//     unsigned temp_dof_row_i = temp_block_to_dof_map[block_row_i];
-//     for (unsigned block_col_i = 0; 
-//          block_col_i < N_velocity_doftypes; block_col_i++) 
-//     {
-//       unsigned temp_dof_col_i = temp_block_to_dof_map[block_col_i];
-//       this->set_replacement_dof_block(
-//           temp_dof_row_i,temp_dof_col_i,
-//           v_aug_pt(block_row_i,block_col_i));
-//     }
-//   }
-//  }
+//    std::cout << std::endl;
+//    std::cout << "block_to_dof_map: " << std::endl;
+//    for (unsigned iii = 0; iii < block_to_dof_map.size(); iii++) 
+//    {
+//      std::cout << block_to_dof_map[iii] << std::endl; 
+//    }
+    
+   
+   // Now do the replacement of all blocks in v_aug_pt 
+   for (unsigned block_row_i = 0; 
+        block_row_i < N_velocity_doftypes; block_row_i++) 
+   {
+     unsigned temp_dof_row_i = temp_block_to_dof_map[block_row_i];
+     for (unsigned block_col_i = 0; 
+          block_col_i < N_velocity_doftypes; block_col_i++) 
+     {
+       unsigned temp_dof_col_i = temp_block_to_dof_map[block_col_i];
+       this->set_replacement_dof_block(
+           temp_dof_row_i,temp_dof_col_i,
+           v_aug_pt(block_row_i,block_col_i));
+     }
+   }
+  }
 
 //  pause("first replacement done"); 
   
@@ -1937,56 +1937,56 @@ void LagrangeEnforcedflowPreconditioner::setup()
 
 
 
-  {  
-  unsigned blocked_row_i = spatial_dim;
-  unsigned blocked_col_i = spatial_dim;
-  unsigned doftype_row_running_total = My_ndof_types_in_mesh[0];
-  unsigned doftype_col_running_total = My_ndof_types_in_mesh[0];
-
-  for (unsigned row_mesh_i = 1; row_mesh_i < My_nmesh; row_mesh_i++) 
-  {
-    // Get the indirection for the mesh
-    for (unsigned row_dim_i = 0; row_dim_i < spatial_dim; row_dim_i++) 
-    {
-      const unsigned doftype_row_i = doftype_row_running_total 
-                                     + row_dim_i;
-
-      // Now do the same for the columns
-      for (unsigned col_mesh_i = 1; col_mesh_i < My_nmesh; col_mesh_i++) 
-      {
-        for (unsigned col_dim_i = 0; col_dim_i < spatial_dim; col_dim_i++)
-        {
-          const unsigned doftype_col_i = doftype_col_running_total
-                                         + col_dim_i;
-
-          this->set_replacement_dof_block(
-                  doftype_row_i,doftype_col_i,
-                  v_aug_pt(blocked_row_i,blocked_col_i));
- 
-//            oomph_info << "(" << blocked_row_i << "," 
-//                              << blocked_col_i << ")" 
-//                       << " -> " 
-//                       << "(" << doftype_row_i << ","
-//                              << doftype_col_i << ")" << std::endl; 
-
-          blocked_col_i++;
-        }
-
-        // Update the column dof type running total
-        doftype_col_running_total += My_ndof_types_in_mesh[col_mesh_i];
-      }
-
-      // reset the blocked col i and the running total for the next row
-      blocked_col_i = spatial_dim;
-      doftype_col_running_total = My_ndof_types_in_mesh[0];
-
-      // Update the blocked row_i
-      blocked_row_i++;
-    }
-    // Update the row dof type running total
-    doftype_row_running_total += My_ndof_types_in_mesh[row_mesh_i];
-  }
-  }
+//  {  
+//  unsigned blocked_row_i = spatial_dim;
+//  unsigned blocked_col_i = spatial_dim;
+//  unsigned doftype_row_running_total = My_ndof_types_in_mesh[0];
+//  unsigned doftype_col_running_total = My_ndof_types_in_mesh[0];
+//
+//  for (unsigned row_mesh_i = 1; row_mesh_i < My_nmesh; row_mesh_i++) 
+//  {
+//    // Get the indirection for the mesh
+//    for (unsigned row_dim_i = 0; row_dim_i < spatial_dim; row_dim_i++) 
+//    {
+//      const unsigned doftype_row_i = doftype_row_running_total 
+//                                     + row_dim_i;
+//
+//      // Now do the same for the columns
+//      for (unsigned col_mesh_i = 1; col_mesh_i < My_nmesh; col_mesh_i++) 
+//      {
+//        for (unsigned col_dim_i = 0; col_dim_i < spatial_dim; col_dim_i++)
+//        {
+//          const unsigned doftype_col_i = doftype_col_running_total
+//                                         + col_dim_i;
+//
+//          this->set_replacement_dof_block(
+//                  doftype_row_i,doftype_col_i,
+//                  v_aug_pt(blocked_row_i,blocked_col_i));
+// 
+////            oomph_info << "(" << blocked_row_i << "," 
+////                              << blocked_col_i << ")" 
+////                       << " -> " 
+////                       << "(" << doftype_row_i << ","
+////                              << doftype_col_i << ")" << std::endl; 
+//
+//          blocked_col_i++;
+//        }
+//
+//        // Update the column dof type running total
+//        doftype_col_running_total += My_ndof_types_in_mesh[col_mesh_i];
+//      }
+//
+//      // reset the blocked col i and the running total for the next row
+//      blocked_col_i = spatial_dim;
+//      doftype_col_running_total = My_ndof_types_in_mesh[0];
+//
+//      // Update the blocked row_i
+//      blocked_row_i++;
+//    }
+//    // Update the row dof type running total
+//    doftype_row_running_total += My_ndof_types_in_mesh[row_mesh_i];
+//  }
+//  }
 //    pause("remember me!"); 
     
 
