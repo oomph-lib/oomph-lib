@@ -836,8 +836,8 @@ namespace oomph
 
   unsigned* nreq_sparse = new unsigned[nproc]();
   unsigned* nreq_sparse_for_proc = new unsigned[nproc]();
-  unsigned** index_in_dof_block_sparse_send = new unsigned*[nproc]{};
-  unsigned** dof_number_sparse_send = new unsigned*[nproc]{};
+  unsigned** index_in_dof_block_sparse_send = new unsigned*[nproc]();
+  unsigned** dof_number_sparse_send = new unsigned*[nproc]();
   Vector<MPI_Request> send_requests_sparse;
   Vector<MPI_Request> recv_requests_sparse;
 
