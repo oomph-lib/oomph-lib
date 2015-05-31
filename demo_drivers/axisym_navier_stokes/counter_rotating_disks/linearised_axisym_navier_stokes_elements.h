@@ -592,8 +592,6 @@ namespace oomph
     
     /// \short The number of "DOF types" that degrees of freedom in this
     /// element are sub-divided into: Velocity and pressure.
-    /// RAYRAY - The above comment is not useful for understanding why 8 is
-    /// returned.
     unsigned ndof_types()const { return 8; }
 
     // RAYRAY - where is the function get_dof_numbers_for_unknowns(...) ?
@@ -829,8 +827,6 @@ namespace oomph
     
     /// \short Returns the number of "DOF types" that degrees of freedom
     /// in this element are sub-divided into: Velocity and pressure.
-    /// RAYRAY - The above comment is not useful for understanding why 8
-    /// is returned.
     unsigned ndof_types()const { return 8; }
 
     // RAYRAY - where is the function get_dof_numbers_for_unknowns(...)?

@@ -1261,8 +1261,9 @@ void compute_error(ostream &outfile,
     }
   } //End of function
 
- /// RAYRAY perhaps this deserves a comment rather than three slashes?
- /// I did not write this function... Ray White
+ ///
+ /// Perhaps this deserves a comment rather than three slashes?
+ /// I did not write this function...
  unsigned ndof_types() const
   {
    return DIM+2;

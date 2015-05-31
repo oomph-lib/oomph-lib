@@ -149,15 +149,17 @@ public:
 
  /// \short The number of "blocks" that degrees of freedom in this element
  /// are sub-divided into
- /// RAYRAY - This is not even the correct function name! Because this appears
+ /// 
+ /// IMPORTANT:
+ /// This is not even the correct function name! Because this appears
  /// to be untested (it will break if tested!), I will comment this out.
  /// Please re-implement if required in the future.
  /// The correct function signature is:
  /// unsigned ndof_types() const
- unsigned nblock_types()
-  {
-   return 2;
-  }
+// unsigned nblock_types()
+//  {
+//   return 2;
+//  }
 
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
@@ -166,23 +168,25 @@ public:
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) Pressure=1 since we expect to add this
  /// unknown to the pressure block
- /// RAYRAY - This is not even the correct function name!
+ ///
+ /// IMPORTANT:
+ /// This is not even the correct function name
  /// I have no self tests for this, because it appears to be not tested,
  /// I will comment this out, the correct function signature is:
  /// void get_dof_numbers_for_unknowns(
  /// std::list<std::pair<unsigned long, unsigned> >& block_lookup_list) const
- void get_block_numbers_for_unknowns(
-  std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)
-  {
-   // pair to store block lookup prior to being added to list
-   std::pair<unsigned,unsigned> block_lookup;
- 
-   block_lookup.first = eqn_number(0);
-   block_lookup.second = 1;
-     
-   // add to list
-   block_lookup_list.push_front(block_lookup);
-  }
+// void get_block_numbers_for_unknowns(
+//  std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)
+//  {
+//   // pair to store block lookup prior to being added to list
+//   std::pair<unsigned,unsigned> block_lookup;
+// 
+//   block_lookup.first = eqn_number(0);
+//   block_lookup.second = 1;
+//     
+//   // add to list
+//   block_lookup_list.push_front(block_lookup);
+//  }
  
  
 private:

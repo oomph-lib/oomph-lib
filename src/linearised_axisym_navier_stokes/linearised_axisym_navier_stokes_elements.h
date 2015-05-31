@@ -585,7 +585,7 @@ namespace oomph
     void output(FILE* file_pt, const unsigned &n_plot)
     { LinearisedAxisymmetricNavierStokesEquations::output(file_pt,n_plot); }
     
-    /// \short The number of "blocks" that degrees of freedom in this
+    /// \short The number of "dof-blocks" that degrees of freedom in this
     /// element are sub-divided into: Velocity and pressure.
     unsigned ndof_types() { return 8; }
     
@@ -827,7 +827,7 @@ namespace oomph
     void output(FILE* file_pt, const unsigned &n_plot)
     { LinearisedAxisymmetricNavierStokesEquations::output(file_pt,n_plot); }
     
-    /// \short Returns the number of "blocks" that degrees of freedom
+    /// \short Returns the number of "dof-blocks" that degrees of freedom
     /// in this element are sub-divided into: Velocity and pressure.
     unsigned ndof_types() { return 8; }
     
