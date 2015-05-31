@@ -953,7 +953,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
   this->clean_up_memory();
   double t_end_clean_up_memory = TimingHelpers::timer();
  
-  if(Doc_time)
+//  if(Doc_time)
   { 
     const double t_clean_up_memory = t_end_clean_up_memory 
                                      - t_start_clean_up_memory;

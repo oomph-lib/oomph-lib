@@ -973,7 +973,8 @@ namespace oomph
     // first_row+nrow_local for which we should store the
     // Dof_index and Index_in_dof_block for
     // then send the lists to other processors
-    Vector<unsigned> sparse_global_rows_for_block_lookup;
+//    Vector<unsigned> sparse_global_rows_for_block_lookup;
+    std::set<unsigned> sparse_global_rows_for_block_lookup;
     if (matrix_distributed)
      {
       unsigned nnz = cr_matrix_pt->nnz();
@@ -983,13 +984,14 @@ namespace oomph
         unsigned ci = column_index[i];
         if (ci<first_row || ci>last_row)
          {
-          if (find(sparse_global_rows_for_block_lookup.begin(),
-                   sparse_global_rows_for_block_lookup.end(),
-                   ci) ==
-              sparse_global_rows_for_block_lookup.end())
-           {
-            sparse_global_rows_for_block_lookup.push_back(ci);
-           }
+           sparse_global_rows_for_block_lookup.insert(ci);
+//          if (find(sparse_global_rows_for_block_lookup.begin(),
+//                   sparse_global_rows_for_block_lookup.end(),
+//                   ci) ==
+//              sparse_global_rows_for_block_lookup.end())
+//           {
+//            sparse_global_rows_for_block_lookup.push_back(ci);
+//           }
          }
        }
      }
@@ -1008,24 +1010,24 @@ namespace oomph
 
 
     // RAYTIME
-    double t_sort_sparse_global_rows_for_block_lookup_start
-      = TimingHelpers::timer();
-
-    sort(sparse_global_rows_for_block_lookup.begin(),
-         sparse_global_rows_for_block_lookup.end());
-
-    // RAYTIME
-    double t_sort_sparse_global_rows_for_block_lookup_end
-      = TimingHelpers::timer();
-    if(Debug_flag)
-    {
-      double t_sort_sparse_global_rows_for_block_lookup
-        = t_sort_sparse_global_rows_for_block_lookup_end
-        - t_sort_sparse_global_rows_for_block_lookup_start;
-      oomph_info << "BLKSETUP_MO_SENDSPARSE: " 
-                <<  "t_sort_sparse_global_rows_for_block_lookup: "
-                << t_sort_sparse_global_rows_for_block_lookup << std::endl; 
-    }
+//    double t_sort_sparse_global_rows_for_block_lookup_start
+//      = TimingHelpers::timer();
+//
+//    sort(sparse_global_rows_for_block_lookup.begin(),
+//         sparse_global_rows_for_block_lookup.end());
+//
+//    // RAYTIME
+//    double t_sort_sparse_global_rows_for_block_lookup_end
+//      = TimingHelpers::timer();
+//    if(Debug_flag)
+//    {
+//      double t_sort_sparse_global_rows_for_block_lookup
+//        = t_sort_sparse_global_rows_for_block_lookup_end
+//        - t_sort_sparse_global_rows_for_block_lookup_start;
+//      oomph_info << "BLKSETUP_MO_SENDSPARSE: " 
+//                <<  "t_sort_sparse_global_rows_for_block_lookup: "
+//                << t_sort_sparse_global_rows_for_block_lookup << std::endl; 
+//    }
       
 
     // RAYTIME
@@ -1033,14 +1035,20 @@ namespace oomph
       = TimingHelpers::timer();
 
     int nsparse = sparse_global_rows_for_block_lookup.size();
-    Global_index_sparse.resize(nsparse);
+    
+    //Global_index_sparse.resize(nsparse);
+    Global_index_sparse.resize(0);
+    std::copy(sparse_global_rows_for_block_lookup.begin(), 
+              sparse_global_rows_for_block_lookup.end(), 
+              std::back_inserter(Global_index_sparse));
+
     Index_in_dof_block_sparse.resize(nsparse);
     Dof_number_sparse.resize(nsparse);
-    // RAYRAY - Why is this looping through a vector?...
-    for (int i = 0; i < nsparse; i++)
-     {
-      Global_index_sparse[i]=sparse_global_rows_for_block_lookup[i];
-     }
+//    // RAYRAY - Why is this looping through a vector?...
+//    for (int i = 0; i < nsparse; i++)
+//     {
+//      Global_index_sparse[i]=sparse_global_rows_for_block_lookup[i];
+//     }
     sparse_global_rows_for_block_lookup.clear();
 
     // RAYTIME
