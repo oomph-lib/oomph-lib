@@ -148,6 +148,9 @@ namespace oomph
   // For debugging...
   bool doc_block_matrices=false;
 
+  // For output timing results - to be removed soon. Ray
+  bool raytime_flag = false;
+
   //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   // NOTE: In the interest of minimising memory usage, several containers
   //       are recycled, therefore their content/meaning changes
@@ -160,8 +163,11 @@ namespace oomph
   double t_clean_up_memory_end = TimingHelpers::timer();
   double clean_up_memory_time = t_clean_up_memory_end 
                                 - t_clean_up_memory_start;
-  oomph_info << "LSC: clean_up_memory_time: " 
-             << clean_up_memory_time << std::endl; 
+  if(raytime_flag)
+  {
+    oomph_info << "LSC: clean_up_memory_time: " 
+               << clean_up_memory_time << std::endl; 
+  }
   
 
 #ifdef PARANOID
@@ -252,7 +258,11 @@ namespace oomph
     oomph_info << "Time for block_setup(...) [sec]: "
                << block_setup_time << "\n";
    }
-  oomph_info << "LSC: block_setup: " << block_setup_time << std::endl; 
+
+  if(raytime_flag)
+  {
+    oomph_info << "LSC: block_setup: " << block_setup_time << std::endl; 
+  }
   
 
   // determine whether the F preconditioner is a block preconditioner (and
@@ -278,7 +288,10 @@ namespace oomph
                << get_B_time << "\n";
    }
 
+  if(raytime_flag)
+  {
   oomph_info << "LSC: get block B get_B_time: " << get_B_time << std::endl; 
+  }
 
   if (doc_block_matrices)
    {
@@ -321,8 +334,11 @@ namespace oomph
                << "mass matrices) [sec]: "
                << ivmm_assembly_time << "\n";
    }
+  if(raytime_flag)
+  {
    oomph_info << "LSC: ivmm_assembly_time: " 
               << ivmm_assembly_time << std::endl; 
+  }
 
 
   if (doc_block_matrices)
@@ -348,8 +364,11 @@ namespace oomph
     oomph_info << "Time to get Bt [sec]: "
                << t_get_Bt_time << std::endl;
    }
+  if(raytime_flag)
+  {
   oomph_info << "LSC: get block Bt: " 
              << t_get_Bt_time << std::endl;  
+  }
 
   if (doc_block_matrices)   
    {
@@ -381,8 +400,11 @@ namespace oomph
                << t_QBt_time << std::endl;
    }
   delete inv_v_mass_pt; inv_v_mass_pt = 0;
+  if(raytime_flag)
+  {
   oomph_info << "LSC: t_QBt_time (matrix multiplicaton): " 
              << t_QBt_time << std::endl;  
+  }
   
   // Multiply B from left by divergence matrix B and store result in 
   // pressure Poisson matrix.
@@ -399,8 +421,11 @@ namespace oomph
   // Kill divergence matrix because we don't need it any more
   delete b_pt; b_pt = 0;
  
+  if(raytime_flag)
+  {
   oomph_info << "LSC: t_p_time (matrix multiplication): " 
              << t_p_time << std::endl;
+  }
 
 
   // Build the matvec operator for QBt
@@ -420,7 +445,10 @@ namespace oomph
   // needs to be recomputed afresh below)
   delete bt_pt; bt_pt = 0;
   
+  if(raytime_flag)
+  {
   oomph_info << "LSC: QBt (setup MV product): " << t_p_time2 << std::endl;
+  }
 
   // Do we need the Fp stuff?
   if (!Use_LSC)
@@ -476,8 +504,11 @@ namespace oomph
     oomph_info << "Time to get F [sec]: "
                << t_get_F_time << std::endl;
    }
+  if(raytime_flag)
+  {
     oomph_info << "LSC: get_block t_get_F_time: " 
                << t_get_F_time << std::endl;
+  }
   
   // form the matrix vector product helper
   double t_F_MV_start = TimingHelpers::timer();
@@ -491,8 +522,11 @@ namespace oomph
     oomph_info << "Time to build F Matrix Vector Operator [sec]: "
                << t_F_MV_time << std::endl;
    }
+  if(raytime_flag)
+  {
    oomph_info << "LSC: MV product setup t_F_MV_time: " 
               << t_F_MV_time << std::endl;
+  }
 
   
   // if F is a block preconditioner then we can delete the F matrix
@@ -514,8 +548,11 @@ namespace oomph
     oomph_info << "Time to get Bt [sec]: "
                << t_get_Bt_time2 << std::endl;
    }
+  if(raytime_flag)
+  {
   oomph_info << "LSC: get_block t_get_Bt_time2: " 
              << t_get_Bt_time2 << std::endl;
+  }
  
 
   // form the matrix vector operator for Bt
@@ -533,10 +570,13 @@ namespace oomph
 
   double t_Bt_MV_finish = TimingHelpers::timer();
 
-    double t_Bt_MV_time = t_Bt_MV_finish - t_Bt_MV_start;
-
+  double t_Bt_MV_time = t_Bt_MV_finish - t_Bt_MV_start;
+  if(raytime_flag)
+  {
   oomph_info << "LSC: MV product setup t_Bt_MV_time: " 
                << t_Bt_MV_time << std::endl;
+  }
+
   // if the P preconditioner has not been setup
   if (P_preconditioner_pt == 0)
    {
@@ -566,7 +606,10 @@ namespace oomph
     oomph_info << "P sub-preconditioner setup time [sec]: "
                << t_p_prec_time << "\n";
    }
+  if(raytime_flag)
+  {
   oomph_info << "LSC: p_prec setup time: " << t_p_prec_time << std::endl;
+  }
 
   
   // Set up solver for solution of system with momentum matrix
@@ -611,7 +654,11 @@ namespace oomph
     oomph_info << "F sub-preconditioner setup time [sec]: "
                << t_f_prec_time << "\n";
    }
+  if(raytime_flag)
+  {
    oomph_info << "LSC: f_prec setup time: " << t_f_prec_time << std::endl; 
+  }
+
   // Remember that the preconditioner has been setup so
   // the stored information can be wiped when we
   // come here next...
