@@ -499,7 +499,7 @@ void print_connectivity_matrix(const Problem* const problem_pt)
   const Mesh* const mesh_pt = problem_pt->mesh_pt();
 
   const unsigned n_element = mesh_pt->nelement();
-  const unsigned n_ele_1d = sqrt(n_element);
+//  const unsigned n_ele_1d = sqrt(n_element);
 
   // Set up out file
   std::ostringstream filenamestream;
@@ -750,7 +750,7 @@ int main(int argc, char *argv[])
                   << RayParam::Matbase_str;
       std::string dump_str = dump_stream.str();
 
-      my_prec.print_subblocks(dump_str);
+//      my_prec.print_subblocks(dump_str);
 
       std::ostringstream dump_ss;
       dump_ss << RayParam::Natural_jac_dir
@@ -758,7 +758,7 @@ int main(int argc, char *argv[])
               << RayParam::Matbase_str;
       std::string another_dump_str = dump_ss.str();
 
-      my_prec.set_fullblock_dir(another_dump_str);
+//      my_prec.set_fullblock_dir(another_dump_str);
 
       problem.newton_solve();
 

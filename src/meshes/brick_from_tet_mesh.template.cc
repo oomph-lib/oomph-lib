@@ -9817,7 +9817,6 @@ namespace oomph
 //  Boundary_id.resize(n_xda_boundaries);
 //  for (unsigned xda_b=0;xda_b<n_xda_boundaries;xda_b++)
 //   {
-//     // RAYRAY
 //    //Boundary_id[xda_b]=tet_mesh_pt->oomph_lib_boundary_ids(xda_b);
 //    Boundary_id[xda_b]=xda_b;
 //   }

@@ -797,7 +797,7 @@ class BlockSelector
     // process.
     //
     //
-    // RAYRAY - a small note about indirections which caused me some headache.
+    // A small note about indirections which caused me some headache.
     // Thought I would mention it here in case the below code needs to be
     // re-visited.
     //

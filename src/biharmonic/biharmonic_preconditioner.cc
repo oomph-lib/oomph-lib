@@ -117,23 +117,6 @@ namespace Biharmonic_schur_complement_Hypre_defaults
  //setup the blocks look up schemes
  this->block_setup();
 
- if(Print_subblocks)
- {
-   First_solve = true;
-   unsigned nblocks = this->nblock_types();
-   for (unsigned block_i = 0; block_i < nblocks; block_i++) 
-   {
-     for (unsigned block_j = 0; block_j < nblocks; block_j++) 
-     {
-       std::ostringstream block_ss;
-       block_ss << Subblock_dir << "_" << block_i << block_j;
-       std::string block_str = block_ss.str();
-       CRDoubleMatrix tmp_block = this->get_block(block_i,block_j);
-       tmp_block.sparse_indexed_output(block_str,15,true);
-     }
-   }
- }
-
  // determine whether this preconditioner has 4 or 5 block types and set
  // Nblock_types if neccessary
 // unsigned n_row = this->master_nrow();
@@ -213,31 +196,6 @@ namespace Biharmonic_schur_complement_Hypre_defaults
  void BiharmonicPreconditioner::preconditioner_solve( 
   const DoubleVector &r, DoubleVector &z)
  {
-
-  if(Print_subblocks)
-  {
-    if(First_solve)
-    {
-      First_solve = false;
-
-      std::ostringstream r_ss;
-      r_ss << Fullblock_dir << "_rhs";
-      std::string r_str = r_ss.str();
-      r.output(r_str,15);
-
-      unsigned nblocks = this->nblock_types();
-      for (unsigned block_i = 0; block_i < nblocks; block_i++) 
-      {
-        std::ostringstream block_ss;
-        block_ss << Subblock_dir << "_rhs_" << block_i;
-        std::string block_str = block_ss.str();
-        DoubleVector block_vec;
-        get_block_vector(block_i,r,block_vec);
-        block_vec.output(block_str,15);
-      }
-    }
-  }
-
   // zero z
   z.initialise(0.0);
 
@@ -617,7 +575,6 @@ void InexactSubBiharmonicPreconditioner::compute_inexact_schur_complement()
   S_00_row_start[J_00_nrow] = S_00_nnz;
 
   // build the schur complement S00
-  // RAYRAY - make sure that this is correct, regarding the block distribution.
   S_00_pt = new CRDoubleMatrix(this->block_distribution_pt(0),J_00_nrow,
                                S_00_value,S_00_column_index,S_00_row_start);
   

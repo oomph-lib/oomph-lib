@@ -1001,7 +1001,6 @@ namespace oomph
 
     int nsparse = sparse_global_rows_for_block_lookup.size();
     
-    //Global_index_sparse.resize(nsparse);
     Global_index_sparse.resize(0);
     std::copy(sparse_global_rows_for_block_lookup.begin(), 
               sparse_global_rows_for_block_lookup.end(), 
@@ -1038,9 +1037,6 @@ namespace oomph
       int zero = 0;
       for (unsigned p = 0; p < nproc; p++)
        {
-//        nreq_sparse[p] = 0;
-//        nreq_sparse_for_proc[p] = 0;
-
         // determine the global eqn numbers required by this processor
         // that can be classified by processor p
         int begin = 0;

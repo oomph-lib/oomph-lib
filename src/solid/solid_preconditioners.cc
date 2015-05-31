@@ -89,8 +89,6 @@ namespace oomph
    }
   else
    {
-    // RAYRAY check if this is correct, IIRC there is no proper mapping of the
-    // meshes
     ndof_types = this->ndof_types_in_mesh(0);
    }
   Vector<unsigned> dof_to_block_map(ndof_types);
@@ -729,15 +727,6 @@ namespace oomph
  CRDoubleMatrix* 
  PressureBasedSolidLSCPreconditioner::assemble_mass_matrix_diagonal()
  {
-
-   {
-     std::ostringstream err_msg;
-     err_msg << "RAYRAY: assemble_mass_matrix_diagonal from solid_prec" << std::endl;
-     OomphLibWarning(
-         err_msg.str(),
-         OOMPH_CURRENT_FUNCTION,
-         OOMPH_EXCEPTION_LOCATION);
-   }
   // determine the rows required by this processor
   unsigned first_row = this->block_distribution_pt(0)->first_row();
   unsigned nrow_local = this->block_distribution_pt(0)->nrow_local();
