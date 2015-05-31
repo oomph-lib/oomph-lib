@@ -209,6 +209,8 @@ class LagrangeEnforcedflowPreconditioner
     Doc_prec_directory_pt = 0;
 
     Replace_all_f_blocks = false;
+
+    Setup_counter = 0;
   }
 
   /// destructor
@@ -271,14 +273,19 @@ class LagrangeEnforcedflowPreconditioner
     Doc_prec_directory_pt = doc_prec_directory_pt;
   }
 
-  void replace_all_f_blocks()
+  void set_replace_all_f_blocks()
   {
     Replace_all_f_blocks = true;
   }
 
-  void replace_modified_blocks_only()
+  void set_replace_modified_blocks_only()
   {
     Replace_all_f_blocks = false;
+  }
+
+  bool replace_all_f_blocks()
+  {
+    return Replace_all_f_blocks;
   }
 
   /// \short Apply the preconditioner.
@@ -629,6 +636,10 @@ class LagrangeEnforcedflowPreconditioner
 
   /// \short The number of velocity dof types.
   unsigned N_velocity_doftypes;
+
+  /// \short Counter for outputting matrices within 
+  /// setup, this is initialised to 0.
+  unsigned Setup_counter;
 
   bool First_NS_solve;
 
@@ -1250,6 +1261,120 @@ void LagrangeEnforcedflowPreconditioner::setup()
   this->block_setup(dof_to_block_map);
   this->turn_off_debug_flag();
 
+
+  unsigned rrmy_rank = master_distribution_pt()
+                       ->communicator_pt()->my_rank();
+  unsigned rrnproc = master_distribution_pt()
+                     ->communicator_pt()->nproc();
+
+  std::ostringstream counter_np_rank_ss;
+
+  counter_np_rank_ss << "C" << Setup_counter
+                     << "NP" << rrnproc 
+                     << "R" << rrmy_rank;
+
+  std::string counter_np_rank = counter_np_rank_ss.str();
+
+//  if(Setup_counter > 19)
+  {
+    string datafolder = "matrixdata";
+    string replacetype;
+    if(this->replace_all_f_blocks())
+    {
+      // Replace All F Blocks
+      replacetype = "RAFB";
+    }
+    else
+    {
+      // Replace Modified Blocks Only
+      replacetype = "RMBO";
+    } 
+
+    unsigned rrnblocktypes = this->nblock_types();
+
+    ////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////
+    // Outputting BLOCK types in BLOCK order
+//    for(unsigned blocki = 0; blocki < rrnblocktypes; blocki++)
+    {
+//      for (unsigned blockj = 0; blockj < rrnblocktypes; blockj++)
+      {
+        unsigned blocki = 0;
+        unsigned blockj = 0;
+        CRDoubleMatrix subblock;
+        this->internal_get_block(blocki,blockj,subblock);
+        std::stringstream blockname;
+        blockname << datafolder << "/" << replacetype << "_lgr_ibbefore_"
+                  << counter_np_rank << "_"
+                  << std::setw(2) << std::setfill('0') << blocki
+                  << std::setw(2) << std::setfill('0') << blockj;
+
+        subblock.sparse_indexed_output(blockname.str(),15,true);
+      }
+    }
+  }
+  //////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
+
+
+//  // RAYRAY outputting all the blocks in dof order
+//  {
+//    string datafolder = "matrixdata";
+//    string replacetype;
+//    if(this->replace_all_f_blocks())
+//    {
+//      // Replace All F Blocks
+//      replacetype = "RAFB";
+//    }
+//    else
+//    {
+//      // Replace Modified Blocks Only
+//      replacetype = "RMBO";
+//    }
+//
+//
+//    unsigned rrnblocktypes = this->nblock_types();
+//    unsigned rrndoftypes = this->ndof_types();
+//
+//    ////////////////////////////////////////////////////////////////////////
+//    ////////////////////////////////////////////////////////////////////////
+//    // Outputting DOF types in DOF order
+//    for(unsigned dofi = 0; dofi < rrndoftypes; dofi++)
+//    {
+//      for (unsigned dofj = 0; dofj < rrndoftypes; dofj++)
+//      {
+//        CRDoubleMatrix subblock;
+//        this->get_dof_level_block(dofi,dofj,subblock);
+//        std::stringstream blockname;
+//        blockname << datafolder << "/" << replacetype << "_lgr_d_"
+//                  << counter_np_rank << "_"
+//                  << std::setw(2) << std::setfill('0') << dofi
+//                  << std::setw(2) << std::setfill('0') << dofj;
+//
+////        subblock.sparse_indexed_output(blockname.str(),15,true);
+//      }
+//    }
+//
+//    ////////////////////////////////////////////////////////////////////////
+//    ////////////////////////////////////////////////////////////////////////
+//    // Outputting BLOCK types in BLOCK order
+//    for(unsigned blocki = 0; blocki < rrnblocktypes; blocki++)
+//    {
+//      for (unsigned blockj = 0; blockj < rrnblocktypes; blockj++)
+//      {
+//        CRDoubleMatrix subblock = this->get_block(blocki,blockj);
+//        std::stringstream blockname;
+//        blockname << datafolder << "/" << replacetype << "_lgr_b_"
+//                  << counter_np_rank << "_"
+//                  << std::setw(2) << std::setfill('0') << blocki
+//                  << std::setw(2) << std::setfill('0') << blockj;
+//
+////        subblock.sparse_indexed_output(blockname.str(),15,true);
+//      }
+//    }
+//
+//  } // END OF OUTPUT BLOCKS
+
   // RAYTIME
   double t_end_block_setup = TimingHelpers::timer();
   double t_block_setup = t_end_block_setup - t_start_block_setup;
@@ -1342,7 +1467,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
         blockname << "temprawmat/j_"
           << std::setw(2) << std::setfill('0') << Mi
           << std::setw(2) << std::setfill('0') << Mj;
-        sub_matrix_pt->sparse_indexed_output(blockname.str(),true,15);
+        sub_matrix_pt->sparse_indexed_output(blockname.str(),15,true);
         delete sub_matrix_pt;
         sub_matrix_pt = 0;
       }//for
@@ -1996,6 +2121,102 @@ void LagrangeEnforcedflowPreconditioner::setup()
     }
   }
 
+  {
+    string datafolder = "matrixdata";
+    string replacetype;
+    if(this->replace_all_f_blocks())
+    {
+      // Replace All F Blocks
+      replacetype = "RAFB";
+    }
+    else
+    {
+      // Replace Modified Blocks Only
+      replacetype = "RMBO";
+    } 
+
+    unsigned rrnblocktypes = this->nblock_types();
+
+    ////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////
+    // Outputting BLOCK types in BLOCK order
+    for(unsigned blocki = 0; blocki < rrnblocktypes; blocki++)
+    {
+      for (unsigned blockj = 0; blockj < rrnblocktypes; blockj++)
+      {
+        CRDoubleMatrix subblock;
+        this->internal_get_block(blocki,blockj,subblock);
+        std::stringstream blockname;
+        blockname << datafolder << "/" << replacetype << "_lgr_ibafter_"
+                  << counter_np_rank << "_"
+                  << std::setw(2) << std::setfill('0') << blocki
+                  << std::setw(2) << std::setfill('0') << blockj;
+
+        subblock.sparse_indexed_output(blockname.str(),15,true);
+      }
+    }
+  }
+
+  // RAYRAY outputting all the blocks in dof order
+  {
+    string datafolder = "matrixdata";
+    string replacetype;
+    if(this->replace_all_f_blocks())
+    {
+      // Replace All F Blocks
+      replacetype = "RAFB_AFTER";
+    }
+    else
+    {
+      // Replace Modified Blocks Only
+      replacetype = "RMBO_AFTER";
+    }
+
+    unsigned rrnblocktypes = this->nblock_types();
+    unsigned rrndoftypes = this->ndof_types();
+
+    ////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////
+    // Outputting DOF types in DOF order
+    for(unsigned dofi = 0; dofi < rrndoftypes; dofi++)
+    {
+      for (unsigned dofj = 0; dofj < rrndoftypes; dofj++)
+      {
+        CRDoubleMatrix subblock;
+        this->get_dof_level_block(dofi,dofj,subblock);
+        std::stringstream blockname;
+        blockname << datafolder << "/" << replacetype << "_lgr_d_"
+                  << counter_np_rank << "_"
+                  << std::setw(2) << std::setfill('0') << dofi
+                  << std::setw(2) << std::setfill('0') << dofj;
+
+//        subblock.sparse_indexed_output(blockname.str(),15,true);
+      }
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////
+    // Outputting BLOCK types in BLOCK order
+    for(unsigned blocki = 0; blocki < rrnblocktypes; blocki++)
+    {
+      for (unsigned blockj = 0; blockj < rrnblocktypes; blockj++)
+      {
+        CRDoubleMatrix subblock = this->get_block(blocki,blockj);
+        std::stringstream blockname;
+        blockname << datafolder << "/" << replacetype << "_lgr_b_"
+                  << counter_np_rank << "_"
+                  << std::setw(2) << std::setfill('0') << blocki
+                  << std::setw(2) << std::setfill('0') << blockj;
+
+//        subblock.sparse_indexed_output(blockname.str(),15,true);
+      }
+    }
+
+  } // END OF OUTPUT BLOCKS
+
+
+
+
   // AT this point, we have created the augmented fluid block in v_aug_pt
   // and the w block in w_pt.
   //
@@ -2504,6 +2725,21 @@ void LagrangeEnforcedflowPreconditioner::setup()
     //    pause("About to call setup of NS prec."); 
 
 
+
+    /// RAYRAY set the flag for replace all f blocks or not. This is so we
+    /// can label the output of blocks correctly.
+    NavierStokesSchurComplementPreconditioner* nsscp_pt
+      = dynamic_cast<NavierStokesSchurComplementPreconditioner*>
+      (navier_stokes_block_preconditioner_pt);
+    if(this->replace_all_f_blocks())
+    {
+      nsscp_pt->set_replace_all_f_blocks();
+    }
+    else
+    {
+      nsscp_pt->set_replace_modified_blocks_only();
+    }
+
     // RAYTIME
     double t_start_ns_setup = TimingHelpers::timer();
 
@@ -2610,6 +2846,8 @@ void LagrangeEnforcedflowPreconditioner::setup()
         << t_delete_w << "\n";
 
     Mapping_info_calculated = true;
+
+    Setup_counter++;
     
   } // end of LagrangeEnforcedflowPreconditioner::setup
 

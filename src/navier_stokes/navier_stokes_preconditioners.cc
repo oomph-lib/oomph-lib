@@ -469,6 +469,147 @@ namespace oomph
   double t_get_F_start = TimingHelpers::timer();
   this->get_block(0,0,*f_pt);
   double t_get_F_finish = TimingHelpers::timer();
+ 
+
+//  unsigned rrmy_rank = master_distribution_pt()
+//                       ->communicator_pt()->my_rank();
+//  unsigned rrnproc = master_distribution_pt()
+//                     ->communicator_pt()->nproc();
+//
+//  std::ostringstream counter_np_rank_ss;
+//
+//  counter_np_rank_ss << "C" << Setup_counter
+//                     << "NP" << rrnproc 
+//                     << "R" << rrmy_rank;
+//
+//  std::string counter_np_rank = counter_np_rank_ss.str();
+//
+//
+//
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//  // RAYRAY outputting stuff for bebugging.
+////  if(Setup_counter > 19)
+//  {
+//    std::string datafolder = "matrixdata";
+//    std::string replacetype;
+//    if(this->replace_all_f_blocks())
+//    {
+//      // Replace All F Blocks
+//      replacetype = "RAFB";
+//    }
+//    else
+//    {
+//      // Replace Modified Blocks Only
+//      replacetype = "RMBO";
+//    }
+//
+//    unsigned rrnblocktypes = this->nblock_types();
+//    unsigned rrndoftypes = this->ndof_types();
+//
+//    ////////////////////////////////////////////////////////////////////////
+//    ////////////////////////////////////////////////////////////////////////
+//    // Outputting DOF types in DOF order
+//    for(unsigned dofi = 0; dofi < rrndoftypes; dofi++)
+//    {
+//      for (unsigned dofj = 0; dofj < rrndoftypes; dofj++)
+//      {
+//        CRDoubleMatrix subblock;
+//        this->get_dof_level_block(dofi,dofj,subblock);
+//        std::stringstream blockname;
+//        blockname << datafolder << "/" << replacetype << "_lsc_d_"
+//                  << counter_np_rank << "_"
+//                  << std::setw(2) << std::setfill('0') << dofi
+//                  << std::setw(2) << std::setfill('0') << dofj;
+//
+//        subblock.sparse_indexed_output(blockname.str(),15,true);
+//      }
+//    }
+//
+//    ////////////////////////////////////////////////////////////////////////
+//    ////////////////////////////////////////////////////////////////////////
+//    // Outputting BLOCK types in BLOCK order
+//    for(unsigned blocki = 0; blocki < rrnblocktypes; blocki++)
+//    {
+//      for (unsigned blockj = 0; blockj < rrnblocktypes; blockj++)
+//      {
+//        CRDoubleMatrix subblock = this->get_block(blocki,blockj);
+//        std::stringstream blockname;
+//        blockname << datafolder << "/" << replacetype << "_lsc_b_"
+//                  << counter_np_rank << "_"
+//                  << std::setw(2) << std::setfill('0') << blocki
+//                  << std::setw(2) << std::setfill('0') << blockj;
+//
+//        subblock.sparse_indexed_output(blockname.str(),15,true);
+//      }
+//    }
+//
+//    // Outputting the block from the master
+//    unsigned mnblock 
+//      = this->master_block_preconditioner_pt()->nblock_types();
+//    for (unsigned blocki = 0; blocki < mnblock; blocki++) 
+//    {
+//      for (unsigned blockj = 0; blockj < mnblock; blockj++) 
+//      {
+//        CRDoubleMatrix subblock;
+//        this->master_block_preconditioner_pt()
+//            ->internal_get_block(blocki,blockj,subblock);
+//
+//        std::stringstream blockname;
+//        blockname << datafolder << "/" << replacetype << "_master_ib_"
+//                  << counter_np_rank << "_"
+//                  << std::setw(2) << std::setfill('0') << blocki
+//                  << std::setw(2) << std::setfill('0') << blockj;
+//
+//        subblock.sparse_indexed_output(blockname.str(),15,true);
+//
+//      }
+//    }
+//
+//    for (unsigned blocki = 0; blocki < mnblock; blocki++) 
+//    {
+//      for (unsigned blockj = 0; blockj < mnblock; blockj++) 
+//      {
+//        CRDoubleMatrix subblock;
+//        this->master_block_preconditioner_pt()
+//            ->get_block(blocki,blockj,subblock);
+//
+//        std::stringstream blockname;
+//        blockname << datafolder << "/" << replacetype << "_master_b_"
+//                  << counter_np_rank << "_"
+//                  << std::setw(2) << std::setfill('0') << blocki
+//                  << std::setw(2) << std::setfill('0') << blockj;
+//
+//        subblock.sparse_indexed_output(blockname.str(),15,true);
+//
+//      }
+//    }
+//
+//
+//    for (unsigned blocki = 0; blocki < mnblock; blocki++) 
+//    {
+//      for (unsigned blockj = 0; blockj < mnblock; blockj++) 
+//      {
+//        CRDoubleMatrix subblock;
+//        this->master_block_preconditioner_pt()
+//            ->get_dof_level_block(blocki,blockj,subblock);
+//
+//        std::stringstream blockname;
+//        blockname << datafolder << "/" << replacetype << "_master_d_"
+//                  << counter_np_rank << "_"
+//                  << std::setw(2) << std::setfill('0') << blocki
+//                  << std::setw(2) << std::setfill('0') << blockj;
+//
+//        subblock.sparse_indexed_output(blockname.str(),15,true);
+//
+//      }
+//    }
+//
+//  }
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+
+
 
   double t_get_F_time = t_get_F_finish - t_get_F_start;
   if(Doc_time)
@@ -616,6 +757,8 @@ namespace oomph
   // the stored information can be wiped when we
   // come here next...
   Preconditioner_has_been_setup = true;
+
+  Setup_counter++;
  }
 
 
