@@ -307,6 +307,25 @@ namespace oomph
   void set_delete_main_matrix()
    {Should_delete_main_matrix = true;}
 
+
+ /// \short Output the "bottom right" entry regardless of it being
+ /// zero or not (this allows automatic detection of matrix size in
+ /// e.g. matlab, python).
+  void output_bottom_right_zero_helper(std::ostream &outfile) const
+   {
+    int last_row = this->nrow()-1;
+    int last_col = this->ncol()-1;
+
+    double last_value = operator()(last_row, last_col);
+    
+    if(last_value == 0.0)
+     {
+      outfile << last_row << " " << last_col << " " << 0.0
+              << std::endl;
+     }
+   }
+
+
   /// \short Output the matrix in sparse format. Note that this is going to be
   /// slow because we have to check every entry of every matrix for non-zeros.
   void sparse_indexed_output_helper(std::ostream &outfile) const
