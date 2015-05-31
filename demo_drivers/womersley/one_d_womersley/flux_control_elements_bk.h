@@ -29,6 +29,8 @@
 #ifndef OOMPH_FLUX_CONTROL_ELEMENTS
 #define OOMPH_FLUX_CONTROL_ELEMENTS
 
+// NOTE: This does not appeared to be used. So I have renmaed it from
+// flux_control_elements.h to flux_control_elements_bk.h
 
 namespace oomph
 {
@@ -61,6 +63,10 @@ public:
   Flux_control_mesh_pt(flux_control_mesh_pt),
   Prescribed_outflow_value_pt(prescribed_outflow_value_pt)
   {
+    pause("Hello, using this flux element!"); 
+    
+
+
    // Construct Pressure_data_pt
    Pressure_data_pt = new Data(1);
    

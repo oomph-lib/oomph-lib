@@ -2157,7 +2157,7 @@ void CRDoubleMatrix::matrix_reduction(const double &alpha,
  }
 
 //=============================================================================
-/// if this matrix is distributed then a the equivalent global matrix is built
+/// if this matrix is distributed then the equivalent global matrix is built
 /// using new and returned. The calling method is responsible for the 
 /// destruction of the new matrix.
 //=============================================================================
@@ -2200,7 +2200,7 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
    dist_nrow_local[p] = this->nrow_local(p);
   }
 
- // conpute the offset for the values and column index data
+ // compute the offset for the values and column index data
  int* nnz_offset = new int[nproc];
  nnz_offset[0] = 0;
  for (int p = 1; p < nproc; p++)
@@ -5257,7 +5257,6 @@ namespace CRDoubleMatrixHelpers
           // Loop through the current local row.
           for (int l = b_row_start[k]; l < b_row_start[k+1]; l++)
            {
-
             // if b_column_index[l] was a row index, what processor
             // would it be on
             unsigned p = 0;
@@ -5276,7 +5275,7 @@ namespace CRDoubleMatrixHelpers
             // "column block"
             unsigned eqn = b_column_index[l]-b_first_row;
 
-            // add to the preconditioner matrix
+            // add to the result matrix
             res_value[res_i] = b_value[l];
             res_column_index[res_i] = col_offset(p,j)+eqn;
             res_row_start[res_row_i+1]++;

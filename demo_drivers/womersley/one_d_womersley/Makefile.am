@@ -5,7 +5,7 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 check_PROGRAMS=one_d_womersley 
 
 # Sources for executable
-one_d_womersley_SOURCES = one_d_womersley.cc flux_control_elements.h
+one_d_womersley_SOURCES = one_d_womersley.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
