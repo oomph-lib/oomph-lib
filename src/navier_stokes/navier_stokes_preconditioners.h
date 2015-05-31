@@ -735,9 +735,6 @@ namespace oomph
      // Initially assume that there are no multiple element types in the 
      // Navier-Stokes mesh
      Allow_multiple_element_type_in_navier_stokes_mesh = false;
-
-     Replace_all_f_blocks = false;
-     Setup_counter = 0;
     }
 
    /// Destructor
@@ -1167,24 +1164,6 @@ namespace oomph
     // Free up storage
     Eqn_number_backup.clear();
    }
-
-   void set_replace_all_f_blocks()
-   {
-     Replace_all_f_blocks = true;
-   }
-
-   void set_replace_modified_blocks_only()
-   {
-     Replace_all_f_blocks = false;
-   }
- 
-   bool replace_all_f_blocks()
-   {
-     return Replace_all_f_blocks;
-   } 
-
-   unsigned Setup_counter;
-   bool Replace_all_f_blocks;
   
     private:
 

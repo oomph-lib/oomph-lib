@@ -834,16 +834,10 @@ namespace oomph
   double t_initialise_index_in_dof_and_dof_num_sparse_start
     = TimingHelpers::timer();
 
-  // RAYRAY This might benefit from memcpy?
-  unsigned* nreq_sparse = new unsigned[nproc];
-  unsigned* nreq_sparse_for_proc = new unsigned[nproc];
-  unsigned** index_in_dof_block_sparse_send = new unsigned*[nproc];
-  unsigned** dof_number_sparse_send = new unsigned*[nproc];
-  for (unsigned p = 0; p < nproc; p++)
-   {
-    index_in_dof_block_sparse_send[p] = 0;
-    dof_number_sparse_send[p] = 0;
-   }
+  unsigned* nreq_sparse = new unsigned[nproc]();
+  unsigned* nreq_sparse_for_proc = new unsigned[nproc]();
+  unsigned** index_in_dof_block_sparse_send = new unsigned*[nproc]{};
+  unsigned** dof_number_sparse_send = new unsigned*[nproc]{};
   Vector<MPI_Request> send_requests_sparse;
   Vector<MPI_Request> recv_requests_sparse;
 
@@ -973,7 +967,6 @@ namespace oomph
     // first_row+nrow_local for which we should store the
     // Dof_index and Index_in_dof_block for
     // then send the lists to other processors
-//    Vector<unsigned> sparse_global_rows_for_block_lookup;
     std::set<unsigned> sparse_global_rows_for_block_lookup;
     if (matrix_distributed)
      {
@@ -985,13 +978,6 @@ namespace oomph
         if (ci<first_row || ci>last_row)
          {
            sparse_global_rows_for_block_lookup.insert(ci);
-//          if (find(sparse_global_rows_for_block_lookup.begin(),
-//                   sparse_global_rows_for_block_lookup.end(),
-//                   ci) ==
-//              sparse_global_rows_for_block_lookup.end())
-//           {
-//            sparse_global_rows_for_block_lookup.push_back(ci);
-//           }
          }
        }
      }
@@ -1010,27 +996,6 @@ namespace oomph
 
 
     // RAYTIME
-//    double t_sort_sparse_global_rows_for_block_lookup_start
-//      = TimingHelpers::timer();
-//
-//    sort(sparse_global_rows_for_block_lookup.begin(),
-//         sparse_global_rows_for_block_lookup.end());
-//
-//    // RAYTIME
-//    double t_sort_sparse_global_rows_for_block_lookup_end
-//      = TimingHelpers::timer();
-//    if(Debug_flag)
-//    {
-//      double t_sort_sparse_global_rows_for_block_lookup
-//        = t_sort_sparse_global_rows_for_block_lookup_end
-//        - t_sort_sparse_global_rows_for_block_lookup_start;
-//      oomph_info << "BLKSETUP_MO_SENDSPARSE: " 
-//                <<  "t_sort_sparse_global_rows_for_block_lookup: "
-//                << t_sort_sparse_global_rows_for_block_lookup << std::endl; 
-//    }
-      
-
-    // RAYTIME
     double t_copy_to_global_index_sparse_start
       = TimingHelpers::timer();
 
@@ -1044,11 +1009,6 @@ namespace oomph
 
     Index_in_dof_block_sparse.resize(nsparse);
     Dof_number_sparse.resize(nsparse);
-//    // RAYRAY - Why is this looping through a vector?...
-//    for (int i = 0; i < nsparse; i++)
-//     {
-//      Global_index_sparse[i]=sparse_global_rows_for_block_lookup[i];
-//     }
     sparse_global_rows_for_block_lookup.clear();
 
     // RAYTIME
@@ -1078,8 +1038,8 @@ namespace oomph
       int zero = 0;
       for (unsigned p = 0; p < nproc; p++)
        {
-        nreq_sparse[p] = 0;
-        nreq_sparse_for_proc[p] = 0;
+//        nreq_sparse[p] = 0;
+//        nreq_sparse_for_proc[p] = 0;
 
         // determine the global eqn numbers required by this processor
         // that can be classified by processor p

@@ -2514,7 +2514,7 @@ class BlockSelector
     setup_matrix_vector_product(matvec_prod_pt,block_pt,col_index_vector);
   } // EOFunc setup_matrix_vector_product(...)
 
-// private:
+ private:
 
   /// \short Given the naturally ordered vector, v, return
   /// the vector rearranged in block order in w. This is a legacy function
