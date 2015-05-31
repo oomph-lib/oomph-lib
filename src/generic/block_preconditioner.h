@@ -453,7 +453,6 @@ class BlockSelector
    // as the distribution of the BlockPreconditioner.
    //
    // This seems inconsistent and I cannot figure out why this is done.
-   // RAYRAY
    Internal_preconditioner_matrix_distribution_pt = 0;
 
    // The concatenation of the external block distributions.
