@@ -511,6 +511,9 @@ namespace oomph
    // cache nrow_local
    double* v_values_pt = v.values_pt();
    unsigned nrow_local = this->nrow_local();
+
+   // Decided to keep this as a loop rather than use std::transform, because
+   // this is a very simple loop and should compile to the same code.
    for (unsigned i = 0; i < nrow_local; i++)
     {
      Values_pt[i] += v_values_pt[i];
@@ -556,6 +559,9 @@ namespace oomph
    // cache nrow_local
    double* v_values_pt = v.values_pt();
    unsigned nrow_local = this->nrow_local();
+   
+   // Decided to keep this as a loop rather than use std::transform, because
+   // this is a very simple loop and should compile to the same code.
    for (unsigned i = 0; i < nrow_local; i++)
     {
      Values_pt[i] -= v_values_pt[i];
@@ -578,7 +584,9 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
-
+   
+  // Decided to keep this as a loop rather than use std::transform, because
+  // this is a very simple loop and should compile to the same code.
   for(unsigned i=0, ni=this->nrow_local(); i<ni; i++)
    {
     Values_pt[i] *= d;
@@ -591,6 +599,9 @@ namespace oomph
  void DoubleVector::operator/=(const double& d)
  {
   // PARANOID checks are done inside operator *=
+  
+  // Decided to keep this as a loop rather than use std::transform, because
+  // this is a very simple loop and should compile to the same code.
   double divisor = (1.0/d);
   this->operator*=(divisor);
  }
