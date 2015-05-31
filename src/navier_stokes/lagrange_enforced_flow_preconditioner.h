@@ -1383,9 +1383,9 @@ void LagrangeEnforcedflowPreconditioner::setup()
   //pause("Dumped!"); 
   
 
-  ///////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
   // Need to create the norms, used for Sigma, if required
-  ///////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
 
   // RAYRAY todo: This could be made more efficient by storing only the
   // augmented blocks. I will do this later.
@@ -1487,9 +1487,9 @@ void LagrangeEnforcedflowPreconditioner::setup()
     << std::setprecision(cout_precision)
     << std::endl;
 
-  ///////////////////////////////////////////////////////////////////////////
-  //                Now create the augmented fluid matrix.                 //
-  ///////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
+  //                Now create the augmented fluid matrix.                //
+  //////////////////////////////////////////////////////////////////////////
 
 
   // Loop through the Lagrange multipliers and do three things:
@@ -1622,7 +1622,8 @@ void LagrangeEnforcedflowPreconditioner::setup()
     //
     // When w_i is inverted, we always take the diagonal approximation 
     // beforehand. In the case of (1), nothing needs to be done, 
-    // but in (2) we need to extract the diagonal of the block-diagonal matrix.
+    // but in (2) we need to extract the diagonal of the 
+    // block-diagonal matrix.
 
     if(Use_diagonal_w_block) // This is the default.
     {
@@ -1681,6 +1682,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
       // Theses are square matrices. So we use the l_i_nrow_global for the
       // number of columns.
       // RAYRAY change back to Block_distribution_pt
+      // RAYRAY check if the above line is done?
       unsigned long l_i_nrow_global 
         = this->Block_distribution_pt[l_doftype]->nrow();
       w_pt[l_i]->build(l_i_nrow_global,
@@ -1695,7 +1697,9 @@ void LagrangeEnforcedflowPreconditioner::setup()
     else
     // We use the block diagonal form of the W block.
     {
-      // NOTE: This seems very dodgy. A lot of functions has moved into CRDoubleMatrix
+      // NOTE: This seems very dodgy. 
+      // RAYRAY fix this. 
+      // A lot of functions has moved into CRDoubleMatrix
       // such as get_diagonal_entries() and add()
 
       // Square the first mass matrix. We assume that there is at least one.
@@ -1724,7 +1728,8 @@ void LagrangeEnforcedflowPreconditioner::setup()
       }
 
       // w_i is complete.
-      // We have to create inv_w_pt by extracting the diagonal entries of w_i.
+      // We have to create inv_w_pt by extracting 
+      // the diagonal entries of w_i.
 
       // Get the number of local rows for this Lagrange block.
       // We shall use the block in the first column.
@@ -1755,7 +1760,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
     } // else - finished building w_i and inv_w_i
 
 
-    ///////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////
     // Now we create the augmented matrix in v_aug_pt.
     // v_aug_pt is already re-ordered
     // Loop through the mm_locations
