@@ -207,6 +207,8 @@ class LagrangeEnforcedflowPreconditioner
     Label_pt = 0;
 
     Doc_prec_directory_pt = 0;
+
+    Replace_all_f_blocks = false;
   }
 
   /// destructor
@@ -267,6 +269,16 @@ class LagrangeEnforcedflowPreconditioner
   void set_doc_prec_directory_pt(std::string* doc_prec_directory_pt) 
   {
     Doc_prec_directory_pt = doc_prec_directory_pt;
+  }
+
+  void replace_all_f_blocks()
+  {
+    Replace_all_f_blocks = true;
+  }
+
+  void replace_modified_blocks_only()
+  {
+    Replace_all_f_blocks = false;
   }
 
   /// \short Apply the preconditioner.
@@ -619,6 +631,8 @@ class LagrangeEnforcedflowPreconditioner
   unsigned N_velocity_doftypes;
 
   bool First_NS_solve;
+
+  bool Replace_all_f_blocks;
 
 
   /// \short Pointer to Doc_linear_solver_info.
@@ -1889,7 +1903,8 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //      
 //    }
 
- /// RRR NEW REPLACEMENT STUFF 
+ /// Replace all f blocks
+  if(Replace_all_f_blocks)
   {
     // Create the inverse to dof_to_block_map
     Vector<unsigned> temp_block_to_dof_map(n_dof_types,0);
@@ -1929,76 +1944,57 @@ void LagrangeEnforcedflowPreconditioner::setup()
      }
    }
   }
+  else
+  {
+    unsigned blocked_row_i = spatial_dim;
+    unsigned blocked_col_i = spatial_dim;
+    unsigned doftype_row_running_total = My_ndof_types_in_mesh[0];
+    unsigned doftype_col_running_total = My_ndof_types_in_mesh[0];
 
-//  pause("first replacement done"); 
-  
+    for (unsigned row_mesh_i = 1; row_mesh_i < My_nmesh; row_mesh_i++) 
+    {
+      // Get the indirection for the mesh
+      for (unsigned row_dim_i = 0; row_dim_i < spatial_dim; row_dim_i++) 
+      {
+        const unsigned doftype_row_i = doftype_row_running_total 
+          + row_dim_i;
 
+        // Now do the same for the columns
+        for (unsigned col_mesh_i = 1; col_mesh_i < My_nmesh; col_mesh_i++) 
+        {
+          for (unsigned col_dim_i = 0; col_dim_i < spatial_dim; col_dim_i++)
+          {
+            const unsigned doftype_col_i = doftype_col_running_total
+              + col_dim_i;
 
+            this->set_replacement_dof_block(
+                doftype_row_i,doftype_col_i,
+                v_aug_pt(blocked_row_i,blocked_col_i));
 
+            //            oomph_info << "(" << blocked_row_i << "," 
+            //                              << blocked_col_i << ")" 
+            //                       << " -> " 
+            //                       << "(" << doftype_row_i << ","
+            //                              << doftype_col_i << ")" << std::endl; 
 
+            blocked_col_i++;
+          }
 
-//  {  
-//  unsigned blocked_row_i = spatial_dim;
-//  unsigned blocked_col_i = spatial_dim;
-//  unsigned doftype_row_running_total = My_ndof_types_in_mesh[0];
-//  unsigned doftype_col_running_total = My_ndof_types_in_mesh[0];
-//
-//  for (unsigned row_mesh_i = 1; row_mesh_i < My_nmesh; row_mesh_i++) 
-//  {
-//    // Get the indirection for the mesh
-//    for (unsigned row_dim_i = 0; row_dim_i < spatial_dim; row_dim_i++) 
-//    {
-//      const unsigned doftype_row_i = doftype_row_running_total 
-//                                     + row_dim_i;
-//
-//      // Now do the same for the columns
-//      for (unsigned col_mesh_i = 1; col_mesh_i < My_nmesh; col_mesh_i++) 
-//      {
-//        for (unsigned col_dim_i = 0; col_dim_i < spatial_dim; col_dim_i++)
-//        {
-//          const unsigned doftype_col_i = doftype_col_running_total
-//                                         + col_dim_i;
-//
-//          this->set_replacement_dof_block(
-//                  doftype_row_i,doftype_col_i,
-//                  v_aug_pt(blocked_row_i,blocked_col_i));
-// 
-////            oomph_info << "(" << blocked_row_i << "," 
-////                              << blocked_col_i << ")" 
-////                       << " -> " 
-////                       << "(" << doftype_row_i << ","
-////                              << doftype_col_i << ")" << std::endl; 
-//
-//          blocked_col_i++;
-//        }
-//
-//        // Update the column dof type running total
-//        doftype_col_running_total += My_ndof_types_in_mesh[col_mesh_i];
-//      }
-//
-//      // reset the blocked col i and the running total for the next row
-//      blocked_col_i = spatial_dim;
-//      doftype_col_running_total = My_ndof_types_in_mesh[0];
-//
-//      // Update the blocked row_i
-//      blocked_row_i++;
-//    }
-//    // Update the row dof type running total
-//    doftype_row_running_total += My_ndof_types_in_mesh[row_mesh_i];
-//  }
-//  }
-//    pause("remember me!"); 
-    
+          // Update the column dof type running total
+          doftype_col_running_total += My_ndof_types_in_mesh[col_mesh_i];
+        }
 
+        // reset the blocked col i and the running total for the next row
+        blocked_col_i = spatial_dim;
+        doftype_col_running_total = My_ndof_types_in_mesh[0];
 
-//     for (unsigned row_i = spatial_dim; row_i < N_velocity_doftypes; row_i++) 
-//      {
-//        for (unsigned col_i = spatial_dim; col_i < N_velocity_doftypes; col_i++) 
-//        {
-//          this->set_replacement_dof_block(row_i,col_i,
-//                                          v_aug_pt(row_i,col_i));
-//        }
-//      }
+        // Update the blocked row_i
+        blocked_row_i++;
+      }
+      // Update the row dof type running total
+      doftype_row_running_total += My_ndof_types_in_mesh[row_mesh_i];
+    }
+  }
 
   // AT this point, we have created the augmented fluid block in v_aug_pt
   // and the w block in w_pt.
