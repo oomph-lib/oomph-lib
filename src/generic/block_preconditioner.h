@@ -490,12 +490,16 @@ class BlockSelector
    // concatenation process to create the distribution of the blocks.
    Dof_block_distribution_pt.resize(0);
 
-   // Clear both the Block_to_dof_map_coarse and Block_to_dof_map_fine vectors.
+   // Clear both the Block_to_dof_map_coarse and Block_to_dof_map_fine 
+   // vectors.
    Block_to_dof_map_coarse.resize(0);
    Block_to_dof_map_fine.resize(0);
 
    // Default the debug flag to false.
    Recursive_debug_flag = false;
+
+   // Default the debug flag to false.
+   Debug_flag = false;
   } // EOFunc constructor
 
 
@@ -545,8 +549,8 @@ class BlockSelector
   } // EOFunc matrix_pt()
 
 
-  /// \short Toggles on the debug flag up the block preconditioning 
-  /// hierarchy.
+  /// \short Toggles on the recursive debug flag. The change goes 
+  /// up the block preconditioning  hierarchy.
   void turn_on_recursive_debug_flag()
   {
     Recursive_debug_flag = true;
@@ -555,14 +559,26 @@ class BlockSelector
             ->turn_on_recursive_debug_flag();
   }
 
-  /// \short Toggles off the debug flag up the block preconditioning
-  /// hierarchy.
+  /// \short Toggles off the recursive debug flag. The change goes 
+  /// up the block preconditioning hierarchy.
   void turn_off_recursive_debug_flag()
   {
     Recursive_debug_flag = false;
     if(is_subsidiary_block_preconditioner())
       this->master_block_preconditioner_pt()
             ->turn_off_recursive_debug_flag();
+  }
+
+  /// \short Toggles on the debug flag.
+  void turn_on_debug_flag()
+  {
+    Debug_flag = true;
+  }
+
+  /// \short Toggles off the debug flag.
+  void turn_off_debug_flag()
+  {
+    Debug_flag = false;
   }
 
   /// \short Function to turn this preconditioner into a
@@ -3381,6 +3397,11 @@ class BlockSelector
   /// turn_off_recursive_debug_flag(...)
   /// These will turn on/off the debug flag up the hierarchy.
   bool Recursive_debug_flag;
+
+  /// \short Debugging variable. Set true or false via the access functions
+  /// turn_on_debug_flag(...)
+  /// turn_off_debug_flag(...)
+  bool Debug_flag;
 
   /// \short Stores any block-level distributions / concatenation of 
   /// block-level distributions required. The first in the pair 

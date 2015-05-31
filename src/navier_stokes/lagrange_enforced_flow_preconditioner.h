@@ -1229,11 +1229,15 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //    pause("I'm back"); 
     
 
+  // RAYTIME
   double t_start_block_setup = TimingHelpers::timer();
+  this->turn_on_debug_flag();
   // Call the block setup
   this->block_setup(dof_to_block_map);
+  this->turn_off_debug_flag();
+
+  // RAYTIME
   double t_end_block_setup = TimingHelpers::timer();
-  
   double t_block_setup = t_end_block_setup - t_start_block_setup;
   oomph_info << "LGR: block_setup: " << t_block_setup << std::endl;
 
@@ -1390,6 +1394,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
   // a single direction of the velocity block, we extract them all since we
   // use the rest immediately (to perform the augmentation).
 
+  // RAYTIME
   double t_start_get_v_aug_pt = TimingHelpers::timer();
   DenseMatrix<CRDoubleMatrix*> v_aug_pt(N_velocity_doftypes,
       N_velocity_doftypes,0);
@@ -1402,15 +1407,16 @@ void LagrangeEnforcedflowPreconditioner::setup()
       this->get_block(row_i,col_i,*v_aug_pt(row_i,col_i));
     } // for
   } // for
+
+  // RAYTIME
   double t_end_get_v_aug_pt = TimingHelpers::timer();
-
   double t_get_v_aug = t_end_get_v_aug_pt - t_start_get_v_aug_pt;
-
-  oomph_info << "LGR: t_get_v_aug " << t_get_v_aug << std::endl;
+  oomph_info << "LGR: t_get_v_aug: " << t_get_v_aug << std::endl;
 
 
   if(Use_default_norm_of_f_scaling)
   {
+    // RAYTIME
     double t_norm_start = TimingHelpers::timer();
 
     //    DenseMatrix<CRDoubleMatrix* > u_pt(My_nmesh,My_nmesh,0);
@@ -1439,6 +1445,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
     //    Scaling_sigma = CRDoubleMatrixHelpers::maximum_gershgorin_disk(v_aug_pt)
     //     *Scaling_sigma_multiplier;
 
+    // RAYTIME
     double t_norm_finish = TimingHelpers::timer();
 //    if(Doc_time)
     {
@@ -1506,6 +1513,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
   Vector<CRDoubleMatrix*> w_pt(N_lagrange_doftypes,0);
 
 
+  // RAYTIME
   double t_start_big_loop = TimingHelpers::timer();
 
   // Note that we do not need to store all the inverse w_i since they
@@ -1783,8 +1791,10 @@ void LagrangeEnforcedflowPreconditioner::setup()
     }
   } // loop through Lagrange multipliers.
 
+  // RAYTIME
   double t_end_big_loop = TimingHelpers::timer();
-    
+  
+  // RAYTIME
   double t_big_loop = t_end_big_loop - t_start_big_loop;
 
   oomph_info << "LGR: big_loop: " << t_big_loop << std::endl;
@@ -2382,15 +2392,16 @@ void LagrangeEnforcedflowPreconditioner::setup()
     // structure:
     // 0  1  2  3  4  5  6
     // ub vb up vp ut vt p
+    // RAYTIME
     double t_start_turn_into_subsidairy = TimingHelpers::timer();
-      navier_stokes_block_preconditioner_pt
+    
+    navier_stokes_block_preconditioner_pt
         ->turn_into_subsidiary_block_preconditioner(this, Subsidiary_list_bcpl,
             subsidiary_dof_type_coarsening_map);
+    // RAYTIME
     double t_end_turn_into_subsidairy = TimingHelpers::timer();
       //pause("Lgr: Done turn_into_sub..."); 
-      
     double t_turn_into_sub = t_end_turn_into_subsidairy - t_start_turn_into_subsidairy;
-
     oomph_info << "LGR: turn_into_subsidairy: " << t_turn_into_sub << std::endl;
     //    pause("After turn_into..."); 
 
@@ -2415,16 +2426,15 @@ void LagrangeEnforcedflowPreconditioner::setup()
     //    pause("About to call setup of NS prec."); 
 
 
+    // RAYTIME
     double t_start_ns_setup = TimingHelpers::timer();
-
 
     navier_stokes_block_preconditioner_pt
         ->setup(matrix_pt());
 
+    // RAYTIME
     double t_end_ns_setup = TimingHelpers::timer();
-    
     double t_ns_setup = t_end_ns_setup - t_start_ns_setup;
-
     oomph_info << "LGR: ns_setup: " << t_ns_setup << std::endl;
 
 //      pause("done NS setup"); 
@@ -2438,7 +2448,8 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //        }
 //      }
     } // else - NS prec is block preconditioner
-    
+   
+    // RAYTIME 
     double t_start_delete_v_aug = TimingHelpers::timer();
 
     const unsigned v_aug_nrow = v_aug_pt.nrow();
@@ -2451,10 +2462,9 @@ void LagrangeEnforcedflowPreconditioner::setup()
         v_aug_pt(v_row,v_col) = 0;
       }
     }
+    // RAYTIME
     double t_end_delete_v_aug = TimingHelpers::timer();
-    
     double t_delete_v_aug = t_end_delete_v_aug - t_start_delete_v_aug;
-
     oomph_info << "LGR: delete_v_aug: " << t_delete_v_aug << std::endl;
 
     ///////////////////////////////////////////////////////////////////////////////

@@ -321,7 +321,7 @@ namespace oomph
                << "mass matrices) [sec]: "
                << ivmm_assembly_time << "\n";
    }
-   oomph_info << "LSC: ivmm_assembly_time " 
+   oomph_info << "LSC: ivmm_assembly_time: " 
               << ivmm_assembly_time << std::endl; 
 
 
@@ -348,7 +348,7 @@ namespace oomph
     oomph_info << "Time to get Bt [sec]: "
                << t_get_Bt_time << std::endl;
    }
-  oomph_info << "LSC: get block Bt " 
+  oomph_info << "LSC: get block Bt: " 
              << t_get_Bt_time << std::endl;  
 
   if (doc_block_matrices)   
@@ -381,7 +381,7 @@ namespace oomph
                << t_QBt_time << std::endl;
    }
   delete inv_v_mass_pt; inv_v_mass_pt = 0;
-  oomph_info << "LSC: t_QBt_time (matrix multiplicaton) " 
+  oomph_info << "LSC: t_QBt_time (matrix multiplicaton): " 
              << t_QBt_time << std::endl;  
   
   // Multiply B from left by divergence matrix B and store result in 
@@ -399,7 +399,7 @@ namespace oomph
   // Kill divergence matrix because we don't need it any more
   delete b_pt; b_pt = 0;
  
-  oomph_info << "LSC: t_p_time (matrix multiplication) " 
+  oomph_info << "LSC: t_p_time (matrix multiplication): " 
              << t_p_time << std::endl;
 
 
@@ -420,7 +420,7 @@ namespace oomph
   // needs to be recomputed afresh below)
   delete bt_pt; bt_pt = 0;
   
-  oomph_info << "LSC: QBt (setup MV product) " << t_p_time2 << std::endl;
+  oomph_info << "LSC: QBt (setup MV product): " << t_p_time2 << std::endl;
 
   // Do we need the Fp stuff?
   if (!Use_LSC)
@@ -476,7 +476,7 @@ namespace oomph
     oomph_info << "Time to get F [sec]: "
                << t_get_F_time << std::endl;
    }
-    oomph_info << "LSC: get_block t_get_F_time " 
+    oomph_info << "LSC: get_block t_get_F_time: " 
                << t_get_F_time << std::endl;
   
   // form the matrix vector product helper
@@ -491,7 +491,7 @@ namespace oomph
     oomph_info << "Time to build F Matrix Vector Operator [sec]: "
                << t_F_MV_time << std::endl;
    }
-   oomph_info << "LSC: MV product setup t_F_MV_time " 
+   oomph_info << "LSC: MV product setup t_F_MV_time: " 
               << t_F_MV_time << std::endl;
 
   
@@ -514,7 +514,7 @@ namespace oomph
     oomph_info << "Time to get Bt [sec]: "
                << t_get_Bt_time2 << std::endl;
    }
-  oomph_info << "LSC: get_block t_get_Bt_time2 " 
+  oomph_info << "LSC: get_block t_get_Bt_time2: " 
              << t_get_Bt_time2 << std::endl;
  
 
@@ -535,7 +535,7 @@ namespace oomph
 
     double t_Bt_MV_time = t_Bt_MV_finish - t_Bt_MV_start;
 
-  oomph_info << "LSC: MV product setup t_Bt_MV_time " 
+  oomph_info << "LSC: MV product setup t_Bt_MV_time: " 
                << t_Bt_MV_time << std::endl;
   // if the P preconditioner has not been setup
   if (P_preconditioner_pt == 0)
@@ -566,7 +566,7 @@ namespace oomph
     oomph_info << "P sub-preconditioner setup time [sec]: "
                << t_p_prec_time << "\n";
    }
-  oomph_info << "LSC: p_prec setup time " << t_p_prec_time << std::endl;
+  oomph_info << "LSC: p_prec setup time: " << t_p_prec_time << std::endl;
 
   
   // Set up solver for solution of system with momentum matrix
@@ -611,7 +611,7 @@ namespace oomph
     oomph_info << "F sub-preconditioner setup time [sec]: "
                << t_f_prec_time << "\n";
    }
-   oomph_info << "LSC: f_prec setup time " << t_f_prec_time << std::endl; 
+   oomph_info << "LSC: f_prec setup time: " << t_f_prec_time << std::endl; 
   // Remember that the preconditioner has been setup so
   // the stored information can be wiped when we
   // come here next...
