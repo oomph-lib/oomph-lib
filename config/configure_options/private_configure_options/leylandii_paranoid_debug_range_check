@@ -91,9 +91,17 @@
 # optimisation and full warnings. Library headers are installed
 # in the build directory and are not linked to the sources.
 #
---enable-symbolic-links-for-headers
---enable-suppress-doc
-CXXFLAGS="-g -DPARANOID -DRANGE_CHECKING -Wall"
+--enable-MPI 
+--enable-symbolic-links-for-headers 
+--enable-suppress-doc 
+--with-mpi-include-directory=/usr/include/openmpi-x86_64 
+--with-mpi-self-tests=" /usr/lib64/openmpi/bin/mpirun -np 2" 
+--with-mpi-self-tests-variablenp=" /usr/lib64/openmpi/bin/mpirun -np OOMPHNP" 
+CXXFLAGS="-g -DPARANOID -DRANGE_CHECKING -Wall" 
 CFLAGS="-g -Wall" 
 FFLAGS="-g -Wall" 
+CXX=mpic++ 
+CC=mpicc 
+F77=mpif77 
+LD=mpif77 
 FFLAGS_NO_OPT="-O0"
