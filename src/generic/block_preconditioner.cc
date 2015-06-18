@@ -1500,44 +1500,6 @@ namespace oomph
           for (unsigned i = first_dof_to_send[p]; i < u; i++)
            {
 #ifdef PARANOID
-            // RAYRAY Legacy code, this checks that the DOFs have not been
-            // re-classified. This has been changed so that we can re-classify
-            // the DOFs. Example: Bulk element classifies it's own DOF types,
-            // then a FaceElement will re-classify the bulk element's DOFs.
-            // See ImposeParallelOutflowElement.
-            // I have not deleted the below so we can easily "revert" back if
-            // required.
-
-            // paranoid check
-            // check that if row has been imported the block number is the
-            // same
-//            if (dof_recv[my_global_dofs[i]-first_row])
-//             {
-//              if (Dof_number_dense[my_global_dofs[i]-first_row]
-//                  != my_dof_numbers[i])
-//               {
-//                std::ostringstream error_message;
-//                error_message
-//                 << "Inconsistency in assigment of block numbers\n"
-//                 << "Global dof " <<  my_global_dofs[i]
-//                 << "was previously assigned to block "
-//                 <<  Dof_number_dense[my_global_dofs[i]-first_row]
-//                 << "\nNow it's been reassigned to block "
-//                 << my_dof_numbers[i] << ".\n"
-//                 << "This is most likely because one of your\n"
-//                 << "elements has classified its degrees of freedom\n"
-//                 << "wrongly. You should remember that \n"
-//                 << "GeneralisedElement::get_block_numbers_for_unknowns()\n"
-//                 << "should only classify the element's OWN dofs and not \n"
-//                 << "deal with dofs that were created by resizing nodes, \n"
-//                 << "say. Check that loops over nodal values in that \n"
-//                 << "function do not use Node::nvalue() to determine the\n"
-//                 << "dofs to be classified!\n";
-//                throw OomphLibWarning(error_message.str(),
-//                                      OOMPH_CURRENT_FUNCTION,
-//                                      OOMPH_EXCEPTION_LOCATION);
-//               }
-//             }
             // indicate that this dof has ben recv
             dof_recv[my_global_dofs[i]-first_row] = true;
 #endif
@@ -1566,45 +1528,6 @@ namespace oomph
         for (int i  = 0; i < ndof_to_recv[p]; i++)
          {
 #ifdef PARANOID
-          // RAYRAY Legacy code, this checks that the DOFs have not been
-          // re-classified. This has been changed so that we can re-classify
-          // the DOFs. Example: Bulk element classifies it's own DOF types,
-          // then a FaceElement will re-classify the bulk element's DOFs.
-          // See ImposeParallelOutflowElement.
-          // I have not deleted the below so we can easily "revert" back if
-          // required.
-
-          // paranoid check
-          // check that if row has been imported the block number is the same
-//          if (dof_recv[global_dofs_recv[p][i]-first_row])
-//           {
-//            if (Dof_number_dense[global_dofs_recv[p][i]-first_row]
-//                != dof_numbers_recv[p][i])
-//             {
-//              std::ostringstream error_message;
-//              error_message
-//               << "Inconsistency in assignment of block numbers\n"
-//               << "Global dof "
-//               <<  global_dofs_recv[p][i]
-//               << " was previously assigned to block "
-//               <<  Dof_number_dense[global_dofs_recv[p][i]
-//                                    -first_row]
-//               << "\nNow it's been reassigned to block "
-//               << dof_numbers_recv[p][i] << ".\n"
-//               << "This is most likely because one of your\n"
-//               << "elements has classified its degrees of freedom\n"
-//               << "wrongly. You should remember that \n"
-//               << "GeneralisedElement::get_block_numbers_for_unknowns()\n"
-//               << "should only classify the element's OWN dofs and not \n"
-//               << "deal with dofs that were created by resizing nodes, \n"
-//               << "say. Check that loops over nodal values in that \n"
-//               << "function do not use Node::nvalue() to determine the\n"
-//               << "dofs to be classified!\n";
-//              throw OomphLibWarning(error_message.str(),
-//                                    OOMPH_CURRENT_FUNCTION,
-//                                    OOMPH_EXCEPTION_LOCATION);
-//             }
-//           }
           // indicate that this dof has ben recv
           dof_recv[global_dofs_recv[p][i]-first_row] = true;
 #endif
