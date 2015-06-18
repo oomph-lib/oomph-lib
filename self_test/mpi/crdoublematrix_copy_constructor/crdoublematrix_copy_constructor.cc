@@ -31,7 +31,8 @@
 
 using namespace oomph;
 
-// Helper function to construct a Vector given an array
+// Helper function to construct a Vector given an array. We use this because
+// there is no better way to create an arbitrary Vector.
 template<typename myType>
 void construct_vector(const myType given_array[],
                       const unsigned given_arraysize,                  
@@ -87,31 +88,6 @@ int main(int argc, char* argv[])
   //  values = 1 2 3 4 5 6 7 8 9
   //  col i  = 0 1 0 2 3 4 0 1 4
   //  row s  = 0 2 4 6 9 9
-  //
-  //  Matrix 2
-  //  [1  2  3  4  5
-  //   6  7  8  9  10
-  //   0  0  11 0  12
-  //   13 14 15 0  0
-  //   0  0  16 17 18]
-  //  
-  //  values = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
-  //  col i  = 0 1 2 3 4 0 1 2 3 4  2  4  0  1  2  2  3  4
-  //  row s  = 0 5 10 12 15 18
-  //
-  //  Result matrix
-  //  [2  4  3  4  5 
-  //   9  7  12 9  10
-  //   0  0  11 5  18
-  //   20 22 15 0  9 
-  //   0  0  16 17 18]
-  //
-  //   values = 2 4 3 4 5 9 7 12 9 10 11 5 18 20 22 15 9 16 17 18
-  //   col i  = 0 1 2 3 4 0 1 2 3 4 2 3 4 0 1 2 4 2 3 4
-  //   row s  = 0 5 10 13 17 19
-  //
-
-  // First matrix (t1m1)
   unsigned nrow_global_t1m1 = 5;
   unsigned ncol_t1m1 = 5;
   unsigned nnz_t1m1 = 9;
@@ -144,67 +120,10 @@ int main(int argc, char* argv[])
   copy_of_mat_t1m1.sparse_indexed_output(copy_of_mat_t1m1_stream.str());
 
 
-//  // Next matrix (t1m2)
-//  unsigned nrow_global_t1m2 = 5;
-//  unsigned ncol_t1m2 = 5;
-//  unsigned nnz_t1m2 = 18;
-//  Vector<double> val_t1m2;
-//  Vector<int> col_i_t1m2;
-//  Vector<int> row_s_t1m2;
-//
-//  double val_array_t1m2[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
-//  int col_i_array_t1m2[] = {0,1,2,3,4,0,1,2,3,4,2,4,0,1,2,2,3,4};
-//  int row_s_array_t1m2[] = {0,5,10,12,15,18};
-//
-//  construct_vector(val_array_t1m2,nnz_t1m2,val_t1m2);
-//  construct_vector(col_i_array_t1m2,nnz_t1m2,col_i_t1m2);
-//  construct_vector(row_s_array_t1m2,nrow_global_t1m2+1,row_s_t1m2);
-//
-//  CRDoubleMatrix mat_t1m2;
-//  CRDoubleMatrixHelpers::create_uniformly_distributed_matrix(
-//      nrow_global_t1m2,ncol_t1m2,comm_pt,
-//      val_t1m2,col_i_t1m2,row_s_t1m2,mat_t1m2);
-//
-//  std::ostringstream mat_t1m2_stream;
-//
-//  mat_t1m2_stream << "t1m2_NP"<<nproc<<"R"<<my_rank;
-//  mat_t1m2.sparse_indexed_output(mat_t1m2_stream.str());
-//
-//  // Now perform element-wise addition of t1m1 and t1m2, and put the result
-//  // in mat_t1_result.
-//  CRDoubleMatrix mat_t1_result;
-//
-//  mat_t1m1.add(mat_t1m2,mat_t1_result);
-//
-//  std::ostringstream mat_t1_result_stream;
-//  mat_t1_result_stream << "t1_res_NP"<<nproc<<"R"<<my_rank;
-//  mat_t1_result.sparse_indexed_output(mat_t1_result_stream.str());
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-  // Now test with the following matrices: A + B = C where
+  // Next matrix, testing non-square matrix where nrow < ncol.
   // A = [1  2  3  4  5  6
   //      7  8  9  10 11 12
   //      13 14 15 16 17 18]
-  //
-  // B = [1  2  3  4  5  6
-  //      7  8  9  10 11 12
-  //      13 14 15 16 17 18]
-  //
-  // C = [2  4  6  8  10 12
-  //      14 16 18 20 22 24
-  //      26 28 30 32 34 36]
-  
-  // First matrix (t2m1)
   unsigned nrow_global_t2m1 = 3;
   unsigned ncol_t2m1 = 6;
   unsigned nnz_t2m1 = 18;
@@ -237,82 +156,13 @@ int main(int argc, char* argv[])
   copy_of_mat_t2m1.sparse_indexed_output(copy_of_mat_t2m1_stream.str());
 
 
-
-
-
-
-
-//  // Second matrix (t2m2)
-//  unsigned nrow_global_t2m2 = 3;
-//  unsigned ncol_t2m2 = 6;
-//  unsigned nnz_t2m2 = 18;
-//  Vector<double> val_t2m2;
-//  Vector<int> col_i_t2m2;
-//  Vector<int> row_s_t2m2;
-//
-//  double val_array_t2m2[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
-//  int col_i_array_t2m2[] = {0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5};
-//  int row_s_array_t2m2[] = {0,6,12,18};
-//
-//  construct_vector(val_array_t2m2,nnz_t2m2,val_t2m2);
-//  construct_vector(col_i_array_t2m2,nnz_t2m2,col_i_t2m2);
-//  construct_vector(row_s_array_t2m2,nrow_global_t2m2+1,row_s_t2m2);
-//
-//  CRDoubleMatrix mat_t2m2;
-//  CRDoubleMatrixHelpers::create_uniformly_distributed_matrix(
-//      nrow_global_t2m2,ncol_t2m2,comm_pt,
-//      val_t2m2,col_i_t2m2,row_s_t2m2,mat_t2m2);
-//
-//  std::ostringstream mat_t2m2_stream;
-//  mat_t2m2_stream << "t2m2_NP"<<nproc<<"R"<<my_rank;
-//  mat_t2m2.sparse_indexed_output(mat_t2m2_stream.str());
-//
-//  // Now perform element-wise addition of t2m1 and t2m2, and put the result
-//  // in mat_t2_result.
-//  CRDoubleMatrix mat_t2_result;
-//
-//  mat_t2m1.add(mat_t2m2,mat_t2_result);
-//
-//  std::ostringstream mat_t2_result_stream;
-//  mat_t2_result_stream << "t2_res_NP"<<nproc<<"R"<<my_rank;
-//  mat_t2_result.sparse_indexed_output(mat_t2_result_stream.str());
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-  // Now test with the following matrices: A + B = C where
+  // Testing non square matrix where nrow > ncol
   // A = [1  2  3
   //      4  5  6
   //      7  8  9
   //      10 11 12
   //      13 14 15
   //      16 17 18]
-  //
-  // B = [1  2  3
-  //      4  5  6
-  //      7  8  9
-  //      10 11 12
-  //      13 14 15
-  //      16 17 18]
-  //
-  // C = [2  4  6
-  //      8  10 12
-  //      14 16 18
-  //      20 22 24
-  //      26 28 30
-  //      32 34 36]
-  
-  // First matrix (t3m1)
   unsigned nrow_global_t3m1 = 6;
   unsigned ncol_t3m1 = 3;
   unsigned nnz_t3m1 = 18;
@@ -343,129 +193,6 @@ int main(int argc, char* argv[])
   std::ostringstream copy_of_mat_t3m1_stream;
   copy_of_mat_t3m1_stream << "copy_of_t3m1_NP" << nproc << "R" << my_rank;
   copy_of_mat_t3m1.sparse_indexed_output(copy_of_mat_t3m1_stream.str());
-
-
-//  // Second matrix (t3m2)
-//  unsigned nrow_global_t3m2 = 6;
-//  unsigned ncol_t3m2 = 3;
-//  unsigned nnz_t3m2 = 18;
-//  Vector<double> val_t3m2;
-//  Vector<int> col_i_t3m2;
-//  Vector<int> row_s_t3m2;
-//
-//  double val_array_t3m2[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
-//  int col_i_array_t3m2[] = {0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2};
-//  int row_s_array_t3m2[] = {0,3,6,9,12,15,18};
-//
-//
-//  construct_vector(val_array_t3m2,nnz_t3m2,val_t3m2);
-//  construct_vector(col_i_array_t3m2,nnz_t3m2,col_i_t3m2);
-//  construct_vector(row_s_array_t3m2,nrow_global_t3m2+1,row_s_t3m2);
-//
-//  CRDoubleMatrix mat_t3m2;
-//  CRDoubleMatrixHelpers::create_uniformly_distributed_matrix(
-//      nrow_global_t3m2,ncol_t3m2,comm_pt,
-//      val_t3m2,col_i_t3m2,row_s_t3m2,mat_t3m2);
-//
-//  std::ostringstream mat_t3m2_stream;
-//  mat_t3m2_stream << "t3m2_NP"<<nproc<<"R"<<my_rank;
-//  mat_t3m2.sparse_indexed_output(mat_t3m2_stream.str());
-//
-//  // Now perform element-wise addition of t3m1 and t3m2, and put the result
-//  // in mat_t3_result.
-//  CRDoubleMatrix mat_t3_result;
-//
-//  mat_t3m1.add(mat_t3m2,mat_t3_result);
-//
-//  std::ostringstream mat_t3_result_stream;
-//  mat_t3_result_stream << "t3_res_NP"<<nproc<<"R"<<my_rank;
-//  mat_t3_result.sparse_indexed_output(mat_t3_result_stream.str());
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//  // COLUMN INDICES NOT ORDERED. 
-//  // Now test with the following matrices: A + B = C where
-//  // A = [1  2  3  4  5  6
-//  //      7  8  9  10 11 12
-//  //      13 14 15 16 17 18]
-//  //
-//  // B = [1  2  3  4  5  6
-//  //      7  8  9  10 11 12
-//  //      13 14 15 16 17 18]
-//  //
-//  // B = [2  4  6  8  10 12
-//  //      14 16 18 20 22 24
-//  //      26 28 30 32 34 36]
-//  //
-//  // In this test, the column indices (per row) is not ordered.
-//  
-//  // First matrix (t4m1)
-//  unsigned nrow_global_t4m1 = 3;
-//  unsigned ncol_t4m1 = 6;
-//  unsigned nnz_t4m1 = 18;
-//  Vector<double> val_t4m1;
-//  Vector<int> col_i_t4m1;
-//  Vector<int> row_s_t4m1;
-//
-//  double val_array_t4m1[] = {1,5,4,3,2,6,7,8,9,10,11,12,13,17,16,15,14,18};
-//  int col_i_array_t4m1[] = {0,4,3,2,1,5,0,1,2,3,4,5,0,4,3,2,1,5};
-//  int row_s_array_t4m1[] = {0,6,12,18};
-//
-//  construct_vector(val_array_t4m1,nnz_t4m1,val_t4m1);
-//  construct_vector(col_i_array_t4m1,nnz_t4m1,col_i_t4m1);
-//  construct_vector(row_s_array_t4m1,nrow_global_t4m1+1,row_s_t4m1);
-//
-//  CRDoubleMatrix mat_t4m1;
-//  CRDoubleMatrixHelpers::create_uniformly_distributed_matrix(
-//      nrow_global_t4m1,ncol_t4m1,comm_pt,
-//      val_t4m1,col_i_t4m1,row_s_t4m1,mat_t4m1);
-//
-//  std::ostringstream mat_t4m1_stream;
-//  mat_t4m1_stream << "t4m1_NP"<<nproc<<"R"<<my_rank;
-//  mat_t4m1.sparse_indexed_output(mat_t4m1_stream.str());
-// 
-//  // Second matrix (t4m2)
-//  unsigned nrow_global_t4m2 = 3;
-//  unsigned ncol_t4m2 = 6;
-//  unsigned nnz_t4m2 = 18;
-//  Vector<double> val_t4m2;
-//  Vector<int> col_i_t4m2;
-//  Vector<int> row_s_t4m2;
-//
-//  double val_array_t4m2[] = {1,2,3,4,5,6,7,11,10,9,8,12,13,14,15,16,17,18};
-//  int col_i_array_t4m2[] = {0,1,2,3,4,5,0,4,3,2,1,5,0,1,2,3,4,5};
-//  int row_s_array_t4m2[] = {0,6,12,18};
-//
-//  construct_vector(val_array_t4m2,nnz_t4m2,val_t4m2);
-//  construct_vector(col_i_array_t4m2,nnz_t4m2,col_i_t4m2);
-//  construct_vector(row_s_array_t4m2,nrow_global_t4m2+1,row_s_t4m2);
-//
-//  CRDoubleMatrix mat_t4m2;
-//  CRDoubleMatrixHelpers::create_uniformly_distributed_matrix(
-//      nrow_global_t4m2,ncol_t4m2,comm_pt,
-//      val_t4m2,col_i_t4m2,row_s_t4m2,mat_t4m2);
-//
-//  std::ostringstream mat_t4m2_stream;
-//  mat_t4m2_stream << "t4m2_NP"<<nproc<<"R"<<my_rank;
-//  mat_t4m2.sparse_indexed_output(mat_t4m2_stream.str());
-//
-//  // Now perform element-wise addition of t4m1 and t4m2, and put the result
-//  // in mat_t4_result.
-//  CRDoubleMatrix mat_t4_result;
-//
-//  mat_t4m1.add(mat_t4m2,mat_t4_result);
-//
-//  std::ostringstream mat_t4_result_stream;
-//  mat_t4_result_stream << "t4_res_NP"<<nproc<<"R"<<my_rank;
-//  mat_t4_result.sparse_indexed_output(mat_t4_result_stream.str());
 
 #ifdef OOMPH_HAS_MPI
   // finalize MPI
