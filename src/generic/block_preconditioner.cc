@@ -2627,6 +2627,25 @@ namespace oomph
   const Vector<unsigned>& doftype_in_master_preconditioner_coarse,
   const Vector<Vector<unsigned> > &doftype_coarsen_map_coarse)
  {
+
+#ifdef PARANOID
+  const unsigned para_nmesh = this->Mesh_pt.size();
+  if(para_nmesh > 0)
+  {
+    std::ostringstream error_message;
+    error_message << "Tried to turn into subsidiary block preconditioner,\n"
+                  << "but there is already meshes set, Mesh_pt.size() is:\n"
+                  << para_nmesh << ".\n"
+                  << "Subsidiary preconditioners do not have meshes set.\n"
+                  << "Please re-write the BlockPreconditioner with this "
+                  << "in mind."
+                  << std::endl;
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
   // Set the master block preconditioner pointer
   Master_block_preconditioner_pt = master_block_prec_pt;
 
