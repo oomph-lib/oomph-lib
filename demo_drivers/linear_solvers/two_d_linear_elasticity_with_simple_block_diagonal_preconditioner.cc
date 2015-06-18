@@ -365,9 +365,8 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem
 
  // Block preconditioner can work with just the bulk mesh
  // since its elements contain all the degrees of freedom that
- // need to be classified.
- Prec_pt->set_nmesh(1);
- Prec_pt->set_mesh(0,Bulk_mesh_pt);
+ // need to be classified. Push back the bulk mesh.
+ Prec_pt->push_back_mesh(Bulk_mesh_pt);
 
  // Set the preconditioner
  Solver_pt->preconditioner_pt()=Prec_pt;

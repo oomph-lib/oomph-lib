@@ -223,9 +223,8 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
     new Diagonal<CRDoubleMatrix>;
    
    // Set mesh
-   block_prec_pt->set_nmesh(1);
-   block_prec_pt->set_mesh(0,mesh_pt());
-   
+   block_prec_pt->push_back_mesh(mesh_pt());
+
    // Set preconditioner
    solver_pt->preconditioner_pt()=block_prec_pt;
   }
@@ -238,8 +237,7 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
     new UpperTriangular<CRDoubleMatrix>;
    
    // Set mesh
-   block_prec_pt->set_nmesh(1);
-   block_prec_pt->set_mesh(0,mesh_pt());
+   block_prec_pt->push_back_mesh(mesh_pt());
    
    // Set preconditioner
    solver_pt->preconditioner_pt()=block_prec_pt;
@@ -255,8 +253,8 @@ else if (CommandLineArgs::
     TwoPlusThree<CRDoubleMatrix>;
    
    // Set mesh
-   block_prec_pt->set_nmesh(1);
-   block_prec_pt->set_mesh(0,mesh_pt());
+   block_prec_pt->push_back_mesh(mesh_pt());
+
    
    // Set preconditioner
    solver_pt->preconditioner_pt()=block_prec_pt;
@@ -272,9 +270,9 @@ else if (CommandLineArgs::
     TwoPlusThreeUpperTriangular<CRDoubleMatrix>;
    
    // Set mesh
-   block_prec_pt->set_nmesh(1);
-   block_prec_pt->set_mesh(0,mesh_pt());
-   
+   block_prec_pt->push_back_mesh(mesh_pt());
+
+
    // Set preconditioner
    solver_pt->preconditioner_pt()=block_prec_pt;
   }
@@ -291,9 +289,9 @@ else if (CommandLineArgs::
     TwoPlusThreeUpperTriangularWithOneLevelSubsidiary<CRDoubleMatrix>;
    
    // Set mesh
-   block_prec_pt->set_nmesh(1);
-   block_prec_pt->set_mesh(0,mesh_pt());
-   
+   block_prec_pt->push_back_mesh(mesh_pt());
+
+
    // Set preconditioner
    solver_pt->preconditioner_pt()=block_prec_pt;
   }
@@ -310,9 +308,9 @@ else if (CommandLineArgs::
     TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary<CRDoubleMatrix>;
    
    // Set mesh
-   block_prec_pt->set_nmesh(1);
-   block_prec_pt->set_mesh(0,mesh_pt());
-   
+   block_prec_pt->push_back_mesh(mesh_pt());
+ 
+
    // Set preconditioner
    solver_pt->preconditioner_pt()=block_prec_pt;
   }
@@ -328,9 +326,9 @@ else if (CommandLineArgs::
     TwoPlusThreeUpperTriangularWithReplace<CRDoubleMatrix>;
    
    // Set mesh
-   block_prec_pt->set_nmesh(1);
-   block_prec_pt->set_mesh(0,mesh_pt());
-   
+   block_prec_pt->push_back_mesh(mesh_pt());
+
+
    // Set preconditioner
    solver_pt->preconditioner_pt()=block_prec_pt;
   }
@@ -346,9 +344,9 @@ else if (CommandLineArgs::
     CoarseTwoPlusTwoPlusOne<CRDoubleMatrix>;
    
    // Set mesh
-   block_prec_pt->set_nmesh(1);
-   block_prec_pt->set_mesh(0,mesh_pt());
-   
+   block_prec_pt->push_back_mesh(mesh_pt());
+
+
    // Set preconditioner
    solver_pt->preconditioner_pt()=block_prec_pt;
   }
@@ -365,9 +363,9 @@ else if (CommandLineArgs::
     OnePlusFourWithTwoCoarse<CRDoubleMatrix>;
    
    // Set mesh
-   block_prec_pt->set_nmesh(1);
-   block_prec_pt->set_mesh(0,mesh_pt());
-   
+   block_prec_pt->push_back_mesh(mesh_pt());
+ 
+
    // Set preconditioner
    solver_pt->preconditioner_pt()=block_prec_pt;
   }

@@ -91,7 +91,10 @@ namespace oomph
    : BlockPreconditioner<MATRIX>(),
      Subsidiary_preconditioner_creation_function_pt
      (&PreconditionerCreationFunctions::create_super_lu_preconditioner)
-  {}
+  {
+    // Make sure that the Gp_mesh_pt container is size zero.
+    Gp_mesh_pt.resize(0);
+  }
 
   /// Destructor: clean up memory then delete all subsidiary
   /// preconditioners.
@@ -178,13 +181,72 @@ namespace oomph
   Preconditioner* subsidiary_preconditioner_pt(const unsigned &i) const
   { return Subsidiary_preconditioner_pt[i]; }
 
-  /// \short specify a DOF to block map
+  /// \short Specify a DOF to block map
   void set_dof_to_block_map(Vector<unsigned>& dof_to_block_map)
   {
    Dof_to_block_map = dof_to_block_map;
   }
+  
+  /// \short Pushes a mesh onto the Vector Gp_mesh_pt to be used by the
+  /// block preconditioning framework for classifying DOF types.
+  void push_back_mesh(const Mesh* mesh_pt, 
+                   const bool &allow_multiple_element_type_in_mesh = false)
+  {
+#ifdef PARANOID
+    // Check that the mesh pointer is not null.
+    if(mesh_pt == 0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "The mesh_pt is null, please point it to a mesh.\n";
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+    // Push back the mesh pointer and the boolean in a pair.
+    Gp_mesh_pt.push_back(std::make_pair(mesh_pt,
+                                     allow_multiple_element_type_in_mesh));
+  }
+
+  /// \short Returns the number of meshes currently set in the 
+  /// GeneralPurposeBlockPreconditioner base class. This is different from
+  /// the nmesh in the BlockPreconditioner base class.
+  /// the nmesh in the BlockPreconditioner base class will be 0 until 
+  /// set_nmesh is called. This method will return the meshes in GP_mesh_pt.
+  unsigned gp_nmesh()
+  {
+    return Gp_mesh_pt.size();
+  }
 
  protected:
+
+  /// \short Set the mesh in the block preconditioning framework.
+  void gp_preconditioner_set_all_meshes()
+  {
+    if(this->is_master_block_preconditioner())
+    {
+      const unsigned nmesh = gp_nmesh();
+#ifdef PARANOID
+    if(nmesh == 0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "There are no meshes set.\n"
+              << "Have you remembered to call push_back_mesh(...)?\n";
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+      this->set_nmesh(nmesh);
+      for (unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++) 
+      {
+        this->set_mesh(mesh_i,
+                       Gp_mesh_pt[mesh_i].first,
+                       Gp_mesh_pt[mesh_i].second);
+      }
+    }
+  }
 
   /// Modified block setup for general purpose block preconditioners
   void gp_preconditioner_block_setup()
@@ -251,6 +313,10 @@ namespace oomph
 
   /// the set of dof to block maps for this preconditioner
   Vector<unsigned> Dof_to_block_map;
+
+  /// Vector of mesh pointers and a boolean indicating if we allow multiple
+  /// element types in the same mesh.
+  Vector<std::pair<const Mesh*, bool> > Gp_mesh_pt;
  };
 
  

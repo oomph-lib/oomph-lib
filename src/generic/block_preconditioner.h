@@ -646,82 +646,7 @@ class BlockSelector
    const Vector<unsigned>& doftype_in_master_preconditioner_coarse,
    const Vector<Vector<unsigned> > & doftype_coarsen_map_coarse);
 
-  /// \short Specify the number of meshes required by this block 
-  /// preconditioner.
-  /// Note: elements in different meshes correspond to different types
-  /// of DOF.
-  void set_nmesh(const unsigned& n)
-  {
-#ifdef PARANOID
-   // Check that this preconditioner is not a subsidiary
-   if(is_subsidiary_block_preconditioner())
-    {
-     std::string err_msg;
-     err_msg = "Tried to set nmesh in subsidiary preconditioner but subsidiary";
-     err_msg += "but subsidiary preconditioners do not store meshes.";
-     throw OomphLibError(err_msg, OOMPH_CURRENT_FUNCTION, 
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-   Mesh_pt.resize(n,0);
-   Allow_multiple_element_type_in_mesh.resize(n,0);
-  } // EOFunc set_nmesh(...)
 
-
-  /// \short Set the i-th mesh for this block preconditioner.
-  /// Note:
-  /// The method set_nmesh(...) must be called before this method
-  /// to specify the number of meshes.
-  /// By default, it is assumed that each mesh only contains elements of the 
-  /// same type. This condition may be relaxed by setting the boolean
-  /// allow_multiple_element_type_in_mesh to true, however, each mesh must only 
-  /// contain elements with the same number of dof types.
-  void set_mesh(const unsigned& i, const Mesh* const mesh_pt,
-                const bool &allow_multiple_element_type_in_mesh = false)
-  {
-#ifdef PARANOID
-   // paranoid check that mesh i can be set
-   if (i >= nmesh())
-    {
-     std::ostringstream err_msg;
-     err_msg
-      << "The mesh pointer has space for " << nmesh()
-      << " meshes.\n" << "Cannot store a mesh at entry " << i << "\n"
-      << "Has set_nmesh(...) been called?";
-     throw OomphLibError(err_msg.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
-   // Check that the mesh pointer is not null.
-   if(mesh_pt == 0)
-    {
-     std::ostringstream err_msg;
-     err_msg
-      << "Tried to set the " << i << "-th mesh pointer, but it is null.";
-     throw OomphLibError(err_msg.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
-   // Check that this preconditioner is not a subsidiary
-   if(is_subsidiary_block_preconditioner())
-    {
-     std::string err_msg;
-     err_msg = "Tried to set a mesh in a subsidiary preconditioner, ";
-     err_msg += "but subsidiary preconditioners do not store meshes.";
-     throw OomphLibError(err_msg, OOMPH_CURRENT_FUNCTION, 
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-   // store the mesh pt and n dof types
-   Mesh_pt[i]=mesh_pt;
-
-   // Does this mesh contain multiple element types?
-   Allow_multiple_element_type_in_mesh[i] 
-     = unsigned(allow_multiple_element_type_in_mesh);
-  } // EOFunc set_mesh(...)
 
   /// \short Determine the size of the matrix blocks and setup the
   /// lookup schemes relating the global degrees of freedom with
@@ -2916,6 +2841,84 @@ class BlockSelector
  }
 
  protected:
+
+  /// \short Specify the number of meshes required by this block 
+  /// preconditioner.
+  /// Note: elements in different meshes correspond to different types
+  /// of DOF.
+  void set_nmesh(const unsigned& n)
+  {
+#ifdef PARANOID
+   // Check that this preconditioner is not a subsidiary
+   if(is_subsidiary_block_preconditioner())
+    {
+     std::string err_msg;
+     err_msg = "Tried to set nmesh in subsidiary preconditioner but subsidiary";
+     err_msg += "but subsidiary preconditioners do not store meshes.";
+     throw OomphLibError(err_msg, OOMPH_CURRENT_FUNCTION, 
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   Mesh_pt.resize(n,0);
+   Allow_multiple_element_type_in_mesh.resize(n,0);
+  } // EOFunc set_nmesh(...)
+
+
+  /// \short Set the i-th mesh for this block preconditioner.
+  /// Note:
+  /// The method set_nmesh(...) must be called before this method
+  /// to specify the number of meshes.
+  /// By default, it is assumed that each mesh only contains elements of the 
+  /// same type. This condition may be relaxed by setting the boolean
+  /// allow_multiple_element_type_in_mesh to true, however, each mesh must only 
+  /// contain elements with the same number of dof types.
+  void set_mesh(const unsigned& i, const Mesh* const mesh_pt,
+                const bool &allow_multiple_element_type_in_mesh = false)
+  {
+#ifdef PARANOID
+   // paranoid check that mesh i can be set
+   if (i >= nmesh())
+    {
+     std::ostringstream err_msg;
+     err_msg
+      << "The mesh pointer has space for " << nmesh()
+      << " meshes.\n" << "Cannot store a mesh at entry " << i << "\n"
+      << "Has set_nmesh(...) been called?";
+     throw OomphLibError(err_msg.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Check that the mesh pointer is not null.
+   if(mesh_pt == 0)
+    {
+     std::ostringstream err_msg;
+     err_msg
+      << "Tried to set the " << i << "-th mesh pointer, but it is null.";
+     throw OomphLibError(err_msg.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Check that this preconditioner is not a subsidiary
+   if(is_subsidiary_block_preconditioner())
+    {
+     std::string err_msg;
+     err_msg = "Tried to set a mesh in a subsidiary preconditioner, ";
+     err_msg += "but subsidiary preconditioners do not store meshes.";
+     throw OomphLibError(err_msg, OOMPH_CURRENT_FUNCTION, 
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // store the mesh pt and n dof types
+   Mesh_pt[i]=mesh_pt;
+
+   // Does this mesh contain multiple element types?
+   Allow_multiple_element_type_in_mesh[i] 
+     = unsigned(allow_multiple_element_type_in_mesh);
+  } // EOFunc set_mesh(...)
+
 
   /// \short Set replacement dof-level blocks.
   /// Only dof-level blocks can be set. This is important due to how the

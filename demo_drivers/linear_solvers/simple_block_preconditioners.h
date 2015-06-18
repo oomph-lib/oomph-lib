@@ -92,11 +92,36 @@ namespace oomph
   /// \short Setup the preconditioner 
   virtual void setup();
   
+  /// \short Pushes a mesh onto the Vector Multi_poisson_mesh_pt to be used 
+  /// by the block preconditioning framework for classifying DOF types.
+  void push_back_mesh(const Mesh* const mesh_pt)
+  {
+#ifdef PARANOID
+    // Check that the mesh pointer is not null.
+    if(mesh_pt == 0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "The mesh_pt is null, please point it to a mesh.\n";
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+    // Push back the mesh.
+    Multi_poisson_mesh_pt.push_back(mesh_pt);
+  } 
+  
  private :
   
   /// \short Vector of SuperLU preconditioner pointers for storing the 
   /// preconditioners for each diagonal block // hierher  superlu
   Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
+
+  /// \short Vector of Mesh pointers. We store it here since this
+  /// preconditioner is responsible for the DOF ordering, which is
+  /// determined by calls to BlockPreconditioner::set_mesh(...).
+  Vector<const Mesh*> Multi_poisson_mesh_pt;
 
  };
 
@@ -107,6 +132,34 @@ namespace oomph
  template<typename MATRIX> 
  void SimpleBlockDiagonalPreconditioner<MATRIX>::setup()
  {
+
+  // Only set the mesh if this is a master block preconditioner.
+  // Otherwise, the DOF ordering information is given by the
+  // master block preconditioner.
+  if(this->is_master_block_preconditioner())
+  {
+    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
+
+#ifdef PARANOID
+    if(my_nmesh == 0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "There are no meshes set.\n"
+              << "Please set at least one mesh with push_back_mesh(...)";
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+    // Set the nmesh in the BlockPreconditioner base class
+    this->set_nmesh(my_nmesh);
+
+    // Loop through all the meshes and set them.
+    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
+    {
+      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
+    }
+  }
 
   // Set up the block look up scheme
   this->block_setup();

@@ -766,9 +766,18 @@ void SimpleFSIPreconditioner::setup()
   // are the fluid DOFs. Mesh 1 is the solid mesh and therefore DOFs 
   // n_fluid_dof_type to n_total_dof_type-1 are solid DOFs
   // set the mesh pointers
-  this->set_nmesh(2);
-  this->set_mesh(0,Navier_stokes_mesh_pt);
-  this->set_mesh(1,Solid_mesh_pt);
+  //
+  // Only set the mesh if this is a master block preconditioner. Only
+  // master block preconditioners store the meshes in the 
+  // BlockPreconditioner base class - used for determining the DOF type
+  // ordering.
+  if(this->is_master_block_preconditioner())
+  {
+    this->set_nmesh(2);
+    this->set_mesh(0,Navier_stokes_mesh_pt);
+    this->set_mesh(1,Solid_mesh_pt);
+  }
+
   unsigned n_fluid_dof_type = this->ndof_types_in_mesh(0);
   unsigned n_total_dof_type = n_fluid_dof_type + this->ndof_types_in_mesh(1);
 

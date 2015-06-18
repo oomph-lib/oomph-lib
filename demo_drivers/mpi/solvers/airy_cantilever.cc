@@ -736,11 +736,12 @@ int main(int argc, char* argv[])
 
  // The preconditioner only requires the bulk mesh since its
  // elements are capable of classifying all degrees of freedom
- prec_pt->set_nmesh(1);
  
- // Set mesh
- prec_pt->set_mesh(0,problem.solid_mesh_pt());
- 
+ // prec_pt is a GeneralPurposeBlockPreconditioner, so we call the function
+ // push_back_mesh(...). Otherwise we'd have to call the specific 
+ // set_*_mesh() functions.
+ prec_pt->push_back_mesh(problem.solid_mesh_pt());
+
  // set the DOF to block map
  Vector<unsigned> dof_to_block_map(2);
  dof_to_block_map[0] = 0;

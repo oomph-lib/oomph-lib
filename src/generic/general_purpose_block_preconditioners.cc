@@ -44,6 +44,26 @@ namespace oomph
   // clean the memory
   this->clean_up_memory();
 
+  // If this is a master block preconditioner, 
+  // we give the mesh pointers to the BlockPreconditioner base class.
+  if(this->is_master_block_preconditioner())
+  {
+#ifdef PARANOID
+    if( this->gp_nmesh() == 0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "There are no meshes set.\n"
+              << "Did you remember to call push_back_mesh(...)?";
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+    // Set all meshes if this is master block preconditioner
+    this->gp_preconditioner_set_all_meshes();
+  }
+
   // Set up the block look up schemes
   this->gp_preconditioner_block_setup();
 
@@ -170,6 +190,26 @@ namespace oomph
  {
   // clean the memory
   this->clean_up_memory();
+
+  // If this is a master block preconditioner, 
+  // we give the mesh pointers to the BlockPreconditioner base class.
+  if(this->is_master_block_preconditioner())
+  {
+#ifdef PARANOID
+    if( this->gp_nmesh() == 0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "There are no meshes set.\n"
+              << "Did you remember to call push_back_mesh(...)?";
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+    // Set all meshes if this is master block preconditioner
+    this->gp_preconditioner_set_all_meshes();
+  }
 
   // Set up the block look up schemes
   this->gp_preconditioner_block_setup();
@@ -310,6 +350,27 @@ namespace oomph
  template<typename MATRIX> 
  void ExactBlockPreconditioner<MATRIX>::setup()
  {
+
+  // If this is a master block preconditioner, 
+  // we give the mesh pointers to the BlockPreconditioner base class.
+  if(this->is_master_block_preconditioner())
+  {
+#ifdef PARANOID
+    if( this->gp_nmesh() == 0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "There are no meshes set.\n"
+              << "Did you remember to call push_back_mesh(...)?";
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+    // Set all meshes if this is master block preconditioner
+    this->gp_preconditioner_set_all_meshes();
+  }
+
   // Set up the block look up schemes
   this->gp_preconditioner_block_setup();
 

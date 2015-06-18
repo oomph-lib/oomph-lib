@@ -981,6 +981,9 @@ throw OomphLibError("Not implemented (yet?).", OOMPH_CURRENT_FUNCTION,
     IterativeLinearSolver* its_pt = iterative_linear_solver_pt();
     if(its_pt != 0)
       {
+// RRR add comments to why this is incorrect:
+// We cannot call set_nmesh and set_mesh, this is handled by the derived
+// classes.
         // Try to get a block preconditioner from the preconditioner
         BlockPreconditioner<CRDoubleMatrix>* bp_pt
           = smart_cast_preconditioner<BlockPreconditioner<CRDoubleMatrix>*>
@@ -988,12 +991,27 @@ throw OomphLibError("Not implemented (yet?).", OOMPH_CURRENT_FUNCTION,
 
         if(bp_pt != 0)
           {
-            // Set up meshes
-            bp_pt->set_nmesh(nsub_mesh());
-            for(unsigned i=0; i< nsub_mesh(); i++)
-              {
-                bp_pt->set_mesh(i, mesh_pt(i));
-              }
+#ifdef PARANOID
+          {
+            std::string err = "IS THIS EVER USED?";
+            throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                                OOMPH_EXCEPTION_LOCATION);
+          }
+#endif
+
+          // This part of the code is never executed in the driver code.
+          // Commented out since it no longer make sense. The functions
+          // set_nmesh() and set_mesh() are made protected. Each derived
+          // block preconditioner has to call set_nmesh() and set_mesh(), 
+          // since the preconditioner knows which mesh goes where, the 
+          // writer of the driver code does not necessarily know.
+
+//            // Set up meshes
+//            bp_pt->set_nmesh(nsub_mesh());
+//            for(unsigned i=0; i< nsub_mesh(); i++)
+//              {
+//                bp_pt->set_mesh(i, mesh_pt(i));
+//              }
           }
       }
 
