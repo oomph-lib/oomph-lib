@@ -9,6 +9,7 @@ if WANT_MPI_VARIABLENP
 		vector_split \
 		vector_concatenation \
 		matrix_concatenation \
+		crdoublematrix_copy_constructor \
 		matrix_addition 
 else
   variablenp_dir = 
