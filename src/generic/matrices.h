@@ -1078,12 +1078,44 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
    return Serial_matrix_matrix_multiply_method; 
   }
 
+ /// \short Read only access function (const version) to 
+ /// Serial_matrix_matrix_multiply_method, the flag
+ /// which determines the matrix matrix multiplication method used for serial 
+ /// matrices.
+ /// Method 1: First runs through this matrix and matrix_in to find the storage
+ ///           requirements for result - arrays of the correct size are 
+ ///           then allocated before performing the calculation.
+ ///           Minimises memory requirements but more costly. 
+ /// Method 2: Grows storage for values and column indices of result 'on the
+ ///           fly' using an array of maps. Faster but more memory
+ ///           intensive. 
+ /// Method 3: Grows storage for values and column indices of result 'on the
+ ///           fly' using a vector of vectors. Not particularly impressive
+ ///           on the platforms we tried... 
+ /// Method 4: Trilinos Epetra Matrix Matrix multiply.
+ /// Method 5: Trilinos Epetra Matrix Matrix multiply (ML based).
+ const unsigned& serial_matrix_matrix_multiply_method() const
+  { 
+   return Serial_matrix_matrix_multiply_method; 
+  }
+
  /// \short Access function to Distributed_matrix_matrix_multiply_method, the 
  /// flag which determines the matrix matrix multiplication method used for 
  /// distributed matrices.
  /// Method 1: Trilinos Epetra Matrix Matrix multiply.
  /// Method 2: Trilinos Epetra Matrix Matrix multiply (ML based).
  unsigned& distributed_matrix_matrix_multiply_method() 
+  { 
+   return Distributed_matrix_matrix_multiply_method; 
+  }
+
+ /// \short Read only access function (const version) to 
+ /// Distributed_matrix_matrix_multiply_method, the 
+ /// flag which determines the matrix matrix multiplication method used for 
+ /// distributed matrices.
+ /// Method 1: Trilinos Epetra Matrix Matrix multiply.
+ /// Method 2: Trilinos Epetra Matrix Matrix multiply (ML based).
+ const unsigned& distributed_matrix_matrix_multiply_method() const
   { 
    return Distributed_matrix_matrix_multiply_method; 
   }
@@ -3183,6 +3215,15 @@ template<class T,class MATRIX_TYPE>
           OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
+    // First set the matrix matrix multiply methods (for both serial and
+    // distributed)
+    out_matrix.serial_matrix_matrix_multiply_method() = 
+      in_matrix_pt->serial_matrix_matrix_multiply_method();
+
+    out_matrix.distributed_matrix_matrix_multiply_method()
+      = in_matrix_pt->distributed_matrix_matrix_multiply_method();
+   
     
     // The local nrow and nnz of the in matrix
     const unsigned in_nrow_local = in_matrix_pt->nrow_local();
@@ -3219,6 +3260,10 @@ template<class T,class MATRIX_TYPE>
         out_values,
         out_column_indices,
         out_row_start);
+
+    // The only thing we haven't copied over is the default linear solver
+    // pointer, but I cannot figure out how to copy over a solver since
+    // I do not know what it is.
   } // EoFunc deep_copy
 
   /// \short Builds a uniformly distributed matrix.

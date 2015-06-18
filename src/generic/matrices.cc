@@ -1257,37 +1257,33 @@ CRDoubleMatrix::CRDoubleMatrix(const CRDoubleMatrix& other_matrix)
  const double* values_pt = other_matrix.value();
  const int* column_indices = other_matrix.column_index();
  const int* row_start = other_matrix.row_start();
- unsigned nnz = other_matrix.nnz();
- // RAYRAY this appears to be incorrect. nrow_local should be used.
- // Because this "nrow" variable is used to copy the row_start array, which is
- // of length nrow_local. Since nrow_local <= nrow, this will fail in parallel.
- // This is obviously not tested in parallel. I can't be bothered to write a 
- // test for this as I am not using it. Just be aware...
- //
- // Also, why are we not using std::copy????!
- unsigned nrow = other_matrix.nrow();
+ 
+ // This is the local nnz.
+ const unsigned nnz = other_matrix.nnz();
+
+ // Using number of local rows since the underlying CRMatrix is local to
+ // each processor.
+ const unsigned nrow_local = other_matrix.nrow_local();
+
+ // Storage for the (yet to be copied) data.
  double* my_values_pt = new double[nnz];
  int* my_column_indices = new int[nnz];
- int* my_row_start = new int[nrow+1];
- for (unsigned i = 0; i < nnz; i++)
-  {
-   my_values_pt[i] = values_pt[i];
-  }
- for (unsigned i = 0; i < nnz; i++)
-  {
-   my_column_indices[i] = column_indices[i];
-  }
- for (unsigned i = 0; i <= nrow; i++)
-  {
-   my_row_start[i] = row_start[i];
-  }
+ int* my_row_start = new int[nrow_local+1];
+ 
+ // Copying over the data.
+ std::copy(values_pt,values_pt+nnz,my_values_pt);
+ std::copy(column_indices,column_indices+nnz,my_column_indices);
+ std::copy(row_start,row_start+nrow_local+1,my_row_start);
+
+
+ // Build without copy since we have made a deep copy of the data structure.
  this->build_without_copy(other_matrix.ncol(),nnz,my_values_pt,
                           my_column_indices,my_row_start);
 
  // set the default solver
  Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
  
- // matrix not built
+ // matrix is built
  Built = true;
 
  // set the serial matrix-matrix multiply method
