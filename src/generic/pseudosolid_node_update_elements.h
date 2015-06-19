@@ -457,13 +457,6 @@ template<class BASIC, class SOLID>
 
  /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into.
- /// This is needed as a final overload in cases where both fluid and
- /// solid elements are block preconditionable. However, we break
- /// it here because it isn't obvious which classification we
- /// should use. This forces the user to re-implement this function
- /// if it's used
- /// RAYRAY - the comment is incorrect, this is no longer broken.
- /// who ever wrote this comment should fix it.
  unsigned ndof_types() const
   {
    return BASIC::ndof_types() + SOLID::ndof_types();
@@ -1313,13 +1306,6 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
 
  /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into.
- /// This is needed as a final overload in cases where both fluid and
- /// solid elements are block preconditionable. However, we break
- /// it here because it isn't obvious which classification we
- /// should use. This forces the user to re-implement this function
- /// if it's used.
- /// RAYRAY - The above comment is incorrect, this is no longer broken.
- /// Who ever wrote this comment can fix it.
  unsigned ndof_types() const
   {
    return BASIC::ndof_types() + SOLID::ndof_types();

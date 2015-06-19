@@ -589,12 +589,16 @@ namespace oomph
     /// Redirect output to NavierStokesEquations output
     void output(FILE* file_pt, const unsigned &n_plot)
     { LinearisedAxisymmetricNavierStokesEquations::output(file_pt,n_plot); }
-    
-    /// \short The number of "DOF types" that degrees of freedom in this
-    /// element are sub-divided into: Velocity and pressure.
-    unsigned ndof_types()const { return 8; }
 
-    // RAYRAY - where is the function get_dof_numbers_for_unknowns(...) ?
+
+    // NOTE: This function is only used in block preconditioning context
+    // and if used (it isn't!) must be accompanied by an equivalent
+    // overload of get_dof_numbers_for_unknowns(...)
+    /* /// \short The number of "DOF types" that degrees of freedom in this */
+    /* /// element are sub-divided into: Velocity and pressure. */
+    /* unsigned ndof_types()const { return 8; } */
+
+
     
   }; // End of LinearisedAxisymmetricQCrouzeixRaviartElement class definition
  
@@ -825,11 +829,12 @@ namespace oomph
     void output(FILE* file_pt, const unsigned &n_plot)
     { LinearisedAxisymmetricNavierStokesEquations::output(file_pt,n_plot); }
     
-    /// \short Returns the number of "DOF types" that degrees of freedom
-    /// in this element are sub-divided into: Velocity and pressure.
-    unsigned ndof_types()const { return 8; }
-
-    // RAYRAY - where is the function get_dof_numbers_for_unknowns(...)?
+    /* // NOTE: This function is only used in block preconditioning context */
+    /* // and if used (it isn't!) must be accompanied by an equivalent */
+    /* // overload of get_dof_numbers_for_unknowns(...) */
+    /* /// \short Returns the number of "DOF types" that degrees of freedom */
+    /* /// in this element are sub-divided into: Velocity and pressure. */
+    /* unsigned ndof_types()const { return 8; } */
     
   }; // End of LinearisedAxisymmetricQCrouzeixRaviartElement class definition
  

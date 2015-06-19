@@ -63,10 +63,6 @@ public:
   Flux_control_mesh_pt(flux_control_mesh_pt),
   Prescribed_outflow_value_pt(prescribed_outflow_value_pt)
   {
-    pause("Hello, using this flux element!"); 
-    
-
-
    // Construct Pressure_data_pt
    Pressure_data_pt = new Data(1);
    
@@ -270,7 +266,7 @@ public:
 
  /// \short Create a list of pairs for all unknowns in this element,
  /// Do nothing since this element adds no new dofs
- void get_block_numbers_for_unknowns(
+ void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)
   {}
  

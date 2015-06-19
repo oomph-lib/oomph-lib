@@ -889,7 +889,7 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  /// matrix
  CRDoubleMatrix(const LinearAlgebraDistribution* distribution_pt);
  
- /// Broken copy constructor
+ /// Copy constructor
  CRDoubleMatrix(const CRDoubleMatrix& matrix); 
 
  /// Broken assignment operator

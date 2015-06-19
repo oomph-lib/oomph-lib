@@ -1354,9 +1354,7 @@ public:
   {AxisymmetricNavierStokesEquations::output(file_pt,n_plot);}
 
  /// \short The number of "DOF types" that degrees of freedom in this element
- /// are sub-divided into: Velocity and pressure.
- /// RAYRAY - 4 is hard coded and the above comment doesn't tell us much
- /// information. Please state why this is the case
+ /// are sub-divided into: Velocity (3 components) and pressure.
  unsigned ndof_types() const
   {
    return 4;
@@ -1367,7 +1365,7 @@ public:
  /// number of the unknown, while the second one contains the number
  /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
- /// scheme has been set up.) Velocity=0; Pressure=1
+ /// scheme has been set up.) 
  void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const;
 
@@ -1630,9 +1628,7 @@ public virtual AxisymmetricNavierStokesEquations
   {AxisymmetricNavierStokesEquations::output(file_pt,n_plot);}
 
  /// \short Returns the number of "DOF types" that degrees of freedom
- /// in this element are sub-divided into: Velocity and pressure.
- /// RAYRAY - 4 is hard coded and the above comment doesn't tell us much
- /// information. Please state why this is the case
+ /// in this element are sub-divided into: Velocity (3 components) and pressure.
  unsigned ndof_types() const
   {
    return 4;
@@ -1643,7 +1639,7 @@ public virtual AxisymmetricNavierStokesEquations
  /// number of the unknown, while the second one contains the number
  /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
- /// scheme has been set up.) Velocity=0; Pressure=1
+ /// scheme has been set up.) 
  void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long, unsigned> >& dof_lookup_list) const;
 

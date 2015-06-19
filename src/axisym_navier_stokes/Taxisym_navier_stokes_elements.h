@@ -285,9 +285,7 @@ public:
  
 
  /// \short The number of "DOF types" that degrees of freedom in this element
- /// are sub-divided into: Velocity and pressure.
- /// RAYRAY - is this correct? - This should depend on the problem dimension...
- /// Who ever wrote this should double check.
+ /// are sub-divided into: Velocity (3 components) and pressure.
  unsigned ndof_types() const
   {
    return 4;
@@ -298,9 +296,7 @@ public:
  /// number of the unknown, while the second one contains the number
  /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
- /// scheme has been set up.) Velocity=0; Pressure=1
- /// RAYRAY - Velocity=0 and Pressure=1 seems to be incorrect...
- /// Also, the pressure DOF number is hard coded to 3. Hmm...
+ /// scheme has been set up.) 
  void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
   {
@@ -800,9 +796,7 @@ public:
  }
  
  /// \short The number of "DOF types" that degrees of freedom in this element
- /// are sub-divided into: Velocities and pressure.
- /// RAYRAY - Hard coding 4 seems incorrect, surely it should be problem
- /// dimension dependent?
+ /// are sub-divided into: Velocities (3  components) and pressure.
  unsigned ndof_types() const
  {
   return 4;
@@ -813,9 +807,7 @@ public:
  /// number of the unknown, while the second one contains the number
  /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
- /// scheme has been set up.) Velocity=0; Pressure=1
- /// RAYRAY - The comment "Velocity=0; Pressure=1" is incorrect, the function
- /// is clearly assigning u=0, v=1, w=2.
+ /// scheme has been set up.) 
  void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
   {
