@@ -747,6 +747,14 @@ namespace oomph
   // overloading. This is not a problem when using base class pointers.
   using Preconditioner::setup;
 
+   
+  /// \short Preconditioner solve for the diagonal preconditioner: 
+  /// Apply preconditioner to r and return z, so that P z = r, where
+  /// P is the block diagonal matrix constructed from the original 
+  /// linear system.
+  void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
+
+
   /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
   /// for preconditioning.
   void push_back_mesh(const Mesh* const mesh_pt)
