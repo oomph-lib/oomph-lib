@@ -1184,6 +1184,43 @@ double KirchhoffLoveShellEquations::load_rate_of_work()
 
 
 //===================================================================
+/// The output function: position, veloc and accel.
+//===================================================================
+void HermiteShellElement::output_with_time_dep_quantities(std::ostream &outfile, 
+                                                          const unsigned &n_plot)
+{
+ //Local variables
+ Vector<double> s(2);
+
+ //Tecplot header info 
+ outfile << "ZONE I=" << n_plot << ", J=" << n_plot << std::endl;
+
+ //Loop over plot points
+ for(unsigned l2=0;l2<n_plot;l2++)
+  {
+   s[1] = -1.0 + l2*2.0/(n_plot-1);
+   for(unsigned l1=0;l1<n_plot;l1++)
+    {
+     s[0] = -1.0 + l1*2.0/(n_plot-1);
+     
+     //Output
+     outfile << interpolated_x(s,0) << " " 
+             << interpolated_x(s,1) << " "
+             << interpolated_x(s,2) << " "
+             << interpolated_dxdt(s,0,1) << " " 
+             << interpolated_dxdt(s,1,1) << " "
+             << interpolated_dxdt(s,2,1) << " "
+             << interpolated_dxdt(s,0,2) << " " 
+             << interpolated_dxdt(s,1,2) << " "
+             << interpolated_dxdt(s,2,2) << " "
+             << std::endl;
+    }
+  }
+  outfile << std::endl;
+}
+
+
+//===================================================================
 /// The output function
 //===================================================================
 void HermiteShellElement::output(std::ostream &outfile, const unsigned &n_plot)

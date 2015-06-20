@@ -1045,6 +1045,7 @@ class NewmarkBDF : public Newmark<NSTEPS>
   {
    this->Type="NewmarkBDF";
    Degrade_to_bdf1_for_first_derivs=false;
+   Newmark_veloc_weight.resize(NSTEPS+3);
   }
 
  /// Broken copy constructor
@@ -1062,6 +1063,14 @@ class NewmarkBDF : public Newmark<NSTEPS>
  ///Set weights 
  void set_weights();
 
+ /// \short This function updates the Data's time history so that
+ /// we can advance to the next timestep.
+ void shift_time_values(Data* const &data_pt);
+
+ /// \short This function updates a nodal time history so that
+ /// we can advance to the next timestep.
+ void shift_time_positions(Node* const &node_pt);
+
  /// \short Degrade scheme to first order BDF (for first derivs/veloc); usually
  /// for start-up.
  void enable_degrade_first_derivatives_to_bdf1()
@@ -1076,13 +1085,36 @@ class NewmarkBDF : public Newmark<NSTEPS>
   Degrade_to_bdf1_for_first_derivs=false;
  }
 
+   private:
 
-  private:
 
+ /// \short Set original Newmark weights for velocities (needed when 
+ /// shifting history values -- they're used when updating the
+ /// previous accelerations and doing this with bdf can make the
+ /// scheme unstable...
+ void set_newmark_veloc_weights(const double& dt)
+ {
+  Newmark_veloc_weight[0]=this->Beta1*dt*this->Weight(2,0);
+  Newmark_veloc_weight[1]=this->Beta1*dt*this->Weight(2,1);
+  for (unsigned t=2;t<=NSTEPS;t++)
+   {
+    Newmark_veloc_weight[t]=0.0;
+   }
+  Newmark_veloc_weight[NSTEPS+1]=
+   1.0+this->Beta1*dt*this->Weight(2,NSTEPS+1);
+  Newmark_veloc_weight[NSTEPS+2]=
+   dt*(1.0-this->Beta1)+this->Beta1*dt*this->Weight(2,NSTEPS+2);
+ }  
  
  /// \short Boolean flag to indicate degradation of scheme to first
  /// order BDF (for first derivs/veloc); usually for start-up.
  bool Degrade_to_bdf1_for_first_derivs;
+
+ /// \short Original Newmark weights for velocities (needed when 
+ /// shifting history values -- they're used when updating the
+ /// previous accelerations and doing this with bdf can make the
+ /// scheme unstable...
+ Vector<double> Newmark_veloc_weight;
 
 };
 

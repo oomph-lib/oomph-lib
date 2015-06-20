@@ -329,6 +329,10 @@ public:
    set_nodal_dimension(3);
   }
  
+ /// Output position veloc and accel.
+ void output_with_time_dep_quantities(std::ostream &outfile, 
+                                      const unsigned &n_plot);
+  
  /// Overload the output function
  void output(std::ostream &outfile) {SolidQHermiteElement<2>::output(outfile);}
 

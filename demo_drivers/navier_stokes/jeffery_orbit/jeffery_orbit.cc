@@ -325,7 +325,7 @@ UnstructuredImmersedEllipseProblem()
  this->add_time_stepper_pt(new BDF<2>);
 
  // Allocate a timestepper for the rigid body
- this->add_time_stepper_pt(new NewmarkBDF<2>);
+ this->add_time_stepper_pt(new Newmark<2>);
 
  // Define the boundaries: Polyline with 4 different
  // boundaries for the outer boundary and 1 internal elliptical hole

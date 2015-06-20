@@ -1092,6 +1092,111 @@ template class Newmark<3>;
 template class Newmark<4>;
 
 
+
+//=========================================================================
+/// \short This function updates the Data's time history so that
+/// we can advance to the next timestep.
+//=========================================================================
+template<unsigned NSTEPS>
+void NewmarkBDF<NSTEPS>::shift_time_values(Data* const &data_pt)
+{
+ //Find number of values stored
+ unsigned n_value = data_pt->nvalue();
+ 
+ //Storage for the velocity and acceleration
+ Vector<double> veloc(n_value,0.0);
+ Vector<double> accel(n_value,0.0);
+ 
+ //Find number of stored time values
+ unsigned n_tstorage = this->ntstorage();
+ 
+ //Loop over the variables
+ for(unsigned i=0;i<n_value;i++)
+  {
+   //Loop over all the history data
+   for(unsigned t=0;t<n_tstorage;t++)
+    {
+     veloc[i] += Newmark_veloc_weight[t]*data_pt->value(t,i);
+     accel[i] += this->weight(2,t)*data_pt->value(t,i);
+    }
+  }
+
+ 
+ //Loop over values
+ for(unsigned j=0;j<n_value;j++)
+  {
+   //Set previous values/veloc/accel to present values/veloc/accel, 
+   // if not a copy
+   if(data_pt->is_a_copy(j) == false)
+    {
+     for (unsigned t=NSTEPS;t>0;t--)
+      {
+       data_pt->set_value(t,j,data_pt->value(t-1,j));
+      }
+     data_pt->set_value(NSTEPS+1,j,veloc[j]);
+     data_pt->set_value(NSTEPS+2,j,accel[j]);
+    }
+  }
+}
+
+//=========================================================================
+/// \short This function updates a nodal time history so that
+/// we can advance to the next timestep.
+//=========================================================================
+template<unsigned NSTEPS>
+void  NewmarkBDF<NSTEPS>::shift_time_positions(Node* const &node_pt)
+{
+ //Find the number of coordinates
+ unsigned n_dim = node_pt->ndim();
+ //Find the number of position types
+ unsigned n_position_type = node_pt->nposition_type();
+
+ //Storage for the velocity and acceleration
+ double veloc[n_position_type][n_dim];
+ double accel[n_position_type][n_dim];
+ 
+ //Find number of stored time values
+ unsigned n_tstorage =this->ntstorage();
+  
+ //Loop over the variables
+ for(unsigned i=0;i<n_dim;i++)
+  {
+   for(unsigned k=0;k<n_position_type;k++)
+    {
+     veloc[k][i] = accel[k][i] = 0.0;
+     //Loop over all the history data
+     for(unsigned t=0;t<n_tstorage;t++)
+      {
+       veloc[k][i] += Newmark_veloc_weight[t]*node_pt->x_gen(t,k,i);
+       accel[k][i] += this->weight(2,t)*node_pt->x_gen(t,k,i);
+      }
+    }
+  }
+
+ //Loop over the position variables
+ for(unsigned i=0;i<n_dim;i++)
+  {
+   //If not a copy
+   if(node_pt->position_is_a_copy(i) == false)
+    {
+     //Loop over position types
+     for(unsigned k=0;k<n_position_type;k++)
+      {
+       //Set previous values/veloc/accel to present values/veloc/accel, 
+       // if not a copy
+       for(unsigned t=NSTEPS;t>0;t--)
+        {
+         node_pt->x_gen(t,k,i) = node_pt->x_gen(t-1,k,i);
+        }
+       
+       node_pt->x_gen(NSTEPS+1,k,i) = veloc[k][i];
+       node_pt->x_gen(NSTEPS+2,k,i) = accel[k][i];
+      }
+    }
+  }
+}
+
+
 //=========================================================================
 ///Set weights 
 //=========================================================================
@@ -1111,6 +1216,8 @@ void  NewmarkBDF<1>::set_weights()
  Weight(1,2)=0.0;
  Weight(1,3)=0.0;
 
+ // Orig Newmark weights for first derivs.
+ set_newmark_veloc_weights(dt);
 }
 
 //=========================================================================
@@ -1147,7 +1254,9 @@ void  NewmarkBDF<2>::set_weights()
    Weight(1,3)=0.0;
    Weight(1,4)=0.0;
   }
-   
+
+ // Orig Newmark weights for first derivs.
+ set_newmark_veloc_weights(dt);
 }
 
 //=========================================================================
@@ -1202,6 +1311,9 @@ void  NewmarkBDF<4>::set_weights()
    Weight(1,6) = 0.0;
   }
  
+ // Orig Newmark weights for first derivs.
+ set_newmark_veloc_weights(dt);
+
 }
 
 //===================================================================
