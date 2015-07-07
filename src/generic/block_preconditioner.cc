@@ -1286,12 +1286,10 @@ namespace oomph
     // else the problem is distributed
     else
      {
+       // RAYTIME
+       double t_loop_through_meshes_start = TimingHelpers::timer();
+
 #ifdef OOMPH_HAS_MPI
-
-      // RAYTIME
-      double t_loop_through_meshes_start = TimingHelpers::timer();
-
-
       // Offset for the block type in the overall system.
       // Different meshes contain different block-preconditionable
       // elements -- their blocks are added one after the other...
@@ -1672,11 +1670,11 @@ namespace oomph
     // next a distributed matrix
     else
      {
+       // RAYTIME
+       double t_index_in_dof_and_dof_dimension_start
+	 = TimingHelpers::timer();
 #ifdef OOMPH_HAS_MPI
 
-      // RAYTIME
-      double t_index_in_dof_and_dof_dimension_start
-        = TimingHelpers::timer();
 
       // first compute how many instances of each dof are on this
       // processor
