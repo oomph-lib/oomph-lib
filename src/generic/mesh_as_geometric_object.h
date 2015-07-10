@@ -124,6 +124,10 @@ private:
  ///Communicator
  OomphCommunicator* Communicator_pt;
 
+ /// \short Flag to indicate that MeshAsGeomObject has used
+ /// Eulerian coordinates when setting up bin.
+ bool Have_used_eulerian_coordinates_during_setup;
+
 public:
  
  ///\short Constructor, pass the pointer to the mesh. 
@@ -404,19 +408,39 @@ public:
  
 
  /// \short Output bin vertices (allowing display of bins as zones).
- /// Final argument specifies the coordinates of a point (defaults to
- /// zero vector) and output includes the minimum distance of any of
+ /// Final argument specifies the coordinates of a point
+ /// and output includes the minimum distance of any of
  /// the bin vertices to this point. 
- void output_bin_vertices(std::ofstream& outfile,
+ void output_bin_vertices(std::ostream& outfile,
                           const Vector<double>& zeta);
  
  /// \short Output bin vertices (allowing display of bins as zones).
- void output_bin_vertices(std::ofstream& outfile)
+ void output_bin_vertices(std::ostream& outfile)
  {
   Vector<double> zeta( this->nlagrangian(),0.0);
   output_bin_vertices(outfile,zeta);
  }
   
+
+ /// \short Output bin vertices of specified bin (allowing display 
+ /// of bins as zones). 
+ /// Final argument specifies the coordinates of a point
+ /// and output includes the minimum distance of any of
+ /// the bin vertices to this point. 
+ void output_bin_vertices(std::ostream& outfile,
+                          const unsigned& i_bin,
+                          const Vector<double>& zeta);
+
+ /// Output bin vertices of specified bin (allowing display of bins as zones).
+ void output_bin_vertices(std::ostream& outfile,
+                          const unsigned& i_bin)
+ {
+  Vector<double> zeta( this->nlagrangian(),0.0);
+  output_bin_vertices(outfile,i_bin,zeta);
+ }
+
+
+
  /// \short Get vector of vectors containing the coordinates of the
  /// vertices of the i_bin-th bin: bin_vertex[j][i] contains the
  /// i-th coordinate of the j-th vertex.
@@ -482,6 +506,9 @@ public:
   outfile.close();
  }
 
+ /// \short Globally set-able (sorry!) flag to indicate that MeshAsGeomObject
+ /// is to use Eulerian coordinates when setting up bin.
+ static bool Use_eulerian_coordinates_during_setup;
 
  /// \short Counter for overall number of bins allocated -- used to
  /// issue warning if this exceeds a threshhold. (Default assignment

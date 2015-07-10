@@ -2361,9 +2361,9 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
 //======================================================================
 /// Adapt problem based on specified elemental error estimates
 //======================================================================
-template <class ELEMENT>
-void RefineableTriangleMesh<ELEMENT>::adapt(
-const Vector<double>& elem_error)
+ template <class ELEMENT>
+ void RefineableTriangleMesh<ELEMENT>::adapt(
+  const Vector<double>& elem_error)
  {
 
   double t_start_overall=TimingHelpers::timer();
@@ -2371,11 +2371,32 @@ const Vector<double>& elem_error)
   // Get refinement targets
   Vector<double> target_area(elem_error.size());
   double min_angle=compute_area_target(elem_error,
-    target_area);
+                                       target_area);
 
+
+  // Post-process to allow only quantised target areas
+  // in an attempt to more closely mimick the structured
+  // case and limit the diffusion of small elements.
+  bool quantised_areas=true; 
+  if (quantised_areas)
+   {
+    unsigned n=target_area.size();
+    double total_area=0;
+    for (unsigned e=0;e<n;e++)
+     {
+      total_area+=this->finite_element_pt(e)->size();
+     }
+    for (unsigned e=0;e<n;e++)
+     {
+      unsigned level=ceil(log(target_area[e]/total_area)/log(1.0/3.0))-1;
+      double new_target_area=total_area*pow(1.0/3.0,level);
+      target_area[e]=new_target_area;
+     }
+   }
 
   // std::ofstream hierher;
-  // hierher.open("overall_target_areas.dat");
+  // hierher.open((Global_string_for_annotation:: String[0]+"overall_target_areas"+
+  //               StringConversion::to_string(Global_unsigned::Number)+".dat").c_str());
   
   // Get maximum target area
   unsigned n=target_area.size();
@@ -2387,30 +2408,32 @@ const Vector<double>& elem_error)
     if (target_area[e]<min_area) min_area=target_area[e];
 
     // hierher << (finite_element_pt(e)->node_pt(0)->x(0)+
-    //             finite_element_pt(e)->node_pt(1)->x(0)+
-    //             finite_element_pt(e)->node_pt(2)->x(0))/3.0 << " "
-    //         << (finite_element_pt(e)->node_pt(0)->x(1)+
-    //             finite_element_pt(e)->node_pt(1)->x(1)+
-    //             finite_element_pt(e)->node_pt(2)->x(1))/3.0 << " "
-    //         << target_area[e] << std::endl;
+    //            finite_element_pt(e)->node_pt(1)->x(0)+
+    //           finite_element_pt(e)->node_pt(2)->x(0))/3.0 << " "
+    //        << (finite_element_pt(e)->node_pt(0)->x(1)+
+    //            finite_element_pt(e)->node_pt(1)->x(1)+
+    //            finite_element_pt(e)->node_pt(2)->x(1))/3.0 << " "
+    //        << target_area[e] << " " 
+    //        << finite_element_pt(e)->size() << " "
+    //        << elem_error[e]  << " " << std::endl;
    }
 
-//  hierher.close();
+  //hierher.close();
 
 
   oomph_info << "Maximum target area: " << max_area << std::endl;
   oomph_info << "Minimum target area: " << min_area << std::endl;
   oomph_info << "Number of elements to be refined "
-  << this->Nrefined << std::endl;
+             << this->Nrefined << std::endl;
   oomph_info << "Number of elements to be unrefined "
-  << this->Nunrefined << std::endl;
+             << this->Nunrefined << std::endl;
   oomph_info << "Min angle "<< min_angle << std::endl;
 
   double orig_max_area, orig_min_area;
   this->max_and_min_element_size(orig_max_area, orig_min_area);
   oomph_info << "Max/min element size in original mesh: "
-  << orig_max_area << " "
-  << orig_min_area << std::endl;
+             << orig_max_area << " "
+             << orig_min_area << std::endl;
 
   // Check if boundaries need to be updated (regardless of
   // requirements of bulk error estimator) but don't do anything!
@@ -2420,7 +2443,7 @@ const Vector<double>& elem_error)
   bool inner_open_boundary_update_necessary=false;
 
   outer_boundary_update_necessary=
-  this->update_polygon_using_face_mesh(this->Outer_boundary_pt,check_only);
+   this->update_polygon_using_face_mesh(this->Outer_boundary_pt,check_only);
 
   // Do not waste time if we already know that it is necessary an update
   // on the boundary representation
@@ -2431,8 +2454,8 @@ const Vector<double>& elem_error)
     unsigned nhole=this->Internal_polygon_pt.size();
     Vector<Vector<double> > internal_point_coord(nhole);
     inner_boundary_update_necessary=
-      this->surface_remesh_for_inner_hole_boundaries(internal_point_coord,
-        check_only);
+     this->surface_remesh_for_inner_hole_boundaries(internal_point_coord,
+                                                    check_only);
 
     // If there was not necessary a change even on the internal closed
     // curve then finally check for the open curves as well
@@ -2442,8 +2465,8 @@ const Vector<double>& elem_error)
       for (unsigned i = 0; i < n_open_polyline; i++)
        {
         inner_open_boundary_update_necessary=
-          this->update_open_curve_using_face_mesh(
-            this->Internal_open_curve_pt[i], check_only);
+         this->update_open_curve_using_face_mesh(
+          this->Internal_open_curve_pt[i], check_only);
 
         // If at least one needs modification then break the for loop
         if (inner_open_boundary_update_necessary) break;
@@ -2453,34 +2476,34 @@ const Vector<double>& elem_error)
 
   // Should we bother to adapt?
   if ( (Nrefined > 0) || (Nunrefined > max_keep_unrefined()) ||
-    (min_angle < min_permitted_angle()) || (outer_boundary_update_necessary)
-    || (inner_boundary_update_necessary)
-    || (inner_open_boundary_update_necessary) )
+       (min_angle < min_permitted_angle()) || (outer_boundary_update_necessary)
+       || (inner_boundary_update_necessary)
+       || (inner_open_boundary_update_necessary) )
    {
 
     if (! ( (Nrefined > 0) || (Nunrefined > max_keep_unrefined()) ) )
      {
 
       if ( (outer_boundary_update_necessary)
-        || (inner_boundary_update_necessary)
-        || (inner_open_boundary_update_necessary) )
+           || (inner_boundary_update_necessary)
+           || (inner_open_boundary_update_necessary) )
        {
         oomph_info
-        << "Mesh regeneration triggered by inaccurate interface/surface\n"
-        << "representation; setting Nrefined to number of elements.\n"
-        << "outer_boundary_update_necessary     : " 
-        << outer_boundary_update_necessary << "\n"
-        << "inner_boundary_update_necessary     : "
-        << inner_boundary_update_necessary << "\n"
-        << "inner_open_boundary_update_necessary: "
-        << inner_open_boundary_update_necessary << "\n"; 
+         << "Mesh regeneration triggered by inaccurate interface/surface\n"
+         << "representation; setting Nrefined to number of elements.\n"
+         << "outer_boundary_update_necessary     : " 
+         << outer_boundary_update_necessary << "\n"
+         << "inner_boundary_update_necessary     : "
+         << inner_boundary_update_necessary << "\n"
+         << "inner_open_boundary_update_necessary: "
+         << inner_open_boundary_update_necessary << "\n"; 
         Nrefined=nelement();
        }
       else
        {
         oomph_info
-        << "Mesh regeneration triggered by min angle criterion;\n"
-        << "setting Nrefined to number of elements.\n";
+         << "Mesh regeneration triggered by min angle criterion;\n"
+         << "setting Nrefined to number of elements.\n";
         Nrefined=nelement();
        }
      }
@@ -2498,8 +2521,8 @@ const Vector<double>& elem_error)
     unsigned n_open_polyline = this->Internal_open_curve_pt.size();
     for (unsigned i = 0; i < n_open_polyline; i++)
      {
-        this->update_open_curve_using_face_mesh(
-          this->Internal_open_curve_pt[i]);
+      this->update_open_curve_using_face_mesh(
+       this->Internal_open_curve_pt[i]);
      }
 
     //If there is not a geometric object associated with the boundary
@@ -2531,9 +2554,9 @@ const Vector<double>& elem_error)
          //Get the region id
          unsigned region_id = it->first;
 
-          //Report information
+         //Report information
          oomph_info << "Region " << region_id << ": "
-                   << it->second[0] << " " << it->second[1] << " ";
+                    << it->second[0] << " " << it->second[1] << " ";
          
          //Check that there is at least one element in the region
          unsigned n_region_element = this->nregion_element(region_id);
@@ -2548,16 +2571,16 @@ const Vector<double>& elem_error)
              Node* const nod_pt = elem_pt->node_pt(n);
              for(unsigned i=0;i<2;i++) {centroid[i] += nod_pt->x(i);}
             }
-             for(unsigned i=0;i<2;i++) {centroid[i] /= 3;} 
-             //Now we have the centroid set it
-             it->second = centroid;
+           for(unsigned i=0;i<2;i++) {centroid[i] /= 3;} 
+           //Now we have the centroid set it
+           it->second = centroid;
 
-             oomph_info << "   ,    " << 
-              it->second[0] << " " << it->second[1] << std::endl;
-            } //end of case when there is at least one element
-                }
-          }
+           oomph_info << "   ,    " << 
+            it->second[0] << " " << it->second[1] << std::endl;
+          } //end of case when there is at least one element
         }
+      }
+    }
               
 
     // Are we dealing with a solid mesh?
@@ -2604,23 +2627,23 @@ const Vector<double>& elem_error)
     // Pass information about the extra holes (not defined with closed
     // boundaries)
     triangle_mesh_parameters.extra_holes_coordinates() =
-      this->Extra_holes_coordinates;
+     this->Extra_holes_coordinates;
     
     //Pass information about regions
     triangle_mesh_parameters.regions_coordinates() =
-      this->Regions_coordinates;
+     this->Regions_coordinates;
     
     // *****************************************************************
 
     if (solid_mesh_pt!=0)
      {
       tmp_new_mesh_pt=new RefineableSolidTriangleMesh<ELEMENT>
-      (triangle_mesh_parameters, this->Time_stepper_pt);
+       (triangle_mesh_parameters, this->Time_stepper_pt);
      }
     else
      {
       tmp_new_mesh_pt=new RefineableTriangleMesh<ELEMENT>
-      (triangle_mesh_parameters, this->Time_stepper_pt);
+       (triangle_mesh_parameters, this->Time_stepper_pt);
      }
 
     // Snap to curvilinear boundaries (some code duplication as this
@@ -2665,251 +2688,289 @@ const Vector<double>& elem_error)
     //which will have been set by the problem, then ensure
     //all data in the new mesh has the appropriate timestepper
     /*if(dynamic_cast<GeneralisedTimeStepper*>(this->Time_stepper_pt))
-     {
+      {
       tmp_new_mesh_pt->set_nodal_and_elemental_time_stepper(
-       this->Time_stepper_pt);
+      this->Time_stepper_pt);
       tmp_new_mesh_pt->set_mesh_level_time_stepper(this->Time_stepper_pt);
       }*/
 
     //Output the mesh after the snapping has taken place
-    //   tmp_new_mesh_pt->output("mesh_nodes_snapped_0.dat");
+    //tmp_new_mesh_pt->output("mesh_nodes_snapped_0.dat"); 
+    //this->output("existing_mesh.dat"); 
 
     // Get the TriangulateIO object associated with that mesh
     TriangulateIO tmp_new_triangulateio=
-    tmp_new_mesh_pt->triangulateio_representation();
+     tmp_new_mesh_pt->triangulateio_representation();
     RefineableTriangleMesh<ELEMENT>* new_mesh_pt=0;
 
     // Map storing target areas for elements in temporary
     // TriangulateIO mesh
     std::map<GeneralisedElement*,double> target_area_map;
 
-    //////////////////////////////////////////////////////////////
-    // NOTE: Repeated setup of multidomain interaction could
-    // be avoided by setting up a sufficiently fine bin
-    // for the original mesh and reading out the target
-    // area information from there
-    //////////////////////////////////////////////////////////////
+
+    
+    // Adjust size of bins
+    unsigned backup_bin_x=Multi_domain_functions::Nx_bin;
+    unsigned backup_bin_y=Multi_domain_functions::Ny_bin;
+    Multi_domain_functions::Nx_bin=Nbin_x_for_area_transfer;
+    Multi_domain_functions::Ny_bin=Nbin_y_for_area_transfer;
+    
+    // Make a mesh as geom object representation of the temporary
+    // mesh -- this also builds up the internal bin structure 
+    // from which we'll recover the target areas
+    double t0_geom_obj=TimingHelpers::timer();
+    
+    // If the mesh is a solid mesh then do the mapping based on the
+    // Eulerian coordinates
+    bool backup= MeshAsGeomObject::Use_eulerian_coordinates_during_setup;
+    if (solid_mesh_pt!=0)
+     {
+      MeshAsGeomObject::Use_eulerian_coordinates_during_setup=true;
+     }
+    MeshAsGeomObject* mesh_geom_obj_pt =
+     new MeshAsGeomObject(this);
+    if (solid_mesh_pt!=0)
+     {
+      MeshAsGeomObject::Use_eulerian_coordinates_during_setup=backup;
+     }
+
+    // Reset
+    Multi_domain_functions::Nx_bin=backup_bin_x;
+    Multi_domain_functions::Ny_bin=backup_bin_y;
+    
+    oomph_info << "time for setup of mesh as geom obj: "
+               << TimingHelpers::timer()-t0_geom_obj
+               << std::endl;
+    
+    // Do some stats
+    {
+     unsigned max_entry=0;
+     unsigned min_entry=UINT_MAX;
+     unsigned tot_entry=0;
+     unsigned nempty=0;
+     Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > 
+      bin_content=mesh_geom_obj_pt->bin_content();
+     mesh_geom_obj_pt->bin_content();
+     unsigned nbin=bin_content.size();
+     for (unsigned b=0;b<nbin;b++)
+      {
+       unsigned nentry=bin_content[b].size();
+       if (nentry>max_entry) max_entry=nentry;
+       if (nentry<min_entry) min_entry=nentry;
+       if (nentry==0) nempty++;
+       tot_entry+=nentry;
+      }
+     oomph_info 
+      << "Before bin diffusion: nbin, nempty, min, max, av entries: "
+      << nbin << " " 
+      << nempty << " " 
+      << min_entry << " " 
+      << max_entry << " " 
+      << double(tot_entry)/double(nbin) << " "
+      << std::endl;
+    }
+    
+    // Fill bin by diffusion
+    double t0_bin_diff=TimingHelpers::timer();
+    oomph_info << "going into diffusion bit...\n";
+    mesh_geom_obj_pt->fill_bin_by_diffusion();
+    oomph_info << "back from diffusion bit...\n";
+    oomph_info << "time for bin diffusion: "
+               << TimingHelpers::timer()-t0_bin_diff
+               << std::endl;
+    
+    
+
+    // Do some stats
+    {
+     unsigned max_entry=0;
+     unsigned min_entry=UINT_MAX;
+     unsigned tot_entry=0;
+     unsigned nempty=0;
+     Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > 
+      bin_content=mesh_geom_obj_pt->bin_content();
+     mesh_geom_obj_pt->bin_content();
+     unsigned nbin=bin_content.size();
+     for (unsigned b=0;b<nbin;b++)
+      {
+       unsigned nentry=bin_content[b].size();
+       if (nentry>max_entry) max_entry=nentry;
+       if (nentry<min_entry) min_entry=nentry;
+       if (nentry==0) nempty++;
+       tot_entry+=nentry;
+      }
+     oomph_info 
+      << "After bin diffusion: nbin, nempty, min, max, av entries: "
+      << nbin << " " 
+      << nempty << " " 
+      << min_entry << " " 
+      << max_entry << " " 
+      << double(tot_entry)/double(nbin) << " "
+      << std::endl;
+    }
+    
+
+    // Set up a map from pointer to element to its number
+    // in the mesh
+    std::map<GeneralisedElement*,unsigned> element_number;
+    unsigned nelem=this->nelement();
+    for (unsigned e=0;e<nelem;e++)
+     {
+      element_number[this->element_pt(e)]=e;
+     }
+    
 
     // Now start iterating to refine mesh recursively
     //-----------------------------------------------
     bool done=false;
     unsigned iter=0;
+    double t_iter=TimingHelpers::timer();
     while (!done)
      {
 
       // Accept by default but overwrite if things go wrong below
       done=true;
-
       double t_start=TimingHelpers::timer();
-      if (Do_area_transfer_by_projection)
-       {
 
-        oomph_info << "Doing area transfer by projection\n";
 
-        // "Project" target areas from current mesh onto uniform
-        //------------------------------------------------------
-        // background mesh
-        //----------------
 
-        // Temporarily switch on projection capabilities to allow
-        // storage of pointer to external element.
-        // Need to do this for both meshes to ensure that 
-        // matching is done based on Eulerian coordinates for both
-        // (in case we're dealing with solid meshes where the
-        // locate_zeta would otherwise use the Lagrangian coordintes).
-        unsigned nelem=this->nelement();
-        for (unsigned e=0;e<nelem;e++)
+
+      double t0_loop_int_pts=TimingHelpers::timer();
+
+
+      // Get ready for next assignment of target areas
+      target_area_map.clear();
+          
+      // Loop over elements in new (tmp) mesh and visit all
+      // its integration points. Check where it's located in the bin
+      // structure of the current mesh and pass the target area
+      // to the new element
+      nelem=tmp_new_mesh_pt->nelement();
+
+      for (unsigned e=0;e<nelem;e++)
+       { // start loop el
+        ELEMENT* el_pt=dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e));
+        unsigned nint=el_pt->integral_pt()->nweight();
+        for (unsigned ipt=0;ipt<nint;ipt++)
          {
-          dynamic_cast<ELEMENT*>(this->element_pt(e))->enable_projection();
-         }
-        unsigned nelem2=tmp_new_mesh_pt->nelement();
-        for (unsigned e=0;e<nelem2;e++)
-         {
-          dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e))->
-          enable_projection();
-         }
-
-        // Set up multi domain interactions so we can figure out
-        // which element in the intermediate uniform mesh is co-located
-        // with given element in current mesh (which is to be refined)
-        double t_start=TimingHelpers::timer();
-        Problem* tmp_problem_pt=new Problem;
-        Multi_domain_functions::setup_multi_domain_interaction
-        <ELEMENT>(tmp_problem_pt,this,tmp_new_mesh_pt);
-        delete tmp_problem_pt;
-        tmp_problem_pt=0;
-        oomph_info
-        <<"CPU for multi-domain setup for projection of areas (iter "
-        << iter << ") " << TimingHelpers::timer()-t_start
-        << std::endl;
-
-        target_area_map.clear();
-        for (unsigned e=0;e<nelem;e++)
-         {
-          ELEMENT* el_pt=dynamic_cast<ELEMENT*>(this->element_pt(e));
-          unsigned nint=el_pt->integral_pt()->nweight();
-          for (unsigned ipt=0;ipt<nint;ipt++)
+          // Get the coordinate of current point
+          Vector<double> s(2);
+          for(unsigned i=0;i<2;i++)
            {
-            GeneralisedElement* ext_el_pt=el_pt->external_element_pt(0,ipt);
-
-            // Use max. rather than min area of any element overlapping the
-            // the current element, otherwise we get a rapid outward diffusion
-            // of small elements
-            target_area_map[ext_el_pt]=std::max(target_area_map[ext_el_pt], 
-                                                target_area[e]);
+            s[i] = el_pt->integral_pt()->knot(ipt,i);
            }
 
-          // Switch off projection capability          
-          dynamic_cast<ELEMENT*>(this->element_pt(e))->disable_projection();
-         }
-        for (unsigned e=0;e<nelem2;e++)
-         {
-          dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e))->
-          disable_projection();
-         }
-       }
-      // Do by direct diffused bin lookup
-      else
-       {
-        oomph_info << "Doing area transfer by bins\n";
+          Vector<double> x(2);
+          el_pt->interpolated_x(s,x);
 
-        // Adjust size of bins
-        unsigned backup_bin_x=Multi_domain_functions::Nx_bin;
-        unsigned backup_bin_y=Multi_domain_functions::Ny_bin;
-        Multi_domain_functions::Nx_bin=Nbin_x_for_area_transfer;
-        Multi_domain_functions::Ny_bin=Nbin_y_for_area_transfer;
-
-        // Make a mesh as geom object representation of the temporary
-        // mesh -- this also builds up the internal bin structure 
-        // from which we'll recover the target areas
-
-        MeshAsGeomObject* tmp_mesh_geom_obj_pt =
-         new MeshAsGeomObject(tmp_new_mesh_pt);
-
-        // Reset
-        Multi_domain_functions::Nx_bin=backup_bin_x;
-        Multi_domain_functions::Ny_bin=backup_bin_y;
-
-        // Fill bin by diffusion
-        oomph_info << "going into diffusion bit...\n";
-        tmp_mesh_geom_obj_pt->fill_bin_by_diffusion();
-        oomph_info << "back from diffusion bit...\n";
-
-        // Get ready for next assignment of target areas
-        target_area_map.clear();
-
-        // Loop over elements in current (fine) mesh and visit all
-        // its integration points. Check where it's located in the bin
-        // structure of the temporary mesh and pass the target area
-        // to the associated element(s)
-        unsigned nelem=this->nelement();
-        for (unsigned e=0;e<nelem;e++)
-         {
-          ELEMENT* el_pt=dynamic_cast<ELEMENT*>(this->element_pt(e));
-          unsigned nint=el_pt->integral_pt()->nweight();
-          for (unsigned ipt=0;ipt<nint;ipt++)
+          // Find the bin that contains that point and its contents
+          int bin_number=0;
+          Vector<std::pair<FiniteElement*,Vector<double> > >
+           sample_point_pairs;
+          mesh_geom_obj_pt->get_bin(x,bin_number,sample_point_pairs);
+              
+          // Did we find it?
+          if (bin_number<0)
            {
-            // Get the coordinate of current point
-            Vector<double> s(2);
-            for(unsigned i=0;i<2;i++)
+            // Not even within bin boundaries... odd
+            std::stringstream error_message;
+            error_message
+             << "Very odd -- we're looking for a point[ "
+             << x[0] << " " << x[1] << " ] that's not even \n"
+             << "located within the bin boundaries.\n";
+            throw OomphLibError(error_message.str(),
+                                "RefineableTriangleMesh::adapt()",
+                                OOMPH_EXCEPTION_LOCATION);
+           }
+          else
+           {
+            // Pass target area to new element
+            unsigned n=sample_point_pairs.size();
+            if (n>0)
              {
-              s[i] = el_pt->integral_pt()->knot(ipt,i);
-             }
-            Vector<double> x(2);
-            el_pt->interpolated_x(s,x);
+              for (unsigned ee=0;ee<n;ee++)
+               {
+                // Get ee-th element (in currrent mesh) in bin
+                GeneralisedElement* current_el_pt=sample_point_pairs[ee].first;
+                unsigned e_current=element_number[current_el_pt];                    
 
-            // Find the bin that contains that point and its contents
-            int bin_number=0;
-            Vector<std::pair<FiniteElement*,Vector<double> > >
-            sample_point_pairs;
-            tmp_mesh_geom_obj_pt->get_bin(x,bin_number,sample_point_pairs);
-
-            // Did we find it?
-            if (bin_number<0)
-             {
-              // Not even within bin boundaries... odd
-#ifdef PARANOID
-              std::stringstream error_message;
-              error_message
-              << "Very odd -- we're looking for a point that's not even \n"
-              << "located within the bin boundaries.\n";
-              OomphLibWarning(error_message.str(),
-                "RefineableTriangleMesh::adapt()",
-                OOMPH_EXCEPTION_LOCATION);
-#endif
+                // Go for smallest target area of any element in this bin
+                // to force "one level" of refinement (the one-level-ness is
+                // enforced below by limiting the actual reduction in area
+                if (target_area_map[el_pt]!=0)
+                 {
+                  target_area_map[el_pt]=
+                   std::min(target_area_map[el_pt], 
+                            target_area[e_current]);
+                 }
+                else
+                 {
+                  target_area_map[el_pt]=target_area[e_current];
+                 }
+               }
              }
             else
              {
-              // Pass target area to all new elements associated
-              // with this bin
-              unsigned n=sample_point_pairs.size();
-              if (n>0)
-               {
-                for (unsigned ee=0;ee<n;ee++)
-                 {
-                  // Get ee-th new element in bin
-                  GeneralisedElement* ext_el_pt=sample_point_pairs[ee].first;
-
-                  // Use max. rather than min area of any element overlapping 
-                  // the current element, otherwise we get a rapid outward 
-                  // diffusion of small elements
-                  target_area_map[ext_el_pt]=
-                   std::max(target_area_map[ext_el_pt],
-                            target_area[e]);
-                 }
-               }
-              else
-               {
-                std::stringstream error_message;
-                error_message
-                << "Point not found within bin structure\n";
-                throw OomphLibError(error_message.str(),
-                                    OOMPH_CURRENT_FUNCTION,
-                  OOMPH_EXCEPTION_LOCATION);
-               }
+              std::stringstream error_message;
+              error_message
+               << "Point not found within bin structure\n";
+              throw OomphLibError(error_message.str(),
+                                  OOMPH_CURRENT_FUNCTION,
+                                  OOMPH_EXCEPTION_LOCATION);
              }
            }
          }
+       }
 
 
-
-        // // hierher
-        // {
-        //  hierher.open("binned_target_areas.dat");
-        //  Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > bin_content=
-        //   tmp_mesh_geom_obj_pt->bin_content();
-        //  unsigned nbin=bin_content.size();
-        //  for (unsigned b=0;b<nbin;b++)
-        //   {
-        //    unsigned nentry=bin_content[b].size();
-        //    for (unsigned entry=0;entry<nentry;entry++)
-        //     {
-        //      FiniteElement* el_pt=bin_content[b][entry].first;
-        //      GeneralisedElement* gen_el_pt=bin_content[b][entry].first;
-        //      Vector<double> s=bin_content[b][entry].second;
-        //      Vector<double> x(2);
-        //      el_pt->interpolated_x(s,x);
-        //      hierher << x[0] << " " << x[1] << " " << target_area_map[gen_el_pt] << std::endl;
-        //     }
-        //   }
-        //  hierher.close();
-        // }
-        
+      oomph_info << "time for loop over int pts in new mesh: "
+                 << TimingHelpers::timer()-t0_loop_int_pts  
+                 << std::endl;
 
 
-        //Delete the temporary geometric object
-        delete tmp_mesh_geom_obj_pt;
-
-       } // endif for projection/diffused bin
+      // //hierher
+      // {
+      // hierher.open((Global_string_for_annotation:: String[0]+"binned_target_areas"+
+      //               StringConversion::to_string(Global_unsigned::Number)+".dat").c_str());
+  
+      // Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > bin_content=
+      //  mesh_geom_obj_pt->bin_content();
+      // unsigned nbin=bin_content.size();
+      // for (unsigned b=0;b<nbin;b++)
+      //  {
+      //   unsigned nentry=bin_content[b].size();
+      //   for (unsigned entry=0;entry<nentry;entry++)
+      //    {
+      //     FiniteElement* el_pt=bin_content[b][entry].first;
+      //     GeneralisedElement* gen_el_pt=bin_content[b][entry].first;
+      //     Vector<double> s=bin_content[b][entry].second;
+      //     Vector<double> x(2);
+      //     el_pt->interpolated_x(s,x);
+      //     unsigned e_current=element_number[gen_el_pt];
+      //     hierher << x[0] << " " << x[1] << " " 
+      //             << target_area[e_current] << " " 
+      //             << el_pt->size() << " " 
+      //             << std::endl;
+      //    }
+      //  }
+      // hierher.close();
+      // }
+                    
 
       oomph_info << "CPU for transfer of target areas (iter "
-      << iter << ") " << TimingHelpers::timer()-t_start
-      << std::endl;
+                 << iter << ") " << TimingHelpers::timer()-t_start
+                 << std::endl;
 
 
-      // hierher.open(("target_areas_intermediate_mesh"+
-      //               StringConversion::to_string(iter)+".dat").c_str());
-
+      // // Output mesh
+      // tmp_new_mesh_pt->output(("intermediate_mesh"+
+      //                         StringConversion::to_string(iter)+".dat").c_str()); 
+      
+      // hierher.open((Global_string_for_annotation:: String[0]+"target_areas_intermediate_mesh_iter"+
+      //               StringConversion::to_string(iter)+"_"+
+      //               StringConversion::to_string(Global_unsigned::Number)+".dat").c_str());
+     
+  
       // Now copy into target area for temporary mesh but limit to
       // the equivalent of one sub-division per iteration
       unsigned nel_new=tmp_new_mesh_pt->nelement();
@@ -2921,7 +2982,18 @@ const Vector<double>& elem_error)
         double new_area=target_area_map[tmp_new_mesh_pt->element_pt(e)];
         if (new_area<=0.0)
          {
-          new_target_area[e]=-1.0;
+          std::ostringstream error_stream;
+          error_stream << "This shouldn't happen! Element whose centroid is at"
+                       <<  (tmp_new_mesh_pt->finite_element_pt(e)->node_pt(0)->x(0)+
+                            tmp_new_mesh_pt->finite_element_pt(e)->node_pt(1)->x(0)+
+                            tmp_new_mesh_pt->finite_element_pt(e)->node_pt(2)->x(0))/3.0 << " "
+                       << (tmp_new_mesh_pt->finite_element_pt(e)->node_pt(0)->x(1)+
+                           tmp_new_mesh_pt->finite_element_pt(e)->node_pt(1)->x(1)+
+                           tmp_new_mesh_pt->finite_element_pt(e)->node_pt(2)->x(1))/3.0 << " "
+                       << " has no target area assigned\n"; 
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
          }
         else
          {
@@ -2929,36 +3001,40 @@ const Vector<double>& elem_error)
           // refinement during this stage of the iteration
           new_target_area[e]=new_area;
           if (new_target_area[e]<
-            tmp_new_mesh_pt->finite_element_pt(e)->size()/3.0)
+              tmp_new_mesh_pt->finite_element_pt(e)->size()/3.0)
            {
             new_target_area[e]=
-            tmp_new_mesh_pt->finite_element_pt(e)->size()/3.0;
+             tmp_new_mesh_pt->finite_element_pt(e)->size()/3.0;
 
             // We'll need to give it another go later
             done=false;
            }
-         }
-
+         }               
+       
+      
         // hierher 
-        //  << (tmp_new_mesh_pt->finite_element_pt(e)->node_pt(0)->x(0)+
-        //      tmp_new_mesh_pt->finite_element_pt(e)->node_pt(1)->x(0)+
-        //      tmp_new_mesh_pt->finite_element_pt(e)->node_pt(2)->x(0))/3.0 << " "
-        //  << (tmp_new_mesh_pt->finite_element_pt(e)->node_pt(0)->x(1)+
-        //      tmp_new_mesh_pt->finite_element_pt(e)->node_pt(1)->x(1)+
-        //      tmp_new_mesh_pt->finite_element_pt(e)->node_pt(2)->x(1))/3.0 << " "
-        //  << new_target_area[e] << std::endl;
+        // << (tmp_new_mesh_pt->finite_element_pt(e)->node_pt(0)->x(0)+
+        //     tmp_new_mesh_pt->finite_element_pt(e)->node_pt(1)->x(0)+
+        //     tmp_new_mesh_pt->finite_element_pt(e)->node_pt(2)->x(0))/3.0 << " "
+        // << (tmp_new_mesh_pt->finite_element_pt(e)->node_pt(0)->x(1)+
+        //     tmp_new_mesh_pt->finite_element_pt(e)->node_pt(1)->x(1)+
+        //     tmp_new_mesh_pt->finite_element_pt(e)->node_pt(2)->x(1))/3.0 << " "
+        // << new_target_area[e] << " " 
+        // << tmp_new_mesh_pt->finite_element_pt(e)->size()<< std::endl;
         
+       }	
+      
+      if (done) 
+       {
+        oomph_info << "All area adjustments accomodated by max. permitted area reduction \n";
+       }
+      else
+       {
+        oomph_info << "NOT all area adjustments accomodated by max. permitted area reduction \n";
        }
       
-      // if (done) 
-      //  {
-      //   oomph_info << "All area adjustments accomodated by area reduction by a factor of 3\n";
-      //  }
-      // else
-      //  {
-      //   oomph_info << "NOT all area adjustments accomodated by area reduction by a factor of 3\n";
-      //  }
-      // hierher.close();
+      //hierher.close();
+      //pause("doced binned_target_areas.dat and interemdiate mesh targets");
 
       // Now create the new mesh from TriangulateIO structure
       //-----------------------------------------------------
@@ -2971,19 +3047,19 @@ const Vector<double>& elem_error)
       if (solid_mesh_pt!=0)
        {
         new_mesh_pt=new RefineableSolidTriangleMesh<ELEMENT>
-        (new_target_area,
+         (new_target_area,
           tmp_new_triangulateio,
           this->Time_stepper_pt,
-            this->Use_attributes);
+          this->Use_attributes);
        }
       // No solid mesh
       else
        {
         new_mesh_pt=new RefineableTriangleMesh<ELEMENT>
-        (new_target_area,
+         (new_target_area,
           tmp_new_triangulateio,
           this->Time_stepper_pt,
-            this->Use_attributes);
+          this->Use_attributes);
        }
 
       // Snap to curvilinear boundaries (some code duplication as this
@@ -2992,12 +3068,12 @@ const Vector<double>& elem_error)
 
       //Pass the boundary  geometric objects to the new mesh 
       new_mesh_pt->boundary_geom_object_pt() =
-      this->boundary_geom_object_pt();
+       this->boundary_geom_object_pt();
 
       // Reset the boundary coordinates if there is
       // a geometric object associated with the boundary
       new_mesh_pt->boundary_coordinate_limits() =
-      this->boundary_coordinate_limits();
+       this->boundary_coordinate_limits();
       for (unsigned b=0;b<n_boundary;b++)
        {
         if(new_mesh_pt->boundary_geom_object_pt(b)!=0)
@@ -3048,14 +3124,29 @@ const Vector<double>& elem_error)
 
      } // end of iteration
 
+    //Delete the temporary geometric object representation of the current mesh
+    delete mesh_geom_obj_pt;
+    
+    oomph_info << "CPU for iterative generation of new mesh " 
+               << TimingHelpers::timer()-t_iter
+               << std::endl;
+
+    double t_proj=TimingHelpers::timer();
+    oomph_info << "about to do projection\n";
 
     // Project current solution onto new mesh
     //---------------------------------------
     ProjectionProblem<ELEMENT>* project_problem_pt=
-    new ProjectionProblem<ELEMENT>;
+     new ProjectionProblem<ELEMENT>;
     project_problem_pt->mesh_pt()=new_mesh_pt;
     //project_problem_pt->disable_suppress_output_during_projection();
     project_problem_pt->project(this);
+
+    oomph_info << "CPU for projection of solution onto new mesh " 
+               << TimingHelpers::timer()-t_proj
+               << std::endl;
+
+    double t_rest=TimingHelpers::timer();
 
     //Flush the old mesh 
     unsigned nnod=nnode();
@@ -3150,17 +3241,17 @@ const Vector<double>& elem_error)
            {
             //Allocate storage in the map
             this->Boundary_region_element_pt[b][r].
-            resize(n_boundary_el_in_region);
+             resize(n_boundary_el_in_region);
             this->Face_index_region_at_boundary[b][r].
-            resize(n_boundary_el_in_region);
+             resize(n_boundary_el_in_region);
 
             //Copy over the information
             for(unsigned e=0;e<n_boundary_el_in_region;++e)
              {
               this->Boundary_region_element_pt[b][r][e]
-              = new_mesh_pt->boundary_element_in_region_pt(b,r,e);
+               = new_mesh_pt->boundary_element_in_region_pt(b,r,e);
               this->Face_index_region_at_boundary[b][r][e]
-              = new_mesh_pt->face_index_at_boundary_in_region(b,r,e);
+               = new_mesh_pt->face_index_at_boundary_in_region(b,r,e);
              }
            }
          }
@@ -3180,7 +3271,7 @@ const Vector<double>& elem_error)
     TriangleHelper::clear_triangulateio(this->Triangulateio);
     bool quiet=true;
     this->Triangulateio=
-    TriangleHelper::deep_copy_of_triangulateio_representation(
+     TriangleHelper::deep_copy_of_triangulateio_representation(
       new_mesh_pt->triangulateio_representation(),quiet);
 
     // Flush the mesh
@@ -3194,8 +3285,14 @@ const Vector<double>& elem_error)
     double min_area;
     this->max_and_min_element_size(max_area, min_area);
     oomph_info << "Max/min element size in adapted mesh: "
-    << max_area << " "
-    << min_area << std::endl;
+               << max_area << " "
+               << min_area << std::endl;
+
+    oomph_info << "CPU for final bits... " 
+               << TimingHelpers::timer()-t_rest
+               << std::endl;
+
+
    }
   else
    {
@@ -3205,7 +3302,7 @@ const Vector<double>& elem_error)
    }
 
   oomph_info <<"CPU for adaptation: "
-  << TimingHelpers::timer()-t_start_overall << std::endl;
+             << TimingHelpers::timer()-t_start_overall << std::endl;
 
  }
 

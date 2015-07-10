@@ -37,6 +37,8 @@ else
   echo " "
   echo "for details."
   echo " "
+  ../../bin/find_failed_directories.bash
+  echo " "
   echo "======================================================================"
   echo " " 
   exit 1

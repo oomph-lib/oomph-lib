@@ -32,7 +32,6 @@
 #include <oomph-lib-config.h>
 #endif
 
-
 #ifdef OOMPH_HAS_MPI
 //mpi headers
 #include <mpi.h>
@@ -53,8 +52,6 @@
 
 namespace oomph
 {
-
-
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
@@ -2901,21 +2898,7 @@ template<class ELEMENT>
    
    /// Empty Destructor
    virtual ~RefineableTriangleMesh() {}
-   
-  /// \short Enable transfer of target areas between meshes by 
-  /// bin method (fast but diffusive; default)
-  void enable_area_transfer_by_bins()
-  {
-   Do_area_transfer_by_projection=false;
-  }
-
-  /// \short Enable transfer of target areas between meshes by 
-  /// multi-domain method (slow but expensive)
-  void enable_area_transfer_by_multi_domain()
-  {
-   Do_area_transfer_by_projection=true;
-  }
-  
+     
   /// \short Read/write access to number of bins in the x-direction
   /// when transferring target areas by bin method
   unsigned& nbin_x_for_area_transfer(){return Nbin_x_for_area_transfer;}
@@ -3131,11 +3114,6 @@ template<class ELEMENT>
   /// Helper function to initialise data associated with adaptation
   void initialise_adaptation_data()
   {
-   // Boolean flag to choose method for transfer of target areas
-   // between meshes: Bin (fast but more diffusive; false; default)
-   // or projection (slow; true)
-   this->Do_area_transfer_by_projection=false;
-
    // Number of bins in the x-direction
    // when transferring target areas by bin method
    this->Nbin_x_for_area_transfer=100;
@@ -3215,35 +3193,48 @@ template<class ELEMENT>
       double angle2=180.0-angle0-angle1;
       min_angle=std::min(min_angle,angle2);
         
-      // Mimick refinement in tree-based procedure: Target areas
-      // for elements that exceed permitted error is 1/3 of their
-      // current area, corresponding to a uniform sub-division.
-      if (elem_error[e]>max_permitted_error())
-       {
-        target_area[e]=std::max(area/3.0,Min_element_size);
-        if (target_area[e]!=Min_element_size)
+        // Mimick refinement in tree-based procedure: Target areas
+        // for elements that exceed permitted error is 1/3 of their
+        // current area, corresponding to a uniform sub-division.
+        double size_ratio=3.0;
+        if (elem_error[e]>max_permitted_error())
          {
-          count_refined++;
+          // Reduce area
+          target_area[e]=std::max(area/size_ratio,Min_element_size);
+          
+          //...but also make sure we're below the max element size
+          target_area[e]=std::min(target_area[e],Max_element_size);
+          
+          if (target_area[e]!=Min_element_size)
+           {
+            count_refined++;
+           }
+          else
+           {
+            this->Nrefinement_overruled++;
+           }
+         }
+        else if (elem_error[e]<min_permitted_error())
+         {
+          // Increase the area
+          target_area[e]=std::min(size_ratio*area,Max_element_size);
+          
+          //...but also make sure we're above the min element size
+          target_area[e]=std::max(target_area[e],Min_element_size);
+          
+          if (target_area[e]!=Max_element_size)
+           {
+            count_unrefined++;
+           }
          }
         else
          {
-          this->Nrefinement_overruled++;
+          // Leave it alone but enforce size limits
+          double area_leave_alone = std::max(area,Min_element_size); 
+          target_area[e] = std::min(area_leave_alone,Max_element_size); 
          }
-       }
-      else if (elem_error[e]<min_permitted_error())
-       {
-        target_area[e]=std::min(3.0*area,Max_element_size);
-        if (target_area[e]!=Max_element_size)
-         {
-          count_unrefined++;
-         }
-       }
-      else
-       {
-        // Leave it alone
-        target_area[e] = std::max(area,Min_element_size); 
-       }
-     }      
+     }
+      
     
     // Tell everybody
     this->Nrefined=count_refined;
@@ -3263,18 +3254,12 @@ template<class ELEMENT>
     return min_angle;
    }
   
- 
-   /// \short Boolean flag to choose method for transfer of target areas
-   /// between meshes: Bin (fast but more diffusive; false; default)
-   /// or projection (slow; true)
-   bool Do_area_transfer_by_projection;
-
    /// \short Number of bins in the x-direction
-   /// when transferring target areas by bin method
+   /// when transferring target areas by bin method.
    unsigned Nbin_x_for_area_transfer;
 
    /// \short Number of bins in the y-direction
-   /// when transferring target areas by bin method
+   /// when transferring target areas by bin method.
    unsigned Nbin_y_for_area_transfer;
    
    /// Max permitted element size

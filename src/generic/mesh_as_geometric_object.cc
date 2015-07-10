@@ -41,6 +41,12 @@
 namespace oomph
 {
 
+ //==========================================================================
+ /// \short Globally set-able (sorry!) flag to indicate that MeshAsGeomObject
+ /// is to use Eulerian coordinates when setting up bin.
+ //==========================================================================
+ bool MeshAsGeomObject::Use_eulerian_coordinates_during_setup=false;
+
 
 //========================================================================
  /// \short Counter for overall number of bins allocated -- used to
@@ -108,6 +114,10 @@ namespace oomph
   Communicator_pt=mesh_pt->communicator_pt();
 #endif
 
+  // Remember how bin was (or rather: will have been) set up
+  Have_used_eulerian_coordinates_during_setup=
+   MeshAsGeomObject::Use_eulerian_coordinates_during_setup;
+  
   //Storage for the Lagrangian and Eulerian dimension
   int dim[2]={0,0};
 
@@ -215,7 +225,7 @@ namespace oomph
      get_min_and_max_coordinates(mesh_pt);
     }
    else
-    {
+    { 
 #ifdef PARANOID
    // Check X_min is less than X_max
    if (Multi_domain_functions::X_min >= Multi_domain_functions::X_max)
@@ -267,9 +277,6 @@ namespace oomph
     }
 #endif
    
-
-
-
      Min_coords[0] = Multi_domain_functions::X_min-
       Multi_domain_functions::Percentage_offset*(
        Multi_domain_functions::X_max-Multi_domain_functions::X_min);
@@ -379,7 +386,10 @@ namespace oomph
   
   // Use the min and max coords of the bin structure, to find
   // the bin structure containing the current zeta cooordinate
-  
+
+  // Initialise for subsequent computation
+  bin_number=0; 
+
   //Offset for rows/matrices in higher dimensions
   unsigned multiplier=1;
   unsigned Nbin[3]={Nbin_x,Nbin_y,Nbin_z};
@@ -398,6 +408,57 @@ namespace oomph
      //Increase the current row/matrix multiplier for the next loop
      multiplier *= Nbin[i];
     }
+
+
+#ifdef PARANOID
+
+  // Tolerance for "out of bin" test
+  double tol=1.0e-10;
+
+  unsigned nvertex=pow(2,n_lagrangian);
+  Vector<Vector<double> > bin_vertex(nvertex);
+  for (unsigned j=0;j<nvertex;j++)
+   {
+    bin_vertex[j].resize(n_lagrangian);
+   }
+  get_bin_vertices(bin_number, bin_vertex);
+  for (unsigned i=0;i<n_lagrangian;i++)
+   {
+    double min_vertex_coord=DBL_MAX;
+    double max_vertex_coord=-DBL_MAX;
+    for (unsigned j=0;j<nvertex;j++)
+     {
+      if (bin_vertex[j][i]<min_vertex_coord) min_vertex_coord=bin_vertex[j][i];
+      if (bin_vertex[j][i]>max_vertex_coord) max_vertex_coord=bin_vertex[j][i];
+     }
+    if (zeta[i]<min_vertex_coord-tol)
+     {
+      std::ostringstream error_message_stream;                           
+      error_message_stream                                        
+       << "Trouble! " << i << " -th coordinate of sample point, "
+       << zeta[i] << " , isn't actually between limits, "
+       << min_vertex_coord << " and " << max_vertex_coord 
+       << " [it's below by more than " << tol << " !] " << std::endl; 
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+
+    if (zeta[i]>max_vertex_coord+tol)
+     {
+      std::ostringstream error_message_stream;                           
+      error_message_stream                                        
+       << "Trouble! " << i << " -th coordinate of sample point, "
+       << zeta[i] << " , isn't actually between limits, "
+       << min_vertex_coord << " and " << max_vertex_coord 
+       << " [it's above by more than " << tol << "!] " << std::endl; 
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+
+#endif
 
  }
  
@@ -425,18 +486,23 @@ namespace oomph
   // Loop over all bins to check if they're empty
   std::list<unsigned> empty_bins;
   unsigned nbin=Bin_object_coord_pairs.size();
+  std::vector<bool> was_empty_until_current_iteration(nbin,false);
   for (unsigned i=0;i<nbin;i++)
    {
     if (Bin_object_coord_pairs[i].size()==0)
      {
       empty_bins.push_front(i);
+      was_empty_until_current_iteration[i]=true;
      }
    }
 
   // Now keep processing the empty bins until there are none left
+  unsigned iter=0;
+  Vector<unsigned> newly_filled_bin;
   while (empty_bins.size()!=0)
    {
-    // std::list<std::list<unsigned>::iterator> now_filled_bins;
+    newly_filled_bin.clear();
+    newly_filled_bin.reserve(empty_bins.size());
     for (std::list<unsigned>::iterator it=empty_bins.begin();
          it!=empty_bins.end();it++)
      {
@@ -446,23 +512,66 @@ namespace oomph
       unsigned level=bin_diffusion_radius;
       Vector<unsigned> neighbour_bin;
       get_neighbouring_bins_helper(bin,level,neighbour_bin);
-
       unsigned n_neigh=neighbour_bin.size();
+
+
+      // Find closest pair
+      double min_dist=DBL_MAX;
+      std::pair<FiniteElement*,Vector<double> > closest_pair;
       for (unsigned i=0;i<n_neigh;i++)
        {
         unsigned neigh_bin=neighbour_bin[i];
-        if (Bin_object_coord_pairs[neigh_bin].size()!=0)
-         {
-          // Copy the nearest one across and then stop
-          Bin_object_coord_pairs[bin]=Bin_object_coord_pairs[neigh_bin];
 
-          // Wipe entry without breaking the linked list (Andrew's trick -- nice!)
-          std::list<unsigned>::iterator it_to_be_deleted=it;
-          it--;
-          empty_bins.erase(it_to_be_deleted);
-          break;
+        // Only allow to re-populate from bins that were already filled at
+        // previous iteration, otherwise things can progate too fast
+        if (!was_empty_until_current_iteration[neigh_bin])
+         {
+          unsigned nbin_content=Bin_object_coord_pairs[neigh_bin].size();
+          for (unsigned j=0;j<nbin_content;j++)
+           {
+            FiniteElement* el_pt=Bin_object_coord_pairs[neigh_bin][j].first;
+            Vector<double> s(Bin_object_coord_pairs[neigh_bin][j].second);
+            Vector<double> x(2);
+            el_pt->interpolated_x(s,x);
+            // Get minimum distance of sample point from any of the vertices
+            // of current bin
+            double dist=min_distance(bin,x);
+            if (dist<min_dist)
+             {
+              min_dist=dist;
+              closest_pair=Bin_object_coord_pairs[neigh_bin][j];
+             }
+           }
          }
        }
+
+
+      // Have we filled the bin?
+      if (min_dist!=DBL_MAX)
+       {
+        Vector<std::pair<FiniteElement*,Vector<double> > > new_entry;
+        new_entry.push_back(closest_pair);
+        Bin_object_coord_pairs[bin]=new_entry;
+        
+        // Record that we've filled it.
+        newly_filled_bin.push_back(bin);
+        
+        // Wipe entry without breaking the linked list (Andrew's trick -- nice!)
+        std::list<unsigned>::iterator it_to_be_deleted=it;
+        it--;
+        empty_bins.erase(it_to_be_deleted);
+        
+       }
+     }
+
+    // Get ready for next iteration on remaining empty bins
+    iter++;
+
+    // Now update the vector that records which bins were empty up to now
+    unsigned n=newly_filled_bin.size();
+    for (unsigned i=0;i<n;i++)
+     {
+      was_empty_until_current_iteration[newly_filled_bin[i]]=false;
      }
    }
 
@@ -758,8 +867,15 @@ namespace oomph
        // Get the local s
        el_pt->get_s_plot(iplot,n_plot,s_local);
 
-       // Now interpolate to global (Lagrangian) coordinates
-       el_pt->interpolated_zeta(s_local,zeta_global);
+       // Now interpolate to global coordinates
+       if (MeshAsGeomObject::Use_eulerian_coordinates_during_setup)
+        {         
+         el_pt->interpolated_x(s_local,zeta_global);
+        }
+       else
+        {
+         el_pt->interpolated_zeta(s_local,zeta_global);
+        }
 
        // Check the max and min in each direction
        for(int i=0;i<n_lagrangian;i++)
@@ -1001,7 +1117,16 @@ namespace oomph
        // Get local coordinate and interpolate to global
        el_pt->get_s_plot(iplot,
                          Multi_domain_functions::Nsample_points,local_coord);
-       el_pt->interpolated_zeta(local_coord,global_coord);
+       
+       // Now get appropriate global coordinate
+       if (MeshAsGeomObject::Use_eulerian_coordinates_during_setup) 
+        {         
+         el_pt->interpolated_x(local_coord,global_coord);
+        }
+       else
+        {
+         el_pt->interpolated_zeta(local_coord,global_coord);
+        }
 
        //Which bin are the global coordinates in?
        unsigned bin_number=0;
@@ -1087,7 +1212,14 @@ namespace oomph
           Vector<double> s(Bin_object_coord_pairs[b][e].second);
           unsigned dim=this->nlagrangian();
           Vector<double> zeta(dim);
-          el_pt->interpolated_zeta(s,zeta);
+          if (Have_used_eulerian_coordinates_during_setup) 
+           {         
+            el_pt->interpolated_x(s,zeta);
+           }
+          else
+           {
+            el_pt->interpolated_zeta(s,zeta);
+           }
           for (unsigned i=0;i<dim;i++)
            {
             outfile << zeta[i] << " ";
@@ -1138,11 +1270,11 @@ namespace oomph
 
 //========================================================================
 /// Output bin vertices (allowing display of bins as zones). 
-/// Final argument specifies the coordinates of a point (defaults to
-/// zero vector) and output includes the minimum distance of any of
+/// Final argument specifies the coordinates of a point
+/// and output includes the minimum distance of any of
 /// the bin vertices to this point. 
 //========================================================================
- void MeshAsGeomObject::output_bin_vertices(std::ofstream& outfile,
+ void MeshAsGeomObject::output_bin_vertices(std::ostream& outfile,
   const Vector<double>& zeta)
  {
   
@@ -1186,6 +1318,53 @@ namespace oomph
      }
    }
  }
+
+
+//========================================================================
+/// Output bin vertices of specified bin (allowing display of bins as zones). 
+/// Final argument specifies the coordinates of a point 
+/// and output includes the minimum distance of any of
+/// the bin vertices to this point. 
+//========================================================================
+ void MeshAsGeomObject::output_bin_vertices(std::ostream& outfile,
+                                            const unsigned& i_bin,
+                                            const Vector<double>& zeta)
+ {
+  
+  // Spatial dimension of bin
+  const unsigned n_lagrangian = this->nlagrangian();
+  
+  // Get bin vertices
+  Vector<Vector<double> > bin_vertex;
+  get_bin_vertices(i_bin, bin_vertex);
+  switch(n_lagrangian)
+   {
+   case 1:
+    outfile << "ZONE I=2\n";
+    break;
+    
+   case 2:
+    outfile << "ZONE I=2, J=2\n";
+    break;
+    
+   case 3:
+    outfile << "ZONE I=2, J=2, K=2\n";
+    break;
+   }
+  
+  unsigned nvertex=bin_vertex.size();
+  for (unsigned i=0;i<nvertex;i++)
+   {
+    for (unsigned j=0;j<n_lagrangian;j++)
+     {
+      outfile 
+       << bin_vertex[i][j] << " ";
+     }
+    outfile << i_bin << " "
+            << min_distance(i_bin,zeta) << "\n";
+   }
+ }
+
 
 
 //========================================================================
