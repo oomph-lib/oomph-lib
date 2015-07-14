@@ -2388,8 +2388,8 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
      }
     for (unsigned e=0;e<n;e++)
      {
-      unsigned level=ceil(log(target_area[e]/total_area)/log(1.0/3.0))-1;
-      double new_target_area=total_area*pow(1.0/3.0,level);
+      unsigned level=unsigned(ceil(log(target_area[e]/total_area)/log(1.0/3.0)))-1;
+      double new_target_area=total_area*pow(1.0/3.0,int(level));
       target_area[e]=new_target_area;
      }
    }
