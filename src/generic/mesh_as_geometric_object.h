@@ -46,6 +46,123 @@
 namespace oomph
 {
 
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+// hierher move this into vector.h or its own file at some point
+
+
+//========================================================================
+/// Sparse vector -- wrapper for map (but avoids filling map during
+/// reads of zero/empty entries). Square bracket operator is read-only.
+//========================================================================
+template<class T>
+class SparseVector
+{
+
+public:
+
+
+ /// Constructor
+ SparseVector()
+  {
+   // Empty instance
+   Empty_pt=new T(0);
+  }
+
+ /// Destructor
+ ~SparseVector()
+  {
+   // Delete empty instance
+   delete Empty_pt;
+  }
+ 
+ /// Wipe storage
+ void clear()
+  {
+   Data.clear();
+  }
+
+ /// Square bracket access (const version)
+ const T& operator[](const unsigned& i) const
+  {
+   typedef typename std::map<unsigned,T>::const_iterator IT;
+   IT it=Data.find(i);
+   if (it==Data.end())
+    {
+     return *Empty_pt;
+    }
+   return (*it).second;
+  }
+ 
+ 
+ /// Set value of i-th entry
+ void set_value(const unsigned& i, const T& value)
+  {
+   Data[i]=value;
+  }
+
+
+ /// \short Number of nonzero entries stored in here (specifying the 
+ /// size of the vector (as a mathematical object)
+ /// doesn't really make sense -- the thing could be infinitely
+ /// big and we wouldn't know or care)
+ unsigned nnz() const
+  {
+   return Data.size();
+  }
+
+ /// Read-only access to underlying map
+ const std::map<unsigned,T>* map_pt() const
+  {
+   return &Data;
+  }
+
+ /// Read/write access to underlying map -- dangerous!
+ std::map<unsigned,T>* map_pt()
+  {
+   return &Data;
+  }
+
+ /// \short Return vector containing all values
+ /// (without reference to their specific indices)
+ /// for fast direct access
+ void get_all_values(Vector<T>& all_values) const
+  {
+   all_values.clear();
+   all_values.resize(nnz());
+   typedef typename std::map<unsigned,T>::const_iterator IT;
+   unsigned count=0;
+   for (IT it=Data.begin();it!=Data.end();it++)
+    {
+     all_values[count]=(*it).second;
+    }
+  }
+
+private:
+
+ /// Internal storage in map.
+ std::map<unsigned,T> Data;
+
+ /// Empty instance
+ const T* Empty_pt;
+
+};
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 //========================================================================
 /// This class provides a GeomObject representation of a given
 /// finite element mesh. The Lagrangian coordinate is taken to be the 
@@ -82,7 +199,7 @@ private:
  Vector<FiniteElement*> Sub_geom_object_pt;
 
  ///Storage for paired objects and coords in each bin 
- Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > 
+ SparseVector<Vector<std::pair<FiniteElement*,Vector<double> > > > 
   Bin_object_coord_pairs;
 
  /// \short In parallel computation, suppress synchronisation of bins
@@ -246,6 +363,17 @@ public:
    BrokenCopy::broken_assign("MeshAsGeomObject");
   }
 
+ 
+ /// Total number of bins (empty or not)
+ unsigned total_nbin() const
+  {
+   const unsigned n_lagrangian = this->nlagrangian();
+   unsigned Nbin[3] ={Nbin_x, Nbin_y, Nbin_z};
+   unsigned ntotalbin=Nbin[0];
+   for(unsigned i=1;i<n_lagrangian;i++) {ntotalbin *= Nbin[i];}
+   return ntotalbin;
+  }
+ 
  /// How many items of Data does the shape of the object depend on?
  unsigned ngeom_data() const {return Geom_data_pt.size();}
  
@@ -401,6 +529,13 @@ public:
  ///Number of bins in z direction
  unsigned nbin_z(){return Nbin_z;}
 
+ /// Provide some stats on the fill level of the associated bin
+ void get_fill_stats(unsigned& n_bin,
+                     unsigned& max_n_entry,
+                     unsigned& min_n_entry,
+                     unsigned& tot_n_entry,
+                     unsigned& n_empty) const;
+
  /// \short Compute the minimum distance of any vertex in the specified bin
  /// from the specified Lagrangian coordinate zeta
  double min_distance(const unsigned& i_bin,
@@ -414,6 +549,7 @@ public:
  void output_bin_vertices(std::ostream& outfile,
                           const Vector<double>& zeta);
  
+
  /// \short Output bin vertices (allowing display of bins as zones).
  void output_bin_vertices(std::ostream& outfile)
  {
@@ -458,7 +594,7 @@ public:
  /// for total number of bins in active use by any MeshAsGeomObject)
  void flush_bins_of_objects()
   {
-   Total_nbin_cells_counter-=Bin_object_coord_pairs.size();
+   Total_nbin_cells_counter-=Bin_object_coord_pairs.nnz();
    Bin_object_coord_pairs.clear();
   }
 
@@ -474,14 +610,12 @@ public:
               Vector<std::pair<FiniteElement*,
               Vector<double> > >& sample_point_pairs);
  
- /// Get the contents of the specified bin
- Vector<std::pair<FiniteElement*,Vector<double> > >& bin_content(
-  const unsigned& bin_number);
-
- /// Get the contents of all bins
+ /// Get the contents of all bins in vector
  Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > bin_content() const
   {
-   return Bin_object_coord_pairs;
+   Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > all_vals;
+   Bin_object_coord_pairs.get_all_values(all_vals);
+   return all_vals;
   }
 
  ///Calculate the bin numbers of all the neighbours to "bin" given the level

@@ -2741,33 +2741,30 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
     oomph_info << "time for setup of mesh as geom obj: "
                << TimingHelpers::timer()-t0_geom_obj
                << std::endl;
-    
+
+
     // Do some stats
     {
-     unsigned max_entry=0;
-     unsigned min_entry=UINT_MAX;
-     unsigned tot_entry=0;
-     unsigned nempty=0;
-     Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > 
-      bin_content=mesh_geom_obj_pt->bin_content();
-     mesh_geom_obj_pt->bin_content();
-     unsigned nbin=bin_content.size();
-     for (unsigned b=0;b<nbin;b++)
-      {
-       unsigned nentry=bin_content[b].size();
-       if (nentry>max_entry) max_entry=nentry;
-       if (nentry<min_entry) min_entry=nentry;
-       if (nentry==0) nempty++;
-       tot_entry+=nentry;
-      }
+     double t_stats=TimingHelpers::timer();
+     unsigned n_bin=0;
+     unsigned max_n_entry=0;
+     unsigned min_n_entry=UINT_MAX;
+     unsigned tot_n_entry=0;
+     unsigned n_empty=0;
+     mesh_geom_obj_pt->get_fill_stats(n_bin,max_n_entry,min_n_entry,
+                                      tot_n_entry,n_empty);
+     
      oomph_info 
       << "Before bin diffusion: nbin, nempty, min, max, av entries: "
-      << nbin << " " 
-      << nempty << " " 
-      << min_entry << " " 
-      << max_entry << " " 
-      << double(tot_entry)/double(nbin) << " "
+      << n_bin << " " 
+      << n_empty << " " 
+      << min_n_entry << " " 
+      << max_n_entry << " " 
+      << double(tot_n_entry)/double(n_bin) << " "
       << std::endl;
+     oomph_info << "time for bin stats: "
+                << TimingHelpers::timer()-t_stats
+                << std::endl;
     }
     
     // Fill bin by diffusion
@@ -2780,33 +2777,28 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
                << std::endl;
     
     
-
     // Do some stats
     {
-     unsigned max_entry=0;
-     unsigned min_entry=UINT_MAX;
-     unsigned tot_entry=0;
-     unsigned nempty=0;
-     Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > 
-      bin_content=mesh_geom_obj_pt->bin_content();
-     mesh_geom_obj_pt->bin_content();
-     unsigned nbin=bin_content.size();
-     for (unsigned b=0;b<nbin;b++)
-      {
-       unsigned nentry=bin_content[b].size();
-       if (nentry>max_entry) max_entry=nentry;
-       if (nentry<min_entry) min_entry=nentry;
-       if (nentry==0) nempty++;
-       tot_entry+=nentry;
-      }
+     double t_stats=TimingHelpers::timer();
+     unsigned n_bin=0;
+     unsigned max_n_entry=0;
+     unsigned min_n_entry=UINT_MAX;
+     unsigned tot_n_entry=0;
+     unsigned n_empty=0;
+     mesh_geom_obj_pt->get_fill_stats(n_bin,max_n_entry,min_n_entry,
+                                      tot_n_entry,n_empty);
+     
      oomph_info 
       << "After bin diffusion: nbin, nempty, min, max, av entries: "
-      << nbin << " " 
-      << nempty << " " 
-      << min_entry << " " 
-      << max_entry << " " 
-      << double(tot_entry)/double(nbin) << " "
+      << n_bin << " " 
+      << n_empty << " " 
+      << min_n_entry << " " 
+      << max_n_entry << " " 
+      << double(tot_n_entry)/double(n_bin) << " "
       << std::endl;
+     oomph_info << "time for bin stats: "
+                << TimingHelpers::timer()-t_stats
+                << std::endl;
     }
     
 

@@ -319,13 +319,17 @@ namespace oomph
                                      Vector<double> > >& sample_point_pairs)
  {
 
-  // Set current zeta coordinate
-  Multi_domain_functions::Zeta_coords_for_further_away_comparison=zeta;
+  OomphLibWarning("Multi_domain_functions::Sort_bin_entries is currently disabled\n",
+                  OOMPH_CURRENT_FUNCTION,
+                  OOMPH_EXCEPTION_LOCATION);
 
-  // Sort the bin
-  std::sort(sample_point_pairs.begin(),
-            sample_point_pairs.end(),
-            Multi_domain_functions::first_closer_than_second);
+  // // Set current zeta coordinate
+  // Multi_domain_functions::Zeta_coords_for_further_away_comparison=zeta;
+
+  // // Sort the bin
+  // std::sort(sample_point_pairs.begin(),
+  //           sample_point_pairs.end(),
+  //           Multi_domain_functions::first_closer_than_second);
 
  }
 
@@ -348,7 +352,7 @@ namespace oomph
   get_bin(zeta,bin_number);
   if (bin_number>=0)
    {
-    sample_point_pairs=bin_content(bin_number);
+    sample_point_pairs=Bin_object_coord_pairs[unsigned(bin_number)];
    }
  }
 
@@ -463,17 +467,6 @@ namespace oomph
  }
  
 
- 
- //=================================================================
- /// Get the contents of the specified bin
- //=================================================================
- Vector<std::pair<FiniteElement*,Vector<double> > >& 
- MeshAsGeomObject::bin_content(const unsigned& bin_number)
- {
-  return Bin_object_coord_pairs[bin_number];
- }
- 
-
 
 //========================================================================
 /// Fill bin by diffusion, populating each empty bin with the same content
@@ -485,7 +478,7 @@ namespace oomph
  {
   // Loop over all bins to check if they're empty
   std::list<unsigned> empty_bins;
-  unsigned nbin=Bin_object_coord_pairs.size();
+  unsigned nbin=total_nbin(); 
   std::vector<bool> was_empty_until_current_iteration(nbin,false);
   for (unsigned i=0;i<nbin;i++)
    {
@@ -551,7 +544,7 @@ namespace oomph
        {
         Vector<std::pair<FiniteElement*,Vector<double> > > new_entry;
         new_entry.push_back(closest_pair);
-        Bin_object_coord_pairs[bin]=new_entry;
+        Bin_object_coord_pairs.set_value(bin,new_entry); 
         
         // Record that we've filled it.
         newly_filled_bin.push_back(bin);
@@ -578,7 +571,7 @@ namespace oomph
 
 #ifdef PARANOID
   // Loop over all bins to check if they're empty
-  nbin=Bin_object_coord_pairs.size();
+  nbin=total_nbin(); 
   for (unsigned i=0;i<nbin;i++)
    {
     if (Bin_object_coord_pairs[i].size()==0)
@@ -684,10 +677,14 @@ namespace oomph
          // Don't do anything if this bin has no sample points
          if (n_sample>0)
           {
+
            // Sort the bin if required
            if (Multi_domain_functions::Sort_bin_entries)
             {
-             sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
+             OomphLibWarning("Multi_domain_functions::Sort_bin_entries is currently disabled\n",
+                             OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);
+             //sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
             }
            
            for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
@@ -777,12 +774,16 @@ namespace oomph
            // Don't do anything if this bin has no sample points
            if (n_sample>0)
             {
+
              // Sort the bin if required
              if (Multi_domain_functions::Sort_bin_entries)
               {
-               sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
+               OomphLibWarning("Multi_domain_functions::Sort_bin_entries is currently disabled\n",
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION);
+               //sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
               }
-             
+                          
              for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
               {
                // Get the element
@@ -960,6 +961,45 @@ namespace oomph
     }
   }
 
+
+
+//========================================================================
+ /// Provide some stats on the fill level of the associated bin
+//========================================================================
+ void MeshAsGeomObject::get_fill_stats(unsigned& n_bin,
+                                       unsigned& max_n_entry,
+                                       unsigned& min_n_entry,
+                                       unsigned& tot_n_entry,
+                                       unsigned& n_empty) const
+ {
+  // Total number of bins
+  n_bin=total_nbin();
+  n_empty=n_bin-Bin_object_coord_pairs.nnz();
+
+  // Get pointer to map-based representation
+  const std::map<unsigned,Vector<std::pair<FiniteElement*,Vector<double> > > >*
+   map_pt=Bin_object_coord_pairs.map_pt();
+
+  // Initialise
+  max_n_entry=0;
+  min_n_entry=UINT_MAX;
+  tot_n_entry=0;
+
+  // Do stats
+  typedef std::map<unsigned,Vector<
+   std::pair<FiniteElement*,Vector<double> > > >::const_iterator IT;
+  for (IT it=map_pt->begin();it!=map_pt->end();it++)
+   {
+    unsigned nentry=(*it).second.size();
+    if (nentry>max_n_entry) max_n_entry=nentry;
+    if (nentry<min_n_entry) min_n_entry=nentry;
+    tot_n_entry+=nentry;
+   }
+
+ }
+ 
+
+
 //========================================================================
 ///Initialise the "bin" structure for locating coordinates
 ///The number of elements in the mesh is passed in only for an error check
@@ -1005,13 +1045,15 @@ namespace oomph
    /// Flush all objects out of the bin structure
    flush_bins_of_objects();
 
-   //The storage for these bins is the product of the 
-   //number of bins in all directions
-   unsigned Nbin[3] ={Nbin_x, Nbin_y, Nbin_z};
-   unsigned ntotalbin=Nbin[0];
-   for(unsigned i=1;i<n_lagrangian;i++) {ntotalbin *= Nbin[i];}
-   Bin_object_coord_pairs.resize(ntotalbin);
+   // Temporary storage in bin
+   std::map<unsigned,Vector<std::pair<FiniteElement*,Vector<double> > > >
+    tmp_bin_object_coord_pairs;
 
+   unsigned Nbin[3] ={Nbin_x, Nbin_y, Nbin_z};
+
+   // Total number of bins
+   unsigned ntotalbin=total_nbin();
+   
    // Issue warning about small number of bins
    if (!Suppress_warning_about_small_number_of_bins)
     {
@@ -1176,10 +1218,31 @@ namespace oomph
          multiplier *= Nbin[i];
         }
        
+       // //Add element-sample local coord pair to the calculated bin
+       // Bin_object_coord_pairs[bin_number].push_back
+       //  (std::make_pair(el_pt,local_coord));
+
+
        //Add element-sample local coord pair to the calculated bin
-       Bin_object_coord_pairs[bin_number].push_back
+       tmp_bin_object_coord_pairs[bin_number].push_back
         (std::make_pair(el_pt,local_coord));
+
       }
+    }
+
+
+   // Finally copy filled vectors across -- wiping memory from temporary
+   // map as we go along is good and wouldn't be possible if we 
+   // filled the SparseVector's internal map within that class.
+   typedef std::map<unsigned,Vector<
+    std::pair<FiniteElement*,Vector<double> > > >::iterator IT;
+   for (IT it=tmp_bin_object_coord_pairs.begin();
+        it!=tmp_bin_object_coord_pairs.end();it++)
+    {
+     Bin_object_coord_pairs.set_value((*it).first,
+                                      (*it).second);
+     // Make space immediately
+     (*it).second.clear();
     }
 
   }
