@@ -79,10 +79,21 @@ public:
    delete Empty_pt;
   }
  
+ // Initialise the bin (only called by the create_bins_of_objects()
+ // method)
+ void initialise(const unsigned &size)
+ {
+  // Create a "large" bool vector indicated all bins are empty
+  Bin_has_entries.resize(size,false);
+ }
+ 
  /// Wipe storage
  void clear()
   {
    Data.clear();
+   // Get current size and reset all entries
+   const unsigned size = Bin_has_entries.size();
+   Bin_has_entries.assign(size,false);
   }
 
  /// Square bracket access (const version)
@@ -102,6 +113,8 @@ public:
  void set_value(const unsigned& i, const T& value)
   {
    Data[i]=value;
+   //Mark as occupied
+   Bin_has_entries[i]=true;
   }
 
 
@@ -125,7 +138,13 @@ public:
   {
    return &Data;
   }
-
+ 
+ /// \short Check if the bin has entries
+ bool bin_has_entries(const unsigned &nbin)
+ {
+  return Bin_has_entries[nbin];
+ }
+ 
  /// \short Return vector containing all values
  /// (without reference to their specific indices)
  /// for fast direct access
@@ -148,7 +167,10 @@ private:
 
  /// Empty instance
  const T* Empty_pt;
-
+ 
+ /// Keep track of the filled and empty bins
+ std::vector<bool> Bin_has_entries;
+ 
 };
 
 
@@ -411,18 +433,25 @@ public:
   spiraling_locate_zeta(zeta,sub_geom_object_pt,s,called_within_spiral);
  }
 
-/// \short Find the sub geometric object and local coordinate therein that
-/// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
-/// on return from this function, none of the constituent sub-objects 
-/// contain the required coordinate.
-/// Setting the final bool argument to true means that we only search
-/// for matching element within a a certain number of "spirals" within
-/// the bin structure.
+ /// \short Find the sub geometric object and local coordinate therein that
+ /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
+ /// on return from this function, none of the constituent sub-objects 
+ /// contain the required coordinate.
+ /// Setting the final bool argument to true means that we only search
+ /// for matching element within a a certain number of "spirals" within
+ /// the bin structure.
  void spiraling_locate_zeta(const Vector<double>& zeta,
                             GeomObject*& sub_geom_object_pt,
                             Vector<double>& s, 
                             const bool &called_within_spiral);
-
+ 
+ /// \short Version of spiraling locate zeta used for the projection
+ /// during the unstructured mesh adatation
+ void my_spiraling_locate_zeta(const Vector<double>& zeta,
+                               GeomObject*& sub_geom_object_pt,
+                               Vector<double>& s,
+                               const bool &called_within_spiral);
+ 
  /// \short Return the position as a function of the intrinsic coordinate zeta.
  /// This provides an (expensive!) default implementation in which
  /// we loop over all the constituent sub-objects and check if they
@@ -609,19 +638,20 @@ public:
  void get_bin(const Vector<double>& zeta, int& bin_number,
               Vector<std::pair<FiniteElement*,
               Vector<double> > >& sample_point_pairs);
- 
+  
  /// Get the contents of all bins in vector
- Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > bin_content() const
+ const std::map<unsigned,Vector<std::pair<FiniteElement*,Vector<double> > > > *
+  get_all_bins_content() const
   {
-   Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > all_vals;
-   Bin_object_coord_pairs.get_all_values(all_vals);
-   return all_vals;
+   // Return the content of the bins
+   return Bin_object_coord_pairs.map_pt();
   }
-
+ 
  ///Calculate the bin numbers of all the neighbours to "bin" given the level
  void get_neighbouring_bins_helper(const unsigned& bin_number, 
                                    const unsigned& level,
-                                   Vector<unsigned>& neighbour_bin);
+                                   Vector<unsigned>& neighbour_bin,
+                                   const bool &only_use_filled_bins=false);
 
  /// \short Fill bin by diffusion, populating each empty bin with the 
  /// same content as the first non-empty bin found during a spiral-based search 

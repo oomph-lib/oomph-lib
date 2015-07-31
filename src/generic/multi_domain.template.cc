@@ -1690,6 +1690,12 @@ namespace oomph
      if (Doc_timings)
       {
        t_spiral_start=TimingHelpers::timer();
+       // Initialize the total time for sorting elements in bins
+       if (Sort_bin_entries)
+        {
+         Total_time_for_sorting_elements_in_bins=0.0;
+        }
+       
       }
      
      // Perform locate_zeta locally first! This looks locally for
@@ -1980,6 +1986,16 @@ namespace oomph
         << "CPU for entrire spiral [spiral level "
         << i_level << "]: "
         << t_local-t_spiral_start << std::endl;
+       
+       // Document the time for sorting the bins
+       if (Sort_bin_entries)
+        {
+         oomph_info << "CPU for sorting elements in bins [spiral level "
+                    << i_level << "]: "
+                    << Total_time_for_sorting_elements_in_bins
+                    << std::endl;
+        }
+       
       }
      
      // Bump up spiral levels for all meshes

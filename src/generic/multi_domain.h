@@ -225,7 +225,19 @@ namespace Multi_domain_functions
   /// therefore set to true by default but retention
   /// of this flag allows easy return to previous implementation.
   extern bool Allow_use_of_halo_elements_as_external_elements;
-
+  
+  /// \short The total time for sorting the elements in the bins
+  extern double Total_time_for_sorting_elements_in_bins;
+  
+  /// Set up multi-domain for projection
+  extern bool Setup_multi_domain_for_projection;
+  
+  /// \short Indicate whether we are allowed to use halo elements as
+  /// external elements for projection, possibly only required in
+  /// parallel unstructured mesh generation during the projection
+  /// stage. Default set to true
+  extern bool Allow_use_of_halo_elements_as_external_elements_for_projection;
+  
   /// \short Boolean to indicate whether to doc timings or not.
   extern bool Doc_timings;
 
@@ -570,12 +582,11 @@ namespace Multi_domain_functions
   /// \short Helper function that clears all the intermediate information used
   /// during the external storage creation at the end of the procedure
   void clean_up();
-
-
+  
   /// \short Bool to decide if to sort entries in bin during locate_zeta
   /// operation (default: false)
   extern bool Sort_bin_entries;
-
+    
   /// \short Vector of zeta coordinates that we're currently trying to locate;
   /// used in sorting of bin entries in further_away() comparison function
   extern Vector<double> Zeta_coords_for_further_away_comparison;

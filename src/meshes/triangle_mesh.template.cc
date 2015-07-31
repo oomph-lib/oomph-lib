@@ -2702,19 +2702,19 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
     TriangulateIO tmp_new_triangulateio=
      tmp_new_mesh_pt->triangulateio_representation();
     RefineableTriangleMesh<ELEMENT>* new_mesh_pt=0;
-
-    // Map storing target areas for elements in temporary
-    // TriangulateIO mesh
-    std::map<GeneralisedElement*,double> target_area_map;
-
-
     
     // Adjust size of bins
-    unsigned backup_bin_x=Multi_domain_functions::Nx_bin;
-    unsigned backup_bin_y=Multi_domain_functions::Ny_bin;
+    const unsigned backup_bin_x_target_areas=Multi_domain_functions::Nx_bin;
+    const unsigned backup_bin_y_target_areas=Multi_domain_functions::Ny_bin;
+    
     Multi_domain_functions::Nx_bin=Nbin_x_for_area_transfer;
     Multi_domain_functions::Ny_bin=Nbin_y_for_area_transfer;
     
+    // Switch timings and stats on
+    //Multi_domain_functions::Doc_timings=true;
+    //Multi_domain_functions::Doc_stats=true;
+    //Multi_domain_functions::Doc_full_stats=true;
+        
     // Make a mesh as geom object representation of the temporary
     // mesh -- this also builds up the internal bin structure 
     // from which we'll recover the target areas
@@ -2735,8 +2735,13 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
      }
 
     // Reset
-    Multi_domain_functions::Nx_bin=backup_bin_x;
-    Multi_domain_functions::Ny_bin=backup_bin_y;
+    Multi_domain_functions::Nx_bin=backup_bin_x_target_areas;
+    Multi_domain_functions::Ny_bin=backup_bin_y_target_areas;
+    
+    // Switch timings and stats off
+    //Multi_domain_functions::Doc_timings=false;
+    //Multi_domain_functions::Doc_stats=false;
+    //Multi_domain_functions::Doc_full_stats=false;
     
     oomph_info << "time for setup of mesh as geom obj: "
                << TimingHelpers::timer()-t0_geom_obj
@@ -2801,7 +2806,6 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
                 << std::endl;
     }
     
-
     // Set up a map from pointer to element to its number
     // in the mesh
     std::map<GeneralisedElement*,unsigned> element_number;
@@ -2811,34 +2815,98 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
       element_number[this->element_pt(e)]=e;
      }
     
-
+    // For each bin, compute the minimum of the target areas in the bin
+    
+    // Timing for map
+    double t_total_map=0.0;
+    // Counter for map
+    unsigned counter_map = 0;
+    
+    // Get access to the bins (we need access to the content of the
+    // bins to compute the minimum of the target areas of the elements
+    // in each bin)
+    const std::map<unsigned,Vector<std::pair<FiniteElement*,Vector<double> > > >*
+      bins_pt=mesh_geom_obj_pt->get_all_bins_content();
+    
+    // Get the number of bins
+    const unsigned n_bin=bins_pt->size();
+    
+    // Create a vector to store the min target area of each bin (at
+    // this stage the number of bins should not be that large, so it
+    // should be safe to build a vector for the total number of bins)
+    Vector<double> bin_min_target_area(n_bin, 0.0);
+    // loop over the bins, get their elements and compute the minimum
+    // target area of all of them
+    typedef std::map<unsigned,Vector<std::pair<FiniteElement*,Vector<double> > > >::const_iterator IT;
+    for (IT it=bins_pt->begin();it!=bins_pt->end();it++)
+     {
+      // The bin number
+      unsigned ib=(*it).first;
+      // Get the number of elements in the bin
+      const unsigned n_ele_bin = (*it).second.size();
+      // loop over the elements in the bin
+      for (unsigned ee=0;ee<n_ele_bin;ee++)
+       {
+        // Get ee-th element (in currrent mesh) in ib-th bin
+        GeneralisedElement* ele_pt=(*it).second[ee].first;
+        double t_map=TimingHelpers::timer();
+        const unsigned ele_number = element_number[ele_pt];
+        t_total_map+=TimingHelpers::timer()-t_map;
+        
+        // Increase the number of calls to map
+        counter_map++;
+        
+        // Go for smallest target area of any element in this bin to
+        // force "one level" of refinement (the one-level-ness is
+        // enforced below by limiting the actual reduction in area
+        if (bin_min_target_area[ib]!=0)
+         {
+          bin_min_target_area[ib]=
+           std::min(bin_min_target_area[ib], target_area[ele_number]);
+         }
+        else
+         {
+          bin_min_target_area[ib]=target_area[ele_number];
+         }
+        
+       } // for (ee<n_ele_bin)
+      
+     } // for (it!=bins.end())
+    
+    oomph_info << "CPU for map[counter="<<counter_map<<"]: "
+               << t_total_map << std::endl;
+    
     // Now start iterating to refine mesh recursively
     //-----------------------------------------------
     bool done=false;
     unsigned iter=0;
     double t_iter=TimingHelpers::timer();
+    
+    // Timing for get bin
+    double t_total_get_bin=0.0;
+        
     while (!done)
      {
 
       // Accept by default but overwrite if things go wrong below
       done=true;
       double t_start=TimingHelpers::timer();
-
-
-
-
       double t0_loop_int_pts=TimingHelpers::timer();
-
-
-      // Get ready for next assignment of target areas
-      target_area_map.clear();
-          
+      double t_total_iter_get_bin=0.0;;
+      
       // Loop over elements in new (tmp) mesh and visit all
       // its integration points. Check where it's located in the bin
       // structure of the current mesh and pass the target area
       // to the new element
       nelem=tmp_new_mesh_pt->nelement();
-
+      
+      // Store the target areas for elements in the temporary
+      // TriangulateIO mesh
+      Vector<double> new_transferred_target_area(nelem,0.0);
+      
+      // Couters for map and get_bin()
+      unsigned counter_get_bin_iter = 0;
+      
       for (unsigned e=0;e<nelem;e++)
        { // start loop el
         ELEMENT* el_pt=dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e));
@@ -2857,9 +2925,12 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
 
           // Find the bin that contains that point and its contents
           int bin_number=0;
-          Vector<std::pair<FiniteElement*,Vector<double> > >
-           sample_point_pairs;
-          mesh_geom_obj_pt->get_bin(x,bin_number,sample_point_pairs);
+          double t_get_bin=TimingHelpers::timer();
+          mesh_geom_obj_pt->get_bin(x,bin_number);
+          t_total_iter_get_bin+=TimingHelpers::timer()-t_get_bin;
+          
+          // Increase the counter for number of calls to get_bin()
+          counter_get_bin_iter++;
               
           // Did we find it?
           if (bin_number<0)
@@ -2875,51 +2946,34 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
                                 OOMPH_EXCEPTION_LOCATION);
            }
           else
-           {
-            // Pass target area to new element
-            unsigned n=sample_point_pairs.size();
-            if (n>0)
+           {            
+            // Go for smallest target area of any element in this bin
+            // to force "one level" of refinement (the one-level-ness
+            // is enforced below by limiting the actual reduction in
+            // area
+            if (new_transferred_target_area[e]!=0)
              {
-              for (unsigned ee=0;ee<n;ee++)
-               {
-                // Get ee-th element (in currrent mesh) in bin
-                GeneralisedElement* current_el_pt=sample_point_pairs[ee].first;
-                unsigned e_current=element_number[current_el_pt];                    
-
-                // Go for smallest target area of any element in this bin
-                // to force "one level" of refinement (the one-level-ness is
-                // enforced below by limiting the actual reduction in area
-                if (target_area_map[el_pt]!=0)
-                 {
-                  target_area_map[el_pt]=
-                   std::min(target_area_map[el_pt], 
-                            target_area[e_current]);
-                 }
-                else
-                 {
-                  target_area_map[el_pt]=target_area[e_current];
-                 }
-               }
+              new_transferred_target_area[e]=
+               std::min(new_transferred_target_area[e], 
+                        bin_min_target_area[bin_number]);
              }
             else
              {
-              std::stringstream error_message;
-              error_message
-               << "Point not found within bin structure\n";
-              throw OomphLibError(error_message.str(),
-                                  OOMPH_CURRENT_FUNCTION,
-                                  OOMPH_EXCEPTION_LOCATION);
+              new_transferred_target_area[e]=bin_min_target_area[bin_number];
              }
+            
            }
-         }
-       }
-
-
+          
+         } // for (ipt<nint)
+        
+       } // for (e<nelem)
+      
+      
       oomph_info << "time for loop over int pts in new mesh: "
                  << TimingHelpers::timer()-t0_loop_int_pts  
                  << std::endl;
-
-
+      
+      
       // //hierher
       // {
       // hierher.open((Global_string_for_annotation:: String[0]+"binned_target_areas"+
@@ -2947,13 +3001,15 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
       //  }
       // hierher.close();
       // }
-                    
-
+      
+      // Add to the total bin time
+      t_total_get_bin+=t_total_iter_get_bin;
+      
       oomph_info << "CPU for transfer of target areas (iter "
                  << iter << ") " << TimingHelpers::timer()-t_start
                  << std::endl;
-
-
+      
+      
       // // Output mesh
       // tmp_new_mesh_pt->output(("intermediate_mesh"+
       //                         StringConversion::to_string(iter)+".dat").c_str()); 
@@ -2969,19 +3025,21 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
       Vector<double> new_target_area(nel_new);
       for (unsigned e=0;e<nel_new;e++)
        {
+        // The finite element
+        FiniteElement* f_ele_pt = tmp_new_mesh_pt->finite_element_pt(e);
         // No target area found for this element -- keep its size
         // by setting target area to -1 for triangle
-        double new_area=target_area_map[tmp_new_mesh_pt->element_pt(e)];
+        double new_area=new_transferred_target_area[e];
         if (new_area<=0.0)
          {
           std::ostringstream error_stream;
           error_stream << "This shouldn't happen! Element whose centroid is at"
-                       <<  (tmp_new_mesh_pt->finite_element_pt(e)->node_pt(0)->x(0)+
-                            tmp_new_mesh_pt->finite_element_pt(e)->node_pt(1)->x(0)+
-                            tmp_new_mesh_pt->finite_element_pt(e)->node_pt(2)->x(0))/3.0 << " "
-                       << (tmp_new_mesh_pt->finite_element_pt(e)->node_pt(0)->x(1)+
-                           tmp_new_mesh_pt->finite_element_pt(e)->node_pt(1)->x(1)+
-                           tmp_new_mesh_pt->finite_element_pt(e)->node_pt(2)->x(1))/3.0 << " "
+                       <<  (f_ele_pt->node_pt(0)->x(0)+
+                            f_ele_pt->node_pt(1)->x(0)+
+                            f_ele_pt->node_pt(2)->x(0))/3.0 << " "
+                       << (f_ele_pt->node_pt(0)->x(1)+
+                           f_ele_pt->node_pt(1)->x(1)+
+                           f_ele_pt->node_pt(2)->x(1))/3.0 << " "
                        << " has no target area assigned\n"; 
           throw OomphLibError(error_stream.str(),
                               OOMPH_CURRENT_FUNCTION,
@@ -2992,11 +3050,9 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
           // Limit target area to the equivalent of uniform
           // refinement during this stage of the iteration
           new_target_area[e]=new_area;
-          if (new_target_area[e]<
-              tmp_new_mesh_pt->finite_element_pt(e)->size()/3.0)
+          if (new_target_area[e]<f_ele_pt->size()/3.0)
            {
-            new_target_area[e]=
-             tmp_new_mesh_pt->finite_element_pt(e)->size()/3.0;
+            new_target_area[e]=f_ele_pt->size()/3.0;
 
             // We'll need to give it another go later
             done=false;
@@ -3014,7 +3070,7 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
         // << new_target_area[e] << " " 
         // << tmp_new_mesh_pt->finite_element_pt(e)->size()<< std::endl;
         
-       }	
+       }
       
       if (done) 
        {
@@ -3122,7 +3178,22 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
     oomph_info << "CPU for iterative generation of new mesh " 
                << TimingHelpers::timer()-t_iter
                << std::endl;
-
+    
+    // Change the size of bins
+    const unsigned backup_bin_x_projection=Multi_domain_functions::Nx_bin;
+    const unsigned backup_bin_y_projection=Multi_domain_functions::Ny_bin;
+    Multi_domain_functions::Nx_bin=Nbin_x_for_projection;
+    Multi_domain_functions::Ny_bin=Nbin_y_for_projection;
+    Multi_domain_functions::Setup_multi_domain_for_projection=true;
+    
+    // Switch timings and stats on
+    //Multi_domain_functions::Doc_timings=true;
+    //Multi_domain_functions::Doc_stats=true;
+    //Multi_domain_functions::Doc_full_stats=true;
+    
+    // Enable sort elements in bins for projection
+    //Multi_domain_functions::Sort_bin_entries=true;
+    
     double t_proj=TimingHelpers::timer();
     oomph_info << "about to do projection\n";
 
@@ -3134,10 +3205,21 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
     //project_problem_pt->disable_suppress_output_during_projection();
     project_problem_pt->project(this);
 
+    // Reset
+    Multi_domain_functions::Nx_bin=backup_bin_x_projection;
+    Multi_domain_functions::Ny_bin=backup_bin_y_projection;
+    //Multi_domain_functions::Sort_bin_entries=false;
+    Multi_domain_functions::Setup_multi_domain_for_projection=false;
+
+    // Switch timings and stats off
+    //Multi_domain_functions::Doc_timings=false;
+    //Multi_domain_functions::Doc_stats=false;
+    //Multi_domain_functions::Doc_full_stats=false;
+    
     oomph_info << "CPU for projection of solution onto new mesh " 
                << TimingHelpers::timer()-t_proj
                << std::endl;
-
+        
     double t_rest=TimingHelpers::timer();
 
     //Flush the old mesh 

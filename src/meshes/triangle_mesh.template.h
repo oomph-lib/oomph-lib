@@ -2906,7 +2906,15 @@ template<class ELEMENT>
   /// \short Read/write access to number of bins in the y-direction
   /// when transferring target areas by bin method
   unsigned& nbin_y_for_area_transfer(){return Nbin_y_for_area_transfer;}
-
+  
+  /// \short Read/write access to number of bins in the x-direction
+  /// when projecting old solution onto new mesh
+  unsigned& nbin_x_for_projection(){return Nbin_x_for_projection;}
+  
+  /// \short Read/write access to number of bins in the y-direction
+  /// when projecting old solution onto new mesh
+  unsigned& nbin_y_for_projection(){return Nbin_y_for_projection;}
+  
   /// Max element size allowed during adaptation
   double& max_element_size(){return Max_element_size;}
   
@@ -3121,7 +3129,15 @@ template<class ELEMENT>
    // Number of bins in the y-direction
    // when transferring target areas by bin method
    this->Nbin_y_for_area_transfer=100;
-
+   
+   /// Number of bins in the x-direction when projecting the solution
+   /// from the old mesh into the new mesh
+   this->Nbin_x_for_projection=100;
+   
+   /// Number of bins in the y-direction when projecting the solution
+   /// from the old mesh into the new mesh
+   this->Nbin_y_for_projection=100;
+   
    // Set max and min targets for adaptation
    this->Max_element_size=1.0;
    this->Min_element_size=0.001;
@@ -3261,6 +3277,14 @@ template<class ELEMENT>
    /// \short Number of bins in the y-direction
    /// when transferring target areas by bin method.
    unsigned Nbin_y_for_area_transfer;
+
+   /// \short Number of bins in the x-direction when projecting the
+   /// solution from the old mesh into the new mesh
+   unsigned Nbin_x_for_projection;
+   
+   /// \short Number of bins in the y-direction when projecting the
+   /// solution from the old mesh into the new mesh
+   unsigned Nbin_y_for_projection;
    
    /// Max permitted element size
    double Max_element_size;

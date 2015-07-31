@@ -208,7 +208,19 @@ namespace Multi_domain_functions
   /// therefore set to true by default but retention
   /// of this flag allows easy return to previous implementation.
   bool Allow_use_of_halo_elements_as_external_elements=true;
-
+  
+  /// \short The timing for sorting the elements in the bins 
+  double Total_time_for_sorting_elements_in_bins=0.0;
+  
+  /// Set up multi-domain for projection
+  bool Setup_multi_domain_for_projection=false;
+  
+  /// \short Indicate whether we are allowed to use halo elements as
+  /// external elements for projection, possibly only required in
+  /// parallel unstructured mesh generation during the projection
+  /// stage. Default set to true
+  bool Allow_use_of_halo_elements_as_external_elements_for_projection=true;
+  
   /// \short Boolean to indicate whether to doc timings or not.
   bool Doc_timings=false;
 
@@ -2405,10 +2417,19 @@ namespace Multi_domain_functions
 
            // Perform locate_zeta locally for this coordinate
            bool called_within_spiral=true;
-           mesh_geom_obj_pt->spiraling_locate_zeta(x_global,
-                                                   sub_geom_obj_pt,s_ext,
-                                                   called_within_spiral);
-
+           if (!Setup_multi_domain_for_projection)
+            {
+             mesh_geom_obj_pt->spiraling_locate_zeta(x_global,
+                                                     sub_geom_obj_pt,s_ext,
+                                                     called_within_spiral);
+            }
+           else
+            {
+             mesh_geom_obj_pt->my_spiraling_locate_zeta(x_global,
+                                                        sub_geom_obj_pt,s_ext,
+                                                        called_within_spiral);
+            }
+           
            // Has the required element been located?
            if (sub_geom_obj_pt!=0)
             {
@@ -2587,10 +2608,20 @@ namespace Multi_domain_functions
              
              // Perform locate_zeta locally for this coordinate
              bool called_within_spiral=true;
-             mesh_geom_obj_pt[i_mesh]->spiraling_locate_zeta(
-              x_global,
-              sub_geom_obj_pt,s_ext,
-              called_within_spiral);
+             if (!Setup_multi_domain_for_projection)
+              {
+               mesh_geom_obj_pt[i_mesh]->
+                spiraling_locate_zeta(x_global,
+                                      sub_geom_obj_pt,s_ext,
+                                      called_within_spiral);
+              }
+             else
+              {
+               mesh_geom_obj_pt[i_mesh]->
+                my_spiraling_locate_zeta(x_global,
+                                         sub_geom_obj_pt,s_ext,
+                                         called_within_spiral);
+              }
              
              // Has the required element been located?
              if (sub_geom_obj_pt!=0)

@@ -113,7 +113,7 @@ namespace oomph
    // Set communicator
   Communicator_pt=mesh_pt->communicator_pt();
 #endif
-
+  
   // Remember how bin was (or rather: will have been) set up
   Have_used_eulerian_coordinates_during_setup=
    MeshAsGeomObject::Use_eulerian_coordinates_during_setup;
@@ -157,11 +157,12 @@ namespace oomph
    //Set the Lagrangian and Eulerian dimensions within this geometric object
    this->set_nlagrangian_and_ndim(static_cast<unsigned>(dim[0]),
                                   static_cast<unsigned>(dim[1]));
-
-
+   
    // Create temporary storage for geometric Data (don't count 
    // Data twice!
    std::set<Data*> tmp_geom_data;
+   
+   double t_cast_finite_element = TimingHelpers::timer();
    
    //Copy all the elements in the mesh into local storage
    //N.B. elements must be able to have a geometric object representation.
@@ -207,6 +208,13 @@ namespace oomph
      count++;
     }
 
+   if (Multi_domain_functions::Doc_stats)
+    {
+     oomph_info << "CPU for cast_FiniteElement*: "
+                << TimingHelpers::timer()-t_cast_finite_element
+                << std::endl;
+    }
+   
    // Set storage for minimum and maximum coordinates
    const unsigned dim_lagrangian = this->nlagrangian();
    Min_coords.resize(dim_lagrangian);
@@ -221,8 +229,15 @@ namespace oomph
    // Are we computing the extreme bin coordinates here?
    if (compute_extreme_bin_coords)
     {
+     double t_compute_extreme_coordinates = TimingHelpers::timer();
      // Find the maximum and minimum coordinates for the mesh
      get_min_and_max_coordinates(mesh_pt);
+     if (Multi_domain_functions::Doc_stats)
+      {
+       oomph_info << "CPU for computing extreme bin coordinates: "
+                  << TimingHelpers::timer()-t_compute_extreme_coordinates
+                  << std::endl;
+      }
     }
    else
     { 
@@ -302,10 +317,42 @@ namespace oomph
         }
       }
     }
+   
+   double t_create_bins_of_object = TimingHelpers::timer();
 
    // Create the bin structure, passing in the number of elements in 
    // the mesh
    create_bins_of_objects(mesh_pt->nelement());
+
+   if (Multi_domain_functions::Doc_stats)
+    {
+   
+     oomph_info << "CPU to create bins of objects [TOTAL]: "
+                << TimingHelpers::timer()-t_create_bins_of_object
+                << std::endl;
+    }
+   
+   // Do some stats
+   if (Multi_domain_functions::Doc_stats)
+    {
+     unsigned n_bin=0;
+     unsigned max_n_entry=0;
+     unsigned min_n_entry=UINT_MAX;
+     unsigned tot_n_entry=0;
+     unsigned n_empty=0;
+     get_fill_stats(n_bin,max_n_entry,min_n_entry,
+                    tot_n_entry,n_empty);
+     
+     oomph_info 
+      << "After creation of bins: nbin, nempty, min, max, av entries: "
+      << n_bin << " " 
+      << n_empty << " " 
+      << min_n_entry << " " 
+      << max_n_entry << " " 
+      << double(tot_n_entry)/double(n_bin) << " "
+      << std::endl;
+    }
+   
  }
 
 
@@ -681,10 +728,23 @@ namespace oomph
            // Sort the bin if required
            if (Multi_domain_functions::Sort_bin_entries)
             {
+//              if (Multi_domain_functions::Doc_timings)
+//               {
+//                double t_sort_bin=TimingHelpers::timer();
+//                sort_the_bin(zeta,
+//                             Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
+//                Multi_domain_functions::
+//                 Total_time_for_sorting_elements_in_bins+=
+//                 TimingHelpers::timer()-t_sort_bin;
+//               }
+//              else
+//               {
+//                sort_the_bin(zeta,
+//                             Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
+//               }
              OomphLibWarning("Multi_domain_functions::Sort_bin_entries is currently disabled\n",
                              OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
-             //sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
             }
            
            for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
@@ -733,6 +793,7 @@ namespace oomph
         {
          //oomph_info << "Terminating: Outside search radius [1]\n";
         }
+       
       } // end loop over bins at this level
 
     }
@@ -778,10 +839,10 @@ namespace oomph
              // Sort the bin if required
              if (Multi_domain_functions::Sort_bin_entries)
               {
+               //sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
                OomphLibWarning("Multi_domain_functions::Sort_bin_entries is currently disabled\n",
                                OOMPH_CURRENT_FUNCTION,
                                OOMPH_EXCEPTION_LOCATION);
-               //sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
               }
                           
              for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
@@ -830,6 +891,283 @@ namespace oomph
 
       } // end loop over levels
 
+    } // end if (called_within_spiral)
+
+  }
+ 
+//========================================================================
+/// \short Find the sub geometric object and local coordinate therein that
+/// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
+/// on return from this function, none of the constituent sub-objects 
+/// contain the required coordinate.
+/// Setting the final bool argument to true means that we only search
+/// for matching element within a a certain number of "spirals" within
+/// the bin structure.
+//========================================================================
+ void MeshAsGeomObject::my_spiraling_locate_zeta
+ (const Vector<double>& zeta,GeomObject*& sub_geom_object_pt,
+  Vector<double>& s, const bool &called_within_spiral)
+  {
+   // Initialise return to null -- if it's still null when we're
+   // leaving we've failed!
+   sub_geom_object_pt=0;
+
+   //Get the lagrangian dimension
+   const unsigned n_lagrangian = this->nlagrangian();
+
+   // Does the zeta coordinate lie within the current bin structure?
+
+   //Loop over the lagrangian dimension
+   for(unsigned i=0;i<n_lagrangian;i++)
+    {
+     //If the i-th coordinate is less than the minimum
+     if(zeta[i] < Min_coords[i]) 
+      {
+       return; 
+      }
+     //Otherwise coordinate may be bigger than the maximum
+     else if(zeta[i] > Max_coords[i])
+      {
+       return; 
+      }
+    }
+   
+   // Use the min and max coords of the bin structure, to find
+   // the bin structure containing the current zeta cooordinate
+   unsigned bin_number=0;
+   //Offset for rows/matrices in higher dimensions
+   unsigned multiplier=1;
+   unsigned Nbin[3]={Nbin_x,Nbin_y,Nbin_z};
+
+   // Loop over the dimension
+   for(unsigned i=0;i<n_lagrangian;i++)
+    {
+     //Find the bin number of the current coordinate
+     unsigned bin_number_i = 
+      int(Nbin[i]*((zeta[i]-Min_coords[i])/
+                   (Max_coords[i] - Min_coords[i])));
+     //Buffer the case when we are exactly on the edge
+     if(bin_number_i==Nbin[i]) {bin_number_i -= 1;}
+     //Now add to the bin number using the multiplier
+     bin_number += multiplier*bin_number_i;
+     //Increase the current row/matrix multiplier for the next loop
+     multiplier *= Nbin[i];
+    }
+   
+   // Visit all levels
+   const unsigned my_max_spiral_level = UINT_MAX;
+   if (called_within_spiral)
+    {
+     for (unsigned i_level=0;i_level<=my_max_spiral_level;i_level++)
+      //for (unsigned i_level=current_min_spiral_level();
+      //    i_level<=current_max_spiral_level();i_level++)
+      {
+       // Loop over spirals that are to be visited in one go
+       Vector<unsigned> neighbour_bin;
+       // Only add bins that have elements
+       const bool only_use_filled_bins=true;
+       // Call helper function to find the neighbouring bins at this level
+       get_neighbouring_bins_helper(bin_number,i_level,neighbour_bin,
+                                    only_use_filled_bins);
+       
+       // Total number of bins to be visited
+       unsigned n_nbr_bin=neighbour_bin.size();
+       
+       // Set bool for finding zeta
+       bool found_zeta=false;
+       for (unsigned i_nbr=0;i_nbr<n_nbr_bin;i_nbr++)
+        {
+         // Only search if bin is within the max. radius
+         if (min_distance(neighbour_bin[i_nbr],zeta)<Max_search_radius)
+          {         
+           // Get the number of element-sample point pairs in this bin
+           unsigned n_sample=
+            Bin_object_coord_pairs[neighbour_bin[i_nbr]].size();
+           
+           // Don't do anything if this bin has no sample points
+           if (n_sample>0)
+            {
+             // Sort the bin if required
+             if (Multi_domain_functions::Sort_bin_entries)
+              {
+//                if (Multi_domain_functions::Doc_timings)
+//                 {
+//                  double t_sort_bin=TimingHelpers::timer();
+//                  sort_the_bin(zeta,
+//                               Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
+//                  Multi_domain_functions::
+//                   Total_time_for_sorting_elements_in_bins+=
+//                   TimingHelpers::timer()-t_sort_bin;
+//                 }
+//                else
+//                 {
+//                  sort_the_bin(zeta,
+//                               Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
+//                 }
+               OomphLibWarning("Multi_domain_functions::Sort_bin_entries is currently disabled\n",
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION);
+              }
+             
+             for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
+              {
+               // Get the element
+               FiniteElement* el_pt=Bin_object_coord_pairs
+                [neighbour_bin[i_nbr]][i_sam].first;
+             
+               // Get the local coordinate
+               s=Bin_object_coord_pairs[neighbour_bin[i_nbr]][i_sam].second;
+             
+               // Use this coordinate as the initial guess
+               bool use_coordinate_as_initial_guess=true;
+             
+               // Attempt to find zeta within a sub-object
+               el_pt->locate_zeta(zeta,sub_geom_object_pt,s,
+                                  use_coordinate_as_initial_guess);
+             
+#ifdef OOMPH_HAS_MPI
+               // Allow halo elements as external elements when doing
+               // the projection
+               if (!Multi_domain_functions::Allow_use_of_halo_elements_as_external_elements_for_projection)
+                {
+                 // Dynamic cast the result to a FiniteElement
+                 FiniteElement* test_el_pt=
+                  dynamic_cast<FiniteElement*>(sub_geom_object_pt);
+                 if (test_el_pt!=0)
+                  {
+                   // We only want to exit if this is a non-halo element
+                   if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
+                  }
+                }
+#endif
+             
+               // If the FiniteElement is non-halo and has been located, exit
+               if (sub_geom_object_pt!=0)
+                {
+                 found_zeta=true;
+                 break;
+                }
+              } // end loop over sample points
+            }
+           
+           if (found_zeta)
+            {
+             break;
+            }
+           
+          } //end of don't search if outside search radius
+         else
+          {
+           //oomph_info << "Terminating: Outside search radius [1]\n";
+          }
+         
+        } // end loop over bins at this level
+       
+       if (found_zeta)
+        {
+         break;
+        }
+       
+      } // end loop over levels
+     
+    }
+   else
+    {
+     // Not called from within a spiral procedure
+     // (i.e. the loop in multi_domain.h), so do the spiralling here
+
+     // Loop over all levels... maximum of N*_bin
+     unsigned n_level=Nbin[0];
+     for(unsigned i=1;i<n_lagrangian;i++)
+      {
+       if(n_level < Nbin[i]) {n_level = Nbin[i];}
+      }
+     
+     // Also limit to max. spiral level
+     //n_level=std::min(n_level,max_spiral_level());
+     n_level=UINT_MAX;
+     
+     // Set bool for finding zeta
+     bool found_zeta=false;
+     for (unsigned i_level=0;i_level<n_level;i_level++)
+      {
+       // Loop over spirals that are to be visited in one go
+       Vector<unsigned> neighbour_bin;
+       // Only add bins that have elements
+       const bool only_use_filled_bins=true;
+       // Call helper function to find the neighbouring bins at this level
+       get_neighbouring_bins_helper(bin_number,i_level,neighbour_bin,
+                                    only_use_filled_bins);
+       unsigned n_nbr_bin=neighbour_bin.size();
+       
+       // Loop over neighbouring bins
+       for (unsigned i_nbr=0;i_nbr<n_nbr_bin;i_nbr++)
+        {
+         // Only search if bin is within the max. radius
+         if (min_distance(neighbour_bin[i_nbr],zeta)<Max_search_radius)
+          {         
+           // Get the number of element-sample point pairs in this bin
+           unsigned n_sample=
+            Bin_object_coord_pairs[neighbour_bin[i_nbr]].size();
+           
+           // Don't do anything if this bin has no sample points
+           if (n_sample>0)
+            {
+             // Sort the bin if required
+             if (Multi_domain_functions::Sort_bin_entries)
+              {
+//               sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
+               OomphLibWarning("Multi_domain_functions::Sort_bin_entries is currently disabled\n",
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION);
+              }
+             
+             for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
+              {
+               // Get the element
+               FiniteElement* el_pt=Bin_object_coord_pairs
+                [neighbour_bin[i_nbr]][i_sam].first;
+               
+               // Get the local coordinate
+               s=Bin_object_coord_pairs[neighbour_bin[i_nbr]][i_sam].second;
+               
+               // Use this coordinate as the initial guess in locate_zeta
+               bool use_coordinate_as_initial_guess=true;
+               
+               // Attempt to loacte the correct sub-object
+               el_pt->locate_zeta(zeta,sub_geom_object_pt,s,
+                                  use_coordinate_as_initial_guess);
+               
+               // If it was found then break
+               if (sub_geom_object_pt!=0)
+                {
+                 found_zeta=true;
+                 break;
+                }
+              } // end loop over sample points
+            }
+           
+           // Break out of the bin loop if locate was successful
+           if (found_zeta)
+            {
+             break;
+            }
+          } //end of don't search if outside search radius
+         else
+          {
+           //oomph_info << "Terminating: Outside search radius [2]\n";
+          }
+
+        } // end loop over bins at this level
+
+       // Break out of the spiral loop if locate was successful
+       if (found_zeta)
+        {
+         break;
+        }
+
+      } // end loop over levels
+     
     } // end if (called_within_spiral)
 
   }
@@ -1050,10 +1388,13 @@ namespace oomph
     tmp_bin_object_coord_pairs;
 
    unsigned Nbin[3] ={Nbin_x, Nbin_y, Nbin_z};
-
+   
    // Total number of bins
    unsigned ntotalbin=total_nbin();
    
+   // Initialise the structure that keep tracks of the occupided bins
+   Bin_object_coord_pairs.initialise(ntotalbin);
+    
    // Issue warning about small number of bins
    if (!Suppress_warning_about_small_number_of_bins)
     {
@@ -1140,7 +1481,9 @@ namespace oomph
      oomph_info << "There are " << n_sub << " element[s] to be put into bins"
                 << std::endl << std::endl;
     }
-
+   
+   double t_put_elements_in_bins = TimingHelpers::timer();
+   
    for (unsigned e=0;e<n_sub;e++)
     {
      // Cast to the element (sub-object) first
@@ -1229,7 +1572,14 @@ namespace oomph
 
       }
     }
-
+   
+   if (Multi_domain_functions::Doc_stats)
+    {
+     oomph_info << "CPU for adding elements in bins "
+                << TimingHelpers::timer()-t_put_elements_in_bins
+                << std::endl;
+    }
+   
 
    // Finally copy filled vectors across -- wiping memory from temporary
    // map as we go along is good and wouldn't be possible if we 
@@ -1567,7 +1917,8 @@ namespace oomph
 //========================================================================
  void MeshAsGeomObject::get_neighbouring_bins_helper(
   const unsigned& bin, const unsigned& level,
-  Vector<unsigned>& neighbour_bin)
+  Vector<unsigned>& neighbour_bin,
+  const bool &only_use_filled_bins)
   {
    const unsigned n_lagrangian = this->nlagrangian();
    // This will be different depending on the number of Lagrangian
@@ -1579,14 +1930,34 @@ namespace oomph
      if ((nbr_bin_left>=0) && (nbr_bin_left<Nbin_x))
       {
        unsigned nbr_bin=nbr_bin_left;
-       neighbour_bin.push_back(nbr_bin);
+       if (only_use_filled_bins)
+        {
+         if (Bin_object_coord_pairs.bin_has_entries(nbr_bin))
+          {
+           neighbour_bin.push_back(nbr_bin);
+          }
+        }
+       else
+        {
+         neighbour_bin.push_back(nbr_bin);
+        }
       }
      unsigned nbr_bin_right=bin+level;
      if ((nbr_bin_right>=0) && (nbr_bin_right<Nbin_x) && 
          (nbr_bin_right!=nbr_bin_left))
       {
        unsigned nbr_bin=nbr_bin_right;
-       neighbour_bin.push_back(nbr_bin);
+       if (only_use_filled_bins)
+        {
+         if (Bin_object_coord_pairs.bin_has_entries(nbr_bin))
+          {
+           neighbour_bin.push_back(nbr_bin);
+          }
+        }
+       else
+        {
+         neighbour_bin.push_back(nbr_bin);
+        }
       }
     }
    else if (n_lagrangian==2)
@@ -1631,7 +2002,17 @@ namespace oomph
            //  and less than the total number of bins)
            if ((row==nbr_bin_row) && (nbr_bin>=0) && (nbr_bin<n_total_bin))
             {
-             neighbour_bin.push_back(nbr_bin);
+             if (only_use_filled_bins)
+              {
+               if (Bin_object_coord_pairs.bin_has_entries(nbr_bin))
+                {
+                 neighbour_bin.push_back(nbr_bin);
+                }
+              }
+             else
+              {
+               neighbour_bin.push_back(nbr_bin);
+              }
             }  
           }
         }
@@ -1692,7 +2073,17 @@ namespace oomph
              if ((row==nbr_bin_row) && (layer==nbr_bin_layer)
                  && (nbr_bin>=0) && (nbr_bin<n_total_bin))
               {
-               neighbour_bin.push_back(nbr_bin);
+               if (only_use_filled_bins)
+                {
+                 if (Bin_object_coord_pairs.bin_has_entries(nbr_bin))
+                  {
+                   neighbour_bin.push_back(nbr_bin);
+                  }
+                }
+               else
+                {
+                 neighbour_bin.push_back(nbr_bin);
+                }
               }  
             }
 
