@@ -499,7 +499,22 @@ class FoldHandler : public AssemblyHandler
   /// initialise the fold handler, by setting initial guesses
   /// for Y, Phi and calculating count. If the system changes, a new
   /// fold handler must be constructed
-  FoldHandler(Problem* const &problem_pt, double* const &parameter_pt);
+  FoldHandler(Problem* const &problem_pt,
+              double* const &parameter_pt);
+
+
+  /// Constructor in which initial eigenvector can be passed
+  FoldHandler(Problem* const &problem_pt,
+              double* const &parameter_pt,
+              const DoubleVector &eigenvector);
+
+  /// Constructor in which initial eigenvector
+  /// and normalisation can be passed
+  FoldHandler(Problem* const &problem_pt,
+              double* const &parameter_pt,
+              const DoubleVector &eigenvector,
+              const DoubleVector &normalisation);
+
   
   /// \short Destructor, return the problem to its original state
   /// before the augmented system was added

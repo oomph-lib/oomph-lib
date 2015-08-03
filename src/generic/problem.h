@@ -1805,9 +1805,9 @@ public:
 
  /// \short Get the matrices required by a eigensolver. If the
  ///shift parameter is non-zero the second matrix will be shifted
- void get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
-                                CRDoubleMatrix &main_matrix,
-                                const double &shift=0.0);
+ virtual void get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
+                                        CRDoubleMatrix &main_matrix,
+                                        const double &shift=0.0);
 
  /// \short Assign the eigenvector passed to the function
  /// to the dofs in the problem so that it can be output by
@@ -2142,6 +2142,23 @@ public:
  /// augmented system which is both faster and uses less memory.
  void activate_fold_tracking(double* const &parameter_pt,
                              const bool &block_solve=true);
+
+ ///\short Activate generic bifurcation tracking for a single (real) eigenvalue
+ ///where the initial guess for the eigenvector can be specified.
+ void activate_bifurcation_tracking(
+  double* const &parameter_pt,
+  const DoubleVector &eigenvector,
+  const bool &block_solve=true);
+
+ ///\short Activate generic bifurcation tracking for a single (real) eigenvalue
+ ///where the initial guess for the eigenvector can be specified and the
+ ///normalisation condition can also be specified.
+  void activate_bifurcation_tracking(
+  double* const &parameter_pt,
+  const DoubleVector &eigenvector,
+  const DoubleVector &normalisation,
+  const bool &block_solve=true);
+
 
  /// \short Turn on pitchfork tracking using the augmented system specified
  /// in the PitchForkHandler class.

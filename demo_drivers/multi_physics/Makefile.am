@@ -4,6 +4,7 @@ boussinesq_convection \
 double_diffusive_convection \
 marangoni_convection \
 insoluble_surfactant \
+rayleigh_instability_surfactant \
 soluble_surfactant \
 thermo \
 thermal_fibre \

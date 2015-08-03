@@ -9896,6 +9896,69 @@ void Problem::activate_fold_tracking(double* const &parameter_pt,
   }
 }
 
+ //===============================================================
+/// Activate the generic bifurcation ///tracking system by changing the assembly
+/// handler and initialising it using the parameter addressed
+/// by parameter_pt.
+//============================================================
+void Problem::activate_bifurcation_tracking(
+ double* const &parameter_pt,
+ const DoubleVector &eigenvector,
+ const bool &block_solve)
+{
+ //Reset the assembly handler to default
+ reset_assembly_handler_to_default();
+ //Set the new assembly handler. Note that the constructor actually
+ //solves the original problem to get some initial conditions, but
+ //this is OK because the RHS is always evaluated before assignment.
+ Assembly_handler_pt = new FoldHandler(this,parameter_pt,
+  eigenvector);
+
+ //If we are using a block solver, we must set the linear solver pointer
+ //to the block fold solver. The present linear solver is
+ //used by the block solver and so must be passed as an argument.
+ //The destructor of the Fold handler returns the linear
+ //solver to the original non-block version.
+ if(block_solve)
+  {
+   Linear_solver_pt = new AugmentedBlockFoldLinearSolver(Linear_solver_pt);
+  }
+}
+
+
+ //===============================================================
+/// Activate the generic bifurcation ///tracking system by changing the assembly
+/// handler and initialising it using the parameter addressed
+/// by parameter_pt.
+//============================================================
+void Problem::activate_bifurcation_tracking(
+ double* const &parameter_pt,
+ const DoubleVector &eigenvector,
+ const DoubleVector &normalisation,
+ const bool &block_solve)
+{
+ //Reset the assembly handler to default
+ reset_assembly_handler_to_default();
+ //Set the new assembly handler. Note that the constructor actually
+ //solves the original problem to get some initial conditions, but
+ //this is OK because the RHS is always evaluated before assignment.
+ Assembly_handler_pt = new FoldHandler(this,parameter_pt,
+                                       eigenvector,normalisation);
+
+ //If we are using a block solver, we must set the linear solver pointer
+ //to the block fold solver. The present linear solver is
+ //used by the block solver and so must be passed as an argument.
+ //The destructor of the Fold handler returns the linear
+ //solver to the original non-block version.
+ if(block_solve)
+  {
+   Linear_solver_pt = new AugmentedBlockFoldLinearSolver(Linear_solver_pt);
+  }
+}
+
+
+
+
 
 //==================================================================
 /// Activate the pitchfork tracking system by changing the assembly

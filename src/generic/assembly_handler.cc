@@ -912,6 +912,139 @@ namespace oomph
  }
 
 
+ ///Constructor in which the eigenvector is passed as an initial
+ ///guess
+ FoldHandler::FoldHandler(Problem* const &problem_pt,
+                          double* const &parameter_pt,
+                          const DoubleVector &eigenvector) :
+  Solve_which_system(Full_augmented), Parameter_pt(parameter_pt)
+ {
+  //Set the problem pointer
+  Problem_pt = problem_pt;
+  //Set the number of degrees of freedom
+  Ndof = problem_pt->ndof();
+
+  // create the linear algebra distribution for this solver
+  // currently only global (non-distributed) distributions are allowed
+  LinearAlgebraDistribution* dist_pt = new
+   LinearAlgebraDistribution(problem_pt->communicator_pt(),
+                             Ndof,false);
+
+  //Resize the vectors of additional dofs and constants
+  Phi.resize(Ndof);
+  Y.resize(Ndof);
+  Count.resize(Ndof,0);
+
+  //Loop over all the elements in the problem
+  unsigned n_element = problem_pt->mesh_pt()->nelement();
+  for(unsigned e=0;e<n_element;e++)
+   {
+    GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
+    //Loop over the local freedoms in the element
+    unsigned n_var = elem_pt->ndof();
+    for(unsigned n=0;n<n_var;n++)
+     {
+      //Increase the associated global equation number counter
+      ++Count[elem_pt->eqn_number(n)];
+     }
+   }
+
+  //Add the global parameter as an unknown to the problem
+  problem_pt->Dof_pt.push_back(parameter_pt);
+
+  
+  //Normalise the initial guesses for the eigenvecor
+  double length = 0.0;
+  for(unsigned n=0;n<Ndof;n++)
+   {length += eigenvector[n]*eigenvector[n];}
+  length = sqrt(length);
+
+  //Now add the null space components to the problem unknowns
+  //and initialise them and Phi to the same normalised values
+  for(unsigned n=0;n<Ndof;n++)
+   {
+    problem_pt->Dof_pt.push_back(&Y[n]);
+    Y[n] = Phi[n] = eigenvector[n]/length;
+   }
+
+  // delete the dist_pt
+  problem_pt->Dof_distribution_pt->build(problem_pt->communicator_pt(),
+                                         Ndof*2+1,true);
+  //Remove all previous sparse storage used during Jacobian assembly
+  Problem_pt->Sparse_assemble_with_arrays_previous_allocation.resize(0);
+
+  delete dist_pt;
+ }
+
+
+  ///Constructor in which the eigenvector and normalisation
+  ///vector are  passed as an initial guess
+ FoldHandler::FoldHandler(Problem* const &problem_pt,
+                          double* const &parameter_pt,
+                          const DoubleVector &eigenvector,
+                          const DoubleVector &normalisation) :
+  Solve_which_system(Full_augmented), Parameter_pt(parameter_pt)
+ {
+  //Set the problem pointer
+  Problem_pt = problem_pt;
+  //Set the number of degrees of freedom
+  Ndof = problem_pt->ndof();
+
+  // create the linear algebra distribution for this solver
+  // currently only global (non-distributed) distributions are allowed
+  LinearAlgebraDistribution* dist_pt = new
+   LinearAlgebraDistribution(problem_pt->communicator_pt(),
+                             Ndof,false);
+
+  //Resize the vectors of additional dofs and constants
+  Phi.resize(Ndof);
+  Y.resize(Ndof);
+  Count.resize(Ndof,0);
+
+  //Loop over all the elements in the problem
+  unsigned n_element = problem_pt->mesh_pt()->nelement();
+  for(unsigned e=0;e<n_element;e++)
+   {
+    GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
+    //Loop over the local freedoms in the element
+    unsigned n_var = elem_pt->ndof();
+    for(unsigned n=0;n<n_var;n++)
+     {
+      //Increase the associated global equation number counter
+      ++Count[elem_pt->eqn_number(n)];
+     }
+   }
+
+  //Add the global parameter as an unknown to the problem
+  problem_pt->Dof_pt.push_back(parameter_pt);
+
+  
+  //Normalise the initial guesses for the eigenvecor
+  double length = 0.0;
+  for(unsigned n=0;n<Ndof;n++)
+   {length += eigenvector[n]*normalisation[n];}
+  length = sqrt(length);
+
+  //Now add the null space components to the problem unknowns
+  //and initialise them and Phi to the same normalised values
+  for(unsigned n=0;n<Ndof;n++)
+   {
+    problem_pt->Dof_pt.push_back(&Y[n]);
+    Y[n] = eigenvector[n]/length;
+    Phi[n] = normalisation[n];
+   }
+
+  // delete the dist_pt
+  problem_pt->Dof_distribution_pt->build(problem_pt->communicator_pt(),
+                                         Ndof*2+1,true);
+  //Remove all previous sparse storage used during Jacobian assembly
+  Problem_pt->Sparse_assemble_with_arrays_previous_allocation.resize(0);
+
+  delete dist_pt;
+ }
+
+
+ 
  //=================================================================
  /// The number of unknowns is 2n+1
  //================================================================
