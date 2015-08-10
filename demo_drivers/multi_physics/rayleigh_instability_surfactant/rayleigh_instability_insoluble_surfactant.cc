@@ -14,12 +14,65 @@
 // Interface headers
 #include "fluid_interface.h"
 
-// The simple rectangular quad mesh
-#include "meshes/rectangular_quadmesh.h"
+// The mesh, including horizontal spines
+#include "meshes/horizontal_single_layer_spine_mesh.h"
 
 //Use the oomph and std namespaces 
 using namespace oomph;
 using namespace std;
+
+//==start_of_namespace===================================================
+/// Namespace for physical parameters
+/// The parameter values are chosen to be those used in Figures 8, 9 
+/// in Campana et al.
+//=======================================================================
+namespace Global_Physical_Variables
+{
+
+  //Film thickness parameter
+ double Film_Thickness = 0.2;
+
+ /// Reynolds number
+ double Re = 40.0;
+ 
+ /// Womersley number
+ double ReSt = Re; // (St = 1)
+ 
+ /// Product of Reynolds number and inverse of Froude number
+ double ReInvFr = 0.0; // (Fr = 0)
+
+ /// Capillary number
+ double Ca = pow(Film_Thickness,3.0);
+
+ /// External pressure
+ double P_ext = 0.0;
+
+ /// Direction of gravity
+ Vector<double> G(3);
+
+ /// Wavelength of the domain
+ double Alpha = 1.047;
+ 
+ /// Free surface cosine deformation parameter
+ double Epsilon = 1.0e-3;
+
+ /// \short Surface Elasticity number (weak case)
+ double Beta = 3.6e-3;
+
+ /// \short Surface Peclet number
+ double Peclet_S = 4032.0;
+
+ /// \shorT Sufrace Peclet number multiplied by Strouhal number
+ double Peclet_St_S = 1.0; 
+ 
+ /// \short Pvd file -- a wrapper for all the different
+ /// vtu output files plus information about continuous time
+ /// to facilitate animations in paraview
+ ofstream Pvd_file;
+
+} // End of namespace
+
+
  
 namespace oomph
 {
@@ -33,7 +86,8 @@ namespace oomph
 ///but we may wish to revisit this.
 //=================================================================
 template<class ELEMENT>
-class SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement : public SpineAxisymmetricFluidInterfaceElement<ELEMENT>
+class SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement : 
+  public SpineAxisymmetricFluidInterfaceElement<ELEMENT>
 {
 private:
  /// Pointer to an Elasticity number
@@ -602,8 +656,6 @@ public:
    return mass;
   }
 
-
-
 };
 
 
@@ -617,39 +669,31 @@ double SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement<ELEMENT>::Defau
 namespace oomph
 {
 
-
-//ALH: NB. This could probably be expressed more compactly by 
-//inheritance and overloading from the exisiting SpineMesh, but
-//it works!
 //======================================================================
-/// Horizontal Single-layer spine mesh class derived from standard 2D mesh.
-/// The mesh contains a layer of spinified fluid elements (of type ELEMENT;
-/// e.g  SpineElement<QCrouzeixRaviartElement<2>)
-/// and the information required to update their position. Additional
-/// equations must be specified in order to determine how the spines move.
+/// Inherit from the standard Horizontal single-layer SpineMesh
+/// and modify the spine_node_update() function so that it is appropriate
+/// for an annular film, rather than a fluid fibre.
 //======================================================================
 template <class ELEMENT>
-class HorizontalSingleLayerSpineMesh : public RectangularQuadMesh<ELEMENT >, 
-                          public SpineMesh
+class MyHorizontalSingleLayerSpineMesh : 
+  public HorizontalSingleLayerSpineMesh<ELEMENT>
 {
 
 public:
 
  /// \short Constructor: Pass number of elements in x-direction, number of
- /// elements in y-direction, axial length, height of layer, and pointer 
+ /// elements in y-direction, radial extent, axial length , and pointer 
  /// to timestepper (defaults to Steady timestepper)
- HorizontalSingleLayerSpineMesh(const unsigned &nx, 
-                   const unsigned &ny,
-                   const double &lx,
-                   const double &h,
-                   TimeStepper* time_stepper_pt=
+ MyHorizontalSingleLayerSpineMesh(const unsigned &nx, 
+                                  const unsigned &ny,
+                                  const double &lx,
+                                  const double &ly,
+                                  TimeStepper* time_stepper_pt=
+                                  &Mesh::Default_TimeStepper) :
+  HorizontalSingleLayerSpineMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt) {}
 
-                   &Mesh::Default_TimeStepper);
-                   
-
- /// \short General node update function implements pure virtual function 
- /// defined in SpineMesh base class and performs specific node update
- /// actions:  along vertical spines
+ /// \short Node update function assumed spines rooted at the wall
+ /// fixed to be at r=1 and directed inwards to r=0.
  virtual void spine_node_update(SpineNode* spine_node_pt)
   {
    //Get fraction along the spine
@@ -659,234 +703,17 @@ public:
    double H = spine_node_pt->h();
    
    //Set the value of y
-   //spine_node_pt->x(0) = this->Xmin + W*H;
-   spine_node_pt->x(0) = 1-(1-W)*H;
-   
+   spine_node_pt->x(0) = 1.0-(1.0-W)*H;
   }
-
-protected:
-
- /// \short Helper function to actually build the single-layer spine mesh 
- /// (called from various constructors)
- virtual void build_horizontal_single_layer_mesh(TimeStepper* time_stepper_pt);
 
 };
 
-
-//===========================================================================
-/// Constructor for spine 2D mesh: Pass number of elements in x-direction, 
-/// number of elements in y-direction, axial length and height of layer, 
-/// and pointer to timestepper (defaults to Static timestepper).
-///
-/// The mesh contains a layer of spinified fluid elements (of type ELEMENT;
-/// e.g  SpineElement<QCrouzeixRaviartElement<2>)
-/// and information about how the internal nodes positions are affected
-/// by changes in spine length. Additional equations that determine the
-/// spine heights must be specified in order to use this mesh.
-//===========================================================================
-template<class ELEMENT>
-HorizontalSingleLayerSpineMesh<ELEMENT>::HorizontalSingleLayerSpineMesh(
- const unsigned &nx, const unsigned &ny,
- const double &lx, const double &h, TimeStepper* time_stepper_pt) :
- RectangularQuadMesh<ELEMENT>(nx,ny,0.0,lx,0.0,h,false,false,
-                               time_stepper_pt)
-{
- // Mesh can only be built with 2D Qelements.
- MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
-
- //Mesh can only be built with spine elements
- MeshChecker::assert_geometric_element<SpineFiniteElement,ELEMENT>(2);
-
- // We've called the "generic" constructor for the RectangularQuadMesh
- // which doesn't do much...
- 
- // Now build the mesh: 
- build_horizontal_single_layer_mesh(time_stepper_pt);
 }
-
-//===========================================================================
-/// Helper function that actually builds the single-layer spine mesh
-/// based on the parameters set in the various constructors
-//===========================================================================
-template<class ELEMENT>
-void HorizontalSingleLayerSpineMesh<ELEMENT>::
-build_horizontal_single_layer_mesh(
- TimeStepper* time_stepper_pt) 
-{
- // Build the underlying quad mesh: 
- RectangularQuadMesh<ELEMENT >::build_mesh(time_stepper_pt);
-
- //Read out the number of elements in the x-direction
- unsigned n_x = this->Nx;
- unsigned n_y = this->Ny;
-
- //Allocate memory for the spines and fractions along spines
- //---------------------------------------------------------
-
- //Read out number of linear points in the element
- unsigned n_p = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
- Spine_pt.reserve((n_p-1)*n_y+1);
-
- // FIRST SPINE
- // -----------
-
- // Element 0
- // Node 0
- // Assign the new spine with unit length
- Spine* new_spine_pt=new Spine(1.0);
- Spine_pt.push_back(new_spine_pt);
-
-
- // Get pointer to node
- SpineNode* nod_pt=element_node_pt(0,0);
- //Set the pointer to the spine
- nod_pt->spine_pt() = new_spine_pt;
- //Set the fraction
- nod_pt->fraction() = 0.0;
- // Pointer to the mesh that implements the update fct
- nod_pt->spine_mesh_pt() = this; 
-
- // Loop HORIZONTAL along the spine
- // Loop over the elements 
- for(unsigned long i=0;i<n_x;i++)
-  {
-   //Loop over the HORIZONTAL nodes, apart from the first
-   for(unsigned l1=1;l1<n_p;l1++)
-    {
-     // Get pointer to node
-     //SpineNode* nod_pt=element_node_pt(i*n_y,l1*n_p);
-
-     // Get pointer to node(without reoder)
-     SpineNode* nod_pt=element_node_pt(i,l1);
-     //Set the pointer to the spine
-     nod_pt->spine_pt()= new_spine_pt;
-     //Set the fraction
-     nod_pt->fraction()=(double(i)+double(l1)/double(n_p-1))/double(n_x);
-     // Pointer to the mesh that implements the update fct
-     nod_pt->spine_mesh_pt() = this; 
-    }
-  }
-
-
- // LOOP OVER OTHER SPINES
- // ----------------------
-
- // Now loop over the elements VERTICALLY
- for(unsigned long j=0;j<n_y;j++)
-  {
-   // Loop over the nodes in the elements horizontally, ignoring 
-   // the first row
-
-   // Last spine needs special treatment in x-periodic meshes:
-   unsigned n_pmax=n_p;
-    
-   for(unsigned l2=1;l2<n_pmax;l2++)
-    {
-     // Assign the new spine with unit height
-     new_spine_pt=new Spine(1.0);
-     Spine_pt.push_back(new_spine_pt);
-
-     // Get the node
-     //SpineNode* nod_pt=element_node_pt(j,l2);
-
-     // Get the node (without reorder)
-     SpineNode* nod_pt=element_node_pt(j*n_x,l2*n_p);  
-     // Set the pointer to spine
-     nod_pt->spine_pt() = new_spine_pt;
-     //Set the fraction
-     nod_pt->fraction() = 0.0;
-     // Pointer to the mesh that implements the update fct
-     nod_pt->spine_mesh_pt() = this; 
-
-     // Loop HORIZONTALLY along the spine
-     // Loop over the elements 
-     for(unsigned long i=0;i<n_x;i++)
-      {
-       // Loop over the HORIZONTAL nodes, apart from the first
-       for(unsigned l1=1;l1<n_p;l1++)
-        {
-         // Get the node
-         // SpineNode* nod_pt=element_node_pt(i*n_y+j,l1*n_p+l2);
-
-         // Get the node (without reorder)
-         SpineNode* nod_pt=element_node_pt(j*n_x+i,l2*n_p+l1);
-         // Set the pointer to the spine
-         nod_pt->spine_pt() = new_spine_pt;
-         // Set the fraction
-         nod_pt->fraction()=(double(i)+double(l1)/double(n_p-1))/double(n_x);
-         // Pointer to the mesh that implements the update fct
-         nod_pt->spine_mesh_pt() = this; 
-        }  
-      }
-    }
-  }
-
-}
-
-
-}
-
-
-using namespace std;
-
-using namespace oomph;
-
-
-//==start_of_namespace===================================================
-/// Namespace for physical parameters
-/// The parameter values are chosen to be those used in Figures 8, 9 
-/// in Campana et al.
-//=======================================================================
-namespace Global_Physical_Variables
-{
-
-  //Film thickness parameter
- double Film_Thickness = 0.2;
-
- /// Reynolds number
- double Re = 40.0;
- 
- /// Womersley number
- double ReSt = Re; // (St = 1)
- 
- /// Product of Reynolds number and inverse of Froude number
- double ReInvFr = 0.0; // (Fr = 0)
-
- /// Capillary number
- double Ca = pow(Film_Thickness,3.0);
-
- /// External pressure
- double P_ext = 0.0;
-
- /// Direction of gravity
- Vector<double> G(3);
-
- /// Wavelength of the domain
- double Alpha = 1.047;
- 
- /// Free surface cosine deformation parameter
- double Epsilon = 1.0e-3;
-
- /// \short Surface Elasticity number (weak case)
- double Beta = 3.6e-3;
-
- /// \short Surface Peclet number
- double Peclet_S = 4032.0;
-
- /// \shorT Sufrace Peclet number multiplied by Strouhal number
- double Peclet_St_S = 1.0; 
- 
- /// \short Pvd file -- a wrapper for all the different
- /// vtu output files plus information about continuous time
- /// to facilitate animations in paraview
- ofstream Pvd_file;
-
-} // End of namespace
-
 
 
 //==start_of_problem_class===============================================
-/// Single axisymmetric fluid interface problem in rectangular domain
+/// Single axisymmetric fluid interface problem including the
+/// transport of an insoluble surfactant.
 //=======================================================================
 template<class ELEMENT, class TIMESTEPPER>
 class InterfaceProblem : public Problem
@@ -894,13 +721,10 @@ class InterfaceProblem : public Problem
  
 public:
  
- /// Constructor: Pass the number of elements and the lengths of the
- /// domain in the r and z directions (h is the height of the fluid layer
- /// i.e. the length of the domain in the z direction)
- InterfaceProblem(const unsigned &n_r, 
-                  const unsigned &n_z, 
-                  const double &l_r, 
-                  const double &h);
+ /// Constructor: Pass the number of elements in radial and axial directions 
+ /// and the length of the domain in the z direction)
+ InterfaceProblem(const unsigned &n_r, const unsigned &n_z, 
+                  const double &l_z);
  
  /// Destructor (empty)
  ~InterfaceProblem() {}
@@ -914,17 +738,9 @@ public:
    Bulk_mesh_pt->node_update();
   }
 
- // Update before solve (empty)
- void actions_before_newton_solve() {}
-
- /// \short Update after solve can remain empty, because the update 
- /// is performed automatically after every Newton step.
- void actions_after_newton_solve() {}
-
  /// Set initial conditions: Set all nodal velocities to zero and
  /// initialise the previous velocities to correspond to an impulsive
  /// start
-
  void set_initial_condition()
   {
    // Determine number of nodes in mesh
@@ -949,6 +765,8 @@ public:
 
 
  /// The global temporal error norm, based on the movement of the nodes
+ /// in the radial direction only (because that's the only direction
+ /// in which they move!)
  double global_temporal_error_norm()
   {
    //Temp
@@ -960,8 +778,8 @@ public:
    //Loop over the nodes and calculate the errors in the positions
    for(unsigned n=0;n<n_node;n++)
     {
-     //Find number of dimensions of the node
-     const unsigned n_dim = 1; //Bulk_mesh_pt->node_pt(n)->ndim();
+     //Set the dimensions to be restricted to the radial direction only
+     const unsigned n_dim = 1; 
      //Set the position error to zero
      double node_position_error = 0.0;
      //Loop over the dimensions
@@ -991,7 +809,7 @@ public:
 
 
  /// \short Access function for the specific mesh
- HorizontalSingleLayerSpineMesh<ELEMENT>*  Bulk_mesh_pt; 
+ MyHorizontalSingleLayerSpineMesh<ELEMENT>*  Bulk_mesh_pt; 
 
  /// \short Mesh for the free surface (interface) elements
  Mesh* Interface_mesh_pt;
@@ -1002,9 +820,10 @@ public:
  /// Do unsteady run up to maximum time t_max with given timestep dt
  void unsteady_run(const double &t_max, const double &dt); 
 
- /// Compute the total mass
+ /// Compute the total mass of the insoluble surfactant
  double compute_total_mass()
   {
+   //Initialise to zero
    double mass = 0.0;
    
    // Determine number of 1D interface elements in mesh
@@ -1017,7 +836,7 @@ public:
      SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement<ELEMENT>* el_pt = 
       dynamic_cast<SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement<ELEMENT>*>
       (Interface_mesh_pt->element_pt(e));
-
+     //Add contribution from each element
      mass += el_pt->integrate_c();
     }
    return mass;
@@ -1048,18 +867,11 @@ private:
    
    // Update nodes in bulk mesh
    Bulk_mesh_pt->node_update();
-   
 
   } // End of deform_free_surface
 
   /// Trace file
   ofstream Trace_file;
-
-  /// Width of domain
-  double Lr;
-  
-  /// Height of the domain
-  double Height;
  
 }; // End of problem class
 
@@ -1072,20 +884,15 @@ template<class ELEMENT, class TIMESTEPPER>
 InterfaceProblem<ELEMENT,TIMESTEPPER>::
 InterfaceProblem(const unsigned &n_r, 
                  const unsigned &n_z,
-                 const double &l_r, 
-                 const double& h) : Lr(l_r),
-                                    Height(h)
+                 const double &l_z) 
 
 {
-
- //this->linear_solver_pt() = new HSL_MA42;
- 
  // Allocate the timestepper (this constructs the time object as well)
  add_time_stepper_pt(new TIMESTEPPER(true));
 
  // Build and assign mesh (the "false" boolean flag tells the mesh
  // constructor that the domain is not periodic in r)
- Bulk_mesh_pt = new HorizontalSingleLayerSpineMesh<ELEMENT>(n_r,n_z,l_r,h,time_stepper_pt());
+ Bulk_mesh_pt = new MyHorizontalSingleLayerSpineMesh<ELEMENT>(n_r,n_z,1.0,l_z,time_stepper_pt());
  
  //Create "surface mesh" that will only contain the interface elements
  Interface_mesh_pt = new Mesh;
@@ -1438,11 +1245,8 @@ int main(int argc, char* argv[])
  // Number of elements in axial (z) direction
  const unsigned n_z = 80;
 
- // Width of domain
- const double l_r = 1.0;
-
- // Height of fluid layer
- const double h = MathematicalConstants::Pi/Global_Physical_Variables::Alpha;
+ // Height of domain
+ const double l_z = MathematicalConstants::Pi/Global_Physical_Variables::Alpha;
  
  // Set direction of gravity (vertically downwards)
  Global_Physical_Variables::G[0] = 0.0;
@@ -1452,7 +1256,7 @@ int main(int argc, char* argv[])
  // Set up the spine test problem with AxisymmetricQCrouzeixRaviartElements,
  // using the BDF<2> timestepper
  InterfaceProblem<SpineElement<AxisymmetricQCrouzeixRaviartElement >,BDF<2> >
-  problem(n_r,n_z,l_r,h);
+  problem(n_r,n_z,l_z);
  
  // Run the unsteady simulation
  problem.unsteady_run(t_max,dt);

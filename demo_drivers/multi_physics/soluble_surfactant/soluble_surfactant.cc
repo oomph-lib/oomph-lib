@@ -461,6 +461,7 @@ protected:
    const unsigned ndim = this->node_pt(0)->ndim();
    Vector<double> interpolated_tangent(ndim,0.0);
    Vector<double> interpolated_u(ndim,0.0);
+   Vector<double> interpolated_duds(ndim,0.0);
    Vector<double> mesh_velocity(ndim,0.0);
 
    if(ndim != u_index.size())
@@ -481,25 +482,16 @@ protected:
       {
        interpolated_tangent[i] += this->nodal_position(l,i)*dpsi;
        interpolated_u[i] += this->nodal_value(l,u_index[i])*psi;
-      }
-    }
-   
-   //Mesh velocity
-   if(false)
-    {
-     for(unsigned l=0;l<n_node;l++) 
-      {
-       for(unsigned j=0;j<ndim;j++)
-        {
-         mesh_velocity[j] += this->dnodal_position_dt(l,j)*psif(l);
-        }
+       interpolated_duds[i] += this->nodal_value(l,u_index[i])*dpsi;
+       mesh_velocity[i] += this->dnodal_position_dt(l,i)*psif(l);
       }
     }
 
    double u_tangent = 0.0, t_length = 0.0;
    for(unsigned i=0;i<ndim;i++) 
     {
-     u_tangent += interpolated_u[i]*interpolated_tangent[i];
+     u_tangent += 
+      (interpolated_u[i] - mesh_velocity[i])*interpolated_tangent[i];
      t_length  += interpolated_tangent[i]*interpolated_tangent[i];
     }
 
@@ -512,13 +504,18 @@ protected:
      //If not a boundary condition
      if(local_eqn >= 0)
       {
+       //Time derivative term
        residuals[local_eqn] -= PeSt_s*dCdt*psif(l)*W*J;
-       //The division by the tangent arises through some sort 
-       //of co-contra stuff that I don't yet fully understand.
-       double tmp = 
-        (Pe_s*u_tangent*interpolated_C - interpolated_dCds)/sqrt(t_length);
+
+       //Diffusion term
+       residuals[local_eqn] -= interpolated_dCds*dpsifds(l,0)*W/J;
        
-       residuals[local_eqn] += tmp*dpsifds(l,0)*W;
+       //Advection term in new formulation
+       residuals[local_eqn] -= 
+        Pe_s*(u_tangent*interpolated_dCds + 
+              interpolated_C*
+              (interpolated_tangent[0]*interpolated_duds[0]
+               + interpolated_tangent[1]*interpolated_duds[1]))*psif(l)*W/J;
 
        //Now add the flux term
        residuals[local_eqn] += D*flux*psif(l)*W*J;
@@ -537,8 +534,9 @@ protected:
              if(local_unknown >= 0)
               {
                jacobian(local_eqn,local_unknown) 
-                += Pe_s*psif(l2)*interpolated_tangent[i2]*
-                interpolated_C*dpsifds(l,0)*W/sqrt(t_length);
+                -= Pe_s*interpolated_tangent[i2]*
+                (psif(l2)*interpolated_dCds + 
+                 interpolated_C*dpsifds(l2,0))*psif(l)*W/J;
               }
             }
            
