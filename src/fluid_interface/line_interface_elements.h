@@ -106,7 +106,7 @@ public virtual LineFluidInterfaceElement
      {
       this->U_index_interface[i] = cast_element_pt->u_index_nst(i);
      }
-   }
+   } //End of constructor
 
 
 
@@ -119,7 +119,7 @@ public virtual LineFluidInterfaceElement
    
    //Call the generic routine to evaluate shape derivatives
    this->fill_in_jacobian_from_geometric_data(jacobian);
-  }
+  } //End of jacobian contribution
  
 
  /// \short Helper function to calculate the additional contributions
@@ -312,7 +312,7 @@ public LineFluidInterfaceElement
    // additional values.
    add_additional_values(additional_data_values,id);
    
-  }
+  } //End of constructor
   
  /// Return the Lagrange multiplier at local node j
  double &lagrange(const unsigned &j)
@@ -376,7 +376,7 @@ public LineFluidInterfaceElement
   
   int local_eqn=0, local_unknown = 0;
   
-  //Loop over the shape functions
+  //Loop over the shape functions to assemble contributions
   for(unsigned l=0;l<n_node;l++)
    {
     //Loop over the directions
@@ -409,8 +409,7 @@ public LineFluidInterfaceElement
          } //End of Jacobian calculation
        } 
      } 
-    
-   }
+   } //End of loop over shape functions
  }
  
  

@@ -1307,6 +1307,36 @@ behaviour would cause strong spatially uniform refinement.
 <A NAME="free_surface_nst"><CENTER><B>The free-surface Navier-Stokes equations</B></CENTER></A>
 </TD>
 </TR>
+#######################################################################
+<TR>
+<TD>
+<A HREF="../../navier_stokes/surface_theory/html/index.html">
+<B>Interfaces, Free Surfaces and Surface Transport: Theory and Implementation.</B>
+</A>
+In this document, we introduce the basic theory of moving surfaces,
+surface calculus and surface transport equations.
+In addition, we describe how \c oomph-lib's free-surface and
+surface-transport capabilities are implemented.
+</TD>
+<TD>
+- Theory
+ - Geometry of Surfaces
+ - Differential Operators On A Surface
+ - Free Surface and Interface Boundary Conditions
+ - Surface Transport Equations
+ .
+- Implementation
+ - The FluidInterfaceElement class
+ - Spine and Elastic formulations of free surface elements
+ .
+.
+</TD>
+<TD>
+<CENTER>near complete</CENTER>
+</TD>
+</TR>
+
+
 ######################################################################
 <TR>
 <TD>
@@ -3008,6 +3038,29 @@ and a solid element
 </TD>
 <TD>
 <CENTER>driver code and pretty pictures</CENTER>
+</TD>
+</TR>
+<TR>
+<TD>
+<A NAME="surfactant">
+<A HREF="../../multi_physics/rayleigh_instability_surfactant/html/index.html">
+<B>
+Surfactant Transport: How to add surface transport equations to 
+free surface elements.</B>
+</A></A>
+
+We demonstrate how to add general surface transport equations to the
+\c FluidInterfaceElements and apply them to determine the effects of 
+insoluble surfactant
+on the Rayleigh--Plateau instability.
+</TD>
+<TD>
+- How to use the member function \c 
+add_additional_residual_contributions_interface()
+to include additional terms in free surface problems.
+</TD>
+<TD>
+<CENTER>nearly complete</CENTER>
 </TD>
 </TR>
 #######################################################

@@ -171,18 +171,18 @@ protected:
    Shape psi(n_node);
    this->shape(s,psi);
    
-   //Now interpolate the temperature and surfactant concentration
+   //Now interpolate the surfactant concentration
    double C=0.0;
    for(unsigned l=0;l<n_node;l++)
     {
      C += this->nodal_value(l,C_index)*psi(l);
     }
    
-   //Get the Elasticity numbers
+   //Get the Elasticity number
    double Beta = this->beta();
    //Return the variable surface tension
    return (1.0 - Beta*(C-1.0));
-  }
+  } // End of sigma
 
  /// \short Fill in the contribution to the residuals
  /// Calculate the contribution to the jacobian
@@ -840,7 +840,7 @@ public:
      mass += el_pt->integrate_c();
     }
    return mass;
-  }
+  } // End of compute_total_mass
     
 
 private:
