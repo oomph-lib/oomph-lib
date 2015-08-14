@@ -304,9 +304,6 @@ public:
 
 private:
 
- // Amount of warping
- double warp;
-
  /// \short Left boundary face
  /// zeta \f$ \in [-1,1]^2 \f$
  void r_L(const unsigned& t, const Vector<double>& zeta, 

@@ -305,7 +305,7 @@ void position(const unsigned& t,
 
 private:
 
- ///Storage for the x-coordinate of the centre
+ ///Storage for the x-coordinate of the centre (cgj: never used)
  double Centre_x;
  
  ///Storage for the y-coordinate of the centre

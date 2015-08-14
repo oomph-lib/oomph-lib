@@ -667,7 +667,7 @@ void HermiteQuadMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
  add_boundary_node(0,Node_pt[node_count]);
  
  //If we only have one column then the RHS node is on the right boundary
- if((Nelement[0]==1))
+ if(Nelement[0]==1)
   {add_boundary_node(1,Node_pt[node_count]);}
  
  // set the position of the node

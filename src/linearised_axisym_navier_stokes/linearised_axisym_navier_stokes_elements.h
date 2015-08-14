@@ -587,17 +587,8 @@ namespace oomph
     
     /// \short The number of "dof-blocks" that degrees of freedom in this
     /// element are sub-divided into: Velocity and pressure.
-    unsigned ndof_types() { return 8; }
-    
-    /// \short Create a list of pairs for all unknowns in this element,
-    /// so that the first entry in each pair contains the global equation
-    /// number of the unknown, while the second one contains the number
-    /// of the "block" that this unknown is associated with.
-    /// (Function can obviously only be called if the equation numbering
-    /// scheme has been set up.) Velocity=0; Pressure=1
-    void get_dof_numbers_for_unknowns(
-     std::list<std::pair<unsigned long,unsigned> >& block_lookup_list);
-    
+    unsigned ndof_types() const { return 8; }
+        
   }; // End of LinearisedAxisymmetricQCrouzeixRaviartElement class definition
  
  
@@ -829,18 +820,9 @@ namespace oomph
     
     /// \short Returns the number of "dof-blocks" that degrees of freedom
     /// in this element are sub-divided into: Velocity and pressure.
-    unsigned ndof_types() { return 8; }
+    unsigned ndof_types() const { return 8; }
     
-    /// \short Create a list of pairs for all unknowns in this element,
-    /// so that the first entry in each pair contains the global equation
-    /// number of the unknown, while the second one contains the number
-    /// of the "block" that this unknown is associated with.
-    /// (Function can obviously only be called if the equation numbering
-    /// scheme has been set up.) Velocity=0; Pressure=1
-    void get_dof_numbers_for_unknowns(
-     std::list<std::pair<unsigned long, unsigned> >& block_lookup_list);
-    
-  }; // End of LinearisedAxisymmetricQCrouzeixRaviartElement class definition
+  }; // End of LinearisedAxisymmetricQTaylorHoodElement class definition
  
 
  // Inline functions

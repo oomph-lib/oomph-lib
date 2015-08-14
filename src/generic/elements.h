@@ -4472,6 +4472,9 @@ class FaceElement: public virtual FiniteElement
  /// Pointer to higher-dimensional "bulk" element (const version)
  FiniteElement* bulk_element_pt() const {return Bulk_element_pt;}
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Woverloaded-virtual"
+
  /// \short Return the pointer to the function that maps the face
  /// coordinate to the bulk coordinate
  CoordinateMappingFctPt &face_to_bulk_coordinate_fct_pt()
@@ -4492,6 +4495,8 @@ class FaceElement: public virtual FiniteElement
  /// of the bulk coordinates wrt the face coordinates (const version)
  BulkCoordinateDerivativesFctPt bulk_coordinate_derivatives_fct_pt() const
   {return Bulk_coordinate_derivatives_fct_pt;}
+
+#pragma clang diagnostic pop
 
  /// \short Return vector of local coordinates in bulk element, 
  /// given the local coordinates in this FaceElement

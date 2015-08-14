@@ -586,12 +586,6 @@ class LagrangeEnforcedflowPreconditioner
   /// Bool to use diagonal or block diagonal W block.
   bool Use_diagonal_w_block;
 
-  /// RAYRAY
-  bool Preconditioner_has_been_setup;
-
-  /// RAYRAY
-  bool F_preconditioner_is_block_preconditioner;
-
   /// the re-arraned doftypes: velocity, pressure, lagrange.
   Vector<unsigned> Doftype_list_vpl;
   

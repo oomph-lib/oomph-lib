@@ -329,7 +329,7 @@ class HermiteBeamElement : public virtual SolidQHermiteElement<1>,
 
  /// \short Output at previous time (t=0: present; t>0: previous) 
  /// with specified number of plot points
- void output(const unsigned& t, std::ostream &outfile, const unsigned &n_plot);
+ void output(const unsigned& t, std::ostream &outfile, const unsigned &n_plot) const;
 
  /// C-style output function
  void output(FILE* file_pt);
@@ -339,7 +339,7 @@ class HermiteBeamElement : public virtual SolidQHermiteElement<1>,
 
  /// \short C-style output at previous time (t=0: present; t>0: previous)
  /// with specified number of plot points
- void output(const unsigned& t, FILE* file_pt, const unsigned &n_plot);
+ void output(const unsigned& t, FILE* file_pt, const unsigned &n_plot) const;
 
 };
 

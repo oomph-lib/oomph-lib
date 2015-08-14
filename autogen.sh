@@ -214,7 +214,12 @@ while [[ $accept_configure_options != "true" ]]; do
 
     # Read in the Desired File and validate it
     file_number=$(OptionRead)
-    if (( $file_number >= $count )) || (( $file_number < 0 )); then
+	if ! [[ $file_number =~ ^[0-9]+$ ]]; then
+		echo "File number not readable as an integer" 1>&2
+		continue
+	fi
+
+    if (( $file_number > $count )) || (( $file_number < 0 )); then
         # Error and go to start of loop
         echo "File number out of range, trying again." 1>&2
         continue

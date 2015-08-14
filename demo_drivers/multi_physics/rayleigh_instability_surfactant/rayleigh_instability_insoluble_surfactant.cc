@@ -4,7 +4,8 @@
 // A 2-D model of Rayleigh instability in capillary tubes --- surfactant 
 // effects by D. Campana, J. Di Paolo & F. A. Saita, Int. J. Multiphase Flow,
 // vol 30, pp 431--454, (2004).
-  
+// The initial version of this code was developed by Aman Rajvardhan.
+
 // Generic oomph-lib header
 #include "generic.h"
 

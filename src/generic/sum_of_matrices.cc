@@ -45,10 +45,7 @@ namespace oomph
         it != Col_map_pt[i_matrix]->main_to_added_mapping_pt()->end();
         it++)
      {
-      if(it->second >= 0) // skip pinned nodes
-       {
         temp_x[it->second] = x[it->first];
-       }
      }
     
     // Perform the multiplication
@@ -60,10 +57,7 @@ namespace oomph
         it != Row_map_pt[i_matrix]->main_to_added_mapping_pt()->end();
         it++)
      {
-      if(it->second >= 0)  // skip pinned nodes
-       {
         soln[it->first] += temp_soln[it->second];
-       }
      }
    }
 

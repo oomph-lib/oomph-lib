@@ -666,15 +666,43 @@ solid mechanics:
 \section surface Surface Transport Implementation
 
 The recommended strategy for implementing surface transport equations
-is to inherit from the appropriate \c FluidInterfaceElement to
-implement the equations independently of the mesh-update strategy and
-then to specialise as required. Alternatively, one can simply inherit
-directly from the specialised element. 
+is to inherit from the appropriate \c FluidInterfaceElement, 
+and include the equations independently of the mesh-update
+strategy by overloading the function
+\code
+ FluidInterfaceElement::add_additional_residual_contributions_interface(...)
+\endcode
+The mesh-update specialisations can be added by further specialisation
+as required.
+Alternatively, one could simply inherit
+directly from the specialised element. This is the approach taken in
+this <a
+href="../../../multi_physics/rayleigh_instability_surfactant/html/index.html">
+example code. </a>
 
-It should be possible to implement the appropriate transport equations
-within the function \c
-FluidInterfaceElement::add_additional_residual_contributions_interface(...)
-and this has been used in the examples ...
+An important point is that the axisymmetric formulation of the
+surface divergence of a vector is not entirely trivial,
+as discussed in \ref axi. In the context of surface transport
+the term that is always present is \f$
+\mbox{\boldmath$\nabla$}_{\!\!_{S}}\mbox{\boldmath$\cdot$}
+\mbox{\boldmath$U$} \f$. Using the same surface coordinates as above,
+\f$ (\zeta^{1},
+\zeta^{2}) = (s,\theta)\f$, the velocity vector is
+ \f[ \mbox{\boldmath$U$} = \left(\begin{array}{c} U_r(s)\cos\theta \\
+ U_r(s)\sin\theta \\ U_z(s) \end{array}\right)
+\quad\Rightarrow\quad
+  \mbox{\boldmath$U$}_{,1} = \left(\begin{array}{c} \frac{\partial
+  U_{r}}{\partial s}\cos\theta \\
+ \frac{\partial U_{r}}{\partial s} \sin\theta \\ \frac{\partial
+ U_z}{\partial s} \end{array}\right), \quad
+  \mbox{\boldmath$U$}_{,2} = \left(\begin{array}{c} -U_r \sin\theta \\
+ U_r\cos\theta \\ 0 \end{array}\right). \f]
+Thus, the surface divegence term is
+\f[ \myb{\nabla}_{\!\!_{S}} \myb{\cdot} \myb{U} =  \frac{\left(\frac{\partial U_{r}}{\partial s} \frac{\partial
+    r}{\partial s} + \frac{\partial U_{z}}{\partial s} \frac{\partial
+   z}{\partial s}\right)}{(r')^{2} + (z')^{2}} + \frac{U_{r}}{r},\f]
+ which is exactly the same form as the surface divergence of the
+ vector test function derived in the section \ref axi, as expected.
 
 
 @@END@@

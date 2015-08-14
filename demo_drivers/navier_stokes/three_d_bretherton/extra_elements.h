@@ -489,7 +489,7 @@ public:
  double du_dt(const unsigned &l, const unsigned &i) const
   {
    // Get the data's timestepper
-   TimeStepper* time_stepper_pt=Node_pt[l]->time_stepper_pt();
+	  TimeStepper* time_stepper_pt=node_pt(l)->time_stepper_pt(); // cgj: previously Node_pt[l] -- but (interpreting as FiniteElement::Node_pt as clang does) this is private!
 
    // Number of timsteps (past & present)
    unsigned n_time = time_stepper_pt->ntstorage();

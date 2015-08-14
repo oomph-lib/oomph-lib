@@ -51,7 +51,7 @@ lib_LTLIBRARIES = liboomph_metis_from_parmetis_3.1.1.la
 # Sources that the library depends on:
 #-------------------------------------
 liboomph_metis_from_parmetis_3_1_1_la_SOURCES = $(headers_and_sources) $(extra_headers)
-
+liboomph_metis_from_parmetis_3_1_1_la_LDFLAGS = -static
 
 # The library's include headers:
 #-------------------------------

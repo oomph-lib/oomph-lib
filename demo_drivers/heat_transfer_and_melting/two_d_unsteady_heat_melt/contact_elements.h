@@ -1092,14 +1092,14 @@ public virtual SurfaceContactElementBase<ELEMENT>
 
  
  /// \short Output function
- void output(std::ostream &outfile)
+ void output(std::ostream &outfile) // cgj: hides version in omph::SurfaceContactElementBase with 2 params
  {
   unsigned n_plot=5;
   this->output(outfile,n_plot);
  }
 
  /// \short Output function
- void output(std::ostream &outfile, const unsigned &n_plot)
+ void output(std::ostream &outfile, const unsigned &n_plot)// cgj: hides version in omph::SurfaceContactElementBase with type mismatch (first param is FILE*)
  {
   
   unsigned n_dim = this->nodal_dimension();
@@ -1795,14 +1795,14 @@ public virtual SurfaceContactElementBase<ELEMENT>
  
  
  /// \short Output function
- void output(std::ostream &outfile)
+ void output(std::ostream &outfile) // cgj: hides version in SurfaceContactElementBase
  {
   unsigned n_plot=5;
   this->output(outfile,n_plot);
  }
 
  /// \short Output function
- void output(std::ostream &outfile, const unsigned &n_plot)
+ void output(std::ostream &outfile, const unsigned &n_plot) // cgj: hides version in SurfaceContactElementBase
  {
   unsigned n_dim = this->nodal_dimension();
   

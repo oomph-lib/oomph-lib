@@ -94,7 +94,7 @@ void  YoungLaplaceEquations::exact_position(const Vector<double>& s,
 /// Get position vector to meniscus
 //======================================================================
  void  YoungLaplaceEquations::position(const Vector<double>& s, 
-                                       Vector<double>& r)
+                                       Vector<double>& r) const
  {
   
   // Get global coordinates

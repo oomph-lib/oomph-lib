@@ -17,7 +17,7 @@ rayleigh_instability_insoluble_surfactant_SOURCES = rayleigh_instability_insolub
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 rayleigh_instability_insoluble_surfactant_LDADD = -L@libdir@ \
- -laxisym_navier_stokes -lmulti_physics -lfluid_interface -lgeneric \
+ -laxisym_navier_stokes -lfluid_interface -lgeneric \
  $(EXTERNAL_LIBS) $(FLIBS)
 
 
@@ -28,5 +28,5 @@ rayleigh_instability_insoluble_surfactant_LDADD = -L@libdir@ \
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 3d_rayleigh_instability_surfactant_LDADD = -L@libdir@ \
- -lnavier_stokes -lmulti_physics -lfluid_interface -lgeneric \
+ -lnavier_stokes -lfluid_interface -lgeneric \
  $(EXTERNAL_LIBS) $(FLIBS)

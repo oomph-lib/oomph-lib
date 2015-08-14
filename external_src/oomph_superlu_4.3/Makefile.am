@@ -157,6 +157,7 @@ lib_LTLIBRARIES = liboomph_superlu_4.3.la
 # Sources that the library depends on:
 #-------------------------------------
 liboomph_superlu_4_3_la_SOURCES = $(headers_and_sources)
+liboomph_superlu_4_3_la_LDFLAGS = -static 
 
 
 # The library's include headers:

@@ -35,6 +35,7 @@ lib_LTLIBRARIES = liboomph_triangle.la
 # Sources that the library depends on:
 #-------------------------------------
 liboomph_triangle_la_SOURCES = $(headers_and_sources) $(extra_headers)
+liboomph_triangle_la_LDFLAGS = -static
 
 
 # The library's include headers:

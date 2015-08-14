@@ -156,7 +156,7 @@ public:
  
  /// \short Use spines or not? (Based on availability of function pointers
  /// to to spine and spine base vector fields)
- bool use_spines()
+ bool use_spines() const
   {
    return (Spine_fct_pt!=0);
   }
@@ -296,7 +296,7 @@ public:
   }
 
  /// Get position vector to meniscus at local coordinate s
- void position(const Vector<double>& s, Vector<double>& r);
+ void position(const Vector<double>& s, Vector<double>& r) const;
 
  /// Get exact position vector to meniscus at local coordinate s
  void exact_position(const Vector<double>& s, 

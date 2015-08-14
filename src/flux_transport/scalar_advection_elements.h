@@ -103,7 +103,7 @@ public:
  ///Assemble the contributions to the mass matrix and residuals
  void compute_error(FiniteElement::SteadyExactSolutionFctPt
                     initial_condition_pt, const double &t, 
-                    Vector<double> &error)
+                    Vector<double> &error) // cgj: this hides 3-param and 4-param versions in FiniteElement
   {
    //Find the number of fluxes
    const unsigned n_flux = this->nflux();

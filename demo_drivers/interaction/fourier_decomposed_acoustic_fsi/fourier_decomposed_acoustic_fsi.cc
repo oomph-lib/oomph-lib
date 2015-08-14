@@ -474,7 +474,7 @@ setup_interaction()
  // Doc boundary coordinate for Helmholtz
  ofstream the_file;
  the_file.open("boundary_coordinate_hh.dat");
- Helmholtz_mesh_pt->Mesh::doc_boundary_coordinates<HELMHOLTZ_ELEMENT>
+ Helmholtz_mesh_pt->Mesh::template doc_boundary_coordinates<HELMHOLTZ_ELEMENT>
   (boundary_in_helmholtz_mesh, the_file);
  the_file.close();
 
@@ -488,7 +488,7 @@ setup_interaction()
 
  // Doc boundary coordinate for solid mesh
  the_file.open("boundary_coordinate_solid.dat");
- Solid_mesh_pt->Mesh::doc_boundary_coordinates<ELASTICITY_ELEMENT>
+ Solid_mesh_pt->Mesh::template doc_boundary_coordinates<ELASTICITY_ELEMENT>
   (boundary_in_solid_mesh, the_file);
  the_file.close();
 

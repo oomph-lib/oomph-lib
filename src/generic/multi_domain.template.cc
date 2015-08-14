@@ -78,7 +78,7 @@ namespace oomph
    Vector<unsigned>& boundary_in_bulk_mesh,
    Mesh* const &bulk_mesh_pt,
    Vector<Mesh*>& face_mesh_pt,
-   const unsigned& interaction=0)
+   const unsigned& interaction)
  {
   
   unsigned n_mesh=boundary_in_bulk_mesh.size();
@@ -216,7 +216,7 @@ namespace oomph
   const unsigned& boundary_in_bulk_mesh,
   Mesh* const& bulk_mesh_pt,
   Mesh* const& face_mesh_pt,
-  const unsigned& interaction=0)
+  const unsigned& interaction)
  {
 
 #ifdef USE_VECTOR_BASED_MD

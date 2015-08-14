@@ -30,6 +30,7 @@ lib_LTLIBRARIES = liboomph_lapack.la
 # Sources that the library depends on:
 #-------------------------------------
 liboomph_lapack_la_SOURCES = $(headers_and_sources)
+liboomph_lapack_la_LDFLAGS = -static
 
 
 # The library's include headers:

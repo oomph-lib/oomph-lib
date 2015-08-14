@@ -402,7 +402,7 @@ public:
  
  
  ///self test wrapper
- unsigned self_test() const
+ unsigned self_test()
   {
    
    bool passed=true;

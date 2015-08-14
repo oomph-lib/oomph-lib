@@ -405,7 +405,7 @@ namespace Multi_domain_functions
                                            const Vector<Mesh*>& mesh_pt,
                                            Mesh* const &external_mesh_pt,
                                            const unsigned& interaction_index,
-                                           const Vector<Mesh*>& external_face_mesh_pt=0);
+                                           const Vector<Mesh*>& external_face_mesh_pt);
 
 
   

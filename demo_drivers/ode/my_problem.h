@@ -720,7 +720,7 @@ using namespace StringConversion;
     virtual void set_up_impulsive_initial_condition();
 
     /// Assign initial conditions from function pointer
-    virtual void set_initial_condition(const SolutionFunctorBase& ic);
+    virtual void set_initial_condition(const SolutionFunctorBase& ic); // cgj: hides version in Problem with no params
 
     /// Hook to be overloaded with any calculations needed after setting of
     /// initial conditions.

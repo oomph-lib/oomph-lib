@@ -1623,7 +1623,7 @@ public:
  unsigned nvertex_node() const {return 3;}
 
  /// \short Public access function for Node_on_face.
- unsigned get_bulk_node_number(const unsigned& face_index,
+ unsigned get_bulk_node_number(const int& face_index,
                                const unsigned& i) const
  {
   return Node_on_face[face_index][i];
@@ -3067,7 +3067,7 @@ public:
  unsigned nvertex_node() const {return 4;}
 
  /// \short Public access function for Node_on_face.
- unsigned get_bulk_node_number(const unsigned& face_index,
+ unsigned get_bulk_node_number(const int& face_index,
                                const unsigned& i) const
   {
    return Node_on_face[face_index][i];

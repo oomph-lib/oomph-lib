@@ -2326,7 +2326,7 @@ private:
   unsigned get_associated_vertex_to_svalue(
       double &target_s_value,
       unsigned &bnd_id,
-      double &s_tolerance = 1.0e-14)
+      const double &s_tolerance = 1.0e-14)
   {
    // Create a pointer to the list of s coordinates and arclength values
    // associated with a vertex

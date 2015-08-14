@@ -2028,7 +2028,7 @@ class BoundaryNodeBase
  void remove_from_boundary(const unsigned &b);
 
  /// \short Test whether the node lies on a boundary
- bool is_on_boundary() const {return (!Boundaries_pt==0);}
+ bool is_on_boundary() const {return !(Boundaries_pt==0);}
 
  /// \short Test whether the node lies on mesh boundary b
  bool is_on_boundary(const unsigned &b) const;

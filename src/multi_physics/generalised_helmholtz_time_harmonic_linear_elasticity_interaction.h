@@ -532,7 +532,7 @@ double TimeHarmonicLinElastLoadedByGeneralisedHelmholtzPressureBCElement<
 #endif
   
   //Find out the dimension of the node
-  unsigned n_dim = this->nodal_dimension();
+  const unsigned n_dim = this->nodal_dimension();
   
   //Cache the nodal indices at which the displacement components are stored
   std::complex<unsigned> u_nodal_index[n_dim];

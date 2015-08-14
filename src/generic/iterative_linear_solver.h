@@ -607,7 +607,7 @@ class GS : public IterativeLinearSolver
 
 
  /// \short returns the the time taken to setup the preconditioner 
- double preconditioner_setup_time()
+ double preconditioner_setup_time() const 
   {
    throw OomphLibError(
     "Gauss Seidel is not a preconditionable iterative solver",

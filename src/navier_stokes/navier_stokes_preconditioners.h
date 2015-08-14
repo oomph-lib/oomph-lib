@@ -149,7 +149,7 @@ namespace oomph
    private:
    
    /// Spatial dimension of problem
-   unsigned Ndim;
+   unsigned Ndim; // cgj: Ndim is never used.
    
  };
  

@@ -327,10 +327,10 @@ template<class ELEMENT>
 #endif
   
   //Find out the dimension of the node
-  unsigned n_dim = this->nodal_dimension();
+  const unsigned n_dim = this->nodal_dimension();
   
   //Cache the nodal indices at which the displacement components are stored
-  std::complex<unsigned> u_nodal_index[n_dim];
+  std::vector<std::complex<unsigned> > u_nodal_index(n_dim);
   for(unsigned i=0;i<n_dim;i++)
    {
     //u_nodal_index[i].real() = 

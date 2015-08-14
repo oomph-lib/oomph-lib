@@ -763,7 +763,7 @@ void KirchhoffLoveBeamEquations::get_energy(double &stretch,
 /// with specified number of plot points.
 //=======================================================================
 void HermiteBeamElement::output(const unsigned& t, std::ostream &outfile, 
-                                const unsigned &n_plot)
+                                const unsigned &n_plot) const
 {
 
 #ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES
@@ -923,7 +923,7 @@ void HermiteBeamElement::output(std::ostream &outfile)
 /// with specified number of plot points.
 //=======================================================================
 void HermiteBeamElement::output(const unsigned& t, FILE* file_pt,
-                                const unsigned &n_plot)
+                                const unsigned &n_plot) const
 {
 
 #ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES

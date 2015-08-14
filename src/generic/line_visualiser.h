@@ -363,7 +363,7 @@ namespace oomph
    
        // Declaration of MPI variables
        MPI_Status stat;
-       int tag;
+       int tag; // cgj: tag should be initialised before use
        int my_rank=Comm_pt->my_rank();
 
    

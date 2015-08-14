@@ -5,7 +5,7 @@
 # failures are detected. Acts on validation.log
 # in current directory.
 #=====================================================
-full_test_text=`tempfile`
+full_test_text='tempfile'
 echo $full_test
 
 awk 'BEGIN{

@@ -1057,7 +1057,7 @@ public:
  ModalPRefineableQElement() : PRefineableQElement<DIM,2>() {}
  
  void initial_setup(Tree* const &adopted_father_pt=0, const unsigned &initial_p_order=0);
- void pre_build();
+	void pre_build(Mesh*&, Vector<Node*>&);
  void further_build()
   {
    PRefineableQElement<DIM,2>::further_build(); //(Empty)
@@ -1178,7 +1178,7 @@ void ModalPRefineableQElement<1>::initial_setup(Tree* const &adopted_father_pt, 
 }
 
 template<>
-void ModalPRefineableQElement<1>::pre_build() {}
+void ModalPRefineableQElement<1>::pre_build(Mesh*&, Vector<Node*>&) {}
 
 template<>
 void ModalPRefineableQElement<1>::p_refine(

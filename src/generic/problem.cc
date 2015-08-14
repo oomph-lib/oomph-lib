@@ -13492,7 +13492,7 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
    
    //Now sort out the Dof pointer
    ndof_local = Dof_distribution_pt->nrow_local();
-   if(Dof_derivative.size() != ndof_local);
+   if(Dof_derivative.size() != ndof_local)
    {
     Dof_derivative.resize(ndof_local,0.0);
    }

@@ -537,7 +537,7 @@ public:
  double du_dt(const unsigned &l, const unsigned &i) const
   {
    // Get the data's timestepper
-   TimeStepper* time_stepper_pt=Node_pt[l]->time_stepper_pt();
+   TimeStepper* time_stepper_pt=node_pt(l)->time_stepper_pt();
 
    // Number of timsteps (past & present)
    unsigned n_time = time_stepper_pt->ntstorage();
@@ -1245,7 +1245,7 @@ public:
 
  /// \short Overload the continuation actions because we're 
  /// continuing in Ca which does not affect the mesh
- void actions_after_change_in_global_parameter()
+	void actions_after_change_in_global_parameter() // cgj: should have a "double* const &parameter_pt" parameter to avoid hiding version in Problem
   {
    //Check that the multipliers have worked
    using namespace Global_Physical_Variables;
@@ -1430,7 +1430,7 @@ public:
   }
 
  /// Dump the entire problem
- void dump(ofstream &dump_file)
+ void dump(ofstream &dump_file) const
   {
    using namespace Global_Physical_Variables;
    dump_file << Re << std::endl;
