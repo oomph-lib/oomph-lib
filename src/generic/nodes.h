@@ -1887,6 +1887,12 @@ class BoundaryNodeBase
 
  public:
 
+ /// \short Member function that allocates storage for a given
+ /// number of additional degrees of freedom, n_additional_value,
+ /// associated with a particular face_id to the Node
+ /// node_pt
+ virtual void assign_additional_values_with_face_id(
+  const unsigned &n_additional_value, const unsigned &face_id=0)=0;
 
  /// \short Return pointer to the map giving
  /// the index of the first face element value.
@@ -1916,7 +1922,7 @@ class BoundaryNodeBase
     error_message 
      << "Index_of_first_value_assigned_by_face_element_pt==0;\n"
      << "Pointer must be set via call to: \n\n"
-     << "  BoundaryNode::index_of_first_value_assigned_by_face_element_pt(), \n\n" 
+     << " BoundaryNode::assign_additional_values_with_face_id(...), \n\n" 
      << "typically from FaceElement::add_additional_values(...).";
     throw OomphLibError(error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
@@ -1965,7 +1971,7 @@ class BoundaryNodeBase
       error_message 
        << "Index_of_first_value_assigned_by_face_element_pt==0;\n"
        << "Pointer must be set via call to: \n\n"
-       << "  BoundaryNode::index_of_first_value_assigned_by_face_element_pt(), \n\n" 
+       << "  BoundaryNode::assign_additional_values_with_face_id(...), \n\n" 
        << "typically from FaceElement::add_additional_values(...).";
 
       if (throw_quietly)
@@ -2412,7 +2418,7 @@ public:
     error_message 
      << "Index_of_first_value_assigned_by_face_element_pt==0;\n"
      << "Pointer must be set via call to: \n\n"
-     << "  BoundaryNode::index_of_first_value_assigned_by_face_element_pt(), \n\n" 
+     << "  BoundaryNode::assign_additional_values_with_face_id(), \n\n" 
      << "typically from FaceElement::add_additional_values(...).";
     throw OomphLibError(error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
@@ -2424,9 +2430,18 @@ public:
   // How many values are there in total?
   unsigned nval=this->nvalue();
 
+  //If ID is not present in the map then return 0
+  if(Index_of_first_value_assigned_by_face_element_pt->find(face_id)==
+     Index_of_first_value_assigned_by_face_element_pt->end())
+   {
+    return 0;
+   }
+
+  //Otherwise the entry is present in the map
+  
   // Single entry: Number of values is the difference between 
   // number of values and first index
-  if ((*Index_of_first_value_assigned_by_face_element_pt).size()==1)
+  else if ((*Index_of_first_value_assigned_by_face_element_pt).size()==1)
    {
     return nval-
      (*Index_of_first_value_assigned_by_face_element_pt)[face_id];
@@ -2452,6 +2467,100 @@ public:
    }
  }
 
+
+//=====================================================================
+/// Member function to allocates storage for a given
+/// number of additional degrees of freedom, n_additional_value,
+/// associated with a particular face_id to the Node node_pt. Needs
+/// to be filled in here so that access to the nodal values is
+/// available.
+//=====================================================================
+ void assign_additional_values_with_face_id(
+   const unsigned &n_additional_value, const unsigned &face_id=0)
+ {
+#ifdef PARANOID
+  //If nothing is being added warn the user
+  if(n_additional_value == 0)
+   {
+    std::ostringstream warn_message;
+    warn_message 
+     << "No additional data values are being added to the boundary node "
+     << this << "\n"
+     << "by face id " << face_id << ".\n"
+     << "This means that the function \n"
+     << "BoundaryNode::index_of_first_value_assigned_by_face_element(id) \n"
+     << "will return a value that is equal to the number of values stored at the Node.\n"
+     << "Calling Node::value(...) with this index will lead to an out-of-range error.\n"
+     << "The anticpated usage of a loop from the index over the number of values.\n"
+     << "will not cause any problems, but if you try to do anything else, you may be surprised.\n"
+     << "You have been warned!\n";
+    OomphLibWarning(warn_message.str(),
+                    OOMPH_CURRENT_FUNCTION,
+                    OOMPH_EXCEPTION_LOCATION);
+    
+   }
+#endif
+  
+  //Allocate storage if not already assigned
+  if(this->Index_of_first_value_assigned_by_face_element_pt==0)
+   {
+    this->Index_of_first_value_assigned_by_face_element_pt =
+     new std::map<unsigned, unsigned>;
+   }
+  
+  //Find the number of values already stored in the node
+  const unsigned n_value = this->nvalue();
+  
+  //If this ID hasn't already been used
+  if(this->Index_of_first_value_assigned_by_face_element_pt->find(face_id)
+     ==this->Index_of_first_value_assigned_by_face_element_pt->end())
+   {
+    //Set the first index to by number of values
+    (*Index_of_first_value_assigned_by_face_element_pt)[face_id] =
+     n_value;
+   }
+  //Otherwise this ID has been used previously
+  else
+   {
+    //Find the number of values associated with this id
+    const unsigned n_value_for_id =
+     this->nvalue_assigned_by_face_element(face_id);
+    //If the number of current values is equal to the desired values
+    // do nothing and return
+    if(n_value_for_id==n_additional_value) {return;}
+    //Otherwise
+    else
+     {
+      //Safety check, are the value associated with this id
+      //all at the end
+      if(((*this->Index_of_first_value_assigned_by_face_element_pt)[face_id]
+          + n_value_for_id) != n_value)
+       {
+#ifdef PARANOID
+        std::ostringstream warn_message;
+        warn_message 
+         << "Trying to (resize) number of unknowns associated with face id " << face_id << "\n"
+         << "but previous storage for this data is not at the end of the nodal values.\n"
+         << "The anticipated usage here is within constructors that add additional equations\n"
+         << "to existing FaceElements in which case we will always be at the end.\n"
+         << "If you are trying to do something else, then try using a different id.\n"
+         << " FaceElement::add_additional_values(...)."
+         << " For consistency with earlier versions, this will do nothing!\n";
+        OomphLibWarning(warn_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+#endif
+        //Just return without doing anything
+        return;
+       }
+     } //Case when we are actually requesting additional values
+   } //End case when ID has already been touched
+  
+     //Now finally resize the storage
+  this->resize(n_value + n_additional_value);
+ }
+
+ 
  /// \short Make the node periodic
  void make_periodic(Node* const &node_pt)
   {BoundaryNodeBase::make_node_periodic(this,node_pt);}

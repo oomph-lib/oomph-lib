@@ -122,9 +122,10 @@ public virtual LineFluidInterfaceElement
   } //End of jacobian contribution
  
 
- /// \short Helper function to calculate the additional contributions
- /// to be added at each integration point. Empty as there's nothing
- /// to be done
+ /// \short
+ /// Helper function to calculate the additional contributions
+ /// to be added at each integration point. Empty for this
+ /// implemenetation
  void add_additional_residual_contributions_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian,
@@ -134,8 +135,10 @@ public virtual LineFluidInterfaceElement
   const Vector<double> &interpolated_x, 
   const Vector<double> &interpolated_n, 
   const double &W, 
-  const double &J){}
-
+  const double &J)
+ {
+ }
+ 
  /// Overload the output function
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
 
@@ -234,7 +237,8 @@ public LineFluidInterfaceElement
  int kinematic_local_eqn(const unsigned &j)
  {
   // Get the index of the nodal value associated with Lagrange multiplier
-  unsigned lagr_index=dynamic_cast<BoundaryNodeBase*>(node_pt(j))->
+  const unsigned lagr_index=
+   dynamic_cast<BoundaryNodeBase*>(node_pt(j))->
    index_of_first_value_assigned_by_face_element(Id);
   
   // Return nodal value

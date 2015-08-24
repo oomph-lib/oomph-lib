@@ -690,14 +690,18 @@ public:
  /// by all specific SpineMeshes.
  virtual void spine_node_update(SpineNode* spine_node_pt)=0;
 
+#ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Woverloaded-virtual"
-
+#endif
+ 
  /// \short Overload the dump function so that the spine data is dumped
  void dump(std::ofstream &dump_file) const;
 
+#ifdef __clang__
 #pragma clang diagnostic pop
-
+#endif
+ 
  /// \short Overload the read function so that the spine data is read 
  /// from the restart file
  void read(std::ifstream &restart_file);

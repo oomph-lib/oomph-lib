@@ -554,10 +554,18 @@ public:
    /// \short Return the index at which the i-th unknown velocity component
  /// is stored. The default value, i, is appropriate for single-physics
  /// problems.
- /// In derived multi-physics elements, this function should be overloaded
+  /// In derived multi-physics elements, this function should be overloaded
  /// to reflect the chosen storage scheme. Note that these equations require
  /// that the unknowns are always stored at the same indices at each node.
  virtual inline unsigned u_index_axi_nst(const unsigned &i) const {return i;}
+
+ /// \short Return the index at which the i-th unknown velocity component
+ /// is stored with a common interface for use in general
+ /// FluidInterface and similar elements.
+ /// \todo Merge all common storage etc to a common base class for
+ /// Navier--Stokes elements in all coordinate systems.
+ inline unsigned u_index_nst(const unsigned &i) const
+ {return this->u_index_axi_nst(i);}
  
  /// \short i-th component of du/dt at local node n. 
  /// Uses suitably interpolated value for hanging nodes.

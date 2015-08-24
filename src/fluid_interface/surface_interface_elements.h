@@ -133,6 +133,23 @@ namespace oomph
      //Call the generic routine to handle the shape derivatives
      this->fill_in_jacobian_from_geometric_data(jacobian);
     }
+
+    /// \short
+    /// Helper function to calculate the additional contributions
+    /// to be added at each integration point. Empty for this
+    /// implemenetation
+    void add_additional_residual_contributions_interface(
+     Vector<double> &residuals, 
+     DenseMatrix<double> &jacobian,
+     const unsigned &flag,
+     const Shape &psif,
+     const DShape &dpsifds,
+     const Vector<double> &interpolated_x, 
+     const Vector<double> &interpolated_n, 
+     const double &W, 
+     const double &J)
+    {
+    }
     
     /// Overload the output function
     void output(std::ostream &outfile) {FiniteElement::output(outfile);}
@@ -163,10 +180,20 @@ namespace oomph
      
      //Attach the geometrical information to the new element
      this->build_face_element(face_index,face_el_pt);
+
+     //Set the index at which the velocity nodes are stored
+     face_el_pt->u_index_interface_boundary() = this->U_index_interface;
      
      //Set the value of the nbulk_value, the node is not resized
-     //in this problem, so it will just be the actual nvalue
-     face_el_pt->nbulk_value(0) = face_el_pt->node_pt(0)->nvalue();
+     //in this bounding element,
+     //so it will just be the actual nvalue here
+     // There is some ambiguity about what this means (however)
+     const unsigned n_node_bounding = face_el_pt->nnode();
+     for(unsigned n=0;n<n_node_bounding;n++)
+      {
+       face_el_pt->nbulk_value(n) =
+        face_el_pt->node_pt(n)->nvalue();
+      }
      
      //Set of unique geometric data that is used to update the bulk,
      //but is not used to update the face
@@ -194,22 +221,6 @@ namespace oomph
      //Return the value of the pointer
      return face_el_pt;
     }
-    
-
-    
-    /// \short Helper function to calculate the additional contributions
-    /// to be added at each integration point. Empty as there's nothing
-    /// to be done
-    void add_additional_residual_contributions_interface(
-     Vector<double> &residuals, 
-     DenseMatrix<double> &jacobian,
-     const unsigned &flag,
-     const Shape &psif,
-     const DShape &dpsifds,
-     const Vector<double> &interpolated_x, 
-     const Vector<double> &interpolated_n, 
-     const double &W, 
-     const double &J){}
     
   };
  
@@ -245,7 +256,14 @@ namespace oomph
    /// \short Equation number of the kinematic BC associated with node j.
    /// (This is the equation for the Lagrange multiplier) 
    int kinematic_local_eqn(const unsigned &j)
-   {return this->nodal_local_eqn(j,Nbulk_value[j]);}
+   {
+    // Get the index of the nodal value associated with Lagrange multiplier
+    const unsigned lagr_index=
+     dynamic_cast<BoundaryNodeBase*>(this->node_pt(j))->
+     index_of_first_value_assigned_by_face_element(Id);
+
+    return this->nodal_local_eqn(j,lagr_index);
+   }
    
    
   /// \short Hijacking the kinematic condition corresponds to hijacking the
@@ -445,20 +463,34 @@ namespace oomph
      //Attach the geometrical information to the new element
      this->build_face_element(face_index,face_el_pt);
 
+     //Set the index at which the velocity nodes are stored
+     face_el_pt->u_index_interface_boundary() = this->U_index_interface;
+
+     //Set the value of the nbulk_value, the node is not resized
+     //in this bounding element,
+     //so it will just be the actual nvalue here
+     // There is some ambiguity about what this means (however)
+     const unsigned n_node_bounding = face_el_pt->nnode();
+     for(unsigned n=0;n<n_node_bounding;n++)
+      {
+       face_el_pt->nbulk_value(n) =
+        face_el_pt->node_pt(n)->nvalue();
+      }
+     
      //Pass the ID down
      face_el_pt->set_id(Id);
      
      //Find the nodes
      std::set<SolidNode*> set_of_solid_nodes;
-     unsigned n_node = this->nnode();
+     const unsigned n_node = this->nnode();
      for(unsigned n=0;n<n_node;n++)
       {
        set_of_solid_nodes.insert(static_cast<SolidNode*>(this->node_pt(n)));
       }
      
      //Delete the nodes from the face
-     n_node = face_el_pt->nnode();
-     for(unsigned n=0;n<n_node;n++)
+     //n_node = face_el_pt->nnode();
+     for(unsigned n=0;n<n_node_bounding;n++)
       {
        //Set the value of the nbulk_value, from the present element
        face_el_pt->nbulk_value(n) = 

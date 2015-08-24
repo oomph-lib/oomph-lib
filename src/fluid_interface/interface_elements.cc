@@ -38,8 +38,7 @@ namespace oomph
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
-
-
+ 
 
 //=========================================================================
 /// \short Set a pointer to the desired contact angle. Optional boolean
@@ -336,7 +335,7 @@ namespace oomph
         for(unsigned i=0;i<3;i++)
          {
           //Get the equation number for the momentum equation
-          int local_eqn =  this->nodal_local_eqn(l,i);
+          int local_eqn =  this->nodal_local_eqn(l,this->U_index_interface_boundary[i]);
 
           //If it's not a boundary condition
           if(local_eqn >= 0 )
@@ -375,7 +374,7 @@ namespace oomph
         for(unsigned i=0;i<3;i++)
          {
           //Get the equation number for the momentum equation
-          int local_eqn =  this->nodal_local_eqn(l,i);
+          int local_eqn =  this->nodal_local_eqn(l,this->U_index_interface_boundary[i]);
           
           //If it's not a boundary condition
           if(local_eqn >= 0 )

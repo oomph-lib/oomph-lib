@@ -84,9 +84,10 @@ namespace oomph
   /// \short Index at which the i-th velocity component is stored in the 
   /// element's nodes
   Vector<unsigned> U_index_interface_boundary;
-  
+
   /// \short Function that is used to determine the local equation number of
   /// the kinematic equation associated with the nodes of the element
+  /// This must be overloaded depending on the node update scheme
   virtual int kinematic_local_eqn(const unsigned &n)=0;
   
   /// \short Function that returns the unit normal of the bounding wall
@@ -309,269 +310,6 @@ public:
 
 
 
-//=====================================================================
-///Spine version of the PointFluidInterfaceBoundingElement
-//===================================================================== 
- template<class ELEMENT>
-  class SpinePointFluidInterfaceBoundingElement : 
- public Hijacked< SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >,
-  public PointFluidInterfaceBoundingElement
-   
-  {
-  public:
- 
-
- /// Constructor
- SpinePointFluidInterfaceBoundingElement() : 
- Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >(),
-  PointFluidInterfaceBoundingElement() {}
- 
- /// Overload the output function
- void output(std::ostream &outfile) {FiniteElement::output(outfile);}
- 
- /// Output the element
- void output(std::ostream &outfile, const unsigned &n_plot)
- {FluidInterfaceBoundingElement::output(outfile,n_plot);}
- 
- ///Overload the C-style output function
- void output(FILE* file_pt) {FiniteElement::output(file_pt);}
- 
- ///C-style Output function
- void output(FILE* file_pt, const unsigned &n_plot)
- {FluidInterfaceBoundingElement::output(file_pt,n_plot);}
- 
- /// Calculate the elemental residual vector and the Jacobian
- void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                       DenseMatrix<double> &jacobian)
- {
-  //Call the generic routine with the flag set to 1
-  this->fill_in_generic_residual_contribution_interface_boundary(residuals,
-                                                                 jacobian,1);
-  //Call generic FD routine for the external data
-  this->fill_in_jacobian_from_external_by_fd(jacobian);
-  
-  //Call the generic routine to handle the spine variables
-  this->fill_in_jacobian_from_geometric_data(jacobian);
- }
- 
- /// \short Return local equation number associated with the kinematic
- /// constraint for local node n
- int kinematic_local_eqn(const unsigned &n) 
- {return this->spine_local_eqn(n);}
- 
-  }; 
-
- 
-//=========================================================================
-/// Pseudo-elasticity version of the PointFluidInterfaceBoundingElement
-//========================================================================
- template<class ELEMENT>
-  class ElasticPointFluidInterfaceBoundingElement : 
- public  FaceGeometry<FaceGeometry<ELEMENT> > ,
-  public PointFluidInterfaceBoundingElement, public virtual SolidFiniteElement
-  
- {
-   private:
-  
-  ///\short ID of the Lagrange multipler (in the collection of nodal values
-  /// accommodated by resizing
-  unsigned Id;
-  
-   public:
-  
-  ///\short Set the Id
-  void set_id(const unsigned &id) {Id = id;}
-  
-  /// \short Specify the value of nodal zeta from the face geometry
-  /// The "global" intrinsic coordinate of the element when
-  /// viewed as part of a geometric object should be given by
-  /// the FaceElement representation, by default
-  double zeta_nodal(const unsigned &n, const unsigned &k,           
-                   const unsigned &i) const 
-  {return FaceElement::zeta_nodal(n,k,i);}     
-  
-  
-  /// Constructor
-   ElasticPointFluidInterfaceBoundingElement() : 
-  FaceGeometry<FaceGeometry<ELEMENT> >(),
-   PointFluidInterfaceBoundingElement() {}
-  
-  /// Overload the output function
-  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
-  
-  /// Output the element
-  void output(std::ostream &outfile, const unsigned &n_plot)
-  {FluidInterfaceBoundingElement::output(outfile,n_plot);}
-  
-  ///Overload the C-style output function
-  void output(FILE* file_pt) {FiniteElement::output(file_pt);}
-  
-  ///C-style Output function
-  void output(FILE* file_pt, const unsigned &n_plot)
-  {FluidInterfaceBoundingElement::output(file_pt,n_plot);}
-  
-  /// Calculate the element's residual vector and Jacobian
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                        DenseMatrix<double> &jacobian)
-  {
-   //Call the generic routine with the flag set to 1
-   fill_in_generic_residual_contribution_interface_boundary(residuals,
-                                                            jacobian,1);
-   //Call the generic FD routine to get external data
-   this->fill_in_jacobian_from_external_by_fd(jacobian);
-   
-   //Call the generic finite difference routine to handle the solid variables
-   this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
-  }
-  
-  /// \short Return local eqn number of the kinematic boundary condition 
-  /// associated with local node n.
-  int kinematic_local_eqn(const unsigned &n) 
-  {
-   //Read out the index of the kinematic constraint from the Id
-   //set by the constructing element
-   unsigned lagr_index=dynamic_cast<BoundaryNodeBase*>(this->node_pt(n))->
-    index_of_first_value_assigned_by_face_element(Id);
-  
-   return this->nodal_local_eqn(n,lagr_index);
-  }
-  
- }; 
- 
-
-
-//=========================================================================
-/// Spine version of the LineFluidInterfaceBoundingElement
-//========================================================================
-template<class ELEMENT>
-class SpineLineFluidInterfaceBoundingElement : public 
- Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >,
- public LineFluidInterfaceBoundingElement
-                                       
-{
-  public:
- 
- /// Constructor
-  SpineLineFluidInterfaceBoundingElement() : 
- Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >(),
-  LineFluidInterfaceBoundingElement() {}
- 
- /// Overload the output function
- void output(std::ostream &outfile) {FiniteElement::output(outfile);}
- 
- /// Output the element
- void output(std::ostream &outfile, const unsigned &n_plot)
- {FluidInterfaceBoundingElement::output(outfile,n_plot);}
- 
- ///Overload the C-style output function
- void output(FILE* file_pt) {FiniteElement::output(file_pt);}
- 
- ///C-style Output function
- void output(FILE* file_pt, const unsigned &n_plot)
- {FluidInterfaceBoundingElement::output(file_pt,n_plot);}
- 
- 
- /// Calculate the jacobian
- void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                       DenseMatrix<double> &jacobian)
- {
-  //Call the generic routine with the flag set to 1
-  this->fill_in_generic_residual_contribution_interface_boundary(residuals,
-                                                                 jacobian,1);
-  //Call generic FD routine for the external data
-  this->fill_in_jacobian_from_external_by_fd(jacobian);
-  
-  //Call the generic routine to handle the spine variables
-  this->fill_in_jacobian_from_geometric_data(jacobian);
- }
- 
-
- /// Local eqn number of the kinematic bc associated with local node n
- int kinematic_local_eqn(const unsigned &n) 
- {
-  //Kinematic bc is always associated with the n-th spine height
-  return this->spine_local_eqn(n);
- }
- 
-}; 
-
-
-//=========================================================================
-/// Pseudo-elasticity version of the LineFluidInterfaceBoundingElement
-//========================================================================
-template<class ELEMENT>
- class ElasticLineFluidInterfaceBoundingElement : 
-public  FaceGeometry<FaceGeometry<ELEMENT> > ,
- public LineFluidInterfaceBoundingElement, public virtual SolidFiniteElement
- 
-{
-  ///\short ID of the Lagrange multipler (in the collection of nodal values
-  /// accommodated by resizing
-  unsigned Id;
-  
-   public:
-  
-  ///\short Set the Id
-  void set_id(const unsigned &id) {Id = id;}
- 
- /// Constructor
-  ElasticLineFluidInterfaceBoundingElement() : 
- FaceGeometry<FaceGeometry<ELEMENT> >(),
-  LineFluidInterfaceBoundingElement() {}
- 
- /// \short Specify the value of nodal zeta from the face geometry
- /// The "global" intrinsic coordinate of the element when
- /// viewed as part of a geometric object should be given by
- /// the FaceElement representation, by default
- double zeta_nodal(const unsigned &n, const unsigned &k,           
-                          const unsigned &i) const 
-  {return FaceElement::zeta_nodal(n,k,i);}     
-
- 
- /// Overload the output function
- void output(std::ostream &outfile) {FiniteElement::output(outfile);}
- 
- /// Output the element
- void output(std::ostream &outfile, const unsigned &n_plot)
- {
-  FluidInterfaceBoundingElement::output(outfile,n_plot);
- }
- 
- ///Overload the C-style output function
- void output(FILE* file_pt) {FiniteElement::output(file_pt);}
- 
- ///C-style Output function
- void output(FILE* file_pt, const unsigned &n_plot)
- {FluidInterfaceBoundingElement::output(file_pt,n_plot);}
- 
- /// Calculate the elemental residual vector and Jacobian
- void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                       DenseMatrix<double> &jacobian)
- {
-  //Call the generic routine with the flag set to 1
-  fill_in_generic_residual_contribution_interface_boundary(residuals,jacobian,1);
-  
-  //Call the generic FD routine to get externals
-  this->fill_in_jacobian_from_external_by_fd(jacobian);
-
-  //Call the generic finite difference routine to handle the solid variables
-  this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
- }
- 
- /// Local eqn number of kinematic bc associated with local node n
- int kinematic_local_eqn(const unsigned &n) 
- {
-  //Read out the kinematic constraint from the Id which is passed down
-  //from the constructing element
-   unsigned lagr_index=dynamic_cast<BoundaryNodeBase*>(this->node_pt(n))->
-    index_of_first_value_assigned_by_face_element(Id);
-  
-   return this->nodal_local_eqn(n,lagr_index);
- }
- 
-}; 
-
-
 //=======================================================================
 /// Base class establishing common interfaces and functions for all 
 /// Navier-Stokes-like fluid
@@ -581,7 +319,10 @@ public  FaceGeometry<FaceGeometry<ELEMENT> > ,
 //======================================================================
 class FluidInterfaceElement : public virtual FaceElement
 {
- private:
+ //Make the bounding element class a friend 
+ friend FluidInterfaceBoundingElement;
+
+  private:
 
  /// Pointer to the Capillary number 
  double *Ca_pt;
@@ -614,8 +355,8 @@ class FluidInterfaceElement : public virtual FaceElement
  /// for the (scalar) kinematic equation associated with the j-th local
  /// node. This must be overloaded by specific interface elements
  /// and depends on the method for handing the free-surface deformation.
- virtual int kinematic_local_eqn(const unsigned &j)=0;
- 
+ virtual int kinematic_local_eqn(const unsigned &n)=0;
+  
  /// \short Access function for the local equation number that
  /// corresponds to the external pressure.
  int pext_local_eqn() 
@@ -666,10 +407,11 @@ class FluidInterfaceElement : public virtual FaceElement
   const Vector<double> &interpolated_x, 
   const Vector<double> &interpolated_n, 
   const double &W, 
-  const double &J)=0;
+  const double &J) {}
 
 public:
 
+ 
  /// Constructor, set the default values of the booleans and pointers (null)
  FluidInterfaceElement():   Pext_data_pt(0) 
   {
@@ -878,7 +620,11 @@ class LineFluidInterfaceElement : public FluidInterfaceElement
   public:
  
  /// Constructor
- LineFluidInterfaceElement() : FluidInterfaceElement() {}
+ LineFluidInterfaceElement() : FluidInterfaceElement()
+  {
+   //Resize the storage for momentum equations in the bulk
+   this->U_index_interface.resize(2);
+  }
   
   /// Overload the output functions
   void output(std::ostream &outfile) {FiniteElement::output(outfile);}
@@ -922,7 +668,11 @@ class AxisymmetricFluidInterfaceElement : public FluidInterfaceElement
 public:
 
  /// Constructor
- AxisymmetricFluidInterfaceElement(): FluidInterfaceElement() {}
+ AxisymmetricFluidInterfaceElement(): FluidInterfaceElement()
+  {
+   //Resize the storage for momentum equations in the bulk
+   this->U_index_interface.resize(3);
+  }
   
   /// Overload the output functions
   void output(std::ostream &outfile) {FiniteElement::output(outfile);}
@@ -965,7 +715,11 @@ class SurfaceFluidInterfaceElement : public FluidInterfaceElement
 public:
 
  /// Constructor
- SurfaceFluidInterfaceElement(): FluidInterfaceElement() {}
+ SurfaceFluidInterfaceElement(): FluidInterfaceElement()
+  {
+   //Resize the storage for momentum equations in the bulk
+   this->U_index_interface.resize(3);
+  }
   
   /// Overload the output functions
   void output(std::ostream &outfile) {FiniteElement::output(outfile);}

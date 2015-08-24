@@ -4143,56 +4143,18 @@ class FaceElement: public virtual FiniteElement
                             const unsigned &id)
   { 
    // How many nodes? 
-   unsigned n_node=nnode();
+   const unsigned n_node=nnode();
      
    // loop over the nodes
-   for (unsigned j=0;j<n_node;j++)
+   for (unsigned n=0;n<n_node;n++)
     {
-     // Cast to a boundary node
-     BoundaryNodeBase *bnod_pt = 
-      dynamic_cast<BoundaryNodeBase*>(node_pt(j));
- 
-     // Create storage, if it doesn't already exist, for the map 
-     // that will contain the position of the first entry of 
-     // this face element's additional values, 
-     if(bnod_pt->index_of_first_value_assigned_by_face_element_pt()==0)
-      {
-       bnod_pt->index_of_first_value_assigned_by_face_element_pt()= 
-        new std::map<unsigned, unsigned>; 
-      }
-       
-     // Get pointer to the map
-     std::map<unsigned, unsigned>* map_pt=
-      bnod_pt->index_of_first_value_assigned_by_face_element_pt();
-       
-     // We only resize the node values Vector if we haven't done it yet
-     std::map<unsigned, unsigned>::const_iterator p=map_pt->find(id);
-
-     // If this node hasn't been resized for current id
-     if(p==map_pt->end())
-      {
-         
-       // get the node pt
-       Node* nod_pt = node_pt(j);
-
-       // how many values are stored in the node?
-       unsigned n_values= nod_pt->nvalue();
-
-       // assign the face element id and the position of the 
-       //first entry to the boundary node
-       (*map_pt)[id]= n_values;
-         
-       //Read out the number of additional values
-       unsigned n_additional = nadditional_values[j];
-
-       // resize the node vector of values
-       if( n_additional > 0)
-        {
-         nod_pt->resize(n_values + n_additional);
-        }
-      }
+     //Assign the required number of additional nodes to the node
+     dynamic_cast<BoundaryNodeBase*>(
+      this->node_pt(n))->assign_additional_values_with_face_id(
+       nadditional_values[n],id);
     }
   }
+
 
   public:
  
@@ -4472,9 +4434,12 @@ class FaceElement: public virtual FiniteElement
  /// Pointer to higher-dimensional "bulk" element (const version)
  FiniteElement* bulk_element_pt() const {return Bulk_element_pt;}
 
+ //Clang specific pragma's
+#ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Woverloaded-virtual"
-
+#endif
+ 
  /// \short Return the pointer to the function that maps the face
  /// coordinate to the bulk coordinate
  CoordinateMappingFctPt &face_to_bulk_coordinate_fct_pt()
@@ -4496,8 +4461,10 @@ class FaceElement: public virtual FiniteElement
  BulkCoordinateDerivativesFctPt bulk_coordinate_derivatives_fct_pt() const
   {return Bulk_coordinate_derivatives_fct_pt;}
 
+#ifdef __clang__
 #pragma clang diagnostic pop
-
+#endif
+ 
  /// \short Return vector of local coordinates in bulk element, 
  /// given the local coordinates in this FaceElement
  Vector<double> local_coordinate_in_bulk(const Vector<double>& s) const;

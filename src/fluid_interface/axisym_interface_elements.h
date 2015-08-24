@@ -103,7 +103,8 @@ namespace oomph
       this->U_index_interface.resize(3);
       for(unsigned i=0;i<3;i++)
        {
-        this->U_index_interface[i] = cast_element_pt->u_index_axi_nst(i);
+        this->U_index_interface[i] =
+         cast_element_pt->u_index_nst(i);
        }
      }
     
@@ -118,10 +119,10 @@ namespace oomph
      this->fill_in_jacobian_from_geometric_data(jacobian);
     }
     
-    
-    /// \short Helper function to calculate the additional contributions
-    /// to be added at each integration point. Empty as there's nothing
-    /// to be done.
+    /// \short
+    /// Helper function to calculate the additional contributions
+    /// to be added at each integration point. Empty for this
+    /// implemenetation
     void add_additional_residual_contributions_interface(
      Vector<double> &residuals, 
      DenseMatrix<double> &jacobian,
@@ -131,7 +132,10 @@ namespace oomph
      const Vector<double> &interpolated_x, 
      const Vector<double> &interpolated_n, 
      const double &W, 
-     const double &J){}
+     const double &J)
+    {
+    }
+    
     
     /// Overload the output function
     void output(std::ostream &outfile) {FiniteElement::output(outfile);}
@@ -292,7 +296,8 @@ namespace oomph
       this->U_index_interface.resize(3);
       for(unsigned i=0;i<3;i++)
        {
-        this->U_index_interface[i] = cast_element_pt->u_index_axi_nst(i);
+        this->U_index_interface[i] = cast_element_pt->
+         u_index_nst(i);
        }
       
       //Read out the number of nodes on the face
