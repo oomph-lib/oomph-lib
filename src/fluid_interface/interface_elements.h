@@ -320,7 +320,7 @@ public:
 class FluidInterfaceElement : public virtual FaceElement
 {
  //Make the bounding element class a friend 
- friend FluidInterfaceBoundingElement;
+ friend class FluidInterfaceBoundingElement;
 
   private:
 
@@ -374,15 +374,34 @@ class FluidInterfaceElement : public virtual FaceElement
  }
 
  /// \short Helper function to calculate the residuals and 
- /// (if flag==1) the Jacobian of the equations. This must
- /// be overloaded by specific implementations of different
- /// geometrical interface element i.e. axisymmetric, two- or three-
- /// dimensional.
+ /// (if flag==1) the Jacobian of the equations.
+ /// This is implemented generically using the surface
+ /// divergence information that is overloaded in each element
+ /// i.e. axisymmetric, two- or three-dimensional.
  virtual void fill_in_generic_residual_contribution_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian, 
-  unsigned flag)=0;
- 
+  unsigned flag);
+
+ /// \short Compute the surface gradient and surface divergence
+ /// operators given the shape functions and  derivatives
+ /// with respect to the local coordinates. Return
+ /// the jacobian of the surface. This is the only
+ /// function that needs to be overloaded to specify
+ /// different geometries.
+ /// Thus in order to compute the surface gradient of a scalar
+ /// function one needs only compute the sum over the nodes
+ /// of dpsidS(l,i) * nodal_value(l,scalar_index)
+ /// To compute the surface divergence of a vector quantity
+ /// one computes a sum over nodes and coordinate directions
+ /// dpsidS_div(l,i) * nodal_value(l,vector_index[i])
+ /// In Cartesian cordinates the two surface derivatives are the
+ /// same, but in Axisymmetric coordinates they are not!
+ virtual double compute_surface_derivatives(const Shape &psi, const DShape &dpsids,
+                                            const DenseMatrix<double> &interpolated_t,
+                                            const Vector<double> &interpolated_x,
+                                            DShape &dpsidS,
+                                            DShape &dpsidS_div)=0;
 
  /// \short Helper function to calculate the additional contributions
  /// to the resisuals and Jacobian that arise from specific node update 
@@ -391,19 +410,23 @@ class FluidInterfaceElement : public virtual FaceElement
  /// number of input parameters:
  /// - the velocity shape functions and their derivatives w.r.t.
  ///   the local coordinates
- /// - the Eulerian coordinates (whatever they may represent in the 
- ///   specific dimension/geometry: cartesian (x,y,[z]), axisymmetric
- ///   polar (r,z), ...
+ /// - the surface gradient and divergence of the velocity shape
+ ///   functions
+ /// - The local and Eulerian coordinates,
  /// - the outer unit normal,
  /// - the integration weight from the integration scheme 
  /// - the Jacobian of the mapping between the local and global coordinates
- ///   along the element.
+ ///   along the element. (Note that in the axisymmmetric case this
+ ///   includes the r term)!
  virtual void add_additional_residual_contributions_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian,
   const unsigned &flag,
   const Shape &psif,
   const DShape &dpsifds,
+  const DShape &dpsifdS,
+  const DShape &dpsifdS_div,
+  const Vector<double> &s,
   const Vector<double> &interpolated_x, 
   const Vector<double> &interpolated_n, 
   const double &W, 
@@ -602,21 +625,15 @@ public:
 class LineFluidInterfaceElement : public FluidInterfaceElement
 {
   protected:
- 
- ///\short Implementation of the helper function to calculate the residuals 
- /// and (if flag==1) the Jacobian associated with the kinematic and
- /// dynamic boundary conditions -- this function only deals with
- /// the part of the Jacobian that can be handled generically. 
- /// Specific additional contributions may be provided in
- /// add_additional_residual_contributions_interface(...), to be provided in
- /// any derived class that implements the specific node update
- /// strategy.
- void fill_in_generic_residual_contribution_interface(
-  Vector<double> &residuals, 
-  DenseMatrix<double> &jacobian, 
-  unsigned flag);
- 
 
+ ///Fill in the specific surface derivative calculations
+ double compute_surface_derivatives(const Shape &psi, const DShape &dpsids,
+                                    const DenseMatrix<double> &interpolated_t,
+                                    const Vector<double> &interpolated_x,
+                                    DShape &surface_gradient,
+                                    DShape &surface_divergence);
+ 
+ 
   public:
  
  /// Constructor
@@ -651,19 +668,13 @@ class LineFluidInterfaceElement : public FluidInterfaceElement
 class AxisymmetricFluidInterfaceElement : public FluidInterfaceElement
 {
   protected:
- 
- ///\short Implementation of the helper function to calculate the residuals 
- /// and (if flag==1) the Jacobian associated with the kinematic and
- /// dynamic boundary conditions -- this function only deals with
- /// the part of the Jacobian that can be handled generically. 
- /// Specific additional contributions may be provided in
- /// add_additional_residual_contributions_interface(...), to be provided in
- /// any derived class that implements the specific node update
- /// strategy.
- void fill_in_generic_residual_contribution_interface(
-  Vector<double> &residuals, 
-  DenseMatrix<double> &jacobian, 
-  unsigned flag);
+
+ ///Fill in the specific surface derivatives
+ double compute_surface_derivatives(const Shape &psi, const DShape &dpsids,
+                                    const DenseMatrix<double> &interpolated_t,
+                                    const Vector<double> &interpolated_x,
+                                    DShape &surface_gradient,
+                                    DShape &surface_divergence);
   
 public:
 
@@ -698,19 +709,13 @@ public:
 class SurfaceFluidInterfaceElement : public FluidInterfaceElement
 {
   protected:
- 
- ///\short Implementation of the helper function to calculate the residuals 
- /// and (if flag==1) the Jacobian associated with the kinematic and
- /// dynamic boundary conditions -- this function only deals with
- /// the part of the Jacobian that can be handled generically. 
- /// Specific additional contributions may be provided in
- /// add_additional_residuals_contributions_interface(...), to be provided in
- /// any derived class that implements the specific node update
- /// strategy.
- void fill_in_generic_residual_contribution_interface(
-  Vector<double> &residuals, 
-  DenseMatrix<double> &jacobian, 
-  unsigned flag);
+
+ /// Fill in the specific surface derivatives
+ double compute_surface_derivatives(const Shape &psi, const DShape &dpsids,
+                                    const DenseMatrix<double> &interpolated_t,
+                                    const Vector<double> &interpolated_x,
+                                    DShape &surface_gradient,
+                                    DShape &surface_divergence);
   
 public:
 

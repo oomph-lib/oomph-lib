@@ -208,13 +208,16 @@ template<class ELEMENT>
      const unsigned &flag,
      const Shape &psif,
      const DShape &dpsifds,
+     const DShape &dpsifdS,
+     const DShape &dpsifdS_div,
+     const Vector<double> &s,
      const Vector<double> &interpolated_x, 
      const Vector<double> &interpolated_n, 
      const double &W, 
      const double &J)
     {
      EQUATION_CLASS::add_additional_residual_contributions_interface(
-      residuals,jacobian,flag,psif,dpsifds,interpolated_x,interpolated_n,W,J);
+      residuals,jacobian,flag,psif,dpsifds,dpsifdS,dpsifdS_div,s,interpolated_x,interpolated_n,W,J);
     }
     
     /// Overload the output function
@@ -667,13 +670,16 @@ template<class ELEMENT>
      const unsigned &flag,
      const Shape &psif,
      const DShape &dpsifds,
+     const DShape &dpsifdS,
+     const DShape &dpsifdS_div,
+     const Vector<double> &s,
      const Vector<double> &interpolated_x, 
      const Vector<double> &interpolated_n, 
      const double &W, 
      const double &J)
     {
      EQUATION_CLASS::add_additional_residual_contributions_interface(
-      residuals,jacobian,flag,psif,dpsifds,interpolated_x,interpolated_n,W,J);
+      residuals,jacobian,flag,psif,dpsifds,dpsifdS,dpsifdS_div,s,interpolated_x,interpolated_n,W,J);
      
      //Assemble Lagrange multiplier by loop over the shape functions
      const unsigned n_node = this->nnode();

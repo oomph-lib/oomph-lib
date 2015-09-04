@@ -253,6 +253,8 @@ protected:
   /// additional entries are calculated inside the integration loop
   void add_additional_residual_contributions_interface(Vector<double> &residuals, DenseMatrix<double> &jacobian,
                                                        const unsigned &flag,const Shape &psif, const DShape &dpsifds,
+                                                       const DShape &dpsifdS, const DShape &dpsifdS_div,
+                                                       const Vector<double> &s,
                                                        const Vector<double> &interpolated_x, const Vector<double> &interpolated_n, 
                                                        const double &W,const double &J)
   {
@@ -279,6 +281,9 @@ protected:
    //Read out the radial position
    const double r = interpolated_x[0];
 
+   //Rescale the jacobian to be the "raw" version
+   const double J_raw = J/r;
+   
    //Now calculate the concentration at this point
    //Assuming the same shape functions are used (which they are)
    double interpolated_C = 0.0;
@@ -337,9 +342,9 @@ protected:
    double k1 = 0.0;
    for(unsigned i=0;i<2;i++)
     {
-     k1 += (d2xds[i]/(J*J) - interpolated_tangent[i]*(
+     k1 += (d2xds[i]/(J_raw*J_raw) - interpolated_tangent[i]*(
              interpolated_tangent[0]*d2xds[0] 
-             + interpolated_tangent[1]*d2xds[1])/(J*J*J*J))*interpolated_n[i];
+             + interpolated_tangent[1]*d2xds[1])/(J_raw*J_raw*J_raw*J_raw))*interpolated_n[i];
     }
    
    //Second component of the curvature
@@ -355,7 +360,7 @@ protected:
      if(local_eqn >= 0)
       {
        //Time derivative
-       residuals[local_eqn] += dCdt*psif(l)*r*W*J;
+       residuals[local_eqn] += dCdt*psif(l)*r*W*J_raw;
 
        double tmp = 0.0;
        //Compute our version in which second derivatives are not required
@@ -367,13 +372,13 @@ protected:
             (interpolated_u[i] - mesh_velocity[i])*interpolated_tangent[i];
           }
          //First Advection term
-         residuals[local_eqn] += tmp*interpolated_dCds*psif(l)*r*W/J;
+         residuals[local_eqn] += tmp*interpolated_dCds*psif(l)*r*W/J_raw;
          //Additional term from axisymmetric formulation
-         residuals[local_eqn] += interpolated_C*interpolated_u[0]*psif(l)*W*J;
+         residuals[local_eqn] += interpolated_C*interpolated_u[0]*psif(l)*W*J_raw;
          //Second Advection term
          residuals[local_eqn] += interpolated_C*
           (interpolated_duds[0]*interpolated_tangent[0]
-           + interpolated_duds[1]*interpolated_tangent[1])*r*W*psif(l)/J;
+           + interpolated_duds[1]*interpolated_tangent[1])*r*W*psif(l)/J_raw;
           }
        //This is the Campana formulation
        else
@@ -383,20 +388,20 @@ protected:
           {
            tmp += -mesh_velocity[i]*interpolated_tangent[i];
           }
-         residuals[local_eqn] += tmp*interpolated_dCds*psif(l)*r*W/J;
+         residuals[local_eqn] += tmp*interpolated_dCds*psif(l)*r*W/J_raw;
          // Curvature (normal velocity) term
          residuals[local_eqn] -= 
-          interpolated_C*(k1 + k2)*psif(l)*r*W*J*(
+          interpolated_C*(k1 + k2)*psif(l)*r*W*J_raw*(
            interpolated_u[0]*interpolated_n[0]
            + interpolated_u[1]*interpolated_n[1]);
          //Integrated by parts tangential advection term
          residuals[local_eqn] -= interpolated_C*(
           interpolated_tangent[0]*interpolated_u[0] + 
-          interpolated_tangent[1]*interpolated_u[1])*dpsifds(l,0)*r*W/J;
+          interpolated_tangent[1]*interpolated_u[1])*dpsifds(l,0)*r*W/J_raw;
         }
        
        //Diffusion term
-       residuals[local_eqn] += (1.0/Pe_s)*interpolated_dCds*dpsifds(l,0)*r*W/J;
+       residuals[local_eqn] += (1.0/Pe_s)*interpolated_dCds*dpsifds(l,0)*r*W/J_raw;
        
        //We also need to worry about the jacobian terms
        if(flag)
@@ -413,33 +418,33 @@ protected:
            if(local_unknown >=0)
             {
              jacobian(local_eqn,local_unknown) += 
-              time_stepper_pt->weight(1,0)*psif(l2)*psif(l)*r*W*J;
+              time_stepper_pt->weight(1,0)*psif(l2)*psif(l)*r*W*J_raw;
              
              if(Integrated_curvature)
               {
                jacobian(local_eqn,local_unknown) += ((interpolated_u[0] - mesh_velocity[0])*interpolated_tangent[0]
                                                      + (interpolated_u[1] - mesh_velocity[1])*interpolated_tangent[1])*dpsifds(l2,0)
-                *psif(l)*r*W/J;
+                *psif(l)*r*W/J_raw;
 
 
-               jacobian(local_eqn,local_unknown) += psif(l2)*interpolated_u[0]*psif(l)*W*J;
+               jacobian(local_eqn,local_unknown) += psif(l2)*interpolated_u[0]*psif(l)*W*J_raw;
                
                jacobian(local_eqn,local_unknown) += psif(l2)*(interpolated_tangent[0]*interpolated_duds[0]
-                                                              + interpolated_tangent[1]*interpolated_duds[1])*psif(l)*r*W/J;
+                                                              + interpolated_tangent[1]*interpolated_duds[1])*psif(l)*r*W/J_raw;
               }
              else
               {
                jacobian(local_eqn,local_unknown) -=
-                (mesh_velocity[0]*interpolated_tangent[0] + mesh_velocity[1]*interpolated_tangent[1])*dpsifds(l2,0)*psif(l)*r*W/J;
+                (mesh_velocity[0]*interpolated_tangent[0] + mesh_velocity[1]*interpolated_tangent[1])*dpsifds(l2,0)*psif(l)*r*W/J_raw;
                
-               jacobian(local_eqn,local_unknown) -= psif(l2)*(k1 + k2)*psif(l)*r*W*J*(interpolated_u[0]*interpolated_n[0]
+               jacobian(local_eqn,local_unknown) -= psif(l2)*(k1 + k2)*psif(l)*r*W*J_raw*(interpolated_u[0]*interpolated_n[0]
                                                                                       + interpolated_u[1]*interpolated_n[1]);
                
                jacobian(local_eqn,local_unknown) -= psif(l2)*(interpolated_tangent[0]*interpolated_u[0] + interpolated_tangent[1]*
-                                                              interpolated_u[1])*dpsifds(l,0)*r*W/J;
+                                                              interpolated_u[1])*dpsifds(l,0)*r*W/J_raw;
               }
              
-             jacobian(local_eqn,local_unknown) += (1.0/Pe_s)*dpsifds(l2,0)*dpsifds(l,0)*r*W/J;
+             jacobian(local_eqn,local_unknown) += (1.0/Pe_s)*dpsifds(l2,0)*dpsifds(l,0)*r*W/J_raw;
              
             }
 
@@ -456,26 +461,26 @@ protected:
              if(local_unknown >= 0)
               {
                
-               // jacobian(local_eqn,local_unknown) += time_stepper_pt->weight(1,0)*psif(l2)*PeSt_s*psif(l)*r*W*J;
+               // jacobian(local_eqn,local_unknown) += time_stepper_pt->weight(1,0)*psif(l2)*PeSt_s*psif(l)*r*W*J_raw;
                if(Integrated_curvature)
                 {
                  jacobian(local_eqn,local_unknown) += 
-                  interpolated_dCds*psif(l2)*interpolated_tangent[i2]*psif(l)*r*W/J;
+                  interpolated_dCds*psif(l2)*interpolated_tangent[i2]*psif(l)*r*W/J_raw;
 
                  if(i2==0)
                   {
-                   jacobian(local_eqn,local_unknown) += interpolated_C*psif(l2)*W*J;
+                   jacobian(local_eqn,local_unknown) += interpolated_C*psif(l2)*W*J_raw;
                   }
                 }
                else
                 {
-                 jacobian(local_eqn,local_unknown) -= interpolated_C*(k1 + k2)*psif(l)*r*W*J*psif(l2)*interpolated_n[i2];
+                 jacobian(local_eqn,local_unknown) -= interpolated_C*(k1 + k2)*psif(l)*r*W*J_raw*psif(l2)*interpolated_n[i2];
                  
-                 jacobian(local_eqn,local_unknown) -=  interpolated_C*interpolated_tangent[i2]*psif(l2)*dpsifds(l,0)*r*W/J;
+                 jacobian(local_eqn,local_unknown) -=  interpolated_C*interpolated_tangent[i2]*psif(l2)*dpsifds(l,0)*r*W/J_raw;
                 }
                
                jacobian(local_eqn,local_unknown) += 
-                interpolated_C*interpolated_tangent[i2]*dpsifds(l2,0)*psif(l)*r*W/J;
+                interpolated_C*interpolated_tangent[i2]*dpsifds(l2,0)*psif(l)*r*W/J_raw;
               }
             }
           }

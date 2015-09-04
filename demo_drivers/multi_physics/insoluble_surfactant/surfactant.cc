@@ -314,6 +314,8 @@ protected:
   Vector<double> &residuals, DenseMatrix<double> &jacobian,
   const unsigned &flag,
   const Shape &psif, const DShape &dpsifds,
+  const DShape &dpsifdS, const DShape &dpsifds_div,
+  const Vector<double> &s,
   const Vector<double> &interpolated_x, 
   const Vector<double> &interpolated_n, 
   const double &W,
