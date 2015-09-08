@@ -161,9 +161,6 @@ protected:
 };
 
 
-//Define the default physical value to be one
-double SurfactantTransportInterfaceElement::Default_Physical_Constant_Value = 1.0;
-
 ///=============================================================================
 ///This is the policy class for the surfactanttransport equations which require
 ///one additional value for the surface concentration
@@ -255,6 +252,36 @@ template<class ELEMENT>
    SurfactantTransportInterfaceElement,AxisymmetricDerivatives,ELEMENT> >() :
   SpinePointFluidInterfaceBoundingElement<ELEMENT>() { }
  };
+
+///Specialise to the Axisymmetric geometry
+template<class ELEMENT>
+ class ElasticAxisymmetricSurfactantTransportInterfaceElement :
+ public ElasticUpdateFluidInterfaceElement<SurfactantTransportInterfaceElement,
+ AxisymmetricDerivatives,ELEMENT>
+ {
+   public:
+  
+   ElasticAxisymmetricSurfactantTransportInterfaceElement(
+  FiniteElement* const &element_pt, 
+  const int &face_index) : 
+  ElasticUpdateFluidInterfaceElement<SurfactantTransportInterfaceElement,
+   AxisymmetricDerivatives,ELEMENT>(element_pt,face_index) {}
+ };
+
+
+//Define the bounding element type for the axisymmetric surface 
+template<class ELEMENT>
+ class BoundingElementType<ElasticUpdateFluidInterfaceElement<
+ SurfactantTransportInterfaceElement,AxisymmetricDerivatives,ELEMENT> >:
+ public ElasticPointFluidInterfaceBoundingElement<ELEMENT>
+ {
+   public:
+  
+  BoundingElementType<ElasticUpdateFluidInterfaceElement<
+   SurfactantTransportInterfaceElement,AxisymmetricDerivatives,ELEMENT> >() :
+  ElasticPointFluidInterfaceBoundingElement<ELEMENT>() { }
+ };
+
 
  ///Specialise to surface geometry
  template<class ELEMENT>

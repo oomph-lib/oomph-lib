@@ -33,6 +33,10 @@
 namespace oomph
 {
 
+
+//Define the default physical value to be one
+double SurfactantTransportInterfaceElement::Default_Physical_Constant_Value = 1.0;
+
  //=====================================================================
  ///Get the surfactant concentration
  //=====================================================================
