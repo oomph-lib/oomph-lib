@@ -566,6 +566,11 @@ public:
  /// Navier--Stokes elements in all coordinate systems.
  inline unsigned u_index_nst(const unsigned &i) const
  {return this->u_index_axi_nst(i);}
+
+ /// \short Return the number of velocity components for use in
+ /// general FluidInterface clas
+ inline unsigned n_u_nst() const {return 3;}
+
  
  /// \short i-th component of du/dt at local node n. 
  /// Uses suitably interpolated value for hanging nodes.

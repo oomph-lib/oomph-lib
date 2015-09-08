@@ -440,16 +440,15 @@ oomph-lib. The basic idea is that the equations should be implemented
 independently of the specific element type and mesh-update strategy and a 
 base class oomph::FluidInterfaceElement defines the 
 generic functionality for all fluid interface elements. 
-Rather than
-using a template parameter, the equations for different surface geometries are 
-specified in the three classes oomph::LineFluidInterfaceElement (1D
-surface), oomph::AxisymmetricFluidInterfaceElement and
-oomph::SurfaceFluidInterfaceElement (2D surface). These are then
-specialised further depending on the mesh-update strategy. These elements
-are all \c FaceElements and would normally be templated by the bulk
-element. In order to avoid excessive recompilation, the additional of
-the template parameter is deferred until the final completely
-specified class.
+The only difference between the different surface geometries are in
+the definitions of the surface derivative operators and these are
+defined in specific classes oomph::LineDerivatives (1D surface),
+oomph::AxisymmetricDerivatives and
+oomph::SurfaceDerivatives (2D surface).
+The final specific element is created by using a special templated
+class that determines the node-update strategy
+and takes the base class, derivative class and bulk element
+as template arguments.
 
 <HR>
 
@@ -462,6 +461,11 @@ elements. The most important functions to be aware of are:
 Strouhal numbers.
 - Storage for a (pointer to) an external pressure degree of freedom if
 the boundary is a free surface, rather than an interface.
+- The virtual function
+\code
+ double FluidInterfaceElement::compute_surface_derivatives(...)
+ \endcode
+  specifies how the suface gradient operators are computed.
 - The function 
 \code
  double FluidInterfaceElement::sigma(const Vector<double> &s_local) 
@@ -492,15 +496,12 @@ contributions corresponding to the dynamic and kinematic boundary conditions.
 .
 
 
-\subsection line The LineFluidInterfaceElement class
+\subsection line The LineDerivatives class
 
-The class oomph::LineFluidInterfaceElement inherits from \c
-FluidInterfaceElement and implements the specific residuals associated
-with a one-dimensional surface in a two-dimensional domain. It
-overloads the output functions and the function 
-\c fill_in_generic_residual_contribution_interface(...) to implement
-the surface integral terms in (@R[dyn_disc]@) and also the kinematic
-condition. The global coordinate system is Cartesian so its base
+The class oomph::LineDerivatives
+implements the specific surface derivatives
+associated with a one-dimensional surface in a two-dimensional
+domain.The global coordinate system is Cartesian so its base
 vectors do not vary with the surface coordinates and 
 \f$ [\mbox{\boldmath$\psi$}_{,\beta}^{(F)}]_{i} =
 \psi^{(F)}_{i,\beta}\f$;
@@ -508,20 +509,16 @@ and the contribution to each component of the momentum equation is
 found by setting the appropriate component \f$ \psi^{(F)}_{i} = 0\f$ for
 \f$ i = 1,2 \f$.
 
-\subsection axi The AxisymmetricFluidInterfaceElement class
+\subsection axi The AxisymmetricDerivatives class
 
-The class oomph::AxisymmetricFluidInterfaceElement inherits from \c
-FluidInterfaceElement and implements the specific residuals associated
+The class oomph::AxisymmetricDerivatives implements the specific residuals associated
 with a two-dimensional surface in a three-dimensional domain, under
 the assumption of axisymmetry. Thus, the coordinate system is
 cylindrical polar \f$(r,z,\theta)\f$, but it is assumed that there are
-no variations in the \f$ \theta \f$ direction. It
-overloads the output functions and the function 
-\c fill_in_generic_residual_contribution_interface(...) to implement
-the surface integral terms in (@R[dyn_disc]@) and kinematic condition.
+no variations in the \f$ \theta \f$ direction.
 
 It is worthwhile including the required mathematics here because the
-terms are not the same as in the \c LineFluidInterfaceElement
+terms are not the same as in the \c LineDerivatives
 class. Specifically, if the surface coordinates are \f$ (\zeta^{1},
 \zeta^{2}) = (s,\theta)\f$, the 
 position vector to the surface is given by
@@ -554,20 +551,16 @@ position vector to the surface is given by
 (z')^2} + \frac{1}{r}} \psi_{r}^{(F)}\right]\, \mbox{ d}S, \f]
 Two separate contributions are then derived from the cases \f$
 \psi_{r}^{(F)} = 0 \f$ and \f$ \psi_{z}^{(F)} = 0\f$. The difference
-from the \c LineFluidInterfaceElement is the final term that accounts for the
+from the \c LineDerivatives is the final term that accounts for the
 azimuthal curvature. In addition, we must also multiply all terms by
 the additional factor of \f$ r\f$ in the square-root of the determinant of
 the surface metric tensor.
 
-\subsection surface The SurfaceFluidInterfaceElement class
+\subsection surface The SurfaceDerivatives class
 
-The class oomph::SurfaceFluidInterfaceElement inherits from \c
-FluidInterfaceElement and implements the specific residuals associated
+The class oomph::SurfaceDerivatives implements the specific residuals associated
 with a general two-dimensional surface in a three-dimensional domain. 
-It overloads the output functions and the function 
-\c fill_in_generic_residual_contribution_interface(...) to implement
-the surface integral terms in (@R[dyn_disc]@) and kinematic
-condition. Once again, the global coordinate is Cartesian, so the
+Once again, the global coordinate is Cartesian, so the
 contribution to each momentum equation is found by setting the
 two other components of the test function to be zero.
 
@@ -580,13 +573,15 @@ the others are essentially the same.
 
 The class oomph::SpineLineFluidInterfaceElement is templated by the
 bulk element type, \c ELEMENT,  and inherits from \c
-LineInterfaceFluidInterface and \c
+FluidInterfaceElement, LineDerivatives and \c
 Hijacked<SpineElement<FaceGeometry<ELEMENT> > >. The hijacking is only
 required for imposition of contact angle boundary conditions, see <a
 href="../../static_single_later/html/index.html"> another tutorial
 </a> for more details. 
 
-The constructor is given below and simply builds the element based on
+Note that the use of templates to make the code generic makes it
+hard to read. A simplified constructor is given below and
+simply builds the element based on
 the \c FaceGeometry of the bulk element and sets the indices
 associated with the bulk fluid velocity components from the bulk
 element.
@@ -620,7 +615,7 @@ the others are essentially the same.
 
 The class oomph::ElasticLineFluidInterfaceElement is templated by the
 bulk element type, \c ELEMENT,  and inherits from \c
-LineInterfaceFluidInterface and \c
+LineDerivatives, FluidInterfaceElement and \c
 Hijacked<FaceGeometry<ELEMENT>  >. The hijacking is again only
 required for imposition of contact angle boundary conditions.
 

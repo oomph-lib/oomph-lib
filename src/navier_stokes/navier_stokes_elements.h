@@ -819,7 +819,10 @@ public:
  /// that the unknowns are always stored at the same indices at each node.
  virtual inline unsigned u_index_nst(const unsigned &i) const {return i;}
 
-
+ /// \short Return the number of velocity components
+ /// Used in FluidInterfaceElements
+ inline unsigned n_u_nst() const {return DIM;}
+ 
  /// \short i-th component of du/dt at local node n. 
  /// Uses suitably interpolated value for hanging nodes.
  double du_dt_nst(const unsigned &n, const unsigned &i) const

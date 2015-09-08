@@ -437,32 +437,32 @@ namespace oomph
 //============================================================
 /// Default value for physical constant (static)
 //============================================================
-double FluidInterfaceElement::Default_Physical_Constant_Value = 1.0;
+ double FluidInterfaceElement::Default_Physical_Constant_Value = 1.0;
 
 
 //================================================================
 /// Calculate the i-th velocity component at local coordinate s
 //================================================================
-double FluidInterfaceElement::
-interpolated_u(const Vector<double> &s, const unsigned &i) 
-{
- //Find number of nodes
- unsigned n_node = FiniteElement::nnode();
+ double FluidInterfaceElement::
+ interpolated_u(const Vector<double> &s, const unsigned &i) 
+ {
+  //Find number of nodes
+  unsigned n_node = FiniteElement::nnode();
 
- //Storage for the local shape function
- Shape psi(n_node);
+  //Storage for the local shape function
+  Shape psi(n_node);
 
- //Get values of shape function at local coordinate s
- this->shape(s,psi);
+  //Get values of shape function at local coordinate s
+  this->shape(s,psi);
  
- //Initialise value of u
- double interpolated_u = 0.0;
+  //Initialise value of u
+  double interpolated_u = 0.0;
 
- //Loop over the local nodes and sum
- for(unsigned l=0;l<n_node;l++) {interpolated_u += u(l,i)*psi(l);}
+  //Loop over the local nodes and sum
+  for(unsigned l=0;l<n_node;l++) {interpolated_u += u(l,i)*psi(l);}
 
- return(interpolated_u);
-}
+  return(interpolated_u);
+ }
 
 //===========================================================================
 ///Calculate the contribution to the residuals from the interface
@@ -533,140 +533,221 @@ interpolated_u(const Vector<double> &s, const unsigned &i)
     Vector<double> interpolated_dx_dt(n_dim,0.0);;
     DenseMatrix<double> interpolated_t(el_dim,n_dim,0.0);
     
-   //Loop over the shape functions
-   for(unsigned l=0;l<n_node;l++)
-    {
-     const double psi_ = psif(l);
-     //Loop over directional components 
-     for(unsigned i=0;i<n_dim;i++)
-      {
-       // Coordinate
-       interpolated_x[i] += this->nodal_position(l,i)*psi_;
+    //Loop over the shape functions
+    for(unsigned l=0;l<n_node;l++)
+     {
+      const double psi_ = psif(l);
+      //Loop over directional components 
+      for(unsigned i=0;i<n_dim;i++)
+       {
+        // Coordinate
+        interpolated_x[i] += this->nodal_position(l,i)*psi_;
 
-       //Calculate velocity of mesh
-       interpolated_dx_dt[i] += this->dnodal_position_dt(l,i)*psi_;
+        //Calculate velocity of mesh
+        interpolated_dx_dt[i] += this->dnodal_position_dt(l,i)*psi_;
 
-       //Calculate the tangent vectors
-       for(unsigned j=0;j<el_dim;j++)
-        {
-         interpolated_t(j,i) += this->nodal_position(l,i)*dpsifds(l,j);
-        }
+        //Calculate the tangent vectors
+        for(unsigned j=0;j<el_dim;j++)
+         {
+          interpolated_t(j,i) += this->nodal_position(l,i)*dpsifds(l,j);
+         }
        
-       //Calculate velocity and tangent vector
-       interpolated_u[i]  += u(l,i)*psi_;
-      }
+        //Calculate velocity and tangent vector
+        interpolated_u[i]  += u(l,i)*psi_;
+       }
        
-    }
+     }
 
 
-   //Calculate the surface gradient and divergence
-   double J =
-    this->compute_surface_derivatives(psif,dpsifds,
-                                      interpolated_t,
-                                      interpolated_x,
-                                      dpsifdS,
-                                      dpsifdS_div);
-   //Get the normal vector
-   //(ALH: This could be more efficient because
-   //there is some recomputation of shape functions here)
-   Vector<double> interpolated_n(n_dim); 
-   this->outer_unit_normal(s,interpolated_n);
+    //Calculate the surface gradient and divergence
+    double J =
+     this->compute_surface_derivatives(psif,dpsifds,
+                                       interpolated_t,
+                                       interpolated_x,
+                                       dpsifdS,
+                                       dpsifdS_div);
+    //Get the normal vector
+    //(ALH: This could be more efficient because
+    //there is some recomputation of shape functions here)
+    Vector<double> interpolated_n(n_dim); 
+    this->outer_unit_normal(s,interpolated_n);
 
-   //Now also get the (possible variable) surface tension
-   double Sigma = this->sigma(s);
+    //Now also get the (possible variable) surface tension
+    double Sigma = this->sigma(s);
 
-  // Loop over the shape functions
-   for(unsigned l=0;l<n_node;l++)
-    {
-     //Loop over the velocity components
-     for(unsigned i=0;i<n_dim;i++)
-      {
-       //Get the equation number for the momentum equation
-       local_eqn = this->nodal_local_eqn(l,this->U_index_interface[i]);
+    // Loop over the shape functions
+    for(unsigned l=0;l<n_node;l++)
+     {
+      //Loop over the velocity components
+      for(unsigned i=0;i<n_dim;i++)
+       {
+        //Get the equation number for the momentum equation
+        local_eqn = this->nodal_local_eqn(l,this->U_index_interface[i]);
 
-       //If it's not a boundary condition
-       if(local_eqn >= 0)
-        {
-         //Add the surface-tension contribution to the momentum equation
-         residuals[local_eqn] -= (Sigma/Ca)*dpsifdS_div(l,i)*J*W;
+        //If it's not a boundary condition
+        if(local_eqn >= 0)
+         {
+          //Add the surface-tension contribution to the momentum equation
+          residuals[local_eqn] -= (Sigma/Ca)*dpsifdS_div(l,i)*J*W;
 
-         //If the element is a free surface, add in the external pressure
-         if(Pext_data_pt!=0)
-          {
-           //External pressure term
-           residuals[local_eqn] -= p_ext*interpolated_n[i]*psif(l)*J*W;
+          //If the element is a free surface, add in the external pressure
+          if(Pext_data_pt!=0)
+           {
+            //External pressure term
+            residuals[local_eqn] -= p_ext*interpolated_n[i]*psif(l)*J*W;
 
-           //Add in the Jacobian term for the external pressure
-           //The correct area is included in the length of the normal
-           //vector
-           if(flag)
-            {
-             local_unknown = pext_local_eqn();
-             if(local_unknown >= 0)
-              {
-               jacobian(local_eqn,local_unknown) -=
-                interpolated_n[i]*psif(l)*J*W;
-              }
-            }
-          } //End of pressure contribution
-        }
-      } //End of contribution to momentum equation
+            //Add in the Jacobian term for the external pressure
+            //The correct area is included in the length of the normal
+            //vector
+            if(flag)
+             {
+              local_unknown = pext_local_eqn();
+              if(local_unknown >= 0)
+               {
+                jacobian(local_eqn,local_unknown) -=
+                 interpolated_n[i]*psif(l)*J*W;
+               }
+             }
+           } //End of pressure contribution
+         }
+       } //End of contribution to momentum equation
 
     
-     // Kinematic BC
-     local_eqn = kinematic_local_eqn(l);
-     if(local_eqn >= 0) 
-      {
-       //Assemble the kinematic condition
-       //The correct area is included in the normal vector
-       for(unsigned k=0;k<n_dim;k++)
-        {
-         residuals[local_eqn] += 
-          (interpolated_u[k] - St*interpolated_dx_dt[k])
-          *interpolated_n[k]*psif(l)*J*W;
-        }
+      // Kinematic BC
+      local_eqn = kinematic_local_eqn(l);
+      if(local_eqn >= 0) 
+       {
+        //Assemble the kinematic condition
+        //The correct area is included in the normal vector
+        for(unsigned k=0;k<n_dim;k++)
+         {
+          residuals[local_eqn] += 
+           (interpolated_u[k] - St*interpolated_dx_dt[k])
+           *interpolated_n[k]*psif(l)*J*W;
+         }
        
-       //Add in the jacobian
-       if(flag)
-        {
-         //Loop over shape functions
-         for(unsigned l2=0;l2<n_node;l2++)
-          {
-           //Loop over the components
-           for(unsigned i2=0;i2<n_dim;i2++)
-            {
-             local_unknown = 
-              this->nodal_local_eqn(l2,this->U_index_interface[i2]);
-             //If it's a non-zero dof add
-             if(local_unknown >= 0)
-              {
-               jacobian(local_eqn,local_unknown) +=
-                psif(l2)*interpolated_n[i2]*psif(l)*J*W;
-              }
-            }
-          }
-        } //End of Jacobian contribution
-      }
-    } //End of loop over shape functions
+        //Add in the jacobian
+        if(flag)
+         {
+          //Loop over shape functions
+          for(unsigned l2=0;l2<n_node;l2++)
+           {
+            //Loop over the components
+            for(unsigned i2=0;i2<n_dim;i2++)
+             {
+              local_unknown = 
+               this->nodal_local_eqn(l2,this->U_index_interface[i2]);
+              //If it's a non-zero dof add
+              if(local_unknown >= 0)
+               {
+                jacobian(local_eqn,local_unknown) +=
+                 psif(l2)*interpolated_n[i2]*psif(l)*J*W;
+               }
+             }
+           }
+         } //End of Jacobian contribution
+       }
+     } //End of loop over shape functions
    
 
-   // Add additional contribution required from the implementation
-   // of the node update (e.g. Lagrange multpliers etc)
-   add_additional_residual_contributions_interface(residuals,
-                                                   jacobian,
-                                                   flag,
-                                                   psif,
-                                                   dpsifds,
-                                                   dpsifdS,
-                                                   dpsifdS_div,
-                                                   s,
-                                                   interpolated_x,
-                                                   interpolated_n,
-                                                   W,
-                                                   J);
+    // Add additional contribution required from the implementation
+    // of the node update (e.g. Lagrange multpliers etc)
+    add_additional_residual_contributions_interface(residuals,
+                                                    jacobian,
+                                                    flag,
+                                                    psif,
+                                                    dpsifds,
+                                                    dpsifdS,
+                                                    dpsifdS_div,
+                                                    s,
+                                                    interpolated_x,
+                                                    interpolated_n,
+                                                    W,
+                                                    J);
 
-  } //End of loop over integration points
+   } //End of loop over integration points
  }
+
+//========================================================
+///Overload the output functions generically
+//=======================================================
+ void FluidInterfaceElement::
+ output(std::ostream &outfile, const unsigned &n_plot)
+ {
+  const unsigned el_dim = this->dim();
+  const unsigned n_dim = this->nodal_dimension();
+  const unsigned n_velocity = this->U_index_interface.size();
+  //Set output Vector
+  Vector<double> s(el_dim);
+ 
+  //Tecplot header info 
+  outfile << tecplot_zone_string(n_plot);
+
+  // Loop over plot points
+  unsigned num_plot_points=nplot_points(n_plot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+   {
+    //Get local coordinates of pliot point
+    get_s_plot(iplot,n_plot,s);
+   
+    //Output the x,y,u,v 
+    for(unsigned i=0;i<n_dim;i++) outfile << this->interpolated_x(s,i) << " ";
+    for(unsigned i=0;i<n_velocity;i++) outfile << interpolated_u(s,i) << " ";      
+
+    //Output a dummy pressure
+    outfile << 0.0 << "\n";
+   }
+
+  write_tecplot_zone_footer(outfile,n_plot);
+
+  outfile << "\n";
+
+ }
+
+
+//===========================================================================
+///Overload the output function
+//===========================================================================
+ void FluidInterfaceElement::
+ output(FILE* file_pt, const unsigned &n_plot)
+ {
+  const unsigned el_dim = this->dim();
+  const unsigned n_dim = this->nodal_dimension();
+  const unsigned n_velocity = this->U_index_interface.size();
+  //Set output Vector
+  Vector<double> s(el_dim);
+ 
+  // Tecplot header info
+  fprintf(file_pt,"%s",tecplot_zone_string(n_plot).c_str());
+
+  // Loop over plot points
+  unsigned num_plot_points=nplot_points(n_plot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+   {
+    // Get local coordinates of plot point
+    get_s_plot(iplot,n_plot,s);
+   
+    // Coordinates
+    for(unsigned i=0;i<n_dim;i++) 
+     {
+      fprintf(file_pt,"%g ",interpolated_x(s,i));
+     }
+   
+    // Velocities
+    for(unsigned i=0;i<n_velocity;i++) 
+     {
+      fprintf(file_pt,"%g ",interpolated_u(s,i));
+     }
+   
+    // Dummy Pressure
+    fprintf(file_pt,"%g \n",0.0);
+   }
+  fprintf(file_pt,"\n");
+ 
+  // Write tecplot footer (e.g. FE connectivity lists)
+  write_tecplot_zone_footer(file_pt,n_plot);
+ }
+
 
  
 
@@ -677,7 +758,7 @@ interpolated_u(const Vector<double> &s, const unsigned &i)
 //====================================================================
 ///Specialise the surface derivatives for the line interface case
 //===================================================================
- double LineFluidInterfaceElement::compute_surface_derivatives(
+ double LineDerivatives::compute_surface_derivatives(
   const Shape &psi, const DShape &dpsids,
   const DenseMatrix<double> &interpolated_t,
   const Vector<double> &interpolated_x,
@@ -692,86 +773,22 @@ interpolated_u(const Vector<double> &s, const unsigned &i)
   double a11 = interpolated_t(0,0)*interpolated_t(0,0) + 
    interpolated_t(0,1)*interpolated_t(0,1);
   
-   //Now set the derivative terms of the shape functions
-   for(unsigned l=0;l<n_shape;l++)
-    {
-     for(unsigned i=0;i<n_dim;i++)
-      {
-       dpsidS(l,i) = dpsids(l,0)*interpolated_t(0,i)/a11;
-      }
-    }
+  //Now set the derivative terms of the shape functions
+  for(unsigned l=0;l<n_shape;l++)
+   {
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      dpsidS(l,i) = dpsids(l,0)*interpolated_t(0,i)/a11;
+     }
+   }
 
-   //The surface divergence is the same as the surface
-   //gradient operator
-   dpsidS_div = dpsidS;
+  //The surface divergence is the same as the surface
+  //gradient operator
+  dpsidS_div = dpsidS;
 
-   //Return the jacobian
-   return sqrt(a11);
+  //Return the jacobian
+  return sqrt(a11);
  }
-
-
-//===========================================================================
-///Overload the output function
-//===========================================================================
-void LineFluidInterfaceElement::
-output(std::ostream &outfile, const unsigned &n_plot)
-{
- //Set output Vector
- Vector<double> s(1);
- 
- //Tecplot header info 
- // outfile << "ZONE I=" << n_plot << std::endl;
- outfile << tecplot_zone_string(n_plot);
-
- //Loop over plot points
- for(unsigned l=0;l<n_plot;l++)
-  {
-   //Get local coordinates of pliot point
-   get_s_plot(l,n_plot,s);
-   //s[0] = -1.0 + l*2.0/(n_plot-1);
-   
-   //Output the x,y,u,v 
-   for(unsigned i=0;i<2;i++) outfile << this->interpolated_x(s,i) << " ";
-   for(unsigned i=0;i<2;i++) outfile << interpolated_u(s,i) << " ";      
-
-   //Output a dummy pressure
-   outfile << 0.0 << "\n";
-  }
-
- write_tecplot_zone_footer(outfile,n_plot);
-
- outfile << "\n";
-
-}
-
-
-//===========================================================================
-///Overload the output function
-//===========================================================================
-void LineFluidInterfaceElement::
-output(FILE* file_pt, const unsigned &n_plot)
-{
- //Set output Vector
- Vector<double> s(1);
- 
- //Tecplot header info 
- fprintf(file_pt,"ZONE I=%i \n",n_plot);
- 
- //Loop over plot points
- for(unsigned l=0;l<n_plot;l++)
-  {
-   s[0] = -1.0 + l*2.0/(n_plot-1);
-   
-   //Output the x,y,u,v 
-   for(unsigned i=0;i<2;i++) fprintf(file_pt,"%g ",this->interpolated_x(s,i));
-   for(unsigned i=0;i<2;i++) fprintf(file_pt,"%g ",this->interpolated_u(s,i));
-
-   //Output a dummy pressure
-   fprintf(file_pt,"0.0 \n");
-  }
- fprintf(file_pt,"\n");
-}
-
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -779,9 +796,9 @@ output(FILE* file_pt, const unsigned &n_plot)
 ////////////////////////////////////////////////////////////////////////
 
 //====================================================================
-///Specialise the surface derivatives for the line interface case
+///Specialise the surface derivatives for the axisymmetric interface case
 //===================================================================
- double AxisymmetricFluidInterfaceElement::compute_surface_derivatives(
+ double AxisymmetricDerivatives::compute_surface_derivatives(
   const Shape &psi, const DShape &dpsids,
   const DenseMatrix<double> &interpolated_t,
   const Vector<double> &interpolated_x,
@@ -792,98 +809,34 @@ output(FILE* file_pt, const unsigned &n_plot)
   const unsigned n_shape = psi.nindex1();
   const unsigned n_dim = 2;
 
-   //Calculate the only entry of the surface
-   //metric tensor (square length of the tangent vector)
+  //Calculate the only entry of the surface
+  //metric tensor (square length of the tangent vector)
   double a11 = interpolated_t(0,0)*interpolated_t(0,0) + 
    interpolated_t(0,1)*interpolated_t(0,1);
 
-   //Now set the derivative terms of the shape functions
-   for(unsigned l=0;l<n_shape;l++)
-    {
-     for(unsigned i=0;i<n_dim;i++)
-      {
-       dpsidS(l,i) = dpsids(l,0)*interpolated_t(0,i)/a11;
-       //Set the standard components of the divergence
-       dpsidS_div(l,i) = dpsidS(l,i);
-      }
-    }
+  //Now set the derivative terms of the shape functions
+  for(unsigned l=0;l<n_shape;l++)
+   {
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      dpsidS(l,i) = dpsids(l,0)*interpolated_t(0,i)/a11;
+      //Set the standard components of the divergence
+      dpsidS_div(l,i) = dpsidS(l,i);
+     }
+   }
 
-   const double r = interpolated_x[0];
+  const double r = interpolated_x[0];
    
-   //The surface divergence is different because we need
-   //to take account of variation of the base vectors
-   for(unsigned l=0;l<n_shape;l++)
-    {
-     dpsidS_div(l,0) += psi(l)/r;
-    }
+  //The surface divergence is different because we need
+  //to take account of variation of the base vectors
+  for(unsigned l=0;l<n_shape;l++)
+   {
+    dpsidS_div(l,0) += psi(l)/r;
+   }
    
-   //Return the jacobian, needs to be multiplied by r
-   return r*sqrt(a11);
+  //Return the jacobian, needs to be multiplied by r
+  return r*sqrt(a11);
  }
-
- 
-//===========================================================================
-///Overload the output function
-//===========================================================================
-void AxisymmetricFluidInterfaceElement::
-output(std::ostream &outfile, const unsigned &n_plot)
-{
- //Vector of local coordinates
- Vector<double> s(1);
- 
- // Tecplot header info
- outfile << tecplot_zone_string(n_plot);
- 
- // Loop over plot points
- unsigned num_plot_points=nplot_points(n_plot);
- for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-  {
-   // Get local coordinates of plot point
-   get_s_plot(iplot,n_plot,s);
-
-   for(unsigned i=0;i<2;i++) outfile << this->interpolated_x(s,i) << " ";
-   for(unsigned i=0;i<3;i++) outfile << interpolated_u(s,i) << " ";      
-
-   //Output a dummy pressure
-   outfile << 0.0 << "\n";
-  }
-
- // Write tecplot footer (e.g. FE connectivity lists)
- write_tecplot_zone_footer(outfile,n_plot);
-
- //Output a final blank line
- outfile << "\n";
-
-}
-
-
-//===========================================================================
-///Overload the output function
-//===========================================================================
-void AxisymmetricFluidInterfaceElement::
-output(FILE* file_pt, const unsigned &n_plot)
-{
- //Set output Vector
- Vector<double> s(1);
- 
- //Tecplot header info 
- fprintf(file_pt,"ZONE I=%i \n",n_plot);
- 
- //Loop over plot points
- for(unsigned l=0;l<n_plot;l++)
-  {
-   s[0] = -1.0 + l*2.0/(n_plot-1);
-   
-   //Output the x,y,u,v 
-   for(unsigned i=0;i<2;i++) fprintf(file_pt,"%g ",this->interpolated_x(s,i));
-   for(unsigned i=0;i<3;i++) fprintf(file_pt,"%g ",this->interpolated_u(s,i));
-
-   //Output a dummy pressure
-   fprintf(file_pt,"0.0 \n");
-  }
- fprintf(file_pt,"\n");
-}
-
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -891,9 +844,9 @@ output(FILE* file_pt, const unsigned &n_plot)
 ////////////////////////////////////////////////////////////////////////
 
 //====================================================================
-///Specialise the surface derivatives for the line interface case
+///Specialise the surface derivatives for 2D surface case
 //===================================================================
- double SurfaceFluidInterfaceElement::compute_surface_derivatives(
+ double SurfaceDerivatives::compute_surface_derivatives(
   const Shape &psi, const DShape &dpsids,
   const DenseMatrix<double> &interpolated_t,
   const Vector<double> &interpolated_x,
@@ -951,311 +904,5 @@ output(FILE* file_pt, const unsigned &n_plot)
   //Return the jacobian
   return sqrt(det_a);
  }
-
- 
-//=======================================================================
-/// Calculate the residuals (kinematic and dynamic BC) for the 
-/// two-dimensional (surface) interface element (plus, indirectly, 
-/// any contributions due to node update strategy involving e.g.
-/// Lagrange multipliers).
-//=======================================================================
-/*void SurfaceFluidInterfaceElement::
-fill_in_generic_residual_contribution_interface(Vector<double> &residuals, 
-                                                DenseMatrix<double> &jacobian, 
-                                                unsigned flag)
-{
- //Find out how many nodes there are
- unsigned n_node = this->nnode();
-
- //Set up memeory for the shape functions
- Shape psif(n_node);
-
- //We have two local surface coordinates
- DShape dpsifds(n_node,2);
-
- //Set the value of n_intpt
- unsigned n_intpt = this->integral_pt()->nweight();
-
- //Get the value of the Capillary number
- double Ca = ca();
-
- //Get the value of the Strouhal numer
- double St = st();
-
- //Get the value of the external pressure
- double p_ext = pext();
- 
- //Integers used to hold the local equation numbers and local unknowns
- int local_eqn=0, local_unknown=0;
-
- //Storage for the local coordinate
- Vector<double> s(2);
- 
- //Loop over the integration points
- for(unsigned ipt=0;ipt<n_intpt;ipt++)
-  {
-   //Get the value of the local coordiantes at the integration point
-   for(unsigned i=0;i<2;i++) {s[i] = this->integral_pt()->knot(ipt,i);}
-
-   //Get the integral weight
-   double W = this->integral_pt()->weight(ipt);
-
-   //Call the derivatives of the shape function
-   this->dshape_local_at_knot(ipt,psif,dpsifds);
-   
-   //Define and zero the tangent Vectors and local velocities
-   Vector<double> interpolated_x(3,0.0);
-   double interpolated_g[2][3] = {{0.0,0.0,0.0},{0.0,0.0,0.0}};
-   double interpolated_u[3] = {0.0,0.0,0.0};
-   double interpolated_dx_dt[3] = {0.0,0.0,0.0};
-   
-   //Loop over the shape functions
-   for(unsigned l=0;l<n_node;l++)
-    {
-     //Loop over directional components (now three)
-     for(unsigned i=0;i<3;i++)
-      {
-       // Coordinate
-       interpolated_x[i] += this->nodal_position(l,i)*psif(l);
-
-       //Calculate velocity of mesh
-       interpolated_dx_dt[i] += this->dnodal_position_dt(l,i)*psif(l);
-       
-       //Calculate velocity and tangent vector
-       interpolated_u[i]  += u(l,i)*psif(l);
-
-       //Calculate the local tangent vectors
-       interpolated_g[0][i] += this->nodal_position(l,i)*dpsifds(l,0);
-       interpolated_g[1][i] += this->nodal_position(l,i)*dpsifds(l,1);  
-      }
-    }
-
-
-   //Calculate the local metric tensor
-   //The dot product of the two tangent vectors
-   double gmet[2][2];
-   for(unsigned al=0;al<2;al++)
-    {
-     for(unsigned be=0;be<2;be++)
-      {
-       //Initialise to zero
-       gmet[al][be] = 0.0;
-       //Add the dot product contributions
-       for(unsigned i=0;i<3;i++)
-        {
-         gmet[al][be] += interpolated_g[al][i]*interpolated_g[be][i];
-        }
-      }
-    }
-
-   // Define the normal vector (cross product of tangent vectors)
-   Vector<double> interpolated_n(3); 
-   interpolated_n[0] = 
-    interpolated_g[0][1]*interpolated_g[1][2] - 
-    interpolated_g[0][2]*interpolated_g[1][1];
-   interpolated_n[1] = 
-    interpolated_g[0][2]*interpolated_g[1][0] - 
-    interpolated_g[0][0]*interpolated_g[1][2]; 
-   interpolated_n[2] = interpolated_g[0][0]*interpolated_g[1][1] - 
-    interpolated_g[0][1]*interpolated_g[1][0];
-
-   // Calculate the length of the vector
-   double slength =  interpolated_n[0]*interpolated_n[0] +
-                     interpolated_n[1]*interpolated_n[1] +
-                     interpolated_n[2]*interpolated_n[2];
-  
-   //Set the determinant of the local metric tensor, 
-   //which is equal to the length of the normal vector
-   double J = sqrt(slength);
-   
-   //We can now set the sign to get the OUTER UNIT normal
-   for(unsigned i=0;i<3;i++)
-    {
-     interpolated_n[i] *= normal_sign()/J;
-    }
-
-   //Now also get the (possible variable) surface tension
-   double Sigma = this->sigma(s);
-
-  // Loop over the shape functions
-   for(unsigned l=0;l<n_node;l++)
-    {
-     //Loop over the velocity components
-     for(unsigned i=0;i<3;i++)
-      {
-       //Get the equation number for the momentum equation
-       local_eqn = this->nodal_local_eqn(l,this->U_index_interface[i]);
-
-       //If it's not a boundary condition
-       if(local_eqn >= 0)
-        {
-         //Add the surface-tension contribution to the momentum equation
-         residuals[local_eqn] -=
-          //G0 contribuation
-          (interpolated_g[0][i]*(gmet[1][1]*dpsifds(l,0) 
-                                 -gmet[1][0]*dpsifds(l,1)) +
-           //G1 contribution
-           interpolated_g[1][i]*(gmet[0][0]*dpsifds(l,1) 
-                                 -gmet[0][1]*dpsifds(l,0)))
-          *(Sigma/Ca)*W/J;
-
-         //If the element is a free surface, add in the external pressure
-         if(Pext_data_pt!=0)
-          {
-           //External pressure term
-           residuals[local_eqn] -= p_ext*interpolated_n[i]*psif(l)*J*W;
-
-           //Add in the Jacobian term for the external pressure
-           //The correct area is included in the length of the normal
-           //vector
-           if(flag)
-            {
-             local_unknown = pext_local_eqn();
-             if(local_unknown >= 0)
-              {
-               jacobian(local_eqn,local_unknown) -=
-                interpolated_n[i]*psif(l)*J*W;
-              }
-            }
-          } //End of pressure contribution
-        }
-      } //End of contribution to momentum equation
-
-    
-     // Kinematic BC
-     local_eqn = kinematic_local_eqn(l);
-     if(local_eqn >= 0) 
-      {
-       //Assemble the kinematic condition
-       //The correct area is included in the normal vector
-       for(unsigned k=0;k<3;k++)
-        {
-         residuals[local_eqn] += 
-          (interpolated_u[k] - St*interpolated_dx_dt[k])
-          *interpolated_n[k]*psif(l)*J*W;
-        }
-       
-       //Add in the jacobian
-       if(flag)
-        {
-         //Loop over shape functions
-         for(unsigned l2=0;l2<n_node;l2++)
-          {
-           //Loop over the components
-           for(unsigned i2=0;i2<3;i2++)
-            {
-             local_unknown = 
-              this->nodal_local_eqn(l2,this->U_index_interface[i2]);
-             //If it's a non-zero dof add
-             if(local_unknown >= 0)
-              {
-               jacobian(local_eqn,local_unknown) +=
-                psif(l2)*interpolated_n[i2]*psif(l)*J*W;
-              }
-            }
-          }
-        } //End of Jacobian contribution
-      }
-    } //End of loop over shape functions
-   
-
-   // Add additional contribution required from the implementation
-   // of the node update (e.g. Lagrange multpliers etc)
-   add_additional_residual_contributions_interface(residuals,
-                                                   jacobian,
-                                                   flag,
-                                                   psif,
-                                                   dpsifds,
-                                                   interpolated_x,
-                                                   interpolated_n,
-                                                   W,
-                                                   J);
-
-  } //End of loop over integration points
-  }*/
-
-//===========================================================================
-///Overload the output function
-//===========================================================================
-void SurfaceFluidInterfaceElement::
-output(std::ostream &outfile, const unsigned &nplot)
-{
- //Storage for the local coordinate
- Vector<double> s(2);
- 
- // Tecplot header info
- outfile << tecplot_zone_string(nplot);
- 
- // Loop over plot points
- unsigned num_plot_points=nplot_points(nplot);
- for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-  {
-   
-   // Get local coordinates of plot point
-   get_s_plot(iplot,nplot,s);
-  
-   // Coordinates
-   for(unsigned i=0;i<3;i++) 
-    {
-     outfile << interpolated_x(s,i) << " ";
-    }
-   
-   // Velocities
-   for(unsigned i=0;i<3;i++) 
-    {
-     outfile << interpolated_u(s,i) << " ";
-    }
-   
-   // Dummy Pressure
-   outfile << 0.0  << "\n";
-  }
-
- // Write tecplot footer (e.g. FE connectivity lists)
- write_tecplot_zone_footer(outfile,nplot);
-
- //Write a final blank line
- outfile << "\n";
-
-}
-
-//===========================================================================
-///Overload the output function
-//===========================================================================
-void SurfaceFluidInterfaceElement::
-output(FILE* file_pt, const unsigned &nplot)
-{
- //Storage for local coordinates
- Vector<double> s(2);
- 
- // Tecplot header info
- fprintf(file_pt,"%s",tecplot_zone_string(nplot).c_str());
- 
- // Loop over plot points
- unsigned num_plot_points=nplot_points(nplot);
- for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-  {
-   // Get local coordinates of plot point
-   get_s_plot(iplot,nplot,s);
-   
-   // Coordinates
-   for(unsigned i=0;i<3;i++) 
-    {
-     fprintf(file_pt,"%g ",interpolated_x(s,i));
-    }
-   
-   // Velocities
-   for(unsigned i=0;i<3;i++) 
-    {
-     fprintf(file_pt,"%g ",interpolated_u(s,i));
-    }
-   
-   // Dummy Pressure
-   fprintf(file_pt,"%g \n",0.0);
-  }
- fprintf(file_pt,"\n");
- 
- // Write tecplot footer (e.g. FE connectivity lists)
- write_tecplot_zone_footer(file_pt,nplot);
-}
 
 }
