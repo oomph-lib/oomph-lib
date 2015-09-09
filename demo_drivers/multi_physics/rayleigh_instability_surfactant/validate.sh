@@ -5,7 +5,7 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=3
 
 
 # Setup validation directory
@@ -39,6 +39,29 @@ else
 ../../../../bin/fpdiff.py ../validata/rayleigh_surf.dat.gz \
     rayleigh_surf.dat 0.1 1.0e-14  >> validation.log
 fi
+
+echo "Running axisymmetric soluble surfactant Rayleigh--Plateau validation "
+mkdir RESLT
+../rayleigh_instability_soluble_surfactant lalala > ./OUTPUT_ray_sol_surf
+echo "done"
+echo " " >> validation.log
+echo "Axisymmetric soluble surfactant Rayleigh--Plateau  validation " >> validation.log
+echo "----------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat RESLT/int5.dat  > rayleigh_sol_surf.dat
+mv RESLT RESLT_axi_sol
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/rayleigh_sol_surf.dat.gz \
+    rayleigh_sol_surf.dat 0.1 1.0e-14  >> validation.log
+fi
+
 
 
 echo "Running 3D insoluble surfactant Rayleigh--Plateau validation "

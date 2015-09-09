@@ -38,6 +38,10 @@ namespace oomph
 double AxisymAdvectionDiffusionEquations::
 Default_peclet_number = 0.0;
 
+/// Default Diffusion coefficient
+ double AxisymAdvectionDiffusionEquations::
+ Default_diffusion_parameter = 1.0;
+ 
 
 //======================================================================
 /// \short Compute element residual Vector and/or element Jacobian matrix 
@@ -103,6 +107,7 @@ fill_in_generic_residual_contribution_axi_adv_diff(
    double dudt = 0.0;
    Vector<double> interpolated_x(2,0.0);
    Vector<double> interpolated_dudx(2,0.0);
+   Vector<double> mesh_velocity(2,0.0);
 
    //Calculate function value and derivatives:
    //-----------------------------------------
@@ -120,6 +125,18 @@ fill_in_generic_residual_contribution_axi_adv_diff(
        interpolated_dudx[j] += u_value*dpsidx(l,j);
       }
     }
+
+   if(!ALE_is_disabled)
+    {
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       for(unsigned j=0;j<2;j++)
+        {
+         mesh_velocity[j] += raw_dnodal_position_dt(l,j)*psi(l);
+        }
+      }
+    }
+
      
    //Get source function
    //-------------------
@@ -132,6 +149,9 @@ fill_in_generic_residual_contribution_axi_adv_diff(
    Vector<double> wind(3);
    get_wind_axi_adv_diff(ipt,s,interpolated_x,wind);
 
+   //Get the diffusion
+   double diff = this->d();
+   
    //r is the first position component
    double r = interpolated_x[0];
 
@@ -155,11 +175,17 @@ fill_in_generic_residual_contribution_axi_adv_diff(
        residuals[local_eqn] -= 
         //radial terms
         (interpolated_dudx[0]*
-         (scaled_peclet*wind[0]*test(l) + dtestdx(l,0)) +
+         (scaled_peclet*wind[0]*test(l) + diff*dtestdx(l,0)) +
          //azimuthal terms
          (interpolated_dudx[1]*
-          (scaled_peclet*wind[1]*test(l) + dtestdx(l,1))))*r*W;
+          (scaled_peclet*wind[1]*test(l) + diff*dtestdx(l,1))))*r*W;
 
+       if(!ALE_is_disabled)
+        {
+         residuals[local_eqn] += scaled_peclet_st*(
+          mesh_velocity[0]*interpolated_dudx[0] + 
+          mesh_velocity[1]*interpolated_dudx[1])*test(l)*r*W;
+        }
        
        // Calculate the jacobian
        //-----------------------
@@ -190,10 +216,18 @@ fill_in_generic_residual_contribution_axi_adv_diff(
              jacobian(local_eqn,local_unknown) -= 
               //radial terms
               (dpsidx(l2,0)*
-               (scaled_peclet*wind[0]*test(l) + dtestdx(l,0)) +
+               (scaled_peclet*wind[0]*test(l) + diff*dtestdx(l,0)) +
                //azimuthal terms
                (dpsidx(l2,1)*
-                (scaled_peclet*wind[1]*test(l) + dtestdx(l,1))))*r*W;
+                (scaled_peclet*wind[1]*test(l) + diff*dtestdx(l,1))))*r*W;
+
+             if(!ALE_is_disabled)
+              {
+               jacobian(local_eqn,local_unknown)
+                += scaled_peclet_st*(
+                 mesh_velocity[0]*dpsidx(l2,0) + 
+                 mesh_velocity[1]*dpsidx(l2,1))*test(l)*r*W;
+              }
             }
           }
         }

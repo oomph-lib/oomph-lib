@@ -75,11 +75,13 @@ public:
 
  /// \short Constructor: Initialise the Source_fct_pt and Wind_fct_pt 
  /// to null and set (pointer to) Peclet number to default
- AxisymAdvectionDiffusionEquations() : Source_fct_pt(0), Wind_fct_pt(0)
+  AxisymAdvectionDiffusionEquations() : Source_fct_pt(0), Wind_fct_pt(0),
+  ALE_is_disabled(false)
   {
    //Set pointer to Peclet number to the default value zero
    Pe_pt = &Default_peclet_number;
    PeSt_pt = &Default_peclet_number;
+   D_pt = &Default_diffusion_parameter;
   }
  
  /// Broken copy constructor
@@ -133,6 +135,24 @@ public:
    }
   return dudt;
  }
+
+ /// \short Disable ALE, i.e. assert the mesh is not moving -- you do this
+ /// at your own risk!
+ void disable_ALE()
+  {
+   ALE_is_disabled=true;
+  }
+
+
+ /// \short (Re-)enable ALE, i.e. take possible mesh motion into account
+ /// when evaluating the time-derivative. Note: By default, ALE is 
+ /// enabled, at the expense of possibly creating unnecessary work 
+ /// in problems where the mesh is, in fact, stationary. 
+ void enable_ALE()
+  {
+   ALE_is_disabled=false;
+  }
+
 
  /// \short Number of scalars/fields output by this element. Reimplements
  /// broken virtual function in base class.
@@ -293,6 +313,12 @@ public:
  /// Pointer to Peclet number multipled by Strouha number
  inline double* &pe_st_pt() {return PeSt_pt;}
 
+ /// Peclet number multiplied by Strouhal number
+ inline const double &d() const {return *D_pt;}
+
+ /// Pointer to Peclet number multipled by Strouha number
+ inline double* &d_pt() {return D_pt;}
+ 
  /// \short Get source term at (Eulerian) position x. This function is
  /// virtual to allow overloading in multi-physics problems where
  /// the strength of the source function might be determined by
@@ -521,17 +547,26 @@ protected:
  /// Pointer to global Peclet number multiplied by Strouhal number
  double *PeSt_pt;
 
+ /// Pointer to global Diffusion parameter
+ double *D_pt;
+ 
  /// Pointer to source function:
  AxisymAdvectionDiffusionSourceFctPt Source_fct_pt;
  
  /// Pointer to wind function:
  AxisymAdvectionDiffusionWindFctPt Wind_fct_pt;
 
+ /// Boolean flag to indicate whether AlE formulation is disable
+ bool ALE_is_disabled;
+
  private:
 
  /// Static default value for the Peclet number
  static double Default_peclet_number;
- 
+
+  /// Static default value for the Peclet number
+ static double Default_diffusion_parameter;;
+
   
 };//End class AxisymAdvectionDiffusionEquations
 

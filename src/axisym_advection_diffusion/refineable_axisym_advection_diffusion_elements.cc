@@ -76,7 +76,7 @@ int local_eqn=0, local_unknown=0;
 HangInfo *hang_info_pt=0, *hang_info2_pt=0;
 
 //Local variable to determine the ALE stuff
-// bool ALE_is_disabled_flag = this->ALE_is_disabled; 
+bool ALE_is_disabled_flag = this->ALE_is_disabled; 
 
 //Loop over the integration points
 for(unsigned ipt=0;ipt<n_intpt;ipt++)
@@ -103,7 +103,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
   //These need to be a Vector to be ANSI C++, initialise to zero
   Vector<double> interpolated_x(2,0.0);
   Vector<double> interpolated_dudx(2,0.0);
-  //Vector<double> mesh_velocity(DIM,0.0);
+  Vector<double> mesh_velocity(2,0.0);
   
   //Calculate function value and derivatives:
   //-----------------------------------------
@@ -124,17 +124,17 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
    }
   
   //Get the mesh velocity, if required
-/* if (!ALE_is_disabled_flag)
+  if (!ALE_is_disabled_flag)
    {
-   for(unsigned l=0;l<n_node;l++) 
-   {
-   // Loop over directions
-   for(unsigned j=0;j<2;j++)
-   {
-   mesh_velocity[j] += dnodal_position_dt(l,j)*psi(l);
+    for(unsigned l=0;l<n_node;l++) 
+     {
+      // Loop over directions
+      for(unsigned j=0;j<2;j++)
+       {
+        mesh_velocity[j] += dnodal_position_dt(l,j)*psi(l);
+       }
+     }
    }
-   }
-   }*/
   
   
   //Get body force
@@ -211,6 +211,15 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
          //azimuthal terms
          (interpolated_dudx[1]*
           (scaled_peclet*wind[1]*test(l) + dtestdx(l,1))))*r*W*hang_weight;
+
+       //ALE terms
+       if(!ALE_is_disabled)
+        {
+         residuals[local_eqn] += scaled_peclet_st*(
+          mesh_velocity[0]*interpolated_dudx[0] + 
+          mesh_velocity[1]*interpolated_dudx[1])*test(l)*r*W*hang_weight;
+        }
+   
        
        // Calculate the Jacobian
        if(flag)
@@ -285,6 +294,15 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
                  (dpsidx(l2,1)*
                   (scaled_peclet*wind[1]*test(l) + dtestdx(l,1))))*r*W*
                 hang_weight*hang_weight2;
+               
+               if(!ALE_is_disabled)
+                {
+                 jacobian(local_eqn,local_unknown)
+                  += scaled_peclet_st*(
+                   mesh_velocity[0]*dpsidx(l2,0) + 
+                   mesh_velocity[1]*dpsidx(l2,1))*test(l)*r*W*hang_weight*hang_weight2;
+                }
+               
               }
             } //End of loop over master nodes
           } //End of loop over nodes

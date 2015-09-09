@@ -61,14 +61,15 @@ private:
  /// Pointer to the surface Peclect Strouhal number
   double *Peclet_Strouhal_S_pt;
 
+protected:
+
  /// Index at which the surfactant concentration is stored at the
  /// nodes
  Vector<unsigned> C_index;
  
+
  /// Default value of the physical constants
  static double Default_Physical_Constant_Value;
-
-protected:
  
  ///Get the surfactant concentration
  double interpolated_C(const Vector<double> &s);
