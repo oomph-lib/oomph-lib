@@ -12,8 +12,30 @@ sources = triangle.c
 # C...
 headers = triangle.h
 
+if !HAVE_FPUCONTROLH
+
+fpu_control_h=fpu_control.h
+
+junk:
+	echo "dont have it"
+
+fpu_control.h:
+	rm -f fpu_control.h
+	$(LN_S) dummy_fpu_control.h fpu_control.h
+
+#headers+=fpu_control.h
+
+else
+	fpu_control_h=""
+
+junk:		
+	echo "have it"	
+
+endif
+
+
 #Specific compilation for triangle with no optimisation
-triangle.lo : triangle.c
+triangle.lo : triangle.c $(fpu_control_h)
 	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(AM_CFLAGS) -O0 -Wall \
@@ -92,5 +114,9 @@ endif
 # Cleanup: Kill automatically generated combined header file
 clean-local: 
 	rm -f $(libname).h
+	rm -f fpu_control.h
 distclean-local:
 	rm -f $(libname).h
+	rm -f fpu_control.h
+
+EXTRA_DIST=dummy_fpu_control.h

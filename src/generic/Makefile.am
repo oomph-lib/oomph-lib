@@ -190,8 +190,7 @@ library_include_HEADERS=$(headers) $(templates)
 #-------------------
 # Include path for library headers -- need to refer to include files
 # in src as they will not have been installed yet! 
-AM_CPPFLAGS += -I$(top_srcdir)/external_src 
-
+AM_CPPFLAGS += -I$(top_srcdir)/external_src -I$(top_srcdir)/external_src/oomph_tetgen
 
 
 

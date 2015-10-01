@@ -30,8 +30,10 @@
 
 #include "mesh.h"
 #include "Telements.h"
+
 //Include the data structure from tetgen
-#include "../../external_src/oomph_tetgen/tetgen.h"
+//#include "../../external_src/oomph_tetgen/tetgen.h"
+#include "oomph_tetgen/tetgen.h"
 
 namespace oomph
 {

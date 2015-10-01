@@ -196,6 +196,30 @@ if test x$have_unistdh = xtrue; then \
 fi;
 
 
+
+
+# Check for the fpu_control.h. Needed by triangle. If we don't have it
+# use an empty replacement (included via symbolic link during build process
+# and hope for the best...)
+AC_CHECK_HEADER(fpu_control.h,[have_fpucontrolh=true;
+                            echo "Found fpu_control.h -- can do triangle properly!";],
+                           [have_fpucontrolh=false;
+                            echo "Didn't find fpu_control.h -- using an empty replacement for triangle which may struggle... Keep an eye on it!";])
+
+# Pass result of test to automake (makefiles can now check for 
+# status of HAVE_FPUCONTROLH in any Makefile.am:
+AM_CONDITIONAL(HAVE_FPUCONTROLH, test x$have_fpucontrolh = xtrue)
+
+# Add flag (don't use the obvious HAVE_FPUCONTROLH as this may be used by
+# other packages too and may lead to clashes!)
+if test x$have_fpucontrolh = xtrue; then \
+    accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DOOMPH_HAS_FPUCONTROLH"`; \
+fi;
+
+
+
+
+
 # Does C compiler support const?
 AC_C_CONST
 

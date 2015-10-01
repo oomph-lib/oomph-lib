@@ -12,7 +12,7 @@ rayleigh_instability_soluble_surfactant
 
 
 # Sources for executable
-rayleigh_instability_insoluble_surfactant_SOURCES = rayleigh_instability_insoluble_surfactant.cc 
+rayleigh_instability_insoluble_surfactant_SOURCES = rayleigh_instability_insoluble_surfactant.cc axisymmetric_advection_navier_stokes_elements.h
 
 
 # Required libraries:

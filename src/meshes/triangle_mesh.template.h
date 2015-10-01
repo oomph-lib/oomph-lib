@@ -2321,12 +2321,27 @@ private:
 
   }
 
+
+  
   /// \short Get the associated vertex to the given s value by looking to
   /// the list of s values created when changing from curviline to polyline
   unsigned get_associated_vertex_to_svalue(
       double &target_s_value,
-      unsigned &bnd_id,
-      const double &s_tolerance = 1.0e-14)
+      unsigned &bnd_id) // hierher all const?
+  {
+   double s_tolerance=1.0e-14;
+   return get_associated_vertex_to_svalue(
+    target_s_value,
+    bnd_id,
+    s_tolerance);
+  }
+  
+  /// \short Get the associated vertex to the given s value by looking to
+  /// the list of s values created when changing from curviline to polyline
+  unsigned get_associated_vertex_to_svalue(
+   double &target_s_value,
+   unsigned &bnd_id,
+   double &s_tolerance)
   {
    // Create a pointer to the list of s coordinates and arclength values
    // associated with a vertex

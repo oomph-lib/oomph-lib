@@ -160,9 +160,13 @@ if [[ $generate_config_files == "true" ]]; then
     version_greater_equal_1_12_0()
     {
         # Put each value into a variable
-        v1=$(echo $1 | cut -d "." --output-delimiter=" " -f 1)
-        v2=$(echo $1 | cut -d "." --output-delimiter=" " -f 2)
-        v3=$(echo $1 | cut -d "." --output-delimiter=" " -f 3)
+        #v1=$(echo $1 | cut -d "." --output-delimiter=" " -f 1)
+        #v2=$(echo $1 | cut -d "." --output-delimiter=" " -f 2)
+        #v3=$(echo $1 | cut -d "." --output-delimiter=" " -f 3)
+
+        v1=$(echo $1 | cut -d "."  -f 1)
+        v2=$(echo $1 | cut -d "."  -f 2)
+        v3=$(echo $1 | cut -d "."  -f 3)
 
         # The values to compare against
         c1=1
@@ -231,7 +235,7 @@ confdir="config/configure.ac_scripts"
 
 # Generate a sorted list of all the makefiles in the project, wrap it into
 # an autoconfigure command and put it into a file.
-makefile_list="$(find -path './external_distributions' -prune \
+makefile_list="$(find . -path './external_distributions' -prune \
                     -o -type f -name 'Makefile.am' -print \
                 | sed -e 's:Makefile\.am:Makefile:' -e 's:^./::' \
                 | sort)"
@@ -332,9 +336,9 @@ if [[ "$new_configure_options" != "$old_configure_options" || "$generate_config_
 
     # Finally run configure itself to convert "Makefile.in"s into "Makefile"s
     echo
-    echo "Running ./configure --prefix $build_dir $new_configure_options $extra_configure_options"
+    echo "Running ./configure --prefix $build_dir $new_configure_options $extra_configure_options " # --disable-shared " # hierher
     echo
-    /bin/sh -c "./configure --prefix $build_dir $new_configure_options $extra_configure_options"
+    /bin/sh -c "./configure --prefix $build_dir $new_configure_options $extra_configure_options " # --disable-shared " # hierher
 
     # Test that the mpi commands work with these configure options
     # (automatically passes if no variable MPI_RUN_COMMAND in makefile).
