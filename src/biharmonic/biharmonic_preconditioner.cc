@@ -39,6 +39,7 @@ namespace oomph
 {
 
 #ifdef OOMPH_HAS_HYPRE
+
 //=============================================================================
 // defaults settings for the Hypre solver (AMG) when used as the approximate
 // linear solver for the Schur complement (non-compound) linear subsidiary 
@@ -47,22 +48,25 @@ namespace oomph
 namespace Biharmonic_schur_complement_Hypre_defaults
 {
 
- // smoother type - Jacobi
- unsigned amg_smoother = 3;
+ /// smoother type - Gauss Seidel: 1
+ unsigned AMG_smoother = 1;
 
- // amg coarsening strategy
- unsigned amg_coarsening = 3;
+ /// amg coarsening strategy: classical Ruge Stueben: 1
+ unsigned AMG_coarsening = 1;
 
- // number of V cycles
- unsigned n_cycle = 2;
+ /// number of V cycles: 2
+ unsigned N_cycle = 2;
 
- // amg strength parameter
- double amg_strength = 0.5;
+ /// amg strength parameter: 0.25 -- optimal for 2d
+ double AMG_strength = 0.25;
 
- // jacobi damping
- double amg_jacobi_damping = 0.1;
+ /// jacobi damping -- hierher not used 0.1
+ double AMG_jacobi_damping = 0.1;
 
- // set the defaults
+ /// amg smoother iterations
+ unsigned AMG_smoother_iterations=2;
+
+ /// set the defaults
  void set_defaults(HyprePreconditioner* hypre_prec_pt)
   {
 
@@ -70,22 +74,34 @@ namespace Biharmonic_schur_complement_Hypre_defaults
      hypre_prec_pt->hypre_method() = HypreSolver::BoomerAMG;
 
      // Smoother types
-     hypre_prec_pt->amg_simple_smoother() = amg_smoother;
+     hypre_prec_pt->amg_simple_smoother() = AMG_smoother;
 
      // jacobi damping
-//     hypre_prec_pt->amg_damping() = amg_jacobi_damping;    
+//     hypre_prec_pt->amg_damping() = AMG_jacobi_damping;    
  
      // coarsening stategy
-     hypre_prec_pt->amg_coarsening() = amg_coarsening;
+     hypre_prec_pt->amg_coarsening() = AMG_coarsening;
 
-     // number of cycles
-     hypre_prec_pt->amg_smoother_iterations() = n_cycle;
+     oomph_info << "Current number of v cycles: "
+                << hypre_prec_pt->amg_iterations() << std::endl;
+
+     // number of v-cycles
+     hypre_prec_pt->amg_iterations() = N_cycle;
      
+     oomph_info << "Re-assigned number of v cycles: "
+                << hypre_prec_pt->amg_iterations() << std::endl;
+
      // strength parameter
-     hypre_prec_pt->amg_strength() = amg_strength;
-     
-     // convergennce tolerance
-//     hypre_prec_pt->tolerance() = 0.0;
+     hypre_prec_pt->amg_strength() = AMG_strength;
+
+     // hierher new
+     oomph_info << "Current number of amg smoother iterations: "
+                << hypre_prec_pt->amg_smoother_iterations() << std::endl;
+
+     hypre_prec_pt->amg_smoother_iterations()=AMG_smoother_iterations;
+
+     oomph_info << "Re-assigned number of amg smoother iterations: "
+                << hypre_prec_pt->amg_smoother_iterations() << std::endl;
   }
 }
 #endif
@@ -132,35 +148,73 @@ namespace Biharmonic_schur_complement_Hypre_defaults
 #ifdef PARANOID
  if (Preconditioner_type != 0 && 
      Preconditioner_type != 1 && 
-     Preconditioner_type != 2)
+     Preconditioner_type != 2 &&
+     Preconditioner_type != 3  )
   {
    std::ostringstream error_message;
    error_message
-    << "Preconditioner_type must be equal to 0 (exact), 1 (inexact with LU) or"
-    << " 2 (inexact with AMG).";
+    << "Preconditioner_type must be equal to 0 (BBD exact), 1 (inexact BBD with LU),"
+    << " 2 (inexact BBD with AMG) or 3 (exact BD).";
    throw OomphLibError(error_message.str(),
                        OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);   
   }
 #endif
 
- // create the preconditioners
- if (Preconditioner_type == 0)
+ // create the preconditioners   
+ bool use_amg=true;
+ bool retain_all_blocks=false;
+ switch(Preconditioner_type)
   {
-   Sub_preconditioner_1_pt = new ExactSubBiharmonicPreconditioner(this); 
+   // Exact BBD
+  case 0:
+
+   retain_all_blocks=false;
+   Sub_preconditioner_1_pt = 
+    new ExactSubBiharmonicPreconditioner(this,retain_all_blocks);
    Sub_preconditioner_2_pt = new SuperLUPreconditioner;
-  }
- else
-  {
-   bool use_amg = false;
-   if (Preconditioner_type == 2)
-    {
-     use_amg = true;
-    }
+
+   oomph_info << "Using exact BBD\n";
+   break;
+
+   // Inexact BBD with LU
+  case 1:
+   
+   use_amg = false;
    Sub_preconditioner_1_pt = 
     new InexactSubBiharmonicPreconditioner(this,use_amg);
    Sub_preconditioner_2_pt = new MatrixBasedDiagPreconditioner;
+   oomph_info << "Using inexact BBD with LU\n";
+   break;
+
+
+   // Inexact BBD with AMG
+  case 2:
+
+   use_amg = true;
+   Sub_preconditioner_1_pt = 
+    new InexactSubBiharmonicPreconditioner(this,use_amg);
+   Sub_preconditioner_2_pt = new MatrixBasedDiagPreconditioner;
+   oomph_info << "Using inexact BBD with AMG\n";
+   break;
+
+   /// Exact BD
+  case 3: 
+
+   retain_all_blocks=true;
+   Sub_preconditioner_1_pt = 
+    new ExactSubBiharmonicPreconditioner(this,retain_all_blocks); 
+   Sub_preconditioner_2_pt = new SuperLUPreconditioner;
+
+   oomph_info << "Using exact BD\n";
+   break;
+
+  default:
+
+   oomph_info << "Never get here...\n";
+   abort();
   }
+
  
  // setup sub preconditioner pt 1
  Sub_preconditioner_1_pt->setup(matrix_pt());
@@ -265,8 +319,11 @@ void ExactSubBiharmonicPreconditioner::setup()
   }
 
   // Which blocks do we not want?
-  required_blocks[1][2].do_not_want_block();
-  required_blocks[2][1].do_not_want_block();
+  if (!Retain_all_blocks)
+   {
+    required_blocks[1][2].do_not_want_block();
+    required_blocks[2][1].do_not_want_block();
+   }
 
   // Get the preconditioner matrix as defined by required_blocks
   CRDoubleMatrix preconditioner_matrix

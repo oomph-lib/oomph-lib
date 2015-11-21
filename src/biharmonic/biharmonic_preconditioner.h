@@ -51,6 +51,40 @@ namespace oomph
 {
 
 
+#ifdef OOMPH_HAS_HYPRE
+
+//=============================================================================
+// defaults settings for the Hypre solver (AMG) when used as the approximate
+// linear solver for the Schur complement (non-compound) linear subsidiary 
+// linear systems
+//=============================================================================
+namespace Biharmonic_schur_complement_Hypre_defaults
+{
+
+ /// smoother type - Gauss Seidel: 1
+ extern unsigned AMG_smoother;
+
+ /// amg coarsening strategy: classical Ruge Stueben: 1
+ extern unsigned AMG_coarsening;
+
+ /// number of V cycles: 2
+ extern unsigned N_cycle;
+
+ /// amg strength parameter: 0.25 -- optimal for 2d
+ extern double AMG_strength;
+
+ /// jacobi damping -- hierher not used 0.1;
+ extern double AMG_jacobi_damping;
+
+ /// Amg smoother iterations: 2
+ extern unsigned AMG_smoother_iterations;
+
+ /// set the defaults
+ extern void set_defaults(HyprePreconditioner* hypre_prec_pt);
+
+}
+#endif
+
 
 
 //=============================================================================
@@ -116,9 +150,10 @@ namespace oomph
    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
    
    /// \short Access function to the preconditioner type \n
-   /// + 0 : exact \n
-   /// + 1 : inexact w/ SuperLU \n
-   /// + 2 : inexact w/ AMG (Hypre Boomer AMG)
+   /// + 0 : exact BBD \n
+   /// + 1 : inexact BBD w/ SuperLU \n
+   /// + 2 : inexact BBD w/ AMG (Hypre Boomer AMG)
+   /// + 3 : block diagonal (3x3)+(1x1)
    unsigned& preconditioner_type()
     {
      return Preconditioner_type;
@@ -135,9 +170,10 @@ namespace oomph
     private:
 
    /// preconditioner type \n
-   /// + 0 : exact \n
-   /// + 1 : inexact w/ SuperLU \n
-   /// + 2 : inexact w/ AMG
+   /// + 0 : exact BBD \n
+   /// + 1 : inexact BBD w/ SuperLU \n
+   /// + 2 : inexact BBD w/ AMG
+   /// + 3 : block diagonal (3x3)+(1x1)
    unsigned Preconditioner_type;
 
    /// Exact Preconditioner Pointer
@@ -158,7 +194,10 @@ namespace oomph
 //=============================================================================
 /// \short Sub Biharmonic Preconditioner - an exact preconditioner for the 
 /// 3x3 top left hand corner sub block matrix.
-/// Used as part of the BiharmonicPreconditioner<MATRIX> 
+/// Used as part of the BiharmonicPreconditioner<MATRIX> .
+/// By default this uses the BBD (block-bordered-diagonal/arrow-shaped)
+/// preconditioner; can also switch to full BD version (in which case
+/// all the 3x3 blocks are retained)
 //=============================================================================
 class ExactSubBiharmonicPreconditioner 
  : public BlockPreconditioner<CRDoubleMatrix>
@@ -167,9 +206,10 @@ class ExactSubBiharmonicPreconditioner
   public :
    
    /// \short Constructor - for a preconditioner acting as a sub preconditioner
-   ExactSubBiharmonicPreconditioner(BiharmonicPreconditioner* master_prec_pt)
+  ExactSubBiharmonicPreconditioner(BiharmonicPreconditioner* master_prec_pt,
+                                   const bool& retain_all_blocks=false) :
+  Retain_all_blocks(retain_all_blocks)
    {
-    
     // Block mapping for ExactSubBiharmonicPreconditioner
     Vector<unsigned> block_lookup(3);
     block_lookup[0] = 0;
@@ -218,6 +258,11 @@ class ExactSubBiharmonicPreconditioner
 
   // Pointer to the sub preconditioner
   Preconditioner* Sub_preconditioner_pt;
+
+
+  /// Boolean indicating that all blocks are to be retained (defaults to false)
+  bool Retain_all_blocks;
+
  };
  
 //=============================================================================
