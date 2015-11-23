@@ -50,9 +50,9 @@ namespace oomph
 /// A class for all isoparametric elements that solve the
 /// Foeppl von Karman equations.
 /// \f[
-/// \nabla^4 w - \eta \frac{\partial}{\partial x_{\beta}} 
-///                    \left( \sigma^{\alpha \beta}
-///                           \frac{\partial w}{\partial x_{\alpha}}
+/// \nabla^4 w -  12  \frac{\partial}{\partial x_{\beta}} 
+///                   \left( \sigma^{\alpha \beta}
+///                          \frac{\partial w}{\partial x_{\alpha}}
 ///                   \right) = p(x,y)
 /// \f]
 /// and
@@ -81,333 +81,272 @@ public:
  /// Traction_fct_pt. Also set physical parameters to their default
  /// values.
  FoepplvonKarmanDisplacementEquations() 
-   : Pressure_fct_pt(0), Traction_fct_pt(0)
-   {
-     //Set all the physical constants to the default value (zero)
-     Eta_pt = &Default_Physical_Constant_Value;
-     Nu_pt = &Default_Physical_Constant_Value;
-     
-     Linear_bending_model = false;
-     Linear_strain = false;
-     // Symmetric?
-     Multiply_displacements_by_eta = false;
-     // Use the non eta version by default
-     Use_eta_version = false;
-     // Uncouple the W from the U_alpha part
-     Uncoupled_system = false;
-     // Only elasticity
-     Use_only_elasticity_model = false;
-     
-   }
+  : Pressure_fct_pt(0), Traction_fct_pt(0)
+  {
+   //Set default
+   Nu_pt = &Default_Nu_Value;
+   
+   // Linear bending model?
+   Linear_bending_model = false;
+  }
  
  /// Broken copy constructor
  FoepplvonKarmanDisplacementEquations(const FoepplvonKarmanDisplacementEquations& dummy)
-   {
-     BrokenCopy::broken_copy("FoepplvonKarmanDisplacementEquations");
-   }
+  {
+   BrokenCopy::broken_copy("FoepplvonKarmanDisplacementEquations");
+  }
  
-  /// Broken assignment operator
-  void operator=(const FoepplvonKarmanDisplacementEquations&)
+ /// Broken assignment operator
+ void operator=(const FoepplvonKarmanDisplacementEquations&)
   {
-    BrokenCopy::broken_assign("FoepplvonKarmanDisplacementEquations");
+   BrokenCopy::broken_assign("FoepplvonKarmanDisplacementEquations");
   }
-  
-  // Access functions for the physical constants
-  
-  /// Eta
-  const double &eta() const {return *Eta_pt;}
-  
-  /// Pointer to eta
-  double* &eta_pt() {return Eta_pt;}
-    
-  /// Poisson's ratio
-  const double &nu() const {return *Nu_pt;}
-  
-  /// Pointer to Poisson's ratio
-  double* &nu_pt() {return Nu_pt;}
-  
-  /// \short Return the index at which the i-th unknown value
-  /// is stored. The default value, i, is appropriate for single-physics
-  /// problems. By default, these are:
-  /// 0: w
-  /// 1: laplacian w
-  /// 2: u_x
-  /// 3: u_y
-  /// In derived multi-physics elements, this function should be overloaded
-  /// to reflect the chosen storage scheme. Note that these equations require
-  /// that the unknown is always stored at the same index at each node.
-  virtual inline unsigned nodal_index_fvk(const unsigned& i=0) const {return i;}
-  
-  /// Output with default number of plot points
-  void output(std::ostream &outfile)
-  {
-    const unsigned n_plot=5;
-    output(outfile,n_plot);
-  }
-  
-  /// \short Output FE representation of soln: x,y,w at
-  /// n_plot^DIM plot points
-  void output(std::ostream &outfile, const unsigned &n_plot);
-  
-  /// C_style output with default number of plot points
-  void output(FILE* file_pt)
-  {
-    const unsigned n_plot=5;
-    output(file_pt,n_plot);
-  }
-  
-  /// \short C-style output FE representation of soln: x,y,w at
-  /// n_plot^DIM plot points
-  void output(FILE* file_pt, const unsigned &n_plot);
-  
-  /// Output exact soln: x,y,w_exact at n_plot^DIM plot points
-  void output_fct(std::ostream &outfile, const unsigned &n_plot,
-                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
-  
-  /// \short Output exact soln: x,y,w_exact at
-  /// n_plot^DIM plot points (dummy time-dependent version to
-  /// keep intel compiler happy)
-  virtual void output_fct(std::ostream &outfile, const unsigned &n_plot,
-                          const double& time,
-                          FiniteElement::UnsteadyExactSolutionFctPt
-                          exact_soln_pt)
-  {
-    throw OomphLibError(
-    "There is no time-dependent output_fct() for Foeppl von Karman"
-    "elements ",
+ 
+ /// Poisson's ratio
+ const double &nu() const {return *Nu_pt;}
+ 
+ /// Pointer to Poisson's ratio
+ double* &nu_pt() {return Nu_pt;}
+ 
+ /// \short Return the index at which the i-th unknown value
+ /// is stored. The default value, i, is appropriate for single-physics
+ /// problems. By default, these are:
+ /// 0: w
+ /// 1: laplacian w
+ /// 2: u_x
+ /// 3: u_y
+ /// In derived multi-physics elements, this function should be overloaded
+ /// to reflect the chosen storage scheme. Note that these equations require
+ /// that the unknown is always stored at the same index at each node.
+ virtual inline unsigned nodal_index_fvk(const unsigned& i=0) const {return i;}
+ 
+ /// Output with default number of plot points
+ void output(std::ostream &outfile)
+ {
+  const unsigned n_plot=5;
+  output(outfile,n_plot);
+ }
+ 
+ /// \short Output FE representation of soln: x,y,w at
+ /// n_plot^DIM plot points
+ void output(std::ostream &outfile, const unsigned &n_plot);
+ 
+ /// C_style output with default number of plot points
+ void output(FILE* file_pt)
+ {
+  const unsigned n_plot=5;
+  output(file_pt,n_plot);
+ }
+ 
+ /// \short C-style output FE representation of soln: x,y,w at
+ /// n_plot^DIM plot points
+ void output(FILE* file_pt, const unsigned &n_plot);
+ 
+ /// Output exact soln: x,y,w_exact at n_plot^DIM plot points
+ void output_fct(std::ostream &outfile, const unsigned &n_plot,
+                 FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
+ 
+ /// \short Output exact soln: x,y,w_exact at
+ /// n_plot^DIM plot points (dummy time-dependent version to
+ /// keep intel compiler happy)
+ virtual void output_fct(std::ostream &outfile, const unsigned &n_plot,
+                         const double& time,
+                         FiniteElement::UnsteadyExactSolutionFctPt
+                         exact_soln_pt)
+ {
+  throw OomphLibError(
+   "There is no time-dependent output_fct() for Foeppl von Karman"
+   "elements ",
     OOMPH_CURRENT_FUNCTION,
-    OOMPH_EXCEPTION_LOCATION);
+   OOMPH_EXCEPTION_LOCATION);
   }
-
-  
-  /// Get error against and norm of exact solution
-  void compute_error(std::ostream &outfile,
-                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                     double& error, double& norm);
-  
-  
-  /// Dummy, time dependent error checker
-  void compute_error(std::ostream &outfile,
-                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                     const double& time, double& error, double& norm)
-  {
-    throw OomphLibError(
-    "There is no time-dependent compute_error() for Foeppl von Karman"
-    "elements",
-    OOMPH_CURRENT_FUNCTION,
-    OOMPH_EXCEPTION_LOCATION);
-  }
-  
-  /// Access function: Pointer to pressure function
-  FoepplvonKarmanPressureFctPt& pressure_fct_pt() {return Pressure_fct_pt;}
-  
-  /// Access function: Pointer to pressure function. Const version
-  FoepplvonKarmanPressureFctPt pressure_fct_pt() const
-  {return Pressure_fct_pt;}
-  
-  /// Access function: Pointer to traction function
-  FoepplvonKarmanTractionFctPt& traction_fct_pt() {return Traction_fct_pt;}
-  
-  /// Access function: Pointer to traction function. Const version
-  FoepplvonKarmanTractionFctPt traction_fct_pt() const
-  {return Traction_fct_pt;}
-  
-  /// \short Get pressure term at (Eulerian) position x. This function
-  /// is virtual to allow overloading in multi-physics problems where
-  /// the strength of the pressure function might be determined by
-  /// another system of equations.
-  inline virtual void get_pressure_fvk(const unsigned& ipt,
-                                       const Vector<double>& x,
-                                       double& pressure) const
-  {
-    //If no pressure function has been set, return zero
-    if(Pressure_fct_pt==0) {pressure = 0.0;}
-    else
-      {
-        // Get pressure strength
-        (*Pressure_fct_pt)(x,pressure);
-      }
-  }
-  
-  /// \short Get traction term at (Eulerian) position x.
-  inline virtual void get_traction_fvk(Vector<double>& x,
-                                       Vector<double>& traction) const
-  {
-    //If no pressure function has been set, return zero
-    if(Traction_fct_pt==0)
-      {
-        traction[0] = 0.0;
-        traction[1] = 0.0;
-      }
-    else
-      {
-        // Get traction
-        (*Traction_fct_pt)(x,traction);
-      }
-  }
-  
-  /// Get gradient of deflection: gradient[i] = dw/dx_i
+ 
+ 
+ /// Get error against and norm of exact solution
+ void compute_error(std::ostream &outfile,
+                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+                    double& error, double& norm);
+ 
+ 
+ /// Dummy, time dependent error checker
+ void compute_error(std::ostream &outfile,
+                    FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+                    const double& time, double& error, double& norm)
+ {
+  throw OomphLibError(
+   "There is no time-dependent compute_error() for Foeppl von Karman"
+   "elements",
+   OOMPH_CURRENT_FUNCTION,
+   OOMPH_EXCEPTION_LOCATION);
+ }
+ 
+ /// Access function: Pointer to pressure function
+ FoepplvonKarmanPressureFctPt& pressure_fct_pt() {return Pressure_fct_pt;}
+ 
+ /// Access function: Pointer to pressure function. Const version
+ FoepplvonKarmanPressureFctPt pressure_fct_pt() const
+ {return Pressure_fct_pt;}
+ 
+ /// Access function: Pointer to in-plane traction function
+ FoepplvonKarmanTractionFctPt& traction_fct_pt() {return Traction_fct_pt;}
+ 
+ /// Access function: Pointer to in-plane traction function. Const version
+ FoepplvonKarmanTractionFctPt traction_fct_pt() const
+ {return Traction_fct_pt;}
+ 
+ /// \short Get pressure term at (Eulerian) position x. This function
+ /// is virtual to allow overloading in multi-physics problems where
+ /// the strength of the pressure function might be determined by
+ /// another system of equations.
+ inline virtual void get_pressure_fvk(const unsigned& ipt,
+                                      const Vector<double>& x,
+                                      double& pressure) const
+ {
+  //If no pressure function has been set, return zero
+  if(Pressure_fct_pt==0) {pressure = 0.0;}
+  else
+   {
+    // Get pressure strength
+    (*Pressure_fct_pt)(x,pressure);
+   }
+ }
+ 
+ /// \short Get in-plane traction term at (Eulerian) position x.
+ inline virtual void get_traction_fvk(Vector<double>& x,
+                                      Vector<double>& traction) const
+ {
+  //If no pressure function has been set, return zero
+  if(Traction_fct_pt==0)
+   {
+    traction[0] = 0.0;
+    traction[1] = 0.0;
+   }
+  else
+   {
+    // Get traction
+    (*Traction_fct_pt)(x,traction);
+   }
+ }
+ 
+ /// Get gradient of deflection: gradient[i] = dw/dx_i
   void get_gradient_of_deflection(const Vector<double>& s,
                                   Vector<double>& gradient) const
   {
-    //Find out how many nodes there are in the element
-    const unsigned n_node = nnode();
-    
-    //Get the index at which the unknown is stored
-    // Indexes for unknows are
-    // 0: W (vertical displacement)
-    // 1: L (laplacian of W)
-    // 2: Ux (In plane displacement x)
-    // 3: Uy (In plane displacement y)
-    unsigned w_nodal_index = nodal_index_fvk(0);
-    
+   //Find out how many nodes there are in the element
+   const unsigned n_node = nnode();
+   
+   //Get the index at which the unknown is stored
+   // Indexes for unknows are
+   // 0: W (vertical displacement)
+   // 1: L (laplacian of W)
+   // 2: Ux (In plane displacement x)
+   // 3: Uy (In plane displacement y)
+   unsigned w_nodal_index = nodal_index_fvk(0);
+   
+   // hierher julio please kill these ifdefs. In any case
+   // this function should always do what its name says to
+   // the ifdef should live in the error estimation function
 #ifdef T_ADAPT_BASED_ON_L
-    w_nodal_index = nodal_index_fvk(1);
+   w_nodal_index = nodal_index_fvk(1);
 #endif // #ifdef T_ADAPT_BASED_ON_L
-    
-    //Set up memory for the shape and test functions
-    Shape psi(n_node);
-    DShape dpsidx(n_node,2);
-    
-    //Call the derivatives of the shape and test functions
-    dshape_eulerian(s,psi,dpsidx);
-    
-    //Initialise to zero
-    for(unsigned j=0;j<2;j++)
+   
+   //Set up memory for the shape and test functions
+   Shape psi(n_node);
+   DShape dpsidx(n_node,2);
+   
+   //Call the derivatives of the shape and test functions
+   dshape_eulerian(s,psi,dpsidx);
+   
+   //Initialise to zero
+   for(unsigned j=0;j<2;j++)
+    {
+     gradient[j] = 0.0;
+    }
+   
+   // Loop over nodes
+   for(unsigned l=0;l<n_node;l++)
+    {
+     //Loop over derivative directions
+     for(unsigned j=0;j<2;j++)
       {
-        gradient[j] = 0.0;
+       gradient[j] += this->nodal_value(l,w_nodal_index)*dpsidx(l,j);
       }
-    
-    // Loop over nodes
-    for(unsigned l=0;l<n_node;l++)
-      {
-        //Loop over derivative directions
-        for(unsigned j=0;j<2;j++)
-          {
-            gradient[j] += this->nodal_value(l,w_nodal_index)*dpsidx(l,j);
-          }
-      }
+    }
   }
   
-  /// Get gradient of deflection: gradient[i] = dw/dx_i
-  void get_gradient_of_deflection(const Vector<double>& s,
-                                  Vector<double>& gradient, 
-                                  const unsigned &index) const
+  /// Get gradient of field: gradient[i] = d[.]/dx_i,
+  // Indices for fields are
+  // 0: W (vertical displacement)
+  // 1: L (laplacian of W)
+  // 2: Ux (In plane displacement x)
+  // 3: Uy (In plane displacement y)
+  void get_gradient_of_field(const Vector<double>& s,
+                             Vector<double>& gradient, 
+                             const unsigned &index) const
   {
-    //Find out how many nodes there are in the element
-    const unsigned n_node = nnode();
-    
-    //Get the index at which the unknown is stored
-    // Indexes for unknows are
-    // 0: W (vertical displacement)
-    // 1: L (laplacian of W)
-    // 2: Ux (In plane displacement x)
-    // 3: Uy (In plane displacement y)
-    const unsigned w_nodal_index = nodal_index_fvk(index);
-    
-    //Set up memory for the shape and test functions
-    Shape psi(n_node);
-    DShape dpsidx(n_node,2);
-    
-    //Call the derivatives of the shape and test functions
-    dshape_eulerian(s,psi,dpsidx);
-    
-    //Initialise to zero
-    for(unsigned j=0;j<2;j++)
+   //Find out how many nodes there are in the element
+   const unsigned n_node = nnode();
+   
+   //Get the index at which the unknown is stored
+   // Indexes for unknows are
+   // 0: W (vertical displacement)
+   // 1: L (laplacian of W)
+   // 2: Ux (In plane displacement x)
+   // 3: Uy (In plane displacement y)
+   const unsigned w_nodal_index = nodal_index_fvk(index);
+   
+   //Set up memory for the shape and test functions
+   Shape psi(n_node);
+   DShape dpsidx(n_node,2);
+   
+   //Call the derivatives of the shape and test functions
+   dshape_eulerian(s,psi,dpsidx);
+   
+   //Initialise to zero
+   for(unsigned j=0;j<2;j++)
+    {
+     gradient[j] = 0.0;
+    }
+   
+   // Loop over nodes
+   for(unsigned l=0;l<n_node;l++)
+    {
+     //Loop over derivative directions
+     for(unsigned j=0;j<2;j++)
       {
-        gradient[j] = 0.0;
+       gradient[j] += this->nodal_value(l,w_nodal_index)*dpsidx(l,j);
       }
-    
-    // Loop over nodes
-    for(unsigned l=0;l<n_node;l++)
-      {
-        //Loop over derivative directions
-        for(unsigned j=0;j<2;j++)
-          {
-            gradient[j] += this->nodal_value(l,w_nodal_index)*dpsidx(l,j);
-          }
-      }
+    }
   }
-  
-  /// Get the stress (sigma)
+
+  /// Get the in-plane stress (sigma) as a fct of the pre=computed
+  /// displcement derivatives
   void get_sigma(DenseMatrix<double> &sigma, 
-                 Vector<double> &interpolated_dwdx,
-                 Vector<double> &interpolated_duxdx,
-                 Vector<double> &interpolated_duydx)
+                 const Vector<double> &interpolated_dwdx,
+                 const Vector<double> &interpolated_duxdx,
+                 const Vector<double> &interpolated_duydx)
   {
-    // The strain tensor values
-    double e_xx = interpolated_duxdx[0];
-    if (!Linear_strain)
-      {
-        e_xx+= 0.5 * interpolated_dwdx[0] * interpolated_dwdx[0];
-      }
-    
-    double e_yy = interpolated_duydx[1];
-    if (!Linear_strain)
-      {
-        e_yy+= 0.5 * interpolated_dwdx[1] * interpolated_dwdx[1];
-      }
-    
-    double e_xy = 0.5 * (interpolated_duxdx[1] + interpolated_duydx[0]);
-    if (!Linear_strain)
-      {
-        e_xy+= 0.5 * interpolated_dwdx[0] * interpolated_dwdx[1];
-      }
-    
-    // Get Poisson's ratio
-    const double _nu = nu();
-    const double nu_square = _nu * _nu;
-    
-    // The stress tensor values
-    // sigma_xx
-    sigma(0,0) = (e_xx + _nu*e_yy)/(1.0 - nu_square);
-    
-    // sigma_yy
-    sigma(1,1) = (e_yy + _nu*e_xx)/(1.0 - nu_square);
-    
-    // sigma_xy = sigma_yx
-    sigma(0,1) = sigma(1,0) = e_xy/(1.0 + _nu);
-    
-  }
-  
-  /// Get the stress (sigma)
-  void get_sigma_non_eta(DenseMatrix<double> &sigma, 
-                         Vector<double> &interpolated_dwdx,
-                         Vector<double> &interpolated_duxdx,
-                         Vector<double> &interpolated_duydx)
-  {
-    // The strain tensor values
-    double e_xx = interpolated_duxdx[0];
-    if (!Linear_strain)
-      {
-        e_xx+= 0.5 * interpolated_dwdx[0] * interpolated_dwdx[0];
-      }
-    
-    double e_yy = interpolated_duydx[1];
-    if (!Linear_strain)
-      {
-        e_yy+= 0.5 * interpolated_dwdx[1] * interpolated_dwdx[1];
-      }
-    
-    double e_xy = 0.5 * (interpolated_duxdx[1] + interpolated_duydx[0]);
-    if (!Linear_strain)
-      {
-        e_xy+= 0.5 * interpolated_dwdx[0] * interpolated_dwdx[1];
-      }
-    
-    // Get Poisson's ratio
-    const double _nu = nu();
-    
-    // The stress tensor values
-    // sigma_xx
-    sigma(0,0) = (e_xx + _nu*e_yy);
-    
-    // sigma_yy
-    sigma(1,1) = (e_yy + _nu*e_xx);
-        
-    // sigma_xy = sigma_yx
-    sigma(0,1) = sigma(1,0) = e_xy*(1.0 - _nu);
-    
+   // The strain tensor values
+   double e_xx = interpolated_duxdx[0];
+   double e_yy = interpolated_duydx[1];
+   double e_xy = 0.5 * (interpolated_duxdx[1] + interpolated_duydx[0]);
+   e_xx+= 0.5 * interpolated_dwdx[0] * interpolated_dwdx[0];
+   e_yy+= 0.5 * interpolated_dwdx[1] * interpolated_dwdx[1];
+   e_xy+= 0.5 * interpolated_dwdx[0] * interpolated_dwdx[1];
+     
+   // Get Poisson's ratio
+   const double _nu = nu();
+   
+   // The stress tensor values
+   // sigma_xx
+   sigma(0,0) = (e_xx + _nu*e_yy);
+   
+   // sigma_yy
+   sigma(1,1) = (e_yy + _nu*e_xx);
+   
+   // sigma_xy = sigma_yx
+   sigma(0,1) = sigma(1,0) = e_xy*(1.0 - _nu);
+   
   }
   
   // Get the stress for output
@@ -448,9 +387,9 @@ public:
     for(unsigned l=0;l<n_node;l++)
       {
         //Get the nodal values
-        nodal_value[0] = raw_nodal_value(l,w_nodal_index);
-        nodal_value[2] = raw_nodal_value(l,u_x_nodal_index);
-        nodal_value[3] = raw_nodal_value(l,u_y_nodal_index);
+        nodal_value[0] = this->nodal_value(l,w_nodal_index);
+        nodal_value[2] = this->nodal_value(l,u_x_nodal_index);
+        nodal_value[3] = this->nodal_value(l,u_y_nodal_index);
         
         //Add contributions from current node/shape function
         
@@ -464,621 +403,310 @@ public:
           } // Loop over directions for (j<2)
         
       } // Loop over nodes for (l<n_node)
+
+
+    // Get in-plane stress
+    get_sigma(sigma, interpolated_dwdx, 
+              interpolated_duxdx, interpolated_duydx);
     
-    /// Are we working with the eta or the non eta version
-    if (Use_eta_version)
-      {
-        get_sigma(sigma, interpolated_dwdx, 
-                  interpolated_duxdx, interpolated_duydx);
-      }
-    else 
-      {
-        get_sigma_non_eta(sigma, interpolated_dwdx, 
-                          interpolated_duxdx, interpolated_duydx);        
-      }
     
     // The strain tensor values
     // E_xx
     strain(0,0) = interpolated_duxdx[0];
-    if (!Linear_strain)
-      {
-        strain(0,0)+= 0.5 * interpolated_dwdx[0] * interpolated_dwdx[0];
-      }
+    strain(0,0)+= 0.5 * interpolated_dwdx[0] * interpolated_dwdx[0];
     
     // E_yy
     strain(1,1) = interpolated_duydx[1];
-    if (!Linear_strain)
-      {
-        strain(1,1)+= 0.5 * interpolated_dwdx[1] * interpolated_dwdx[1];
-      }
+    strain(1,1)+= 0.5 * interpolated_dwdx[1] * interpolated_dwdx[1];
     
     // E_xy
     strain(0,1) = 0.5 * (interpolated_duxdx[1] + interpolated_duydx[0]);
-    if (!Linear_strain)
-      {
-        strain(0,1)+= 0.5 * interpolated_dwdx[0] * interpolated_dwdx[1];
-      }
+    strain(0,1)+= 0.5 * interpolated_dwdx[0] * interpolated_dwdx[1];
     
     // E_yx
     strain(1,0)=strain(0,1);
     
   }
   
+
+  /// hierher dummy
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
+  DenseMatrix<double> &mass_matrix)
+  { 
+
+   // Get Jacobian from base class (FD-ed)
+   FiniteElement::fill_in_contribution_to_jacobian(residuals,
+                                                   jacobian);
+
+   // Dummy diagonal (won't result in global unit matrix but
+   // doesn't matter for zero eigenvalue/eigenvector
+   unsigned ndof=mass_matrix.nrow();
+   for (unsigned i=0;i<ndof;i++)
+    {
+     mass_matrix(i,i)+=1.0;
+    }
+
+  }
+
+
+
+
   /// Fill in the residuals with this element's contribution
   void fill_in_contribution_to_residuals(Vector<double> &residuals)
   {
-    // Check whether we are usign the version that considers the eta
-    // parameter or the version that does not considers the eta
-    // parameter
-    if (Use_eta_version)
+   //Find out how many nodes there are
+   const unsigned n_node = nnode();
+   
+   //Set up memory for the shape and test functions
+   Shape psi(n_node), test(n_node);
+   DShape dpsidx(n_node,2), dtestdx(n_node,2);
+   
+   //Indices at which the unknowns are stored
+   const unsigned w_nodal_index = nodal_index_fvk(0);
+   const unsigned laplacian_w_nodal_index = nodal_index_fvk(1);
+   const unsigned u_x_nodal_index = nodal_index_fvk(2);
+   const unsigned u_y_nodal_index = nodal_index_fvk(3);
+   
+   //Set the value of n_intpt
+   const unsigned n_intpt = integral_pt()->nweight();
+   
+   //Integers to store the local equation numbers
+   int local_eqn=0;
+   
+   //Loop over the integration points
+   for(unsigned ipt=0;ipt<n_intpt;ipt++)
+    {
+     //Get the integral weight
+     double w = integral_pt()->weight(ipt);
+     
+     //Call the derivatives of the shape and test functions
+     double J = dshape_and_dtest_eulerian_at_knot_fvk(ipt,psi,dpsidx,
+                                                      test,dtestdx);
+     
+     //Premultiply the weights and the Jacobian
+     double W = w*J;
+     
+     //Allocate and initialise to zero storage for the interpolated values
+     Vector<double> interpolated_x(2,0.0);
+     
+     // The variables
+     double interpolated_laplacian_w = 0;
+     Vector<double> interpolated_dwdx(2,0.0);
+     Vector<double> interpolated_dlaplacian_wdx(2,0.0); 
+     Vector<double> interpolated_duxdx(2,0.0);
+     Vector<double> interpolated_duydx(2,0.0);
+     
+     //--------------------------------------------
+     //Calculate function values and derivatives:
+     //--------------------------------------------
+     Vector<double> nodal_value(4,0.0);
+     // Loop over nodes
+     for(unsigned l=0;l<n_node;l++)
       {
-        // Call the eta version
-        fill_in_contribution_to_residuals_eta_version(residuals);
-      }
-    else
+       //Get the nodal values
+       nodal_value[0] = this->nodal_value(l,w_nodal_index);
+       nodal_value[1] = this->nodal_value(l,laplacian_w_nodal_index);
+       nodal_value[2] = this->nodal_value(l,u_x_nodal_index);
+       nodal_value[3] = this->nodal_value(l,u_y_nodal_index);
+       
+       //Add contributions from current node/shape function
+       interpolated_laplacian_w += nodal_value[1]*psi(l);
+       
+       // Loop over directions
+       for(unsigned j=0;j<2;j++)
+        {
+         interpolated_x[j] += nodal_position(l,j)*psi(l);
+         interpolated_dwdx[j] += nodal_value[0]*dpsidx(l,j);
+         interpolated_dlaplacian_wdx[j] += nodal_value[1]*dpsidx(l,j);
+         interpolated_duxdx[j] += nodal_value[2]*dpsidx(l,j);
+         interpolated_duydx[j] += nodal_value[3]*dpsidx(l,j);
+         
+        } // Loop over directions for (j<2)
+       
+      } // Loop over nodes for (l<n_node)
+     
+     // Get in-plane stress
+     DenseMatrix<double> sigma(2,2,0.0);
+
+     // Stress not used if we have the linear bending model
+     if(!Linear_bending_model)
       {
-        // Call the non eta version
-        fill_in_contribution_to_residuals_noneta_version(residuals);
+       // Get the value of in plane stress at the integration
+       // point
+       get_sigma(sigma, interpolated_dwdx, 
+                 interpolated_duxdx, interpolated_duydx);
       }
-    
+        
+     //Get pressure function
+     //-------------------
+     double pressure = 0.0;
+     get_pressure_fvk(ipt,interpolated_x,pressure);
+     
+     // Assemble residuals and Jacobian
+     //--------------------------------
+     
+     // Loop over the test functions
+     for(unsigned l=0;l<n_node;l++)
+      {
+       //Get the local equation (First equation)
+       local_eqn = nodal_local_eqn(l,w_nodal_index);
+       
+       // IF it's not a boundary condition
+       if(local_eqn >= 0)
+        {
+         residuals[local_eqn] += pressure*test(l)*W;
+         
+         // Reduced order biharmonic operator
+         for(unsigned k=0;k<2;k++)
+          {
+           residuals[local_eqn] += 
+            interpolated_dlaplacian_wdx[k]*dtestdx(l,k)*W;
+          }
+         
+         // Sigma_alpha_beta part
+         if(!Linear_bending_model)
+          {
+           // Alpha loop
+           for (unsigned alpha=0;alpha<2;alpha++)
+            {
+             // Beta loop
+             for(unsigned beta=0;beta<2;beta++)
+              {
+               residuals[local_eqn]-=
+                12.0*sigma(alpha,beta)*
+                interpolated_dwdx[alpha]*dtestdx(l,beta)*W;
+              }
+            }
+          } // if(!Linear_bending_model)
+        }
+       
+       //Get the local equation (Second equation)
+       local_eqn = nodal_local_eqn(l,laplacian_w_nodal_index);
+       
+       // IF it's not a boundary condition
+       if(local_eqn >= 0)
+        {
+         // The coupled Poisson equations for the biharmonic operator
+         residuals[local_eqn] += interpolated_laplacian_w*test(l)*W;
+         
+         for(unsigned k=0;k<2;k++)
+          {
+           residuals[local_eqn] += interpolated_dwdx[k]*dtestdx(l,k)*W;
+          }
+        }
+   
+       // Get in plane traction
+       Vector<double> traction(2, 0.0);
+       get_traction_fvk(interpolated_x,traction);
+       
+       //Get the local equation (Third equation)
+       local_eqn = nodal_local_eqn(l,u_x_nodal_index);
+       
+       // IF it's not a boundary condition
+       if(local_eqn >= 0)
+        {
+         // tau_x
+         residuals[local_eqn] += traction[0]*test(l)*W;
+         
+         // r_{\alpha = x}
+         for(unsigned beta=0;beta<2;beta++)
+          {
+           residuals[local_eqn] += sigma(0,beta)*dtestdx(l,beta)*W;
+          }
+         
+        }
+       
+       //Get the local equation (Fourth equation)
+       local_eqn = nodal_local_eqn(l,u_y_nodal_index);
+       
+       // IF it's not a boundary condition
+       if(local_eqn >= 0)
+        {
+         // tau_y
+         residuals[local_eqn] += traction[1]*test(l)*W;
+         
+         // r_{\alpha = y}
+         for(unsigned beta=0;beta<2;beta++)
+          {                    
+           residuals[local_eqn] += sigma(1,beta)*dtestdx(l,beta)*W;
+          }
+         
+        }
+       
+      } // End loop over nodes or test functions (l<n_node)
+     
+    } // End of loop over integration points
+   
   }
   
-  /// Fill in the residuals with this element's contribution
-  void fill_in_contribution_to_residuals_noneta_version(Vector<double> &residuals)
-  {
-    //Find out how many nodes there are
-    const unsigned n_node = nnode();
-    
-    //Set up memory for the shape and test functions
-    Shape psi(n_node), test(n_node);
-    DShape dpsidx(n_node,2), dtestdx(n_node,2);
-    
-    //Indices at which the unknowns are stored
-    const unsigned w_nodal_index = nodal_index_fvk(0);
-    const unsigned laplacian_w_nodal_index = nodal_index_fvk(1);
-    const unsigned u_x_nodal_index = nodal_index_fvk(2);
-    const unsigned u_y_nodal_index = nodal_index_fvk(3);
-    
-    //Set the value of n_intpt
-    const unsigned n_intpt = integral_pt()->nweight();
-    
-    //Integers to store the local equation numbers
-    int local_eqn=0;
-    
-    //Loop over the integration points
-    for(unsigned ipt=0;ipt<n_intpt;ipt++)
-      {
-        //Get the integral weight
-        double w = integral_pt()->weight(ipt);
-        
-        //Call the derivatives of the shape and test functions
-        double J = dshape_and_dtest_eulerian_at_knot_fvk(ipt,psi,dpsidx,
-                                                         test,dtestdx);
-        
-        //Premultiply the weights and the Jacobian
-        double W = w*J;
-        
-        //Allocate and initialise to zero storage for the interpolated values
-        Vector<double> interpolated_x(2,0.0);
-        
-        // The variables
-        double interpolated_laplacian_w = 0;
-        Vector<double> interpolated_dwdx(2,0.0);
-        Vector<double> interpolated_dlaplacian_wdx(2,0.0); 
-        Vector<double> interpolated_duxdx(2,0.0);
-        Vector<double> interpolated_duydx(2,0.0);
-        
-        //--------------------------------------------
-        //Calculate function values and derivatives:
-        //--------------------------------------------
-        Vector<double> nodal_value(4,0.0);
-        // Loop over nodes
-        for(unsigned l=0;l<n_node;l++)
-          {
-            //Get the nodal values
-            nodal_value[0] = raw_nodal_value(l,w_nodal_index);
-            nodal_value[1] = raw_nodal_value(l,laplacian_w_nodal_index);
-            nodal_value[2] = raw_nodal_value(l,u_x_nodal_index);
-            nodal_value[3] = raw_nodal_value(l,u_y_nodal_index);
-            
-            //Add contributions from current node/shape function
-            interpolated_laplacian_w += nodal_value[1]*psi(l);
-            
-            // Loop over directions
-            for(unsigned j=0;j<2;j++)
-              {
-                interpolated_x[j] += raw_nodal_position(l,j)*psi(l);
-                interpolated_dwdx[j] += nodal_value[0]*dpsidx(l,j);
-                interpolated_dlaplacian_wdx[j] += nodal_value[1]*dpsidx(l,j);
-                interpolated_duxdx[j] += nodal_value[2]*dpsidx(l,j);
-                interpolated_duydx[j] += nodal_value[3]*dpsidx(l,j);
-                
-              } // Loop over directions for (j<2)
-            
-          } // Loop over nodes for (l<n_node)
-        
-        //-------------------
-        // Sigma_{\alpha \beta}
-        DenseMatrix<double> sigma(2,2);
-        // Initialise sigma alpha beta
-        for (unsigned alpha = 0; alpha < 2; alpha++)
-          {
-            for (unsigned beta = 0; beta < 2; beta++)
-              {
-                sigma(alpha,beta) = 0.0;
-              }
-          }
-        
-        if(!Linear_bending_model)
-          {
-            // Get the value of sigma alpha beta at the integration
-            // point
-            get_sigma_non_eta(sigma, interpolated_dwdx, 
-                              interpolated_duxdx, interpolated_duydx);
-          }
-        
-        //Get pressure function
-        //-------------------
-        double pressure = 0.0;
-        get_pressure_fvk(ipt,interpolated_x,pressure);
-        
-        // Assemble residuals and Jacobian
-        //--------------------------------
-        
-        // Loop over the test functions
-        for(unsigned l=0;l<n_node;l++)
-          {
-            //Get the local equation (First equation)
-            local_eqn = nodal_local_eqn(l,w_nodal_index);
-            
-            // IF it's not a boundary condition
-            if(local_eqn >= 0)
-              {
-                residuals[local_eqn] += pressure*test(l)*W;
-                
-                // Reduced order biharmonic operator
-                for(unsigned k=0;k<2;k++)
-                  {
-                    residuals[local_eqn] += 
-                      interpolated_dlaplacian_wdx[k]*dtestdx(l,k)*W;
-                  }
-                
-                // Sigma_alpha_beta part
-                if(!Linear_bending_model)
-                  {
-                    if (!Uncoupled_system)
-                      {
-                        // Alpha loop
-                        for (unsigned alpha=0;alpha<2;alpha++)
-                          {
-                            // Beta loop
-                            for(unsigned beta=0;beta<2;beta++)
-                              {
-                                residuals[local_eqn]-=
-                                  12.0*sigma(alpha,beta)*
-                                  interpolated_dwdx[alpha]*dtestdx(l,beta)*W;
-                              }
-                          }
-                      } // if (!Uncoupled_system)
-                  } // if(!Linear_bending_model)
-              }
-            
-            //Get the local equation (Second equation)
-            local_eqn = nodal_local_eqn(l,laplacian_w_nodal_index);
-
-            // IF it's not a boundary condition
-            if(local_eqn >= 0)
-              {
-                // The coupled Poisson equations for the biharmonic operator
-                residuals[local_eqn] += interpolated_laplacian_w*test(l)*W;
-                
-                for(unsigned k=0;k<2;k++)
-                  {
-                    residuals[local_eqn] += interpolated_dwdx[k]*dtestdx(l,k)*W;
-                  }
-              }
-            
-            Vector<double> traction(2, 0.0);
-            get_traction_fvk(interpolated_x,traction);
-            
-            //Get the local equation (Third equation)
-            local_eqn = nodal_local_eqn(l,u_x_nodal_index);
-            
-            // IF it's not a boundary condition
-            if(local_eqn >= 0)
-              {
-                // tau_x
-                residuals[local_eqn] += traction[0]*test(l)*W;
-                
-                // r_{\alpha = x}
-                for(unsigned beta=0;beta<2;beta++)
-                  {
-                    residuals[local_eqn] += sigma(0,beta)*dtestdx(l,beta)*W;
-                  }
-                
-              }
-            
-            //Get the local equation (Fourth equation)
-            local_eqn = nodal_local_eqn(l,u_y_nodal_index);
-            
-            // IF it's not a boundary condition
-            if(local_eqn >= 0)
-              {
-                // tau_y
-                residuals[local_eqn] += traction[1]*test(l)*W;
-                
-                // r_{\alpha = y}
-                for(unsigned beta=0;beta<2;beta++)
-                  {                    
-                    residuals[local_eqn] += sigma(1,beta)*dtestdx(l,beta)*W;
-                  }
-                
-              }
-            
-          } // End loop over nodes or test functions (l<n_node)
-        
-      } // End of loop over integration points
-    
-  }
-
-  /// Fill in the residuals with this element's contribution
-  void fill_in_contribution_to_residuals_eta_version(Vector<double> &residuals)
-  {
-    //Find out how many nodes there are
-    const unsigned n_node = nnode();
-    
-    //Set up memory for the shape and test functions
-    Shape psi(n_node), test(n_node);
-    DShape dpsidx(n_node,2), dtestdx(n_node,2);
-    
-    //Indices at which the unknowns are stored
-    const unsigned w_nodal_index = nodal_index_fvk(0);
-    const unsigned laplacian_w_nodal_index = nodal_index_fvk(1);
-    const unsigned u_x_nodal_index = nodal_index_fvk(2);
-    const unsigned u_y_nodal_index = nodal_index_fvk(3);
-    
-    //Set the value of n_intpt
-    const unsigned n_intpt = integral_pt()->nweight();
-    
-    //Integers to store the local equation numbers
-    int local_eqn=0;
-    
-    //Loop over the integration points
-    for(unsigned ipt=0;ipt<n_intpt;ipt++)
-      {
-        //Get the integral weight
-        double w = integral_pt()->weight(ipt);
-        
-        //Call the derivatives of the shape and test functions
-        double J = dshape_and_dtest_eulerian_at_knot_fvk(ipt,psi,dpsidx,
-                                                         test,dtestdx);
-        
-        //Premultiply the weights and the Jacobian
-        double W = w*J;
-        
-        //Allocate and initialise to zero storage for the interpolated values
-        Vector<double> interpolated_x(2,0.0);
-        
-        // The variables
-        double interpolated_laplacian_w = 0;
-        Vector<double> interpolated_dwdx(2,0.0);
-        Vector<double> interpolated_dlaplacian_wdx(2,0.0); 
-        Vector<double> interpolated_duxdx(2,0.0);
-        Vector<double> interpolated_duydx(2,0.0);
-        
-        //--------------------------------------------
-        //Calculate function values and derivatives:
-        //--------------------------------------------
-        Vector<double> nodal_value(4,0.0);
-        // Loop over nodes
-        for(unsigned l=0;l<n_node;l++)
-          {
-            //Get the nodal values
-            nodal_value[0] = raw_nodal_value(l,w_nodal_index);
-            nodal_value[1] = raw_nodal_value(l,laplacian_w_nodal_index);
-            nodal_value[2] = raw_nodal_value(l,u_x_nodal_index);
-            nodal_value[3] = raw_nodal_value(l,u_y_nodal_index);
-            
-            //Add contributions from current node/shape function
-            interpolated_laplacian_w += nodal_value[1]*psi(l);
-            
-            // Loop over directions
-            for(unsigned j=0;j<2;j++)
-              {
-                interpolated_x[j] += raw_nodal_position(l,j)*psi(l);
-                interpolated_dwdx[j] += nodal_value[0]*dpsidx(l,j);
-                interpolated_dlaplacian_wdx[j] += nodal_value[1]*dpsidx(l,j);
-                interpolated_duxdx[j] += nodal_value[2]*dpsidx(l,j);
-                interpolated_duydx[j] += nodal_value[3]*dpsidx(l,j);
-                
-              } // Loop over directions for (j<2)
-            
-          } // Loop over nodes for (l<n_node)
-        
-        //-------------------
-        // Sigma_{\alpha \beta}
-        DenseMatrix<double> sigma(2,2);
-        // Initialise sigma alpha beta
-        for (unsigned alpha = 0; alpha < 2; alpha++)
-          {
-            for (unsigned beta = 0; beta < 2; beta++)
-              {
-                sigma(alpha,beta) = 0.0;
-              }
-          }
-        
-        if(!Linear_bending_model)
-          {
-            // Get the value of sigma alpha beta at the integration
-            // point
-            get_sigma(sigma, interpolated_dwdx, 
-                      interpolated_duxdx, interpolated_duydx);
-          }
-        
-        //Get pressure function
-        //-------------------
-        double pressure = 0.0;
-        get_pressure_fvk(ipt,interpolated_x,pressure);
-        
-        // Assemble residuals and Jacobian
-        //--------------------------------
-        
-        // Loop over the test functions
-        for(unsigned l=0;l<n_node;l++)
-          {
-            //Get the local equation (First equation)
-            local_eqn = nodal_local_eqn(l,w_nodal_index);
-            
-            // IF it's not a boundary condition
-            if(local_eqn >= 0)
-              {
-                residuals[local_eqn] += pressure*test(l)*W;
-                
-                // Reduced order biharmonic operator
-                for(unsigned k=0;k<2;k++)
-                  {
-                    residuals[local_eqn] += 
-                      interpolated_dlaplacian_wdx[k]*dtestdx(l,k)*W;
-                  }
-                
-                // Sigma_alpha_beta part
-                if(!Linear_bending_model)
-                  {
-                    // Alpha loop
-                    for (unsigned alpha=0;alpha<2;alpha++)
-                      {
-                        // Beta loop
-                        for(unsigned beta=0;beta<2;beta++)
-                          {
-                            residuals[local_eqn]-=
-                              eta()*sigma(alpha,beta)*
-                              interpolated_dwdx[alpha]*dtestdx(l,beta)*W;
-                          }
-                      }
-                  }
-              }
-            
-            //Get the local equation (Second equation)
-            local_eqn = nodal_local_eqn(l,laplacian_w_nodal_index);
-
-            // IF it's not a boundary condition
-            if(local_eqn >= 0)
-              {
-                // The coupled Poisson equations for the biharmonic operator
-                residuals[local_eqn] += interpolated_laplacian_w*test(l)*W;
-                
-                for(unsigned k=0;k<2;k++)
-                  {
-                    residuals[local_eqn] += interpolated_dwdx[k]*dtestdx(l,k)*W;
-                  }
-              }
-            
-            Vector<double> traction(2,0.0);
-            get_traction_fvk(interpolated_x,traction);
-            
-            //Get the local equation (Third equation)
-            local_eqn = nodal_local_eqn(l,u_x_nodal_index);
-            
-            // IF it's not a boundary condition
-            if(local_eqn >= 0)
-              {
-                // tau_x
-                residuals[local_eqn] += traction[0]*test(l)*W;
-                
-                // r_{\alpha = x}
-                for(unsigned beta=0;beta<2;beta++)
-                  {
-                    double temp = sigma(0,beta)*dtestdx(l,beta)*W;
-                    if (Multiply_displacements_by_eta)
-                      {
-                        temp=temp*(-eta());
-                      }
-                    
-                    residuals[local_eqn] += temp;
-                  }
-                
-              }
-            
-            //Get the local equation (Fourth equation)
-            local_eqn = nodal_local_eqn(l,u_y_nodal_index);
-            
-            // IF it's not a boundary condition
-            if(local_eqn >= 0)
-              {
-                // tau_y
-                residuals[local_eqn] += traction[1]*test(l)*W;
-                
-                // r_{\alpha = y}
-                for(unsigned beta=0;beta<2;beta++)
-                  {
-                    double temp = sigma(1,beta)*dtestdx(l,beta)*W;
-                    if (Multiply_displacements_by_eta)
-                      {
-                        temp=temp*(-eta());
-                      }
-                    
-                    residuals[local_eqn] += temp;
-                  }
-                
-              }
-            
-          } // End loop over nodes or test functions (l<n_node)
-        
-      } // End of loop over integration points
-    
-  }
-    
+  
+  
   /// \short Return FE representation of function value w_fvk(s)
   /// at local coordinate s (by default - if index > 0, returns
   /// FE representation of valued stored at index^th nodal index 
   inline double interpolated_w_fvk(const Vector<double> &s,
                                    unsigned index=0) const
   {
-    //Find number of nodes
-    const unsigned n_node = nnode();
-    
-    //Get the index at which the poisson unknown is stored
-    const unsigned w_nodal_index = nodal_index_fvk(index);
-    
-    //Local shape function
-    Shape psi(n_node);
-    
-    //Find values of shape function
-    shape(s,psi);
-    
-    //Initialise value of u
-    double interpolated_w = 0.0;
-    
-    //Loop over the local nodes and sum
-    for(unsigned l=0;l<n_node;l++)
-      {
-        interpolated_w += this->nodal_value(l,w_nodal_index)*psi[l];
-      }
-    
-    return(interpolated_w);
+   //Find number of nodes
+   const unsigned n_node = nnode();
+   
+   //Get the index at which the poisson unknown is stored
+   const unsigned w_nodal_index = nodal_index_fvk(index);
+   
+   //Local shape function
+   Shape psi(n_node);
+   
+   //Find values of shape function
+   shape(s,psi);
+   
+   //Initialise value of u
+   double interpolated_w = 0.0;
+   
+   //Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++)
+    {
+     interpolated_w += this->nodal_value(l,w_nodal_index)*psi[l];
+    }
+   
+   return(interpolated_w);
   }
   
   /// \short Self-test: Return 0 for OK
   unsigned self_test();
   
-  /// \short Sets a flag to signify that we are solving the linear,
-  /// pure elasticity equations, and pin all the nodal values that
-  /// will not be used in this case
-  void use_only_elasticity_model()
-  {
-    // Set the boolean flag
-    Use_only_elasticity_model = true;
-    
-    // Get the index of the first FvK nodal value
-    unsigned first_fvk_nodal_index = nodal_index_fvk();
-    
-    // Get the number of nodes in this element
-    unsigned n_node = nnode();
-    
-    // Loop over the appropriate nodal indices
-    for(unsigned index=0; // because [0] is w
-                          // and [1] is laplacian
-        index<first_fvk_nodal_index+2;
-        index++)
-      {
-        // Loop over the nodes in the element
-        for(unsigned inod=0;inod<n_node;inod++)
-          {
-            // Pin the nodal value at the current index
-            node_pt(inod)->pin(index);
-          }
-      }
-  }
-
   /// \short Sets a flag to signify that we are solving the linear, pure bending
   /// equations, and pin all the nodal values that will not be used in this case
   void use_linear_bending_model()
   {
-    // Set the boolean flag
-    Linear_bending_model = true;
-    
-    // Get the index of the first FvK nodal value
-    unsigned first_fvk_nodal_index = nodal_index_fvk();
-    
-    // Get the total number of FvK nodal values (assuming they are stored
-    // contiguously) at node 0 (it's the same at all nodes anyway)
-    unsigned total_fvk_nodal_indices = 4; 
-    
-    // Get the number of nodes in this element
-    unsigned n_node = nnode();
-    
-    // Loop over the appropriate nodal indices
-    for(unsigned index=first_fvk_nodal_index+2; // because [2] is u_x
-                                                // and [3] is u_y
-        index<first_fvk_nodal_index+total_fvk_nodal_indices;
-        index++)
+   // Set the boolean flag
+   Linear_bending_model = true;
+   
+   // Get the index of the first FvK nodal value
+   unsigned first_fvk_nodal_index = nodal_index_fvk();
+   
+   // Get the total number of FvK nodal values (assuming they are stored
+   // contiguously) at node 0 (it's the same at all nodes anyway)
+   unsigned total_fvk_nodal_indices = 4; 
+   
+   // Get the number of nodes in this element
+   unsigned n_node = nnode();
+   
+   // Loop over the appropriate nodal indices
+   for(unsigned index=first_fvk_nodal_index+2; // because [2] is u_x
+       // and [3] is u_y
+       index<first_fvk_nodal_index+total_fvk_nodal_indices;
+       index++)
+    {
+     // Loop over the nodes in the element
+     for(unsigned inod=0;inod<n_node;inod++)
       {
-        // Loop over the nodes in the element
-        for(unsigned inod=0;inod<n_node;inod++)
-          {
-            // Pin the nodal value at the current index
-            node_pt(inod)->pin(index);
-          }
+       // Pin the nodal value at the current index
+       node_pt(inod)->pin(index);
       }
+    }
   }
   
-  /// \short Sets a flag to indicate we are using the linear version
-  /// of the strain tensor
-  void use_linear_strain()
-  {
-    // Set the boolean flag
-    Linear_strain = true;
-  }
-  
-  /// \short Sets the flag to indicate we should multiply the
-  /// displacements Ux and Uy times eta in order to make the Jacobian
-  /// symmetric
-  void set_multiply_displacements_by_eta()
-  {
-    // Set the boolean flag
-    Multiply_displacements_by_eta = true;
-  }
-  
-  /// \short Enables the use of eta into the computations
-  void enable_eta_version()
-  {
-    // Set the boolean flag
-    Use_eta_version = true;
-  }
-  
-  /// \short Disables the use of eta into the computations
-  void disable_eta_version()
-  {
-    // Set the boolean flag
-    Use_eta_version = false;
-    // Disable the multiplication by eta of the displacements (not
-    // really necessary since the method to compute the residuals is
-    // different)
-    Multiply_displacements_by_eta = false;
-    
-  }
-  
-  /// \short Enables the uncoupling of the system of eq.
-  void enable_uncoupled_system()
-  {
-    // We need to disale the eta version first
-    disable_eta_version();
-    // Use linear strain to decouple the W part from the U_alpha part
-    use_linear_strain();
-    // Set the boolean flag
-    Uncoupled_system = true;
-  }
-  
-  /// \short Disables the uncoupling of the system of eq.
-  void disable_uncoupled_system()
-  {
-    // We need to disale the eta version first
-    disable_eta_version();
-    // Do not use linear strain
-    Linear_strain = false;
-    // Set the boolean flag
-    Uncoupled_system = false;
-  }
   
 protected:
   
@@ -1097,13 +725,8 @@ protected:
                                                        DShape &dpsidx,
                                                        Shape &test,
                                                        DShape &dtestdx)
-  const=0;
+   const=0;
   
-  // -------------------------------------------
-  // Pointers to global physical constants
-  
-  /// Pointer to global eta
-  double *Eta_pt;
     
   /// Pointer to global Poisson's ratio
   double *Nu_pt;
@@ -1116,35 +739,13 @@ protected:
   
 private:
   
-  /// Default value for physical constants
-  static double Default_Physical_Constant_Value;
+  /// Default value for Poisson's ratio
+  static double Default_Nu_Value;
   
   /// \short Flag which stores whether we are using a linear, pure
   /// bending model instead of the full non-linear Foeppl-von Karman
   bool Linear_bending_model;
-  
-  /// \short Flag to indicate we are using the linear strain version
-  bool Linear_strain;
-  
-  /// \short Flag to indicate we are multiplying the contribution of
-  /// the displacements U_x and U_y times the nondimesional parameter
-  /// eta
-  bool Multiply_displacements_by_eta;
-  
-  /// \short (Default value:true) Flag to indicate whether we are
-  /// using the version with the eta parameter or the version without
-  /// the eta parameter
-  bool Use_eta_version;
-  
-  /// \short Uncouple the system of equations (The w from the U_alpha
-  /// part), this would be similar to set eta equal to zero in the eta
-  /// version
-  bool Uncoupled_system;
-  
-  /// \short Flag which stores whether we are solving only the
-  /// elasticity problem
-  bool Use_only_elasticity_model;
-  
+   
 };
   
   

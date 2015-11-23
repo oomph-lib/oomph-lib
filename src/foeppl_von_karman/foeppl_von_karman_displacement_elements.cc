@@ -36,8 +36,8 @@ namespace oomph
   
   // Foeppl von Karman displacement equations static data
   
-  /// Default value physical constants
-  double FoepplvonKarmanDisplacementEquations::Default_Physical_Constant_Value = 0.0;
+  /// Default value for Poisson's ratio
+  double FoepplvonKarmanDisplacementEquations::Default_Nu_Value = 0.5;
   
 //======================================================================
 /// Self-test:  Return 0 for OK
