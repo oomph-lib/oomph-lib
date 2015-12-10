@@ -303,81 +303,12 @@ protected:
   /// Same order as shape functions.
   unsigned nrecovery_order() {return (NNODE_1D-1);}
   
-#define T_ADAPT_BASED_ON_W
-  //#define T_ADAPT_BASED_ON_L
-  //#define T_ADAPT_BASED_ON_STRAIN
-#ifdef T_ADAPT_BASED_ON_W
   /// Number of 'flux' terms for Z2 error estimation
   unsigned num_Z2_flux_terms() {return 2;}//The dimension
     
   /// Get 'flux' for Z2 error recovery:  Standard flux.from FvK equations
   void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
   {this->get_gradient_of_deflection(s,flux);}
-#endif // #ifdef T_ADAPT_BASED_ON_W
-  
-#ifdef T_ADAPT_BASED_ON_L
-  /// Number of 'flux' terms for Z2 error estimation
-  unsigned num_Z2_flux_terms() {return 2;}//The dimension
-    
-  /// Get 'flux' for Z2 error recovery:  Standard flux.from FvK equations
-  void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
-  {this->get_gradient_of_deflection(s,flux);}
-#endif // #ifdef T_ADAPT_BASED_ON_L
-  
-#ifdef T_ADAPT_BASED_ON_STRAIN
-  /// Number of 'flux' terms for Z2 error estimation
-  unsigned num_Z2_flux_terms()
-  {
-    const unsigned dim=2;
-    // dim Diagonal strain rates and dim*(dim-1)/2 off diagonal terms
-    return (dim + dim*(dim-1)/2);
-  }
-  
-  /// Get 'flux' for Z2 error recovery:  Standard flux.from FvK equations
-  void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
-  {
-    const unsigned dim=2;
-#ifdef PARANOID
-    unsigned num_entries=(dim+((dim*dim)-dim)/2);
-    if (flux.size()!=num_entries)
-      {
-        std::ostringstream error_message;
-        error_message << "The flux vector has the wrong number of entries, " 
-                      << flux.size() << ", whereas it should be " 
-                      << num_entries << std::endl;
-        throw OomphLibError(
-                            error_message.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-    
-    // Get strain matrix
-    DenseMatrix<double> stress(dim);
-    DenseMatrix<double> strain(dim);
-    this->get_stress_and_strain_for_output(s, stress, strain);
-    
-    // Pack into flux Vector
-    unsigned icount=0;
-    
-    // Start with diagonal terms
-    for(unsigned i=0;i<dim;i++)
-      {
-        flux[icount]=strain(i,i);
-        icount++;
-      }
-    
-    //Off diagonals row by row
-    for(unsigned i=0;i<dim;i++)
-      {
-        for(unsigned j=i+1;j<dim;j++)
-          {
-            flux[icount]=strain(i,j);
-            icount++;
-          }
-      }
-  }
-#endif // #ifdef T_ADAPT_BASED_ON_STRAIN
   
   /// \short Number of vertex nodes in the element
   unsigned nvertex_node() const

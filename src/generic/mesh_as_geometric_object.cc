@@ -645,6 +645,7 @@ namespace oomph
 /// Setting the final bool argument to true means that we only search
 /// for matching element within a a certain number of "spirals" within
 /// the bin structure.
+/// Only search in nonempty bins
 //========================================================================
  void MeshAsGeomObject::spiraling_locate_zeta
  (const Vector<double>& zeta,GeomObject*& sub_geom_object_pt,
@@ -703,8 +704,17 @@ namespace oomph
      for (unsigned i_level=current_min_spiral_level();
           i_level<=current_max_spiral_level();i_level++)
       {
-       // Call helper function to find the neighbouring bins at this level
-       get_neighbouring_bins_helper(bin_number,i_level,neighbour_bin);
+       // Only add bins that have elements if finding zeta values for
+       // projection
+       bool only_use_filled_bins=false;
+       if (Multi_domain_functions::Setup_multi_domain_for_projection)
+        {
+         only_use_filled_bins=true;
+        }
+       // Call helper function to find the neighbouring bins at this
+       // level
+       get_neighbouring_bins_helper(bin_number,i_level,neighbour_bin,
+                                    only_use_filled_bins);
       }
 
      // Total number of bins to be visited
@@ -728,23 +738,10 @@ namespace oomph
            // Sort the bin if required
            if (Multi_domain_functions::Sort_bin_entries)
             {
-//              if (Multi_domain_functions::Doc_timings)
-//               {
-//                double t_sort_bin=TimingHelpers::timer();
-//                sort_the_bin(zeta,
-//                             Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
-//                Multi_domain_functions::
-//                 Total_time_for_sorting_elements_in_bins+=
-//                 TimingHelpers::timer()-t_sort_bin;
-//               }
-//              else
-//               {
-//                sort_the_bin(zeta,
-//                             Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
-//               }
              OomphLibWarning("Multi_domain_functions::Sort_bin_entries is currently disabled\n",
                              OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
+             //sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
             }
            
            for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
@@ -764,13 +761,30 @@ namespace oomph
                                 use_coordinate_as_initial_guess);
              
 #ifdef OOMPH_HAS_MPI
-             // Dynamic cast the result to a FiniteElement
-             FiniteElement* test_el_pt=
-              dynamic_cast<FiniteElement*>(sub_geom_object_pt);
-             if (test_el_pt!=0)
+             if (!Multi_domain_functions::Setup_multi_domain_for_projection)
               {
-               // We only want to exit if this is a non-halo element
-               if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
+               // Dynamic cast the result to a FiniteElement
+               FiniteElement* test_el_pt=
+                dynamic_cast<FiniteElement*>(sub_geom_object_pt);
+               if (test_el_pt!=0)
+                {
+                 // We only want to exit if this is a non-halo element
+                 if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
+                }
+              }
+             else
+              {
+               if (!Multi_domain_functions::Allow_use_of_halo_elements_as_external_elements_for_projection)
+                {
+                 // Dynamic cast the result to a FiniteElement
+                 FiniteElement* test_el_pt=
+                  dynamic_cast<FiniteElement*>(sub_geom_object_pt);
+                 if (test_el_pt!=0)
+                  {
+                   // We only want to exit if this is a non-halo element
+                   if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
+                  }                 
+                }
               }
 #endif
              
@@ -793,7 +807,6 @@ namespace oomph
         {
          //oomph_info << "Terminating: Outside search radius [1]\n";
         }
-       
       } // end loop over bins at this level
 
     }
@@ -816,9 +829,18 @@ namespace oomph
      bool found_zeta=false;
      for (unsigned i_level=0;i_level<n_level;i_level++)
       {
-       // Call helper function to find the neighbouring bins at this level
+       // Call helper function to find the neighbouring bins at this
+       // level
        Vector<unsigned> neighbour_bin;
-       get_neighbouring_bins_helper(bin_number,i_level,neighbour_bin);
+       // Only add bins that have elements if finding zeta values for
+       // projection
+       bool only_use_filled_bins=false;
+       if (Multi_domain_functions::Setup_multi_domain_for_projection)
+        {
+         only_use_filled_bins=true;
+        }
+       get_neighbouring_bins_helper(bin_number,i_level,neighbour_bin,
+                                    only_use_filled_bins);
        unsigned n_nbr_bin=neighbour_bin.size();
        
        // Loop over neighbouring bins
@@ -839,10 +861,10 @@ namespace oomph
              // Sort the bin if required
              if (Multi_domain_functions::Sort_bin_entries)
               {
-               //sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
                OomphLibWarning("Multi_domain_functions::Sort_bin_entries is currently disabled\n",
                                OOMPH_CURRENT_FUNCTION,
                                OOMPH_EXCEPTION_LOCATION);
+               //sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
               }
                           
              for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
@@ -894,7 +916,7 @@ namespace oomph
     } // end if (called_within_spiral)
 
   }
- 
+  
 //========================================================================
 /// \short Find the sub geometric object and local coordinate therein that
 /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
@@ -1068,7 +1090,7 @@ namespace oomph
          break;
         }
        
-      } // end loop over levels
+      } // end loop over levels in this chunk
      
     }
    else
@@ -1084,9 +1106,8 @@ namespace oomph
       }
      
      // Also limit to max. spiral level
-     //n_level=std::min(n_level,max_spiral_level());
-     n_level=UINT_MAX;
-     
+     n_level=std::min(n_level,max_spiral_level());
+
      // Set bool for finding zeta
      bool found_zeta=false;
      for (unsigned i_level=0;i_level<n_level;i_level++)
@@ -1909,9 +1930,10 @@ namespace oomph
    }
 
  }
-
-
-
+  
+  
+  // Original version
+#if 0
 //========================================================================
 ///Calculate the bin numbers of all the neighbours to "bin" given the level
 //========================================================================
@@ -1925,14 +1947,35 @@ namespace oomph
    // coordinates
    if (n_lagrangian==1)
     {
+     // Reserve memory for the container where we return the indices
+     // of the neighbouring bins (2 bins max, left and right)
+     neighbour_bin.reserve(2);
+     
      // Single "loop" in one direction - always a vector of max size 2
      unsigned nbr_bin_left=bin-level;
-     if ((nbr_bin_left>=0) && (nbr_bin_left<Nbin_x)) // cgj: first condition is always true
+     if ((nbr_bin_left>=0) && (nbr_bin_left<Nbin_x))
       {
        unsigned nbr_bin=nbr_bin_left;
        if (only_use_filled_bins)
+         {
+           if (Bin_object_coord_pairs.has_entry(nbr_bin))
+             {
+               neighbour_bin.push_back(nbr_bin);
+             }
+         }
+       else
+         {
+           neighbour_bin.push_back(nbr_bin);
+         }
+      }
+     unsigned nbr_bin_right=bin+level;
+     if ((nbr_bin_right>=0) && (nbr_bin_right<Nbin_x) && 
+         (nbr_bin_right!=nbr_bin_left))
+      {
+       unsigned nbr_bin=nbr_bin_right;
+       if (only_use_filled_bins)
         {
-         if (Bin_object_coord_pairs.bin_has_entries(nbr_bin))
+         if (Bin_object_coord_pairs.has_entry(nbr_bin))
           {
            neighbour_bin.push_back(nbr_bin);
           }
@@ -1942,6 +1985,524 @@ namespace oomph
          neighbour_bin.push_back(nbr_bin);
         }
       }
+    }
+   else if (n_lagrangian==2)
+    {
+     // Reserve memory for the container where we return the indices
+     // of the neighbouring bins
+     const unsigned n_max_neighbour_bins = 8*level;
+     neighbour_bin.reserve(n_max_neighbour_bins);
+     
+     unsigned n_total_bin=Nbin_x*Nbin_y;
+
+     // Which row of the bin structure is the current bin on?
+     // This is just given by the integer answer of dividing bin
+     // by Nbin_x (the number of bins in a single row)
+     // e.g. in a 6x6 grid, bins 6 through 11 would all have bin_row=1
+     unsigned bin_row=bin/Nbin_x;
+
+     // The neighbour_bin vector contains all bin numbers at the 
+     // specified "distance" (level) away from the current bin
+
+     // Row/column length
+     unsigned n_length=(level*2)+1;
+
+     // Loop over the rows
+     for (unsigned j=0;j<n_length;j++)
+      {
+       // Loop over the columns
+       for (unsigned i=0;i<n_length;i++)
+        {
+         // Only do this for all the first & last row, and the
+         // end points of every other row
+         if ((j==0) || (j==n_length-1) || (i==0) || (i==n_length-1))
+          {
+           unsigned nbr_bin=bin-level+i-((level-j)*Nbin_x);
+           // This number might fall on the wrong
+           // row of the bin structure; this needs to be tested
+
+           // Which row is this number on? (see above)
+           unsigned nbr_bin_row=nbr_bin/Nbin_x;
+
+           // Which row should it be on?
+           unsigned row=bin_row-level+j;
+
+           // These numbers for the rows must match; 
+           // if it is then add nbr_bin to the neighbour scheme
+           // (The bin number must also be greater than zero
+           //  and less than the total number of bins)
+           if ((row==nbr_bin_row) && (nbr_bin>=0) && (nbr_bin<n_total_bin))
+            {
+             if (only_use_filled_bins)
+              {
+               if (Bin_object_coord_pairs.has_entry(nbr_bin))
+                {
+                 neighbour_bin.push_back(nbr_bin);
+                }
+              }
+             else
+              {
+               neighbour_bin.push_back(nbr_bin);
+              }
+            }  
+          }
+        }
+
+      }
+    }
+   else if (n_lagrangian==3)
+    {
+     // Reserve memory for the container where we return the indices
+     // of the neighbouring bins
+     const unsigned n_max_neighbour_bins = 
+      8*level*(3+2*(level-1))+2*(2*(level-1)+1)*(2*(level-1)+1);
+     neighbour_bin.reserve(n_max_neighbour_bins);
+     
+     unsigned n_total_bin=Nbin_x*Nbin_y*Nbin_z;
+     
+     // Which layer of the bin structure is the current bin on?
+     // This is just given by the integer answer of dividing bin
+     // by Nbin_x*Nbin_y (the number of bins in a single layer
+     // e.g. in a 6x6x6 grid, bins 72 through 107 would all have bin_layer=2
+     unsigned bin_layer=bin/(Nbin_x*Nbin_y);
+
+     // Which row in this layer is the bin number on?
+     unsigned bin_row=(bin/Nbin_x)-(bin_layer*Nbin_y);
+
+     // The neighbour_bin vector contains all bin numbers at the 
+     // specified "distance" (level) away from the current bin
+
+     // Row/column/layer length
+     unsigned n_length=(level*2)+1;
+
+     // Loop over the layers
+     for (unsigned k=0;k<n_length;k++)
+      {
+       // Loop over the rows
+       for (unsigned j=0;j<n_length;j++)
+        {
+         // Loop over the columns
+         for (unsigned i=0;i<n_length;i++)
+          {
+           // Only do this for the end points of every row/layer/column
+           if ((k==0) || (k==n_length-1) || (j==0) || 
+               (j==n_length-1) || (i==0) || (i==n_length-1))
+            {
+             unsigned nbr_bin=bin-level+i-((level-j)*Nbin_x)-
+              ((level-k)*Nbin_x*Nbin_y);
+             // This number might fall on the wrong
+             // row or layer of the bin structure; this needs to be tested
+
+             // Which layer is this number on?
+             unsigned nbr_bin_layer=nbr_bin/(Nbin_x*Nbin_y);
+
+             // Which row is this number on? (see above)
+             unsigned nbr_bin_row=(nbr_bin/Nbin_x)-(nbr_bin_layer*Nbin_y);
+
+             // Which layer and row should it be on, given level?
+             unsigned layer=bin_layer-level+k;
+             unsigned row=bin_row-level+j;
+
+             // These layers and rows must match up:
+             // if so then add nbr_bin to the neighbour schemes
+             // (The bin number must also be greater than zero
+             //  and less than the total number of bins)
+             if ((row==nbr_bin_row) && (layer==nbr_bin_layer)
+                 && (nbr_bin>=0) && (nbr_bin<n_total_bin))
+              {
+               if (only_use_filled_bins)
+                {
+                 if (Bin_object_coord_pairs.has_entry(nbr_bin))
+                  {
+                   neighbour_bin.push_back(nbr_bin);
+                  }
+                }
+               else
+                {
+                 neighbour_bin.push_back(nbr_bin);
+                }
+              }  
+            }
+
+          }
+        }
+      }
+
+    }
+  }
+#endif // #if 0
+  
+  // My version
+#if 1
+//========================================================================
+///Calculate the bin numbers of all the neighbours to "bin" given the level
+//========================================================================
+ void MeshAsGeomObject::get_neighbouring_bins_helper(
+  const unsigned& bin, const unsigned& level,
+  Vector<unsigned>& neighbour_bin,
+  const bool &only_use_filled_bins)
+  {
+   const unsigned n_lagrangian = this->nlagrangian();
+   // This will be different depending on the number of Lagrangian
+   // coordinates
+   if (n_lagrangian==1)
+    {
+     // Reserve memory for the container where we return the indices
+     // of the neighbouring bins (2 bins max, left and right)
+     neighbour_bin.reserve(2);
+     
+     // Single "loop" in one direction - always a vector of max size 2
+     unsigned nbr_bin_left=bin-level;
+     if ((nbr_bin_left>=0) && (nbr_bin_left<Nbin_x)) // cgj: first condition is always true
+      {
+       unsigned nbr_bin=nbr_bin_left;
+       if (only_use_filled_bins)
+         {
+           if (Bin_object_coord_pairs.has_entry(nbr_bin))
+             {
+               neighbour_bin.push_back(nbr_bin);
+             }
+         }
+       else
+         {
+           neighbour_bin.push_back(nbr_bin);
+         }
+      }
+     unsigned nbr_bin_right=bin+level;
+     if ((nbr_bin_right>=0) && (nbr_bin_right<Nbin_x) && 
+         (nbr_bin_right!=nbr_bin_left))
+      {
+       unsigned nbr_bin=nbr_bin_right;
+       if (only_use_filled_bins)
+        {
+         if (Bin_object_coord_pairs.has_entry(nbr_bin))
+          {
+           neighbour_bin.push_back(nbr_bin);
+          }
+        }
+       else
+        {
+         neighbour_bin.push_back(nbr_bin);
+        }
+      }
+    }
+   else if (n_lagrangian==2)
+    {
+     // Reserve memory for the container where we return the indices
+     // of the neighbouring bins
+     const unsigned n_max_neighbour_bins = 8*level;
+     neighbour_bin.reserve(n_max_neighbour_bins);
+     
+     const unsigned n_total_bin=Nbin_x*Nbin_y;
+
+     // Which row of the bin structure is the current bin on?
+     // This is just given by the integer answer of dividing bin
+     // by Nbin_x (the number of bins in a single row)
+     // e.g. in a 6x6 grid, bins 6 through 11 would all have bin_row=1
+     const unsigned bin_row=bin/Nbin_x;
+
+     // The neighbour_bin vector contains all bin numbers at the 
+     // specified "distance" (level) away from the current bin
+
+     // Row/column length
+     const unsigned n_length=(level*2)+1;
+     
+     {
+      // Visit all the bins at the specified distance (level) away
+      // from the current bin. In order to obtain the same order in
+      // the visited bins as the previous algorithm we visit all the
+      // bins at the specified distance (level) as follows:
+      
+      // Suppose we want the bins at distance (level=2) of the
+      // specified bin, then we visit them as indicated below
+       
+      // 01 02 03 04 05   // First row
+      // 06          07
+      // 08    B     09
+      // 10          11
+      // 12 13 14 15 16   // Last row
+      // ^--------------- First column
+      //              ^-- Last column
+      
+      // ----------------------------------------------------------------
+      // Visit all the bins in the first row at the specified
+      // distance (level) away from the current bin
+       
+      // ------------------ FIRST ROW ------------------------
+      // Pre-compute the distance in the j-direction
+      const unsigned j_precomputed = level*Nbin_x;
+      // Pre-compute the row where the bin should lie on
+      const unsigned j_initial_row=bin_row-level;
+      
+      // Loop over the columns (of the first row)
+      for (unsigned i=0;i<n_length;i++)
+       {
+        // --------- First row ------------------------------------------
+        const unsigned initial_neighbour_bin=bin-(level-i)-j_precomputed;
+        // This number might fall on the wrong row of the bin
+        // structure; this needs to be tested? Not sure why, but leave
+        // the test!
+        
+        // Which row is this number on? (see above)
+        const unsigned initial_neighbour_bin_row=initial_neighbour_bin/Nbin_x;
+        // These numbers for the rows must match; if it is then add
+        // initial_neighbour_bin to the neighbour scheme (The bin
+        // number must also be greater than zero and less than the
+        // total number of bins)
+        if ((j_initial_row==initial_neighbour_bin_row) && 
+            (initial_neighbour_bin>=0) &&
+            (initial_neighbour_bin<n_total_bin))
+         {
+          if (only_use_filled_bins)
+           {
+            if (Bin_object_coord_pairs.has_entry(initial_neighbour_bin))
+             {
+              neighbour_bin.push_back(initial_neighbour_bin);
+             }
+           }
+          else
+           {
+            neighbour_bin.push_back(initial_neighbour_bin);
+           }
+         }
+        
+       } // for (unsigned i=0;i<n_length;i++)
+      
+      // Then visit all the bins in the first and last column at the
+      // specified distance (level) away from the current bin
+      
+      // ------------------ FIRST AND LAST COLUMNS ---------------------
+      // Loop over the rows (of the first and last column)
+      for (unsigned j=1;j<n_length-1;j++)
+       {
+        // --------- First column ---------------------------------------
+        const unsigned initial_neighbour_bin=bin-(level)-((level-j)*Nbin_x);
+        // This number might fall on the wrong row of the bin
+        // structure; this needs to be tested? Not sure why, but leave
+        // the test!
+        
+        // Which row is this number on? (see above)
+        const unsigned initial_neighbour_bin_row=initial_neighbour_bin/Nbin_x;
+        
+        // Which row should it be on?
+        const unsigned initial_row=bin_row-(level-j);
+        
+        // These numbers for the rows must match; if it is then add
+        // initial_neighbour_bin to the neighbour scheme (The bin
+        // number must also be greater than zero and less than the
+        // total number of bins)
+        if ((initial_row==initial_neighbour_bin_row) && 
+            (initial_neighbour_bin>=0) &&
+            (initial_neighbour_bin<n_total_bin))
+         {
+          if (only_use_filled_bins)
+           {
+            if (Bin_object_coord_pairs.has_entry(initial_neighbour_bin))
+             {
+              neighbour_bin.push_back(initial_neighbour_bin);
+             }
+           }
+          else
+           {
+            neighbour_bin.push_back(initial_neighbour_bin);
+           }
+         }
+        
+        // --------- Last column -----------------------------------------
+        const unsigned final_neighbour_bin=bin+(level)-((level-j)*Nbin_x);
+        // This number might fall on the wrong row of the bin
+        // structure; this needs to be tested? Not sure why, but leave
+        // the test!
+        
+        // Which row is this number on? (see above)
+        const unsigned final_neighbour_bin_row=final_neighbour_bin/Nbin_x;
+        
+        // Which row should it be on?
+        const unsigned final_row=bin_row-(level-j);
+        
+        // These numbers for the rows must match; if it is then add
+        // initial_neighbour_bin to the neighbour scheme (The bin
+        // number must also be greater than zero and less than the
+        // total number of bins)
+        if ((final_row==final_neighbour_bin_row) && 
+            (final_neighbour_bin>=0) &&
+            (final_neighbour_bin<n_total_bin))
+         {
+          if (only_use_filled_bins)
+           {
+            if (Bin_object_coord_pairs.has_entry(final_neighbour_bin))
+             {
+              neighbour_bin.push_back(final_neighbour_bin);
+             }
+           }
+          else
+           {
+            neighbour_bin.push_back(final_neighbour_bin);
+           }
+         }
+        
+       } // for (unsigned j=1;j<n_length-1;j++)
+
+      // ------------------ LAST ROW ------------------------
+      // Pre-compute the row where the bin should lie on
+      const unsigned j_final_row=bin_row+level;
+      
+      // Loop over the columns (of the last row)
+      for (unsigned i=0;i<n_length;i++)
+       {        
+        // --------- Last row ------------------------------------------
+        const unsigned final_neighbour_bin=bin-(level-i)+j_precomputed;
+        // This number might fall on the wrong row of the bin
+        // structure; this needs to be tested? Not sure why, but leave
+        // the test!
+        
+        // Which row is this number on? (see above)
+        const unsigned final_neighbour_bin_row=final_neighbour_bin/Nbin_x;
+        // These numbers for the rows must match; if it is then add
+        // initial_neighbour_bin to the neighbour scheme (The bin
+        // number must also be greater than zero and less than the
+        // total number of bins)
+        if ((j_final_row==final_neighbour_bin_row) && 
+            (final_neighbour_bin>=0) &&
+            (final_neighbour_bin<n_total_bin))
+         {
+          if (only_use_filled_bins)
+           {
+            if (Bin_object_coord_pairs.has_entry(final_neighbour_bin))
+             {
+              neighbour_bin.push_back(final_neighbour_bin);
+             }
+           }
+          else
+           {
+            neighbour_bin.push_back(final_neighbour_bin);
+           }
+         }
+        
+       } // for (unsigned i=0;i<n_length;i++)
+
+     }
+     
+    }
+   else if (n_lagrangian==3)
+    {
+     // Reserve memory for the container where we return the indices
+     // of the neighbouring bins
+     const unsigned n_max_neighbour_bins = 
+      8*level*(3+2*(level-1))+2*(2*(level-1)+1)*(2*(level-1)+1);
+     neighbour_bin.reserve(n_max_neighbour_bins);
+     
+     unsigned n_total_bin=Nbin_x*Nbin_y*Nbin_z;
+     
+     // Which layer of the bin structure is the current bin on?
+     // This is just given by the integer answer of dividing bin
+     // by Nbin_x*Nbin_y (the number of bins in a single layer
+     // e.g. in a 6x6x6 grid, bins 72 through 107 would all have bin_layer=2
+     unsigned bin_layer=bin/(Nbin_x*Nbin_y);
+
+     // Which row in this layer is the bin number on?
+     unsigned bin_row=(bin/Nbin_x)-(bin_layer*Nbin_y);
+
+     // The neighbour_bin vector contains all bin numbers at the 
+     // specified "distance" (level) away from the current bin
+
+     // Row/column/layer length
+     unsigned n_length=(level*2)+1;
+
+     // Loop over the layers
+     for (unsigned k=0;k<n_length;k++)
+      {
+       // Loop over the rows
+       for (unsigned j=0;j<n_length;j++)
+        {
+         // Loop over the columns
+         for (unsigned i=0;i<n_length;i++)
+          {
+           // Only do this for the end points of every row/layer/column
+           if ((k==0) || (k==n_length-1) || (j==0) || 
+               (j==n_length-1) || (i==0) || (i==n_length-1))
+            {
+             unsigned nbr_bin=bin-level+i-((level-j)*Nbin_x)-
+              ((level-k)*Nbin_x*Nbin_y);
+             // This number might fall on the wrong
+             // row or layer of the bin structure; this needs to be tested
+
+             // Which layer is this number on?
+             unsigned nbr_bin_layer=nbr_bin/(Nbin_x*Nbin_y);
+
+             // Which row is this number on? (see above)
+             unsigned nbr_bin_row=(nbr_bin/Nbin_x)-(nbr_bin_layer*Nbin_y);
+
+             // Which layer and row should it be on, given level?
+             unsigned layer=bin_layer-level+k;
+             unsigned row=bin_row-level+j;
+
+             // These layers and rows must match up:
+             // if so then add nbr_bin to the neighbour schemes
+             // (The bin number must also be greater than zero
+             //  and less than the total number of bins)
+             if ((row==nbr_bin_row) && (layer==nbr_bin_layer)
+                 && (nbr_bin>=0) && (nbr_bin<n_total_bin))
+              {
+               if (only_use_filled_bins)
+                {
+                 if (Bin_object_coord_pairs.has_entry(nbr_bin))
+                  {
+                   neighbour_bin.push_back(nbr_bin);
+                  }
+                }
+               else
+                {
+                 neighbour_bin.push_back(nbr_bin);
+                }
+              }  
+            }
+
+          }
+        }
+      }
+
+    }
+  }
+#endif // #if 1
+
+#if 0
+//========================================================================
+///Calculate the bin numbers of all the neighbours to "bin" given the level
+//========================================================================
+ void MeshAsGeomObject::get_neighbouring_bins_helper(
+  const unsigned& bin, const unsigned& level,
+  Vector<unsigned>& neighbour_bin,
+  const bool &only_use_filled_bins)
+  {
+    // Get access to the map storing the bins
+    const std::map<unsigned,Vector<std::pair<FiniteElement*,Vector<double> > > >* map_pt=Bin_object_coord_pairs.map_pt();
+    // A typedef for the iterator to find the bin
+    typedef std::map<unsigned,Vector<std::pair<FiniteElement*,Vector<double> > > >::const_iterator IT;
+   const unsigned n_lagrangian = this->nlagrangian();
+   // This will be different depending on the number of Lagrangian
+   // coordinates
+   if (n_lagrangian==1)
+    {
+     // Single "loop" in one direction - always a vector of max size 2
+     unsigned nbr_bin_left=bin-level;
+     if ((nbr_bin_left>=0) && (nbr_bin_left<Nbin_x))
+      {
+       unsigned nbr_bin=nbr_bin_left;
+       if (only_use_filled_bins)
+         {
+           // Try to find the bin in the map
+           IT it = map_pt->find(nbr_bin);
+           if (it!=map_pt->end())
+             {
+               neighbour_bin.push_back(nbr_bin);
+             }
+         }
+       else
+         {
+           neighbour_bin.push_back(nbr_bin);
+         }
+      }
      unsigned nbr_bin_right=bin+level;
      if ((nbr_bin_right>=0) && (nbr_bin_right<Nbin_x) && // cgj: first condition is always true 
          (nbr_bin_right!=nbr_bin_left))
@@ -1949,7 +2510,9 @@ namespace oomph
        unsigned nbr_bin=nbr_bin_right;
        if (only_use_filled_bins)
         {
-         if (Bin_object_coord_pairs.bin_has_entries(nbr_bin))
+         // Try to find the bin in the map
+         IT it = map_pt->find(nbr_bin);
+         if (it!=map_pt->end())
           {
            neighbour_bin.push_back(nbr_bin);
           }
@@ -2004,7 +2567,9 @@ namespace oomph
             {
              if (only_use_filled_bins)
               {
-               if (Bin_object_coord_pairs.bin_has_entries(nbr_bin))
+               // Try to find the bin in the map
+               IT it = map_pt->find(nbr_bin);
+               if (it!=map_pt->end())
                 {
                  neighbour_bin.push_back(nbr_bin);
                 }
@@ -2075,7 +2640,9 @@ namespace oomph
               {
                if (only_use_filled_bins)
                 {
-                 if (Bin_object_coord_pairs.bin_has_entries(nbr_bin))
+                 // Try to find the bin in the map
+                 IT it = map_pt->find(nbr_bin);
+                 if (it!=map_pt->end())
                   {
                    neighbour_bin.push_back(nbr_bin);
                   }
@@ -2093,6 +2660,7 @@ namespace oomph
 
     }
   }
+#endif // #if 0
  
 
 }

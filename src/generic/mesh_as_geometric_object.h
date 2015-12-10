@@ -82,18 +82,18 @@ public:
  // Initialise the bin (only called by the create_bins_of_objects()
  // method)
  void initialise(const unsigned &size)
- {
-  // Create a "large" bool vector indicated all bins are empty
-  Bin_has_entries.resize(size,false);
- }
- 
+  {
+   // Create a "large" bool vector indicating all entries are empty
+   Has_entry.resize(size,false);
+  }
+
  /// Wipe storage
  void clear()
   {
    Data.clear();
    // Get current size and reset all entries
-   const unsigned size = Bin_has_entries.size();
-   Bin_has_entries.assign(size,false);
+   const unsigned size = Has_entry.size();
+   Has_entry.resize(size,false);
   }
 
  /// Square bracket access (const version)
@@ -113,8 +113,8 @@ public:
  void set_value(const unsigned& i, const T& value)
   {
    Data[i]=value;
-   //Mark as occupied
-   Bin_has_entries[i]=true;
+   //Mark as having entry
+   Has_entry[i]=true;
   }
 
 
@@ -140,9 +140,9 @@ public:
   }
  
  /// \short Check if the bin has entries
- bool bin_has_entries(const unsigned &nbin)
+ bool has_entry(const unsigned &nbin)
  {
-  return Bin_has_entries[nbin];
+  return Has_entry[nbin];
  }
  
  /// \short Return vector containing all values
@@ -156,7 +156,7 @@ public:
    unsigned count=0;
    for (IT it=Data.begin();it!=Data.end();it++)
     {
-     all_values[count]=(*it).second;
+     all_values[count++]=(*it).second;
     }
   }
 
@@ -169,7 +169,7 @@ private:
  const T* Empty_pt;
  
  /// Keep track of the filled and empty bins
- std::vector<bool> Bin_has_entries;
+ std::vector<bool> Has_entry;
  
 };
 
@@ -638,7 +638,15 @@ public:
  void get_bin(const Vector<double>& zeta, int& bin_number,
               Vector<std::pair<FiniteElement*,
               Vector<double> > >& sample_point_pairs);
-  
+ 
+ /// Get the contents of all bins in vector
+ Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > bin_content() const
+  {
+   Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > all_vals;
+   Bin_object_coord_pairs.get_all_values(all_vals);
+   return all_vals;
+  }
+ 
  /// Get the contents of all bins in vector
  const std::map<unsigned,Vector<std::pair<FiniteElement*,Vector<double> > > > *
   get_all_bins_content() const

@@ -243,13 +243,6 @@ public:
    // 3: Uy (In plane displacement y)
    unsigned w_nodal_index = nodal_index_fvk(0);
    
-   // hierher julio please kill these ifdefs. In any case
-   // this function should always do what its name says to
-   // the ifdef should live in the error estimation function
-#ifdef T_ADAPT_BASED_ON_L
-   w_nodal_index = nodal_index_fvk(1);
-#endif // #ifdef T_ADAPT_BASED_ON_L
-   
    //Set up memory for the shape and test functions
    Shape psi(n_node);
    DShape dpsidx(n_node,2);
