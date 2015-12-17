@@ -39,8 +39,8 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py \
            extract_free_mem_from_top_trace.bash strip_control_m.bash \
            parallel_self_test.py tweak_doxygen_latex_style_file.bash \
            check-makefile-subdirs.py fpsmall.py string_contains.sh \
-           meld_changed_files.bash find_failed_directories.bash
-
+           meld_changed_files.bash find_failed_directories.bash \
+           run_svnversion_if_it_exists.bash
 
 
 

@@ -1,8 +1,16 @@
 #Process this file with autoconf to produce a configure script.
 
 # Initialise autoconfigure: Pass package name, version number and contact email
-AC_INIT([oomph-lib],[0.90],[oomph-lib@maths.man.ac.uk])
-
+# The M4 magic to automatically use the svn revision number is from
+# http://caulfield.info/emmet/2008/05/get-the-subversion-revision-nu.html
+# Slightly wrapped by script which checks if svnversion exists locally
+# and, if it does, if we're working on revision controlled version.
+# Useful because make mydist is often used to backup entire distribution
+# so this should even work for non-developers. If we can't get a
+# meaninful revision number for either reason we use 0000 instead.
+define([svnversion], esyscmd([sh -c "bin/run_svnversion_if_it_exists.bash|tr -d '\n'"]))dnl
+AC_INIT([oomph-lib],[1.0.svnversion],[oomph-lib@maths.manchester.ac.uk])
+ 
 # config header file
 AC_CONFIG_HEADERS(config.h)
 
