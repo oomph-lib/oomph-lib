@@ -3,9 +3,11 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC//           Version 0.90. August 3, 2009.
+//LIC//    Version 1.0; svn revision $LastChangedRevision$
+//LIC//
+//LIC// $LastChangedDate$
 //LIC// 
-//LIC// Copyright (C) 2006-2009 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -13,7 +15,7 @@
 //LIC// version 2.1 of the License, or (at your option) any later version.
 //LIC// 
 //LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; wiythout even the implied warranty of
+//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
 //LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //LIC// Lesser General Public License for more details.
 //LIC// 

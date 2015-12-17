@@ -2,10 +2,8 @@
 
 #--------------------------------------------------------------
 # Shell script to apply licence prefix to all oomph-lib
-# *.h *.cc and  files.
+# *.h *.cc and  files. Also activate the svn keywords flag.
 #--------------------------------------------------------------
-
-
 
 
 #--------------------------------------------------------------
@@ -31,6 +29,7 @@ for file in $oomph_lib_h_and_cc_files; do
         echo "OK"
         mv -f $file.licenced $file
         rm  $file.delicenced
+        svn propset svn:keywords "LastChangedDate LastChangedRevision" $file
     fi
 #    echo " "
 done
