@@ -177,6 +177,8 @@ class TriangleMeshCurveSection
   Final_vertex_connected(false),
   Initial_vertex_connected_to_curviline(false),
   Final_vertex_connected_to_curviline(false),
+  Refinement_tolerance(0.08),
+  Unrefinement_tolerance(0.04),
   Maximum_length(-1.0)
  { }
 
@@ -797,21 +799,11 @@ public:
 
   /// Empty constructor
   TriangleMeshCurve(const Vector<TriangleMeshCurveSection*> &curve_section_pt)
-  : Curve_section_pt(curve_section_pt)
+   : Curve_section_pt(curve_section_pt),
+     Polyline_refinement_tolerance(0.08),
+     Polyline_unrefinement_tolerance(0.04)
   {
-   Polyline_refinement_tolerance = 0.08;
-   Polyline_unrefinement_tolerance = 0.04;
    
-   // Establish the default refinement and unrefinement tolerance for all the
-   // curve sections on the TriangleMeshCurve
-   unsigned n_curve_sections = Curve_section_pt.size();
-   for (unsigned i = 0; i < n_curve_sections; i++)
-    {
-     Curve_section_pt[i]->set_refinement_tolerance(
-      Polyline_refinement_tolerance);
-     Curve_section_pt[i]->set_unrefinement_tolerance(
-      Polyline_unrefinement_tolerance);
-    }
   }
 
   /// Empty destructor

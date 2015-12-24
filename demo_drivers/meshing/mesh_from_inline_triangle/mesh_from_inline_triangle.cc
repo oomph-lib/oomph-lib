@@ -275,10 +275,10 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
    //--------------------------------
    closed_curve_pt=
      new TriangleMeshClosedCurve(outer_curvilinear_boundary_pt);
-
+   
   }
-
-
+ 
+ 
  // Now build the holes
  //====================
  Vector<TriangleMeshClosedCurve*> hole_pt(2);
@@ -407,8 +407,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
 
  // closed_curve_pt->disable_polyline_refinement();
  // closed_curve_pt->disable_polyline_unrefinement();
-
-
+ 
  // Now build the mesh
  //===================
 
@@ -422,7 +421,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
  // Specify the maximum area element
  double uniform_element_area=0.2;
  triangle_mesh_parameters.element_area() = uniform_element_area;
-
+ 
  // Create the mesh
  My_mesh_pt=new 
   RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters);

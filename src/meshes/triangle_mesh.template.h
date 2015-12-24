@@ -405,7 +405,7 @@ class TriangleMeshParameters
    // TriangleMeshParameters object
    TriangleMeshClosedCurve *outer_boundary_pt =
      triangle_mesh_parameters.outer_boundary_pt();
-
+   
    // Get the polygon representation and compute the max boundary_id on
    // the outer polygon. Does nothing (i.e. just returns a pointer to
    // the outer boundary that was input) if the outer boundary is
@@ -542,7 +542,7 @@ class TriangleMeshParameters
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
-
+   
    this->generic_constructor(outer_boundary_polygon_pt,
                              internal_polygon_pt,
                              internal_open_curve_poly_pt,
@@ -554,7 +554,7 @@ class TriangleMeshParameters
                              use_attributes,
                              refine_boundary,
                              refine_internal_boundary);
-
+   
    // Setup boundary coordinates for boundaries
    unsigned nb=nboundary();
 
