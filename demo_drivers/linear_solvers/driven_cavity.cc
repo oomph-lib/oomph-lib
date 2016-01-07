@@ -283,9 +283,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
    Prec_pt=new NavierStokesSchurComplementPreconditioner(this);
    Prec_pt->set_navier_stokes_mesh(this->mesh_pt());
 
-//   Prec_pt->navier_stokes_mesh_pt() = this->mesh_pt();
    Solver_pt->preconditioner_pt()=Prec_pt;
-   
    
    // By default, the LSC Preconditioner uses SuperLU as
    // an exact preconditioner (i.e. a solver) for the

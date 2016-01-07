@@ -13,7 +13,9 @@ then
    echo "0000"
 else
    revision=`$path_to_svnversion`
-   if [ "$revision" == "Unversioned directory" ]
+   # Capture unversioned or svn client out of date (in which case we 
+   # get an error message on screen but no return)
+   if [ "$revision" == "Unversioned directory"  -o "$revision" == "" ]
    then
        echo "0000"
    else

@@ -272,8 +272,11 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
 #endif
  
 //Set Block diagonal preconditioner for the momentum block
-Preconditioner* F_matrix_preconditioner_pt = 
+BlockDiagonalPreconditioner<CRDoubleMatrix>* F_matrix_preconditioner_pt = 
   new BlockDiagonalPreconditioner<CRDoubleMatrix>;
+
+// Set mesh
+F_matrix_preconditioner_pt->add_mesh(this->mesh_pt());
 
 //Use AMG on the momentum blocks if we have Hypre 
 #ifdef OOMPH_HAS_HYPRE

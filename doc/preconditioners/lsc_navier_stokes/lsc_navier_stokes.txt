@@ -17,7 +17,7 @@ Navier-Stokes elements: Taylor-Hood (Q2Q1) and Crouzeix-Raviart
 namely the velocities and pressures. 
 
 The least-squares commutator (LSC; formerly BFBT) Navier-Stokes 
-preconditioner employs \c oomph-lib's block-preconditioning framework
+preconditioner employs \c oomph-lib's <a href="../../../mpi/block_preconditioners/html/index.html">block-preconditioning framework</a>
 to (formally) re-order the linear system to be solved during the
 Newton iteration into 2x2 blocks, corresponding to the velocity 
 and pressure unknowns. We note that all velocity components are 
@@ -204,11 +204,15 @@ a few straightforward steps:
    just listed, using the solver flags assigned in another
    helper function in the namespace  \c Hypre_default_settings:
    \n\n
-   \until #endif
+   \skipline F_matrix_preconditioner_pt = new HyprePreconditioner;
+   \until Prec_pt->set_f_preconditioner
+
+   The driver code contains various other preconditioning options which you
+   should explore yourself.
 .
 
 <HR>
-<HR>
+<HR> 
 
 \section comm_ex Further comments and exercises
 
@@ -216,7 +220,7 @@ Use the driver code
 <A HREF="../../../../demo_drivers/linear_solvers/driven_cavity.cc">
 demo_drivers/linear_solvers/driven_cavity.cc</a> to explore the
 behaviour of the preconditioner for the driven cavity problem.
-The driver codes uses command line flags to specify various
+The driver code uses command line flags to specify various
 solver/preconditioner combinations. 
 
 -# Show that for Taylor-Hood (Q2Q1) elements, the preconditioner
@@ -228,7 +232,7 @@ solver/preconditioner combinations.
    leads to a very poor performance. 
    \n\n
 -# Examine iteration numbers and CPU times for various problem sizes
-   and show that Taylor-Hood (Q2Q1) elements, the preconditioner
+   and show that for Taylor-Hood (Q2Q1) elements, the preconditioner
    leads to near-optimal behaviour in the sense that the CPU times
    increase approximately linearly with the number of unknowns.
    Determine the "break-even" point in the CPU times for 

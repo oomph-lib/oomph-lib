@@ -10,8 +10,13 @@ Examples of "automatically parallelised" tasks include
   Newton's method.
 - Error estimation.
 - The solution of the linear systems within the Newton iteration, and any
-  preconditioning operations performed within \c oomph-lib's block 
-  preconditioning framework.
+  preconditioning operations performed within \c oomph-lib's 
+  <a  href="../../../mpi/block_preconditioners/html/index.html">
+  block-preconditioning framework</a> which relies heavily on the
+  library's 
+  <a href="../../../mpi/distributed_linear_algebra_infrastructure/html/index.html">
+  distributed linear algebra infrastructure.</a>
+
 .
 The only parallel task that requires user intervention is 
 the distribution of a problem over multiple processors
@@ -197,7 +202,18 @@ any additional issues are discussed in the accompanying tutorials.
   --with-mpi-self-tests="mpirun -np 2"
   \endcode
   \n
-  It is easiest to add the appropriate line to the
+  Some self-tests are performed with a greater number of processors.
+  To perform these tests as part of the \c make \c test procedure,
+  add the configure flag  \c --with-mpi-self-tests-variablenp
+  to the configure options. Its argument has to specify how to spawn
+  an mpi job on an arbitary number of processors, using the
+  placeholder \c OOMPHNP for the number of processors. E.g. 
+  \n\n
+  \code
+  --with-mpi-self-tests-variablenp="mpirun -np OOMPHNP"
+  \endcode
+  \n
+  It is easiest to add the appropriate lines to the
   <code>config/configure_options/current</code> file before
   building/installing \c oomph-lib with <code>autogen.sh</code>.
   \n\n
@@ -560,7 +576,7 @@ determined by helper functions such as
 \c Multi_domain_functions::setup_multi_domain_interactions(...). 
 The appropriate helper functions must be called in the function 
 \c Problem::actions_after_distribute() to ensure that the interactions
-are correctly setup once the problem has been distributed.
+are correctly set up once the problem has been distributed.
 
 The helper function \c
 Multi_domain_functions::locate_external_elements() has been written to

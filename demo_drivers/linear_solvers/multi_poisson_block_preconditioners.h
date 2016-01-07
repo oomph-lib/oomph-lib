@@ -61,6 +61,7 @@ namespace oomph
   /// Constructor for Diagonal preconditioner
   Diagonal() : BlockPreconditioner<MATRIX>()
    {
+    Multi_poisson_mesh_pt=0;
    } // end_of_constructor
 
  
@@ -98,35 +99,21 @@ namespace oomph
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
 
 
-  /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
-  /// for preconditioning.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
   {
-#ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (mesh_pt == 0)
-    {
-      std::stringstream err;
-      err << "mesh_pt is null, please set a valid mesh pointer.\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Push the mesh in.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
   }
-  
+
  private :
   
   /// \short Vector of pointers to preconditioners/inexact solvers 
   /// for each diagonal block
   Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
   
-  /// \short Vector of mesh pointers with preconditionable elements used
-  /// for preconditioning.
-  Vector<const Mesh*> Multi_poisson_mesh_pt;
+  /// \short Mesh pointers with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
 
  };
 
@@ -139,32 +126,22 @@ namespace oomph
   // clean the memory
   this->clean_up_my_memory();
 
-  // Only the master block preconditioner sets the mesh. If this is a
-  // subsidiary block preconditioner then the information is gathered from
-  // it's master block preconditioner.
-  if(this->is_master_block_preconditioner())
-  {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
 
 #ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (my_nmesh == 0)
-    {
-      std::stringstream err;
-      err << "Number of meshes is 0, please call push_back_mesh(...).\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif 
-
-    this->set_nmesh(my_nmesh);
-    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
-    {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
-    }
-  }
-
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+  
   // Set up the generic block lookup scheme
   this->block_setup();
 
@@ -270,9 +247,10 @@ namespace oomph
   /// Constructor for SimpleTwoDofOnly
   SimpleTwoDofOnly() : BlockPreconditioner<MATRIX>()
    {
+    Multi_poisson_mesh_pt=0;
    } // end_of_constructor
 
- 
+  
   /// Destructor - clean up memory
   ~SimpleTwoDofOnly()
    {
@@ -304,26 +282,11 @@ namespace oomph
   /// Apply preconditioner to r, i.e. return solution of P z = r
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
 
-  /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
-  /// for preconditioning.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
   {
-#ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (mesh_pt == 0)
-    {
-      std::stringstream err;
-      err << "mesh_pt is null, please set a valid mesh pointer.\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Push the mesh in.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
   }
-
   
  private :
   
@@ -331,9 +294,10 @@ namespace oomph
   /// for each diagonal block
   Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
 
-  /// \short Vector of mesh pointers with preconditionable elements used
-  /// for preconditioning.
-  Vector<const Mesh*> Multi_poisson_mesh_pt;
+  /// \short Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
+
  };
 
  //=========================start_of_setup_for_simple==========================
@@ -345,31 +309,20 @@ namespace oomph
   // clean the memory
   this->clean_up_my_memory();
 
-  // Only the master block preconditioner sets the mesh. If this is a
-  // subsidiary block preconditioner then the information is gathered from
-  // it's master block preconditioner.
-  if(this->is_master_block_preconditioner())
-  {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
-
 #ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (my_nmesh == 0)
-    {
-      std::stringstream err;
-      err << "Number of meshes is 0, please call push_back_mesh(...).\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif 
-
-    this->set_nmesh(my_nmesh);
-    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
-    {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
-    }
-  }
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
 
 #ifdef PARANOID
   // This preconditioner only works for 2 dof types
@@ -503,7 +456,8 @@ namespace oomph
   /// Constructor for SimpleOneDofOnly
   SimpleOneDofOnly() : BlockPreconditioner<MATRIX>()
    {
-     Subsidiary_preconditioner_pt = 0;
+    Subsidiary_preconditioner_pt = 0;
+    Multi_poisson_mesh_pt=0;
    } // end_of_constructor
 
  
@@ -539,35 +493,20 @@ namespace oomph
   /// Apply preconditioner to r, i.e. return solution of P z = r
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
  
-  /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
-  /// for preconditioning.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
   {
-#ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (mesh_pt == 0)
-    {
-      std::stringstream err;
-      err << "mesh_pt is null, please set a valid mesh pointer.\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Push the mesh in.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
-  } 
-
-
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+  
    private :
   
   /// \short Pointer to the preconditioners/inexact solver.
   Preconditioner* Subsidiary_preconditioner_pt;
   
-  /// \short Vector of mesh pointers with preconditionable elements used
-  /// for preconditioning.
-  Vector<const Mesh*> Multi_poisson_mesh_pt;
+  /// \short Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
  };
 
  //=========================start_of_setup_for_simple==========================
@@ -579,31 +518,20 @@ namespace oomph
   // clean the memory
   this->clean_up_my_memory();
 
-  // Only the master block preconditioner sets the mesh. If this is a
-  // subsidiary block preconditioner then the information is gathered from
-  // it's master block preconditioner.
-  if(this->is_master_block_preconditioner())
-  {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
-
 #ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (my_nmesh == 0)
-    {
-      std::stringstream err;
-      err << "Number of meshes is 0, please call push_back_mesh(...).\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif 
-
-    this->set_nmesh(my_nmesh);
-    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
-    {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
-    }
-  }
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
 
 
 #ifdef PARANOID
@@ -714,7 +642,8 @@ namespace oomph
   /// Constructor for CoarseTwoIntoOne
   CoarseTwoIntoOne() : BlockPreconditioner<MATRIX>()
    {
-     Subsidiary_preconditioner_pt = 0;
+    Subsidiary_preconditioner_pt = 0;
+    Multi_poisson_mesh_pt=0;
    } // end_of_constructor
 
  
@@ -756,25 +685,10 @@ namespace oomph
   /// linear system.
   void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-
-  /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
-  /// for preconditioning.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
   {
-#ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (mesh_pt == 0)
-    {
-      std::stringstream err;
-      err << "mesh_pt is null, please set a valid mesh pointer.\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Push the mesh in.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
   }
 
  private :
@@ -782,9 +696,9 @@ namespace oomph
   /// \short Pointer to the preconditioners/inexact solvers 
   Preconditioner* Subsidiary_preconditioner_pt;
 
-  /// \short Vector of mesh pointers with preconditionable elements used
-  /// for preconditioning.
-  Vector<const Mesh*> Multi_poisson_mesh_pt;
+  /// \short Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
  };
 
  //=========================start_of_setup_for_simple==========================
@@ -796,31 +710,20 @@ namespace oomph
   // clean the memory
   this->clean_up_my_memory();
 
-  // Only the master block preconditioner sets the mesh. If this is a
-  // subsidiary block preconditioner then the information is gathered from
-  // it's master block preconditioner.
-  if(this->is_master_block_preconditioner())
-  {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
-
 #ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (my_nmesh == 0)
-    {
-      std::stringstream err;
-      err << "Number of meshes is 0, please call push_back_mesh(...).\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif 
-
-    this->set_nmesh(my_nmesh);
-    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
-    {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
-    }
-  }
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
 
 
 #ifdef PARANOID
@@ -873,33 +776,39 @@ namespace oomph
   // We use a subsidiary block preconditioner which accepts only one DOF 
   // types. Since we have two DOF types, we must coarsen DOF types.
   {
-    // To coarsen DOF types, we have a 2D Vector.
-    // Size of the outer Vector is the number of subsidiary DOF types.
-    const unsigned n_sub_dof_types = 1;
-    Vector<Vector<unsigned> >doftype_coarsen_map(n_sub_dof_types);
-
-    // The inner vector(s) tells the subsidiary block preconditioner which
-    // DOF types to coarsen into one. In this case the 0th inner vector is
-    // of size TWO with values [0,1], this tells the subsidiary block
-    // preconditioner that IT'S DOF type 0 and 1 is coarsened into 
-    // DOF type 0.
-    doftype_coarsen_map[0].resize(2);
-    doftype_coarsen_map[0][0]=0;
-    doftype_coarsen_map[0][1]=1;
-
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
     // This is the usual dof map between master's DOF type and subsidiary 
     // DOF types. In this case, the vector [0,1] tells the subsidiary block
     // preconditioner that it's DOF type 0(1) is mapped to the master's DOF 
     // type 0(1).
-    Vector<unsigned>doftype_in_master(2);
-    doftype_in_master[0] = 0;
-    doftype_in_master[1] = 1;
+   Vector<unsigned>dof_map(2);
+   dof_map[0] = 0;
+   dof_map[1] = 1;
 
-    block_prec_pt->turn_into_subsidiary_block_preconditioner(this,
-        doftype_in_master,doftype_coarsen_map);
-
-    // Set up block preconditioner.
-    block_prec_pt->setup(this->matrix_pt());
+   // To coarsen DOF types, we have a 2D Vector.
+   // Size of the outer Vector is the number of subsidiary DOF types.
+   const unsigned n_sub_dof_types = 1;
+   Vector<Vector<unsigned> >doftype_coarsening(n_sub_dof_types);
+   
+   // The inner vector(s) tells the subsidiary block preconditioner which
+   // DOF types to coarsen into one. In this case the 0th inner vector is
+   // of size TWO with values [0,1], this tells the subsidiary block
+   // preconditioner that IT'S DOF type 0 and 1 is coarsened into 
+   // DOF type 0.
+   doftype_coarsening[0].resize(2);
+   doftype_coarsening[0][0]=0;
+   doftype_coarsening[0][1]=1;
+   
+   
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,
+                                      dof_map,doftype_coarsening);
+   
+   // Set up block preconditioner. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
+   block_prec_pt->setup(this->matrix_pt());
   }
  }
  
@@ -953,6 +862,7 @@ namespace oomph
   /// Constructor.
   UpperTriangular() : BlockPreconditioner<MATRIX>()
    {
+    Multi_poisson_mesh_pt=0;
    }
  
   /// Destructor - delete the preconditioner matrices
@@ -986,24 +896,10 @@ namespace oomph
   // setup function that takes a matrix pointer as an argument.
   using Preconditioner::setup;
 
-  /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
-  /// for preconditioning.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
   {
-#ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (mesh_pt == 0)
-    {
-      std::stringstream err;
-      err << "mesh_pt is null, please set a valid mesh pointer.\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Push the mesh in.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
   }
 
  private:  
@@ -1015,9 +911,9 @@ namespace oomph
   /// for each diagonal block
   Vector<Preconditioner*> Block_preconditioner_pt;
 
-  /// \short Vector of mesh pointers with preconditionable elements used
-  /// for preconditioning.
-  Vector<const Mesh*> Multi_poisson_mesh_pt;
+  /// \short Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
 
  };
 
@@ -1030,32 +926,20 @@ namespace oomph
   // clean the memory
   this->clean_up_my_memory();
 
-  // Only the master block preconditioner sets the mesh. If this is a
-  // subsidiary block preconditioner then the information is gathered from
-  // it's master block preconditioner.
-  if(this->is_master_block_preconditioner())
-  {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
-
 #ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (my_nmesh == 0)
-    {
-      std::stringstream err;
-      err << "Number of meshes is 0, please call push_back_mesh(...).\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif 
-
-    this->set_nmesh(my_nmesh);
-    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
-    {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
-    }
-  }
-
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
 
   // Set up the block look up schemes
   this->block_setup();
@@ -1210,7 +1094,9 @@ namespace oomph
   TwoPlusThree() : BlockPreconditioner<MATRIX>(),
    First_subsidiary_preconditioner_pt(0),
    Second_subsidiary_preconditioner_pt(0)
-    {} // end_of_constructor
+    {
+     Multi_poisson_mesh_pt=0;
+    } // end_of_constructor
     
   /// Destructor - delete the diagonal solvers (subsidiary preconditioners)
   ~TwoPlusThree()
@@ -1239,24 +1125,10 @@ namespace oomph
   /// \short Setup the preconditioner 
   virtual void setup();
  
-  /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
-  /// for preconditioning.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
   {
-#ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (mesh_pt == 0)
-    {
-      std::stringstream err;
-      err << "mesh_pt is null, please set a valid mesh pointer.\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Push the mesh in.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
   }
 
  private :
@@ -1269,9 +1141,9 @@ namespace oomph
   /// for (1,1) block
   Preconditioner* Second_subsidiary_preconditioner_pt;
 
-  /// \short Vector of mesh pointers with preconditionable elements used
-  /// for preconditioning.  
-  Vector<const Mesh*> Multi_poisson_mesh_pt; 
+  /// \short Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.  
+  Mesh* Multi_poisson_mesh_pt; 
  };
 
  //====================start_of_setup_for_two_plus_three=======================
@@ -1283,34 +1155,24 @@ namespace oomph
   // Clean up memory.
   this->clean_up_my_memory();
 
-  // Only the master block preconditioner sets the mesh. If this is a
-  // subsidiary block preconditioner then the information is gathered from
-  // it's master block preconditioner.
-  if(this->is_master_block_preconditioner())
-  {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
-
 #ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (my_nmesh == 0)
-    {
-      std::stringstream err;
-      err << "Number of meshes is 0, please call push_back_mesh(...).\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif 
-
-    this->set_nmesh(my_nmesh);
-    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
-    {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
-    }
-  }
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
 
   // How many dof types do we have?
   unsigned n_dof_types = this->ndof_types();
+
 
 #ifdef PARANOID
   // This preconditioner only works for 5 dof types
@@ -1439,7 +1301,8 @@ namespace oomph
     Off_diagonal_matrix_vector_product_pt(0),
     First_subsidiary_preconditioner_pt(0),
     Second_subsidiary_preconditioner_pt(0)
-   {
+   { 
+    Multi_poisson_mesh_pt=0;
    }
  
   /// Destructor - delete the preconditioner matrices
@@ -1473,24 +1336,10 @@ namespace oomph
   // setup function that takes a matrix pointer as an argument.
   using Preconditioner::setup;
 
-  /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
-  /// for preconditioning.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
   {
-#ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (mesh_pt == 0)
-    {
-      std::stringstream err;
-      err << "mesh_pt is null, please set a valid mesh pointer.\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Push the mesh in.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
   }
 
  private:  
@@ -1506,9 +1355,9 @@ namespace oomph
   /// for (1,1) block
   Preconditioner* Second_subsidiary_preconditioner_pt;
 
-  /// \short Vector of mesh pointers with preconditionable elements used
-  /// for preconditioning.
-  Vector<const Mesh*> Multi_poisson_mesh_pt;
+  /// \short Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
 
  };
 
@@ -1521,31 +1370,20 @@ namespace oomph
   // clean the memory
   this->clean_up_my_memory();
 
-  // Only the master block preconditioner sets the mesh. If this is a
-  // subsidiary block preconditioner then the information is gathered from
-  // it's master block preconditioner.
-  if(this->is_master_block_preconditioner())
-  {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
-
 #ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (my_nmesh == 0)
-    {
-      std::stringstream err;
-      err << "Number of meshes is 0, please call push_back_mesh(...).\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif 
-
-    this->set_nmesh(my_nmesh);
-    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
-    {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
-    }
-  }
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
 
   // Get number of degrees of freedom.
   unsigned n_dof_types = this->ndof_types();
@@ -1708,6 +1546,7 @@ namespace oomph
     First_subsidiary_preconditioner_pt(0),
     Second_subsidiary_preconditioner_pt(0)
    {
+    Multi_poisson_mesh_pt=0;
    }
  
   /// Destructor - delete the preconditioner matrices
@@ -1745,26 +1584,11 @@ namespace oomph
   // setup function that takes a matrix pointer as an argument.
   using Preconditioner::setup;
 
-  /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
-  /// for preconditioning.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
   {
-#ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (mesh_pt == 0)
-    {
-      std::stringstream err;
-      err << "mesh_pt is null, please set a valid mesh pointer.\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Push the mesh in.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
   }
-
 
  private:  
 
@@ -1779,9 +1603,9 @@ namespace oomph
   /// for (1,1) block
   Preconditioner* Second_subsidiary_preconditioner_pt;
 
-  /// \short Vector of mesh pointers with preconditionable elements used
-  /// for preconditioning.
-  Vector<const Mesh*> Multi_poisson_mesh_pt;
+  /// \short Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
 
  };
 
@@ -1794,31 +1618,20 @@ namespace oomph
   // clean the memory
   this->clean_up_my_memory();
 
-  // Only the master block preconditioner sets the mesh. If this is a
-  // subsidiary block preconditioner then the information is gathered from
-  // it's master block preconditioner.
-  if(this->is_master_block_preconditioner())
-  {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
-
 #ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (my_nmesh == 0)
-    {
-      std::stringstream err;
-      err << "Number of meshes is 0, please call push_back_mesh(...).\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif 
-
-    this->set_nmesh(my_nmesh);
-    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
-    {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
-    }
-  }
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
 
   // number of dof types  
   unsigned n_dof_types = this->ndof_types();
@@ -1855,6 +1668,9 @@ namespace oomph
     new UpperTriangular<CRDoubleMatrix>;
    First_subsidiary_preconditioner_pt=block_prec_pt;
 
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
    // Turn into a subsidiary preconditioner, declaring which
    // of the five dof types in the present (master) preconditioner
    // correspond to the dof types in the subsidiary block preconditioner:
@@ -1875,6 +1691,9 @@ namespace oomph
    UpperTriangular<CRDoubleMatrix>* block_prec_pt=
     new UpperTriangular<CRDoubleMatrix>;
    Second_subsidiary_preconditioner_pt=block_prec_pt;
+   
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
    
    // Turn second_sub into a subsidiary preconditioner, declaring which
    // of the five dof types in the present (master) preconditioner
@@ -1931,7 +1750,7 @@ namespace oomph
     
   // Now extract the "bottom" (3x1) block vector from the full-size (5x1)
   // solution vector that we've just computed -- note that index 1
-  // refers to the block enumeration the in the current preconditioner
+  // refers to the block enumeration in the current preconditioner
   // (which has two blocks!)
   DoubleVector block_y;
   this->get_block_vector(1,y,block_y);
@@ -2022,6 +1841,7 @@ public BlockPreconditioner<MATRIX>
    Second_subsidiary_preconditioner_pt(0),
    Off_diagonal_matrix_vector_product_pt(0)
     {
+     Multi_poisson_mesh_pt=0;
     } // end_of_constructor
   
   
@@ -2058,26 +1878,12 @@ public BlockPreconditioner<MATRIX>
   // setup function that takes a matrix pointer as an argument.
   using Preconditioner::setup;
   
-  /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
-  /// for preconditioning.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
   {
-#ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (mesh_pt == 0)
-    {
-      std::stringstream err;
-      err << "mesh_pt is null, please set a valid mesh pointer.\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Push the mesh in.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
   }
-  
+
    private :
   
   /// \short Pointer to preconditioners/inexact solver
@@ -2091,9 +1897,9 @@ public BlockPreconditioner<MATRIX>
   /// Matrix vector product operators for the off diagonals.
   MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
-  /// \short Vector of mesh pointers with preconditionable elements used
-  /// for preconditioning.
-  Vector<const Mesh*> Multi_poisson_mesh_pt;
+  /// \short Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
 
  };
 
@@ -2106,31 +1912,21 @@ template<typename MATRIX>
   // Clean up memory.
   this->clean_up_my_memory();
   
-  // Only the master block preconditioner sets the mesh. If this is a
-  // subsidiary block preconditioner then the information is gathered from
-  // it's master block preconditioner.
-  if(this->is_master_block_preconditioner())
-  {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
-
 #ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (my_nmesh == 0)
-    {
-      std::stringstream err;
-      err << "Number of meshes is 0, please call push_back_mesh(...).\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif 
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
 
-    this->set_nmesh(my_nmesh);
-    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
-    {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
-    }
-  }
 
 #ifdef PARANOID
   // This preconditioner only works for 3 dof types
@@ -2164,6 +1960,9 @@ template<typename MATRIX>
     new UpperTriangular<CRDoubleMatrix>;
    First_subsidiary_preconditioner_pt=block_prec_pt;
    
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
    // Turn it into a subsidiary preconditioner, declaring which
    // of the three dof types in the present (master) preconditioner
    // correspond to the dof types in the subsidiary block preconditioner,
@@ -2174,7 +1973,9 @@ template<typename MATRIX>
    dof_map[1] = 1;
    block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
    
-   // Perform setup
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
    block_prec_pt->setup(this->matrix_pt());
   }
 
@@ -2185,6 +1986,9 @@ template<typename MATRIX>
     new UpperTriangular<CRDoubleMatrix>;
    Second_subsidiary_preconditioner_pt=block_prec_pt;
    
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
    // Turn it into a subsidiary preconditioner, declaring which
    // of the three dof types in the present (master) preconditioner
    // correspond to the dof types in the subsidiary block preconditioner i.e.
@@ -2194,7 +1998,9 @@ template<typename MATRIX>
    dof_map[0] = 2;
    block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
    
-   // Perform setup
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
    block_prec_pt->setup(this->matrix_pt()); 
   }
 
@@ -2315,7 +2121,8 @@ template<typename MATRIX>
    Off_diagonal_matrix_vector_product_pt(0),
    First_subsidiary_preconditioner_pt(0),
    Second_subsidiary_preconditioner_pt(0)
-   {
+   {   
+    Multi_poisson_mesh_pt=0;
    }
  
   /// Destructor - delete the preconditioner matrices
@@ -2353,24 +2160,10 @@ template<typename MATRIX>
   // setup function that takes a matrix pointer as an argument.
   using Preconditioner::setup;
 
-  /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
-  /// for preconditioning.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
   {
-#ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (mesh_pt == 0)
-    {
-      std::stringstream err;
-      err << "mesh_pt is null, please set a valid mesh pointer.\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Push the mesh in.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
   }
 
  private:  
@@ -2386,9 +2179,9 @@ template<typename MATRIX>
   /// for (1,1) block
   Preconditioner* Second_subsidiary_preconditioner_pt;
 
-  /// \short Vector of mesh pointers with preconditionable elements used
-  /// for preconditioning.
-  Vector<const Mesh*> Multi_poisson_mesh_pt;
+  /// \short Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
 
  };
 
@@ -2401,31 +2194,20 @@ template<typename MATRIX>
   // clean the memory
   this->clean_up_my_memory();
 
-  // Only the master block preconditioner sets the mesh. If this is a
-  // subsidiary block preconditioner then the information is gathered from
-  // it's master block preconditioner.
-  if(this->is_master_block_preconditioner())
-  {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
-
 #ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (my_nmesh == 0)
-    {
-      std::stringstream err;
-      err << "Number of meshes is 0, please call push_back_mesh(...).\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif 
-
-    this->set_nmesh(my_nmesh);
-    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
-    {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
-    }
-  }
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
 
   // number of block types  
   unsigned n_dof_types = this->ndof_types();
@@ -2467,6 +2249,9 @@ template<typename MATRIX>
     new UpperTriangular<CRDoubleMatrix>;
    First_subsidiary_preconditioner_pt=block_prec_pt;
    
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
    // Turn first_sub into a subsidiary preconditioner, declaring which
    // of the five dof types in the present (master) preconditioner
    // correspond to the dof types in the subsidiary block preconditioner,
@@ -2476,7 +2261,10 @@ template<typename MATRIX>
    dof_map[0]=0;
    dof_map[1]=1;
    block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);    
-   // Perform setup
+
+   // Perform setup.Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
    block_prec_pt->setup(this->matrix_pt());
   }
   
@@ -2485,6 +2273,9 @@ template<typename MATRIX>
    TwoPlusOneUpperTriangularPreconditioner<CRDoubleMatrix>* block_prec_pt=
     new TwoPlusOneUpperTriangularPreconditioner<CRDoubleMatrix>;
    Second_subsidiary_preconditioner_pt=block_prec_pt;
+   
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
    
    // Turn second_sub into a subsidiary preconditioner, declaring which
    // of the five dof types in the present (master) preconditioner
@@ -2496,7 +2287,10 @@ template<typename MATRIX>
    dof_map[1]=3;
    dof_map[2]=4;
    block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);    
-   // Perform setup
+
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
    block_prec_pt->setup(this->matrix_pt());
   }
 
@@ -2633,7 +2427,8 @@ template<typename MATRIX>
    First_subsidiary_preconditioner_pt(0),
    Second_subsidiary_preconditioner_pt(0),
    Off_diagonal_matrix_vector_product_pt(0)
-   {
+   {    
+    Multi_poisson_mesh_pt=0;
    } // end_of_constructor
   
   
@@ -2667,24 +2462,10 @@ template<typename MATRIX>
   /// \short Setup the preconditioner 
   void setup();
  
-  /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
-  /// for preconditioning.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
   {
-#ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (mesh_pt == 0)
-    {
-      std::stringstream err;
-      err << "mesh_pt is null, please set a valid mesh pointer.\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Push the mesh in.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
   }
 
    private :
@@ -2704,9 +2485,9 @@ template<typename MATRIX>
   // Matrix of pointers to replacement matrix blocks
   DenseMatrix<CRDoubleMatrix*> Replacement_matrix_pt;
 
-  /// \short Vector of mesh pointers with preconditionable elements used
-  /// for preconditioning.
-  Vector<const Mesh*> Multi_poisson_mesh_pt;
+  /// \short Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
   
  };
  
@@ -2720,32 +2501,20 @@ template<typename MATRIX>
   // Clean up memory.
   this->clean_up_my_memory();
 
-  // Only the master block preconditioner sets the mesh. If this is a
-  // subsidiary block preconditioner then the information is gathered from
-  // it's master block preconditioner.
-  if(this->is_master_block_preconditioner())
-  {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
-
 #ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (my_nmesh == 0)
-    {
-      std::stringstream err;
-      err << "Number of meshes is 0, please call push_back_mesh(...).\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif 
-
-    this->set_nmesh(my_nmesh);
-    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
-    {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
-    }
-  }
-
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
 
   // How many dof types do we have?
   const unsigned n_dof_types = this->ndof_types();
@@ -2871,6 +2640,9 @@ template<typename MATRIX>
     new UpperTriangular<CRDoubleMatrix>;
    First_subsidiary_preconditioner_pt=block_prec_pt;
   
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
    // Turn it into a subsidiary preconditioner, declaring which
    // of the five dof types in the present (master) preconditioner
    // correspond to the dof types in the subsidiary block preconditioner
@@ -2879,7 +2651,10 @@ template<typename MATRIX>
    dof_map[0]=0;
    dof_map[1]=1;
    block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
-    // Perform setup
+
+    // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
    block_prec_pt->setup(this->matrix_pt());
   }
 
@@ -2888,6 +2663,9 @@ template<typename MATRIX>
    UpperTriangular<CRDoubleMatrix>* block_prec_pt=
     new UpperTriangular<CRDoubleMatrix>;
    Second_subsidiary_preconditioner_pt=block_prec_pt;
+   
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
    
    // Turn it into a subsidiary preconditioner, declaring which
    // of the five dof types in the present (master) preconditioner
@@ -2899,7 +2677,9 @@ template<typename MATRIX>
    dof_map[2]=4;
    block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
    
-   // Perform setup
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
    block_prec_pt->setup(this->matrix_pt());
   }
 
@@ -3022,9 +2802,9 @@ template<typename MATRIX>
 
 //==================start_of_coarse_two_plus_two_plus_one_class================
 /// \short Block diagonal preconditioner for system with 5 dof types
-/// assembled into a 2x2 block system, with (0,0) block containing
-/// the first two dof types, the (1,1) block containing the remaining,
-/// (1,1) block is itself solved by a (2x2) block preconditioner!
+/// assembled into a 2x2 block system, with the (0,0) block containing
+/// the first two dof types, the (1,1) block containing the three remaining 
+/// ones.
 //=============================================================================
  template<typename MATRIX> 
  class CoarseTwoPlusTwoPlusOne : 
@@ -3039,7 +2819,8 @@ template<typename MATRIX>
    First_subsidiary_preconditioner_pt(0),
    Second_subsidiary_preconditioner_pt(0),
    Off_diagonal_matrix_vector_product_pt(0)
-    {
+    {    
+     Multi_poisson_mesh_pt=0;
     } // end_of_constructor
   
   
@@ -3074,24 +2855,10 @@ template<typename MATRIX>
   /// \short Setup the preconditioner 
   virtual void setup();
  
-  /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
-  /// for preconditioning.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
   {
-#ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (mesh_pt == 0)
-    {
-      std::stringstream err;
-      err << "mesh_pt is null, please set a valid mesh pointer.\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Push the mesh in.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
   }
 
  private :
@@ -3110,9 +2877,9 @@ template<typename MATRIX>
   /// Matrix vector product operator
   MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
-  /// \short Vector of mesh pointers with preconditionable elements used
-  /// for preconditioning.  
-  Vector<const Mesh*> Multi_poisson_mesh_pt;
+  /// \short Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.  
+  Mesh* Multi_poisson_mesh_pt;
  };
 
  //===============start_of_setup_for_coarse_two_plus_two_plus_one=============
@@ -3124,32 +2891,20 @@ template<typename MATRIX>
   // Clean up memory
   this->clean_up_my_memory();
 
-  // Only the master block preconditioner sets the mesh. If this is a
-  // subsidiary block preconditioner then the information is gathered from
-  // it's master block preconditioner.
-  if(this->is_master_block_preconditioner())
-  {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
-
 #ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (my_nmesh == 0)
-    {
-      std::stringstream err;
-      err << "Number of meshes is 0, please call push_back_mesh(...).\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif 
-
-    this->set_nmesh(my_nmesh);
-    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
-    {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
-    }
-  }
-
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
 
   // This preconditioner only works for 5 dof types
   unsigned n_dof_types = this->ndof_types();
@@ -3212,25 +2967,28 @@ template<typename MATRIX>
         replacement_row_start.resize(dof_block_nrow+1,0);
 
         Replacement_matrix_pt(i,j)=
-         new CRDoubleMatrix(dof_block_dist_pt, dof_block_ncol, replacement_value,
+         new CRDoubleMatrix(dof_block_dist_pt, dof_block_ncol, 
+                            replacement_value,
                             replacement_column_index, replacement_row_start);
 
         // Replace.
         this->set_replacement_dof_block(i,j,Replacement_matrix_pt(i,j));
+
        }// End of if
      }// End of j loop.
    }// End of i loop.
 
   // Create the subsidiary preconditioners
   //--------------------------------------
-
   {
    // First subsidiary precond is a block diagonal preconditioner itself.
-   // Put in owns cope so block_prec_pt goes out of scope.
    UpperTriangular<CRDoubleMatrix>* block_prec_pt=
     new UpperTriangular<CRDoubleMatrix>;
    First_subsidiary_preconditioner_pt=block_prec_pt;
 
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
    // Turn first_sub into a subsidiary preconditioner, declaring which
    // of the five dof types in the present (master) preconditioner
    // correspond to the dof types in the subsidiary block preconditioner
@@ -3239,70 +2997,93 @@ template<typename MATRIX>
    dof_map[0]=0;
    dof_map[1]=1;
    block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);    
-   // Perform setup
+
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
    block_prec_pt->setup(this->matrix_pt());
   }
 
-  // Second subsidiary precond is a block diagonal preconditioner itself
-  SimpleTwoDofOnly<CRDoubleMatrix>* block_prec_pt=
-   new SimpleTwoDofOnly<CRDoubleMatrix>;
-  Second_subsidiary_preconditioner_pt=block_prec_pt;
-
-
-  // The subsidiary block preconditioner SimpleTwoDofOnly accepts only two
-  // DOF types. To use this preconditioner on the remaining 3 DOF types,
-  // we coarsen the 3 DOf types into two DOF types.
-  
-  // Number of dof types the subsidiary block preconditioner expects.
-  const unsigned n_sub_dof_types=2;
-  Vector<Vector<unsigned> > doftype_coarsen_map_coarse(n_sub_dof_types);
-
-  // Subsidiary dof type 0 contains 2 dof types.
-  doftype_coarsen_map_coarse[0].resize(2);
-
-  // Subsidiary dof type 1 contains 1 dof types. 
-  doftype_coarsen_map_coarse[1].resize(1);
-
-  // Coarsen subsidiary dof types 0 and 1 into subsidiary dof type 0.
-  doftype_coarsen_map_coarse[0][0]=0;
-  doftype_coarsen_map_coarse[0][1]=1;
-
-  // Subsidiary Dof type 1 contains subsidiary dof type 2.
-  doftype_coarsen_map_coarse[1][0]=2;
-
-  // This is the usual mapping between the subsidiary and master dof types.
-  Vector<unsigned> doftype_in_master_coarse(3);
-  doftype_in_master_coarse[0]=2;
-  doftype_in_master_coarse[1]=3;
-  doftype_in_master_coarse[2]=4;
+  // Second subsidiary preconditioner is also a block preconditioner 
+  {
+   SimpleTwoDofOnly<CRDoubleMatrix>* block_prec_pt=
+    new SimpleTwoDofOnly<CRDoubleMatrix>;
+   Second_subsidiary_preconditioner_pt=block_prec_pt;
    
-  block_prec_pt->
-   turn_into_subsidiary_block_preconditioner(this,doftype_in_master_coarse,
-                                             doftype_coarsen_map_coarse);
-  // Perform setup
-  block_prec_pt->setup(this->matrix_pt());
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+   // This is the usual mapping between the subsidiary and master dof types.
+   Vector<unsigned> dof_map(3);
+   dof_map[0]=2;
+   dof_map[1]=3;
+   dof_map[2]=4;
+   
+   // The subsidiary block preconditioner SimpleTwoDofOnly accepts only two
+   // dof types. We therefore have to "coarsen" the 3 dof types into two
+   // by specifying the vector of vectors doftype_coarsening whose
+   // entries are to be interpreted as
+   // 
+   //    doftype_coarsening[coarsened_dof_type][i]=dof_type
+   //
+   // where i ranges from 0 to the number of dof types (minus one, because
+   // of the zero-based indexing...) that are to be
+   // combined/coarsened into dof type dof_type_in_coarsed_block_preconditioner
 
+
+   // Number of dof types the subsidiary block preconditioner expects.
+   const unsigned n_sub_dof_types=2;
+   Vector<Vector<unsigned> > doftype_coarsening(n_sub_dof_types);
+   
+   // Subsidiary dof type 0 contains 2 dof types.
+   doftype_coarsening[0].resize(2);
+
+   // Coarsen subsidiary dof types 0 and 1 into subsidiary dof type 0.
+   doftype_coarsening[0][0]=0;
+   doftype_coarsening[0][1]=1;
+   
+   // Subsidiary dof type 1 contains 1 dof types. 
+   doftype_coarsening[1].resize(1);
+   
+   // Subsidiary Dof type 1 contains subsidiary dof type 2.
+   doftype_coarsening[1][0]=2;
+      
+   // Turn into subdiary preconditioner
+   block_prec_pt->
+    turn_into_subsidiary_block_preconditioner(this,dof_map,
+                                              doftype_coarsening);
+
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
+   block_prec_pt->setup(this->matrix_pt());
+  }
+   
+   
   // Set up off diagonal matrix vector product
-     
-  // Get the off diagonal block.
-  CRDoubleMatrix block_matrix = this->get_block(0,1);
+  {
+   // Get the off diagonal block.
+   CRDoubleMatrix block_matrix = this->get_block(0,1);
+   
+   // Create matrix vector product operator
+   Off_diagonal_matrix_vector_product_pt = new MatrixVectorProduct;
+   
+   // Setup: Final argument indicates block column in the present
+   // block preconditioner (which views the system matrix as comprising
+   // 2x2 blocks).
+   unsigned block_column_index=1;
+   this->setup_matrix_vector_product(
+    Off_diagonal_matrix_vector_product_pt,&block_matrix,block_column_index);
 
-  // Create matrix vector product operator
-  Off_diagonal_matrix_vector_product_pt = new MatrixVectorProduct;
-
-  // Setup: Final argument indicates block column in the present
-  // block preconditioner (which views the system matrix as comprising
-  // 2x2 blocks).
-  unsigned block_column_index=1;
-  this->setup_matrix_vector_product(
-   Off_diagonal_matrix_vector_product_pt,&block_matrix,block_column_index);
-
+   // extracted block can now go out of scope; the matrix vector product
+   // retains its own (deep) copy.
+  }
+ 
  }// End of setup
- 
- 
+  
+  
  //=============================================================================
- /// Preconditioner solve for the coarse one plus two plus two with subsidiary 
- /// and replacement preconditioner: 
+ /// Preconditioner solve: 
  /// Apply preconditioner to r and return z, so that P z = r, where
  /// P is the block diagonal matrix constructed from the original 
  /// linear system.
@@ -3417,7 +3198,9 @@ template<typename MATRIX>
    First_subsidiary_preconditioner_pt(0),
    Second_subsidiary_preconditioner_pt(0),
    Off_diagonal_matrix_vector_product_pt(0)
-   {} // end_of_constructor
+   {   
+    Multi_poisson_mesh_pt=0;
+   } // end_of_constructor
   
   
   /// Destructor - delete the diagonal solvers (subsidiary preconditioners)
@@ -3451,24 +3234,10 @@ template<typename MATRIX>
   /// \short Setup the preconditioner 
   virtual void setup();
  
-  /// \short Push back a mesh into the Multi_poisson_mesh_pt variable used
-  /// for preconditioning.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
   {
-#ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (mesh_pt == 0)
-    {
-      std::stringstream err;
-      err << "mesh_pt is null, please set a valid mesh pointer.\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    // Push the mesh in.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
   }
 
  private :
@@ -3487,9 +3256,9 @@ template<typename MATRIX>
   /// Matrix vector product operators for the off diagonal.
   MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
-  /// \short Vector of mesh pointers with preconditionable elements used
-  /// for preconditioning.
-  Vector<const Mesh*> Multi_poisson_mesh_pt;
+  /// \short Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
 
  };
 
@@ -3502,32 +3271,20 @@ template<typename MATRIX>
   // Clean up memory
   this->clean_up_my_memory();
 
-  // Only the master block preconditioner sets the mesh. If this is a
-  // subsidiary block preconditioner then the information is gathered from
-  // it's master block preconditioner.
-  if(this->is_master_block_preconditioner())
-  {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
-
 #ifdef PARANOID
-    // This preconditioner only works for 2 dof types
-    if (my_nmesh == 0)
-    {
-      std::stringstream err;
-      err << "Number of meshes is 0, please call push_back_mesh(...).\n";
-      throw OomphLibError(err.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif 
 
-    this->set_nmesh(my_nmesh);
-    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
-    {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
-    }
-  }
-
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
 
   // This preconditioner only works for 5 dof types
   unsigned n_dof_types = this->ndof_types();
@@ -3607,6 +3364,9 @@ template<typename MATRIX>
     new UpperTriangular<CRDoubleMatrix>;
    First_subsidiary_preconditioner_pt=block_prec_pt;
 
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
    // Turn first_sub into a subsidiary preconditioner, declaring which
    // of the five dof types in the present (master) preconditioner
    // correspond to the dof types in the subsidiary block preconditioner
@@ -3614,7 +3374,10 @@ template<typename MATRIX>
    Vector<unsigned> dof_map(n_sub_dof_types);
    dof_map[0]=0;
    block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map); 
-   // Perform setup
+
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
    block_prec_pt->setup(this->matrix_pt());
   }
   
@@ -3627,48 +3390,60 @@ template<typename MATRIX>
    new CoarseTwoIntoOne<CRDoubleMatrix>;
   Second_subsidiary_preconditioner_pt=block_prec_pt;
 
-
-  // The subsidiary block preconditioner CoarseTwoIntoOne accepts only two
-  // DOF types. To use this preconditioner on the remaining 4 DOF types,
-  // we coarsen the 4 DOf types into 2 DOF types.
-  
-  // Number of dof types the subsidiary block preconditioner expects. 
-  const unsigned n_sub_dof_types=2;
-  Vector<Vector<unsigned> > doftype_coarsen_map_coarse(n_sub_dof_types);
-
-  // Subsidiary dof type 0 contains 2 dof types.
-  doftype_coarsen_map_coarse[0].resize(2);
-
-  // Subsidiary dof type 1 contains 2 dof types. 
-  doftype_coarsen_map_coarse[1].resize(2);
-
-  // Coarsen subsidiary dof types 0 and 1 into subsidiary dof type 0.
-  doftype_coarsen_map_coarse[0][0]=0;
-  doftype_coarsen_map_coarse[0][1]=1;
-
-  // Coarsen subsidiary dof types 0 and 1 into subsidiary dof type 1.
-  doftype_coarsen_map_coarse[1][0]=2;
-  doftype_coarsen_map_coarse[1][1]=3;
-
-  // This is the usual dof map between subsidiary and master dof types.
-  Vector<unsigned> doftype_in_master_coarse(4);
-  doftype_in_master_coarse[0]=1;
-  doftype_in_master_coarse[1]=2;
-  doftype_in_master_coarse[2]=3;
-  doftype_in_master_coarse[3]=4;
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
    
-  // Turn the block preconditioner into a subsidiary block preconditioner.
-  block_prec_pt->
-   turn_into_subsidiary_block_preconditioner(this,doftype_in_master_coarse,
-                                             doftype_coarsen_map_coarse);
-  
-  // Perform setup
+   // This is the usual dof map between subsidiary and master dof types.
+   Vector<unsigned> dof_map(4);
+   dof_map[0]=1;
+   dof_map[1]=2;
+   dof_map[2]=3;
+   dof_map[3]=4;
+   
+
+   // The subsidiary block preconditioner CoarseTwoIntoOne accepts only two
+   // dof types. To use this preconditioner on the remaining 4 dof types,
+   // we coarsen the 4 dof types into 2 dof types
+   // by specifying the vector of vectors doftype_coarsening whose
+   // entries are to be interpreted as
+   // 
+   //    doftype_coarsening[coarsened_dof_type][i]=dof_type
+   //
+   // where i ranges from 0 to the number of dof types (minus one, because
+   // of the zero-based indexing...) that are to be
+   // combined/coarsened into dof type dof_type_in_coarsed_block_preconditioner
+   
+   // Number of dof types the subsidiary block preconditioner expects. 
+   const unsigned n_sub_dof_types=2;
+   Vector<Vector<unsigned> > doftype_coarsening(n_sub_dof_types);
+   
+   // Subsidiary dof type 0 contains 2 dof types.
+   doftype_coarsening[0].resize(2);
+
+   // Coarsen subsidiary dof types 0 and 1 into subsidiary dof type 0.
+   doftype_coarsening[0][0]=0;
+   doftype_coarsening[0][1]=1;
+   
+   // Subsidiary dof type 1 contains 2 dof types. 
+   doftype_coarsening[1].resize(2);
+   
+   // Coarsen subsidiary dof types 0 and 1 into subsidiary dof type 1.
+   doftype_coarsening[1][0]=2;
+   doftype_coarsening[1][1]=3;
+   
+   // Turn the block preconditioner into a subsidiary block preconditioner.
+   block_prec_pt->
+    turn_into_subsidiary_block_preconditioner(this,dof_map,
+                                              doftype_coarsening);
+   
+  // Perform setup. Note that because the subsidiary
+  // preconditioner is a block preconditioner itself it is given
+  // the pointer to the "full" matrix
   block_prec_pt->setup(this->matrix_pt());
   
 
   // Set up off diagonal matrix vector product
   {
-   
    // Get the block
    CRDoubleMatrix block_matrix = this->get_block(0,1);
    

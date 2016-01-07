@@ -20,7 +20,8 @@ distributed linear algebra framework is typically used in practice.
 
 
 The primary aim of this document is to provide an overview of the design 
-and functionality of distributed linear algebra capabilities in \c oomph-lib, and hence 
+and functionality of distributed linear algebra capabilities in 
+\c oomph-lib, and hence 
 we do not discuss every method of every class; we refer the reader to the class
 documentation for a complete specification.
 
@@ -28,9 +29,10 @@ documentation for a complete specification.
 \section oomph_communicator OomphCommunicator
 
 \c Oomph-lib employs MPI for distributed memory
-parallelisation. Fundamental to MPI is the communicator  ( \c MPI_Comm
-)
-which determines which processes are involved in a parallel computation. Although \c oomph-lib is implemented in C++, the C MPI
+parallelisation. Fundamental to MPI is the communicator  
+( \c MPI_Comm )
+which determines which processes are involved in a parallel
+computation. Although \c oomph-lib is implemented in C++, the C MPI
 bindings are utilised. \c Oomph-lib provides the class \c
 OomphCommunicator as an object-oriented wrapper for a \c
 MPI_Comm.
@@ -40,41 +42,33 @@ MPI_Init(argc,argv). It initialises MPI
 ( i.e. calls \c MPI_Init(argc,argv) ) and creates \c oomph-lib's global
 communicator:
 
-\code
-// main method
-int main(int argc, char **argv)
-{
- // initialise MPI and create the oomph-lib's global communicator
- MPI_Helpers::init(argc,argv);
-\endcode
+\dontinclude generic_mpi_test.cc
+\skipline start_of_main
+\until init(
 
- The newly created communicator is available via the \c MPI_Helpers
- class static method:
+ The newly created communicator is available via a \c MPI_Helpers
+class static method:
 
-\code
- // get the global oomph-lib communicator
- const OomphCommunicator* const comm_pt = MPI_Helpers::communicator_pt();
-\endcode
+\skipline Get the global 
+\until communicator_pt
 
  and is equivalent to the \c MPI_COMM_WORLD
 communicator in that it represents all the processes that \c oomph-lib
 knows about. By default, this communicator contains exactly the same
 set of processes as \c MPI_COMM_WORLD. 
 
-The \c OomphCommunicator provides a number of access functions to communicator data including the rank of the process and the number of the processes:
+The \c OomphCommunicator provides a number of access functions to 
+communicator data including the rank of the process and the number of 
+the processes:
 
-\code
- // get my rank in comm_pt
- unsigned my_rank = comm_pt->my-rank();
+\until std::endl;
 
- // get the number of processes associated with comm_pt
- unsigned nproc = comm_pt->nproc();
-\endcode
 
 \section linear_algebra_distribution LinearAlgebraDistribution
 
 
-Distributed memory parallelisation requires data and computations to be distributed
+Distributed memory parallelisation requires data and computations to 
+be distributed
 over the available processes in some way. In this document we are
 solely interested in distributed linear algebra. We choose to
 distribute the linear algebra objects row-wise, and constrain the
@@ -83,24 +77,16 @@ contiguous set of rows. The class \c LinearAlgebraDistribution allows
 the specification of such a distribution. 
 
 
-The distribution is defined with two integers defining the first
+The distribution is defined by two integers defining the first
 global row and the number of local rows associated with a
 process. This data is sufficient to allow a mapping between a global
 row number and a local row number on a particular process.
-
 
 To construct a \c LinearAlgebraDistribution in which 100 rows are
 uniformly distributed across the set of processes specified by \c
 comm_pt we write:
 
-\code
- // create a uniformly distributed LinearAlgebraDistribution
- // 100 global rows are uniformly distributed accross the processes of 
- // comm_pt
- unsigned nrow_global = 100;
- bool distributed=true;
- LinearAlgebraDistribution distributed_distribution(comm_pt,nrow_global,distributed);
-\endcode
+\until std::endl;
 
 In this example, if run on four processes, the first 25 rows are associated 
 with process 0, the next 25 rows are on process 1 and so on. In
@@ -111,53 +97,30 @@ general, in a uniform distribution of \f$n_r\f$ global rows over
 alternative user defined distributions; see the class documentation for details.
 
 
-The third ( \c bool ) argument in the constructor indicates that we require 
-a distributed linear algebra distribution. However, on some occassions 
-we may want
+An optional third ( \c bool ) argument (default: true) in the
+constructor indicates that we require a distributed linear algebra 
+distribution. However, on some occassions we may want
 to replicate all rows of a linear algebra object on all processes. This is
 achieved by simply making the third argument \c false (non-distributed):
 
-\code
- // Construct an empty distribution object (does not specify a distribution)
- LinearAlgebraDistribution locally_replicated_distribution;
-
- // build a locally replicated distribution such that every row is available
- // on every process
- distributed=false;
- locally_replicated_distribution.build(comm_pt,nrow_global,distributed);
-\endcode
-
+\until << std::endl;
 
 This example illustrates two other features of \c
 LinearAlgebraDistribution. Firstly, the default constructor creates
 an empty distribution, and secondly for every (non-default)
-constructor there is an equivalent \c build(...) method to "re-construct" the object.
+constructor there is an equivalent \c build(...) method to 
+"re-construct" the object.
 
 
 The state of the object is accessible through a range of methods.
 
-\code
- // get the number of local rows on this process
- unsigned nrow_local = distributed_distribution.nrow_local();
+\until bool built
 
- // get the first row on this process
- unsigned first_row = distributed_distribution.first_row();
-
- // get the number of global rows
- unsigned nrow_global = distributed_distribution.nrow();
-
- // is this distributed (true) or locally replicated (false)
- bool distributed = distributed_distribution.distributed();
-
- // does this object specify a distribution
- bool built = distributed_distribution.built();
-\endcode
-
-The \c built() method indicates if the object specifies a distribution, or is empty.
+The \c built() method indicates if the object specifies a
+distribution, or is empty.
 
 
 \section double_vector DoubleVector
-
 
 The simplest distributed linear algebra object is \c DoubleVector, a
 distributed vector of \c doubles developed specifically for linear
@@ -166,58 +129,32 @@ container for \c doubles ). For example, the following command constructs a \c D
 \c LinearAlgebraDistribution defined in the previous section) 
 and unit elements:
 
-\code
- // construct a uniformly distributed DoubleVector with unit elements
- DoubleVector my_vector(distributed_distribution,1.0);
-\endcode
- 
-To access the vector elements the \c operator[] is implemented. For example to increment every element by one:
+\until my_vector
 
-\code
- // increment every element of my_vector on this process by 1
- unsigned nrow_local = my_vector.distribution_pt()->nrow_local();
- for (unsigned i = 0; i < nrow_local; i++)
-  {
-   my_vector[i]+=1.0;
-  }
-\endcode
+ 
+To access the vector elements the \c operator[] is implemented. 
+For example to increment every element by one:
+
+\until }
 
 It is the \c oomph-lib convention that the data in \c DoubleVector (and all 
 other distributed linear algebra object) is accessed using local indices. The 
 following loop documents the local row number, the global row number, and the
 value of the elements on each process:
 
-\code
- // document elements on this process in my_vector
- unsigned nrow_local = my_vector.distribution_pt()->nrow_local();
- unsigned first_row = my_vector.distribution_pt()->first_row();
- for (unsigned i = 0; i < nrow_local; i++)
-  {
-   oomph_info << "local row " << i 
-              << " is global row " << first_row+i 
-	      << " and has value " << my_vector[i] << std::endl; 
-  }
-\endcode
-
+\until }
 
 To change the distribution of a \c DoubleVector while retaining the
 data, we provide the \c redistribute(...) method. For example to
 change \c my_vector from uniformly distributed to locally replicated:
 
-\code
- // redistribute my_vector such that it is locally replicated on all processes
- my_vector.redistribute(&locally_replicated_distribution);
-\endcode
+\until redistribute
 
 Just like the \c LinearAlgebraDistribution, we provide \c build() methods 
 that mirror the behaviour of all non-default constructors. For example
 to revert \c my_vector to a uniform distribution with unit elements:
 
-\code
- // (re)build my_vector such that it is uniformly distributed over all
- // processes
- my_vector.build(distributed_distribution,1.0);
-\endcode
+\until distributed_distribution
 
 It is important to differentiate between \c build(...) and \c
 redistribute(...); calling \c build(...) deletes the existing data,
@@ -225,17 +162,16 @@ effectively re-constructing the object, whereas \c redistribute(...)
 retains the vector's data.
 
 Like the \c LinearAlgebraDistribution, a \c DoubleVector need not
-contain any data. To generate an object in this state, we could instantiating an object using the default constructor or call the \c clear() method:
+contain any data. To generate an object in this state, we could 
+instantiate an object using the default constructor or call the 
+\c clear() method:
 
-\code
- // construct an empty DoubleVector
- DoubleVector another_vector;
 
- // Clear all data from an existing DoubleVector
- my_vector.clear();
-\endcode
+\until clear
 
-Again the \c built() method returns the state of the object and indicates if it contains any data.
+Again the \c built() method returns the state of the object 
+and indicates if it contains any data.
+
 
 \section cr_double_matrix CRDoubleMatrix
 
@@ -256,46 +192,20 @@ no coefficients in which case \c my_matrix->distribution_built() is \c true but 
 
 For example, to contruct an empty matrix we call:
 
-\code
- // Construct an empty CRDoubleMatrix
- CRDoubleMatrix my_matrix;
-\endcode
+\until my_matrix
 
-To specify the distribution as defined by the \c LinearAlgebraDistribution \c distributed_distribution we write:
+To specify the distribution as defined by the 
+\c LinearAlgebraDistribution \c distributed_distribution we write:
 
-\code
- // Specify that the rows be uniformly distributed
- my_matrix.build(distributed_distribution);
-\endcode
+\until my_matrix.build
 
 The distribution has now been specified but the coefficients have not.
 Like the \c DoubleVector, rows are indexed locally and hence the
-coefficients rows must be indexed locally. For example, to populate \c my_matrix
+coefficients rows must be indexed locally. For example, 
+to populate \c my_matrix
 as a square identity matrix, we write:
 
-\code
- // vector of coefficient of value 1.0
- Vector<double> values(nrow_local,1.0);
-
- // column indices corresponding to values
- Vector<double> column_indices(nrow_local);
-
- // index of vectors values and column_indices where the i-th row starts
- // (each row contains one coefficient)
- Vector<double> row_start(nrow_local+1);
-
- // populate column_indices and row_start
- for (int i = 0; i < nrow_local; ++i)
-  {
-   column_indices[i]=first_row+nrow_local;
-   row_start[i]=i;
-  }
- row_start[nrow_local]=nrow_local;
-
- // build the (square) matrix
- unsigned ncol = nrow_global;
- my_matrix.build(ncol,values,column_indices,row_start);
-\endcode
+\until my_matrix.build
 
  We note that the column indices are global because only the rows are
  distributed. The assembly of a \c CRDoubleMatrix is now
@@ -307,32 +217,29 @@ the distribution and then specifying the coefficients. However it is possible
 to perform this operation in just one step, by using the appropriate 
 constructor or \c build(...) method, for example:
 
-\code
- CRDoubleMatrix my_matrix(&distributed_distribution,ncol,values,
-                          column_indices,row_start);
-\endcode
-
-
+\until row_start);
 
 \section distributed_linear_algebra_object DistributedLinearAlgebraObject
 
 
-In this section we introduce the class \c DistributedLinearAlgebraObject, a base
-class for all distributed linear algebra objects. This class encapsulates a \c LinearAlgebraDistribution, provides (protected)
+In this section we introduce the class \c
+DistributedLinearAlgebraObject, 
+a base class for all distributed linear algebra objects. 
+This class encapsulates a \c LinearAlgebraDistribution, provides (protected)
 access to derived classes to update ( \c build_distribution(...) ) and
 clear ( \c clear() ) the stored distribution. Secondly, it provides
 methods to simplify access to commonly used \c
-LinearAlgebraDistribution data. For example, because a \c CRDoubleMatrix is a \c DistributedLinearAlgebraObject,
-\code
- // get the first (global) row of my_matrix on this process
- unsigned first_row =  my_matrix.distribution_pt()->first_row();
-\endcode
-can be replaced with
-\code
- // get the first (global) row of my_matrix on this process
- unsigned first_row =  my_matrix.first_row();
-\endcode
+LinearAlgebraDistribution data. For example, because a 
+\c CRDoubleMatrix is a \c DistributedLinearAlgebraObject,
 
+\until first_row();
+
+can be replaced with
+
+\until first_row();
+
+
+ 
 \c DistributedLinearAlgebraObjects can be divided into two types:
 containers and operators. We have already reviewed the containers \c
 DoubleVector and \c CRDoubleMatrix. A wide range of operator classes
@@ -396,25 +303,31 @@ possible will be uniformly distributed over all available processes.
 As an example, we consider the \c Problem method \c get_jacobian(...). If the user does not specify a return distribution for the
 Jacobian and residuals, then \c oomph-lib will uniformly distribute both containers.
 
-\code
- // Get the residual and Jacobian, by default both are uniformly distributed
- // over all available processes
- my_vector.clear();
- my_matrix.clear();
- problem_pt->get_jacobian(my_vector,my_matrix);
-\endcode
+\until std::endl;
 
 On the other hand, a user can specify a return distribution by
  setting the distribution of the matrix
 and vector prior to calling \c get_jacobian(...). 
 
-\code
- // Request locally replicated residual and Jacobian from the problem
- my_vector.build(locally_replicated_distribution);
- my_matrix.build(locally_replicated_distribution);
- problem_pt->get_jacobian(my_vector,my_matrix);
-\endcode
-
-We finally remark that because all linear algebra operations are automatically distributed, to parallelise \c oomph-lib's Newton solve phase, the user need only run their executable under MPI on multiple processes.
+\until std::endl;
 
 
+We finally remark that because all linear algebra operations are 
+automatically distributed, to parallelise \c oomph-lib's Newton solve 
+phase, the user need only run their executable under MPI on multiple processes.
+
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../self_test/mpi/generic_mpi/">
+self_test/mpi/generic_mpi
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../self_test/mpi/generic_mpi/generic_mpi_test.cc">
+self_test/mpi/generic_mpi/generic_mpi_test.cc
+</A>
+</CENTER>

@@ -24,8 +24,8 @@ turek_flag_non_fsi \
 vmtk_fluid \
 unstructured_fluid \
 unstructured_three_d_fluid \
-jeffery_orbit
-
+jeffery_orbit \
+surface_theory
 
 
 

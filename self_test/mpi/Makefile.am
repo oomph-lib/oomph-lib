@@ -10,7 +10,8 @@ if WANT_MPI_VARIABLENP
 		vector_concatenation \
 		matrix_concatenation \
 		crdoublematrix_copy_constructor \
-		matrix_addition 
+		matrix_addition \
+		generic_mpi
 else
   variablenp_dir = 
 endif

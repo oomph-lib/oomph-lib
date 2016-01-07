@@ -111,7 +111,6 @@ clean-local:
 distclean-local:
 #We need to distclean the private directories because they are not
 #mentioned in DIST_SUBDIRS
-	-(cd private && if test -e Makefile; then ${MAKE} distclean; fi)
+#	-(cd private && if test -e Makefile; then ${MAKE} distclean; fi)
 	rm -f old_symbolic_links.txt
 	rm -f config/configure.ac_scripts/private*.dir_list
-

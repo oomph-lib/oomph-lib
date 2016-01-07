@@ -227,7 +227,7 @@ mesh refinement.
 
 The preconditioner described above is implemented within \c oomph-lib's
 (parallel) block preconditioning framework which is described in 
-<a href="../../../mpi/distributed_block_preconditioners/html/index.html">
+<a href="../../../mpi/block_preconditioners/html/index.html">
 another tutorial</a>. For the purpose of the implementation,
 we decompose the preconditioning matrix into the 3x3
 main blocks indicated by the vertical and horizontal lines
@@ -251,7 +251,7 @@ of degree of freedom) is appropriate for the use with the
 representing the nodal positions in the (pseudo-solid) fluid mesh
 need to be sub-divided into those that are and are not constrained
 by the Lagrange multipliers that impose the deformation of the
-FSI boundary. This is most conventiently done by overloading the relevant
+FSI boundary. This is most conveniently done by overloading the relevant
 functions in a templated wrapper element, \c PseudoElasticBulkElement<...>,  
 as discussed in <a href="../../prescribed_displ_lagr_mult/html/index.html">
 another tutorial.</a>
@@ -400,7 +400,7 @@ which are used to select solver options and to specify the spatial
 resolution 
 
 \skipline Store command
-\until --validate
+\until validate
 
 We then assign the command line flags that were specified
 and document the ones that were recognised, before building the

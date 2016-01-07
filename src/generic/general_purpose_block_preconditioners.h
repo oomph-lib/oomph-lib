@@ -189,9 +189,10 @@ namespace oomph
    Dof_to_block_map = dof_to_block_map;
   }
   
-  /// \short Pushes a mesh onto the Vector Gp_mesh_pt to be used by the
-  /// block preconditioning framework for classifying DOF types.
-  void push_back_mesh(const Mesh* mesh_pt, 
+  /// \short Adds a mesh to be used by the
+  /// block preconditioning framework for classifying DOF types. Optional boolean
+  /// argument (default: false) allows the mesh to contain multiple element types.
+  void add_mesh(const Mesh* mesh_pt, 
                    const bool &allow_multiple_element_type_in_mesh = false)
   {
 #ifdef PARANOID
@@ -211,10 +212,7 @@ namespace oomph
   }
 
   /// \short Returns the number of meshes currently set in the 
-  /// GeneralPurposeBlockPreconditioner base class. This is different from
-  /// the nmesh in the BlockPreconditioner base class.
-  /// the nmesh in the BlockPreconditioner base class will be 0 until 
-  /// set_nmesh is called. This method will return the meshes in GP_mesh_pt.
+  /// GeneralPurposeBlockPreconditioner base class. 
   unsigned gp_nmesh()
   {
     return Gp_mesh_pt.size();
@@ -225,15 +223,13 @@ namespace oomph
   /// \short Set the mesh in the block preconditioning framework.
   void gp_preconditioner_set_all_meshes()
   {
-    if(this->is_master_block_preconditioner())
-    {
       const unsigned nmesh = gp_nmesh();
 #ifdef PARANOID
     if(nmesh == 0)
     {
       std::ostringstream err_msg;
       err_msg << "There are no meshes set.\n"
-              << "Have you remembered to call push_back_mesh(...)?\n";
+              << "Have you remembered to call add_mesh(...)?\n";
       throw OomphLibError(err_msg.str(),
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
@@ -248,7 +244,6 @@ namespace oomph
                        Gp_mesh_pt[mesh_i].second);
       }
     }
-  }
 
   /// Modified block setup for general purpose block preconditioners
   void gp_preconditioner_block_setup()

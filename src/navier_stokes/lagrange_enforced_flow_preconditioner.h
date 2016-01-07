@@ -423,18 +423,15 @@ class LagrangeEnforcedflowPreconditioner
     }
 #endif
 
-    // Only the upper most master block preconditioner stores the meshes.
-    if(is_master_block_preconditioner())
-    {
-      // Set the number of meshes 
-      this->set_nmesh(nmesh);
-
-      // Set the meshes
-      for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
-      {
-        this->set_mesh(mesh_i,mesh_pt[mesh_i]);
-      }
-    }
+    
+    // Set the number of meshes 
+    this->set_nmesh(nmesh);
+    
+    // Set the meshes
+    for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
+     {
+      this->set_mesh(mesh_i,mesh_pt[mesh_i]);
+     }
 
     // We also store the meshes and number of meshes locally in this class.
     // This is slightly redundant, since we always have it stored in the upper

@@ -36,10 +36,17 @@ if [[ ! -f "${oomph_root}/config/configure_options/current" ]]; then
     cp "${oomph_root}/config/configure_options/default" "${oomph_root}/config/configure_options/current"
 fi
 
+run_self_tests=0
 
 # Parse command line arguments
-while getopts ":hrd:c:b:j:sko" opt; do
+while getopts ":hrd:c:b:j:skoS" opt; do
     case $opt in
+
+        S) 
+            echo "Will run self tests (serially) at end of build"
+            run_self_tests=1
+            ;;
+
         h)
             echo "Options for autogen.sh:"
             echo
@@ -373,3 +380,19 @@ echo "done"
 # echo "running `make $make_options install` in $PWD"
 make $make_options install
 echo "done"
+
+# Run tests if requested
+if [ $run_self_tests == 1 ]
+then
+    echo "I'm about to run the self tests"
+    self_test_command="make check -k"
+    echo "Running self test command: $self_test_command"
+    $self_test_command 
+    echo " " 
+    echo "Done with self-tests"
+    echo " " 
+else
+    echo "NOT running self tests"
+fi
+
+

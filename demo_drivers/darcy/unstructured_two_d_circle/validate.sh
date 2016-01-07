@@ -1,6 +1,9 @@
 #! /bin/sh
 
 
+# Get the OOPMH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+
 #Set the number of tests to be checked
 NUM_TESTS=2
 
@@ -29,7 +32,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 touch unstructured_two_d_circle.dat
 rm -f unstructured_two_d_circle.dat
-cat RESLT/trace.dat | cut -d ' ' -f 2-3 >> unstructured_two_d_circle.dat
+head -n 2 RESLT/trace.dat | cut -d ' ' -f 2-3 >> unstructured_two_d_circle.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
@@ -58,7 +61,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 touch adaptive_unstructured_two_d_circle.dat
 rm -f adaptive_unstructured_two_d_circle.dat
-cat RESLT/trace.dat | cut -d ' ' -f 2-3 >> adaptive_unstructured_two_d_circle.dat
+head -n 2 RESLT/trace.dat | cut -d ' ' -f 2-3 >> adaptive_unstructured_two_d_circle.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
@@ -81,46 +84,15 @@ cat validation.log >> ../../../../validation.log
 cd ..
 
 
-
 #######################################################################
 
 
 #Check that we get the correct number of OKs
-OK_COUNT=`grep -c 'OK' Validation/validation.log`
-if  [ $OK_COUNT -eq $NUM_TESTS ]; then
- echo " "
- echo "======================================================================"
- echo " " 
- echo "All tests in" 
- echo " " 
- echo "    `pwd`    "
- echo " "
- echo "passed successfully."
- echo " "
- echo "======================================================================"
- echo " " 
-else
-  if [ $OK_COUNT -lt $NUM_TESTS ]; then
-   echo " "
-   echo "======================================================================"
-   echo " " 
-   echo "Only $OK_COUNT of $NUM_TESTS test(s) passed; see"
-   echo " " 
-   echo "    `pwd`/Validation/validation.log"
-   echo " " 
-   echo "for details" 
-   echo " " 
-   echo "======================================================================"
-   echo " "
-  else 
-   echo " "
-   echo "======================================================================"
-   echo " " 
-   echo "More OKs than tests! Need to update NUM_TESTS in"
-   echo " " 
-   echo "    `pwd`/validate.sh"
-   echo " "
-   echo "======================================================================"
-   echo " "
-  fi
-fi
+# validate_ok_count will exit with status
+# 0 if all tests has passed.
+# 1 if some tests failed.
+# 2 if there are more 'OK' than expected.
+. $OOMPH_ROOT_DIR/bin/validate_ok_count
+
+# Never get here
+exit 10

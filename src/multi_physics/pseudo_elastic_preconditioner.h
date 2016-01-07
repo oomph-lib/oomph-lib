@@ -759,12 +759,9 @@ namespace oomph
     set_matrix_pt(matrix_pt);
 
     // set the mesh
-    if(this->is_master_block_preconditioner())
-     {
-      this->set_nmesh(1);
-      this->set_mesh(0,solid_mesh_pt);
-     }
-
+    this->set_nmesh(1);
+    this->set_mesh(0,solid_mesh_pt);
+   
     // set the communicator pointer
     this->set_comm_pt(comm_pt);
 

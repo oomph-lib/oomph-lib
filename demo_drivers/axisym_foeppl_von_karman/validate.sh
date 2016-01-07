@@ -1,6 +1,9 @@
 #! /bin/sh
 
 
+# Get the OOPMH-LIB root directory from a makefile
+OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+
 #Set the number of tests to be checked
 NUM_TESTS=1
 
@@ -50,46 +53,11 @@ cd ..
 
 
 #Check that we get the correct number of OKs
-OK_COUNT=`grep -c 'OK' Validation/validation.log`
-if  [ $OK_COUNT -eq $NUM_TESTS ]; then
- echo " "
- echo "======================================================================"
- echo " " 
- echo "All tests in" 
- echo " " 
- echo "    `pwd`    "
- echo " "
- echo "passed successfully."
- echo " "
- echo "======================================================================"
- echo " " 
- exit 0
-else
-  if [ $OK_COUNT -lt $NUM_TESTS ]; then
-   echo " "
-   echo "======================================================================"
-   echo " " 
-   echo "Only $OK_COUNT of $NUM_TESTS test(s) passed; see"
-   echo " " 
-   echo "    `pwd`/Validation/validation.log"
-   echo " " 
-   echo "for details" 
-   echo " " 
-   echo "======================================================================"
-   echo " "
-   exit 1
-  else 
-   echo " "
-   echo "======================================================================"
-   echo " " 
-   echo "More OKs than tests! Need to update NUM_TESTS in"
-   echo " " 
-   echo "    `pwd`/validate.sh"
-   echo " "
-   echo "======================================================================"
-   echo " "
-  exit 2
-  fi
-fi
+# validate_ok_count will exit with status
+# 0 if all tests has passed.
+# 1 if some tests failed.
+# 2 if there are more 'OK' than expected.
+. $OOMPH_ROOT_DIR/bin/validate_ok_count
+
 # Never get here
 exit 10

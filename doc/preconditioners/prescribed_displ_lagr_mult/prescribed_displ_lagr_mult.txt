@@ -249,7 +249,7 @@ mesh refinement.
 
 The preconditioner described above is implemented within \c oomph-lib's
 (parallel) block preconditioning framework which is described in 
-<a href="../../../mpi/distributed_block_preconditioners/html/index.html">
+<a href="../../../mpi/block_preconditioners/html/index.html">
 another tutorial</a>. For the purpose of the implementation,
 we decompose the preconditioning matrix into the 2x2
 main blocks indicated by the vertical and horizontal lines
@@ -378,7 +378,7 @@ to employ preconditioned GMRES as the linear solver for the Newton method.
 
 \subsection reclass (Re-)classification of the dof types
 As discussed above (and in the more detailed 
-<a href="../../../mpi/distributed_block_preconditioners/html/index.html">
+<a href="../../../mpi/block_preconditioners/html/index.html">
 block-preconditioning tutorial</a>, the classification of the
 degrees of freedom into different "dof types" has to be performed
 by the elements. Our implementation of the pseudo-elastic preconditioner
@@ -453,7 +453,7 @@ x- and y-directions. The \c --no_adapt flag suppresses the
 spatial adaptivity to facilitate systematic mesh refinement
 studies. 
 
-\until --trilinos_cg_for_lagrange_multiplier_blocks
+\until diagonal_scaling_for_elastic_blocks
 
 We then assign the command line flags that were specified
 and document the ones that were recognised before building the

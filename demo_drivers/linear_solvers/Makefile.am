@@ -8,10 +8,8 @@ two_d_poisson_dense_lu \
 two_d_poisson_cg \
 driven_cavity \
 direct_solver_test \
-two_d_linear_elasticity_with_simple_block_diagonal_preconditioner \
-two_d_multi_poisson
-
-#driven_cavity_with_simple_lsc_preconditioner 
+two_d_multi_poisson \
+two_d_linear_elasticity_with_simple_block_diagonal_preconditioner
 
 
 
@@ -68,18 +66,6 @@ driven_cavity_LDADD = \
 
 
 # Sources for executable
-adv_diff_iterative_linear_solver_tester_SOURCES =  adv_diff_iterative_linear_solver_tester.cc
-
-# Required libraries:
-# $(FLIBS) is included in case the solver involves fortran sources.
-adv_diff_iterative_linear_solver_tester_LDADD = \
-                -L@libdir@ -ladvection_diffusion  \
-                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
-
-#----------------------------------------------------------------------
-
-
-# Sources for executable
 two_d_linear_elasticity_with_simple_block_diagonal_preconditioner_SOURCES = \
 two_d_linear_elasticity_with_simple_block_diagonal_preconditioner.cc simple_block_preconditioners.h
 
@@ -87,6 +73,18 @@ two_d_linear_elasticity_with_simple_block_diagonal_preconditioner.cc simple_bloc
 # $(FLIBS) is included in case the solver involves fortran sources.
 two_d_linear_elasticity_with_simple_block_diagonal_preconditioner_LDADD = \
                 -L@libdir@ -llinear_elasticity  \
+                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
+#----------------------------------------------------------------------
+
+
+# Sources for executable
+adv_diff_iterative_linear_solver_tester_SOURCES =  adv_diff_iterative_linear_solver_tester.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+adv_diff_iterative_linear_solver_tester_LDADD = \
+                -L@libdir@ -ladvection_diffusion  \
                 -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #----------------------------------------------------------------------

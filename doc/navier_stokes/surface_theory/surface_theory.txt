@@ -206,8 +206,7 @@ direction, then we obtain
  The presence of an interface with non-constant surface tension 
 \f$ \sigma^{*} \f$
 contributes to the
-overall force balance, as also described in <a
-href="../../single_layer_free_surface/html/index.html"> another
+overall force balance, as also described in <a href="../../single_layer_free_surface/html/index.html"> another
 tutorial </a>. The surface tension acts a line force bounding the
 interface and acting in the direction \f$ \mbox{\boldmath$m$}\f$. Thus
 using the surface divergence theorm in the form (@R[wether_surf]@),
@@ -232,8 +231,7 @@ where we have been explicit about the fact that the curvature is
 dimensional and 
 \f$ \kappa^{*} > 0 \f$ if the centre of curvature lies inside fluid 1. 
 
-After using the non-dimensionalisation described in  <a
-href="../../single_layer_free_surface/html/index.html"> another
+After using the non-dimensionalisation described in  <a href="../../single_layer_free_surface/html/index.html"> another
 tutorial, </a> the boundary condition becomes
 \f[\left[\left[ \mbox{\boldmath$\tau$}
 \mbox{\boldmath$\cdot n$}^{[1]} \right]\right]
@@ -244,8 +242,7 @@ where \f$ \sigma = \sigma^{*} / \sigma_{ref} \f$ and
 is the capillary number based on a reference viscosity and surface tension. 
 This condition can be incorporated directly into the weak form of the
 momentum equations because the surface integral term in these
-equations, as described in <a
-href="../../rayleigh_traction_channel/html/index.html#traction_theory">
+equations, as described in <a href="../../rayleigh_traction_channel/html/index.html#traction_theory">
 another tutorial </a>, 
 is \f[ \int\!\!\!\int_{S} \mbox{\boldmath$n\cdot \tau\cdot  \psi$}^{(F)}\,\mbox{ d}S, \f]
 where \f$ \mbox{\boldmath$\psi$}^{(F)}\f$ 
@@ -307,8 +304,7 @@ formulation without the explicit need to take its surface
  time. The condition is compactly expressed in non-dimensional form as
  \f[ \left(\mbox{\boldmath$U$} - St \frac{\partial \mathbf{R}}{\partial
  t}\right) \mbox{\boldmath$\cdot n$} = 0, \f]
- where \f$ St\f$ is the Strouhal number, see <a
-href="../../single_layer_free_surface/html/index.html"> another
+ where \f$ St\f$ is the Strouhal number, see <a href="../../single_layer_free_surface/html/index.html"> another
 tutorial </a> for details. Note that, in general \f$ \mbox{\boldmath$U$}\f$ the
  velocity of the surface need <em> not </em> coincide with the
  velocity of the fluid.
@@ -575,8 +571,8 @@ The class oomph::SpineLineFluidInterfaceElement is templated by the
 bulk element type, \c ELEMENT,  and inherits from \c
 FluidInterfaceElement, LineDerivatives and \c
 Hijacked<SpineElement<FaceGeometry<ELEMENT> > >. The hijacking is only
-required for imposition of contact angle boundary conditions, see <a
-href="../../static_single_later/html/index.html"> another tutorial
+required for imposition of contact angle boundary conditions, see 
+<a href="../../static_single_later/html/index.html"> another tutorial
 </a> for more details. 
 
 Note that the use of templates to make the code generic makes it
@@ -671,8 +667,8 @@ The mesh-update specialisations can be added by further specialisation
 as required.
 Alternatively, one could simply inherit
 directly from the specialised element. This is the approach taken in
-this <a
-href="../../../multi_physics/rayleigh_instability_surfactant/html/index.html">
+this 
+<a href="../../../multi_physics/rayleigh_instability_surfactant/html/index.html">
 example code. </a>
 
 An important point is that the axisymmetric formulation of the

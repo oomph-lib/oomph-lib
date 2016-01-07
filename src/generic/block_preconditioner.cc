@@ -55,6 +55,37 @@ namespace oomph
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  block_setup(const Vector<unsigned>& dof_to_block_map_in)
  {
+
+
+#ifdef PARANOID
+  // Subsidiary preconditioners don't really need the meshes
+  if (this->is_master_block_preconditioner())
+   {
+    std::ostringstream err_msg;
+    unsigned n=nmesh();
+    if (n==0)
+     {
+      err_msg << "No meshes have been set for this block preconditioner!\n"
+              << "Set one with set_nmesh(...), set_mesh(...)" << std::endl;
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+      for (unsigned m=0;m<n;m++)
+       {
+        if (Mesh_pt[m]==0)
+         {        
+          err_msg << "The mesh pointer to mesh " << m << " is null!\n"
+                  << "Set a non-null one with set_mesh(...)" << std::endl;
+          throw OomphLibError(err_msg.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+          
+         }
+       }
+     }
+   }
+#endif
+
   // Create a copy of the vector input so that we can modify it below
   Vector<unsigned> dof_to_block_map = dof_to_block_map_in;
 
@@ -2628,23 +2659,6 @@ namespace oomph
   const Vector<Vector<unsigned> > &doftype_coarsen_map_coarse)
  {
 
-#ifdef PARANOID
-  const unsigned para_nmesh = this->Mesh_pt.size();
-  if(para_nmesh > 0)
-  {
-    std::ostringstream error_message;
-    error_message << "Tried to turn into subsidiary block preconditioner,\n"
-                  << "but there is already meshes set, Mesh_pt.size() is:\n"
-                  << para_nmesh << ".\n"
-                  << "Subsidiary preconditioners do not have meshes set.\n"
-                  << "Please re-write the BlockPreconditioner with this "
-                  << "in mind."
-                  << std::endl;
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
 
   // Set the master block preconditioner pointer
   Master_block_preconditioner_pt = master_block_prec_pt;
@@ -2671,6 +2685,37 @@ namespace oomph
  template<typename MATRIX>
  void BlockPreconditioner<MATRIX>::block_setup()
  {
+
+#ifdef PARANOID
+
+  // Subsidiary preconditioners don't really need the meshes
+  if (this->is_master_block_preconditioner())
+   {
+    std::ostringstream err_msg;
+    unsigned n=nmesh();
+    if (n==0)
+     {
+      err_msg << "No meshes have been set for this block preconditioner!\n"
+              << "Set one with set_nmesh(...), set_mesh(...)" << std::endl;
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+      for (unsigned m=0;m<n;m++)
+       {
+        if (Mesh_pt[m]==0)
+         {        
+          err_msg << "The mesh pointer to mesh " << m << " is null!\n"
+                  << "Set a non-null one with set_mesh(...)" << std::endl;
+          throw OomphLibError(err_msg.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+          
+         }
+       }
+     }
+   }
+#endif
+
   // Get the number of dof types.
   unsigned internal_n_dof_types = ndof_types();
 

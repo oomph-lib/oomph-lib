@@ -94,9 +94,8 @@ namespace oomph
   /// \short Setup the preconditioner 
   virtual void setup();
   
-  /// \short Pushes a mesh onto the Vector Multi_poisson_mesh_pt to be used 
-  /// by the block preconditioning framework for classifying DOF types.
-  void push_back_mesh(const Mesh* const mesh_pt)
+  /// \short Add a mesh 
+  void add_mesh(const Mesh* const mesh_pt)
   {
 #ifdef PARANOID
     // Check that the mesh pointer is not null.
@@ -111,19 +110,19 @@ namespace oomph
 #endif
 
     // Push back the mesh.
-    Multi_poisson_mesh_pt.push_back(mesh_pt);
+    My_mesh_pt.push_back(mesh_pt);
   } 
   
  private :
   
-  /// \short Vector of SuperLU preconditioner pointers for storing the 
-  /// preconditioners for each diagonal block // hierher  superlu
+  /// \short Vector of preconditioner pointers for storing the 
+  /// preconditioners for each diagonal block 
   Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
 
   /// \short Vector of Mesh pointers. We store it here since this
   /// preconditioner is responsible for the DOF ordering, which is
   /// determined by calls to BlockPreconditioner::set_mesh(...).
-  Vector<const Mesh*> Multi_poisson_mesh_pt;
+  Vector<const Mesh*> My_mesh_pt;
 
  };
 
@@ -140,7 +139,7 @@ namespace oomph
   // master block preconditioner.
   if(this->is_master_block_preconditioner())
   {
-    const unsigned my_nmesh = Multi_poisson_mesh_pt.size();
+    const unsigned my_nmesh = My_mesh_pt.size();
 
 #ifdef PARANOID
     if(my_nmesh == 0)
@@ -159,7 +158,7 @@ namespace oomph
     // Loop through all the meshes and set them.
     for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
     {
-      this->set_mesh(mesh_i,Multi_poisson_mesh_pt[mesh_i]);
+      this->set_mesh(mesh_i,My_mesh_pt[mesh_i]);
     }
   }
 
@@ -187,7 +186,7 @@ namespace oomph
     this->get_block(i,i,block);
     
     // Set up preconditioner (i.e. lu-decompose the block)
-    Diagonal_block_preconditioner_pt[i]->setup(&block); //hierher ,this->comm_pt());
+    Diagonal_block_preconditioner_pt[i]->setup(&block); 
     
     // Done with this block now, so can go out of scope; LU decomposition
     // is retained in superlu
@@ -206,18 +205,6 @@ namespace oomph
    // Get number of blocks
    unsigned n_block = this->nblock_types();
    
-   /* // hierher */
-   /* // Cache umber of block types */
-   /* unsigned n_block = 0; */
-   /* if(this->Preconditioner_blocks_have_been_precomputed) */
-   /*  { */
-   /*   n_block = this->nblocks_precomputed(); */
-   /*  } */
-   /* else */
-   /*  { */
-   /*   n_block = this->nblock_types(); */
-   /*  } */
-
    // Split up rhs vector into sub-vectors, re-arranged to match
    // the matrix blocks
    Vector<DoubleVector> block_r;

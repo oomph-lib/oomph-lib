@@ -144,16 +144,17 @@ namespace oomph
    }
 #endif
   
-  // set the mesh
+  // set the meshes
+  this->set_nmesh(2);
+  this->set_mesh(0,Elastic_mesh_pt);
+  this->set_mesh(1,Lagrange_multiplier_mesh_pt);
+  
+  // Figure out number of dof types
   unsigned n_solid_dof_types = 0;
   unsigned n_dof_types = 0;
 
   if (this->is_master_block_preconditioner())
    {
-    this->set_nmesh(2);
-    this->set_mesh(0,Elastic_mesh_pt);
-    this->set_mesh(1,Lagrange_multiplier_mesh_pt);
-    
     // get the number of solid dof types from the first element
     n_solid_dof_types = this->ndof_types_in_mesh(0);
     
@@ -331,6 +332,10 @@ namespace oomph
     ExactBlockPreconditioner<CRDoubleMatrix>* s_prec_pt = 
      new ExactBlockPreconditioner<CRDoubleMatrix>;
 
+    // Add mesh (not actually used since this only acts as a subsidiary
+    // preconditioner...
+    //s_prec_pt->add_mesh(Elastic_mesh_pt);
+
     Vector<Vector<unsigned> > doftype_to_doftype_map(n_solid_dof_types,
                                                      Vector<unsigned>(1,0));
 
@@ -410,6 +415,11 @@ namespace oomph
      break;
      }
 
+
+    // Add mesh (not actually used since this only acts as a subsidiary
+    // preconditioner...
+    //s_prec_pt->add_mesh(Elastic_mesh_pt);
+    
     // The block to block map
     Vector<Vector<unsigned> > doftype_to_doftype_map(
       Dim,Vector<unsigned>(2,0));

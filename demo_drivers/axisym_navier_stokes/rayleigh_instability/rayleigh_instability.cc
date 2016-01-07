@@ -396,15 +396,14 @@ doc_solution(DocInfo &doc_info)
  some_file.close();
 
  // Output solution to file in paraview format
- sprintf(filename,"%s/soln%i.vtu",doc_info.directory().c_str(),
-         doc_info.number());
+ string file_name="soln"+StringConversion::to_string(doc_info.number())
+  +".vtu";
+ sprintf(filename,"%s/%s",doc_info.directory().c_str(),file_name.c_str());
  some_file.open(filename);
  Bulk_mesh_pt->output_paraview(some_file,npts);
  some_file.close();
  
  // Write pvd information 
- string file_name="soln"+StringConversion::to_string(doc_info.number())
-  +".vtu";
  ParaviewHelper::write_pvd_information(Global_Physical_Variables::Pvd_file,
                                        file_name,t);
 
@@ -506,7 +505,7 @@ int main(int argc, char* argv[])
  CommandLineArgs::setup(argc,argv);
 
  /// Maximum time
- double t_max = 1.0;
+ double t_max = 1.8;
 
  /// Duration of timestep
  const double dt = 0.05;

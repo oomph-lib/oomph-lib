@@ -655,18 +655,19 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 /// for the 2x2 FSI block system -- DOFs are decomposed into fluid DOFs and 
 /// solid DOFs. The fluid subisidiary system is solved with the 
 /// Navier Stokes Preconditioner and the solid subsidiary system with the
-/// SuperLUPreconditioner. 
-/// Note Jacobian must be of type CRDoubleMatrix
 //=============================================================================
+ template<typename MATRIX> 
 class SimpleFSIPreconditioner 
- : public virtual BlockPreconditioner<CRDoubleMatrix>
+ : public virtual BlockPreconditioner<MATRIX>
 {
  
 public :
  
  /// \short Constructor for SimpleFSIPreconditioner
  SimpleFSIPreconditioner(Problem* problem_pt)
-  : Navier_stokes_mesh_pt(0), Solid_mesh_pt(0) 
+  : BlockPreconditioner<MATRIX>(), Navier_stokes_preconditioner_pt(0),
+    Solid_preconditioner_pt(0), Fluid_solid_coupling_matvec_pt(0),
+    Navier_stokes_mesh_pt(0), Solid_mesh_pt(0)
   {
    // Create the Navier Stokes Schur Complement preconditioner
    Navier_stokes_preconditioner_pt = 
@@ -677,6 +678,7 @@ public :
 
    // Create the matrix-vector product operator
    Fluid_solid_coupling_matvec_pt = new MatrixVectorProduct;
+
   }// end_of_constructor
  
  
@@ -685,14 +687,13 @@ public :
   {
    //Delete the Navier-Stokes preconditioner
    delete Navier_stokes_preconditioner_pt; Navier_stokes_preconditioner_pt = 0;
-
+   
    //Delete the solid preconditioner
    delete Solid_preconditioner_pt; Solid_preconditioner_pt = 0;
-
+   
    // Delete the matrix vector product operator
    delete Fluid_solid_coupling_matvec_pt; Fluid_solid_coupling_matvec_pt = 0;
-  }//end_of_destructor
- 
+  }
  
  /// Broken copy constructor
  SimpleFSIPreconditioner(const SimpleFSIPreconditioner&)
@@ -744,7 +745,7 @@ private:
  /// Pointer to the solid mesh.
  Mesh* Solid_mesh_pt;
 
-};//end_of_simple_fsi_preconditioner
+};
 
 
 
@@ -760,98 +761,95 @@ private:
 //=start_of_setup===============================================================
 /// Setup the preconditioner.
 //==============================================================================
-void SimpleFSIPreconditioner::setup()
- {
-  // setup the meshes for BlockPreconditioner and get the number of types of
-  // DOF assoicated with each Mesh.
-  // Mesh 0 is the fluid mesh, and hence DOFs 0 to n_fluid_dof_type-1 
-  // are the fluid DOFs. Mesh 1 is the solid mesh and therefore DOFs 
-  // n_fluid_dof_type to n_total_dof_type-1 are solid DOFs
-  // set the mesh pointers
-  //
-  // Only set the mesh if this is a master block preconditioner. Only
-  // master block preconditioners store the meshes in the 
-  // BlockPreconditioner base class - used for determining the DOF type
-  // ordering.
-  if(this->is_master_block_preconditioner())
+ template<typename MATRIX> 
+ void SimpleFSIPreconditioner<MATRIX>::setup()
+{
+ // setup the meshes for BlockPreconditioner and get the number of types of
+ // DOF assoicated with each Mesh.
+ // Mesh 0 is the fluid mesh, and hence DOFs 0 to n_fluid_dof_type-1 
+ // are the fluid DOFs. Mesh 1 is the solid mesh and therefore DOFs 
+ // n_fluid_dof_type to n_total_dof_type-1 are solid DOFs
+ // set the mesh pointers
+ this->set_nmesh(2);
+ this->set_mesh(0,Navier_stokes_mesh_pt);
+ this->set_mesh(1,Solid_mesh_pt);
+ 
+ unsigned n_fluid_dof_type = this->ndof_types_in_mesh(0);
+ unsigned n_total_dof_type = n_fluid_dof_type + this->ndof_types_in_mesh(1);
+ 
+ // This fsi preconditioner has two types of block -- fluid and solid.
+ // Create a map from DOF number to block type. The fluid block is labelled
+ // 0 and the solid block 1.
+ Vector<unsigned> dof_to_block_map(n_total_dof_type,0);
+ for (unsigned i = n_fluid_dof_type; i < n_total_dof_type; i++)
   {
-    this->set_nmesh(2);
-    this->set_mesh(0,Navier_stokes_mesh_pt);
-    this->set_mesh(1,Solid_mesh_pt);
+   dof_to_block_map[i] = 1;
   }
+ 
+ // Call the BlockPreconditioner method block_setup(...) to assemble the data
+ // structures required for block preconditioning.
+ this->block_setup(dof_to_block_map);
+ 
+ // First the solid preconditioner
+ //===============================
+ 
+ // get the solid block matrix (1,1)
+ CRDoubleMatrix* solid_matrix_pt = new CRDoubleMatrix;
+ this->get_block(1,1,*solid_matrix_pt);
+ 
+ // setup the solid preconditioner
+ // (perform the LU decomposition)
+ Solid_preconditioner_pt->setup(solid_matrix_pt);
+ delete solid_matrix_pt; solid_matrix_pt = 0;
+ 
+ // Next the fluid preconditioner
+ //==============================
+ 
+ // Specify the relationship between the enumeration of DOF types in the 
+ // master preconditioner and the Schur complement subsidiary preconditioner 
+ // so that ns_dof_type[i_nst] contains i_master
+ Vector<unsigned> ns_dof_list(n_fluid_dof_type);
+ for (unsigned i = 0; i < n_fluid_dof_type; i++)
+  {
+   ns_dof_list[i] = i;
+  }
+ 
+ // Turn the NavierStokesSchurComplement preconditioner into a subsidiary 
+ // preconditioner of this (FSI) preconditioner
+ Navier_stokes_preconditioner_pt->
+  turn_into_subsidiary_block_preconditioner(this,ns_dof_list);
+ 
+ // Set up the NavierStokesSchurComplement preconditioner. 
+ // (Pass it a pointer to the Navier Stokes mesh)
+ Navier_stokes_preconditioner_pt->
+  set_navier_stokes_mesh(Navier_stokes_mesh_pt);
 
-  unsigned n_fluid_dof_type = this->ndof_types_in_mesh(0);
-  unsigned n_total_dof_type = n_fluid_dof_type + this->ndof_types_in_mesh(1);
-
-  // This fsi preconditioner has two types of block -- fluid and solid.
-  // Create a map from DOF number to block type. The fluid block is labelled
-  // 0 and the solid block 1.
-  Vector<unsigned> dof_to_block_map(n_total_dof_type,0);
-  for (unsigned i = n_fluid_dof_type; i < n_total_dof_type; i++)
-   {
-    dof_to_block_map[i] = 1;
-   }
-
-  // Call the BlockPreconditioner method block_setup(...) to assemble the data
-  // structures required for block preconditioning.
-  this->block_setup(dof_to_block_map);
-
-  // First the solid preconditioner
-  //===============================
-
-  // get the solid block matrix (1,1)
-  CRDoubleMatrix* solid_matrix_pt = new CRDoubleMatrix;
-  this->get_block(1,1,*solid_matrix_pt);
-
-  // setup the solid preconditioner
-  // (perform the LU decomposition)
-  Solid_preconditioner_pt->setup(solid_matrix_pt);
-  delete solid_matrix_pt; solid_matrix_pt = 0;
-
-  // Next the fluid preconditioner
-  //==============================
-
-  // Specify the relationship between the enumeration of DOF types in the 
-  // master preconditioner and the Schur complement subsidiary preconditioner 
-  // so that ns_dof_type[i_nst] contains i_master
-  Vector<unsigned> ns_dof_list(n_fluid_dof_type);
-  for (unsigned i = 0; i < n_fluid_dof_type; i++)
-   {
-    ns_dof_list[i] = i;
-   }
-
-  // Turn the NavierStokesSchurComplement preconditioner into a subsidiary 
-  // preconditioner of this (FSI) preconditioner
-  Navier_stokes_preconditioner_pt->
-   turn_into_subsidiary_block_preconditioner(this,ns_dof_list);
-
-  // Setup the NavierStokesSchurComplement preconditioner. 
-  // (Pass it a pointer to the Navier Stokes mesh)
-  Navier_stokes_preconditioner_pt->
-   set_navier_stokes_mesh(Navier_stokes_mesh_pt);
-  Navier_stokes_preconditioner_pt->setup(matrix_pt());
-
-  // Finally the fluid onto solid matrix vector product operator
-  //============================================================
-
-  // Similar to the solid preconditioner get the matrix
-  CRDoubleMatrix* fluid_onto_solid_matrix_pt = new CRDoubleMatrix;
-  this->get_block(1,0,*fluid_onto_solid_matrix_pt);
-
-  // And setup the matrix vector product operator
-  this->setup_matrix_vector_product(Fluid_solid_coupling_matvec_pt,
-                                    fluid_onto_solid_matrix_pt,
-                                    0);
-//  Fluid_solid_coupling_matvec_pt->setup(fluid_onto_solid_matrix_pt);
-  delete fluid_onto_solid_matrix_pt; fluid_onto_solid_matrix_pt = 0;
- }
+ // Navier Stokes preconditioner is a subsidiary block preconditioner.
+ // It therefore needs a pointer to the full matrix.
+ Navier_stokes_preconditioner_pt->setup(this->matrix_pt());
+ 
+ // Finally the fluid onto solid matrix vector product operator
+ //============================================================
+ 
+ // Similar to the solid preconditioner get the matrix
+ CRDoubleMatrix* fluid_onto_solid_matrix_pt = new CRDoubleMatrix;
+ this->get_block(1,0,*fluid_onto_solid_matrix_pt);
+ 
+ // And setup the matrix vector product operator
+ this->setup_matrix_vector_product(Fluid_solid_coupling_matvec_pt,
+                                   fluid_onto_solid_matrix_pt,
+                                   0);
+ // Clean up
+ delete fluid_onto_solid_matrix_pt; fluid_onto_solid_matrix_pt = 0;
+}
 
 
 //=start_of_preconditioner_solve================================================
 /// Apply preconditioner.
 //==============================================================================
-void SimpleFSIPreconditioner::preconditioner_solve(const DoubleVector &y, 
-                                             DoubleVector &z)
+ template<typename MATRIX> 
+ void SimpleFSIPreconditioner<MATRIX>::preconditioner_solve(
+  const DoubleVector &y, DoubleVector &z)
 {
  // Fluid Subsidiary Preconditioner
  //=================================
@@ -943,7 +941,8 @@ int main(int argc, char* argv[])
  problem.linear_solver_pt() = solver_pt;
  
  // Create the preconditioner
- SimpleFSIPreconditioner* preconditioner_pt = new SimpleFSIPreconditioner(&problem);
+ SimpleFSIPreconditioner<CRDoubleMatrix>* preconditioner_pt 
+  = new SimpleFSIPreconditioner<CRDoubleMatrix>(&problem);
 
  // Pass the meshes to the preconditioner.
  preconditioner_pt->set_navier_stokes_mesh(problem.fluid_mesh_pt());

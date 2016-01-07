@@ -165,11 +165,11 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
        new  ExactBlockPreconditioner<CRDoubleMatrix>;
      
       // With GeneralPurposeBlockPreconditioner, we set meshes with
-      // push_back_mesh(...). The order of the meshes matter if we want to
+      // add_mesh(...). The order of the meshes matter if we want to
       // use different subsidiary preconditioners for different blocks.
 
       // Set Navier Stokes mesh.
-      prec_pt->push_back_mesh(this->bulk_mesh_pt()); 
+      prec_pt->add_mesh(this->bulk_mesh_pt()); 
       
       // Build  the mesh that contains all solid elements:
       
@@ -187,7 +187,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
 
       // Set solid mesh with "true" to tolerate multiple element types
       // in the mesh.
-      prec_pt->push_back_mesh(solid_mesh_pt,true);
+      prec_pt->add_mesh(solid_mesh_pt,true);
 
 
       // Set preconditioner
@@ -459,7 +459,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
         // Shut up
         P_matrix_preconditioner_pt->disable_doc_time();
        }
-#endif
+#endif // endif for we have hypre...
 
       switch (solver_sub_flag)
        {

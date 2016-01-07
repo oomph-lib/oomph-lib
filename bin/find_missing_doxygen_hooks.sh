@@ -13,8 +13,16 @@ echo "that looks suspiciously as if it's been generated from"
 echo "a doxygen code include that went wrong -- usually because "
 echo "the hook in the c++ source code got changed and doxygen "
 echo "doesn't know what to include any more, resulting in an empty box. "
+echo "Output contains one previous line of text (from the generated html file)"
+echo "to facilitate tracking down where the problem occurs."
 echo " "
-find . -name 'index.html' -exec grep -H '<pre class="fragment"></pre>' {} \;
+echo "Pattern 1: "
+echo " "
+find . -name 'index.html' -exec grep -H -B 1 '<pre class="fragment"></pre>' {} \;
+echo " "
+echo "Pattern 2: "
+echo " "
+find . -name 'index.html' -exec grep -H -B 1 '<div class="fragment"></div><!-- fragment -->' {} \;
 echo " "
 echo "Done"
 

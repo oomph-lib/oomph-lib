@@ -1708,6 +1708,35 @@ class BlockSelector
   /// \short Return the total number of DOF types.
   unsigned ndof_types() const
   {
+#ifdef PARANOID
+  // Subsidiary preconditioners don't really need the meshes
+  if (this->is_master_block_preconditioner())
+   {
+    std::ostringstream err_msg;
+    unsigned n=nmesh();
+    if (n==0)
+     {
+      err_msg << "No meshes have been set for this block preconditioner!\n"
+              << "Set one with set_nmesh(...), set_mesh(...)" << std::endl;
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+      for (unsigned m=0;m<n;m++)
+       {
+        if (Mesh_pt[m]==0)
+         {        
+          err_msg << "The mesh pointer to mesh " << m << " is null!\n"
+                  << "Set a non-null one with set_mesh(...)" << std::endl;
+          throw OomphLibError(err_msg.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+          
+         }
+       }
+     }
+   }
+#endif
+
     // If this is a subsidiary block preconditioner, then the function
     // turn_into_subsidiary_block_preconditioner(...) should have been called,
     // this function would have set up the look up lists between coarsened
@@ -1761,7 +1790,12 @@ class BlockSelector
   /// preconditionable elements of the same number of dof type). 
   /// 
   /// WARNING: This should only be used if the derived class is the 
-  /// upper-most master block preconditioner.
+  /// upper-most master block preconditioner. An error is thrown is
+  /// this function is called from a subsidiary preconditioner. 
+  /// They (and since every block preconditioner can in principle
+  /// be used as s subsidiary preconditioner: all block preconditioners) 
+  /// should store local copies of "their meshes" (if they're needed 
+  /// for anything)
   const Mesh* mesh_pt(const unsigned& i) const
   {
 #ifdef PARANOID
@@ -1795,21 +1829,11 @@ class BlockSelector
   /// \short Return the number of meshes in Mesh_pt.
   ///
   /// WARNING: This should only be used if the derived class is the 
-  /// upper-most master block preconditioner.
+  /// upper-most master block preconditioner. All block preconditioners) 
+  /// should store local copies of "their meshes" (if they're needed 
+  /// for anything)
   unsigned nmesh() const 
   {
-#ifdef PARANOID
-    if(is_subsidiary_block_preconditioner())
-    {
-      std::ostringstream error_msg;
-      error_msg << "The nmesh() function should not be called on a subsidiary\n"
-        << "block preconditioner." << std::endl;
-      throw OomphLibError(error_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
     return Mesh_pt.size();
   } // EOFunc nmesh()
 
@@ -2029,7 +2053,12 @@ class BlockSelector
 
   /// \short Return the number of DOF types in mesh i.
   /// WARNING: This should only be used by the upper-most master block 
-  /// preconditioner.
+  /// preconditioner. An error is thrown is
+  /// this function is called from a subsidiary preconditioner. 
+  /// They (and since every block preconditioner can in principle
+  /// be used as s subsidiary preconditioner: all block preconditioners) 
+  /// should store local copies of "their meshes" (if they're needed 
+  /// for anything)
   unsigned ndof_types_in_mesh(const unsigned& i) const
   {
 #ifdef PARANOID
@@ -2039,7 +2068,7 @@ class BlockSelector
       err_msg << "A subsidiary block preconditioner should not care about\n"
         << "anything to do with meshes.";
       throw OomphLibError(err_msg.str(), OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
+                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
     if(Ndof_types_in_mesh.size() == 0)
@@ -2850,17 +2879,6 @@ class BlockSelector
   /// of DOF.
   void set_nmesh(const unsigned& n)
   {
-#ifdef PARANOID
-   // Check that this preconditioner is not a subsidiary
-   if(is_subsidiary_block_preconditioner())
-    {
-     std::string err_msg;
-     err_msg = "Tried to set nmesh in subsidiary preconditioner but subsidiary";
-     err_msg += "but subsidiary preconditioners do not store meshes.";
-     throw OomphLibError(err_msg, OOMPH_CURRENT_FUNCTION, 
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
    Mesh_pt.resize(n,0);
    Allow_multiple_element_type_in_mesh.resize(n,0);
   } // EOFunc set_nmesh(...)
@@ -2899,16 +2917,6 @@ class BlockSelector
       << "Tried to set the " << i << "-th mesh pointer, but it is null.";
      throw OomphLibError(err_msg.str(),
                          OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
-   // Check that this preconditioner is not a subsidiary
-   if(is_subsidiary_block_preconditioner())
-    {
-     std::string err_msg;
-     err_msg = "Tried to set a mesh in a subsidiary preconditioner, ";
-     err_msg += "but subsidiary preconditioners do not store meshes.";
-     throw OomphLibError(err_msg, OOMPH_CURRENT_FUNCTION, 
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

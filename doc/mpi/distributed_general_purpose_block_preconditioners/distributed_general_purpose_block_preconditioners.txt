@@ -1,9 +1,9 @@
-\mainpage (Distributed) General-Purpose Block Preconditioners 
+\mainpage General-Purpose Block Preconditioners 
 
 In this document we will demonstrate how to use the general-purpose block
 preconditioners implemented in \c oomph-lib. This tutorial follows from the 
- <a href="../../../mpi/distributed_block_preconditioners/html/index.html">
-(Distributed) Block Preconditioners</A> tutorial, which provides
+ <a href="../../../mpi/block_preconditioners/html/index.html">
+Block Preconditioners</A> tutorial, which provides
  an overview of \c oomph-lib's generic block preconditioning framework. 
 
 
@@ -47,7 +47,8 @@ J_{yx}&J_{yy}
 \f]
 
 Utilising this partitioning we will describe four (distributed)
-general purpose block preconditioning methodologies. (Left) preconditioning represents a transformation of the original
+general purpose block preconditioning methodologies. (Left) 
+preconditioning represents a transformation of the original
 linear system to
 
 \f[
@@ -83,7 +84,7 @@ subsidiary systems \f$J_{xx}\f$ and \f$J_{yy}\f$.
 
 The two-subsidiary systems in the block diagonal
 preconditioner (involving \f$J_{xx}\f$ and \f$J_{yy}\f$) can be solved
-in any order. In parallel computation we can either solve the two
+in any order. In a parallel computation we can either solve the two
 systems one after the other using the full set of processes for the
 solution of each linear system. An alternative is to solve all the 
 subsidiary systems simultaneously, using only a
@@ -229,49 +230,32 @@ the preconditioner.
 \skipline  Specify Hypre as the subsidiary block preconditioner
 \until (Hypre_Subsidiary_Preconditioner_Helper::get_hypre_preconditioner);
 
-
 The same subsidiary preconditioner is used for all subsidiary
   systems in a general purpose block preconditioner.
 
-
-As discussed in the <a href="../../../mpi/distributed_block_preconditioners/html/index.html">
-(Distributed) Block Preconditioners</A>
+As discussed in the 
+<a href="../../../mpi/block_preconditioners/html/index.html">
+Block Preconditioners</A>
  tutorial, the classification of the DOFs
 is implemented at an elemental level so we pass a pointer to the mesh
-containing the elements to the preconditioner. This problem in fact
-contains two meshes containing the bulk elements and the traction
-elements. All the DOFs are classified by the bulk elements and
-therefore we do not need to pass the traction element mesh to 
-the block preconditioner.
+containing the elements to the preconditioner. (Note that this problem 
+contains two meshes, one containing the bulk elements and one
+containing the FaceElements that apply the traction boundary condition.
+Since the latter do not introduce any new DOFs, all the DOFs are 
+classified by the bulk elements. Therefore, we do not need to pass the 
+traction element mesh to the block preconditioner.)
 
 \dontinclude airy_cantilever.cc
 \skipline The preconditioner only requires the bulk mesh since its
-\until prec_pt->set_mesh(0,problem.solid_mesh_pt());
+\until prec_pt->add_mesh(problem.solid_mesh_pt());
  
-
-The next stage is to specify the map from DOF type number in the
-element to block type in the preconditioner. In the solid elements
-\f$x\f$ displacement DOFs are labelled \c 0 and \f$y\f$ displacement
-DOFs are labelled \c 1. In the preconditioner the \f$x\f$ displacement
-block is labelled \c 0 and \f$y\f$ displacement block is labelled \c
-1, and hence we define the trivial DOF-to-block map and pass it to the preconditioner.
-
-\dontinclude airy_cantilever.cc
-\skipline set the DOF to block map
-\until  prec_pt->set_dof_to_block_map(dof_to_block_map);
-
-(This step is in fact not necessary, as the preconditioner framework assumes that
-each DOF type corresponds to a different block type if a DOF to block
-map is not specified, but presented nonetheless to illustrate how to
-specify a DOF to block map.)
-
 Finally, we pass the preconditioner to the solver
 
 \dontinclude airy_cantilever.cc
 \skipline pass the preconditioner to the solver
 \until solver_pt->preconditioner_pt() = prec_pt;
 
-and solve the problem.
+and solve the problem:
 
 \dontinclude airy_cantilever.cc
 \skipline solve the problem
@@ -286,5 +270,25 @@ distributed, all that is
 required for a distributed solution is to run the executable under
 MPI with multiple processes.
 
+
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+- The source files for the driver code are in
+<CENTER>
+<A HREF="../../../../demo_drivers/mpi/solvers/">
+demo_drivers/mpi/solvers/
+</A>
+</CENTER>
+\n
+- The driver code is
+<CENTER>
+<A HREF="../../../../demo_drivers/mpi/solvers/airy_cantilever.cc">
+demo_drivers/mpi/solvers/airy_cantilever.cc
+</A>
+</CENTER>
+\n
+.
 
 

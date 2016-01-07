@@ -40,7 +40,8 @@ namely the fluid velocities, the fluid pressures, and the solid
 mechanics degrees of freedom.
 
 \c oomph-lib's FSI preconditioner employs the library's 
-block-preconditioning framework to (formally) re-order the 
+<a  href="../../../mpi/block_preconditioners/html/index.html">
+block-preconditioning framework</a> to (formally) re-order the 
 linear system to be solved during the Newton iteration into 3x3 
 blocks. We note that all fluid velocity components and all solid
 degrees of freedom are treated as single blocks of unknowns. The linear system
@@ -219,7 +220,7 @@ a few straightforward steps:
    \n
    The \c FSIHermiteBeamElement elements used for the discretisation
    of the flexible channel wall are also contained in their own 
-   (sub-)mesh, accessible via the member function \c bulk_mesh_pt().
+   (sub-)mesh, accessible via the member function \c wall_mesh_pt().
    If displacement control is used, the 
    \c DisplacementControlElement introduces a further unknown
    into the problem: the adjustable external pressure;
@@ -233,9 +234,11 @@ a few straightforward steps:
    \until Mesh* combined_solid_mesh_pt
    \n
    Finally, we pass the pointer to the combined solid mesh to the FSI
-   preconditioner to identify the solid degrees of freedom:
+   preconditioner to identify the solid degrees of freedom
+   (the optional boolean flag indicates that we allow the mesh to
+   contain multiple element types):
    \n\n
-   \until (combined_solid_mesh_pt);
+   \until (combined_solid_mesh_pt,true);
    \n
    The preconditioner is now fully functional and we pass       
    a pointer to it to the preconditioner:
@@ -288,7 +291,7 @@ a few straightforward steps:
    \n\n
   \dontinclude fsi_chan_precond_driver.cc
   \skipline #ifdef OOMPH_HAS_HYPRE
-  \until #endif
+  \until endif for we have hypre
 .
  
 <HR>
@@ -324,7 +327,7 @@ a few straightforward steps:
    solve times, but this choice is problem-dependent and 
    unless you are willing to perform systematic preliminary
    investigations, we recommend using the default
-   convergence tolerance of  \f$ 10^{-10} \f$, as defined
+   convergence tolerance of  \f$ 10^{-8} \f$, as defined
    in the \c IterativeLinearSolver base class.
    \n\n
 -# <b>Explore the behaviour of preconditioner(s)</b> \n\n

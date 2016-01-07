@@ -154,19 +154,19 @@ public:
        
        // Never get here
       default:
-     std::stringstream error_stream;
-     error_stream 
-      << "Helmholtz elements only store 2 fields so i must be 0 or 1" 
-      << std::endl;
-     throw OomphLibError(
-      error_stream.str(),
-      OOMPH_CURRENT_FUNCTION,
-     OOMPH_EXCEPTION_LOCATION);
+       std::stringstream error_stream;
+       error_stream 
+        << "Helmholtz elements only store 2 fields so i must be 0 or 1" 
+        << std::endl;
+       throw OomphLibError(
+        error_stream.str(),
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
        break;
       }
     } // end of plotpoint loop
   } // end scalar_value_paraview
-
+ 
  /// \short Name of the i-th scalar field. Default implementation
  /// returns V1 for the first one, V2 for the second etc. Can (should!) be
  /// overloaded with more meaningful names in specific elements.
@@ -191,14 +191,14 @@ public:
      throw OomphLibError(
       error_stream.str(),
       OOMPH_CURRENT_FUNCTION,
-     OOMPH_EXCEPTION_LOCATION);
+      OOMPH_EXCEPTION_LOCATION);
      
      // Dummy return for the default statement
      return " ";
      break;
     }
   }
-
+ 
  /// Output with default number of plot points
  void output(std::ostream &outfile) 
   {

@@ -55,7 +55,7 @@ namespace Hypre_Subsidiary_Preconditioner_Helper
 {
  Preconditioner* get_hypre_preconditioner()
  {
-  return new HyprePreconditioner;
+  return new HyprePreconditioner; 
  }
 } // end_of_hypre_helper
 #endif
@@ -740,15 +740,8 @@ int main(int argc, char* argv[])
  // elements are capable of classifying all degrees of freedom
  
  // prec_pt is a GeneralPurposeBlockPreconditioner, so we call the function
- // push_back_mesh(...). Otherwise we'd have to call the specific 
- // set_*_mesh() functions.
- prec_pt->push_back_mesh(problem.solid_mesh_pt());
-
- // set the DOF to block map
- Vector<unsigned> dof_to_block_map(2);
- dof_to_block_map[0] = 0;
- dof_to_block_map[1] = 1;
- prec_pt->set_dof_to_block_map(dof_to_block_map);
+ // add_mesh(...). 
+ prec_pt->add_mesh(problem.solid_mesh_pt());
 
  // pass the preconditioner to the solver
  solver_pt->preconditioner_pt() = prec_pt;

@@ -12,12 +12,14 @@ University of Manchester</A>.
 
 <P>
 
-The latest version of the library is revision 0.90 which was released
-on August 3, 2009. See the <a href="../change_log/html/index.html">
-change log page</a> for an overview of the changes made
-since the previous release.
+The latest version of the library is 
 
-#<HR>
+   Revision 1.0; svn revision $LastChangedRevision$ 
+
+which was committed to the svn repository on:
+
+$LastChangedDate$.
+
 <HR>
 
 \section all_you_ever All you ever wanted to know about oomph-lib
@@ -123,7 +125,8 @@ includes:
     on the principle of virtual displacements in cartesian and
     axisymmetric geometries; with arbitrary constitutive equations. \n\n
   - Shell and beam elements, based on a geometrically non-linear
-    formulation. \n\n
+    formulation. 
+  - ...and many others.\n\n
   .
   [\b Note: Most elements are implemented in a dimension-independent
   formulation] \n\n
@@ -181,7 +184,7 @@ includes:
 \section how_much_is_it How much does it cost? Nothing!
 
 - \c oomph-lib is freely available under the 
-<A HREF="http://www.gnu.org/copyleft/lgpl.html">gnu lesser public licence.</A>
+<A HREF="http://www.gnu.org/copyleft/gpl.html">gnu public licence.</A>
   Help yourself! 
 
 - We welcome feedback and will try our best to help you if you get
@@ -203,9 +206,7 @@ includes:
 \subsection get How do I get it?
 We provide 
 <A HREF="../the_distribution/html/index.html">gzipped tar files
-</A>of the entire library (big!), and (much smaller) partial distributions
-in which, e.g. the online documentation and/or the demo/self-test codes
-and the associated validation data are excluded.
+</A>of the library.
 
 <P>
 We also provide read-only access to the
@@ -224,6 +225,12 @@ svn checkout svn://oomph-lib.maths.man.ac.uk/trunk
 See <a href="../subversion/html/index.html">our subversion
 webpage</a> for further details.
 
+Note that the <A HREF="../the_distribution/html/index.html">gzipped tar files
+</A>, the latest version of the library available via the 
+public repository and the webpage at 
+<a href="http://www.oomph-lib.org">http://www.oomph-lib.org</a>
+are automatically synchronised. 
+
 
 
 
@@ -240,9 +247,10 @@ webpage</a> for further details.
  \n\n
  For this purpose you <B>must have</B>: \n\n
  - A computer with a linux (or unix) operating system.
-   [<B>Note for windows users:</B> \c oomph-lib can be installed
+   [<B>Note for windows users:</B> We believe that \c oomph-lib can be installed
    in a windows enviroment, using 
-   <A HREF="http://www.cygwin.com/">cygwin</A>.] \n\n
+   <A HREF="http://www.cygwin.com/">cygwin</A>, though we haven't
+   tried this for a long time.] \n\n
  - Compilers for C++, C and Fortran77. The open-source 
    <A HREF="http://gcc.gnu.org/">GNU gcc compiler suite</A> version
    3.2.3 or later is fine; the library also compiles  
@@ -361,6 +369,25 @@ The \c oomph-lib "architects" are (in no particular order)
 collaborators who made 
 (or are still making) signficant contributions to the development of
 the library (listed in reverse chronological order):
+- \b Puneet \b Matharu works on the implementation of geometric
+  multigrid solvers, particularly for Helmholtz equations. 
+- \b Chihebeddine \b Hammami worked on the implementation of 
+  Yulii Shikhmurzaev's interface formation theory. 
+- \b Narjes \b Akriche worked on pseudo-resonances in acoustic 
+  fluid-structure interaction problems. 
+- \b Jordan \b Rosso worked on topological fluid mechanics of the
+  the Karman vortex street.
+- \b Florian \b Molinier did some early work on the coupled solution
+  of the axisymmetric free-surface Navier-Stokes equations and 
+  the axisymmetric Foeppl von Karman equations.
+- \b Jonathan \b Deakin worked on a glaciology-related melt problem
+  (and has since returned as PhD student to work on the numerical
+  solution of acoustic fluid-structure interaction problems).
+- \b Draga \b Pihler-Puzovic worked on the the coupled solution of the
+   Foeppl von Karman equations and the Reynolds lubrication equation
+   to model wrinkling/fingering in elastic-walled Hele-Shaw cells.
+- \b Joris \b Ferrand worked on the solution of the Foeppl von Karman
+  equations.
 - \b Anton \b Martinsson implemented the machinery required to 
   output \c oomph-lib data in paraview format, bypassing the need
   for running the time-consuming tecplot to paraview conversion scripts.

@@ -203,29 +203,6 @@ public:
  PeriodicLoadProblem(const unsigned &nx, const unsigned &ny, 
                      const double &lx, const double &ly);
 
- /// Destructor
- ~PeriodicLoadProblem()
-  {
-   // // Loop over the traction elements
-   // unsigned n_element = Surface_mesh_pt->nelement();
-   // oomph_info << "deleting " << n_element << " face elements\n";
-   // for(unsigned e=0;e<n_element;e++)
-   //  {
-   //   delete dynamic_cast<LinearElasticityTractionElement<ELEMENT>*>(
-   //    Surface_mesh_pt->element_pt(e));
-   //  }
-   
-   // // Wipe the mesh
-   // //Surface_mesh_pt->flush_element_and_node_storage();
-
-
-   delete Surface_mesh_pt;
-
-   delete Bulk_mesh_pt;
-   delete Prec_pt;
-   delete Solver_pt;
-  }
-
  /// Update before solve is empty
  void actions_before_newton_solve() {}
 
@@ -348,27 +325,26 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem
  cout << assign_eqn_numbers() << " equations assigned" << std::endl; 
 
  // Create the solver.
-#ifdef OOMPH_HAS_TRILINOS
- TrilinosAztecOOSolver* trilinos_solver_pt = new TrilinosAztecOOSolver;
- trilinos_solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
- Solver_pt = trilinos_solver_pt;
-#else
  Solver_pt = new GMRES<CRDoubleMatrix>;
+
  // We use RHS preconditioning. Note that by default,
  // left hand preconditioning is used.
  static_cast<GMRES<CRDoubleMatrix>*>(Solver_pt)->set_preconditioner_RHS();
-#endif
 
  // Set linear solver
  linear_solver_pt() = Solver_pt;
+
+ // Doc convergence
+ Solver_pt->open_convergence_history_file_stream
+  ("RESLT/iterative_solver_convergence.dat");
 
  // Create the preconditioner
  Prec_pt=new SimpleBlockDiagonalPreconditioner<CRDoubleMatrix>;
 
  // Block preconditioner can work with just the bulk mesh
  // since its elements contain all the degrees of freedom that
- // need to be classified. Push back the bulk mesh.
- Prec_pt->push_back_mesh(Bulk_mesh_pt);
+ // need to be classified. 
+ Prec_pt->add_mesh(Bulk_mesh_pt);
 
  // Set the preconditioner
  Solver_pt->preconditioner_pt()=Prec_pt;

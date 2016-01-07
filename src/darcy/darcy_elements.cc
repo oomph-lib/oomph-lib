@@ -308,7 +308,7 @@ namespace oomph
      // Get exact solution at this point
      (*exact_soln_pt)(x,exact_soln);
 
-     // Displacement error
+     // Flux error
      for(unsigned i=0;i<DIM;i++)
       {
        norm[0]+=exact_soln[i]*exact_soln[i]*W;
@@ -317,10 +317,10 @@ namespace oomph
                  (exact_soln[i]-this->interpolated_q(s,i))*W;
       }
 
-     // Displacement divergence error
-     norm[0]+=exact_soln[DIM]*exact_soln[DIM]*W;
-     error[0]+=(exact_soln[DIM]-interpolated_div_q(s))*
-               (exact_soln[DIM]-interpolated_div_q(s))*W;
+     // // Flux divergence error
+     // norm[0]+=exact_soln[DIM]*exact_soln[DIM]*W;
+     // error[0]+=(exact_soln[DIM]-interpolated_div_q(s))*
+     //           (exact_soln[DIM]-interpolated_div_q(s))*W;
 
      // Pressure error
      norm[1]+=exact_soln[DIM+1]*exact_soln[DIM+1]*W;

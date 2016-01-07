@@ -46,25 +46,28 @@ namespace oomph
   // clean the memory
   this->clean_up_memory();
 
-  // If this is a master block preconditioner, 
-  // we give the mesh pointers to the BlockPreconditioner base class.
-  if(this->is_master_block_preconditioner())
-  {
+  // Note: Subsidiary block preconditioners don't really use their
+  // mesh pointers (since the lookup schemes inferred from them are
+  // set up by their masters). Generally we insist that (for uniformity)
+  // a mesh should be set, but sometimes subsidiary preconditioners are 
+  // set up on the fly and we can't sensibly set meshes, so we're forgiving...)
+  if (this->is_master_block_preconditioner())
+   {
 #ifdef PARANOID
     if( this->gp_nmesh() == 0)
-    {
+     {
       std::ostringstream err_msg;
       err_msg << "There are no meshes set.\n"
-              << "Did you remember to call push_back_mesh(...)?";
+              << "Did you remember to call add_mesh(...)?";
       throw OomphLibError(err_msg.str(),
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
-    }
+     }
 #endif
-
+    
     // Set all meshes if this is master block preconditioner
     this->gp_preconditioner_set_all_meshes();
-  }
+   }
 
   // Set up the block look up schemes
   this->gp_preconditioner_block_setup();
@@ -193,20 +196,19 @@ namespace oomph
   // clean the memory
   this->clean_up_memory();
 
-  // If this is a master block preconditioner, 
-  // we give the mesh pointers to the BlockPreconditioner base class.
-  if(this->is_master_block_preconditioner())
+  // Subsidiary preconditioners don't really need the meshes
+ if (this->is_master_block_preconditioner())
   {
 #ifdef PARANOID
-    if( this->gp_nmesh() == 0)
-    {
+   if( this->gp_nmesh() == 0)
+     {
       std::ostringstream err_msg;
       err_msg << "There are no meshes set.\n"
-              << "Did you remember to call push_back_mesh(...)?";
+              << "Did you remember to call add_mesh(...)?";
       throw OomphLibError(err_msg.str(),
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
-    }
+     }
 #endif
 
     // Set all meshes if this is master block preconditioner
@@ -355,14 +357,15 @@ namespace oomph
 
   // If this is a master block preconditioner, 
   // we give the mesh pointers to the BlockPreconditioner base class.
+  // Subsidiary preconditioners don't need meshes...
   if(this->is_master_block_preconditioner())
   {
 #ifdef PARANOID
-    if( this->gp_nmesh() == 0)
+   if( this->gp_nmesh() == 0)
     {
       std::ostringstream err_msg;
       err_msg << "There are no meshes set.\n"
-              << "Did you remember to call push_back_mesh(...)?";
+              << "Did you remember to call add_mesh(...)?";
       throw OomphLibError(err_msg.str(),
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);

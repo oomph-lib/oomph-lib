@@ -1420,6 +1420,192 @@ GaussLobattoLegendre<3,NPTS_1D>::GaussLobattoLegendre()
    }
 }
 
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
+
+//===================================================================
+/// Class for multidimensional Gauss  Legendre integration 
+/// rules
+/// empty - just establishes template parameters
+//===================================================================
+template <unsigned DIM, unsigned NPTS_1D>
+class GaussLegendre 
+{
+};
+
+//===================================================================
+/// 1D Gauss  Legendre integration class
+//===================================================================
+template<unsigned NPTS_1D>
+class GaussLegendre<1,NPTS_1D> : public Integral
+{
+private:
+
+ /// Number of integration points in scheme
+ static const unsigned Npts=NPTS_1D;
+ /// Array to hold weight and knot points
+ //These are not constant, because they are calculated on the fly
+ double Knot[NPTS_1D][1], Weight[NPTS_1D];
+ 
+public:
+
+  /// Deafault constructor. Calculates and stores GLL nodes
+  GaussLegendre();
+
+  /// Number of integration points of the scheme   
+  unsigned nweight() const {return Npts;}
+
+  /// Return coordinate s[j] (j=0) of integration point i
+  double knot(const unsigned &i, const unsigned &j) const
+   {return Knot[i][j];}
+
+  /// Return weight of integration point i
+  double weight(const unsigned &i) const {return Weight[i];}
+
+};
+
+
+//=============================================================
+/// Calculate positions and weights for the 1D Gauss 
+/// Legendre integration class
+//=============================================================
+template<unsigned NPTS_1D>
+GaussLegendre<1,NPTS_1D>::GaussLegendre()
+{
+ //Temporary storage for the integration points
+ Vector<double> s(NPTS_1D),w(NPTS_1D);
+ //call the function that calculates the points
+ Orthpoly::gl_nodes(NPTS_1D,s,w);
+ //Populate the arrays
+ for(unsigned i=0;i<NPTS_1D;i++)
+  {
+   Knot[i][0]=s[i];
+   Weight[i]=w[i];
+  }
+}
+
+
+//===================================================================
+/// 2D Gauss  Legendre integration class
+//===================================================================
+template<unsigned NPTS_1D>
+class GaussLegendre<2,NPTS_1D> : public Integral
+{
+private:
+
+  /// Number of integration points in scheme
+  static const unsigned long int Npts=NPTS_1D*NPTS_1D;
+
+  /// Array to hold weight and knot points
+  double Knot[NPTS_1D*NPTS_1D][2], 
+    Weight[NPTS_1D*NPTS_1D]; // COULDN'T MAKE THESE
+  // const BECAUSE THEY ARE CALCULATED (at least currently)
+
+public:
+
+  /// Deafault constructor. Calculates and stores GLL nodes
+  GaussLegendre();
+
+  /// Number of integration points of the scheme   
+  unsigned nweight() const {return Npts;}
+
+  /// Return coordinate s[j] (j=0) of integration point i
+  double knot(const unsigned  &i, const unsigned &j) const
+  {return Knot[i][j];}
+
+  /// Return weight of integration point i
+  double weight(const unsigned &i) const {return Weight[i];}
+
+};
+
+//=============================================================
+/// Calculate positions and weights for the 2D Gauss 
+/// Legendre integration class
+//=============================================================
+
+template<unsigned NPTS_1D>
+GaussLegendre<2,NPTS_1D>::GaussLegendre()
+{
+ //Tempoarary storage for the 1D knots and weights
+  Vector<double> s(NPTS_1D),w(NPTS_1D);
+  //Call the function to populate the array
+  Orthpoly::gl_nodes(NPTS_1D,s,w);
+  int i_fast=0, i_slow=0;
+  for(unsigned i=0;i<NPTS_1D*NPTS_1D;i++){
+   if (i_fast == NPTS_1D){i_fast=0;i_slow++;}
+   Knot[i][0]=s[i_fast];
+   Knot[i][1]=s[i_slow];
+   Weight[i]=w[i_fast]*w[i_slow];
+   i_fast++;
+  }
+}
+
+
+
+
+//===================================================================
+/// 3D Gauss  Legendre integration class
+//===================================================================
+template<unsigned NPTS_1D>
+class GaussLegendre<3,NPTS_1D> : public Integral
+{
+private:
+
+  /// Number of integration points in scheme
+  static const unsigned long int Npts=NPTS_1D*NPTS_1D*NPTS_1D;
+
+  /// Array to hold weight and knot points
+  double Knot[NPTS_1D*NPTS_1D*NPTS_1D][3], 
+   Weight[NPTS_1D*NPTS_1D*NPTS_1D]; // COULDN'T MAKE THESE
+  // const BECAUSE THEY ARE CALCULATED (at least currently)
+
+public:
+
+  /// Deafault constructor. Calculates and stores GLL nodes
+  GaussLegendre();
+  
+  /// Number of integration points of the scheme   
+  unsigned nweight() const {return Npts;}
+
+  /// Return coordinate s[j] (j=0) of integration point i
+  double knot(const unsigned  &i, const unsigned &j) const
+  {return Knot[i][j];}
+
+  /// Return weight of integration point i
+  double weight(const unsigned &i) const {return Weight[i];}
+
+};
+
+//=============================================================
+/// Calculate positions and weights for the 3D Gauss 
+/// Legendre integration class
+//=============================================================
+
+template<unsigned NPTS_1D>
+GaussLegendre<3,NPTS_1D>::GaussLegendre()
+{
+ //Tempoarary storage for the 1D knots and weights
+  Vector<double> s(NPTS_1D),w(NPTS_1D);
+  //Call the function to populate the array
+  Orthpoly::gl_nodes(NPTS_1D,s,w);
+  for(unsigned k=0;k<NPTS_1D;k++)
+   {
+    for(unsigned j=0;j<NPTS_1D;j++)
+     {
+      for(unsigned i=0;i<NPTS_1D;i++)
+       {
+        unsigned index = NPTS_1D*NPTS_1D*k + NPTS_1D*j + i;
+        Knot[index][0]=s[i];
+        Knot[index][1]=s[j];
+        Knot[index][2]=s[k]; 
+        Weight[index]=w[i]*w[j]*w[k];
+       }
+     }
+   }
+}
 
 
 

@@ -19,6 +19,58 @@ for displaying the data with <A HREF="http://www.tecplot.com">
 tecplot,</A> a powerful and easy-to-use commercial plotting package
 -- possibly a somewhat odd choice for a an open-source library. 
 
+We also provide the capability to output data in 
+a format that is suitable for display with 
+<a href="http://www.paraview.org/New/index.html">paraview</a>,
+an open-source 3D plotting package.
+For elements for which the relevant output functions are
+implemented (they are defined as broken virtual functions in the
+\c FiniteElement base class) output files for all the elements
+in a certain mesh (here the one pointed t by \c Bulk_mesh_pt) can 
+be written as
+
+\dontinclude rayleigh_instability.cc
+\skipline Output solution to file in paraview format
+\skipline some_file.open(
+\until some_file.close();
+
+where the unsigned integer \c npts  controls the number of plot points per
+element (just as in the tecplot-based output functions). If \c npts
+is set to 2, the solution is output at the elements' vertices. For 
+larger values of \c npts the solution is sampled at greater number of (equally
+spaced) plot points within the element -- this makes sense for 
+higher-order elements, i.e. elements in which the finite-element solution is not
+interpolated linearly between the vertex nodes. It is important to note that
+when displaying such a solution in paraview's "Surface with Edges" mode, the 
+"mesh" that is displayed does not represent the actual finite element mesh but is a
+finer auxiliary mesh that is created merely to establish the connectivity
+between the plot points.
+
+Paraview makes it possible to animate sequences of plots from
+time-dependent simulations. To correctly animate results from
+temporally adaptive simulations (where the timestep varies)
+paraview can operate on pvd files which provide a list of 
+filenames and the associated time. These can be written automatically
+from within \c oomph-lib, using the functions in the \c ParaviewHelper
+namespace:
+
+\dontinclude mesh.h
+\skipline paraview_helper
+\until }
+
+Once the pvd file is opened, call \c
+ParaviewHelper::write_pvd_header(...) to write the header information
+required by paraview; then add the name of each output file 
+and the value of the associated value of the continous time, using \c
+ParaviewHelper::write_pvd_information(...). When the simulation is
+complete write the footer
+information using \c
+ParaviewHelper::write_pvd_footer(...), then close to the pvd file.
+
+Currently, the paraview output functions are only implemented for a
+relatively small number of elements but it is straightforward
+to implement them for others.
+
 The <a href="../../FAQ/html/index.html">FAQ</a> contain
 an entry that discusses how to display \c oomph-lib's output
 with <A HREF="http://www.gnuplot.info">gnuplot</A> and 
@@ -26,11 +78,13 @@ with <A HREF="http://www.gnuplot.info">gnuplot</A> and
 how to adjust \c oomph-lib's output functions to different 
 formats.</a>
   
+
+
 <a href="http://cm.strumech.citg.tudelft.nl/simone/">Angelo 
 Simone</a> has written a python script that converts \c oomph-lib's
 output to the vtu format that can be read by 
-<a href="http://www.paraview.org/New/index.html">paraview</a>,
-an open-source 3D plotting package. This has since been improved
+<a href="http://www.paraview.org/New/index.html">paraview</a>. 
+This has since been improved
 and extended significantly with input from Alexandre Raczynski and 
 Jeremy van Chu. The conversion script
 can currently deal with output from meshes that are composed
@@ -49,8 +103,7 @@ The \c oomph-lib distribution contains three scripts:
   A shell script the creates the \c * \c .pvd files required by
   paraview to produce animations.
 . 
-
-
+ 
 <hr>
 <hr>
 
@@ -458,6 +511,7 @@ pipe data:
 
 @I w \textwidth how_to_01 " "
 
+@@END@@
 
 \subsubsection display Display multiple files
 

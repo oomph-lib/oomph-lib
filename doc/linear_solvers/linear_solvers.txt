@@ -18,7 +18,7 @@ linear solvers for \c oomph-lib's Newton solver.
 
 \section overview Overview
  As discussed in the <a href="../../the_data_structure/html/index.html">
-bottom-up discussion of \c oomph-lib's data structure</a> , by default \c
+bottom-up discussion of \c oomph-lib's data structure</a>, by default \c
 oomph-lib's Newton solver, \c Problem::newton_solve(...) solves
 the linear systems arising during the Newton iteration 
 with its default linear solver,
@@ -33,9 +33,9 @@ are derived from the base class
 <a href="../../the_data_structure/html/classoomph_1_1LinearSolver.html"><CODE>
 LinearSolver</CODE></a> which contains a single pure virtual function
 
-\code
-virtual void LinearSolver::solve(Problem *const &problem_pt, Vector<double> &result)=0
-\endcode
+
+\dontinclude linear_solver.h
+\skipline virtual void solve(Problem* const &problem_pt, DoubleVector &result)=0;
 
 whose task it is to compute the solution \f$ \delta {\bf x} \f$ (returned
 in the vector \c result) of the linear system
@@ -159,7 +159,7 @@ functions.
 
 <HR>
 <HR>
-
+ 
 \section how_to_change_linear_solver How to change the LinearSolver
 
 
@@ -204,20 +204,15 @@ very poorly without some sort of preconditioning.
 Specific preconditioners may be implemented by deriving from the
 \c Preconditioner base class, by implementing its two pure virtual functions
 
-\code
-  /// Apply the preconditioner. Pure virtual generic interface
-  /// function. This method should apply the preconditioner operator to the
-  /// vector r and return the vector z.
-  virtual void preconditioner_solve(const DoubleVector &r, DoubleVector &z)=0;
-\endcode
+\dontinclude preconditioner.h
+\skipline Apply the preconditioner
+\until = 0;
 
 and
 
-\code
-  /// Setup the preconditioner. Pure virtual generic interface
-  /// function.
-  virtual void setup() = 0;
-\endcode
+\dontinclude preconditioner.h
+\skipline Setup the preconditioner. Pure virtual generic
+\until = 0;
 
 Note that, by default, \c oomph-lib's \c IterativeLinearSolvers 
 employ left preconditioning.
@@ -227,6 +222,8 @@ several general-purpose preconditioners. For instance, the zero-fill-in
 incomplete LU factorisation preconditioner ILU(0) may be employed
 by adding the lines
 
+\dontinclude two_d_poisson_cg.cc
+\skipline Specify preconditioner
 \until ILU
 
 to the \c Problem constructor.
@@ -433,11 +430,17 @@ or
 
 \section specific_precond Problem-specific preconditioners
 
-In addition to "general-purpose" preconditioners like ILU 
+In addition to "general-purpose" preconditioners like ILU,
 \c oomph-lib provides a number of problem-specific preconditioners
 which are typically based on the library's block preconditioning
-framework.
+framework. Separate documentation is available for these:
 
+- We provide a (very!) detailed discussion of \c oomph-lib's
+  <a href="../../mpi/block_preconditioners/html/index.html">
+  block preconditioning framework.</a> \n\n
+- Another tutorial discusses \c oomph-lib's 
+  <a href="../../mpi/distributed_general_purpose_block_preconditioners/html/index.html">"general purpose" 
+  block preconditioners.</a> \n\n
 - The NavierStokesSchurComplementPreconditioner
   for Navier-Stokes problems is described in its 
   <a href="../../preconditioners/lsc_navier_stokes/html/index.html">
@@ -447,4 +450,13 @@ framework.
   is described in its 
   <a href="../../preconditioners/fsi/html/index.html">
   own tutorial</a> \n\n
+- We provide a
+  <a href="../../preconditioners/prescribed_displ_lagr_mult/html/index.html">
+  preconditioner for large-displacement solid mechanics problems 
+  in which boundary displacements are prescribed.</a>\n\n
+- The previous preconditioner is mainly used as a subsidiary
+  block preconditioner for the 
+  <a href="../../preconditioners/pseudo_solid_fsi/html/index.html">
+  solution of fluid-structure interaction problems with (pseudo-)solid 
+  fluid mesh updates.</a> \n\n
 .

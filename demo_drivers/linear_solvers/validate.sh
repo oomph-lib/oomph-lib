@@ -5,7 +5,7 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 
 #Set the number of tests to be checked
-NUM_TESTS=83
+NUM_TESTS=84
 
 # Threshold for number of iterations in comparison of convergence histories
 #===========================================================================
@@ -19,6 +19,43 @@ mkdir Validation
 
 cd Validation
 
+
+# Validation for simple block precond for linear elasticity
+#----------------------------------------------------------
+
+echo "Simple block preconditioner for 2D linear elasticity "
+mkdir RESLT
+../two_d_linear_elasticity_with_simple_block_diagonal_preconditioner > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "2D Linear elasticity simple preconditioner validation" >> validation.log
+echo "-----------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat  RESLT/soln.dat > linear_elasticity_simple_prec_results.dat
+cat  RESLT/iterative_solver_convergence.dat > lin_elast_simple_iterative_solver_convergence.dat
+
+if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+    # Compare results
+    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/lin_elast_simple_prec_results.dat.gz  \
+        lin_elast_simple_prec_results.dat >> validation.log
+    
+    #Compare number of iterations against reference data and append
+    ../$OOMPH_ROOT_DIR/bin/compare_file_length_with_tolerance.bash \
+        lin_elast_simple_iterative_solver_convergence.dat \
+        ../validata/lin_elast_simple_iterative_solver_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+fi
+
+
+mv RESLT RESLT_linear_elasticity
 
 # Validation for simple block precond
 #------------------------------------
