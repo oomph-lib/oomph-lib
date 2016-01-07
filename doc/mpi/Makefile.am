@@ -7,6 +7,5 @@ fsi_channel_with_leaflet \
 turek_flag  \
 two_d_poisson_flux_bc_adapt \
 block_preconditioners \
-distributed_block_preconditioners \
 distributed_general_purpose_block_preconditioners \
- distributed_linear_algebra_infrastructure
+distributed_linear_algebra_infrastructure
