@@ -5,7 +5,7 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 
 #Set the number of tests to be checked
-NUM_TESTS=84
+NUM_TESTS=85
 
 # Threshold for number of iterations in comparison of convergence histories
 #===========================================================================
@@ -43,8 +43,8 @@ if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
-    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/lin_elast_simple_prec_results.dat.gz  \
-        lin_elast_simple_prec_results.dat >> validation.log
+    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/linear_elasticity_simple_prec_results.dat.gz  \
+        linear_elasticity_simple_prec_results.dat >> validation.log
     
     #Compare number of iterations against reference data and append
     ../$OOMPH_ROOT_DIR/bin/compare_file_length_with_tolerance.bash \
