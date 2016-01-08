@@ -13,6 +13,7 @@ oscillations of elastic bodies.
 <TD bgcolor="cornsilk">
 <CENTER>
 <B>Acknowledgement:</B>
+\n\n
 The implementation of the equations and the documentation 
 were developed jointly with David Nigro.
 </CENTER>
@@ -305,39 +306,36 @@ elements in the mesh.
 
 \section main The driver code
 
-The code is built to perform parameter studies on the length/width
-attributed to the perfectly matched layers, as well as the number of
-elements they are built on. The first step is to start timing the code
-and proceed with reading in the command line arguments, from which the
-global parameters are adjusted.
+We start by defining command line arguments which specify the
+number of elements in the mesh and indicate the presence or absence of the
+"gap" in the coating. 
 
-\dontinclude time_harmonic_elasticity_driver.cc
+\dontinclude time_harmonic_elastic_annulus.cc
 \skipline start_of_main
-\until &Global_Parameters::Directory);
+\until have_gap
 
-After extracting the relevant information from the command line we
-continue by computing the dependent parameters, which lies in the
-global namespace area and adjusts the geometry of the problem accordingly.
+The code performs a parameter study in which we compute the solution
+for a range of pressures. We specify the pressure increment and
+the number of steps to be performed, parse the command line arguments 
+and document them.
 
-\skipline // Validation run?
-\until doc_info.set_directory(Global_Parameters::Directory);
+\skipline P increment
+\until doc_specified 
 
-Next, we create the elasticity tensor and set up the problem (discretised with triangular elements). 
-\skipline // Build elasticity tensor
-\until #endif
+Next, we create the problem (discretising the domain with nine-noded
+quadrilateral elements), 
+\skipline Set up the problem
+\until AnnularDisk
 
-and perform the actual computation
+and perform the parameter study:
 
-\skipline #ifdef
+\skipline Initial values
+\until {
+
+\skipline Solve the problem using Newton's method
 \until newton_solve();
 
-followed by extracting the number of degrees of freedom for
-post-processing purposes, as well as taking note of the time 
-at the end of the execution. All this data is finally used in
-documenting all aspects of the problem we were interested in. Further
-details on the results provided will be presented in  \c doc_solution(DocInfo& doc_info).
-
-\skipline Find total
+\skipline Doc solution
 \until end of main
  
 <HR>
@@ -455,8 +453,9 @@ As expected, this member function documents the computed solution.
   to enforce periodicity on the mesh for the case without a gap
   in the annular region because two of the boundaries in 
   the original mesh then overlap. How this is dealt with is discussed in 
-  <A HREF="../../../navier_stokes/rayleigh_channel/html/index.html#periodic">
+  <A  HREF="../../../navier_stokes/rayleigh_channel/html/index.html#periodic">
   another tutorial.</a>
+  \n\n
 - If you inspect the <A HREF="../../../../demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/time_harmonic_elastic_annulus.cc">driver code</a>
   you will notice that it also contains relevant code to perform 
   spatially adaptive simulations of the problem -- the adaptive
@@ -474,13 +473,16 @@ As expected, this member function documents the computed solution.
   of an increase in \f$ \Omega^2 \f$ on the accuracy of the 
   solution by comparing the computed results against 
   the exact solution at fixed spatial resolution.
+  \n\n
 - Explore the use of spatial adaptivity in the problem
+  \n\n
   - for the same parameter study suggested in the previous exercise
     (increase in \f$ \Omega^2 \f$ ) 
   .
   and 
   - for the problem with the "gap" in the annular region.
   .
+  \n\n
 - Modify the code to exploit at least some of the problem's symmetry,
   e.g. by solving the problem for the continuous annulus in a
   quarter of the original domain, \f$ x_1, x_2 \ge 0 \f$, say, using 

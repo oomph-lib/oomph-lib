@@ -111,7 +111,7 @@ namespace Global_Parameters
                    (Lambda+2.0*Mu-Omega_sq)));
   result[2] = cos(time)*(
    -x[0]*(8.0*Mu*pow(x[1],3)+pow(x[0],2)*(pow(x[1],3)*Omega_sq+6.0*Mu*x[1])));
- }
+ } // end of body force
  
  /// \short Helper function - spatial components of the exact solution in a
  /// vector. This is necessary because we need to multiply this by different

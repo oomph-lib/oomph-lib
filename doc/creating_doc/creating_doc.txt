@@ -190,7 +190,14 @@ e.g. the main function of \c spin_up.\c cc, use the following syntax:
 \until end of main
 \endcode
 This only works if \c start_of_main exists somewhere in \c spin_up.\c cc
-file, but any word(s) can be used as a start/endpoint.
+file, but any word(s) can be used as a start/endpoint. However, <B>do
+not use dashes as targets</B> because more recent versions of doxygen
+get very confused by this, so <b>don't</b> do
+\code
+\skipline ----
+\endcode
+say.
+
 
 \subsection misc Miscellaneous
 

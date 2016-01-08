@@ -398,7 +398,7 @@ unconstrained. We pin the vertical displacement of the nodes on the
 solid boundaries (since these must remain stationary) and pin the
 horizontal displacement of all nodes in the mesh.
 
-\skipline -----
+\skipline Set the boundary conditions for this problem
 \until Bulk_mesh_pt->node_pt(n)->pin_position(0)
 
 Next we create a generalised Hookean constitutive equation for the
@@ -416,7 +416,7 @@ Problem::add_time_stepper_pt(...) above. Note that we do not assign
 pointers for the viscosity and density ratios, \f$ R_\mu \f$ and \f$
 R_\rho \f$, since these take the default value in the lower fluid.
 
-\skipline -----
+\skipline Complete the problem setup to make the elements fully functional
 \until End of loop over bulk elements in lower fluid
 
 We then do the same for the bulk elements in the upper fluid, and this
@@ -521,7 +521,7 @@ newly-created element is then added to the surface mesh.
 Finally, we pass the Strouhal and Capillary numbers to the interface
 elements.
 
-\skipline -------
+\skipline Complete the setup to make the elements fully functional
 \until End of create_interface_elements
 
 <HR>

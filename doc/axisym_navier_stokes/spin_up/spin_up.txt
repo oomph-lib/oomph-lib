@@ -415,13 +415,13 @@ timestepper, before calling \c unsteady_run(...). This function solves
 the system at each timestep using the \c 
 Problem::unsteady_newton_solve(...) function before documenting the result.
 
-\skipline --------------------------
+\skipline RefineableAxisymmetricQTaylorHoodElements
 \until }
 
 We then repeat the process with \c
 RefineableAxisymmetricQCrouzeixRaviartElements.
 
-\skipline --------------------------
+\skipline RefineableAxisymmetricQCrouzeixRaviartElements
 \until End of main
 
 <HR>
@@ -507,7 +507,7 @@ adaptation.
 We pin the radial and azimuthal velocity components on all boundaries,
 and the axial component on the three solid boundaries.
 
-\skipline -----
+\skipline Set the boundary conditions for this problem
 \until End of loop over mesh boundaries
 
 We pass the pointers to the Reynolds and Womersley numbers,
@@ -521,7 +521,7 @@ the additional computation required to calculate the correction to the Eulerian
 time-derivative \f$ \partial u /\partial t \f$ which is required if
 the mesh is moving, as discussed in detail in <A HREF="../../../optimisation/html/index.html#ale">another tutorial</A>.
 
-\skipline -----
+\skipline Complete the problem setup to make the elements fully functional
 \until End of loop over elements
 
 Since no traction boundary conditions are

@@ -519,7 +519,7 @@ looping over the bulk elements adjacent to the free surface and
 `attaching' interface elements to their upper faces. These
 newly-created elements are then stored in the surface mesh.
 
-\skipline ------------
+\skipline Create the
 \until }
 
 Now that the interface elements have been created, we combine the bulk
@@ -538,7 +538,7 @@ boundary). We pin the vertical displacement of the nodes on the bottom
 boundary (since these must remain stationary) and pin the horizontal
 displacement of all nodes in the mesh.
 
-\skipline -----
+\skipline Set the boundary conditions
 \until Bulk_mesh_pt->node_pt(n)->pin_position(0)
 
 Next we create a generalised Hookean constitutive equation for the
@@ -554,7 +554,7 @@ the Reynolds number and the inverse of the Froude number, \f$ Re/Fr
 addition we pass a pointer to the global time object, created when we
 called \c Problem::add_time_stepper_pt(...) above.
 
-\skipline -----
+\skipline Complete the problem setup
 \until End of loop over bulk elements
 
 Next we create a pointer to a \c Data value for the external pressure
