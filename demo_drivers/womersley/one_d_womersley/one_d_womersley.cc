@@ -1562,13 +1562,9 @@ int main(int argc, char *argv[])
  double period=0.45;
  bool validation_run=false;
 
-// Trilinos settings
-// #ifdef OOMPH_HAS_TRILINOS
- unsigned f_ml_settings=1;
-// #endif
-
  // Set Hypre default values
 #ifdef OOMPH_HAS_HYPRE
+ unsigned f_ml_settings=1;
  unsigned f_bamg_smoother=1;
  double f_bamg_damping=1.0;
  double f_bamg_strength=0.25;

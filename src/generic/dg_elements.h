@@ -323,7 +323,7 @@ protected:
    for(unsigned n=0;n<n_node;n++)
     {
      //Construct the node and ignore the return value
-     (void)this->construct_node(n,time_stepper_pt);
+     (void) this->construct_node(n,time_stepper_pt);
     }
   
    //Make the faces

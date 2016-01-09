@@ -3315,11 +3315,12 @@ namespace CRDoubleMatrixHelpers
     }
 #endif
 
-  // The communicator pointer from block (0,0)
-  const OomphCommunicator* const comm_pt 
-   = matrix_pt(0,0)->distribution_pt()->communicator_pt();
-
 #ifdef PARANOID
+
+   // The communicator pointer from block (0,0)
+   const OomphCommunicator* const comm_pt 
+    = matrix_pt(0,0)->distribution_pt()->communicator_pt();
+   
    // Check that all communicators are the same
    for (unsigned block_row_i = 0; block_row_i < nblockrow; block_row_i++) 
     {
@@ -3578,12 +3579,14 @@ namespace CRDoubleMatrixHelpers
     }
 #endif
 
-  // The communicator pointer from block (0,0)
-  // All communicators should be the same, we check this next.
-  const OomphCommunicator* const comm_pt 
-   = matrix_pt(0,0)->distribution_pt()->communicator_pt();
 
 #ifdef PARANOID
+
+   // The communicator pointer from block (0,0)
+   // All communicators should be the same, we check this next.
+   const OomphCommunicator* const comm_pt 
+    = matrix_pt(0,0)->distribution_pt()->communicator_pt();
+
    // Check that all communicators are the same
    for (unsigned block_row_i = 0; block_row_i < nblockrow; block_row_i++) 
     {
