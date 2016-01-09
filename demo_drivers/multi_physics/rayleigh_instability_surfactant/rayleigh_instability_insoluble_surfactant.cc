@@ -92,7 +92,7 @@ namespace Global_Physical_Variables
  /// \short Surface Peclet number
  double Peclet_S = 4032.0;
 
- /// \shorT Sufrace Peclet number multiplied by Strouhal number
+ /// \short Sufrace Peclet number multiplied by Strouhal number
  double Peclet_St_S = 1.0; 
  
  /// \short Pvd file -- a wrapper for all the different

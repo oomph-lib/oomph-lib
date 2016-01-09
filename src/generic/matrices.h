@@ -3181,7 +3181,7 @@ template<class T,class MATRIX_TYPE>
  //=================================================================
  namespace CRDoubleMatrixHelpers
 {
-  /// \Create a deep copy of the matrix pointed to by in_matrix_pt
+  /// Create a deep copy of the matrix pointed to by in_matrix_pt
   inline void deep_copy(const CRDoubleMatrix* const in_matrix_pt,
       CRDoubleMatrix& out_matrix)
   {
@@ -3289,15 +3289,15 @@ template<class T,class MATRIX_TYPE>
   double inf_norm(const DenseMatrix<CRDoubleMatrix*> &matrix_pt);
 
   /// \short Calculates the largest Gershgorin disc whilst preserving the sign. 
-  /// Let A be an n by n matrix, with entries aij. For i \in {1,...,n} let
-  /// R_i = \sum_{i\neqj}|a_{ij}| be the sum of the absolute values of the
-  /// non-diagonal entries in the i-th row. Let D(a_{ii},R_i) be the closed 
-  /// disc centered at a_{ii} with radius R_i, such a disc is called a 
+  /// Let A be an n by n matrix, with entries aij. For \f$ i \in \{ 1,...,n \} \f$ let
+  /// \f$ R_i = \sum_{i\neq j}|a_{ij}| \f$ be the sum of the absolute values of the
+  /// non-diagonal entries in the i-th row. Let \f$ D(a_{ii},R_i) \f$ be the closed 
+  /// disc centered at \f$ a_{ii} \f$ with radius \f$ R_i \f$, such a disc is called a 
   /// Gershgorin disc.
   /// 
   /// \n
   /// 
-  /// We calculate |D(a_{ii},R_i)|_max and multiply by the sign of the diagonal
+  /// We calculate \f$ |D(a_{ii},R_i)|_{max} \f$and multiply by the sign of the diagonal
   /// entry.
   ///
   /// \n

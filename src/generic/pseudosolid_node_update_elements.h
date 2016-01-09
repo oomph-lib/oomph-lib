@@ -27,7 +27,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-///This header file contains elements that combine two element types in
+//This header file contains elements that combine two element types in
 //a generic way. 
 
 #ifndef OOMPH_PSEUDO_SOLID_REMESH_ELEMENTS_HEADER

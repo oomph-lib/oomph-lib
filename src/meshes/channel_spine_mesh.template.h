@@ -41,10 +41,7 @@ namespace oomph
 /// Spine mesh class derived from standard 2D mesh.
 /// The mesh contains a StraightLine GeomObject which defines the height 
 /// of the left and right regions (0,2) and another GeomObject is passed 
-/// to the constructor to define the height in the central region (1).
-///
-/// \image html ChannelSpineMesh.gif "ChannelSpineMesh"
-///
+/// to the constructor to define the height in the central region.
 //======================================================================
 template <class ELEMENT>
 class ChannelSpineMesh : public RectangularQuadMesh<ELEMENT >, public SpineMesh

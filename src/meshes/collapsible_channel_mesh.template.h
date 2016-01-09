@@ -65,7 +65,6 @@ namespace oomph
 /// located on boundary 3 (the collapsible segment).
 /// The curvilinear ("collapsible") segment is defined by
 /// a \c GeomObject.
-/// \image html collapsible_channel_mesh.gif "Collapsible channel mesh"
 //========================================================================
 template <class ELEMENT>
 class CollapsibleChannelMesh : public SimpleRectangularQuadMesh<ELEMENT>
@@ -185,7 +184,6 @@ protected:
 /// located on boundary 3 (the collapsible segment).
 /// The curvilinear ("collapsible") segment is defined by
 /// a \c GeomObject.
-/// \image html collapsible_channel_mesh.gif "Collapsible channel mesh"
 //====================================================================
 template <class ELEMENT>
 class RefineableCollapsibleChannelMesh :

@@ -470,4 +470,10 @@ int main(int argc, char* argv[])
   MPI_Helpers::finalize();
 
 
+  // dummy line to suppress warning about unused built variable
+  if (built)
+   {
+    built=false;
+   }
+  
 } // end_of_main

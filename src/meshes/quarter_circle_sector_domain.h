@@ -45,8 +45,7 @@ namespace oomph
 //=================================================================
 /// \short Circular sector as domain. Domain is bounded by 
 /// curved boundary which is represented by a GeomObject. Domain is 
-/// parametrised by three macro elements as shown here:
-/// \image html DomainWithMacroElementSketchAndCoords.gif
+/// parametrised by three macro elements.
 //=================================================================
 class QuarterCircleSectorDomain : public Domain 
 { 

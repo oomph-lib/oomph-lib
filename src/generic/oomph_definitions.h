@@ -65,8 +65,8 @@ namespace oomph
 //be used in erorr messages.
 #define OOMPH_EXCEPTION_LOCATION __FILE__ ":" OOMPH_TO_STRING(__LINE__)
 
-/// Get the current function name. All the mess is due to different
-/// compilers naming the macro we need differently.
+// Get the current function name. All the mess is due to different
+// compilers naming the macro we need differently.
 #if defined(__GNUC__) || (defined(__MWERKS__) && (__MWERKS__ >= 0x3000)) || (defined(__ICC) && (__ICC >= 600)) || defined(__ghs__)
 # define OOMPH_CURRENT_FUNCTION __PRETTY_FUNCTION__
 

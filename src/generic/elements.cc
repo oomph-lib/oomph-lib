@@ -495,6 +495,7 @@ std::deque<double*> GeneralisedElement::Dof_pt_deque;
 ///   incremented. 
 /// - Dof_pt, the Vector of pointers to the global dofs 
 ///   (to which any internal dofs are added).
+/// .
 //==========================================================================
  void GeneralisedElement::
  assign_internal_eqn_numbers(unsigned long &global_number,
@@ -3705,7 +3706,7 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
 
 //===============================================================
 /// Return the number of the node located at *node_pt 
-/// if this node is in the element, else return -1; 
+/// if this node is in the element, else return \f$ -1 \f$ 
 //===============================================================
  int FiniteElement::get_node_number(Node* const &global_node_pt) const
  {
@@ -4090,7 +4091,7 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
 /// Calculate the size of the element (in Eulerian computational 
 /// coordinates. Use suitably overloaded compute_physical_size()
 /// function to compute the actual size (taking into account
-/// factors such as 2pi or radii the integrand) -- such function
+/// factors such as 2pi or radii the integrand). Such function
 /// can only be implemented on an equation-by-equation basis.
 //====================================================================
  double FiniteElement::size() const
@@ -4744,7 +4745,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
          // Loop over the nodes
          for(unsigned l=0;l<n_node;l++)
           {
-           // Loop over position type even though it should be 1 - the
+           // Loop over position type even though it should be 1; the
            // functionality for n_position_type>1 will exist in the future
            for(unsigned k=0;k<n_position_type;k++)
             {
@@ -4761,7 +4762,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
           }
 
          //The entries of the Jacobian matrix are merely dresiduals/ds
-         //i.e. - dx/ds
+         //i.e. \f$ -dx/ds \f$
          for(unsigned i=0;i<ncoord;i++)
           {
            for(unsigned j=0;j<ncoord;j++)
@@ -4849,11 +4850,8 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
 /// The information will typically be used in interaction problems in
 /// which the FiniteElement provides a forcing term for an 
 /// ElementWithExternalElement. The Data must be provided as 
-/// \c paired_load data containing
-///  - the pointer to a Data object
-/// and
-/// - the index of the value in that Data object
-/// .
+/// \c paired_load data containing (a) the pointer to a Data object
+/// and (b) the index of the value in that Data object.
 /// The generic implementation (should be overloaded in more specific
 /// applications) is to include all nodal and internal Data stored in
 /// the FiniteElement. Note that the geometric data, 
@@ -4958,8 +4956,8 @@ void FiniteElement::build_face_element(const int &face_index,
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-/// Initialise the static variable. 
-/// Do not ignore warning for discontinuous tangent vectors.
+// Initialise the static variable. 
+// Do not ignore warning for discontinuous tangent vectors.
 bool FaceElement::Ignore_discontinuous_tangent_warning = false;
 
 

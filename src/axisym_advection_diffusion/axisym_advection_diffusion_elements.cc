@@ -34,15 +34,13 @@
 namespace oomph
 {
 
-/// 2D Steady Axisymmetric Advection Diffusion elements
+// 2D Steady Axisymmetric Advection Diffusion elements
 
 /// Default value for Peclet number
-double AxisymAdvectionDiffusionEquations::
-Default_peclet_number = 0.0;
+double AxisymAdvectionDiffusionEquations::Default_peclet_number = 0.0;
 
 /// Default Diffusion coefficient
- double AxisymAdvectionDiffusionEquations::
- Default_diffusion_parameter = 1.0;
+ double AxisymAdvectionDiffusionEquations::Default_diffusion_parameter = 1.0;
  
 
 //======================================================================
@@ -53,8 +51,7 @@ Default_peclet_number = 0.0;
 ///
 /// Pure version without hanging nodes
 //======================================================================
-void  AxisymAdvectionDiffusionEquations::
-fill_in_generic_residual_contribution_axi_adv_diff(
+void  AxisymAdvectionDiffusionEquations::fill_in_generic_residual_contribution_axi_adv_diff(
  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
  DenseMatrix<double> &mass_matrix,
  unsigned flag) 

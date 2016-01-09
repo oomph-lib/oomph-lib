@@ -53,9 +53,7 @@ namespace oomph
 
 //=================================================================
 /// \short Fish shaped mesh. The geometry is defined by
-/// the Domain object FishDomain:
-/// \image html fish_mesh.gif "The FishMesh consists of four quad elements. The nodes/boundary nodes are illustrated for 16 node quad elements."
-///
+/// the Domain object FishDomain.
 //=================================================================
 template<class ELEMENT>
 class FishMesh : public virtual QuadMeshBase
@@ -130,8 +128,7 @@ protected:
 
 //=================================================================
 /// Refineable fish shaped mesh. The geometry is defined by
-/// the Domain object FishDomain:
-/// \image html fish_mesh.gif "The FishMesh consists of four quad elements. The nodes/boundary nodes are illustrated for 16 node quad elements."
+/// the Domain object FishDomain.
 //=============================start_adaptive_fish_mesh============
 template<class ELEMENT>
 class RefineableFishMesh : public virtual FishMesh<ELEMENT>,  
@@ -206,7 +203,6 @@ class MacroElementNodeUpdateNode;
 /// the Jacobian matrix of the elements. For this purpose,
 /// the element (whose type is specified by the template parameter)
 /// must inherit from MacroElementNodeUpdateElementBase. 
-/// \image html fish_mesh.gif "The FishMesh consists of four quad elements. The nodes/boundary nodes are illustrated for 16 node quad elements."
 //========================================================================
 template<class ELEMENT>
 class MacroElementNodeUpdateRefineableFishMesh : 
@@ -348,7 +344,6 @@ public:
 
 //=================================================================
 /// \short Fish shaped mesh with algebraic node update function for nodes.
-/// \image html fish_mesh.gif "The FishMesh consists of four quad elements. The nodes/boundary nodes are illustrated for 16 node quad elements."
 //=================================================================
 template<class ELEMENT>
 class AlgebraicFishMesh : public AlgebraicMesh,
@@ -523,7 +518,6 @@ protected:
 
 //=================================================================
 /// \short Refineable fish shaped mesh with algebraic node update function.
-/// \image html fish_mesh.gif "The FishMesh consists of four quad elements. The nodes/boundary nodes are illustrated for 16 node quad elements."
 //=================================================================
 template<class ELEMENT>
 class AlgebraicRefineableFishMesh : public AlgebraicFishMesh<ELEMENT>, 

@@ -4787,7 +4787,7 @@ int main(int argc, char* argv[])
               << std::endl;
 
    // Solve
-   bool first=false;
+   //bool first=false;
    // problem.unsteady_newton_solve(dt,max_adapt,first);
    try
     {      

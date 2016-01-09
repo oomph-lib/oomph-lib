@@ -44,8 +44,7 @@ namespace oomph
 //===========start_of_fish_domain=======================================
 /// \short Fish shaped domain, represented by four
 /// MacroElements. Shape is parametrised by GeomObject
-/// that represents the fish's back:
-/// \image html fish_domain.gif "FishDomain parametrised by geometric object."
+/// that represents the fish's back.
 //=======================================================================
 class FishDomain : public Domain 
 { 

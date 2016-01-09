@@ -1292,7 +1292,7 @@ int main(int argc, char* argv[])
        //Restarting
        //cout << GlobalParameters::Restart_file.c_str() << endl;
        char filename[100];
-       sprintf(filename,GlobalParameters::Restart_file.c_str());
+       sprintf(filename,"%s",GlobalParameters::Restart_file.c_str());
        char* step;
        step = strtok(filename,"/");
        step = strtok(NULL,"/");
@@ -1313,7 +1313,7 @@ int main(int argc, char* argv[])
       {
        //Restarting
        char filename[100];
-       sprintf(filename,GlobalParameters::Restart_file.c_str());
+       sprintf(filename,"%s",GlobalParameters::Restart_file.c_str());
        char* step;
        step = strtok(filename,"/");
        step = strtok(NULL,"/");
