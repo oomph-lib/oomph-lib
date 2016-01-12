@@ -1090,7 +1090,7 @@ fill_in_generic_residual_contribution_shell(Vector<double> &residuals,
       }
     }
    
-   unsigned c;
+   unsigned c=0;
    for(unsigned al=0;al<2;al++)
     {
      for(unsigned be=0;be<2;be++)

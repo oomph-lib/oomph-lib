@@ -2006,6 +2006,14 @@ int main(int argc, char *argv[])
  delete ns_preconditioner_pt;
  ns_preconditioner_pt=0;
   
+
+ std::cout << "dummy output to suppress compiler warnings: "
+           << f_bamg_smoother+f_bamg_damping+f_bamg_strength+f_ml_settings
+           << " " << p_preconditioner_pt
+           << " " << f_preconditioner_pt
+           << std::endl;
+
+
 } //end of driver code
 
   
