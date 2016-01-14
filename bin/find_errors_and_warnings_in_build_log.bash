@@ -35,6 +35,6 @@ do
     echo " "
     echo "Checking for warnings in oomph-lib related part of build log:"
     echo " "
-    grep -i warning $stripped_file | grep -v AUTOMATICALLY | grep -v "doxygen could be confused by a macro call without semicolon" | grep -v OomphLibWarning | grep -v  "0 warnings" | grep -v "hyperref Warning" | grep -v "LaTeX Warning" | grep -v "Oomph-lib WARNING" | grep -v "bin/find_errors_and_warnings_in_build_log.bash" | grep -v "an oomph-lib warning whenever a function" | grep -v "gcc-based compilation with debugging (-g) and full warnings"
+    grep -i warning $stripped_file | grep -v AUTOMATICALLY | grep -v "doxygen could be confused by a macro call without semicolon" | grep -v OomphLibWarning | grep -v  "0 warnings" | grep -v "hyperref Warning" | grep -v "LaTeX Warning" | grep -v "Oomph-lib WARNING" | grep -v "bin/find_errors_and_warnings_in_build_log.bash" | grep -v "an oomph-lib warning whenever a function" | grep -v "gcc-based compilation with debugging (-g) and full warnings" | grep -v "if you get this warning in any other context"
 
 done
