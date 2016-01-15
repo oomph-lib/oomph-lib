@@ -60,5 +60,6 @@ include $(top_srcdir)/config/makefile_templates/doc
 
 docfile = doc
 
-EXTRA_DIST += oomph-lib_header.html.template oomph_header.css navbar_toggle.js
+EXTRA_DIST += oomph-lib_header.html.template oomph_header.css navbar_toggle.js \
+extra_latex_style_files
 

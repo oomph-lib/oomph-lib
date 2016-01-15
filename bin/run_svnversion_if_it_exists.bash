@@ -19,6 +19,7 @@ else
    then
        echo "0000"
    else
-       echo $revision
+       # Get rid of ":" for revision
+       echo $revision | sed 's/:/_/g'
    fi
 fi
