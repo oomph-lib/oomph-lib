@@ -206,12 +206,22 @@ say.
 - To tell \c doxygen that a certain section of the source file is only
   to be included in the \c html version of the documentation and
   omitted in the \c LaTeX version, enclose this section within \c
-  \c \\htmlonly and \c \\endhtmlonly tags.
+  \c \\htmlonly and \c \\endhtmlonly tags. CAREFUL: With recent
+  version of doxygen, this has caused problems with certain commands
+  not being interpreted correctly. Best not to use this... The
+  following item is a work-around:
+- Add the variable \c suppress_latex_in_this_directory to the
+  Makefile.am and set it to 1 to bypass the generation of latex-based
+  documentation for a specific directory (which may contain difficult
+  to render tables etc. and therefore cause latex to hang...). Here's
+  an example of a Makefile.am from the directory
+  \c doc/order_of_action_functions:
+  \include Makefile.am 
 - To tell \c doxygen that a certain section of the source file is only
   to be included in the \c LaTeX version of the documentation and
   omitted in the \c html version, enclose this section within \c
   \c \\latexonly and \c \\endlatexonly tags.
-
+.
 <HR>
 
 \section generate Generating the documentation

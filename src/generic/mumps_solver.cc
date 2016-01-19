@@ -545,9 +545,10 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
      {
       std::ostringstream warning_stream;
       warning_stream 
-       << "The distribution of rhs vector does not match that ofthe solver.\n";
+       << "The distribution of rhs vector does not match that of the solver.\n";
       warning_stream
-       << "The rhs will be redistributed, which is likely to  be inefficient\n";
+       << "The rhs may have to be redistributed but we're not doing this because\n"
+       << "I'm no longer convinced it's necessary. Keep an eye on this...\n";
       warning_stream
        << "To remove this warning you can either:\n"
        << "    i) Ensure that the rhs vector has the correct distribution\n"
@@ -560,10 +561,10 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
                       "MumpsSolver::resolve()",
                       OOMPH_EXCEPTION_LOCATION);
      }
-    
-    //Have to cast away const-ness (which tells us that we shouldn't really
-    //be doing this!)
-    const_cast<DoubleVector&>(rhs).redistribute(this->distribution_pt());
+
+    // //Have to cast away const-ness (which tells us that we shouldn't really
+    // //be doing this!)
+    // const_cast<DoubleVector&>(rhs).redistribute(this->distribution_pt());
    }
  
 
