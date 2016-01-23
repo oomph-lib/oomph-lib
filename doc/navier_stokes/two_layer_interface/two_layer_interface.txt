@@ -43,7 +43,7 @@ interior mesh is treated as a ficitious elastic solid and thus the
 mechanics problem. The deformation of the free surface boundary itself
 is imposed by introducing a a field of Lagrange multipliers at the
 interface, and the equation associated with these additional unknowns
-is the kinematic condition. In the <A HREF="../../single_layer_free_surface/html/implementation.html">single layer case</A> 
+is the kinematic condition. In the <A HREF="../../single_layer_free_surface/html/index.html#implementation">single layer case</A> 
 this equation is discretised by attaching \c FaceElements to the
 boundaries of the `bulk' elements that are adjacent to the free
 surface. In this two-layer example we attach the same \c FaceElements
@@ -53,7 +53,7 @@ also responsible for adding the surface tension contributions to the
 momentum equations that arise through the application of the dynamic
 boundary condition. We note that since we are solving the
 Navier--Stokes equations on either side of the interface we do not
-specify an external pressure, a step that was necessary in the <A HREF="../../single_layer_free_surface/html/implementation.html">single layer case</A>. 
+specify an external pressure, a step that was necessary in the <A HREF="../../single_layer_free_surface/html/index.html#implementation">single layer case</A>. 
 
 The other difference between this problem and the <A HREF="../../single_layer_free_surface/html/index.html">previous example</A>
 is that we shall be solving this one using spatial adaptivity. We
