@@ -22,6 +22,29 @@ if [ $# -ne 1 ]; then
  exit 1
 fi
 
+echo " "
+echo "---------------------------------------------------------------"
+echo " "
+echo "Destruct test script is currently customised for running on "
+echo "School of Maths linux system. Some variables need to be updated"
+echo "on other machines. A certain amount of self-checking is done"
+echo "to make sure the variables work. Check the \"Customised variables\""
+echo "section in the script if anything doesn't work out." 
+echo "Names of compilers are currently hard-coded (for gcc/open-mpi)."
+echo " "
+echo "Full destruct test will require about 215G of diskspace and take "
+echo "a long time to run. On-screen output is redirected into "
+echo " "
+echo "          */*/test_build.log"
+echo " "
+echo "and can be checked for errors using"
+echo " "
+echo "   paranoia_0_mpi_0_external_dist_0/oomph-lib-1.0.1111/bin/find_errors_and_warnings_in_build_log.bash */*/test_build.log "
+echo "  "
+echo "Please make a note of this now and then hit any key to continue"
+read -n 1
+
+echo "...here we go..."
 
 
 ##########################################################################
