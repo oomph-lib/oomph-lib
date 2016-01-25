@@ -10,8 +10,8 @@ and
 - how to implement a shell problem with the \c BellElement and the \c C1CurvedElement in \c oomph-lib 
 .
 
-The reader is referred to <A HREF="../../../doc/c1_curved/bell_element/html/index.html">
-the Bell triangular finite element</A> and <A HREF="../../../doc/c1_curved/curved_element/html/index.html">
+The reader is referred to <A HREF="../../../c1_element/bell_element/html/index.html">
+the Bell triangular finite element</A> and <A HREF="../../../c1_element/curved_element/html/index.html">
 the \f$ C^1 \f$-curved triangular finite element tutorials</A>, 
 for more detailed descriptions on the \c BellElement and \c C1CurvedElement.
 
@@ -222,8 +222,8 @@ unstructured mesh with triangular elements in 2D. A number of nodes in an elemen
 the problem set up. This is crucial in order to take care of element
 nodes when the number of nodes on the element defined differently for each interpolation functions. 
 
-Normally, in the problem that \f$ C^1 \f$-shape functions are the only interpolation functions used to approximate the variable space, the number of \c NNODE_1D remains 2 as required by the \f$ C^1 \f$-shape functions (see <A HREF="../../../doc/c1_curved/bell_element/html/index.html">
-the Bell triangular finite element</A> and <A HREF="../../../doc/c1_curved/curved_element/html/index.html">
+Normally, in the problem that \f$ C^1 \f$-shape functions are the only interpolation functions used to approximate the variable space, the number of \c NNODE_1D remains 2 as required by the \f$ C^1 \f$-shape functions (see <A HREF="../../../c1_element/bell_element/html/index.html">
+the Bell triangular finite element</A> and <A HREF="../../../c1_element/curved_element/html/index.html">
 the \f$ C^1 \f$-curved triangular finite element tutorials</A>). However, in a linear shell problem, different shape functions are used to interpolate displacements in different directions as different order of continuity is required in their governing equations. 
 
 In this study, the displacements in tangential directions are chosen to approximate by the quadratic Lagrange interpolations which provide only \f$ C^0 \f$ continuity and are defined to have 3 nodes per side on a triangle. On the other hand, the approximation of the normal displacement employs the \f$ C^1 \f$-interpolation functions which are defined to have 2 nodes per side on a triangle. 

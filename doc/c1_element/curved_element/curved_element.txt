@@ -1,12 +1,12 @@
 \mainpage A two-dimensional Biharmonic problem with the C1-curved triangular finite element
 
-In <A HREF="../../../doc/c1_curved/bell_element/html/index.html">
+In <A HREF="../../../c1_element/bell_element/html/index.html">
 the previous tutorial</A>, the triangular Bell element has been successfully used to solve the Biharmonic equation which is a fourth-order problem in two dimensions. The domains of interest considered in the particular problem contained only straight boundaries so that this representation was exact. However, in many engineering applications, the geometric boundary of a problem is not straight. Solving such a problem with the straight-sided \f$ C^1 \f$-finite elements limits the convergence rate and accuracy as presented in <A HREF="http://onlinelibrary.wiley.com/doi/10.1002/pamm.201010272/pdf"> a publication of 
 P.Fischer(2010)</A> .
 
 In order to deal with a fourth-order problem, which requires \f$ C^1 \f$-continuity, on a curvilinear domain, the \f$ C^1 \f$-curved triangular element is introduced in this document. Numerical implementations of the Biharmonic equation on a circular domain will be presented. This is to compare the results obtained between the Bell and the \f$ C^1 \f$-curved triangular elements. Both rate of convergence and the obtained accuracy will be determined together with the computational time. This is to show that representing a curved boundary by a series of straight-sided elements exhibits a limitation in convergence rate and accuracy. Also, we would like to illustrate that the \f$ C^1 \f$-curved triangular element can retain the rate of convergence and accuracy when a curvilinear boundary is concerned.
 
-The reader is referred to <A HREF="../../../doc/c1_curved/bell_element/html/index.html">
+The reader is referred to <A HREF="../../../c1_element/bell_element/html/index.html">
 a two-dimensional Biharmonic problem with the Bell triangular finite element tutorial</A> for more detailed descriptions of the variational principle of the Biharmonic equation and the Bell element. 
 
 In addition, in this document we demonstrate
@@ -101,7 +101,7 @@ M.Bernadou (1993)</A> .
 
 In this section, we will elaborate the shape functions defined on the \c C1CurvedElement. Since there are two types of elements defined on the \c C1CurvedElement, two sets of shape functions will be considered.
 
-On the straight-sided triangular element, we inherit the \c BellElement to approximate values defined on the element. Therefore, the Bell shape functions will be employed and their details can be found in <A HREF="../../../doc/c1_curved/bell_element/html/index.html">
+On the straight-sided triangular element, we inherit the \c BellElement to approximate values defined on the element. Therefore, the Bell shape functions will be employed and their details can be found in <A HREF="../../../c1_element/bell_element/html/index.html">
 the Bell triangular finite element tutorial</A>. Note that the Bell shape functions are defined with respect to the global coordinates so that the transformation of derivatives between the local and the global coordinates is no longer need in an implementation.
 
 Next, we will define shape functions of the \f$ C^1 \f$-curved finite element in order to interpolate any function defined over the curve-sided triangular element. Unlike the interpolation functions defined on the Bell triangular element, the interpolation functions of the \f$ C^1 \f$-curved triangle are chosen to defined over the reference triangle \f$ \hat{K}. \f$ Therefore, for any polynomial \f$p \in P_{K}\f$ defined over the curved triangle \f$ K_{C}, \f$ we employ the mapping defined in (@R[nonlinear_mapping]@) to associate this polynomial \f$ p \f$ with the polynomial defined on the reference triangle as
@@ -334,7 +334,7 @@ M.Bernadou (1993)</A> .
 \section reslt Solving the Biharmonic equation with the C1CurvedElement
 
 The sections below provide an example of solving the fourth-order
-problem using \c C1CurvedElement. The fourth-order problem consider here is the same Biharmonic equation described in <A HREF="../../../doc/c1_curved/bell_element/html/index.html">
+problem using \c C1CurvedElement. The fourth-order problem consider here is the same Biharmonic equation described in <A HREF="../../../c1_element/bell_element/html/index.html">
 another tutorial</A> which is extressed as follow:
 
 \f[ \frac{\partial^4 u}{\partial x^4} + 2\frac{\partial^4 u}{\partial
@@ -343,7 +343,7 @@ x^2\partial y^2} + \frac{\partial^4 u}{\partial y^4} = 0, \ \ \ @E[eqn:biharmoni
 with the exact solution \f$ u(x,y) = \cos(x)e^y.\f$ However, in this document, the problem is implemented in the quarter of the unit circular domain \f$ \Omega = \{(x,y) |
 x,y \in [0,1] , x^2+y^2 = 1\} \f$ which is a curvilinear boundary domain rather than a straight-sided boundary domain. Similarly, we also apply Dirichlet boundary conditions such that the exact solution is satisfied. Also, the conditions that have to be specified on the boundaries have to correspond with the degrees of freedom defined for the \c C1CurvedElement in the previous section. 
 
-Since 36 values of degrees of freedom defined on the reference triangle depend on the 21 values of degrees of freedom defined on the physical curved triangle, those 21 degrees of freedom on the physical curved triangle have to be imposed. These degrees of freedom constitute of 6 degrees of freedom at 3 vertex nodes and the values of degrees of freedom at 3 internal nodes. The 6 degrees of freedom defined on vertices incorporate the value of unknown field, the first derivatives with respect to the first and second coordinates, and the second derivatives with respect to the first, second, and mix derivatives have to be determined at the boundaries. The boundary specifications can be determined the same as described in <A HREF="../../../doc/c1_curved/bell_element/html/index.html">
+Since 36 values of degrees of freedom defined on the reference triangle depend on the 21 values of degrees of freedom defined on the physical curved triangle, those 21 degrees of freedom on the physical curved triangle have to be imposed. These degrees of freedom constitute of 6 degrees of freedom at 3 vertex nodes and the values of degrees of freedom at 3 internal nodes. The 6 degrees of freedom defined on vertices incorporate the value of unknown field, the first derivatives with respect to the first and second coordinates, and the second derivatives with respect to the first, second, and mix derivatives have to be determined at the boundaries. The boundary specifications can be determined the same as described in <A HREF="../../../c1_element/bell_element/html/index.html">
 a two-dimensional Biharmonic problem with the Bell triangular finite element tutorial</A>. 
 
 Here are two tables comparing the performance with the associated computational time between the \c BellElement and the \c C1CurvedElement. The accuracy of the solutions will base on the \f$ L^2 \f$-norm error which is mathematically described as 
@@ -577,7 +577,7 @@ In order to compare the convergence rate between the \c BellElement and the \c C
 
 When performing the log-plot between the \f$L^2\f$-norm error and the element size, Fig. 1.6 depicts that the convergence rate of the \c C1CurvedElement are greater than the \c BellElement as its slope is greater. The obtained rate of convergence for the \c C1CurvedElement and \c the BellElement is quintic and quadratic, respectively.
 
-It is noteworthy that using the \c BellElement to solve the \f$ C^1 \f$-problem with a curved boundary domain decreases its rate of convergence from its potential when solving an exact representation domain (see <A HREF="../../../doc/c1_curved/bell_element/html/index.html">
+It is noteworthy that using the \c BellElement to solve the \f$ C^1 \f$-problem with a curved boundary domain decreases its rate of convergence from its potential when solving an exact representation domain (see <A HREF="../../../c1_element/bell_element/html/index.html">
 another tutorial</A>). This limitation of convergence rate in the \c BellElement is due to the representation of the curved boundaries with straight-edge elements. 
 
 @I w 0.65\textwidth Rate_of_convergence_compare "The comparison of the convergence rate between the Bell and the C1-curved triangular elements. "
@@ -589,7 +589,7 @@ another tutorial</A>). This limitation of convergence rate in the \c BellElement
 
 \section impl Implementation in oomph-lib
 
-In order to solve the Biharmonic equation with \c oomph-lib, the Global parameters and functions can be defined the same as in <A HREF="../../../doc/c1_curved/bell_element/html/index.html">
+In order to solve the Biharmonic equation with \c oomph-lib, the Global parameters and functions can be defined the same as in <A HREF="../../../c1_element/bell_element/html/index.html">
 another Biharmonic tutorial</A>. However, we use the \c BiharmonicCurvedElement<2,2> to solve the Biharmonic equation when the curvilinear boundary is concerned. This can be modified in the driver code.
 
 In sequels, we will discuss only functions that defined differently from solving the Biharmonic equation with the \c BellElement.
