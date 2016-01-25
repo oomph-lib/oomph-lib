@@ -1357,10 +1357,10 @@ public:
    //Initialise the TriangulateIO Data structure
    TriangleHelper::initialise_triangulateio(Triangulateio);
 
-#endif
 
    // Enable triangulateio specific parts for dump/restart by default.
    Use_triangulateio_restart = true;
+#endif
   }
 
  /// Broken copy constructor
@@ -1396,6 +1396,7 @@ public:
  /// next to mesh's boundaries. Doc in outfile (if it's open).
  void setup_boundary_element_info(std::ostream &outfile);
 
+#ifdef OOMPH_HAS_TRIANGLE_LIB
  /// \short const access for Use_triangulateio_restart.
  bool use_triangulateio_restart() const {return Use_triangulateio_restart;}
 
@@ -1406,7 +1407,6 @@ public:
  void disable_triangulateio_restart() {Use_triangulateio_restart = false;}
 
 
-#ifdef OOMPH_HAS_TRIANGLE_LIB
 
  /// Access to the triangulateio representation of the mesh
  TriangulateIO& triangulateio_representation() {return Triangulateio;}
