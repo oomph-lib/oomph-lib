@@ -73,6 +73,23 @@
 namespace oomph
 {
 
+// Forward declaration needed for second invariant helper
+template<class TYPE>
+class DenseMatrix;
+
+//=====================================================================
+/// Helper namespace containing function that computes second invariant
+/// of tensor
+//=====================================================================
+ namespace SecondInvariantHelper
+ {
+  
+  /// Compute second invariant of tensor
+  extern double second_invariant(const DenseMatrix<double>& tensor);
+  
+ }
+
+
 //==============================================
 /// Namespace for error messages for broken
 /// copy constructors and assignment operators

@@ -46,6 +46,39 @@
 namespace oomph
 {
 
+//=====================================================================
+/// Helper namespace containing function that computes second invariant
+/// of tensor
+//=====================================================================
+ namespace SecondInvariantHelper
+ {
+  
+  /// Compute second invariant of tensor
+  double second_invariant(const DenseMatrix<double>& tensor)
+  {
+   // get size of tensor
+   unsigned n=tensor.nrow();
+   double trace_of_tensor=0.0;
+   double trace_of_tensor_squared=0.0;
+   for(unsigned i=0;i<n;i++)
+    {
+     // Calculate the trace of the tensor: T_ii
+     trace_of_tensor += tensor(i,i);
+     // Calculate the trace of the tensor squared: T_ij T_ji
+     for(unsigned j=0;j<n;j++)
+      {
+       trace_of_tensor_squared += tensor(i,j)*tensor(j,i);
+      }
+    }
+   
+   // return the second invariant: 1.0/2.0*[(T_ii)^2 - T_ij T_ji]
+   return 0.5*(trace_of_tensor*trace_of_tensor-trace_of_tensor_squared);
+   
+  }
+  
+ }
+
+
 //==============================================
 /// Namespace for error messages for broken
 /// copy constructors and assignment operators

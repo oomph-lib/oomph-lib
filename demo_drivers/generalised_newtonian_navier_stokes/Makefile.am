@@ -1,0 +1,2 @@
+SUBDIRS = \
+vibrating_shell

@@ -51,7 +51,9 @@ darcy \
 axisym_poroelasticity \
 generalised_time_harmonic_linear_elasticity \
 linearised_axisym_navier_stokes \
-linearised_free_surface_axisym_navier_stokes
+linearised_free_surface_axisym_navier_stokes \
+generalised_newtonian_navier_stokes \
+generalised_newtonian_axisym_navier_stokes
 if WANT_MPI
 SUBDIRS += mpi
 endif
