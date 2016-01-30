@@ -37,9 +37,9 @@
 
 
 //OOMPH-LIB headers 
-#include "../../../src/generic/Telements.h"
+#include "../generic/Telements.h"
 #include "generalised_newtonian_navier_stokes_elements.h"
-#include "../../../src/generic/error_estimator.h"
+#include "../generic/error_estimator.h"
 
 namespace oomph
 {
@@ -180,17 +180,6 @@ public:
    this->internal_data_pt(P_nst_internal_index)->set_value(p_dof, p_value);
   }
 
- /* /// \short Build FaceElements that apply the Robin boundary condition */
- /* /// to the pressure advection diffusion problem required by  */
- /* /// Fp preconditioner */
- /* void build_fp_press_adv_diff_robin_bc_element(const unsigned&  */
- /*                                               face_index) */
- /*  { */
- /*  this->Pressure_advection_diffusion_robin_element_pt.push_back( */
- /*   new FpPressureAdvDiffRobinBCElement< */
- /*   GeneralisedNewtonianTCrouzeixRaviartElement<DIM> >( */
- /*    this, face_index)); */
- /*  } */
  
  /// \short Add to the set paired_load_data
  /// pairs of pointers to data objects and unsignedegers that
@@ -872,18 +861,6 @@ public:
    this->node_pt(Pconv[p_dof])->set_value(DIM,p_value);
   }
 
-
- /* /// \short Build FaceElements that apply the Robin boundary condition */
- /* /// to the pressure advection diffusion problem required by  */
- /* /// Fp preconditioner */
- /* void build_fp_press_adv_diff_robin_bc_element(const unsigned&  */
- /*                                               face_index) */
- /* { */
- /*  this->Pressure_advection_diffusion_robin_element_pt.push_back( */
- /*   new FpPressureAdvDiffRobinBCElement< */
- /*   GeneralisedNewtonianTTaylorHoodElement<DIM> >( */
- /*    this, face_index)); */
- /* } */
 
  /// \short Add to the set \c paired_load_data pairs containing
  /// - the pointer to a Data object

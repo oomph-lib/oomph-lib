@@ -110,7 +110,8 @@ sum_of_matrices.h implicit_midpoint_rule.h \
 trapezoid_rule.h \
 prettyprint.h \
 preconditioner_array.h pml_meshes.h prettyprint98.h \
-generalised_timesteppers.h vector_matrix.h face_mesh_project.h
+generalised_timesteppers.h vector_matrix.h face_mesh_project.h \
+generalised_newtonian_constitutive_models.h
 
 if OOMPH_HAS_MUMPS
 headers+=mumps_solver.h

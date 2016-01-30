@@ -38,10 +38,10 @@
 //OOMPH-LIB headers 
 //#include "generic.h"
 
-#include "../../../src/generic/Qelements.h"
-#include "../../../src/generic/fsi.h"
-#include "../../../src/generic/projection.h"
-#include "../../../src/generic/generalised_newtonian_constitutive_models.h"
+#include "../generic/Qelements.h"
+#include "../generic/fsi.h"
+#include "../generic/projection.h"
+#include "../generic/generalised_newtonian_constitutive_models.h"
 
 namespace oomph
 {

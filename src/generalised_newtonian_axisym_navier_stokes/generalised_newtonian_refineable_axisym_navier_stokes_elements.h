@@ -35,8 +35,8 @@
 #endif
 
 //Oomph lib includes
-#include "../../../src/generic/refineable_quad_element.h"
-#include "../../../src/generic/error_estimator.h"
+#include "../generic/refineable_quad_element.h"
+#include "../generic/error_estimator.h"
 #include "generalised_newtonian_axisym_navier_stokes_elements.h"
 
 namespace oomph

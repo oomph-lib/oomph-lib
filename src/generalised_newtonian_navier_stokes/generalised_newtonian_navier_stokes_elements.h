@@ -37,278 +37,15 @@
 
 
 //OOMPH-LIB headers 
-#include "../../../src/generic/Qelements.h"
-#include "../../../src/generic/fsi.h"
-#include "../../../src/generic/projection.h"
-#include "../../../src/generic/generalised_newtonian_constitutive_models.h"
+#include "../generic/Qelements.h"
+#include "../generic/fsi.h"
+#include "../generic/projection.h"
+#include "../generic/generalised_newtonian_constitutive_models.h"
 
 
 namespace oomph
 {
 
-
-/* //====================================================================== */
-/* /// Helper class for elements that impose Robin boundary conditions */
-/* /// on pressure advection diffusion problem required by Fp preconditioner */
-/* /// (class used to get around some templating issues) */
-/* //====================================================================== */
-/*  class FpPressureAdvDiffRobinBCElementBase : public virtual FaceElement */
-/* { */
-/*   public: */
- 
-/*  /// Constructor */
-/*  FpPressureAdvDiffRobinBCElementBase() {} */
- 
-/*  /// Empty virtual destructor */
-/*  virtual ~FpPressureAdvDiffRobinBCElementBase(){} */
- 
-/*  /// \short This function returns the residuals for the  */
-/*  /// traction function. flag=1 (or 0): do (or don't) compute the  */
-/*  /// Jacobian as well.  */
-/*  virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc( */
-/*   Vector<double> &residuals,  */
-/*   DenseMatrix<double> &jacobian,  */
-/*   unsigned flag)=0; */
- 
-/* }; */
-
-
-
-/* /////////////////////////////////////////////////////////////////////// */
-/* /////////////////////////////////////////////////////////////////////// */
-/* /////////////////////////////////////////////////////////////////////// */
-
-
-
-/* //====================================================================== */
-/* /// A class for elements that allow the imposition of Robin boundary */
-/* /// conditions for the pressure advection diffusion problem in the */
-/* /// Fp preconditioner. */
-/* /// The geometrical information can be read from the FaceGeometry<ELEMENT>  */
-/* /// class and and thus, we can be generic enough without the need to have */
-/* /// a separate equations class */
-/* //====================================================================== */
-/* template <class ELEMENT> */
-/* class FpPressureAdvDiffRobinBCElement : public virtual FaceGeometry<ELEMENT>,  */
-/*  public virtual FaceElement,  */
-/*  public virtual FpPressureAdvDiffRobinBCElementBase  */
-/* { */
- 
-/*   public: */
- 
-/*  ///Constructor, which takes a "bulk" element and the value of the index */
-/*  ///and its limit. Optional boolean flag indicates if it's called */
-/*  // refineable constructor. */
-/*  FpPressureAdvDiffRobinBCElement( */
-/*   FiniteElement* const &element_pt,  */
-/*   const int &face_index, */
-/*   const bool& called_from_refineable_constructor=false) */
-/*   :   FaceGeometry<ELEMENT>(), FaceElement() */
-/*   {  */
-
-/*    //Attach the geometrical information to the element. N.B. This function */
-/*    //also assigns nbulk_value from the required_nvalue of the bulk element */
-/*    element_pt->build_face_element(face_index,this); */
-   
-/* #ifdef PARANOID */
-/*    { */
-/*     //Check that the element is not a refineable 3d element */
-/*     if (!called_from_refineable_constructor) */
-/*      { */
-/*       //If it's three-d */
-/*       if(element_pt->dim()==3) */
-/*        { */
-/*         //Is it refineable */
-/*         RefineableElement* ref_el_pt= */
-/*          dynamic_cast<RefineableElement*>(element_pt); */
-/*         if(ref_el_pt!=0) */
-/*          { */
-/*           if (this->has_hanging_nodes()) */
-/*            { */
-/*             throw OomphLibError( */
-/*              "This flux element will not work correctly if nodes are hanging\n", */
-/*              OOMPH_CURRENT_FUNCTION, */
-/*              OOMPH_EXCEPTION_LOCATION); */
-/*            } */
-/*          } */
-/*        } */
-/*      } */
-/*    } */
-/* #endif */
-   
-/*   } */
-
-/*  /// Empty destructor */
-/*  ~FpPressureAdvDiffRobinBCElement() {} */
-
-/*  /// \short This function returns the residuals for the  */
-/*  /// traction function. flag=1 (or 0): do (or don't) compute the  */
-/*  /// Jacobian as well.  */
-/*  virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc( */
-/*   Vector<double> &residuals,  */
-/*   DenseMatrix<double> &jacobian,  */
-/*   unsigned flag); */
- 
-
-/*  ///This function returns just the residuals */
-/*  inline void fill_in_contribution_to_residuals(Vector<double> &residuals) */
-/*   { */
-/*    std::ostringstream error_message; */
-/*    error_message  */
-/*     << "fill_in_contribution_to_residuals() must not be called directly.\n" */
-/*     << "since it uses the local equation numbering of the bulk element\n" */
-/*     << "which calls the relevant helper function directly.\n"; */
-/*    throw OomphLibError( */
-/*     error_message.str(), */
-/*     OOMPH_CURRENT_FUNCTION, */
-/*     OOMPH_EXCEPTION_LOCATION); */
-/*   } */
-
-/*  ///This function returns the residuals and the jacobian */
-/*  inline void fill_in_contribution_to_jacobian(Vector<double> &residuals, */
-/*                                           DenseMatrix<double> &jacobian) */
-/*   { */
-/*    std::ostringstream error_message; */
-/*    error_message  */
-/*     << "fill_in_contribution_to_jacobian() must not be called directly.\n" */
-/*     << "since it uses the local equation numbering of the bulk element\n" */
-/*     << "which calls the relevant helper function directly.\n"; */
-/*    throw OomphLibError( */
-/*     error_message.str(), */
-/*     OOMPH_CURRENT_FUNCTION, */
-/*     OOMPH_EXCEPTION_LOCATION); */
-/*   } */
- 
-/*  ///Overload the output function */
-/*  void output(std::ostream &outfile) {FiniteElement::output(outfile);} */
- 
-/*  ///Output function: x,y,[z],u,v,[w],p in tecplot format */
-/*  void output(std::ostream &outfile, const unsigned &nplot) */
-/*  {FiniteElement::output(outfile,nplot);} */
- 
-/* }; */
-
-/* /////////////////////////////////////////////////////////////////////// */
-/* /////////////////////////////////////////////////////////////////////// */
-/* /////////////////////////////////////////////////////////////////////// */
-
-
-
-
-/* //============================================================================ */
-/* /// Get residuals and Jacobian of Robin boundary conditions in pressure */
-/* /// advection diffusion problem in Fp preconditoner */
-/* //============================================================================ */
-/* template<class ELEMENT> */
-/* void FpPressureAdvDiffRobinBCElement<ELEMENT>:: */
-/* fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc( */
-/*  Vector<double> &residuals,  */
-/*  DenseMatrix<double> &jacobian,  */
-/*  unsigned flag) */
-/* { */
-/*  //Storage for local coordinates in FaceElement and associted bulk element */
-/*  unsigned my_dim=this->dim(); */
-/*  Vector<double> s(my_dim); */
-/*  Vector<double> s_bulk(my_dim+1); */
- 
-/*  // Storage for outer unit normal */
-/*  Vector<double> unit_normal(my_dim+1); */
- 
-/*  //Storage for veloc in bulk element */
-/*  Vector<double> veloc(my_dim+1); */
- 
-/*  //Set the value of n_intpt */
-/*  unsigned n_intpt = this->integral_pt()->nweight(); */
- 
-/*  //Integers to store local equation numbers */
-/*  int local_eqn=0; */
-/*  int local_unknown=0; */
- 
-/*  // Get cast bulk element */
-/*  ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(this->bulk_element_pt()); */
- 
-/*  //Find out how many pressure dofs there are in the bulk element */
-/*  unsigned n_pres = bulk_el_pt->npres_nst(); */
- 
-/*  // Get the Reynolds number from the bulk element */
-/*  double re = bulk_el_pt->re(); */
- 
-/*  //Set up memory for pressure shape and test functions */
-/*  Shape psip(n_pres), testp(n_pres); */
- 
-/*  //Loop over the integration points */
-/*  for(unsigned ipt=0;ipt<n_intpt;ipt++) */
-/*   { */
-/*    //Get the integral weight */
-/*    double w = this->integral_pt()->weight(ipt); */
-   
-/*    //Assign values of local coordinate in FaceElement */
-/*    for(unsigned i=0;i<my_dim;i++) s[i] = this->integral_pt()->knot(ipt,i); */
-   
-/*    // Find corresponding coordinate in the the bulk element */
-/*    s_bulk=this->local_coordinate_in_bulk(s); */
-   
-/*    /// Get outer unit normal  */
-/*    this->outer_unit_normal(ipt,unit_normal); */
-   
-/*    // Get velocity in bulk element */
-/*    bulk_el_pt->interpolated_u_nst(s_bulk,veloc); */
-   
-/*    // Get normal component of veloc */
-/*    double flux=0.0; */
-/*    for (unsigned i=0;i<my_dim+1;i++) */
-/*     { */
-/*      flux+=veloc[i]*unit_normal[i]; */
-/*     } */
-   
-/*    // Modify bc: If outflow (flux>0) apply Neumann condition instead */
-/*    if (flux>0.0) flux=0.0; */
-
-/*    // Get pressure */
-/*    double interpolated_press=bulk_el_pt->interpolated_p_nst(s_bulk); */
-   
-/*    //Call the pressure shape and test functions in bulk element */
-/*    bulk_el_pt->pshape_nst(s_bulk,psip,testp); */
-   
-/*    //Find the Jacobian of the mapping within the FaceElement */
-/*    double J = this->J_eulerian(s); */
-   
-/*    //Premultiply the weights and the Jacobian */
-/*    double W = w*J; */
-   
-/*    //Loop over the pressure shape functions in bulk */
-/*    //(wasteful but they'll be zero on the boundary) */
-/*    for(unsigned l=0;l<n_pres;l++) */
-/*     { */
-/*      local_eqn=bulk_el_pt->p_local_eqn(l); */
-     
-/*      //If not a boundary conditions */
-/*      if(local_eqn >= 0) */
-/*       { */
-/*        residuals[local_eqn] -=  */
-/*         re*flux*interpolated_press*testp[l]*W; */
-       
-/*        // Jacobian too? */
-/*        if(flag) */
-/*         { */
-/*          //Loop over the shape functions in bulk */
-/*          for(unsigned l2=0;l2<n_pres;l2++) */
-/*           { */
-/*            local_unknown = bulk_el_pt->p_local_eqn(l2); */
-           
-/*            //If not a boundary conditions */
-/*            if(local_unknown >= 0) */
-/*             {              */
-/*              jacobian(local_eqn,local_unknown)-=  */
-/*               re*flux*psip[l2]*testp[l]*W; */
-/*             } */
-/*           } */
-/*         } /\*End of Jacobian calculation*\/ */
-/*       } //End of if not boundary condition */
-/*     }//End of loop over l */
-/*   } */
- 
-/* } */
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -332,15 +69,6 @@ public virtual NavierStokesElementWithDiagonalMassMatrices,
  /// Virtual destructor (empty)
  virtual ~GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase(){};
  
- /* /// \short Compute the residuals for the associated pressure advection  */
- /* /// diffusion problem. Used by the Fp preconditioner. */
- /* virtual void fill_in_pressure_advection_diffusion_residuals(Vector<double>&  */
- /*                                                             residuals)=0; */
- 
- /* /// \short Compute the residuals and Jacobian for the associated  */
- /* /// pressure advection diffusion problem. Used by the Fp preconditioner. */
- /* virtual void fill_in_pressure_advection_diffusion_jacobian( */
- /*  Vector<double>& residuals, DenseMatrix<double> &jacobian)=0; */
  
  /// \short Return the index at which the pressure is stored if it is
  /// stored at the nodes. If not stored at the nodes this will return 
@@ -352,26 +80,10 @@ public virtual NavierStokesElementWithDiagonalMassMatrices,
  /// p_local_eqn[n] = local equation number or < 0 if pinned
  virtual int p_local_eqn(const unsigned &n)const=0;
 
- /* /// \short Global eqn number of pressure dof that's pinned in pressure */
- /* /// adv diff problem */
- /* virtual int& pinned_fp_pressure_eqn()=0; */
-
-
  /// \short Pin all non-pressure dofs and backup eqn numbers of all Data
  virtual void pin_all_non_pressure_dofs(std::map<Data*,std::vector<int> >& 
                                         eqn_number_backup)=0;
  
- /* /// \short Build FaceElements that apply the Robin boundary condition */
- /* /// to the pressure advection diffusion problem required by  */
- /* /// Fp preconditioner */
- /* virtual void build_fp_press_adv_diff_robin_bc_element(const unsigned&  */
- /*                                                       face_index)=0; */
-
- /* /// \short Delete the FaceElements that apply the Robin boundary condition */
- /* /// to the pressure advection diffusion problem required by  */
- /* /// Fp preconditioner */
- /* virtual void delete_pressure_advection_diffusion_robin_elements()=0; */
-
 
  /// \short Compute the diagonal of the velocity/pressure mass matrices.
  /// If which one=0, both are computed, otherwise only the pressure 
@@ -494,10 +206,6 @@ template <unsigned DIM>
  /// Pointer to volumetric source function
  NavierStokesSourceFctPt Source_fct_pt;
 
- /* /// \short Pointer to source function pressure advection diffusion equation */
- /* /// (only to be used during validation) */
- /* NavierStokesPressureAdvDiffSourceFctPt Press_adv_diff_source_fct_pt; */
-
  /// Pointer to the generalised Newtonian constitutive equation
  GeneralisedNewtonianConstitutiveEquation<DIM> *Constitutive_eqn_pt;
 
@@ -509,15 +217,6 @@ template <unsigned DIM>
  /// time-derivatives are computed. Only set to true if you're sure
  /// that the mesh is stationary.
  bool ALE_is_disabled;
-
- /* /// \short Storage for FaceElements that apply Robin BC for pressure adv diff */
- /* /// equation used in Fp preconditioner. */
- /* Vector<FpPressureAdvDiffRobinBCElementBase*>  */
- /*  Pressure_advection_diffusion_robin_element_pt; */
-
- /* /// \short Global eqn number of pressure dof that's pinned in  */
- /* /// pressure advection diffusion problem (defaults to -1) */
- /* int Pinned_fp_pressure_eqn; */
 
  /// \short Compute the shape functions and derivatives 
  /// w.r.t. global coords at local coordinate s.
@@ -683,13 +382,6 @@ template <unsigned DIM>
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
   DenseMatrix<double> &mass_matrix, unsigned flag);
 
-
- /* /// \short Compute the residuals for the associated pressure advection  */
- /* /// diffusion problem. Used by the Fp preconditioner. */
- /* /// flag=1(or 0): do (or don't) compute the Jacobian as well.  */
- /* virtual void fill_in_generic_pressure_advection_diffusion_contribution_nst( */
- /*  Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag); */
-
  ///\short Compute the derivatives of the 
  /// residuals for the Navier--Stokes equations with respect to a parameter
  /// Flag=1 (or 0): do (or don't) compute the Jacobian as well.
@@ -716,7 +408,7 @@ public:
   //Press_adv_diff_source_fct_pt(0),
   Constitutive_eqn_pt(new NewtonianConstitutiveEquation<DIM>), 
   Use_extrapolated_strainrate_to_compute_second_invariant(false),
-  ALE_is_disabled(false)//, Pinned_fp_pressure_eqn(-1)
+  ALE_is_disabled(false)
   {
    //Set all the Physical parameter pointers to the default value zero
    Re_pt = &Default_Physical_Constant_Value;
@@ -788,17 +480,6 @@ public:
  ///Access function for the source-function pointer. Const version
  NavierStokesSourceFctPt source_fct_pt() const {return Source_fct_pt;}
 
- /* /// \short Access function for the source-function pointer for pressure  */
- /* /// advection diffusion  (used for validation only).  */
- /* NavierStokesPressureAdvDiffSourceFctPt& source_fct_for_pressure_adv_diff() */
- /* {return Press_adv_diff_source_fct_pt;} */
-
- /* /// \short Access function for the source-function pointer for pressure  */
- /* /// advection diffusion  (used for validation only). Const version. */
- /* NavierStokesPressureAdvDiffSourceFctPt source_fct_for_pressure_adv_diff() */
- /*  const */
- /* {return Press_adv_diff_source_fct_pt;} */
-
  /// Access function for the constitutive equation pointer
  GeneralisedNewtonianConstitutiveEquation<DIM>* &constitutive_eqn_pt() 
   {return Constitutive_eqn_pt;}
@@ -814,10 +495,6 @@ public:
  {
   Use_extrapolated_strainrate_to_compute_second_invariant=true;
  }
-
- /* /// \short Global eqn number of pressure dof that's pinned in pressure */
- /* /// adv diff problem */
- /* int& pinned_fp_pressure_eqn(){return Pinned_fp_pressure_eqn;} */
 
  ///Function to return number of pressure degrees of freedom
  virtual unsigned npres_nst() const=0;
@@ -1238,25 +915,7 @@ public:
     parameter_pt,dres_dparam,djac_dparam,dmass_matrix_dparam,2);
   }
 
- 
- /* /// \short Compute the residuals for the associated pressure advection  */
- /* /// diffusion problem. Used by the Fp preconditioner. */
- /* void fill_in_pressure_advection_diffusion_residuals(Vector<double>& residuals) */
- /* { */
- /*  fill_in_generic_pressure_advection_diffusion_contribution_nst( */
- /*   residuals,GeneralisedElement::Dummy_matrix,0); */
- /* } */
-
- /* /// \short Compute the residuals and Jacobian for the associated  */
- /* /// pressure advection diffusion problem. Used by the Fp preconditioner. */
- /* void fill_in_pressure_advection_diffusion_jacobian( */
- /*  Vector<double>& residuals, DenseMatrix<double> &jacobian) */
- /* { */
- /*  fill_in_generic_pressure_advection_diffusion_contribution_nst( */
- /*   residuals,jacobian,1); */
- /* } */
-
- 
+  
  /// \short Pin all non-pressure dofs and backup eqn numbers
  void pin_all_non_pressure_dofs(std::map<Data*,std::vector<int> >& 
                                 eqn_number_backup)
@@ -1343,60 +1002,6 @@ public:
  }
  
 
- /* /// \short Build FaceElements that apply the Robin boundary condition */
- /* /// to the pressure advection diffusion problem required by  */
- /* /// Fp preconditioner */
- /* virtual void build_fp_press_adv_diff_robin_bc_element(const unsigned&  */
- /*                                                       face_index)=0; */
-
- /* /// \short Output the FaceElements that apply the Robin boundary condition */
- /* /// to the pressure advection diffusion problem required by  */
- /* /// Fp preconditioner */
- /* void output_pressure_advection_diffusion_robin_elements(std::ostream &outfile) */
- /* { */
- /*  unsigned nel=Pressure_advection_diffusion_robin_element_pt.size(); */
- /*  for (unsigned e=0;e<nel;e++) */
- /*   { */
- /*    FaceElement* face_el_pt=Pressure_advection_diffusion_robin_element_pt[e]; */
- /*    outfile << "ZONE" << std::endl; */
- /*    Vector<double> unit_normal(DIM); */
- /*    Vector<double> x(DIM); */
- /*    Vector<double> s(DIM-1); */
- /*    unsigned n=face_el_pt->integral_pt()->nweight(); */
- /*    for (unsigned ipt=0;ipt<n;ipt++) */
- /*     { */
- /*      for(unsigned i=0;i<DIM-1;i++)  */
- /*       { */
- /*        s[i]=face_el_pt->integral_pt()->knot(ipt,i); */
- /*       } */
- /*      face_el_pt->interpolated_x(s,x); */
- /*      face_el_pt->outer_unit_normal(ipt,unit_normal); */
- /*      for (unsigned i=0;i<DIM;i++) */
- /*       { */
- /*        outfile << x[i] << " "; */
- /*       } */
- /*      for (unsigned i=0;i<DIM;i++) */
- /*       { */
- /*        outfile << unit_normal[i] << " "; */
- /*       } */
- /*      outfile << std::endl; */
- /*     } */
- /*   } */
- /* } */
-
- /* /// \short Delete the FaceElements that apply the Robin boundary condition */
- /* /// to the pressure advection diffusion problem required by  */
- /* /// Fp preconditioner */
- /* void delete_pressure_advection_diffusion_robin_elements() */
- /* { */
- /*  unsigned nel=Pressure_advection_diffusion_robin_element_pt.size(); */
- /*  for (unsigned e=0;e<nel;e++) */
- /*   { */
- /*    delete Pressure_advection_diffusion_robin_element_pt[e]; */
- /*   } */
- /*  Pressure_advection_diffusion_robin_element_pt.clear(); */
- /* } */
-
  /// \short Compute derivatives of elemental residual vector with respect
  /// to nodal coordinates. Overwrites default implementation in 
  /// FiniteElement base class.
@@ -1404,7 +1009,6 @@ public:
  virtual void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
                                                dresidual_dnodal_coordinates);
   
-
 
  /// Compute vector of FE interpolated velocity u at local coordinate s
  void interpolated_u_nst(const Vector<double> &s, Vector<double>& veloc) const
@@ -1718,18 +1322,6 @@ public:
    this->internal_data_pt(P_nst_internal_index)->set_value(p_dof,p_value);
   }
 
-
- /* /// \short Build FaceElements that apply the Robin boundary condition */
- /* /// to the pressure advection diffusion problem required by  */
- /* /// Fp preconditioner */
- /* void build_fp_press_adv_diff_robin_bc_element(const unsigned&  */
- /*                                               face_index) */
- /* { */
- /*  this->Pressure_advection_diffusion_robin_element_pt.push_back( */
- /*   new FpPressureAdvDiffRobinBCElement */
- /*   <GeneralisedNewtonianQCrouzeixRaviartElement<DIM> >( */
- /*    this, face_index)); */
- /* } */
 
  /// \short  Add to the set \c paired_load_data pairs containing
  /// - the pointer to a Data object
@@ -2273,20 +1865,6 @@ class GeneralisedNewtonianQTaylorHoodElement : public virtual QElement<DIM,3>,
    this->node_pt(Pconv[p_dof])->pin(this->p_nodal_index_nst());
    this->node_pt(Pconv[p_dof])->set_value(this->p_nodal_index_nst(),p_value);
   }
-
-
-
- /* /// \short Build FaceElements that apply the Robin boundary condition */
- /* /// to the pressure advection diffusion problem required by  */
- /* /// Fp preconditioner */
- /* void build_fp_press_adv_diff_robin_bc_element(const unsigned&  */
- /*                                               face_index) */
- /* { */
- /*  this->Pressure_advection_diffusion_robin_element_pt.push_back( */
- /*   new FpPressureAdvDiffRobinBCElement */
- /*   <GeneralisedNewtonianQTaylorHoodElement<DIM> >( */
- /*    this, face_index)); */
- /* } */
 
 
  /// \short  Add to the set \c paired_load_data pairs containing

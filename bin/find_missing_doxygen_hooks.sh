@@ -5,8 +5,9 @@
 # source code that's supposed to have been included:
 
 echo " "
-echo "Checking for broken doxygen includes:"
-echo "-------------------------------------"
+echo "Checking for broken doxygen includes in"
+echo " "
+echo "    "`pwd`
 echo " "
 echo "Any files listed below contain html code"
 echo "that looks suspiciously as if it's been generated from"
