@@ -475,7 +475,7 @@ equation numbering scheme.
 \section set_initial_condition Initial conditions
 
 The \c set_initial_conditions() function is very similar to that in
-the <A HREF="../../two_layer_interface/html/index.html#set_initial_condition">two-dimensional problem</A>. 
+the <A HREF="../../../navier_stokes/two_layer_interface/html/index.html#set_initial_condition">two-dimensional problem</A>. 
 We loop over all nodes in the mesh and set all three
 velocity components to zero, before calling \c
 Problem::assign_initial_values_impulsive(). This function copies the
@@ -492,21 +492,21 @@ impulsive start.
 \section set_boundary_conditions Boundary conditions
 
 The \c set_boundary_conditions() function is very similar to that in
-the <A HREF="../../two_layer_interface/html/index.html#set_boundary_conditions">two-dimensional problem</A>. 
+the <A HREF="../../../navier_stokes/two_layer_interface/html/index.html#set_boundary_conditions">two-dimensional problem</A>. 
 
 \skipline start_of_set_boundary_conditions
 \until End of set_boundary_conditions
 
 \section before_after_adapt Actions before and after adaptation
 
-These functions follow exactly the same structure as those in the <A HREF="../../two_layer_interface/html/index.html#before_adapt">two-dimensional problem</A>.
+These functions follow exactly the same structure as those in the <A HREF="../../../navier_stokes/two_layer_interface/html/index.html#before_adapt">two-dimensional problem</A>.
 
 <HR>
 <HR>
 
 \section create_interface_elements Create interface elements
 
-This function is identical to that in the <A HREF="../../two_layer_interface/html/index.html#create_interface_elements">two-dimensional problem</A>, 
+This function is identical to that in the <A HREF="../../../navier_stokes/two_layer_interface/html/index.html#create_interface_elements">two-dimensional problem</A>, 
 with the exception that instead of creating interface elements of the
 type
 
@@ -527,7 +527,7 @@ where \c ELEMENT is the templated bulk element type.
 
 \section delete_interface_elements Delete interface elements
 
-This function is identical to that in the <A HREF="../../two_layer_interface/html/index.html#delete_interface_elements">two-dimensional problem</A>.
+This function is identical to that in the <A HREF="../../../navier_stokes/two_layer_interface/html/index.html#delete_interface_elements">two-dimensional problem</A>.
 
 
 <HR>
@@ -551,7 +551,7 @@ boundaries and the (now deformed) interface.
 
 \section doc Post-processing
 
-This function follows an identical structure to that in the <A HREF="../../two_layer_interface/html/index.html#doc">two-dimensional problem</A>.
+This function follows an identical structure to that in the <A HREF="../../../navier_stokes/two_layer_interface/html/index.html#doc">two-dimensional problem</A>.
 
 <HR>
 <HR>
@@ -559,7 +559,7 @@ This function follows an identical structure to that in the <A HREF="../../two_l
 \section unsteady_run The timestepping loop
 
 The function \c unsteady_run(...) is used to perform the timestepping
-procedure, and is very similar to that in the <A HREF="../../two_layer_interface/html/index.html#unsteady_run">two-dimensional problem</A>. 
+procedure, and is very similar to that in the <A HREF="../../../navier_stokes/two_layer_interface/html/index.html#unsteady_run">two-dimensional problem</A>. 
 The only difference arises from the fact that the initial
 interface deformation is a Bessel function rather than a cosine
 curve. 
@@ -567,7 +567,7 @@ curve.
 \skipline Set value of epsilon
 \until deform_free_surface
 
-The rest of the function is identical to <A HREF="../../two_layer_interface/html/index.html#unsteady_run">before</A>.
+The rest of the function is identical to <A HREF="../../../navier_stokes/two_layer_interface/html/index.html#unsteady_run">before</A>.
 
 <HR>
 <HR>

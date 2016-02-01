@@ -49,7 +49,7 @@ where \f$ \tilde{E}^{\alpha\beta\gamma\delta} \f$ represents the plane stress st
 \tilde{E}^{\alpha\beta\gamma\delta} = \frac{E}{2(1+\nu)}\left( t^{\alpha\gamma}t^{\beta\delta} + t^{\alpha\delta}t^{\beta\gamma} + \frac{2\nu}{1-\nu}t^{\alpha\beta}t^{\gamma\delta}\right), \ \ \ \ @E[eqn:stiffness_tensor]@ 
 \f]
 
-where \f$ \nu \f$ denotes the Poisson's ratio. This equation is presented with a non-dimensional form and is described in details in <A HREF="../../../doc/beam/tensioned_string/tensioned_string/html/index.html"> another tutorial</A>. Non-dimensionalisation of quantities is also explained here.
+where \f$ \nu \f$ denotes the Poisson's ratio. This equation is presented with a non-dimensional form and is described in details in <A HREF="../../../beam/tensioned_string/html/index.html"> another tutorial</A>. Non-dimensionalisation of quantities is also explained here.
 
 Note that in the small strain regime, an area element between the undeformed and deformed configurations are indistinguishable. Hence, the external force is preferable to express on the area element of the undeformed midplane which is related with that of the deformed midplane as
 \f[
@@ -250,7 +250,7 @@ The problem class has five member functions, illustrated as follows:
 - \c parameter_study() : Computes the shell's deformation for a range of external pressures.
 .
 
-From the above mentioned functions, only the problem constructor is non-trivial. The reader is refered to <A HREF="../../../doc/beam/tensioned_string/tensioned_string/html/index.html"> another tutorial</A>  for a description on \c parameter_study.
+From the above mentioned functions, only the problem constructor is non-trivial. The reader is refered to <A HREF="../../../beam/tensioned_string/html/index.html"> another tutorial</A>  for a description on \c parameter_study.
 
 In the present problem, the function \c Problem::actions_after_newton_solve() is not required, so it remains empty. Also, the class includes two private data members which store pointers to a source function and to the geometric object that specifies the shell's undeformed shape.
 
@@ -264,7 +264,7 @@ In the present problem, the function \c Problem::actions_after_newton_solve() is
 
 The problem constructor starts by overloading the function \c
 Problem::mesh_pt() and set to the specific mesh used in the
-problem. In this tutorial, we implement the problem with 2D triangular unstructured mesh which is externally created by \c Triangle. The generated output will be used to build \c oomph-lib mesh. The reader may refer to <A HREF="../../../doc/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle/html/index.html"> another tutorial</A> to create an unstructured triangular mesh internally.
+problem. In this tutorial, we implement the problem with 2D triangular unstructured mesh which is externally created by \c Triangle. The generated output will be used to build \c oomph-lib mesh. The reader may refer to <A HREF="../../../meshes/mesh_from_inline_triangle/html/index.html"> another tutorial</A> to create an unstructured triangular mesh internally.
 
 \dontinclude unstructured_clamped_square_plate.cc
 \skipline start_of_constructor
