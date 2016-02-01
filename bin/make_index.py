@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 #Script to generate an index page for oomph-lib from a very simple
 #input file
 
@@ -69,32 +70,32 @@ def print_key(doc_root_directory,key,level,anchor):
  #same look as real links (In the end I found this confusing, so have removed 
  #it)
  if key[1]=='':
-  print begin_tag, anchor_string #, \
+  print(begin_tag, anchor_string) #, \
   #Uncomment for self anchor-tag 
   #"\htmlonly",\
   #anchor_tag, key[0], "</a>"
-  print key[0]
+  print(key[0])
   #Uncomment for the collapsing section stuff
   #print "<a onclick=\"index_toggle(\'div_id",div_counter,"\',\'im_id",\
   #div_counter,"\')\">", \
   #"<img src=\"../collapse.png\" id=\"im_id",div_counter,"\">", "</a>",
   #print  "\endhtmlonly"
-  print end_tag, \
-  "<div id=\"div_id",div_counter,"\"",style,">"
+  print(end_tag, \
+  "<div id=\"div_id",div_counter,"\"",style,">")
 
  #Otherwise just print the link and key
  else:
   link_target = doc_root_directory + "/" + key[1]
   if key[2]=='':
    output_key = key[0]
-   print begin_tag, \
+   print(begin_tag, \
    anchor_string, \
-   "<a href=\"",link_target,"\">",output_key,"</a>",end_tag
+   "<a href=\"",link_target,"\">",output_key,"</a>",end_tag)
   else:
    output_key = key[2]
-   print begin_tag, \
+   print(begin_tag, \
    anchor_string, \
-   key[0], "<br> &nbsp; &nbsp; &nbsp;  <a href=\"", link_target,"\">",output_key,"</a>",end_tag
+   key[0], "<br> &nbsp; &nbsp; &nbsp;  <a href=\"", link_target,"\">",output_key,"</a>",end_tag)
 
 #The main nested output function. The idea is to loop through the list
 #Output the keys and subkeys and keep going until we hit a link
@@ -106,7 +107,7 @@ def nested_output(doc_root_directory,index,level=0,anchor=""):
  if index == []: 
   return 
  if level>2 :
-  print "<ul>"
+  print("<ul>")
 
  #The key is the first entry in the first list
  key = get_key_and_link(index[0])
@@ -132,7 +133,7 @@ def nested_output(doc_root_directory,index,level=0,anchor=""):
 
    #If there is no key the entry is not a link, so we end the text div
    if key[1]=='':
-    print "</div>"
+    print("</div>")
    #Get the new key
    key = get_key_and_link(entry)
    #There will only be a subindex entry if we have no link
@@ -145,7 +146,7 @@ def nested_output(doc_root_directory,index,level=0,anchor=""):
    if len(entry) > 1:
     if entry[1][0]=='%':
      if entry[1].lstrip('%') != key[1]:
-      print "Multiple links for the same key", key[1], "\n"
+      print("Multiple links for the same key", key[1], "\n")
       assert 0
     elif entry[1][0]=='^':
      #Error trapping here will be a pain, but should be done
@@ -168,9 +169,9 @@ def nested_output(doc_root_directory,index,level=0,anchor=""):
  anchor = anchor_stem
 
  if key[1]=='':
-  print "</div>"
+  print("</div>")
  if level>2 :
-  print "</ul>"
+  print("</ul>")
 
 
 def make_index(filename,doc_root_directory):
@@ -222,12 +223,12 @@ def make_index(filename,doc_root_directory):
   first_letters += "<a href=" + doc_root_directory + \
   "/index/html/index.html#" + char + ">" + char + "</a>"
  first_letters += "</h1>"
- print "\htmlonly"
- print first_letters
+ print("\htmlonly")
+ print(first_letters)
 
  #Output the list
  nested_output(doc_root_directory,main_index)
- print "\endhtmlonly"
+ print("\endhtmlonly")
   
 
 if __name__ == "__main__":
@@ -237,7 +238,7 @@ if __name__ == "__main__":
  #Check the number of argumens
  narg = len(sys.argv)
  if narg != 2:
-  print "\n Must specify input filename and path to doc directory on the command line"
+  print("\n Must specify input filename and path to doc directory on the command line")
   assert 0
 
  make_index(sys.argv[0],sys.argv[1])

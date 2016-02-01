@@ -350,7 +350,7 @@ tutorial </a> for details. Note that, in general \f$ \mbox{\boldmath$U$}\f$ the
    \frac{1}{Pe_{s}}
  \mbox{\boldmath$\nabla$}_{\!\!_{S}}\mbox{\boldmath$\cdot$} 
  \mbox{\boldmath$\nabla$}_{\!\!_{S}}
-   \Gamma \right]\, \phi\, \text{d}S = 0. \f]
+   \Gamma \right]\, \phi\, \mbox{d}S = 0. \f]
  In the above equation the time derivative is taken at fixed ``nodes''
  in the finite element formulation and the ALE-like term compensates
  for tangential movement of these nodes along the surface. The normal
@@ -391,7 +391,7 @@ tutorial </a> for details. Note that, in general \f$ \mbox{\boldmath$U$}\f$ the
    \Gamma \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} \mbox{\boldmath$U$} + \mbox{\boldmath$U$} \mbox{\boldmath$\cdot$}
    \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \right] \phi +
    \frac{1}{Pe_{s}} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \mbox{\boldmath$\cdot$} \mbox{\boldmath$\nabla$}_{\!\!_{S}}
-   \phi\, \text{d}S  -
+   \phi\, \mbox{d}S  -
  \int_{B} \frac{1}{Pe_{s}} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma
  \mbox{\boldmath$\cdot m$}\,  \phi \,\mbox{ d} l
 = 0,\f]
@@ -401,7 +401,7 @@ tutorial </a> for details. Note that, in general \f$ \mbox{\boldmath$U$}\f$ the
    St\, \dot{\mbox{\boldmath$R$}}) \mbox{\boldmath$\cdot$} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma +
    \Gamma \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} \mbox{\boldmath$U$} \right] \phi +
    \frac{1}{Pe_{s}} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \mbox{\boldmath$\cdot$} \mbox{\boldmath$\nabla$}_{\!\!_{S}}
-   \phi\, \text{d}S 
+   \phi\, \mbox{d}S 
  -
  \int_{B} \frac{1}{Pe_{s}} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma
  \mbox{\boldmath$\cdot m$}\,  \phi \,\mbox{ d} l
@@ -415,7 +415,7 @@ In index notation the equations are
  (U_{i} -  St\, \dot{R}_{i})  \Gamma_{,\beta}
  + \Gamma \left[\mbox{\boldmath$U$}_{,\beta}\right]_{i}\right\}
   \right] \phi +
-   \frac{1}{Pe_{s}} g^{\alpha\beta} \Gamma_{,\alpha} \phi_{,\beta}\, \text{d}S 
+   \frac{1}{Pe_{s}} g^{\alpha\beta} \Gamma_{,\alpha} \phi_{,\beta}\, \mbox{d}S 
  -
  \int_{B} \frac{1}{Pe_{s}} g^{\alpha\beta}
  [\mbox{\boldmath$g$}_{\alpha}]_{i} m_{i} \Gamma_{,\beta}\,  \phi \,\mbox{ d} l
@@ -534,8 +534,8 @@ position vector to the surface is given by
  \psi_{r}^{(F)}(s) \cos\theta \\ \psi_{r}^{(F)}(s) \sin\theta \\
  \psi_{z}^{(F)}(s) \end{array} \right) \quad\Rightarrow\quad
 \mbox{\boldmath$\psi$}^{(F)}_{,1} = \left(\begin{array}{c}
- \psi'_{r}^{(F)}(s) \cos\theta \\ \psi'_{r}^{(F)}(s) \sin\theta \\
- \psi'_{z}^{(F)}(s) \end{array} \right) \quad\mbox{and}\quad 
+ (\psi')_{r}^{(F)}(s) \cos\theta \\ (\psi')_{r}^{(F)}(s) \sin\theta \\
+ (\psi')_{z}^{(F)}(s) \end{array} \right) \quad\mbox{and}\quad 
  \mbox{\boldmath$\psi$}^{(F)}_{,2} = \left(\begin{array}{c}
  -\psi_{r}^{(F)}(s) \sin\theta \\ \psi_{r}^{(F)}(s) \cos\theta \\
  0 \end{array} \right).\f]
@@ -543,8 +543,8 @@ position vector to the surface is given by
  Thus the contribution to the momentum equation (@R[dyn_disc]@) are
 \f[ \int_{B} \frac{1}{Ca} \sigma \psi_{i}^{(F)} m_{i}\,\mbox{ d}l 
  - \int\!\!\!\int_{S} \frac{1}{Ca}
-\sigma  \left[\frac{r' \psi'_{r}^{(F)} + z' \psi'_{z}^{(F)}}{(r')^{2} +
-(z')^2} + \frac{1}{r}} \psi_{r}^{(F)}\right]\, \mbox{ d}S, \f]
+\sigma  \left[\frac{r' (\psi')_{r}^{(F)} + z' (\psi')_{z}^{(F)}}{(r')^{2} +
+(z')^2} + \frac{1}{r} \psi_{r}^{(F)}\right]\, \mbox{ d}S, \f]
 Two separate contributions are then derived from the cases \f$
 \psi_{r}^{(F)} = 0 \f$ and \f$ \psi_{z}^{(F)} = 0\f$. The difference
 from the \c LineDerivatives is the final term that accounts for the
@@ -689,7 +689,9 @@ the term that is always present is \f$
   \mbox{\boldmath$U$}_{,2} = \left(\begin{array}{c} -U_r \sin\theta \\
  U_r\cos\theta \\ 0 \end{array}\right). \f]
 Thus, the surface divegence term is
-\f[ \myb{\nabla}_{\!\!_{S}} \myb{\cdot} \myb{U} =  \frac{\left(\frac{\partial U_{r}}{\partial s} \frac{\partial
+\f[ \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$}
+\mbox{\boldmath$U$}
+ =  \frac{\left(\frac{\partial U_{r}}{\partial s} \frac{\partial
     r}{\partial s} + \frac{\partial U_{z}}{\partial s} \frac{\partial
    z}{\partial s}\right)}{(r')^{2} + (z')^{2}} + \frac{U_{r}}{r},\f]
  which is exactly the same form as the surface divergence of the
