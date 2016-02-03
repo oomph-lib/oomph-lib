@@ -5,9 +5,16 @@
 # source code that's supposed to have been included:
 
 echo " "
-echo "Checking for broken doxygen includes in"
+echo "Checking for broken doxygen includes/hrefs"
+echo "=========================================="
 echo " "
+echo "in"
 echo "    "`pwd`
+echo " "
+
+echo " "
+echo "Checking for broken includes:"
+echo "-----------------------------"
 echo " "
 echo "Any files listed below contain html code"
 echo "that looks suspiciously as if it's been generated from"
@@ -25,7 +32,8 @@ echo "Pattern 2: "
 echo " "
 find . -name 'index.html' -exec grep -H -B 1 '<div class="fragment"></div><!-- fragment -->' {} \;
 echo " "
-echo "Done"
+echo "Done checking for broken includes"
+echo " "
 
 # find dangling "<a" most likely from emacs-induced linebreak after
 # a long url. doxgyen doesn't build proper links from those.
@@ -39,4 +47,5 @@ echo "before a long url -- check these out:"
 echo " "
 find . -name '*.txt' -exec grep -l '<[Aa] *$' {} \;
 echo " "
-echo "Done"
+echo "Done checking for broken hrefs"
+echo " "
