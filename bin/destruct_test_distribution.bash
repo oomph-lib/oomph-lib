@@ -39,7 +39,7 @@ echo "          */*/test_build.log"
 echo " "
 echo "and can be checked for errors using"
 echo " "
-echo "   paranoia_0_mpi_0_external_dist_0/oomph-lib-1.0.1111/bin/find_errors_and_warnings_in_build_log.bash */*/test_build.log "
+echo "   paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash */*/test_build.log "
 echo "  "
 echo "Please make a note of this now and then hit any key to continue"
 read -n 1
