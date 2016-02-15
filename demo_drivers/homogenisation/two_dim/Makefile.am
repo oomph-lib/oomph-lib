@@ -11,7 +11,7 @@ Thomo_lin_elasticity_elements.cc two_dim.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-two_dim_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+two_dim_LDADD = -L@libdir@ -llinear_elasticity -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 # Sources for executable
 two_dim_hex_SOURCES = homo_lin_elasticity_elements.h \
@@ -20,5 +20,5 @@ Thomo_lin_elasticity_elements.cc two_dim_hex.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-two_dim_hex_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+two_dim_hex_LDADD = -L@libdir@ -llinear_elasticity -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 

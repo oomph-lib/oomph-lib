@@ -36,7 +36,7 @@
 
 // The equations
 #include "./Thomo_lin_elasticity_elements.h"
-#include "../../src/linear_elasticity/elasticity_tensor.cc"
+//#include "../../src/linear_elasticity/elasticity_tensor.cc"
 
 // The mesh
 #include "meshes/triangle_mesh.h"
