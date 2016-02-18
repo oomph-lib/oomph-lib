@@ -272,6 +272,7 @@ public:
    error[0] = 0.0;
    
    Vector<double> local_error(1);
+   Vector<double> local_norm(1);
    
    const unsigned n_element = Problem::mesh_pt()->nelement();
    //Do the timestep
@@ -279,7 +280,9 @@ public:
     {
      dynamic_cast<ScalarAdvectionEquations<2>*>(
       Problem::mesh_pt()->element_pt(e))
-      ->compute_error(Global::initial_condition,t,local_error);  
+      ->compute_error(std::cout,
+                      Global::initial_condition,t,local_error,
+                      local_norm);  
      error[0] += local_error[0];
     }
   }

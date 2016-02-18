@@ -465,6 +465,7 @@ public:
    error.initialise(0.0);
    
    Vector<double> local_error(4);
+   Vector<double> local_norm(4);
    
    const unsigned n_element = Problem::mesh_pt()->nelement();
    //Do the timestep
@@ -472,7 +473,9 @@ public:
     {
      dynamic_cast<ELEMENT*>(
       Problem::mesh_pt()->element_pt(e))
-      ->compute_error(Global::exact_solution,t,local_error);  
+      ->compute_error(std::cout,
+                      Global::exact_solution,t,local_error,
+                      local_norm);  
      for(unsigned i=0;i<4;i++)
       {
        error[i] += local_error[i];

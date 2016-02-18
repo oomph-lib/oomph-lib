@@ -102,10 +102,11 @@ public:
  ///\short The number of unknowns at each node is the number of values
  unsigned required_nvalue(const unsigned &n) const {return 1;}
 
- ///Assemble the contributions to the mass matrix and residuals
- void compute_error(FiniteElement::SteadyExactSolutionFctPt
+ ///Compute the error and norm of solution integrated over the element
+ ///Does not plot the error in the outfile
+ void compute_error(std::ostream &outfile, FiniteElement::SteadyExactSolutionFctPt
                     initial_condition_pt, const double &t, 
-                    Vector<double> &error) // cgj: this hides 3-param and 4-param versions in FiniteElement
+                    Vector<double> &error, Vector<double> &norm) 
   {
    //Find the number of fluxes
    const unsigned n_flux = this->nflux();
@@ -118,8 +119,8 @@ public:
    //Find the number of integration points
    unsigned n_intpt = this->integral_pt()->nweight();
 
-   error.resize(n_flux);
-   for(unsigned i=0;i<n_flux;i++) {error[i] = 0.0;}
+   error.resize(n_flux); norm.resize(n_flux);
+   for(unsigned i=0;i<n_flux;i++) {error[i] = 0.0; norm[i] = 0.0;}
 
    Vector<double> s(DIM);
 
@@ -172,6 +173,7 @@ public:
       {
        error[i] += 
         pow((interpolated_u[i] - exact_u[i]),2.0)*W;
+       norm[i] += interpolated_u[i]*interpolated_u[i]*W;
       }
     }
   }
