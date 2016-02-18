@@ -371,11 +371,11 @@ int main()
  TanhSolnForPoisson::Alpha=20.0;
  
  // Initially uniformly refine the mesh
- for (unsigned p=0; p<0; p++)
-  {
-   cout << "p-refining:" << endl;
-   problem.p_refine_uniformly();
-  }
+ // for (unsigned p=0; p<0; p++)
+ //  {
+ //   cout << "p-refining:" << endl;
+ //   problem.p_refine_uniformly();
+ //  }
  for (unsigned h=0; h<1; h++)
   {
    cout << "h-refining:" << endl;

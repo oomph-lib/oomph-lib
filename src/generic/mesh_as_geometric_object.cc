@@ -2155,7 +2155,7 @@ namespace oomph
      
      // Single "loop" in one direction - always a vector of max size 2
      unsigned nbr_bin_left=bin-level;
-     if ((nbr_bin_left>=0) && (nbr_bin_left<Nbin_x)) // cgj: first condition is always true
+     if (nbr_bin_left<Nbin_x)
       {
        unsigned nbr_bin=nbr_bin_left;
        if (only_use_filled_bins)
@@ -2171,7 +2171,7 @@ namespace oomph
          }
       }
      unsigned nbr_bin_right=bin+level;
-     if ((nbr_bin_right>=0) && (nbr_bin_right<Nbin_x) && 
+     if ((nbr_bin_right<Nbin_x) && 
          (nbr_bin_right!=nbr_bin_left))
       {
        unsigned nbr_bin=nbr_bin_right;
@@ -2252,7 +2252,6 @@ namespace oomph
         // number must also be greater than zero and less than the
         // total number of bins)
         if ((j_initial_row==initial_neighbour_bin_row) && 
-            (initial_neighbour_bin>=0) &&
             (initial_neighbour_bin<n_total_bin))
          {
           if (only_use_filled_bins)
@@ -2294,7 +2293,6 @@ namespace oomph
         // number must also be greater than zero and less than the
         // total number of bins)
         if ((initial_row==initial_neighbour_bin_row) && 
-            (initial_neighbour_bin>=0) &&
             (initial_neighbour_bin<n_total_bin))
          {
           if (only_use_filled_bins)
@@ -2327,7 +2325,6 @@ namespace oomph
         // number must also be greater than zero and less than the
         // total number of bins)
         if ((final_row==final_neighbour_bin_row) && 
-            (final_neighbour_bin>=0) &&
             (final_neighbour_bin<n_total_bin))
          {
           if (only_use_filled_bins)
@@ -2365,7 +2362,6 @@ namespace oomph
         // number must also be greater than zero and less than the
         // total number of bins)
         if ((j_final_row==final_neighbour_bin_row) && 
-            (final_neighbour_bin>=0) &&
             (final_neighbour_bin<n_total_bin))
          {
           if (only_use_filled_bins)
@@ -2444,7 +2440,7 @@ namespace oomph
              // (The bin number must also be greater than zero
              //  and less than the total number of bins)
              if ((row==nbr_bin_row) && (layer==nbr_bin_layer)
-                 && (nbr_bin>=0) && (nbr_bin<n_total_bin))
+                  && (nbr_bin<n_total_bin))
               {
                if (only_use_filled_bins)
                 {

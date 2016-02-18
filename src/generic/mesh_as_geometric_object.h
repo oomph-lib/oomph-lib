@@ -262,8 +262,12 @@ private:
  ///Current max. spiralling level
  unsigned Current_max_spiral_level;
 
- ///Communicator (cgj: should this be inside OOMPH_HAS_MPI?)
+#ifdef OOMPH_HAS_MPI
+
+ ///Communicator
  OomphCommunicator* Communicator_pt; 
+
+#endif
 
  /// \short Flag to indicate that MeshAsGeomObject has used
  /// Eulerian coordinates when setting up bin.

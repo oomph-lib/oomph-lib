@@ -106,7 +106,7 @@ namespace oomph
    public:
   
   /// Constructor. Pass spatial dimension
-  FpPreconditionerAssemblyHandler(const unsigned& ndim) : Ndim(ndim)
+  FpPreconditionerAssemblyHandler(const unsigned& ndim) // : Ndim(ndim)
    {}
    
    /// \short Empty virtual destructor
@@ -151,7 +151,7 @@ namespace oomph
    private:
    
    /// Spatial dimension of problem
-   unsigned Ndim; // cgj: Ndim is never used.
+   //unsigned Ndim; // cgj: Ndim is never used.
    
  };
  

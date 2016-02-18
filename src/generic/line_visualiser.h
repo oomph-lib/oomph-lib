@@ -579,7 +579,7 @@ namespace oomph
    Vector<Vector<double> > coord_vec_tmp; // Coord array
     
    // Loop over the lines of the input file
-   while(getline(file_input,line) != NULL)
+   while(getline(file_input,line) != 0)
     {
      // Test if the first char of the line is a number
      // using ascii enumeration of chars

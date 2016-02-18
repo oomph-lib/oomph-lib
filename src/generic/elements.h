@@ -3099,7 +3099,7 @@ public:
  void face_node_number_error_check(const unsigned& i) const
  {
 #ifdef RANGE_CHECKING
-  if(i < 0 || i > nnode_on_face())
+  if(i > nnode_on_face())
    {
     std::string err = "Face node index i out of range on face.";
     throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
