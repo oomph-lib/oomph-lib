@@ -41,7 +41,7 @@ echo "          destruct_test/*/*/test_build.log"
 echo " "
 echo "and can be checked for errors using"
 echo " "
-echo "   destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash */*/test_build.log "
+echo "   destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log "
 echo "  "
 echo "Please make a note of this now and then hit any key to continue"
 read -n 1
