@@ -292,7 +292,22 @@ public:
  /// (Empty virtual function -- implement this for specific
  /// Mesh classes)
  virtual void setup_boundary_element_info(std::ostream &outfile) {}
-
+ 
+ /// Virtual function to perform the reset boundary elements info rutines
+ virtual void reset_boundary_element_info(
+  Vector<unsigned> &ntmp_boundary_elements,
+  Vector<FiniteElement*> &deleted_elements)
+  {
+   std::ostringstream error_stream;
+   error_stream << "Empty default reset boundary element info function"
+                << "called.\n";
+   error_stream << "This should be overloaded in a specific "
+                << "TriangleMeshBase\n";
+   throw OomphLibError(error_stream.str(),
+                       "Mesh::reset_boundary_element_info()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+  
  /// \short Output boundary coordinates on boundary b -- template argument
  /// specifies the bulk element type (needed to create FaceElement
  /// of appropriate type on mesh boundary).
@@ -920,7 +935,7 @@ public:
 
  /// Output the nodes on the boundaries (into separate tecplot zones)
  void output_boundaries(std::ostream &outfile);
-
+ 
  /// Output the nodes on the boundaries (into separate tecplot zones).
  /// Specify filename
  void output_boundaries(const std::string& output_filename)
@@ -931,6 +946,45 @@ public:
    outfile.close();
   }
 
+ /// Output the nodes on the boundary and their respective boundary
+ /// coordinates(into separate tecplot zones)
+ virtual void output_boundary_coordinates(const unsigned &b,
+                                          std::ostream &outfile)
+  {
+   std::ostringstream error_stream;
+   error_stream 
+    << "Empty default output_boundary_coordinates() method called.\n"
+    << "This should be overloaded on the specific mesh that you are using\n";
+    throw OomphLibError(error_stream.str(),
+                        "Mesh::output_boundary_coordinates",
+                        OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ /// Output the nodes on the boundary and their respective boundary
+ /// coordinates(into separate tecplot zones)
+ void output_boundary_coordinates(const unsigned &b, 
+                                  const std::string& output_filename)
+  {
+   std::ofstream outfile;
+   outfile.open(output_filename.c_str());
+   output_boundary_coordinates(b, outfile);
+   outfile.close();
+  }
+ 
+ /// Output the nodes on the boundaries and their respective boundary
+ /// coordinates(into separate tecplot zones)
+ void output_boundaries_coordinates(std::ostream &outfile);
+ 
+ /// Output the nodes on the boundaries and their respective boundary
+ /// coordinates(into separate tecplot zones)
+ void output_boundaries_coordinates(const std::string& output_filename)
+  {
+   std::ofstream outfile;
+   outfile.open(output_filename.c_str());
+   output_boundaries_coordinates(outfile);
+   outfile.close();
+  }
+ 
  /// \short Assign initial values for an impulsive start
  void assign_initial_values_impulsive();
 
@@ -2085,7 +2139,59 @@ public:
    return procs;
   }
 
-#endif
+ /// \short Creates the shared boundaries, only used in unstructured meshes
+ /// In this case with the "TriangleMesh" class
+ virtual void create_shared_boundaries(OomphCommunicator* comm_pt, 
+                                       const Vector<unsigned> &element_domain,
+                                       const Vector<GeneralisedElement*>
+                                       &backed_up_el_pt,
+                                       const Vector<FiniteElement*>
+                                       &backed_up_f_el_pt,
+                                       std::map<Data*,std::set<unsigned> >
+                                       &processors_associated_with_data,
+                                       const bool&
+                                       overrule_keep_as_halo_element_status)
+  {
+   std::ostringstream error_stream;
+   error_stream << "Empty default create_shared_boundaries() method"
+                << "called.\n";
+   error_stream << "This should be overloaded in a specific "
+                << "TriangleMeshBase\n";
+   throw OomphLibError(error_stream.str(),
+                       "Mesh::create_shared_boundaries()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ // Check if necessary to add the element as haloed or if it has been
+ // previously added to the haloed scheme
+ virtual unsigned try_to_add_root_haloed_element_pt(const unsigned& p, 
+                                                    GeneralisedElement*& el_pt)
+ {  
+  std::ostringstream error_stream;
+  error_stream << "Empty default try_to_add_root_haloed_element_pt() method"
+               << "called.\n";
+  error_stream << "This should be overloaded in a specific "
+               << "TriangleMeshBase\n";
+  throw OomphLibError(error_stream.str(),
+                      "Mesh::try_to_add_root_haloed_element_pt()",
+                      OOMPH_EXCEPTION_LOCATION);
+ }
+ 
+ // Check if necessary to add the node as haloed or if it has been
+ // previously added to the haloed scheme
+ virtual unsigned try_to_add_haloed_node_pt(const unsigned& p, Node*& nod_pt)
+ {
+  std::ostringstream error_stream;
+  error_stream << "Empty default try_to_add_haloed_node_pt() method"
+               << "called.\n";
+  error_stream << "This should be overloaded in a specific "
+               << "TriangleMeshBase\n";
+  throw OomphLibError(error_stream.str(),
+                      "Mesh::try_to_add_haloed_node_pt()",
+                      OOMPH_EXCEPTION_LOCATION);
+ }
+ 
+#endif 
 
  /// \short Wipe the storage for all externally-based elements
  void delete_all_external_storage();

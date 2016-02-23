@@ -1012,6 +1012,34 @@ get_body_force_nst(const double& time,
 }
 
 
+///Explicit definition of the face geometry of these elements
+template<class NST_ELEMENT, class AD_ELEMENT>
+ class FaceGeometry<NavierStokesBoussinesqElement<NST_ELEMENT, AD_ELEMENT> > : 
+ public virtual FaceGeometry<NST_ELEMENT>
+{
+  public:
+ /// \short Constructor calls the constructor of the NST_ELEMENT
+ /// (Only the Intel compiler seems to need this!)
+  FaceGeometry() : FaceGeometry<NST_ELEMENT>() {}
+ 
+  protected:
+};
+
+///Explicit definition of the face geometry of these elements
+template<class NST_ELEMENT, class AD_ELEMENT>
+ class FaceGeometry<FaceGeometry<
+ NavierStokesBoussinesqElement<NST_ELEMENT, AD_ELEMENT> > > : 
+ public virtual FaceGeometry<FaceGeometry<NST_ELEMENT> >
+{
+  public:
+ /// \short Constructor calls the constructor of the NST_ELEMENT
+ /// (Only the Intel compiler seems to need this!)
+  FaceGeometry() : FaceGeometry<FaceGeometry<NST_ELEMENT> >() {}
+ 
+  protected:
+};
+
+
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////

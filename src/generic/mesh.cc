@@ -44,6 +44,7 @@
 #include "problem.h"
 #include "elastic_problems.h"
 #include "refineable_mesh.h"
+#include "triangle_mesh.h"
 #include "shape.h"
 
 namespace oomph
@@ -1016,6 +1017,24 @@ void Mesh::output_boundaries(std::ostream &outfile)
   }
 }
 
+//======================================================== 
+/// Output the nodes on the boundaries and their 
+/// respective boundary coordinates(into separate tecplot 
+/// zones)
+//======================================================== 
+void Mesh::output_boundaries_coordinates(std::ostream &outfile)
+{
+ //Loop over the boundaries
+ const unsigned nbound = nboundary();
+ for(unsigned ibound = 0; ibound < nbound; ibound++)
+  {
+   unsigned nelement = Boundary_element_pt[ibound].size();
+   if (nelement>0)
+    {
+     output_boundary_coordinates(ibound, outfile);
+    } // if (nelement > 0)
+  } // for (ibound < nbound)
+}
 
 
 //===================================================================
@@ -3639,6 +3658,34 @@ void Mesh::classify_halo_and_haloed_nodes(DocInfo& doc_info,
     }
 
 
+  // Doc stats
+  if (report_stats)
+   {
+    // Report total number of halo(ed) and shared nodes for this process
+    oomph_info << "BEFORE SYNCHRONISE SHARED NODES Processor " << my_rank 
+               << " holds " << this->nnode() 
+               << " nodes of which " << this->nhalo_node()
+               << " are halo nodes \n while " << this->nhaloed_node()
+               << " are haloed nodes, and " << this->nshared_node()
+               << " are shared nodes." << std::endl;   
+
+    // Report number of halo(ed) and shared nodes with each domain 
+    // from the current process
+    for (int iproc=0;iproc<n_proc;iproc++)
+     {
+      // Get vector of halo elements by copy operation
+      Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(iproc));
+      Vector<GeneralisedElement*> haloed_elem_pt(
+       this->haloed_element_pt(iproc));
+      oomph_info << "With process " << iproc << ", there are " 
+                 << this->nhalo_node(iproc) << " halo nodes, and " << std::endl
+                 << this->nhaloed_node(iproc) << " haloed nodes, and " 
+                 << this->nshared_node(iproc) << " shared nodes" << std::endl
+                 <<  halo_elem_pt.size() << " halo elements and "
+                 <<  haloed_elem_pt.size() << " haloed elements\n"; 
+     }
+   }
+
 //  // Doc stats
 //  if (report_stats)
 //   {
@@ -4312,7 +4359,7 @@ void Mesh::get_halo_node_stats(double& av_number,
  unsigned nnod=this->nnode();
 
  std::ostringstream filename;
-
+ 
  // Doc the partitioning (only on processor 0)
  //-------------------------------------------
  if (doc_info.is_doc_enabled())
@@ -4455,23 +4502,84 @@ void Mesh::get_halo_node_stats(double& av_number,
   {
    backed_up_el_pt[e]=this->element_pt(e);
   }
-
+ 
+ // Info. used to re-generate the boundary element scheme after the
+ // deletion of elements not belonging to the current processor)
+ 
+ // Get the number of boundary elements before the deletion of non
+ // retained elements
+ const unsigned tmp_nboundary = this->nboundary();
+ Vector<unsigned> ntmp_boundary_elements(tmp_nboundary);
+ // In case that there are regions, also get the number of boundary
+ // elements in each region
+ Vector<Vector<unsigned> > ntmp_boundary_elements_in_region(tmp_nboundary);
+ // Also get the finite element version of the elements and back them
+ // up
+ Vector<FiniteElement*> backed_up_f_el_pt(nelem);
+ 
+ // Only do this if the mesh is a TriangleMeshBase
+ TriangleMeshBase* triangle_mesh_pt = dynamic_cast<TriangleMeshBase*>(this);
+ bool is_a_triangle_mesh_base_mesh = false;
+ if (triangle_mesh_pt!=0)
+  {
+   // Set the flag to indicate we are working with a TriangleMeshBase
+   // mesh
+   is_a_triangle_mesh_base_mesh = true;
+   
+   // Are there regions?
+   const unsigned n_regions = triangle_mesh_pt->nregion();
+   
+   // Loop over the boundaries
+   for (unsigned ib = 0; ib < tmp_nboundary; ib++)
+    {
+     // Get the number of boundary elements
+     ntmp_boundary_elements[ib] = this->nboundary_element(ib);
+     
+     // Resize the container
+     ntmp_boundary_elements_in_region[ib].resize(n_regions);
+     
+     // Loop over the regions
+     for (unsigned rr = 0 ; rr < n_regions; rr++)
+      {
+       // Get the region id
+       const unsigned region_id = 
+        static_cast<unsigned>(triangle_mesh_pt->region_attribute(rr));
+       
+       // Store the number of element in the region (notice we are
+       // using the region index not the region id to refer to the
+       // region)
+       ntmp_boundary_elements_in_region[ib][rr] = 
+        triangle_mesh_pt->nboundary_element_in_region(ib, region_id);
+       
+      } // for (rr < n_regions)
+     
+    } // for (ib < tmp_nboundary)
+   
+   for (unsigned e=0;e<nelem;e++)
+    {
+     // Get the finite element version of the elements and back them
+     // up
+     backed_up_f_el_pt[e] = this->finite_element_pt(e);
+    }
+   
+  } // if (triangle_mesh_pt!=0)
+ 
  // Flush the mesh storage
  this->flush_element_storage();
-
+ 
  // Delete any storage of external elements and nodes
  this->delete_all_external_storage();
-
+ 
  // Boolean to indicate which element is to be retained
  std::vector<bool> element_retained(nelem,false);
-
+ 
  // Storage for element numbers of root halo elements that will be
  // retained on current processor: root_halo_element[p][j]
  // stores the element number (in the order in which the elements are stored
  // in backed_up_el_pt) of the j-th root halo element with processor
  // p.
  Vector<Vector<int> > root_halo_element(n_proc);
-
+ 
  // Dummy entry to make sure we always have something to send
  for (int p=0;p<n_proc;p++)
   {
@@ -4481,7 +4589,7 @@ void Mesh::get_halo_node_stats(double& av_number,
  // Determine which elements are going to end up on which processor
  //----------------------------------------------------------------
  unsigned number_of_retained_elements=0;
-
+ 
  // Loop over all backed up elements
  nelem=backed_up_el_pt.size();
  for (unsigned e=0;e<nelem;e++)
@@ -4564,15 +4672,42 @@ void Mesh::get_halo_node_stats(double& av_number,
       } //End of testing for halo by virtue of shared nodes
     }//End of halo element conditions
   } //end of loop over elements
-
-
-// NOTE: No need to add additional layer of halo elements.
-//       Procedure for removing "overlooked" halo nodes in
-//       deals classify_halo_and_haloed_nodes() deals
-//       with the problem addressed here. [code that dealt with this
-//       problem at distribution stage has been removed]
-
-
+ 
+ // First check that the number of elements is greater than zero, when
+ // working with submeshes it may be possible that some of them have
+ // no elements (face element meshes) since those may have been
+ // deleted in "Problem::actions_before_distribute()"
+ if (nelem > 0)
+  {
+   // Check that we are working with a TriangleMeshBase mesh, if
+   // that is the case then we need to create shared boundaries
+   if (is_a_triangle_mesh_base_mesh)
+    {
+     // Creation of shared boundaries
+     // ------------------------------
+     // All processors share the same boundary id for the created
+     // shared boundary. We need all the elements on all processors,
+     // that is why this step is performed before the deletion of the
+     // elements not associated to the current processor. 
+     // N.B.: This applies only to unstructured meshes
+     this->create_shared_boundaries(comm_pt, element_domain, 
+                                    backed_up_el_pt,
+                                    backed_up_f_el_pt,
+                                    processors_associated_with_data, 
+                                    overrule_keep_as_halo_element_status);
+    } // if (is_a_triangle_mesh_base_mesh)
+  } // if (nelem > 0)
+ 
+ // NOTE: No need to add additional layer of halo elements.
+ //       Procedure for removing "overlooked" halo nodes in 
+ //       deals classify_halo_and_haloed_nodes() deals 
+ //       with the problem addressed here. [code that dealt with this
+ //       problem at distribution stage has been removed]
+ 
+ // Store the finite element pointer version of the elements that are
+ // about to be deleted, used to reset the boundary elements info
+ Vector<FiniteElement*> deleted_f_element_pt;
+ 
  // Copy the elements associated with the actual
  // current processor into its own permanent storage.
  // Do it in the order in which the elements appeared originally
@@ -4592,10 +4727,24 @@ void Mesh::get_halo_node_stats(double& av_number,
       {
        ref_el_pt->tree_pt()->flush_object();
       }
-
-     // Store pointer to the element that's about to be deleted
-     deleted_element_pt.push_back(el_pt);
-
+     
+     
+     // Store pointer to the element that's about to be deleted.
+     
+     // Only for structured meshes since this "deleted_element_pt"
+     // vector is used in the "problem" class to set null pointer to
+     // the deleted elements in the Base_mesh_element_pt structure
+     if (!is_a_triangle_mesh_base_mesh)
+      {
+       deleted_element_pt.push_back(el_pt);
+      } // if (!is_a_triangle_mesh_base_mesh)
+     
+     if (is_a_triangle_mesh_base_mesh)
+      {
+       // Store pointer to the finite element that's about to be deleted
+       deleted_f_element_pt.push_back(backed_up_f_el_pt[e]);
+      }
+     
      // Delete the element
      delete el_pt;
     }
@@ -4803,14 +4952,31 @@ void Mesh::get_halo_node_stats(double& av_number,
       }
     }
   }
-
-
+ 
+ 
  // Now remove the pruned nodes
  this->prune_dead_nodes();
-
- // And finally re-setup the boundary lookup scheme for elements
- this->setup_boundary_element_info();
-
+ 
+ 
+#ifdef OOMPH_HAS_TRIANGLE_LIB
+ if (is_a_triangle_mesh_base_mesh)
+  {
+   triangle_mesh_pt->
+    reset_boundary_element_info(ntmp_boundary_elements,
+                                ntmp_boundary_elements_in_region,
+                                deleted_f_element_pt);
+  } // if (tri_mesh_pt!=0)
+ else
+  {
+#endif // #ifdef OOMPH_HAS_TRIANGLE_LIB   
+   
+   // Temporarly set the mesh as distributed
+   this->setup_boundary_element_info();
+   
+#ifdef OOMPH_HAS_TRIANGLE_LIB
+  }
+#endif
+ 
  // Re-setup tree forest. (Call this every time even if
  // a (distributed) mesh has no elements on this processor.
  // We still need to participate in communication.)
@@ -8750,7 +8916,6 @@ void SolidMesh::set_lagrangian_nodal_coordinates()
 
    //The assumption here is that there must be fewer lagrangian coordinates
    //than eulerian (which must be true?)
-
    // Set (generalised) Lagrangian coords = (generalised) Eulerian coords
    for(unsigned k=0;k<n_lagrangian_type;k++)
     {
@@ -8761,6 +8926,7 @@ void SolidMesh::set_lagrangian_nodal_coordinates()
       }
     }
   }
+ 
 }
 
 

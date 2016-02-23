@@ -274,7 +274,8 @@ namespace oomph
    /// Can be adjusted later
    unsigned ndof_types() const
    {
-    return 1;
+    return 2;
+    //return 1;
    }
    
    /// \short Create a list of pairs for all unknowns in this element,
@@ -312,7 +313,8 @@ namespace oomph
           // store dof lookup in temporary pair: First entry in pair
           // is global equation number; second entry is dof type
           dof_lookup.first = this->eqn_number(local_unknown);
-          dof_lookup.second = 0;
+          dof_lookup.second = i;
+          //dof_lookup.second = DIM;
           
           // add to list
           dof_lookup_list.push_front(dof_lookup);

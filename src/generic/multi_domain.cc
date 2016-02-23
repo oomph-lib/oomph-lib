@@ -2601,8 +2601,7 @@ namespace Multi_domain_functions
 
    // Loop over meshes
    for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
-    {
-
+    {      
      // Number of local elements
      unsigned n_element=mesh_pt[i_mesh]->nelement();
      
@@ -2662,7 +2661,78 @@ namespace Multi_domain_functions
              
              // Perform locate_zeta locally for this coordinate
              bool called_within_spiral=true;
-                          
+             
+             // Which version of spiraling locate zeta should we call?
+             // The logic is to call the specialised version
+             // "my_spiraling_locate_zeta()" only if we are running in
+             // serial AND doing the setup of multidomain for
+             // projection, any other case we call the original
+             // "spiraling_locate_zeta method()"
+#ifdef OOMPH_HAS_MPI
+             // We need to check this to avoid segfault when checking
+             // for number of processors if mpi has not been
+             // initialised
+             if (MPI_Helpers::mpi_has_been_initialised())
+              {
+               if (MPI_Helpers::communicator_pt()->nproc()>1)
+                {
+                  mesh_geom_obj_pt[i_mesh]->
+                   spiraling_locate_zeta(x_global,
+                                         sub_geom_obj_pt,s_ext,
+                                         called_within_spiral);
+                }
+               else
+                {
+                 if (!Setup_multi_domain_for_projection)
+                  {
+                   mesh_geom_obj_pt[i_mesh]->
+                    spiraling_locate_zeta(x_global,
+                                          sub_geom_obj_pt,s_ext,
+                                          called_within_spiral);
+                  }
+                 else
+                  {
+                   mesh_geom_obj_pt[i_mesh]->
+                     my_spiraling_locate_zeta(x_global,
+                                              sub_geom_obj_pt,s_ext,
+                                              called_within_spiral);
+                  }
+                }
+              }
+             else
+              {
+               if (!Setup_multi_domain_for_projection)
+                {
+                 mesh_geom_obj_pt[i_mesh]->
+                  spiraling_locate_zeta(x_global,
+                                        sub_geom_obj_pt,s_ext,
+                                        called_within_spiral);
+                }
+               else
+                {
+                 mesh_geom_obj_pt[i_mesh]->
+                  my_spiraling_locate_zeta(x_global,
+                                           sub_geom_obj_pt,s_ext,
+                                           called_within_spiral);
+                }
+              }
+#else
+             if (!Setup_multi_domain_for_projection)
+              {
+               mesh_geom_obj_pt[i_mesh]->
+                spiraling_locate_zeta(x_global,
+                                      sub_geom_obj_pt,s_ext,
+                                      called_within_spiral);
+              }
+             else
+              {
+               mesh_geom_obj_pt[i_mesh]->
+                my_spiraling_locate_zeta(x_global,
+                                         sub_geom_obj_pt,s_ext,
+                                         called_within_spiral);
+              }
+#endif // #ifdef OOMPH_HAS_MPI
+             
              // Which version of spiraling locate zeta should we call?
              // The logic is to call the specialised version
              // "my_spiraling_locate_zeta()" only if we are running in
@@ -2819,8 +2889,7 @@ namespace Multi_domain_functions
        e_count++;
 
       } // end loop over local elements
-
-
+     
      // Mark end of mesh data in flat packed array
      for (unsigned i=0;i<Dim;i++)
       {

@@ -219,9 +219,27 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
    result.build(rhs.distribution_pt(),0.0);
   }
 
- // setup the solver
- solver_setup(matrix_pt);
-
+ if (Use_iterative_solver_as_preconditioner)
+  {
+   // Only call the setup method if this is the first time we call the
+   // solve method
+   if (First_time_solve_when_used_as_preconditioner)
+    {
+     // setup the solver
+     solver_setup(matrix_pt);
+     // Do not call the setup again
+     First_time_solve_when_used_as_preconditioner=false;
+     // Enable resolve since we are not going to build the solver, the
+     // matrix and the wrapper to the preconditioner again
+     Enable_resolve=true;
+    }
+  }
+ else
+  {
+   // setup the solver
+   solver_setup(matrix_pt);
+  }
+ 
  // create Epetra version of r
  Epetra_Vector* epetra_r_pt = TrilinosEpetraHelpers::
   create_distributed_epetra_vector(rhs);
@@ -586,7 +604,7 @@ void TrilinosAztecOOSolver::solve_using_AztecOO(Epetra_Vector* &rhs_pt,
  // set the vectors
  AztecOO_solver_pt->SetLHS(soln_pt);
  AztecOO_solver_pt->SetRHS(rhs_pt);
-
+ 
  // perform solve
  AztecOO_solver_pt->Iterate(Max_iter, Tolerance);
 

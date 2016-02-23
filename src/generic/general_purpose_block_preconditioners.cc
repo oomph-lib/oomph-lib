@@ -274,7 +274,7 @@ namespace oomph
  {
   // Cache number of block types
   unsigned n_block = this->nblock_types();
-
+  
   //
   int start, end, step;
   if(Upper_triangular)

@@ -321,11 +321,11 @@ namespace oomph
     }
    
    double t_create_bins_of_object = TimingHelpers::timer();
-
+   
    // Create the bin structure, passing in the number of elements in 
    // the mesh
    create_bins_of_objects(mesh_pt->nelement());
-
+   
    if (Multi_domain_functions::Doc_stats)
     {
    
@@ -337,22 +337,59 @@ namespace oomph
    // Do some stats
    if (Multi_domain_functions::Doc_stats)
     {
-     unsigned n_bin=0;
-     unsigned max_n_entry=0;
-     unsigned min_n_entry=UINT_MAX;
-     unsigned tot_n_entry=0;
-     unsigned n_empty=0;
-     get_fill_stats(n_bin,max_n_entry,min_n_entry,
-                    tot_n_entry,n_empty);
+     unsigned nbin=0;
+     unsigned max_entry=0;
+     unsigned min_entry=UINT_MAX;
+     unsigned tot_entry=0;
+     unsigned nempty=0;
+     get_fill_stats(nbin,max_entry,min_entry,
+                    tot_entry,nempty);
      
+     double average_entries = double(tot_entry)/double(nbin);
      oomph_info 
-      << "After creation of bins: nbin, nempty, min, max, av entries: "
-      << n_bin << " " 
-      << n_empty << " " 
-      << min_n_entry << " " 
-      << max_n_entry << " " 
-      << double(tot_n_entry)/double(n_bin) << " "
-      << std::endl;
+       << "After creation of bins: nbin:("<<nbin<<")"
+       << " nempty:("<<nempty<<")"
+       << " min:("<<min_entry<<")"
+       << " max:("<<max_entry<<")"
+       << " av entries:("<<average_entries<<")"
+       << std::endl;
+     
+#ifdef OOMPH_HAS_MPI
+     if (MPI_Helpers::mpi_has_been_initialised() && 
+         mesh_pt->is_mesh_distributed())
+      {
+       // Get the communicator
+       OomphCommunicator* comm_pt = Communicator_pt;
+       unsigned global_min_entry = 0;
+       unsigned global_max_entry = 0;
+       unsigned global_max_n_empty = 0;
+       double global_max_average_entries = 0;
+       
+       // Get the minimum and maximum time for projection
+       MPI_Reduce(&min_entry, &global_min_entry,
+                  1, MPI_UNSIGNED, MPI_MIN, 0, comm_pt->mpi_comm());
+       MPI_Reduce(&max_entry, &global_max_entry,
+                  1, MPI_UNSIGNED, MPI_MAX, 0, comm_pt->mpi_comm());
+       MPI_Reduce(&nempty, &global_max_n_empty,
+                  1, MPI_UNSIGNED, MPI_MAX, 0, comm_pt->mpi_comm());
+       MPI_Reduce(&average_entries, &global_max_average_entries,
+                  1, MPI_DOUBLE, MPI_MAX, 0, comm_pt->mpi_comm());
+       
+       if (comm_pt->my_rank() == 0)
+        {
+         oomph_info 
+          << "After creation of bins: (GLOBAL)"
+          << " n_empty:("<<global_max_n_empty<<")"
+          << " min:("<<global_min_entry<<")"
+          << " max:("<<global_max_entry<<")"
+          << " av.entries:("<<global_max_average_entries<<")"
+          << std::endl;
+         
+        }
+       
+      }
+#endif // #ifdef OOMPH_HAS_MPI
+     
     }
    
  }
@@ -468,7 +505,7 @@ namespace oomph
   // Tolerance for "out of bin" test
   double tol=1.0e-10;
 
-  unsigned nvertex=pow(2,n_lagrangian);
+  unsigned nvertex=(int)pow(2,n_lagrangian);
   Vector<Vector<double> > bin_vertex(nvertex);
   for (unsigned j=0;j<nvertex;j++)
    {
@@ -1417,7 +1454,7 @@ namespace oomph
    
    // Initialise the structure that keep tracks of the occupided bins
    Bin_object_coord_pairs.initialise(ntotalbin);
-    
+   
    // Issue warning about small number of bins
    if (!Suppress_warning_about_small_number_of_bins)
     {
@@ -1494,10 +1531,10 @@ namespace oomph
         }
       }
     }
-
+   
    ///Loop over subobjects (elements) to decide which bin they belong in...
    unsigned n_sub=Sub_geom_object_pt.size();
-
+   
    // Some stats
    if (Multi_domain_functions::Doc_stats)
     {
@@ -1603,7 +1640,6 @@ namespace oomph
                 << std::endl;
     }
    
-
    // Finally copy filled vectors across -- wiping memory from temporary
    // map as we go along is good and wouldn't be possible if we 
    // filled the SparseVector's internal map within that class.
@@ -1932,210 +1968,7 @@ namespace oomph
    }
 
  }
-  
-  
-  // Original version
-#if 0
-//========================================================================
-///Calculate the bin numbers of all the neighbours to "bin" given the level
-//========================================================================
- void MeshAsGeomObject::get_neighbouring_bins_helper(
-  const unsigned& bin, const unsigned& level,
-  Vector<unsigned>& neighbour_bin,
-  const bool &only_use_filled_bins)
-  {
-   const unsigned n_lagrangian = this->nlagrangian();
-   // This will be different depending on the number of Lagrangian
-   // coordinates
-   if (n_lagrangian==1)
-    {
-     // Reserve memory for the container where we return the indices
-     // of the neighbouring bins (2 bins max, left and right)
-     neighbour_bin.reserve(2);
-     
-     // Single "loop" in one direction - always a vector of max size 2
-     unsigned nbr_bin_left=bin-level;
-     if ((nbr_bin_left>=0) && (nbr_bin_left<Nbin_x))
-      {
-       unsigned nbr_bin=nbr_bin_left;
-       if (only_use_filled_bins)
-         {
-           if (Bin_object_coord_pairs.has_entry(nbr_bin))
-             {
-               neighbour_bin.push_back(nbr_bin);
-             }
-         }
-       else
-         {
-           neighbour_bin.push_back(nbr_bin);
-         }
-      }
-     unsigned nbr_bin_right=bin+level;
-     if ((nbr_bin_right>=0) && (nbr_bin_right<Nbin_x) && 
-         (nbr_bin_right!=nbr_bin_left))
-      {
-       unsigned nbr_bin=nbr_bin_right;
-       if (only_use_filled_bins)
-        {
-         if (Bin_object_coord_pairs.has_entry(nbr_bin))
-          {
-           neighbour_bin.push_back(nbr_bin);
-          }
-        }
-       else
-        {
-         neighbour_bin.push_back(nbr_bin);
-        }
-      }
-    }
-   else if (n_lagrangian==2)
-    {
-     // Reserve memory for the container where we return the indices
-     // of the neighbouring bins
-     const unsigned n_max_neighbour_bins = 8*level;
-     neighbour_bin.reserve(n_max_neighbour_bins);
-     
-     unsigned n_total_bin=Nbin_x*Nbin_y;
 
-     // Which row of the bin structure is the current bin on?
-     // This is just given by the integer answer of dividing bin
-     // by Nbin_x (the number of bins in a single row)
-     // e.g. in a 6x6 grid, bins 6 through 11 would all have bin_row=1
-     unsigned bin_row=bin/Nbin_x;
-
-     // The neighbour_bin vector contains all bin numbers at the 
-     // specified "distance" (level) away from the current bin
-
-     // Row/column length
-     unsigned n_length=(level*2)+1;
-
-     // Loop over the rows
-     for (unsigned j=0;j<n_length;j++)
-      {
-       // Loop over the columns
-       for (unsigned i=0;i<n_length;i++)
-        {
-         // Only do this for all the first & last row, and the
-         // end points of every other row
-         if ((j==0) || (j==n_length-1) || (i==0) || (i==n_length-1))
-          {
-           unsigned nbr_bin=bin-level+i-((level-j)*Nbin_x);
-           // This number might fall on the wrong
-           // row of the bin structure; this needs to be tested
-
-           // Which row is this number on? (see above)
-           unsigned nbr_bin_row=nbr_bin/Nbin_x;
-
-           // Which row should it be on?
-           unsigned row=bin_row-level+j;
-
-           // These numbers for the rows must match; 
-           // if it is then add nbr_bin to the neighbour scheme
-           // (The bin number must also be greater than zero
-           //  and less than the total number of bins)
-           if ((row==nbr_bin_row) && (nbr_bin>=0) && (nbr_bin<n_total_bin))
-            {
-             if (only_use_filled_bins)
-              {
-               if (Bin_object_coord_pairs.has_entry(nbr_bin))
-                {
-                 neighbour_bin.push_back(nbr_bin);
-                }
-              }
-             else
-              {
-               neighbour_bin.push_back(nbr_bin);
-              }
-            }  
-          }
-        }
-
-      }
-    }
-   else if (n_lagrangian==3)
-    {
-     // Reserve memory for the container where we return the indices
-     // of the neighbouring bins
-     const unsigned n_max_neighbour_bins = 
-      8*level*(3+2*(level-1))+2*(2*(level-1)+1)*(2*(level-1)+1);
-     neighbour_bin.reserve(n_max_neighbour_bins);
-     
-     unsigned n_total_bin=Nbin_x*Nbin_y*Nbin_z;
-     
-     // Which layer of the bin structure is the current bin on?
-     // This is just given by the integer answer of dividing bin
-     // by Nbin_x*Nbin_y (the number of bins in a single layer
-     // e.g. in a 6x6x6 grid, bins 72 through 107 would all have bin_layer=2
-     unsigned bin_layer=bin/(Nbin_x*Nbin_y);
-
-     // Which row in this layer is the bin number on?
-     unsigned bin_row=(bin/Nbin_x)-(bin_layer*Nbin_y);
-
-     // The neighbour_bin vector contains all bin numbers at the 
-     // specified "distance" (level) away from the current bin
-
-     // Row/column/layer length
-     unsigned n_length=(level*2)+1;
-
-     // Loop over the layers
-     for (unsigned k=0;k<n_length;k++)
-      {
-       // Loop over the rows
-       for (unsigned j=0;j<n_length;j++)
-        {
-         // Loop over the columns
-         for (unsigned i=0;i<n_length;i++)
-          {
-           // Only do this for the end points of every row/layer/column
-           if ((k==0) || (k==n_length-1) || (j==0) || 
-               (j==n_length-1) || (i==0) || (i==n_length-1))
-            {
-             unsigned nbr_bin=bin-level+i-((level-j)*Nbin_x)-
-              ((level-k)*Nbin_x*Nbin_y);
-             // This number might fall on the wrong
-             // row or layer of the bin structure; this needs to be tested
-
-             // Which layer is this number on?
-             unsigned nbr_bin_layer=nbr_bin/(Nbin_x*Nbin_y);
-
-             // Which row is this number on? (see above)
-             unsigned nbr_bin_row=(nbr_bin/Nbin_x)-(nbr_bin_layer*Nbin_y);
-
-             // Which layer and row should it be on, given level?
-             unsigned layer=bin_layer-level+k;
-             unsigned row=bin_row-level+j;
-
-             // These layers and rows must match up:
-             // if so then add nbr_bin to the neighbour schemes
-             // (The bin number must also be greater than zero
-             //  and less than the total number of bins)
-             if ((row==nbr_bin_row) && (layer==nbr_bin_layer)
-                 && (nbr_bin>=0) && (nbr_bin<n_total_bin))
-              {
-               if (only_use_filled_bins)
-                {
-                 if (Bin_object_coord_pairs.has_entry(nbr_bin))
-                  {
-                   neighbour_bin.push_back(nbr_bin);
-                  }
-                }
-               else
-                {
-                 neighbour_bin.push_back(nbr_bin);
-                }
-              }  
-            }
-
-          }
-        }
-      }
-
-    }
-  }
-#endif // #if 0
-  
-  // My version
-#if 1
 //========================================================================
 ///Calculate the bin numbers of all the neighbours to "bin" given the level
 //========================================================================
@@ -2462,203 +2295,5 @@ namespace oomph
 
     }
   }
-#endif // #if 1
-
-#if 0
-//========================================================================
-///Calculate the bin numbers of all the neighbours to "bin" given the level
-//========================================================================
- void MeshAsGeomObject::get_neighbouring_bins_helper(
-  const unsigned& bin, const unsigned& level,
-  Vector<unsigned>& neighbour_bin,
-  const bool &only_use_filled_bins)
-  {
-    // Get access to the map storing the bins
-    const std::map<unsigned,Vector<std::pair<FiniteElement*,Vector<double> > > >* map_pt=Bin_object_coord_pairs.map_pt();
-    // A typedef for the iterator to find the bin
-    typedef std::map<unsigned,Vector<std::pair<FiniteElement*,Vector<double> > > >::const_iterator IT;
-   const unsigned n_lagrangian = this->nlagrangian();
-   // This will be different depending on the number of Lagrangian
-   // coordinates
-   if (n_lagrangian==1)
-    {
-     // Single "loop" in one direction - always a vector of max size 2
-     unsigned nbr_bin_left=bin-level;
-     if ((nbr_bin_left>=0) && (nbr_bin_left<Nbin_x))
-      {
-       unsigned nbr_bin=nbr_bin_left;
-       if (only_use_filled_bins)
-         {
-           // Try to find the bin in the map
-           IT it = map_pt->find(nbr_bin);
-           if (it!=map_pt->end())
-             {
-               neighbour_bin.push_back(nbr_bin);
-             }
-         }
-       else
-         {
-           neighbour_bin.push_back(nbr_bin);
-         }
-      }
-     unsigned nbr_bin_right=bin+level;
-     if ((nbr_bin_right>=0) && (nbr_bin_right<Nbin_x) && // cgj: first condition is always true 
-         (nbr_bin_right!=nbr_bin_left))
-      {
-       unsigned nbr_bin=nbr_bin_right;
-       if (only_use_filled_bins)
-        {
-         // Try to find the bin in the map
-         IT it = map_pt->find(nbr_bin);
-         if (it!=map_pt->end())
-          {
-           neighbour_bin.push_back(nbr_bin);
-          }
-        }
-       else
-        {
-         neighbour_bin.push_back(nbr_bin);
-        }
-      }
-    }
-   else if (n_lagrangian==2)
-    {
-     unsigned n_total_bin=Nbin_x*Nbin_y;
-
-     // Which row of the bin structure is the current bin on?
-     // This is just given by the integer answer of dividing bin
-     // by Nbin_x (the number of bins in a single row)
-     // e.g. in a 6x6 grid, bins 6 through 11 would all have bin_row=1
-     unsigned bin_row=bin/Nbin_x;
-
-     // The neighbour_bin vector contains all bin numbers at the 
-     // specified "distance" (level) away from the current bin
-
-     // Row/column length
-     unsigned n_length=(level*2)+1;
-
-     // Loop over the rows
-     for (unsigned j=0;j<n_length;j++)
-      {
-       // Loop over the columns
-       for (unsigned i=0;i<n_length;i++)
-        {
-         // Only do this for all the first & last row, and the
-         // end points of every other row
-         if ((j==0) || (j==n_length-1) || (i==0) || (i==n_length-1))
-          {
-           unsigned nbr_bin=bin-level+i-((level-j)*Nbin_x);
-           // This number might fall on the wrong
-           // row of the bin structure; this needs to be tested
-
-           // Which row is this number on? (see above)
-           unsigned nbr_bin_row=nbr_bin/Nbin_x;
-
-           // Which row should it be on?
-           unsigned row=bin_row-level+j;
-
-           // These numbers for the rows must match; 
-           // if it is then add nbr_bin to the neighbour scheme
-           // (The bin number must also be greater than zero
-           //  and less than the total number of bins)
-           if ((row==nbr_bin_row) && (nbr_bin>=0) && (nbr_bin<n_total_bin)) // cgj: nbr_bin always >= 0
-            {
-             if (only_use_filled_bins)
-              {
-               // Try to find the bin in the map
-               IT it = map_pt->find(nbr_bin);
-               if (it!=map_pt->end())
-                {
-                 neighbour_bin.push_back(nbr_bin);
-                }
-              }
-             else
-              {
-               neighbour_bin.push_back(nbr_bin);
-              }
-            }  
-          }
-        }
-
-      }
-    }
-   else if (n_lagrangian==3)
-    {
-     unsigned n_total_bin=Nbin_x*Nbin_y*Nbin_z;
-
-     // Which layer of the bin structure is the current bin on?
-     // This is just given by the integer answer of dividing bin
-     // by Nbin_x*Nbin_y (the number of bins in a single layer
-     // e.g. in a 6x6x6 grid, bins 72 through 107 would all have bin_layer=2
-     unsigned bin_layer=bin/(Nbin_x*Nbin_y);
-
-     // Which row in this layer is the bin number on?
-     unsigned bin_row=(bin/Nbin_x)-(bin_layer*Nbin_y);
-
-     // The neighbour_bin vector contains all bin numbers at the 
-     // specified "distance" (level) away from the current bin
-
-     // Row/column/layer length
-     unsigned n_length=(level*2)+1;
-
-     // Loop over the layers
-     for (unsigned k=0;k<n_length;k++)
-      {
-       // Loop over the rows
-       for (unsigned j=0;j<n_length;j++)
-        {
-         // Loop over the columns
-         for (unsigned i=0;i<n_length;i++)
-          {
-           // Only do this for the end points of every row/layer/column
-           if ((k==0) || (k==n_length-1) || (j==0) || 
-               (j==n_length-1) || (i==0) || (i==n_length-1))
-            {
-             unsigned nbr_bin=bin-level+i-((level-j)*Nbin_x)-
-              ((level-k)*Nbin_x*Nbin_y);
-             // This number might fall on the wrong
-             // row or layer of the bin structure; this needs to be tested
-
-             // Which layer is this number on?
-             unsigned nbr_bin_layer=nbr_bin/(Nbin_x*Nbin_y);
-
-             // Which row is this number on? (see above)
-             unsigned nbr_bin_row=(nbr_bin/Nbin_x)-(nbr_bin_layer*Nbin_y);
-
-             // Which layer and row should it be on, given level?
-             unsigned layer=bin_layer-level+k;
-             unsigned row=bin_row-level+j;
-
-             // These layers and rows must match up:
-             // if so then add nbr_bin to the neighbour schemes
-             // (The bin number must also be greater than zero
-             //  and less than the total number of bins)
-             if ((row==nbr_bin_row) && (layer==nbr_bin_layer)
-                 && (nbr_bin>=0) && (nbr_bin<n_total_bin)) // cgj: nbr_bin always >=0
-              {
-               if (only_use_filled_bins)
-                {
-                 // Try to find the bin in the map
-                 IT it = map_pt->find(nbr_bin);
-                 if (it!=map_pt->end())
-                  {
-                   neighbour_bin.push_back(nbr_bin);
-                  }
-                }
-               else
-                {
-                 neighbour_bin.push_back(nbr_bin);
-                }
-              }  
-            }
-
-          }
-        }
-      }
-
-    }
-  }
-#endif // #if 0
  
-
 }

@@ -1648,6 +1648,11 @@ ContactProblem<ELEMENT>::ContactProblem()
  
 #else
 
+ //hierher
+ // Disable the use of an iterative solver for the projection
+ // stage during mesh adaptation
+ Bulk_mesh_pt->disable_iterative_solver_for_projection();
+
  // Set error estimator for bulk mesh
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
  Bulk_mesh_pt->spatial_error_estimator_pt()=error_estimator_pt;

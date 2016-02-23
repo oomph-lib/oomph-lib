@@ -45,8 +45,6 @@
 #endif
 
 
-
-
 // Flag to allow switching between vector-based multi-domain lookup
 // schemes and the old version (kept alive for now...)
 #define USE_VECTOR_BASED_MD

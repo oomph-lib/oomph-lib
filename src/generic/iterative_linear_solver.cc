@@ -1500,6 +1500,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
                                  const DoubleVector &rhs,
                                  DoubleVector &solution)
 {
+  
  // Get number of dofs
  unsigned n_dof=rhs.nrow();
 

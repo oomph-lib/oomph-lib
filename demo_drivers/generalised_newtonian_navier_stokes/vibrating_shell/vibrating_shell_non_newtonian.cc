@@ -904,8 +904,7 @@ VibratingShellProblem<ELEMENT>::VibratingShellProblem()
  Fluid_mesh_pt =
    new RefineableSolidTriangleMesh<ELEMENT>(
     triangle_mesh_parameters,this->time_stepper_pt());
-
-
+ 
  // Increase number of bins to reduce bias/drift in area targets
  Fluid_mesh_pt->nbin_x_for_area_transfer()=500;
  Fluid_mesh_pt->nbin_y_for_area_transfer()=500;

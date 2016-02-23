@@ -83,6 +83,13 @@ class IterativeLinearSolver : public LinearSolver
    Setup_preconditioner_before_solve = true;
 
    Throw_error_after_max_iter = false;
+   
+   // By default the iterative solver is not used as preconditioner
+   Use_iterative_solver_as_preconditioner = false;
+
+   // Indicates whether this is the first time we call the solve
+   // method
+   First_time_solve_when_used_as_preconditioner = true;
   }    
  
  /// Broken copy constructor
@@ -190,6 +197,18 @@ class IterativeLinearSolver : public LinearSolver
  void disable_error_after_max_iter()
  {Throw_error_after_max_iter = false;}
  
+ /// Enables the iterative solver be used as preconditioner (when
+ /// calling the solve method it bypass the setup solver method --
+ /// currently only used by Trilinos solver ---)
+ void enable_iterative_solver_as_preconditioner()
+ {Use_iterative_solver_as_preconditioner=true;}
+ 
+ /// Disables the iterative solver be used as preconditioner (when
+ /// calling the solve method it bypass the setup solver method --
+ /// currently only used by Trilinos solver ---)
+ void disable_iterative_solver_as_preconditioner()
+ {Use_iterative_solver_as_preconditioner=false;}
+ 
   protected:
 
  /// \short Flag indicating if the convergence history is to be
@@ -229,6 +248,14 @@ class IterativeLinearSolver : public LinearSolver
  /// \short Should we throw an error instead of just returning when we hit
  /// the max iterations?
  bool Throw_error_after_max_iter;
+ 
+ /// \short Use the iterative solver as preconditioner
+ bool Use_iterative_solver_as_preconditioner;
+
+ /// When the iterative solver is used a preconditioner then we call
+ /// the setup of solver method only once (the first time the solve
+ /// method is called)
+ bool First_time_solve_when_used_as_preconditioner;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -731,7 +758,7 @@ class GMRES : public IterativeLinearSolver
     // delete it
     Matrix_can_be_deleted=false;
    }
-
+  
   // Call the helper function
   this->solve_helper(matrix_pt,rhs,solution);
  }
@@ -796,12 +823,12 @@ class GMRES : public IterativeLinearSolver
  void clean_up_memory()
   {
    if ((Matrix_pt!=0)&&(Matrix_can_be_deleted))
-    {
+     {
      delete Matrix_pt;
      Matrix_pt=0;
     }
   }
-
+ 
  /// Helper function to update the result vector
  void update(const unsigned& k, const Vector<Vector<double> >& H, 
              const Vector<double>& s, const Vector<DoubleVector>& v,

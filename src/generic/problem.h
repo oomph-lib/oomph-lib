@@ -951,6 +951,12 @@ public:
 
   public:
 
+ /// Enable problem distributed
+ void enable_problem_distributed() {Problem_has_been_distributed = true; }
+
+ /// Disable problem distributed
+ void disable_problem_distributed() {Problem_has_been_distributed = false; }
+
  /// \short Set default first and last elements for parallel assembly
  /// of non-distributed problem.
  void set_default_first_and_last_element_for_assembly();
@@ -1935,7 +1941,6 @@ public:
  /// \short Dump refinement pattern of all refineable meshes and all generic
  /// Problem data to file for restart.
  virtual void dump(std::ofstream& dump_file) const;
-
  
  /// \short Dump refinement pattern of all refineable meshes and all generic
  /// Problem data to file for restart. 
@@ -1952,7 +1957,7 @@ public:
 #endif
   dump(dump_stream);
  }
-
+ 
 #ifdef OOMPH_HAS_MPI
 
  /// \short Get pointers to all possible halo data indexed by global

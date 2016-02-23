@@ -175,6 +175,10 @@ class TriangleMeshCurveSection
  TriangleMeshCurveSection() :
   Initial_vertex_connected(false),
   Final_vertex_connected(false),
+#ifdef OOMPH_HAS_MPI
+  Initial_vertex_connected_suspended(false),
+  Final_vertex_connected_suspended(false),
+#endif
   Initial_vertex_connected_to_curviline(false),
   Final_vertex_connected_to_curviline(false),
   Refinement_tolerance(0.08),
@@ -190,10 +194,14 @@ class TriangleMeshCurveSection
  /// to the number of straight-line segments in triangle
  /// representation.
  virtual unsigned nsegment() const = 0;
-
+ 
  /// Boundary id
  virtual unsigned boundary_id()const = 0;
-
+ 
+ /// Boundary chunk (Used when a boundary is represented by more
+ /// than one polyline
+ virtual unsigned boundary_chunk()const = 0;
+ 
  /// Number of vertices
  virtual unsigned nvertex() const = 0;
 
@@ -355,6 +363,35 @@ class TriangleMeshCurveSection
  void unset_initial_vertex_connected()
   {Initial_vertex_connected = false;}
 
+ 
+#ifdef OOMPH_HAS_MPI
+ /// Set the initial vertex connection as suspended, it will be
+ /// resumed when the method to resume the connections is called
+ /// This method is only used in a distributed context, when the
+ /// boundary to connect is no longer part of the domain in the
+ /// processor
+ void suspend_initial_vertex_connected()
+ {
+  if (Initial_vertex_connected)
+   {
+    Initial_vertex_connected = false;
+    Initial_vertex_connected_suspended = true;
+   }
+ }
+ 
+ /// Resumes the initial vertex connection, it may be that after load
+ /// balancing the boundary to which the connection was suspended be part
+ /// of the domain
+ void resume_initial_vertex_connected()
+ {
+  if (Initial_vertex_connected_suspended)
+   {
+    Initial_vertex_connected = true;
+    Initial_vertex_connected_suspended = false;
+   }
+ }
+#endif
+
  /// Test whether final vertex is connected or not
  bool is_final_vertex_connected() const
  {return Final_vertex_connected;}
@@ -366,6 +403,34 @@ class TriangleMeshCurveSection
  /// Sets the final vertex as non connected
  void unset_final_vertex_connected()
   {Final_vertex_connected = false;}
+
+#ifdef OOMPH_HAS_MPI
+ /// Set the final vertex connection as suspended, it will be
+ /// resumed when the method to resume the connections is called
+ /// This method is only used in a distributed context, when the
+ /// boundary to connect is no longer part of the domain in the
+ /// processor
+ void suspend_final_vertex_connected()
+ {
+  if (Final_vertex_connected)
+   {
+    Final_vertex_connected = false;
+    Final_vertex_connected_suspended = true;
+   }
+ }
+ 
+ /// Resumes the final vertex connection, it may be that after load
+ /// balancing the boundary to which the connection was suspended be part
+ /// of the domain
+ void resume_final_vertex_connected()
+ {
+  if (Final_vertex_connected_suspended)
+   {
+    Final_vertex_connected = true;
+    Final_vertex_connected_suspended = false;
+   }
+ }
+#endif
 
  /// Gets the id to which the initial end is connected
  unsigned initial_vertex_connected_bnd_id() const
@@ -382,7 +447,15 @@ class TriangleMeshCurveSection
  /// Sets the vertex number to which the initial end is connected
  unsigned &initial_vertex_connected_n_vertex()
  {return Initial_vertex_connected_n_vertex;}
-
+ 
+ /// Gets the boundary chunk to which the initial end is connected
+ unsigned initial_vertex_connected_n_chunk() const
+ {return Initial_vertex_connected_n_chunk;}
+ 
+ /// Sets the boundary chunk to which the initial end is connected
+ unsigned &initial_vertex_connected_n_chunk()
+ {return Initial_vertex_connected_n_chunk;}
+ 
  /// Gets the id to which the final end is connected
  unsigned final_vertex_connected_bnd_id() const
  {return Final_vertex_connected_bnd_id;}
@@ -395,10 +468,18 @@ class TriangleMeshCurveSection
  unsigned final_vertex_connected_n_vertex() const
  {return Final_vertex_connected_n_vertex;}
 
- /// Gets the vertex number to which the initial end is connected
+ /// Gets the vertex number to which the final end is connected
  unsigned &final_vertex_connected_n_vertex()
  {return Final_vertex_connected_n_vertex;}
 
+ /// Gets the boundary chunk to which the final end is connected
+ unsigned final_vertex_connected_n_chunk() const
+ {return Final_vertex_connected_n_chunk;}
+ 
+ /// Sets the boundary chunk to which the final end is connected
+ unsigned &final_vertex_connected_n_chunk()
+ {return Final_vertex_connected_n_chunk;}
+ 
  /// Test whether the initial vertex is connected to a curviline
  bool is_initial_vertex_connected_to_curviline() const
  {return Initial_vertex_connected_to_curviline;}
@@ -423,21 +504,32 @@ class TriangleMeshCurveSection
  void unset_final_vertex_connected_to_curviline()
  {Final_vertex_connected_to_curviline = false;}
 
- /// \short Gets the s value to which the initial end
- /// is connected
+ /// \short Gets the s value to which the initial end is connected
  double initial_s_connection_value() const
  {return Initial_s_connection_value;}
 
- /// \short Gets the s value to which the final end
- /// is connected
+ /// \short Sets the s value to which the initial end is connected
+ double &initial_s_connection_value()
+ {return Initial_s_connection_value;}
+
+ /// \short Gets the s value to which the final end is connected
  double final_s_connection_value() const
  {return Final_s_connection_value;}
-
+ 
+ /// \short Sets the s value to which the final end is connected
+ double &final_s_connection_value()
+ {return Final_s_connection_value;}
+ 
  /// \short Gets the tolerance value for connections among
  /// curvilines
  double tolerance_for_s_connection() const
  {return Tolerance_for_s_connection;}
-
+ 
+ /// \short Sets the tolerance value for connections among
+ /// curvilines
+ double &tolerance_for_s_connection()
+ {return Tolerance_for_s_connection;}
+ 
 protected:
 
  /// \short Used for stating if the initial end is connected
@@ -448,20 +540,41 @@ protected:
  /// to another boundary
  bool Final_vertex_connected;
 
+ 
+#ifdef OOMPH_HAS_MPI
+ /// \short Indicates if the connection is suspended because the
+ /// boundary to connect is no longer part of the domain (only used in
+ /// a distributed context)
+ bool Initial_vertex_connected_suspended;
+ 
+ /// \short Indicates if the connection is suspended because the
+ /// boundary to connect is no longer part of the domain (only used in
+ /// a distributed context)
+ bool Final_vertex_connected_suspended;
+#endif
+
  /// Stores the id to which the initial end is connected
  unsigned Initial_vertex_connected_bnd_id;
 
  /// \short Stores the vertex number used for connection with
  /// the initial end
  unsigned Initial_vertex_connected_n_vertex;
-
+ 
+ /// \short Stores the chunk number of the boundary to which is
+ /// connected th initial end
+ unsigned Initial_vertex_connected_n_chunk;
+ 
  /// Stores the id to which the initial end is connected
  unsigned Final_vertex_connected_bnd_id;
 
  /// \short Stores the vertex number used for connection with
  /// the final end
  unsigned Final_vertex_connected_n_vertex;
-
+ 
+ /// \short Stores the chunk number of the boundary to which is
+ /// connected th initial end
+ unsigned Final_vertex_connected_n_chunk;
+ 
  /// States if the initial vertex is connected to a curviline
  bool Initial_vertex_connected_to_curviline;
 
@@ -481,14 +594,16 @@ protected:
 
   private:
  
- /// Tolerance for refinement of curve sections (neg if refinement is disabled)
+ /// Tolerance for refinement of curve sections (neg if refinement is
+ /// disabled)
  double Refinement_tolerance;
  
- /// Tolerance for unrefinement of curve sections (neg if refinement is disabled)
+ /// Tolerance for unrefinement of curve sections (neg if refinement
+ /// is disabled)
  double Unrefinement_tolerance;
 
- /// Maximum allowed distance between two vertices on the polyline representation
- /// of the curve section
+ /// Maximum allowed distance between two vertices on the polyline
+ /// representation of the curve section
  double Maximum_length;
 
 };
@@ -518,7 +633,8 @@ public:
                        const unsigned& nsegment,
                        const unsigned& boundary_id,
                        const bool&
-                       space_vertices_evenly_in_arclength=true)
+                       space_vertices_evenly_in_arclength=true,
+                       const unsigned &boundary_chunk = 0)
                      :  TriangleMeshCurveSection(),
                         Geom_object_pt(geom_object_pt),
                         Zeta_start(zeta_start),
@@ -526,7 +642,8 @@ public:
                         Nsegment(nsegment),
                         Boundary_id(boundary_id),
                         Space_vertices_evenly_in_arclength(
-                          space_vertices_evenly_in_arclength)
+                         space_vertices_evenly_in_arclength),
+                        Boundary_chunk(boundary_chunk)
   { }
 
 
@@ -553,7 +670,11 @@ public:
 
  /// Boundary ID
  unsigned boundary_id() const {return Boundary_id;}
-
+ 
+ /// Boundary chunk (Used when a boundary is represented by more
+ /// than one polyline
+ unsigned boundary_chunk() const {return Boundary_chunk;}
+ 
  /// Output curvilinear boundary at n_sample (default: 50) points
  void output(std::ostream &outfile, const unsigned& n_sample=50)
   {
@@ -653,12 +774,16 @@ private:
 
  /// Boundary ID
  unsigned Boundary_id;
-
+ 
  /// \short Boolean to indicate if vertices in polygonal representation
  /// of the Curviline are spaced (approximately) evenly in arclength
  /// along the GeomObject [true] or in equal increments in zeta [false]
  bool Space_vertices_evenly_in_arclength;
-
+ 
+ /// Boundary chunk (Used when a boundary is represented by more
+ /// than one polyline
+ unsigned Boundary_chunk;
+ 
  // \short Stores the information for connections received on the
  /// curviline. Used when converting to polyline
  Vector<double> Connection_points_pt;
@@ -679,10 +804,12 @@ public:
  /// Also allows the optional specification of a boundary ID -- useful
  /// in a mesh generation context. If not specified it defaults to zero.
  TriangleMeshPolyLine(const Vector<Vector<double> >& vertex_coordinate,
-                      const unsigned &boundary_id) :
+                      const unsigned &boundary_id,
+                      const unsigned &boundary_chunk = 0) :
                        TriangleMeshCurveSection(),
                        Vertex_coordinate(vertex_coordinate),
-                       Boundary_id(boundary_id)
+                        Boundary_id(boundary_id),
+                        Boundary_chunk(boundary_chunk)
  {
 #ifdef PARANOID
   unsigned nvert=Vertex_coordinate.size();
@@ -715,7 +842,11 @@ public:
   
  /// Boundary id
  unsigned boundary_id() const {return Boundary_id;}
-  
+ 
+ /// Boundary chunk (Used when a boundary is represented by more
+ /// than one polyline
+ unsigned boundary_chunk() const{return Boundary_chunk;}
+ 
  /// Coordinate vector of i-th vertex (const version)
  Vector<double> vertex_coordinate(const unsigned& i) const
  {return Vertex_coordinate[i];}
@@ -745,9 +876,132 @@ public:
     }
   }
 
- /// Reverse vertices
+ /// Reverse the polyline, this includes the connection information
+ /// and the vertices order
  void reverse()
- {std::reverse(Vertex_coordinate.begin(), Vertex_coordinate.end());}
+ {
+  // Do the reversing of the connection information
+  
+  // Is there a connection to the initial vertex
+  const bool initial_connection = is_initial_vertex_connected();
+  
+  // Is there a connection to the initial vertex
+  const bool final_connection = is_final_vertex_connected();
+  
+  // If there are any connection at the ends that info. needs to be
+  // reversed
+  if (initial_connection || final_connection)
+   {
+    // Backup the connection information
+    
+    // -------------------------------------------------------------------
+    // Backup the initial vertex connection information
+    // The boundary id
+    const unsigned backup_initial_vertex_connected_bnd_id = 
+     initial_vertex_connected_bnd_id();
+    // The chunk number
+    const unsigned backup_initial_vertex_connected_chunk = 
+     initial_vertex_connected_n_chunk();
+    // The vertex number
+    const unsigned backup_initial_vertex_connected_n_vertex = 
+     initial_vertex_connected_n_vertex();
+    // Is it connected to a curviline
+    const bool backup_initial_vertex_connected_to_curviline =
+     is_initial_vertex_connected_to_curviline();
+    // The s value for the curviline connection
+    const double backup_initial_s_connection = initial_s_connection_value();
+    // The tolerance
+    const double backup_initial_s_tolerance = tolerance_for_s_connection();
+    
+    // -------------------------------------------------------------------
+    // Backup the final vertex connection information
+    // The boundary id
+    const unsigned backup_final_vertex_connected_bnd_id = 
+     final_vertex_connected_bnd_id();
+    // The chunk number
+    const unsigned backup_final_vertex_connected_chunk = 
+     final_vertex_connected_n_chunk();
+    // The vertex number
+    const unsigned backup_final_vertex_connected_n_vertex = 
+     final_vertex_connected_n_vertex();
+    // Is it connected to a curviline
+    const bool backup_final_vertex_connected_to_curviline =
+     is_final_vertex_connected_to_curviline();
+    // The s value for the curviline connection
+    const double backup_final_s_connection = final_s_connection_value();
+    // The tolerance
+    const double backup_final_s_tolerance = tolerance_for_s_connection();
+    // -------------------------------------------------------------------
+    
+    // Disconnect the polyline
+    
+    // Disconnect the initial vertex
+    unset_initial_vertex_connected();
+    unset_initial_vertex_connected_to_curviline();
+    
+    // Disconnect the final vertex
+    unset_final_vertex_connected();
+    unset_final_vertex_connected_to_curviline();
+    
+    // Now reconnected but in inverted order
+    if (initial_connection)
+     {
+      // Set the final vertex as connected
+      set_final_vertex_connected();
+      // Copy the boundary id
+      final_vertex_connected_bnd_id() = 
+       backup_initial_vertex_connected_bnd_id;
+      // Copy the chunk number
+      final_vertex_connected_n_chunk() = 
+       backup_initial_vertex_connected_chunk;
+      // Copy the vertex number
+      final_vertex_connected_n_vertex() =
+       backup_initial_vertex_connected_n_vertex;
+      // Is it connected to a curviline
+      if (backup_initial_vertex_connected_to_curviline)
+       {
+        // Set the final vertex as connected to curviline
+        set_final_vertex_connected_to_curviline();
+        // Copy the s value to connected
+        final_s_connection_value() = backup_initial_s_connection;
+        // Copy the tolerance
+        tolerance_for_s_connection() = backup_initial_s_tolerance;
+       } // if (backup_initial_vertex_connected_to_curviline)
+      
+     } // if (initial_connection)
+    
+    if (final_connection)
+     {
+      // Set the initial vertex as connected
+      set_initial_vertex_connected();
+      // Copy the boundary id
+      initial_vertex_connected_bnd_id() = 
+       backup_final_vertex_connected_bnd_id;
+      // Copy the chunk number
+      initial_vertex_connected_n_chunk() = 
+       backup_final_vertex_connected_chunk;
+      // Copy the vertex number
+      initial_vertex_connected_n_vertex() =
+       backup_final_vertex_connected_n_vertex;
+      // Is it connected to a curviline
+      if (backup_final_vertex_connected_to_curviline)
+       {
+        // Set the initial vertex as connected to curviline
+        set_initial_vertex_connected_to_curviline();
+        // Copy the s value to connected
+        initial_s_connection_value() = backup_final_s_connection;
+        // Copy the tolerance
+        tolerance_for_s_connection() = backup_final_s_tolerance;
+       } // if (backup_final_vertex_connected_to_curviline)
+      
+     } // if (final_connection)
+    
+   } // if (initial_connection || final_connection)
+  
+  // Do the reversing of the vertices
+  std::reverse(Vertex_coordinate.begin(), Vertex_coordinate.end());
+  
+ }
 
 private:
 
@@ -756,7 +1010,11 @@ private:
 
  /// Boundary ID
  unsigned Boundary_id;
-
+ 
+ /// Boundary chunk (Used when a boundary is represented by more
+ /// than one polyline
+ unsigned Boundary_chunk;
+ 
 };
 
 
@@ -1383,7 +1641,7 @@ public:
    TriangleHelper::clear_triangulateio(Triangulateio);
 #endif
   }
-
+ 
  /// Setup lookup schemes which establish whic elements are located
  /// next to mesh's boundaries (wrapper to suppress doc).
  void setup_boundary_element_info()
@@ -1395,7 +1653,7 @@ public:
  /// \short Setup lookup schemes which establish which elements are located
  /// next to mesh's boundaries. Doc in outfile (if it's open).
  void setup_boundary_element_info(std::ostream &outfile);
-
+ 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
  /// \short const access for Use_triangulateio_restart.
  bool use_triangulateio_restart() const {return Use_triangulateio_restart;}
@@ -1407,7 +1665,7 @@ public:
  void disable_triangulateio_restart() {Use_triangulateio_restart = false;}
 
 
-
+ 
  /// Access to the triangulateio representation of the mesh
  TriangulateIO& triangulateio_representation() {return Triangulateio;}
  
@@ -1421,11 +1679,78 @@ public:
  /// memory in extremely tight situations.
  void clear_triangulateio()
   {TriangleHelper::clear_triangulateio(Triangulateio);}
-
+ 
  /// \short Dump the triangulateio structure to a dump file and
  /// record boundary coordinates of boundary nodes
  void dump_triangulateio(std::ostream &dump_file);
+ 
+#ifdef OOMPH_HAS_MPI
+ /// Virtual function that is used to dump info. related with
+ /// distributed triangle meshes
+ virtual void dump_distributed_info_for_restart(std::ostream &dump_file)
+  {
+   std::ostringstream error_stream;
+   error_stream << "Empty default dump disributed info. method called.\n";
+   error_stream << "This should be overloaded in a specific TriangleMesh\n";
+   throw OomphLibError(error_stream.str(),
+                       "TriangleMeshBase::dump_distributed_info_for_restart()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ /// Virtual function that is used to dump info. related with
+ /// distributed triangle meshes
+ virtual void dump_info_to_reset_halo_haloed_scheme(std::ostream &dump_file)
+  {
+   std::ostringstream error_stream;
+   error_stream << "Empty default dump info. to reset halo haloed scheme.\n";
+   error_stream << "This should be overloaded in a specific TriangleMesh\n";
+   throw OomphLibError(error_stream.str(),
+                       "TriangleMeshBase::dump_info_to_reset_halo_haloed_scheme()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ /// Virtual function that is used to read info. related with
+ /// distributed triangle meshes
+ virtual void read_distributed_info_for_restart(std::istream &restart_file)
+  {
+   std::ostringstream error_stream;
+   error_stream << "Empty default read disributed info. method called.\n";
+   error_stream << "This should be overloaded in a specific TriangleMesh\n";
+   throw OomphLibError(error_stream.str(),
+                       "TriangleMeshBase::read_distributed_info_for_restart()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
 
+ /// Virtual function used to re-establish any additional info. related with
+ /// the distribution after a re-starting for triangle meshes
+ virtual void reestablish_distribution_info_for_restart(
+  OomphCommunicator* comm_pt, std::istream &restart_file)
+  {
+   std::ostringstream error_stream;
+   error_stream << "Empty default reestablish disributed info method "
+                << "called.\n";
+   error_stream << "This should be overloaded in a specific "
+                << "RefineableTriangleMesh\n";
+   throw OomphLibError(error_stream.str(),
+                       "TriangleMeshBase::reestablish_distribution_info_for_restart()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ /// Virtual function used to update the polylines representation after 
+ /// restart
+ virtual void update_polyline_representation_from_restart()
+  {
+   std::ostringstream error_stream;
+   error_stream << "Empty default update polylines representation from "
+                << "restart method called.\n";
+   error_stream << "This should be overloaded in a specific "
+                << "RefineableTriangleMesh\n";
+   throw OomphLibError(error_stream.str(),
+                       "TriangleMeshBase::update_polyline_representation_from_restart()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
  /// \short Regenerate the mesh from a dumped triangulateio file
  /// and dumped boundary coordinates of boundary nodes
  void remesh_from_triangulateio(std::istream &restart_file);
@@ -1441,20 +1766,101 @@ public:
                        OOMPH_EXCEPTION_LOCATION);
   }
 
-#endif
+#endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
 
+ /// Virtual function to perform the load balance rutines
+ virtual void load_balance(const Vector<unsigned>& 
+                           target_domain_for_local_non_halo_element)
+ {
+  std::ostringstream error_stream;
+  error_stream << "Empty default load balancing function called.\n";
+  error_stream << "This should be overloaded in a specific TriangleMesh\n";
+  throw OomphLibError(error_stream.str(),
+                      "TriangleMeshBase::load_balance()",
+                      OOMPH_EXCEPTION_LOCATION);
+ }
+ 
+ /// Virtual function to perform the reset boundary elements info rutines
+ virtual void reset_boundary_element_info(
+  Vector<unsigned> &ntmp_boundary_elements,
+  Vector<Vector<unsigned> > &ntmp_boundary_elements_in_region,
+  Vector<FiniteElement*> &deleted_elements)
+ {
+  std::ostringstream error_stream;
+  error_stream << "Empty default reset boundary element info function"
+               << "called.\n";
+  error_stream << "This should be overloaded in a specific "
+               << "TriangleMesh\n";
+  throw OomphLibError(error_stream.str(),
+                      "TriangleMeshBase::reset_boundary_element_info()",
+                      OOMPH_EXCEPTION_LOCATION);
+ }
+ 
+ /// Virtual function to get the number of regions in the mesh
+ virtual unsigned nregion()
+ {
+  std::ostringstream error_stream;
+  error_stream << "Empty default nregion() function called.\n";
+  error_stream << "This should be overloaded in a specific "
+               << "TriangleMesh\n";
+  throw OomphLibError(error_stream.str(),
+                      "TriangleMeshBase::nregion()",
+                      OOMPH_EXCEPTION_LOCATION);
+ }
+ 
+ /// Virtual function to get the region attribute
+ virtual double region_attribute(const unsigned &i)
+ {
+  std::ostringstream error_stream;
+  error_stream << "Empty default region_attribute() function called.\n";
+  error_stream << "This should be overloaded in a specific "
+               << "TriangleMesh\n";
+  throw OomphLibError(error_stream.str(),
+                      "TriangleMeshBase::region_attribute()",
+                      OOMPH_EXCEPTION_LOCATION);
+ }
+ 
+ /// Virtual function to get the number of boundary elements in a
+ /// region
+ virtual unsigned nboundary_element_in_region(const unsigned &b,
+                                              const unsigned &r) const
+ {
+  std::ostringstream error_stream;
+  error_stream << "Empty default nboundary_element_in_region() function "
+               << "called.\n";
+  error_stream << "This should be overloaded in a specific "
+               << "TriangleMesh\n";
+  throw OomphLibError(error_stream.str(),
+                      "TriangleMeshBase::nboundary_element_in_region()",
+                      OOMPH_EXCEPTION_LOCATION);
+ }
+ 
+ /// Output the nodes on the boundary and their respective boundary
+ /// coordinates(into separate tecplot zones)
+ virtual void output_boundary_coordinates(const unsigned &b,
+                                          std::ostream &outfile)
+  {
+   std::ostringstream error_stream;
+   error_stream 
+    << "Empty default output_boundary_coordinates() method called.\n"
+    << "This should be overloaded on the specific TriangleMesh class\n";
+    throw OomphLibError(error_stream.str(),
+                        "TriangleMeshBase::output_boundary_coordinates",
+                        OOMPH_EXCEPTION_LOCATION);
+  }
+ 
   protected:
-
+ 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
  ///\short TriangulateIO representation of the mesh
  TriangulateIO Triangulateio;
-
+ 
  /// Should we use triangulateio specific parts for dump/restart? (Doesn't
  /// work with some elements and isn't needed if not using adaptivity).
  bool Use_triangulateio_restart;
 
-#endif 
+#endif // OOMPH_HAS_TRIANGLE
  
 };
 

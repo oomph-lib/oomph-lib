@@ -562,8 +562,7 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
                    << t_end-t_start << std::endl;
         t_start = TimingHelpers::timer();
        }
-
-
+      
       // Store how many elements we had in the various sub-meshes
       // before actions_before_distribute() (which may empty some of
       // them).
@@ -615,8 +614,8 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
             if (nsub_elem_old==nsub_elem)
              {
               submesh_element_domain[i_mesh][e]=element_domain[count];
-              return_element_domain.push_back(element_domain[count]);
              }
+            return_element_domain.push_back(element_domain[count]);
             count++;
            }
          }
@@ -625,24 +624,110 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
        {
         return_element_domain=element_domain;
        }
-
+      
       if (Doc_time_in_distribute)
        {
         t_start = TimingHelpers::timer();
        }
-
+      
       // Setup the map between "root" element and number in global mesh
       // (currently used in the load_balance() routines)
-      unsigned n_element=global_mesh_pt->nelement();
-      Base_mesh_element_pt.resize(n_element);
-      Base_mesh_element_number_plus_one.clear();
-      for (unsigned e=0;e<n_element;e++)
+      
+      // This map is only established for structured meshes, then we
+      // need to check here the type of mesh
+      if (n_mesh==0)
        {
-        GeneralisedElement* el_pt=global_mesh_pt->element_pt(e);
-        Base_mesh_element_number_plus_one[el_pt]=e+1;
-        Base_mesh_element_pt[e]=el_pt;
-       }
-
+        // Check if the only one mesh is an structured mesh
+        bool structured_mesh = true;
+        TriangleMeshBase* tri_mesh_pt = 
+         dynamic_cast<TriangleMeshBase*>(mesh_pt(0));
+        if (tri_mesh_pt != 0)
+         {
+          structured_mesh = false;
+         } // if (tri_mesh_pt != 0)
+        if (structured_mesh)
+         {
+          const unsigned n_ele = global_mesh_pt->nelement();
+          Base_mesh_element_pt.resize(n_ele);
+          Base_mesh_element_number_plus_one.clear();
+          for (unsigned e=0;e<n_ele;e++)
+           {
+            GeneralisedElement* el_pt=global_mesh_pt->element_pt(e);
+            Base_mesh_element_number_plus_one[el_pt]=e+1;
+            Base_mesh_element_pt[e]=el_pt;
+           } // for (e<n_ele)
+         } // A TreeBaseMesh mesh
+       } // if (n_mesh==0)
+      else
+       {
+        // If we have submeshes then we only add those elements that
+        // belong to structured meshes, but first compute the number
+        // of total elements in the structured meshes
+        unsigned nglobal_element = 0;
+        // Store which submeshes are structured
+        std::vector<bool> is_structured_mesh(n_mesh);
+        for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+         {
+          TriangleMeshBase* tri_mesh_pt = 
+           dynamic_cast<TriangleMeshBase*>(mesh_pt(i_mesh));
+          if (tri_mesh_pt != 0)
+           {
+            // Set the flags to indicate this is not an structured
+            // mesh
+            is_structured_mesh[i_mesh] = false;
+           } // if (tri_mesh_pt != 0)
+          else
+           {
+            // Set the flags to indicate this is an structured
+            // mesh
+            is_structured_mesh[i_mesh] = true;
+           } // else if (tri_mesh_pt != 0)
+          // Check if mesh is an structured mesh
+          if (is_structured_mesh[i_mesh])
+           {
+            nglobal_element+=mesh_pt(i_mesh)->nelement();
+           } // A TreeBaseMesh mesh
+         } // for (i_mesh<n_mesh)
+        
+        // Once computed the number of elements, then resize the
+        // structure
+        Base_mesh_element_pt.resize(nglobal_element);
+        Base_mesh_element_number_plus_one.clear();
+        unsigned counter = 0;
+        for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+         {
+          // Check if mesh is an structured mesh
+          if (is_structured_mesh[i_mesh])
+           {
+            const unsigned n_ele = mesh_pt(i_mesh)->nelement();
+            for (unsigned e=0;e<n_ele;e++)
+             {
+             GeneralisedElement* el_pt=mesh_pt(i_mesh)->element_pt(e);
+             Base_mesh_element_number_plus_one[el_pt]=counter+1;
+             Base_mesh_element_pt[counter]=el_pt;
+             // Inrease the global element number
+             counter++;
+             } // for (e<n_ele)
+           } // An structured mesh
+         } // for (i_mesh<n_mesh)
+        
+#ifdef PARANOID
+        if (counter != nglobal_element)
+         {
+          std::ostringstream error_stream;
+          error_stream
+           << "The number of global elements ("<<nglobal_element
+           <<") is not the sameas the number of\nadded elements ("
+           << counter <<") to the Base_mesh_element_pt data "
+           << "structure!!!\n\n";
+          throw OomphLibError(error_stream.str(),
+                              "Problem::distribute()",
+                              OOMPH_EXCEPTION_LOCATION);
+         } // if (counter != nglobal_element)
+#endif // #ifdef PARANOID
+        
+       } // else if (n_mesh==0)
+      
       // Wipe everything if a pre-determined partitioning
       // didn't specify ANY elements for this processor
       // (typically happens during restarts with larger number
@@ -1093,50 +1178,93 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
       Vector<Vector<GeneralisedElement*> >
        new_base_element_associated_with_old_base_element(nel_base_old);
 
-      // Loop over all elements in the rebuilt mesh
-      nel=mesh_pt()->nelement();
-      for (unsigned e=0;e<nel;e++)
+      unsigned n_meshes = n_mesh;
+      // Change the value for the number of submeshes if there is only
+      // one mesh so that the loop below works if we have only one
+      // mesh
+      if (n_meshes == 0)
+       {n_meshes = 1;}
+      
+      // Store which submeshes, if there are some are structured
+      // meshes
+      std::vector<bool> is_structured_mesh(n_meshes);
+      
+      // Loop over all elements in the rebuilt mesh, but make sure
+      // that we are only looping over the structured meshes
+      nel = 0;
+      for (unsigned i_mesh = 0; i_mesh < n_meshes; i_mesh++)
        {
-        // Get the element
-        GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
-
-        // Not refineable: It's definitely a new base element
-        RefineableElement* ref_el_pt=0;
-        ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
-        if (ref_el_pt==0)
+        TriangleMeshBase* tri_mesh_pt = 
+         dynamic_cast<TriangleMeshBase*>(mesh_pt(i_mesh));
+        if (!(tri_mesh_pt!=0))
          {
-          unsigned old_base_el_no=old_base_element_number_plus_one[el_pt]-1;
-          new_base_element_associated_with_old_base_element[old_base_el_no].
-           push_back(el_pt);
-         }
-        // Refineable
+          // Mark the mesh as structured mesh
+          is_structured_mesh[i_mesh] = true;
+          // Add the number of elements 
+          nel+=mesh_pt(i_mesh)->nelement();
+         } // if (!(tri_mesh_pt!=0))
         else
          {
-          // Is it a tree root (after pruning)? In that case it's
-          // a new base element
-          if (dynamic_cast<TreeRoot*>(ref_el_pt->tree_pt()))
+          // Mark the mesh as nonstructured mesh
+          is_structured_mesh[i_mesh] = false;
+         } // else if (!(tri_mesh_pt!=0))
+       } // for (i_mesh < n_mesh)
+      
+      // Go for all the meshes (if there are submeshes)
+      for (unsigned i_mesh = 0; i_mesh < n_meshes; i_mesh++)
+       {
+        // Only work with the elements in the mesh if it is an
+        // structured mesh
+        if (is_structured_mesh[i_mesh])
+         {
+          // Get the number of elements in the submesh
+          const unsigned nele_submesh = mesh_pt(i_mesh)->nelement();
+          for (unsigned e = 0; e < nele_submesh; e++)
            {
-            unsigned old_base_el_no=old_base_element_number_plus_one[el_pt]-1;
-            new_base_element_associated_with_old_base_element[old_base_el_no].
-             push_back(el_pt);
-           }
-          else
-           {
-            // Get associated root element
-            FiniteElement* root_el_pt=
-             ref_el_pt->tree_pt()->root_pt()->object_pt();
-
-            if (!root_el_done[root_el_pt])
+            // Get the element
+            GeneralisedElement* el_pt = mesh_pt(i_mesh)->element_pt(e);
+            
+            // Not refineable: It's definitely a new base element
+            RefineableElement* ref_el_pt=0;
+            ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
+            if (ref_el_pt==0)
              {
-              root_el_done[root_el_pt]=true;
-              unsigned old_base_el_no=
+              unsigned old_base_el_no = 
                old_base_element_number_plus_one[el_pt]-1;
               new_base_element_associated_with_old_base_element
-               [old_base_el_no].push_back(root_el_pt);
+               [old_base_el_no].push_back(el_pt);
+             }         
+            // Refineable
+            else
+             {
+              // Is it a tree root (after pruning)? In that case it's 
+              // a new base element
+              if (dynamic_cast<TreeRoot*>(ref_el_pt->tree_pt()))
+               {
+                unsigned old_base_el_no = 
+                 old_base_element_number_plus_one[el_pt]-1;
+                new_base_element_associated_with_old_base_element
+                 [old_base_el_no].push_back(el_pt);
+               }
+              else
+               {
+                // Get associated root element
+                FiniteElement* root_el_pt=
+                 ref_el_pt->tree_pt()->root_pt()->object_pt();
+            
+                if (!root_el_done[root_el_pt])
+                 {               
+                  root_el_done[root_el_pt]=true;
+                  unsigned old_base_el_no=
+                   old_base_element_number_plus_one[el_pt]-1;
+                  new_base_element_associated_with_old_base_element
+                   [old_base_el_no].push_back(root_el_pt);
+                 }
+               }
              }
-           }
-         }
-       }
+           } // for (e < nele_submesh)
+         } // if (is_structured_mesh[i_mesh])
+       } // for (i_mesh < n_mesh)
 
       // Create a vector that stores how many new root/base elements
       // got spawned from each old root/base element in the global mesh
@@ -8711,7 +8839,7 @@ void Problem::newton_solve()
        // Synchronise the solution on different processors (on each submesh)
        this->synchronise_all_dofs();
 #endif
-
+       
        actions_before_newton_convergence_check();
        dx.clear();
        get_residuals(dx);
@@ -11805,14 +11933,21 @@ void Problem::dump(std::ofstream& dump_file) const
   }
 
 
-
+ 
  // Get target for all base elements by reduction
  if (Problem_has_been_distributed)
   {
-   MPI_Allreduce(&local_base_element_processor[0],
-                 &base_element_processor[0],
-                 n,MPI_INT,MPI_MAX,
-                 this->communicator_pt()->mpi_comm());
+   // Check that the base elements have been associated to a processor
+   // (the Base_mesh_elemen_pt is only used for structured meshes,
+   // therefore, if there are no ustructured meshes as part of the
+   // problem this container will be empty)
+   if (n > 0)
+    {
+     MPI_Allreduce(&local_base_element_processor[0],
+                   &base_element_processor[0],
+                   n,MPI_INT,MPI_MAX,
+                   this->communicator_pt()->mpi_comm());
+    }
   }
  else
   {
@@ -11845,6 +11980,15 @@ void Problem::dump(std::ofstream& dump_file) const
    TriangleMeshBase* mmesh_pt = dynamic_cast<TriangleMeshBase*>(mesh_pt(0));
    if(mmesh_pt != 0 && mmesh_pt->use_triangulateio_restart())
     {
+#ifdef OOMPH_HAS_MPI
+     // Check if the mesh is distributed, if that is the case then
+     // additional info. needs to be saved
+     if (mmesh_pt->is_mesh_distributed())
+      {
+       // Dump the info. related with the distribution of the mesh
+       mmesh_pt->dump_distributed_info_for_restart(dump_file);
+      }
+#endif
      mmesh_pt->dump_triangulateio(dump_file);
     }
 #endif
@@ -11870,6 +12014,15 @@ void Problem::dump(std::ofstream& dump_file) const
       dynamic_cast<TriangleMeshBase*>(mesh_pt(imesh));
      if(mmesh_pt != 0 && mmesh_pt->use_triangulateio_restart())
       {
+#ifdef OOMPH_HAS_MPI
+       // Check if the mesh is distributed, if that is the case then
+       // additional info. needs to be saved
+       if (mmesh_pt->is_mesh_distributed())
+        {
+         // Dump the info. related with the distribution of the mesh
+         mmesh_pt->dump_distributed_info_for_restart(dump_file);
+        }
+#endif
        mmesh_pt->dump_triangulateio(dump_file);
       }
 #endif
@@ -12263,65 +12416,72 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
  unsigned load_balance_required_flag=0;
  if (Problem_has_been_distributed)
   {
-   const int my_rank=this->communicator_pt()->my_rank();
+   // Working with TreeBasedRefineableMeshBase mesh
    unsigned local_load_balance_required_flag=0;
-   unsigned nel=mesh_pt()->nelement();
-   for (unsigned e=0;e<nel;e++)
+   if(dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
     {
-     GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
-     if (!el_pt->is_halo())
+     const int my_rank=this->communicator_pt()->my_rank();
+     unsigned nel=mesh_pt()->nelement();
+     for (unsigned e=0;e<nel;e++)
       {
-       // Get element number (plus one) in base element enumeration
-       unsigned el_number_in_base_mesh_plus_one=
-        Base_mesh_element_number_plus_one[el_pt];
-
-       // If it's zero then we haven't found it, it may be a FaceElement
-       // (in which case we move it to the same processor as its bulk element
-       if (el_number_in_base_mesh_plus_one==0)
+       GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
+       if (!el_pt->is_halo())
         {
-         FaceElement* face_el_pt=dynamic_cast<FaceElement*>(el_pt);
-         if (face_el_pt!=0)
+         // Get element number (plus one) in base element enumeration
+         unsigned el_number_in_base_mesh_plus_one=
+          Base_mesh_element_number_plus_one[el_pt];
+         
+         // If it's zero then we haven't found it, it may be a FaceElement 
+         // (in which case we move it to the same processor as its bulk
+         // element
+         if (el_number_in_base_mesh_plus_one==0)
           {
-           // Get corresponding bulk element
-           FiniteElement* bulk_el_pt=face_el_pt->bulk_element_pt();
-
-           // Use its element number (plus one) in base element enumeration
-           el_number_in_base_mesh_plus_one=
-            Base_mesh_element_number_plus_one[bulk_el_pt];
-
-           // If this is zero too we have a problem
-           if (el_number_in_base_mesh_plus_one==0)
+           FaceElement* face_el_pt=dynamic_cast<FaceElement*>(el_pt);
+           if (face_el_pt!=0)
             {
-             throw OomphLibError("el_number_in_base_mesh_plus_one=0 for bulk",
-                                 OOMPH_CURRENT_FUNCTION,
-                                 OOMPH_EXCEPTION_LOCATION);
+             // Get corresponding bulk element
+             FiniteElement* bulk_el_pt=face_el_pt->bulk_element_pt();
+
+             // Use its element number (plus one) in base element enumeration
+             el_number_in_base_mesh_plus_one=
+              Base_mesh_element_number_plus_one[bulk_el_pt];
+             
+             // If this is zero too we have a problem
+             if (el_number_in_base_mesh_plus_one==0)
+              {
+               throw OomphLibError("el_number_in_base_mesh_plus_one=0 for bulk",
+                                   "Problem::read()",
+                                   OOMPH_EXCEPTION_LOCATION);
+              }
             }
           }
-        }
-
-       // If we've made it here then we're not dealing with a FaceElement
-       // but with an element that doesn't exist locally --> WTF?
-       if (el_number_in_base_mesh_plus_one==0)
-        {
-         throw OomphLibError("el_number_in_base_mesh_plus_one=0",
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-
-       // Assign target domain for next local non-halo element in
-       // the order in which it's encountered in the global mesh
-       target_domain_for_local_non_halo_element.push_back(
-        target_domain_for_base_element[el_number_in_base_mesh_plus_one-1]);
-
-       // Do elements on this processor to be moved elsewhere?
-       if (int(target_domain_for_base_element
-               [el_number_in_base_mesh_plus_one-1])
-           !=my_rank)
-        {
-         local_load_balance_required_flag=1;
+         
+         // If we've made it here then we're not dealing with a
+         // FaceElement but with an element that doesn't exist locally
+         // --> WTF?
+         if (el_number_in_base_mesh_plus_one==0)
+          {
+           throw OomphLibError("el_number_in_base_mesh_plus_one=0",
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION);
+          }
+         
+         // Assign target domain for next local non-halo element in
+         // the order in which it's encountered in the global mesh
+         target_domain_for_local_non_halo_element.push_back(
+          target_domain_for_base_element[el_number_in_base_mesh_plus_one-1]);
+         
+         // Do elements on this processor to be moved elsewhere?
+         if (int(target_domain_for_base_element
+                 [el_number_in_base_mesh_plus_one-1])
+             !=my_rank)
+          {
+           local_load_balance_required_flag=1;
+          }
         }
       }
-    }
+     
+    } // if (working with TreeBasedRefineableMeshBase mesh)
 
    // Get overall need to load balance by max
    MPI_Allreduce(&local_load_balance_required_flag,
@@ -12396,11 +12556,34 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
    TriangleMeshBase* mmesh_pt = dynamic_cast<TriangleMeshBase*>(mesh_pt(0));
    if(mmesh_pt != 0 && mmesh_pt->use_triangulateio_restart())
     {
+#ifdef OOMPH_HAS_MPI
+     // Check if the mesh is distributed, if that is the case then
+     // additional info. needs to be read
+     if (mmesh_pt->is_mesh_distributed())
+      {
+       // Dump the info. related with the distribution of the mesh
+       mmesh_pt->read_distributed_info_for_restart(restart_file);
+      }
+#endif
      //The function reads the TriangulateIO data structure from the dump
      //file and then completely regenerates the mesh using the
      //data structure
      mmesh_pt->remesh_from_triangulateio(restart_file);
      have_read_unstructured_mesh=true;
+#ifdef OOMPH_HAS_MPI
+     // Check if the mesh is distributed, if that is the case then we
+     // need to re-establish the halo/haloed scheme (similar as in the
+     // RefineableTriangleMesh::adapt() method)
+     if (mmesh_pt->is_mesh_distributed())
+      { 
+       mmesh_pt->reestablish_distribution_info_for_restart(
+        this->communicator_pt(), restart_file);
+      }
+#endif
+     // Still left to update the polylines representation, that is performed
+     // later since the nodes positions may still change when reading info.
+     // for the mesh, see below
+
     }
 #endif
 
@@ -12433,15 +12616,39 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
       dynamic_cast<TriangleMeshBase*>(mesh_pt(imesh));
      if(mmesh_pt != 0 && mmesh_pt->use_triangulateio_restart())
       {
+#ifdef OOMPH_HAS_MPI
+       // Check if the mesh is distributed, if that is the case then
+       // additional info. needs to be read
+       if (mmesh_pt->is_mesh_distributed())
+        {
+         // Dump the info. related with the distribution of the mesh
+         mmesh_pt->read_distributed_info_for_restart(restart_file);
+        }
+#endif
        //The function reads the TriangulateIO data structure from the dump
        //file and then completely regenerates the mesh using the
        //data structure
        mmesh_pt->remesh_from_triangulateio(restart_file);
        have_read_unstructured_mesh=true;
+       
+#ifdef OOMPH_HAS_MPI
+       // Check if the mesh is distributed, if that is the case then we
+       // need to re-establish the halo/haloed scheme (similar as in the
+       // RefineableTriangleMesh::adapt() method)
+       if (mmesh_pt->is_mesh_distributed())
+        { 
+         mmesh_pt->reestablish_distribution_info_for_restart(
+          this->communicator_pt(), restart_file);
+        }
+#endif
+       // Still left to update the polylines representation, that is performed
+       // later since the nodes positions may still change when reading info.
+       // for the mesh, see below
+       
       }
 #endif
     } // End of loop over submeshes
-
+   
 
    // Rebuild the global mesh
    rebuild_global_mesh();
@@ -12500,7 +12707,6 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
  oomph_info <<"\nNumber of equations in Problem::read(): "
             << assign_eqn_numbers()
             << std::endl<< std::endl;
-
  // Read time info
  //---------------
  unsigned local_unsteady_restart_flag=0;
@@ -12673,7 +12879,6 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
  // in the problem.
  if (unsteady_restart) initialise_dt(dt);
 
-
  // Loop over submeshes:
  unsigned nmesh=nsub_mesh();
  if (nmesh==0) nmesh=1;
@@ -12722,11 +12927,24 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
 //    //---------------------------------------------------------
 //    // End keep this commented out code around to debug restarts
 //    //---------------------------------------------------------
-
-   mesh_pt(m)->read(restart_file);
-
+    
+    mesh_pt(m)->read(restart_file);
+   
+#ifdef OOMPH_HAS_TRIANGLE_LIB  
+    // Here update the polyline representation if working with
+    // triangle base meshes
+    if(TriangleMeshBase* mmesh_pt =
+       dynamic_cast<TriangleMeshBase*>(mesh_pt(m)))
+     {
+      // In charge of updating the polylines representation to the
+      // current refinement/unrefinement level after restart, it
+      // also update the shared boundaries in case of working with a
+      // distributed mesh
+      mmesh_pt->update_polyline_representation_from_restart();        
+     }
+#endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
+      
   }
-
 
  // Read global data:
  //------------------
@@ -12763,7 +12981,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
   {
    Global_data_pt[iglobal]->read(restart_file);
   }
-
+ 
 }
 
 //===================================================================
@@ -16772,11 +16990,6 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
   } //End of loop over processors
 }
 
-
-
-
-
-
 //==========================================================================
 /// Balance the load of a (possibly non-uniformly refined) problem that has
 /// already been distributed, by re-distributing elements over the processors.
@@ -16784,15 +16997,15 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
 /// is set to true and doc various bits of data (mainly for debugging)
 /// in directory specified by DocInfo object.
 //==========================================================================
- void Problem::load_balance(DocInfo& doc_info,
-                            const bool& report_stats,
-                            const Vector<unsigned>&
-                            input_target_domain_for_local_non_halo_element)
- {
+void Problem::load_balance(DocInfo& doc_info,
+                           const bool& report_stats,
+                           const Vector<unsigned>& 
+                           input_target_domain_for_local_non_halo_element)
+{
  double start_t = TimingHelpers::timer();
 
  // Number of processes
- const unsigned n_proc=this->communicator_pt()->nproc();
+ const unsigned n_proc = this->communicator_pt()->nproc();
 
  // Don't do anything if this is a single-process job
  if (n_proc==1)
@@ -16837,7 +17050,7 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
 #ifdef PARANOID
    unsigned old_ndof=ndof();
 #endif
-
+   
    // Store pointers to the old mesh(es) so we retain a handle
    //---------------------------------------------------------
    // to them for deletion
@@ -16855,7 +17068,7 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
        old_mesh_pt.push_back(mesh_pt(i_mesh));
       }
     }
-
+   
 
    // Partition the global mesh in its current state
    //-----------------------------------------------
@@ -16866,8 +17079,7 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
    // elements is the same as in the Problem's mesh, with the halo
    // elements being skipped.
    Vector<unsigned> target_domain_for_local_non_halo_element;
-
-
+   
    // Do any of the processors want to go through externally imposed
    // partitioning? If so, we'd better do it here too (even if the processor
    // is empty, e.g. following a restart on a larger number of procs) or
@@ -16909,12 +17121,12 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
         target_domain_for_local_non_halo_element);
       }
     }
-
+   
    if (report_stats)
     {
      t_metis=TimingHelpers::timer();
-    }
-
+    }   
+   
    // Setup map linking element with target domain
    std::map<GeneralisedElement*,unsigned>
     target_domain_for_local_non_halo_element_map;
@@ -16930,7 +17142,7 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
        count_non_halo_el++;
       }
     }
-
+   
    // Load balancing is equivalent to distribution so call the
    // appropriate "actions before". NOTE: This acts on the
    // current, refined, distributed, etc. problem object
@@ -16938,14 +17150,14 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
    // a duplicate of the call below, which acts on the
    // new, not-yet refined, distributed etc. problem!
    actions_before_distribute();
-
+   
    // Re-setup target domains for remaining elements (FaceElements
    // are likely to have been stripped out in actions_before_distribute()
    n_elem=mesh_pt()->nelement();
    target_domain_for_local_non_halo_element.clear();
    target_domain_for_local_non_halo_element.reserve(n_elem);
    count_non_halo_el=0;
-   for (unsigned e=0;e<n_elem;e++)
+   for (unsigned e = 0; e < n_elem; e++)
     {
      GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
      if (!el_pt->is_halo())
@@ -16953,13 +17165,137 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
        target_domain_for_local_non_halo_element.push_back(
         target_domain_for_local_non_halo_element_map[el_pt]);
       }
-    }
-
+    } // for (e < n_elem)
+   
+   // Now get the target domains for each of the submeshes, we only
+   // get the target domains for the nonhalo elements
+   Vector<Vector<unsigned> > 
+    target_domain_for_local_non_halo_element_submesh(n_mesh);
+   // If we have no sub-meshes then we do not need to copy the target areas
+   // of the submeshes
+   if (n_mesh != 0)
+    {
+     // Counter to copy the target domains from the global vector
+     unsigned count_td = 0;
+     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
+      {
+       // Get the number of elements (considering halo elements)
+       const unsigned nsub_ele = mesh_pt(i_mesh)->nelement();
+       // Now copy that number of data from the global target domains
+       for (unsigned i = 0; i < nsub_ele; i++)
+        {
+         // Get the element
+         GeneralisedElement* ele_pt = mesh_pt(i_mesh)->element_pt(i);
+         // ... and check if it is a nonhalo element
+         if (!ele_pt->is_halo())
+          {
+           // Get the target domain for the current element
+           const unsigned target_domain = 
+            target_domain_for_local_non_halo_element[count_td++];
+           // Add the target domain for the nonhalo element in the
+           // submesh
+           target_domain_for_local_non_halo_element_submesh[i_mesh].
+            push_back(target_domain);
+          } // if (!ele_pt->is_halo())
+        } // for (i < nsub_ele)
+      } // for (imesh < n_mesh)
+     
+#ifdef PARANOID
+     // Check that the total number of copied data be the same as the
+     // total number of nonhalo elements in the (sub)-mesh(es)
+     const unsigned ntarget_domain = 
+      target_domain_for_local_non_halo_element.size();
+     if (count_td != ntarget_domain)
+      {
+       std::ostringstream error_stream;
+       error_stream
+        << "The number of nonhalo elements ("<<count_td<<") found in (all)\n"
+        << "the (sub)-mesh(es) is different from the number of target domains\n"
+        << "(" << ntarget_domain << ") for the nonhalo elements.\n"
+        << "Please ensure that you called the rebuild_global_mesh() method "
+        << "after the\npossible deletion of FaceElements in "
+        << "actions_before_distribute()!!!\n\n";
+       throw OomphLibError(error_stream.str(),"Problem::load_balance()",
+                           OOMPH_EXCEPTION_LOCATION);
+      } // if (count_td != ntarget_domain)
+#endif
+     
+    } // if (n_mesh != 0)
+   
+   // Check if we have different type of submeshes (unstructured
+   // and/or structured). Identify to which type each submesh belongs.
+   // If we have only one mesh then identify to which type that mesh
+   // belongs.
+   
+   // The load balancing strategy acts in the structured meshes and
+   // then acts in the unstructured meshes   
+   
+   // Vector to temporaly store pointers to unstructured meshes
+   // (TriangleMeshBase)
+   Vector<TriangleMeshBase*> unstructured_mesh_pt;
+   std::vector<bool> is_unstructured_mesh;
+   
+   // Flag to indicate that there are unstructured meshes as part of
+   // the problem
+   bool are_there_unstructured_meshes = false;
+   
+   // We have only one mesh
+   if (n_mesh == 0)
+    {
+     // Check if it is a TriangleMeshBase mesh
+     if (TriangleMeshBase* tri_mesh_pt =
+         dynamic_cast<TriangleMeshBase*>(old_mesh_pt[0]))
+      {
+       // Add the pointer to the unstructured meshes container
+       unstructured_mesh_pt.push_back(tri_mesh_pt);
+       // Indicate that it is an unstructured mesh
+       is_unstructured_mesh.push_back(true);
+       // Indicate that there are unstructured meshes as part of the
+       // problem
+       are_there_unstructured_meshes = true;
+      }
+     else
+      {
+       // Add the pointer to the unstructured meshes container (null
+       // pointer)
+       unstructured_mesh_pt.push_back(tri_mesh_pt);
+       // Indicate that it is not an unstructured mesh
+       is_unstructured_mesh.push_back(false);
+      }
+    } // if (n_mesh == 0)
+   else // We have sub-meshes
+    {
+     // Check which sub-meshes are unstructured meshes
+     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
+      {
+       // Is it a TriangleMeshBase mesh
+       if (TriangleMeshBase* tri_mesh_pt =
+           dynamic_cast<TriangleMeshBase*>(old_mesh_pt[i_mesh]))
+        {
+         // Add the pointer to the unstructured meshes container
+         unstructured_mesh_pt.push_back(tri_mesh_pt);
+         // Indicate that it is an unstructured mesh
+         is_unstructured_mesh.push_back(true);
+         // Indicate that there are unstructured meshes as part of the
+         // problem
+         are_there_unstructured_meshes = true;
+        }
+       else
+        {
+         // Add the pointer to the unstructured meshes container (null
+         // pointer)
+         unstructured_mesh_pt.push_back(tri_mesh_pt);
+         // Indicate that it is not an unstructured mesh
+         is_unstructured_mesh.push_back(false);
+        }
+      } // for (i_mesh < n_mesh)
+    } // else if (n_mesh == 0) // We have sub-meshes
+   
    // Extract data to be sent to various processors after the
    //--------------------------------------------------------
    // problem has been rebuilt/re-distributed
    //----------------------------------------
-
+   
    // Storage for number of data to be sent to each processor
    Vector<int> send_n(n_proc,0);
 
@@ -16976,31 +17312,73 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
 
    // Flat-packed refinement info, labeled by id of locally
    // available root elements
-   std::map<unsigned, Vector<unsigned> > flat_packed_refinement_info_for_root;
-
+   std::map<unsigned, Vector<unsigned> > 
+    flat_packed_refinement_info_for_root;
+     
    // Max. level of refinement
    unsigned max_refinement_level_overall=0;
-
+     
+   // Prepare the input for the get_data...() method, only copy the
+   // data from the structured meshes, TreeBaseMesh meshes
+   Vector<unsigned> 
+    target_domain_for_local_non_halo_element_in_structured_mesh;
+   if (n_mesh == 0)
+    {
+     // Check if the mesh is an structured mesh
+     if (!is_unstructured_mesh[0])
+      {
+       const unsigned nele_mesh = 
+        target_domain_for_local_non_halo_element.size();
+       for (unsigned e = 0; e < nele_mesh; e++)
+        {
+         const unsigned target_domain = 
+          target_domain_for_local_non_halo_element[e];
+         target_domain_for_local_non_halo_element_in_structured_mesh.
+          push_back(target_domain);
+        } // for (e < nele_mesh)
+      } // if (!is_unstructured_mesh[0])
+    } // if (n_mesh == 0)
+   else
+    {
+     // Copy the target domains from the structured meshes only
+     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
+      {
+       // Check if the mesh is an structured mesh
+       if (!is_unstructured_mesh[i_mesh])
+        {
+         const unsigned nele_sub_mesh = 
+          target_domain_for_local_non_halo_element_submesh[i_mesh].size();
+         for (unsigned e = 0; e < nele_sub_mesh; e++)
+          {
+           const unsigned target_domain = 
+            target_domain_for_local_non_halo_element_submesh[i_mesh][e];
+           target_domain_for_local_non_halo_element_in_structured_mesh.
+            push_back(target_domain);
+          } // for (e < nele_sub_mesh)
+        } // if (!is_triangle_mesh_base[i_mesh])
+      } // for (i_mesh < n_mesh)
+    } // else if (n_mesh == 0)
+     
    // Extract data from current problem
    // sorted into data to be sent to various processors after
    // rebuilding the meshes in a load-balanced form
    get_data_to_be_sent_during_load_balancing
-    (target_domain_for_local_non_halo_element,
-     send_n,
+    (target_domain_for_local_non_halo_element_in_structured_mesh, 
+     send_n, 
      send_data,
      send_displacement,
      old_domain_for_base_element,
      new_domain_for_base_element,
      max_refinement_level_overall);
-
+   
    // Extract flat-packed refinement pattern
    get_flat_packed_refinement_pattern_for_load_balancing(
     old_domain_for_base_element,
     new_domain_for_base_element,
     max_refinement_level_overall,
     flat_packed_refinement_info_for_root);
-
-   if (report_stats)
+   
+   if (report_stats) 
     {
      t_partition=TimingHelpers::timer();
      oomph_info << "CPU for partition calculation for roots: "
@@ -17027,8 +17405,17 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
        pruned_refinement_level[0]=
         ref_mesh_pt->uniform_refinement_level_when_pruned();
       }
-     delete old_mesh_pt[0];
-    }
+       
+     // If the mesh is an unstructured mesh (TriangleMeshBase mesh)
+     // then we should not delete it since the load balance strategy
+     // requires the mesh
+       
+     // Delete it if it is not an unstructured mesh
+     if (!is_unstructured_mesh[0])
+      {
+       delete old_mesh_pt[0];
+      } // if (!is_unstructured_mesh[0])
+    } // if (n_mesh==0)
    else
     {
      for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
@@ -17041,29 +17428,38 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
          pruned_refinement_level[i_mesh]=
           ref_mesh_pt->uniform_refinement_level_when_pruned();
         }
-       delete old_mesh_pt[i_mesh];
-      }
-
+         
+       // If the mesh is an unstructured mesh (TriangleMeshBase
+       // mesh) then we should not delete it since the load balance
+       // strategy requires the mesh
+         
+       // Delete it if it is not an unstructured mesh
+       if (!is_unstructured_mesh[i_mesh])
+        {
+         delete old_mesh_pt[i_mesh];
+        } // if (!is_unstructured_mesh[i_mesh])
+         
+      } // for (i_mesh<n_mesh)
+       
      // Empty storage for sub-meshes
      flush_sub_meshes();
-
+       
      // Flush the storage for nodes and elements in compound mesh
      // (they've already been deleted in the sub-meshes)
      mesh_pt()->flush_element_and_node_storage();
-
+       
      // Kill
      delete mesh_pt();
      mesh_pt()=0;
-    }
-
-
+    } // else if (n_mesh==0)
+   
    bool some_mesh_has_been_pruned=false;
    unsigned n=pruned_refinement_level.size();
    for (unsigned i=0;i<n;i++)
     {
      if (pruned_refinement_level[i]>0) some_mesh_has_been_pruned=true;
     }
-
+     
    // (Re-)build the new mesh(es) -- this must get the problem into the
    // state it was in when it was first distributed!
    build_mesh();
@@ -17165,61 +17561,147 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
        // Rebuild the global mesh
        rebuild_global_mesh();
       }
-
+     
      // Do actions after adapt
      actions_after_adapt();
-
+       
      // Re-assign number of submeshes -- when this was first
      // set, the problem may have had face meshes that have now
      // disappeared.
      n_mesh=nsub_mesh();
-    }
+    } // if (some_mesh_has_been_pruned)
 
 
    // Perform any actions before distribution but now for the new mesh
    // NOTE: This does NOT replicate the actions_before_distribute()
    // call made above for the previous mesh!
    actions_before_distribute();
-
+     
    // Do some book-keeping
    //---------------------
-
+     
    // Re-assign number of submeshes -- when this was first
    // set, the problem may have had face meshes that have now
    // disappeared.
    n_mesh=nsub_mesh();
-
-   // The submeshes, if they exist, need to know their own element domains
+     
+   // The submeshes, if they exist, need to know their own element
+   // domains. 
+   // NOTE: This vector only stores the target domains or the
+   // element partition for structured meshes
    Vector<Vector<unsigned> > submesh_element_partition(n_mesh);
    if (n_mesh!=0)
     {
      unsigned count=0;
      for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
       {
-       unsigned nsub_elem=mesh_pt(i_mesh)->nelement();
-       submesh_element_partition[i_mesh].resize(nsub_elem);
-       for (unsigned e=0; e<nsub_elem; e++)
+       // Only work with structured meshes
+       if (!is_unstructured_mesh[i_mesh])
         {
-         submesh_element_partition[i_mesh][e]=
-          new_domain_for_base_element[count];
-         count++;
-        }
+         // Get the number of element in the mesh
+         const unsigned nsub_ele = mesh_pt(i_mesh)->nelement();
+         submesh_element_partition[i_mesh].resize(nsub_ele);
+         for (unsigned e=0; e<nsub_ele; e++)
+          {
+           submesh_element_partition[i_mesh][e]=
+            new_domain_for_base_element[count++];
+          } // for (e<nsub_elem)
+        } // if (sub_mesh_pt!=0)
+      } // for (i_mesh<n_mesh)
+       
+#ifdef PARANOID
+     const unsigned nnew_domain_for_base_element = 
+      new_domain_for_base_element.size();
+     if (count != nnew_domain_for_base_element)
+      {
+       std::ostringstream error_stream;
+       error_stream 
+        << "The number of READ target domains for nonhalo elements\n"
+        << " is (" << count << "), but the number of target domains for\n"
+        << "nonhalo elements is ("<<nnew_domain_for_base_element<<")!\n";
+       throw OomphLibError(error_stream.str(),"Problem::load_balance()",
+                           OOMPH_EXCEPTION_LOCATION);
       }
-    }
+#endif
+       
+    } // if (n_mesh!=0)
 
-   // Setup the map between "root" element and number in global mesh again
-   unsigned n_el=mesh_pt()->nelement();
-   Base_mesh_element_pt.resize(n_el);
-   Base_mesh_element_number_plus_one.clear();
-   for (unsigned e=0;e<n_el;e++)
+   // Setup the map between "root" element and number in global mesh
+   // again
+     
+   // This map is only established for structured meshes, then we
+   // need to check here the type of mesh
+   if (n_mesh==0)
     {
-     GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
-     Base_mesh_element_number_plus_one[el_pt]=e+1;
-     Base_mesh_element_pt[e]=el_pt;
-    }
-
-
-   // Storage for the number of face elements in the base mesh --
+     // Check if the only one mesh is an stuctured mesh
+     if (!is_unstructured_mesh[0])
+      {
+       const unsigned n_ele = mesh_pt()->nelement();
+       Base_mesh_element_pt.resize(n_ele);
+       Base_mesh_element_number_plus_one.clear();
+       for (unsigned e=0;e<n_ele;e++)
+        {
+         GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
+         Base_mesh_element_number_plus_one[el_pt]=e+1;
+         Base_mesh_element_pt[e]=el_pt;
+        } // for (e<n_ele)
+      } // if (!is_triangle_mesh_base[0])
+    } // if (n_mesh==0)
+   else
+    {
+     // If we have submeshes then we only add those elements that
+     // belong to structured meshes, but first compute the number of
+     // total elements in the structured sub-meshes
+     unsigned nglobal_element = 0;
+     for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+      {
+       // Check if mesh is an structured mesh
+       if (!is_unstructured_mesh[i_mesh])
+        {
+         nglobal_element+=mesh_pt(i_mesh)->nelement();
+        } // if (!is_triangle_mesh_base[i_mesh])
+      } // for (i_mesh<n_mesh)
+       
+     // Once computed the number of elements, then resize the
+     // structure
+     Base_mesh_element_pt.resize(nglobal_element);
+     Base_mesh_element_number_plus_one.clear();
+     unsigned counter_base = 0;
+     for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+      {
+       // Check if mesh is a structured mesh
+       if (!is_unstructured_mesh[i_mesh])
+        {
+         const unsigned n_ele = mesh_pt(i_mesh)->nelement();
+         for (unsigned e=0;e<n_ele;e++)
+          {
+           GeneralisedElement* el_pt=mesh_pt(i_mesh)->element_pt(e);
+           Base_mesh_element_number_plus_one[el_pt]=counter_base+1;
+           Base_mesh_element_pt[counter_base]=el_pt;
+           // Inrease the global element number
+           counter_base++;
+          } // for (e<n_ele)
+        } // if (!is_triangle_mesh_base[i_mesh])
+      } // for (i_mesh<n_mesh)
+       
+#ifdef PARANOID
+     if (counter_base != nglobal_element)
+      {
+       std::ostringstream error_stream;
+       error_stream
+        << "The number of global elements ("<<nglobal_element
+        <<") is not the same as the number of\nadded elements ("
+        << counter_base <<") to the Base_mesh_element_pt data "
+        << "structure!!!\n\n";
+       throw OomphLibError(error_stream.str(),
+                           "Problem::load_balance()",
+                           OOMPH_EXCEPTION_LOCATION);
+      } // if (counter_base != nglobal_element)
+#endif // #ifdef PARANOID
+       
+    } // else if (n_mesh==0)
+   
+   // Storage for the number of face elements in the base mesh -- 
    // element is identified by number of bulk element and face index
    // so we can reconstruct it if and when the FaceElements have been wiped
    // in actions_before_distribute().
@@ -17262,69 +17744,95 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
       }
     }
 
-
    // Distribute the (sub)meshes
    //---------------------------
    Vector<GeneralisedElement*> deleted_element_pt;
    if (n_mesh==0)
     {
+     // Only distribute (load balance strategy) if this is an
+     // structured mesh
+     if (!is_unstructured_mesh[0])
+      {
 #ifdef PARANOID
-     if (mesh_pt()->nelement()!=new_domain_for_base_element.size())
-      {
-       std::ostringstream error_stream;
-       error_stream << "Distributing one-and-only mesh containing "
-                    << mesh_pt()->nelement() << " elements with info for "
-                    << new_domain_for_base_element.size()
-                    << std::endl;
-       throw OomphLibError(error_stream.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-      }
+       if (mesh_pt()->nelement()!=new_domain_for_base_element.size())
+        {
+         std::ostringstream error_stream;
+         error_stream << "Distributing one-and-only mesh containing " 
+                      << mesh_pt()->nelement() << " elements with info for "
+                      << new_domain_for_base_element.size()
+                      << std::endl;
+         throw OomphLibError(error_stream.str(),
+                             OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);
+        }
 #endif
-
-
-     if (report_stats)
-      {
-       oomph_info << "Distributing one and only mesh\n"
-                  << "------------------------------" << std::endl;
-      }
-
-     // No pre-set distribution from restart that may leave some
-     // processors empty so no need to overrule deletion of elements
-     bool overrule_keep_as_halo_element_status=false;
-     mesh_pt()->distribute(this->communicator_pt(),
-                           new_domain_for_base_element,
-                           deleted_element_pt,
-                           doc_info,report_stats,
-                           overrule_keep_as_halo_element_status);
-    }
-   else // There are submeshes, "distribute" each one separately
-    {
-     for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
-      {
+       
        if (report_stats)
         {
-         oomph_info << "Distributing submesh " << i_mesh << " of "
-                    << n_mesh << " in total\n"
-                    << "---------------------------------------------"
-                    << std::endl;
+         oomph_info << "Distributing one and only mesh\n"
+                    << "------------------------------" << std::endl;
         }
-       // Set the doc_info number to reflect the submesh
-       doc_info.number()=i_mesh;
-
+       
        // No pre-set distribution from restart that may leave some
        // processors empty so no need to overrule deletion of elements
        bool overrule_keep_as_halo_element_status=false;
-       mesh_pt(i_mesh)->distribute(this->communicator_pt(),
-                                   submesh_element_partition[i_mesh],
-                                   deleted_element_pt,
-                                   doc_info,report_stats,
-                                   overrule_keep_as_halo_element_status);
-      }
-     // Rebuild the global mesh
-     rebuild_global_mesh();
-    }
-
+       
+       mesh_pt()->distribute(this->communicator_pt(),
+                             new_domain_for_base_element,
+                             deleted_element_pt,
+                             doc_info,report_stats,
+                             overrule_keep_as_halo_element_status);
+         
+      } // if (!is_unstructured_mesh[0])
+       
+    } // if (n_mesh==0)
+   else // There are submeshes, "distribute" each one separately
+    {
+       
+     // Rebuild the mesh only if one of the meshes was modified
+     bool need_to_rebuild_mesh = false;
+     for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
+      {
+       // Perform the load balancing based on distribution in the
+       // structured meshes only
+       if (!is_unstructured_mesh[i_mesh])
+        {
+           
+         if (report_stats)
+          {
+           oomph_info << "Distributing submesh " << i_mesh << " of " 
+                      << n_mesh << " in total\n"
+                      << "---------------------------------------------" 
+                      << std::endl;
+          }
+           
+         // Set the doc_info number to reflect the submesh
+         doc_info.number()=i_mesh;
+           
+         // No pre-set distribution from restart that may leave some
+         // processors empty so no need to overrule deletion of elements
+         bool overrule_keep_as_halo_element_status=false;
+         mesh_pt(i_mesh)->distribute(this->communicator_pt(),
+                                     submesh_element_partition[i_mesh],
+                                     deleted_element_pt,
+                                     doc_info,report_stats,
+                                     overrule_keep_as_halo_element_status);
+           
+         // Set the flag to rebuild the global mesh
+         need_to_rebuild_mesh = true;
+         
+        } // if (!is_unstructured_mesh[i_mesh])
+       
+      } // for (i_mesh<n_mesh)
+     
+     if (need_to_rebuild_mesh)
+      {
+       // Rebuild the global mesh
+       rebuild_global_mesh();
+      } // if (need_to_rebuild_mesh)
+     
+    } // else if (n_mesh==0)
+     
    // Null out information associated with deleted elements
    unsigned n_del=deleted_element_pt.size();
    for (unsigned e=0;e<n_del;e++)
@@ -17381,7 +17889,6 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
 
     }
 
-
    if (report_stats)
     {
      t_distribute=TimingHelpers::timer();
@@ -17393,9 +17900,10 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
    // Send refinement info to other processors
    //-----------------------------------------
 
-   // Storage for refinement pattern:  Given ID of root element,
+   // Storage for refinement pattern:  Given ID of root element, 
    // root_element_id, and current refinement level, level, the e-th entry in
-   // refinement_info_for_root_elements[root_element_id][level][e] is equal
+   // refinement_info_for_root_elements[root_element_id][level][e] is equal 
+
    // to 2 if the e-th element (using the enumeration when the mesh has been
    // refined to the level-th level) is to be refined during the next
    // refinement; it's 1 if it's not to be refined.
@@ -17431,7 +17939,7 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
    //       So we attach them first, but then immediatly strip
    //       them out again because the FaceElements themselves
    //       will have been stripped out before distribution/adaptation.
-
+     
    // Do actions after adapt because we have just adapted the mesh.
    actions_after_adapt();
 
@@ -17443,7 +17951,100 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
    //------------------------------------------------------------------------
    send_data_to_be_sent_during_load_balancing(send_n, send_data,
                                               send_displacement);
-
+   
+   // If there are unstructured meshes here we perform the load
+   // balancing of those meshes
+   if (are_there_unstructured_meshes)
+    {
+     // Delete any storage of external elements and nodes
+     this->delete_all_external_storage();
+       
+     if (n_mesh == 0)
+      {
+       // Before doing the load balancing delete the mesh created at
+       // calling build_mesh(), and restore the pointer to the old
+       // mesh
+         
+       // It should be an unstructured mesh, therefore we should not
+       // be here
+       if (is_unstructured_mesh[0])
+        {
+         // Delete the new created mesh
+         delete mesh_pt();
+         // Re-assign the pointer to the old mesh
+         this->mesh_pt() = old_mesh_pt[0];
+        } // if (is_unstructured_mesh[0])
+#ifdef PARANOID
+       else
+        {
+         std::ostringstream error_stream;
+         error_stream 
+          <<"The only one mesh in the problem is not an unstructured mesh,\n"
+          <<"but the flag 'are_there_unstructures_meshes' ("
+          <<are_there_unstructured_meshes<<") was turned on,\n"
+          <<"this is weird. Please check for any  condition that may have\n"
+          <<"turned on this flag!!!!\n\n";
+         throw OomphLibError(error_stream.str(),"Problem::load_balance()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+       
+       unstructured_mesh_pt[0]->
+        load_balance(target_domain_for_local_non_halo_element);
+      } // if (n_mesh == 0)
+     else
+      {
+       // Before doing the load balancing delete the meshes created
+       // at calling build_mesh(), and restore the pointer to the
+       // old meshes
+       for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
+        {
+         if (is_unstructured_mesh[i_mesh])
+          {
+           // Delete the new created mesh
+           delete mesh_pt(i_mesh);
+           // Now point it to nothing
+           mesh_pt(i_mesh) = 0;
+           // Re-assign the pointer to the old mesh
+           this->mesh_pt(i_mesh) = old_mesh_pt[i_mesh];
+          } // if (is_unstructured_mesh[i_mesh])
+           
+        } // for (i_mesh<n_mesh)
+         
+       // Empty storage for sub-meshes
+       //flush_sub_meshes();
+         
+       // Flush the storage for nodes and elements in compound mesh
+       // (they've already been deleted in the sub-meshes)
+       mesh_pt()->flush_element_and_node_storage();
+         
+       // Now we can procede with the load balancing thing
+       for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
+        {
+         if (is_unstructured_mesh[i_mesh])
+          {
+           // Get the number of elements in the "i_mesh"
+           const unsigned n_element = old_mesh_pt[i_mesh]->nelement();
+           
+           // Perform the load balancing if there are elements in the
+           // mesh. We check for this case because the meshes created
+           // from face elements have been cleaned in
+           // "actions_before_distribute()"
+           if (n_element > 0 && is_unstructured_mesh[i_mesh])
+            {
+             unstructured_mesh_pt[i_mesh]->load_balance(
+              target_domain_for_local_non_halo_element_submesh[i_mesh]);
+            } // if (n_element > 0)
+          } // if (is_unstructured_mesh[i_mesh)]
+        } // for (i_mesh < n_mesh)
+         
+       // Rebuild the global mesh
+       rebuild_global_mesh();
+         
+      } // else if (n_mesh == 0)
+       
+    } // if (are_there_unstructured_meshes)
+   
    if (report_stats)
     {
      t_copy_solution=TimingHelpers::timer();
@@ -17490,17 +18091,15 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
     }
 #endif
   }
-
+ 
  // Finally synchronise all dofs to allow halo check to pass
  synchronise_all_dofs();
-
+ 
  double end_t = TimingHelpers::timer();
  oomph_info << "Time for load_balance() [sec]    : "
             << end_t-start_t << std::endl;
+ 
 }
-
-
-
 
 
 //==========================================================================
@@ -17546,32 +18145,38 @@ void Problem::send_refinement_info_helper(
     {
      my_mesh_pt=mesh_pt(i_mesh);
     }
-
-   // Loop over processors to find haloed elements -- need to
-   // send their refinement patterns processors that hold their
-   // halo counterparts!
-   for (int p=0;p<n_proc;p++)
+   
+   // Only work with structured meshes
+   TriangleMeshBase* sub_mesh_pt = 
+    dynamic_cast<TriangleMeshBase*>(mesh_pt(i_mesh));
+   if (!(sub_mesh_pt!=0))
     {
-     Vector<GeneralisedElement*> haloed_elem_pt=
-      my_mesh_pt->haloed_element_pt(p);
-     unsigned nhaloed=haloed_elem_pt.size();
-     for (unsigned h=0;h<nhaloed;h++)
+     // Loop over processors to find haloed elements -- need to
+     // send their refinement patterns processors that hold their 
+     // halo counterparts!
+     for (int p=0;p<n_proc;p++)
       {
-       // This element must send its refinement information to processor p
-       unsigned e=Base_mesh_element_number_plus_one[haloed_elem_pt[h]];
-#ifdef PARANOID
-       if (e==0)
+       Vector<GeneralisedElement*> haloed_elem_pt=
+        my_mesh_pt->haloed_element_pt(p);
+       unsigned nhaloed=haloed_elem_pt.size();
+       for (unsigned h=0;h<nhaloed;h++)
         {
-         throw OomphLibError("Base_mesh_element_number_plus_one[...]=0",
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-        }
+         // This element must send its refinement information to processor p
+         unsigned e=Base_mesh_element_number_plus_one[haloed_elem_pt[h]];
+#ifdef PARANOID
+         if (e==0)
+          {
+           throw OomphLibError("Base_mesh_element_number_plus_one[...]=0",
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION);
+          }
 #endif
-       e-=1;
-       halo_domains[e].push_back(p);
+         e-=1;
+         halo_domains[e].push_back(p);
+        }
       }
-    }
-  }
+    } // if (!(sub_mesh_pt!=0))
+  } // for (i_mesh<max_mesh)
 
  // Accumulate relevant flat-packed refinement data to be sent to
  //--------------------------------------------------------------
@@ -18084,12 +18689,6 @@ void Problem::send_refinement_info_helper(
  }
 }
 
-
-
-
-
-
-
 //==========================================================================
 /// Load balance helper routine: Send data to other
 /// processors during load balancing.
@@ -18403,8 +19002,6 @@ void Problem::send_data_to_be_sent_during_load_balancing(
 }
 
 
-
-
 //==========================================================================
 /// Load balance helper routine: Get data to be sent to other
 /// processors during load balancing and other information about
@@ -18438,10 +19035,10 @@ void Problem::get_data_to_be_sent_during_load_balancing(
  const int my_rank=this->communicator_pt()->my_rank();
 
  //------------------------------------------------------------------------
- // Overall strategy: Loop over all elements, identify their corresponding
- // root elements and move all associated leaves together, collecting
- // the leaves in batches.
- //------------------------------------------------------------------------
+ // Overall strategy: Loop over all elements (in structured meshes),
+ // identify their corresponding root elements and move all associated
+ // leaves together, collecting the leaves in batches.
+ // ------------------------------------------------------------------------
 
  // Map to store whether the root element has been visited yet
  std::map<RefineableElement*,bool> root_el_done;
@@ -18489,161 +19086,184 @@ void Problem::get_data_to_be_sent_during_load_balancing(
  unsigned n_base_element=Base_mesh_element_pt.size();
  Vector<int> old_domain_for_base_element_local(n_base_element,-1);
  Vector<int> new_domain_for_base_element_local(n_base_element,-1);
-
-
+ 
  // Loop over all non-halo elements on current processor and identify roots
  // -------------------------------------------------------------------
  // All leaf elements in associated tree (must!) get moved together
  //----------------------------------------------------------------
  unsigned count_non_halo_el=0;
- unsigned n_elem=mesh_pt()->nelement();
- for (unsigned e=0;e<n_elem;e++)
+ // Get the number of submeshs, if there are no submeshes, then
+ // increase the counter so that the loop below also work for the only
+ // one mesh in the problem
+ unsigned n_mesh = nsub_mesh();
+ if (n_mesh == 0)
+  {n_mesh = 1;}
+ // We need to know if there are structure meshes (with elements) as
+ // part of the problem in order to perform (or not) the proper
+ // communications
+ bool are_there_structured_meshes = false;
+ // Go for the nonhalo elements only in the TreeBaseMeshes
+ for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
   {
-   GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
-   if (!el_pt->is_halo())
+   // Only work with structured meshes
+   TriangleMeshBase* sub_mesh_pt = 
+    dynamic_cast<TriangleMeshBase*>(mesh_pt(i_mesh));
+   if (!(sub_mesh_pt!=0))
     {
-
-     // New non-halo: Where is this element supposed to go to?
-     //-------------------------------------------------------
-     unsigned target_domain=
-      target_domain_for_local_non_halo_element[count_non_halo_el];
-
-     // Bump up counter for non-halo elements
-     count_non_halo_el++;
-
-
-     // Is it a root element? (It is, trivially, if it's not refineable)
-     //------------------------------------------------------------------
-     RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
-     if (ref_el_pt==0)
+     const unsigned nele = mesh_pt(i_mesh)->nelement();
+     if (nele > 0)
       {
-       // Not refineable so add element itself
-       element_for_processor[target_domain].push_back(el_pt);
-
-       // Number of elements associated with this root/base element (just the
-       // element itself)
-       nelement_batch_for_processor[target_domain].push_back(1);
-
-       // This is the unique base/root element number in unrefined mesh
-       unsigned element_number_in_base_mesh=
-        Base_mesh_element_number_plus_one[el_pt];
-#ifdef PARANOID
-       if (element_number_in_base_mesh==0)
-        {
-         throw OomphLibError("Base_mesh_element_number_plus_one[...]=0",
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-#endif
-       element_number_in_base_mesh-=1;
-       base_element_for_element_batch_for_processor[target_domain].
-        push_back(element_number_in_base_mesh);
-
-       /// Where do I come from, where do I go to?
-       old_domain_for_base_element_local[element_number_in_base_mesh]=
-        my_rank;
-       new_domain_for_base_element_local[element_number_in_base_mesh]=
-        target_domain;
+       // Change the flag to indicate that there are structured meshes
+       // (with elements, because we may have meshes with face
+       // elements and therefore zero elements at this point)
+       are_there_structured_meshes = true;
       }
-     // It's not a root element so we package its leaves into a batch
-     //--------------------------------------------------------------
-     // of elements
-     //------------
-     else
+
+     for (unsigned e = 0; e < nele; e++)
       {
-       // Get the root element
-       RefineableElement* root_el_pt=ref_el_pt->root_element_pt();
-
-       // Has this root been visited yet?
-       if (!root_el_done[root_el_pt])
+       GeneralisedElement* el_pt = mesh_pt(i_mesh)->element_pt(e);
+       if (!el_pt->is_halo())
         {
-         // Now we've done it
-         root_el_done[root_el_pt]=true;
+         // New non-halo: Where is this element supposed to go to?
+         //-------------------------------------------------------
+         unsigned target_domain=
+          target_domain_for_local_non_halo_element[count_non_halo_el];
+ 
+         // Bump up counter for non-halo elements
+         count_non_halo_el++;
 
-         // Unique number of root element in base mesh
-         unsigned element_number_in_base_mesh=
-          Base_mesh_element_number_plus_one[root_el_pt];
-#ifdef PARANOID
-         if (element_number_in_base_mesh==0)
+         // Is it a root element? (It is, trivially, if it's not refineable)
+         //------------------------------------------------------------------
+         RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
+         if (ref_el_pt==0)
           {
-           throw OomphLibError("Base_mesh_element_number_plus_one[...]=0",
-                               OOMPH_CURRENT_FUNCTION,
-                               OOMPH_EXCEPTION_LOCATION);
-          }
-#endif
-         element_number_in_base_mesh-=1;
-
-         /// Where do I come from, where do I go to?
-         old_domain_for_base_element_local[element_number_in_base_mesh]=
-          my_rank;
-         new_domain_for_base_element_local[element_number_in_base_mesh]=
-          target_domain;
-
+           // Not refineable so add element itself
+           element_for_processor[target_domain].push_back(el_pt);
+         
+           // Number of elements associated with this root/base
+           // element (just the element itself)
+           nelement_batch_for_processor[target_domain].push_back(1);
+         
+           // This is the unique base/root element number in unrefined mesh
+           unsigned element_number_in_base_mesh=
+            Base_mesh_element_number_plus_one[el_pt];
 #ifdef PARANOID
-         // Store target domain associated with this root element
-         // (offset by one) to allow checking that all elements
-         // with the same root move to the same processor
-         target_plus_one_for_root[root_el_pt]=target_domain+1;
-#endif
-
-         // Package all leaves into batch of elements
-         Vector<Tree*> all_leaf_nodes_pt;
-         root_el_pt->tree_pt()->stick_leaves_into_vector(all_leaf_nodes_pt);
-
-         // Number of leaves
-         unsigned n_leaf=all_leaf_nodes_pt.size();
-
-         // Number of elements associated with this root/base element (all
-         // the leaves)
-         nelement_batch_for_processor[target_domain].push_back(n_leaf);
-
-         // Store the unique base/root element number in unrefined mesh
-         base_element_for_element_batch_for_processor[target_domain].
-          push_back(element_number_in_base_mesh);
-
-         // Loop over leaves
-         for (unsigned i_leaf=0;i_leaf<n_leaf;i_leaf++)
-          {
-           // Add element object at leaf
-           RefineableElement* leaf_el_pt=
-            all_leaf_nodes_pt[i_leaf]->object_pt();
-           element_for_processor[target_domain].push_back(leaf_el_pt);
-
-           // Monitor/update maximum refinement level
-           unsigned level=all_leaf_nodes_pt[i_leaf]->level();
-           if (level>max_refinement_level)
+           if (element_number_in_base_mesh==0)
             {
-             max_refinement_level=level;
+             throw OomphLibError("Base_mesh_element_number_plus_one[...]=0",
+                                 OOMPH_CURRENT_FUNCTION,
+                                 OOMPH_EXCEPTION_LOCATION);
             }
-          }
-        }
+#endif
+           element_number_in_base_mesh-=1;
+           base_element_for_element_batch_for_processor[target_domain].
+            push_back(element_number_in_base_mesh);
+         
+           /// Where do I come from, where do I go to?
+           old_domain_for_base_element_local[element_number_in_base_mesh]=
+            my_rank;
+           new_domain_for_base_element_local[element_number_in_base_mesh]=
+            target_domain;
+          } // if (ref_el_pt==0)
+         // It's not a root element so we package its leaves into a batch
+         //--------------------------------------------------------------
+         // of elements
+         //------------
+         else
+          {
+           // Get the root element
+           RefineableElement* root_el_pt=ref_el_pt->root_element_pt();
+         
+           // Has this root been visited yet?
+           if (!root_el_done[root_el_pt])
+            {
+             // Now we've done it
+             root_el_done[root_el_pt]=true;
+
+             // Unique number of root element in base mesh
+             unsigned element_number_in_base_mesh=
+              Base_mesh_element_number_plus_one[root_el_pt];
+#ifdef PARANOID
+             if (element_number_in_base_mesh==0)
+              {
+               throw OomphLibError("Base_mesh_element_number_plus_one[...]=0",
+                                   OOMPH_CURRENT_FUNCTION,
+                                   OOMPH_EXCEPTION_LOCATION);
+              }
+#endif
+             element_number_in_base_mesh-=1;
+
+             /// Where do I come from, where do I go to?
+             old_domain_for_base_element_local[element_number_in_base_mesh]=
+              my_rank;
+             new_domain_for_base_element_local[element_number_in_base_mesh]=
+              target_domain;
 
 #ifdef PARANOID
-       // Root element has already been visited
-       else
-        {
-         // We don't have to do anything with this element since it's
-         // already been processed earlier, but check that it's scheduled
-         // to go onto the same processor as its root.
-         if ((target_plus_one_for_root[root_el_pt]-1)!=target_domain)
-          {
-           std::ostringstream error_message;
-           error_message
-            << "All elements associated with same root must have same target. "
-            << "during load balancing\n";
-           throw OomphLibError(
-            error_message.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-          }
-        }
+             // Store target domain associated with this root element
+             // (offset by one) to allow checking that all elements
+             // with the same root move to the same processor
+             target_plus_one_for_root[root_el_pt]=target_domain+1;
 #endif
 
-      }
-    }
-  }
+             // Package all leaves into batch of elements
+             Vector<Tree*> all_leaf_nodes_pt;
+             root_el_pt->tree_pt()->stick_leaves_into_vector(all_leaf_nodes_pt);
 
+             // Number of leaves
+             unsigned n_leaf=all_leaf_nodes_pt.size();
+             
+             // Number of elements associated with this root/base element (all 
+             // the leaves)
+             nelement_batch_for_processor[target_domain].push_back(n_leaf);
 
+             // Store the unique base/root element number in unrefined mesh
+             base_element_for_element_batch_for_processor[target_domain].
+              push_back(element_number_in_base_mesh);
+
+             // Loop over leaves
+             for (unsigned i_leaf=0;i_leaf<n_leaf;i_leaf++)
+              {
+               // Add element object at leaf
+               RefineableElement* leaf_el_pt=
+                all_leaf_nodes_pt[i_leaf]->object_pt();
+               element_for_processor[target_domain].push_back(leaf_el_pt);
+
+               // Monitor/update maximum refinement level
+               unsigned level=all_leaf_nodes_pt[i_leaf]->level();
+               if (level>max_refinement_level)
+                {
+                 max_refinement_level=level;
+                }
+              }
+            }
+
+#ifdef PARANOID
+           // Root element has already been visited
+           else
+            {
+             // We don't have to do anything with this element since it's
+             // already been processed earlier, but check that it's scheduled
+             // to go onto the same processor as its root.
+             if ((target_plus_one_for_root[root_el_pt]-1)!=target_domain)
+              {           
+               std::ostringstream error_message;
+               error_message 
+                << "All elements associated with same root must have "
+                << "same target. during load balancing\n";
+               throw OomphLibError(
+                error_message.str(),
+                OOMPH_CURRENT_FUNCTION,
+                OOMPH_EXCEPTION_LOCATION);
+              }
+            }
+#endif
+          } // else if (ref_el_pt==0)
+        } // if (!ele_pt->is_halo())
+      } // for (e < nele)
+    } // if (!(sub_mesh_pt!=0))
+  } // for (i_mesh < n_mesh)
+ 
 #ifdef PARANOID
  // Have we processed all target domains?
  if (target_domain_for_local_non_halo_element.size()!=count_non_halo_el)
@@ -18661,8 +19281,7 @@ void Problem::get_data_to_be_sent_during_load_balancing(
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
-
-
+ 
  // Determine max. refinement level and origin/destination scheme
  // -------------------------------------------------------------
  // for all root/base elements
@@ -18670,21 +19289,37 @@ void Problem::get_data_to_be_sent_during_load_balancing(
 
  // Allreduce to work out max max refinement level across all processors
  max_refinement_level_overall=0;
- MPI_Allreduce(&max_refinement_level,&max_refinement_level_overall,1,
-               MPI_UNSIGNED,MPI_MAX,comm_pt->mpi_comm());
 
-
+ // Only perform this communications if necessary (it means if there
+ // are structured meshes as part of the problem)
+ if (are_there_structured_meshes)
+  {
+   MPI_Allreduce(&max_refinement_level,&max_refinement_level_overall,1,
+                 MPI_UNSIGNED,MPI_MAX,comm_pt->mpi_comm());
+  } // if (are_there_structured_meshes)
+ 
  // Allreduce to tell everybody about the original and new domains
  // for root elements
  Vector<int> tmp_old_domain_for_base_element(n_base_element);
- MPI_Allreduce(&old_domain_for_base_element_local[0],
-               &tmp_old_domain_for_base_element[0],n_base_element,
-               MPI_INT,MPI_MAX,comm_pt->mpi_comm());
- Vector<int> tmp_new_domain_for_base_element(n_base_element);
- MPI_Allreduce(&new_domain_for_base_element_local[0],
-               &tmp_new_domain_for_base_element[0],n_base_element,
-               MPI_INT,MPI_MAX,comm_pt->mpi_comm());
 
+ // Only perform this communications if necessary (it means if there
+ // are structured meshes as part of the problem)
+ if (are_there_structured_meshes)
+  {
+   MPI_Allreduce(&old_domain_for_base_element_local[0],
+                 &tmp_old_domain_for_base_element[0],n_base_element,
+                 MPI_INT,MPI_MAX,comm_pt->mpi_comm());
+  } // if (are_there_structured_meshes)
+ 
+ Vector<int> tmp_new_domain_for_base_element(n_base_element);
+ // Only perform this communications if necessary (it means if there
+ // are structured meshes as part of the problem)
+ if (are_there_structured_meshes)
+  {
+   MPI_Allreduce(&new_domain_for_base_element_local[0],
+                 &tmp_new_domain_for_base_element[0],n_base_element,
+                 MPI_INT,MPI_MAX,comm_pt->mpi_comm());
+  } // if (are_there_structured_meshes)
 
  // Copy across (after optional sanity check)
  old_domain_for_base_element.resize(n_base_element);
@@ -18912,8 +19547,6 @@ void Problem::get_data_to_be_sent_during_load_balancing(
 }
 
 
-
-
 //==========================================================================
 /// Get flat-packed refinement pattern for each root element in current
 /// mesh (labeled by unique number of root element in unrefined base mesh).
@@ -18942,120 +19575,137 @@ void Problem::get_flat_packed_refinement_pattern_for_load_balancing(
  // Map to store whether the root element has been visited yet
  std::map<RefineableElement*,bool> root_el_done;
 
- // Loop over all elements
- unsigned n_elem=mesh_pt()->nelement();
-  for (unsigned e=0;e<n_elem;e++)
+ // Get the number of submeshs, if there are no submeshes, then
+ // increase the counter so that the loop below also work for the only
+ // one mesh in the problem
+ unsigned n_mesh = nsub_mesh();
+ if (n_mesh == 0)
+  {n_mesh = 1;}
+ // Go for the nonhalo elements only in the TreeBaseMeshes
+ for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
   {
-   // Get pointer to element
-   GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
-
-   // Ignore halos
-   if (!el_pt->is_halo())
+   // Only work with structured
+   TriangleMeshBase* sub_mesh_pt = 
+    dynamic_cast<TriangleMeshBase*>(mesh_pt(i_mesh));
+   if (!(sub_mesh_pt!=0))
     {
-     // Is it refineable? No!
-     RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
-     if (ref_el_pt==0)
+     const unsigned nele_submesh = mesh_pt(i_mesh)->nelement();
+     for (unsigned e = 0; e < nele_submesh; e++)
       {
-       // The element is not refineable - stick a zero in refinement_info
-       // indicating that there are no tree nodes following
-       unsigned e=Base_mesh_element_number_plus_one[el_pt];
-#ifdef PARANOID
-       if (e==0)
+       // Get pointer to element
+       GeneralisedElement* el_pt=mesh_pt(i_mesh)->element_pt(e);
+
+       // Ignore halos
+       if (!el_pt->is_halo())
         {
-         throw OomphLibError(
-          "Base_mesh_element_number_plus_one[...]=0",
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-        }
-#endif
-       e-=1;
-       flat_packed_refinement_info_for_root[e].push_back(0);
-      }
-     // Refineable
-     else
-      {
-       // Get the root element
-       RefineableElement* root_el_pt=ref_el_pt->root_element_pt();
-
-       // Has this root been visited yet?
-       if (!root_el_done[root_el_pt])
-        {
-         // Get unique number of root element in base mesh
-         unsigned root_element_number=
-          Base_mesh_element_number_plus_one[root_el_pt];
+         // Is it refineable? No!
+         RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
+         if (ref_el_pt==0)
+          {
+           // The element is not refineable - stick a zero in refinement_info
+           // indicating that there are no tree nodes following
+           unsigned e=Base_mesh_element_number_plus_one[el_pt];
 #ifdef PARANOID
-         if (root_element_number==0)
-          {
-           throw OomphLibError(
-            "Base_mesh_element_number_plus_one[...]=0",
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-          }
-#endif
-         root_element_number-=1;
-
-         // Get all the nodes associated with this root element
-         Vector<Tree*> all_tree_nodes_pt;
-         root_el_pt->tree_pt()->
-          stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
-
-         // How many tree nodes are there?
-         unsigned n_tree_nodes=all_tree_nodes_pt.size();
-         flat_packed_refinement_info_for_root[root_element_number].
-          push_back(n_tree_nodes);
-
-         // Loop over all levels
-         for (unsigned current_level=0;
-              current_level<max_refinement_level_overall;
-              current_level++)
-          {
-           // Loop over all tree nodes
-           for (unsigned e=0;e<n_tree_nodes;e++)
+           if (e==0)
             {
-             // What's the level of this tree node?
-             unsigned level=all_tree_nodes_pt[e]->level();
+             throw OomphLibError(
+              "Base_mesh_element_number_plus_one[...]=0",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION);
+            }
+#endif
+           e-=1;
+           flat_packed_refinement_info_for_root[e].push_back(0);
+          }
+         // Refineable
+         else
+          {
+           // Get the root element
+           RefineableElement* root_el_pt=ref_el_pt->root_element_pt();
 
-             // Element exists at this refinement level of the mesh
-             // if it's at this level or it's at a lower level and a leaf
-             if ((level==current_level) ||
-                 ((level<current_level) && (all_tree_nodes_pt[e]->is_leaf())))
+           // Has this root been visited yet?
+           if (!root_el_done[root_el_pt])
+            {         
+             // Get unique number of root element in base mesh
+             unsigned root_element_number=
+              Base_mesh_element_number_plus_one[root_el_pt];
+
+#ifdef PARANOID
+             if (root_element_number==0)
               {
-               flat_packed_refinement_info_for_root[root_element_number].
-                push_back(1);
+               throw OomphLibError(
+                "Base_mesh_element_number_plus_one[...]=0",
+                OOMPH_CURRENT_FUNCTION,
+                OOMPH_EXCEPTION_LOCATION);
+              }
+#endif
+             root_element_number-=1;
+             
+             // Get all the nodes associated with this root element
+             Vector<Tree*> all_tree_nodes_pt;
+             root_el_pt->tree_pt()->
+              stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
+             
+             // How many tree nodes are there?
+             unsigned n_tree_nodes=all_tree_nodes_pt.size();         
+             flat_packed_refinement_info_for_root[root_element_number].
+              push_back(n_tree_nodes);
+             
+             // Loop over all levels
+             for (unsigned current_level=0;
+                  current_level<max_refinement_level_overall;
+                  current_level++)
+              {
+               // Loop over all tree nodes
+               for (unsigned e=0;e<n_tree_nodes;e++)
+                {
+                 // What's the level of this tree node?
+                 unsigned level=all_tree_nodes_pt[e]->level();
 
-               // If it's at this level, and not a leaf, then it will
-               // need to be refined in the new mesh
-               if ((level==current_level) &&
-                   (!all_tree_nodes_pt[e]->is_leaf()))
-                {
-                 flat_packed_refinement_info_for_root[root_element_number].
-                  push_back(1);
-                }
-               // Element exists at this level and is a leaf so it doesn't
-               // have to be refined
-               else
-                {
-                 flat_packed_refinement_info_for_root[root_element_number].
-                  push_back(0);
+                 // Element exists at this refinement level of the mesh
+                 // if it's at this level or it's at a lower level and a leaf
+                 if ((level==current_level) || 
+                     ((level<current_level) && 
+                      (all_tree_nodes_pt[e]->is_leaf())))
+                  {
+                   flat_packed_refinement_info_for_root[root_element_number].
+                    push_back(1);
+
+                   // If it's at this level, and not a leaf, then it will 
+                   // need to be refined in the new mesh
+                   if ((level==current_level) && 
+                       (!all_tree_nodes_pt[e]->is_leaf()))
+                    {
+                     flat_packed_refinement_info_for_root[root_element_number].
+                      push_back(1);
+                    }
+                   // Element exists at this level and is a leaf so it doesn't
+                   // have to be refined
+                   else
+                    {
+                     flat_packed_refinement_info_for_root[root_element_number].
+                      push_back(0);
+                    }
+                  }
+                 // Element does not exist at this level so it doesn't have
+                 // to be refined
+                 else
+                  {
+                   flat_packed_refinement_info_for_root[root_element_number].
+                    push_back(0);
+                  }
                 }
               }
-             // Element does not exist at this level so it doesn't have
-             // to be refined
-             else
-              {
-               flat_packed_refinement_info_for_root[root_element_number].
-                push_back(0);
-              }
+             // Now we've done it
+             root_el_done[root_el_pt]=true;
             }
           }
-         // Now we've done it
-         root_el_done[root_el_pt]=true;
-        }
-      }
-    }
-  }
+       
+        } // if (!el_pt->is_halo())
+      } // for (e < nele_submesh)
+    } // if (!(sub_mesh_pt!=0))
+  } // for (i_mesh < n_mesh) 
 }
-
 
 //==========================================================================
 /// Load balance helper routine:  Function performs max_level_overall
@@ -19182,126 +19832,138 @@ void Problem::refine_distributed_base_mesh
 /// (used during load balancing) after pruning.
 //====================================================================
 void Problem::setup_base_mesh_info_after_pruning()
- {
-  // Storage for number of processors and current processor
-  int n_proc=this->communicator_pt()->nproc();
-  int my_rank=this->communicator_pt()->my_rank();
+{
+ // Storage for number of processors and current processor
+ int n_proc=this->communicator_pt()->nproc();
+ int my_rank=this->communicator_pt()->my_rank();
 
-  // Loop over sub meshes
-  unsigned n_sub_mesh=nsub_mesh();
-  unsigned max_mesh=std::max(n_sub_mesh,unsigned(1));
-  for (unsigned i_mesh=0;i_mesh<max_mesh;i_mesh++)
-   {
-    // Choose the right mesh
-    Mesh* my_mesh_pt=0;
-    if (n_sub_mesh==0)
-     {
-      my_mesh_pt=mesh_pt();
-     }
-    else
-     {
-      my_mesh_pt=mesh_pt(i_mesh);
-     }
+ // Loop over sub meshes
+ unsigned n_sub_mesh=nsub_mesh(); 
+ unsigned max_mesh=std::max(n_sub_mesh,unsigned(1));
+ for (unsigned i_mesh=0;i_mesh<max_mesh;i_mesh++)
+  {
+   // Choose the right mesh
+   Mesh* my_mesh_pt=0;
+   if (n_sub_mesh==0)
+    {
+     my_mesh_pt=mesh_pt();
+    }
+   else
+    {
+     my_mesh_pt=mesh_pt(i_mesh);
+    }
 
-    // Storage for number of data to be sent to each processor
-    Vector<int> send_n(n_proc,0);
+   // Only work with structured meshes
+   TriangleMeshBase* sub_mesh_pt = 
+    dynamic_cast<TriangleMeshBase*>(my_mesh_pt);
+   if (!(sub_mesh_pt!=0))
+    {
+     // Storage for number of data to be sent to each processor
+     Vector<int> send_n(n_proc,0);
 
-    // Storage for all values to be sent to all processors
-    Vector<unsigned> send_data;
+     // Storage for all values to be sent to all processors
+     Vector<unsigned> send_data;
 
-    // Start location within send_data for data to be sent to each processor
-    Vector<int> send_displacement(n_proc,0);
+     // Start location within send_data for data to be sent to each processor 
+     Vector<int> send_displacement(n_proc,0);
+    
+     // Loop over all processors
+     for(int rank=0;rank<n_proc;rank++)
+      {  
+       //Set the offset for the current processor
+       send_displacement[rank] = send_data.size();
+      
+       //Don't bother to do anything if the processor in the loop is the 
+       //current processor
+       if(rank!=my_rank)
+        {
+         // Get root haloed elements with that processor
+         Vector<GeneralisedElement*> root_haloed_elements_pt=
+          my_mesh_pt->root_haloed_element_pt(rank);
+         unsigned nel=root_haloed_elements_pt.size();
 
-    // Loop over all processors
-    for(int rank=0;rank<n_proc;rank++)
-     {
-      //Set the offset for the current processor
-      send_displacement[rank] = send_data.size();
+         // Store element numbers for send
+         for (unsigned e=0;e<nel;e++)
+          {
+           GeneralisedElement* el_pt=root_haloed_elements_pt[e];
+           send_data.push_back(Base_mesh_element_number_plus_one[el_pt]);
+          }
 
-      //Don't bother to do anything if the processor in the loop is the
-      //current processor
-      if(rank!=my_rank)
-       {
-        // Get root haloed elements with that processor
-        Vector<GeneralisedElement*> root_haloed_elements_pt=
-         my_mesh_pt->root_haloed_element_pt(rank);
-        unsigned nel=root_haloed_elements_pt.size();
+        }
 
-        // Store element numbers for send
-        for (unsigned e=0;e<nel;e++)
-         {
-          GeneralisedElement* el_pt=root_haloed_elements_pt[e];
-          send_data.push_back(Base_mesh_element_number_plus_one[el_pt]);
-         }
+       //Find the number of data added to the vector
+       send_n[rank] = send_data.size() - send_displacement[rank];
+      }
 
-       }
+     //Storage for the number of data to be received from each processor
+     Vector<int> receive_n(n_proc,0);
 
-      //Find the number of data added to the vector
-      send_n[rank] = send_data.size() - send_displacement[rank];
-     }
-
-    //Storage for the number of data to be received from each processor
-    Vector<int> receive_n(n_proc,0);
-
-    //Now send numbers of data to be sent between all processors
-    MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
-                 this->communicator_pt()->mpi_comm());
-
-    //We now prepare the data to be received
-    //by working out the displacements from the received data
-    Vector<int> receive_displacement(n_proc,0);
-    int receive_data_count=0;
-    for(int rank=0;rank<n_proc;++rank)
-     {
-      //Displacement is number of data received so far
-      receive_displacement[rank] = receive_data_count;
-      receive_data_count += receive_n[rank];
-     }
-
-    //Now resize the receive buffer for all data from all processors
-    //Make sure that it has a size of at least one
-    if(receive_data_count==0) {++receive_data_count;}
-    Vector<unsigned> receive_data(receive_data_count);
-
-    //Make sure that the send buffer has size at least one
-    //so that we don't get a segmentation fault
-    if(send_data.size()==0) {send_data.resize(1);}
-
-    //Now send the data between all the processors
-    MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
-                  MPI_UNSIGNED,
-                  &receive_data[0],&receive_n[0],
-                  &receive_displacement[0],
-                  MPI_UNSIGNED,
+     //Now send numbers of data to be sent between all processors
+     MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
                   this->communicator_pt()->mpi_comm());
 
-    //Now use the received data to update the halo element numbers in base mesh
-    for (int send_rank=0;send_rank<n_proc;send_rank++)
-     {
-      //Don't bother to do anything for the processor corresponding to the
-      //current processor or if no data were received from this processor
-      if((send_rank != my_rank) && (receive_n[send_rank] != 0))
-       {
-        //Counter for the data within the large array
-        unsigned count=receive_displacement[send_rank];
+     //We now prepare the data to be received
+     //by working out the displacements from the received data
+     Vector<int> receive_displacement(n_proc,0);
+     int receive_data_count=0;
+     for(int rank=0;rank<n_proc;++rank)
+      {
+       //Displacement is number of data received so far
+       receive_displacement[rank] = receive_data_count;
+       receive_data_count += receive_n[rank];
+      }
 
-        // Get root halo elements with that processor
-        Vector<GeneralisedElement*> root_halo_elements_pt=
-         my_mesh_pt->root_halo_element_pt(send_rank);
-        unsigned nel=root_halo_elements_pt.size();
+     //Now resize the receive buffer for all data from all processors
+     //Make sure that it has a size of at least one
+     if(receive_data_count==0) {++receive_data_count;}
+     Vector<unsigned> receive_data(receive_data_count);
 
-        // Read in element numbers
-        for (unsigned e=0;e<nel;e++)
-         {
-          GeneralisedElement* el_pt=root_halo_elements_pt[e];
-          unsigned el_number_plus_one=receive_data[count++];
-          Base_mesh_element_number_plus_one[el_pt]=el_number_plus_one;
-          Base_mesh_element_pt[el_number_plus_one-1]=el_pt;
-         }
-       }
-     } //End of data is received
-   }
- }
+     //Make sure that the send buffer has size at least one
+     //so that we don't get a segmentation fault
+     if(send_data.size()==0) {send_data.resize(1);}
+
+     //Now send the data between all the processors
+     MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
+                   MPI_UNSIGNED,
+                   &receive_data[0],&receive_n[0],
+                   &receive_displacement[0],
+                   MPI_UNSIGNED,
+                   this->communicator_pt()->mpi_comm());
+
+     //Now use the received data to update the halo element numbers in
+     //base mesh
+     for (int send_rank=0;send_rank<n_proc;send_rank++)
+      {
+       //Don't bother to do anything for the processor corresponding to the
+       //current processor or if no data were received from this processor
+       if((send_rank != my_rank) && (receive_n[send_rank] != 0))
+        {
+         //Counter for the data within the large array
+         unsigned count=receive_displacement[send_rank];
+
+         // Get root halo elements with that processor
+         Vector<GeneralisedElement*> root_halo_elements_pt=
+          my_mesh_pt->root_halo_element_pt(send_rank);
+         unsigned nel=root_halo_elements_pt.size();
+
+         // Read in element numbers
+         for (unsigned e=0;e<nel;e++)
+          {
+           GeneralisedElement* el_pt=root_halo_elements_pt[e];
+           unsigned el_number_plus_one=receive_data[count++];
+           Base_mesh_element_number_plus_one[el_pt]=el_number_plus_one;
+           Base_mesh_element_pt[el_number_plus_one-1]=el_pt;
+          }
+         
+        }
+       
+      } //End of data is received
+     
+    } // if (!(sub_mesh_pt!=0))
+   
+  } // for (i_mesh<max_mesh)
+ 
+}
 
 #endif
 

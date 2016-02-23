@@ -66,14 +66,13 @@ class SparseVector
 
 public:
 
-
  /// Constructor
  SparseVector()
   {
    // Empty instance
    Empty_pt=new T(0);
   }
-
+  
  /// Destructor
  ~SparseVector()
   {
@@ -88,16 +87,17 @@ public:
    // Create a "large" bool vector indicating all entries are empty
    Has_entry.resize(size,false);
   }
-
+ 
  /// Wipe storage
  void clear()
-  {
+ {
    Data.clear();
+   
    // Get current size and reset all entries
    const unsigned size = Has_entry.size();
    Has_entry.resize(size,false);
   }
-
+ 
  /// Square bracket access (const version)
  const T& operator[](const unsigned& i) const
   {
@@ -109,7 +109,6 @@ public:
     }
    return (*it).second;
   }
- 
  
  /// Set value of i-th entry
  void set_value(const unsigned& i, const T& value)
@@ -272,7 +271,7 @@ private:
  /// \short Flag to indicate that MeshAsGeomObject has used
  /// Eulerian coordinates when setting up bin.
  bool Have_used_eulerian_coordinates_during_setup;
-
+ 
 public:
  
  ///\short Constructor, pass the pointer to the mesh. 
@@ -450,7 +449,7 @@ public:
                             GeomObject*& sub_geom_object_pt,
                             Vector<double>& s, 
                             const bool &called_within_spiral);
- 
+  
  /// \short Version of spiraling locate zeta used for the projection
  /// during the unstructured mesh adatation
  void my_spiraling_locate_zeta(const Vector<double>& zeta,

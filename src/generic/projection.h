@@ -23,16 +23,11 @@
 //LIC// License along with this library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 //LIC// 02110-1301  USA.
-//LIC// 
+//LIC// T
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
 //Header file for a classes used to represent projectable elements
-
-// TODO:
-// -- Switch to more efficient solver for projection problem.
-   
-
 
 #ifndef PROJECTION_H
 #define PROJECTION_H
@@ -44,6 +39,16 @@
 #include "shape.h"
 #include "element_with_external_element.h"
 #include "linear_solver.h"
+
+// Using CG to solve the projection problem
+#ifdef OOMPH_HAS_TRILINOS
+#include "trilinos_solver.h"
+#endif // #ifdef OOMPH_HAS_TRILINOS
+#include "iterative_linear_solver.h"
+
+// Use a preconditioner for the iterative solver
+#include "preconditioner.h"
+#include "general_purpose_preconditioners.h"
 
 namespace oomph
 {
@@ -651,7 +656,15 @@ class FaceGeometry<ProjectableElement<ELEMENT> >
    FaceGeometry() : FaceGeometry<ELEMENT>() {}
  };
 
+// Forward definition of the friends of the class
 
+// The RefineableTriangleMesh
+template<class FRIEND_PROJECTABLE_ELEMENT>
+class RefineableTriangleMesh;
+
+// The BackupMeshForProjection
+template<class FRIEND_PROJECTABLE_ELEMENT>
+class BackupMeshForProjection;
 
 //=======================================================================
 /// Projection problem. This is created during the adaptation
@@ -662,20 +675,20 @@ class FaceGeometry<ProjectableElement<ELEMENT> >
 template<class PROJECTABLE_ELEMENT>
 class ProjectionProblem : public virtual Problem
 {
-  public:
   
- ///Default constructor 
- ProjectionProblem() 
-  {
-   //This is a linear problem so avoid checking the residual
-   //after the solve 
-   Problem_is_nonlinear=false; // DO NOT CHANGE THIS -- EVER -- IN
-                               // SOLID MECHANICS PROBLEMS
-
-   // By default suppress output during projection
-   Output_during_projection_suppressed=true;
-  }
-
+  // The classes are friend whether the templated element of the
+  // friend class is the same or not as the templated element of the
+  // ProjectionProblem class
+  template<class FRIEND_PROJECTABLE_ELEMENT> friend class RefineableTriangleMesh;
+  template<class FRIEND_PROJECTABLE_ELEMENT> friend class BackupMeshForProjection;
+  // The classes are friend only when the templated element of the
+  // friend class matches the templated element of the
+  // ProjectionProblem class
+  //  friend class RefineableTriangleMesh<class PROJECTABLE_ELEMENT>;
+  //  friend class BackupMeshForProjection<class PROJECTABLE_ELEMENT>;
+  
+ public:
+  
  /// Suppress all output during projection phases
  void enable_suppress_output_during_projection()
  {
@@ -688,9 +701,85 @@ class ProjectionProblem : public virtual Problem
   Output_during_projection_suppressed=false;
  }
 
+ /// Return the value of the flag about using an iterative solver for
+ /// projection
+ bool use_iterative_solver_for_projection()
+ {return Use_iterative_solver_for_projection;}
+ 
+ /// Enables the use of an iterative solver for projection
+ void enable_use_iterative_solver_for_projection()
+ {Use_iterative_solver_for_projection=true;}
+ 
+ /// Disbales the use of an iterative solver for projection
+ void disable_use_iterative_solver_for_projection()
+ {Use_iterative_solver_for_projection=false;}
+ 
  ///\short Project from base into the problem's own mesh. 
  void project(Mesh* base_mesh_pt, const bool& dont_project_positions=false)
- {
+ {  
+  // Use an iterative solver?
+  if (Use_iterative_solver_for_projection)
+   {
+    // If oomph-lib has Trilinos installed then use the CG version
+    // from Trilinos, otherwise use oomph-lib's own CG implementation
+#ifdef OOMPH_HAS_TRILINOS
+    // Check whether the problem is distributed?
+    if (MPI_Helpers::mpi_has_been_initialised())
+     {
+      // Create a Trilinos Solver 
+      Iterative_solver_projection_pt = new TrilinosAztecOOSolver;
+      // Select CG as the linear solver
+      dynamic_cast<TrilinosAztecOOSolver*>(Iterative_solver_projection_pt)->
+       solver_type() = TrilinosAztecOOSolver::CG;
+     }
+    else
+     {
+      // Use CG to solve the projection problem
+      Iterative_solver_projection_pt = new CG<CRDoubleMatrix>;
+     }
+    
+    // Create the preconditioner
+    Preconditioner_projection_pt = new MatrixBasedDiagPreconditioner();
+    // Set the preconditioner for the solver
+    Iterative_solver_projection_pt->preconditioner_pt() =
+     Preconditioner_projection_pt;
+    
+    // Set CG as the linear solver
+    Problem::linear_solver_pt() = Iterative_solver_projection_pt;
+
+#else
+    // Check whether the problem is distributed?
+    if (!(MPI_Helpers::mpi_has_been_initialised()))
+     {
+      // If we did not installed Trilinos and the problem is not
+      // distributed then we can use a (serial) preconditioned
+      // iterative solver, otherwise, if we did not installed Trilinos
+      // but the problem is distributed then we cannot use a
+      // preconditioned iterative solver. Matrix multiplication in a
+      // distributed environment is only performed by Trilinos. We
+      // then use a direct solver for the projection problem.
+      
+      // Use CG to solve the projection problem
+      Iterative_solver_projection_pt = new CG<CRDoubleMatrix>; 
+      
+      // Create the preconditioner
+      Preconditioner_projection_pt = new MatrixBasedDiagPreconditioner();
+      // Set the preconditioner for the solver
+      Iterative_solver_projection_pt->preconditioner_pt() =
+       Preconditioner_projection_pt;
+      
+      // Set CG as the linear solver
+      Problem::linear_solver_pt() = Iterative_solver_projection_pt;
+     }
+    else
+     {
+      // Use a direct solver. Do nothing
+     }
+    
+#endif
+    
+   } // if (Use_iterative_solver_for_projection)
+  
   // Backup verbosity in Newton solve status
   bool shut_up_in_newton_solve_backup=Shut_up_in_newton_solve;
 
@@ -714,6 +803,7 @@ class ProjectionProblem : public virtual Problem
     oomph_info << "Base mesh has " << n_node1 << " nodes\n";
     oomph_info << "Target mesh has " << n_node << " nodes\n";
     oomph_info <<"=============================\n\n";
+    
    }
   else
    {
@@ -1190,6 +1280,9 @@ class ProjectionProblem : public virtual Problem
       dynamic_cast<PROJECTABLE_ELEMENT*>
       (Problem::mesh_pt()->element_pt(e));
      
+     // Flush information associated with the external elements
+     new_el_pt->flush_all_external_element_storage();
+     
      new_el_pt->disable_projection();
     }
    
@@ -1198,6 +1291,9 @@ class ProjectionProblem : public virtual Problem
      PROJECTABLE_ELEMENT * el_pt = 
       dynamic_cast<PROJECTABLE_ELEMENT*>
       (base_mesh_pt->element_pt(e));
+     
+     // Flush information associated with the external elements
+     el_pt->flush_all_external_element_storage();
      
      // Disable  projection
      el_pt->disable_projection();
@@ -1209,11 +1305,21 @@ class ProjectionProblem : public virtual Problem
    // Now cleanup the storage
    Solid_backup.clear();
    
-   unsigned ndof_tmp=this->assign_eqn_numbers();
+   /* unsigned ndof_tmp=this->assign_eqn_numbers(); */
    if (!Output_during_projection_suppressed)
     {
-     oomph_info << "Number of unknowns after project: " 
-                << ndof_tmp << std::endl;
+     /* oomph_info << "Number of unknowns after project: "  */
+     /*            << ndof_tmp << std::endl; */
+     //std::ostringstream warn_message;
+     //warn_message
+     // << "WARNING: Ensure to assign equations numbers in the new mesh,\n"
+     // << "this is done by calling the assign_eqn_numbers() method from\n"
+     // << "the original Problem object that has an instance of the mesh.\n"
+     // << "This may be performed in actions_after_adapt() if the projection\n"
+     // << "was performed as part of the mesh adaptation process\n\n";
+     //OomphLibWarning(warn_message.str(),
+     //                OOMPH_CURRENT_FUNCTION,
+     //                OOMPH_EXCEPTION_LOCATION);
     }
    else
     {
@@ -1230,8 +1336,46 @@ class ProjectionProblem : public virtual Problem
   } //End of function Projection
  
   private:
+  
+ ///Default constructor (made this private so only the friend class
+ ///can call the constructor)
+ ProjectionProblem()
+  {   
+   //This is a linear problem so avoid checking the residual
+   //after the solve 
+   Problem_is_nonlinear=false; // DO NOT CHANGE THIS -- EVER -- IN
+                               // SOLID MECHANICS PROBLEMS
+     
+   // By default suppress output during projection
+   Output_during_projection_suppressed=true;
 
-
+   // By default we use an iterative solver for projection
+   Use_iterative_solver_for_projection=true;
+   
+   // Initialise the pointer to the solver and the preconditioner
+   Iterative_solver_projection_pt = 0;
+   Preconditioner_projection_pt = 0;
+  }
+ 
+ // Destructor
+ ~ProjectionProblem()
+  {
+   if (Iterative_solver_projection_pt!=0)
+    {
+     // Clean up memory
+     delete Iterative_solver_projection_pt;
+     Iterative_solver_projection_pt = 0;
+    }
+   
+   if (Preconditioner_projection_pt!=0)
+    {
+     delete Preconditioner_projection_pt;
+     Preconditioner_projection_pt = 0;
+    }
+   
+  }
+   
+ 
  /// \short Helper function to store positions (the only things that
  /// have been set before doing projection
  void store_positions()
@@ -1606,9 +1750,17 @@ class ProjectionProblem : public virtual Problem
  /// Backup for pin status of solid node's position Data
  Vector<DenseMatrix<double> > Solid_backup;
 
-
  /// Flag to suppress output during projection
  bool Output_during_projection_suppressed;
+
+ // Use an iterative solver for solving the system of equations
+ bool Use_iterative_solver_for_projection;
+ 
+ // The iterative solver to solve the projection problem
+ IterativeLinearSolver *Iterative_solver_projection_pt;
+ 
+ // The preconditioner for the solver
+ Preconditioner *Preconditioner_projection_pt;
 
 };
 

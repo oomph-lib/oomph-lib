@@ -1201,6 +1201,7 @@ void TriangleMeshCurveSection::connect_initial_vertex_to_polyline(
  Initial_vertex_connected = true;
  Initial_vertex_connected_bnd_id = polyline_pt->boundary_id();
  Initial_vertex_connected_n_vertex = vertex_number;
+ Initial_vertex_connected_n_chunk = polyline_pt->boundary_chunk();
 
 }
 
@@ -1270,6 +1271,7 @@ void TriangleMeshCurveSection::connect_final_vertex_to_polyline(
  Final_vertex_connected = true;
  Final_vertex_connected_bnd_id = polyline_pt->boundary_id();
  Final_vertex_connected_n_vertex = vertex_number;
+ Final_vertex_connected_n_chunk = polyline_pt->boundary_chunk();
 
 }
 
@@ -1343,6 +1345,7 @@ void TriangleMeshCurveSection::connect_initial_vertex_to_curviline(
  Initial_vertex_connected_to_curviline = true;
  Initial_vertex_connected = true;
  Initial_vertex_connected_bnd_id = curviline_pt->boundary_id();
+ Initial_vertex_connected_n_chunk = curviline_pt->boundary_chunk();
 
  // We are still not able to compute the vertex number but we can
  // at least store the corresponding s value
@@ -1427,6 +1430,7 @@ void TriangleMeshCurveSection::connect_final_vertex_to_curviline(
  Final_vertex_connected_to_curviline = true;
  Final_vertex_connected = true;
  Final_vertex_connected_bnd_id = curviline_pt->boundary_id();
+ Final_vertex_connected_n_chunk = curviline_pt->boundary_chunk();
 
  // We are still not able to compute the vertex number but we can
  // at least store the corresponding s value.
@@ -1464,58 +1468,64 @@ TriangleMeshClosedCurve::TriangleMeshClosedCurve(
   TriangleMeshCurve(curve_section_pt),
   Internal_point_pt(internal_point_pt)
 {
-
+ 
 #ifdef PARANOID
-
- // Matching of curve sections i.e. the last vertex of
- // the i curve section should match with the first
- // vertex of the i+1 curve section
-
+ 
+ // Matching of curve sections i.e. the last vertex of the i curve
+ // section should match with the first vertex of the i+1 curve
+ // section
+ 
  // Total number of boundaries
- unsigned n_boundaries = Curve_section_pt.size();
-
+ const unsigned n_boundaries = Curve_section_pt.size();
+ 
  // Need at least two
  if (n_boundaries<2)
   {
    std::ostringstream error_stream;
    error_stream
-   << "Sorry -- I'm afraid we insist that a closed curve is\n"
-   << "specified by at least two separate CurveSections.\n"
-   << "You've only specified (" << n_boundaries << ")" << std::endl;
+    << "Sorry -- I'm afraid we insist that a closed curve is\n"
+    << "specified by at least two separate CurveSections.\n"
+    << "You've only specified (" << n_boundaries << ")" << std::endl;
    throw OomphLibError(error_stream.str(),
                        OOMPH_CURRENT_FUNCTION,
-     OOMPH_EXCEPTION_LOCATION);
+                       OOMPH_EXCEPTION_LOCATION);
   }
-
+ 
  // Check last point of each boundary bit coincides with first point
  // on next one
  for (unsigned i=0;i<n_boundaries-1;i++)
   {
-
+   
    // Auxiliary vertex for storing the vertex values of contiguous curves
    Vector<double> v1(2);
-
+   
    // This is for getting the final coordinates of the i curve section
    curve_section_pt[i]->final_vertex_coordinate(v1);
-
+   
    // Auxiliary vertex for storing the vertex values of contiguous curves
    Vector<double> v2(2);
-
+   
    // This is for the start coordinates of the i+1 curve section
    curve_section_pt[i+1]->initial_vertex_coordinate(v2);
-
+   
    // Work out error
    double error = sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
-
+   
    if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
     {
      std::ostringstream error_stream;
      error_stream
-     << "The start and end points of curve section boundary parts " << i
-     << " and " <<i+1<< " don't match when judged \nwith the tolerance of "
+     << "The start and end points of curve section boundary parts\n" << i
+     << " and " <<i+1<< " don't match when judged with the tolerance of "
      << ToleranceForVertexMismatchInPolygons::Tolerable_error
-     << " which is specified in the namespace \nvariable "
+     << " which\nis specified in the namespace variable\n"
      << "ToleranceForVertexMismatchInPolygons::Tolerable_error.\n\n"
+     << "These are the vertices coordinates:\n"
+     << "Curve section ("<<i<<") final vertex: ("
+     << v1[0] <<", "<< v1[1] <<")\n"
+     << "Curve section ("<<i+1<<") initial vertex: ("
+     << v2[0] <<", "<< v2[1] <<")\n"
+     << "The distance between the vertices is ("<<error<< ")\n"
      << "Feel free to adjust this or to recompile the code without\n"
      << "paranoia if you think this is OK...\n"
      << std::endl;
@@ -1626,260 +1636,261 @@ TriangleMeshPolygon::TriangleMeshPolygon(
     Can_update_configuration(false),
     Polygon_fixed(false)
 {
-
+ 
 #ifdef PARANOID
-
-  unsigned nbound=boundary_polyline_pt.size();
-
-  // Check that all the constituent TriangleMeshCurveSection are
-  // instance of TriangleMeshPolyLine
-  for (unsigned p = 0; p < nbound; p++)
-   {
-    TriangleMeshPolyLine *tmp_polyline_pt =
-      dynamic_cast<TriangleMeshPolyLine*>(boundary_polyline_pt[p]);
-    if (tmp_polyline_pt == 0)
-     {
-      std::ostringstream error_stream;
-      error_stream
+ 
+ // Get the number of polylines
+ const unsigned n_bound = boundary_polyline_pt.size();
+ 
+ // Check that all the constituent TriangleMeshCurveSection are
+ // instance of TriangleMeshPolyLine
+ for (unsigned p = 0; p < n_bound; p++)
+  {
+   TriangleMeshPolyLine *tmp_polyline_pt =
+    dynamic_cast<TriangleMeshPolyLine*>(boundary_polyline_pt[p]);
+   if (tmp_polyline_pt == 0)
+    {
+     std::ostringstream error_stream;
+     error_stream
       << "The (" << p << ") TriangleMeshCurveSection is not a "
       << "TriangleMeshPolyLine.\nThe TriangleMeshPolygon object"
       << "is constituent of only TriangleMeshPolyLine objects.\n"
       << "Verify that all the constituent elements of the "
       << "TriangleMeshPolygon\nare instantiated as "
       << "TriangleMeshPolyLines." << std::endl;
-      throw OomphLibError(error_stream.str(),
-                          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-     }
-   }
-
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ 
  // Check that the polylines are contiguous
  bool contiguous=true;
  unsigned i_offensive=0;
+ 
+ // Need at least two
+ if (n_bound<2)
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "Sorry -- I'm afraid we insist that a closed curve is\n"
+    << "specified by at least two separate TriangleMeshPolyLines.\n"
+    << "You've only specified (" << n_bound << ")" << std::endl;
+   throw OomphLibError(error_stream.str(),
+                       "TriangleMeshPolygon::TriangleMeshPolygon()",
+                       OOMPH_EXCEPTION_LOCATION);
+  } // if (n_bound<2)
+ 
+ // Does the last node of the polyline connect to the first one of the
+ // next one (only up the last but one!)
+ for(unsigned i=0;i<n_bound-1;i++)
+  {
+   // Get vector last vertex in current polyline
+   unsigned last_vertex = (polyline_pt(i)->nvertex())-1;
+   Vector<double> v1=polyline_pt(i)->
+    vertex_coordinate(last_vertex);
+   
+   // Get vector to first vertex in next polyline
+   Vector<double> v2=polyline_pt(i+1)->vertex_coordinate(0);
 
-  // Need at least two
-  if (nbound<2)
+   // Work out error
+   double error=sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
+
+   // Is error accetable?
+   if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
     {
-      std::ostringstream error_stream;
-      error_stream
-      << "Sorry -- I'm afraid we insist that the polygon is specified\n"
-      << "by at least two separate PolyLines. You've only specied "
-      << nbound << std::endl;
-      throw OomphLibError(error_stream.str(),
-                          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
+     contiguous=false;
+     i_offensive=i;
+     break;
     }
-
-
-  // Does the last node of the polyline connect to the first one
-  // of the next one (only up the last but one!)
-  for(unsigned i=0;i<nbound-1;i++)
+   // Align
+   else
     {
-      // Get vector last vertex in current polyline
-      unsigned last_vertex = (polyline_pt(i)->nvertex())-1;
-      Vector<double> v1=polyline_pt(i)->
-          vertex_coordinate(last_vertex);
+     polyline_pt(i+1)->vertex_coordinate(0)=
+      polyline_pt(i)->vertex_coordinate(last_vertex);
+    }
+  }
+ 
+ // Does the last one connect to the first one?
+ 
+ // Get vector last vertex last polyline
+ unsigned last_vertex = (polyline_pt(n_bound-1)->nvertex())-1;
+ Vector<double> v1=polyline_pt(n_bound-1)->
+  vertex_coordinate(last_vertex);
+ 
+ // Get vector first vertex first polyline
+ Vector<double> v2=polyline_pt(0)->vertex_coordinate(0);
+ double error=sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
+ 
+ if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
+  {
+   contiguous=false;
+   i_offensive=n_bound-1;
+  }
+ else
+  {
+   polyline_pt(0)->vertex_coordinate(0)=
+    polyline_pt(n_bound-1)->vertex_coordinate(last_vertex);
+  }
+ 
+ if (!contiguous)
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "The polylines specified \n"
+    << "should define a closed geometry, i.e. the first/last vertex of\n"
+    << "adjacent polylines should match.\n\n"
+    << "Your polyline number "<< i_offensive
+    <<" has no contiguous neighbour, when judged \nwith the tolerance of "
+    << ToleranceForVertexMismatchInPolygons::Tolerable_error
+    << " which is specified in the namespace \nvariable "
+    << "ToleranceForVertexMismatchInPolygons::Tolerable_error.\n\n"
+    << "Feel free to adjust this or to recompile the code without\n"
+    << "paranoia if you think this is OK...\n"
+    << std::endl;
+   throw OomphLibError(error_stream.str(),
+                       "TriangleMeshPolygon::TriangleMeshPolygon()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ // Check if internal point is actually located in bounding polygon
+ // Reference: http://paulbourke.net/geometry/insidepoly/
+ 
+ // Only checked if there is an internal hole
+ if (!Internal_point_pt.empty())
+  {
+   
+   // Vertex coordinates
+   Vector<Vector<double> > polygon_vertex;
+   
+   // Total number of vertices
+   unsigned nvertex=0;
+   
+   // Storage for first/last point on polyline for contiguousness check
+   Vector<double> last_vertex(2);
+   Vector<double> first_vertex(2);
 
-      // Get vector to first vertex in next polyline
-      Vector<double> v2=polyline_pt(i+1)->vertex_coordinate(0);
-
-      // Work out error
-      double error=sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
-
-      // Is error accetable?
-      if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
+   // Get vertices
+   unsigned npolyline=boundary_polyline_pt.size();
+   for (unsigned i=0;i<npolyline;i++)
+    {
+     // Number of vertices
+     unsigned nvert=boundary_polyline_pt[i]->nvertex();
+     for (unsigned j=0;j<nvert;j++)
+      {
+       // Check contiguousness
+       if ((i>1)&&(j==0))
         {
-          contiguous=false;
-          i_offensive=i;
-          break;
+         first_vertex=polyline_pt(i)->vertex_coordinate(j);
+         double dist=sqrt(pow(first_vertex[0]-last_vertex[0],2)+
+                          pow(first_vertex[1]-last_vertex[1],2));
+         if (dist
+             >ToleranceForVertexMismatchInPolygons::Tolerable_error)
+          {
+           std::ostringstream error_stream;
+           error_stream
+            << "The start and end points of polylines " << i
+            << " and " <<i+1<< " don't match when judged\n"
+            << "with the tolerance ("
+            << ToleranceForVertexMismatchInPolygons::Tolerable_error
+            << ") which is specified in the namespace \nvariable "
+            << "ToleranceForVertexMismatchInPolygons::"
+            << "Tolerable_error.\n\n"
+            << "Feel free to adjust this or to recompile the "
+            << "code without\n"
+            << "paranoia if you think this is OK...\n"
+            << std::endl;
+           throw OomphLibError(
+            error_stream.str(),
+            "TriangleMeshPolygon::TriangleMeshPolygon()",
+            OOMPH_EXCEPTION_LOCATION);
+          }
         }
-      // Align
-      else
+       // Get vertex (ignore end point)
+       if (j<nvert-1)
         {
-          polyline_pt(i+1)->vertex_coordinate(0)=
-              polyline_pt(i)->vertex_coordinate(last_vertex);
+         polygon_vertex.push_back(
+          polyline_pt(i)->vertex_coordinate(j));
         }
-    }
-
-  // Does the last one connect to the first one?
-
-  // Get vector last vertex last polyline
-  unsigned last_vertex = (polyline_pt(nbound-1)->nvertex())-1;
-  Vector<double> v1=polyline_pt(nbound-1)->
-      vertex_coordinate(last_vertex);
-
-  // Get vector first vertex first polyline
-  Vector<double> v2=polyline_pt(0)->vertex_coordinate(0);
-  double error=sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
-
-  if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
-    {
-      contiguous=false;
-      i_offensive=nbound-1;
-    }
-  else
-    {
-      polyline_pt(0)->vertex_coordinate(0)=
-          polyline_pt(nbound-1)->vertex_coordinate(last_vertex);
-    }
-
-  if (!contiguous)
-    {
-      std::ostringstream error_stream;
-      error_stream
-      << "The polylines specified \n"
-      << "should define a closed geometry, i.e. the first/last vertex of\n"
-      << "adjacent polylines should match.\n\n"
-      << "Your polyline number "<< i_offensive
-      <<" has no contiguous neighbour, when judged \nwith the tolerance of "
-      << ToleranceForVertexMismatchInPolygons::Tolerable_error
-      << " which is specified in the namespace \nvariable "
-      << "ToleranceForVertexMismatchInPolygons::Tolerable_error.\n\n"
-      << "Feel free to adjust this or to recompile the code without\n"
-      << "paranoia if you think this is OK...\n"
-      << std::endl;
-      throw OomphLibError(error_stream.str(),
-                          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-
-  // Check if internal point is actually located in bounding polygon
-  // Reference: http://paulbourke.net/geometry/insidepoly/
-
-  // Only checked if there is an internal hole
-  if (!Internal_point_pt.empty())
-    {
-
-      // Vertex coordinates
-      Vector<Vector<double> > polygon_vertex;
-
-      // Total number of vertices
-      unsigned nvertex=0;
-
-      // Storage for first/last point on polyline for contiguousness check
-      Vector<double> last_vertex(2);
-      Vector<double> first_vertex(2);
-
-      // Get vertices
-      unsigned npolyline=boundary_polyline_pt.size();
-      for (unsigned i=0;i<npolyline;i++)
+       // Prepare for check of contiguousness
+       else
         {
-          // Number of vertices
-          unsigned nvert=boundary_polyline_pt[i]->nvertex();
-          for (unsigned j=0;j<nvert;j++)
+         last_vertex=polyline_pt(i)->vertex_coordinate(j);
+        }
+      }
+    }
+
+   // Total number of vertices
+   nvertex=polygon_vertex.size();
+
+   // Counter for number of intersections
+   unsigned intersect_counter=0;
+
+   //Get first vertex
+   Vector<double> p1=polygon_vertex[0];
+   for (unsigned i=1;i<=nvertex;i++)
+    {
+     // Get second vertex by wrap-around
+     Vector<double> p2 = polygon_vertex[i%nvertex];
+     
+     if (Internal_point_pt[1] > std::min(p1[1],p2[1]))
+      {
+       if (Internal_point_pt[1] <= std::max(p1[1],p2[1]))
+        {
+         if (Internal_point_pt[0] <= std::max(p1[0],p2[0]))
+          {
+           if (p1[1] != p2[1])
             {
-              // Check contiguousness
-              if ((i>1)&&(j==0))
-                {
-                  first_vertex=polyline_pt(i)->vertex_coordinate(j);
-                  double dist=sqrt(pow(first_vertex[0]-last_vertex[0],2)+
-                      pow(first_vertex[1]-last_vertex[1],2));
-                  if (dist
-                      >ToleranceForVertexMismatchInPolygons::Tolerable_error)
-                    {
-                      std::ostringstream error_stream;
-                      error_stream
-                      << "The start and end points of polylines " << i
-                      << " and " <<i+1<< " don't match when judged\n"
-                      << "with the tolerance ("
-                      << ToleranceForVertexMismatchInPolygons::Tolerable_error
-                      << ") which is specified in the namespace \nvariable "
-                      << "ToleranceForVertexMismatchInPolygons::"
-                      << "Tolerable_error.\n\n"
-                      << "Feel free to adjust this or to recompile the "
-                      << "code without\n"
-                      << "paranoia if you think this is OK...\n"
-                      << std::endl;
-                      throw OomphLibError(
-                          error_stream.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-                    }
-                }
-              // Get vertex (ignore end point)
-              if (j<nvert-1)
-                {
-                  polygon_vertex.push_back(
-                    polyline_pt(i)->vertex_coordinate(j));
-                }
-              // Prepare for check of contiguousness
-              else
-                {
-                  last_vertex=polyline_pt(i)->vertex_coordinate(j);
-                }
+             double xintersect =
+              (Internal_point_pt[1]-p1[1])*(p2[0]-p1[0])/
+              (p2[1]-p1[1])+p1[0];
+             if ( (p1[0] == p2[0]) ||
+                  (Internal_point_pt[0] <= xintersect) )
+              {
+               intersect_counter++;
+              }
             }
+          }
         }
-
-      // Total number of vertices
-      nvertex=polygon_vertex.size();
-
-      // Counter for number of intersections
-      unsigned intersect_counter=0;
-
-      //Get first vertex
-      Vector<double> p1=polygon_vertex[0];
-      for (unsigned i=1;i<=nvertex;i++)
-        {
-          // Get second vertex by wrap-around
-          Vector<double> p2 = polygon_vertex[i%nvertex];
-
-          if (Internal_point_pt[1] > std::min(p1[1],p2[1]))
-            {
-              if (Internal_point_pt[1] <= std::max(p1[1],p2[1]))
-                {
-                  if (Internal_point_pt[0] <= std::max(p1[0],p2[0]))
-                    {
-                      if (p1[1] != p2[1])
-                        {
-                          double xintersect =
-                            (Internal_point_pt[1]-p1[1])*(p2[0]-p1[0])/
-                              (p2[1]-p1[1])+p1[0];
-                          if ( (p1[0] == p2[0]) ||
-                            (Internal_point_pt[0] <= xintersect) )
-                            {
-                              intersect_counter++;
-                            }
-                        }
-                    }
-                }
-            }
-          p1 = p2;
-        }
-
-      // Even number of intersections: outside
-      if (intersect_counter%2==0)
-        {
-          std::ostringstream error_stream;
-          error_stream
-          << "The internal point at "
-          << Internal_point_pt[0]<< " "
-          << Internal_point_pt[1]
-          << " isn't in the polygon that describes the internal closed "
-          << "curve!\nPolygon vertices are at: \n";
-          for (unsigned i=0;i<nvertex;i++)
-            {
-              error_stream << polygon_vertex[i][0] << " "
-                  << polygon_vertex[i][1] << "\n";
-            }
-          error_stream
-          << "This may be because the internal point is defined by a\n"
-          << "GeomObject that has deformed so much that it's \n"
-          << "swept over the (initial) internal point.\n"
-          << "If so, you should update the position of the internal point. \n"
-          << "This could be done automatically by generating \n"
-          << "an internal mesh inside the polygon and using one\n"
-          << "of its internal nodes as the internal point. Actually not \n"
-          << "why triangle doesn't do that automatically....\n";
-          throw OomphLibError(
-              error_stream.str(),
-              OOMPH_CURRENT_FUNCTION,
-              OOMPH_EXCEPTION_LOCATION);
-        }
+      }
+     p1 = p2;
+    }
+   
+   // Even number of intersections: outside
+   if (intersect_counter%2==0)
+    {
+     std::ostringstream error_stream;
+     error_stream
+      << "The internal point at "
+      << Internal_point_pt[0]<< " "
+      << Internal_point_pt[1]
+      << " isn't in the polygon that describes the internal closed "
+      << "curve!\nPolygon vertices are at: \n";
+     for (unsigned i=0;i<nvertex;i++)
+      {
+       error_stream << polygon_vertex[i][0] << " "
+                    << polygon_vertex[i][1] << "\n";
+      }
+     error_stream
+      << "This may be because the internal point is defined by a\n"
+      << "GeomObject that has deformed so much that it's \n"
+      << "swept over the (initial) internal point.\n"
+      << "If so, you should update the position of the internal point. \n"
+      << "This could be done automatically by generating \n"
+      << "an internal mesh inside the polygon and using one\n"
+      << "of its internal nodes as the internal point. Actually not \n"
+      << "why triangle doesn't do that automatically....\n";
+     throw OomphLibError(
+      error_stream.str(),
+      "TriangleMeshPolygon::TriangleMeshPolygon()",
+      OOMPH_EXCEPTION_LOCATION);
 
     }
 
+  }
+ 
 #endif
-
+ 
 }
 
 
@@ -2019,33 +2030,44 @@ namespace TriangleBoundaryHelper
  {
   TriangleHelper::dump_triangulateio(Triangulateio,dump_file);
 
-  // Loop over all boundary nodes and dump out boundary coordinates 
-  // if they exist
-  Vector<double> zeta(1);
-  unsigned nb=nboundary();
-  for (unsigned b=0;b<nb;b++)
+#ifdef OOMPH_HAS_MPI
+  // If the mesh is not distributed then process what follows
+  if (!this->is_mesh_distributed())
    {
-    if (Boundary_coordinate_exists[b])
+#endif // #ifdef OOMPH_HAS_MPI
+    
+    // Loop over all boundary nodes and dump out boundary coordinates
+    // if they exist
+    Vector<double> zeta(1);
+    unsigned nb=nboundary();
+    for (unsigned b=0;b<nb;b++)
      {
-      dump_file << "1 # Boundary coordinate for boundary " << b 
-                << " does exist\n";
-      unsigned nnod=nboundary_node(b);
-      dump_file << nnod << " # Number of dumped boundary nodes\n";
-      for (unsigned j=0;j<nnod;j++)
+      if (Boundary_coordinate_exists[b])
        {
-        Node* nod_pt=boundary_node_pt(b,j);
-        nod_pt->get_coordinates_on_boundary(b,zeta);
-        dump_file << zeta[0] << std::endl;
+        dump_file << "1 # Boundary coordinate for boundary " << b 
+                  << " does exist\n";
+        unsigned nnod=nboundary_node(b);
+        dump_file << nnod << " # Number of dumped boundary nodes\n";
+        for (unsigned j=0;j<nnod;j++)
+         {
+          Node* nod_pt=boundary_node_pt(b,j);
+          nod_pt->get_coordinates_on_boundary(b,zeta);
+          dump_file << zeta[0] << std::endl;
+         }
+        dump_file << "-999 # Done boundary coords for boundary " << b << "\n";
        }
-      dump_file << "-999 # Done boundary coords for boundary " << b << "\n";
-     }
-    else
-     {
-      dump_file << "0 # Boundary coordinate for boundary " << b 
-                << " does not exist\n";
+      else
+       {
+        dump_file << "0 # Boundary coordinate for boundary " << b 
+                  << " does not exist\n";
       
+       }
      }
+  
+#ifdef OOMPH_HAS_MPI
    }
+#endif // #ifdef OOMPH_HAS_MPI
+  
  }
 
 
@@ -2071,108 +2093,118 @@ namespace TriangleBoundaryHelper
   //Now remesh from the new data structure
   this->remesh_from_internal_triangulateio();
    
-
-#ifdef PARANOID
-  // Record number of boundary nodes after remesh
-  unsigned nbound_new=nboundary();
-  if (nbound_new!=nbound_old)
+#ifdef OOMPH_HAS_MPI
+  // If the mesh is not distributed then process what follows
+  if (!this->is_mesh_distributed())
    {
-    std::ostringstream error_stream;
-    error_stream << "Number of boundaries before remesh from triangulateio, " 
-                 << nbound_new 
-                 << ",\ndoesn't match number boundaries afterwards, " 
-                 << nbound_old 
-                 << ". Have you messed \naround with boundary nodes in the "
-                 << "derived mesh constructor (or after calling \nit)? If so,"
-                 << " the dump/restart won't work as written at the moment.";
-    throw OomphLibError(error_stream.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
+#endif // #ifdef OOMPH_HAS_MPI
+    
+#ifdef PARANOID
+    // Record number of boundary nodes after remesh
+    unsigned nbound_new=nboundary();
+    if (nbound_new!=nbound_old)
+     {
+      std::ostringstream error_stream;
+      error_stream << "Number of boundaries before remesh from triangulateio, " 
+                   << nbound_new 
+                   << ",\ndoesn't match number boundaries afterwards, " 
+                   << nbound_old 
+                   << ". Have you messed \naround with boundary nodes in the "
+                   << "derived mesh constructor (or after calling \nit)? If so,"
+                   << " the dump/restart won't work as written at the moment.";
+      throw OomphLibError(error_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
 #endif
 
-
-  // Loop over all boundary nodes and read boundary coordinates 
-  // if they exist
-  Vector<double> zeta(1);
-  std::string input_string;
-  unsigned nb=nboundary();
-  for (unsigned b=0;b<nb;b++)
-   {
-    // Read line up to termination sign
-    getline(restart_file,input_string,'#');
-
-    // Ignore rest of line
-    restart_file.ignore(80,'\n');
-
-    // Did boundary coordinate exist?
-    const unsigned bound_coord_exists=atoi(input_string.c_str());    
-    if (bound_coord_exists==1)
+    
+    // Loop over all boundary nodes and read boundary coordinates 
+    // if they exist
+    Vector<double> zeta(1);
+    std::string input_string;
+    unsigned nb=nboundary();
+    for (unsigned b=0;b<nb;b++)
      {
-      // Remember it!
-      Boundary_coordinate_exists[b]=true;
-
       // Read line up to termination sign
       getline(restart_file,input_string,'#');
-      
+
       // Ignore rest of line
       restart_file.ignore(80,'\n');
-      
-      // How many nodes did we dump?
-      const unsigned nnod_dumped=atoi(input_string.c_str());
 
-      // Does it match?
-      unsigned nnod=nboundary_node(b);
-      if (nnod!=nnod_dumped)
+      // Did boundary coordinate exist?
+      const unsigned bound_coord_exists=atoi(input_string.c_str());    
+      if (bound_coord_exists==1)
        {
-        std::ostringstream error_stream;
-        error_stream << "Number of dumped boundary nodes " 
-                     << nnod_dumped 
-                     << " doesn't match number of nodes on boundary " 
-                     << b << ": " << nnod << std::endl;
-        throw OomphLibError(error_stream.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-       }
+        // Remember it!
+        Boundary_coordinate_exists[b]=true;
 
-      // Loop over all nodes
-      for (unsigned j=0;j<nnod;j++)
-       {
         // Read line up to termination sign
-        getline(restart_file,input_string);
+        getline(restart_file,input_string,'#');
+      
+        // Ignore rest of line
+        restart_file.ignore(80,'\n');
+      
+        // How many nodes did we dump?
+        const unsigned nnod_dumped=atoi(input_string.c_str());
+
+        // Does it match?
+        unsigned nnod=nboundary_node(b);
+        if (nnod!=nnod_dumped)
+         {
+          std::ostringstream error_stream;
+          error_stream << "Number of dumped boundary nodes " 
+                       << nnod_dumped 
+                       << " doesn't match number of nodes on boundary " 
+                       << b << ": " << nnod << std::endl;
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+         }
+
+        // Loop over all nodes
+        for (unsigned j=0;j<nnod;j++)
+         {
+          // Read line up to termination sign
+          getline(restart_file,input_string);
         
-        // Boundary coordinate
-        zeta[0]=atof(input_string.c_str());
+          // Boundary coordinate
+          zeta[0]=atof(input_string.c_str());
 
-        // Set it
-        Node* nod_pt=boundary_node_pt(b,j);
-        nod_pt->set_coordinates_on_boundary(b,zeta);
+          // Set it
+          Node* nod_pt=boundary_node_pt(b,j);
+          nod_pt->set_coordinates_on_boundary(b,zeta);
+         }
+
+        // Read line up to termination sign
+        getline(restart_file,input_string,'#');
+      
+        // Ignore rest of line
+        restart_file.ignore(80,'\n');
+      
+        // Have we reached the end?
+        const int check=atoi(input_string.c_str());
+        if (check!=-999)
+         {
+          std::ostringstream error_stream;
+          error_stream << "Haven't read all nodes on boundary "<< b 
+                       << std::endl; 
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+         }
        }
-
-      // Read line up to termination sign
-      getline(restart_file,input_string,'#');
-      
-      // Ignore rest of line
-      restart_file.ignore(80,'\n');
-      
-      // Have we reached the end?
-      const int check=atoi(input_string.c_str());
-      if (check!=-999)
+      else
        {
-        std::ostringstream error_stream;
-        error_stream << "Haven't read all nodes on boundary "<< b << std::endl; 
-        throw OomphLibError(error_stream.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
+        oomph_info << "Restart: Boundary coordinate for boundary " << b 
+                   << " does not exist.\n";
+        
        }
      }
-    else
-     {
-      oomph_info << "Restart: Boundary coordinate for boundary " << b 
-                 << " does not exist.\n";
-      
-     }
-   }
+#ifdef OOMPH_HAS_MPI  
+   } // if (!this->is_mesh_distributed())
+#endif // #ifdef OOMPH_HAS_MPI
+  
  }
 
 
@@ -2400,23 +2432,25 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
  // Loop over elements
  //-------------------
  unsigned nel=nelement();
-
-      
+ 
  // Get pointer to vector of boundaries that the
  // node lives on
  Vector<std::set<unsigned>*> boundaries_pt(3,0);
-
-
+ 
  // Data needed to deal with edges through the
  // interior of the domain
- std::map<Edge,unsigned> edge_count;
+ std::map<Edge,unsigned > edge_count;
  std::map<Edge,TriangleBoundaryHelper::BCInfo> 
   edge_bcinfo;
  std::map<Edge,TriangleBoundaryHelper::BCInfo>
   face_info;
  MapMatrixMixed<unsigned,FiniteElement*, int > face_count;
  Vector<unsigned> bonus(nbound);
-     
+
+ // When using internal boundaries, an edge can be related to more than
+ // one element (because of both sides of the internal boundaries)
+ std::map<Edge,Vector<TriangleBoundaryHelper::BCInfo> > edge_internal_bnd;
+ 
  for (unsigned e=0;e<nel;e++)
   {
    // Get pointer to element
@@ -2431,7 +2465,6 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
      // ----------------------------------------------------------------------
 
      //We need only loop over the corner nodes
-
      for(unsigned i=0;i<3;i++)
       {
        fe_pt->node_pt(i)->get_boundaries_pt(boundaries_pt[i]);
@@ -2439,8 +2472,7 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
 
      //Find the common boundaries of each edge
      Vector<std::set<unsigned> > edge_boundary(3);
-
-
+    
      //Edge 0 connects points 1 and 2
      //-----------------------------
 
@@ -2450,7 +2482,7 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
        Edge edge0(fe_pt->node_pt(1),fe_pt->node_pt(2));
 
        // Update infos about this edge
-       TriangleBoundaryHelper::BCInfo info;      
+       TriangleBoundaryHelper::BCInfo info;
        info.Face_id=0;
        info.FE_pt = fe_pt;
 	
@@ -2458,20 +2490,24 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
                              boundaries_pt[2]->begin(),boundaries_pt[2]->end(),
                              std::insert_iterator<std::set<unsigned> >(
                               edge_boundary[0],edge_boundary[0].begin()));
-       std::set<unsigned>::iterator it0=edge_boundary[0].begin(); 
+       std::set<unsigned>::iterator it0=edge_boundary[0].begin();
 
        // Edge does exist:
        if ( edge_boundary[0].size() > 0 )
         {
          info.Boundary=*it0;
+         
          // How many times this edge has been visited
          edge_count[edge0]++;
-
+         
          // Update edge_bcinfo
-         edge_bcinfo.insert(std::make_pair(edge0,info)); 
+         edge_bcinfo.insert(std::make_pair(edge0,info));
+         
+         // ... and also update the info associated with internal bnd
+         edge_internal_bnd[edge0].push_back(info);
         }
       }
-
+     
      //Edge 1 connects points 0 and 2
      //-----------------------------
 
@@ -2495,15 +2531,18 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
        if ( edge_boundary[1].size() > 0)
         {
          info.Boundary=*it1;
-
+         
          // How many times this edge has been visited
          edge_count[edge1]++;  
-
+         
          // Update edge_bcinfo              
          edge_bcinfo.insert(std::make_pair(edge1,info));
+         
+         // ... and also update the info associated with internal bnd
+         edge_internal_bnd[edge1].push_back(info);
         }
       }
- 
+     
      //Edge 2 connects points 0 and 1
      //-----------------------------
 
@@ -2527,20 +2566,23 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
        if ( edge_boundary[2].size() > 0)
         {
          info.Boundary=*it2;
-
+         
          // How many times this edge has been visited
-         edge_count[edge2]++;  
-
+         edge_count[edge2]++;
+         
          // Update edge_bcinfo
          edge_bcinfo.insert(std::make_pair(edge2,info));
+         
+         // ... and also update the info associated with internal bnd
+         edge_internal_bnd[edge2].push_back(info);
         }
       }
-
-
+     
+     
 #ifdef PARANOID
      
      // Check if edge is associated with multiple boundaries
-
+     
      //We now know whether any edges lay on the boundaries
      for(unsigned i=0;i<3;i++)
       {
@@ -2570,16 +2612,13 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
       }
      
 #endif
-
+     
      // Now we set the pointers to the boundary sets to zero
      for(unsigned i=0;i<3;i++) {boundaries_pt[i] = 0;}
      
     }
   } //end of loop over all elements
-
-
-
-
+ 
  // Loop over all edges that are located on a boundary
  typedef std::map<Edge,TriangleBoundaryHelper::BCInfo>::iterator ITE;
  for (ITE it=edge_bcinfo.begin();
@@ -2587,9 +2626,9 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
       it++)
   {
    Edge current_edge = it->first;
-   unsigned  bound=it->second.Boundary; 
+   unsigned  bound=it->second.Boundary;
    
-   //If the edge has been visited only once
+   // If the edge has been visited only once
    if(edge_count[current_edge]==1)
     {
      // Count the edges that are on the same element and on the same boundary
@@ -2614,7 +2653,6 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
      else
       {
        //Add element and face to the appropriate vectors
-
        // Does the pointer already exits in the vector
        Vector<FiniteElement*>::iterator b_el_it =
         std::find(vector_of_boundary_element_pt[
@@ -2640,7 +2678,6 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
     }
    
   }  //End of "adding-boundaries"-loop
- 
  
   
  // Now copy everything across into permanent arrays
@@ -2724,5 +2761,6 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
  Lookup_for_elements_next_boundary_is_setup=true;
 
 }
+
 
 }

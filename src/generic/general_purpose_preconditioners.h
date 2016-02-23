@@ -74,7 +74,7 @@ class MatrixBasedDiagPreconditioner : public Preconditioner
   {
    BrokenCopy::broken_assign("MatrixBasedDiagPreconditioner");
   }
-
+ 
   /// Apply preconditioner to z, i.e. z=D^-1 
   void preconditioner_solve(const DoubleVector&r, DoubleVector &z);
 
@@ -468,7 +468,7 @@ class InnerIterationPreconditioner : public Preconditioner
                                     matrix_pt()->nrow(),false);
      this->build_distribution(dist);
     }
-
+   
    // Setup the inner iteration preconditioner (For some reason we need to
    // remind the compiler that there is also a function named setup in the
    // base class.)

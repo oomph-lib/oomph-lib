@@ -31,7 +31,6 @@
 //Include guard to prevent multiple inclusions of the header
 #ifndef OOMPH_FACE_MESH_PROJECT_HEADER
 #define OOMPH_FACE_MESH_PROJECT_HEADER
- 
 
 namespace oomph
 {

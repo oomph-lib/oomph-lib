@@ -1150,61 +1150,99 @@ namespace oomph
   int iterations=0;
   double norm=0;
   
-  if (Existing_solver==BoomerAMG)
-   {
-    HYPRE_BoomerAMGSolve(Solver, Matrix_par, rhs_par, solution_par);
-    HYPRE_BoomerAMGGetNumIterations(Solver, &iterations);
-    HYPRE_BoomerAMGGetFinalRelativeResidualNorm(Solver, &norm);
-   }
-  else if (Existing_solver==CG)
-   {
-    HYPRE_PCGSolve(Solver,
-                   (HYPRE_Matrix) Matrix_par, 
-                   (HYPRE_Vector) rhs_par, 
-                   (HYPRE_Vector) solution_par);
-    HYPRE_PCGGetNumIterations(Solver, &iterations);
-    HYPRE_PCGGetFinalRelativeResidualNorm(Solver, &norm);
-   }
-  else if (Existing_solver==GMRES)
-   {
-    HYPRE_GMRESSolve(Solver, 
-                     (HYPRE_Matrix) Matrix_par, 
-                     (HYPRE_Vector) rhs_par, 
-                     (HYPRE_Vector) solution_par);
-    HYPRE_GMRESGetNumIterations(Solver, &iterations);
-    HYPRE_GMRESGetFinalRelativeResidualNorm(Solver, &norm);
-   }
-  else if (Existing_solver==BiCGStab)
-   {
-    HYPRE_BiCGSTABSolve(Solver,
-                        (HYPRE_Matrix) Matrix_par, 
-                        (HYPRE_Vector) rhs_par, 
-                        (HYPRE_Vector) solution_par);
-    HYPRE_BiCGSTABGetNumIterations(Solver, &iterations);
-    HYPRE_BiCGSTABGetFinalRelativeResidualNorm(Solver, &norm);
-   }
-  else if (Existing_solver==Euclid)
-   {
-    HYPRE_EuclidSolve(Solver, Matrix_par, rhs_par, solution_par);
-   }
-  else if (Existing_solver==ParaSails)
-   {
-    HYPRE_ParaSailsSolve(Solver, Matrix_par, rhs_par, solution_par);
-   }
+  // Get the norm of rhs
+  const double rhs_norm = rhs.norm();
+  bool do_solving = false;
+  if (rhs_norm > 0.0)
+    {
+      do_solving = true;
+    }
+  
+#ifdef OOMPH_HAS_MPI
+  // We need to check whether any processor requires to solve, if that
+  // is the case then do the solving
+  if (MPI_Helpers::mpi_has_been_initialised())
+    {
+      if (MPI_Helpers::communicator_pt()->nproc()>1)
+        {
+          unsigned this_processor_do_solving = 0;
+          unsigned all_processors_do_solving = 0;
+          if (do_solving)
+            {
+              this_processor_do_solving = 1;
+            }
+          // Get the communicator
+          OomphCommunicator* comm_pt = MPI_Helpers::communicator_pt();
+          // Communicate with all procesoors
+          MPI_Allreduce(&this_processor_do_solving,&all_processors_do_solving,
+                        1, MPI_UNSIGNED,MPI_SUM,comm_pt->mpi_comm());
+          if (all_processors_do_solving > 0)
+            {
+              do_solving = true;
+            }
+        }
+    }
+#endif
+  
+  if (do_solving)
+    {
+      if (Existing_solver==BoomerAMG)
+        {
+          HYPRE_BoomerAMGSolve(Solver, Matrix_par, rhs_par, solution_par);
+          HYPRE_BoomerAMGGetNumIterations(Solver, &iterations);
+          HYPRE_BoomerAMGGetFinalRelativeResidualNorm(Solver, &norm);
+        }
+      else if (Existing_solver==CG)
+        {
+          HYPRE_PCGSolve(Solver,
+                         (HYPRE_Matrix) Matrix_par, 
+                         (HYPRE_Vector) rhs_par, 
+                         (HYPRE_Vector) solution_par);
+          HYPRE_PCGGetNumIterations(Solver, &iterations);
+          HYPRE_PCGGetFinalRelativeResidualNorm(Solver, &norm);
+        }
+      else if (Existing_solver==GMRES)
+        {
+          HYPRE_GMRESSolve(Solver, 
+                           (HYPRE_Matrix) Matrix_par, 
+                           (HYPRE_Vector) rhs_par, 
+                           (HYPRE_Vector) solution_par);
+          HYPRE_GMRESGetNumIterations(Solver, &iterations);
+          HYPRE_GMRESGetFinalRelativeResidualNorm(Solver, &norm);
+        }
+      else if (Existing_solver==BiCGStab)
+        {
+          HYPRE_BiCGSTABSolve(Solver,
+                              (HYPRE_Matrix) Matrix_par, 
+                              (HYPRE_Vector) rhs_par, 
+                              (HYPRE_Vector) solution_par);
+          HYPRE_BiCGSTABGetNumIterations(Solver, &iterations);
+          HYPRE_BiCGSTABGetFinalRelativeResidualNorm(Solver, &norm);
+        }
+      else if (Existing_solver==Euclid)
+        {
+          HYPRE_EuclidSolve(Solver, Matrix_par, rhs_par, solution_par);
+        }
+      else if (Existing_solver==ParaSails)
+        {
+          HYPRE_ParaSailsSolve(Solver, Matrix_par, rhs_par, solution_par);
+        }
 
-  // output any error message
-  if (Hypre_error_messages)
-   {
-    std::ostringstream message;
-    int err = HypreHelpers::check_HYPRE_error_flag(message);
-    if (err)
-     {
-      OomphLibWarning(message.str(),
-                      "HypreSolver::hypre_solve()",
-                      OOMPH_EXCEPTION_LOCATION);
-     }
-   }
+      // output any error message
+      if (Hypre_error_messages)
+        {
+          std::ostringstream message;
+          int err = HypreHelpers::check_HYPRE_error_flag(message);
+          if (err)
+            {
+              OomphLibWarning(message.str(),
+                              "HypreSolver::hypre_solve()",
+                              OOMPH_EXCEPTION_LOCATION);
+            }
+        }
 
+    } // if (do_solving)
+  
   // Copy result to solution
   unsigned nrow_local = Hypre_distribution_pt->nrow_local();
   unsigned first_row = Hypre_distribution_pt->first_row();
@@ -1759,7 +1797,6 @@ std::map<std::string,double> HyprePreconditioner::Context_based_cumulative_solve
   hypre_solver_setup();
  }
 
- 
 //===================================================================
 /// Preconditioner_solve uses a hypre solver to precondition vector r
 //====================================================================

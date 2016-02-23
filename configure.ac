@@ -1598,6 +1598,7 @@ AC_SUBST(HLIB_INCLUDE)
 
 will_build_mumps_and_scalapack=false; 
 
+mpi_include_dir=
 
 # Specify the mpi include directory that contains mpi.h
 AC_ARG_WITH(mpi-include-directory,

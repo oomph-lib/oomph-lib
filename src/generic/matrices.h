@@ -999,16 +999,16 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  
  /// Access to C-style row_start array
  int* row_start() {return CR_matrix.row_start();}
-
+ 
  /// Access to C-style row_start array (const version)
  const int* row_start() const {return CR_matrix.row_start();}
-
+ 
  /// Access to C-style column index array
  int* column_index() {return CR_matrix.column_index();}
-
+ 
  /// Access to C-style column index array (const version)
  const int* column_index() const {return CR_matrix.column_index();}
-
+ 
  /// Access to C-style value array
  double* value() {return CR_matrix.value();}
  
