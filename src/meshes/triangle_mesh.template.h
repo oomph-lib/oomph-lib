@@ -356,9 +356,12 @@ class TriangleMeshParameters
     // By default allow the automatic creation of vertices along the
     // boundaries by Triangle
     Allow_automatic_creation_of_vertices_on_boundaries = true;
+#ifdef OOMPH_HAS_MPI
     // Initialize the flag to indicate this is the first time to
     // compute the holes left by the halo elements
     First_time_compute_holes_left_by_halo_elements = true;
+#endif // #ifdef OOMPH_HAS_MPI
+
 #endif
 
     // Mesh can only be built with 2D Telements.
@@ -380,10 +383,11 @@ class TriangleMeshParameters
     // Initialize the value for allowing creation of points on boundaries
     Allow_automatic_creation_of_vertices_on_boundaries = 
      allow_automatic_creation_of_vertices_on_boundaries;
-    
+#ifdef OOMPH_HAS_MPI    
     // Initialize the flag to indicate this is the first time to
     // compute the holes left by the halo elements
     First_time_compute_holes_left_by_halo_elements = true;
+#endif // #ifdef OOMPH_HAS_MPI
         
     // Store Timestepper used to build elements
     Time_stepper_pt=time_stepper_pt;
@@ -443,10 +447,11 @@ class TriangleMeshParameters
     // Initialize the value for allowing creation of points on boundaries
     Allow_automatic_creation_of_vertices_on_boundaries = 
      allow_automatic_creation_of_vertices_on_boundaries;
-    
+#ifdef OOMPH_HAS_MPI    
     // Initialize the flag to indicate this is the first time to
     // compute the holes left by the halo elements
     First_time_compute_holes_left_by_halo_elements = true;
+#endif // #ifdef OOMPH_HAS_MPI
     
     //Store the attributes flag
     Use_attributes = use_attributes;
@@ -495,9 +500,11 @@ class TriangleMeshParameters
    Allow_automatic_creation_of_vertices_on_boundaries = 
     triangle_mesh_parameters.is_automatic_creation_of_vertices_on_boundaries_allowed();
    
+#ifdef OOMPH_HAS_MPI   
    // Initialize the flag to indicate this is the first time to
    // compute the holes left by the halo elements
    First_time_compute_holes_left_by_halo_elements = true;
+#endif // #ifdef OOMPH_HAS_MPI
    
    // ********************************************************************
    // First part - Get polylines representations
@@ -730,10 +737,12 @@ class TriangleMeshParameters
     // Initialize the value for allowing creation of points on boundaries
     Allow_automatic_creation_of_vertices_on_boundaries = 
      allow_automatic_creation_of_vertices_on_boundaries;
-    
+
+#ifdef OOMPH_HAS_MPI    
     // Initialize the flag to indicate this is the first time to
     // compute the holes left by the halo elements
     First_time_compute_holes_left_by_halo_elements = true;    
+#endif // #ifdef OOMPH_HAS_MPI
     
     // Disclaimer
     std::string message=
@@ -972,8 +981,6 @@ class TriangleMeshParameters
   /// the mesh
   void add_boundary_segment_node(const unsigned &b, const unsigned &s,
                                  Node* const &node_pt);
-  
-#endif // #ifdef OOMPH_HAS_MPI
   
   /// \short Return the initial coordinates for the boundary
   Vector<double> &boundary_initial_coordinate(const unsigned &b)
@@ -1269,6 +1276,8 @@ class TriangleMeshParameters
   std::map<unsigned, Vector<double> > &boundary_segment_final_zeta()
    {return Boundary_segment_final_zeta;}
   
+#endif // #ifdef OOMPH_HAS_MPI
+
   /// Return the number of elements adjacent to boundary b in region r
   inline unsigned nboundary_element_in_region(const unsigned &b,
                                         const unsigned &r) const
@@ -4008,13 +4017,67 @@ private:
     Vector<Vector<unsigned> > &ntmp_boundary_elements_in_region,
     Vector<FiniteElement*> &deleted_elements);
    
+#endif // #ifdef OOMPH_HAS_MPI
+   
    /// Output the nodes on the boundary and their respective boundary
    /// coordinates(into separate tecplot zones)
    void output_boundary_coordinates(const unsigned &b, 
                                     std::ostream &outfile);
-   
-#endif // #ifdef OOMPH_HAS_MPI
 
+ private:
+
+  // Reference :
+  // http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain#C.2B.2B
+  
+  // Monotone chain 2D convex hull algorithm.
+  // Asymptotic complexity: O(n log n).
+  // Practical performance: 0.5-1.0 seconds for n=1000000 on a 1GHz machine. 
+  typedef double coord_t;   // coordinate type
+  typedef double coord2_t;  // must be big enough to hold 2*max(|coordinate|)^2
+  
+  struct Point {
+   coord_t x, y;
+   
+   bool operator <(const Point &p) const {
+    return x < p.x || (x == p.x && y < p.y);
+   }
+  };
+  
+  // 2D cross product of OA and OB vectors, i.e. z-component of their 3D
+  // cross product.
+  // Returns a positive value, if OAB makes a counter-clockwise turn,
+  // negative for clockwise turn, and zero if the points are collinear.
+  coord2_t cross(const Point &O, const Point &A, const Point &B)
+  {
+   return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
+  }
+  
+  // Returns a list of points on the convex hull in counter-clockwise order.
+  // Note: the last point in the returned list is the same as the first one.
+  std::vector<Point> convex_hull(std::vector<Point> P)
+   {
+    int n = P.size(), k = 0;
+    std::vector<Point> H(2*n);
+   
+    // Sort points lexicographically
+    std::sort(P.begin(), P.end());
+   
+    // Build lower hull
+    for (int i = 0; i < n; ++i) {
+     while (k >= 2 && cross(H[k-2], H[k-1], P[i]) <= 0) k--;
+     H[k++] = P[i];
+    }
+   
+    // Build upper hull
+    for (int i = n-2, t = k+1; i >= 0; i--) {
+     while (k >= t && cross(H[k-2], H[k-1], P[i]) <= 0) k--;
+     H[k++] = P[i];
+    }
+   
+    H.resize(k);
+    return H;
+   }
+   
  };
 
 
@@ -4343,7 +4406,8 @@ template<class ELEMENT>
    {
     return Mesh_update_fct_pt;
    }
-   
+
+#ifdef OOMPH_HAS_MPI   
    unsigned nsorted_shared_boundary_node(unsigned &b)
    {
     std::map<unsigned, Vector<Node*> >::iterator it = 
@@ -4395,6 +4459,8 @@ template<class ELEMENT>
      }
     return (*it).second;
    }
+
+#endif // #ifdef OOMPH_HAS_MPI
    
    /// Helper function to create polylines and fill associate data 
    // structures, used when creating from a mesh from polyfiles
@@ -4570,20 +4636,20 @@ template<class ELEMENT>
   Vector<Vector<Node*> > &tmp_sorted_shared_node_pt,
   std::map<Node*, Vector<Vector<unsigned> > > &node_alias,
   Vector<Vector<Vector<unsigned> > > &adjacency_matrix);
-  
- /// \short Get the nodes on the boundary (b), these are stored in
- /// the segment they belong (also used by the load balance method
- /// to re-set the number of segments per boundary after load
- /// balance has taken place)
- void get_boundary_segment_nodes_helper(
-  const unsigned &b, Vector<Vector<Node*> > &tmp_segment_nodes);
- 
+   
  /// \short Get the nodes on the shared boundary (b), these are stored
  /// in the segment they belong
  void get_shared_boundary_segment_nodes_helper(
   const unsigned &shd_bnd_id, Vector<Vector<Node*> > &tmp_segment_nodes);
  
 #endif // #ifdef OOMPH_HAS_MPI
+ 
+ /// \short Get the nodes on the boundary (b), these are stored in
+ /// the segment they belong (also used by the load balance method
+ /// to re-set the number of segments per boundary after load
+ /// balance has taken place)
+ void get_boundary_segment_nodes_helper(
+  const unsigned &b, Vector<Vector<Node*> > &tmp_segment_nodes);
  
  // Enable/disable unrefinement/refinement methods for original
  // boundaries
@@ -5307,7 +5373,6 @@ template<class ELEMENT>
   /// \short Updates the open curve representation after restart
   void update_open_curve_after_restart(TriangleMeshOpenCurve* &open_curve_pt);
   
-#ifdef OOMPH_HAS_MPI
   /// \short Updates the polylines using the elements area as constraint for
   /// the number of points along the boundaries
   bool update_polygon_using_elements_area(
@@ -5318,6 +5383,7 @@ template<class ELEMENT>
   bool update_open_curve_using_elements_area(
    TriangleMeshOpenCurve* &open_curve_pt, const Vector<double> &target_area);
   
+#ifdef OOMPH_HAS_MPI
   /// \short Updates the polylines using the elements area as 
   /// constraint for the number of points along the boundaries
   bool update_shared_curve_using_elements_area(
@@ -5656,63 +5722,6 @@ public virtual RefineableTriangleMesh<ELEMENT>,
 
 #endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
  
- namespace convex_hull
- {
-  // Reference :
-  // http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain#C.2B.2B
-  
-  // Monotone chain 2D convex hull algorithm.
-  // Asymptotic complexity: O(n log n).
-  // Practical performance: 0.5-1.0 seconds for n=1000000 on a 1GHz machine. 
-  typedef double coord_t;   // coordinate type
-  typedef double coord2_t;  // must be big enough to hold 2*max(|coordinate|)^2
-  
-  struct Point {
-   coord_t x, y;
-   
-   bool operator <(const Point &p) const {
-    return x < p.x || (x == p.x && y < p.y);
-   }
-  };
-  
-  // 2D cross product of OA and OB vectors, i.e. z-component of their 3D
-  // cross product.
-  // Returns a positive value, if OAB makes a counter-clockwise turn,
-  // negative for clockwise turn, and zero if the points are collinear.
-  coord2_t cross(const Point &O, const Point &A, const Point &B)
-  {
-   return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
-  }
-  
-  // Returns a list of points on the convex hull in counter-clockwise order.
-  // Note: the last point in the returned list is the same as the first one.
-  std::vector<Point> convex_hull(std::vector<Point> P)
-   {
-    int n = P.size(), k = 0;
-    std::vector<Point> H(2*n);
-   
-    // Sort points lexicographically
-    std::sort(P.begin(), P.end());
-   
-    // Build lower hull
-    for (int i = 0; i < n; ++i) {
-     while (k >= 2 && cross(H[k-2], H[k-1], P[i]) <= 0) k--;
-     H[k++] = P[i];
-    }
-   
-    // Build upper hull
-    for (int i = n-2, t = k+1; i >= 0; i--) {
-     while (k >= t && cross(H[k-2], H[k-1], P[i]) <= 0) k--;
-     H[k++] = P[i];
-    }
-   
-    H.resize(k);
-    return H;
-   }
- 
- }
- 
-
 }
 
 #endif

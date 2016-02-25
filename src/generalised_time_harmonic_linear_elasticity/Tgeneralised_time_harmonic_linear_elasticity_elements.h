@@ -42,8 +42,9 @@
 #include "../generic/nodes.h"
 #include "../generic/oomph_utilities.h"
 #include "../generic/Telements.h"
-#include "generalised_time_harmonic_linear_elasticity_elements.h"
 #include "../generic/error_estimator.h"
+
+#include "./generalised_time_harmonic_linear_elasticity_elements.h"
 
 namespace oomph
 {

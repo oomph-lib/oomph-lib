@@ -175,10 +175,8 @@ class TriangleMeshCurveSection
  TriangleMeshCurveSection() :
   Initial_vertex_connected(false),
   Final_vertex_connected(false),
-#ifdef OOMPH_HAS_MPI
   Initial_vertex_connected_suspended(false),
   Final_vertex_connected_suspended(false),
-#endif
   Initial_vertex_connected_to_curviline(false),
   Final_vertex_connected_to_curviline(false),
   Refinement_tolerance(0.08),
@@ -362,9 +360,7 @@ class TriangleMeshCurveSection
  /// Sets the initial vertex as non connected
  void unset_initial_vertex_connected()
   {Initial_vertex_connected = false;}
-
  
-#ifdef OOMPH_HAS_MPI
  /// Set the initial vertex connection as suspended, it will be
  /// resumed when the method to resume the connections is called
  /// This method is only used in a distributed context, when the
@@ -390,8 +386,7 @@ class TriangleMeshCurveSection
     Initial_vertex_connected_suspended = false;
    }
  }
-#endif
-
+ 
  /// Test whether final vertex is connected or not
  bool is_final_vertex_connected() const
  {return Final_vertex_connected;}
@@ -403,8 +398,7 @@ class TriangleMeshCurveSection
  /// Sets the final vertex as non connected
  void unset_final_vertex_connected()
   {Final_vertex_connected = false;}
-
-#ifdef OOMPH_HAS_MPI
+ 
  /// Set the final vertex connection as suspended, it will be
  /// resumed when the method to resume the connections is called
  /// This method is only used in a distributed context, when the
@@ -430,8 +424,7 @@ class TriangleMeshCurveSection
     Final_vertex_connected_suspended = false;
    }
  }
-#endif
-
+ 
  /// Gets the id to which the initial end is connected
  unsigned initial_vertex_connected_bnd_id() const
  {return Initial_vertex_connected_bnd_id;}
@@ -539,9 +532,7 @@ protected:
  /// \short Used for stating if the final end is connected
  /// to another boundary
  bool Final_vertex_connected;
-
  
-#ifdef OOMPH_HAS_MPI
  /// \short Indicates if the connection is suspended because the
  /// boundary to connect is no longer part of the domain (only used in
  /// a distributed context)
@@ -551,8 +542,7 @@ protected:
  /// boundary to connect is no longer part of the domain (only used in
  /// a distributed context)
  bool Final_vertex_connected_suspended;
-#endif
-
+ 
  /// Stores the id to which the initial end is connected
  unsigned Initial_vertex_connected_bnd_id;
 

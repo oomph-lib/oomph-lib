@@ -59,8 +59,12 @@
 // The meshes (needed for building of pml meshes!)
 // Include template files to avoid unnecessary re-compilation
 // (*.template.h files get included indirectly).
-#include "../meshes/triangle_mesh.template.cc"
-#include "../meshes/rectangular_quadmesh.template.cc"
+//#include "../meshes/triangle_mesh.template.cc"
+//#include "../meshes/rectangular_quadmesh.template.cc"
+
+// Why not just to include the *.h files, Just as all other files
+#include "../meshes/triangle_mesh.template.h"
+#include "../meshes/rectangular_quadmesh.template.h"
 
 namespace oomph
 {

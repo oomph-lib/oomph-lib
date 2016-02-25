@@ -1510,12 +1510,15 @@ namespace oomph
        // Get the first and last nodes coordinates for the current
        // segment
        
+#ifdef OOMPH_HAS_MPI
        // Check if the initial zeta values of the segments have been
        // established, if they have not then get the first and last
        // coordinates from the current segments, same as the zeta
        // values
        if (!Assigned_segments_initial_zeta_values[b])
         {
+#endif // #ifdef OOMPH_HAS_MPI
+
          // Get access to the first element on the segment
          FiniteElement* first_ele_pt = segment_sorted_ele_pt[is].front();
          
@@ -1551,8 +1554,10 @@ namespace oomph
           get_coordinates_on_boundary(b, first_node_zeta_coordinate);
          last_node_pt->
           get_coordinates_on_boundary(b, last_node_zeta_coordinate);
-         
+
+#ifdef OOMPH_HAS_MPI         
         } // if (!Assigned_segments_initial_zeta_values[b])
+#endif // #ifdef OOMPH_HAS_MPI
        
        // Get the nodes of the current segment
        std::set<Node*> all_nodes_pt = segment_all_nodes_pt[is];
@@ -1868,6 +1873,7 @@ namespace oomph
            Node* nod_pt = (*it);
            nod_pt->get_coordinates_on_boundary(b, zeta);
            
+#ifdef OOMPH_HAS_MPI           
            // If the mesh is distributed and the initial and final
            // zeta values for the segment have been assigned then
            // check if the segment is inverted, we need to consider
@@ -1882,6 +1888,8 @@ namespace oomph
                zeta[0] = segment_arclength[is] - zeta[0];
               } // if (boundary_segment_inverted(b)[is])
             }
+#endif // #ifdef OOMPH_HAS_MPI
+           
            // Set the zeta value
            zeta[0]+= z_initial;
            // Adjust the value based on the bottom-left condition
@@ -15527,7 +15535,7 @@ namespace oomph
   
   // -------------------------------------------------------------------
   // Compute the convex hull Create the data structure
-  std::vector<convex_hull::Point> input_vertices_convex_hull;
+  std::vector<Point> input_vertices_convex_hull;
   // Copy ALL the vertices of the polygons
   // Loop over the polygons
   for (unsigned p = 0; p < n_polygons; p++)
@@ -15538,7 +15546,7 @@ namespace oomph
     for (unsigned v = 0; v < n_vertices; v++)
      {
       // Create a new "Point" to store in the input vertices
-      convex_hull::Point point;
+      Point point;
       // Assign the values to the "Point"
       point.x = vertices_polygons[p][v][0];
       point.y = vertices_polygons[p][v][1];
@@ -15548,8 +15556,8 @@ namespace oomph
    } // for (p < n_polygons)
   
   // Compute the convex hull
-  std::vector<convex_hull::Point> output_vertices_convex_hull =
-   convex_hull::convex_hull(input_vertices_convex_hull);
+  std::vector<Point> output_vertices_convex_hull =
+   convex_hull(input_vertices_convex_hull);
   
   // Get the number of vertices in the convex hull
   const unsigned n_vertices_convex_hull = output_vertices_convex_hull.size();
@@ -15614,7 +15622,7 @@ namespace oomph
   output_holes_coordinates = hole_kept;
   
  }
- 
+
  //======================================================================
  /// Helper function that checks if a given point is inside a polygon
  //======================================================================
@@ -34983,7 +34991,9 @@ update_other_proc_shd_bnd_node_helper
       
       // Now copy into target area for temporary mesh but limit to
       // the equivalent of one sub-division per iteration
+#ifdef OOMPH_HAS_MPI
       unsigned n_ele_need_refinement_iter = 0;
+#endif // #ifdef OOMPH_HAS_MPI
       
       const unsigned nel_new=tmp_new_mesh_pt->nelement();
       Vector<double> new_target_area(nel_new);
@@ -35025,10 +35035,11 @@ update_other_proc_shd_bnd_node_helper
             
            } // if (new_target_area[e]<
              //      tmp_new_mesh_pt->finite_element_pt(e)->size()/3.0)
-          
-          // Increase the number of elements that require
-          // (un)refinement
+      
+#ifdef OOMPH_HAS_MPI    
+          // Keep track of the elements that require (un)refinement
           n_ele_need_refinement_iter++;
+#endif // #ifdef OOMPH_HAS_MPI
           
          } // else if (new_area <= 0.0)
         
@@ -35254,6 +35265,7 @@ update_other_proc_shd_bnd_node_helper
       iter++;
       delete tmp_new_mesh_pt;
       
+#ifdef OOMPH_HAS_MPI
       // Check whether the number of elements that need (un)refinement
       // from the previous iteration is the same, if that is the case
       // then we mark this processor as done
@@ -35262,6 +35274,7 @@ update_other_proc_shd_bnd_node_helper
       // Update the number of elements that require further
       // (un)refinement
       n_ele_need_refinement = n_ele_need_refinement_iter;
+#endif // #ifdef OOMPH_HAS_MPI
       
       // ------------------------------------------
       // DISTRIBUTED MESH: BEGIN
@@ -36761,6 +36774,7 @@ update_other_proc_shd_bnd_node_helper
   
  }
   
+#ifdef OOMPH_HAS_MPI
  //=========================================================================
  /// \short Synchronise the vertices that are marked for non deletion
  //  on the shared boundaries. Unrefinement of shared boundaries is
@@ -37109,6 +37123,7 @@ update_other_proc_shd_bnd_node_helper
      } // for (jproc < nproc)
    
  }
+#endif // #ifdef OOMPH_HAS_MPI
   
  //=========================================================================
  /// \short After unrefinement and refinement has taken place compute
@@ -42903,7 +42918,8 @@ update_open_curve_using_elements_area(TriangleMeshOpenCurve* &open_curve_pt,
    Vector<Vector<Vector<double> > > sub_vector_vertex_node;
 
    // --------- Stuff to deal with splitted boundaries ----------- End ------
-#endif
+   
+#endif // #ifdef OOMPH_HAS_MPI
 
    // Sort the face element, those that have both elements (one at
    // each side of the boundary) marked as nonhalo, and those with one
@@ -42948,8 +42964,12 @@ update_open_curve_using_elements_area(TriangleMeshOpenCurve* &open_curve_pt,
          repeated_ele_face_pt = non_halo_doubled_face_element_pt[iface+1];
          // ... also mark as done the repeated face element
          face_element_done[repeated_ele_face_pt] = true;
+         
+#ifdef OOMPH_HAS_MPI
          if (!repeated_ele_face_pt->is_halo())
           {both_root_face_elements_are_nonhalo = true;}
+#endif // #ifdef OOMPH_HAS_MPI
+         
          // Plus two because internal boundaries have
          // two face elements per each edge
          nsorted_face_elements+=2;
@@ -43149,8 +43169,12 @@ update_open_curve_using_elements_area(TriangleMeshOpenCurve* &open_curve_pt,
          // Get the face element at the other side of the boundary
          repeated_ele_face_pt = non_halo_doubled_face_element_pt[iiface+1];
          bool both_face_elements_are_nonhalo = false;
+         
+#ifdef OOMPH_HAS_MPI
          if (!repeated_ele_face_pt->is_halo())
           {both_face_elements_are_nonhalo = true;}
+#endif // #ifdef OOMPH_HAS_MPI
+         
          if (!face_element_done[ele_face_pt] && 
              (both_face_elements_are_nonhalo == 
               both_root_face_elements_are_nonhalo))
@@ -43934,6 +43958,7 @@ update_open_curve_using_elements_area(TriangleMeshOpenCurve* &open_curve_pt,
  
 }
 
+#ifdef OOMPH_HAS_MPI
 //======================================================================
 /// \short Updates the polylines using the elements area as 
 /// constraint for the number of points along the boundaries
@@ -43943,7 +43968,7 @@ bool RefineableTriangleMesh<ELEMENT>::
 update_shared_curve_using_elements_area(Vector<TriangleMeshPolyLine*> 
                                         &vector_polyline_pt,
                                         const Vector<double> &target_areas)
-{ 
+{
  // Flag to check if there were a change on the shared boundary
  // representation
  unsigned update_was_performed = false;
@@ -44588,6 +44613,7 @@ update_shared_curve_using_elements_area(Vector<TriangleMeshPolyLine*>
  return update_was_performed;
  
 }
+#endif // #ifdef OOMPH_HAS_MPI
 
  //=========================================================================
  /// \short Helper function that performs the unrefinement process
@@ -46313,8 +46339,12 @@ update_open_curve_after_restart(TriangleMeshOpenCurve* &open_curve_pt)
          repeated_ele_face_pt = non_halo_doubled_face_element_pt[iface+1];
          // ... also mark as done the repeated face element
          face_element_done[repeated_ele_face_pt] = true;
+         
+#ifdef OOMPH_HAS_MPI
          if (!repeated_ele_face_pt->is_halo())
           {both_root_face_elements_are_nonhalo = true;}
+#endif // #ifdef OOMPH_HAS_MPI
+         
          // Plus two because internal boundaries have
          // two face elements per each edge
          nsorted_face_elements+=2;
@@ -46410,8 +46440,12 @@ update_open_curve_after_restart(TriangleMeshOpenCurve* &open_curve_pt)
          // Get the face element at the other side of the boundary
          repeated_ele_face_pt = non_halo_doubled_face_element_pt[iiface+1];
          bool both_face_elements_are_nonhalo = false;
+         
+#ifdef OOMPH_HAS_MPI
          if (!repeated_ele_face_pt->is_halo())
           {both_face_elements_are_nonhalo = true;}
+#endif // #ifdef OOMPH_HAS_MPI
+         
          if (!face_element_done[ele_face_pt] && 
              (both_face_elements_are_nonhalo == 
               both_root_face_elements_are_nonhalo))
@@ -48265,4 +48299,5 @@ OOMPH_CURRENT_FUNCTION,
 #endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
 
 }
+
 #endif
