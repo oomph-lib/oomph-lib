@@ -259,13 +259,13 @@ class LagrangeEnforcedflowPreconditioner
   ///Disable documentation of time
   void disable_doc_time() {Doc_time = false;}
 
-  /// RAYRAY
+  /// Set  label
   void set_label_pt(std::string* label_pt) 
   {
     Label_pt = label_pt;
   }
 
-  /// RAYRAY
+  /// 
   void set_doc_prec_directory_pt(std::string* doc_prec_directory_pt) 
   {
     Doc_prec_directory_pt = doc_prec_directory_pt;
@@ -363,7 +363,7 @@ class LagrangeEnforcedflowPreconditioner
     First_NS_solve = false;
   } // end of preconditioner_solve
 
-  /// RAYRAY  
+  /// Set the meshes, the first mesh must be the fluid mesh
   void set_meshes(const Vector<Mesh*> &mesh_pt)
   {
     // There should be at least two meshes for this preconditioner.
@@ -478,13 +478,13 @@ class LagrangeEnforcedflowPreconditioner
   /// If do_both=true, both are computed, otherwise only the velocity
   /// mass matrix (the LSC version of the preconditioner only needs
   /// that one)
-  void assemble_inv_press_and_veloc_mass_matrix_diagonal(
-       CRDoubleMatrix*& inv_p_mass_pt,
-       CRDoubleMatrix*& inv_v_mass_pt,
-       const unsigned& procnumber);
+//  void assemble_inv_press_and_veloc_mass_matrix_diagonal(
+//       CRDoubleMatrix*& inv_p_mass_pt,
+//       CRDoubleMatrix*& inv_v_mass_pt,
+//       const unsigned& procnumber);
 
 
-  /// RAYRAY
+  /// Use default scaling?
   void use_default_norm_of_f_scaling()
   {
     Use_default_norm_of_f_scaling = true;
@@ -516,7 +516,7 @@ class LagrangeEnforcedflowPreconditioner
     }
   }
 
-  /// RAYRAY
+  /// Maybe I need to remove this.
   void set_doc_linear_solver_info_pt
     (DocLinearSolverInfo* doc_linear_solver_info_pt)
   {
@@ -538,26 +538,26 @@ class LagrangeEnforcedflowPreconditioner
 
   private:
 
-  /// RAYRAY
+  /// 
   std::string* Label_pt;
 
-  /// RAYRAY
+  /// 
   std::string *Doc_prec_directory_pt;
 
-  /// RAYRAY
+  /// 
   bool Doc_time;
 
-  /// RAYRAY
+  /// 
   bool Doc_prec;
 
-  /// RAYRAY
+  /// 
   bool Mapping_info_calculated;
 
   /// \short the Scaling_sigma variable of this preconditioner
   double Scaling_sigma;
   double Scaling_sigma_multiplier;
 
-  /// RAYRAY
+  /// 
   bool Use_default_norm_of_f_scaling;
 
   /// The Lagrange multiplier subsidiary preconditioner function pointer
@@ -595,7 +595,7 @@ class LagrangeEnforcedflowPreconditioner
   /// The first mesh must always be the Navier-Stokes (bulk) mesh.
   Vector<Mesh*> My_mesh_pt;
 
-  /// RAYRAY
+  /// 
   Vector<unsigned> My_ndof_types_in_mesh;
 
   /// \short Store the number of meshes. 
@@ -973,7 +973,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
 
 
   // Set up the My_ndof_types_in_mesh vector.
-  // RAYRAY - this can be optimised by creating a lookup list to the master
+  // - this can be optimised by creating a lookup list to the master
   // block preconditioner, so then we get the number of DOF types in each mesh
   // from BlockPreconditioner::ndof_types_in_mesh(...). The function
   //  Mesh::ndof_types() requires communication, so we store this for now.
@@ -1224,18 +1224,8 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //    pause("I'm back"); 
     
 
-  // RAYTIME
-  double t_start_block_setup = TimingHelpers::timer();
-  this->turn_on_debug_flag();
   // Call the block setup
   this->block_setup(dof_to_block_map);
-  this->turn_off_debug_flag();
-
-  // RAYTIME
-  double t_end_block_setup = TimingHelpers::timer();
-  double t_block_setup = t_end_block_setup - t_start_block_setup;
-  oomph_info << "LGR: block_setup: " << t_block_setup << std::endl;
-
 
 //    pause("Lgr::setup() done block_setup, about to print dof block dist nrow"); 
 
@@ -1342,8 +1332,8 @@ void LagrangeEnforcedflowPreconditioner::setup()
       oomph_info << "Getting vmm block: " << required_block << std::endl; 
 
       
-      assemble_inv_press_and_veloc_mass_matrix_diagonal
-        (inv_p_mass_pt, inv_v_mass_pt, required_block);
+//      assemble_inv_press_and_veloc_mass_matrix_diagonal
+//        (inv_p_mass_pt, inv_v_mass_pt, required_block);
 
       std::stringstream blockname;
       blockname << "temprawmat/vmm_"
@@ -1360,8 +1350,8 @@ void LagrangeEnforcedflowPreconditioner::setup()
     {
       unsigned required_block = N_velocity_doftypes; //Doftype_list_vpl[dof_type_i];
               oomph_info << "Getting pressure mass matrix, block: " << required_block  << std::endl; 
-      assemble_inv_press_and_veloc_mass_matrix_diagonal
-        (inv_p_mass_pt, inv_v_mass_pt, required_block);
+//      assemble_inv_press_and_veloc_mass_matrix_diagonal
+//        (inv_p_mass_pt, inv_v_mass_pt, required_block);
 
 
         
@@ -1382,15 +1372,12 @@ void LagrangeEnforcedflowPreconditioner::setup()
   // Need to create the norms, used for Sigma, if required
   //////////////////////////////////////////////////////////////////////////
 
-  // RAYRAY todo: This could be made more efficient by storing only the
+  // todo: This could be made more efficient by storing only the
   // augmented blocks. I will do this later.
   //
   // Extract the velocity block. Although we only require the infinity norm
   // a single direction of the velocity block, we extract them all since we
   // use the rest immediately (to perform the augmentation).
-
-  // RAYTIME
-  double t_start_get_v_aug_pt = TimingHelpers::timer();
   DenseMatrix<CRDoubleMatrix*> v_aug_pt(N_velocity_doftypes,
       N_velocity_doftypes,0);
   
@@ -1430,17 +1417,8 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //  pause("done!"); 
   
 
-  // RAYTIME
-  double t_end_get_v_aug_pt = TimingHelpers::timer();
-  double t_get_v_aug = t_end_get_v_aug_pt - t_start_get_v_aug_pt;
-  oomph_info << "LGR: t_get_v_aug: " << t_get_v_aug << std::endl;
-
-
   if(Use_default_norm_of_f_scaling)
   {
-    // RAYTIME
-    double t_norm_start = TimingHelpers::timer();
-
     //    DenseMatrix<CRDoubleMatrix* > u_pt(My_nmesh,My_nmesh,0);
     //
     //    // Recall the blocking scheme:
@@ -1466,14 +1444,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
 
     //    Scaling_sigma = CRDoubleMatrixHelpers::maximum_gershgorin_disk(v_aug_pt)
     //     *Scaling_sigma_multiplier;
-
-    // RAYTIME
-    double t_norm_finish = TimingHelpers::timer();
-//    if(Doc_time)
-    {
-      double t_norm_time = t_norm_finish - t_norm_start;
-      oomph_info << "LGR: t_norm_time: " << t_norm_time << std::endl;
-    }
   } // if(Use_default_f_scaling)
 
 #ifdef PARANOID
@@ -1533,10 +1503,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
 
   // Storage for the W block.
   Vector<CRDoubleMatrix*> w_pt(N_lagrange_doftypes,0);
-
-
-  // RAYTIME
-  double t_start_big_loop = TimingHelpers::timer();
 
   // Note that we do not need to store all the inverse w_i since they
   // are only used once per Lagrange multiplier.
@@ -1630,7 +1596,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
     // The mass matrices for the current Lagrange block col is in mmt_pt. 
     // Now create the w_i and put it in w_pt.
 
-    // RAYRAY change back to Block_distribution_pt
     // Create both the w_i and inv_w_i matrices.
     w_pt[l_i] = new CRDoubleMatrix(this->Block_distribution_pt[l_doftype]);
     CRDoubleMatrix* inv_w_pt 
@@ -1649,7 +1614,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
 
     if(Use_diagonal_w_block) // This is the default.
     {
-      // RAYRAY change back to Block_distribution_pt
       // Get the number of local rows for this Lagrange block.
       unsigned long l_i_nrow_local 
         = this->Block_distribution_pt[l_doftype]->nrow_local();
@@ -1703,8 +1667,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
 
       // Theses are square matrices. So we use the l_i_nrow_global for the
       // number of columns.
-      // RAYRAY change back to Block_distribution_pt
-      // RAYRAY check if the above line is done?
       unsigned long l_i_nrow_global 
         = this->Block_distribution_pt[l_doftype]->nrow();
       w_pt[l_i]->build(l_i_nrow_global,
@@ -1720,7 +1682,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
     // We use the block diagonal form of the W block.
     {
       // NOTE: This seems very dodgy. 
-      // RAYRAY fix this. 
       // A lot of functions has moved into CRDoubleMatrix
       // such as get_diagonal_entries() and add()
 
@@ -1731,7 +1692,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
       for (unsigned mm_i = 1; mm_i < n_mm; mm_i++)
       {
         // Squaring process.
-        // RAYRAY change back to Block_distribution_pt
         CRDoubleMatrix* temp_mm_sqrd_pt = new CRDoubleMatrix;
         temp_mm_sqrd_pt->build(this->Block_distribution_pt[l_doftype]);
         mm_pt[mm_i]->multiply((*mm_pt[mm_i]),*temp_mm_sqrd_pt);
@@ -1772,7 +1732,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
       }
 
       inv_w_i_row_start[l_i_nrow_local] = l_i_nrow_local;
-      // RAYRAY change back to Block_distribution_pt
       unsigned long l_i_nrow_global 
         = this->Block_distribution_pt[l_doftype]->nrow();
       inv_w_pt->build(l_i_nrow_global,
@@ -1817,15 +1776,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
       delete mmt_pt[m_i];
     }
   } // loop through Lagrange multipliers.
-
-  // RAYTIME
-  double t_end_big_loop = TimingHelpers::timer();
-  
-  // RAYTIME
-  double t_big_loop = t_end_big_loop - t_start_big_loop;
-
-  oomph_info << "LGR: big_loop: " << t_big_loop << std::endl;
-
 
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
@@ -2059,7 +2009,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //      }
 
 
-//      // RAYRAY old
 //      DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
 //          N_fluid_doftypes,0);
 //      // put in v_aug_pt:
@@ -2264,7 +2213,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //      }
       
 
-    //    // RAYRAY REMOVE
     //    Doftype_coarsen_map_fine.resize(0,0);
     //    Vector<unsigned> tmp0;
     //    tmp0.push_back(0);
@@ -2452,19 +2400,9 @@ void LagrangeEnforcedflowPreconditioner::setup()
     // structure:
     // 0  1  2  3  4  5  6
     // ub vb up vp ut vt p
-    // RAYTIME
-    double t_start_turn_into_subsidairy = TimingHelpers::timer();
-    
     navier_stokes_block_preconditioner_pt
         ->turn_into_subsidiary_block_preconditioner(this, Subsidiary_list_bcpl,
             subsidiary_dof_type_coarsening_map);
-    // RAYTIME
-    double t_end_turn_into_subsidairy = TimingHelpers::timer();
-      //pause("Lgr: Done turn_into_sub..."); 
-    double t_turn_into_sub = t_end_turn_into_subsidairy - t_start_turn_into_subsidairy;
-    oomph_info << "LGR: turn_into_subsidairy: " << t_turn_into_sub << std::endl;
-    //    pause("After turn_into..."); 
-
 
     // Set the replacement blocks.
     //
@@ -2472,7 +2410,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
     //  0 1 2   3  4  5    6  7  8     9   10  11  12   <- block index
     // [u v w | up vp wp | ut vt wt ] [p | Lp1 Lp2 Lt1] <- DOF type
 
-    // RAYRAY commented out.
 //      for (unsigned row_i = spatial_dim; row_i < N_velocity_doftypes; row_i++) 
 //      {
 //        for (unsigned col_i = spatial_dim; col_i < N_velocity_doftypes; col_i++) 
@@ -2486,19 +2423,9 @@ void LagrangeEnforcedflowPreconditioner::setup()
     //    pause("About to call setup of NS prec."); 
 
 
-    // RAYTIME
-    double t_start_ns_setup = TimingHelpers::timer();
 
     navier_stokes_block_preconditioner_pt
         ->setup(matrix_pt());
-
-    // RAYTIME
-    double t_end_ns_setup = TimingHelpers::timer();
-    double t_ns_setup = t_end_ns_setup - t_start_ns_setup;
-    oomph_info << "LGR: ns_setup: " << t_ns_setup << std::endl;
-
-//      pause("done NS setup"); 
-      
 
 //      for (unsigned i = 0; i < N_fluid_doftypes; i++)
 //      {
@@ -2509,9 +2436,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //      }
     } // else - NS prec is block preconditioner
    
-    // RAYTIME 
-    double t_start_delete_v_aug = TimingHelpers::timer();
-
     const unsigned v_aug_nrow = v_aug_pt.nrow();
     const unsigned v_aug_ncol = v_aug_pt.ncol();
     for (unsigned v_row = 0; v_row < v_aug_nrow; v_row++) 
@@ -2522,11 +2446,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
         v_aug_pt(v_row,v_col) = 0;
       }
     }
-    // RAYTIME
-    double t_end_delete_v_aug = TimingHelpers::timer();
-    double t_delete_v_aug = t_end_delete_v_aug - t_start_delete_v_aug;
-    oomph_info << "LGR: delete_v_aug: " << t_delete_v_aug << std::endl;
-
     ///////////////////////////////////////////////////////////////////////////////
 
     // Solver for the W block.
@@ -2605,7 +2524,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
     this->clear_block_preconditioner_base();
 
     // Delete the Navier-Stokes preconditioner pointer.
-    // RAYRAY for now, we do not delete the Navier Stokes preconditioner pointer.
+    //  for now, we do not delete the Navier Stokes preconditioner pointer.
     // Since we did not create this preconditioner. We should...
     // Create function pointers for both the Lagrange and Navier-Stokes block.
     // At the moment, if SuperLU preconditioning is used for the NS block,
@@ -2631,277 +2550,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
 
 
 
-  //========================================================================
-  /// Helper function to assemble the diagonal of the velocity
-  /// mass matrix from the elemental contributions defined in
-  /// NavierStokesEquations<DIM>::get_velocity_mass_matrix_diagonal(...).
-  /// If do_both=true, both are computed, otherwise only the velocity
-  /// mass matrix (the LSC version of the preconditioner only needs
-  /// that one)
-  //========================================================================
-  void LagrangeEnforcedflowPreconditioner::
-    assemble_inv_press_and_veloc_mass_matrix_diagonal(
-        CRDoubleMatrix*& inv_p_mass_pt,
-        CRDoubleMatrix*& inv_v_mass_pt,
-        const unsigned& procnumber)
-  {
-    int pronumber = (int)procnumber;
-    bool do_pressure = false;
-    if(procnumber == N_velocity_doftypes)
-    {
-      do_pressure  = true;
-    }
-    else
-    {
-      do_pressure = false;
-    }
-
-    // determine the velocity rows required by this processor
-    // RRR_type
-    unsigned v_first_row 
-        = this->block_distribution_pt(pronumber)->first_row();
-
-    unsigned v_nrow_local 
-      = this->block_distribution_pt(pronumber)->nrow_local();
-
-    unsigned v_nrow 
-      = this->block_distribution_pt(pronumber)->nrow();
-
-    //cout << "v_first_row = " << v_first_row << endl;
-    //cout << "v_nrow_local = " << v_nrow_local << endl;
-    //cout << "v_nrow = " << v_nrow << endl;
-
-    // create storage for the diagonals
-    double* v_values = new double[v_nrow_local];
-    for (unsigned i = 0; i < v_nrow_local; i++)
-    {
-      v_values[i] = 0.0;
-    }
-
-    // Equivalent information for pressure mass matrix (only needed for
-    // Fp version)
-    unsigned p_first_row=0;
-    unsigned p_nrow_local=0;
-    unsigned p_nrow=0;
-    double* p_values = 0;
-      
-//      if (L_prec_type != Exact_lsc_block_preconditioner)
-    // This is for testing purposes, we always 
-    // want the mass pressure mm
-    unsigned p_dof_number = N_velocity_doftypes;
-
-    if(procnumber == p_dof_number)
-    {
-      do_pressure = true;
-    }
-    oomph_info << "do_pressure: " << do_pressure << std::endl; 
-      
-
-    if(do_pressure)
-    {
-      // note: By now, we have called block_setup, so we have the 
-      // variables:
-      
-      // N_velocity_doftypes = My_nmesh*spatial_dim;
-
-      // Fluid has +1 for the pressure.
-      //  N_fluid_doftypes = N_velocity_doftypes + 1;
-
-      // The rest are Lagrange multiplier DOF types.
-      //    N_lagrange_doftypes = n_dof_types - N_fluid_doftypes;
-
-      // determine the pressure rows required by this processor
-      p_first_row 
-        = this->block_distribution_pt(p_dof_number)->first_row();
-      p_nrow_local 
-        = this->block_distribution_pt(p_dof_number)->nrow_local();
-
-      p_nrow = this->block_distribution_pt(p_dof_number)->nrow();
-
-      oomph_info << "p_nrow: "<< p_nrow_local << std::endl; 
-      oomph_info << "p_first_row: "<< p_first_row << std::endl; 
-      oomph_info << "p_nrow: "<< p_nrow << std::endl; 
-        
-      // create storage for the diagonals
-      p_values = new double[p_nrow_local];
-      for (unsigned i = 0; i < p_nrow_local; i++)
-      {
-        p_values[i] = 0.0;
-      }
-    } // if (!Use_LSC)
-      
-
-    // store the problem pt, this seems to be not used.
-    //const Problem* problem_pt = this->problem_pt();
-
-    // if the problem is distributed
-    bool distributed = false;
-
-    if (distributed)
-    {
-      // To do
-    }
-    else
-    {
-      // find number of elements
-      unsigned n_el = My_mesh_pt[0]->nelement();
-
-      //unsigned n_el = problem_pt->mesh_pt(0)->nelement();
-      // Fp needs pressure and velocity mass matrices
-      // 0 - both v and p mass matrices are computed
-      // 1 - only pressure mm is computed
-      // 2 = only vmm is computed,
-      // This is awful code.
-      unsigned which_one=0;
-      if (do_pressure)
-      {
-        which_one=1;
-      }
-      else
-      {
-        which_one = 2;
-      }
-      oomph_info << "which one is: " << which_one << std::endl; 
-      
-
-      // get the contribution for each element
-      for (unsigned e = 0; e < n_el; e++)
-      {
-        // Get element
-        //GeneralisedElement* el_pt=problem_pt->mesh_pt(0)->element_pt(e);
-        GeneralisedElement* el_pt=this->My_mesh_pt[0]->element_pt(e);
-
-        // find number of degrees of freedom in the element
-        // (this is slightly too big because it includes the
-        // pressure dofs but this doesn't matter)
-        unsigned el_dof = el_pt->ndof();
-
-        // allocate local storage for the element's contribution to the
-        // pressure and velocity mass matrix diagonal
-        Vector<double> el_vmm_diagonal(el_dof);
-        Vector<double> el_pmm_diagonal(el_dof);
-
-        dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(el_pt)->
-          get_pressure_and_velocity_mass_matrix_diagonal(
-              el_pmm_diagonal,el_vmm_diagonal,which_one);
-
-        // Get the contribution for each dof
-        for (unsigned i = 0; i < el_dof; i++)
-        {
-          //Get the equation number
-          unsigned eqn_number = el_pt->eqn_number(i);
-
-          // Get the velocity dofs
-            
-          if ((!do_pressure) && this->block_number(eqn_number)==pronumber) // RAY_TOCHANGE
-          {
-              
-            //cout << "GOT HERE!!!!" << endl;
-            // get the index in the block
-            unsigned index = this->index_in_block(eqn_number);
-
-            // if it is required on this processor
-            if ((index >= v_first_row) &&
-                (index < (v_first_row + v_nrow_local) ) )
-            {
-              //cout << "ZOMG Got in if" << endl;
-              //cout << "index-v_first_row = " << index-v_first_row << endl;
-              v_values[index-v_first_row] += el_vmm_diagonal[i];
-            }
-          }
-          // Get the pressure dofs
-          // NOTE: This is not used for the LSC case.
-          else if (this->block_number(eqn_number)== (int)p_dof_number) // RAY_TOCHANGE
-          {
-            // if (L_prec_type != Exact_lsc_block_preconditioner)
-            {
-              // get the index in the block
-              unsigned index = this->index_in_block(eqn_number);
-
-              // if it is required on this processor
-              if ((index >= p_first_row)&&
-                  (index < (p_first_row + p_nrow_local)) )
-              {
-                p_values[index-p_first_row] += el_pmm_diagonal[i];
-              }
-            } // if (!Use_LSC)
-          }
-        }
-      } // for (unsigned e = 0; e < n_el; e++)
-    }// if (distributed), else
-
-
-    if(!do_pressure)
-    {
-      // Create column index and row start for velocity mass matrix
-      int* v_column_index = new int[v_nrow_local];
-      int* v_row_start = new int[v_nrow_local+1];
-      for (unsigned i = 0; i < v_nrow_local; i++)
-      {
-#ifdef PARANOID
-        if (v_values[i]==0.0)
-        {
-          std::ostringstream error_message;
-          error_message << "Zero entry in diagonal of velocity mass matrix\n"
-            << "Index: " << i << std::endl;
-          throw OomphLibError(
-              error_message.str(),
-              "ConstrainedNavierStokesSchurComplementPreconditioner::assemble_inv_press_and_veloc_mass_matrix_diagonal()",
-              OOMPH_EXCEPTION_LOCATION);
-        }
-#endif
-        v_values[i] = 1.0/v_values[i];
-        v_column_index[i] = v_first_row + i;
-        v_row_start[i] = i;
-      }
-      
-      v_row_start[v_nrow_local] = v_nrow_local;
-
-      // Build the velocity mass matrix
-      inv_v_mass_pt 
-        = new CRDoubleMatrix(this->block_distribution_pt(pronumber));
-      inv_v_mass_pt->build_without_copy(v_nrow,v_nrow_local,
-          v_values,v_column_index,
-          v_row_start);
-    }
-    
-    // Create pressure mass matrix
-    if (do_pressure)
-    {
-      // Create column index and row start for pressure mass matrix
-      int* p_column_index = new int[p_nrow_local];
-      int* p_row_start = new int[p_nrow_local+1];
-      for (unsigned i = 0; i < p_nrow_local; i++)
-      {
-#ifdef PARANOID
-        if (p_values[i]==0.0)
-        {
-          std::ostringstream error_message;
-          error_message << "Zero entry in diagonal of pressure mass matrix\n"
-            << "Index: " << i << std::endl;
-          throw OomphLibError(
-              error_message.str(),
-              "ConstrainedNavierStokesSchurComplementPreconditioner::assemble_inv_press_and_veloc_mass_matrix_diagonal()",
-              OOMPH_EXCEPTION_LOCATION);
-        }
-#endif
-        p_values[i] = 1.0/p_values[i];
-
-        p_column_index[i] = p_first_row + i;
-        p_row_start[i] = i;
-      }
-      
-      p_row_start[p_nrow_local] = p_nrow_local;
-
-      // Build the pressure mass matrix
-      inv_p_mass_pt 
-        = new CRDoubleMatrix(
-            this->block_distribution_pt(p_dof_number));
-      inv_p_mass_pt->build_without_copy(p_nrow,p_nrow_local,
-          p_values,p_column_index,
-          p_row_start);
-    } // if (!Use_LSC)
-  }
 // void LagrangeEnforcedflowPreconditioner::assemble_inv_press_and_veloc_mass_matrix_diagonal
 }
 #endif

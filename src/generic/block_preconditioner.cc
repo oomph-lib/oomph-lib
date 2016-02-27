@@ -513,9 +513,6 @@ namespace oomph
      }
 #endif
 
-    // RAYTIME
-    double t_gen_coarsen_mapping_start = TimingHelpers::timer();
-
     // Clear and reserve space.
     Doftype_coarsen_map_fine.clear();
     Doftype_coarsen_map_coarse.clear();
@@ -530,17 +527,6 @@ namespace oomph
       Doftype_coarsen_map_fine.push_back(tmp_vec);
       Doftype_coarsen_map_coarse.push_back(tmp_vec);
      }
-
-    // RAYTIME
-    double t_gen_coarsen_mapping_end = TimingHelpers::timer();
-    if(Debug_flag)
-    {
-     double t_gen_coarsen_mapping = t_gen_coarsen_mapping_end
-                                    - t_gen_coarsen_mapping_start;
-     oomph_info << "BLKSETUP: t_gen_coarsen_mapping: " 
-                << t_gen_coarsen_mapping << std::endl;
-    }
-
    }
   else
    // Else this is a subsidiary block preconditioner.
@@ -633,9 +619,6 @@ namespace oomph
     // Create the Block_to_dof_map_coarse from 
     // the dof_to_block_map and Doftype_coarsen_map_coarse.
 
-    // RAYTIME
-    double t_block_to_dof_map_start = TimingHelpers::timer();
-
     // find the maximum block number
     unsigned max_block_number = *std::max_element(dof_to_block_map.begin(), 
                                                   dof_to_block_map.end());
@@ -707,16 +690,6 @@ namespace oomph
      {
       dof_to_block_map[i] = i;
      }
-
-    // RAYTIME
-    double t_block_to_dof_map_end = TimingHelpers::timer();
-    if(Debug_flag)
-    {
-      double t_block_to_dof_map = t_block_to_dof_map_end
-                                  - t_block_to_dof_map_start;
-      oomph_info << "BLKSETUP: t_block_to_dof_map: "
-                 << t_block_to_dof_map << std::endl;
-    }
   } // end of Block_to_dof_map_coarse encapsulation
 
 #ifdef PARANOID
@@ -834,23 +807,8 @@ namespace oomph
    }
 
 #endif
-
-  // RAYTIME
-  double t_clear_block_preconditioner_base_start = TimingHelpers::timer();
-
   // clear the memory
   this->clear_block_preconditioner_base();
-
-  // RAYTIME
-  double t_clear_block_preconditioner_base_end = TimingHelpers::timer();
-  if(Debug_flag)
-  {
-    double t_clear_block_preconditioner_base 
-      = t_clear_block_preconditioner_base_end
-        - t_clear_block_preconditioner_base_start;
-    oomph_info << "BLKSETUP: t_clear_block_preconditioner_base: "
-               << t_clear_block_preconditioner_base << std::endl; 
-  }
 
   // get my_rank and nproc
 #ifdef OOMPH_HAS_MPI
@@ -863,28 +821,12 @@ namespace oomph
   // start of master block preconditioner only operations
   /////////////////////////////////////////////////////////////////////////////
 #ifdef OOMPH_HAS_MPI
-  // RAYTIME
-  double t_initialise_index_in_dof_and_dof_num_sparse_start
-    = TimingHelpers::timer();
-
   unsigned* nreq_sparse = new unsigned[nproc]();
   unsigned* nreq_sparse_for_proc = new unsigned[nproc]();
   unsigned** index_in_dof_block_sparse_send = new unsigned*[nproc]();
   unsigned** dof_number_sparse_send = new unsigned*[nproc]();
   Vector<MPI_Request> send_requests_sparse;
   Vector<MPI_Request> recv_requests_sparse;
-
-  // RAYTIME
-  double t_initialise_index_in_dof_and_dof_num_sparse_end
-    = TimingHelpers::timer();
-  if(Debug_flag)
-  {
-    double t_initialise_index_in_dof_and_dof_num_sparse = 
-      t_initialise_index_in_dof_and_dof_num_sparse_end
-      - t_initialise_index_in_dof_and_dof_num_sparse_start;
-    oomph_info << "BLKSETUP: t_initialise_index_in_dof_and_dof_num_sparse: "
-               << t_initialise_index_in_dof_and_dof_num_sparse << std::endl; 
-  }
 #endif
 
   // If this preconditioner is the master preconditioner then we need
@@ -892,30 +834,12 @@ namespace oomph
   //                           Index_in_dof_block
   if (is_master_block_preconditioner())
    {
-    // RAYTIME
-    double t_master_prec_only_start = TimingHelpers::timer();
-
-    // RAYTIME
-    double t_get_mesh_ndof_types_start = TimingHelpers::timer();
-
     // Get the number of dof types in each mesh.
     Ndof_types_in_mesh.assign(nmesh(),0);
     for(unsigned i=0; i<nmesh(); i++)
      {
       Ndof_types_in_mesh[i] = mesh_pt(i)->ndof_types();
      }
-
-    // RAYTIME
-    double t_get_mesh_ndof_types_end = TimingHelpers::timer();
-    if(Debug_flag)
-    {
-      double t_get_mesh_ndof_types = t_get_mesh_ndof_types_end
-                                     - t_get_mesh_ndof_types_start;
-      // MO means Master Only.
-      oomph_info << "BLKSETUP_MO: t_get_mesh_ndof_types: "
-                 << t_get_mesh_ndof_types << std::endl;
-    }
-
     // Setup the distribution of this preconditioner, assumed to be the same
     // as the matrix if the matrix is distributable.
     if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt()))
@@ -962,13 +886,6 @@ namespace oomph
     unsigned last_row = first_row+nrow_local-1;
 
 #ifdef OOMPH_HAS_MPI
-    // RAYTIME
-    double t_setting_and_sending_sparse_vecs_start = TimingHelpers::timer();
-
-    // RAYTIME
-    double t_create_dense_row_required_start = TimingHelpers::timer();
-
-
     // storage for the rows required by each processor in the dense
     // block lookup storage scheme
     // dense_required_rows(p,0) is the minimum global index required by proc p
@@ -980,21 +897,6 @@ namespace oomph
       dense_required_rows(p,1) = this->distribution_pt()->first_row(p)
        +this->distribution_pt()->nrow_local(p) - 1;
      }
-
-    // RAYTIME
-    double t_create_dense_row_required_end = TimingHelpers::timer();
-    if(Debug_flag)
-    {
-      double t_create_dense_row_required 
-        = t_create_dense_row_required_end
-        - t_create_dense_row_required_start;
-      oomph_info << "BLKSETUP_MO_SENDSPARSE: t_create_dense_row_required: " 
-                 << t_create_dense_row_required << std::endl; 
-    }
-
-    // RAYTIME
-    double t_sparse_global_rows_for_block_lookup_start
-      = TimingHelpers::timer();
 
     // determine the global rows That are not in the range first_row to
     // first_row+nrow_local for which we should store the
@@ -1014,23 +916,6 @@ namespace oomph
          }
        }
      }
-    // RAYTIME
-    double t_sparse_global_rows_for_block_lookup_end
-      = TimingHelpers::timer();
-    if(Debug_flag)
-    {
-      double t_sparse_global_rows_for_block_lookup
-        = t_sparse_global_rows_for_block_lookup_end
-        - t_sparse_global_rows_for_block_lookup_start;
-      oomph_info 
-        << "BLKSETUP_MO_SENDSPARSE: t_sparse_global_rows_for_block_lookup: "
-        << t_sparse_global_rows_for_block_lookup << std::endl; 
-    }
-
-
-    // RAYTIME
-    double t_copy_to_global_index_sparse_start
-      = TimingHelpers::timer();
 
     int nsparse = sparse_global_rows_for_block_lookup.size();
     
@@ -1042,24 +927,6 @@ namespace oomph
     Index_in_dof_block_sparse.resize(nsparse);
     Dof_number_sparse.resize(nsparse);
     sparse_global_rows_for_block_lookup.clear();
-
-    // RAYTIME
-    double t_copy_to_global_index_sparse_end
-      = TimingHelpers::timer();
-    if(Debug_flag)
-    {
-      double t_copy_to_global_index_sparse 
-        = t_copy_to_global_index_sparse_end
-        - t_copy_to_global_index_sparse_start;
-      oomph_info << "BLKSETUP_MO_SENDSPARSE: " 
-                 << "t_copy_to_global_index_sparse: " 
-                 << t_copy_to_global_index_sparse << std::endl; 
-    }
-
-
-    // RAYTIME
-    double t_sending_recv_requests_sparse_start
-      = TimingHelpers::timer();
 
     Vector<MPI_Request> recv_requests_sparse_nreq;
     if (matrix_distributed)
@@ -1161,31 +1028,6 @@ namespace oomph
         recv_requests_sparse_nreq.push_back(req);
        }
      }
-
-    // RAYTIME
-    double t_sending_recv_requests_sparse_end
-      = TimingHelpers::timer();
-    if(Debug_flag)
-    {
-      double t_sending_recv_requests_sparse
-        = t_sending_recv_requests_sparse_end
-        - t_sending_recv_requests_sparse_start;
-      oomph_info 
-        << "BLKSETUP_MO_SENDSPARSE: t_sending_recv_requests_sparse: "
-        << t_sending_recv_requests_sparse << std::endl;
-    }
-
-    // RAYTIME
-    double t_setting_and_sending_sparse_vecs_end = TimingHelpers::timer();
-    if(Debug_flag)
-    {
-      double t_setting_and_sending_sparse_vecs 
-        = t_setting_and_sending_sparse_vecs_end
-        - t_setting_and_sending_sparse_vecs_start;
-      oomph_info << "BLKSETUP_MO: t_setting_and_sending_sparse_vecs: "
-                 << t_setting_and_sending_sparse_vecs << std::endl; 
-    }
-
 #endif
 
     // resize the storage
@@ -1207,28 +1049,12 @@ namespace oomph
 
     // the problem method distributed() is only accessible with MPI
 #ifdef OOMPH_HAS_MPI
-    // RAYTIME
-    double t_problem_distributed_start = TimingHelpers::timer();
     problem_distributed = any_mesh_distributed();
-    // RAYTIME
-    double t_problem_distributed_end = TimingHelpers::timer();
-    if(Debug_flag)
-    {
-      double t_problem_distributed 
-        = t_problem_distributed_end
-        - t_problem_distributed_start;
-      oomph_info << "BLKSETUP_MO: t_problem_distributed: "
-                 << t_problem_distributed << std::endl;
-    }
 #endif
 
     // if the problem is not distributed
     if (!problem_distributed)
      {
-
-      // RAYTIME
-      double t_loop_through_meshes_start = TimingHelpers::timer();
-
       // Offset for the block type in the overall system.
       // Different meshes contain different block-preconditionable
       // elements -- their blocks are added one after the other.
@@ -1305,23 +1131,10 @@ namespace oomph
          }
        }
 #endif
-      // RAYTIME
-      double t_loop_through_meshes_end = TimingHelpers::timer();
-      if(Debug_flag)
-      {
-        double t_loop_through_meshes
-          = t_loop_through_meshes_end
-          - t_loop_through_meshes_start;
-        oomph_info << "BLKSETUP_MO: t_loop_through_meshes: "
-                   << t_loop_through_meshes << std::endl;
-      }
      }
     // else the problem is distributed
     else
      {
-       // RAYTIME
-       double t_loop_through_meshes_start = TimingHelpers::timer();
-
 #ifdef OOMPH_HAS_MPI
       // Offset for the block type in the overall system.
       // Different meshes contain different block-preconditionable
@@ -1611,21 +1424,8 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
 #endif
-      // RAYTIME
-      double t_loop_through_meshes_end = TimingHelpers::timer();
-      if(Debug_flag)
-      {
-        double t_loop_through_meshes
-          = t_loop_through_meshes_end - t_loop_through_meshes_start;
-        oomph_info << "BLKSETUP_MO: t_loop_through_meshes: "
-                   << t_loop_through_meshes << std::endl;
-      }
      }
-
 #ifdef OOMPH_HAS_MPI
-    // RAYTIME
-    double t_sparse_rows_for_proc_start = TimingHelpers::timer();
-
     Vector<unsigned*> sparse_rows_for_proc(nproc,0);
     Vector<MPI_Request> sparse_rows_for_proc_requests;
     if (matrix_distributed)
@@ -1651,17 +1451,6 @@ namespace oomph
          }
        }
      }
-
-    // RAYTIME
-    double t_sparse_rows_for_proc_end = TimingHelpers::timer();
-    if(Debug_flag)
-    {
-      double t_sparse_rows_for_proc
-        = t_sparse_rows_for_proc_end
-        - t_sparse_rows_for_proc_start;
-      oomph_info << "BLKSETUP_MO: t_sparse_rows_for_proc: "
-                 << t_sparse_rows_for_proc << std::endl;
-    }
 #endif
 
 
@@ -1674,10 +1463,6 @@ namespace oomph
     // first consider a non distributed matrix
     if (!matrix_distributed)
      {
-      // RAYTIME
-      double t_index_in_dof_and_dof_dimension_start 
-        = TimingHelpers::timer();
-
       // set the Index_in_dof_block
       unsigned nrow  = this->distribution_pt()->nrow();
       Index_in_dof_block_dense.resize(nrow);
@@ -1687,25 +1472,11 @@ namespace oomph
         Index_in_dof_block_dense[i] = Dof_dimension[Dof_number_dense[i]];
         Dof_dimension[Dof_number_dense[i]]++;
        }
-
-      // RAYTIME
-      double t_index_in_dof_and_dof_dimension_end = TimingHelpers::timer();
-      if(Debug_flag)
-      {
-        double t_index_in_dof_and_dof_dimension
-          = t_index_in_dof_and_dof_dimension_end
-          - t_index_in_dof_and_dof_dimension_start;
-        oomph_info << "BLKSETUP_MO: t_index_in_dof_and_dof_dimension: "
-                   << t_index_in_dof_and_dof_dimension << std::endl;
-      }
      }
 
     // next a distributed matrix
     else
      {
-       // RAYTIME
-       double t_index_in_dof_and_dof_dimension_start
-	 = TimingHelpers::timer();
 #ifdef OOMPH_HAS_MPI
 
 
@@ -1827,27 +1598,7 @@ namespace oomph
          }
        }
 #endif
-      // RAYTIME
-      double t_index_in_dof_and_dof_dimension_end
-        = TimingHelpers::timer();
-      if(Debug_flag)
-      {
-        double t_index_in_dof_and_dof_dimension
-          = t_index_in_dof_and_dof_dimension_end
-          - t_index_in_dof_and_dof_dimension_start;
-        oomph_info << "BLKSETUP_MO: t_index_in_dof_and_dof_dimension: "
-                   << t_index_in_dof_and_dof_dimension << std::endl;
-      }
      }
-    // RAYTIME
-    double t_master_prec_only_end = TimingHelpers::timer();
-    if(Debug_flag)
-    {
-      double t_master_prec_only = t_master_prec_only_end
-                                  - t_master_prec_only_start;
-      oomph_info << "BLKSETUP: t_master_prec_only: "
-                 << t_master_prec_only << std::endl; 
-    }
    }
 
   /////////////////////////////////////////////////////////////////////////////
