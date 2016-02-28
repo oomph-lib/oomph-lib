@@ -1611,7 +1611,7 @@ class TriangleMeshParameters
       // to the correct one (after reset the halo/haloed scheme)
      }
 #else
-    nbound = this->nboudary(); // The original number of boundaries
+    nbound = this->nboundary(); // The original number of boundaries
 #endif
     
     // Setup boundary coordinates for boundaries
@@ -3164,6 +3164,28 @@ private:
     } // for
   } // function
   
+   public:
+  
+  /// \short Gets the vertex number on the destination polyline (used
+  /// to create the connections among shared boundaries)
+  const bool get_connected_vertex_number_on_destination_polyline(
+   TriangleMeshPolyLine *dst_polyline_pt,
+   Vector<double> &vertex_coordinates,
+   unsigned &vertex_number);
+  
+  // \short Sort the polylines coming from joining them. Check whether
+  // it is necessary to reverse them or not. Used when joining two curve
+  // polylines in order to create a polygon
+  void check_contiguousness_on_polylines_helper(
+   Vector<TriangleMeshPolyLine *> &polylines_pt, unsigned &index);
+  
+  // \short Sort the polylines coming from joining them. Check whether
+  // it is necessary to reverse them or not. Used when joining polylines
+  // and they still do not create a polygon
+  void check_contiguousness_on_polylines_helper(
+   Vector<TriangleMeshPolyLine *> &polylines_pt,
+   unsigned &index_halo_start, unsigned &index_halo_end);
+  
 #ifdef OOMPH_HAS_MPI
 
    public:
@@ -3224,12 +3246,12 @@ private:
   // \short Stores the final zeta coordinate for the segments that
   // appear when a boundary is splited among processors
   std::map<unsigned, Vector<double> > Boundary_segment_final_zeta;
-
+  
   // \short Used to store the nodes associated to a boundary and to an
   // specific segment (this only applies in distributed meshes where the
   // boundary is splitted in segments)
   std::map<unsigned, Vector<Vector<Node*> > > Boundary_segment_node_pt;
-
+  
   // \short Stores the initial number of vertices for the segments that
   // appear when a boundary is splited among processors
   //std::map<unsigned, Vector<unsigned> > Boundary_segment_initial_vertices;
@@ -3847,12 +3869,6 @@ private:
    Vector<TriangleMeshPolygon *> &polygons_pt,
    Vector<Vector<double> > &output_holes_coordinates);
   
-  /// Helper function that checks if a given point is inside a polygon
-  // (a set of sorted vertices that connected create a polygon)
-  bool is_point_inside_polygon_helper(
-   Vector<Vector<double> > polygon_vertices,
-   Vector<double> point);
-  
   // \short Check for any possible connections that the array of
   // sorted nodes have with any previous boundaries or with
   // itself. Return -1 if no connection was found, return -2 if the
@@ -3875,26 +3891,6 @@ private:
   // as having connections. This connections were marked in the function
   // TriangleMesh::create_polylines_from_halo_elements_helper().
   void create_shared_polylines_connections();
-  
-  /// \short Gets the vertex number on the destination polyline (used
-  /// to create the connections among shared boundaries)
-  const bool get_connected_vertex_number_on_destination_polyline(
-   TriangleMeshPolyLine *dst_polyline_pt,
-   Vector<double> &vertex_coordinates,
-   unsigned &vertex_number);
-  
-  // \short Sort the polylines coming from joining them. Check whether
-  // it is necessary to reverse them or not. Used when joining two curve
-  // polylines in order to create a polygon
-  void check_contiguousness_on_polylines_helper(
-   Vector<TriangleMeshPolyLine *> &polylines_pt, unsigned &index);
-  
-  // \short Sort the polylines coming from joining them. Check whether
-  // it is necessary to reverse them or not. Used when joining polylines
-  // and they still do not create a polygon
-  void check_contiguousness_on_polylines_helper(
-   Vector<TriangleMeshPolyLine *> &polylines_pt,
-   unsigned &index_halo_start, unsigned &index_halo_end);
   
   /// \short Creates the shared boundaries
   void create_shared_boundaries(OomphCommunicator* comm_pt, 
@@ -4023,7 +4019,13 @@ private:
    /// coordinates(into separate tecplot zones)
    void output_boundary_coordinates(const unsigned &b, 
                                     std::ostream &outfile);
-
+   
+  /// Helper function that checks if a given point is inside a polygon
+  // (a set of sorted vertices that connected create a polygon)
+  bool is_point_inside_polygon_helper(
+   Vector<Vector<double> > polygon_vertices,
+   Vector<double> point);
+  
  private:
 
   // Reference :
@@ -4466,10 +4468,6 @@ template<class ELEMENT>
    // structures, used when creating from a mesh from polyfiles
    void create_polylines_from_polyfiles(const std::string& node_file_name,
                                         const std::string& poly_file_name);
-   
-   /// Helper function that checks if a given point is inside a polygon
-   bool is_point_inside_polygon(Vector<Vector<double> > polygon_vertices,
-                                Vector<double> point);
    
 #ifdef OOMPH_HAS_MPI
    // \short Fill the boundary elements structures when dealing with

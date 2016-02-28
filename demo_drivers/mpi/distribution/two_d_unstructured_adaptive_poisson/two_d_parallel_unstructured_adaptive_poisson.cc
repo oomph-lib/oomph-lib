@@ -92,7 +92,7 @@ namespace TestArguments
 {
   unsigned Domain_configuration = 1; // Choose the domain geometry
   double Element_size = 1.0e-2; // same as default
-  double Max_adapt = 3;
+  unsigned Max_adapt = 3;
   double Max_permitted_error = 1.0e-3; // same as default
   double Min_permitted_error = 1.0e-5; // same as default
   double Max_element_size = Element_size;
@@ -1479,6 +1479,8 @@ int main(int argc, char* argv[])
  
  problem.mesh_pt()->output(file_initial_distributed_mesh, 2);
 #endif // OOMPH_HAS_MPI
+ 
+ 
  
  // Solve the problem doing (parallel unstructured) mesh adaptation
  problem.newton_solve(TestArguments::Max_adapt);

@@ -999,12 +999,14 @@ namespace oomph
      
      // Store the arclength of each segment in the current processor
      Vector<double> segment_arclength(nsegments);
-     
+
+#ifdef OOMPH_HAS_MPI     
      // Clear the boundary segment nodes storage
      this->flush_boundary_segment_node(b);
      
      // Set the number of segments for the current boundary
      this->set_nboundary_segment_node(b, nsegments);
+#endif // #ifdef OOMPH_HAS_MPI
      
      // Go through all the segments and compute their (local) boundary
      // coordinates
@@ -1050,8 +1052,10 @@ namespace oomph
        std::set<Node*> local_nodes_pt;
        local_nodes_pt.insert(first_node_pt);
        
+#ifdef OOMPH_HAS_MPI       
        // Insert the node in the look-up scheme for nodes in segments
        this->add_boundary_segment_node(b, is, first_node_pt);
+#endif // #ifdef OOMPH_HAS_MPI
        
        // Now loop over nodes in order
        for (std::list<FiniteElement*>::iterator it = 
@@ -1095,9 +1099,10 @@ namespace oomph
            // Get lexicographically bottom left node but only
            // use vertex nodes as candidates
            local_nodes_pt.insert(nod_pt);
-           
+#ifdef OOMPH_HAS_MPI           
            // Insert the node in the look-up scheme for nodes in segments
            this->add_boundary_segment_node(b, is, nod_pt);
+#endif // #ifdef OOMPH_HAS_MPI
            
           } // for (j < nnod)
          
@@ -15622,118 +15627,6 @@ namespace oomph
   output_holes_coordinates = hole_kept;
   
  }
-
- //======================================================================
- /// Helper function that checks if a given point is inside a polygon
- //======================================================================
- template <class ELEMENT>
- bool TriangleMesh<ELEMENT>::is_point_inside_polygon_helper(
-  Vector<Vector<double> > polygon_vertices, Vector<double> point)
- {
-  // Total number of vertices (the first and last vertex should be the
-  // same)
-  const unsigned n_vertex = polygon_vertices.size();
-  
-  // Check if internal point is actually located in bounding polygon
-  // Reference: http://paulbourke.net/geometry/insidepoly/
-  
-  // Counter for number of intersections
-  unsigned intersect_counter=0;
- 
-  //Get first vertex
-  Vector<double> p1=polygon_vertices[0];
-  for (unsigned i=1;i<=n_vertex;i++)
-   {
-    // Get second vertex by wrap-around
-    Vector<double> p2 = polygon_vertices[i%n_vertex];
-
-    if (point[1] > std::min(p1[1],p2[1]))
-     {
-      if (point[1] <= std::max(p1[1],p2[1]))
-       {
-        if (point[0] <= std::max(p1[0],p2[0]))
-         {
-          if (p1[1] != p2[1])
-           {
-            double xintersect =
-             (point[1]-p1[1])*(p2[0]-p1[0])/
-             (p2[1]-p1[1])+p1[0];
-            if ( (p1[0] == p2[0]) ||
-                 (point[0] <= xintersect) )
-             {
-              intersect_counter++;
-             }
-           }
-         }
-       }
-     }
-    p1 = p2;
-   }
-  
-  // Even number of intersections: outside
-  if (intersect_counter%2==0)
-   {
-    return false;
-   }
-  else
-   {
-    return true;
-   }
-  
- }
-
- //======================================================================
- /// \short Gets the vertex number on the destination polyline (used /
- //to create the connections among shared boundaries)
- //======================================================================
- template<class ELEMENT>
- const bool TriangleMesh<ELEMENT>::
- get_connected_vertex_number_on_destination_polyline(
-  TriangleMeshPolyLine *dst_polyline_pt,
-  Vector<double> &vertex_coordinates,
-  unsigned &vertex_number)
- {
-  // The returning flag indicating that the vertex was found in the
-  // destination boundary
-  bool found_vertex_number = false;
-  
-  // Get the number of vertices in the destination polyline
-  const unsigned n_vertices = dst_polyline_pt->nvertex();
-  
-  // Loop over the vertices and return the closest vertex
-  // to the given vertex coordinates
-  for (unsigned i = 0; i < n_vertices; i++)
-   {
-    // Get the i-vertex on the polyline
-    Vector<double> current_vertex = dst_polyline_pt->vertex_coordinate(i);
-    
-    // Compute the distance to the input vertex
-    double dist =
-    (vertex_coordinates[0] - current_vertex[0])*
-    (vertex_coordinates[0] - current_vertex[0])
-    +
-    (vertex_coordinates[1] - current_vertex[1])*
-    (vertex_coordinates[1] - current_vertex[1]);
-    dist = sqrt(dist);
-
-    // Have we found the vertex?
-    if(dist <
-       ToleranceForVertexMismatchInPolygons::Tolerable_error)
-     {
-      // Set the vertex index
-      vertex_number = i;
-      // Set the flag to found
-      found_vertex_number = true;
-      // Break the serching
-      break;
-     }
-    
-   } // for (i < n_vertices)
-
-   // Return if the connection was found
-   return found_vertex_number;
-
- }
  
  //======================================================================
  // \short Sorts the polylines so they be contiguous and then we can
@@ -19403,6 +19296,118 @@ namespace oomph
  }
 
 #endif // OOMPH_HAS_MPI
+
+ //======================================================================
+ /// Helper function that checks if a given point is inside a polygon
+ //======================================================================
+ template <class ELEMENT>
+ bool TriangleMesh<ELEMENT>::is_point_inside_polygon_helper(
+  Vector<Vector<double> > polygon_vertices, Vector<double> point)
+ {
+  // Total number of vertices (the first and last vertex should be the
+  // same)
+  const unsigned n_vertex = polygon_vertices.size();
+  
+  // Check if internal point is actually located in bounding polygon
+  // Reference: http://paulbourke.net/geometry/insidepoly/
+  
+  // Counter for number of intersections
+  unsigned intersect_counter=0;
+ 
+  //Get first vertex
+  Vector<double> p1=polygon_vertices[0];
+  for (unsigned i=1;i<=n_vertex;i++)
+   {
+    // Get second vertex by wrap-around
+    Vector<double> p2 = polygon_vertices[i%n_vertex];
+
+    if (point[1] > std::min(p1[1],p2[1]))
+     {
+      if (point[1] <= std::max(p1[1],p2[1]))
+       {
+        if (point[0] <= std::max(p1[0],p2[0]))
+         {
+          if (p1[1] != p2[1])
+           {
+            double xintersect =
+             (point[1]-p1[1])*(p2[0]-p1[0])/
+             (p2[1]-p1[1])+p1[0];
+            if ( (p1[0] == p2[0]) ||
+                 (point[0] <= xintersect) )
+             {
+              intersect_counter++;
+             }
+           }
+         }
+       }
+     }
+    p1 = p2;
+   }
+  
+  // Even number of intersections: outside
+  if (intersect_counter%2==0)
+   {
+    return false;
+   }
+  else
+   {
+    return true;
+   }
+  
+ }
+
+ //======================================================================
+ /// \short Gets the vertex number on the destination polyline (used /
+ //to create the connections among shared boundaries)
+ //======================================================================
+ template<class ELEMENT>
+ const bool TriangleMesh<ELEMENT>::
+ get_connected_vertex_number_on_destination_polyline(
+  TriangleMeshPolyLine *dst_polyline_pt,
+  Vector<double> &vertex_coordinates,
+  unsigned &vertex_number)
+ {
+  // The returning flag indicating that the vertex was found in the
+  // destination boundary
+  bool found_vertex_number = false;
+  
+  // Get the number of vertices in the destination polyline
+  const unsigned n_vertices = dst_polyline_pt->nvertex();
+  
+  // Loop over the vertices and return the closest vertex
+  // to the given vertex coordinates
+  for (unsigned i = 0; i < n_vertices; i++)
+   {
+    // Get the i-vertex on the polyline
+    Vector<double> current_vertex = dst_polyline_pt->vertex_coordinate(i);
+    
+    // Compute the distance to the input vertex
+    double dist =
+    (vertex_coordinates[0] - current_vertex[0])*
+    (vertex_coordinates[0] - current_vertex[0])
+    +
+    (vertex_coordinates[1] - current_vertex[1])*
+    (vertex_coordinates[1] - current_vertex[1]);
+    dist = sqrt(dist);
+
+    // Have we found the vertex?
+    if(dist <
+       ToleranceForVertexMismatchInPolygons::Tolerable_error)
+     {
+      // Set the vertex index
+      vertex_number = i;
+      // Set the flag to found
+      found_vertex_number = true;
+      // Break the serching
+      break;
+     }
+    
+   } // for (i < n_vertices)
+
+   // Return if the connection was found
+   return found_vertex_number;
+
+ }
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -30184,530 +30189,6 @@ update_other_proc_shd_bnd_node_helper
    } // for (iproc < nproc)
   
  }
-  
- //======================================================================
- /// \short Get the nodes on the boundary (b), these are stored in the
- /// segment they belong (also used by the load balance method to
- /// re-set the number of segments per boundary after load balance has
- /// taken place)
- //======================================================================
- template <class ELEMENT>
- void RefineableTriangleMesh<ELEMENT>::get_boundary_segment_nodes_helper(
-  const unsigned &b, Vector<Vector<Node*> > &tmp_segment_nodes)
- {
-  // Clear the data structure were to return the nodes
-  tmp_segment_nodes.clear();
-  
-  // Temporary storage for face elements
-  Vector<FiniteElement*> face_el_pt;
-  
-  // Temporary storage for number of elements adjacent to the boundary
-  unsigned nel = 0;
-  
-  // Temporary storage for elements adjacent to the boundary that have
-  // a common edge (related with internal boundaries)
-  unsigned n_repeated_ele = 0;
-  
-  // Get the number of regions
-  const unsigned n_regions = this->nregion();
-  
-  // Temporary storage for already visited pair of nodes (edges)
-  Vector < std::pair<Node*, Node *> > done_nodes_pt;
-  
-  // Are there more than one region?
-  if (n_regions > 1)
-   {
-    for (unsigned rr = 0 ; rr < n_regions; rr++)
-     {
-      const unsigned region_id = 
-       static_cast<unsigned>(this->Region_attribute[rr]);
-      
-      // Loop over all elements on boundaries in region rr
-      const unsigned nel_in_region = 
-       this->nboundary_element_in_region(b, region_id);
-      
-      // Number of repeated element in region
-      unsigned nel_repeated_in_region = 0;
-      
-      // Only bother to do anything else, if there are elements
-      // associated with the boundary and the current region
-      if (nel_in_region > 0)
-       {
-        // Flag that activates when a repeated face element is found,
-        // possibly because we are dealing with an internal boundary
-        bool repeated = false;
-        
-        // Loop over the bulk elements adjacent to boundary b
-        for (unsigned e = 0; e < nel_in_region; e++)
-         {
-          // Get pointer to the bulk element that is adjacent to boundary b
-          FiniteElement* bulk_elem_pt =
-           this->boundary_element_in_region_pt(b, region_id, e);
-          
-#ifdef OOMPH_HAS_MPI
-          // In a distributed mesh only work with nonhalo elements
-          if (this->is_mesh_distributed() && bulk_elem_pt->is_halo())
-           {
-            // Increase the number of repeated elements
-            n_repeated_ele++;
-            // Go for the next element
-            continue;
-           }
-#endif
-          
-          //Find the index of the face of element e along boundary b
-          int face_index = 
-           this->face_index_at_boundary_in_region(b, region_id, e);
-          
-          // Before adding the new element we need to be sure that the
-          // edge that this element represents has not been already
-          // added
-          FiniteElement* tmp_ele_pt = new DummyFaceElement<ELEMENT> (
-           bulk_elem_pt, face_index);
-      
-          // Number of nodes in the face element
-          const unsigned n_nodes = tmp_ele_pt->nnode();
-          
-          std::pair<Node*, Node*> tmp_pair = 
-           std::make_pair(tmp_ele_pt->node_pt(0),
-                          tmp_ele_pt->node_pt(n_nodes - 1));
-          
-          std::pair<Node*, Node*> tmp_pair_inverse = 
-           std::make_pair(tmp_ele_pt->node_pt(n_nodes - 1),
-                          tmp_ele_pt->node_pt(0));
-          
-          // Search for repeated nodes
-          unsigned n_done_nodes = done_nodes_pt.size();
-          for (unsigned l = 0; l < n_done_nodes; l++)
-           {
-            if (tmp_pair == done_nodes_pt[l] || tmp_pair_inverse
-                == done_nodes_pt[l])
-             {
-              nel_repeated_in_region++;
-              repeated = true;
-              break;
-             }
-            
-           } // for (l < n_done_nodes)
-          
-          // Create new face element?
-          if (!repeated)
-           {
-            // Add the pair of nodes (edge) to the node dones
-            done_nodes_pt.push_back(tmp_pair);
-            // Add the face element to the storage
-            face_el_pt.push_back(tmp_ele_pt);
-           }
-          else
-           {
-            // Clean up
-            delete tmp_ele_pt;
-            tmp_ele_pt = 0;
-           }
-          
-          // Re-start
-          repeated = false;
-          
-         } // for (e < nel_in_region)
-        
-        // Add on the number of elements in the boundary with the
-        // current region
-        nel += nel_in_region;
-        
-        // Add on the number of repeated elements
-        n_repeated_ele += nel_repeated_in_region;
-        
-       } // if (nel_in_region > 0)
-      
-     } // for (rr < n_regions)
-    
-   } // if (n_regions > 1)
-  //Otherwise it's just the normal boundary functions
-  else
-   {
-    // Assign the number of boundary elements
-    nel = this->nboundary_element(b);
-    
-    //Only bother to do anything else, if there are elements
-    if (nel > 0)
-     {
-      // Flag that activates when a repeated face element is found,
-      // possibly because we are dealing with an internal boundary
-      bool repeated = false;
-      
-      // Loop over the bulk elements adjacent to boundary b
-      for (unsigned e = 0; e < nel; e++)
-       {
-        // Get pointer to the bulk element that is adjacent to boundary b
-        FiniteElement* bulk_elem_pt = this->boundary_element_pt(b, e);
-        
-#ifdef OOMPH_HAS_MPI
-        // In a distributed mesh only work with nonhalo elements
-        if (this->is_mesh_distributed() && bulk_elem_pt->is_halo())
-         {
-          // Increase the number of repeated elements
-          n_repeated_ele++;
-          // Go for the next element
-          continue;
-         }
-#endif
-        
-        //Find the index of the face of element e along boundary b
-        int face_index = this->face_index_at_boundary(b, e);
-        
-        // Before adding the new element we need to be sure that the
-        // edge that this element represent has not been already added
-        FiniteElement* tmp_ele_pt = new DummyFaceElement<ELEMENT> (
-         bulk_elem_pt, face_index);
-        
-        // Number of nodes in the face element
-        const unsigned n_nodes = tmp_ele_pt->nnode();
-        
-        std::pair<Node*, Node*> tmp_pair = 
-         std::make_pair(tmp_ele_pt->node_pt(0),
-                        tmp_ele_pt->node_pt(n_nodes - 1));
-        
-        std::pair<Node*, Node*> tmp_pair_inverse = 
-         std::make_pair(tmp_ele_pt->node_pt(n_nodes - 1),
-                        tmp_ele_pt->node_pt(0));
-        
-        // Search for repeated nodes
-        unsigned n_done_nodes = done_nodes_pt.size();
-        for (unsigned l = 0; l < n_done_nodes; l++)
-         {
-          if (tmp_pair == done_nodes_pt[l] || tmp_pair_inverse
-              == done_nodes_pt[l])
-           {
-            n_repeated_ele++;
-            repeated = true;
-            break;
-           }
-          
-         } // for (l < n_done_nodes)
-        
-        // Create new face element
-        if (!repeated)
-         {
-          // Add the pair of nodes (edge) to the node dones
-          done_nodes_pt.push_back(tmp_pair);
-          // Add the face element to the storage
-          face_el_pt.push_back(tmp_ele_pt);
-         }
-        else
-         {
-          // Free the repeated bulk element!!
-          delete tmp_ele_pt;
-          tmp_ele_pt = 0;
-         }
-        
-        // Re-start
-        repeated = false;
-        
-       } // for (e < nel)
-      
-     } // if (nel > 0)
-    
-   } // else if (n_regions > 1)
-  
-  // Substract the repeated elements
-  nel -= n_repeated_ele;
-  
-#ifdef PARANOID
-  if (nel!=face_el_pt.size())
-   {
-     std::ostringstream error_message;
-     error_message
-      << "The independet counting of face elements ("<<nel<<") for "
-      << "boundary ("<<b<<") is different\n"
-      << "from the real number of face elements in the container ("
-      << face_el_pt.size() <<")\n";
-     throw OomphLibError(error_message.str(),
-                         "RefineableTriangleMesh::get_boundary_segment_nodes_helper()",
-                         OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-  
-  //Only bother to do anything else, if there are elements
-  if (nel > 0)
-   {
-    // Assign the number of nonhalo face elements
-    const unsigned nnon_halo_face_elements = nel;
-    
-    // The vector of list to store the "segments" that compound the
-    // boundary (segments may appear only in a distributed mesh)
-    Vector<std::list<FiniteElement*> > segment_sorted_ele_pt;
-    
-    // Number of already sorted face elements (only nonhalo face
-    // elements for a distributed mesh)
-    unsigned nsorted_face_elements = 0;
-     
-    // Keep track of who's done (in a distributed mesh this apply to
-    // nonhalo only)
-    std::map<FiniteElement*, bool> done_ele;
-    
-    // Keep track of which element is inverted (in distributed mesh
-    // the elements may be inverted with respect to the segment they
-    // belong)
-    std::map<FiniteElement*, bool> is_inverted;
-    
-    // Iterate until all possible segments have been created. In a non
-    // distributed mesh there is only one segment which defines the
-    // complete boundary
-    while(nsorted_face_elements < nnon_halo_face_elements)
-     {
-      // The ordered list of face elements (in a distributed mesh a
-      // collection of continuous face elements define a segment)
-      std::list<FiniteElement*> sorted_el_pt;
-      
-#ifdef PARANOID
-      // Select an initial element for the segment
-      bool found_initial_face_element = false;
-#endif
-      
-      FiniteElement* ele_face_pt = 0;
-      
-      unsigned iface = 0;
-#ifdef OOMPH_HAS_MPI
-      if (this->is_mesh_distributed())
-       {
-        for (iface = 0; iface < nel; iface++)
-         {
-          ele_face_pt = face_el_pt[iface];
-          // If not done then take it as initial face element
-          if (!done_ele[ele_face_pt])
-           {
-#ifdef PARANOID
-            // Set the flag to indicate the initial element was
-            // found
-            found_initial_face_element = true;
-#endif
-            // Increase the number of sorted face elements
-            nsorted_face_elements++;
-            // Set the index to the next face element
-            iface++;
-            // Add the face element in the container
-            sorted_el_pt.push_back(ele_face_pt);
-            // Mark as done
-            done_ele[ele_face_pt] = true;
-            break;
-           } // if (!done_el[ele_face_pt])
-         } // for (iface < nel)
-       } // if (this->is_mesh_distributed())
-      else
-       {
-#endif // #ifdef OOMPH_HAS_MPI
-        
-        // When the mesh is not distributed just take the first
-        // element and put it in the ordered list
-        ele_face_pt = face_el_pt[0];
-#ifdef PARANOID
-        // Set the flag to indicate the initial element was found
-        found_initial_face_element = true;
-#endif
-        // Increase the number of sorted face elements
-        nsorted_face_elements++;
-        // Set the index to the next face element
-        iface = 1;
-        // Add the face element in the container
-        sorted_el_pt.push_back(ele_face_pt);
-        // Mark as done
-        done_ele[ele_face_pt] = true;
-#ifdef OOMPH_HAS_MPI
-       } // else if (this->is_mesh_distributed())
-#endif
-       
-#ifdef PARANOID
-      if (!found_initial_face_element)
-       {
-        std::ostringstream error_message;
-        error_message
-         <<"Could not find an initial face element for the current segment\n";
-        throw OomphLibError(error_message.str(),
-                            "RefineableTriangleMesh::get_boundary_segment_nodes_helper()",
-                            OOMPH_EXCEPTION_LOCATION);
-       }
-#endif
-      
-      // Number of nodes in the face element
-      const unsigned nnod = ele_face_pt->nnode();
-      
-      // Left and rightmost nodes (the left and right nodes of the
-      // current face element)
-      Node* left_node_pt = ele_face_pt->node_pt(0);
-      Node* right_node_pt = ele_face_pt->node_pt(nnod - 1);
-      
-      // Continue iterating if a new face element has been added to
-      // the list
-      bool face_element_added = false;
-      
-      // While a new face element has been added to the set of sorted
-      // face elements continue iterating
-      do
-       {
-        // Start from the next face element since we have already
-        // added the previous one as the initial face element (any
-        // previous face element had to be added on previous
-        // iterations)
-        for (unsigned iiface=iface;iiface<nel;iiface++)
-         {
-          // Re-start flag
-          face_element_added = false;
-          
-          // Get the candidate element
-          ele_face_pt = face_el_pt[iiface];
-          
-          // Check that the candidate element has not been done and is
-          // not a halo element
-          if (!done_ele[ele_face_pt])
-           {
-            // Get the left and right nodes of the current element
-            Node* local_left_node_pt = ele_face_pt->node_pt(0);
-            Node* local_right_node_pt = ele_face_pt->node_pt(nnod - 1);
-            
-            // New element fits at the left of segment and is not inverted
-            if (left_node_pt == local_right_node_pt)
-             {
-              left_node_pt = local_left_node_pt;
-              sorted_el_pt.push_front(ele_face_pt);
-              is_inverted[ele_face_pt] = false;
-              face_element_added = true;
-             }
-            // New element fits at the left of segment and is inverted
-            else if (left_node_pt == local_left_node_pt)
-             {
-              left_node_pt = local_right_node_pt;
-              sorted_el_pt.push_front(ele_face_pt);
-              is_inverted[ele_face_pt] = true;
-              face_element_added = true;
-             }
-            // New element fits on the right of segment and is not inverted
-            else if (right_node_pt == local_left_node_pt)
-             {
-              right_node_pt = local_right_node_pt;
-              sorted_el_pt.push_back(ele_face_pt);
-              is_inverted[ele_face_pt] = false;
-              face_element_added = true;
-             }
-            // New element fits on the right of segment and is inverted
-            else if (right_node_pt == local_right_node_pt)
-             {
-              right_node_pt = local_left_node_pt;
-              sorted_el_pt.push_back(ele_face_pt);
-              is_inverted[ele_face_pt] = true;
-              face_element_added = true;
-             }
-            
-            if (face_element_added)
-             {
-              // Mark the face element as done
-              done_ele[ele_face_pt] = true;
-              nsorted_face_elements++;
-              break;
-             }
-            
-           } // if (!done_el[ele_face_pt])
-          
-         } // for (iiface<nnon_halo_face_element)
-        
-       }while(face_element_added &&
-              (nsorted_face_elements < nnon_halo_face_elements));
-      
-      // Store the created segment in the vector of segments
-      segment_sorted_ele_pt.push_back(sorted_el_pt);
-      
-     } // while(nsorted_face_elements < nnon_halo_face_elements);
-    
-    // The number of boundary segments in this processor
-    const unsigned nsegments = segment_sorted_ele_pt.size();
-    
-#ifdef PARANOID
-    if (nnon_halo_face_elements > 0 && nsegments == 0)
-     {
-      std::ostringstream error_message;
-      error_message
-       << "The number of segments is zero, but the number of nonhalo\n"
-       << "elements is: (" << nnon_halo_face_elements << ")\n";
-      throw OomphLibError(error_message.str(),
-                          "RefineableTriangleMesh::get_boundary_segment_nodes_helper()",
-                          OOMPH_EXCEPTION_LOCATION);
-     } // if (nnon_halo_face_elements > 0 && nsegments == 0)
-#endif
-    
-    // Go through all the segments, visit each face element in order
-    // and get the nodes based that represent the boundary segment
-    
-    // Resize the container to store the nodes with the required
-    // number of segments
-    tmp_segment_nodes.resize(nsegments);
-    
-    for (unsigned is = 0; is < nsegments; is++)
-     {
-#ifdef PARANOID
-      if (segment_sorted_ele_pt[is].size() == 0)
-       {
-        std::ostringstream error_message;
-        error_message
-         << "The (" << is << ")-th segment has no elements\n";
-        throw OomphLibError(error_message.str(),
-                            "RefineableTriangleMesh::get_boundary_segment_nodes_helper()",
-                            OOMPH_EXCEPTION_LOCATION);
-       } // if (segment_sorted_ele_pt[is].size() == 0)
-#endif
-      
-      // Get access to the first element on the segment
-      FiniteElement* first_ele_pt = segment_sorted_ele_pt[is].front();
-      
-      // Number of nodes
-      const unsigned nnod = first_ele_pt->nnode();
-      
-      // Get the first node of the current segment
-      Node *first_node_pt = first_ele_pt->node_pt(0);
-      if (is_inverted[first_ele_pt])
-       {
-        first_node_pt = first_ele_pt->node_pt(nnod-1);
-       }
-      
-      // Add the node to the corresponding segment
-      tmp_segment_nodes[is].push_back(first_node_pt);
-      
-      // Now loop over face elements in order to get the nodes
-      for (std::list<FiniteElement*>::iterator it = 
-            segment_sorted_ele_pt[is].begin();
-           it != segment_sorted_ele_pt[is].end(); it++)
-       {
-        // Get element
-        FiniteElement* ele_pt = *it;
-        
-        // The last node pointer
-        Node* last_node_pt = 0;
-        
-        // Get the last node
-        if (!is_inverted[ele_pt])
-         {
-          last_node_pt = ele_pt->node_pt(nnod-1);
-         }
-        else
-         {
-          last_node_pt = ele_pt->node_pt(0);
-         }
-        
-        // Add the node to the corresponding segment
-        tmp_segment_nodes[is].push_back(last_node_pt);
-        
-       } // iterator over the elements in the segment
-      
-     } // for (is < nsegments)
-    
-   } // for (if (nel > 0))
-  
-  // Free memory allocation
-  for (unsigned e = 0; e < nel; e++)
-   {
-    delete face_el_pt[e];
-    face_el_pt[e] = 0;
-   } // for (e < nel)
-  
- }
  
  //======================================================================
  /// \short Get the nodes on the shared boundary (b), these are stored
@@ -33755,6 +33236,530 @@ update_other_proc_shd_bnd_node_helper
   
 #endif // #ifdef OOMPH_HAS_MPI
 
+ //======================================================================
+ /// \short Get the nodes on the boundary (b), these are stored in the
+ /// segment they belong (also used by the load balance method to
+ /// re-set the number of segments per boundary after load balance has
+ /// taken place)
+ //======================================================================
+ template <class ELEMENT>
+ void RefineableTriangleMesh<ELEMENT>::get_boundary_segment_nodes_helper(
+  const unsigned &b, Vector<Vector<Node*> > &tmp_segment_nodes)
+ {
+  // Clear the data structure were to return the nodes
+  tmp_segment_nodes.clear();
+  
+  // Temporary storage for face elements
+  Vector<FiniteElement*> face_el_pt;
+  
+  // Temporary storage for number of elements adjacent to the boundary
+  unsigned nel = 0;
+  
+  // Temporary storage for elements adjacent to the boundary that have
+  // a common edge (related with internal boundaries)
+  unsigned n_repeated_ele = 0;
+  
+  // Get the number of regions
+  const unsigned n_regions = this->nregion();
+  
+  // Temporary storage for already visited pair of nodes (edges)
+  Vector < std::pair<Node*, Node *> > done_nodes_pt;
+  
+  // Are there more than one region?
+  if (n_regions > 1)
+   {
+    for (unsigned rr = 0 ; rr < n_regions; rr++)
+     {
+      const unsigned region_id = 
+       static_cast<unsigned>(this->Region_attribute[rr]);
+      
+      // Loop over all elements on boundaries in region rr
+      const unsigned nel_in_region = 
+       this->nboundary_element_in_region(b, region_id);
+      
+      // Number of repeated element in region
+      unsigned nel_repeated_in_region = 0;
+      
+      // Only bother to do anything else, if there are elements
+      // associated with the boundary and the current region
+      if (nel_in_region > 0)
+       {
+        // Flag that activates when a repeated face element is found,
+        // possibly because we are dealing with an internal boundary
+        bool repeated = false;
+        
+        // Loop over the bulk elements adjacent to boundary b
+        for (unsigned e = 0; e < nel_in_region; e++)
+         {
+          // Get pointer to the bulk element that is adjacent to boundary b
+          FiniteElement* bulk_elem_pt =
+           this->boundary_element_in_region_pt(b, region_id, e);
+          
+#ifdef OOMPH_HAS_MPI
+          // In a distributed mesh only work with nonhalo elements
+          if (this->is_mesh_distributed() && bulk_elem_pt->is_halo())
+           {
+            // Increase the number of repeated elements
+            n_repeated_ele++;
+            // Go for the next element
+            continue;
+           }
+#endif
+          
+          //Find the index of the face of element e along boundary b
+          int face_index = 
+           this->face_index_at_boundary_in_region(b, region_id, e);
+          
+          // Before adding the new element we need to be sure that the
+          // edge that this element represents has not been already
+          // added
+          FiniteElement* tmp_ele_pt = new DummyFaceElement<ELEMENT> (
+           bulk_elem_pt, face_index);
+      
+          // Number of nodes in the face element
+          const unsigned n_nodes = tmp_ele_pt->nnode();
+          
+          std::pair<Node*, Node*> tmp_pair = 
+           std::make_pair(tmp_ele_pt->node_pt(0),
+                          tmp_ele_pt->node_pt(n_nodes - 1));
+          
+          std::pair<Node*, Node*> tmp_pair_inverse = 
+           std::make_pair(tmp_ele_pt->node_pt(n_nodes - 1),
+                          tmp_ele_pt->node_pt(0));
+          
+          // Search for repeated nodes
+          unsigned n_done_nodes = done_nodes_pt.size();
+          for (unsigned l = 0; l < n_done_nodes; l++)
+           {
+            if (tmp_pair == done_nodes_pt[l] || tmp_pair_inverse
+                == done_nodes_pt[l])
+             {
+              nel_repeated_in_region++;
+              repeated = true;
+              break;
+             }
+            
+           } // for (l < n_done_nodes)
+          
+          // Create new face element?
+          if (!repeated)
+           {
+            // Add the pair of nodes (edge) to the node dones
+            done_nodes_pt.push_back(tmp_pair);
+            // Add the face element to the storage
+            face_el_pt.push_back(tmp_ele_pt);
+           }
+          else
+           {
+            // Clean up
+            delete tmp_ele_pt;
+            tmp_ele_pt = 0;
+           }
+          
+          // Re-start
+          repeated = false;
+          
+         } // for (e < nel_in_region)
+        
+        // Add on the number of elements in the boundary with the
+        // current region
+        nel += nel_in_region;
+        
+        // Add on the number of repeated elements
+        n_repeated_ele += nel_repeated_in_region;
+        
+       } // if (nel_in_region > 0)
+      
+     } // for (rr < n_regions)
+    
+   } // if (n_regions > 1)
+  //Otherwise it's just the normal boundary functions
+  else
+   {
+    // Assign the number of boundary elements
+    nel = this->nboundary_element(b);
+    
+    //Only bother to do anything else, if there are elements
+    if (nel > 0)
+     {
+      // Flag that activates when a repeated face element is found,
+      // possibly because we are dealing with an internal boundary
+      bool repeated = false;
+      
+      // Loop over the bulk elements adjacent to boundary b
+      for (unsigned e = 0; e < nel; e++)
+       {
+        // Get pointer to the bulk element that is adjacent to boundary b
+        FiniteElement* bulk_elem_pt = this->boundary_element_pt(b, e);
+        
+#ifdef OOMPH_HAS_MPI
+        // In a distributed mesh only work with nonhalo elements
+        if (this->is_mesh_distributed() && bulk_elem_pt->is_halo())
+         {
+          // Increase the number of repeated elements
+          n_repeated_ele++;
+          // Go for the next element
+          continue;
+         }
+#endif
+        
+        //Find the index of the face of element e along boundary b
+        int face_index = this->face_index_at_boundary(b, e);
+        
+        // Before adding the new element we need to be sure that the
+        // edge that this element represent has not been already added
+        FiniteElement* tmp_ele_pt = new DummyFaceElement<ELEMENT> (
+         bulk_elem_pt, face_index);
+        
+        // Number of nodes in the face element
+        const unsigned n_nodes = tmp_ele_pt->nnode();
+        
+        std::pair<Node*, Node*> tmp_pair = 
+         std::make_pair(tmp_ele_pt->node_pt(0),
+                        tmp_ele_pt->node_pt(n_nodes - 1));
+        
+        std::pair<Node*, Node*> tmp_pair_inverse = 
+         std::make_pair(tmp_ele_pt->node_pt(n_nodes - 1),
+                        tmp_ele_pt->node_pt(0));
+        
+        // Search for repeated nodes
+        unsigned n_done_nodes = done_nodes_pt.size();
+        for (unsigned l = 0; l < n_done_nodes; l++)
+         {
+          if (tmp_pair == done_nodes_pt[l] || tmp_pair_inverse
+              == done_nodes_pt[l])
+           {
+            n_repeated_ele++;
+            repeated = true;
+            break;
+           }
+          
+         } // for (l < n_done_nodes)
+        
+        // Create new face element
+        if (!repeated)
+         {
+          // Add the pair of nodes (edge) to the node dones
+          done_nodes_pt.push_back(tmp_pair);
+          // Add the face element to the storage
+          face_el_pt.push_back(tmp_ele_pt);
+         }
+        else
+         {
+          // Free the repeated bulk element!!
+          delete tmp_ele_pt;
+          tmp_ele_pt = 0;
+         }
+        
+        // Re-start
+        repeated = false;
+        
+       } // for (e < nel)
+      
+     } // if (nel > 0)
+    
+   } // else if (n_regions > 1)
+  
+  // Substract the repeated elements
+  nel -= n_repeated_ele;
+  
+#ifdef PARANOID
+  if (nel!=face_el_pt.size())
+   {
+     std::ostringstream error_message;
+     error_message
+      << "The independet counting of face elements ("<<nel<<") for "
+      << "boundary ("<<b<<") is different\n"
+      << "from the real number of face elements in the container ("
+      << face_el_pt.size() <<")\n";
+     throw OomphLibError(error_message.str(),
+                         "RefineableTriangleMesh::get_boundary_segment_nodes_helper()",
+                         OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  //Only bother to do anything else, if there are elements
+  if (nel > 0)
+   {
+    // Assign the number of nonhalo face elements
+    const unsigned nnon_halo_face_elements = nel;
+    
+    // The vector of list to store the "segments" that compound the
+    // boundary (segments may appear only in a distributed mesh)
+    Vector<std::list<FiniteElement*> > segment_sorted_ele_pt;
+    
+    // Number of already sorted face elements (only nonhalo face
+    // elements for a distributed mesh)
+    unsigned nsorted_face_elements = 0;
+     
+    // Keep track of who's done (in a distributed mesh this apply to
+    // nonhalo only)
+    std::map<FiniteElement*, bool> done_ele;
+    
+    // Keep track of which element is inverted (in distributed mesh
+    // the elements may be inverted with respect to the segment they
+    // belong)
+    std::map<FiniteElement*, bool> is_inverted;
+    
+    // Iterate until all possible segments have been created. In a non
+    // distributed mesh there is only one segment which defines the
+    // complete boundary
+    while(nsorted_face_elements < nnon_halo_face_elements)
+     {
+      // The ordered list of face elements (in a distributed mesh a
+      // collection of continuous face elements define a segment)
+      std::list<FiniteElement*> sorted_el_pt;
+      
+#ifdef PARANOID
+      // Select an initial element for the segment
+      bool found_initial_face_element = false;
+#endif
+      
+      FiniteElement* ele_face_pt = 0;
+      
+      unsigned iface = 0;
+#ifdef OOMPH_HAS_MPI
+      if (this->is_mesh_distributed())
+       {
+        for (iface = 0; iface < nel; iface++)
+         {
+          ele_face_pt = face_el_pt[iface];
+          // If not done then take it as initial face element
+          if (!done_ele[ele_face_pt])
+           {
+#ifdef PARANOID
+            // Set the flag to indicate the initial element was
+            // found
+            found_initial_face_element = true;
+#endif
+            // Increase the number of sorted face elements
+            nsorted_face_elements++;
+            // Set the index to the next face element
+            iface++;
+            // Add the face element in the container
+            sorted_el_pt.push_back(ele_face_pt);
+            // Mark as done
+            done_ele[ele_face_pt] = true;
+            break;
+           } // if (!done_el[ele_face_pt])
+         } // for (iface < nel)
+       } // if (this->is_mesh_distributed())
+      else
+       {
+#endif // #ifdef OOMPH_HAS_MPI
+        
+        // When the mesh is not distributed just take the first
+        // element and put it in the ordered list
+        ele_face_pt = face_el_pt[0];
+#ifdef PARANOID
+        // Set the flag to indicate the initial element was found
+        found_initial_face_element = true;
+#endif
+        // Increase the number of sorted face elements
+        nsorted_face_elements++;
+        // Set the index to the next face element
+        iface = 1;
+        // Add the face element in the container
+        sorted_el_pt.push_back(ele_face_pt);
+        // Mark as done
+        done_ele[ele_face_pt] = true;
+#ifdef OOMPH_HAS_MPI
+       } // else if (this->is_mesh_distributed())
+#endif
+       
+#ifdef PARANOID
+      if (!found_initial_face_element)
+       {
+        std::ostringstream error_message;
+        error_message
+         <<"Could not find an initial face element for the current segment\n";
+        throw OomphLibError(error_message.str(),
+                            "RefineableTriangleMesh::get_boundary_segment_nodes_helper()",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+#endif
+      
+      // Number of nodes in the face element
+      const unsigned nnod = ele_face_pt->nnode();
+      
+      // Left and rightmost nodes (the left and right nodes of the
+      // current face element)
+      Node* left_node_pt = ele_face_pt->node_pt(0);
+      Node* right_node_pt = ele_face_pt->node_pt(nnod - 1);
+      
+      // Continue iterating if a new face element has been added to
+      // the list
+      bool face_element_added = false;
+      
+      // While a new face element has been added to the set of sorted
+      // face elements continue iterating
+      do
+       {
+        // Start from the next face element since we have already
+        // added the previous one as the initial face element (any
+        // previous face element had to be added on previous
+        // iterations)
+        for (unsigned iiface=iface;iiface<nel;iiface++)
+         {
+          // Re-start flag
+          face_element_added = false;
+          
+          // Get the candidate element
+          ele_face_pt = face_el_pt[iiface];
+          
+          // Check that the candidate element has not been done and is
+          // not a halo element
+          if (!done_ele[ele_face_pt])
+           {
+            // Get the left and right nodes of the current element
+            Node* local_left_node_pt = ele_face_pt->node_pt(0);
+            Node* local_right_node_pt = ele_face_pt->node_pt(nnod - 1);
+            
+            // New element fits at the left of segment and is not inverted
+            if (left_node_pt == local_right_node_pt)
+             {
+              left_node_pt = local_left_node_pt;
+              sorted_el_pt.push_front(ele_face_pt);
+              is_inverted[ele_face_pt] = false;
+              face_element_added = true;
+             }
+            // New element fits at the left of segment and is inverted
+            else if (left_node_pt == local_left_node_pt)
+             {
+              left_node_pt = local_right_node_pt;
+              sorted_el_pt.push_front(ele_face_pt);
+              is_inverted[ele_face_pt] = true;
+              face_element_added = true;
+             }
+            // New element fits on the right of segment and is not inverted
+            else if (right_node_pt == local_left_node_pt)
+             {
+              right_node_pt = local_right_node_pt;
+              sorted_el_pt.push_back(ele_face_pt);
+              is_inverted[ele_face_pt] = false;
+              face_element_added = true;
+             }
+            // New element fits on the right of segment and is inverted
+            else if (right_node_pt == local_right_node_pt)
+             {
+              right_node_pt = local_left_node_pt;
+              sorted_el_pt.push_back(ele_face_pt);
+              is_inverted[ele_face_pt] = true;
+              face_element_added = true;
+             }
+            
+            if (face_element_added)
+             {
+              // Mark the face element as done
+              done_ele[ele_face_pt] = true;
+              nsorted_face_elements++;
+              break;
+             }
+            
+           } // if (!done_el[ele_face_pt])
+          
+         } // for (iiface<nnon_halo_face_element)
+        
+       }while(face_element_added &&
+              (nsorted_face_elements < nnon_halo_face_elements));
+      
+      // Store the created segment in the vector of segments
+      segment_sorted_ele_pt.push_back(sorted_el_pt);
+      
+     } // while(nsorted_face_elements < nnon_halo_face_elements);
+    
+    // The number of boundary segments in this processor
+    const unsigned nsegments = segment_sorted_ele_pt.size();
+    
+#ifdef PARANOID
+    if (nnon_halo_face_elements > 0 && nsegments == 0)
+     {
+      std::ostringstream error_message;
+      error_message
+       << "The number of segments is zero, but the number of nonhalo\n"
+       << "elements is: (" << nnon_halo_face_elements << ")\n";
+      throw OomphLibError(error_message.str(),
+                          "RefineableTriangleMesh::get_boundary_segment_nodes_helper()",
+                          OOMPH_EXCEPTION_LOCATION);
+     } // if (nnon_halo_face_elements > 0 && nsegments == 0)
+#endif
+    
+    // Go through all the segments, visit each face element in order
+    // and get the nodes based that represent the boundary segment
+    
+    // Resize the container to store the nodes with the required
+    // number of segments
+    tmp_segment_nodes.resize(nsegments);
+    
+    for (unsigned is = 0; is < nsegments; is++)
+     {
+#ifdef PARANOID
+      if (segment_sorted_ele_pt[is].size() == 0)
+       {
+        std::ostringstream error_message;
+        error_message
+         << "The (" << is << ")-th segment has no elements\n";
+        throw OomphLibError(error_message.str(),
+                            "RefineableTriangleMesh::get_boundary_segment_nodes_helper()",
+                            OOMPH_EXCEPTION_LOCATION);
+       } // if (segment_sorted_ele_pt[is].size() == 0)
+#endif
+      
+      // Get access to the first element on the segment
+      FiniteElement* first_ele_pt = segment_sorted_ele_pt[is].front();
+      
+      // Number of nodes
+      const unsigned nnod = first_ele_pt->nnode();
+      
+      // Get the first node of the current segment
+      Node *first_node_pt = first_ele_pt->node_pt(0);
+      if (is_inverted[first_ele_pt])
+       {
+        first_node_pt = first_ele_pt->node_pt(nnod-1);
+       }
+      
+      // Add the node to the corresponding segment
+      tmp_segment_nodes[is].push_back(first_node_pt);
+      
+      // Now loop over face elements in order to get the nodes
+      for (std::list<FiniteElement*>::iterator it = 
+            segment_sorted_ele_pt[is].begin();
+           it != segment_sorted_ele_pt[is].end(); it++)
+       {
+        // Get element
+        FiniteElement* ele_pt = *it;
+        
+        // The last node pointer
+        Node* last_node_pt = 0;
+        
+        // Get the last node
+        if (!is_inverted[ele_pt])
+         {
+          last_node_pt = ele_pt->node_pt(nnod-1);
+         }
+        else
+         {
+          last_node_pt = ele_pt->node_pt(0);
+         }
+        
+        // Add the node to the corresponding segment
+        tmp_segment_nodes[is].push_back(last_node_pt);
+        
+       } // iterator over the elements in the segment
+      
+     } // for (is < nsegments)
+    
+   } // for (if (nel > 0))
+  
+  // Free memory allocation
+  for (unsigned e = 0; e < nel; e++)
+   {
+    delete face_el_pt[e];
+    face_el_pt[e] = 0;
+   } // for (e < nel)
+  
+ }
+
 //======================================================================
 /// Adapt problem based on specified elemental error estimates
 /// This function implement serial and parallel mesh adaptation, the
@@ -35036,7 +35041,7 @@ update_other_proc_shd_bnd_node_helper
            } // if (new_target_area[e]<
              //      tmp_new_mesh_pt->finite_element_pt(e)->size()/3.0)
       
-#ifdef OOMPH_HAS_MPI    
+#ifdef OOMPH_HAS_MPI
           // Keep track of the elements that require (un)refinement
           n_ele_need_refinement_iter++;
 #endif // #ifdef OOMPH_HAS_MPI
@@ -35141,6 +35146,7 @@ update_other_proc_shd_bnd_node_helper
                      << t_sub_total_create_new_adapted_mesh << std::endl;
         }
       
+#ifdef OOMPH_HAS_MPI
       // ------------------------------------------
       // DISTRIBUTED MESH: BEGIN
       // ------------------------------------------
@@ -35171,7 +35177,8 @@ update_other_proc_shd_bnd_node_helper
       // ------------------------------------------
       // DISTRIBUTED MESH: END
       // ------------------------------------------
-      
+#endif // #ifdef OOMPH_HAS_MPI      
+
       // Snap to curvilinear boundaries (some code duplication as this
       // is repeated below but helper function would take so many
       // arguments that it's nearly as messy...
@@ -37575,6 +37582,7 @@ update_other_proc_shd_bnd_node_helper
        } // else if (!connecting_to_an_overlaped_boundary)
       
      } // if (!connecting_to_an_split_boundary)
+#ifdef OOMPH_HAS_MPI
     else
      {
       // If the boundary was split then we need to look for the vertex
@@ -37683,6 +37691,7 @@ update_other_proc_shd_bnd_node_helper
        } // else if (!connecting_to_an_overlaped_boundary)
       
      } // else if (!connecting_to_an_split_boundary)
+#endif // #ifdef OOMPH_HAS_MPI
     
     // If not found it may be that the connection information is
     // inverted
@@ -37948,6 +37957,7 @@ update_other_proc_shd_bnd_node_helper
        } // else if (!connecting_to_an_overlaped_boundary)
       
      } // if (!connecting_to_an_split_boundary)
+#ifdef OOMPH_HAS_MPI
     else
      {
       // If the boundary was split then we need to look for the vertex
@@ -38056,6 +38066,7 @@ update_other_proc_shd_bnd_node_helper
        } // else if (!connecting_to_an_overlaped_boundary)
       
      } // else if (!connecting_to_an_split_boundary)
+#endif // #ifdef OOMPH_HAS_MPI
     
     // If not found it may be that the connection information is
     // inverted
@@ -41885,8 +41896,10 @@ update_polygon_using_elements_area(TriangleMeshPolygon* &polygon_pt,
    // Number of done face elements
    unsigned nsorted_face_elements = 0;
    
+#ifdef OOMPH_HAS_MPI
    // Counter for sub_boundaries
    unsigned nsub_boundaries = 0;
+#endif // #ifdef OOMPH_HAS_MPI
    
    // Continue until all the face elements have been sorted
    // While to deal with split boundaries cases
@@ -42928,8 +42941,10 @@ update_open_curve_using_elements_area(TriangleMeshOpenCurve* &open_curve_pt,
    // Number of done face elements
    unsigned nsorted_face_elements = 0;
 
+#ifdef OOMPH_HAS_MPI
    // Counter for sub_boundaries
    unsigned nsub_boundaries = 0;
+#endif // #ifdef OOMPH_HAS_MPI
 
    // Total number of non halo double face element
    const unsigned nnon_halo_doubled_face_ele = 
@@ -45453,8 +45468,10 @@ update_polygon_after_restart(TriangleMeshPolygon* &polygon_pt)
    // Number of done face elements
    unsigned nsorted_face_elements = 0;
 
+#ifdef OOMPH_HAS_MPI
    // Counter for sub_boundaries
    unsigned nsub_boundaries = 0;
+#endif // #ifdef OOMPH_HAS_MPI
    
    // Continue until all the face elements have been sorted
    // This while is to deal with the cases of splitted boundaries
@@ -46303,8 +46320,10 @@ update_open_curve_after_restart(TriangleMeshOpenCurve* &open_curve_pt)
    // Number of done face elements
    unsigned nsorted_face_elements = 0;
 
+#ifdef OOMPH_HAS_MPI
    // Counter for sub_boundaries
    unsigned nsub_boundaries = 0;
+#endif // #ifdef OOMPH_HAS_MPI
 
    // Total number of non halo double face element
    const unsigned nnon_halo_doubled_face_ele = 
@@ -47818,14 +47837,20 @@ fill_boundary_elements_and_nodes_for_internal_boundaries(
    //Get the nodes on the boundary but consider to which segment (which
    //may appear in a distributed mesh) they belong
    Vector<Vector<Node*> > segment_nodes_pt;
-
+   
+#ifdef OOMPH_HAS_MPI
    // Get the number of segments
    const unsigned nsegments = new_mesh_pt->nboundary_segment(b);
-
+#else
+   // The number of segments is one since the boundary is not split
+   // over multiple processors
+   const unsigned nsegments = 1;
+#endif // #ifdef OOMPH_HAS_MPI
+   
+#ifdef OOMPH_HAS_MPI
    // Get the total number of nodes on the boundary
    const unsigned n_new_boundary_node = new_mesh_pt->nboundary_segment_node(b);
-
-#ifdef OOMPH_HAS_MPI
+   
    // Check if we are working with a distributed mesh
    if (this->is_mesh_distributed())
     {
@@ -47850,7 +47875,7 @@ fill_boundary_elements_and_nodes_for_internal_boundaries(
        return;
       }
     }
-#endif
+#endif // #ifdef OOMPH_HAS_MPI
     
    //Create a vector of boundary nodes that must be moved
    Vector<Vector<unsigned> > nodes_to_be_snapped(nsegments);
@@ -47859,15 +47884,23 @@ fill_boundary_elements_and_nodes_for_internal_boundaries(
    // for the new nodes
    for (unsigned is = 0; is < nsegments; is++)
     {
+#ifdef OOMPH_HAS_MPI
      const unsigned n_new_boundary_segment_node = 
       new_mesh_pt->nboundary_segment_node(b,is);
+#else
+     const unsigned n_new_boundary_segment_node = new_mesh_pt->nboundary_node(b);
+#endif // #ifdef OOMPH_HAS_MPI
      
      Vector<Vector<double> > new_boundary_node(n_new_boundary_segment_node);
      //There will be six data associated with each node
      node_coord.resize(6,0.0);
      for(unsigned n = 0; n < n_new_boundary_segment_node; n++)
       {
+#ifdef OOMPH_HAS_MPI
        Node* nod_pt = new_mesh_pt->boundary_segment_node_pt(b,is,n);
+#else
+       Node* nod_pt = new_mesh_pt->boundary_node_pt(b,n);
+#endif // #ifdef OOMPH_HAS_MPI
        nod_pt->get_coordinates_on_boundary(b,b_coord);
        node_coord[0] = b_coord[0];
        node_coord[1] = nod_pt->x(0);
@@ -48004,6 +48037,7 @@ fill_boundary_elements_and_nodes_for_internal_boundaries(
           OOMPH_EXCEPTION_LOCATION);
         }
        
+#ifdef OOMPH_HAS_MPI
        //get the old coordinate
        new_mesh_pt->boundary_segment_node_pt(
         b,is,static_cast<unsigned>(new_boundary_node[n][3]))
@@ -48013,6 +48047,17 @@ fill_boundary_elements_and_nodes_for_internal_boundaries(
        new_mesh_pt->boundary_segment_node_pt(
         b,is,static_cast<unsigned>(new_boundary_node[n][3]))
         ->set_coordinates_on_boundary(b,b_coord);
+#else
+       //get the old coordinate
+       new_mesh_pt->boundary_node_pt(
+        b,static_cast<unsigned>(new_boundary_node[n][3]))
+        ->get_coordinates_on_boundary(b,b_coord);
+       //Set the new coordinate
+       b_coord[0] = new_boundary_node[n][4];
+       new_mesh_pt->boundary_node_pt(
+        b,static_cast<unsigned>(new_boundary_node[n][3]))
+        ->set_coordinates_on_boundary(b,b_coord);
+#endif // #ifdef OOMPH_HAS_MPI
 
       }
      
@@ -48054,15 +48099,18 @@ fill_boundary_elements_and_nodes_for_internal_boundaries(
      {
       //Read out the boundary node number
       unsigned n = nodes_to_be_snapped[is][in];
+#ifdef OOMPH_HAS_MPI
       //Get the boundary coordinate of all new nodes
       Node* const nod_pt = new_mesh_pt->boundary_segment_node_pt(b,is,n);
+#else
+      //Get the boundary coordinate of all new nodes
+      Node* const nod_pt = new_mesh_pt->boundary_node_pt(b,n);
+#endif // #ifdef OOMPH_HAS_MPI
       
       nod_pt->get_coordinates_on_boundary(b,b_coord);
       //Let's find boundary coordinates of the new node
       mesh_geom_obj_pt->position(b_coord,new_x);
-      //DEBP(b_coord[0]);
-      //DEBP(new_x[0]);
-      //DEBP(new_x[1]);
+      
       //Now snap to the boundary
       for(unsigned i=0;i<2;i++)
        {

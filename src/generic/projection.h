@@ -659,12 +659,16 @@ class FaceGeometry<ProjectableElement<ELEMENT> >
 // Forward definition of the friends of the class
 
 // The RefineableTriangleMesh
-template<class FRIEND_PROJECTABLE_ELEMENT>
-class RefineableTriangleMesh;
+//template<class FRIEND_PROJECTABLE_ELEMENT>
+//class RefineableTriangleMesh;
+
+// The RefineableTetgenMesh
+//template<class FRIEND_PROJECTABLE_ELEMENT>
+//class RefineableTetgenMesh;
 
 // The BackupMeshForProjection
-template<class FRIEND_PROJECTABLE_ELEMENT>
-class BackupMeshForProjection;
+//template<class FRIEND_PROJECTABLE_ELEMENT>
+//class BackupMeshForProjection;
 
 //=======================================================================
 /// Projection problem. This is created during the adaptation
@@ -680,11 +684,13 @@ class ProjectionProblem : public virtual Problem
   // friend class is the same or not as the templated element of the
   // ProjectionProblem class
   template<class FRIEND_PROJECTABLE_ELEMENT> friend class RefineableTriangleMesh;
+  template<class FRIEND_PROJECTABLE_ELEMENT> friend class RefineableTetgenMesh;
   template<class FRIEND_PROJECTABLE_ELEMENT> friend class BackupMeshForProjection;
   // The classes are friend only when the templated element of the
   // friend class matches the templated element of the
   // ProjectionProblem class
   //  friend class RefineableTriangleMesh<class PROJECTABLE_ELEMENT>;
+  //  friend class RefineableTetgenMesh<class PROJECTABLE_ELEMENT>;
   //  friend class BackupMeshForProjection<class PROJECTABLE_ELEMENT>;
   
  public:
