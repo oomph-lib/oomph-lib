@@ -711,17 +711,17 @@ class TriangleMeshParameters
      this->set_communicator_pt(triangle_mesh_parameters.communicator_pt());
     }
 #endif
-
+   
    for (unsigned b=0;b<nb;b++)
     {
      this->setup_boundary_coordinates(b);
     }
-
+   
    // Snap it!
    this->snap_nodes_onto_geometric_objects();
    
   }
-
+  
   /// \short Build mesh from poly file, with specified target
   /// area for all elements.
   TriangleMesh(const std::string& poly_file_name,

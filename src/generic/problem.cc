@@ -614,8 +614,9 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
             if (nsub_elem_old==nsub_elem)
              {
               submesh_element_domain[i_mesh][e]=element_domain[count];
+              return_element_domain.push_back(element_domain[count]);
              }
-            return_element_domain.push_back(element_domain[count]);
+            //return_element_domain.push_back(element_domain[count]);
             count++;
            }
          }
@@ -17059,13 +17060,17 @@ void Problem::load_balance(DocInfo& doc_info,
    unsigned n_mesh=nsub_mesh();
    if (n_mesh==0)
     {
-     old_mesh_pt.push_back(mesh_pt());
+     // Resize the container
+     old_mesh_pt.resize(1);
+     old_mesh_pt[0]=mesh_pt();
     }
    else
     {
+     // Resize the container
+     old_mesh_pt.resize(n_mesh);
      for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
       {
-       old_mesh_pt.push_back(mesh_pt(i_mesh));
+       old_mesh_pt[i_mesh]=mesh_pt(i_mesh);
       }
     }
    
@@ -17167,6 +17172,12 @@ void Problem::load_balance(DocInfo& doc_info,
       }
     } // for (e < n_elem)
    
+   // Re-setup the number of sub-meshes since some of them may have
+   // been stripped out in actions_before_distribute(), but save the
+   // number of old sub-meshes
+   const unsigned n_old_sub_meshes=n_mesh;
+   n_mesh=nsub_mesh();
+   
    // Now get the target domains for each of the submeshes, we only
    // get the target domains for the nonhalo elements
    Vector<Vector<unsigned> > 
@@ -17265,7 +17276,8 @@ void Problem::load_balance(DocInfo& doc_info,
     } // if (n_mesh == 0)
    else // We have sub-meshes
     {
-     // Check which sub-meshes are unstructured meshes
+     // Check which sub-meshes are unstructured meshes (work with the
+     // old sub-meshes number)
      for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
       {
        // Is it a TriangleMeshBase mesh
@@ -17394,7 +17406,7 @@ void Problem::load_balance(DocInfo& doc_info,
    //-------------------------------------------------------------
    // by METIS
    //---------
-   Vector<unsigned> pruned_refinement_level(std::max(int(n_mesh),1));
+   Vector<unsigned> pruned_refinement_level(std::max(int(n_old_sub_meshes),1));
    if (n_mesh==0)
     {
      pruned_refinement_level[0]=0;
@@ -17410,15 +17422,18 @@ void Problem::load_balance(DocInfo& doc_info,
      // then we should not delete it since the load balance strategy
      // requires the mesh
        
-     // Delete it if it is not an unstructured mesh
+     // Delete the mesh if it is not an unstructured mesh
      if (!is_unstructured_mesh[0])
       {
        delete old_mesh_pt[0];
+       old_mesh_pt[0] = 0;
       } // if (!is_unstructured_mesh[0])
     } // if (n_mesh==0)
    else
     {
-     for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+     // Loop over the number of old meshes (required to delete the
+     // pointers of structured meshes in the old_mesh_pt structure)
+     for (unsigned i_mesh=0;i_mesh<n_old_sub_meshes;i_mesh++)
       {
        pruned_refinement_level[i_mesh]=0;
        TreeBasedRefineableMeshBase* ref_mesh_pt=
@@ -17429,14 +17444,15 @@ void Problem::load_balance(DocInfo& doc_info,
           ref_mesh_pt->uniform_refinement_level_when_pruned();
         }
          
-       // If the mesh is an unstructured mesh (TriangleMeshBase
-       // mesh) then we should not delete it since the load balance
-       // strategy requires the mesh
-         
-       // Delete it if it is not an unstructured mesh
+       // If the mesh is an unstructured mesh (TriangleMeshBase mesh)
+       // then we should NOT delete it since the load balance strategy
+       // requires the mesh
+       
+       // Delete the mesh if it is not an unstructured mesh
        if (!is_unstructured_mesh[i_mesh])
         {
          delete old_mesh_pt[i_mesh];
+         old_mesh_pt[i_mesh] = 0;
         } // if (!is_unstructured_mesh[i_mesh])
          
       } // for (i_mesh<n_mesh)
@@ -17965,8 +17981,8 @@ void Problem::load_balance(DocInfo& doc_info,
        // calling build_mesh(), and restore the pointer to the old
        // mesh
          
-       // It should be an unstructured mesh, therefore we should not
-       // be here
+       // It MUST be an unstructured mesh, otherwise we should not be
+       // here
        if (is_unstructured_mesh[0])
         {
          // Delete the new created mesh
@@ -18005,12 +18021,12 @@ void Problem::load_balance(DocInfo& doc_info,
            delete mesh_pt(i_mesh);
            // Now point it to nothing
            mesh_pt(i_mesh) = 0;
-           // Re-assign the pointer to the old mesh
+           // ... and re-assign the pointer to the old mesh
            this->mesh_pt(i_mesh) = old_mesh_pt[i_mesh];
           } // if (is_unstructured_mesh[i_mesh])
-           
-        } // for (i_mesh<n_mesh)
          
+        } // for (i_mesh<n_mesh)
+       
        // Empty storage for sub-meshes
        //flush_sub_meshes();
          
@@ -18023,7 +18039,7 @@ void Problem::load_balance(DocInfo& doc_info,
         {
          if (is_unstructured_mesh[i_mesh])
           {
-           // Get the number of elements in the "i_mesh"
+           // Get the number of elements in the "i_mesh" (the old one)
            const unsigned n_element = old_mesh_pt[i_mesh]->nelement();
            
            // Perform the load balancing if there are elements in the

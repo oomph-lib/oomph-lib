@@ -135,7 +135,7 @@ echo $folder_distribution_file_flag $folder_distribution_file_value
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_ON_NP_COMMAND ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np2_square
+$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np2_square ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value
 echo "done"
 echo " " >> validation.log
 echo "two_d_parallel_unstructured_adaptive_poisson (2 processors) SQUARE domain validation" >> validation.log
@@ -183,7 +183,7 @@ echo $folder_distribution_file_flag $folder_distribution_file_value
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_ON_NP_COMMAND ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np3_square
+$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np3_square ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value
 echo "done"
 echo " " >> validation.log
 echo "two_d_parallel_unstructured_adaptive_poisson (3 processors) SQUARE domain validation" >> validation.log
@@ -231,7 +231,7 @@ echo $folder_distribution_file_flag $folder_distribution_file_value
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_ON_NP_COMMAND ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np4_square
+$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np4_square ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value
 echo "done"
 echo " " >> validation.log
 echo "two_d_parallel_unstructured_adaptive_poisson (4 processors) SQUARE domain validation" >> validation.log
@@ -258,7 +258,7 @@ mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP4_SQUARE
 domain_configuration_flag=--domain_configuration
 domain_configuration_value=2
 element_size_flag=--element_size
-element_size_value=0.01
+element_size_value=0.05
 max_adapt_flag=--max_adapt
 max_adapt_value=3
 max_permitted_error_flag=--max_permitted_error
@@ -299,7 +299,7 @@ echo $folder_distribution_file_flag $folder_distribution_file_value
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_ON_NP_COMMAND ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle
+$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value
 echo "done"
 echo " " >> validation.log
 echo "two_d_parallel_unstructured_adaptive_poisson (2 processors) HALF CIRCLE domain validation" >> validation.log
@@ -315,7 +315,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../../bin/fpdiff.py ../validata/trace_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_results.dat >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_results.dat 0.1 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP2_HALF_CIRCLE
@@ -347,7 +347,7 @@ echo $folder_distribution_file_flag $folder_distribution_file_value
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_ON_NP_COMMAND ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle
+$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value
 echo "done"
 echo " " >> validation.log
 echo "two_d_parallel_unstructured_adaptive_poisson (3 processors) HALF CIRCLE domain validation" >> validation.log
@@ -363,7 +363,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../../bin/fpdiff.py ../validata/trace_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_results.dat >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_results.dat 0.1 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP3_HALF_CIRCLE
@@ -395,7 +395,7 @@ echo $folder_distribution_file_flag $folder_distribution_file_value
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_ON_NP_COMMAND ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle
+$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value
 echo "done"
 echo " " >> validation.log
 echo "two_d_parallel_unstructured_adaptive_poisson (4 processors) HALF CIRCLE domain validation" >> validation.log
@@ -411,7 +411,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../../bin/fpdiff.py ../validata/trace_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_results.dat >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_results.dat 0.1 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP4_HALF_CIRCLE
@@ -463,7 +463,7 @@ echo $folder_distribution_file_flag $folder_distribution_file_value
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_ON_NP_COMMAND ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_internal_boundaries
+$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_internal_boundaries ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value
 echo "done"
 echo " " >> validation.log
 echo "two_d_parallel_unstructured_adaptive_poisson (2 processors) HALF_CIRCLE_INTERNAL_BOUNDARIES domain validation" >> validation.log
@@ -479,7 +479,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../../bin/fpdiff.py ../validata/trace_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_internal_boundaries_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_internal_boundaries_results.dat >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_internal_boundaries_results.dat 0.1 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP2_HALF_CIRCLE_INTERNAL_BOUNDARIES
@@ -511,7 +511,7 @@ echo $folder_distribution_file_flag $folder_distribution_file_value
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_ON_NP_COMMAND ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_internal_boundaries
+$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_internal_boundaries ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value
 echo "done"
 echo " " >> validation.log
 echo "two_d_parallel_unstructured_adaptive_poisson (3 processors) HALF_CIRCLE_INTERNAL_BOUNDARIES domain validation" >> validation.log
@@ -527,7 +527,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../../bin/fpdiff.py ../validata/trace_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_internal_boundaries_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_internal_boundaries_results.dat >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_internal_boundaries_results.dat 0.1 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP3_HALF_CIRCLE_INTERNAL_BOUNDARIES
@@ -559,7 +559,7 @@ echo $folder_distribution_file_flag $folder_distribution_file_value
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_ON_NP_COMMAND ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_internal_boundaries
+$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_internal_boundaries ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value
 echo "done"
 echo " " >> validation.log
 echo "two_d_parallel_unstructured_adaptive_poisson (4 processors) HALF_CIRCLE_INTERNAL_BOUNDARIES domain validation" >> validation.log
@@ -575,7 +575,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../../bin/fpdiff.py ../validata/trace_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_internal_boundaries_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_internal_boundaries_results.dat >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_internal_boundaries_results.dat 0.1 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP4_HALF_CIRCLE_INTERNAL_BOUNDARIES
@@ -627,7 +627,7 @@ echo $folder_distribution_file_flag $folder_distribution_file_value
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_ON_NP_COMMAND ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np2_complex_holes
+$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np2_complex_holes ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value
 echo "done"
 echo " " >> validation.log
 echo "two_d_parallel_unstructured_adaptive_poisson (2 processors) COMPLEX_HOLES domain validation" >> validation.log
@@ -643,7 +643,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../../bin/fpdiff.py ../validata/trace_two_d_parallel_unstructured_adaptive_poisson_np2_complex_holes_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_complex_holes_results.dat >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_complex_holes_results.dat 0.1 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP2_COMPLEX_HOLES
@@ -675,7 +675,7 @@ echo $folder_distribution_file_flag $folder_distribution_file_value
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_ON_NP_COMMAND ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np3_complex_holes
+$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np3_complex_holes ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value
 echo "done"
 echo " " >> validation.log
 echo "two_d_parallel_unstructured_adaptive_poisson (3 processors) COMPLEX_HOLES domain validation" >> validation.log
@@ -691,7 +691,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../../bin/fpdiff.py ../validata/trace_two_d_parallel_unstructured_adaptive_poisson_np3_complex_holes_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_complex_holes_results.dat >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_complex_holes_results.dat 0.1 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP3_COMPLEX_HOLES
@@ -723,7 +723,7 @@ echo $folder_distribution_file_flag $folder_distribution_file_value
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_ON_NP_COMMAND ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np4_complex_holes
+$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np4_complex_holes ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value
 echo "done"
 echo " " >> validation.log
 echo "two_d_parallel_unstructured_adaptive_poisson (4 processors) COMPLEX_HOLES domain validation" >> validation.log
@@ -739,7 +739,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../../bin/fpdiff.py ../validata/trace_two_d_parallel_unstructured_adaptive_poisson_np4_complex_holes_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_complex_holes_results.dat >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_complex_holes_results.dat 0.1 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP4_COMPLEX_HOLES

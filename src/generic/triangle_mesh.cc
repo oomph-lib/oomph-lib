@@ -1468,9 +1468,7 @@ TriangleMeshClosedCurve::TriangleMeshClosedCurve(
   TriangleMeshCurve(curve_section_pt),
   Internal_point_pt(internal_point_pt)
 {
- 
-#ifdef PARANOID
- 
+  
  // Matching of curve sections i.e. the last vertex of the i curve
  // section should match with the first vertex of the i+1 curve
  // section
@@ -1542,6 +1540,7 @@ TriangleMeshClosedCurve::TriangleMeshClosedCurve(
      TriangleMeshPolyLine *next_polyline =
        dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[i+1]);
 
+     // Was it able to do the cast?
      if (current_polyline && next_polyline)
       {
        unsigned last_vertex = current_polyline->nvertex() - 1;
@@ -1592,6 +1591,7 @@ TriangleMeshClosedCurve::TriangleMeshClosedCurve(
    TriangleMeshPolyLine *last_polyline =
      dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[n_boundaries-1]);
 
+   // Was it able to do the cast?
    if (first_polyline && last_polyline)
     {
      unsigned last_vertex = last_polyline->nvertex() - 1;
@@ -1599,9 +1599,7 @@ TriangleMeshClosedCurve::TriangleMeshClosedCurve(
        last_polyline->vertex_coordinate(last_vertex);
     }
   }
-
-#endif
-
+ 
 }
 
 
@@ -1636,9 +1634,7 @@ TriangleMeshPolygon::TriangleMeshPolygon(
     Can_update_configuration(false),
     Polygon_fixed(false)
 {
- 
-#ifdef PARANOID
- 
+  
  // Get the number of polylines
  const unsigned n_bound = boundary_polyline_pt.size();
  
@@ -1888,9 +1884,7 @@ TriangleMeshPolygon::TriangleMeshPolygon(
     }
 
   }
- 
-#endif
- 
+  
 }
 
 
@@ -1912,8 +1906,6 @@ TriangleMeshOpenCurve::TriangleMeshOpenCurve(
    const Vector<TriangleMeshCurveSection*> &curve_section_pt)
  : TriangleMeshCurve(curve_section_pt)
  {
-
-#ifdef PARANOID
 
  // Matching of curve sections i.e. the last vertex of
  // the i curve section should match with the first
@@ -1973,9 +1965,7 @@ TriangleMeshOpenCurve::TriangleMeshOpenCurve(
     }
 
   } // For n_boundaries - 1
-
-#endif
-
+ 
  }
 
 

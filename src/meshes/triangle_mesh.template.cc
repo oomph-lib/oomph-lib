@@ -10751,7 +10751,7 @@ namespace oomph
   
   // Fill triangulateIO data structure
   // ---------------------------------------
-  
+    
   // Fill the vertices first
   // An external counter
   unsigned ii = 0;
@@ -33769,7 +33769,7 @@ update_other_proc_shd_bnd_node_helper
  template <class ELEMENT>
  void RefineableTriangleMesh<ELEMENT>::adapt(
   const Vector<double>& elem_error)
- {  
+ {
   double t_start_overall=TimingHelpers::timer();
   
   // ==============================================================
@@ -35906,6 +35906,7 @@ update_other_proc_shd_bnd_node_helper
     
     double max_area;
     double min_area;
+    
     this->max_and_min_element_size(max_area, min_area);
     oomph_info << "Max/min element size in adapted mesh: "
                << max_area << " "
