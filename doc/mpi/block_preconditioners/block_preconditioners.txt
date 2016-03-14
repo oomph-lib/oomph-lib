@@ -1957,7 +1957,7 @@ matrices and loop over the off-diagonal blocks:
 
   
 Given that the replacement matrices are zero matrices, we could
-simple create them without ever looking at the original blocks.
+simply create them without ever looking at the original blocks.
 Sadly the creation of zero matrices turns out to be slightly
 more painful than one would wish because they have
 to be created as a (possibly distributed) \c CRDoubleMatrix. The 
@@ -1971,7 +1971,7 @@ zeroes, but it's just a demonstration!):
 
 \until this is just an example!
 
-We then pass the pointer to the replacement block to the
+We then pass the pointer to the replacement dof block to the
 block preconditioner
 
 \skip Replace (i,j)
@@ -2218,7 +2218,8 @@ entries are to be interpreted as
 <code> doftype_coarsening[coarsened_dof_type][i]=dof_type</code>
 
 where \c i ranges from 0 to the number of dof types (minus one, because
-of the zero-based indexing...) that are to be
+of the zero-based indexing...) in the enumeration of the
+subsidiary preconditioner that are to be
 combined/coarsened into dof type \c coarsened_dof_type:
 
 \skip The subsidiary block preconditioner
@@ -2502,8 +2503,11 @@ subsidiary preconditioner:
 \skipline First the solid preconditioner
 \until delete solid_matrix_pt;
 
-Note that the block matrix can be deleted since the subsidiary 
-preconditioner retains whatever data it requires.
+Note that, compared to the previous examples, we have used an 
+alternative, pointer-based version of the \c get_block(...) function.
+However, as before, the block matrix can be deleted once the 
+subsidiary preconditioner has been set up since the latter
+retains whatever data it requires. 
 
 The fluid subsidiary preconditioner (\f$\tilde F\f$) a block preconditioner
 itself. Its setup is therefore performed in two steps:

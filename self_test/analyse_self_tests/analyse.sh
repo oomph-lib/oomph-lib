@@ -16,7 +16,7 @@ echo " "
 echo "======================================================================"
 echo " " 
 if  [ $FAIL_COUNT -eq 0 ]; then
-  echo "All $OK_COUNT test[s] passed successfully. "
+  echo "All $OK_COUNT compiled test[s] passed successfully. "
   echo " "
   echo "See " 
   echo " "
@@ -24,9 +24,14 @@ if  [ $FAIL_COUNT -eq 0 ]; then
   echo " "
   echo "for details."
   echo " "
-  echo "======================================================================"
-  echo " " 
-  exit 0
+  return_flag=0
+  cd ../..; bin/find_compilation_failures_for_demo_drivers.bash | tee .failed_compilation.txt
+  failures=`grep "Check these out" .failed_compilation.txt | wc -w`
+  rm -f .failed_compilation.txt
+  if [ $failures -ne 0 ]; then
+      return_flag=1
+  fi
+  exit $return_flag
 else 
   echo "Only $OK_COUNT test[s] passed successfully "
   echo "while $FAIL_COUNT test[s] failed! "
@@ -41,6 +46,7 @@ else
   echo " "
   echo "======================================================================"
   echo " " 
+  cd ../..; bin/find_compilation_failures_for_demo_drivers.bash
   exit 1
 fi
 
