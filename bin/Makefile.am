@@ -41,7 +41,9 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py \
            check-makefile-subdirs.py fpsmall.py string_contains.sh \
            meld_changed_files.bash find_failed_directories.bash \
            run_svnversion_if_it_exists.bash \
-           find_errors_and_warnings_in_build_log.bash 
+           find_errors_and_warnings_in_build_log.bash \
+           find_compilation_failures_for_demo_drivers.bash \
+           check_if_executable_exists.bash
 
 
 

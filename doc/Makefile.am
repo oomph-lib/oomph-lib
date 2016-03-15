@@ -48,18 +48,21 @@ time_harmonic_fourier_decomposed_linear_elasticity \
 fourier_decomposed_helmholtz \
 c1_element \
 time_harmonic_linear_elasticity \
-generalised_fourier_decomposed_helmholtz \
-generalised_helmholtz \
+pml_fourier_decomposed_helmholtz \
+pml_helmholtz \
 axisym_linear_elasticity \
 acoustic_fsi \
 fourier_decomposed_acoustic_fsi \
 generalised_time_harmonic_linear_elasticity \
-deliberately_broken_doc_for_checking
+deliberately_broken_doc_for_checking \
+acknowledgements \
+search_results
 
 include $(top_srcdir)/config/makefile_templates/doc
 
 docfile = doc
 
-EXTRA_DIST += oomph-lib_header.html.template oomph_header.css navbar_toggle.js \
+EXTRA_DIST += oomph-lib_header.html.template oomph-lib_footer.html.template \
+css js\
 extra_latex_style_files
 

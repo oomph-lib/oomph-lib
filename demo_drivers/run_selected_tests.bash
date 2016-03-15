@@ -13,7 +13,7 @@ echo $all_dirs
 echo " "
 
 
-list=`echo linking optimisation bifurcation_tracking FAQ linear_solvers linear_elasticity womersley biharmonic reaction_diffusion flux_transport young_laplace time_harmonic_fourier_decomposed_linear_elasticity fourier_decomposed_helmholtz foeppl_von_karman axisym_foeppl_von_karman generalised_helmholtz axisym_linear_elasticity homogenisation darcy generalised_time_harmonic_linear_elasticity mpi`
+list=`echo linking optimisation bifurcation_tracking FAQ linear_solvers linear_elasticity womersley biharmonic reaction_diffusion flux_transport young_laplace time_harmonic_fourier_decomposed_linear_elasticity fourier_decomposed_helmholtz foeppl_von_karman axisym_foeppl_von_karman pml_helmholtz axisym_linear_elasticity homogenisation darcy generalised_time_harmonic_linear_elasticity mpi`
  
 
 echo " "

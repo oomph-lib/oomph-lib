@@ -27,10 +27,10 @@ You may also wish to consult the following documents:
   tutorial discussing <code>oomph-lib</code>'s parallel processing
   capabilities.</a>.
 .
-<TABLE>
-<TR>
-<TD bgcolor="cornsilk">
-<CENTER><B>Note:</b></CENTER>
+\htmlonly
+<div class="panel panel-warning">
+<div class="panel-heading"><h3 class="panel-title">Work in progress</h3></div>
+<div class="panel-body">
 We're still working on the detailed documentation for many
 of the demo problems listed below. The fully-documented 
 demo problems are accessible via the links. If you
@@ -43,21 +43,12 @@ usually need a bit of tidying to make them acceptable for
 are run on a regular basis as part of \c oomph-lib's self-test
 routines (activated by typing \c make \c check in the top-level
 directory). 
-</TD>
-</TR>
-</TABLE>
+</div>
+</div>
  
+\endhtmlonly
 
-\latexonly
-\begin{center}
-\bf
-[Sorry -- the table listing the various tutorials cannot be rendered properly i#n
-latex; please consult the html-based documentation.]
-\end{center}
-\endlatexonly
-
-
-<A NAME="overview"><B>Overview:</b></a>
+<H1 NAME="overview">Overview:</H1>
 -# <A HREF="#problems">Example codes for specific problem/equations</A>
   - Single-physics problems:
     - <A HREF="#poisson">Poisson problems</A>
@@ -123,14 +114,20 @@ latex; please consult the html-based documentation.]
   .
 .
 
+\latexonly
+\begin{center}
+\bf
+[Sorry -- the table listing the various tutorials cannot be rendered properly i#n
+latex; please consult the html-based documentation.]
+\end{center}
+\endlatexonly
 
-<HR>
 <HR>
 
 <A NAME="problems"><B>Example codes for specific problem/equations</B></A>
 
 <CENTER>
-<TABLE>
+<TABLE class="example-table">
 ######################################################################
 <TR>
 <TD>
@@ -140,14 +137,12 @@ latex; please consult the html-based documentation.]
 <B>\c oomph-lib features/conventions illustrated 
 by the example code</B>
 </TD>
-<TD>
-<B>Completeness of the documentation</B>
-</TD>
+
 </TR>
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="poisson"><CENTER><B>Poisson problems</B></CENTER></A>
 </TD>
 </TR>
@@ -172,9 +167,7 @@ The \c OneDMesh and finite elements from the \c QPoisson family.
   .
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -194,9 +187,7 @@ and compare the results against an exact solution.
   - \c oomph-lib mesh objects are templated by the element type.
     How does one pre-compile mesh objects?
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 
 </TR>
 ##############################################################
@@ -215,9 +206,7 @@ boundary conditions.
 - General conventions:
   - What are broken virtual functions and why/when/where are they used?
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -240,14 +229,12 @@ An alternative solution for the previous problem, using multiple meshes.
   separate tutorial</a>
   that discusses the parallelisation of this code.</span> 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="poisson_adapt"><CENTER><B>Poisson problems with adaptivity</B></CENTER></A>
 </TD>
 </TR>
@@ -268,9 +255,7 @@ routines.
 - \c The functions \c Problem::actions_before_adapt() and 
   \c Problem::actions_after_adapt().
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -290,9 +275,7 @@ automatic mesh adaptation routines.
   - Hanging nodes -- the functions \c Node::position(...)
     and \c Node::value(...).
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -317,9 +300,7 @@ meshes for problems with curvilinear and/or moving domain boundaries.
   - It is good practice to store boundary coordinates for 
     (\c Boundary) \c Nodes that are located on curvilinear domain boundaries. 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -348,9 +329,7 @@ conditions in problems with spatial adaptivity.
   <A HREF="../../mpi/two_d_poisson_flux_bc_adapt/html/index.html">
   separate tutorial</a>
   that discusses the parallelisation of this code.</span> 
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -373,14 +352,15 @@ routines.
     code.
   - Plotting mesh boundaries.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
+
+</TABLE>
+<TABLE class="example-table">
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="adv_diff"><CENTER><B>The advection-diffusion equation</B></CENTER></A>
 </TD>
 </TR>
@@ -402,9 +382,7 @@ characteristic features of solutions at large Peclet number.
 - How to document the progress of \c oomph-lib's "black box" adaptive
   Newton solver.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -420,9 +398,7 @@ We solve a 2D advection-diffusion equation with flux boundary conditions.
 - How to specify Neumann (flux) boundary conditions for the
   advection diffusion equation.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -442,15 +418,13 @@ of the advection diffusion equation.
   - The role of shape, basis and test functions.
   - The element building blocks: Geometric elements, equation classes
     and specific elements.
-</TD>
-<TD>
-<CENTER>Driver code and pretty pictures</CENTER>
+- <span style="color:red">Note: the driver code is unannotated.</span>
 </TD>
 </TR>
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="unsteady_heat"><CENTER><B>The unsteady heat equation and 
 an introduction to time-stepping</B></CENTER></A>
 </TD>
@@ -482,9 +456,7 @@ parabolic problems.
   - Steady and unsteady versions of functions -- position and
     interpretation of the (discrete) time index.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -503,9 +475,7 @@ allow time-dependent simulations to be restarted.
   \c Problem::read(...).
 - How to customise the generic dump/restart functions.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -524,9 +494,7 @@ We demonstrate \c oomph-lib's adaptive timestepping capabilities.
 - The function \c Problem::global_temporal_error_norm().
 - How to choose the target for the global temporal error norm.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -552,9 +520,7 @@ against the exact solution.
 - The functions \c Problem::dump(...) and
   \c Problem::read(...) can handle adaptive meshes. 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -579,9 +545,7 @@ unsteady heat equation in a nontrivial moving domain.
     the nodal positions in response to the deformation/motion of time-dependent
     \c GeomObjects that define the \c Domain and \c Mesh boundaries.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -599,14 +563,15 @@ solution of a 2D unsteady heat equation in a nontrivial moving domain.
 <TD>
 - Adaptive timestepping combined with spatial adaptivity.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
+
+</TABLE>
+<TABLE class="example-table">
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="wave"><CENTER><B>The linear wave equation</B></CENTER></A>
 </TD>
 </TR>
@@ -628,35 +593,31 @@ time-stepping procedures for hyperbolic problems.
 - How to apply Neumann (flux) boundary conditions for the
   linear wave equation. 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
-<TR>
-<TD>
+#<TR>
+#<TD>
 ##<A HREF="../../linear_wave/two_d_lin_wave_adapt/html/index.html">
-<B>The spatially-adaptive solution of the 2D linear wave equation
-</B>
+#<B>The spatially-adaptive solution of the 2D linear wave equation
+#</B>
 #</A>
 
-We demonstrate that the spatially-adaptive solution of the 
-2D wave equation is difficult (in fact, not very sensible)
-because any spurious waves that are generated during mesh adaptation
-are never damped out. Refineable linear wave elements should therefore
-only be used to "manually" refine meshes before the start of the simulation. 
-</TD>
-<TD>
-- How to use refineable linear wave elements
-</TD>
-<TD>
-<CENTER>driver code only</CENTER>
-</TD>
-</TR>
+#We demonstrate that the spatially-adaptive solution of the 
+#2D wave equation is difficult (in fact, not very sensible)
+#because any spurious waves that are generated during mesh adaptation
+#are never damped out. Refineable linear wave elements should therefore
+#only be used to "manually" refine meshes before the start of the simulation. 
+#</TD>
+#<TD>
+#- How to use refineable linear wave elements
+#<span style="color:red">Note: this driver code is currently undocumented.</span>
+#</TD>
+#</TR>
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="helmholtz"><CENTER><B>The Helmholtz equation</B></CENTER></A>
 </TD>
 </TR>
@@ -676,9 +637,7 @@ wave from a circular cylinder.
 - The Sommerfeld radiation condition and its approximation by
   approximate/absorbing boundary conditions and Dirichlet-to-Neumann mappings.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -694,14 +653,12 @@ wave from a circular cylinder -- this time using an unstructured mesh.
 <TD>
 - How to solve the Helmholtz equation on an unstructured mesh.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="fourier_decomposed_helmholtz"><CENTER><B>The
  azimuthally Fourier-decomposed 3D Helmholtz equation</B></CENTER></A>
 </TD>
@@ -723,9 +680,7 @@ We solve the 3D Helmholtz equation in cylindrical polar coordinates,
 - Validation with an exact solution formed by a superposition of
   outgoing waves from a sphere.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -743,14 +698,15 @@ time using spatial adaptivity and an unstructured mesh
 - Spatial adaptivity on unstructured meshes for the azimuthally 
   Fourier-decomposed 3D Helmholtz equation.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
+
+</TABLE>
+<TABLE class="example-table">
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="gen_helmholtz"><CENTER><B>The generalised Helmholtz equation and
 perfectly matched layers</B></CENTER></A>
 </TD>
@@ -758,7 +714,7 @@ perfectly matched layers</B></CENTER></A>
 ######################################################################
 <TR>
 <TD>
-<A HREF="../../generalised_helmholtz/scattering/html/index.html">
+<A HREF="../../pml_helmholtz/scattering/html/index.html">
 <B>The generalised Helmholtz equation and perfectly matched layers (PMLs).
 </B>
 </A>
@@ -774,14 +730,12 @@ by perfectly matched layers (PMLs).
 - The Sommerfeld radiation condition and its approximation by
   perfectly matched layers (PMLs).
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="gen_fourier_decomposed_helmholtz"><CENTER>
 <B>The generalised azimuthally 
 Fourier-decomposed 3D Helmholtz equation and
@@ -791,7 +745,7 @@ perfectly matched layers (PMLs)</B></CENTER></A>
 ######################################################################
 <TR>
 <TD>
-<A HREF="../../generalised_fourier_decomposed_helmholtz/oscillating_sphere/html/index.html">
+<A HREF="../../pml_fourier_decomposed_helmholtz/oscillating_sphere/html/index.html">
 <B>The generalised  azimuthally 
 Fourier-decomposed 3D Helmholtz equation and perfectly matched layers (PMLs).
 </B>
@@ -810,9 +764,7 @@ by perfectly matched layers (PMLs).
 - The Sommerfeld radiation condition and its approximation by
   perfectly matched layers (PMLs).
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 
 #####################################################################
@@ -821,7 +773,7 @@ by perfectly matched layers (PMLs).
 
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="young_laplace"><CENTER><B>The Young Laplace equation</B></CENTER></A>
 </TD>
 </TR>
@@ -844,9 +796,7 @@ static air-liquid interfaces.
 - How to use displacement control to compute (past) limit
   points in the load-displacement characteristics.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -866,14 +816,16 @@ Young-Laplace equation.
 - Limitations of the current approach and suggestions for improvement
 - An inherent difficulty in problems with zero contact angles.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
+
+
+</TABLE>
+<TABLE class="example-table">
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="nst"><CENTER><B>The Navier-Stokes equations</B></CENTER></A>
 </TD>
 </TR>
@@ -899,9 +851,7 @@ with Taylor-Hood and Crouzeix-Raviart elements.
   conditions for the velocity on all boundaries.      
 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -925,9 +875,7 @@ pressure singularities.
   separate tutorial</a>
   that discusses the parallelisation of this code.</span>
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -949,9 +897,7 @@ Navier-Stokes equations.
 - How to switch between the stress-divergence and the simplified
   form of the incompressible Navier-Stokes equations.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -971,9 +917,7 @@ We solve the classical problem of entry flow into a 3D tube.
 - The natural (traction-free) boundary conditions for the
   Navier-Stokes equations.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -997,9 +941,7 @@ Navier-Stokes equations.
   .
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1019,9 +961,7 @@ Navier-Stokes equations.
   equations.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1041,10 +981,11 @@ an exact solution (an unsteady stagnation point flow).
   the function
   \c FSI_functions::apply_no_slip_on_moving_wall(...)
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
+
+</TABLE>
+<TABLE class="example-table">
 ######################################################################
 <TR>
 <TD>
@@ -1064,9 +1005,7 @@ replaced by a moving "membrane" whose motion is prescribed.
 - The adaptive solution of the Navier-Stokes equations in a moving 
   domain with traction boundary conditions. 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1091,9 +1030,7 @@ problems.
   required element (of type \c ELEMENT, say) in the templated wrapper class
   \c AlgebraicElement<ELEMENT>. 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ####################################################
 <TR>
@@ -1116,9 +1053,7 @@ demonstrate an alternative node-update procedure, based on
 - How to create a custom \c SpineMesh.
 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 
 ######################################################################
@@ -1140,9 +1075,7 @@ consider the case where the motion of the leaflet is prescribed.
 - Another example illustrating the use of algebraic and 
   \c MacroElement/Domain-based node update techniques.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1162,10 +1095,12 @@ consider the case where the motion of the flag is prescribed.
 - Another example illustrating the use of algebraic and 
   \c MacroElement/Domain-based node update techniques.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
+
+
+</TABLE>
+<TABLE class="example-table">
 ######################################################################
 <TR>
 <TD>
@@ -1183,9 +1118,7 @@ unstructured meshes for FSI problems.
 - How to use xfig/triangle-generated, unstructured meshes
   for flow problems.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1205,9 +1138,7 @@ unstructured 3D meshes for FSI problems.
   for 3D flow problems.
 - Avoiding "locking" with the \c split_corner_elements flag.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1230,9 +1161,7 @@ problems in which the vessel wall is elastic.
   in- and outflow from cross-sections that are not aligned with 
   any coordinate planes.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1248,9 +1177,7 @@ We solve the classical problem of shear flow past a immersed ellipse
   unstructured meshes
 - \c ImmersedRigidBodyElements to describe the interaction of fluids with rigid bodies
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 #####################################################################
 <TR>
@@ -1264,9 +1191,7 @@ We solve the classical problem of flow into a 3D curved tube.
 </TD>
 <TD>
 - Another example of adaptivity for 3D Navier-Stokes problems
-</TD>
-<TD>
-<CENTER>driver code and pretty pictures</CENTER>
+- <span style="color:red">Note: the documentation for this problem is incomplete.</span>
 </TD>
 </TR>
 
@@ -1274,7 +1199,7 @@ We solve the classical problem of flow into a 3D curved tube.
 
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="axisym_nst"><CENTER><B>The axisymmetric Navier-Stokes equations</B></CENTER></A>
 </TD>
 </TR>
@@ -1300,18 +1225,18 @@ behaviour would cause strong spatially uniform refinement.
   the error in spatially-adaptive computations in which the solution
   approaches a "trivial" solution.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 
 
+</TABLE>
+<TABLE class="example-table">
 
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="free_surface_nst"><CENTER><B>The free-surface Navier-Stokes equations</B></CENTER></A>
 </TD>
 </TR>
@@ -1336,11 +1261,7 @@ surface-transport capabilities are implemented.
 - Implementation
  - The FluidInterfaceElement class
  - Spine and Elastic formulations of free surface elements
- .
-.
-</TD>
-<TD>
-<CENTER>near complete</CENTER>
+- <span style="color:red">Note: the documentation has disappeared</span>
 </TD>
 </TR>
 
@@ -1360,9 +1281,7 @@ analytic dispersion relation based on linearised disturbances.
 - Boundary conditions at a free surface
 - How to solve free-boundary problems using a pseudo-solid node update approach.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1379,9 +1298,7 @@ results to the analytic dispersion relation based on linearised disturbances.
 - Adaptivity in free-surface/interfacial problems with a 
   pseudo-solid node update approach.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ##############################################################
 
@@ -1402,9 +1319,7 @@ bounds a layer of viscous fluid -- harder than you might think!
  a solid boundary.
  - Hijacking (overwriting) data from within elements.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1420,9 +1335,7 @@ viscous fluids -- harder than you might think!
 - Adapting an existing mesh to include an interface.
 - Imposing a static contact angle when an interface meets a solid boundary.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 
 ######################################################################
@@ -1443,9 +1356,7 @@ node update strategies for free surface problems.
 - Applying time-dependent perturbations to steady solutions.
 - Open flow boundary conditions.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 
 ########################################################################
@@ -1465,12 +1376,14 @@ non-trivial free surface problem.
 - ***
 - General conventions:
   - ***
-</TD>
-<TD>
-<CENTER>driver code only</CENTER>
+<span style="color:red">Note: this driver code is currently undocumented.</span>
 </TD>
 </TR> -->
 #####################################################################
+
+
+</TABLE>
+<TABLE class="example-table">
 
 ###########################################################
 <TR>
@@ -1491,9 +1404,7 @@ analysis.
 - Use of external \c Data to implement non-local interactions
   between elements.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 
 ######################################################################
@@ -1521,9 +1432,7 @@ non-trivial free surface problem.
   a viscous fluid.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 #####################################################################
 ######################################################################
@@ -1544,14 +1453,12 @@ a non-trivial interfacial (two-fluid) problem.
 "droplet" in a viscous fluid.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="axi_free_surface_nst"><CENTER><B>The axisymmetric free-surface Navier-Stokes equations</B></CENTER></A>
 </TD>
 </TR>
@@ -1572,9 +1479,7 @@ results to the analytic dispersion relation based on linearised disturbances.
 - Free-surface/interfacial problems in an axisymmetric domain with a 
   pseudo-solid node update approach and spatial adaptivity.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ##############################################################
 #####################################################################
@@ -1591,17 +1496,17 @@ bounds a layer of viscous fluid in an axisymmetric geometry.
 <TD>
  - Trivial differences between two-dimensional and axisymmetric static problems.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 
+</TABLE>
+<TABLE class="example-table">
 
 ######################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="solid"><CENTER><B>Nonlinear solid mechanics problems</B></CENTER></A>
 </TD>
 </TR>
@@ -1637,9 +1542,7 @@ capabilities.
 - Timestepping and the generation of initial conditions for solid mechanics problems
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1661,9 +1564,7 @@ the stress field.
 - How to apply traction boundary conditions, using
   \c SolidTractionElements.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1685,9 +1586,7 @@ the predictions from small-displacement elasticity.
 - How to switch between different constitutive equations
 - how to incorporate isotropic growth into the model.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1713,9 +1612,7 @@ the predictions from small-displacement elasticity.
 - The default setting: Incompressibility is not enforced automatically.
   It must be requested explicitly.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1732,9 +1629,7 @@ against the predictions from small-displacement elasticity.
 <TD>
 - How to assign initial conditions for unsteady solid mechanics problems.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1755,10 +1650,11 @@ is controlled by (pseudo-)elasticity.
 - How to impose displacement boundary conditions in solid mechanics
   problems by Lagrange multipliers.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
+
+</TABLE>
+<TABLE class="example-table">
 ######################################################################
 <TR>
 <TD>
@@ -1775,9 +1671,7 @@ made of incompressible material.
 - How to enforce incompressible behaviour. 
 - How to solve 3D solid mechanics problems with spatial adaptivity.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1797,9 +1691,7 @@ problem for the solution of unstructured FSI problems.
 - How to identify domain boundaries in xfig-generated unstructured
   meshes. 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1819,9 +1711,7 @@ unstructured 3D meshes for FSI problems.
 - How to solve 3D solid mechanics problems on unstructured 
   meshes. 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1843,9 +1733,7 @@ fluid.
 <TD>
 - How to solve physiological solid mechanics problems.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1858,10 +1746,8 @@ fluid.
 We study the propagation of shock waves in an elastic 2D circular disk.
 </TD>
 <TD>
-- How to employ spatial adaptivity in time-dependent solid mechanics problems. 
-</TD>
-<TD>
-<CENTER>driver code only</CENTER>
+- How to employ spatial adaptivity in time-dependent solid mechanics problems.
+- <span style="color:red">Note: this driver code is currently undocumented.</span>
 </TD>
 </TR>
 ######################################################################
@@ -1879,9 +1765,7 @@ pressure load.
 - How to employ spatial adaptivity in solid mechanics problems using
 unstructured meshes.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1897,10 +1781,9 @@ comprare against Green and Zerna's exact solution.
 </TD>
 <TD>
 - A validation problem.
+- <span style="color:red">Note: this driver code is currently undocumented.</span>
 </TD>
-<TD>
-<CENTER>driver code only</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 #<TR>
@@ -1918,16 +1801,16 @@ comprare against Green and Zerna's exact solution.
 #- General conventions:
 #  - ***
 #</TD>
-#<TD>
-#<CENTER>driver code and pretty pictures</CENTER>
-#</TD>
 #</TR>
 
+
+</TABLE>
+<TABLE class="example-table">
 
 ######################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="linear_elasticity"><CENTER><B>Linear elasticity</B></CENTER></A>
 </TD>
 </TR>
@@ -1950,9 +1833,7 @@ elements and demonstrate their use in a 2D model problem.
   elastic strip, loaded by a spatially periodic surface traction.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -1971,9 +1852,7 @@ spatial adaptivity.
 - How to apply periodic boundary conditions in spatially adaptive
   computations.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 
@@ -1984,7 +1863,7 @@ spatial adaptivity.
 ######################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="axisym_linear_elasticity"><CENTER><B>Axisymmetric linear elasticity</B></CENTER></A>
 </TD>
 </TR>
@@ -2010,16 +1889,18 @@ elements and demonstrate their use in time-dependent test problem.
   exact solution.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
+
+
+</TABLE>
+<TABLE class="example-table">
 
 ######################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="time_harmonic_lin_elas"><CENTER><B>
 Time-harmonic linear elasticity</B></CENTER></A>
 </TD>
@@ -2045,9 +1926,7 @@ time-harmonic oscillations of elastic bodies.
   annular elastic region, computed with and without spatial adaptation.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2068,15 +1947,13 @@ elasticity -- this time using an unstructured mesh.
   the domain.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 
 ######################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="gen_time_harmonic_lin_elas"><CENTER><B>
 Generalised time-harmonic linear elasticity and perfectly matched 
 layers (PMLs)</B></CENTER></A>
@@ -2104,16 +1981,14 @@ matched layers
   forced by the prescribed oscillations of an embedded circular disk. 
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 
 ######################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="fourier_decomp_lin_elas"><CENTER><B>
 Azimuthally Fourier-decomposed 3D time-harmonic linear elasticity</B></CENTER></A>
 </TD>
@@ -2140,9 +2015,7 @@ non-dimensionalisation.
 - The solution of a "manufactured" test problem.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2163,16 +2036,17 @@ on its inner surface.
   elasticity on unstructured meshes.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 
+
+</TABLE>
+<TABLE class="example-table">
 
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="beam"><CENTER><B>Beam structures</B></CENTER></A>
 </TD>
 </TR>
@@ -2197,9 +2071,7 @@ using \c oomph-lib's geometrically non-linear Kirchhoff-Love-type
 - General conventions:
   - How to change control parameters for the Newton solver.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2222,10 +2094,13 @@ results against results from the literature.
   - What should be stored in a \c Problem's "global" \c Data?
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
+
+
+</TABLE>
+<TABLE class="example-table">
+
 ######################################################################
 <TR>
 <TD>
@@ -2248,9 +2123,7 @@ ring and demonstrate that Newmark's method is energy conserving.
 - The non-dimensionalisation of the kinetic and potential (strain)
   energies of \c HermiteBeamElements.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2269,15 +2142,13 @@ analytical predictions.
 - How to assign initial conditions for beam structures.
 - General conventions:
   - ***
-</TD>
-<TD>
-<CENTER>driver code only</CENTER>
+- <span style="color:red">Note: this driver code is currently undocumented.</span>
 </TD>
 </TR>
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="shell"><CENTER><B>Shell structures</B></CENTER></A>
 </TD>
 </TR>
@@ -2299,15 +2170,13 @@ clamped, thin-walled elastic shell.
 - Using displacement control for  \c HermiteShellElements.
 - General conventions:
   - ***
-</TD>
-<TD>
-<CENTER>driver code only</CENTER>
+- <span style="color:red">Note: this driver code is currently undocumented.</span>
 </TD>
 </TR>
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="fsi"><CENTER><B>Large-displacement fluid-structure interaction problems</B></CENTER></A>
 </TD>
 </TR>
@@ -2334,9 +2203,7 @@ domain boundary.
 - What is a \c GeomObject's geometric \c Data?
 - What is a \c GeneralisedElement's external and internal \c Data?
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2364,9 +2231,7 @@ domain boundary.
 - General conventions:
   - \c MacroElementNodeUpdateElements and \c MacroElementNodeUpdateMeshes.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 #<TR>
@@ -2387,10 +2252,9 @@ domain boundary.
 #  sparse node update operations. 
 ##- General conventions:
 #  -  \c AlgebraicElements and \c AlgebraicMeshes.
+#<span style="color:red">Note: this driver code is currently undocumented.</span>
 #</TD>
-#<TD>
-#<CENTER>driver code and pretty pictures</CENTER>
-#</TD>
+
 #</TR>
 ######################################################################
 <TR>
@@ -2427,9 +2291,7 @@ fluid-structure interaction problem.
   separate tutorial</a>
   that discusses the parallelisation of this code.</span> 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2460,9 +2322,7 @@ earlier non-FSI example</A> lead to a much more efficient code.
   separate tutorial</a>
   that discusses the parallelisation of this code.</span> 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2491,10 +2351,12 @@ interaction problems.
   separate tutorial</a>
   that discusses the parallelisation of this code.</span> 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
+
+
+</TABLE>
+<TABLE class="example-table">
 ######################################################################
 <TR>
 <TD>
@@ -2517,9 +2379,7 @@ interaction problems.
 (standard) "monolithic" problem 
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2543,9 +2403,7 @@ is performed by algebraic node updates.
 - How to use \c oomph-lib's \c FSIPreconditioner
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2568,9 +2426,7 @@ by an elastic leaflet.
   separate tutorial</a>
   that discusses the parallelisation of this code.</span> 
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2596,9 +2452,7 @@ We demonstrate how to discretise and solve this benchmark problem with
   and shows to modify it to allow spatial adaptativity in the fluid 
   and solid meshes.</span>
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2620,9 +2474,7 @@ in fluid-structure interaction problems.
   xfig/triangle-generated, unstructured meshes. How it works
   and what can go wrong...
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2642,10 +2494,12 @@ meshes for 3D fluid-structure interaction problems.
   tetgen-generated, unstructured meshes. How it works
   and what can go wrong...
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
+
+
+</TABLE>
+<TABLE class="example-table">
 
 ######################################################################
 <TR>
@@ -2662,9 +2516,7 @@ meshes for 2D fluid-structure interaction problems.
 - How to use inline mesh generation to provide spatial adaptivity for
   fluid-structure interaction problems
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 
 ######################################################################
@@ -2684,9 +2536,7 @@ Modeling Toolkit (VMTK).</a>
   distinguishing different Lagrange multipliers.
 - How to solve physiological fluid-structure interaction problems.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2706,9 +2556,7 @@ by pseudo-elasticity.
   by pseudo-elasticity.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2733,9 +2581,7 @@ asymptotic results.
 - Fluid-structure interaction.
 - General conventions:
   - ***
-</TD>
-<TD>
-<CENTER>driver code only</CENTER>
+- <span style="color:red">Note: this driver code is currently undocumented.</span>
 </TD>
 </TR>
 ######################################################################
@@ -2757,9 +2603,7 @@ nodal positions with \c AlgebraicElements.
 - Fluid-structure interaction.
 - General conventions:
   - ***
-</TD>
-<TD>
-<CENTER>driver code only</CENTER>
+- <span style="color:red">Note: this driver code is currently undocumented.</span>
 </TD>
 </TR>
 ######################################################################
@@ -2780,16 +2624,18 @@ asymptotic predictions.
 - Fluid-structure interaction.
 - General conventions:
   - ***
-</TD>
-<TD>
-<CENTER>driver code only</CENTER>
+- <span style="color:red">Note: this driver code is currently undocumented.</span>
 </TD>
 </TR>
+
+
+</TABLE>
+<TABLE class="example-table">
 
 #####################################################################
 #####################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="acoustic_fsi"><CENTER><B>Acoustic fluid-structure interaction problems</B></CENTER></A>
 </TD>
 </TR>
@@ -2825,9 +2671,7 @@ equation.</a>
   helper function
 - Validation of the methodology via a comparison against an analytical solution.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2851,15 +2695,13 @@ with unstructured meshes.
 - How to assign different material properties to different regions
   of the elastic body.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 
 #####################################################################
 #####################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="fd_acoustic_fsi"><CENTER><B>Azimuthally Fourier-decomposed 
 3D acoustic fluid-structure interaction problems</B></CENTER></A>
 </TD>
@@ -2899,9 +2741,7 @@ equation.</a>
   helper function
 - Validation of the methodology via a comparison against an analytical solution.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -2926,14 +2766,17 @@ on adaptive, unstructured meshes.
 - How to assign different material properties to different regions
   of the elastic body.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
+
+
+</TABLE>
+<TABLE class="example-table">
+
 ######################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="multi"><CENTER><B>Multi-physics problems</B></CENTER></A>
 </TD>
 </TR>
@@ -2965,9 +2808,7 @@ coupled to an energy equation.
   separate tutorial</a>
   that discusses the parallelisation of this code.</span>
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 #######################################################################
 <TR>
@@ -2995,9 +2836,7 @@ coupled to an energy equation.
   separate tutorial</a>
   that discusses the parallelisation of this code.</span>
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 #######################################################################
 <TR>
@@ -3020,9 +2859,7 @@ meshes and interact via "external elements".
   separate tutorial</a>
   that discusses the parallelisation of this code.</span>
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -3043,9 +2880,7 @@ equation is completely hidden.
 <TD>
 - How to use multiple inheritance to combine a single-phyics element
 and a solid element
-</TD>
-<TD>
-<CENTER>driver code and pretty pictures</CENTER>
+- <span style="color:red">Note: this driver code is currently undocumented.</span>
 </TD>
 </TR>
 <TR>
@@ -3067,14 +2902,15 @@ on the Rayleigh--Plateau instability.
 add_additional_residual_contributions_interface()
 to include additional terms in free surface problems.
 </TD>
-<TD>
-<CENTER>nearly complete</CENTER>
-</TD>
 </TR>
+
+
+</TABLE>
+<TABLE class="example-table">
 #######################################################
 ########################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="eigen"><CENTER><B>Eigenproblems</B></CENTER></A>
 </TD>
 </TR>
@@ -3098,9 +2934,7 @@ We demonstrate how to write \c QHarmonicElements that solve the
   solutions of the eigenproblems.
 - Post-processing of eigenvalue problems.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 
 <TR>
@@ -3120,9 +2954,7 @@ We demonstrate how to write \c QComplexHarmonicElements that determine the
 - How to write a quadratic eigenproblem as two linear eigenproblems.
 - How to output complex eigenvalues and eigenvectors.
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 
 
@@ -3136,7 +2968,7 @@ We demonstrate how to write \c QComplexHarmonicElements that determine the
 <A NAME="meshes"><B>Mesh generation</B></A>
 
 <CENTER>
-<TABLE>
+<TABLE class="example-table">
 ######################################################################
 <TR>
 <TD>
@@ -3145,12 +2977,10 @@ We demonstrate how to write \c QComplexHarmonicElements that determine the
 <TD>
 <B>\c oomph-lib features/conventions illustrated by the example code </B>
 </TD>
-<TD>
-<B>Completeness of the documentation</B>
-</TD>
+
 </TR>
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="available_meshes"><CENTER><B>Structured meshes</B></CENTER></A>
 </TD>
 </TR>
@@ -3161,7 +2991,6 @@ We demonstrate how to write \c QComplexHarmonicElements that determine the
 <CENTER><B>
 <A HREF="../../meshes/mesh_list/html/index.html">
 Structured meshes
-</A>
 </A>
 </B></CENTER>
 
@@ -3174,12 +3003,10 @@ meshes and provide a quick overview of their common features.
 - What structured meshes are available?
 .        
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="third_party_meshes"><CENTER><B>Unstructured meshes using
 input from third-party mesh generators</B></CENTER></A>
 </TD>
@@ -3224,9 +3051,7 @@ We describe \c oomph-lib's wrappers to third-party
   <A HREF="http://members.shaw.ca/bjoe/">
   http://members.shaw.ca/bjoe/.</A>
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -3244,9 +3069,7 @@ We describe how to generate unstructured 2D meshes from
 - How to create unstructured meshes with curvilinear boundaries
 - How to perform spatial adaptivity on unstructured meshes via complete remeshing
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 
 <TR>
@@ -3266,9 +3089,7 @@ an \c oomph-lib driver code.
 2D meshes using <a href="http://www.cs.cmu.edu/~quake/triangle.html">Triangle.</a>
 - How to create additional regions in space
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 
 
@@ -3291,9 +3112,7 @@ and <a href="http://www.cs.cmu.edu/~quake/triangle.html">Triangle</a>
 triangular meshes using <a href="http://www.xfig.org">xfig</a>
 and <a href="http://www.cs.cmu.edu/~quake/triangle.html">Triangle.</a>
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 ######################################################################
@@ -3311,11 +3130,11 @@ and <a href="http://www.cs.cmu.edu/~quake/triangle.html">Triangle.</a>
 <A NAME="solvers"><B>Linear solvers and preconditioners</B></A>
 
 <CENTER>
-<TABLE>
+<TABLE class="example-table">
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <CENTER><B>Linear solvers and preconditioners</B></CENTER>
 </TD>
 </TR>
@@ -3328,14 +3147,12 @@ and <a href="http://www.cs.cmu.edu/~quake/triangle.html">Triangle.</a>
 <B>\c oomph-lib features/conventions illustrated 
 by the example code</B>
 </TD>
-<TD>
-<B>Completeness of the documentation</B>
-</TD>
+
 </TR>
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="linear_solvers"><CENTER><B>Direct and iterative linear solvers 
 and general-purpose preconditioners</B></CENTER></A>
 </TD>
@@ -3359,14 +3176,12 @@ linear solvers and preconditioners.
   \c Hypre and \c Trilinos libraries.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="lin_alg"><CENTER><B>(Distributed) linear algebra</B></CENTER></A>
 </TD>
 </TR>
@@ -3385,9 +3200,7 @@ linear algebra infrastructure.
 - The \c CRDoubleMatrix and the \c DoubleVector.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 #####################################################################
 <TR>
@@ -3406,9 +3219,7 @@ a new block preconditioner.
 - An example: A simple implementation of an FSI preconditioner.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 #####################################################################
 <TR>
@@ -3427,15 +3238,13 @@ general purpose block preconditioners
 - How to specify the dof types.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <A NAME="specific_preconditioners"><CENTER><B>Problem-specific 
 preconditioners</B></CENTER></A>
 </TD>
@@ -3456,9 +3265,7 @@ Navier-Stokes precondtitioner.
 Navier-Stokes preconditioner.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -3476,9 +3283,7 @@ problems with algebraic node updates.
   with algebraic node updates.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -3502,9 +3307,7 @@ by pseudo-elasticity.
   with any of <code>oomph-lib</code>'s existing block preconditioners.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -3524,9 +3327,7 @@ by pseudo-elasticity.
   by pseudo-elasticity.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 </TABLE>
@@ -3546,11 +3347,11 @@ by pseudo-elasticity.
 <A NAME="visualisation"><B>Visualisation of the results</B></A>
 
 <CENTER>
-<TABLE>
+<TABLE class="example-table">
 #####################################################################
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <CENTER><B>Visualisation of the results</B></CENTER>
 </TD>
 </TR>
@@ -3563,9 +3364,7 @@ by pseudo-elasticity.
 <B>\c oomph-lib features/conventions illustrated 
 by the example code</B>
 </TD>
-<TD>
-<B>Completeness of the documentation</B>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -3575,8 +3374,7 @@ by the example code</B>
 Displaying results with paraview</B></A></a> 
 
 We demonstrate how to use 
-Angelo 
-Simone's conversion scripts that allow the \c oomph-lib
+Angelo Simone's conversion scripts that allow the \c oomph-lib
 results to be displayed by 
 <a href="http://www.paraview.org">paraview.</a>
 </TD>
@@ -3585,9 +3383,7 @@ results to be displayed by
   <a href="http://www.paraview.org">paraview.</a>
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 ######################################################################
@@ -3610,10 +3406,10 @@ Please consult the
 capabilities.</b></a>
 
 <CENTER>
-<TABLE>
+<TABLE class="example-table">
 ######################################################################
 <TR>
-<TD COLSPAN=3 bgcolor="lightcyan">
+<TD COLSPAN=2 bgcolor="lightcyan">
 <CENTER><B>Distributed problems</B></CENTER>
 </TD>
 </TR>
@@ -3626,9 +3422,7 @@ capabilities.</b></a>
 <B>\c oomph-lib features/conventions illustrated 
 by the example code</B>
 </TD>
-<TD>
-<B>Completeness of the documentation</B>
-</TD>
+
 </TR>
 #####################################################################
 ######################################################################
@@ -3649,9 +3443,7 @@ problem.
 - Pinning values in specific elements
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -3670,9 +3462,7 @@ step within the distributed adaptive driven cavity problem
 - The actions before and after load balance functions
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -3690,9 +3480,7 @@ involving \c FaceElements.
   Neumann/flux boundary conditions.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -3708,9 +3496,7 @@ problem where two domains interact.
   their parallel implementation. 
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -3730,9 +3516,7 @@ update methods.
   problem is distributed.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 <TR>
@@ -3756,9 +3540,7 @@ solid and fluid meshes that interact along interface boundaries.
   load balance functions.
 .
 </TD>
-<TD>
-<CENTER>complete</CENTER>
-</TD>
+
 </TR>
 ######################################################################
 ######################################################################

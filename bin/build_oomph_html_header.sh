@@ -1,7 +1,7 @@
 #! /bin/sh
 
 #-------------------------------------------------------------------
-# Shell script to build html header file for oomph-lib documentation.
+# Shell script to build html header and footer file for oomph-lib documentation.
 # The root directory must be passed as the first argument.
 #-------------------------------------------------------------------
 
@@ -28,5 +28,17 @@ chmod a+x tmp.sed
 rm tmp.sed
 
 
-
-
+#-------------------------------------------------------------------
+# Build/execute sed script to replace the #### placeholder in the template
+# file by relative path to the oomph-lib root directory:
+#-------------------------------------------------------------------
+# old echo -n 'sed "s/############/'  > tmp.sed
+tmp_junk='sed "s/############/' 
+printf "$tmp_junk"  > tmp.sed
+#old echo -n $1 | sed 's#/#\\\/#g' >> tmp.sed
+printf "$1" | sed 's#/#\\\/#g' >> tmp.sed
+#old echo -n '/g"'  >> tmp.sed
+printf '/g"'  >> tmp.sed
+chmod a+x tmp.sed
+./tmp.sed < $1/doc/oomph-lib_footer.html.template > oomph-lib_footer.html
+rm tmp.sed

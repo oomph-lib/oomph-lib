@@ -43,9 +43,9 @@ fourier_decomposed_helmholtz \
 foeppl_von_karman \
 axisym_foeppl_von_karman \
 axisym_displ_based_foeppl_von_karman \
-generalised_helmholtz \
+pml_helmholtz \
 axisym_linear_elasticity \
-generalised_fourier_decomposed_helmholtz \
+pml_fourier_decomposed_helmholtz \
 homogenisation \
 darcy \
 axisym_poroelasticity \

@@ -11,9 +11,9 @@ time_harmonic_fourier_decomposed_linear_elasticity \
 fourier_decomposed_helmholtz\
 foeppl_von_karman \
 axisym_foeppl_von_karman \
-generalised_helmholtz \
+pml_helmholtz \
 axisym_linear_elasticity \
-generalised_fourier_decomposed_helmholtz \
+pml_fourier_decomposed_helmholtz \
 darcy \
 ode \
 poroelasticity \

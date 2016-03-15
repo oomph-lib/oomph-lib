@@ -1,241 +1,129 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<title>oomph-lib</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<link rel="stylesheet" type="text/css" href="doxygen.css">
-<link rel="stylesheet" type="text/css" href="############/oomph_header.css">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: $title</title>
 
+<link rel="apple-touch-icon" sizes="57x57" href="############/figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="############/figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="############/figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="############/figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="############/figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="############/figures/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="############/figures/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="############/figures/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="############/figures/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="############/figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="############/figures/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="############/figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="############/figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="############/figures/manifest.json">
+<link rel="mask-icon" href="############/figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="############/figures/favicon.ico">
+<meta name="apple-mobile-web-app-title" content="oomph-lib">
+<meta name="application-name" content="oomph-lib">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="msapplication-TileImage" content="############/figures/mstile-144x144.png">
+<meta name="msapplication-config" content="############/figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
 
-<!-- Google search. -->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
 
-<script>
-  (function() {
-    var cx = '012919300247353260423:n6yfgx9o4pu';
-    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//www.google.com/cse/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
+<!-- Doxygen css-->
+<link rel="stylesheet" type="text/css" href="############/css/doxygen.css">
 
+<!-- Bootstrap -->
+<link href="############/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- The  following script does the hide/show trick-->
-<script language="JavaScript" type="text/javascript" 
-        src="############/navbar_toggle.js" >
-</script>
-
-<!-- The  following script
- ensures that the required field on the download form get filled in-->
-<script language="JavaScript">
-<!--
-function formCheck(formobj){
-    // mandatory fields
-    var fieldRequired = Array("name", "affiliation", "email", "why");
-    // description to appear in the dialog box
-    var fieldDescription = Array("name", "affiliation", "email", 
-                                 "Why are you interested in oomph-lib?");
-    // dialog message
-    var alertMsg = "Please complete the following fields:\n";
-    var l_Msg = alertMsg.length;
-    for (var i = 0; i < fieldRequired.length; i++){
-        var obj = formobj.elements[fieldRequired[i]];
-        if (obj){
-            switch(obj.type){
-            case "select-one":
-                if (obj.selectedIndex == -1 || 
-                    obj.options[obj.selectedIndex].text == ""){
-                    alertMsg += " - " + fieldDescription[i] + "\n";
-                }
-                break;
-            case "select-multiple":
-                if (obj.selectedIndex == -1){
-                    alertMsg += " - " + fieldDescription[i] + "\n";
-                }
-                break;
-            case "text":
-            case "textarea":
-                if (obj.value == "" || obj.value == null){
-                    alertMsg += " - " + fieldDescription[i] + "\n";
-                }
-                break;
-            default:
-            }
-            if (obj.type == undefined){
-                var blnchecked = false;
-                for (var j = 0; j < obj.length; j++){
-                    if (obj[j].checked){
-                        blnchecked = true;
-                    }
-                }
-                if (!blnchecked){
-                    alertMsg += " - " + fieldDescription[i] + "\n";
-                }
-            }
-        }
-    }
-    if (alertMsg.length == l_Msg){
-        return true;
-    }else{
-        alert(alertMsg);
-        return false;
-    }
-}
-// -->
-</script>
-
-
-<body onLoad="visibilitytoggle()"> <!-- This is required for the "Click'n'view" fct to work! -->
-
-<div class="header">
-<p class="logo"><a href="############/../doc/html/index.html"><img src="############/../doc/figures/oomph.png" alt="oomph-lib logo: Link to oomph-lib homepage" border=0></a></p>
-<div class="head-section">
-<div id="hotspot" name="hotspot" class="hotspot" 
-     title="click to expand the navigation menu">Documentation,<br/>
-     example codes and tutorials</div> 
-<dl style="" id="toggle" name="toggle" class="toggle">  
-<dt><a href="############/../doc/index/html/index.html">Index</a></dt>
-<dt><a href="############/../doc/example_code_list/html/index.html">List of tutorials/demo codes</a></dt>
-      <dd><a href="############/../doc/example_code_list/html/index.html#overview">List
-      of example codes</a></dd>
-      <dd><a href="############/../doc/example_code_list/html/index.html#meshes">Mesh generation</a></dd>
-      <dd><a href="############/../doc/example_code_list/html/index.html#solvers">Linear
-      solvers and preconditioners</a></dd>
-      <dd><a href="############/../doc/example_code_list/html/index.html#visualisation">Visualisation</a></dd>
-      <dd><a href="############/../doc/example_code_list/html/index.html#parallel">List
-      of parallel driver codes</a></dd>
-    </dt>
-<dt><a href="############/../doc/quick_guide/html/index.html">The (Not-so) Quick Guide</a></dt>
-
-<dt><a href="############/../doc/intro/html/index.html">FE theory and top-down discussion of the data structure</a></dt>
-      <dt><a href="############/../doc/the_data_structure/html/index.html">Comprehensive bottom-up discussion of the data
-      structure</a></dt>
-      <dt><a href="############/../doc/paraview/html/index.html"> Visualisation of the results </a></dt>
-      <dt><a href="############/../doc/coding_conventions/html/index.html">Coding conventions and C++ style</a></dt>
-      <dt><a href="############/../doc/creating_doc/html/index.html">Creating documentation</a></dt>
-      <dt><a href="############/../doc/optimisation/html/index.html">Optimisation</a>
-      </dt> 
-</dl>
-</div><!-- end section-->
-
-
-<div class="head-section">
-<div id="hotspot" name="hotspot" class="hotspot" 
-     title="click to expand the navigation menu">Parallel Processing</div> 
-<dl style="" id="toggle" name="toggle" class="toggle">  
-      <dt><a href="############/../doc/mpi/general_mpi/html/index.html">
-      Overview: parallel problem assembly, parallel solvers and
-      problem distribution</a></dt>
-      <dt><a href="############/../doc/mpi/adaptive_driven_cavity_load_balance/html/index.html">
-      Load balancing</a></dt>
-      <dt><a href="############/../doc/example_code_list/html/index.html#parallel">List
-      of parallel driver codes</a></dd>
-      <dt><a href="############/../doc/example_code_list/html/index.html#lin_alg">Distributed
-      linear algebra</a></dd>
-      <dd><a href="############/../doc/mpi/distributed_linear_algebra_infrastructure/html/index.html">
-      Distributed linear algebra infrastructure</a></dt>
-      <dd><a href="############/../doc/mpi/block_preconditioners/html/index.html">
-      Distributed block preconditioners </a></dt>
-      <dd><a href="############/../doc/mpi/distributed_general_purpose_block_preconditioners/html/index.html">
-      Distributed general-purpose block preconditioners </a></dt>
-</dl>
-</div>
-
-	
-<div class="head-section">
-<div id="hotspot" name="hotspot" class="hotspot" 
-     title="click to expand the navigation menu"> Publications</div> 
-<dl style="" id="toggle" name="toggle" class="toggle">  
-    <dt><a href="############/../doc/publications/html/index.html">Publications</a>
-      <dd><a href="############/../doc/publications/html/index.html#talks">Talks</a></dd>
-      <dd><a href="############/../doc/publications/html/index.html#papers">Journal publications</a></dd>
-      <dd><a href="############/../doc/publications/html/index.html#theses">Theses</a></dd>
-    </dt>
-    <dt><a href="############/../doc/picture_show/index.html">Picture show </a></dt>
-</dl>
-</div><!-- end section-->
-
-
-
-
-<div class="head-section">
-<div id="hotspot" name="hotspot" class="hotspot" 
-     title="click to expand the navigation menu"> Download</div> 
-<dl style="" id="toggle" name="toggle" class="toggle">  
-    <dt><a href="############/../doc/copyright/html/index.html">Copyright</a></dt>
-    <dt><a href="############/../doc/the_distribution/html/index.html">Download/installation instructions</a></dt>
-    <dt><a href="############/../doc/download/html/index.html">Download page</a></dt>
-</dl>
-</div><!-- end section-->
-
-
-
-<div class="head-section">
-<div id="hotspot" name="hotspot" class="hotspot" 
-     title="click to expand the navigation menu">FAQ & Contact</div> 
-<dl style="" id="toggle" name="toggle" class="toggle">  
-    <dt><a href="############/../doc/FAQ/html/index.html">FAQ</a></dt>
-    <dt><a href="############/../doc/change_log/html/index.html">Change log</a></dt>
-    <dt><a href="############/../doc/bugs/html/index.html">Bugs and other known problems</a></dt>
-    <dt><a href="############/../doc/ToDo/html/index.html">Completeness of the library & our "To-Do List" </a></dt>
-    <dt><a href="############/../doc/contact/html/index.html">Contact the developers</a></dt>
-    <dt><a href="############/../doc/get_involved/html/index.html">Get involved </a></dt>
-</dl>
-</div><!-- end section-->
-
-
-<p class="clear">&nbsp;</p>
-</div><!-- end header -->
-
-
-
-<P>
-<HR>
-
-
-
-<TABLE BORDER=1, WIDTH=700px>
-<TR>
-<TD bgcolor="cornsilk">
-<CENTER><B>Beta release!</b></CENTER><br>
-Please note that the library has not been "officially" released.
-While we continue to work on the documentation, these web pages
-are likely to contain broken links and documents in draft form. 
-Please send an email to 
-<BR><BR>
-<CENTER>
-<TT>oomph-lib AT maths DOT man DOT ac DOT uk</TT>
-</CENTER>
-<BR> 
-if you wish to be informed of the library's "official" release.
-</TD>
-</TR>
-</TABLE>
-<CENTER>
-<br>
-<CENTER><B><H1>Search oomph-lib's documentation</H1></b></CENTER>
-<gcse:search></gcse:search>
-</CENTER>
-<HR>
-
-<script type="text/javascript">
- 
- function index_toggle(id,img) {
-  var e = document.getElementById(id);
-  var im = document.getElementById(img);
-  if (e.style.display == '')
-   {
-      e.style.display = 'none';
-      im.src="../expand.png";
-   }
-  else
-   {
-   e.style.display = '';
-   im.src = "../collapse.png";
-   }
- }
-</script>
-
-
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="############/css/oomph_header.css">
 
 </head>
+<body>
+
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="############/html/index.html"><img alt="oomph-lib" src="############/figures/oomph_logo.png"  width="164px"></a>
+    
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="############/../doc/intro/html/index.html">Finite Element theory</a></li>
+          <li><a href="############/../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="############/../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="############/../doc/example_code_list/html/index.html">Example codes and tutorials</a></li>
+          <li><a href="############/../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="############/../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Components</li>
+          <li><a href="############/../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="############/../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="############/../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="############/../doc/example_code_list/html/index.html#visualisation">Post Processing</a></li>
+          
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="############/../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="############/../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="############/../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="############/../doc/index/html/index.html">Index</a></li>
+          <li><a href="############/../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get it <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="############/../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="############/../doc/subversion/html/index.html">Subversion</a></li>
+            <li><a href="############/../doc/download/html/index.html">Tar files</a></li>
+            <li><a href="############/../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="############/../doc/contact/html/index.html">Contact</a></li>
+            <li><a href="############/../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="############/../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="############/../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <form class="navbar-form" role="search" action="############/../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>

@@ -4,7 +4,7 @@
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
 //LIC//    Version 1.0; svn revision $LastChangedRevision$
-//LIC//
+//LIC// 
 //LIC// $LastChangedDate$
 //LIC// 
 //LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
@@ -100,19 +100,22 @@ public:
   }
 
 
-
  /// Get the square of wavenumber 
  double k_squared()
  { 
+#ifdef PARANOID
   if (K_squared_pt==0)
    {
-    return 0.0;
+     throw OomphLibError(
+      "Please set pointer to k_squared using access fct to pointer!",
+      OOMPH_CURRENT_FUNCTION,
+      OOMPH_EXCEPTION_LOCATION);
    } 
-  else
-   {
+#endif
     return *K_squared_pt;
+
    }
- }
+
 
  /// \short Number of scalars/fields output by this element. Reimplements
  /// broken virtual function in base class.
@@ -154,19 +157,19 @@ public:
        
        // Never get here
       default:
-       std::stringstream error_stream;
-       error_stream 
-        << "Helmholtz elements only store 2 fields so i must be 0 or 1" 
-        << std::endl;
-       throw OomphLibError(
-        error_stream.str(),
-        OOMPH_CURRENT_FUNCTION,
-        OOMPH_EXCEPTION_LOCATION);
+     std::stringstream error_stream;
+     error_stream 
+      << "Helmholtz elements only store 2 fields so i must be 0 or 1" 
+      << std::endl;
+     throw OomphLibError(
+      error_stream.str(),
+      OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
        break;
       }
     } // end of plotpoint loop
   } // end scalar_value_paraview
- 
+
  /// \short Name of the i-th scalar field. Default implementation
  /// returns V1 for the first one, V2 for the second etc. Can (should!) be
  /// overloaded with more meaningful names in specific elements.
@@ -191,14 +194,14 @@ public:
      throw OomphLibError(
       error_stream.str(),
       OOMPH_CURRENT_FUNCTION,
-      OOMPH_EXCEPTION_LOCATION);
+     OOMPH_EXCEPTION_LOCATION);
      
      // Dummy return for the default statement
      return " ";
      break;
     }
   }
- 
+
  /// Output with default number of plot points
  void output(std::ostream &outfile) 
   {

@@ -1,577 +1,119 @@
-\mainpage Welcome to the homepage of oomph-lib
+\mainpage
+\htmlonly
 
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
+  <!-- Indicators -->
+  <!--<ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>-->
 
-\c oomph-lib is an object-oriented, open-source finite-element library 
-for the simulation of multi- (and single-)physics problems, 
-developed and maintained by 
-<A HREF="http://www.maths.man.ac.uk/~mheil">Matthias Heil</A> 
-and <A HREF="http://www.maths.man.ac.uk/~ahazel">Andrew Hazel</A>
-of the <A HREF="http://www.maths.manchester.ac.uk/">School of
-Mathematics</A> at <A HREF="http://www.manchester.ac.uk/">The
-University of Manchester</A>.
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="../figures/slide1.jpg" alt="">
+    </div>
+    
+    <div class="item">
+      <img src="../figures/slide2.png" alt="">
+    </div>
+  
+    <div class="item">
+      <img src="../figures/slide3.png" alt="">
+    </div>
+  </div>
+  
 
-<P>
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="icon-prev" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="icon-next" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+  
+</div>
 
-The latest version of the library is 
-
-   Version 1.0; svn revision $LastChangedRevision$ 
-
-which was committed to the svn repository on:
-
-$LastChangedDate$.
-
-<HR>
-
-\section all_you_ever All you ever wanted to know about oomph-lib
- 
-- \ref what_is_it 
-- \ref features
-- \ref how_much_is_it
-- \ref get_it 
-- \ref how_to_visualise 
-- \ref who_is_who
-- \ref contact
-- \ref ackn
-
-<HR>
-<HR>
-
-\section what_is_it What it is (and what it is not)?
-\c oomph-lib \b is:
-- an object-oriented, open-source finite-element library for the 
-  simulation of multiphysics problems.
-.
-\c oomph-lib it \b is \b not:
-- a GUI-based, mouse-driven "package".
-
-
-You must write your own 
-C++ driver codes to specify your problem, 
-using \c oomph-lib's high-level objects. 
-[If your C++ is a bit rusty (or non-existent) have a look at Andrew Hazel's
-<A HREF="http://www.maths.man.ac.uk/~ahazel/courses_C++.html">
-C++ course</A> for a quick introduction.]  
-Once the problem is formulated, the \c main function can be as simple as
-this: \n
-\code
-        main()
-        {
-          // Create the problem object
-          MyProblem problem;
-          
-          // Solve the problem, using oomph-lib's default Newton solver
-          problem.newton_solve();
-        }
-\endcode
-\n
-\c oomph-lib provides the infrastructure for the problem formulation
-and solution. The library contains a large number of elements, meshes, 
-timesteppers, solvers, etc. which can be combined to solve any problem.
-
-The library is supplied with extensive on-line documentation which
-includes:
-- A <A HREF="../intro/html/index.html"> top-down introduction:</A>
-  This provides a relatively brief, constructive introduction to the 
-  finite element method, and explains 
-  its object-oriented implementation in \c oomph-lib.</A>\n\n
-- A <A HREF="../the_data_structure/html/index.html"> bottom-up discussion</A>
-  of \c oomph-lib's overall data structure, including
-  a complete, cross-referenced, html-based index of all \c oomph-lib
-  classes. \n\n
-- The <A HREF="../quick_guide/html/index.html">(Not-So-)Quick
-  Guide</A> provides a "quick" introduction on how to create new
-  instances of \c oomph-lib's fundamantal objects: \c Problems,
-  \c Meshes, and \c Elements. \n\n
-- A <A HREF="../example_code_list/html/index.html"> large number of
-  example problems</A> \n\n
-  - The example problems are arranged in
-    order of increasing complexity and can be used as chapters
-    in a self-study course. Comments and exercises are provided to
-    encourage further exploration of \c oomph-lib's capabilities.\n\n
-  - The individual examples are as self-contained as possible
-    and can be used as quick guides to particular
-    features of \c oomph-lib. ("How do I solve time-dependent problems?";
-    "How do I enable spatial adpativity?"; "How do I write my own
-    meshes?"; etc.) \n\n
-  - Finally, the examples codes should be regarded as templates 
-    for your own driver codes: Examine the  
-    <A HREF="../example_code_list/html/index.html">list of
-    examples</A> and try to find one that resembles the
-    problem that you wish to solve. For most "classical" problems
-    (e.g. the solution of the Navier-Stokes equations with standard
-    boundary conditions), very few modifications
-    are required (e.g. adjusting the mesh to a different
-    domain, changing the boundary and/or initial conditions, etc). 
-    \n
-    If you wish to solve a non-standard problem, or one for which 
-    \c oomph-lib does not (yet) provide elements or meshes, it is 
-    easy to write your own, following the detailed instructions
-    provided in the documentation.
-  .
-.
-<HR>
-
-\section features Features
-
-- Large number of fully-developed and carefully-validated element
-  types for the solution of: \n\n
-  - The Poisson equation \n\n
-  - The unsteady heat equation \n\n
-  - The linear wave equation \n\n
-  - The advection-diffusion equation \n\n
-  - The Navier-Stokes equations, incl. free-surfaces, in Cartesian
-    and axisymmetric co-ordinates. \n\n
-  - The equations of large-displacement solid mechanics, based 
-    on the principle of virtual displacements in cartesian and
-    axisymmetric geometries; with arbitrary constitutive equations. \n\n
-  - Shell and beam elements, based on a geometrically non-linear
-    formulation. 
-  - ...and many others.\n\n
-  .
-  [\b Note: Most elements are implemented in a dimension-independent
-  formulation] \n\n
-- It is easy to formulate new elements for problems that are not
-  included in the above list. \n\n
-- It is easy to combine any of the above elements to "multi-physics" 
-  elements, allowing e.g. \n\n
-  - the solution of fluid-structure interaction problems \n\n
-  - the simulation of unsteady heat conduction in an elastic body
-    that undergoes large displacements \n\n
-  - free-surface problems
-  - etc. \n\n
-  .
-- Parallel processing capabilities. \n\n
-- Full spatial and temporal adaptivity. All elements listed above
-  support quad-tree/octree-based mesh refinement procedures and
-  adaptive timestepping. \n\n  
-- A wide range of meshes; new meshes can easily be added to the
-  library. \c oomph-lib can also use meshes that are generated
-  by third-party (commercial) mesh generators. \n\n
-- The ability to solve problems in domains with time-dependent,
-  curvilinear boundaries. \n\n
-- \c oomph-lib treats all problems as non-linear problems and uses Newton's
-  method as the default non-linear solver. Within this framework,
-  linear problems are special cases for which the Newton iteration
-  converges in one step. The linear systems
-  arising during the Newton iteration can be solved with a variety
-  of direct and iterative solvers. Continuation methods
-  (Keller's arclength method and displacement-control for solid
-  mechanics problems) are implemented.  \n\n
-- A large number of <A HREF="../example_code_list/html/index.html">fully 
-  documented example codes.</A> All examples include an introduction
-  to the mathematical/physical
-  problem, a detailed discussion of the driver code, a discussion
-  of the results (incl. comparisons against analytical solutions
-  where appropriate) and exercises and comments.
-  \n\n
-- The library has extensive self-test facilities: Every sufficiently
-  complex class has a self-test function that performs various
-  sanity checks -- useful during code-development. The library
-  can be compiled with a PARANOID flag switched on or off. 
-  If the flag is set during compilation, the code performs a large number
-  of self-tests during its execution. If things go wrong, code execution
-  terminates gracefully and diagnostic output is generated
-  to help pinpoint the problem. Of course, the tests introduce an additional
-  run-time overhead, so can be switched off in production
-  runs. During development, range checking on all array-based objects,
-  (vectors, matrices, tensors, etc) can be enabled separately by using the 
-  RANGE_CHECKING flag, but introduces considerable
-  run-time overhead.
-.
-
-<HR>
-
-\section how_much_is_it How much does it cost? Nothing!
-
-- \c oomph-lib is freely available under the 
-<A HREF="http://www.gnu.org/copyleft/gpl.html">gnu public licence.</A>
-  Help yourself! 
-
-- We welcome feedback and will try our best to help you if you get
-  stuck. However, \b please read the documentation and the FAQ first! 
-  We are busy academics and do not have the resources to
-  operate a commercial-style "helpline".
-
-- "Free" under the <A HREF="http://www.gnu.org/copyleft/gpl.html">gnu 
-  public licence</A> means "free for all" -- this
-  includes commercial users. The same applies (within our limited
-  resources!) to requests for help. However, if you are a commercial
-  user and are interested in dedicated assistance for a specific
-  project, let us know. We'll be happy to discuss the possibility 
-  of consultancy arrangements.
-
-<HR>
-
-\section get_it How do I get it? What do I need? How do I install it?
-\subsection get How do I get it?
-We provide 
-<A HREF="../the_distribution/html/index.html">gzipped tar files
-</A>of the library.
-
-<P>
-We also provide read-only access to the
-<a href="http://subversion.tigris.org/"> subversion</a> 
-repository of the oomph-lib project which is hosted
-at <A HREF="http://oomph-lib.maths.man.ac.uk">
-oomph-lib.maths.man.ac.uk</A>. 
-If <a href="http://subversion.tigris.org/"> subversion</a> is
-installed on your computer you can obtain the latest 
-snapshot of the project by issuing the command
-
-\code
-svn checkout svn://oomph-lib.maths.man.ac.uk/trunk
-\endcode
-
-See <a href="../subversion/html/index.html">our subversion
-webpage</a> for further details.
-
-Note that the <A HREF="../the_distribution/html/index.html">gzipped tar files
+  <div style="min-height:800px;">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#about" data-toggle="tab">About</a></li>
+    <li><a href="#get" data-toggle="tab">Get</a></li>
+    <li><a href="#use" data-toggle="tab">Use</a></li>
+  </ul>
+  
+  <section class="tab-content" style="border:1px solid #ddd; border-top:none; padding:20px; margin-bottom:100px;">
+    <article class="tab-pane active" id="about">
+      <p><code>oomph-lib</code> is an object-oriented, open-source finite-element library for the simulation of multi-physics problems. It is developed and maintained by <a href="http://www.maths.man.ac.uk/~mheil">Matthias Heil</a> and <a href="http://www.maths.man.ac.uk/~ahazel">Andrew Hazel</a> of the <a href="http://www.maths.manchester.ac.uk/">School of Mathematics</a> at <a href="http://www.manchester.ac.uk/">The University of Manchester</a>, along with many <a href="../acknowledgements/html/index.html">other contributors</a>.</p>
+      <p></p>
+      <p> 
+      <code>oomph-lib</code> <b>is not</b> a GUI-based, mouse-driven "package". It provides the state of the art infrastructure for the problem formulation and solution. The library contains a large number of elements, meshes, timesteppers, solvers, etc. which can be combined to solve any problem. You write your own C++ driver codes to specify your problem, using <code>oomph-lib's</code> high-level objects. [If your C++ is a bit rusty (or non-existent) have a look at Andrew Hazel's <a href="http://www.maths.man.ac.uk/~ahazel/courses_C++.html">C++ course</a> for a quick introduction.] Once the problem is formulated, the <code>main</code> function can be as simple as this: 
+      </p>
+      <div class="fragment">
+<div class="line">   main()</div>
+<div class="line">   {</div>
+<div class="line">     <span class="comment">// Create the problem object</span></div>
+<div class="line">     <span class="keywordtype">MyProblem</span> problem;</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Solve the problem, using oomph-lib&#39;s default Newton solver</span></div>
+<div class="line">     problem.newton_solve();</div>
+<div class="line">   }</div>
+    </div>
+    </article>
+    <article class="tab-pane" id="get">
+      
+      <p>The latest version of the library is Version 1.0; svn revision $LastChangedRevision$ which was committed to the svn repository on: $LastChangedDate$.</p>
+      
+      
+    <h3>Downloads</h3>
+      <p>We provide <a href="../the_distribution/html/index.html">gzipped tar files</a> of the full and reduced library (without documentation and demo drivers as they can be found online). We also provide read-only access to the <a href="../subversion/html/index.html">subversion repository</a> of the oomph-lib project. For more information see the <a href="../doc/the_distribution/html/index.html">installation guide</a>. Note that the <A HREF="../the_distribution/html/index.html">gzipped tar files
 </A>, the latest version of the library available via the 
 public repository and the webpage at 
 <a href="http://www.oomph-lib.org">http://www.oomph-lib.org</a>
 are automatically synchronised. 
+</p>
+      
+      
+      <h3>Prerequisites</h3>
+      <p><code>oomph-lib</code> has been/is primarily being developed in Linux so it is well tested there. However several people successfully run it on Windows and Mac OS X. All of the dependencies are freely available, for information about dependencies, see the <a href="../doc/the_distribution/html/index.html">installation guide</a>.</p>
+      
+      <p>The latest version of the library is revision 0.90 which was released on August 3, 2009. See the <a href="../change_log/html/index.html">change log page</a> for an overview of the changes made since the previous release.</p>
+    </article>
+    <!--  -->
+    <article class="tab-pane" id="use">
+      <p>The library is supplied with extensive on-line documentation which includes:</p>
+        
+      <h3><a href="../intro/html/index.html">Object Orientated Finite Element Theory</a></h3>
+       This provides a relatively brief, constructive "top-down" introduction to the maths of the finite element method, and explains its object-oriented implementation in <code>oomph-lib</code>.
 
+       <h3> <a href="../the_data_structure/html/index.html">The Data Structure</a></h3>
+       A bottom-up discussion of <code>oomph-lib's</code> overall data structure, including a complete, cross-referenced index of all <code>oomph-lib's</code> classes (generated by Doxygen).
 
+       <h3><a href="../quick_guide/html/index.html">(Not-So-)Quick Guide</a></h3>
+      The <a href="../quick_guide/html/index.html">(Not-So-)Quick Guide</a> provides a "quick" introduction on how to create new instances of <code>oomph-lib's</code> fundamental objects: <code>Problems</code>, <code>Meshes</code>, and <code>Elements</code>. 
 
+      <h3><a href="../example_code_list/html/index.html">Example Problems</a></h3>
+      A large number of verified and documented example problems.
+      <ul>
+      <li style="margin-top:10px;">The example problems are arranged in order of increasing complexity and can be used as chapters in a self-study course. Comments and exercises are provided to encourage further exploration of <code>oomph-lib's</code> capabilities.
 
-\subsection need What do I need?
- \c oomph-lib has been/is being developed in a linux environment, 
- using standard ANSI C++. In order to minimise the dependence 
- on external libraries we include
- "frozen" versions of certain external libraries 
- (<A HREF="http://www-users.cs.umn.edu/~karypis/metis/">METIS</A>, 
- <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU</A>, ...)
- with our distribution. The idea is that you should only have to 
- unpack, build and install one distribution to produce the fully compiled 
- library, the html-based documentation and working example codes.
- \n\n
- For this purpose you <B>must have</B>: \n\n
- - A computer with a linux (or unix) operating system.
-   [<B>Note for windows users:</B> We believe that \c oomph-lib can be installed
-   in a windows enviroment, using 
-   <A HREF="http://www.cygwin.com/">cygwin</A>, though we haven't
-   tried this for a long time.] \n\n
- - Compilers for C++, C and Fortran77. The open-source 
-   <A HREF="http://gcc.gnu.org/">GNU gcc compiler suite</A> version
-   3.2.3 or later is fine; the library also compiles  
-   cleanly with the Intel compilers (\c icpc, \c icc and  \c ifc). 
-   [\b Note: The Fortran77 and C compilers are only required to 
-   compile some external libraries -- \c oomph-lib itself is 
-   written entirely in C++.]
- .
- \n
- The following programs are helpful but not essential: \n\n
- - GNU's <A HREF="http://www.gnu.org/software/autoconf/">autoconf</A>,
-   <A HREF="http://www.gnu.org/software/automake/">automake</A>
-   and <A HREF="http://www.gnu.org/software/libtool/">libtool</A>
-   are required if you wish to add additonal features to your local
-   copy of \c oomph-lib; see  
-   <A HREF="../the_distribution/html/index.html"> the \c oomph-lib 
-   download page </A> for more details. \n\n
- - <A HREF="http://www.python.org/download/">python</A> is needed
-   to analyse the results of the extensive self-tests that may
-   be performed at the end of the installation to verify that the 
-   build process was completed successfully.
-   If python is not available, the self-test
-   will compile and run all test codes but it will not be possible
-   to verify the correctness of the results. \n\n
- - <A HREF="http://www.doxygen.org">doxygen</A> is needed 
-   to build a local copy of \c oomph-lib's extensive online 
-   documentation. If doxygen is not installed on your system
-   you can consult the latest version of the online documentation
-   on <A HREF="http://www.oomph-lib.org"> the \c oomph-lib
-   homepage.</A> \n\n
- 
-\subsection install How do I install it?
-The \c oomph-lib distribution is built under 
-<A HREF="http://www.gnu.org/software/autoconf/">autoconf</A> /
-<A HREF="http://www.gnu.org/software/automake/">automake</A> control,
-making the installation completely straightforward. We provide
-two main installation mechanisms:
--# \c oomph-lib can be built/installed/tested with 
-   GNU's standard \c configure; \c make; \c make \c install; \c make \c check 
-   procedure. \n\n
--# We also provide a customised build script,  \c autogen.sh, that
-   guides the "non-expert" user through the installation. The script
-   facilitates the specification of various build options, such 
-   as optimisation levels etc.
-.
+      </li>
+      <li style="margin-top:10px;">The individual examples are as self-contained as possible and can be used as quick guides to particular features of <code>oomph-lib</code>. ("How do I solve time-dependent problems?"; "How do I enable spatial adpativity?"; "How do I write my own
+          meshes?"; etc.) 
 
-Subject to the minimum requirements, listed above, you should be able 
-to install and use our libraries "anywhere". However, as anybody 
-who has ever ported any code to a different platform knows, things are 
-rarely that simple -- even with  
-<A HREF="http://www.gnu.org/software/autoconf/">autoconf</A>,
-<A HREF="http://www.gnu.org/software/automake/">automake</A>
-and <A HREF="http://www.gnu.org/software/libtool/">libtool</A>...
-Having said that, we have successfully installed and tested
-our installation on the following platforms:
-- Redhat Linux, using the gcc compiler suite (versions 3.2.3,  4.1.2
-  and 4.3.3). The tests included the MPI part of the library, 
-  which we compiled with <A HREF="http://www.lam-mpi.org/">lam</A>.
-- Gentoo Linux, using the gcc compiler suite
-  (versions 3.3.4 and 4.1.2) and the intel compilers 
-  (icpc, ifc and icc all at version 10).
-- Ubuntu (version 9.04) with gcc compilers (version 4.3.3). 
-  The tests included the MPI part of the library, 
-  which we compiled with <A HREF="http://www.lam-mpi.org/">lam</A>.
-- Apple Mac OSX 10.4.11 (Tiger) with gcc compilers (version 4.3.3)
-- Apple Mac OSX 10.5.8 (Leopard) with gcc compilers (version 4.3.3)
-- cygwin running under Windows XP, using the gcc compiler suite 
-  (version 3.4.4).
-- cygwin under Windows Vista Business
-  using the gcc compiler suite (version 3.4.4).
-- cygwin under Windows 7 Ultimate (evaluation copy, build 7100)
-  using the gcc compiler suite (version 3.4.4).
-.
-We welcome feedback on any problems that you encounter
-during your attempts to install \c oomph-lib on your machine.
-However, \b please check the <A HREF="../FAQ/html/index.html">FAQ</A> 
-and the instructions on the 
-<A HREF="../the_distribution/html/index.html">download page</A> 
-before you contact us! 
+      </li>
+      <li style="margin-top:10px;">Finally, the examples codes should be regarded as templates for your own driver codes: Examine the <a href="../example_code_list/html/index.html">list of examples</a> and try to find one that resembles the problem that you wish to solve. For most "classical" problems (e.g. the solution of the Navier-Stokes equations with standard boundary conditions), very few modifications are required (e.g. adjusting the mesh to a different domain, changing the boundary and/or initial conditions, etc). 
+       If you wish to solve a non-standard problem, or one for which <code>oomph-lib</code> does not (yet) provide elements or meshes, it is easy to write your own, following the detailed instructions provided in the documentation.</li>
+      </ul>
+    </article>
+  </section>
+</div>
 
-<HR>
+<!-- remove carousel from contents to allow it to span whole document -->
+<!-- <script type="text/javascript">
+$(".contents").removeClass("contents");
+</script> -->
 
-\section how_to_visualise How do I visualise the results?
-
-An important question! As mentioned above, \c oomph-lib is not a 
-"GUI package" and does not provide any built-in visualisation tools. 
-\c oomph-lib's post-processing routines produce ASCII data
-in a format that is suitable for post-processing with 
-<A HREF="http://www.tecplot.com">
-tecplot</A> -- a powerful and easy-to-use commercial plotting package.  [The
-plots and animations shown in the 
-<A HREF="../example_code_list/html/index.html">examples</A> were all
-produced with <A HREF="http://www.tecplot.com">tecplot</A>.] 
-<A HREF="http://www.gnuplot.info">gnuplot</A>
-can also display the data (in more elementary form, obviously). 
-The trick is to specify the \c using option in
-<A HREF="http://www.gnuplot.info">gnuplot</A>'s
-plot commands -- in this mode 
-<A HREF="http://www.gnuplot.info">gnuplot</A> 
-ignores tecplot's "ZONE" commands.
-<B>Angelo 
-Simone</B> wrote python scripts that convert \c oomph-lib's
-output to the vtu format that can be read by 
-<a href="http://www.paraview.org">paraview</a>;
-see <a href="../paraview/html/index.html">the paraview tutorial</a>
-for details. 
-
-<HR>
-
-\section who_is_who Who develops/maintains oomph-lib?
-The \c oomph-lib "architects" are (in no particular order)
- 
-@I w 0.75\textwidth architects " "
-
-...assisted by former/current project/MSc/PhD students and
-collaborators who made 
-(or are still making) signficant contributions to the development of
-the library (listed in reverse chronological order):
-- \b Puneet \b Matharu works on the implementation of geometric
-  multigrid solvers, particularly for Helmholtz equations. 
-- \b Chihebeddine \b Hammami worked on the implementation of 
-  Yulii Shikhmurzaev's interface formation theory. 
-- \b Narjes \b Akriche worked on pseudo-resonances in acoustic 
-  fluid-structure interaction problems. 
-- \b Jordan \b Rosso worked on topological fluid mechanics of the
-  the Karman vortex street.
-- \b Florian \b Molinier did some early work on the coupled solution
-  of the axisymmetric free-surface Navier-Stokes equations and 
-  the axisymmetric Foeppl von Karman equations.
-- \b Jonathan \b Deakin worked on a glaciology-related melt problem
-  (and has since returned as PhD student to work on the numerical
-  solution of acoustic fluid-structure interaction problems).
-- \b Draga \b Pihler-Puzovic worked on the the coupled solution of the
-   Foeppl von Karman equations and the Reynolds lubrication equation
-   to model wrinkling/fingering in elastic-walled Hele-Shaw cells.
-- \b Joris \b Ferrand worked on the solution of the Foeppl von Karman
-  equations.
-- \b Anton \b Martinsson implemented the machinery required to 
-  output \c oomph-lib data in paraview format, bypassing the need
-  for running the time-consuming tecplot to paraview conversion scripts.
-  He also implemented the displacement-based axisymmetric Foeppl von
-  Karman equations. 
-- \b Matthew \b Walker implemented PML methods for the azimuthally
-  Fourier-decomposed Helmholtz equations.
-- \b Joris \b Ferrand implemented the axisymmetric Foeppl von Karman
-  equations.
-- \b Philippe \b Mesnard worked on acoustic FSI problems and introduced many
-  improvements to \c oomph-lib's machinery for handling such problems.
-- \b Florian \b Molinier worked on the coupling of the free surface
-  Navier-Stokes equations and the axisymmetric Foeppl von Karman 
-  equations (in the context of simulating flows in elastic-walled
-  Hele-Shaw problems).
-- \b David \b Nigro developed and implemented much of the machinery
-  for acoustic fluid-structure interaction problems.
-- \b Matthew \b Russell implemented the Foeppl-von-Karman equations;
-  he now continues to work on poro-elastic FSI problems.
-- \b Raphael \b Perillat worked on the simulation of flows in
-  elastic-walled Hele-Shaw cells.
-- \b Robert \b Harter works on acoustic fluid-structure interaction
-  problems.
-- \b Radu \b Cimpeanu implemented the PML boundary conditions for the
-  Helmholtz equations and the time-harmonic equations of linear
-  elasticity.
-- \b Julio \b Perez \b Sansalvador works on parallel unstructured
-  mesh adaptation.
-- \b David \b Shepherd works on the numerical solution of
-  micromagnetic problems.
-- \b Ray \b White is working on block preconditioners.
-- \b Nico \b Bergemann made (and continues to make) significant
-  contributions to the adaptive unstructured mesh (re-)generation
-  capabilities for free-surface problems.
-- \b Ben \b Saxby works on hp adaptivity and XFEM.
-- \b Michael \b Crabb worked on Discontinuous Galerkin (DG) methods.
-- \b Peter \b Ashcroft worked on eigenvalue problems. 
-- \b Jeremy \b van \b Chu contributed to the completion the tecplot to paraview
-  conversion scripts and signficiantly extended the 
-  <a href="../paraview/html/index.html">the paraview tutorial.</a>
-  He also developed the \c LineVisualiser machinery (which allows
-  the extraction of computational data along lines in a
-  higher-dimensional domain) and wrote the domain-based tube mesh.
-- \b Guilherme \b Rocha developed elements to simulate Hele-Shaw 
-  problems (by solving the free-surface Reynolds lubrication
-  equations).
-- \b Ahmed \b Wassfi extended \b Tarak \b Kharrat's work on the Helmholtz
-  equation and implemented the Fourier-decomposed version of this
-  equation.
-- \b Alexandre \b Raczynski keeps providing bug fixes and contributed 
-   to the completion the tecplot to paraview conversion scripts
-   discussed in the <a href="../paraview/html/index.html">the 
-   paraview tutorial.</a>
-- \b David \b Rutter wrote the 
-   <a href="../linear_elasticity/periodic_load/html/index.html">
-   tutorial for the linear elasticity equations.</a>
-- \b Tarak \b Kharrat implemented the Helmholtz elements and the
-  methodology to apply the Sommerfeld radiation condition.
-- \b Luigi \b Collucci continued Benjamin Metz's work and developed the
-  interface from \c oomph-lib to \c Triangle. 
-- \b Francisco \b Jose \b Blanco \b Rodriguez worked on free-surface
-   problems and wrote the driver code that simulates the Rayleigh 
-   instability of an axisymmetric jet. 
-- \b Benjamin \b Metz worked on adaptivity and solution transfer for 
-  unstructured meshes. 
-- \b Amine \b Massit worked on outflow boundary conditions for
-  Navier-Stokes problems and physiological FSI problems based
-  on meshes generated by <a href="http://www.vmtk.org/">vmtk</a>.
-- \b Patrick \b Hurley works on free surface Navier-Stokes problems.
-- <B>Andy Gait</B>  worked on parallelisation, in particular
-  the problem distribution and the subsequent distributed mesh adaptation.
-- <B>Angelo 
-  Simone</B> wrote python scripts that convert \c oomph-lib's
-  output to the vtu format that can be read by 
-  <a href="http://www.paraview.org">paraview</a>;
-  see <a href="../paraview/html/index.html">the paraview tutorial</a>
-  for details. 
-- \b Sophie \b Kershaw worked on the Navier-Stokes equations
-  in spherical coordinates.
-- \b Floraine \b Cordier developed the driver codes and tutorials for the 
-  <a href="../interaction/fsi_channel_with_leaflet/html/index.html"> 
-  flow past the elastic leaflet</a> and
-  <a href="../interaction/turek_flag/html/index.html"> 
-  Turek & Hron's FSI benchmark</a>. In the process she significantly
-  extended \c oomph-lib's FSI capabilities.
-- <B> Stefan Kollmannsberger</B> and his students Iason Papaioannou and  
-  Orkun Oezkan Doenmez developed early versions of the code
-  for <a href="../interaction/turek_flag/html/index.html"> 
-  Turek & Hron's FSI benchmark</a> and its 
-  <a href="../navier_stokes/turek_flag_non_fsi/html/index.html">
-   non-FSI counterpart.</a>
-- <A HREF="http://www.ladhyx.polytechnique.fr/people/ody/"><B>Cedric
-  Ody</B></A> developed the \c YoungLaplace elements and their refineable
-  counterparts to study capillary statics problems.
-- \b Alice \b Gaertig developed interfaces to the third-party mesh
-  generators <A HREF="http://www.cs.cmu.edu/~quake/triangle.html"> 
-  \c Triangle, </A>  <A HREF="http://tetgen.berlios.de/"> 
-  \c TetGen, </A>, <A HREF="http://members.shaw.ca/bjoe/">\c
-  Geompack++, </A> and <A HREF="http://www.dimap.ufrn.br/~mfsiqueira/Marcelo_Siqueiras_Web_Spot/cqmesh.html">
-  \c CQMesh. </A>
-- \b Claire \b Blancon developed the demo drivers for the collapsible   
-  channel problem (with and without fluid-structure interaction). 
-- \b Nick \b Chapman worked on the implementation of triangular
-  and tet-elements. 
-- \b Chris \b Gold implemented explicit timestepping
-  schemes.
-- \b Phil \b Haines worked on bifurcation detection and tracking for
-   the Navier-Stokes equations and developed the formulation of
-   the equations in plane polar coordinates.
-- \b Richard \b Muddle worked on the block preconditioning techniques for
-  the biharmonic (and many other) equations, and parallel solvers. 
-- \b Glyn \b Rees worked on iterative linear solvers and multigrid
-- \b Alberto \b de \b Lozar worked on 3D free-surface Navier-Stokes problems.
-- \b Jonathan \b Boyle developed the initial interfaces to third-party 
-  iterative solvers and is now involved in the further parallelisation of the
-  code and the implementation and application of block-preconditioning 
-  techniques for Navier-Stokes and fluid-structure interaction problems.
-- \b Renaud \b Schleck completed the octree-based mesh refinement procedures
-  and wrote the MPI-based parallel assembly routines and the
-  interfaces to SuperLU_dist. 
-- \b Sharaf \b Al-Sharif provided the initial implementation of nodal
-  spectral elements.
-- \b Daniel \b Meyer used oomph-lib to study a variety of axisymmetric 
-  Navier-Stokes problems, with and without free surfaces, and developed
-  drafts for many of our tutorials.
-- \b Alexandre \b Klimowicz worked on block-preconditioning methods.
-- \b Jean-Michel \b Lenoir implemented the first part of the
-  octree-based 3D mesh refinement procedures.
-- \b Gemma \b Barson provided the initial implementation for the 2D Delaunay 
-  mesh generation procedures.
-
-We're always looking for more help! Get in touch if you're interested
-in joining the team, and check out the 
-<A HREF="../ToDo/html/index.html">ToDo page</A> for capabilities/features 
-that are planned for future releases. 
-
-<HR>
-
-\section contact Contact/Further information
-
-You can contact the developers at
-
-<CENTER>
-<tt>oomph-lib AT maths DOT man DOT ac DOT uk </tt>
-</CENTER>
-
-If you wish to be kept up-to-date about revisions, bug fixes and
-new releases, join our (very low volume) mailing list. 
-
-<HR>
-
-\section ackn Acknowledgements
-
-We wish to acknowledge the direct and indirect support from the
-following people and organisations:
-- The <A HREF="http://www.epsrc.ac.uk">EPSRC</A> (the UK Engineering
-  and Physical Sciences Resarch Council) for their financial
-  support.\n\n
-- <A HREF="http://www.mims.manchester.ac.uk/">MIMS</A>, the 
-  <A HREF="http://www.mims.manchester.ac.uk/">Manchester Institute for
-  Mathematical Sciences</A>  and the 
-  <A HREF="http://www.maths.manchester.ac.uk/">School of
-  Mathematics</A> at <A HREF="http://www.manchester.ac.uk/">The University of
-  Manchester</A> for their financial support. \n\n
-- Dimitry van Heesch for his brilliant 
-  <A HREF="http://www.doxygen.org">doxygen</A> package which we used
-  to produce the documentation. \n\n
-- <A HREF="http://crd.lbl.gov/~xiaoye/">Xiaoye Sherry Li</A> and
-  colleagues for developing the sparse direct solver 
-  <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU</A> -- 
-  \c oomph-lib's default linear solver. \n\n
-- <A HREF="http://www.maths.man.ac.uk/~chris">Chris Paul</A>, Head of
-  Computing at <A HREF="http://www.manchester.ac.uk/">Manchester</A>'s
-  <A HREF="http://www.maths.man.ac.uk/">
-  School of Mathematics</A> for keeping the machines running! \n\n
-- The <A HREF="http://www.cs.man.ac.uk/cnc/">Manchester Centre for
-  Novel Computing</A>, for giving us access to their Silicon Graphics 
-  Origin 2000, for the early development of \c oomph-lib's 
-  MPI routines.\n\n
-- <A HREF="http://www.math.wayne.edu/~yang/">Daoqi Yang</A> for his
-  brilliant book 
-  <A HREF="http://www.springeronline.com/sgw/cda/frontpage/0,11855,4-40007-22-2105335-0,00.html?changeHeader=true"> C++ and Object-Oriented Numeric 
-  Computing for Scientists and Engineers.</A> \n\n
-
-
-
-
+\endhtmlonly
