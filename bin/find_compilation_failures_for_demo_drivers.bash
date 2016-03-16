@@ -11,6 +11,17 @@
 # Where are we?
 current_dir=`pwd`
 
+# Check if we're running mpi self-tests
+mpi_run_command_length=`make do-we-have-mpi`
+echo "mpi_run_command_length: "$mpi_run_command_length
+have_mpi=0
+if [ "$mpi_run_command_length" -ne 0 ]; then
+    have_mpi=1
+    echo "Have mpi compiler..."
+else
+    echo "Don't have mpi compiler..."
+fi
+
 # Find all directories with validate.sh in them:
 validate_sh_list=`find demo_drivers self_test -name validate.sh`
 
@@ -20,9 +31,18 @@ failed_file=`echo $current_dir"/.failed_compilation_list"`
 
 for file in `echo $validate_sh_list`; do
     dir=`dirname $file`
-    cd $dir
-    make check-if-executables-exist | grep 'LIKELY' >> $failed_file
-    cd $current_dir
+    do_it=1
+    if [ $have_mpi -eq 0 ]; then
+        if [[ "$dir" =~ "/mpi/" ]]; then
+            #echo "Dir "$dir" contains mpi but we don't have mpi compiler..."
+            do_it=0
+        fi
+    fi
+    if [ $do_it -eq 1 ]; then
+        cd $dir
+        make check-if-executables-exist | grep 'LIKELY' >> $failed_file
+        cd $current_dir
+    fi
 done
 
 
@@ -41,7 +61,7 @@ if [ $n_failed -eq 0 ]; then
     return_flag=0
 else
     echo " "
-    echo "Check these out!"
+    echo "Error -- check these out!"
     return_flag=1
 fi
 echo " "

@@ -114,3 +114,7 @@ distclean-local:
 #	-(cd private && if test -e Makefile; then ${MAKE} distclean; fi)
 	rm -f old_symbolic_links.txt
 	rm -f config/configure.ac_scripts/private*.dir_list
+
+
+do-we-have-mpi:
+	@echo -e "$(MPI_RUN_COMMAND)" | tr -d '[[:space:]]' | wc -m
