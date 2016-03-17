@@ -116,5 +116,12 @@ distclean-local:
 	rm -f config/configure.ac_scripts/private*.dir_list
 
 
+# Sorry -- this is a total mess! I'm surrounding the actual output (the length
+# in characters of the mpi run command with whitespace stripped out) by
+# START_BLA and END_BLA because when this is called from the analyse
+# script, make is actually called recursively and therefore additional
+# output appears (which I can now strip out). One beer is on offer
+# for whoever wants to do this properly. For now it works... 
 do-we-have-mpi:
-	@echo -e "$(MPI_RUN_COMMAND)" | tr -d '[[:space:]]' | wc -m
+	@echo -e "$(MPI_RUN_COMMAND)" | tr -d '[[:space:]]' | wc -m > .tmp.wc; echo "START_BLA"`cat .tmp.wc`"END_BLA"; rm .tmp.wc
+

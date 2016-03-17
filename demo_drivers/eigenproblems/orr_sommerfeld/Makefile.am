@@ -2,7 +2,9 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
-check_PROGRAMS=orr_sommerfeld
+if HAVE_ARPACK_SOURCES
+	check_PROGRAMS=orr_sommerfeld
+endif
 
 # Sources for executable
 orr_sommerfeld_SOURCES = orr_sommerfeld.cc validate.sh

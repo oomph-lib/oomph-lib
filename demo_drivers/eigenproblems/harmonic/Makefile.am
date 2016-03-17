@@ -2,7 +2,9 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
-check_PROGRAMS=harmonic complex_harmonic
+if HAVE_ARPACK_SOURCES
+	check_PROGRAMS=harmonic complex_harmonic
+endif
 
 # Sources for executable
 harmonic_SOURCES = harmonic.cc validate.sh
