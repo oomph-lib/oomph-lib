@@ -1,14 +1,13 @@
-\mainpage Example problem: The generalised Helmholtz equation and the use of perfectly matched layers
+\mainpage Example problem: The Helmholtz equation with perfectly matched layers
 
 
  
-In this document we discuss the finite-element-based solution of a
-generalised form of the Helmholtz equation, an elliptic PDE that 
-describes time-harmonic wave propagation  problems. Compared to the
+In this document we discuss the finite-element-based solution of the Helmholtz 
+equation with the Summerfeld boundary condition, an elliptic PDE that describes 
+time-harmonic wave propagation problems. Compared to the 
 "standard form" of the Helmholtz equation, discussed in
 <a href="../../../helmholtz/scattering/html/index.html">
 another tutorial,</a> the formulation used here allows the
-for the presence of damping and also allows the
 imposition of the Sommerfeld radiation condition by means of 
 so-called  "perfectly matched layers" (PMLs) as an alternative 
 to classical absorbing/approximate boundary conditions or DtN maps.
@@ -17,24 +16,22 @@ We start by  reviewing the relevant theory and then
 present the solution of a simple model problem -- the outward propagation of
 waves from the surface of a cylinder.
 
-
-<CENTER>
-<TABLE BORDER=1, WIDTH=500px>
-<TR>
-<TD bgcolor="cornsilk">
-<CENTER>
-<B>Acknowledgement:</B>
+<TABLE border=0>
+<TR >
+<TD >
+<CENTER class="panel panel-success">
+<div class="panel-heading">
+<B>Acknowledgement</B></div><div class="panel-body">
 This tutorial and the associated driver codes were developed jointly
 with
 <a href="http://imperial.academia.edu/RaduCimpeanu">
 Radu Cimpeanu</a>
  (Imperial College London)
+ </div>
 </CENTER>
 </TD>
 </TR>
 </TABLE>
-</CENTER>
-
 <HR>
 <HR> 
 
@@ -153,10 +150,10 @@ achieved by introducing the complex coordinate mapping
 within the perfectly matched layers. This makes the problem
 anisotropic and in 2D we have
  \f[
- \nabla(c^2 \nabla) u = 
-\frac{1}{\gamma_x}\frac{\partial}{\partial x} \left( c^2
+ \nabla ^ 2 u = 
+\frac{1}{\gamma_x}\frac{\partial}{\partial x} \left( 
 \frac{1}{\gamma_x}\frac{\partial u}{\partial x} \right) + 
-\frac{1}{\gamma_y}\frac{\partial}{\partial y}\left( c^2 
+\frac{1}{\gamma_y}\frac{\partial}{\partial y}\left( 
 \frac{1}{\gamma_y}\frac{\partial u}{\partial y}\right)
  \ \ \ \ \ \ \ \ \ \ \ \ @E[pml2]@
 \f]

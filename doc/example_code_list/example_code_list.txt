@@ -61,9 +61,9 @@ directory).
     - <A HREF="#helmholtz">The Helmholtz equation</A>
     - <A HREF="#fourier_decomposed_helmholtz"> The azimuthally 
                Fourier-decomposed 3D Helmholtz equation </A>
-    - <A HREF="#gen_helmholtz">The generalised Helmholtz equation and
+    - <A HREF="#pml_helmholtz">The Helmholtz equation and
                perfectly matched layers (PMLs)</A>
-    - <A HREF="#gen_fourier_decomposed_helmholtz">The generalised azimuthally 
+    - <A HREF="#pml_fourier_decomposed_helmholtz">The azimuthally 
                Fourier-decomposed 3D Helmholtz equation and
                perfectly matched layers (PMLs)</A>
     - <A HREF="#young_laplace">The Young-Laplace equations</A>
@@ -122,24 +122,36 @@ latex; please consult the html-based documentation.]
 \end{center}
 \endlatexonly
 
-<HR>
+<A NAME="problems"></A>
 
-<A NAME="problems"><B>Example codes for specific problem/equations</B></A>
 
-<CENTER>
+  \htmlonly
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">How to use example code list</h3>
+  </div>
+  <div class="panel-body" >
+\endhtmlonly
 <TABLE class="example-table">
 ######################################################################
 <TR>
 <TD>
-<B>Example code</B>
+<A HREF="#"><B>Problem solved by example code</B></A>
+
+Short description of problem.
 </TD>
 <TD>
-<B>\c oomph-lib features/conventions illustrated 
-by the example code</B>
+- \c oomph-lib features/conventions illustrated 
+by the example code.
 </TD>
-
 </TR>
 #####################################################################
+</TABLE>
+\htmlonly
+</div>
+</div>
+\endhtmlonly
+<TABLE class="example-table">
 ######################################################################
 <TR>
 <TD COLSPAN=2 class="header-cell">
@@ -707,26 +719,22 @@ time using spatial adaptivity and an unstructured mesh
 ######################################################################
 <TR>
 <TD COLSPAN=2 class="header-cell">
-<A NAME="gen_helmholtz"><H2 class="header">The generalised Helmholtz equation and
-perfectly matched layers</H2></A>
+<A NAME="pml_helmholtz"><H2 class="header">The Helmholtz equation and perfectly 
+matched layers</H2></A>
 </TD>
 </TR>
 ######################################################################
 <TR>
 <TD>
 <A HREF="../../pml_helmholtz/scattering/html/index.html">
-<B>The generalised Helmholtz equation and perfectly matched layers (PMLs).
+<B>The Helmholtz equation and perfectly matched layers (PMLs).
 </B>
 </A>
-
-We consider a generalisation of the Helmholtz equation to allow
-for spatially varying wavenumbers and damping, and
-demonstrate the imposition of the Sommerfeld radiation condition
-by perfectly matched layers (PMLs).
+We demonstrate the imposition of the Sommerfeld radiation condition
+by perfectly matched layers (PMLs) using the example of a radiating cylinder.
 </TD>
 <TD>
-- The generalised Helmholtz equation with spatially variable
-  wavenumber and damping.
+- The Helmholtz equation.
 - The Sommerfeld radiation condition and its approximation by
   perfectly matched layers (PMLs).
 </TD>
@@ -736,8 +744,8 @@ by perfectly matched layers (PMLs).
 ######################################################################
 <TR>
 <TD COLSPAN=2 class="header-cell">
-<A NAME="gen_fourier_decomposed_helmholtz"><CENTER>
-<B>The generalised azimuthally 
+<A NAME="pml_fourier_decomposed_helmholtz">
+<H2 class="header">The azimuthally 
 Fourier-decomposed 3D Helmholtz equation and
 perfectly matched layers (PMLs)</H2></A>
 </TD>
@@ -746,21 +754,19 @@ perfectly matched layers (PMLs)</H2></A>
 <TR>
 <TD>
 <A HREF="../../pml_fourier_decomposed_helmholtz/oscillating_sphere/html/index.html">
-<B>The generalised  azimuthally 
+<B>The azimuthally 
 Fourier-decomposed 3D Helmholtz equation and perfectly matched layers (PMLs).
 </B>
 </A>
 
-We consider a generalisation of the  azimuthally 
-Fourier-decomposed 3D Helmholtz equation to allow
-for spatially varying wavenumbers and damping, and
+We consider the azimuthally 
+Fourier-decomposed 3D Helmholtz equation and
 demonstrate the imposition of the Sommerfeld radiation condition
 by perfectly matched layers (PMLs).
 </TD>
 <TD>
-- The generalised  azimuthally 
-  Fourier-decomposed 3D Helmholtz equation with spatially variable
-  wavenumber and damping.
+- The azimuthally 
+  Fourier-decomposed 3D Helmholtz equation.
 - The Sommerfeld radiation condition and its approximation by
   perfectly matched layers (PMLs).
 </TD>
@@ -2959,25 +2965,13 @@ We demonstrate how to write \c QComplexHarmonicElements that determine the
 
 ######################################################################
 </TABLE>  
-</CENTER>  
-<HR>
-<HR>
 ######################################################################
 
-<A NAME="meshes"><B>Mesh generation</B></A>
+<A NAME="meshes"><H1 class="section-header">Mesh generation</H1></A>
 
-<CENTER>
+
 <TABLE class="example-table">
-######################################################################
-<TR>
-<TD>
-<B>Mesh type</B>
-</TD>
-<TD>
-<B>\c oomph-lib features/conventions illustrated by the example code </B>
-</TD>
 
-</TR>
 <TR>
 <TD COLSPAN=2 class="header-cell">
 <A NAME="available_meshes"><H2 class="header">Structured meshes</H2></A>
@@ -3095,12 +3089,12 @@ an \c oomph-lib driver code.
 ######################################################################
 <TR>
 <TD>
-<H2 class="header">
+<B>
 <A NAME="xfig_mesh">
 <A HREF="../../meshes/mesh_from_xfig/html/index.html">
 Mesh generation with <code>xfig</code>
 </a>
-</H2>
+</B>
 
 \c oomph-lib's one-and-only GUI: Generating unstructured
 triangular meshes using <a href="http://www.xfig.org">xfig</a>
@@ -3116,38 +3110,15 @@ and <a href="http://www.cs.cmu.edu/~quake/triangle.html">Triangle.</a>
 ######################################################################
 ######################################################################
 </TABLE>
-</CENTER>  
+  
 
 
 #///////////////////////////////////////////////////////////////////////
 
-<hr>
-<hr>
+<A NAME="solvers"><H1 class="section-header">Linear solvers and preconditioners</H1></A>
 
 
-
-<A NAME="solvers"><B>Linear solvers and preconditioners</B></A>
-
-<CENTER>
 <TABLE class="example-table">
-#####################################################################
-######################################################################
-<TR>
-<TD COLSPAN=2 class="header-cell">
-<H2 class="header">Linear solvers and preconditioners</H2>
-</TD>
-</TR>
-######################################################################
-<TR>
-<TD>
-<B>Example code</B>
-</TD>
-<TD>
-<B>\c oomph-lib features/conventions illustrated 
-by the example code</B>
-</TD>
-
-</TR>
 #####################################################################
 ######################################################################
 <TR>
@@ -3330,7 +3301,7 @@ by pseudo-elasticity.
 </TR>
 ######################################################################
 </TABLE>
-</CENTER>  
+  
 
 
 
@@ -3338,39 +3309,21 @@ by pseudo-elasticity.
 
 #///////////////////////////////////////////////////////////////////////
 
-<hr>
-<hr>
+<A NAME="visualisation"><H1 class="section-header">Visualisation of the results</H1></A>
 
-
-
-<A NAME="visualisation"><B>Visualisation of the results</B></A>
-
-<CENTER>
 <TABLE class="example-table">
 #####################################################################
-######################################################################
 <TR>
 <TD COLSPAN=2 class="header-cell">
-<H2 class="header">Visualisation of the results</H2>
+<A NAME="paraview"><H2 class="header">Paraview</H2></A> 
 </TD>
 </TR>
 ######################################################################
 <TR>
 <TD>
-<B>Example code</B>
-</TD>
-<TD>
-<B>\c oomph-lib features/conventions illustrated 
-by the example code</B>
-</TD>
 
-</TR>
-######################################################################
-<TR>
-<TD>
-<A NAME="paraview">
 <A HREF="../../paraview/html/index.html"><B>
-Displaying results with paraview</B></A></a> 
+Displaying results with paraview</B></A>
 
 We demonstrate how to use 
 Angelo Simone's conversion scripts that allow the \c oomph-lib
@@ -3387,24 +3340,19 @@ results to be displayed by
 ######################################################################
 ######################################################################
 </TABLE>
-</CENTER>  
+  
 
 
 #///////////////////////////////////////////////////////////////////////
 
-<hr>
-<hr>
-
-
-
-<A NAME="parallel"><B>Parallel driver codes</B></A>
+<A NAME="parallel"><H1 class="section-header">Parallel driver codes</H1></A>
 
 Please consult the 
 <A HREF="../../mpi/general_mpi/html/index.html">
 <b>general tutorial on <code>oomph-lib</code>'s parallel processing
 capabilities.</b></a>
 
-<CENTER>
+
 <TABLE class="example-table">
 ######################################################################
 <TR>
@@ -3544,7 +3492,7 @@ solid and fluid meshes that interact along interface boundaries.
 ######################################################################
 ######################################################################
 </TABLE>
-</CENTER>  
+  
 
 
 

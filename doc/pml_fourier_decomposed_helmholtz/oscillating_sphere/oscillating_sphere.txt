@@ -1,14 +1,13 @@
 \mainpage Example problem: The azimuthally Fourier-decomposed 3D Helmholtz equation and the use of perfectly matched layers
 
 In this document we discuss the finite-element-based solution of the
-generalised form of the Helmholtz equation in cylindrical polar coordinates, using
+the Helmholtz equation in cylindrical polar coordinates, using
 a Fourier-decomposition of the solution in the azimuthal
-direction.
+direction and with perfectly matched layers.
 
 Compared to the Fourier-decomposed Helmholtz equation discussed in
 <a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html">
 another tutorial, </a> the formulation used here allows the
-for the presence of damping and also allows the
 imposition of the Sommerfeld radiation condition by means of 
 so-called  "perfectly matched layers" (PMLs) as an alternative 
 to classical absorbing/approximate boundary conditions or DtN maps.
@@ -17,26 +16,23 @@ We start by reviewing the relevant theory and then present the
 solution of a simple model problem - the outward propagation of waves
 from the surface of a unit sphere.
 
-<CENTER>
-<TABLE BORDER=1, WIDTH=500px>
-<TR>
-<TD bgcolor="cornsilk">
-<CENTER>
-<B>Acknowledgement:</B>
 
-This tutorial and the associated driver codes were developed jointly
+<TABLE border=0>
+<TR>
+<TD>
+<CENTER class="panel panel-success">
+<div class="panel-heading"><B>Acknowledgements</B></div><div class="panel-body">This tutorial and the associated driver codes were developed jointly
 with Matthew Walker (The University of Manchester), with financial
 support from Thales Underwater Ltd.
-</CENTER>
+</div></CENTER>
 
 </TD>
 </TR>
 </TABLE>
-</CENTER>
 
 <HR>
 
-\section theory Theory: The generalised azimuthally Fourier-decomposed Helmholtz equation
+\section theory Theory: The azimuthally Fourier-decomposed Helmholtz equation
 
 The Helmholtz equation governs time-harmonic solutions of problems
 governed by the linear wave equation
@@ -108,8 +104,7 @@ while specifying the Fourier wavenumber \f$ N \f$ as a parameter.
 The discretisation of the Fourier-decomposed Helmholtz equation itself 
 only requires a trivial modification of its 
 <a href="../../../helmholtz/scattering/html/index.html">cartesian
-counterpart</a>, as well as rewriting the wavenumber \f$ k \f$ in
-terms of \f$ \omega, c \f$ and \f$ \alpha \f$. Since most practical 
+counterpart</a>. Since most practical 
 applications of the Helmholtz equation involve complex-valued
 solutions, we provide separate storage for the real and imaginary
 parts of the solution -- each \c Node therefore stores two unknowns 
@@ -682,12 +677,6 @@ A second parameter
 that can be adjusted is the geometrical thickness of the perfectly matched
 layers. Explore the effects of altering the thickness while
 maintaining the number of elements within the PML layer.
-
-\subsubsection inhomogeneous Inhomogeneous material properties
-Our generalised form the Helmholtz equations allows for 
-spatially varying material parameters (wavespeed and damping). 
-Explore this and examine how the perfectly matched layers behave
-in such problems.
 
 
 \subsubsection large_k Large wavenumbers
