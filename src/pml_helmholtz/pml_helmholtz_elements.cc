@@ -882,10 +882,6 @@ template class PmlHelmholtzEquations<3>;
 template<unsigned DIM>
 BermudezPMLMapping PmlHelmholtzEquations<DIM>::Default_pml_mapping;
 
-//template class BermudezPMLMapping PmlHelmholtzEquations<1>::Default_pml_mapping; //faire
-//template class BermudezPMLMapping PmlHelmholtzEquations<2>::Default_pml_mapping;
-// template class BermudezPMLMapping PmlHelmholtzEquations<3>::Default_pml_mapping;
-
 template class QPmlHelmholtzElement<1,2>;
 template class QPmlHelmholtzElement<1,3>;
 template class QPmlHelmholtzElement<1,4>;

@@ -62,10 +62,6 @@ namespace GlobalParameters
 
  /// Square of the wavenumber (also known as k^2)
  double K_squared = Wavenumber * Wavenumber;
- 
- /// Square of the wavenumber (also known as k^2) effacer
- // double Alpha = 100.0; 
- double Alpha = 0.0;
 
 } // end of namespace
 
@@ -333,9 +329,6 @@ PMLProblem<ELEMENT>::PMLProblem()
 
    //Set the k_squared double pointer
    el_pt->k_squared_pt() = &GlobalParameters::K_squared;
-   
-   //Set the alpha double pointer effacer
-   el_pt->alpha_pt() = &GlobalParameters::Alpha;
   }
 
  // Apply boundary conditions

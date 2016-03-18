@@ -19,14 +19,16 @@ form{margin: 1em 2em 2em 2em;}
 label{display:block;margin-top:1em; font-weight:bold}
 
 
-
+.navbar-search{
+margin-right:0px;
+}
 
 /*Random Doxygen overwrites*/
 
 div.headertitle{
 padding:0px;
 font-weight:200;
-font-size:42px;
+font-size:36px;
 color:#333;
 margin: 0px;
 }
@@ -175,26 +177,15 @@ cursor:pointer;
 
 /* Code listings */
 
-pre.fragment {
-        border: 1px solid #C4CFE5;
-        background-color: #FBFCFD;
-        padding: 4px 6px;
-        margin: 4px 8px 4px 2px;
-        overflow: auto;
-        word-wrap: break-word;
-        font-size:  9pt;
-        line-height: 125%;
-        font-size: 105%;
-}
-
-div.fragment {
+div.fragment,pre.fragment{
+	font-family:Menlo,Monaco,Consolas,"Courier New",monospace;
         padding: 4px 6px;
         margin: 4px 8px 4px 2px;
         line-height:1.4;
 	border: 1px solid #C4CFE5;
 	font-size: 90%;
 	color: #444 ; /*#C7254E;*/
-	/*background-color: #F9F2F4;*/
+	background-color: #F9F2F4;
 	border-radius: 4px;
 
 }
@@ -568,3 +559,20 @@ blockquote {
 	
 }
 
+.example-table td{
+    padding: 20px 10px;
+    vertical-align: top;
+    width: 50%;
+}
+
+.example-table .header-cell{
+	padding:0px;
+	width:auto;
+	border-bottom:1px solid grey;
+}
+
+.doxtable td{
+	border-collapse: collapse;
+	padding:5px;
+	border:1px solid darkgrey;
+}

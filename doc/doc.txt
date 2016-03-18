@@ -64,8 +64,26 @@
     </article>
     <article class="tab-pane" id="get">
       
-      <p>The latest version of the library is Version 1.0; svn revision $LastChangedRevision$ which was committed to the svn repository on: $LastChangedDate$.</p>
-      
+      The latest version of the library is 1.0, 
+      <script>
+      // This odd/hacky construction extracts the svn information automatically
+       var revString = "$LastChangedRevision$";
+       var dateString = "$LastChangedDate$";
+       
+       //Revision number should never be more than 5 digits
+       revString = revString.substr(revString.indexOf(":")+1,5).trim();
+       
+       // The string should always be the same length
+       var timeString = dateString.substr(28,8);
+       
+       dateString = dateString.substr(dateString.indexOf("(")+1, dateString.indexOf(")") - dateString.indexOf("(")-1);
+       
+       document.write("revision number ");
+       document.write(revString);
+       document.write(" and was committed on ");
+       document.write(dateString);
+       document.write(".");
+      </script>
       
     <h3>Downloads</h3>
       <p>We provide <a href="../the_distribution/html/index.html">gzipped tar files</a> of the full and reduced library (without documentation and demo drivers as they can be found online). We also provide read-only access to the <a href="../subversion/html/index.html">subversion repository</a> of the oomph-lib project. For more information see the <a href="../doc/the_distribution/html/index.html">installation guide</a>. Note that the <A HREF="../the_distribution/html/index.html">gzipped tar files

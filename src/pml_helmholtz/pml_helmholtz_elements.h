@@ -170,10 +170,10 @@ public:
   return *K_squared_pt;
  }
  
- /// Alpha, damping per wavelength factor
+ /// Alpha, wavenumber complex shift
 const double &alpha() const {return *Alpha_pt;}
 
-/// Pointer to Alpha, damping per wavelength factor
+/// Pointer to Alpha, wavenumber complex shift
 double* &alpha_pt() {return Alpha_pt;}
 
 
@@ -421,13 +421,6 @@ OOMPH_CURRENT_FUNCTION,
 
      values_to_pin[0]=0;
      values_to_pin[1]=1;
-     /*
-    values_to_pin.resize(2*DIM);
-    for (unsigned j=0;j<2*DIM;j++)
-    // faire, shouldn't this be to 2 as we have real and imag
-     {
-      values_to_pin[j]=j;
-    }*/
    }
 
 
@@ -643,7 +636,7 @@ protected:
   Vector<double> &residuals, DenseMatrix<double> &jacobian,
   const unsigned& flag);
 
-  /// Pointer to global damping per wavelength number
+  /// Pointer to wavenumber complex shift
 double *Alpha_pt;
 
 private:
@@ -654,6 +647,7 @@ private:
  /// Pointer to wave number (must be set!)
  double* K_squared_pt;
 
+ /// Pointer to class which holds the pml mapping function, also known as gamma
  PMLMapping* Pml_mapping_pt;
  
  /// Static default value for the physical constants (initialised to zero)

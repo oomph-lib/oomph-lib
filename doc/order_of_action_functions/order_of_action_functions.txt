@@ -134,11 +134,13 @@ Problem::actions_before_newton_step();
 <TD COLSPAN=3>
 <CENTER>
 <B>Only during the first Newton step:</B>
-<TABLE>
-#========================================================
+</CENTER>
+</TR>
+#########################################################
 <TR>
 #--------------------------------------------------------
-<TD>
+<TD style="padding-left: 30px;
+border-left: 3px solid grey;">
 <B>Step 4a:</B>
 Perform actions before Newton convergence check
 </TD>
@@ -159,7 +161,8 @@ Problem::actions_before_newton_convergence_check();
 #========================================================
 <TR>
 #--------------------------------------------------------
-<TD>
+<TD style="padding-left: 30px;
+border-left: 3px solid grey;">
 <B>Step 4b:</B>
 Compute residual vector
 </TD>
@@ -182,7 +185,8 @@ Problem::get_residuals(residuals);
 #========================================================
 <TR>
 #--------------------------------------------------------
-<TD>
+<TD style="padding-left: 30px;
+border-left: 3px solid grey;">
 <B>Step 4c:</B>
 Convergence check. 
 If converged go to <B>Step 13</B>
@@ -194,7 +198,6 @@ If converged go to <B>Step 13</B>
 converged.}
 \f]
 </TD>
-#--------------------------------------------------------
 <TD>
 \code
 
@@ -212,10 +215,8 @@ if (max_res<Problem::Newton_solver_tolerance)
 </TD>
 #--------------------------------------------------------
 </TR>
-#========================================================
-</TABLE>
-</CENTER>
 #########################################################
+<TR><TD colspan="3" style="height:31px;"></TD></TR>
 <TR>
 #--------------------------------------------------------
 <TD>

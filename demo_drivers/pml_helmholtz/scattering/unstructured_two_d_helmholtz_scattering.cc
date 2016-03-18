@@ -200,13 +200,6 @@ namespace GlobalParameters
     flux+=pow(I,i)*(Wavenumber)*pow(exp(-I*theta),i)*jnp[i];
    }
 
-  // Now multiply by c^2  -- hierher this needs to be discussed/documented!
-  // because we currently assume that the flux corresponds to c^2 du/dn.
-  // (this way the implementation of the face elements is completely
-  // identical to those in the real Helmholtz equations).
-  // flux*=C*C; effacer, faire: is this no longer needed? we basically now
-  // assume c=1
-
  }// end of prescribed_incoming_flux
 
  class TestPMLMapping : public PMLMapping
