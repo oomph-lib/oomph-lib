@@ -81,5 +81,5 @@ distclean-local:
 #-------------------
 # Include path for library headers -- need to refer to include files
 # in src as they will not have been installed yet! 
-INCLUDES = -I$(top_builddir)/src/generic -I$(top_builddir)/private/user_src/num_rec
+AM_CPPFLAGS = -I$(top_builddir)/src/generic -I$(top_builddir)/private/user_src/num_rec
 

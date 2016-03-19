@@ -48,7 +48,8 @@ non_mesh_headers =  \
 collapsible_channel_domain.h  fish_domain.h channel_with_leaflet_domain.h \
 quarter_tube_domain.h eighth_sphere_domain.h quarter_circle_sector_domain.h \
 cylinder_with_flag_domain.h topologically_rectangular_domain.h \
-tube_domain.h full_circle_domain.h quarter_pipe_domain.h annular_domain.h
+tube_domain.h full_circle_domain.h quarter_pipe_domain.h annular_domain.h \
+rectangle_with_hole_domain.h
 
 # Define the non-mesh sources
 non_mesh_sources =  \
