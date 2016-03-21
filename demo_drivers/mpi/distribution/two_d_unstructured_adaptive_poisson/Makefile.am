@@ -49,7 +49,7 @@ two_d_parallel_unstructured_adaptive_poisson_LDADD = \
 # the include directory which we specify with -I
 # Automake will replace the variable @includedir@ with the actual
 # include directory.
-AM_CPPFLAGS = -I@includedir@
+AM_CPPFLAGS += -I@includedir@
 
 EXTRA_DIST += validata/TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP2_SQUARE/input_distribution_0.dat\
 validata/TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP2_SQUARE/input_distribution_1.dat\
