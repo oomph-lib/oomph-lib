@@ -64,7 +64,7 @@ namespace oomph
     PMLMapping(){};
 
    /// \short Pure virtual to return PML mapping gamma, where gamma is the
-   /// $d\tilde x / d x$ as  function of $\nu$ where $\nu = x - h$ where h is
+   /// \f$d\tilde x / d x\f$ as  function of \f$\nu\f$ where \f$\nu = x - h\f$ where h is
    /// the vector from the origin to the start of the PML
    virtual std::complex<double> gamma(const double& nu_i,
      const double& pml_width_i,

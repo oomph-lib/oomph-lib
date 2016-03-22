@@ -215,7 +215,7 @@ namespace oomph
    }
 
 
-   /// \Short The index at which the real and imag part of the
+   /// \short The index at which the real and imag part of the
    /// unknown is stored at the nodes
    std::complex<unsigned> U_index_pml_fourier_decomposed_helmholtz;
 
