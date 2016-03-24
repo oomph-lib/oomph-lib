@@ -38,7 +38,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
  ../../../../bin/fpdiff.py ../validata/unstructured_two_d_circle.dat.gz   \
-  unstructured_two_d_circle.dat  >> validation.log
+  unstructured_two_d_circle.dat  4.0 1.0e-14 >> validation.log
 fi
 
 
