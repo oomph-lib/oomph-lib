@@ -1,4 +1,5 @@
 SUBDIRS = \
+people \
 index \
 picture_show \
 optimisation \

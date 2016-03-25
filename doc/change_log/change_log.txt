@@ -11,8 +11,26 @@ all changes from the intial release of the library (svn revision
 details on how to access this repository, which contains a detailed
 log of subsequent changes.
 
-You may also want to consult the entries in our bugzilla-based
-bug-and-feature-tracking system, accessible online at
+
+As of 2016 (i.e. > the 1.0-* release) we include the svn revision number
+as part of the release identifier since this makes it easier for us
+to publish incremental updates to the library (and to do so more
+frequently than we used to!). Whenever such a
+new release is made available we automatically update the
+snapshot of the corresponding svn log which contains the commit messages of 
+all changes made since "day one":
+
+
+<center>
+<a href="../../svn_log.txt">
+svn log [Note that this link will not work from a local installation 
+of oomph-lib.]</a>
+</center>
+
+
+You may also want to consult the entries in our (sadly rather
+under-used) bugzilla-based bug-and-feature-tracking system, 
+accessible online at
 
 <CENTER> 
 <a href="http://oomph-lib.maths.man.ac.uk/bugzilla">
@@ -22,11 +40,11 @@ http://oomph-lib.maths.man.ac.uk/bugzilla</a>
 
 for known bugs and their resolution.
 
-
-
 The remainder of this document covers the following issues:
 
 - \ref interface_changes
+- \ref zero_point_nine_to_one_point_zero 
+  - \ref new_functionality_one_point_zero
 - \ref zero_point_eight_five_to_zero_point_nine
   - \ref new_functionality_zero_point_nine
   - \ref major_interface_changes_zero_point_nine 
@@ -139,12 +157,50 @@ problems after upgrading to a new version.
 
 
 
-
-
-
-
 <HR>
 
+
+\subsection zero_point_nine_to_one_point_zero Changes between version 0.9 and 1.0
+
+\subsubsection new_functionality_one_point_zero Major new functionality
+- Provided the capability to solve the Helmholtz equation (with
+  various ways of implementing the
+  Sommerfeld radiation condition), the time-harmonic equations of linear
+  elasticity, and the interaction between these two systems of
+  equations in acoustic fluid structure
+  interaction problems. All equations are implemented in cartesian and
+  polar coordinates (in the latter case, using an azimuthal Fourier 
+  decomposition for the solution).
+  \n\n
+- Implemented the linearised Navier-Stokes equations (with the option to study their
+  solutions as perturbations relative to a base state that is itself
+  governed by the full Navier-Stokes equations).
+  \n\n
+- Finished what is hopefully the final rewrite of the (parallel) block
+  preconditioning framework and its extensive tutorial.
+  \n\n
+- Provided elements for the solution of the Foeppl-von-Karman
+  equations in various formulations (using either an Airy-stress 
+  function or the in-plane displacements) and in various coordinate
+  systems.
+  \n\n
+- Provided elements for Darcy porous media flow and Biot-type
+  poro-elasticity.
+  \n\n
+- Implemented the ability adapt unstructured meshes in 2D
+  (in serial and in parallel) and (in a parallel setting) to 
+  distribute such meshes over multiple processors.
+  \n\n
+- Provided elements for the solution of elements for the solution
+  of the Navier-Stokes equations with generalised Newtonian
+  connstitutive equations (i.e. non-Newtonian behaviour in which
+  the viscosity depends on the invariants of the rate-of-strain 
+  tensor).
+- Provided machinery to output paraview (vtu and vtp) files directly
+  (implemented for selected elements; broken virtual functions
+  in base classes provide instructions what to do for others).
+  \n\n
+.   
 
 \subsection zero_point_eight_five_to_zero_point_nine Changes between version 0.85 and 0.9
 

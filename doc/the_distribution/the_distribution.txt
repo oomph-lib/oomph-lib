@@ -1,13 +1,48 @@
 \mainpage Download/installation instructions
 
 
-The latest version of the library is 1.0.
+
+<hr>
+START JONATHAN TO FIX THIS
+<hr>
+
+
+      <p>The latest version of the library is 1.0, 
+      <script>
+      // This odd/hacky construction extracts the svn information automatically
+       var revString = "$LastChangedRevision: 1148 $";
+       var dateString = "$LastChangedDate: 2016-03-21 10:13:12 +0000 (Mon, 21 Mar 2016) $";
+       
+       //Revision number should never be more than 5 digits
+       revString = revString.substr(revString.indexOf(":")+1,5).trim();
+       
+       // The string should always be the same length
+       var timeString = dateString.substr(28,8);
+       
+       dateString = dateString.substr(dateString.indexOf("(")+1, dateString.indexOf(")") - dateString.indexOf("(")-1);
+       
+       document.write("revision number ");
+       document.write(revString);
+       document.write(" and was committed on ");
+       document.write(dateString);
+       document.write(".");
+      </script>
+
+<hr>
+END JONATHAN TO FIX THIS
+<hr>
+
+ See the <a href="../../change_log/html/index.html">change log page</a> for an overview of the changes made since the previous release.</p>
+      
+
 
 <HR>
 
 \section instructions The download/install process, step by step
 -# \ref download
--# \ref unpack
+  -# \ref tar_file
+  -# \ref subversion
+  .
 -# \ref install
   -# \ref manual_install
   -# \ref standard_install 
@@ -36,31 +71,35 @@ The latest version of the library is 1.0.
 <HR>
 <HR>
 
-\section download Download the distribution
+\section download Get the distribution
 
-Depending on the amount of diskspace available on your machine
-you can download the full library or various partial distributions
+\subsection tar_file Option 1: Get a tar file
+
+
+You can download a tar file of the latest distribution
 from the <A HREF="../../download/html/index.html">oomph-lib download
-page</A>. Note that you can also get hold of the very latest
-(possibly unstable) developers' version of the library from our 
-<a href="http://www.subversion.tigris.org">subversion</a>-based
-repository. The procedure for checking out from the repository is
-explained in <a href="../../subversion/html/index.html">another 
-tutorial.</a>
+page</A>.
 
-<HR>
-
-\section unpack Unpack the distribution
- 
-Unpack the distribution:
+Once you have downloaded the tar file unpack it:
 
 \code
-gunzip oomph-lib-0.90.tar.gz
-tar xvf oomph-lib-0.90.tar
+tar xvfz oomph-lib-*.tar.gz
 \endcode
 
 The entire distribution will now be contained in the sub-directory
-<code>oomph-lib-0.90</code>.
+<code>oomph-lib-*</code> where the "*" indicates the version/revision 
+number (the same as in the tar file).
+
+\subsection subversion Option 2: Get the distribution from the subversion repository
+
+You can also get hold of the library from our 
+<a href="http://www.subversion.tigris.org">subversion</a>-based
+repository. The procedure for checking out from the repository is
+explained in <a href="../../subversion/html/index.html">another 
+tutorial.</a> When checking out from the repository, you can specify
+where the distribution is placed. By default subversion will place it
+into a directory called <code>trunk</code>.
+
 
 <HR>
 
@@ -72,13 +111,13 @@ Change into the \c oomph-lib directory and run the \c autogen.sh
 build script:
 
 \code
-cd oomph-lib-0.90
+cd oomph-lib-*
 ./autogen.sh
 \endcode
 
 This build script will ask a few questions, e.g. to verify that the default
-build directory (<code> oomph-lib-0.90/build </code>) is appropriate before
-starting the build.
+build directory (<code>build </code>, relative to the oomph-lib home
+directory) is appropriate before starting the build.
 
 By default, \c autogen.\c sh will build the library and the
 demo codes with certain default settings (using the gcc compilers with full
@@ -126,13 +165,15 @@ and the libraries and include files will be installed in \c /usr/local/
 unless you specify a different directory with the \c --prefix argument to
 the \c configure command. Here's an example of a manual installation
  
-- Unpack the distribution
+- Unpack the distribution (you may have to replace the "*" with the 
+  actual revision number)
   \code
-  tar xvfz oomph-lib-0.90.tar.gz
+  tar xvfz oomph-lib-*.tar.gz
   \endcode 
-- Change into the oomph-lib home directory
+- Change into the oomph-lib home directory (again, you may have to
+  replace the "*" with the actual revision information)
   \code 
-  cd oomph-lib-0.90
+  cd oomph-lib-*
   \endcode
 - Store the oomph-lib home directory in shell variable -- in a bash
   shell this is done like this:
