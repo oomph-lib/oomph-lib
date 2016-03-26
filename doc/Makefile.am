@@ -3,14 +3,12 @@ people \
 index \
 picture_show \
 optimisation \
-get_involved \
 contact \
 publications \
 coding_conventions \
 copyright \
 intro \
 FAQ \
-ToDo \
 meshes \
 tar_files \
 download \
