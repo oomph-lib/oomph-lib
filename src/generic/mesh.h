@@ -296,6 +296,7 @@ public:
  /// Virtual function to perform the reset boundary elements info rutines
  virtual void reset_boundary_element_info(
   Vector<unsigned> &ntmp_boundary_elements,
+  Vector<Vector<unsigned> > &ntmp_boundary_elements_in_region,
   Vector<FiniteElement*> &deleted_elements)
   {
    std::ostringstream error_stream;
