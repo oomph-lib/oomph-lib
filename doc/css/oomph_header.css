@@ -66,8 +66,7 @@ div.navpath li{
 .nav-tabs{
 	margin-top:20px;
 	font-size:2em;
-	font-weight:200;
-	
+	font-weight:300;	
 }
 .nav-tabs li a{
 	
@@ -559,7 +558,12 @@ blockquote {
 	
 }
 
-table {
+/* specific fix for the alphebetical class index*/
+table table{
+	width:100%;
+}
+
+.example-table {
 	width:100%;
 	table-layout: fixed;	
 }
@@ -646,3 +650,11 @@ div.qindex a.qindex:hover {
 	line-height:1.1;
 	color:#555;
 }
+
+/* overide bootstrap for gcse elements (google search) as it doesnt expect border-box*/
+#___gcse_0 *{
+-webkit-box-sizing: content-box;
+-moz-box-sizing: content-box;
+box-sizing: content-box;
+}
+

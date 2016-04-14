@@ -2,6 +2,19 @@
 
 \htmlonly
 
+
+<div class="alert alert-danger" role="alert" id="search_warning" style="display:none;">
+<b>Warning: </b>these search results are from the web version hosted at maths.manchester.ac.uk, clicking them will direct you there.
+</div>
+
+<script> 
+// this decides whether or not to show this
+if(!document.URL.includes("maths.manchester.ac.uk")){ 
+document.getElementById("search_warning").style.display = "block";
+}
+</script>
+
+
 <script>
   (function() {
     var cx = '012602191547997727495:tdptmnnakuy';
