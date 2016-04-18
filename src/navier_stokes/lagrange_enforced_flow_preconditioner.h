@@ -611,10 +611,8 @@ class LagrangeEnforcedflowPreconditioner
   /// \short The number of velocity dof types.
   unsigned N_velocity_doftypes;
 
+  // hierher Ray -- what's this?
   bool First_NS_solve;
-
-  bool Replace_all_f_blocks;
-
 
   /// \short Pointer to Doc_linear_solver_info.
   /// used for book keeping purposes.

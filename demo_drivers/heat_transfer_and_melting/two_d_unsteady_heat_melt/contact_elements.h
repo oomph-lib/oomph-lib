@@ -896,6 +896,18 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
    void output(FILE* file_pt, const unsigned &n_plot)
    {FiniteElement::output(file_pt,n_plot);}
    
+   /// \short Output function
+   void output(std::ostream &outfile)
+   {
+    unsigned n_plot=5;
+    FiniteElement::output(outfile,n_plot);
+   }
+   
+   /// \short Output function
+   void output(std::ostream &outfile, const unsigned &n_plot)
+   {
+    FiniteElement::output(outfile,n_plot);
+   }
    
    /// Shape fct for lagrange multiplier
    void shape_p(const Vector<double>& s, Shape &psi) const
@@ -1094,14 +1106,14 @@ public virtual SurfaceContactElementBase<ELEMENT>
 
  
  /// \short Output function
- void output(std::ostream &outfile) // cgj: hides version in omph::SurfaceContactElementBase with 2 params
+ void output(std::ostream &outfile)
  {
   unsigned n_plot=5;
   this->output(outfile,n_plot);
  }
 
  /// \short Output function
- void output(std::ostream &outfile, const unsigned &n_plot)// cgj: hides version in omph::SurfaceContactElementBase with type mismatch (first param is FILE*)
+ void output(std::ostream &outfile, const unsigned &n_plot)
  {
   
   unsigned n_dim = this->nodal_dimension();
@@ -1797,14 +1809,14 @@ public virtual SurfaceContactElementBase<ELEMENT>
  
  
  /// \short Output function
- void output(std::ostream &outfile) // cgj: hides version in SurfaceContactElementBase
+ void output(std::ostream &outfile)
  {
   unsigned n_plot=5;
   this->output(outfile,n_plot);
  }
 
  /// \short Output function
- void output(std::ostream &outfile, const unsigned &n_plot) // cgj: hides version in SurfaceContactElementBase
+ void output(std::ostream &outfile, const unsigned &n_plot)
  {
   unsigned n_dim = this->nodal_dimension();
   

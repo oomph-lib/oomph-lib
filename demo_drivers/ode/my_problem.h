@@ -37,6 +37,8 @@
 #include <ostream>
 #include <string>
 
+#include "../../../src/generic/prettyprint98.h"
+
 namespace oomph
 {
 
@@ -749,7 +751,7 @@ using namespace StringConversion;
     virtual void set_up_impulsive_initial_condition();
 
     /// Assign initial conditions from function pointer
-    virtual void set_initial_condition(const SolutionFunctorBase& ic); // cgj: hides version in Problem with no params
+    virtual void my_set_initial_condition(const SolutionFunctorBase& ic);
 
     /// Hook to be overloaded with any calculations needed after setting of
     /// initial conditions.
@@ -1457,7 +1459,7 @@ throw OomphLibError("Not implemented (yet?).", OOMPH_CURRENT_FUNCTION,
 
       << Trace_seperator << nnewton_iter_taken
       << Trace_seperator << solver_iterations
-
+     
       << Trace_seperator << solver_times
       << Trace_seperator << jacobian_setup_times
       << Trace_seperator << preconditioner_setup_times
@@ -1569,7 +1571,7 @@ throw OomphLibError("Not implemented (yet?).", OOMPH_CURRENT_FUNCTION,
     actions_after_set_initial_condition();
   }
 
-  void MyProblem::set_initial_condition(const SolutionFunctorBase& ic)
+  void MyProblem::my_set_initial_condition(const SolutionFunctorBase& ic)
   {
 #ifdef PARANOID
     // Can't set global data from a function of space... have to overload this

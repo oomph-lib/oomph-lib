@@ -605,13 +605,6 @@ private:
  /// Coordinate of internal point in the boundaries of the domain
  Vector<double> Lower_3;
  
-
- /// x-coordinate of circle centre
- double Centre_x;
-
- /// y-coordinate of circle centre
- double Centre_y;
-
  /// Pointer to geometric object that represents the central cylinder
  GeomObject* Cylinder_pt;
 

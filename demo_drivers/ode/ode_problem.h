@@ -87,7 +87,7 @@ namespace oomph
    oomph_info << "Number of equations: " << ndof() << std::endl;
   }
 
-  void set_initial_condition(const SolutionFunctorBase& ic)
+  void my_set_initial_condition(const SolutionFunctorBase& ic)
   {
    // Loop over current & previous timesteps
    const unsigned nprev_values = time_stepper_pt()->nprev_values();

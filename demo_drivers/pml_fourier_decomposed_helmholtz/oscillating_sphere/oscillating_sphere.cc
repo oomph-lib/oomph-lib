@@ -660,7 +660,7 @@ complete_problem_setup()
     PmlFourierDecomposedHelmholtzEquations*>(
      mesh_pt()->element_pt(i));
 
-   if (!el_pt==0)
+   if (!(el_pt==0))
     {
      //Set the frequency pointer
      el_pt->k_squared_pt()=&ProblemParameters::K_squared;

@@ -28,7 +28,7 @@
 //LIC// 
 //LIC//====================================================================
 #ifndef OOMPH_RECTANGLE_WITH_HOLE_MESH_CC
-#define OOMPH_RECTANGLE_WITH_HOLE_MESH_cc
+#define OOMPH_RECTANGLE_WITH_HOLE_MESH_CC
 
 #include "../generic/Qelements.h"
 #include "rectangle_with_hole_mesh.template.h"

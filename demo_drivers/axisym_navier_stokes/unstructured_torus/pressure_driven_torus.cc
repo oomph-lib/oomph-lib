@@ -225,11 +225,11 @@ class GeneralCircle : public GeomObject
 {
 public:
 
- /// Constructor that takes the centre position and raidus of the circle
+ /// Constructor that takes the centre position and radius of the circle
  /// as its arguments
- GeneralCircle(const double &centre_x, const double &centre_y,
+ GeneralCircle(const double &centre_y,
                const double &radius) :
-  GeomObject(1,2), Centre_x(centre_x), Centre_y(centre_y), Radius(radius) { }
+  GeomObject(1,2), Centre_y(centre_y), Radius(radius) { }
  
 /// Destructor
 virtual ~GeneralCircle(){}
@@ -307,9 +307,6 @@ void position(const unsigned& t,
 
 private:
 
- ///Storage for the x-coordinate of the centre (cgj: never used)
- double Centre_x;
- 
  ///Storage for the y-coordinate of the centre
  double Centre_y;
 
@@ -639,8 +636,8 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
  add_time_stepper_pt(new BDF<2>);
 
  //Create the domain for the mesh, which consists of a circle of
- //radius Radius and centred at (1/Delta, 0) 
- GeomObject* area_pt = new GeneralCircle(1.0/Delta,0.0,Radius);
+ //radius Radius and centred at y=0 
+ GeomObject* area_pt = new GeneralCircle(0.0,Radius);
 
  // No holes
  Vector<TriangleMeshClosedCurve*> Inner_hole_pt;

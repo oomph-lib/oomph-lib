@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
  // Set values using the initial condition function (initialisation for
  // trapezoid rule is automatically handled here by the
  // actions_after_set_initial_conditions() function in MyProblem).
- problem.set_initial_condition(*problem.Exact_solution_pt);
+ problem.my_set_initial_condition(*problem.Exact_solution_pt);
 
  problem.initial_doc();
 

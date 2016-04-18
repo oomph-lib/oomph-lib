@@ -2321,17 +2321,17 @@ class SolidMesh : public virtual Mesh
     {
      std::ostringstream error_message;
 
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wpotentially-evaluated-expression"
-#endif
+/* #ifdef __clang__ */
+/* #pragma clang diagnostic push */
+/* #pragma clang diagnostic ignored "-Wpotentially-evaluated-expression" */
+/* #endif */
      
      error_message << "Error: Node " << n << " of element " << e
                    << "is a " << typeid(*el_pt->node_pt(n)).name()
                    << ", not an SolidNode" << std::endl;
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
+/* #ifdef __clang__ */
+/* #pragma clang diagnostic pop */
+/* #endif */
      throw OomphLibError(error_message.str(),
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);

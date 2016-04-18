@@ -40789,7 +40789,7 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
   node_file >> npoint_attributes;;
   
   // Flag for boundary markers
-  unsigned boundary_markers_flag;
+  unsigned boundary_markers_flag=0;
   node_file >> boundary_markers_flag;
 
   // Dummy for node number
@@ -40899,9 +40899,9 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
   for(unsigned i=0;i<nglobal_segments;i++)
    {
     // Node id on the edge of the segment
-    unsigned lnode_id; // left node
-    unsigned rnode_id; // right node
-    unsigned bnd_id;   // boundary id associated to the current segment
+    unsigned lnode_id=0; // left node
+    unsigned rnode_id=0; // right node
+    unsigned bnd_id=0;   // boundary id associated to the current segment
     poly_file >> global_segment_number;
     poly_file >> lnode_id;
     poly_file >> rnode_id;

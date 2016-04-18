@@ -1325,8 +1325,8 @@ namespace oomph
       if (cast_el_pt==0)
        {
 #ifdef PARANOID
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wpotentially-evaluated-expression"
+// #pragma clang diagnostic push
+// #pragma clang diagnostic ignored "-Wpotentially-evaluated-expression"
         std::ostringstream error_message;
         error_message 
          << "Failed cast to "
@@ -1338,7 +1338,7 @@ namespace oomph
          error_message.str(),
          "PressureBasedSolidLSCPreconditioner::assemble_mass_matrix_diagonal()",
          OOMPH_EXCEPTION_LOCATION);
-#pragma clang diagnostic pop
+//#pragma clang diagnostic pop
 #endif
        }
       else

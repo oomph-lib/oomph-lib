@@ -218,7 +218,7 @@ public:
     }
 #endif
 
-   return "MultiPoisson solution"+i;
+   return "MultiPoisson solution"+StringConversion::to_string(i);
   }
  
  /// Output with default number of plot points

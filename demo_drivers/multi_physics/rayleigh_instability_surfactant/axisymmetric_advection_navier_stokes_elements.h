@@ -28,7 +28,7 @@
 //LIC// 
 //LIC//====================================================================
 #ifndef AXISYMMETRIC_ADVECTION_NAVIER_STOKES_ELEMENTS_HEADER
-#define AXISYMMETRIC_ADVECTION__NAVIER_STOKES_ELEMENTS_HEADER
+#define AXISYMMETRIC_ADVECTION_NAVIER_STOKES_ELEMENTS_HEADER
 
 //Oomph-lib headers, we require the generic, advection-diffusion-reaction,
 //navier-stokes elements and fluid interface elements

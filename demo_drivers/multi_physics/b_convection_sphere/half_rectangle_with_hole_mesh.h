@@ -551,12 +551,6 @@ private:
  /// Left and right side of lines in the downstream region
  Vector<Vector<Vector<double> > > Down;
 
- /// x-coordinate of circle centre
- double Centre_x;
-
- /// y-coordinate of circle centre
- double Centre_y;
-
  /// Pointer to geometric object that represents the central cylinder
  GeomObject* Cylinder_pt;
 
