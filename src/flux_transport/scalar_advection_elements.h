@@ -104,7 +104,8 @@ public:
 
  ///Compute the error and norm of solution integrated over the element
  ///Does not plot the error in the outfile
- void compute_error(std::ostream &outfile, FiniteElement::SteadyExactSolutionFctPt
+ void compute_error(std::ostream &outfile, 
+		    FiniteElement::UnsteadyExactSolutionFctPt
                     initial_condition_pt, const double &t, 
                     Vector<double> &error, Vector<double> &norm) 
   {
@@ -166,7 +167,7 @@ public:
 
      //Now get the initial condition at this value of x
      Vector<double> exact_u(n_flux,0.0);
-     (*initial_condition_pt)(interpolated_x,exact_u);
+     (*initial_condition_pt)(0.0,interpolated_x,exact_u);
 
      //Loop over the unknowns
      for(unsigned i=0;i<n_flux;i++)

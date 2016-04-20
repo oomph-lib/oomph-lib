@@ -56,7 +56,7 @@ namespace Global
  }
 
  ///Function that determines the initial conditions
- void initial_condition(const Vector<double> &x,
+  void initial_condition(const double &time, const Vector<double> &x,
                         Vector<double> &u)
  {
 
@@ -301,7 +301,7 @@ public:
      x[0] = mesh_pt()->node_pt(n)->x(0);
      x[1] = mesh_pt()->node_pt(n)->x(1);
      //Get the initial conditions
-     Global::initial_condition(x,initial_u);
+     Global::initial_condition(0.0,x,initial_u);
 
      mesh_pt()->node_pt(n)->set_value(0,initial_u[0]);
     }

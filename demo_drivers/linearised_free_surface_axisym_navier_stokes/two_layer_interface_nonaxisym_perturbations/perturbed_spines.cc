@@ -217,10 +217,11 @@ unsigned long PerturbedSpineMesh::assign_global_eqn_numbers
 //=======================================================================
 /// Overload the dump function so that the spine data is also dumped
 //=======================================================================
-void PerturbedSpineMesh::dump(std::ofstream &dump_file)
+  void PerturbedSpineMesh::dump(std::ofstream &dump_file, 
+				const bool &use_old_ordering) const
 {
  // Call the standard mesh dump function
- Mesh::dump(dump_file);
+  Mesh::dump(dump_file,use_old_ordering);
 
  // Now loop over the spine data and dump the spine height data
  // The ASSUMPTION is that the geometric data is stored elsewhere and will

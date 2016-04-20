@@ -1247,7 +1247,8 @@ public:
 
  /// \short Overload the continuation actions because we're 
  /// continuing in Ca which does not affect the mesh
-	void actions_after_change_in_global_parameter() // cgj: should have a "double* const &parameter_pt" parameter to avoid hiding version in Problem
+	void actions_after_change_in_global_parameter(double* 
+						      const &parameter_pt)
   {
    //Check that the multipliers have worked
    using namespace Global_Physical_Variables;
@@ -1263,7 +1264,7 @@ public:
  /// nodal positions, so we need to update all of them
  void actions_before_newton_convergence_check()
   {
-   actions_after_change_in_global_parameter();
+    actions_after_change_in_global_parameter(&Global_Physical_Variables::Ca);
 
    // Mesh Update
    Bulk_mesh_pt->node_update();

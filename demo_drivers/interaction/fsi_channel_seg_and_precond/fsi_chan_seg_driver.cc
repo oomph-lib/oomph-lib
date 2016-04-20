@@ -396,7 +396,7 @@ public :
  void steady_run();
 
  /// Unsteady run
- void unsteady_run();
+  void unsteady_run(const double &dummy_dt=0.1);
 
 private:
 
@@ -1190,10 +1190,12 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::steady_run()
 
 
 //====unsteady_run============================================================
-/// Unsteady run
+/// Unsteady run, dummy argument to be consistent with 
+/// definition in FSICollapsibleChannelProblem
 //============================================================================
 template <class ELEMENT>
-void SegregatedFSICollapsibleChannelProblem<ELEMENT>::unsteady_run()
+void SegregatedFSICollapsibleChannelProblem<ELEMENT>::unsteady_run(
+								   const double &dummy_dt)
 { 
   
   // Set initial value for external pressure (on the wall stiffness scale). 

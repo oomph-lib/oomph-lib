@@ -52,6 +52,9 @@ namespace Global_Parameters
  double Box_length = 10.0;
 }
 
+namespace oomph
+{
+
 
 //=========================================================================
 // Unstructured refineable Triangle Mesh 
@@ -893,7 +896,7 @@ void RefineableTetgenMesh<ELEMENT>::adapt(const Vector<double>& elem_error)
    }
  }
 
-
+}
 
 //====================================================================
 /// Micky mouse  problem.

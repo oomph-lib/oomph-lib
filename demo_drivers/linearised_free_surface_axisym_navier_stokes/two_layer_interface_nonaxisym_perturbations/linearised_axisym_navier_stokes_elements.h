@@ -1049,7 +1049,7 @@ namespace oomph
     
     /// \short The number of "blocks" that degrees of freedom in this
     /// element are sub-divided into: Velocity and pressure.
-    unsigned ndof_types() { return 8; }
+    unsigned ndof_types() const { return 8; }
     
     /// \short Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
@@ -1057,8 +1057,10 @@ namespace oomph
     /// of the "block" that this unknown is associated with.
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.) Velocity=0; Pressure=1
-    void get_dof_numbers_for_unknowns(
-     std::list<std::pair<unsigned long,unsigned> >& block_lookup_list);
+    //ALH: This was never defined
+    //void get_dof_numbers_for_unknowns(
+    // std::list<std::pair<unsigned long,unsigned> >& block_lookup_list) const;
+    
     
   }; // End of LinearisedAxisymmetricQCrouzeixRaviartElement class definition
  
@@ -1362,7 +1364,7 @@ namespace oomph
     /// \short Returns the number of "blocks" that degrees of freedom
     /// in this element are sub-divided into: Four perturbations to nodal
     /// coordaintes, six velocities and two pressures = 12
-    unsigned ndof_types() { return 12; }
+    unsigned ndof_types() const { return 12; }
     
     /// \short Create a list of pairs for all unknowns in this element,
     /// so that the first entry in each pair contains the global equation
@@ -1370,8 +1372,10 @@ namespace oomph
     /// of the "block" that this unknown is associated with.
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.) Velocity=0; Pressure=1
-    void get_dof_numbers_for_unknowns(
-     std::list<std::pair<unsigned long, unsigned> >& block_lookup_list);
+    //ALH: This was never defined
+    //void get_dof_numbers_for_unknowns(
+    // std::list<std::pair<unsigned long, unsigned> >& block_lookup_list) const;
+    
     
   }; // End of LinearisedAxisymmetricQCrouzeixRaviartElement class definition
  

@@ -576,13 +576,13 @@ class PerturbedSpineMesh : public virtual Mesh
   }
 
  /// Return the i-th perturbed spine in the mesh
- PerturbedSpine*& perturbed_spine_pt(const unsigned long &i)
+ PerturbedSpine* const & perturbed_spine_pt(const unsigned long &i) const
   {
    return PerturbedSpine_pt[i];
   }
 
  /// Return the number of perturbed spines in the mesh
- unsigned long nspine() { return PerturbedSpine_pt.size(); }
+ unsigned long nspine() const { return PerturbedSpine_pt.size(); }
 
  /// Add a perturbed spine to the mesh
  void add_perturbed_spine_pt(PerturbedSpine* const &spine_pt)
@@ -658,7 +658,7 @@ class PerturbedSpineMesh : public virtual Mesh
  virtual void perturbed_spine_node_update(PerturbedSpineNode* spine_node_pt)=0;
 
  /// \short Overload the dump function so that the spine data is dumped
- void dump(std::ofstream &dump_file);
+ void dump(std::ofstream &dump_file,const bool &use_old_ordering=true) const;
 
  /// \short Overload the read function so that the spine data is read 
  /// from the restart file

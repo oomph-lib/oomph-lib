@@ -710,7 +710,7 @@ fill_in_generic_residual_contribution_biharmonic(Vector<double> &residuals,
      // 1) which associate with values at interior nodes ei
      for(unsigned p=0;p<3;p++)
       {
-       unsigned l,row;
+       unsigned l=0,row=0;
        if(p==0){l=3;row=18;}
        else if(p==1){l=4;row=19;}
        else if(p==2){l=5;row=20;}
@@ -736,7 +736,7 @@ fill_in_generic_residual_contribution_biharmonic(Vector<double> &residuals,
                //Loop over test functions associated with internal nodes
                for(unsigned p2=0;p2<3;p2++)
                 {
-                 unsigned l2,row2;
+                 unsigned l2=0,row2=0;
                  if(p2==0){l2=3;row2=18;}
                  else if(p2==1){l2=4;row2=19;}
                  else if(p2==2){l2=5;row2=20;}
@@ -822,7 +822,7 @@ fill_in_generic_residual_contribution_biharmonic(Vector<double> &residuals,
                  //Loop over test functions associated with internal nodes
                  for(unsigned p2=0;p2<3;p2++)
                   {
-                   unsigned l2,row2;
+                   unsigned l2=0,row2=0;
                    if(p2==0){l2=3;row2=18;}
                    else if(p2==1){l2=4;row2=19;}
                    else if(p2==2){l2=5;row2=20;}

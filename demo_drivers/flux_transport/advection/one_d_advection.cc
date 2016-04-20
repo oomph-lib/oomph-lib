@@ -52,7 +52,7 @@ namespace Global
   wind[0] = 1.0;
  }
 
- void initial_condition(const Vector<double> &x,
+  void initial_condition(const double &time,const Vector<double> &x,
                         Vector<double> &u)
  {
   u[0] = sin(8.0*atan(1.0)*x[0]);
@@ -321,7 +321,7 @@ class AdvectionProblem : public Problem
         //Set the x-coordinate
         x[0] = nod_pt->x(0);
         //Get the initial condition
-        Global::initial_condition(x,initial_u);
+        Global::initial_condition(0.0,x,initial_u);
         nod_pt->set_value(0,initial_u[0]);
         //Set the previous values
         const unsigned n_prev = nod_pt->time_stepper_pt()->nprev_values();
@@ -330,7 +330,7 @@ class AdvectionProblem : public Problem
           //Move the x-coordinate backwards
           x[0] += wind[0]*dt;
           //Now get the new value
-          Global::initial_condition(x,initial_u);
+          Global::initial_condition(0.0,x,initial_u);
           nod_pt->set_value(i+1,0,initial_u[0]);
          }
        }

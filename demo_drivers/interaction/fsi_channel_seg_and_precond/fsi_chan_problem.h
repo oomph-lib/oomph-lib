@@ -389,12 +389,12 @@ public :
 
 
  /// Doc the steady solution
- virtual void doc_solution_steady(ofstream& trace_file, 
-                                  const double& cpu);
+ virtual void doc_solution_steady(DocInfo& doc_info, ofstream& trace_file, 
+                                  const double& cpu, const unsigned &niter);
 
  /// Doc the unsteady solution
- virtual void doc_solution_unsteady(ofstream& trace_file, 
-                                    const double& cpu);
+ virtual void doc_solution_unsteady(DocInfo& doc_info, ofstream& trace_file, 
+                                    const double& cpu, const unsigned &niter);
 
  /// Apply initial conditions
  void set_initial_condition();
@@ -853,9 +853,11 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
 /// Doc the solution for a steady run
 //============================================================================
 template <class ELEMENT>
-void FSICollapsibleChannelProblem<ELEMENT>:: doc_solution_steady(
- ofstream& trace_file,
- const double& cpu)
+void FSICollapsibleChannelProblem<ELEMENT>:: 
+doc_solution_steady(
+		    DocInfo &doc_info,
+		    ofstream& trace_file,
+		    const double& cpu, const unsigned &niter)
 { 
 
  ofstream some_file;
@@ -912,9 +914,12 @@ void FSICollapsibleChannelProblem<ELEMENT>:: doc_solution_steady(
 /// Doc the solution for an unstady run
 //============================================================================
 template <class ELEMENT>
-void FSICollapsibleChannelProblem<ELEMENT>:: doc_solution_unsteady(
- ofstream& trace_file,
- const double& cpu)
+void FSICollapsibleChannelProblem<ELEMENT>:: 
+doc_solution_unsteady(
+		      DocInfo& doc_info,
+		      ofstream& trace_file,
+		      const double& cpu,
+		      const unsigned &niter)
 { 
 
  ofstream some_file;
@@ -1193,7 +1198,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::steady_run()
  trace_file << std::endl;
 
  // Output the initial solution (dummy for CPU time)
- doc_solution_steady(trace_file,0.0);
+ doc_solution_steady(Doc_info,trace_file,0.0,0);
  
  // Increment step number
  Doc_info.number()++;
@@ -1244,7 +1249,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::steady_run()
       
    // Outpt the solution
    //-------------------
-   doc_solution_steady(trace_file,cpu);
+   doc_solution_steady(Doc_info,trace_file,cpu,0);
    
    // Step number
    Doc_info.number()++;
@@ -1329,7 +1334,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::unsteady_run(const double& dt)
   trace_file << std::endl;
   
   // Output the initial solution (dummy for CPU time)
-  doc_solution_unsteady(trace_file,0.0);
+  doc_solution_unsteady(Doc_info,trace_file,0.0,0);
 
   // Increment step number
   Doc_info.number()++;
@@ -1352,7 +1357,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::unsteady_run(const double& dt)
  
     // Output the solution
     //--------------------
-    doc_solution_unsteady(trace_file,cpu);
+    doc_solution_unsteady(Doc_info,trace_file,cpu,0);
  
     // Step number
     Doc_info.number()++;

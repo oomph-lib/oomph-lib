@@ -1197,7 +1197,7 @@ fill_in_generic_residual_contribution_shell(Vector<double> &residuals,
          // At interior nodes ei
          for(unsigned p=0;p<3;p++)
           {
-           unsigned node,row;
+           unsigned node=0,row=0;
            if(p==0){node=this->nnode()-3;row=20;}
            else if(p==1){node=this->nnode()-2;row=18;}
            else if(p==2){node=this->nnode()-1;row=19;}
