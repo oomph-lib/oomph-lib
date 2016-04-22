@@ -10,7 +10,7 @@ installed on your computer you can obtain the latest
 snapshot of the project by issuing the command
 
 \code
-svn checkout svn://oomph-lib.maths.man.ac.uk/trunk
+svn checkout svn://oomph-lib.maths.man.ac.uk/release/trunk
 \endcode
 
 Updates to the latest version can then be obtained by
@@ -62,12 +62,12 @@ that does not have proxy settings for the svn protocol.
 (Subversion can also use the http and https protocols, but these are
 not serviced by our repository. Therefore the response to the command
 \code
-svn checkout http://oomph-lib.maths.man.ac.uk/trunk subversion
+svn checkout http://oomph-lib.maths.man.ac.uk/release/trunk 
 \endcode
 will be 
 \code 
 svn: Server sent unexpected return value (400 Bad Request) in response to OPTIONS request
-for 'http://oomph-lib.maths.man.ac.uk/trunk'
+for 'http://oomph-lib.maths.man.ac.uk/release/trunk'
 \endcode
 
 The solution is to install tsocks (if you don't have it already 
@@ -81,7 +81,7 @@ local domain and proxy server (you may need to ask
 your local network administrator for information). The checkout is 
 then effected by issuing the command
 \code
-tsocks svn checkout svn://oomph-lib.maths.man.ac.uk/trunk
+tsocks svn checkout svn://oomph-lib.maths.man.ac.uk/release/trunk
 \endcode 
 and the update is done with the command
 \code
