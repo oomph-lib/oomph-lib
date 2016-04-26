@@ -587,28 +587,31 @@ effacer end
   if (this->Pml_is_enabled)
   {
 
-  // Cache k (wavenumber), note: we do it in the loop to save doing sqrt in bulk
-   double k_local = sqrt(k_squared());
-
-   // Switch on pml in certain directions with a switch of doubles
-   // Used in writing down expressions for sigma/gamma - pml functions
-   Vector<double> dimension_switch(2,0.0);
-   for(unsigned k=0; k<2; k++)
+    // Cache k (wavenumber), note: we do it in the loop to save doing sqrt in bulk
+    double k_local = sqrt(k_squared());
+    
+    // Loop over both dimensions
+    for(unsigned k=0; k<2; k++) 
     {
-     // If PML is enabled in the respective direction
-     if (this->Pml_direction_active[k]) { dimension_switch[k] = 1.0;}
-     /// \short Specific ML mapping function, as proposed by Bermudez et al.
-     /// The imaginary term blows up at the outer edge of the PML
-     pml_gamma[k] = 1.0 + dimension_switch[k] / k_local
-     * std::complex<double>
-             (0.0, 1.0/(std::fabs(this->Pml_outer_boundary[k] - x[k]) ));
+      // If PML is enabled in the respective direction
+      if (this->Pml_direction_active[k])
+      {
+        pml_gamma[k] = 1.0 + 1.0 / k_local
+        * std::complex<double>
+                (0.0, 1.0/(std::fabs(this->Pml_outer_boundary[k] - x[k]) ));
+      }
+      else
+      {
+        pml_gamma[k] = 1.0;
+      }
     }
+    
 
-   /// \short  for 2D, in order:
-   /// g_y/g_x, g_x/g_y for Laplace bit and g_x*g_y for Helmholtz bit
-   pml_laplace_factor[0] = pml_gamma[1] / pml_gamma[0];
-   pml_laplace_factor[1] = pml_gamma[0] / pml_gamma[1];
-   pml_k_squared_factor = pml_gamma[0] * pml_gamma[1];
+    /// \short  for 2D, in order:
+    /// g_y/g_x, g_x/g_y for Laplace bit and g_x*g_y for Helmholtz bit
+    pml_laplace_factor[0] = pml_gamma[1] / pml_gamma[0];
+    pml_laplace_factor[1] = pml_gamma[0] / pml_gamma[1];
+    pml_k_squared_factor = pml_gamma[0] * pml_gamma[1];
 
   }
   else
