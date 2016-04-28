@@ -2320,18 +2320,11 @@ class SolidMesh : public virtual Mesh
    if(!dynamic_cast<SolidNode*>(el_pt->node_pt(n)))
     {
      std::ostringstream error_message;
-
-/* #ifdef __clang__ */
-/* #pragma clang diagnostic push */
-/* #pragma clang diagnostic ignored "-Wpotentially-evaluated-expression" */
-/* #endif */
-     
+	 Node *np = el_pt->node_pt(n);
      error_message << "Error: Node " << n << " of element " << e
-                   << "is a " << typeid(*el_pt->node_pt(n)).name()
+                   << "is a " << typeid(*np).name()
                    << ", not an SolidNode" << std::endl;
-/* #ifdef __clang__ */
-/* #pragma clang diagnostic pop */
-/* #endif */
+
      throw OomphLibError(error_message.str(),
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
