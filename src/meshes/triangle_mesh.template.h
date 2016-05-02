@@ -4538,13 +4538,15 @@ template<class ELEMENT>
  /// Method used to update the polylines representation after restart
  void update_polyline_representation_from_restart()
   {
-    unsigned my_rank = 0;
+#ifdef OOMPH_HAS_MPI
     // If the mesh is distributed then also update the shared
     // boundaries
+    unsigned my_rank = 0;
     if (this->is_mesh_distributed())
       {
         my_rank = this->communicator_pt()->my_rank();
       }
+#endif
     
     // Update the polyline representation after restart
     
