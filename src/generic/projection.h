@@ -29,8 +29,8 @@
 //LIC//====================================================================
 //Header file for a classes used to represent projectable elements
 
-#ifndef PROJECTION_H
-#define PROJECTION_H
+#ifndef OOMPH_PROJECTION_HEADER
+#define OOMPH_PROJECTION_HEADER
 
 
 #include "mesh.h"
