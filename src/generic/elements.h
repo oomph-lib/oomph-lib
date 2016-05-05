@@ -2136,8 +2136,23 @@ public:
 
  /// \short Return the i-th coordinate at local node n. Do not use
  /// the hanging node representation.
- double raw_nodal_position(const unsigned &n, const unsigned &i) const
-  {return node_pt(n)->x(i);}
+ /// NOTE: Moved to cc file because of a possible compiler bug
+ /// in gcc (yes, really!). The move to the cc file avoids inlining
+ /// which appears to cause problems (only) when compiled with gcc
+ /// and -O3; offensive "illegal read" is in optimised-out section
+ /// of code and data that is allegedly illegal is readily readable
+ /// (by other means) just before this function is called so I can't
+ /// really see how we could possibly be responsible for this...
+ double raw_nodal_position(const unsigned &n, const unsigned &i) const;
+  /* { */
+  /*  /\* oomph_info << "n: "<< n << std::endl; *\/ */
+  /*  /\* oomph_info << "i: "<< i << std::endl; *\/ */
+  /*  /\* oomph_info << "node_pt(n): "<< node_pt(n) << std::endl; *\/ */
+  /*  /\* oomph_info << "node_pt(n)->x(i): "<< node_pt(n)->x(i) << std::endl; *\/ */
+  /*  double tmp=node_pt(n)->x(i); */
+  /*  //oomph_info << "tmp: "<< tmp << std::endl; */
+  /*  return tmp; // node_pt(n)->x(i); */
+  /* } */
  
  /// \short Return the i-th coordinate at local node n, at time level t
  /// (t=0: present; t>0: previous time level).

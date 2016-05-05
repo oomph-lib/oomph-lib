@@ -1644,6 +1644,30 @@ namespace Locate_zeta_helpers
 ///////////////////////////////////////////////////////////////////////////
 
 //======================================================================
+ /// Return the i-th coordinate at local node n. Do not use
+ /// the hanging node representation.
+ /// NOTE: Moved to cc file because of a possible compiler bug
+ /// in gcc (yes, really!). The move to the cc file avoids inlining
+ /// which appears to cause problems (only) when compiled with gcc
+ /// and -O3; offensive "illegal read" is in optimised-out section
+ /// of code and data that is allegedly illegal is readily readable
+ /// (by other means) just before this function is called so I can't
+ /// really see how we could possibly be responsible for this...
+//======================================================================
+ double FiniteElement::raw_nodal_position(const unsigned &n, const unsigned &i) const
+  {
+   /* oomph_info << "n: "<< n << std::endl; */
+   /* oomph_info << "i: "<< i << std::endl; */
+   /* oomph_info << "node_pt(n): "<< node_pt(n) << std::endl; */
+   /* oomph_info << "node_pt(n)->x(i): "<< node_pt(n)->x(i) << std::endl; */
+   //double tmp=node_pt(n)->x(i);
+   //oomph_info << "tmp: "<< tmp << std::endl;
+   return node_pt(n)->x(i);
+  }
+
+
+
+//======================================================================
 /// \short Function to describe the local dofs of the element. The ostream 
 /// specifies the output stream to which the description 
 /// is written; the string stores the currently 
