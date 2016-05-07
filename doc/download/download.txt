@@ -50,6 +50,8 @@ the information simply because they are too lazy to type...
 <label for="why">Why are you interested in <code>oomph-lib</code>?      What are you planning to use
      it for? </label>
         <textarea name="why" cols="50" rows="3" ></textarea>
+<label for="algebra"> What is 5 + 2? (five lowercase letters)</label>
+   <input name="algebra" type="text"  size="50">
 <label for="firstdownload"> This is my first download of oomph-lib:</label>
 <input type="radio" name="firstdownload" value="Yes" checked="checked"> Yes
 <input type="radio" name="firstdownload" value="No" > No
@@ -58,65 +60,6 @@ the information simply because they are too lazy to type...
         <input type="submit" name="Submit" value="Submit information and proceed to the download page" >
 </div>
 </form>
-
-<!-- The  following script
- ensures that the required field on the download form get filled in-->
-<script language="JavaScript">
-<!--
-function formCheck(formobj){
-    // mandatory fields
-    var fieldRequired = Array("name", "affiliation", "email", "why");
-    // description to appear in the dialog box
-    var fieldDescription = Array("name", "affiliation", "email",
-                                 "Why are you interested in oomph-lib?");
-    // dialog message
-    var alertMsg = "Please complete the following fields:\n";
-    var l_Msg = alertMsg.length;
-    for (var i = 0; i < fieldRequired.length; i++){
-        var obj = formobj.elements[fieldRequired[i]];
-        if (obj){
-            switch(obj.type){
-            case "select-one":
-                if (obj.selectedIndex == -1 ||
-                    obj.options[obj.selectedIndex].text == ""){
-                    alertMsg += " - " + fieldDescription[i] + "\n";
-                }
-                break;
-            case "select-multiple":
-                if (obj.selectedIndex == -1){
-                    alertMsg += " - " + fieldDescription[i] + "\n";
-                }
-                break;
-            case "text":
-            case "textarea":
-                if (obj.value == "" || obj.value == null){
-                    alertMsg += " - " + fieldDescription[i] + "\n";
-                }
-                break;
-            default:
-            }
-            if (obj.type == undefined){
-                var blnchecked = false;
-                for (var j = 0; j < obj.length; j++){
-                    if (obj[j].checked){
-                        blnchecked = true;
-                    }
-                }
-                if (!blnchecked){
-                    alertMsg += " - " + fieldDescription[i] + "\n";
-                }
-            }
-        }
-    }
-    if (alertMsg.length == l_Msg){
-        return true;
-    }else{
-        alert(alertMsg);
-        return false;
-    }
-}
-// -->
-</script>
 
 \endhtmlonly
 

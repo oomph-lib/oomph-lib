@@ -507,10 +507,10 @@ by specifying the configure option
 
 \b Note: \c oomph-lib works with version 2.0.0 of the library. 
 If this version of \c Hypre is not available on your machine
-download the tar file 
+download the tar file from the our own website: 
 
 <CENTER>
-<a href="http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/hypre-2.0.0.tar.gz">http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/hypre-2.0.0.tar.gz</a>
+<a href="../../../../oomph-lib_external_distfiles/hypre-2.0.0.tar.gz">hypre-2.0.0.tar.gz</a>
 </CENTER>
 
 You can either build the library yourself
@@ -570,15 +570,13 @@ of the Trilinos library, and for revision numbers from 11 onwards you will
 need to have \c cmake installed on your machine.
 If these versions of \c Trilinos are not available on your machine you
 can get the latest version from the <a href="http://trilinos.sandia.gov/">
-Trilinos web site </a> or download some of the older versions below
+Trilinos web site </a> or download a copy of the relevant tar file
+from our own website:
 
-<UL>
-<LI><a href="http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-9.0.2.tar.gz">http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-9.0.2.tar.gz</a>
-<LI><a href="http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-10.8.5-Source.tar.gz">http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-10.8.5-Source.tar.gz</a>
-<LI><a href="http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-11.4.3-Source.tar.gz">http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-11.4.3-Source.tar.gz</a>
-</UL>
 
-\c oomph-lib works with all of these.
+<CENTER>
+<a href="../../../../oomph-lib_external_distfiles/trilinos-11.8.1-Source.tar.gz">trilinos-11.8.1-Source.tar.gz</a>
+</CENTER>
 
 You can either build the library yourself
 or get \c oomph-lib to build it for you. To do this simply place a copy of the
@@ -652,13 +650,23 @@ here, </a> and place a copy in the same directory
 \code
 external_distributions/mumps_and_scalapack
 \endcode
+
+
+You can also download both files from our own website:
+<CENTER>
+<a href="../../../../oomph-lib_external_distfiles/MUMPS_4.10.0.tar.gz">MUMPS_4.10.0.tar.gz</a>
+</CENTER>
+<CENTER>
+<a href="../../../../oomph-lib_external_distfiles/scalapack_installer.tgz">scalapack_installer.tgz</a>
+</CENTER>
+
 Note that the configure option
 \code
 --with-mpi-include-directory=/usr/lib/openmpi/include
 \endcode
 <b> must </b> be specified in order to build \c MUMPS, where \c
 /usr/lib/openmpi/include is the directory that contains the file \c mpi.h.
-[You can use `locate mpi.h`, well, locate that directory.]
+[You can use `locate mpi.h`, to, well, locate that directory.]
 
 Once the files have been placed in the \c
 external_distributions/mumps_and_scalapack directory, simply (re-)run
