@@ -38,7 +38,7 @@ class of problems that is first introduced in
 
 The constraint that the droplet
 volume remains constant must be enforced explicitly in the static
-case, as in the buble problem. In the time-simulations, however, a
+case, as in the bubble problem. In the time-simulations, however, a
 constant drop volume is implicitly enforced by the continuity
 equation. For the bubble, the continuity equation is
 not solved within the interior, which is why the volume constraint
@@ -53,7 +53,7 @@ We use the same method as in the
 problem, </a> an ALE-based finite-element method with
 <a href="../../single_layer_free_surface/html/index.html#kinematic_condition_implementation">a pseudo-elastic
 node-update procedure</a>.  In this case,
-there is a pressure jump across the inteface between the
+there is a pressure jump across the interface between the
 fluids, which means that we use triangular Crouzeix--Raviart 
 elements rather than the continuous-pressure Taylor--Hood
 elements. Again, we impose the kinematic and dynamic boundary conditions
@@ -81,7 +81,7 @@ start from this configuration.
 
 The figure below shows the location of the droplet and mesh (upper figure) and 
 a contour plot of the pressure
-distribution with overlayed velocity vectors of the difference between
+distribution with overlaid velocity vectors of the difference between
 the background Poiseuille flow and the velocity field (lower
 figure). The figure is a snapshot for the parameters \f$ Re = ReSt =
 0.0 \f$, \f$ Ca = 10.0 \f$ and a droplet that is ten times as viscous
@@ -156,7 +156,7 @@ tutorial, </a> except that we add a region tag "1" to label the
   and we must tell \c Triangle to use the assigned attributes.
 \dontinclude adaptive_drop_in_channel.cc
 \skipline Define the region
-\until drop_center)
+\until drop_centre)
  The remainder of the constructor is the same as the other tutorial.
 
 <HR> <HR>
@@ -179,7 +179,7 @@ attaching \c FaceElements to the relevant boundaries of the bulk
 elements. However, we must be careful to add only a \b single layer of
 elements. If we use the standard "boundary element" functions then we
 will be creating face elements on both sides of the internal
-boundary. Instead, we use the elements adajacent to the boundary
+boundary. Instead, we use the elements adjacent to the boundary
 within region 0, which ensures that only a single layer of interface
 elements are added.
  

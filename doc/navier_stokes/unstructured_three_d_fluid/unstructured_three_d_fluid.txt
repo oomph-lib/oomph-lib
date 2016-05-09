@@ -327,8 +327,8 @@ degrees of freedom (the pressures at their vertices). This does not
 it does not) -- "locking", due to the presence of too many
 pressure degrees of freedom, arises at the level of the global, fully-assembled
 problem, not on an element-by-element basis. However, the presence
-of such elements makes the occurence of locking more likely and we
-have occassionally come across examples in which locking does occur. 
+of such elements makes the occurrence of locking more likely and we
+have occasionally come across examples in which locking does occur. 
 The remedy would be to pin exactly the required number of
 superfluous pressure degrees of freedom (no more and no fewer!) 
 to "unlock" the problem. However, the diagnosis of the problem 
@@ -358,11 +358,11 @@ different volume constraint.
 <center>
 <b>How to spot "locking":</b>
 </center>
-- If a solution can be computed (using a direct solver) the occurence of
+- If a solution can be computed (using a direct solver) the occurrence of
   "locking" is easy to spot: Typically the pressure in over-constrained 
   elements becomes extremely large while the rest of the flow field
   looks fairly normal. Iterative solvers may fail to converge. If you
-  suspect that locking may have occured, try re-computing the
+  suspect that locking may have occurred, try re-computing the
   solution on a mesh with the \c split_corner_elements flag set to 
   \c true.
 .
@@ -426,7 +426,7 @@ allow you to explore unstructured mesh generation.
   \n\n
   The main (only?) reason why we tend to impose parallel in- or outflow
   in cross-sections that are aligned with the Cartesian coordinate
-  planes is, of course, that such boundary conditons are easiest to apply in a 
+  planes is, of course, that such boundary conditions are easiest to apply in a 
   discretisation that is based on the Cartesian form of the
   Navier-Stokes equations.  What if we wished to impose parallel
   outflow from cross-sections that are not aligned with such planes?

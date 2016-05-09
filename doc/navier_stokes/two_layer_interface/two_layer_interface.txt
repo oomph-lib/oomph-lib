@@ -12,8 +12,8 @@ consider the relaxation of an interface between two viscous fluids.
 \section implementation Implementation
 
 The extension from a single fluid problem to one involving two fluids
-seperated by an interface is very straightforward. As \c oomph-lib's
-Navier--Stokes elements are based on the Arbitary Lagrangian Eulerian
+separated by an interface is very straightforward. As \c oomph-lib's
+Navier--Stokes elements are based on the Arbitrary Lagrangian Eulerian
 form of the equations, and can therefore be used to solve problems in
 moving domains, we can discretise the domain using a rectangular mesh
 containing an additional boundary corresponding to the position of the
@@ -38,7 +38,7 @@ n_j^{[1]} \f$ is the unit normal pointing out of the `lower' fluid and
 The interface conditions in this two-fluid example are implemented in
 an almost identical way to the <A HREF="../../single_layer_free_surface/html/index.html#implementation">single layer case</A>. 
 We employ the same pseudo-solid node-update strategy, where the
-interior mesh is treated as a ficitious elastic solid and thus the
+interior mesh is treated as a fictitious elastic solid and thus the
 (unknown) nodal positions can be determined by solving a solid
 mechanics problem. The deformation of the free surface boundary itself
 is imposed by introducing a a field of Lagrange multipliers at the

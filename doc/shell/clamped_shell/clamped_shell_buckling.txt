@@ -43,7 +43,7 @@ A simple force balance shows that \f$ P = -T/R \f$.
 
  We use geometrical arguments to calculate the radius of the circle,
  \f$ R = 2\sin\alpha/L \f$; 
- the iscoceles triangle \f$ACE\f$ may be used to determine the angle
+ the isosceles triangle \f$ACE\f$ may be used to determine the angle
  \f$\alpha = \pi - 2\beta\f$. It follows that
  \f[\tan\alpha = \tan(\pi -
  2\beta) = - \tan 2\beta = \frac{2\tan\beta}{\tan^{2}\beta -1}, \f]
@@ -58,7 +58,7 @@ A simple force balance shows that \f$ P = -T/R \f$.
  
  We shall solve the above problem numerically using \c oomph-lib's
  KirchhoffBeamElements, which include both stretching and bending effects.
- In the standard formulation, the displacments are unknowns and the
+ In the standard formulation, the displacements are unknowns and the
  external pressure, \f$P\f$, is prescribed in a load function. In an
  alternative, displacement-control, formulation, the
  displacements at a particular position is prescribed and 
@@ -80,7 +80,7 @@ thickness, \f$ h/R_{0}\f$, the dimensionless pre-stress,
 variable that will be used to specify the prescribed position of the
 mid-point displacement, \f$d\f$. The namespace
 also contains the function \c ConstPressureForBeam::load() which returns a constant
-pressure load of mangnitude \f$P\f$.
+pressure load of magnitude \f$P\f$.
 
 \dontinclude tensioned_string.cc
 \skipline start_of_namespace
@@ -109,7 +109,7 @@ The final call is to the function ElasticBeamProblem::parameter_study().
 \section problem The problem class
 
 The problem class has six member functions, only two of which are
-non-trvial:
+non-trivial:
  - the constructor \ref constructor
  - the function \c parameter_study(), described in \ref param
 .
@@ -174,7 +174,7 @@ StraightLine (one of \c oomph-lib's standard geometric objects).
  \until S_displ_control[0]
 
  If we are using displacement control, the pressure is not a degree of
- freedom, so must be unpinned and the displacment must be fixed at the
+ freedom, so must be unpinned and the displacement must be fixed at the
  chosen position in our chosen element. We must also pass a pointer to
  the variable that stores the desired displacment to the element
  \skipline Unpin

@@ -27,7 +27,7 @@ constitutive equations.
 
 The next sketch shows a variant of the problem: We assume that 
 the material undergoes isotropic growth (e.g. via a
-biological growth process or thermal expension, say) with a constant growth
+biological growth process or thermal expansion, say) with a constant growth
 factor \f$ \Gamma \f$. We refer to the the document
 <A HREF="../../solid_theory/html/index.html#isotropic_growth">
 "Solid mechanics: Theory and implementation"</A> for a detailed 
@@ -189,7 +189,7 @@ of external pressures.
 We repeat the exercise with elements from the 
 \c RefineableQPVDElementWithContinuousPressure family
 which discretise the principle of virtual displacements (PVD) 
-in the pressure/displacement formulation, using continous pressures
+in the pressure/displacement formulation, using continuous pressures
 (Q2Q1; Taylor Hood).
 
 \until done case 1
@@ -264,7 +264,7 @@ includes pointers to the mesh of "bulk" solid elements, and the
 mesh of \c SolidTractionElements that apply the pressure load.
 The trace file is used to document the disk's load-displacement
 characteristics by plotting the radial displacement of the nodes on the
-curvlinear boundary, pointers to which are stored in the vector
+curvilinear boundary, pointers to which are stored in the vector
 \c Trace_node_pt.
 
 \until };
@@ -339,7 +339,7 @@ of unknowns.
 The post-processing function outputs the shape of the deformed disk.
 We use the trace file to record how the
 disk's volume (area) and the radii of the control nodes on the
-curvilinear domain buondary vary with the applied pressure. To 
+curvilinear domain boundary vary with the applied pressure. To 
 facilitate the validation of the results against the analytical
 solution, we also add the radius predicted by the linear theory 
 to the trace file.

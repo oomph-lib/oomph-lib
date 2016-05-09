@@ -349,7 +349,7 @@ and use it (in its role as \c Data) as the "load" for the
 \until set_load_pt
 
 Finally,  we pin the nodal values on all boundaries, apply the 
-homogenous Dirichlet boundary conditions,
+homogeneous Dirichlet boundary conditions,
 pass the pointer to the source function to the elements,
 and set up the equation
 numbering scheme. 
@@ -379,9 +379,9 @@ can be found in the paper
 - Heil, M. & Hazel, A. L. "<TT>oomph-lib</TT> -- An 
   <EM>O</EM>bject-<EM>O</EM>riented <EM>M</EM>ulti-<EM>Ph</EM>ysics
   Finite-Element <EM>Lib</EM>rary". In: <EM>Fluid-Structure
-  Interaction</EM>, Editors: M. Schafer und H.-J. Bungartz. 
-  Springer (Lecture Notes on Computational Science and Engineering), 
-  (32 pages; in print; due to appear sometime in 2006) 
+  Interaction</EM>, Editors: M. Schafer and H.-J. Bungartz. 
+  Springer (Lecture Notes on Computational Science and Engineering 53, 2006), 
+  (32 pages) 
   <A HREF="http://www.maths.man.ac.uk/~mheil/MATTHIAS/ABSTRACTS/HeilHazelOomph2006.html">(abstract)</A> 
   <A HREF="http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/oomph_for_www.pdf">
   (pdf preprint)</A>.
@@ -426,7 +426,7 @@ boundary of the fish mesh.
 \skipline Increment
 \until y_c()
 
-This step mimicks the incrementation of one
+This step mimics the incrementation of one
 of the \c Problems's unknowns (recall that in the free-boundary
 problem considered above,\f$ Y_c \f$ has to be determined as part 
 of the solution!) during the finite-difference based computation of
@@ -502,7 +502,7 @@ The implementation employs three key components:
     \c GeneralisedElement::fill_in_contribution_to_jacobian(...) 
     are overloaded by versions that add the shape derivatives
     to the Jacobian matrices computed by the underlying ELEMENT. \n\n
-  - Similary, the function 
+  - Similarly, the function 
     \c FiniteElement::assign_all_generic_local_eqn_numbers()
     is overloaded to add the unknowns associated with the node update
     functions into the element's equation numbering scheme. \n\n

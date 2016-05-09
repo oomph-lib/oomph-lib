@@ -30,8 +30,8 @@ time-derivatives of the nodal values) for the newly-created \c Node
 by interpolating between the corresponding values in the new 
 \c Node's father element. 
 
-Similarly, an initial assigment for the newly-created \c Node's current
-and previous positions (required for the evaluation of the mesh-velocites 
+Similarly, an initial assignment for the newly-created \c Node's current
+and previous positions (required for the evaluation of the mesh-velocities 
 in the ALE formulation of the time-derivatives) is made by interpolating 
 between the current and previous nodal positions of the new \c Node's father 
 element.  This default assignment is subsequently overwritten if the 
@@ -119,7 +119,7 @@ one_d_lagrangian_mesh.template.h</A> is given by
 
 Thus, when we constructed the wall mesh in the non-adaptive
 version of the driver code 
-<A HREF="../../../../demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel.cc">fsi_collapsible_channel.cc,</A> using the statments
+<A HREF="../../../../demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel.cc">fsi_collapsible_channel.cc,</A> using the statements
 
 \code
  //Create the "wall" mesh with FSI Hermite beam elements
@@ -159,7 +159,7 @@ ALE representation of the time-derivatives \f$ \partial u_i/\partial t
 \f$ requires the nodal position at the two previous timesteps.
 This is achieved by passing a pointer to a specifically-constructed
 \c Steady<2> timestepper to the wall mesh. Here is the relevant
-code fragement from the Problem constructor in the driver code
+code fragment from the Problem constructor in the driver code
 <A HREF="../../../../demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel_adapt.cc">fsi_collapsible_channel_adapt.cc</A>:
 
 \dontinclude fsi_collapsible_channel_adapt.cc
@@ -227,7 +227,7 @@ addressed as a compound \c GeomObject, as in our original (slow!) code
 that employed a \c MacroElement - based node update.  The
 procedure is illustrated in the sketch below: The upper wall is 
 parametrised by a compound \c GeomObject in which the beam's Lagrangian
-coordinate \f$ \xi \f$ doubles as the \c GeomObject's instrinsic 
+coordinate \f$ \xi \f$ doubles as the \c GeomObject's intrinsic 
 coordinate \f$ \zeta. \f$
 The green arrows indicate the reference points for nodes I, II, III,
 IV and V in the coarse initial mesh. The reference values
@@ -262,7 +262,7 @@ It obviously does not make sense to create the reference value for
 the newly-created node VI by interpolation. The node update data must be
 created from scratch in two steps:
 -# Determine the newly-created Node's intrinsic reference coordinate within
-   the compound \c MeshAsGeomObject (i.e. the continous beam's
+   the compound \c MeshAsGeomObject (i.e. the continuous beam's
    Lagrangian coordinate), \f$ \xi_{VI}^{[ref]}\f$ by interpolation.
    (<A HREF="../../fsi_collapsible_channel_algebraic/html/index.html">Recall 
    </A> that the \c AlgebraicNodes in the non-refineable
@@ -285,7 +285,7 @@ is, the function may, of course, be implemented as an empty function.
 We note that the function \c AlgebraicMesh::update_node_update(...)
 is called \b after the default values for the node-update
 data have been assigned. It is therefore only necessary to correct
-those values for which the default procedure is inappopriate.
+those values for which the default procedure is inappropriate.
 
 To illustrate the procedure, here is the class definition for the
 \c RefineableAlgebraicCollapsibleChannelMesh. The mesh
@@ -409,7 +409,7 @@ spatial adaptivity may be enabled with a few straightforward changes:
   RefineableQCrouzeixRaviartElement<2>). \n\n
 - Add the functions \c Problem::actions_before_adapt() and
   \c Problem::actions_after_adapt(); see below. \n\n
-- Explicity specify the \c Steady<2> timestepper for the
+- Explicitly specify the \c Steady<2> timestepper for the
   wall mesh, as discussed above. \n\n
 - Create an error estimator, specify the target errors for
   the adaptation, and call the spatially adaptive Newton solver.

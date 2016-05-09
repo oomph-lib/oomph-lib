@@ -226,7 +226,7 @@ the fixed domain example.</A>
 \section ellipse Representing the moving curvilinear domain boundary by a time-dependent GeomObject
 
 As discussed above, we will incorporate the time-dependence of the
-moving curvilinear boundary into the specfication of the \c GeomObject
+moving curvilinear boundary into the specification of the \c GeomObject
 that defines that boundary. For this purpose we represent the
 elliptical boundary by the \c GeomObject \c MyEllipse.
 Its constructor stores the geometric parameters (the
@@ -235,7 +235,7 @@ amplitude of their temporal variations \f$ \hat{a} \f$ and
 \f$ \hat{b} \f$ , and the period of the
 oscillation, \f$ \hat{T} \f$ , in its private member data. We also store a 
 pointer to a \c Time  object to give the \c GeomObject access to the 
-"currrent" and "previous" values of the "continous time". 
+"current" and "previous" values of the "continuous time". 
 The destructor can remain empty.
 
 \dontinclude two_d_unsteady_heat_ALE.cc
@@ -265,7 +265,7 @@ We omit the code that defines the private member data.
 \section main The main function
 Since the deformation of the domain and the update of the nodal
 positions will be handled automatically by adding a call to
-\c Mesh::node_udate() to \c Problem::actions_before_implicit_timestep(), the
+\c Mesh::node_update() to \c Problem::actions_before_implicit_timestep(), the
 driver code for this problem is exactly the same as that in the 
 <A HREF="../../two_d_unsteady_heat_adapt/html/index.html"> previous
 example in a fixed domain. </A> 

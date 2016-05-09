@@ -307,7 +307,7 @@ for compressible/incompressible/near-incompressible behaviour:
    that must be specified by the constitutive law.   
    \f$ d \f$ is the (generalised) dilatation, i.e. the relative change
    in the volume of an infinitesimal material element (or some
-   suitable generalised quantitiy that is related to it). As the 
+   suitable generalised quantity that is related to it). As the 
    material approaches incompressibility, \f$ \kappa \to \infty\f$, so that
    infinitely large pressures would be required to achieve
    any change in volume. To facilitate the implementation of
@@ -471,7 +471,7 @@ Conversely, in plane stress problems, it is assumed that no stresses
 develop in the transverse direction; in this case we must 
 allow material particles to be displaced transversely.
 Since we have formulated our problem in terms of positions 
-(i.e. in terms of the dislacement of material points), our formulation
+(i.e. in terms of the displacement of material points), our formulation
 naturally produces a <B>plane strain</B> problem if we reduce
 the equations to two dimensions:
 We assume that the transverse displacement vanishes, 
@@ -480,7 +480,7 @@ functions of the in-plane coordinates, \f$ x_1\f$ and \f$ x_2\f$.
 
 It is important to remember that the 2D version of all equations must 
 produce plane-strain behaviour when new, strain-energy-based 
-consitutive equation classes are formulated;
+constitutive equation classes are formulated;
 when implementing such strain-energy functions, recall that any
 invariants of metric tensors etc. are the invariants of the full
 3D quantities which are not necessarily the same as those
@@ -574,7 +574,7 @@ Since the isotropically-grown infinitesimal
 @I w 0.35\textwidth Isotropic_growth_N2 " "
 Since the individual material elements have
 grown (or contracted) by different amounts they can (in general) 
-not be (re-)assembled to form a continous body without undergoing 
+not be (re-)assembled to form a continuous body without undergoing 
 some deformation. The deformation of the material elements (relative to their
 stress-free shape in the hypothetical, stress-free state N1) 
 induces internal stresses -- the so-called growth-stresses.
@@ -685,7 +685,7 @@ illustrated in the right half of the sketch. If the isotropic
 growth is spatially non-uniform, \f$ \Gamma = \Gamma(\xi^i)\f$,
 the growth will try to expand all infinitesimal material 
 elements isotropically -- but each one by a different amount as
-illustrated by the hyptothetical state N1 in which each material
+illustrated by the hypothetical state N1 in which each material
 element has expanded to its stress-free state in which its
 metric tensor is given by
 \f[
@@ -869,7 +869,7 @@ fashion.
 
 \section solid_implementation Implementation
 We will now discuss how the discrete equations (@R[fe_pvd]@) are
-implementated in \c oomph-lib. To facilitate the analysis
+implemented in \c oomph-lib. To facilitate the analysis
 of multi-physics problems, we introduce generalisations of the \c Node, 
 \c FiniteElement and \c Mesh classes which provide
 separate storage (and access functions) for all solid mechanics
@@ -1218,7 +1218,7 @@ problems. In this case the time-derivatives of the nodal positions in
 (@R[nondim_continuous_pdv]@) are replaced by an approximation
 which involves the current and three "history values" of the nodal 
 positions. To start the time-integration, we must assign 
-suitable values to these quantities to ensure that the intial 
+suitable values to these quantities to ensure that the initial 
 state of the system is represented correctly.
 
 To assign the intial values for the nodal positions, we

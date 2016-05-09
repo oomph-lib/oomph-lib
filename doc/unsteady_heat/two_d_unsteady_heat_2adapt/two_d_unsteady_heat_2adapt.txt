@@ -96,8 +96,8 @@ at the end of that demo problem, you will have confirmed this by
 observing that the error is reduced when the time-integration is performed
 with a smaller timestep. Since the solution only undergoes rapid
 changes during short periods of time, the use of temporal adaptivity 
-is highly desireable. Before demonstrating that the combined use
-of temporal and spatial adaptivity only reqires trivial changes to 
+is highly desirable. Before demonstrating that the combined use
+of temporal and spatial adaptivity only requires trivial changes to 
 the driver code with purely spatial adaptivity, we 
 briefly comment on the strategy employed by \c oomph-lib's
 doubly-adaptive unsteady Newton solver
@@ -121,7 +121,7 @@ adaptations sequentially, as follows:
    timestep selected previously by the temporal adaptation. Once the spatial 
    adaptations are complete, we could, in principle, re-evaluate
    the temporal error and, if required, re-compute the timestep yet
-   again -- at a signficant additional cost. We omit this further adjustment
+   again -- at a significant additional cost. We omit this further adjustment
    and accept the solution "as is".
 .
 As before, the boolean argument \c first indicates
@@ -204,9 +204,9 @@ default dump/restart procedures:
   \c DocInfo object) that we typically use to label the output files.
   Therefore the output files produced in the restarted run start 
   with label "0", making it difficult to merge the data files from the 
-  orginal and restarted simulations.
+  original and restarted simulations.
 - In an adaptive simulation, the restart files do not record the adaptive
-  timesteppers's suggestion for the next timestep, therefore the
+  timestepper's suggestion for the next timestep, therefore the
   first timestep in the restarted simulation 
   is performed with the timestep that was used when the 
   solution was dumped to disk, leading to slight differences
@@ -230,7 +230,7 @@ suggested by the adaptive timestepper.
 to the suggested next timestep; see \ref no_pub .]
 
  
-We intialise the output label in the \c Problem constructor,
+We initialise the output label in the \c Problem constructor,
 
 \dontinclude two_d_unsteady_heat_2adapt.cc     
 \skipline start_of_constructor
@@ -272,7 +272,7 @@ These values are then read during the restart:
 [The slightly clumsy read procedure is required to ensure that
 the comments that follow the "raw" data are ignored.]
 
-Following the assignement of the initial conditions, the first
+Following the assignment of the initial conditions, the first
 timestep for the timestepping loop in the \c main function 
 can now be obtained from \c next_dt() since \c Next_dt will either
 have been set to the actual first timestep used when setting up

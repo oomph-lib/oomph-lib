@@ -87,7 +87,7 @@ The contravariant metric tensor is the inverse of the covariant metric
  \f$.
 
  We will need to integrate quantities over the surface, which uses 
- the result that an infinitessimal unit of area is
+ the result that an infinitesimal unit of area is
  \f[ \mbox{ d}S = \sqrt{g} \mbox{ d}\zeta^{\alpha}, \f]
  in terms of the intrinsic coordinates.
 
@@ -115,7 +115,7 @@ The contravariant metric tensor is the inverse of the covariant metric
 \f[ \mbox{\boldmath$\nabla$}_{\!\!_S} \phi =
  g^{\alpha\beta} \mbox{\boldmath$g$}_{\alpha} \frac{\partial \phi}{\partial
  \zeta^{\beta}}. \f]
- For a one dimensional surface parameterised by the arc-length,
+ For a one dimensional surface parametrised by the arc-length,
  \f$ s\f$, this reduces to \f$ \mbox{\boldmath$\nabla$}_{\!\!_S} \phi =
  \mbox{\boldmath$t$} \partial \phi / \partial s,\f$ where \f$ t\f$ is a
  unit tangent vector to the surface. By definition the surface
@@ -186,7 +186,7 @@ direction, then we obtain
  \phi (\mbox{\boldmath$e$}_{i} \mbox{\boldmath$\cdot n$}) \kappa\,\mbox{ d}S +
 \int_{B} \phi\, \mbox{\boldmath$e$}_{i} \mbox{\boldmath$\cdot m$}\,\mbox{d} l, \f]
  which is equivalent to the surface divergence theorem for a scalar
- field decribed by 
+ field described by 
  Wetherburn (1955; p 240, Eqn 26) 
 \f[
 \int\!\!\!\int_{S} \kappa \phi \mbox{\boldmath$n$}\mbox{ d}S =
@@ -209,7 +209,7 @@ contributes to the
 overall force balance, as also described in <a href="../../single_layer_free_surface/html/index.html"> another
 tutorial </a>. The surface tension acts a line force bounding the
 interface and acting in the direction \f$ \mbox{\boldmath$m$}\f$. Thus
-using the surface divergence theorm in the form (@R[wether_surf]@),
+using the surface divergence theorem in the form (@R[wether_surf]@),
 \f[
  \int_{B} \sigma^{*} \mbox{\boldmath$m$} \mbox{ d} l = 
 \int\!\!\!\int_{S} \sigma^{*} \kappa + 
@@ -260,7 +260,7 @@ multiplied by the test function. Hence, they become
 
 Early contributors computed these terms directly, but an undesirable
 feature is that computation of the curvature requires taking second
-derivaties of the position vector, which requires a higher degree of
+derivatives of the position vector, which requires a higher degree of
 smoothness than previously demanded. We can use the surface divergence
 theorem again to weaken this requirement. Firstly we must use the
 product rule to bring the test function into the surface divergence
@@ -382,7 +382,7 @@ tutorial </a> for details. Note that, in general \f$ \mbox{\boldmath$U$}\f$ the
   derivation because the surface divergence of the normal may be
   replaced by the curvature, as described above.
 
- Returning to our formulation we use the surface divergence theorm
+ Returning to our formulation we use the surface divergence theorem
  (@R[surf_div]@) to
  integrate the diffusion term and the product rule to handle the third
  term:
@@ -431,7 +431,7 @@ surface_gradient.
 \section fs_implementation Implementation
 
 We will now discuss how the discrete versions of the 
-equations derived above are actually implementated in \c
+equations derived above are actually implemented in \c
 oomph-lib. The basic idea is that the equations should be implemented
 independently of the specific element type and mesh-update strategy and a 
 base class oomph::FluidInterfaceElement defines the 
@@ -461,7 +461,7 @@ the boundary is a free surface, rather than an interface.
 \code
  double FluidInterfaceElement::compute_surface_derivatives(...)
  \endcode
-  specifies how the suface gradient operators are computed.
+  specifies how the surface gradient operators are computed.
 - The function 
 \code
  double FluidInterfaceElement::sigma(const Vector<double> &s_local) 
@@ -688,7 +688,7 @@ the term that is always present is \f$
  U_z}{\partial s} \end{array}\right), \quad
   \mbox{\boldmath$U$}_{,2} = \left(\begin{array}{c} -U_r \sin\theta \\
  U_r\cos\theta \\ 0 \end{array}\right). \f]
-Thus, the surface divegence term is
+Thus, the surface divergence term is
 \f[ \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$}
 \mbox{\boldmath$U$}
  =  \frac{\left(\frac{\partial U_{r}}{\partial s} \frac{\partial

@@ -203,7 +203,7 @@ We define the gravitational body force that acts (only!) on the solid
 
 \until }
 
-and provide a pointer to the consitutive equation for the
+and provide a pointer to the constitutive equation for the
 solid. For simplicity, this constitutive equation will also be used for 
 the (pseudo-)solid elements that determine the deformation of 
 the fluid mesh. In general, the constitutive law used to 
@@ -498,7 +498,7 @@ and pass the FSI interaction parameter \f$ Q \f$ to the element.
 \section create_lagr Creating the Lagrange multiplier elements
 The creation of the \c FaceElements that use Lagrange multipliers
 to impose the boundary displacement of the pseudo-solid fluid mesh
-is again fairly straightfoward (the use of Lagrange multipliers
+is again fairly straightforward (the use of Lagrange multipliers
 for the imposition of boundary displacements is explained
 in <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">
 another tutorial</a>). We start by combining the
@@ -600,7 +600,7 @@ The assignment of the boundary coordinate along mesh boundary \c b
 is performed as follows:
 -# Attach \c FaceElements to the relevant faces of the "bulk" elements
    that are adjacent to mesh boundary \c b. 
--# Eastablish the connectivity of the \c FaceElements using the fact
+-# Establish the connectivity of the \c FaceElements using the fact
 that they share common \c Nodes and sort the elements into "connectivity" order 
 around the boundary.
 -# Locate the "lowest left" boundary node on the boundary and set
@@ -666,7 +666,7 @@ This is extremely unlikely to be right but makes for a useful exercise.
    non-dimensional body forces for the fluid and the solid. 
    \n\n
 -# Use your analysis to explain under what circumstances our "error" 
-   could actually be a justifable approximation to the real system.
+   could actually be a justifiable approximation to the real system.
 .
 
 
@@ -735,7 +735,7 @@ consistent boundary coordinates.
 @I w 0.75\textwidth  boundary_generation_test "Correct FSI boundary. "
   \n
   In the next figure, the fluid mesh is too coarse and the 
-  boundary detection has failed spectactularly:
+  boundary detection has failed spectacularly:
   \n\n
 @I w 0.75\textwidth  boundary_generation_test_too_coarse "Wrongly identified FSI boundary on a (too) coarse fluid mesh.  "
   \n\n

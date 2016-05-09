@@ -108,7 +108,7 @@ in a suitable \c Data object:
 The object has two constructors which we will discuss separately.
 The arguments to the first constructor specify the x- and
 y-coordinates of the ring's centre (\f$ X_c\f$ and \f$ Y_c\f$),
-and its radius, \f$ R \f$, as double precison numbers. The constructor creates
+and its radius, \f$ R \f$, as double-precision numbers. The constructor creates
 storage for these values in the \c Geom_data_pt
 vector which is stored in the object's protected member data.
 First, the \c Geom_data_pt vector (empty by
@@ -315,7 +315,7 @@ Next, we provide an access functions to the spring stiffness parameter,
 \until double
 
 and functions that allow the vertical displacement of the ring to 
-be pinned and un-pinnned:
+be pinned and un-pinned:
  
 \skipline Pin
 \until end of unpin_yc()
@@ -447,7 +447,7 @@ Here is the problem class definition which requires little comment:
 \subsection constructor The problem constructor
 
 In the problem constructor, we create the (single)
-\c ElasticallySupportedRingElementand and assign a value to its 
+\c ElasticallySupportedRingElement and and assign a value to its 
 "spring stiffness" parameter. 
 \skipline =============start
 \until k_stiff()

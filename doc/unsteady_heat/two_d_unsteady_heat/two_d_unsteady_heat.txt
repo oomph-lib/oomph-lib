@@ -109,7 +109,7 @@ timestepping routines by calling the function
 all timesteppers in the problem.
 
 Next we assign the initial conditions by calling 
-\c set_initial_condition(), to be discusssed in more detail below,
+\c set_initial_condition(), to be discussed in more detail below,
 and document the initial conditions. 
 
 \skipline Initialise
@@ -127,7 +127,7 @@ In this loop, each call to the unsteady Newton solver,
 from its current state, at time \f$ t = \f$ \c Problem::time_pt()->time(),
 to \f$ t \ + \f$ \c dt. The unsteady Newton solver automatically
 "shifts" the history values "backwards" and advances the
-value of the continous time. 
+value of the continuous time. 
 
 <HR>
 <HR>
@@ -150,11 +150,11 @@ Here we only use the first of these two functions.
 We note that the (self-explanatory) function \c
 set_initial_condition() overwrites an empty virtual function 
 in the \c Problem base class. While the assignment of initial 
-conditions could, in priniciple, be performed by any other function, 
+conditions could, in principle, be performed by any other function, 
 e.g. the \c Problem constructor, we strongly recommend using
 this function to faciliate the extension to spatial 
 adaptivity. (In spatially adaptive computations of time-dependent
-problems, a standard interface for the re-assignement of 
+problems, a standard interface for the re-assignment of 
 initial conditions following mesh adaptations is required; we will
 discuss this aspect in  
 <A HREF="../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html">
@@ -451,7 +451,7 @@ state for all \f$ t \le 0\f$ rather than only \e at \f$ t =
 0\f$ . For instance, the top-level function \c
 Problem::assign_initial_values_impulsive() sets the  "history values"
 of all \c Data objects and the \c Nodes' "positional history values" 
-to values that are approriate for an impulsive start from the
+to values that are appropriate for an impulsive start from the
 currently assigned nodal values and positions. 
 The following exercises aim to explore this functionality.
 
@@ -479,7 +479,7 @@ The following exercises aim to explore this functionality.
 -# Overwrite the correct assignment of the "history values" in
    \c set_initial_condition() by adding the statement
    \c Problem::assign_initial_values_impulsive() at the end
-   of this function (rather than bypassing the assignement
+   of this function (rather than bypassing the assignment
    completely as in the first exercise). Repeat this with the \c BDF<1>
    and \c BDF<4> timesteppers and explain the different behaviour. 
 -# Examine the accuracy of the various \c BDF timesteppers by

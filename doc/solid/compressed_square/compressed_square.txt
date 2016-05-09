@@ -211,7 +211,7 @@ shows the exact solution while the mesh shows the finite element
 solution obtained with the displacement formulation of the problem.
 The solutions obtained with formulations II and III
 are graphically indistinguishable. All other quantities
-(the transvese displacement and the shear stress \f$ \sigma_{xy} \f$)
+(the transverse displacement and the shear stress \f$ \sigma_{xy} \f$)
 are of order \f$ 10^{-12}. \f$ 
 
 @I w 0.75\textwidth validate_vs_lin "Plot of the vertical displacement and the horizontal and vertical stresses, respectively. "
@@ -225,7 +225,7 @@ constitutive law. The agreement between analytical and
 computed results is as good as the one shown in the above plot. 
 In particular in all cases where incompressibility is enforced, the vertical
 displacement is suppressed and the stress state becomes
-hydrotstatic, as predicted by the analytical solution. 
+hydrostatic, as predicted by the analytical solution. 
 
 <HR>
 <HR>
@@ -395,7 +395,7 @@ enforcement incompressibility (or the lack thereof) is consistent:
 - The compiler will not allow the user to enforce incompressibility
   on elements that are based on the displacement form of the
   principle of virtual displacements. This is because
-  the displacment-based elements do not have a member function
+  the displacement-based elements do not have a member function
   \c incompressible().
   \n\n
 - Certain constitutive laws, such as the Mooney-Rivlin law used in

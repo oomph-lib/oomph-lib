@@ -20,7 +20,7 @@ discretise the computational domain using a boundary-fitted mesh which
 deforms in 
 response to the change in position of the interface. The positions of the
 nodes in the `bulk' of the mesh are determined by treating the interior
-of the mesh as a ficitious elastic solid and solving a solid mechanics
+of the mesh as a fictitious elastic solid and solving a solid mechanics
 problem, a technique which we refer to as a `pseudo-solid node update
 strategy'. The deformation of the free surface boundary itself is imposed by
 solving the kinematic boundary condition for a field of Lagrange
@@ -56,7 +56,7 @@ conserving, and we therefore require
 to be satisfied, where \f$ a \f$ is the radius of the cylindrical
 container (or the width of the computational domain). Since in our
 case \f$ h(r) = J_0(kr) \f$, and we will choose a computational domain
-of width \f$ a=1 \f$, our initial condition must therefore satisy
+of width \f$ a=1 \f$, our initial condition must therefore satisfy
 \f[
 \int_0^1 r \, J_0(kr) \, dr = 0.
 \f]
@@ -64,10 +64,10 @@ Using the properties of Bessel functions we find that this condition
 is met if \f$ J_1(k) = 0 \f$, and hence the values of \f$ k \f$ are
 constrained to be zeroes of \f$ J_1(k) \f$.
 
-Futhermore, the properties of Bessel functions are such that the
+Furthermore, the properties of Bessel functions are such that the
 derivative of \f$ J_0(kr) \f$ with respect to \f$ r \f$, evaluated at
 any point along the \f$ r \f$-axis which corresponds to a zero of \f$
-J_1(kr) \f$, is itself zero. The velocity boundary contition in the
+J_1(kr) \f$, is itself zero. The velocity boundary condition in the
 axial direction is therefore the traction-free condition \f$ \partial
 u_z / \partial r = 0 \f$. This could be physically realised by having
 a `slippery' outer wall where the contact line can move but the
@@ -328,7 +328,7 @@ can linearise the governing equations and obtain a dispersion relation
 \f$ \lambda(k) \f$. In the <A HREF="../../../navier_stokes/single_layer_free_surface/html/index.html#validation">two-dimensional single-layer example</A>
 we discussed the derivation of such a dispersion relation, and the
 technique used for this problem is very similar. The major difference
-is that the proposed seperable solution for the linearised equations
+is that the proposed separable solution for the linearised equations
 is of the form
 \f[
 \hat{h}(r,t) = H e^{\lambda t} J_0(kr),

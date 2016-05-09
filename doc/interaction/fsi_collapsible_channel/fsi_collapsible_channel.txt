@@ -77,7 +77,7 @@ We scale all lengths on the channel width, \f$ H^* \f$ , use the
 average velocity through the undeformed 
 channel, \f$ U =P^*_{up} H^{*2}/(12 \mu L^*_{total}) \f$ , to scale 
 the velocities, and use \f$ H^{*}/U \f$ to non-dimensionalise
-time. Finaly, the fluid pressure is non-dimensionalised on the viscous scale 
+time. Finally, the fluid pressure is non-dimensionalised on the viscous scale 
 \f$ p^{*} = p \mu U/H^{*}\f$.
 (As usual, asterisks distinguish dimensional 
 parameters from their non-dimensional equivalents.) 
@@ -204,7 +204,7 @@ The overall structure of the flow field is very similar to that observed
 in the corresponding  
 <A HREF="../../../navier_stokes/collapsible_channel/html/index.html">
 problem with prescribed wall motion:</A> The wall oscillation generates
-a large-ampitude sloshing flow that is superimposed on the pressure-driven
+a large-amplitude sloshing flow that is superimposed on the pressure-driven
 Poiseuille flow. At the instant shown in this figure, the wall is moving
 inwards. Consequently, the sloshing flow generated in the upstream 
 (downstream)  rigid sections is directed against (in the same)  
@@ -412,7 +412,7 @@ sketch:
 
 The function \c GeomObject::position(zeta,r)
 computes the position vector \c r to a point on the \c GeomObject,
-as identified by its intrinisic coordinate \c zeta.
+as identified by its intrinsic coordinate \c zeta.
 
 <B>2. A beam/shell structure</B>
 
@@ -473,7 +473,7 @@ The \c FiniteElement class inherits from \c GeomObject and by
 default the \c GeomObject::position(...) function calls the function \c
 FiniteElement::interpolate_x(..); in other words,
 the element's local coordinate is
-regarded as the intrinisic
+regarded as the intrinsic
 coordinate that parametrises its shape. Thus we already have a standard 
 interface through which an \c FSIWallElement can be used to parametrise 
 the shape of (part of) the domain boundary. 
@@ -573,7 +573,7 @@ these functions have to implemented on a case-by-case basis.
 However, all existing fluid elements in \c oomph-lib are already derived
 from the \c FSIFluidElement class and therefore provide
 a suitable implementation of these functions. It is therefore
-not necessary to explicity "upgrade" \c oomph-lib's fluid elements 
+not necessary to explicitly "upgrade" \c oomph-lib's fluid elements 
 before using them in FSI computations.
 
 
@@ -835,7 +835,7 @@ We copy the various mesh parameters to the Problem's private data
 \until  Ly=ly;
 
 and increase the maximum value of the residual that is permitted 
-during the Newton iteration to accomodate possible poor initial
+during the Newton iteration to accommodate possible poor initial
 guesses for the solution.
 \until Max_residual
 
@@ -1060,7 +1060,7 @@ problem with prescribed wall motion</A>.
   include all those \c Data objects that are involved in the adjacent 
   fluid elements' node update operations.
   \n\n
-  Here is an animation that illustrates these depencencies for
+  Here is an animation that illustrates these dependencies for
   a relatively coarse discretisation in which the collapsible section
   of the fluid mesh is discretised with 10 "vertical columns" of 
   \c QCrouzeixRaviartElement<2> elements, while the wall is
@@ -1128,7 +1128,7 @@ position of all fluid nodes.
 
 <HR> 
 
-- <B>(In-)efficieny of the MacroElement-based node-update</B> \n\n
+- <B>(In-)efficiency of the MacroElement-based node-update</B> \n\n
   The animations shown above illustrate very graphically
   that the implementation of the fluid-structure interaction
   via \c MacroElement/Domain - based node updates does not lead to

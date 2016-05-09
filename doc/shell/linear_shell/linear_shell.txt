@@ -36,7 +36,7 @@ To develop a mathematical description of the deformation of a three-dimensional 
 
 @I w 0.45\textwidth shell_geometry "A shell geometry. "
 
-The governing equation of a static shell with zero pre-stress is parameterised by the two coordinates \f$ \xi_1, \xi_2 \f$ on the mid-surface of the shell and can be obtained as 
+The governing equation of a static shell with zero pre-stress is parametrised by the two coordinates \f$ \xi_1, \xi_2 \f$ on the mid-surface of the shell and can be obtained as 
 
 \f[
  \int_{\Omega}{\left\{ \tilde{E}^{\alpha\beta\gamma\delta}\left( \gamma_{\alpha\beta}\delta\gamma_{\gamma\delta} + \frac{1}{12}h^2\kappa_{\alpha\beta}\delta\kappa_{\gamma\delta}\right) -
@@ -229,7 +229,7 @@ the \f$ C^1 \f$-curved triangular finite element tutorials</A>). However, in a l
 In this study, the displacements in tangential directions are chosen to approximate by the quadratic Lagrange interpolations which provide only \f$ C^0 \f$ continuity and are defined to have 3 nodes per side on a triangle. On the other hand, the approximation of the normal displacement employs the \f$ C^1 \f$-interpolation functions which are defined to have 2 nodes per side on a triangle. 
 
 Therefore, the number of \c NNODE_1D has been modified
-in the \c BellShellElement<DIM,NNODE_1D> (and \c C1CurvedShellElement when dealing with the curvilinear boundary domain) to be 3 in this problem. Consequencely, the extra nodes that are not neccessay for the \f$ C^1 \f$-shape functions have to be taken care. 
+in the \c BellShellElement<DIM,NNODE_1D> (and \c C1CurvedShellElement when dealing with the curvilinear boundary domain) to be 3 in this problem. Consequencely, the extra nodes that are not necessary for the \f$ C^1 \f$-shape functions have to be taken care. 
 
 Following the usual self-test, we call the function \c MyLinearisedShellProblem::parameter_study() to compute the solution of the problem within a range of external pressures.
 
@@ -250,7 +250,7 @@ The problem class has five member functions, illustrated as follows:
 - \c parameter_study() : Computes the shell's deformation for a range of external pressures.
 .
 
-From the above mentioned functions, only the problem constructor is non-trivial. The reader is refered to <A HREF="../../../beam/tensioned_string/html/index.html"> another tutorial</A>  for a description on \c parameter_study.
+From the above mentioned functions, only the problem constructor is non-trivial. The reader is referred to <A HREF="../../../beam/tensioned_string/html/index.html"> another tutorial</A>  for a description on \c parameter_study.
 
 In the present problem, the function \c Problem::actions_after_newton_solve() is not required, so it remains empty. Also, the class includes two private data members which store pointers to a source function and to the geometric object that specifies the shell's undeformed shape.
 

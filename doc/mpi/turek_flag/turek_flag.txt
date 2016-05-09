@@ -167,7 +167,7 @@ To avoid this problem, we adopt the following strategy:
 \section distr Distributing the Problem
 In the present example, there are two "bulk"
 meshes corresponding to the fluid and solid domains
- and three "suface" meshes of traction
+ and three "surface" meshes of traction
 elements. The traction elements are \c FaceElements 
 created from the "bulk" fluid elements and should be deleted before the
 problem is distributed, see the tutorial on applying 
@@ -185,7 +185,7 @@ as halo elements by using the function
 same methodology could be used here, but it would be extremely wasteful
 to retain all the solid elements in the "bulk" solid mesh because only
 the elements next to the FSI boundary are required. 
-Instad, we use a more fine-grained
+Instead, we use a more fine-grained
 method of retaining elements via the function \c
 GeneralisedElement::must_be_kept_as_halo(). 
 
@@ -197,7 +197,7 @@ GeneralisedElement::must_be_kept_as_halo().
 Most of the driver code is identical to the original serial version 
 discussed in <a href="../../fsi_channel_with_leaflet/html/index.html">
 another tutorial</a>. We therefore only discuss those parts of the
-code that have to be changed to allow (i) the simultaenous adaptation of
+code that have to be changed to allow (i) the simultaneous adaptation of
 the fluid and solid meshes, and (ii) the problem distribution. 
 
 <HR>
@@ -227,7 +227,7 @@ To facilitate the deletion and re-creation of the
 \c FSISolidTractionElements before and after the adaptation
 (and distribution) we provide a new helper function 
 \c delete_fsi_traction_elements() which complements the 
-already-exisiting \c create_fsi_traction_elements() function:
+already-existing \c create_fsi_traction_elements() function:
 
 \dontinclude turek_flag.cc
 \skipline start_of_delete_traction_elements

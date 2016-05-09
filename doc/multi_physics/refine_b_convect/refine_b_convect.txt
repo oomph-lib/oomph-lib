@@ -67,7 +67,7 @@ following the mesh adaptation exactly one pressure degree of freedom
 must be pinned in the problem. (Since the domain is enclosed the 
 pressure is only determined up to an arbitrary constant.) 
 The pressure degree of freedom that was pinned before the adaptation
-may have disappeared during the adpaptation, therefore 
+may have disappeared during the adaptation, therefore 
 the constraint must be re-applied. However, we unpin all pressure
 degrees of freedom first to ensure that we do not accidentally 
 pin two pressure degrees of freedom. 
@@ -164,7 +164,7 @@ version of the problem</a> we create the refineable element
 Many of the
 additional member functions required in the combined multi-physics element are 
 identical to those in the non-refineable version:
-- the acccess function to (the pointer to the) Rayleigh number, \c ra_pt(),
+- the access function to (the pointer to the) Rayleigh number, \c ra_pt(),
 - the output functions, \c output(...),
 - the function \c required_n_value(...) which specifies the number of
   values required at each node,
@@ -204,7 +204,7 @@ fields, with the velocity field terms stored first.
 The default behaviour of the Z2 error estimator is to combine all
 components of the flux vector into a single compound flux. In the present
 multi-physics element, we instead define two compound fluxes: one
-correponding to the combined
+corresponding to the combined
 temperature fluxes and the other to the combined velocity field
 fluxes. The flux components associated with each compound flux must
 specified by overloading the function \c get_Z2_compound_flux_indices
@@ -304,7 +304,7 @@ must be passed to the sons after refinement.
     {return errors[0];}
   \endcode
    specifies that the combined error estimate is the first of the 
-   compound error esimates ---
+   compound error estimates ---
    the error estimate for the Navier--Stokes equations.
   \n\n
   In the current example both fields vary very smoothly, and as a result

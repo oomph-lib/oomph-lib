@@ -28,7 +28,7 @@ Liu's sparse direct
 solver <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU.</A> 
 
 \c oomph-lib provides a large number of alternative linear solvers
-that may be used instead. All linears solvers within the library
+that may be used instead. All linear solvers within the library
 are derived from the base class 
 <a href="../../the_data_structure/html/classoomph_1_1LinearSolver.html"><CODE>
 LinearSolver</CODE></a> which contains a single pure virtual function
@@ -409,7 +409,7 @@ and set it as the \c Preconditioner for \c oomph-lib's \c BiCGStab solver:
 
 \skipline oomph_linear_solver_pt->preconditioner_pt()=hypre_preconditioner_pt;
 
-The actual preconditioning methology to be used by the \c
+The actual preconditioning methodology to be used by the \c
 HyprePreconditioner is again selected via enumerated flags, i.e.
 
 \skipline hypre_preconditioner_pt->hypre_method() = HyprePreconditioner::Boom

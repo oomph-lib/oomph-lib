@@ -5,7 +5,7 @@ This is a slightly more advanced example in which we demonstrate
 the use of spatial adaptivity in time-dependent problems.
 We discuss the implementation of the spatially adaptive version of
 \c oomph-lib's unsteady Newton solver, \c
-Problem::unsteady_newton_solve(...), and explain why the assignement
+Problem::unsteady_newton_solve(...), and explain why the assignment
 of initial conditions should be performed by overloading the 
 \c Problem::set_initial_condition() function. We also
 discuss briefly how \c oomph-lib's generic dump and restart
@@ -228,7 +228,7 @@ issues arise:
 
 \section overview Overview of the driver code 
 
-Equiped with this background information, the driver code for our
+Equipped with this background information, the driver code for our
 example problem is easy to understand, if somewhat 
 lengthy. [Using an example with Dirichlet boundary conditions 
 along the entire domain boundary would have shortened
@@ -274,10 +274,10 @@ in two versions:
   computes the position vector, \c r, to the point on/in the \c GeomObject,
   parametrised by the vector of intrinsic coordinates, \c xi.
 - The three-argument version \c GeomObject::position(t,xi,r), where
-  \c t is an unsignedeger, computes the position vector at 
+  \c t is an \c unsigned, computes the position vector at 
   the \c t - th previous timestep. 
 .
-In the current problem, the domain bondary
+In the current problem, the domain boundary
 is stationary, therefore the steady and unsteady versions of the
 function are identical. Here is the complete source code for
 the \c MyUnitCircle object which we will use to represent the 

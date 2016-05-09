@@ -1,12 +1,12 @@
 \mainpage The Rayleigh--Plateau instability in the presence of an insoluble surfactant
 
-In this tutorial we present an example of surface-tranport equations
+In this tutorial we present an example of surface-transport equations
 in a free-surface Navier--Stokes problem. This is a multi-domain, multi-physics
 problem because there is a coupling between the equations on
 the surface and those in the bulk. The coupling from the bulk to the
 surface transport arises through the surface velocity in the surface
 transport equation. The coupling from the surface transport to bulk arises in a
-more suble manner because the surface concentration affects the
+more subtle manner because the surface concentration affects the
 surface tension. In this tutorial, we describe how to use 
 the existing framework to create surface transport equations and 
 how to include them in a free-surface problem.
@@ -239,7 +239,7 @@ which the tube is completely occluded by the fluid at one end.
   which provides the additional surface transport equations. In the
  example code two formulations of the surface transport equations are
  provided the one used by Campana et al in which the curvature is
- computed explicity and the formulation derived in our <a href="../../../navier_stokes/surface_theory/html/index.html">
+ computed explicitly and the formulation derived in our <a href="../../../navier_stokes/surface_theory/html/index.html">
 free-surface theory, </a> in which the curvature is not required. The
  version used is determined by an internal boolean
  \until Integrated_curvature
@@ -260,7 +260,7 @@ free-surface theory, </a> in which the curvature is not required. The
  \skipline integrate_c()
  \until const
  that computes the integral of the concentration over the elemental
- surface, representating the total mass of surfactant within the
+ surface, representing the total mass of surfactant within the
  element.
 
  <HR>
@@ -276,7 +276,7 @@ reproduce the results found by Campana et al.
 -# Look at the three-dimensional (non-axisymmetric) version of the
 code found in the same directory. Confirm that the same results are
 produced. Is the instability stable to non-axisymmetric perturbations?
-Use the code to investigate what happens if you make the cross-sectoinal 
+Use the code to investigate what happens if you make the cross-sectional 
 boundary slightly elliptical rather than circular?
 .
 <hr>

@@ -272,7 +272,7 @@ to the \c Problem's global mesh.
 \until build_global_mesh();
 
 We pin the position of the nodes on all domain boundaries apart from the
-top boundary (boundary 2) and pin any redudant pressure degrees of freedom.
+top boundary (boundary 2) and pin any redundant pressure degrees of freedom.
 (This is not strictly necessary in the present driver code
 since the displacement-based \c RefineableQPVDElements do not have 
 any pressure degrees of freedom. However, it is good practice to 
@@ -324,7 +324,7 @@ The creation of the Lagrange multiplier elements that impose the
 displacement constraint follows the usual pattern. We loop over
 the "bulk" solid elements that are adjacent to mesh boundary 2
 and attach \c ImposeDisplacementByLagrangeMultiplierElements
-to the approriate faces. 
+to the appropriate faces. 
 
 \dontinclude prescribed_displ_lagr_mult.cc
 \skipline start_of_create_lagrange_multiplier_elements

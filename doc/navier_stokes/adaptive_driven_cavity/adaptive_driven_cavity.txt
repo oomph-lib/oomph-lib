@@ -17,7 +17,7 @@ steps as for a scalar problem:
   that is derived from the \c RefineableMesh class.
 - An \c ErrorEstimator object must be specified.
 . 
-Two additional steps tend to be required during the adaptative solution of 
+Two additional steps tend to be required during the adaptive solution of 
 Navier-Stokes problems:
 - Recall that in Navier-Stokes problems in which the velocity is 
   prescribed along 
@@ -271,10 +271,10 @@ and "hanging weights". This is achieved as follows;
   function \c Node::hanging_pt(), is \c NULL.
 - Mesh adaptation may turn a node into a hanging node. 
   A node's "hanging status" is primarily a
-  geometrical/topolological property. 
+  geometrical/topological property. 
   If a \c Node is found to be hanging, \c oomph-lib's mesh adaptation 
   procedures create a \c HangInfo object that stores the list of
-  the hanging node's "master nodes" and their respecive weights.
+  the hanging node's "master nodes" and their respective weights.
   A pointer to the \c HangInfo object is then passed to the \c Node.
   The list of master nodes and weights, stored in this \c HangInfo
   object is then used by the function \c Node::position() to 
@@ -290,7 +290,7 @@ and "hanging weights". This is achieved as follows;
   elements' nodes, using its geometric shape functions as basis functions.
 - For elements that use different interpolation schemes for 
   different nodal values (e.g. in Taylor-Hood elements), the default
-  assigment for the pointers to the \c HangInfo objects may be
+  assignment for the pointers to the \c HangInfo objects may be
   over-written. This is task is typically performed by re-implementing
   (and thus over-writing) the empty virtual function
   \code
@@ -370,7 +370,7 @@ NavierStokesEquations<DIM>::unpin_proper_nodal_pressure_dofs()
 
 These functions are implemented as empty virtual functions
 in the \c NavierStokesEquations<DIM> class which provides a base
-class for all Navier-Stokes elements. The emtpy functions 
+class for all Navier-Stokes elements. The empty functions 
 are overwritten for \c QTaylorHoodElement<DIM> and remain empty for
 all other Navier-Stokes elements, therefore they can be called
 for any element type.
@@ -386,7 +386,7 @@ Data. Since the pressure representation is discontinuous, the pressure
 values do not have to be subjected to any constraints to ensure
 inter-element continuity. Each \c Node stores two [three] velocity
 degrees of freedom. Since the velocity representation is
-isoparametric, the default assignement for the nodal values' \c
+isoparametric, the default assignment for the nodal values' \c
 HangInfo pointer is appropriate and no further action is required.
 
 

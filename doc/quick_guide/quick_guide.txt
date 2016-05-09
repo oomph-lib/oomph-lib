@@ -275,7 +275,7 @@ below.
 
 
 If the domain is too different from any of the existing meshes, a new,
-customized \c Mesh object, \c SpecificMesh, say, must be created. 
+customised \c Mesh object, \c SpecificMesh, say, must be created. 
 The specific mesh should be created as an object that inherits from the 
 generic \c Mesh class. To maximise the potential for code-reuse, we
 recommended making the element type a template parameter
@@ -349,7 +349,7 @@ into a shape that matches the required domain. Provided that the
 new domain has the same topology as the domain represented 
 by the original \c Mesh, this can always be done by 
 re-positioning the Nodes. Such "deformed" \c Meshes should be implemented
-via inheritance, by deriving the new \c Mesh from an exisiting one.
+via inheritance, by deriving the new \c Mesh from an existing one.
 
 Here is an example that illustrates the procedure. Assume we wish to 
 solve an equation in the 2D annular domain bounded (in polar
@@ -639,7 +639,7 @@ The output function is used to print the nodal values over the element
     typedef double (*PoissonSourceFctPt)(const double& x);
     \endcode
   - Add a function pointer to the private data of the \c
-    TwoNodePoissonElement class and initalise it to NULL
+    TwoNodePoissonElement class and initialise it to NULL
     in the constructor:
     \code
     /// \short Function pointer to source function (initialised to
@@ -1218,7 +1218,7 @@ throughout \c oomph-lib, but the direct use of -1 as a (bad!) "magic number"
 is generally avoided. Instead we refer to the static data member of 
 the \c Data class
 \code static long Data::Is_pinned \endcode
-which is (of course) set to -1. Similary, when nodes are created,
+which is (of course) set to -1. Similarly, when nodes are created,
 the equation numbers of their value(s) are initialised to a value of -10,
 represented by the static data member 
 \code static int Data::Is_unclassified \endcode
@@ -1252,7 +1252,7 @@ multi-physics element will obviously have a larger number of degrees
 of freedom than the constituent single-physics elements. The combined element
 typically calls the \c get_residuals(...) function of the two 
 constituent elements and concatenates their residual vectors. 
-When computating the Jacobian matrix, the "single physics" elements 
+When computing the Jacobian matrix, the "single physics" elements 
 provide the diagonal blocks for the Jacobian matrix of the
 multi-physics element, while the off-diagonal interaction blocks must 
 be computed separately. The details of the implementation vary

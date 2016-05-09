@@ -27,7 +27,7 @@ problems and in fluid-structure interaction problems. We shall explain
 why \c Domain / \c MacroElement - based node update strategies 
 are unlikely to be efficient for such problems and then introduce
 the "Method of Spines" as one of a number of sparse (and therefore more
-efficient) node-update stragegies available in \c oomph-lib.
+efficient) node-update strategies available in \c oomph-lib.
 
 
 
@@ -60,7 +60,7 @@ by the  \c Domain / \c MacroElement - based methods referred to above.
 How exactly the unknowns \f$ H_i \  (i=1,...,N_H)\f$ are 
 determined is irrelevant for the purpose of this discussion (
 in free surface flow problems, the relevant equation is the
-kinematic free-surface condition discusssed in 
+kinematic free-surface condition discussed in 
 <a href="../../../navier_stokes/single_layer_free_surface/html/index.html#kinematic_condition_theory">another tutorial</a>) -- we simply assume that there \e are some equations
 that determine their values. The feature we wish to focus on here is
 that the solution of the problem by Newton's method requires the
@@ -69,7 +69,7 @@ respect to \e all unknowns in the problem. \c oomph-lib's
 Navier-Stokes elements compute the element residual vectors 
 (the residuals of the discretised momentum and continuity equations, 
 evaluated for the current values of the unknowns), and the derivatives of these
-residuals with respect to the elements's velocity and pressure
+residuals with respect to the elements' velocity and pressure
 degrees of freedom. Clearly, the entries in the element's residual
 vector also depend on the position of the element's constituent
 nodes, which, in a free-boundary problem, are determined (via the
@@ -107,7 +107,7 @@ where \f$ h(x_1)\f$ may have to be determined as part of the solution
 
 @I w 0.75\textwidth spine_sketch "Sketch of the Method of Spines. "
 
-Further, assume that the mesh toplogy is such that the
+Further, assume that the mesh topology is such that the
 mesh's \f$ N_{node} \f$ nodes are distributed along \f$ N_{spine} \f$ 
 lines that are (topologically) orthogonal to the free boundary. 
 We refer to these lines as the "spines" and denote

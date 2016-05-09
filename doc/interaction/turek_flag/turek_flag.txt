@@ -4,7 +4,7 @@ In this example we consider the flow in a 2D channel past a cylinder
 with an attached elastic "flag". This is the FSI benchmark problem
 proposed by Turek & Hron,
 <CENTER>
-"Propoposal for Numerical Benchmarking of
+"Proposal for Numerical Benchmarking of
 Fluid-Structure Interaction between an Elastic Object and a Laminar
 Incompressible Flow", S. Turek & J. Hron, pp. 371-385. In: 
 "Fluid-Structure Interaction" Springer Lecture Notes in 
@@ -62,7 +62,7 @@ modulus \f$ E^* \f$, density \f$ \rho_s \f$ and Poisson's ratio \f$ \nu. \f$
 We non-dimensionalise all length and coordinates 
 on the diameter of the cylinder, \f$ d^* \f$, the
 velocities on the mean velocity,  \f$ U^* \f$, and the fluid pressure
-on the viscous scale. To faciliate comparisons with
+on the viscous scale. To facilitate comparisons with
 Turek & Hron's dimensional benchmark data (particularly for 
 the period of the self-excited oscillations), we use a timescale of 
 \f$ T^* = 1 \ \mbox{sec} \f$ to non-dimensionalise time. The 
@@ -256,7 +256,7 @@ along the channel. This is illustrated in the figure below which
 shows a snapshot of the flow field  (pressure contours and 
 instantaneous streamlines) at \f$ t=6.04. \f$
 
-@I w 0.75\textwidth fsi2_flow605_cropped "Snapshot of the flow field (instantaenous streamlines and pressure contours) "
+@I w 0.75\textwidth fsi2_flow605_cropped "Snapshot of the flow field (instantaneous streamlines and pressure contours) "
 
 The constantly adapted mesh contains and average
 of 65,000 degrees of freedom. A relatively large timestep
@@ -280,7 +280,7 @@ This is illustrated in the figure below which
 shows a snapshot of the flow field  (pressure contours and 
 instantaneous streamlines) at \f$ t=3.615. \f$
 
-@I w 0.75\textwidth fsi3_flow724_cropped "Snapshot of the flow field (instantaenous streamlines and pressure contours) "
+@I w 0.75\textwidth fsi3_flow724_cropped "Snapshot of the flow field (instantaneous streamlines and pressure contours) "
 
 This computation was performed with a timestep of \f$ \Delta t = 0.005
 \f$ and resulted in oscillations with a period of \f$ \approx 0.19
@@ -358,7 +358,7 @@ are defined here:
 
 Finally, we provide a helper function that assigns the
 parameters for the various test cases, depending on their
-ID ("FSI1", "FSI2", "FSI3", "CSM1" or "CSM2"). Here is the assigment 
+ID ("FSI1", "FSI2", "FSI3", "CSM1" or "CSM2"). Here is the assignment 
 for the case FSI1:
 
 \until }
@@ -405,7 +405,7 @@ Finally, we document the initial condition and start the
 time-stepping procedure, setting the \c first flag to \c false
 because we have not specified an analytical expression for the
 initial conditions that could be re-assigned after the
-mesh adapatation when computing the first timestep.
+mesh adaptation when computing the first timestep.
 
 \until end of main
 

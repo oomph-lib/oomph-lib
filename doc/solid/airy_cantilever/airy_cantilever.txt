@@ -323,7 +323,7 @@ trace file.
    and \c RefineableQPVDElementWithContinuousPressure<2> and compare
    the results. Both of these two elements are based on a
    pressure-displacement formulation, the former employing 
-   a discontinous pressure representation (as in Crouzeix-Raviart 
+   a discontinuous pressure representation (as in Crouzeix-Raviart 
    Navier-Stokes elements), the 
    latter employing a continuous pressure representation (as in 
    Taylor-Hood elements). Confirm that calls to \c
@@ -351,11 +351,11 @@ trace file.
       \c RefineableRectangularQuadMesh, in 
       <A HREF="../../../../src/meshes/rectangular_quadmesh.template.h">
        src/meshes/rectangular_quadmesh.template.h</A>. 
-      Instead of inherting the mesh from the \c RefineableRectangularQuadMesh
+      Instead of inheriting the mesh from the \c RefineableRectangularQuadMesh
       and the \c SolidMesh classes, inherit from the non-refineable 
       \c RectangularQuadMesh and the \c SolidMesh.]
    -# You must not pass the pointer to the error estimator to the
-      non-refinable mesh -- it has no use for it.
+      non-refineable mesh -- it has no use for it.
    -# You cannot call the adaptive Newton solver.
    .
 .

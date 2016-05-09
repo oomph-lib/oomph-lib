@@ -92,7 +92,7 @@ the downstream end is compressed.
 
 \section overview_implementation Overview of the implementation
 
-The general procedure desribed below is essentially the same as
+The general procedure described below is essentially the same as
 that discussed in the <a href="../../unstructured_fsi/html/index.html">
 two-dimensional unstructured FSI tutorial. </a>  The use of 
 an unstructured mesh 
@@ -117,7 +117,7 @@ other fluid-structure-interaction problems.
  surface facets. As the mesh is
  imported into \c oomph-lib, each surface facet is treated as a
  separate boundary and given a unique boundary identifier. The surface
- parameterisation of each facet is then simply 
+ parametrisation of each facet is then simply 
  given by local coordinates of the plane; see \ref boundary_coord.
  A consequence of this
  approach is that the physical boundaries will consist of several
@@ -195,7 +195,7 @@ the FSI interaction parameter \f$ Q \f$.
 \skipline start_of_namespace
 \until Q=
 
-We provide a pointer to the consitutive equation for the
+We provide a pointer to the constitutive equation for the
 solid. For simplicity, the same constitutive equation will also be used for 
 the (pseudo-)solid elements that determine the deformation of 
 the fluid mesh. In general, of course, a different constitutive
@@ -550,7 +550,7 @@ and pass the FSI interaction parameter \f$ Q \f$ to the element.
 \section create_lagr Creating the Lagrange multiplier elements
 The creation of the \c FaceElements that use Lagrange multipliers
 to impose the boundary displacement of the pseudo-solid fluid mesh
-is again fairly straightfoward (the use of Lagrange multipliers
+is again fairly straightforward (the use of Lagrange multipliers
 for the imposition of boundary displacements is explained
 in <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">
 another tutorial</a>). The only complication is that we must loop over
@@ -618,7 +618,7 @@ when setting up the fluid-structure interaction with
 \c FSI_functions::setup_fluid_load_info_for_solid_elements(...).
 The two parametrisations should be consistent; see
 \ref go_wrong for more details. The implementation is straightforward
-and is supressed for brevity; see the 
+and is suppressed for brevity; see the 
 <a href=
 "../../../../demo_drivers/interaction/unstructured_three_d_fsi/unstructured_three_d_fsi.cc">
 source code </a> if you want to know
@@ -801,7 +801,7 @@ unstructured, three-dimensional FSI problems.
   \n\n
 - <b> The solver does not converge:</b> \n\n
   A large-displacement FSI problem is a highly nonlinear problem and the
-  provison of a good initial guess for the Newton iteration
+  provision of a good initial guess for the Newton iteration
   is essential. We tend to proceed as follows:
   \n\n
   -# Follow the steps outlined above, to study the constituent
@@ -811,7 +811,7 @@ unstructured, three-dimensional FSI problems.
      the desired Reynolds number may have to be computed via a parameter
      incrementation, starting from Stokes flow. Similarly, the
      study of the single-physics solid problem will reveal what
-     load increments can be accomodated without causing the
+     load increments can be accommodated without causing the
      Newton iteration to diverge.
      \n\n
   -# Combine the two single-physics problems 
