@@ -13,7 +13,7 @@ single-physics problems, namely
 .
 for which we have already created unstructured 3D meshes, 
 using <A HREF="http://www.wias-berlin.de/~si ">Hang Si's</A>
-open-source mesh generator  <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>.
+open-source mesh generator  <A HREF="http://wias-berlin.de/software/tetgen//"> \c tetgen </A>.
 
 <HR>
 <HR>
@@ -128,7 +128,7 @@ Since the driver code, discussed in detail below, is somewhat lengthy
 included), we provide a brief overview of the main steps
 required to solve this problem:
 \n\n
--# Use the unstructured 3D mesh generator <A HREF="http://tetgen.berlios.de/">
+-# Use the unstructured 3D mesh generator <A HREF="http://wias-berlin.de/software/tetgen//">
    \c tetgen </A> to generate the solid mesh, using the procedure discussed in 
    <a href="../../../solid/unstructured_three_d_solid/html/index.html#mesh">
    another tutorial.</a>
@@ -374,7 +374,7 @@ associated with the various domain boundaries of interest.
 \section constructor The Problem constructor
 
 We start by building the fluid mesh, using the files created
-by <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>; see the 
+by <A HREF="http://wias-berlin.de/software/tetgen//"> \c tetgen </A>; see the 
 discussion in the corresponding 
 <a href="../../../navier_stokes/unstructured_three_d_fluid/html/index.html#mesh">
 single-physics fluids problem.</a>
@@ -400,7 +400,7 @@ that describes the fluid mesh.
   
 
 Next, we create the solid mesh, using the files created
-by <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>; 
+by <A HREF="http://wias-berlin.de/software/tetgen//"> \c tetgen </A>; 
 see the discussion in the corresponding
 <a href="../../../solid/unstructured_three_d_solid/html/index.html#mesh">
 single-physics solids problem.</a>
@@ -642,7 +642,7 @@ The implementation of this functionality in
 \c TetgenMesh::setup_boundary_coordinates(...) exploits the 
 fact that
 -# Meshes generated
-   by  <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>
+   by  <A HREF="http://wias-berlin.de/software/tetgen//"> \c tetgen </A>
    are bounded by planar facets, and \n\n
 -# We insist that all facets are given distinct boundary IDs  
    when defining the domain in the tetgen <code>*.poly</code> file. 

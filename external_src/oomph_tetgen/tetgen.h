@@ -15,7 +15,7 @@
 // Mohrenstr. 39, 10117 Berlin, Germany                                      //
 // si@wias-berlin.de                                                         //
 //                                                                           //
-// TetGen is freely available through the website: http://tetgen.berlios.de. //
+// TetGen is freely available through the website: http://wias-berlin.de/software/tetgen/. //
 //   It may be copied, modified, and redistributed for non-commercial use.   //
 //   Please consult the file LICENSE for the detailed copyright notices.     //
 //                                                                           //
