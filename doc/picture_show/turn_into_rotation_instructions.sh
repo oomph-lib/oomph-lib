@@ -55,7 +55,7 @@ for dir in `find .. -path '../leftovers' -prune -o -name 'figures' -print `; do
         #--------------------------------------
         # HERE'S THE BANNER CODE ITSELF
         #--------------------------------------
-        echo "\$bannerCode[\$bannerCounter] = \"<CENTER><H2>$title</H2></CENTER><A HREF=\\\"$link\\\"><IMG SRC=\\\"$gif\\\" border=0></A>\";" >> rotate_gifs.php
+        echo "\$bannerCode[\$bannerCounter] = \"<CENTER><H2>$title</H2></CENTER><A HREF=\\\"$link\\\"><IMG SRC=\\\"$gif\\\" class=\"img-responsive centered\" border=0></A>\";" >> rotate_gifs.php
         echo "\$bannerCounter++;" >> rotate_gifs.php
 
     done

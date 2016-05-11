@@ -57,8 +57,14 @@ div.navpath li{
 
 .carousel-inner{
 	border-radius:4px;
-	
+	overflow:hidden;
 }
+/* border-radius on carousel for chrome*/
+.item{
+ border-radius: 4px;
+ overflow:hidden;
+}
+
 .carousel-control{
 	border-radius:4px;
 	
@@ -129,11 +135,13 @@ div.navpath li{
 
 /* Code highlighting*/
 
-.fragment{
+.fragment,code{
 font-family:Menlo,Monaco,Consolas,"Courier New",monospace;
-
-
 }
+code{
+	padding:0px;
+}
+
 .header .summary{
 	font-size:10px;	
 }
@@ -186,7 +194,7 @@ div.fragment,pre.fragment{
 	color: #444 ; /*#C7254E;*/
 	background-color: #F9F2F4;
 	border-radius: 4px;
-
+overflow-x:auto;
 }
 
 div.line {
@@ -197,7 +205,7 @@ div.line {
 	white-space: -moz-pre-wrap; /* Moz */
 	white-space: -pre-wrap;     /* Opera 4-6 */
 	white-space: -o-pre-wrap;   /* Opera 7 */
-	white-space: pre-wrap;      /* CSS3  */
+	white-space: pre;      /* CSS3  */
 	word-wrap: break-word;      /* IE 5.5+ */
 	padding-bottom: 0px;
 	margin: 0px;
@@ -348,7 +356,13 @@ blockquote {
         padding: 0 12px 0 16px;
 }
 
+.formulaDsp {
+    text-align: center;
+}
+
+
 /* @end */
+
 
 
 
@@ -649,6 +663,10 @@ div.qindex a.qindex:hover {
 	margin:20px 0px 5px 0px ;
 	line-height:1.1;
 	color:#555;
+}
+
+.centered{
+	margin:auto;
 }
 
 /* overide bootstrap for gcse elements (google search) as it doesnt expect border-box*/
