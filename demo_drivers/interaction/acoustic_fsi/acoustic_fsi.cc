@@ -96,11 +96,8 @@ namespace Global_Parameters
   normal[0]=x[0]/norm;
   normal[1]=x[1]/norm;
 
-  u[0].real()=normal[0]*cos(double(N)*phi);
-  u[1].real()=normal[1]*cos(double(N)*phi);
-
-  u[0].imag()=0.0;
-  u[1].imag()=0.0;
+  u[0]=complex<double>(normal[0]*cos(double(N)*phi),0.0);
+  u[1]=complex<double>(normal[1]*cos(double(N)*phi),0.0);
  }
 
 

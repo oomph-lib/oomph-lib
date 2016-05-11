@@ -90,7 +90,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/adaptive_unstructured_result.dat.gz  \
-         adaptive_unstructured_result.dat >> validation.log
+         adaptive_unstructured_result.dat 1.0e-14 0.25 >> validation.log
 fi
 
 mv RESLT RESLT_adaptive_unstructured

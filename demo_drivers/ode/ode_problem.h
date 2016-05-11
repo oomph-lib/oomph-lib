@@ -92,21 +92,21 @@ namespace oomph
    // Loop over current & previous timesteps
    const unsigned nprev_values = time_stepper_pt()->nprev_values();
    for(unsigned t=0; t<nprev_values+1; t++)
+   {
+    double time = time_pt()->time(t);
+
+    std::cout << "setting IC at time =" << time << std::endl;
+
+    // Get + set the (only) value
+    Vector<double> dummy(nvalue(), 1.0);
+    Vector<double> values = ic(time, dummy);
+
+    for(unsigned j=0, nj=nvalue(); j<nj; j++)
     {
-     double time = time_pt()->time(t);
-
-     std::cout << "setting IC at time =" << time << std::endl;
-
-     // Get + set the (only) value
-     Vector<double> dummy(nvalue(), 1.0);
-     Vector<double> values = ic(time, dummy);
-
-     for(unsigned j=0, nj=nvalue(); j<nj; j++)
-      {
-       mesh_pt()->element_pt(0)->internal_data_pt(0)
-        ->set_value(t, j, values[j]);
-      }
+     mesh_pt()->element_pt(0)->internal_data_pt(0)
+      ->set_value(t, j, values[j]);
     }
+   }
 
    actions_after_set_initial_condition();
   }
@@ -119,7 +119,27 @@ namespace oomph
   virtual void write_additional_trace_data(const unsigned& t_hist,
                                            std::ofstream& trace_file) const
   {
-   trace_file << Trace_seperator << exact_solution(time_pt()->time(t_hist));
+   // Create a temporary vector to store the exact solution
+   Vector<double> output_vector=exact_solution(time_pt()->time(t_hist));
+
+   // Output the vector
+   unsigned output_vector_length=output_vector.size();
+   if (output_vector_length==0)
+   {
+    trace_file << Trace_seperator << "[]";
+   }
+   else
+   {
+    trace_file << Trace_seperator << "[" << output_vector[0];
+    if (output_vector_length>1)
+    {
+     for (unsigned i=1;i<output_vector_length;i++)
+     {
+      trace_file << ", " << output_vector[i];
+     }
+    }
+    trace_file << "]";
+   }
   }
 
   virtual double get_error_norm(const unsigned& t_hist=0) const
@@ -168,11 +188,50 @@ namespace oomph
 
   // Output solution
   void output_solution(const unsigned& t, std::ostream& outstream,
-                       const unsigned& npoints=2) const
+		       const unsigned& npoints=2) const
   {
-   std::cout << solution(t) << std::endl;
-   outstream << solution(t) << std::endl;
+   // Create a temporary vector to store the exact solution
+   Vector<double> output_vector=solution(t);
 
+   // Vector length
+   unsigned output_vector_length=output_vector.size();
+   
+   // Output the vector (to the command window)
+   if (output_vector_length==0)
+   {
+    std::cout << Trace_seperator << "[]";
+   }
+   else
+   {
+    std::cout << Trace_seperator << "[" << output_vector[0];
+    if (output_vector_length>1)
+    {
+     for (unsigned i=1;i<output_vector_length;i++)
+     {
+      std::cout << ", " << output_vector[i];
+     }
+    }
+    std::cout << "]";
+   }
+
+   // Output the vector (to outstream)
+   if (output_vector_length==0)
+   {
+    outstream << Trace_seperator << "[]";
+   }
+   else
+   {
+    outstream << Trace_seperator << "[" << output_vector[0];
+    if (output_vector_length>1)
+    {
+     for (unsigned i=1;i<output_vector_length;i++)
+     {
+      outstream << ", " << output_vector[i];
+     }
+    }
+    outstream << "]";
+   }
+      
    // npoints is ignored
   }
 
@@ -200,45 +259,45 @@ namespace oomph
    bool adaptive_flag = true;
 
    if(ts_name == "bdf1")
-    {
-     return new BDF<1>(adaptive_flag);
-    }
+   {
+    return new BDF<1>(adaptive_flag);
+   }
    else if(ts_name == "bdf2")
-    {
-     return new BDF<2>(adaptive_flag);
-    }
+   {
+    return new BDF<2>(adaptive_flag);
+   }
    else if(ts_name == "real-imr")
-    {
-     IMR* mp_pt = new IMR(adaptive_flag);
-     ExplicitTimeStepper* pred_pt = new EBDF3;
-     mp_pt->set_predictor_pt(pred_pt);
-     return mp_pt;
-    }
+   {
+    IMR* mp_pt = new IMR(adaptive_flag);
+    ExplicitTimeStepper* pred_pt = new EBDF3;
+    mp_pt->set_predictor_pt(pred_pt);
+    return mp_pt;
+   }
    else if(ts_name == "imr")
-    {
-     IMRByBDF* mp_pt = new IMRByBDF(adaptive_flag);
-     ExplicitTimeStepper* pred_pt = new EBDF3;
-     mp_pt->set_predictor_pt(pred_pt);
-     return mp_pt;
-    }
+   {
+    IMRByBDF* mp_pt = new IMRByBDF(adaptive_flag);
+    ExplicitTimeStepper* pred_pt = new EBDF3;
+    mp_pt->set_predictor_pt(pred_pt);
+    return mp_pt;
+   }
    else if(ts_name == "steady")
-    {
-     // 2 steps so that we have enough space to do reasonable time
-     // derivative estimates in e.g. energy derivatives.
-     return new Steady<3>;
-    }
+   {
+    // 2 steps so that we have enough space to do reasonable time
+    // derivative estimates in e.g. energy derivatives.
+    return new Steady<3>;
+   }
    else if(ts_name == "tr")
-    {
-     // 2 steps so that we have enough space to do reasonable time
-     // derivative estimates in e.g. energy derivatives.
-     return new TR(adaptive_flag);
-    }
+   {
+    // 2 steps so that we have enough space to do reasonable time
+    // derivative estimates in e.g. energy derivatives.
+    return new TR(adaptive_flag);
+   }
    else
-    {
-     std::string err = "Unrecognised time stepper name";
-     throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+   {
+    std::string err = "Unrecognised time stepper name";
+    throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
   }
  }
 

@@ -27,7 +27,6 @@ touch Validation
 rm -r -f Validation
 mkdir Validation
 
-
 # Fixed time step tests 
 # ============================================================
 
@@ -42,8 +41,9 @@ fixed_step_test()
     command="./basic_ode -max-step 50 -ts $1 -element-type $2 -ode $3 -outdir $dir"
 
     echo >> $log_file
+    
     echo "Running $command" >> $log_file
-
+    
     if $command > $dir/OUTPUT; then 
         # everything ran ok
 
@@ -51,10 +51,11 @@ fixed_step_test()
         # write to a file. Then check that all norms are less than $4.
         cut -d\; -f 4 $dir/trace | sed '1d' > $dir/error_norms
         ../../../bin/fpdiff.py $dir/error_norms zeros 0.0 $4 >> $log_file
-    else
+    else	
         echo "FAIL: did not run successfully" >> $log_file
         echo >> $log_file
     fi
+    
 }
 
 # Test each time stepper (except "real" imr) with normal ode elements

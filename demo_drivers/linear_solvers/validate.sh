@@ -44,7 +44,7 @@ if test "$1" = "no_fpdiff"; then
 else
     # Compare results
     ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/linear_elasticity_simple_prec_results.dat.gz  \
-        linear_elasticity_simple_prec_results.dat >> validation.log
+        linear_elasticity_simple_prec_results.dat  1.0e-12 0.1 >> validation.log
     
     #Compare number of iterations against reference data and append
     ../$OOMPH_ROOT_DIR/bin/compare_file_length_with_tolerance.bash \

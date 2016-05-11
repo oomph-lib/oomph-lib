@@ -219,7 +219,6 @@ void AxisymFvKProblem<ELEMENT>::doc_solution()
 int main(int argc, char **argv)
 {
 
- feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);

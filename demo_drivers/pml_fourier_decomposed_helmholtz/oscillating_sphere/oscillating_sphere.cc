@@ -714,8 +714,7 @@ setup_point_source()
     {
      // if source on z axis, only contribution to residual comes
      // from Fourier wavenumber zero
-     ProblemParameters::Magnitude.real() = 0.0;
-     ProblemParameters::Magnitude.imag() = 0.0;
+     ProblemParameters::Magnitude=complex<double>(0.0,0.0);
     }
   }
 

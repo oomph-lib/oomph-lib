@@ -1680,9 +1680,6 @@ compute_error_estimate(double& max_err,double& min_err)
 int main(int argc, char **argv)
 {
 
- feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
-
-
  ToleranceForVertexMismatchInPolygons::Tolerable_error=1e-3;
 
  // Store command line arguments
