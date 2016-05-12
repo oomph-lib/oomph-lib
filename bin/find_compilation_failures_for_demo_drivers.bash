@@ -17,14 +17,13 @@ mpi_run_command_length_aux=`make do-we-have-mpi`
 
 #echo "mpi_run_command_length_aux: "$mpi_run_command_length_aux
 
-# Strip out the potential additional on-screen output that is generated
-# by calling this from within make.
+
 mpi_run_command_length=`echo $mpi_run_command_length_aux | awk '{first=match($0, "START_BLA")+9; second=match($0, "END_BLA"); lngth=second-first; print substr($0, first, lngth)}'`
 
 echo "mpi_run_command_length: "$mpi_run_command_length
 
 have_mpi=0
-if [ "$mpi_run_command_length" != "0" ]; then
+if [ "$mpi_run_command_length" -ne 0 ]; then
     have_mpi=1
     echo "Have mpi compiler..."
 else

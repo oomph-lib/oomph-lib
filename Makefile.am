@@ -124,5 +124,6 @@ distclean-local:
 # output appears (which I can now strip out). One beer is on offer
 # for whoever wants to do this properly. For now it works... 
 do-we-have-mpi:
-	@echo -e "$(MPI_RUN_COMMAND)" | tr -d '[[:space:]]' | wc -m > .tmp.wc; echo "START_BLA"`cat .tmp.wc`"END_BLA"; rm .tmp.wc
+	@echo "$(MPI_RUN_COMMAND)" | tr -d '[[:space:]]' | wc -m > .tmp.wc; echo "START_BLA"`cat .tmp.wc`"END_BLA"; rm .tmp.wc
+
 

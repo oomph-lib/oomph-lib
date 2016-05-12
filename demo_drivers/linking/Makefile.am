@@ -85,6 +85,10 @@ makefile.sample:
 	echo " "  >> makefile.sample
 	echo "#Mac OSX: Replace the above line with the following" >> makefile.sample	
 	echo "#SHARED_LIBRARY_FLAGS= --rpath="@libdir@  >> makefile.sample	
+	echo " "  >> makefile.sample
+	echo "#Mac OSX with clang: Replace the above line with the following" >> makefile.sample	
+	echo "#SHARED_LIBRARY_FLAGS= -Wl,-bind_at_load" >> makefile.sample
+	echo " "  >> makefile.sample
 	echo "# Problem-specific information -- edit this for your driver code "  >> makefile.sample
 	echo " " >> makefile.sample
 	echo "#---------------------------------------------------------------"  >> makefile.sample
