@@ -173,7 +173,7 @@ are applied. This is closely related to the different role of the
 
 <HR>
 
-\subsection BDFvsNewmark The intepretation of history values in BDF and Newmark timesteppers
+\subsection BDFvsNewmark The interpretation of history values in BDF and Newmark timesteppers
 
 In problems in which first time-derivatives are 
 discretised by \c BDF timesteppers, the "history values" represent the 
@@ -276,7 +276,7 @@ To start the simulation with a "smooth" start from the travelling-wave
 solution we have to pass function pointers to the functions that 
 specify the function and its first and second time-derivatives to 
 \c Newmark<NSTEPS>::assign_initial_data_values(...). As usual, 
-the reqired form of the function pointer is defined as a public
+the required form of the function pointer is defined as a public
 \c typedef in the Newmark class. Since \c Data objects can 
 store multiple values, each of which will generally have a
 different time-history, \c Newmark<NSTEPS>::assign_initial_data_values(...)
@@ -292,7 +292,7 @@ required history values.
 
 \until end of smooth start
 
-To check/demonstrate that the assignement of the initial condition
+To check/demonstrate that the assignment of the initial condition
 was successful, we compare the Newmark approximation for the
 zero-th, first and second time-derivatives of the nodal values
 against the exact solution and document the maximum discrepancy. 

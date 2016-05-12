@@ -36,7 +36,7 @@ Solve
 \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = -1,
  \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@
 \f]
-in the fish-shaped domain \f$D_{fish} \f$ with homogenous
+in the fish-shaped domain \f$D_{fish} \f$ with homogeneous
 Dirichlet boundary conditions
 \f[
 \left. u\right|_{\partial D_{fish}}=0.
@@ -140,7 +140,7 @@ refers to the element's \c MacroElement representation to determine
 the new nodal positions.
 
   To enable the mesh adaptation process to respect the domain's
-curvlinear boundaries, each element in the coarse base mesh must 
+curvilinear boundaries, each element in the coarse base mesh must 
 therefore be given a pointer to its associated \c MacroElement,
 e.g. by using the following loop:
 \dontinclude fish_mesh.template.cc
@@ -452,7 +452,7 @@ their nodal positions in response to changes in the domain boundary.
 \c MacroElements and if the \c Mesh does not implement the node update
 by other means, this function does not change the mesh.)
 
-The following code fragement illustrates the trivial modificatons
+The following code fragment illustrates the trivial modifications
 to the driver code required to compute the solution of Poisson's 
 equation in fish-shaped  domain of various widths. We simply
 change the position of the \c GeomObject that specifies the

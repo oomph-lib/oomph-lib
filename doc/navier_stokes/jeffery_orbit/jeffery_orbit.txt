@@ -189,7 +189,7 @@ using \c NavierStokesSurfaceDragTorqueElements.
 \section ellipse Defining the ellipse as a GeomObject
 
  We create a basic \c GeomObject to represent the ellipse whose
-boundary we parameterise by the polar angle, measured from its centre
+boundary we parametrise by the polar angle, measured from its centre
 of mass.
 
 \dontinclude jeffery_orbit.cc 
@@ -252,7 +252,7 @@ of mass.
  boundary conditions are applied using the \c
  actions_before_implicit_timestep() function and the no-slip boundary
  condition is applied in \c actions_before_newton_convergence_check()
- via an auxiliary node update fuction.
+ via an auxiliary node update function.
 
  <a href="../../../../doc/meshes/mesh_from_inline_triangle/html/index.html#adapt">
  Recall</a> that when adapting an unstructured mesh, its constituent
@@ -440,7 +440,7 @@ ellipse
 
 \subsection exercises Exercises
 
--# Confirm that for sufficienly large times the solution agrees 
+-# Confirm that for sufficiently large times the solution agrees 
    with Jeffery's analytic solution when you set \f$ Re=0 \f$. 
    Explain why you expect there to be a discrepancy at early times.\n\n
 -# What happens when the centre of mass is not fixed?

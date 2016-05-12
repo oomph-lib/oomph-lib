@@ -35,7 +35,7 @@ inlet velocity profile.
 
 @I w 0.75\textwidth fsi_sketch "Sketch of the problem showing fluid and solid boundary ids."
 
- The non-dimension formulation is the same as decribed in 
+ The non-dimension formulation is the same as described in 
 <a href="../../unstructured_fsi/html/index.html"> the related
  non-adaptive problem. </a> The fluid structure interaction parameter
  \f$Q \f$ is the ratio of viscous fluid stress to the reference stress
@@ -80,7 +80,7 @@ the FSI interaction parameter \f$ Q \f$.
 \until Q =
 
 We specify the Poisson ratio of the solid and 
-provide a pointer to the consitutive equation for the
+provide a pointer to the constitutive equation for the
 solid. 
 
 \until Constitutive_law_pt
@@ -161,7 +161,7 @@ fluid and solid meshes.
  and then writing the boundaries and mesh to output files. These steps
  are exactly the same as in the 
 <a href="../../../solid/unstructured_adaptive_solid/html/index.html"> 
- unstructured adapative solid mechanics tutorial. </a>
+ unstructured adaptive solid mechanics tutorial. </a>
 
  \dontinclude unstructured_adaptive_2d_fsi.cc
  \skipline start_constructor
@@ -178,7 +178,7 @@ fluid and solid meshes.
  \until }
 
  The next task is to build the fluid mesh, which uses three of the 
-boundary segments  already constructured for the solid mesh for the
+boundary segments  already constructed for the solid mesh for the
 common boundaries
  
 \until }
@@ -211,7 +211,7 @@ common boundaries
 
 \until create_fsi_traction
 
- and three analogous meshes of Lagrange multipler elements.
+ and three analogous meshes of Lagrange multiplier elements.
  
 \until create_lagrange_multiplier
 
@@ -260,7 +260,7 @@ the global mesh is rebuilt.
  of the solid. 
 
  We then reapply the solid boundary conditions and pass the
- constitutive law to the soid elements.
+ constitutive law to the solid elements.
 
  \until complete solid build
 
@@ -312,12 +312,12 @@ non-adaptive </a> case.
  non-adaptive unstructured FSI tutorial </a> also apply here. As
  mentioned above, the reason why the methodology works so
  straightforwardly is because the
- parameterisation of common boundaries must be the 
+ parametrisation of common boundaries must be the 
  same in the fluid and solid meshes. If not, setting up the
  fluid-structure interaction will not work even before any adaptation
  takes place. Thus, provided that your unstructured FSI problem has been
  correctly set up in the case without adaptivity, adding adaptivity is
- completely straightfoward. 
+ completely straightforward. 
 
 \subsection ex Exercises
 

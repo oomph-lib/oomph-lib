@@ -91,7 +91,7 @@ illustrate two different adaptation strategies:
   -# adapt the mesh
   -# solve again
   .
-  is performed automatically until the solution satsifies the 
+  is performed automatically until the solution satisfies the 
   required error bounds (or until the maximum permitted number of 
   adaptation steps has been reached). 
 - In the second approach we start by performing a number of uniform 
@@ -130,11 +130,11 @@ These include
   Any elements whose error estimate exceed this value will be split
   into four "sons".
 - <B>The target for the minimum error: </B> Any elements whose error
-  estimate lies below this value are deemed to be unneccesarily
+  estimate lies below this value are deemed to be unnecessarily
   small and are scheduled for (possible) unrefinement. [Elements can
   only be unrefined (i.e. merged with their "brothers") if their
   "brothers" are also scheduled for unrefinement.]
-- <B>The mimimum refinement level:</B> In problems with curvilinear
+- <B>The minimum refinement level:</B> In problems with curvilinear
   domain boundaries it is often necessary to retain a reasonably accurate 
   representation of the boundary (e.g. for postprocessing
   purposes), even if the error estimate suggests that the 
@@ -177,13 +177,13 @@ the user to
 
 The second driver function illustrates some of these functions. We
 start by setting up the problem, create the \c DocInfo object and document
-the adaptativity targets, exactly as before:
+the adaptivity targets, exactly as before:
 
 \dontinclude fish_poisson.cc
 \skipline start_of_incremental
 \until doc_ad
 
-Next, we solve the problem on the orginal, very coarse mesh
+Next, we solve the problem on the original, very coarse mesh
 and document the result:
 
 \dontinclude fish_poisson.cc
@@ -268,7 +268,7 @@ this type.
 \until new Z2Error
 
 Next we pin the nodal values on all boundaries, apply the 
-homogenous Dirichlet boundary conditions,
+homogeneous Dirichlet boundary conditions,
 pass the pointer to the source function to the elements,
 and set up the equation
 numbering scheme. 
@@ -331,7 +331,7 @@ the adaptive solution of the unsteady heat equation</A>
 for more details.
 Furthermore, the source function pointers are automatically
 passed to an element's four "son" elements when the element
-is subdivided. This allows the adaptation to procede completely
+is subdivided. This allows the adaptation to proceed completely
 automatically, without any intervention by the "user". On return
 from \c Problem::adapt() the problem can immediately be re-solved.
 

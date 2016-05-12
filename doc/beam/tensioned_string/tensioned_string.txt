@@ -340,7 +340,7 @@ approximate analytical solution of the problem. The analytical solution
 will be useful to validate the computational results, and the derivation
 will allow us to discuss certain aspects of the theory in more detail.
 
-We start by parameterising the beam's undeformed shape as
+We start by parametrising the beam's undeformed shape as
 \f[
 {\bf r}_w(\xi) = 
 \left(
@@ -533,7 +533,7 @@ pressures.
 \section problem The problem class
 
 The problem class has five member functions, only two of which are
-non-trvial:
+non-trivial:
  - the problem constructor, \c ElasticBeamProblem(...), whose
    arguments specify the number of elements and the beam's
    undeformed length.
@@ -681,7 +681,7 @@ pressure to the trace file.
    solution as the initial guess for the solution at a
    slightly larger pressure, \f$ p_{ext}^{(2)} \f$, etc. 
    If the increase in the load (or some other control parameter) is
-   too large, the Newton method will diverge. To avoid unneccessary
+   too large, the Newton method will diverge. To avoid unnecessary
    computations, the Newton iteration is terminated if:
    - the number of iterations exceeds \c
      Problem::Max_newton_iterations (which has a default value of 10)

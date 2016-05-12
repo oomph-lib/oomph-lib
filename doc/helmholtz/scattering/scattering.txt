@@ -174,7 +174,7 @@ edition)", Wiley (2002) p. 501ff -- but note that Jin assumes that
 the potential varies like \f$ \exp(i\omega t)\f$ rather than
 \f$ \exp(-i\omega t)\f$ as assumed here) that the 
 normal (radial) derivative, \f$ \partial u / \partial n =   
-\partial u / \partial r, \f$ on the artifical boundary 
+\partial u / \partial r, \f$ on the artificial boundary 
 \f$ \Gamma \f$ is given by
 \f[
  \frac {\partial u}{\partial r}\bigg|_{r=R} =
@@ -283,7 +283,7 @@ we write the total potential as
 \Phi(x,y,t) = \bigg( \phi_{inc}(x,y) + u(x,y) \bigg) \ e^{-i 2\pi t},
 \f]
 where \f$ u(x,y) \  e^{-i 2\pi t} \f$ represents the displacement potential 
-associated with the scattered field which must satsify (@R[helmholtz]@). 
+associated with the scattered field which must satisfy (@R[helmholtz]@). 
 The boundary condition (@R[non_pen_bc]@) then becomes a Neumann 
 (flux) boundary condition for the scattered field,
 \f[
@@ -542,7 +542,7 @@ before the mesh adaptation.
 \subsection create_flux Creating the face elements
 The functions \c create_flux_elements(...) and 
 \c create_outer_bc_elements(...) create the \c FaceElements
-required to apply the bounday conditions on the inner and
+required to apply the boundary conditions on the inner and
 outer boundaries of the annular computational domain.
 They both loop over the bulk elements that are adjacent to the appropriate
 mesh boundary and attach the required \c FaceElements to their

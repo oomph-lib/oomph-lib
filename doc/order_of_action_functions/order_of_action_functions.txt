@@ -507,12 +507,12 @@ is available, the Newton solver will converge quadratically towards
 the solution. Within this framework, linear problems are simply special
 cases for which the Newton iteration converges in one step. However,
 if the problem is known to be linear, a few of the steps in the generic 
-Newton iteration are unneccessary. For instance, it is not necessary
+Newton iteration are unnecessary. For instance, it is not necessary
 to check the residual before or after the Newton step as we know
 that the exact solution will have been obtained (modulo roundoff
 errors) after step 7. The computation of the global residual 
 vectors in steps 4 and 11 (which require a finite amount of cpu time)
-are therefore superfluous and are ommitted if the "user" declares
+are therefore superfluous and are omitted if the "user" declares
 a problem as linear by setting the flag
 \code
 bool Problem::Problem_is_nonlinear
