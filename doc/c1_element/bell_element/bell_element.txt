@@ -125,7 +125,7 @@ Similar to a geometric approximation, a variable can be approximated as
 \f[
 u_i(x_1,x_2) = \sum_{l=1}^{3} \sum_{k=1}^{6}U_{ilk} \ \varphi_{lk}(\lambda_1,\lambda_2,\lambda_3),
 \f]
-where \f$ x_1,x_2 \in \Omega \f$ are the element's 2D global coordinates. The function \f$ \varphi_{lk}\f$ are the two-dimensional Bell shape functions parameterised by area coordinates \f$ \lambda_1, \lambda_2, \lambda_3\f$ which we will describe in the next two subsections.
+where \f$ x_1,x_2 \in \Omega \f$ are the element's 2D global coordinates. The function \f$ \varphi_{lk}\f$ are the two-dimensional Bell shape functions parametrised by area coordinates \f$ \lambda_1, \lambda_2, \lambda_3\f$ which we will describe in the next two subsections.
 
 <HR>
 
@@ -172,7 +172,7 @@ and derived from the quintic polynomials with 18 degrees of
 freedom. The element comprises three nodes with six degrees of
 freedom at each corner node including the value, and all first and second derivatives; \f$ u, u_{x}, u_{y}, u_{xx}, u_{yy}, u_{xy}. \f$ The graphical description of the Bell element is illustrated below. 
 
-@I w 0.75\textwidth bell_element "(Left)The Bell element with 18 degrees of freedom; 6 dofs at vertices. (Right) The description of all parameters utilised whithin the derivation of the Bell shape functions. "
+@I w 0.75\textwidth bell_element "(Left)The Bell element with 18 degrees of freedom; 6 dofs at vertices. (Right) The description of all parameters utilised within the derivation of the Bell shape functions. "
 
 The shape functions of the Bell element are parametrised by area
 coordinates, \f$\lambda_j\f$. The subscripts \f$ik\f$ of the shape
@@ -237,7 +237,7 @@ Here are graphical Bell shape functions at the first node, \f$
 \f$\psi_{11} = 1\f$ at node \f$1\f$ and \f$\psi_{11} = 0\f$ at other
 nodes. Furthermore, all of the Bell shape functions corresponded to all  first and second derivatives \f$ \psi_{1j} = 0, j=2,...,6 \f$ at all nodes. 
 
-@I w 1.05\textwidth shapes "The Bell shape funtions that correspond to the 6 degrees of freedom defined previously at the first node. Here the shape functions are evaluated at x1 which show the appreciation of the crucial properties in the Bell shape functions. "
+@I w 1.05\textwidth shapes "The Bell shape functions that correspond to the 6 degrees of freedom defined previously at the first node. Here the shape functions are evaluated at x1 which show the appreciation of the crucial properties in the Bell shape functions. "
 
 Note that the Bell shape functions and also the first and second
 derivatives are differentiated with respect to global coordinates. Therefore, the Jacobian of mapping between global to local coordinates is no longer needed to derive the derivatives of the shape functions for this type of element.
@@ -332,7 +332,7 @@ The following is a table illustrating the performance with the associated comput
 \f]
 where \f$u_{exact},u_{FE}\f$ denote the exact and the finite element solutions, respectively. 
 
-<B>Table 1:</B> \f$L^2\f$-norm error of the solution obtianed from the Biharmonic implementation using the Bell element with various numbers of elements.
+<B>Table 1:</B> \f$L^2\f$-norm error of the solution obtained from the Biharmonic implementation using the Bell element with various numbers of elements.
 
 #<CENTER>
 #<TABLE>
@@ -512,7 +512,7 @@ of freedom defined on each node.
 
 The driver code is very simple and short. It is where the problem is
 defined. In this study, the problem is constructed using the structured mesh with triangular elements in 2D. A number of nodes in an element has to be specific as a template parameter in the problem set up. This is crucial in order to take care of element nodes which we will describe in <A HREF="../../../shell/linear_shell/html/index.html">
-another tutorial</A>. Following the usual self-test, we call the function \c BiharmonicProblem::newton_solve() to compute the solution of the problem. \c BiharmonicProblem::doc_solution() will output the solution afterward.
+another tutorial</A>. Following the usual self-test, we call the function \c BiharmonicProblem::newton_solve() to compute the solution of the problem. \c BiharmonicProblem::doc_solution() will output the solution afterwards.
 
 \dontinclude structured_2d_biharmonic_bellelement.cc
 \skipline start_of_main

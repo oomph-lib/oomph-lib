@@ -701,7 +701,7 @@ relative to their isotropically grown shape in state N1 is zero.
 In general, the displacements induced by such an isotropic
 expansion will be
 incompatible and it would be impossible to (re-)assemble the 
-individually grown material elements to a continous body
+individually grown material elements to a continuous body
 unless the material elements undergo some deformation. 
 The elements' deformation relative to their
 stress-free shape in N1 will generate internal "growth-stresses"
@@ -1221,7 +1221,7 @@ positions. To start the time-integration, we must assign
 suitable values to these quantities to ensure that the initial 
 state of the system is represented correctly.
 
-To assign the intial values for the nodal positions, we
+To assign the initial values for the nodal positions, we
 (temporarily) remove all boundary conditions for the nodal 
 positions and determine their initial values by solving equation
 (@R[ic_for_displ]@) in its weak form,
@@ -1410,7 +1410,7 @@ terms of displacements and do \b not involve any additional variables
 such as solid pressures. We do not believe that
 it is possible to implement the assignment of initial conditions
 for such problems without additional knowledge about the precise 
-form of the consitutive equations. Therefore we provide 
+form of the constitutive equations. Therefore we provide 
 a virtual function \c SolidFiniteElement::has_internal_solid_data()
 whose role it is to return a bool that indicates if a specific 
 \c SolidFiniteElement stores such data. By default, the function

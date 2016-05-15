@@ -1697,7 +1697,7 @@ structure which separates:
  - We loop over all non-leaf elements in the \c QuadTreeForest
    and call their \c deactivate_object() function, which sets
    \c FiniteElement::Node_pt[n] to zero for any obsolete \c Nodes.
-   Any \c Nodes in the \c Mesh::Node_pt vector that are still labeled
+   Any \c Nodes in the \c Mesh::Node_pt vector that are still labelled
    as obsolete are truly obsolete and are deleted by calling
    \code Mesh::prune_dead_nodes() \endcode
  - Finally, in order to facilitate dump and restart operations we

@@ -90,7 +90,7 @@ with any problems.
 
 \subsection other_compilers The compilation fails when I use my xxx [non gcc] compiler
 
-\c oomph-lib is developed in a GNU Linux enviroment, using the
+\c oomph-lib is developed in a GNU Linux environment, using the
 <A HREF="http://gcc.gnu.org/">gcc compiler suite</A>. We believe (!)
 the source code complies with the  
 <A HREF="http://www.open-std.org/jtc1/sc22/wg21/"> C++ standard</A>
@@ -231,7 +231,7 @@ errors (you'll have to judge this yourself!), modify the
 \c validate.sh script to specify a larger
 relative tolerance and/or a larger value for the threshold
 below which \c fpdiff.py regards numbers as numerical zeroes and
-excluses them from the comparison. [Type
+excludes them from the comparison. [Type
 \code
 bin/fpdiff.py 
 \endcode
@@ -268,7 +268,7 @@ some operating systems will expand the command to
 \code
 cat RESLT/soln0.dat RESLT_elastic/soln0.dat > results_file.dat
 \endcode
-while others will excecute
+while others will execute
 \code
 cat RESLT_elastic/soln0.dat RESLT/soln0.dat > results_file.dat
 \endcode
@@ -445,7 +445,7 @@ make one_d_poisson
 We note that the names of the executable and the source code do not
 have to be as closely related as in this example. While we usually
 create the name of the executable by dropping the
-postifx of the source file, this is not guaranteed! Inspect 
+postfix of the source file, this is not guaranteed! Inspect 
 the \c Makefile.am if \c make doesn't give you what you want.
 
 ########################################################################
@@ -615,7 +615,7 @@ Suggestions:
   and all optimisation disabled. Re-run the code in a debugger
   (\c gdb or its GUI-based equivalent 
   <A HREF="http://www.gnu.org/software/ddd/">ddd</a>) to (try to!) find out 
-  where the segmentation fault occured.
+  where the segmentation fault occurred.
   [\b Careful: If the segmentation fault is caused by a pointer problem,
   this naive inspection can be quite misleading -- tell-tale signs are that
   the traceback displays a non-sensical call stack, e.g. a function being
@@ -701,7 +701,7 @@ Suggestions:
      bug! You may also want to check for any un-initialised variables.
      They are the most likely culprits if your code behaves
      differently at different levels of optimisation as 
-     more agressive optimisation may suppress any default
+     more aggressive optimisation may suppress any default
      initialisations of data -- in fact, you should never rely on that
      anyway!
      \n\n
@@ -819,7 +819,7 @@ unchanged.
 
 \n\n
 
-\subsection element_too_general oomph-lib's implemention of the Navier-Stokes equations (say) is too general (and therefore too expensive) for my application. How do I change this?
+\subsection element_too_general oomph-lib's implementation of the Navier-Stokes equations (say) is too general (and therefore too expensive) for my application. How do I change this?
 
 Many of \c oomph-lib's equations classes (or elements) are implemented
 in great generality. For instance, our discretisation of the 
@@ -863,7 +863,7 @@ library against which you can link.
 The default behaviour when using \c make \c check is to compile and run the
 self tests one test at a time. This means that compilation failures may
 take a long time to appear which can be frustrating when making changes to
-the main library. The alternative is to first complile all self tests using
+the main library. The alternative is to first compile all self tests using
 
 \code
 make check -k TESTS_ENVIRONMENT=true

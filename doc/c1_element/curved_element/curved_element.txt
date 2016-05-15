@@ -335,7 +335,7 @@ M.Bernadou (1993)</A> .
 
 The sections below provide an example of solving the fourth-order
 problem using \c C1CurvedElement. The fourth-order problem consider here is the same Biharmonic equation described in <A HREF="../../../c1_element/bell_element/html/index.html">
-another tutorial</A> which is extressed as follow:
+another tutorial</A> which is expressed as follow:
 
 \f[ \frac{\partial^4 u}{\partial x^4} + 2\frac{\partial^4 u}{\partial
 x^2\partial y^2} + \frac{\partial^4 u}{\partial y^4} = 0, \ \ \ @E[eqn:biharmonic_eqn]@ \f] 
@@ -353,7 +353,7 @@ Here are two tables comparing the performance with the associated computational 
 \f]
 where \f$ u_{exact},u_{FE} \f$ denote the exact and the finite element solutions, respectively. 
 
-Table 1: \f$L^2\f$-norm error of the solution obtianed from the Biharmonic implementations using the BellElement with various numbers of elements.
+Table 1: \f$L^2\f$-norm error of the solution obtained from the Biharmonic implementations using the BellElement with various numbers of elements.
 
 #<CENTER>
 #<TABLE>
@@ -461,7 +461,7 @@ Time (sec)
 #</TABLE> 
 #</CENTER>
 
-Table 2: \f$L^2\f$-norm error of the solution obtianed from the Biharmonic implementations using the C1CurvedElement with various numbers of elements.
+Table 2: \f$L^2\f$-norm error of the solution obtained from the Biharmonic implementations using the C1CurvedElement with various numbers of elements.
 
 #<CENTER>
 #<TABLE>
@@ -619,7 +619,7 @@ Only function \c Problem::nodal_permutation() is newly defined to associate with
 
 Regarding the mapping associated between the reference coordinates and the physical coordinates defined on the curved triangle, it can be seen that we defined the side \f$ \hat{\bf{a}}_1\hat{\bf{a}}_2\f$ of the reference to associate with the curved boundary. Also, in the definition defined in (@R[mapping_conditions]@), the vertex node \f$ \bf{a}_1 \f$ was defined to be correspond with the position where \f$ s \f$ is minimum on each arc of the curved boundary \f$ \Gamma \f$ and the node \f$ \bf{a}_2 \f$ was correspond with the position where the maximum \f$ s \f$  is obtained. Furthermore, the node \f$ \bf{a}_3 \f$ was defined to be the off-boundary node of a curved triangle. 
 
-However, a discretisation of the curvilinear domain by triangles can give a triangulation where the node ordering in a triangular element incompatible with the described definitions. As illstrated in the following figure, three cases of node ordering can happen.
+However, a discretisation of the curvilinear domain by triangles can give a triangulation where the node ordering in a triangular element incompatible with the described definitions. As illustrated in the following figure, three cases of node ordering can happen.
 
 @I w 0.45\textwidth node_ordering "The graphical description of node ordering. "
 
