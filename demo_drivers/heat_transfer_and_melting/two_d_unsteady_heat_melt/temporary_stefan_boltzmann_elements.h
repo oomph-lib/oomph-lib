@@ -1589,13 +1589,6 @@ public:
    BrokenCopy::broken_copy("StefanBoltzmannUnsteadyHeatFluxElement");
   }
  
- /// Broken assignment operator
- void operator=(const StefanBoltzmannUnsteadyHeatFluxElement&)
-  {
-   BrokenCopy::broken_assign("StefanBoltzmannUnsteadyHeatFluxElement");
-  }
-
- 
  /// \short Change integration scheme (overloads underlying version and
  /// and resizes lookup schemes introduced in this class.
  void set_integration_scheme(Integral* const &integral_pt)

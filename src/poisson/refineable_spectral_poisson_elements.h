@@ -79,10 +79,14 @@ public QSpectralPoissonElement<DIM,NNODE_1D>,
   } 
  
  /// Broken assignment operator
- void operator=(const RefineableQSpectralPoissonElement<DIM,NNODE_1D>&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const RefineableQSpectralPoissonElement<DIM,NNODE_1D>&) 
   {
    BrokenCopy::broken_assign("RefineableQuadPoissonElement");
-  }
+   }*/
  
  /// Number of continuously interpolated values: 1
  unsigned ncont_interpolated_values() const {return 1;}

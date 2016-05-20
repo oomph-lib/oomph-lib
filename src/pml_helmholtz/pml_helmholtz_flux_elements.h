@@ -81,10 +81,14 @@ public:
   }
 
  /// Broken assignment operator
- void operator=(const PmlHelmholtzPowerElement&)
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const PmlHelmholtzPowerElement&)
   {
    BrokenCopy::broken_assign("PmlHelmholtzPowerElement");
-  }
+   }*/
 
 
  /// \short Specify the value of nodal zeta from the face geometry
@@ -604,10 +608,10 @@ public:
   }
 
  /// Broken assignment operator
- void operator=(const PmlHelmholtzFluxElement&)
+ /*void operator=(const PmlHelmholtzFluxElement&)
   {
    BrokenCopy::broken_assign("PmlHelmholtzFluxElement");
-  }
+   }*/
 
 
  /// Access function for the prescribed-flux function pointer

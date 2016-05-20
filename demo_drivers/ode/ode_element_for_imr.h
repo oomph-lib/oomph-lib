@@ -196,10 +196,6 @@ namespace oomph
   IMRODEElement(const IMRODEElement& dummy)
   {BrokenCopy::broken_copy("IMRODEElement");}
   
-  /// Broken assignment operator
-  void operator=(const IMRODEElement& dummy) 
-  {BrokenCopy::broken_assign("IMRODEElement");}
-  
  };
 
 } // End of oomph namespace

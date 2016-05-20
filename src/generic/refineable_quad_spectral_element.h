@@ -69,10 +69,14 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const RefineableQSpectralElement<2>&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const RefineableQSpectralElement<2>&) 
   {
    BrokenCopy::broken_assign("RefineableQSpecralElement<2>");
-  }
+   }*/
 
  /// Destructor
  virtual ~RefineableQSpectralElement()

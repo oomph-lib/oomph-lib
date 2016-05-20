@@ -81,10 +81,14 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const UnsteadyHeatFluxElement&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const UnsteadyHeatFluxElement&) 
   {
    BrokenCopy::broken_assign("UnsteadyHeatFluxElement");
-  }
+   }*/
 
  /// Access function for the prescribed-flux function pointer
  UnsteadyHeatPrescribedFluxFctPt& flux_fct_pt() {return Flux_fct_pt;}

@@ -98,10 +98,14 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const GeneralisedAxisymAdvectionDiffusionEquations&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const GeneralisedAxisymAdvectionDiffusionEquations&) 
   {
    BrokenCopy::broken_assign("GeneralisedAxisymAdvectionDiffusionEquations");
-  }
+   }*/
 
  /// \short Return the index at which the unknown value
  /// is stored. The default value, 0, is appropriate for single-physics
@@ -628,10 +632,10 @@ private:
   } 
  
  /// Broken assignment operator
- void operator=(const QGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>&) 
+ /*void operator=(const QGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>&) 
   {
    BrokenCopy::broken_assign("QGeneralisedAxisymAdvectionDiffusionElement");
-  }
+   }*/
 
  /// \short  Required  # of `values' (pinned or dofs) 
  /// at node n

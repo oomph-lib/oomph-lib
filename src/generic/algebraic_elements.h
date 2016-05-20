@@ -126,10 +126,14 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const AlgebraicNode&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const AlgebraicNode&) 
   {
    BrokenCopy::broken_assign("AlgebraicNode");
-  }
+   }*/
 
 
  /// \short Update the current nodal position, using the first 
@@ -585,10 +589,10 @@ public AlgebraicElementBase
   } 
  
  /// Broken assignment operator
- void operator=(const AlgebraicElement&) 
+ /*void operator=(const AlgebraicElement&) 
   {
    BrokenCopy::broken_assign("AlgebraicElement");
-  }
+   }*/
 
 
  ///Empty Destructor must clean up the allocated memory
@@ -648,10 +652,10 @@ class AlgebraicMesh : public virtual Mesh
   } 
  
  /// Broken assignment operator
- void operator=(const AlgebraicMesh&) 
+ /*void operator=(const AlgebraicMesh&) 
   {
    BrokenCopy::broken_assign("AlgebraicMesh");
-  }
+   }*/
 
  /// Surely a proper destructor is required... ?
  ~AlgebraicMesh() {}
@@ -913,10 +917,10 @@ class DummyAlgebraicMesh : public virtual AlgebraicMesh
   } 
  
  /// Broken assignment operator
- void operator=(const DummyAlgebraicMesh&) 
+ /*void operator=(const DummyAlgebraicMesh&) 
   {
    BrokenCopy::broken_assign("DummyAlgebraicMesh");
-  }
+   }*/
 
  /// \short Update the nodal position posn at time level t (t=0: present;
  /// t>0: previous). Do nothing

@@ -113,10 +113,14 @@ namespace oomph
    } 
   
   /// Broken assignment operator
-  void operator=(const FourierDecomposedHelmholtzEquations&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+  /*void operator=(const FourierDecomposedHelmholtzEquations&) 
    {
     BrokenCopy::broken_assign("FourierDecomposedHelmholtzEquations");
-   }
+    }*/
   
 
   /// \short Return the index at which the unknown value
@@ -458,10 +462,10 @@ namespace oomph
     } 
    
    /// Broken assignment operator
-   void operator=(const QFourierDecomposedHelmholtzElement<NNODE_1D>&) 
+   /*void operator=(const QFourierDecomposedHelmholtzElement<NNODE_1D>&) 
     {
      BrokenCopy::broken_assign("QFourierDecomposedHelmholtzElement");
-    }
+     }*/
    
    
    /// \short  Required  # of `values' (pinned or dofs) 

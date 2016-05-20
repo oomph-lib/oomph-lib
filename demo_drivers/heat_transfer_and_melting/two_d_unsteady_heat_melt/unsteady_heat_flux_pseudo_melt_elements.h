@@ -89,12 +89,6 @@ public:
    BrokenCopy::broken_copy("UnsteadyHeatFluxPseudoMeltElement");
   } 
  
- /// Broken assignment operator
- void operator=(const UnsteadyHeatFluxPseudoMeltElement&) 
-  {
-   BrokenCopy::broken_assign("UnsteadyHeatFluxPseudoMeltElement");
-  }
- 
  /// Access function for the prescribed-flux function pointer
  UnsteadyHeatPrescribedFluxFctPt& flux_fct_pt() {return Flux_fct_pt;}
  

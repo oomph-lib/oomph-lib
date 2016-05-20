@@ -61,11 +61,6 @@ public:
    BrokenCopy::broken_copy("PolarStreamfunctionEquations");
   } 
  
- /// Broken assignment operator
- void operator=(const PolarStreamfunctionEquations&) 
-  {
-   BrokenCopy::broken_assign("PolarStreamfunctionEquations");
-  }
 
  /// \short Return the indicies at which the unknown values are stored. 
  virtual inline unsigned u_index_streamfunction() const {return 0;}
@@ -326,12 +321,6 @@ private:
    BrokenCopy::broken_copy("PolarStreamfunctionElement");
   } 
  
- /// Broken assignment operator
- void operator=(const PolarStreamfunctionElement&) 
-  {
-   BrokenCopy::broken_assign("PolarStreamfunctionElement");
-  }
-
  /// \short  Required  # of `values' (pinned or dofs) 
  /// at node n
  inline unsigned required_nvalue(const unsigned &n) const 

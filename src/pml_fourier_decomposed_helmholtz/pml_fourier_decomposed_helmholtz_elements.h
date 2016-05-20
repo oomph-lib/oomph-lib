@@ -184,11 +184,15 @@ effacer end
    }
 
   /// Broken assignment operator
-  void operator=(const PmlFourierDecomposedHelmholtzEquations&)
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+  /*void operator=(const PmlFourierDecomposedHelmholtzEquations&)
    {
     BrokenCopy::broken_assign
      ("PmlFourierDecomposedHelmholtzEquations");
-   }
+     }*/
 
   /// \short Return the index at which the unknown value
   /// is stored: Real/imag part of index contains (real) index of
@@ -778,12 +782,12 @@ effacer end
     }
 
    /// Broken assignment operator
-   void operator=(const
+   /*void operator=(const
                   QPmlFourierDecomposedHelmholtzElement<NNODE_1D>&)
     {
      BrokenCopy::broken_assign
       ("QPmlFourierDecomposedHelmholtzElement");
-    }
+      }*/
 
 
    /// \short  Required  # of `values' (pinned or dofs)

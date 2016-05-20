@@ -121,10 +121,14 @@ public :
  
  
  /// Broken assignment operator
- void operator=(const FSIPreconditioner&)
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const FSIPreconditioner&)
   {
    BrokenCopy::broken_assign("FSIPreconditioner");
-  }
+   }*/
  
 /// Set solid preconditioner (deletes existing one)
  void set_solid_preconditioner_pt(Preconditioner* solid_preconditioner_pt)
@@ -540,10 +544,10 @@ public :
  
  
  /// Broken assignment operator
- void operator=(const SimpleFSIPreconditioner&)
+ /*void operator=(const SimpleFSIPreconditioner&)
   {
    BrokenCopy::broken_assign("SimpleFSIPreconditioner");
-  }
+   }*/
   
  /// \short Setter function for the mesh containing the block-preconditionable
  /// Navier-Stokes elements. 

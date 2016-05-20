@@ -810,12 +810,16 @@ public virtual RefineableQElement<DIM>
   } 
  
  /// Broken assignment operator
- void operator=(const 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const 
                 RefineableGeneralisedNewtonianQCrouzeixRaviartElement<DIM>&) 
   {
    BrokenCopy::broken_assign(
     "RefineableGeneralisedNewtonianQCrouzeixRaviartElement");
-  }
+    }*/
  
  /// Number of continuously interpolated values: DIM (velocities)
  unsigned ncont_interpolated_values() const {return DIM;}
@@ -1040,12 +1044,12 @@ public virtual PRefineableQElement<DIM,3>
   } 
  
  /// Broken assignment operator
- void operator=(const 
+ /*void operator=(const 
                 PRefineableGeneralisedNewtonianQCrouzeixRaviartElement<DIM>&) 
   {
    BrokenCopy::broken_assign(
     "PRefineableGeneralisedNewtonianQCrouzeixRaviartElement");
-  }
+    }*/
 
  /// \short Return the i-th pressure value
  /// (Discontinous pressure interpolation -- no need to cater for hanging 

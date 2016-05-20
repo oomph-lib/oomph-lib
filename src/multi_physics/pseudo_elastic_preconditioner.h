@@ -164,11 +164,15 @@ namespace oomph
    } 
   
   /// Broken assignment operator
-  void operator=
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+  /*void operator=
    (const PseudoElasticPreconditioner&) 
    {
     BrokenCopy::broken_assign(" PseudoElasticPreconditioner");
-   }
+    }*/
   
   /// Setup method for the PseudoElasticPreconditioner.
   void setup();
@@ -365,11 +369,11 @@ namespace oomph
    } 
   
   /// Broken assignment operator
-  void operator=
+  /*void operator=
    (const PseudoElasticPreconditionerOld&) 
    {
     BrokenCopy::broken_assign(" PseudoElasticPreconditionerOld");
-   }
+    }*/
   
   /// Setup method for the PseudoElasticPreconditionerOld.
   void setup();
@@ -538,11 +542,11 @@ namespace oomph
    } 
  
   /// Broken assignment operator
-  void operator=(const PseudoElasticPreconditionerSubsidiaryPreconditionerOld&) 
+  /*void operator=(const PseudoElasticPreconditionerSubsidiaryPreconditionerOld&) 
    {
     BrokenCopy::broken_assign
     (" PseudoElasticPreconditionerSubsidiaryPreconditionerOld");
-   }
+    }*/
  
   // Setup the preconditioner
   void setup();
@@ -644,12 +648,12 @@ namespace oomph
    } 
   
   /// Broken assignment operator
-  void operator=
+  /*void operator=
    (const PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld&) 
    {
     BrokenCopy::broken_assign
     (" PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld");
-   }
+    }*/
   
   /// clean up the memory
   void clean_up_memory();
@@ -785,11 +789,11 @@ namespace oomph
    }
 
   /// Broken assignment operator
-  void operator=(const PseudoElasticPreconditionerScalingHelperOld&)
+  /*void operator=(const PseudoElasticPreconditionerScalingHelperOld&)
    {
     BrokenCopy::
     broken_assign("PseudoElasticPreconditionerScalingHelper");
-   }
+    }*/
 
   /// returns the infinite norm of S
   double s_inf_norm()

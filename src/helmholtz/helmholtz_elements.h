@@ -82,10 +82,14 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const HelmholtzEquations&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const HelmholtzEquations&) 
   {
    BrokenCopy::broken_assign("HelmholtzEquations");
-  }
+   }*/
 
  /// \short Return the index at which the unknown value
  /// is stored.
@@ -480,10 +484,10 @@ private:
   } 
  
  /// Broken assignment operator
- void operator=(const QHelmholtzElement<DIM,NNODE_1D>&) 
+ /*void operator=(const QHelmholtzElement<DIM,NNODE_1D>&) 
   {
    BrokenCopy::broken_assign("QHelmholtzElement");
-  }
+   }*/
 
 
  /// \short  Required  # of `values' (pinned or dofs) 

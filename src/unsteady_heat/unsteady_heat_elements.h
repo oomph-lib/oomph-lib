@@ -106,10 +106,14 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const UnsteadyHeatEquations&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const UnsteadyHeatEquations&) 
   {
    BrokenCopy::broken_assign("UnsteadyHeatEquations");
-  }
+   }*/
 
   /// \short Return the index at which the unknown value
  /// is stored. The default value, 0, is appropriate for single-physics
@@ -489,10 +493,10 @@ template <unsigned DIM, unsigned NNODE_1D>
   } 
  
  /// Broken assignment operator
- void operator=(const QUnsteadyHeatElement<DIM,NNODE_1D>&) 
+ /*void operator=(const QUnsteadyHeatElement<DIM,NNODE_1D>&) 
   {
    BrokenCopy::broken_assign("QUnsteadyHeatElement");
-  }
+   }*/
 
  /// \short  Required  # of `values' (pinned or dofs) 
  /// at node n

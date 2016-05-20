@@ -87,6 +87,7 @@ public :
    BrokenCopy::broken_copy("NavierStokesSchurComplementPreconditioner");
   }
  
+
  /// Broken assignment operator
  void operator=(const NavierStokesSchurComplementPreconditioner&)
   {

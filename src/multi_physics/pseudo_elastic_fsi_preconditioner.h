@@ -138,10 +138,14 @@ namespace oomph {
     }
 
    /// Broken assignment operator
-   void operator=(const PseudoElasticFSIPreconditioner&)
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+   /*void operator=(const PseudoElasticFSIPreconditioner&)
     {
      BrokenCopy::broken_assign("PseudoElasticFSIPreconditioner");
-    }
+     }*/
 
    /// clean up memory method
    void clean_up_memory();

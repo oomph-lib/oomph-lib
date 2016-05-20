@@ -90,11 +90,15 @@ namespace oomph
     }
 
    /// Broken assignment operator
-   void operator=(const PmlFourierDecomposedHelmholtzFluxElement&)
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+   /*void operator=(const PmlFourierDecomposedHelmholtzFluxElement&)
     {
      BrokenCopy::broken_assign
       ("PmlFourierDecomposedHelmholtzFluxElement");
-    }
+      }*/
 
 
    /// Access function for the prescribed-flux function pointer
@@ -433,11 +437,11 @@ public virtual FaceGeometry<ELEMENT>,
    }
 
   /// Broken assignment operator
-  void operator=(const PmlFourierDecomposedHelmholtzPowerMonitorElement&)
+  /*void operator=(const PmlFourierDecomposedHelmholtzPowerMonitorElement&)
    {
     BrokenCopy::broken_assign
      ("PmlFourierDecomposedHelmholtzPowerMonitorElement");
-   }
+     }*/
 
 
   /// \short Specify the value of nodal zeta from the face geometry

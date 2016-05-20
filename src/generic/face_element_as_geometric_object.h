@@ -99,10 +99,14 @@ namespace oomph
    } 
  
   /// Broken assignment operator
-  void operator=(const FaceElementAsGeomObject&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+  /*void operator=(const FaceElementAsGeomObject&) 
    {
     BrokenCopy::broken_assign("FaceElementAsGeomObject");
-   }
+    }*/
  
   /// \short The "global" intrinsic coordinate of the element when
   /// viewed as part of a geometric object should be given by

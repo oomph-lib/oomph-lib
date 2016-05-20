@@ -381,7 +381,7 @@ class TriangleMeshParameters
     MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
     
     // Initialize the value for allowing creation of points on boundaries
-    Allow_automatic_creation_of_vertices_on_boundaries = 
+    this->Allow_automatic_creation_of_vertices_on_boundaries = 
      allow_automatic_creation_of_vertices_on_boundaries;
 #ifdef OOMPH_HAS_MPI    
     // Initialize the flag to indicate this is the first time to
@@ -445,7 +445,7 @@ class TriangleMeshParameters
     MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
 
     // Initialize the value for allowing creation of points on boundaries
-    Allow_automatic_creation_of_vertices_on_boundaries = 
+    this->Allow_automatic_creation_of_vertices_on_boundaries = 
      allow_automatic_creation_of_vertices_on_boundaries;
 #ifdef OOMPH_HAS_MPI    
     // Initialize the flag to indicate this is the first time to
@@ -2668,12 +2668,12 @@ private:
 
    if (curviline_pt->are_there_connection_points())
     {
-     create_vertex_coordinates_for_polyline_connections(
+     this->create_vertex_coordinates_for_polyline_connections(
        curviline_pt, bound, polygonal_vertex_arclength);
     }
    else
     {
-     create_vertex_coordinates_for_polyline_no_connections(
+     this->create_vertex_coordinates_for_polyline_no_connections(
        curviline_pt, bound, polygonal_vertex_arclength);
     }
 

@@ -6391,7 +6391,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
       {
        warning_stream
         << "Shared node scheme has been output in files like\n"
-        << filename << std::endl;
+        << filename.str() << std::endl;
       }
      else
       {

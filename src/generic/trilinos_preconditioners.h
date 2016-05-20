@@ -100,10 +100,14 @@ namespace oomph
 
 
    /// Broken assignment operator.
-   void operator=(const TrilinosPreconditionerBase&)
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+   /*void operator=(const TrilinosPreconditionerBase&)
     {
      BrokenCopy::broken_assign("TrilinosPreconditionerBase");
-    }
+     }*/
 
    /// \short Function to set up a preconditioner for the linear system 
    /// defined by matrix_pt. This function must be called before using 
@@ -184,10 +188,10 @@ namespace oomph
     }
 
    /// Broken assignment operator.
-   void operator=(const TrilinosMLPreconditioner&)
+   /*void operator=(const TrilinosMLPreconditioner&)
     {
      BrokenCopy::broken_assign("TrilinosMLPreconditioner");
-    }
+     }*/
 
    /// \short Set control flags to values for Petrov-Galerkin
    /// preconditioning - for non symmetric systems
@@ -308,10 +312,10 @@ namespace oomph
 
 
    /// Broken assignment operator.
-   void operator=(const TrilinosIFPACKPreconditioner&)
+   /*void operator=(const TrilinosIFPACKPreconditioner&)
     {
      BrokenCopy::broken_assign("TrilinosIFPACKPreconditioner");
-    }
+     }*/
 
    /// Function to set Preconditioner_type to "ILU"
    void set_preconditioner_ILU()

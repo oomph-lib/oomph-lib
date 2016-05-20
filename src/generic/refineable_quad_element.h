@@ -97,10 +97,14 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const RefineableQElement<2>&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const RefineableQElement<2>&) 
   {
    BrokenCopy::broken_assign("RefineableQElement<2>");
-  }
+   }*/
 
  /// Destructor
  virtual ~RefineableQElement()
@@ -237,10 +241,10 @@ class RefineableSolidQElement<2> : public virtual RefineableQElement<2>,
   } 
  
  /// Broken assignment operator
- void operator=(const RefineableSolidQElement<2>&) 
+ /*void operator=(const RefineableSolidQElement<2>&) 
   {
    BrokenCopy::broken_assign("RefineableSolidQElement<2>");
-  }
+   }*/
 
  /// Virtual Destructor
  virtual ~RefineableSolidQElement() {}

@@ -82,10 +82,14 @@ public virtual UnsteadyHeatEquations<DIM>,
   } 
  
  /// Broken assignment operator
- void operator=(const RefineableUnsteadyHeatEquations<DIM>&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const RefineableUnsteadyHeatEquations<DIM>&) 
   {
    BrokenCopy::broken_assign("RefineableUnsteadyHeatEquations");
-  }
+   }*/
  
  /// Number of 'flux' terms for Z2 error estimation 
  unsigned num_Z2_flux_terms() {return DIM;}
@@ -219,10 +223,10 @@ public QUnsteadyHeatElement<DIM,NNODE_1D>,
   } 
  
  /// Broken assignment operator
- void operator=(const RefineableQUnsteadyHeatElement<DIM,NNODE_1D>&) 
+ /*void operator=(const RefineableQUnsteadyHeatElement<DIM,NNODE_1D>&) 
   {
    BrokenCopy::broken_assign("RefineableQuadUnsteadyHeatElement");
-  }
+   }*/
  
  /// Number of continuously interpolated values: 1
  unsigned ncont_interpolated_values() const {return 1;}

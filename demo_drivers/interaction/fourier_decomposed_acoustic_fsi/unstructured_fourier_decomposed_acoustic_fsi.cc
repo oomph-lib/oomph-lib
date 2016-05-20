@@ -82,13 +82,6 @@ public:
    BrokenCopy::broken_copy("MyStraightLine");
   } 
  
- /// Broken assignment operator
- void operator=(const MyStraightLine&) 
-  {
-   BrokenCopy::broken_assign("MyStraightLine");
-  }
-
-
  /// Destructor:  Empty
  ~MyStraightLine(){}
  

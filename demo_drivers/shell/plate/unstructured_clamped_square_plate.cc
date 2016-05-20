@@ -202,12 +202,6 @@ public:
    BrokenCopy::broken_copy("MyShellEquations");
   } 
  
- /// Broken assignment operator
- void operator=(const MyShellEquations&) 
-  {
-   BrokenCopy::broken_assign("MyShellEquations");
-  }
-
  /// \short Return the index at which the unknown value
  /// is stored. 
  /// In derived multi-physics elements, this function should be overloaded
@@ -544,12 +538,6 @@ private:
    BrokenCopy::broken_copy("BellShellElement");
   } 
  
- /// Broken assignment operator
- void operator=(const BellShellElement<DIM,NNODE_1D>&) 
-  {
-   BrokenCopy::broken_assign("BellShellElement");
-  }
-
 
  /// \short  Required  # of `values' (pinned or dofs) 
  /// at node n

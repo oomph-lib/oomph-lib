@@ -190,13 +190,6 @@ public :
   }
 
 
- /// Broken assignment operator
- void operator=(const BoussinesqPreconditioner&)
-  {
-   BrokenCopy::broken_assign("BoussinesqPreconditioner");
-  }
-
-
  /// Switch to block-diagonal preconditioner
  void use_block_diagonal_version()
   {

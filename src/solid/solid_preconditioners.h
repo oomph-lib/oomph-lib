@@ -222,10 +222,14 @@ namespace oomph
     }
 
    /// Broken assignment operator
-   void operator=(const PressureBasedSolidLSCPreconditioner&)
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+   /*void operator=(const PressureBasedSolidLSCPreconditioner&)
     {
      BrokenCopy::broken_assign("PressureBasedSolidLSCPreconditioner");
-    }
+     }*/
 
    /// Setup the preconditioner
    void setup();
@@ -435,10 +439,10 @@ namespace oomph
    
 
    /// Broken assignment operator   
-   void operator=(const PressureBasedSolidExactPreconditioner&)
+   /*void operator=(const PressureBasedSolidExactPreconditioner&)
     {
      BrokenCopy::broken_assign("PressureBasedSolidExactPreconditioner");
-    }
+     }*/
    
    
    /// Setup the preconditioner

@@ -718,12 +718,6 @@ class RefineableModalPoissonEquations :
    BrokenCopy::broken_copy("RefineableModalPoissonEquations");
   } 
  
- /// Broken assignment operator
- void operator=(const RefineableModalPoissonEquations<DIM>&) 
-  {
-   BrokenCopy::broken_assign("RefineableModalPoissonEquations");
-  }
- 
  virtual inline unsigned u_index_poisson() const {return 0;}
  
  /// Number of 'flux' terms for Z2 error estimation 
@@ -1379,12 +1373,6 @@ class ModalPRefineableQPoissonElement :
   { 
    BrokenCopy::broken_copy("ModalPRefineableQPoissonElement");
   } 
- 
- /// Broken assignment operator
- void operator=(const ModalPRefineableQPoissonElement<DIM>&) 
-  {
-   BrokenCopy::broken_assign("ModalPRefineableQPoissonElement");
-  }
  
  // Overload nnode_1d() const
  unsigned nnode_1d() const {return 2;}

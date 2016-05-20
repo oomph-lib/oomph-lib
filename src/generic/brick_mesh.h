@@ -96,10 +96,14 @@ class DummyBrickElement : public virtual QElement<3,2>
   } 
  
  /// Broken assignment operator
- void operator=(const DummyBrickElement&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const DummyBrickElement&) 
   {
    BrokenCopy::broken_assign("DummyBrickElement");
-  }
+   }*/
 
 
  /// \short  Required  # of `values' (pinned or dofs) 
@@ -206,10 +210,10 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const BrickMeshBase&) 
+ /*void operator=(const BrickMeshBase&) 
   {
    BrokenCopy::broken_assign("BrickMeshBase");
-  }
+   }*/
 
  /// Destructor (empty)
  virtual ~BrickMeshBase(){}

@@ -68,12 +68,6 @@ public virtual ElementWithZ2ErrorEstimator
    BrokenCopy::broken_copy("RefineablePolarStreamfunctionEquations");
   } 
  
- /// Broken assignment operator
- void operator=(const RefineablePolarStreamfunctionEquations&) 
-  {
-   BrokenCopy::broken_assign("RefineablePolarStreamfunctionEquations");
-  }
- 
  /// Number of 'flux' terms for Z2 error estimation 
  unsigned num_Z2_flux_terms() {return 2;}
 
@@ -200,12 +194,6 @@ public virtual RefineableQElement<2>
   { 
    BrokenCopy::broken_copy("RefineableQuadStreamfunctionElement");
   } 
- 
- /// Broken assignment operator
- void operator=(const RefineablePolarStreamfunctionElement&) 
-  {
-   BrokenCopy::broken_assign("RefineableQuadStreamfunctionElement");
-  }
  
  /// Number of continuously interpolated values: 3
  unsigned ncont_interpolated_values() const {return 3;}

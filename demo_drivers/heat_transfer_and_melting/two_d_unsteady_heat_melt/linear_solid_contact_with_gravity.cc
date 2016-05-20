@@ -107,12 +107,6 @@ public:
    BrokenCopy::broken_copy("WarpedLine");
   } 
  
- /// Broken assignment operator
- void operator=(const WarpedLine&) 
-  {
-   BrokenCopy::broken_assign("WarpedLine");
-  }
-
 
  /// Empty Destructor
  ~WarpedLine(){}

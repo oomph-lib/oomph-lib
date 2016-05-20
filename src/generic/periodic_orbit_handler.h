@@ -201,10 +201,14 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const PeriodicOrbitEquations&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const PeriodicOrbitEquations&) 
   {
    BrokenCopy::broken_assign("PeriodicOrbitEquations");
-  }
+   }*/
 
  ///Set the pointer to the frequency
  double* &omega_pt() {return Omega_pt;}
@@ -363,10 +367,10 @@ template <unsigned NNODE_1D>
   } 
  
  /// Broken assignment operator
- void operator=(const SpectralPeriodicOrbitElement<NNODE_1D>&) 
+ /*void operator=(const SpectralPeriodicOrbitElement<NNODE_1D>&) 
   {
    BrokenCopy::broken_assign("SpectralPeriodicOrbitElement");
-  }
+   }*/
 
 
  /// \short  Required  # of `values' (pinned or dofs) 

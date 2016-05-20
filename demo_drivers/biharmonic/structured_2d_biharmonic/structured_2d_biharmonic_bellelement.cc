@@ -90,12 +90,6 @@ public:
   { 
    BrokenCopy::broken_copy("MyBiharmonicEquations");
   } 
- 
- /// Broken assignment operator
- void operator=(const MyBiharmonicEquations&) 
-  {
-   BrokenCopy::broken_assign("MyBiharmonicEquations");
-  }
 
  /// \short Return the index at which the unknown value
  /// is stored. The default value, 0, is appropriate for single-physics
@@ -344,12 +338,6 @@ private:
    BrokenCopy::broken_copy("BiharmonicBellElement");
   } 
  
- /// Broken assignment operator
- void operator=(const BiharmonicBellElement<DIM,NNODE_1D>&) 
-  {
-   BrokenCopy::broken_assign("BiharmonicBellElement");
-  }
-
 
  /// \short  Required  # of `values' (pinned or dofs) 
  /// at node n

@@ -753,10 +753,14 @@ namespace oomph
     }
    
    /// Broken assignment operator
-   void operator=(const NavierStokesSchurComplementPreconditioner&)
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+   /*void operator=(const NavierStokesSchurComplementPreconditioner&)
     {
      BrokenCopy::broken_assign("NavierStokesSchurComplementPreconditioner");
-    }
+     }*/
 
    /// Set the problem pointer (non-const pointer, the problem WILL be
    /// changed) for use in get_pressure_advection_diffusion_matrix().
@@ -1295,10 +1299,10 @@ namespace oomph
    
 
    /// Broken assignment operator   
-   void operator=(const NavierStokesExactPreconditioner&)
+   /*void operator=(const NavierStokesExactPreconditioner&)
     {
      BrokenCopy::broken_assign("NavierStokesExactPreconditioner");
-    }
+     }*/
    
    
    /// Setup the preconditioner

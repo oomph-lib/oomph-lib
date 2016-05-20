@@ -85,10 +85,14 @@ template <unsigned DIM, unsigned NNODE_1D>
   } 
  
  /// Broken assignment operator
- void operator=(const TLinearElasticityElement<DIM,NNODE_1D>&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const TLinearElasticityElement<DIM,NNODE_1D>&) 
   {
    BrokenCopy::broken_assign("TLinearElasticityElement");
-  }
+   }*/
  
  /// \short Output function:  
  void output(std::ostream &outfile)

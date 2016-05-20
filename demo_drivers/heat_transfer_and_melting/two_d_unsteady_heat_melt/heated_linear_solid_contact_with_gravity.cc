@@ -1459,13 +1459,6 @@ public:
    BrokenCopy::broken_copy("HeatedPenetratorFluxElement");
   } 
  
- /// Broken assignment operator
- void operator=(const HeatedPenetratorFluxElement&) 
-  {
-   BrokenCopy::broken_assign("HeatedPenetratorFluxElement");
-  }
-
-
  /// \short Pointer to penetrator
  Penetrator* penetrator_pt() const
  {

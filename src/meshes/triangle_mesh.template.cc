@@ -1694,7 +1694,7 @@ namespace oomph
             << "irrespective of the direction of the coordinate.\n"
             << "This probably means that things are way soff.\n"
             << "The errors are " << error << " and " << rev_error << "\n";
-           std::cout << error_stream;
+           std::cout << error_stream.str();
            throw OomphLibError(error_stream.str(),
             "TriangleMesh::setup_boundary_coordinates()",
             OOMPH_EXCEPTION_LOCATION);

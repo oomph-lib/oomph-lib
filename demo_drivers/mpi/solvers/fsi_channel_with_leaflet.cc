@@ -701,11 +701,6 @@ public :
    BrokenCopy::broken_copy("SimpleFSIPreconditioner");
   }
  
- /// Broken assignment operator
- void operator=(const SimpleFSIPreconditioner&)
-  {
-   BrokenCopy::broken_assign("SimpleFSIPreconditioner");
-  }
   
  /// \short Access function to mesh containing the block-preconditionable
  /// Navier-Stokes elements. 

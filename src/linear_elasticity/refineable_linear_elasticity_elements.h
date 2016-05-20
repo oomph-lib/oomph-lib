@@ -263,10 +263,10 @@ class PRefineableQLinearElasticityElement : public QLinearElasticityElement<DIM,
   } 
  
  /// Broken assignment operator
- void operator=(const PRefineableQLinearElasticityElement<DIM>&) 
+/* void operator=(const PRefineableQLinearElasticityElement<DIM>&) 
   {
    BrokenCopy::broken_assign("PRefineableQLinearElasticityElement");
-  }
+   }*/
 
  void further_build();
  

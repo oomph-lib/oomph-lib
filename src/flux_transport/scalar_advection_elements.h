@@ -205,11 +205,15 @@ template <unsigned DIM, unsigned NNODE_1D>
   } 
  
  /// Broken assignment operator
- void operator=(
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(
   const QSpectralScalarAdvectionElement<DIM,NNODE_1D>&) 
   {
    BrokenCopy::broken_assign("QSpectralScalarAdvectionElement");
-  }
+   }*/
  
  /// \short  Required  # of `values' (pinned or dofs) 
  /// at node n
@@ -690,11 +694,11 @@ template <unsigned DIM, unsigned NNODE_1D>
   } 
  
  /// Broken assignment operator
- void operator=(
+ /*void operator=(
   const QScalarAdvectionElement<DIM,NNODE_1D>&) 
   {
    BrokenCopy::broken_assign("QScalarAdvectionElement");
-  }
+   }*/
  
  /// \short  Required  # of `values' (pinned or dofs) 
  /// at node n

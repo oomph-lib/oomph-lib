@@ -147,10 +147,14 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const GeneralisedNewtonianTCrouzeixRaviartElement<DIM>&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const GeneralisedNewtonianTCrouzeixRaviartElement<DIM>&) 
   {
    BrokenCopy::broken_assign("GeneralisedNewtonianTCrouzeixRaviartElement");
-  }
+   }*/
 
 
  /// \short Number of values (pinned or dofs) required at local node n.
@@ -805,10 +809,10 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const GeneralisedNewtonianTTaylorHoodElement<DIM>&) 
+ /*void operator=(const GeneralisedNewtonianTTaylorHoodElement<DIM>&) 
   {
    BrokenCopy::broken_assign("GeneralisedNewtonianTTaylorHoodElement");
-  }
+   }*/
 
  /// \short Number of values (pinned or dofs) required at node n. Can
  /// be overwritten for hanging node version

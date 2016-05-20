@@ -82,10 +82,14 @@ class TUnsteadyHeatElement : public virtual TElement<DIM,NNODE_1D>,
   } 
  
  /// Broken assignment operator
- void operator=(const TUnsteadyHeatElement<DIM,NNODE_1D>&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const TUnsteadyHeatElement<DIM,NNODE_1D>&) 
   {
    BrokenCopy::broken_assign("TUnsteadyHeatElement");
-  }
+   }*/
 
  /// \short  Access function for Nvalue: # of `values' (pinned or dofs) 
  /// at node n (always returns the same value at every node, 1)

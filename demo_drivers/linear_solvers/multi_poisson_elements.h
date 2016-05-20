@@ -86,12 +86,6 @@ public:
    BrokenCopy::broken_copy("MultiPoissonEquations");
   } 
  
- /// Broken assignment operator
- void operator=(const MultiPoissonEquations&) 
-  {
-   BrokenCopy::broken_assign("MultiPoissonEquations");
-  }
-
  /// \short Return the index at which the unknown value
  /// is stored. The default value, i, is appropriate for single-physics
  /// problems, when there is only one variable, the value that satisfies
@@ -492,12 +486,6 @@ private:
    BrokenCopy::broken_copy("QMultiPoissonElement");
   } 
  
- /// Broken assignment operator
- void operator=(const QMultiPoissonElement<DIM,NNODE_1D,NFIELDS>&) 
-  {
-   BrokenCopy::broken_assign("QMultiPoissonElement");
-  }
-
  /// \short  Required  # of `values' (pinned or dofs) 
  /// at node n
  inline unsigned required_nvalue(const unsigned &n) const 

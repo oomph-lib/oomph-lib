@@ -1758,10 +1758,14 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const FiniteElement&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const FiniteElement&) 
   {
    BrokenCopy::broken_assign("FiniteElement");
-  }
+   }*/
 
  ///Check whether the local coordinate are valid or not
  virtual bool local_coord_is_valid(const Vector<double> &s)
@@ -3175,13 +3179,13 @@ class PointElement : public virtual FiniteElement
  PointElement(const PointElement&) 
   { 
    BrokenCopy::broken_copy("PointElement");
-  } 
+   }
  
  /// Broken assignment operator
- void operator=(const PointElement&) 
+ /*void operator=(const PointElement&) 
   {
    BrokenCopy::broken_assign("PointElement");
-  }
+   }*/
 
  /// Calculate the geometric shape functions at local coordinate s
  void shape(const Vector<double> &s, Shape &psi) const;
@@ -3340,10 +3344,10 @@ public:
  
 
  /// Broken assignment operator
- void operator=(const SolidFiniteElement&) 
+ /*void operator=(const SolidFiniteElement&) 
   {
    BrokenCopy::broken_assign("SolidFiniteElement");
-  }
+   }*/
 
  ///\short The number of geometric data affecting a SolidFiniteElemnet is
  ///the same as the number of nodes (one variable position data per node)
@@ -4200,10 +4204,10 @@ class FaceElement: public virtual FiniteElement
   } 
  
  /// Broken assignment operator
- void operator=(const FaceElement&) 
+ /*void operator=(const FaceElement&) 
   {
    BrokenCopy::broken_assign("FaceElement");
-  }
+   }*/
  
  /// Access function for the boundary number in bulk mesh
  inline const unsigned& boundary_number_in_bulk_mesh() const

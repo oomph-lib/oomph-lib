@@ -82,10 +82,14 @@ namespace oomph
   } 
  
  /// Broken assignment operator
- void operator=(const QElementGeometricBase&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const QElementGeometricBase&) 
   {
    BrokenCopy::broken_assign("QElementGeometricBase");
-  }
+   }*/
 
 
 };
@@ -114,10 +118,10 @@ class QElementBase : public virtual QElementGeometricBase
   } 
  
  /// Broken assignment operator
- void operator=(const QElementBase&) 
+ /*void operator=(const QElementBase&) 
   {
    BrokenCopy::broken_assign("QElementBase");
-  }
+   }*/
 
  /// Destructor: Kill storage for macro element reference coords
  virtual ~QElementBase()
@@ -378,10 +382,10 @@ class QSolidElementBase : public virtual QElementBase,
   } 
  
  /// Broken assignment operator
- void operator=(const QSolidElementBase&) 
+ /*void operator=(const QSolidElementBase&) 
   {
    BrokenCopy::broken_assign("QSolidElementBase");
-  }
+   }*/
 
  /// \short Set pointer to MacroElement -- overloads generic version
  /// in RefineableQElement<2> and uses the MacroElement 
@@ -545,10 +549,10 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const QElement&) 
+ /*void operator=(const QElement&) 
   {
    BrokenCopy::broken_assign("QElement");
-  }
+   }*/
 
  /// Calculate the geometric shape functions at local coordinate s
  void shape(const Vector<double> &s, Shape &psi) const;
@@ -863,10 +867,10 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const QElement&) 
+ /*void operator=(const QElement&) 
   {
    BrokenCopy::broken_assign("QElement");
-  }
+   }*/
 
  /// Calculate the geometric shape functions at local coordinate s
  void shape(const Vector<double> &s, Shape &psi) const;
@@ -1214,10 +1218,10 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const QElement&) 
+ /*void operator=(const QElement&) 
   {
    BrokenCopy::broken_assign("QElement");
-  }
+   }*/
  
  /// Calculate the geometric shape functions at local coordinate s
  void shape(const Vector<double> &s, Shape &psi) const;
@@ -1593,10 +1597,10 @@ class SolidQElement<1,NNODE_1D> : public virtual QElement<1,NNODE_1D>,
   } 
  
  /// Broken assignment operator
- void operator=(const SolidQElement&) 
+ /*void operator=(const SolidQElement&) 
   {
    BrokenCopy::broken_assign("SolidQElement");
-  }
+   }*/
 
 ///Overload the output function
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
@@ -1760,10 +1764,10 @@ class SolidQElement<2,NNODE_1D> : public virtual QElement<2,NNODE_1D>,
   } 
  
  /// Broken assignment operator
- void operator=(const SolidQElement&) 
+ /*void operator=(const SolidQElement&) 
   {
    BrokenCopy::broken_assign("SolidQElement");
-  }
+   }*/
 
  /// Overload the output function
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
@@ -1931,10 +1935,10 @@ class SolidQElement<3,NNODE_1D> : public virtual QElement<3,NNODE_1D>,
   } 
  
  /// Broken assignment operator
- void operator=(const SolidQElement&) 
+ /*void operator=(const SolidQElement&) 
   {
    BrokenCopy::broken_assign("SolidQElement");
-  }
+   }*/
 
  /// Overload the output function
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}

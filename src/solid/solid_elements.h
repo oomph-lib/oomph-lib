@@ -2045,10 +2045,14 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const TPVDElementWithContinuousPressure<DIM>&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const TPVDElementWithContinuousPressure<DIM>&) 
   {
    BrokenCopy::broken_assign("TPVDElementWithContinuousPressure");
-  }
+   }*/
 
  /// \short Set the value at which the solid pressure is stored in the nodes
  inline int solid_p_nodal_index() const {return 0;}

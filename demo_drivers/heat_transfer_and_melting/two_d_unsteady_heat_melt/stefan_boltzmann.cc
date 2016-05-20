@@ -74,12 +74,6 @@ public:
   { 
    BrokenCopy::broken_copy("MyIntegral");
   } 
- 
- /// Broken assignment operator
- void operator=(const MyIntegral&) 
-  {
-   BrokenCopy::broken_assign("MyIntegral");
-  }
 
  /// Number of integration points of the scheme
  unsigned nweight() const {return N_knot;}

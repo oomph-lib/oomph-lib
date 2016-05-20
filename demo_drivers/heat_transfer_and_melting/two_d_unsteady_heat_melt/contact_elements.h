@@ -77,13 +77,6 @@ namespace oomph
      BrokenCopy::broken_copy("PiecewiseGauss");
     } 
    
-   /// Broken assignment operator
-   void operator=(const PiecewiseGauss&) 
-    {
-     BrokenCopy::broken_assign("PiecewiseGauss");
-    }
-   
-   
    /// Return the number of integration points of the scheme. 
    virtual unsigned nweight() const
    {
@@ -804,7 +797,7 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
    
    /// \short Do we allow only proper non-penetration (without "stick", i.e.
    /// no negative contact pressures)?
-   void is_stick_enabled()
+   bool is_stick_enabled()
    {
     return Enable_stick;
    }

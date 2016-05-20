@@ -93,14 +93,6 @@ public:
    BrokenCopy::broken_copy("StefanBoltzmannMeltElement");
   }
  
- /// Broken assignment operator
- void operator=(const StefanBoltzmannMeltElement&)
-  {
-   BrokenCopy::broken_assign("StefanBoltzmannMeltElement");
-  }
-
- 
-
   /// \short Specify the value of nodal zeta from the face geometry:
   /// The "global" intrinsic coordinate of the element when
   /// viewed as part of a geometric object should be given by

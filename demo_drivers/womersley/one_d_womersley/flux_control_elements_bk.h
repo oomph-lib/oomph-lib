@@ -102,14 +102,6 @@ public:
    BrokenCopy::broken_copy("NetFluxControlElement");
   } 
  
- 
- /// Broken assignment operator
- void operator=(const NetFluxControlElement&) 
-  {
-   BrokenCopy::broken_assign("NetFluxControlElement");
-  }
-
- 
  /// \short Function return pointer to the Data object whose
  /// single value is the pressure applied by the elements in 
  /// Flux_control_mesh_pt

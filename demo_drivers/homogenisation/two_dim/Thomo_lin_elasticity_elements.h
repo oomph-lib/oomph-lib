@@ -83,12 +83,6 @@ namespace oomph
    BrokenCopy::broken_copy("THomogenisedLinearElasticityElement");
   } 
  
- /// Broken assignment operator
- void operator=(const THomogenisedLinearElasticityElement<DIM,NNODE_1D>&) 
-  {
-   BrokenCopy::broken_assign("THomogenisedLinearElasticityElement");
-  }
- 
  /// \short Output function:  
  ///  x,y,u   or    x,y,z,u
  void output(std::ostream &outfile)

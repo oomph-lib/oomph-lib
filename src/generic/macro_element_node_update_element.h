@@ -89,10 +89,14 @@ public:
   } 
  
  /// Broken assignment operator
- void operator=(const MacroElementNodeUpdateNode&) 
+//Commented out broken assignment operator because this can lead to a conflict warning
+//when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
+//realise that two separate implementations of the broken function are the same and so,
+//quite rightly, it shouts.
+ /*void operator=(const MacroElementNodeUpdateNode&) 
   {
    BrokenCopy::broken_assign("MacroElementNodeUpdateNode");
-  }
+   }*/
 
 
  ///\short Destructor (empty)
@@ -299,10 +303,10 @@ public MacroElementNodeUpdateElementBase
  ~MacroElementNodeUpdateElement() {}
 
  /// Broken assignment operator
- void operator=(const MacroElementNodeUpdateElement&) 
+ /*void operator=(const MacroElementNodeUpdateElement&) 
   {
    BrokenCopy::broken_assign("MacroElementNodeUpdateElement");
-  }
+   }*/
 
  /// \short Set node update information:
  /// Pass the vector of (pointers to) the geometric objects
@@ -389,10 +393,10 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
   } 
  
  /// Broken assignment operator
- void operator=(const MacroElementNodeUpdateMesh&) 
+ /*void operator=(const MacroElementNodeUpdateMesh&) 
   {
    BrokenCopy::broken_assign("MacroElementNodeUpdateMesh");
-  }
+   }*/
 
  /// Access to Macro_domain_pt for MacroElementNodeUpdateMesh; this
  /// must be filled in by any mesh which inherits from here

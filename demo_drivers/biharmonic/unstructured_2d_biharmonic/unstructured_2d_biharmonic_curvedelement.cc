@@ -94,12 +94,6 @@ public:
   { 
    BrokenCopy::broken_copy("MyBiharmonicEquations");
   } 
- 
- /// Broken assignment operator
- void operator=(const MyBiharmonicEquations&) 
-  {
-   BrokenCopy::broken_assign("MyBiharmonicEquations");
-  }
 
  /// \short Return the index at which the unknown value
  /// is stored. 
@@ -357,13 +351,6 @@ private:
   { 
    BrokenCopy::broken_copy("BiharmonicCurvedElement");
   } 
- 
- /// Broken assignment operator
- void operator=(const BiharmonicCurvedElement<DIM,NNODE_1D>&) 
-  {
-   BrokenCopy::broken_assign("BiharmonicCurvedElement");
-  }
-
 
  /// \short  Required  # of `values' (pinned or dofs) 
  /// at node n
