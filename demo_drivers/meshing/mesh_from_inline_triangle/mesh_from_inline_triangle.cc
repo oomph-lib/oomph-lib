@@ -358,7 +358,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
  hole_pt[0] = new TriangleMeshPolygon(hole_polyline_pt, hole_center);
  
 
- // Build curvlinear hole
+ // Build curvilinear hole
  //======================
  
  // Build second hole: Another ellipse
