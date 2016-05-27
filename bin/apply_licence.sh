@@ -10,7 +10,7 @@
 # Find *.h and *.cc files in oomph-lib distribution (i.e. exclude
 # external_src)
 #--------------------------------------------------------------
-oomph_lib_h_and_cc_files=`find demo_drivers src user_src user_drivers \( -name '*.h' -o -name '*.cc' \) -exec ls  {} \; `
+oomph_lib_h_and_cc_files=`find demo_drivers src user_src user_drivers self_test bin \( -name '*.h' -o -name '*.cc' \) -exec ls  {} \; `
 
 
 #--------------------------------------------------------------

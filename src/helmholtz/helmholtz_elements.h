@@ -4,7 +4,7 @@
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
 //LIC//    Version 1.0; svn revision $LastChangedRevision$
-//LIC// 
+//LIC//
 //LIC// $LastChangedDate$
 //LIC// 
 //LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
