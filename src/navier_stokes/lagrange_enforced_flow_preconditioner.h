@@ -1370,7 +1370,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
   // Need to create the norms, used for Sigma, if required
   //////////////////////////////////////////////////////////////////////////
 
-  // todo: This could be made more efficient by storing only the
+  // To do: This could be made more efficient by storing only the
   // augmented blocks. I will do this later.
   //
   // Extract the velocity block. Although we only require the infinity norm

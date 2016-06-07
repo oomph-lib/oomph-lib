@@ -229,4 +229,4 @@ clean-local:
 distclean-local:
 	rm -f $(libname).h *~
 
-EXTRA_DIST=prettyprint.h prettyprint98.h
+#EXTRA_DIST=prettyprint.h prettyprint98.h
