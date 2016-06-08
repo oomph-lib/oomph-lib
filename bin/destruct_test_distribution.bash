@@ -237,7 +237,7 @@ for do_mpi in 0 1; do
 #------------------------------------------------------
             echo "#! /bin/bash" > build_script.bash
             chmod a+x build_script.bash
-            echo "tar xvfz "$tar_file >> build_script.bash  
+            echo "tar xfz "$tar_file >> build_script.bash  
             echo "cd "$unpacked_dist_dir >> build_script.bash 
 
             if [ $do_ext_dist -eq 1 ]
@@ -326,7 +326,7 @@ for do_mpi in 0 1; do
                 echo "echo \"LD=mpif77\" >> config/configure_options/current" >> build_script.bash 
             fi
             # Build and run self tests
-            echo "./non_interactive_autogen.sh -S &> test_build.log & " >> build_script.bash            
+            echo "./non_interactive_autogen.sh -S &> test_build.log  " >> build_script.bash            
             
 #------------------------------------------------------
 # Make the test directory and run tests
@@ -344,3 +344,14 @@ for do_mpi in 0 1; do
     done
 done
 
+
+#------------------------------------------------------
+# Wait until all background jobs have finished
+#------------------------------------------------------
+echo "Waiting for destruct tests to finish..."
+wait
+
+
+message="Destruct test done.\n\nOn-screen output is redirected into\n\n         "`pwd`"/*/*/test_build.log\n\nand can be checked for errors using\n\n   "`pwd`"/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash "`pwd`"/*/*/test_build.log\n\nThis will obviously complain about the buggy codes that were\ndeliberately introduced to create warnings/errors (to test\nthat the destruct test machinery itself works properly...).\nTo omit these use\n\n "`pwd`"/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash "`pwd`"/*/*/test_build.log  | grep -v deliberately_broken | grep -v with_warning | grep -v 'code with warning'\n\ninstead. This should not show ANY errors/warnings.\n\n"
+echo -e $message | mail -s "destruct test done" $USER
+echo -e $message
