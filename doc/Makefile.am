@@ -1,5 +1,4 @@
 SUBDIRS = \
-raw_doxygen \
 people \
 index \
 picture_show \

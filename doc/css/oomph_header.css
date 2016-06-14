@@ -31,6 +31,7 @@ font-weight:200;
 font-size:36px;
 color:#333;
 margin: 0px;
+clear: both;
 }
 #nav-path{
 	display:none;
@@ -90,7 +91,7 @@ div.navpath li{
 
 .mlabels-right{
 	position:absolute;
-	top:0px;
+	top:3px;
 	right:4px;
 	
 }
@@ -104,12 +105,16 @@ div.navpath li{
 }
 
 .navbar-brand{
-	
-	padding: 5px 10px;
+	padding: 7.5px 10px;
 	opacity:0.85;
 }
+
 .navbar-brand:hover{
 	opacity:1.0;
+}
+
+.navbar-brand img{
+	height:35px;
 }
 
 .memberdecls td{
@@ -609,51 +614,69 @@ div.qindex{
 	font-size:0px;
 }
 
-div.qindex a.qindex{
+.tablist li, div.qindex a.qindex{
 	color:grey;
 	position: relative;
-display: inline-block;
-vertical-align: middle;
-display: inline-block;
-margin-bottom: 0;
-font-weight: normal;
-text-align: center;
-vertical-align: middle;
--ms-touch-action: manipulation;
-touch-action: manipulation;
-cursor: pointer;
-background-image: none;
-border: 1px solid transparent;
-white-space: nowrap;
-padding: 6px 12px;
-font-size: 14px;
-line-height: 1.42857143;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-background-color: #fff;
-border-color: #ccc;
-margin-left:-1px;
-float:left;
-	
+	display: inline-block;
+	vertical-align: middle;
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: normal;
+	text-align: center;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	padding: 6px 0px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-color: #fff;
+	border-color: #ccc;
+	margin-left:-1px;
+	float:left;
 }
-div.qindex a.qindex:first-child{
+div.qindex a.qindex{
+	padding: 6px 12px;
+}
+
+.tablist a{
+	padding: 6px 12px;
+	color:grey;
+}
+
+.tablist li:first-child,div.qindex a.qindex:first-child{
 	border-bottom-left-radius:4px;
 	border-top-left-radius:4px;
 }
 
-div.qindex a.qindex:last-child{
+.tablist li:last-child, div.qindex a.qindex:last-child{
 	border-bottom-right-radius:4px;
 	border-top-right-radius:4px;
 }
 
 
-div.qindex a.qindex:hover {
+.tablist li:hover, .tablist li.current, div.qindex a.qindex:hover {
     color: #333;
     background-color: #e6e6e6;
     border-color: #adadad;
 		text-decoration:none;
+}
+
+.tablist li:hover a{
+    color: #333;
+		text-decoration:none;
+}
+
+.tablist{
+	padding-left:0px;
+	
 }
 
 .ah{
@@ -663,6 +686,33 @@ div.qindex a.qindex:hover {
 	margin:20px 0px 5px 0px ;
 	line-height:1.1;
 	color:#555;
+}
+
+.tablist{
+	display:block;
+	clear:both;
+}
+
+#navrow1{
+	display:none;
+}
+
+#navrow2{
+	display:none;	
+}
+#navrow3{
+	display:block;
+	clear:both;
+	margin-bottom:10px;
+}
+
+#navrow4{
+	display:block;
+	clear:both;
+	margin-bottom:10px;
+}
+.contents{
+	clear:both;
 }
 
 .centered{
