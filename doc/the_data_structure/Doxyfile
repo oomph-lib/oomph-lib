@@ -743,43 +743,7 @@ WARN_LOGFILE           =
 # spaces.
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = . \
-                         ../../src/advection_diffusion \
-                         ../../src/fluid_interface \
-                         ../../src/spherical_navier_stokes \
-                         ../../src/advection_diffusion_reaction \
-                         ../../src/flux_transport \
-                         ../../src/meshes \
-                         ../../src/axisym_advection_diffusion \
-                         ../../src/foeppl_von_karman \
-                         ../../src/mesh_smoothing \
-                         ../../src/steady_axisym_advection_diffusion \
-                         ../../src/axisym_linear_elasticity \
-                         ../../src/fourier_decomposed_helmholtz \
-                         ../../src/multi_physics \
-                         ../../src/time_harmonic_fourier_decomposed_linear_elasticity \
-                         ../../src/axisym_navier_stokes \
-                         ../../src/pml_helmholtz \
-                         ../../src/pml_fourier_decomposed_helmholtz \
-                         ../../src/navier_stokes \
-                         ../../src/time_harmonic_linear_elasticity \
-                         ../../src/axisym_spherical_solid \
-                         ../../src/generic \
-                         ../../src/poisson \
-                         ../../src/unsteady_heat \
-                         ../../src/beam \
-                         ../../src/helmholtz \
-                         ../../src/polar_navier_stokes \
-                         ../../src/womersley \
-                         ../../src/biharmonic \
-                         ../../src/linear_elasticity \
-                         ../../src/rigid_body \
-                         ../../src/young_laplace \
-                         ../../src/constitutive \
-                         ../../src/linear_wave \
-                         ../../src/shell \
-                         ../../src/solid \
-                         ../../src/spherical_advection_diffusion
+INPUT                  = . ../../src 
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -805,7 +769,7 @@ FILE_PATTERNS          =
 # be searched for input files as well.
 # The default value is: NO.
 
-RECURSIVE              = NO
+RECURSIVE              = YES
 
 # The EXCLUDE tag can be used to specify files and/or directories that should be
 # excluded from the INPUT source files. This way you can easily exclude a
