@@ -15,7 +15,7 @@ to classical absorbing/approximate boundary conditions or DtN maps.
 We start by  reviewing the relevant theory and then 
 present the solution of a simple model problem -- the outward propagation of
 waves from the surface of a cylinder.
-
+<center>
 <TABLE border=0>
 <TR >
 <TD >
@@ -32,8 +32,9 @@ Radu Cimpeanu</a>
 </TD>
 </TR>
 </TABLE>
-<HR>
-<HR> 
+</center>
+
+ 
 
 \section theory Theory: The Helmholtz equation for time-harmonic scattering problems
 The Helmholtz equation governs time-harmonic solutions of problems
@@ -78,8 +79,8 @@ In a physical context, such as a scattering problem, the condition
 ensures that scattering of an incoming wave only produces outgoing not 
 incoming waves from infinity.
 
-<HR>
-<HR>
+
+
 
 \section discr Discretisation by finite elements
 We provide separate storage for the real and imaginary parts of the solution -- 
@@ -106,7 +107,7 @@ means of absorbing/approximate boundary conditions or DtN maps.
 In the next section we will discuss an alternative approach to this
 problem by means of perfectly matched layers.
 
-<HR>
+
 
 \subsection pml Perfectly matched layers
 
@@ -222,7 +223,7 @@ shown in the sketch below:
 .
 
 
-<HR>
+
 
 \subsection impl Implementation of the perfectly matched layers within oomph-lib
 
@@ -272,8 +273,8 @@ boundaries and 3D is straightforward (if tedious) to implement
 (Any volunteers?).
 
 
-<HR>
-<HR>
+
+
 
 \section scattering A specific example: Outward propagation of acoustic waves from the surface of a cylindrical object
 
@@ -295,8 +296,8 @@ corner meshes (each made of nine-noded \c QPmlHelmholtzElements).
 @I w 0.75\textwidth Mesh "The computational domain used in the example problem. "
 
 
-<HR>
-<HR>
+
+
 
 \section results Results
 The figures below show the real part of the solution \f$ Re(u(x,y,t)) \f$
@@ -329,8 +330,8 @@ solution.
 
 @I w 0.6\textwidth ZeroFluxHeight "The solution with zero flux boundary conditions -- height view. "
 
-<HR>
-<HR>
+
+
 
 \section num_soln The numerical solution
 
@@ -342,8 +343,8 @@ As usual, we define the problem parameters in a global namespace. After non-dime
 \skipline   start_of_namespace
 \until } // end of namespace 
 
-<HR>
-<HR>
+
+
 
 \subsection main The driver code
 The driver code is very straightforward. We start by building the
@@ -369,8 +370,8 @@ Finally, we solve the problem and document the results.
 \until } //end of main
 
  
-<HR>
-<HR>
+
+
 
 \subsection class The problem class
 
@@ -398,8 +399,8 @@ and to the various PML sub-meshes
 \until }; // end of problem class
 
 
-<HR>
-<HR>
+
+
 
 \subsection constr The problem constructor
 
@@ -446,8 +447,8 @@ The problem is now ready to be solved.
 
 
 
-<HR>
-<HR>
+
+
 
 
 \subsection apply_bc Applying the boundary conditions
@@ -460,8 +461,8 @@ the desired boundary values.
 \skipline start_of_apply_boundary_conditions
 \until end of apply_boundary_conditions
 
-<HR>
-<HR>
+
+
 
 
 \subsection doc Post-processing
@@ -473,8 +474,8 @@ computed solution.
 \until  some_file.close();
 
 
-<HR>
-<HR>
+
+
 
 \section comm_ex Comments and Exercises
 \subsection numbering The enumeration of the unknowns
@@ -515,7 +516,7 @@ modifications. For very specific applications, alternatives may
 need to be used and can easily be implemented within the
 existing framework.
 
-<HR>
+
 
 \subsection ex Exercises
 \subsubsection pmlsize Changing perfectly matched layer parameters
@@ -586,8 +587,6 @@ methodologies to
   (so we're even keener for somebody to have a go!)
 .
 
-<HR>
-<HR>
 
 
 \section sources Source files for this tutorial
