@@ -34,5 +34,5 @@ acoustic_fsi_LDADD =  -L@libdir@ -lhelmholtz \
 #---------------------------------------------------------------------
 
 EXTRA_DIST += animate_displacement.mcr  animate_displacement_with_mesh.mcr \
- convert.bash 	run.bash
+ convert.bash 	run.bash animate_helmholtz.mcr
 

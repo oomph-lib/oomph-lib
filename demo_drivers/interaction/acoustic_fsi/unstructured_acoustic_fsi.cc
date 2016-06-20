@@ -1221,6 +1221,26 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT>::doc_solution()
   }
  
  
+ // Do animation of Helmholtz solution
+ //-----------------------------------
+ unsigned nstep=40;
+ for (unsigned i=0;i<nstep;i++)
+  {
+   sprintf(filename,"%s/helmholtz_animation%i_frame%i.dat",
+           Doc_info.directory().c_str(),
+           Doc_info.number(),i);
+   some_file.open(filename);
+   double phi=2.0*MathematicalConstants::Pi*double(i)/double(nstep-1);
+   unsigned nelem=Helmholtz_mesh_pt->nelement();
+   for (unsigned e=0;e<nelem;e++)
+    {
+     HELMHOLTZ_ELEMENT* el_pt=dynamic_cast<HELMHOLTZ_ELEMENT*>(
+      Helmholtz_mesh_pt->element_pt(e));
+     el_pt->output_real(some_file,phi,n_plot);    
+    }
+   some_file.close();
+  }
+
  cout << "Doced for Q=" << Global_Parameters::Q << " (step "
       << Doc_info.number() << ")\n";
  
