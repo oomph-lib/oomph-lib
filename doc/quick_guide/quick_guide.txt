@@ -57,17 +57,15 @@ In all cases, we start with a brief description of
 the minimum functionality that must be implemented for the
 various objects. The general principles are then illustrated
 by considering the discretisation of the model problem
+
 <CENTER>
-<TABLE>
+<TABLE class="oomph-table">
 <TR>
-<TD>
-<CENTER>
-<TABLE BORDER="0">
-<TR>
-<TD>
-<CENTER>
+<TD class="panel panel-default">
+<CENTER class="panel-heading">
 <B>One-dimensional model Poisson problem</B>
-</CENTER> 
+</CENTER>
+<div class="panel-body">
 Solve
 \f[
 \frac{\mbox{d}^2u}{\mbox{d}x^2} = \pm 30 \sin(\sqrt{30} x),
@@ -78,14 +76,12 @@ in the one-dimensional domain \f$x\in[0,1]\f$, subject to
 u(0)=0 \ \mbox{\ \ \ and \ \ \ } \ \ u(1)=\mp 1, 
 \ \ \ \ \ \ \ \ \ \ @E[1DPoisson_BC]@
 \f]
+</div>
 </TD>
 </TR>
-</TABLE> 
+</TABLE>
 </CENTER>
-</TD>
-</TR>
-</TABLE> 
-</CENTER>
+
 by isoparametric two-node elements. (Please consult the
 <A HREF="../../intro/html/index.html">Introduction</A> for a review of
 the relevant finite element theory.) The source code for this example

@@ -682,7 +682,7 @@ div.qindex a.qindex{
 	
 }
 
-.ah{
+.ah,.index-letter{
 	font-weight:300;
 	font-size:24px;
 	border-bottom:1px solid grey;
@@ -722,13 +722,7 @@ div.qindex a.qindex{
 	margin:auto;
 }
 
-.image{
-	text-align:center;
-	margin: 20px 0px	
-}
-.caption{
-	font-size:0.9em;
-}
+
 
 /* overide bootstrap for gcse elements (google search) as it doesnt expect border-box*/
 #___gcse_0 *{
@@ -739,4 +733,20 @@ box-sizing: content-box;
 
 td.panel{
 	display:block;
+}
+
+/*Images generate by Doxygen tthat aren't embedded in text*/
+.image{
+	text-align:center;
+	margin: 20px 0px	
+}
+.caption{
+	font-size:0.9em;
+}
+/*make images responsive, css taken form bootstrap img-responsive*/
+.image img{
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin:auto;
 }

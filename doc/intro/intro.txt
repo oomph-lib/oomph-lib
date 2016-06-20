@@ -98,11 +98,14 @@ by moving all terms to the left-hand-side of the equation, so that
 the general second-order scalar PDE problem is
 
 <CENTER>
-<TABLE>
+<TABLE class="oomph-table">
 <TR>
-<TD>
-<CENTER>
+<TD class="panel panel-default">
+<CENTER class="panel-heading">
 <B> Problem P </B>
+</CENTER>
+
+<CENTER class="panel-body">
 \f[ {\cal R}\left(x_i; u(x_i), \frac{\partial u}{\partial x_i},  
 \frac{\partial^2 u}{\partial x_i \ \partial x_j}\right) = 0 \ 
 \mbox{ \ \ \ \ in \ \ \ } D,\f]
@@ -122,11 +125,14 @@ on the derivatives and write the residual as
 \f$ {\cal R}(x_i; u(x_i))\f$. For example,
 the residual forms of the two Poisson problems are given by:
 <CENTER>
-<TABLE>
+<TABLE class="oomph-table">
 <TR>
-<TD>
-<CENTER>
-<B> Problem P1 </B>
+<TD class="panel panel-default">
+<CENTER class="panel-heading">
+<B> Problem P1</B>
+</CENTER>
+
+<CENTER class="panel-body">
 \f[ {\cal R}(x; u(x)) = \frac{\mbox{d}^2 u(x)}{\mbox{d} x^2} -
 f(x) =0 \mbox{\ \ \ \ for $x\in[0,1]$  \ \ \ 
 subject to \ \ \ }  u(x=0)= g_0 
@@ -143,11 +149,14 @@ where \f$ f(x)\f$ and the constants \f$g_0\f$ and \f$g_1\f$ are given.
  and
 
 <CENTER>
-<TABLE>
+<TABLE class="oomph-table">
 <TR>
-<TD>
-<CENTER>
-<B> Problem P2 </B>
+<TD class="panel panel-default">
+<CENTER class="panel-heading">
+<B> Problem P2</B>
+</CENTER>
+
+<CENTER class="panel-body">
 \f[ {\cal R}(x_i; u(x_i)) = \sum_{j=1}^2
 \frac{\partial^2 u(x_i)}{\partial x_j^2} -
 f(x_i) =0 \mbox{ \ \ \ \ for $x_i\in D$ \ \ \ 
@@ -352,11 +361,14 @@ u(x_i) \in H^i_0(D) \ \ \  \iff \ \ \ \ u(x_i) \in H^i(D)
 Using these function spaces, we can provide a concise definition of the
 weak form of problem P2: 
 <CENTER>
-<TABLE>
+<TABLE class="oomph-table">
 <TR>
-<TD>
-<CENTER>
-<CENTER><B> Problem P2<SUB>weak</SUB> </B></CENTER>
+<TD class="panel panel-default">
+<CENTER class="panel-heading">
+<B> Problem P2<SUB>weak</SUB> </B>
+</CENTER>
+
+<CENTER class="panel-body">
 Find the function   \f$ u(x_i) \in H^1(D) \f$ that satisfies the
 essential boundary conditions
 \f[ \hfill u|_{\partial D} = g, \f]
@@ -383,25 +395,25 @@ to "make sense". All functions that satisfy these constraints,
 are "admissible" and, collectively, they form a function space
 \f$ H(D) \f$, say.
 The weak form of the general problem P can then be written as  \n \n
-  <CENTER>
-  <TABLE>
-  <TR>
-  <TD>
-  <CENTER>
-  <CENTER><B> Problem P<SUB>weak</SUB> </B></CENTER>
-  Find the function   \f$ u(x_i) \in H(D) \f$ that satisfies the
-  essential boundary conditions
-  \f[ \hfill u|_{\partial D} = g, \f]
-  and for which
-  \f[ \int_D {\cal R}(x_i,u(x_i)) \  \phi^{(test)}(x_i) \  \mbox{d}x_1 \mbox{d}x_2 = 0
-  \f]
-  for \e all test functions  \f$ \phi^{(test)}(x_i) \in H_0(D). \f$
-  </CENTER>
-  </TD>
-  </TR>
-  </TABLE>
-  </CENTER>
-  \n
+<CENTER>
+<TABLE class="oomph-table">
+<TR>
+<TD class="panel panel-default">
+<CENTER class="panel-heading"><B> Problem P<SUB>weak</SUB> </B></CENTER>
+<CENTER class="panel-body">
+Find the function   \f$ u(x_i) \in H(D) \f$ that satisfies the
+essential boundary conditions
+\f[ \hfill u|_{\partial D} = g, \f]
+and for which
+\f[ \int_D {\cal R}(x_i,u(x_i)) \  \phi^{(test)}(x_i) \  \mbox{d}x_1 \mbox{d}x_2 = 0
+\f]
+for \e all test functions  \f$ \phi^{(test)}(x_i) \in H_0(D). \f$
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+\n
 
  [If you followed the above argument carefully you will have
  realised that our strategy for ensuring that the weak form
@@ -586,11 +598,12 @@ in the 1D Poisson problem P1:
 We perform the usual integration by parts to 
 derive the symmetric weak form of the problem: \n \n
 <CENTER>
-<TABLE>
+<TABLE class="oomph-table">
 <TR>
-<TD>
-<CENTER>
-<CENTER><B> Problem P1<SUB>weak</SUB> </B></CENTER>
+<TD class="panel panel-default">
+<CENTER class="panel-heading">
+<B> Problem P1<SUB>weak</SUB> </B></CENTER>
+<CENTER class="panel-body">
 Find the function   \f$ u(x) \in H(D) \f$ that satisfies the
 essential boundary conditions
 \f[ u(0) = g_0 \ \ \ \mbox{and} \ \ \   u(1) = g_1, \f]
@@ -661,10 +674,13 @@ sparse structure. If the matrix is dense, the assembly
 and solution of the linear system in steps 4 and 5 of Newton's method
 can become prohibitively expensive.
 
-<TABLE>
+<CENTER>
+<TABLE class="oomph-table">
 <TR>
-<TD>
-<CENTER><B> An aside:  Integration by parts revisited </B></CENTER>
+<TD class="panel panel-default">
+<CENTER class="panel-heading">
+<B> An aside: Integration by parts revisited </B></CENTER><div class="panel-body">
+
 Let us briefly return to the two versions of the weak form and
 examine the equations that we would have obtained had
 we applied Galerkin's method to the original form of
@@ -700,9 +716,11 @@ and the Jacobian matrix has the form
   of the matrix can be used), but also properly reflects 
   the symmetry in the (self-adjoint!) ODE. 
 .
+</div>
 </TD>
 </TR>
 </TABLE>
+</CENTER>
 
 <HR>
 <HR>
@@ -907,25 +925,30 @@ problem P1 by Newton's method</B> </CENTER>
  approach known as "h-refinement" because it alters the distance,
  \f$ h \f$, between nodes.
 
- <TABLE>
- <TR>
- <TD>
- <CENTER><B> An aside: adaptive mesh refinement </B></CENTER>
- A non-uniform distribution of nodes requires a priori
- knowledge of the regions in which we expect the solution to undergo
- rapid variations. The alternative is to use adaptive mesh refinement: 
- start with a 
- relatively coarse, uniform mesh and compute the solution. If 
- the solution on the coarse mesh displays rapid variations in certain 
- parts of the domain (and is therefore likely to be poorly resolved), 
- refine the mesh in these regions and re-compute. Such adaptive
- mesh refinement procedures can be automated and are 
- implemented in \c oomph-lib for a large number of problems; see the 
- section \ref example_P2
- for an example.
- </TD>
- </TR>
- </TABLE>
+<CENTER>
+<TABLE class="oomph-table">
+<TR>
+<TD class="panel panel-default">
+<CENTER class="panel-heading">
+<B> An aside: adaptive mesh refinement </B></CENTER>
+<div class="panel-body">
+A non-uniform distribution of nodes requires a priori
+knowledge of the regions in which we expect the solution to undergo
+rapid variations. The alternative is to use adaptive mesh refinement: 
+start with a 
+relatively coarse, uniform mesh and compute the solution. If 
+the solution on the coarse mesh displays rapid variations in certain 
+parts of the domain (and is therefore likely to be poorly resolved), 
+refine the mesh in these regions and re-compute. Such adaptive
+mesh refinement procedures can be automated and are 
+implemented in \c oomph-lib for a large number of problems; see the 
+section \ref example_P2
+for an example.
+</div>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
 
  The quality of the interpolation can also be improved by 
  using higher-order interpolation, but maintaining
@@ -1125,10 +1148,10 @@ in boxes):
 
 <B> Phase 3: Postprocessing (document the solution)</B> 
 - The finite-element solution is given by 
-  \f[ u^{(FE)}(x) = \sum_{j=1}^{N}  U_j \psi_j(x). \f]
+  \f[ u^{(FE)}(x) = \sum_{j=1}^{N}  U_j \psi_j(x). \f]  
+.
 
 <HR>
-
 
 \subsection element_by_element Element-by-element assembly
 
