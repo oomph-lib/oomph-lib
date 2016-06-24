@@ -48,7 +48,7 @@ namespace Global
  double Gamma = 1.4;
  double Beta = 5.0;
  
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
 
  ///Function that determines the initial conditions
  void exact_solution(const double &t, const Vector<double> &x,

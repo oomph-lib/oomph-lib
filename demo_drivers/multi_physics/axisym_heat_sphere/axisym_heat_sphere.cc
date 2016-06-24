@@ -362,7 +362,7 @@ public:
     }
    
    //Need to multiply the drag and area by the aziumthal component
-   double two_pi = 8.0*atan(1.0);
+   double two_pi = 2.0*MathematicalConstants::Pi;
    
    //Multiply the drag by the surface area of the sphere
    drag[0] *= two_pi; drag[1] *= two_pi; area *= two_pi;

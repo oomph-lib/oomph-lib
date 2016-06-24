@@ -198,7 +198,7 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
  GeomObject* area_pt = new FilledCircle(1.0/Delta,0.0,Radius);
 
  //Define pi
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
  
  //Set the positions of the angles that divide the outer ring
  //These must be in the range -pi,pi, ordered from smallest to

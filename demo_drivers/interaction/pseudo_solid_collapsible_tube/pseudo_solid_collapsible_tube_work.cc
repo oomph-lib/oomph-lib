@@ -225,7 +225,7 @@ public:
    unsigned n_node=nnode();
 
    // Calculate the value of pi
-   const double pi = 4.0*atan(1.0);
+   const double pi = MathematicalConstants::Pi;
 
    // Loop over all nodes
    for (unsigned n=0;n<n_node;n++)
@@ -624,7 +624,7 @@ PseudoElasticCollapsibleChannelProblem()
  xi_lo[1]=0.0;
  Vector<double> xi_hi(2);
  xi_hi[0]= Global_Parameters::L;
- xi_hi[1]=2.0*atan(1.0);
+ xi_hi[1]= 0.5*MathematicalConstants::Pi;
 
  //Radial divider is located half-way along the circumference
  double frac_mid=0.5;

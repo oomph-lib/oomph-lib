@@ -244,7 +244,7 @@ void position (const Vector<double>& xi, Vector<double>& r) const
 
 
  Vector<double> r_square(2);
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
  if(std::fabs(xi[0]) < 0.25*pi)
   {
    r_square[0] = 1.0/Global_Physical_Variables::Delta + Radius;

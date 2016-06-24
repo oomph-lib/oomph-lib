@@ -118,7 +118,12 @@ int main(int argc, char* argv[])
  std::string input_string;
 
  // *.fig file must conform to "Fig Format 3.2"
- // See http://www.xfig.org/userman for details
+ // See http://en.wikipedia.org/wiki/Xfig [xfig is no
+ // longer actively maintained (listed as dormant)
+ // which is a shame. The user manual used to be at
+ // http : // www . xfig . org / userman
+ // (minus the spaces obviously -- added to stop the broken
+ // link checker from complaining...)]
 
  // Read initial comment lines 
  //---------------------------

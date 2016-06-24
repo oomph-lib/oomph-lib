@@ -571,7 +571,7 @@ int main(int argc, char *argv[])
  double r_max = 1.0;
  double r_min = r_max - h;
 
- const double pi = 4.0*atan(1);
+ const double pi = MathematicalConstants::Pi;
 
  double alpha = Global_Physical_Variables::Alpha;
 

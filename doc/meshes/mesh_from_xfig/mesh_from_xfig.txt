@@ -8,26 +8,26 @@ to create \c *.\c poly files for <A HREF="http://www.cs.berkeley.edu/~jrs/">
 Jonathan Shewchuk's</A> open-source mesh generator 
 <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle
 </A>, based on the output from the open-source 
-drawing program <A HREF="http://www.xfig.org/">xfig.</A> 
+drawing program <A HREF="http://en.wikipedia.org/wiki/Xfig">xfig.</A> 
  
 <HR>
 <HR>
 
 \section xfig_input Mesh generation with xfig, fig2poly and Triangle
 
-Mesh generation with <A HREF="http://www.xfig.org/">xfig</A>, \c
+Mesh generation with <A HREF="http://en.wikipedia.org/wiki/Xfig">xfig</A>, \c
 fig2poly and <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle
 </A> is extremely straightforward.
 
 -# Draw the (piecewise linear) domain boundaries, using 
-   <A HREF="http://www.xfig.org/">xfig's</A> polyline
+   <A HREF="http://en.wikipedia.org/wiki/Xfig">xfig's</A> polyline
    drawing tool. Each polyline represents a distinct mesh
    boundary. The start and end points of the polyline
    should not coincide -- \c fig2poly
    will automatically "fill in" the missing line segment.
    \n\n
 -# If the domain has any holes, place a single circle
-   (drawn with <A HREF="http://www.xfig.org/">xfig's</A> 
+   (drawn with <A HREF="http://en.wikipedia.org/wiki/Xfig">xfig's</A> 
    circle/ellipse drawing tool) into each hole. Use the
    circle/ellipse drawing tool that requires
    the specification of the radius. The radius of the circle is 
@@ -53,7 +53,7 @@ fig2poly and <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle
 \subsection xfig_comments Comments:
  
 - \c fig2poly expects the 
-  <A HREF="http://www.xfig.org/">xfig</A> output file to conform
+  <A HREF="http://en.wikipedia.org/wiki/Xfig">xfig</A> output file to conform
   to "Fig format 3.2" and checks for the presence of the string 
   "#FIG 3.2" in the first line of the \c *. \c fig file. 
   below. 
@@ -149,7 +149,7 @@ driven cavity problem,</A> so we shall not discuss in in detail.
 
 \section comments Comments and Exercises
 \subsection bound Numbering of the mesh boundaries
--# Each polyline in the <A HREF="http://www.xfig.org/">xfig</A>-generated 
+-# Each polyline in the <A HREF="http://en.wikipedia.org/wiki/Xfig">xfig</A>-generated 
    figure represents a distinct mesh boundary. \c fig2poly
    assigns boundary numbers to these, depending on the
    order in which the polylines are listed in the \c *. \c fig file.
@@ -164,12 +164,12 @@ driven cavity problem,</A> so we shall not discuss in in detail.
    some post-processing of the mesh may be required.
 . 
 \subsection ex Exercises
--# Download and install <A HREF="http://www.xfig.org/">xfig</A> 
-   (if you work in a linux environment, <A HREF="http://www.xfig.org/">xfig</A> 
+-# Download and install <A HREF="http://en.wikipedia.org/wiki/Xfig">xfig</A> 
+   (if you work in a linux environment, <A HREF="http://en.wikipedia.org/wiki/Xfig">xfig</A> 
    is likely to be available already as it is part of many linux
    distributions) and create your own meshes.
    \n\n
--# Think of a way to modify the <A HREF="http://www.xfig.org/">xfig</A>-based
+-# Think of a way to modify the <A HREF="http://en.wikipedia.org/wiki/Xfig">xfig</A>-based
    mesh generation procedure so that a closed boundary can contain 
    several sub-boundaries so that in- and outflow boundaries
    can be identified separately. [This is an "advanced" exercise

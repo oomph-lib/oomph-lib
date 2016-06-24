@@ -159,7 +159,7 @@ SteadyTubeProblem<ELEMENT>::SteadyTubeProblem(DocInfo& doc_info,
  Volume_pt=new MyCylinder(1.0);
  
  //Define pi 
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
  
  //Set the centerline coordinates spanning the mesh
  //Tube is on length pi

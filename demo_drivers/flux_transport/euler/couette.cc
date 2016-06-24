@@ -85,7 +85,7 @@ public:
    double R_min = 1.0;
    double R_max = 4.0;
 
-   const double pi = 4.0*atan(1.0);
+   const double pi = MathematicalConstants::Pi;
 
    //Work out the length of each element in the x and y directions
    //(Assuming uniform spacing)

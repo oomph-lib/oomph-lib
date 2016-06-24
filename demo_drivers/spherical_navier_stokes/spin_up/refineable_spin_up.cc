@@ -211,7 +211,7 @@ RefineableSphericalSpinUpProblem<ELEMENT>::RefineableSphericalSpinUpProblem()
  // Setup mesh  -don't forget to include the timestepping in the mesh build
  //------------------------------------------------------------------------
  // pi definition
- double pi = 3.141592653589793;
+  double pi = MathematicalConstants::Pi;
      
  // # of elements in r-direction
  unsigned n_x=4;

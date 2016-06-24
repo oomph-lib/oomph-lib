@@ -54,9 +54,9 @@ namespace oomph
 
 //====================================================================
 /// Linear solver class that provides a wrapper to the frontal 
-/// solver MA42 from the <a href="http://www.cse.scitech.ac.uk/nag/hsl/">HSL
-/// library;</a> see  <a href="http://www.cse.scitech.ac.uk/nag/hsl/">
-/// http://www.cse.scitech.ac.uk/nag/hsl/.</A>
+/// solver MA42 from the <a href="http://www.hsl.rl.ac.uk/">HSL
+/// library;</a> see  <a href="http://www.hsl.rl.ac.uk/">
+/// http://www.hsl.rl.ac.uk/.</A>
 //====================================================================
 class HSL_MA42 : public LinearSolver
 {

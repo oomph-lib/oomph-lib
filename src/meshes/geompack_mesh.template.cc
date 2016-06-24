@@ -39,7 +39,7 @@ namespace oomph
 
 //========================================================================
 /// Quadrilateral mesh generator; Uses input from Geompack++.
-/// See: http://members.allstream.net/~bjoe/index.htm
+/// See: http://members.shaw.ca/bjoe/
 /// Currently only for four-noded quads -- extension to higher-order
 /// quads should be trivial (see the corresponding classes for
 /// triangular meshes).

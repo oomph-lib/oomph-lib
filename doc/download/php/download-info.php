@@ -35,10 +35,10 @@ echo "Correct spam filter answer!";
 
 
 
-$subject="oomph download \n" ;
+$subject="oomph-lib 1.0.* download \n" ;
 
 $headers="From: <$alias$email>\n"; 
-$headers.="To: <mheil@maths.man.ac.uk>\n";
+$headers.="To: <oomphlib@maths.manchester.ac.uk>\n";
 
 
 mail("", $subject, $body, $headers);

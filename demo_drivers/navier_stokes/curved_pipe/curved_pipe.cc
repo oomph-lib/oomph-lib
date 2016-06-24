@@ -165,7 +165,7 @@ SteadyCurvedTubeProblem<ELEMENT>::SteadyCurvedTubeProblem(DocInfo& doc_info,
  Volume_pt=new MyCurvedCylinder(1.0,Global_Physical_Variables::Delta);
  
  //Define pi 
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
  
  //Set the centerline coordinates spanning the mesh
  Vector<double> centreline_limits(2);

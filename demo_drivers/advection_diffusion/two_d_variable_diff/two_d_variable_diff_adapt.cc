@@ -62,7 +62,7 @@ namespace RachelsAdvectionDiffusion
  double D22 = 0.2;
 
  /// The value of pi
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
 
  /// The asymptotic solution
  void get_exact_u(const Vector<double> &x, Vector<double> &u)

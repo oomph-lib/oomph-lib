@@ -429,7 +429,7 @@ FreeSurfaceRotationProblem(DocInfo& doc_info,
  add_global_data(Pext_pt);
 
  //Set the contact angle
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
  Global_Physical_Variables::Angle = 0.5*pi;
 
  // Setup mesh:
@@ -450,7 +450,7 @@ FreeSurfaceRotationProblem(DocInfo& doc_info,
  // height of outflow
  xi_hi[0]=1.0;
  // end of Wall_pt
- xi_hi[1]=2.0*atan(1.0);
+ xi_hi[1]=0.5*MathematicalConstants::Pi;
 
  // # of layers
  unsigned nlayer=1;

@@ -559,7 +559,7 @@ namespace Global_Physical_Variables
 
  
  ///Set the value of Pi
- const double Pi= 4.0*std::atan(1.0);
+ const double Pi=MathematicalConstants::Pi;
 
  /// The volume of the domain
  double Volume = 1.2;

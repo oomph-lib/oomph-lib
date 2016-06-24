@@ -46,8 +46,6 @@ using namespace oomph;
 
 namespace GlobalVariables
 {
- const double pi = 4.0*atan(1.0);
-
  ///The vector of timescales
  Vector<double> Tau(2,1.0);
  

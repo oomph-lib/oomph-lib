@@ -48,7 +48,7 @@ namespace Global
  double Gamma = 1.4;
  double Beta = 5.0;
  
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
 
  ///Function that determines the initial conditions
  void exact_solution(const double &t, const Vector<double> &x,
@@ -105,7 +105,7 @@ public:
    double lly = 0.0;
    //Angle (in degrees of ramp)
    double theta = 10.0;
-   const double pi = 4.0*atan(1.0);
+   const double pi = MathematicalConstants::Pi;
    //Work out the length of each element in the x and y directions
    //(Assuming uniform spacing)
    double el_length[2] = {Lx/(double)Nx, Ly/(double)Ny};

@@ -360,6 +360,7 @@
   <li> Ubuntu (version 14.04) with Clang compilers (version 3.5) </li>
   <li> Arch Linux (05-2016) with gcc compilers (version 6.1.1) </li>
   <li> Ubuntu (version 16.04) with gcc compilers (version 5.3.1) </li>       
+  <li> Debian Jessie (gcc 4.9)</li>
  </ul>
 
   <h2>Preparing a ubuntu box for <code>oomph-lib</code></h2>
@@ -371,6 +372,10 @@
   <br>
   <tt>
 apt-get install subversion
+  </tt>
+  <br>
+  <tt>
+apt-get install make
   </tt>
   <br>
   <tt>
@@ -395,6 +400,16 @@ apt-get install gfortran
   <br>
   <tt>
 apt-get install g++
+  </tt>
+  <br>
+  <br>
+  ...or, if you want it all in one go (particularly useful if you have
+  to prefix the apt-get with sudo): 
+  <br>
+  <br>
+  <tt>
+apt-get install subversion make automake libtool autoconf doxygen
+  gfortran g++
   </tt>
   </article>
   

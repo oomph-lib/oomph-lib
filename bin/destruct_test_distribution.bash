@@ -22,6 +22,10 @@ if [ $# -ne 1 ]; then
  exit 1
 fi
 
+full_command="destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log"
+filtered_command="destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log  | grep -v deliberately_broken | grep -v with_warning | grep -v 'code with warning' "
+test_logs_location="destruct_test/*/*/test_build.log"
+
 echo " "
 echo "---------------------------------------------------------------"
 echo " "
@@ -37,18 +41,18 @@ echo "a long time to run. Tests will run in newly created sub-directory "
 echo "destruct_test (and it won't run if that directory already exists)."
 echo "On-screen output is redirected into "
 echo " "
-echo "          destruct_test/*/*/test_build.log"
+echo "          $test_logs_location" # destruct_test/*/*/test_build.log"
 echo " "
 echo "and can be checked for errors using"
 echo " "
-echo "   destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log "
+echo "    $full_command" #"   destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log "
 echo " "
 echo "This will obviously complain about the buggy codes that were "
 echo "deliberately introduced to create warnings/errors (to test"
 echo "that the destruct test machinery itself works properly...). To omit"
 echo "these use "
 echo " "
-echo "   destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log  | grep -v deliberately_broken | grep -v with_warning | grep -v 'code with warning' "
+echo "    $filtered_command" #"   destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log  | grep -v deliberately_broken | grep -v with_warning | grep -v 'code with warning' "
 echo " "
 echo "instead. This should not show ANY errors/warnings."
 echo "  "
@@ -57,6 +61,9 @@ read -n 1
 
 echo "...here we go..."
 
+
+# Break to bypass actual destruct test
+if [ 1 == 1 ]; then
 
 ##########################################################################
 ##########################################################################
@@ -352,6 +359,26 @@ echo "Waiting for destruct tests to finish..."
 wait
 
 
-message="Destruct test done.\n\nOn-screen output is redirected into\n\n         "`pwd`"/*/*/test_build.log\n\nand can be checked for errors using\n\n   "`pwd`"/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash "`pwd`"/*/*/test_build.log\n\nThis will obviously complain about the buggy codes that were\ndeliberately introduced to create warnings/errors (to test\nthat the destruct test machinery itself works properly...).\nTo omit these use\n\n "`pwd`"/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash "`pwd`"/*/*/test_build.log  | grep -v deliberately_broken | grep -v with_warning | grep -v 'code with warning'\n\ninstead. This should not show ANY errors/warnings.\n\n"
-echo -e $message | mail -s "destruct test done" $USER
+# hierher bypass actual destruct test
+fi
+
+#------------------------------------------------------
+# Diagnose and store result in file for attachment
+#------------------------------------------------------
+redirected_full_command="$full_command > destruct_test/full_destruct_test_results.txt"
+echo "$redirected_full_command" > tmp_run.bash
+chmod a+x tmp_run.bash
+./tmp_run.bash
+rm tmp_run.bash
+
+redirected_filtered_command="$filtered_command > destruct_test/filtered_destruct_test_results.txt"
+echo "$redirected_filtered_command" > tmp_run.bash
+chmod a+x tmp_run.bash
+./tmp_run.bash
+rm tmp_run.bash
+
+
+message="Destruct test done.\n\nOn-screen output is redirected into\n\n         $test_logs_location \n\nand can be checked for errors using\n\n   $full_command
+\n\nThis will obviously complain about the buggy codes that were\ndeliberately introduced to create warnings/errors (to test\nthat the destruct test machinery itself works properly...).\nTo omit these use\n\n  $filtered_command \n\ninstead. This should not show ANY errors/warnings.\n\n"
+echo -e $message | mail -s "destruct test done" -a destruct_test/full_destruct_test_results.txt -a destruct_test/filtered_destruct_test_results.txt $USER
 echo -e $message

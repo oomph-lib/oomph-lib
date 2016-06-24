@@ -113,7 +113,7 @@ EultingSphereProblem<ELEMENT>::EultingSphereProblem()
  //------------------------------------------------------------------------
 
  // pi definition
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
      
  // # of elements in r-direction
  unsigned n_r=10;

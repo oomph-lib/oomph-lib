@@ -56,7 +56,7 @@ public:
   GeomObject(3,3),Radius(radius),Delta(delta),P(pitch)
   {
    //Set the value of pi
-   Pi = 4.0*atan(1.0);
+   Pi = MathematicalConstants::Pi;
   } 
  
 /// Destructor
@@ -176,7 +176,7 @@ SteadyHelicalProblem<ELEMENT>::SteadyHelicalProblem(DocInfo& doc_info,
 Wall_pt=new MyHelicalCylinder(1.0,d,p);
 
 //Define pi 
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
  
 
 //Set the centerline coordinates for the start and end of the helix

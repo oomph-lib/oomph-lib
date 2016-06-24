@@ -45,7 +45,7 @@ using namespace std;
 namespace Global
 {
  //Set the value of pi
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
 
  //Set a diagonal wind
  void two_d_wind(const oomph::Vector<double> &x,

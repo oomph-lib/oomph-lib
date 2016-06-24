@@ -12,7 +12,7 @@ single-physics problems, namely
   rigid 2D solid body</a>
 .
 for which we have already created unstructured 2D meshes, using the combination
-of <A HREF="http://www.xfig.org/">xfig</A>, \c oomph-lib's conversion 
+of <A HREF="http://en.wikipedia.org/wiki/Xfig">xfig</A>, \c oomph-lib's conversion 
 code <a href="../../../meshes/mesh_from_xfig/html/index.html">\c
 fig2poly,</a>  and the unstructured mesh generator 
 <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle. </A>
@@ -127,7 +127,7 @@ included), we provide a brief overview of the main steps
 required to solve this problem:
 \n\n
 -# Use the combination of
-   <A HREF="http://www.xfig.org/">xfig</A>,
+   <A HREF="http://en.wikipedia.org/wiki/Xfig">xfig</A>,
    \c oomph-lib's conversion code
    <a href="../../../meshes/mesh_from_xfig/html/index.html">\c
    fig2poly,</a> and the unstructured
@@ -176,7 +176,7 @@ required to solve this problem:
 
 In our experience, the most error-prone part of this procedure is the
 identification of the mesh boundaries in the
-<A HREF="http://www.xfig.org/">xfig</a>-based, unstructured meshes. 
+<A HREF="http://en.wikipedia.org/wiki/Xfig">xfig</a>-based, unstructured meshes. 
 It is very easy to exclude a node at the end of the FSI boundary
 in the fluid mesh, say, while "remembering" it in the solid mesh. If this
 happens, the automatic matching of the unstructured fluid and solid meshes
@@ -217,7 +217,7 @@ Finally, we provide a helper function that will be used
 to establish whether a node is located on the FSI boundary when the
 mesh is in its undeformed configuration. This function uses a simple 
 "brute force" approach. It is required because currently our 
-<A HREF="http://www.xfig.org/">xfig</a>-based
+<A HREF="http://en.wikipedia.org/wiki/Xfig">xfig</a>-based
 mesh generation procedures do not allow us to associate fractional
 parts of a polygonal domain boundary as belonging to different
 mesh boundaries. Hence, such boundaries have to be 
@@ -683,12 +683,12 @@ result in the code being unable to set up
 consistent boundary coordinates. 
 - <b> Boundaries don't match in xfig:</b> \n\n
   When drawing the boundaries of the fluid and solid domains in
-  <A HREF="http://www.xfig.org/">xfig</A>, 
+  <A HREF="http://en.wikipedia.org/wiki/Xfig">xfig</A>, 
   it is important to ensure that the FSI boundary is the same. A
   simple way to achieve this is to draw 
    the fluid domain first and then make a copy of the
   resulting *.fig file. Once the file has been renamed it can be loaded into 
-  <A HREF="http://www.xfig.org/">xfig</A> 
+  <A HREF="http://en.wikipedia.org/wiki/Xfig">xfig</A> 
   and the polygonal vertices that are not part of the FSI
   interface can be deleted, while new vertices that are only part of
   the solid boundary can then be added. Just make sure that you don't move

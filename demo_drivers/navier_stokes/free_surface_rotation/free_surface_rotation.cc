@@ -461,7 +461,7 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_inf
  Pext_pt->set_value(0,0.0);
 
  //Set the contact angle
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
  Global_Physical_Variables::Angle = 0.5*pi;
 
  Newton_solver_tolerance = 2.0e-5;
@@ -483,7 +483,7 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_inf
  // height of outflow
  xi_hi[0]=2.0;
  // end of Wall_pt
- xi_hi[1]=2.0*atan(1.0);
+ xi_hi[1]=0.5*MathematicalConstants::Pi;
 
  // # of layers
  unsigned nlayer=1;
@@ -713,7 +713,7 @@ int main(int argc, char* argv[])
  // Set up doc info
  DocInfo doc_info;
 
- const double pi = 4.0*atan(1.0);
+ const double pi = MathematicalConstants::Pi;
  // Do Taylor-Hood elements
  //------------------------
  {

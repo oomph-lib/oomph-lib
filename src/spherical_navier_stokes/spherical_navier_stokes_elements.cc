@@ -1259,7 +1259,7 @@ strain_rate(const Vector<double>& s,
  //at the origin
  if(std::fabs(interpolated_r) > 1.0e-15)
   {
-   const double pi = 4.0*atan(1.0);
+   const double pi = MathematicalConstants::Pi;
    double inverse_r = 1.0/interpolated_r;
 
    //Should we include the cot terms (default no)

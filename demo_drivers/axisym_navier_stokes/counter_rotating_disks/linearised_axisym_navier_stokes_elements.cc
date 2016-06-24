@@ -211,7 +211,7 @@ namespace oomph
   const int k = azimuthal_mode_number();
 
   // Define pi
-  const double pi = 4.0*atan(1.0);
+  const double pi = MathematicalConstants::Pi;
 
   // Determine theta step size
   double theta_step_size = (2*pi/n_theta_slices)/(nplot-1);
