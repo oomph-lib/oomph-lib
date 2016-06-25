@@ -166,13 +166,18 @@ problems after upgrading to a new version.
   various ways of implementing the
   Sommerfeld radiation condition), the time-harmonic equations of linear
   elasticity, and the interaction between these two systems of
-  equations in acoustic fluid structure
+  equations in time-harmonic acoustic fluid structure
   interaction problems. All equations are implemented in cartesian and
-  polar coordinates (in the latter case, using an azimuthal Fourier 
+  cylindrical polar coordinates (in the latter case, using an azimuthal Fourier 
   decomposition for the solution).
   \n\n
-- Implemented the linearised Navier-Stokes equations (with the option to study their
-  solutions as perturbations relative to a base state that is itself
+- Provided block preconditioners for the solution of
+  large-displacement fluid-structure interaction problems, based the 
+  coupling of full
+  nonlinear 2D/3D elasticity and the Navier-Stokes equations.
+  \n\n
+- Implemented the linearised Navier-Stokes equations (with the option to study
+  their solutions as perturbations relative to a base state that is itself
   governed by the full Navier-Stokes equations).
   \n\n
 - Provided elements for the solution of the axisymmetric equations of 
@@ -186,11 +191,14 @@ problems after upgrading to a new version.
   systems.
   \n\n
 - Provided elements for Darcy porous media flow and Biot-type
-  poro-elasticity.
+  poro-elasticity, including the ability to use the latter elements
+  in fluid-structure interaction problems which are governed by the equations
+  of poro-elasticity coupled to the Navier-Stokes equations.
   \n\n
 - Implemented the ability adapt unstructured meshes in 2D
   (in serial and in parallel) and (in a parallel setting) to 
-  distribute such meshes over multiple processors.
+  distribute such meshes over multiple processors, and to perform
+  load balancing in spatially adaptive simulations.
   \n\n
 - Provided elements for the solution of elements for the solution
   of the Navier-Stokes equations with generalised Newtonian
@@ -199,8 +207,45 @@ problems after upgrading to a new version.
   tensor).\n\n
 - Provided machinery to output paraview (vtu and vtp) files directly
   (implemented for selected elements; broken virtual functions
-  in base classes provide instructions what to do for others).
+  in base classes provide instructions what to do for others). \n\n
+- Provided machinery to establish what the equations/unknowns in 
+  a fully-built problem represent. Calling <code>Problem::describe_dofs()</code>
+  trawls recursively through the oomph-lib object hierarchy to
+  describe what each degree of freedom represents (from the Problem's,
+  Meshes' and Nodes' point of view). Very useful for debugging (e.g. 
+  "Why are all the entries in the n-th row/column in the Jacobian 
+   zero?" or "The n-th residual is enormous -- which equation does it
+   correspond to?", etc.)
   \n\n
+- Many new detailed tutorials explaining:\n\n
+  - How to use \t oomph-lib in parallel and how to (optionally) distribute 
+    problems over multiple processors and to perform load balancing when
+    performing spatially-adaptive, distributed simulations. 
+    \n\n
+  - How to use oomph-lib's block preconditioning framework. 
+    \n\n
+  - How to solve large-displacement fluid-structure interaction
+    problems, based the coupling of full nonlinear 2D/3D elasticity 
+    and the Navier-Stokes equations, incl. the use of preconditioners
+    and spatial adaptivity. \n\n
+  - How to generate unstructured 2D meshes whose curvlinear boundaries are
+    described my \c GeomObjects; these boundaries are respected under
+    mesh refinement, i.e. the mesh converges to the exact domain geometry, 
+    rather than using the geometry defined by the initial, coarse
+    discretisation. \n\n
+  - How to simulate steady and unsteady free-surface flows in various 
+    geometries. \n\n
+  - How to simulate the transport of immersed solid particles in
+    viscous flow. \n\n
+  - How to solve the Helmholtz equations in a variety of coordinate
+    systems and how to apply the Sommerfeld radiation condition by
+    ABCs, DTNs, or PMLs. \n\n
+  - How to solve time-harmonic acoustic fluid-structure interaction
+    problems in a variety of coordinate systems. \n\n
+  - ...\n\n
+. 
+Have a look through the <a href="../../example_code_list/html/index.html">
+extensive list of example codes</a> to see what else is available.
 .   
 
 \subsection zero_point_eight_five_to_zero_point_nine Changes between version 0.85 and 0.9
