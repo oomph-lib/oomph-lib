@@ -217,6 +217,12 @@ problems after upgrading to a new version.
    zero?" or "The n-th residual is enormous -- which equation does it
    correspond to?", etc.)
   \n\n
+- Provided machinery for hp adaptivity and p-type spectral elements
+  with mortar constraints in 2D and 3D.\n\n
+- Added interfaces to the Trilinos ANASAZI eigensolver to allow
+  parallel solution of eigenproblems. \n\n
+- Basic implementation of discontinuous Galerkin methods for general
+  flux transport problems.\n\n
 - Many new detailed tutorials explaining:\n\n
   - How to use \t oomph-lib in parallel and how to (optionally) distribute 
     problems over multiple processors and to perform load balancing when
@@ -237,6 +243,8 @@ problems after upgrading to a new version.
     geometries. \n\n
   - How to simulate the transport of immersed solid particles in
     viscous flow. \n\n
+  - How to implement and solve surface transport equations, such
+    as insoluble and soluble surfactant problems. \n\n
   - How to solve the Helmholtz equations in a variety of coordinate
     systems and how to apply the Sommerfeld radiation condition by
     ABCs, DTNs, or PMLs. \n\n
