@@ -22,6 +22,10 @@ if [ $# -ne 1 ]; then
  exit 1
 fi
 
+# Remember where we are
+current_dir=`pwd`
+
+
 full_command="destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log"
 filtered_command="destruct_test/paranoia_0_mpi_0_external_dist_0/oomph-lib-*/bin/find_errors_and_warnings_in_build_log.bash destruct_test/*/*/test_build.log  | grep -v deliberately_broken | grep -v with_warning | grep -v 'code with warning' "
 test_logs_location="destruct_test/*/*/test_build.log"
@@ -210,15 +214,15 @@ unpacked_dist_dir=`basename $tar_file .tar.gz`
 #------------------------------------------------------
 # Directory for destruct tests
 #------------------------------------------------------
-dir=destruct_test
-if [ -e $dir   ] 
+if [ -e destruct_test   ] 
 then
-   echo "Please delete directory $dir and try again"
+   echo "Please delete directory destruct_test and try again"
    exit
 fi
-mkdir $dir
-cp $tar_file $dir
-cd $dir
+mkdir destruct_test
+cp $tar_file destruct_test
+cd destruct_test
+
 
 #------------------------------------------------------
 # MPI
@@ -365,6 +369,7 @@ fi
 #------------------------------------------------------
 # Diagnose and store result in file for attachment
 #------------------------------------------------------
+cd $current_dir
 redirected_full_command="$full_command > destruct_test/full_destruct_test_results.txt"
 echo "$redirected_full_command" > tmp_run.bash
 chmod a+x tmp_run.bash
@@ -382,3 +387,6 @@ message="Destruct test done.\n\nOn-screen output is redirected into\n\n         
 \n\nThis will obviously complain about the buggy codes that were\ndeliberately introduced to create warnings/errors (to test\nthat the destruct test machinery itself works properly...).\nTo omit these use\n\n  $filtered_command \n\ninstead. This should not show ANY errors/warnings.\n\n"
 echo -e $message | mail -s "destruct test done" -a destruct_test/full_destruct_test_results.txt -a destruct_test/filtered_destruct_test_results.txt $USER
 echo -e $message
+echo " "
+echo "done"
+echo " "
