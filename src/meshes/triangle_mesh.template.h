@@ -35,7 +35,8 @@
 #endif
 
 #ifdef OOMPH_HAS_MPI
-//mpi headers
+
+// MPI headers
 #include <mpi.h>
 #endif
 
@@ -58,11 +59,11 @@ namespace oomph
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
 // Interface to triangulate function
-extern "C" {
- void triangulate(char *triswitches, struct oomph::TriangulateIO *in,
-                  struct oomph::TriangulateIO *out, 
-                  struct oomph::TriangulateIO *vorout);
-}
+ extern "C" {
+  void triangulate(char *triswitches, struct oomph::TriangulateIO *in,
+		   struct oomph::TriangulateIO *out, 
+		   struct oomph::TriangulateIO *vorout);
+ }
 
 #endif
 
@@ -82,105 +83,105 @@ extern "C" {
 /// \short Helper object for dealing with the parameters used for the
 /// TriangleMesh objects
 //=========================================================================
-class TriangleMeshParameters
-{
+ class TriangleMeshParameters
+ {
 
  public:
 
- /// Constructor: Only takes the outer boundary, all the other parameters
- /// are stated with the specific parameters
- TriangleMeshParameters(Vector<TriangleMeshClosedCurve *>&outer_boundary_pt)
-  : Outer_boundary_pt(outer_boundary_pt),
-    Element_area(0.2),
-    Use_attributes(false),
-    Boundary_refinement(true), 
-    Internal_boundary_refinement(true),
-    Allow_automatic_creation_of_vertices_on_boundaries(true),
-    Comm_pt(0)
-  { }
+  /// Constructor: Only takes the outer boundary, all the other parameters
+  /// are stated with the specific parameters
+  TriangleMeshParameters(Vector<TriangleMeshClosedCurve *>&outer_boundary_pt)
+   : Outer_boundary_pt(outer_boundary_pt),
+     Element_area(0.2),
+     Use_attributes(false),
+     Boundary_refinement(true), 
+     Internal_boundary_refinement(true),
+     Allow_automatic_creation_of_vertices_on_boundaries(true),
+     Comm_pt(0)
+   { }
 
- /// Constructor: Only takes the outer boundary, all the other parameters
- /// are stated with the specific parameters
- TriangleMeshParameters(TriangleMeshClosedCurve *outer_boundary_pt)
-  : Element_area(0.2),
-    Use_attributes(false),
-    Boundary_refinement(true), 
-    Internal_boundary_refinement(true),
-    Allow_automatic_creation_of_vertices_on_boundaries(true),
-    Comm_pt(0)
-  { 
-   Outer_boundary_pt.resize(1);
-   Outer_boundary_pt[0] = outer_boundary_pt;
-  }
+  /// Constructor: Only takes the outer boundary, all the other parameters
+  /// are stated with the specific parameters
+  TriangleMeshParameters(TriangleMeshClosedCurve *outer_boundary_pt)
+   : Element_area(0.2),
+     Use_attributes(false),
+     Boundary_refinement(true), 
+     Internal_boundary_refinement(true),
+     Allow_automatic_creation_of_vertices_on_boundaries(true),
+     Comm_pt(0)
+   { 
+    Outer_boundary_pt.resize(1);
+    Outer_boundary_pt[0] = outer_boundary_pt;
+   }
  
- /// Constructor: Takes nothing and initialize the other paremeters to
- /// the default ones
- TriangleMeshParameters()
-  : Element_area(0.2),
-    Use_attributes(false),
-    Boundary_refinement(true), 
-    Internal_boundary_refinement(true),
-    Allow_automatic_creation_of_vertices_on_boundaries(true),
-    Comm_pt(0)
-  { }
+  /// Constructor: Takes nothing and initialize the other paremeters to
+  /// the default ones
+  TriangleMeshParameters()
+   : Element_area(0.2),
+     Use_attributes(false),
+     Boundary_refinement(true), 
+     Internal_boundary_refinement(true),
+     Allow_automatic_creation_of_vertices_on_boundaries(true),
+     Comm_pt(0)
+   { }
  
- /// Empty destructor
- virtual ~TriangleMeshParameters() { }
+  /// Empty destructor
+  virtual ~TriangleMeshParameters() { }
  
- /// Helper function for getting the outer boundary
- Vector<TriangleMeshClosedCurve *> outer_boundary_pt() const
-  {return Outer_boundary_pt;}
+  /// Helper function for getting the outer boundary
+  Vector<TriangleMeshClosedCurve *> outer_boundary_pt() const
+   {return Outer_boundary_pt;}
 
- /// Helper function for getting access to the outer boundary
- Vector<TriangleMeshClosedCurve*> &outer_boundary_pt()
-  {return Outer_boundary_pt;}
+  /// Helper function for getting access to the outer boundary
+  Vector<TriangleMeshClosedCurve*> &outer_boundary_pt()
+   {return Outer_boundary_pt;}
 
- /// Helper function for getting the i-th outer boundary
- TriangleMeshClosedCurve *outer_boundary_pt(const unsigned &i) const
-  {return Outer_boundary_pt[i];}
+  /// Helper function for getting the i-th outer boundary
+  TriangleMeshClosedCurve *outer_boundary_pt(const unsigned &i) const
+   {return Outer_boundary_pt[i];}
 
- /// Helper function for getting access to the i-th outer boundary
- TriangleMeshClosedCurve* &outer_boundary_pt(const unsigned &i)
-  {return Outer_boundary_pt[i];}
+  /// Helper function for getting access to the i-th outer boundary
+  TriangleMeshClosedCurve* &outer_boundary_pt(const unsigned &i)
+   {return Outer_boundary_pt[i];}
   
- /// Helper function for getting the internal closed boundaries
- Vector<TriangleMeshClosedCurve*> internal_closed_curve_pt() const
-  {return Internal_closed_curve_pt;}
+  /// Helper function for getting the internal closed boundaries
+  Vector<TriangleMeshClosedCurve*> internal_closed_curve_pt() const
+   {return Internal_closed_curve_pt;}
   
- /// \short Helper function for getting access to the internal
- /// closed boundaries
- Vector<TriangleMeshClosedCurve*> &internal_closed_curve_pt()
-  {return Internal_closed_curve_pt;}
+  /// \short Helper function for getting access to the internal
+  /// closed boundaries
+  Vector<TriangleMeshClosedCurve*> &internal_closed_curve_pt()
+   {return Internal_closed_curve_pt;}
 
- /// Helper function for getting the internal open boundaries
- Vector<TriangleMeshOpenCurve*> internal_open_curves_pt() const
-  {return Internal_open_curves_pt;}
+  /// Helper function for getting the internal open boundaries
+  Vector<TriangleMeshOpenCurve*> internal_open_curves_pt() const
+   {return Internal_open_curves_pt;}
  
- /// \short Helper function for getting access to the internal
- /// open boundaries
- Vector<TriangleMeshOpenCurve*> &internal_open_curves_pt()
-  {return Internal_open_curves_pt;}
+  /// \short Helper function for getting access to the internal
+  /// open boundaries
+  Vector<TriangleMeshOpenCurve*> &internal_open_curves_pt()
+   {return Internal_open_curves_pt;}
  
- /// Helper function for getting the element area
- double element_area() const {return Element_area;}
+  /// Helper function for getting the element area
+  double element_area() const {return Element_area;}
 
- /// Helper function for getting access to the element area
- double &element_area(){return Element_area;}
+  /// Helper function for getting access to the element area
+  double &element_area(){return Element_area;}
 
- /// Helper function for getting the extra holes
- Vector<Vector<double> > extra_holes_coordinates() const
-  {return Extra_holes_coordinates;}
+  /// Helper function for getting the extra holes
+  Vector<Vector<double> > extra_holes_coordinates() const
+   {return Extra_holes_coordinates;}
  
- /// Helper function for getting access to the extra holes
- Vector<Vector<double> > &extra_holes_coordinates()
-  {return Extra_holes_coordinates;}
+  /// Helper function for getting access to the extra holes
+  Vector<Vector<double> > &extra_holes_coordinates()
+   {return Extra_holes_coordinates;}
 
- /// Helper function for getting the extra regions
- void add_region_coordinates(const unsigned &i,
-                             Vector<double> &region_coordinates)
-  {
-   // Verify if not using the default region number (zero)
-   if (i == 0) 
+  /// Helper function for getting the extra regions
+  void add_region_coordinates(const unsigned &i,
+			      Vector<double> &region_coordinates)
+   {
+    // Verify if not using the default region number (zero)
+    if (i == 0) 
     {
      std::ostringstream error_message;
      error_message << "Please use another region id different from zero.\n"
@@ -190,11 +191,11 @@ class TriangleMeshParameters
                          OOMPH_EXCEPTION_LOCATION);
     }
    
-   // First check if the region with the specified id does not already exist
-   std::map<unsigned, Vector<double> >::iterator it;
-   it = Regions_coordinates.find(i);
-   // If it is already a region defined with that id throw an error
-   if (it != Regions_coordinates.end())
+    // First check if the region with the specified id does not already exist
+    std::map<unsigned, Vector<double> >::iterator it;
+    it = Regions_coordinates.find(i);
+    // If it is already a region defined with that id throw an error
+    if (it != Regions_coordinates.end())
     {
      std::ostringstream error_message;
      error_message << "The region id ("<<i<<") that you are using for"
@@ -207,127 +208,134 @@ class TriangleMeshParameters
                      OOMPH_EXCEPTION_LOCATION);
     }
 
-   // If it does not exist then create the map
-   Regions_coordinates[i] = region_coordinates;
-   // Automatically set the using of attributes to enable
-   enable_use_attributes();
-  }
+    // If it does not exist then create the map
+    Regions_coordinates[i] = region_coordinates;
+    
+    // Automatically set the using of attributes to enable
+    enable_use_attributes();
+   }
  
- /// Helper function for getting access to the regions coordinates
- std::map<unsigned, Vector<double> >&regions_coordinates()
-  {return Regions_coordinates;}
+  /// Helper function for getting access to the regions coordinates
+  std::map<unsigned, Vector<double> >&regions_coordinates()
+   {return Regions_coordinates;}
 
- /// Helper function to specify target area for region
- void set_target_area_for_region(const unsigned &i, const double& area)
- {
-   Regions_areas[i] = area;
- }
+  /// Helper function to specify target area for region
+  void set_target_area_for_region(const unsigned &i, const double& area)
+   {
+    Regions_areas[i] = area;
+   }
 
- /// Helper function for getting access to the region's target areas
- std::map<unsigned, double >&target_area_for_region()
-  {return Regions_areas;}
+  /// Helper function for getting access to the region's target areas
+  std::map<unsigned, double >&target_area_for_region()
+   {return Regions_areas;}
 
- /// \short Helper function for enabling the use of attributes
- void enable_use_attributes() {Use_attributes=true;}
+  /// \short Helper function for enabling the use of attributes
+  void enable_use_attributes() {Use_attributes=true;}
  
- /// \short Helper function for disabling the use of attributes
- void disable_use_attributes() {Use_attributes=false;}
+  /// \short Helper function for disabling the use of attributes
+  void disable_use_attributes() {Use_attributes=false;}
 
- /// \short Helper function for getting the status of use_attributes 
- /// variable
- bool is_use_attributes() const {return Use_attributes;}
+  /// \short Helper function for getting the status of use_attributes 
+  /// variable
+  bool is_use_attributes() const {return Use_attributes;}
 
- /// Enables the creation of points (by Triangle) on the outer and internal
- /// boundaries
- void enable_automatic_creation_of_vertices_on_boundaries()
-  {Allow_automatic_creation_of_vertices_on_boundaries = true;}
-
- /// \short Helper function for enabling the use of boundary refinement
- void enable_boundary_refinement() {Boundary_refinement=true;}
+  /// \short Helper function for enabling the use of boundary refinement
+  void enable_boundary_refinement() {Boundary_refinement=true;}
  
- /// Disables the creation of points (by Triangle) on the outer and internal
- /// boundaries
- void disable_automatic_creation_of_vertices_on_boundaries()
-  {Allow_automatic_creation_of_vertices_on_boundaries=false;}
+  /// Boolean to indicate if Mesh has been distributed
+  bool is_mesh_distributed() const {return (Comm_pt!=0);}
+
+  /// Function to set communicator (mesh is then assumed to be distributed)
+  void set_communicator_pt(OomphCommunicator* comm_pt)
+   {Comm_pt=comm_pt;}
+
+  /// Read-only access fct to communicator (Null if mesh is not distributed)
+  OomphCommunicator* communicator_pt() const
+   {return Comm_pt;}
+
+  /// \short Helper function for disabling the use of boundary refinement
+  void disable_boundary_refinement() {Boundary_refinement=false;}
+
+  /// \short Helper function for getting the status of boundary refinement
+  bool is_boundary_refinement_allowed() const {return Boundary_refinement;}
+
+  /// \short Helper function for enabling the use of boundary refinement
+  void enable_internal_boundary_refinement() 
+   {Internal_boundary_refinement=true;}
  
- /// Returns the status of the variable
- /// Allow_automatic_creation_of_vertices_on_boundaries
- bool is_automatic_creation_of_vertices_on_boundaries_allowed()
-  {return Allow_automatic_creation_of_vertices_on_boundaries;}
+  /// \short Helper function for disabling the use of boundary refinement
+  void disable_internal_boundary_refinement() 
+   {Internal_boundary_refinement=false;}
 
- /// Boolean to indicate if Mesh has been distributed
- bool is_mesh_distributed() const {return (Comm_pt!=0);}
+  /// \short Helper function for getting the status of boundary refinement
+  bool is_internal_boundary_refinement_allowed() const 
+   {return Internal_boundary_refinement;}
 
- /// Function to set communicator (mesh is then assumed to be distributed)
- void set_communicator_pt(OomphCommunicator* comm_pt)
- {Comm_pt=comm_pt;}
-
- /// Read-only access fct to communicator (Null if mesh is not distributed)
- OomphCommunicator* communicator_pt() const
- {return Comm_pt;}
-
- /// \short Helper function for disabling the use of boundary refinement
- void disable_boundary_refinement() {Boundary_refinement=false;}
-
- /// \short Helper function for getting the status of boundary refinement
- bool is_boundary_refinement_allowed() const {return Boundary_refinement;}
-
- /// \short Helper function for enabling the use of boundary refinement
- void enable_internal_boundary_refinement() 
-  {Internal_boundary_refinement=true;}
+  /// Enables the creation of points (by Triangle) on the outer and
+  /// internal boundaries
+  void enable_automatic_creation_of_vertices_on_boundaries()
+   {
+    Allow_automatic_creation_of_vertices_on_boundaries = true;
+   }
+  
+  /// Disables the creation of points (by Triangle) on the outer and
+  /// internal boundaries
+  void disable_automatic_creation_of_vertices_on_boundaries()
+   {
+    Allow_automatic_creation_of_vertices_on_boundaries=false;
+   }
+  
+  /// Returns the status of the variable
+  /// Allow_automatic_creation_of_vertices_on_boundaries
+  bool is_automatic_creation_of_vertices_on_boundaries_allowed()
+   {
+    return Allow_automatic_creation_of_vertices_on_boundaries;
+   }
+  
+ protected:
  
- /// \short Helper function for disabling the use of boundary refinement
- void disable_internal_boundary_refinement() 
- {Internal_boundary_refinement=false;}
+  /// The outer boundary
+  Vector<TriangleMeshClosedCurve*> Outer_boundary_pt;
 
- /// \short Helper function for getting the status of boundary refinement
- bool is_internal_boundary_refinement_allowed() const 
- {return Internal_boundary_refinement;}
+  /// Internal closed boundaries
+  Vector<TriangleMeshClosedCurve*> Internal_closed_curve_pt;
+ 
+  /// Internal boundaries
+  Vector<TriangleMeshOpenCurve*> Internal_open_curves_pt;
 
-  protected:
+  /// The element are when calling triangulate external routine
+  double Element_area;
  
- /// The outer boundary
- Vector<TriangleMeshClosedCurve*> Outer_boundary_pt;
+  /// Store the coordinates for defining extra holes
+  Vector<Vector<double> > Extra_holes_coordinates;
+ 
+  /// \short Store the coordinates for defining extra regions
+  /// The key on the map is the region id
+  std::map<unsigned, Vector<double> > Regions_coordinates;
+ 
+  /// \short Target areas for regions; defaults to 0.0 which (luckily)
+  /// implies "no specific target area" for triangle!
+  std::map<unsigned, double> Regions_areas;
 
- /// Internal closed boundaries
- Vector<TriangleMeshClosedCurve*> Internal_closed_curve_pt;
+  /// Define the use of attributes (regions)
+  bool Use_attributes;
  
- /// Internal boundaries
- Vector<TriangleMeshOpenCurve*> Internal_open_curves_pt;
-
- /// The element are when calling triangulate external routine
- double Element_area;
- 
- /// Store the coordinates for defining extra holes
- Vector<Vector<double> > Extra_holes_coordinates;
- 
- /// \short Store the coordinates for defining extra regions
- /// The key on the map is the region id
- std::map<unsigned, Vector<double> > Regions_coordinates;
- 
- /// \short Target areas for regions; defaults to 0.0 which (luckily)
- /// implies "no specific target area" for triangle!
- std::map<unsigned, double> Regions_areas;
-
- /// Define the use of attributes (regions)
- bool Use_attributes;
- 
- /// Do not allow refinement of nodes on the boundary
- bool Boundary_refinement;
+  /// Do not allow refinement of nodes on the boundary
+  bool Boundary_refinement;
 
   /// Do not allow refinement of nodes on the internal boundary
- bool Internal_boundary_refinement;
+  bool Internal_boundary_refinement;
 
- /// Allows automatic creation of vertices along boundaries by
- /// Triangle
- bool Allow_automatic_creation_of_vertices_on_boundaries;
+  /// Allows automatic creation of vertices along boundaries by
+  /// Triangle
+  bool Allow_automatic_creation_of_vertices_on_boundaries;
  
- /// Pointer to communicator -- set to NULL if mesh is not distributed
- /// Required to pass it to new distributed meshes created at the
- /// adaptation stage
- OomphCommunicator* Comm_pt;
+  /// Pointer to communicator -- set to NULL if mesh is not distributed
+  /// Required to pass it to new distributed meshes created at the
+  /// adaptation stage
+  OomphCommunicator* Comm_pt;
 
-};
+ };
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -342,12 +350,12 @@ class TriangleMeshParameters
 /// from the triangle mesh generator Triangle.
 /// http://www.cs.cmu.edu/~quake/triangle.html
 //======================================================================
- template <class ELEMENT>
-  class TriangleMesh : public virtual TriangleMeshBase
+ template<class ELEMENT>
+ class TriangleMesh : public virtual TriangleMeshBase
  {
-   public:
+ public:
   
-   /// \short Empty constructor 
+  /// \short Empty constructor 
   TriangleMesh()
    {
 #ifdef OOMPH_HAS_TRIANGLE_LIB  
@@ -355,7 +363,7 @@ class TriangleMeshParameters
     Triangulateio_exists=false;
     // By default allow the automatic creation of vertices along the
     // boundaries by Triangle
-    Allow_automatic_creation_of_vertices_on_boundaries = true;
+    this->Allow_automatic_creation_of_vertices_on_boundaries = true;
 #ifdef OOMPH_HAS_MPI
     // Initialize the flag to indicate this is the first time to
     // compute the holes left by the halo elements
@@ -373,7 +381,7 @@ class TriangleMeshParameters
                const std::string& element_file_name,
                const std::string& poly_file_name,
                TimeStepper* time_stepper_pt=
-                   &Mesh::Default_TimeStepper,
+	       &Mesh::Default_TimeStepper,
                const bool &use_attributes=false,
                const bool &allow_automatic_creation_of_vertices_on_boundaries=true)
    {
@@ -403,7 +411,7 @@ class TriangleMeshParameters
                                                         poly_file_name,
                                                         Triangulateio,
                                                         should_use_attributes);
-    //Record that the triangulateio object has been created
+    // Record that the triangulateio object has been created
     Triangulateio_exists=true;
 
 #endif
@@ -412,7 +420,7 @@ class TriangleMeshParameters
     Use_attributes = should_use_attributes;
     
     // Build scaffold
-    Tmp_mesh_pt= new 
+    this->Tmp_mesh_pt= new 
      TriangleScaffoldMesh(node_file_name,
                           element_file_name,
                           poly_file_name);
@@ -421,15 +429,15 @@ class TriangleMeshParameters
     build_from_scaffold(time_stepper_pt,use_attributes);
     
     // Kill the scaffold
-    delete Tmp_mesh_pt;
-    Tmp_mesh_pt=0;
+    delete this->Tmp_mesh_pt;
+    this->Tmp_mesh_pt=0;
     
     // Setup boundary coordinates for boundaries
     unsigned nb=nboundary();
     for (unsigned b=0;b<nb;b++)
-     {
-      this->setup_boundary_coordinates(b);
-     }
+    {
+     this->template setup_boundary_coordinates<ELEMENT>(b);
+    }
    }
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
@@ -437,7 +445,7 @@ class TriangleMeshParameters
   /// \short Constructor based on TriangulateIO object 
   TriangleMesh(TriangulateIO& triangulate_io,
                TimeStepper* time_stepper_pt=
-                   &Mesh::Default_TimeStepper,
+	       &Mesh::Default_TimeStepper,
                const bool &use_attributes=false,
                const bool &allow_automatic_creation_of_vertices_on_boundaries=true)
    {
@@ -447,6 +455,7 @@ class TriangleMeshParameters
     // Initialize the value for allowing creation of points on boundaries
     this->Allow_automatic_creation_of_vertices_on_boundaries = 
      allow_automatic_creation_of_vertices_on_boundaries;
+    
 #ifdef OOMPH_HAS_MPI    
     // Initialize the flag to indicate this is the first time to
     // compute the holes left by the halo elements
@@ -460,7 +469,7 @@ class TriangleMeshParameters
     Time_stepper_pt=time_stepper_pt;
     
     // Build scaffold
-    Tmp_mesh_pt= new TriangleScaffoldMesh(triangulate_io);
+    this->Tmp_mesh_pt= new TriangleScaffoldMesh(triangulate_io);
     
     // Initialize TriangulateIO structure
     TriangleHelper::initialise_triangulateio(Triangulateio);
@@ -477,56 +486,59 @@ class TriangleMeshParameters
     build_from_scaffold(time_stepper_pt,use_attributes);
     
     // Kill the scaffold
-    delete Tmp_mesh_pt;
-    Tmp_mesh_pt=0;
+    delete this->Tmp_mesh_pt;
+    this->Tmp_mesh_pt=0;
     
     // Setup boundary coordinates for boundaries
     unsigned nb=nboundary();
     for (unsigned b=0;b<nb;b++)
-     {
-      this->setup_boundary_coordinates(b);
-     }
+    {
+     this->template setup_boundary_coordinates<ELEMENT>(b);
+    }
    }
 
   /// \short Build mesh, based on the specifications on
   /// TriangleMeshParameters
   TriangleMesh(TriangleMeshParameters &triangle_mesh_parameters, 
                TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
-  {
-   // Mesh can only be built with 2D Telements.
-   MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
+   {
+    // Mesh can only be built with 2D Telements.
+    MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
 
-   // Initialize the value for allowing creation of points on boundaries
-   Allow_automatic_creation_of_vertices_on_boundaries = 
-    triangle_mesh_parameters.is_automatic_creation_of_vertices_on_boundaries_allowed();
+    // Initialize the value for allowing creation of points on boundaries
+    this->Allow_automatic_creation_of_vertices_on_boundaries=
+     triangle_mesh_parameters.is_automatic_creation_of_vertices_on_boundaries_allowed();
    
+    // Store Timestepper used to build elements
+    Time_stepper_pt=time_stepper_pt;
+    
 #ifdef OOMPH_HAS_MPI   
-   // Initialize the flag to indicate this is the first time to
-   // compute the holes left by the halo elements
-   First_time_compute_holes_left_by_halo_elements = true;
+    // Initialize the flag to indicate this is the first time to
+    // compute the holes left by the halo elements
+    First_time_compute_holes_left_by_halo_elements = true;
 #endif // #ifdef OOMPH_HAS_MPI
    
-   // ********************************************************************
-   // First part - Get polylines representations
-   // ********************************************************************
+    // ********************************************************************
+    // First part - Get polylines representations
+    // ********************************************************************
     
-   // Create the polyline representation of all the boundaries and
-   // then create the mesh by calling to "generic_constructor()"
+    // Create the polyline representation of all the boundaries and
+    // then create the mesh by calling to "generic_constructor()"
     
-   // Initialise highest boundary id
-   unsigned max_boundary_id = 0;
+    // Initialise highest boundary id
+    unsigned max_boundary_id = 0;
    
-   // *****************************************************************
-   // Part 1.1 - Outer boundary
-   // *****************************************************************
-   // Get the representation of the outer boundaries from the
-   // TriangleMeshParameters object
-   Vector<TriangleMeshClosedCurve *> outer_boundary_pt =
+    // *****************************************************************
+    // Part 1.1 - Outer boundary
+    // *****************************************************************
+    // Get the representation of the outer boundaries from the
+    // TriangleMeshParameters object
+    Vector<TriangleMeshClosedCurve *> outer_boundary_pt =
      triangle_mesh_parameters.outer_boundary_pt();
    
 #ifdef PARANOID
-   // Verify that the outer_boundary_object_pt has been set
-   if (outer_boundary_pt.size()==0)
+    // Verify that the outer_boundary_object_pt has been set
+    if (outer_boundary_pt.size()==0)
     {
      std::stringstream error_message;
      error_message
@@ -539,134 +551,134 @@ class TriangleMeshParameters
     } // if (outer_boundary_pt!=0)
 #endif
    
-   // Find the number of outer closed curves
-   unsigned n_outer_boundaries = outer_boundary_pt.size();
+    // Find the number of outer closed curves
+    unsigned n_outer_boundaries = outer_boundary_pt.size();
 
-   // Create the storage for the polygons that define the outer
-   // boundaries
-   Vector<TriangleMeshPolygon*> outer_boundary_polygon_pt(n_outer_boundaries);
+    // Create the storage for the polygons that define the outer
+    // boundaries
+    Vector<TriangleMeshPolygon*> outer_boundary_polygon_pt(n_outer_boundaries);
 
-   // Loop over the number of outer boundaries
-   for(unsigned i=0;i<n_outer_boundaries;++i)
+    // Loop over the number of outer boundaries
+    for(unsigned i=0;i<n_outer_boundaries;++i)
     {
      // Get the polygon representation and compute the max boundary_id on
      // each outer polygon. Does nothing (i.e. just returns a pointer to
      // the outer boundary that was input) if the outer boundary is
      // already a polygon
      outer_boundary_polygon_pt[i] =
-       closed_curve_to_polygon_helper(outer_boundary_pt[i], max_boundary_id);
+      closed_curve_to_polygon_helper(outer_boundary_pt[i], max_boundary_id);
     }
    
-   // *****************************************************************
-   // Part 1.2 - Internal closed boundaries (possible holes)
-   // *****************************************************************
-   // Get the representation of the internal closed boundaries from the
-   // TriangleMeshParameters object
-   Vector<TriangleMeshClosedCurve *> internal_closed_curve_pt =
+    // *****************************************************************
+    // Part 1.2 - Internal closed boundaries (possible holes)
+    // *****************************************************************
+    // Get the representation of the internal closed boundaries from the
+    // TriangleMeshParameters object
+    Vector<TriangleMeshClosedCurve *> internal_closed_curve_pt =
      triangle_mesh_parameters.internal_closed_curve_pt();
 
-   // Find the number of internal closed curves
-   unsigned n_internal_closed_curves = internal_closed_curve_pt.size();
+    // Find the number of internal closed curves
+    unsigned n_internal_closed_curves = internal_closed_curve_pt.size();
 
-   // Create the storage for the polygons that define the internal closed
-   // boundaries (again nothing happens (as above) if an internal closed
-   // curve is already a polygon)
-   Vector<TriangleMeshPolygon*> internal_polygon_pt(n_internal_closed_curves);
+    // Create the storage for the polygons that define the internal closed
+    // boundaries (again nothing happens (as above) if an internal closed
+    // curve is already a polygon)
+    Vector<TriangleMeshPolygon*> internal_polygon_pt(n_internal_closed_curves);
 
-   // Loop over the number of internal closed curves
-   for(unsigned i=0;i<n_internal_closed_curves;++i)
+    // Loop over the number of internal closed curves
+    for(unsigned i=0;i<n_internal_closed_curves;++i)
     {
      // Get the polygon representation and compute the max boundary_id on
      // each internal polygon
      internal_polygon_pt[i] =
-       closed_curve_to_polygon_helper(
-         internal_closed_curve_pt[i], max_boundary_id);
+      closed_curve_to_polygon_helper(
+       internal_closed_curve_pt[i], max_boundary_id);
     }
    
-   // *****************************************************************
-   // Part 1.3 - Internal open boundaries
-   // *****************************************************************
-   // Get the representation of open boundaries from the
-   // TriangleMeshParameteres object
-   Vector<TriangleMeshOpenCurve*> internal_open_curve_pt =
+    // *****************************************************************
+    // Part 1.3 - Internal open boundaries
+    // *****************************************************************
+    // Get the representation of open boundaries from the
+    // TriangleMeshParameteres object
+    Vector<TriangleMeshOpenCurve*> internal_open_curve_pt =
      triangle_mesh_parameters.internal_open_curves_pt();
       
-   //Find the number of internal open curves
-   unsigned n_internal_open_curves = internal_open_curve_pt.size();
+    //Find the number of internal open curves
+    unsigned n_internal_open_curves = internal_open_curve_pt.size();
 
-   // Create the storage for the polylines that define the open boundaries
-   Vector<TriangleMeshOpenCurve*> internal_open_curve_poly_pt(
+    // Create the storage for the polylines that define the open boundaries
+    Vector<TriangleMeshOpenCurve*> internal_open_curve_poly_pt(
      n_internal_open_curves);
 
-   // Loop over the number of internal open curves
-   for (unsigned i = 0; i < n_internal_open_curves; i++)
+    // Loop over the number of internal open curves
+    for (unsigned i = 0; i < n_internal_open_curves; i++)
     {
      // Get the open polyline representation and compute the max boundary_id
      // on each open polyline (again, nothing happens if there are curve
      // sections on the current internal open curve)
      internal_open_curve_poly_pt[i] =
-       create_open_curve_with_polyline_helper(
-         internal_open_curve_pt[i], max_boundary_id);
+      create_open_curve_with_polyline_helper(
+       internal_open_curve_pt[i], max_boundary_id);
     }
 
-   // ********************************************************************
-   // Second part - Get associated geom objects and coordinate limits
-   // ********************************************************************
+    // ********************************************************************
+    // Second part - Get associated geom objects and coordinate limits
+    // ********************************************************************
 
-   // ***************************************************************
-   // Part 2.1 Outer boundary
-   // ***************************************************************
-   for (unsigned i = 0; i <  n_outer_boundaries; i++)
+    // ***************************************************************
+    // Part 2.1 Outer boundary
+    // ***************************************************************
+    for (unsigned i = 0; i <  n_outer_boundaries; i++)
     {
      set_geom_objects_and_coordinate_limits_for_close_curve(
       outer_boundary_pt[i]);
     }
 
-   // ***************************************************************
-   // Part 2.2 - Internal closed boundaries (possible holes)
-   // ***************************************************************
-   for (unsigned i = 0; i < n_internal_closed_curves; i++)
+    // ***************************************************************
+    // Part 2.2 - Internal closed boundaries (possible holes)
+    // ***************************************************************
+    for (unsigned i = 0; i < n_internal_closed_curves; i++)
     {
      set_geom_objects_and_coordinate_limits_for_close_curve(
-       internal_closed_curve_pt[i]);
+      internal_closed_curve_pt[i]);
     }
 
-   // ********************************************************************
-   // Part 2.3 - Internal open boundaries
-   // ********************************************************************
-   for (unsigned i = 0; i < n_internal_open_curves; i++)
+    // ********************************************************************
+    // Part 2.3 - Internal open boundaries
+    // ********************************************************************
+    for (unsigned i = 0; i < n_internal_open_curves; i++)
     {
      set_geom_objects_and_coordinate_limits_for_open_curve(
-       internal_open_curve_pt[i]);
+      internal_open_curve_pt[i]);
     }
 
-   // ********************************************************************
-   // Third part - Creates the TriangulateIO object by calling the
-   //              "generic_constructor()" function
-   // ********************************************************************
-   // Get all the other parameters from the TriangleMeshParameters object
-   // The maximum element area
-   const double element_area =
+    // ********************************************************************
+    // Third part - Creates the TriangulateIO object by calling the
+    //              "generic_constructor()" function
+    // ********************************************************************
+    // Get all the other parameters from the TriangleMeshParameters object
+    // The maximum element area
+    const double element_area =
      triangle_mesh_parameters.element_area();
 
-   // The holes coordinates
-   Vector<Vector<double> > extra_holes_coordinates =
+    // The holes coordinates
+    Vector<Vector<double> > extra_holes_coordinates =
      triangle_mesh_parameters.extra_holes_coordinates();
 
-   // The regions coordinates
-   std::map<unsigned, Vector<double> > regions =
+    // The regions coordinates
+    std::map<unsigned, Vector<double> > regions =
      triangle_mesh_parameters.regions_coordinates();
 
-   // If we use regions then we use attributes
-   const bool use_attributes = triangle_mesh_parameters.is_use_attributes();
+    // If we use regions then we use attributes
+    const bool use_attributes = triangle_mesh_parameters.is_use_attributes();
 
-   const bool refine_boundary = 
-    triangle_mesh_parameters.is_boundary_refinement_allowed();
+    const bool refine_boundary = 
+     triangle_mesh_parameters.is_boundary_refinement_allowed();
 
-   const bool refine_internal_boundary = 
-    triangle_mesh_parameters.is_internal_boundary_refinement_allowed();
+    const bool refine_internal_boundary = 
+     triangle_mesh_parameters.is_internal_boundary_refinement_allowed();
 
-   if(!refine_internal_boundary && refine_boundary)
+    if(!refine_internal_boundary && refine_boundary)
     {
      std::ostringstream error_stream;
      error_stream 
@@ -687,47 +699,46 @@ class TriangleMeshParameters
                          OOMPH_EXCEPTION_LOCATION);
     }
    
-   this->generic_constructor(outer_boundary_polygon_pt,
-                             internal_polygon_pt,
-                             internal_open_curve_poly_pt,
-                             element_area,
-                             extra_holes_coordinates,
-                             regions,
-                             triangle_mesh_parameters.target_area_for_region(),
-                             time_stepper_pt,
-                             use_attributes,
-                             refine_boundary,
-                             refine_internal_boundary);
+    this->generic_constructor(outer_boundary_polygon_pt,
+			      internal_polygon_pt,
+			      internal_open_curve_poly_pt,
+			      element_area,
+			      extra_holes_coordinates,
+			      regions,
+			      triangle_mesh_parameters.target_area_for_region(),
+			      time_stepper_pt,
+			      use_attributes,
+			      refine_boundary,
+			      refine_internal_boundary);
    
-   // Setup boundary coordinates for boundaries
-   unsigned nb=nboundary();
+    // Setup boundary coordinates for boundaries
+    unsigned nb=nboundary();
 
 #ifdef OOMPH_HAS_MPI
-   // Before calling setup boundary coordinates check if the mesh is
-   // marked as distrbuted
-   if (triangle_mesh_parameters.is_mesh_distributed())
+    // Before calling setup boundary coordinates check if the mesh is
+    // marked as distrbuted
+    if (triangle_mesh_parameters.is_mesh_distributed())
     {
      // Set the mesh as distributed by passing the communicator
      this->set_communicator_pt(triangle_mesh_parameters.communicator_pt());
     }
 #endif
    
-   for (unsigned b=0;b<nb;b++)
+    for (unsigned b=0;b<nb;b++)
     {
-     this->setup_boundary_coordinates(b);
+     this->template setup_boundary_coordinates<ELEMENT>(b);
     }
    
-   // Snap it!
-   this->snap_nodes_onto_geometric_objects();
-   
-  }
+    // Snap it!
+    this->snap_nodes_onto_geometric_objects();
+   }
   
   /// \short Build mesh from poly file, with specified target
   /// area for all elements.
   TriangleMesh(const std::string& poly_file_name,
                const double& element_area,
                TimeStepper* time_stepper_pt=
-                   &Mesh::Default_TimeStepper,
+	       &Mesh::Default_TimeStepper,
                const bool &use_attributes=false,
                const bool &allow_automatic_creation_of_vertices_on_boundaries=true)
    {
@@ -735,7 +746,7 @@ class TriangleMeshParameters
     MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
 
     // Initialize the value for allowing creation of points on boundaries
-    Allow_automatic_creation_of_vertices_on_boundaries = 
+    this->Allow_automatic_creation_of_vertices_on_boundaries = 
      allow_automatic_creation_of_vertices_on_boundaries;
 
 #ifdef OOMPH_HAS_MPI    
@@ -765,31 +776,33 @@ class TriangleMeshParameters
 
     // MH: Like everything else, this hasn't been tested!
     // used to be input_string_stream<<"-pA -a" << element_area << "q30";
-    input_string_stream<<"-pA -a -a" << element_area << "q30";
+    input_string_stream<< "-pA -a -a" << element_area << "q30";
 
     // Verify if creation of new points on boundaries is allowed
     if (!this->is_creation_of_vertices_on_boundaries_allowed())
-     {input_string_stream<<" -YY";}
+    {
+     input_string_stream<<" -YY";
+    }
     
     // Convert to a *char required by the triangulate function
     char triswitches[100];
     sprintf(triswitches,"%s",input_string_stream.str().c_str());
     
     // Build the input triangulateio object from the .poly file
-    build_triangulateio(poly_file_name, triangle_in);
+    build_triangulateio(poly_file_name,triangle_in);
     
     // Build the triangulateio out object
     triangulate(triswitches, &triangle_in, &Triangulateio, 0);
     
     // Build scaffold
-    Tmp_mesh_pt= new TriangleScaffoldMesh(Triangulateio);
+    this->Tmp_mesh_pt= new TriangleScaffoldMesh(Triangulateio);
     
     // Convert mesh from scaffold to actual mesh
     build_from_scaffold(time_stepper_pt,use_attributes);
     
     // Kill the scaffold
-    delete Tmp_mesh_pt;
-    Tmp_mesh_pt=0;
+    delete this->Tmp_mesh_pt;
+    this->Tmp_mesh_pt=0;
     
     // Cleanup but leave hole alone
     bool clear_hole_data=false;
@@ -798,9 +811,9 @@ class TriangleMeshParameters
     // Setup boundary coordinates for boundaries
     unsigned nb=nboundary();
     for (unsigned b=0;b<nb;b++)
-     {
-      this->setup_boundary_coordinates(b);
-     }
+    {
+     this->template setup_boundary_coordinates<ELEMENT>(b);
+    }
    }
 
 #endif
@@ -819,64 +832,47 @@ class TriangleMeshParameters
   
   /// Destructor 
   virtual ~TriangleMesh() 
-  {
+   {
 #ifdef OOMPH_HAS_TRIANGLE_LIB
-   if (Triangulateio_exists)
+    if (Triangulateio_exists)
     {
      TriangleHelper::clear_triangulateio(Triangulateio);
     }
 
-   std::set<TriangleMeshCurveSection*>::iterator it_polyline;
-   for (it_polyline = Free_curve_section_pt.begin();
-     it_polyline != Free_curve_section_pt.end();
-     it_polyline++)
+    std::set<TriangleMeshCurveSection*>::iterator it_polyline;
+    for (it_polyline = Free_curve_section_pt.begin();
+	 it_polyline != Free_curve_section_pt.end();
+	 it_polyline++)
     {
      delete (*it_polyline);
     }
 
-   std::set<TriangleMeshPolygon*>::iterator it_polygon;
-   for (it_polygon = Free_polygon_pt.begin();
-     it_polygon != Free_polygon_pt.end();
-     it_polygon++)
+    std::set<TriangleMeshPolygon*>::iterator it_polygon;
+    for (it_polygon = Free_polygon_pt.begin();
+	 it_polygon != Free_polygon_pt.end();
+	 it_polygon++)
     {
      delete (*it_polygon);
     }
 
-   std::set<TriangleMeshOpenCurve*>::iterator it_open_polyline;
-   for (it_open_polyline = Free_open_curve_pt.begin();
-     it_open_polyline != Free_open_curve_pt.end();
-     it_open_polyline++)
+    std::set<TriangleMeshOpenCurve*>::iterator it_open_polyline;
+    for (it_open_polyline = Free_open_curve_pt.begin();
+	 it_open_polyline != Free_open_curve_pt.end();
+	 it_open_polyline++)
     {
      delete (*it_open_polyline);
     }
 
 #endif
-  }
+   }
   
   /// \short Overload set_mesh_level_time_stepper so that the stored
   /// time stepper now corresponds to the new timestepper
   void set_mesh_level_time_stepper(TimeStepper* const &time_stepper_pt,
                                    const bool &preserve_existing_data)
-  {this->Time_stepper_pt = time_stepper_pt;}
-
-  /// \short Setup boundary coordinate on boundary b.
-  /// Boundary coordinate increases continously along
-  /// polygonal boundary. It's zero at the lowest left
-  /// node on the boundary.
-  void setup_boundary_coordinates(const unsigned& b)
-  {
-   // Dummy file
-   std::ofstream some_file;
-   setup_boundary_coordinates(b,some_file);
-  }
-  
-  /// \short Setup boundary coordinate on boundary b. Doc Faces
-  /// in outfile.
-  /// Boundary coordinate increases continously along
-  /// polygonal boundary. It's zero at the lowest left
-  /// node on the boundary.
-  void setup_boundary_coordinates(const unsigned& b,
-                                  std::ofstream& outfile); 
+   {
+    this->Time_stepper_pt = time_stepper_pt;
+   }
   
 #ifdef OOMPH_HAS_MPI
   
@@ -925,43 +921,10 @@ class TriangleMeshParameters
   /// decide which of the two face elements should be used on internal
   /// boundaries
   void select_boundary_face_elements(
-    Vector<FiniteElement*> &face_el_pt, const unsigned &b, 
-    bool &is_internal_boundary,
-    std::map<FiniteElement*,FiniteElement*> &face_to_bulk_element_pt);
+   Vector<FiniteElement*> &face_el_pt, const unsigned &b, 
+   bool &is_internal_boundary,
+   std::map<FiniteElement*,FiniteElement*> &face_to_bulk_element_pt);
   
-  // \short Flag used at the setup_boundary_coordinate function to know
-  // if initial zeta values for segments have been assigned
-  std::map<unsigned,bool> Assigned_segments_initial_zeta_values;
-  
-  /// Return the number of segments associated with a boundary
-  unsigned nboundary_segment(const unsigned &b)
-  {return Boundary_segment_node_pt[b].size();}
-
-  /// Return the number of segments associated with a boundary
-  unsigned long nboundary_segment_node(const unsigned &b)
-  {
-   unsigned ntotal_nodes = 0;
-   unsigned nsegments = Boundary_segment_node_pt[b].size();
-   for (unsigned is = 0; is < nsegments; is++)
-    {
-     ntotal_nodes+=nboundary_segment_node(b,is);
-    }
-   return ntotal_nodes;
-  }
-
-  /// Flush the boundary segment node storage
-  void flush_boundary_segment_node(const unsigned &b)
-  {Boundary_segment_node_pt[b].clear();}
-
-  /// Set the number of segments associated with a boundary
-  void set_nboundary_segment_node(const unsigned &b, const unsigned &s)
-  {Boundary_segment_node_pt[b].resize(s);}
-
-  /// Return the number of nodes associated with a given segment of a
-  /// boundary
-  unsigned long nboundary_segment_node(const unsigned &b, const unsigned &s)
-  {return Boundary_segment_node_pt[b][s].size();}
-
   /// \short Return direct access to nodes associated with a boundary but
   /// sorted in segments
   Vector<Vector<Node*> > &boundary_segment_node_pt(const unsigned &b)
@@ -976,483 +939,20 @@ class TriangleMeshParameters
   Node* &boundary_segment_node_pt(const unsigned &b, const unsigned &s,
                                   const unsigned &n)
    {return Boundary_segment_node_pt[b][s][n];}
-
-  /// Add the node node_pt to the b-th boundary and the s-th segment of
-  /// the mesh
-  void add_boundary_segment_node(const unsigned &b, const unsigned &s,
-                                 Node* const &node_pt);
   
-  /// \short Return the initial coordinates for the boundary
-  Vector<double> &boundary_initial_coordinate(const unsigned &b)
-   {
-    std::map<unsigned, Vector<double> >::iterator it =
-     Boundary_initial_coordinate.find(b);
-#ifdef PARANOID
-    if(it==Boundary_initial_coordinate.end())
-     {
-      std::stringstream error_message;
-      error_message
-       << "The boundary ("<<b<<") has not established initial coordinates\n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-    return (*it).second;
-   }
-
-  /// \short Return the final coordinates for the boundary
-  Vector<double> &boundary_final_coordinate(const unsigned &b)
-   {
-    std::map<unsigned, Vector<double> >::iterator it =
-     Boundary_final_coordinate.find(b);
-#ifdef PARANOID
-    if(it==Boundary_final_coordinate.end())
-      {
-        std::stringstream error_message;
-        error_message
-       << "The boundary ("<<b<<") has not established final coordinates\n";
-        throw OomphLibError(error_message.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-    return (*it).second;
-   }
-
-  /// \short Return the initial zeta coordinate for the boundary
-  Vector<double> &boundary_initial_zeta_coordinate(const unsigned &b)
-   {
-    std::map<unsigned, Vector<double> >::iterator it =
-     Boundary_initial_zeta_coordinate.find(b);
-#ifdef PARANOID
-    if(it==Boundary_initial_zeta_coordinate.end())
-      {
-     std::stringstream error_message;
-     error_message
-       << "The boundary ("<<b<<") has not established initial zeta "
-       << "coordinate\n";
-     throw OomphLibError(error_message.str(),
-       OOMPH_CURRENT_FUNCTION,
-       OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-    return (*it).second;
-   }
-
-  /// \short Return the final zeta coordinate for the boundary
-  Vector<double> &boundary_final_zeta_coordinate(const unsigned &b)
-   {
-    std::map<unsigned, Vector<double> >::iterator it =
-     Boundary_final_zeta_coordinate.find(b);
-#ifdef PARANOID
-    if(it==Boundary_final_zeta_coordinate.end())
-     {
-      std::stringstream error_message;
-      error_message
-       << "The boundary ("<<b<<") has not established final zeta coordinate\n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-    return (*it).second;
-   }
+#endif // OOMPH_HAS_MPI
   
-  // \short Return the info. to know if it is necessary to reverse the
-  // segment based on a previous mesh
-  const Vector<unsigned> boundary_segment_inverted(const unsigned &b) const
-   {
-    std::map<unsigned, Vector<unsigned> >::iterator it =
-     Boundary_segment_inverted.find(b);
-#ifdef PARANOID
-    if(it==Boundary_segment_inverted.end())
-     {
-      std::stringstream error_message;
-      error_message
-       << "The boundary ("<<b<<") has not established inv. segments info\n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-    return (*it).second;
-   }
-
-  // \short Return the info. to know if it is necessary to reverse the
-  // segment based on a previous mesh
-  Vector<unsigned> &boundary_segment_inverted(const unsigned &b)
-   {
-    std::map<unsigned, Vector<unsigned> >::iterator it =
-     Boundary_segment_inverted.find(b);
-#ifdef PARANOID
-    if(it==Boundary_segment_inverted.end())
-     {
-      std::stringstream error_message;
-      error_message
-       << "The boundary ("<<b<<") has not established inv. segments info\n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-    return (*it).second;
-   }
-
-  /// \short Return the initial coordinates for the segments that are
-  /// part of a boundary
-  Vector<Vector<double> > &boundary_segment_initial_coordinate(
-   const unsigned &b)
-   {
-    std::map<unsigned, Vector<Vector<double> > >::iterator it =
-     Boundary_segment_initial_coordinate.find(b);
-#ifdef PARANOID
-    if(it==Boundary_segment_initial_coordinate.end())
-     {
-      std::stringstream error_message;
-      error_message
-       << "The boundary ("<<b<<") has no segments associated with it!!\n\n";
-       throw OomphLibError(error_message.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-    return (*it).second;
-   }
-
-  /// \short Return the final coordinates for the segments that are
-  /// part of a boundary
-  Vector<Vector<double> > &boundary_segment_final_coordinate(
-   const unsigned &b)
-   {
-    std::map<unsigned, Vector<Vector<double> > >::iterator it =
-     Boundary_segment_final_coordinate.find(b);
-#ifdef PARANOID
-    if(it==Boundary_segment_final_coordinate.end())
-     {
-      std::stringstream error_message;
-      error_message
-       << "The boundary ("<<b<<") has no segments associated with it!!\n\n";
-       throw OomphLibError(error_message.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-    return (*it).second;
-   }
-
-  /// \short Return the initial arclength for the segments that are
-  /// part of a boundary
-  Vector<double> &boundary_segment_initial_arclength(const unsigned &b)
-   {
-    std::map<unsigned, Vector<double> >::iterator it =
-     Boundary_segment_initial_arclength.find(b);
-#ifdef PARANOID
-    if(it==Boundary_segment_initial_arclength.end())
-     {
-      std::stringstream error_message;
-      error_message
-       << "The boundary ("<<b<<") has no segments associated with it!!\n\n";
-       throw OomphLibError(error_message.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-    return (*it).second;
-   }
-
-  /// \short Return the final arclength for the segments that are
-  /// part of a boundary
-  Vector<double> &boundary_segment_final_arclength(const unsigned &b)
-   {
-    std::map<unsigned, Vector<double> >::iterator it =
-     Boundary_segment_final_arclength.find(b);
-#ifdef PARANOID
-    if(it==Boundary_segment_final_arclength.end())
-      {
-     std::stringstream error_message;
-     error_message
-       << "The boundary ("<<b<<") has no segments associated with it!!\n\n";
-     throw OomphLibError(error_message.str(),
-       OOMPH_CURRENT_FUNCTION,
-       OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-    return (*it).second;
-   }
-
-  /// \short Return the initial zeta for the segments that are
-  /// part of a boundary
-  Vector<double> &boundary_segment_initial_zeta(const unsigned &b)
-   {
-    std::map<unsigned, Vector<double> >::iterator it =
-     Boundary_segment_initial_zeta.find(b);
-#ifdef PARANOID
-    if(it==Boundary_segment_initial_zeta.end())
-      {
-      std::stringstream error_message;
-      error_message
-        << "The boundary ("<<b<<") has no segments associated with it!!\n\n";
-      throw OomphLibError(error_message.str(),
-       OOMPH_CURRENT_FUNCTION,
-       OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-    return (*it).second;
-   }
-
-  /// \short Return the final zeta for the segments that are
-  /// part of a boundary
-  Vector<double> &boundary_segment_final_zeta(const unsigned &b)
-   {
-    std::map<unsigned, Vector<double> >::iterator it =
-     Boundary_segment_final_zeta.find(b);
-#ifdef PARANOID
-    if(it==Boundary_segment_final_zeta.end())
-     {
-      std::stringstream error_message;
-      error_message
-       << "The boundary ("<<b<<") has no segments associated with it!!\n\n";
-       throw OomphLibError(error_message.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-    return (*it).second;
-   }
-  
-  /// \short Return direct access to the initial coordinates of a boundary
-  std::map<unsigned, Vector<double> > &boundary_initial_coordinate() 
-   {return Boundary_initial_coordinate;}
-  
-  /// \short Return direct access to the final coordinates of a boundary
-  std::map<unsigned, Vector<double> > &boundary_final_coordinate() 
-   {return Boundary_final_coordinate;}
-
-  /// \short Return direct access to the initial zeta coordinate of a
-  /// boundary
-  std::map<unsigned, Vector<double> > &boundary_initial_zeta_coordinate() 
-   {return Boundary_initial_zeta_coordinate;}
-
-  /// \short Return direct access to the final zeta coordinates of a
-  /// boundary
-  std::map<unsigned, Vector<double> > &boundary_final_zeta_coordinate() 
-   {return Boundary_final_zeta_coordinate;}
-
-  // \short Return the info. to know if it is necessary to reverse the
-  // segment based on a previous mesh
-  std::map<unsigned, Vector<unsigned> > &boundary_segment_inverted()
-   {return Boundary_segment_inverted;}
-
-  /// \short Return direct access to the initial coordinates for the
-  /// segments that are part of a boundary
-  std::map<unsigned, Vector<Vector<double> > > 
-   &boundary_segment_initial_coordinate() 
-   {return Boundary_segment_initial_coordinate;}
-  
-  /// \short Return direct access to the final coordinates for the
-  /// segments that are part of a boundary
-  std::map<unsigned, Vector<Vector<double> > > 
-   &boundary_segment_final_coordinate() 
-   {return Boundary_segment_final_coordinate;}
-  
-  /// \short Return direct access to the initial arclength for the
-  /// segments that are part of a boundary
-  std::map<unsigned, Vector<double> > &boundary_segment_initial_arclength()
-   {return Boundary_segment_initial_arclength;}
-
-  /// \short Return direct access to the final arclength for the
-  /// segments that are part of a boundary
-  std::map<unsigned, Vector<double> > &boundary_segment_final_arclength()
-   {return Boundary_segment_final_arclength;}
-
-  /// \short Return direct access to the initial zeta for the
-  /// segments that are part of a boundary
-  std::map<unsigned, Vector<double> > &boundary_segment_initial_zeta()
-   {return Boundary_segment_initial_zeta;}
-
-  /// \short Return direct access to the final zeta for the
-  /// segments that are part of a boundary
-  std::map<unsigned, Vector<double> > &boundary_segment_final_zeta()
-   {return Boundary_segment_final_zeta;}
-  
-#endif // #ifdef OOMPH_HAS_MPI
-
-  /// Return the number of elements adjacent to boundary b in region r
-  inline unsigned nboundary_element_in_region(const unsigned &b,
-                                        const unsigned &r) const
-  {
-   //Need to use a constant iterator here to keep the function "const"
-   //Return an iterator to the appropriate entry, if we find it
-   std::map<unsigned,Vector<FiniteElement*> >::const_iterator it =
-     Boundary_region_element_pt[b].find(r);
-   if(it!=Boundary_region_element_pt[b].end())
-    {
-     return (it->second).size();
-    }
-   //Otherwise there are no elements adjacent to boundary b in the region r
-   else
-    {
-     return 0;
-    }
-  }
-  
-  /// Return pointer to the e-th element adjacent to boundary b in region r
-  FiniteElement* boundary_element_in_region_pt(const unsigned &b, 
-                                               const unsigned &r,
-                                               const unsigned &e) const
-  {
-   //Use a constant iterator here to keep function "const" overall
-   std::map<unsigned,Vector<FiniteElement*> >::const_iterator it =
-     Boundary_region_element_pt[b].find(r);
-   if(it!=Boundary_region_element_pt[b].end())
-    {
-     return (it->second)[e];
-    }
-   else
-    {
-     return 0;
-    }
-  }
-
-  /// Return face index of the e-th element adjacent to boundary b in region r
-  int face_index_at_boundary_in_region(const unsigned &b, 
-                                       const unsigned &r,
-                                       const unsigned &e) const
-  {
-   //Use a constant iterator here to keep function "const" overall
-   std::map<unsigned,Vector<int> >::const_iterator it =
-     Face_index_region_at_boundary[b].find(r);
-   if(it!=Face_index_region_at_boundary[b].end())
-    {
-     return (it->second)[e];
-    }
-   else
-    {
-     std::ostringstream error_message;
-     error_message << "Face indices not set up for boundary "
-       << b << " in region " << r << "\n";
-     error_message
-     << "This probably means that the boundary is not adjacent to region\n";
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-  }
-
-  /// Return the number of regions specified by attributes
-  unsigned nregion() {return Region_element_pt.size();}
-  
-  /// Return the number of elements in region i
-  unsigned nregion_element(const unsigned &i) 
-   {
-    std::map<unsigned,Vector<FiniteElement*> >::iterator it =
-     Region_element_pt.find(i);
-    if(it!=Region_element_pt.end())
-     {
-      return (it->second).size();
-     }
-    else
-     {
-      return 0;
-     }
-   }
-  
-  /// Return the attribute associated with region i
-  double region_attribute(const unsigned &i)
-  {return Region_attribute[i];}
-  
-  /// Return the e-th element in the i-th region
-  FiniteElement* region_element_pt(const unsigned &i,
-                                   const unsigned &e)
-   {
-    std::map<unsigned,Vector<FiniteElement*> >::iterator it =
-     Region_element_pt.find(i);
-    if(it!=Region_element_pt.end())
-     {
-      return (it->second)[e];
-     }
-    else
-     {
-      std::ostringstream error_message;
-      error_message << "There are not elements associated with region ("
-                    << i << ")\n";
-      error_message
-       << "This probably means that you are using a non defined region id\n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-   }
-
-  /// \short Return the geometric object associated with the b-th boundary or
-  /// null if the boundary has associated geometric object.
-  GeomObject* boundary_geom_object_pt(const unsigned &b)
-   {
-    std::map<unsigned,GeomObject*>::iterator it;
-    it = Boundary_geom_object_pt.find(b);
-    if(it == Boundary_geom_object_pt.end()) 
-     {return 0;}
-    else 
-     {return (*it).second;}
-   }
-  
-  /// \short Return direct access to the geometric object storage
-  std::map<unsigned,GeomObject*> &boundary_geom_object_pt()  
-   {return Boundary_geom_object_pt;}
-  
-  /// \short Return access to the vector of boundary coordinates associated
-  /// with each geometric object
-  std::map<unsigned,Vector<double> > &boundary_coordinate_limits()
-   {return Boundary_coordinate_limits;}
-  
-  /// \short Return access to the coordinate limits associated with 
-  /// the geometric object associated with boundary b
-  Vector<double> &boundary_coordinate_limits(const unsigned &b)
-   {
-    std::map<unsigned,Vector<double> >::iterator it;
-    it = Boundary_coordinate_limits.find(b);
-    if(it == Boundary_coordinate_limits.end())
-     {
-      throw OomphLibError(
-       "No coordinate limits associated with this boundary\n",
-       OOMPH_CURRENT_FUNCTION,
-       OOMPH_EXCEPTION_LOCATION);
-     }
-    else
-     {
-      return (*it).second;
-     }
-   }
-  
-  /// \short Return pointer to the current polyline that describes
-  /// the b-th mesh boundary
-  TriangleMeshPolyLine *boundary_polyline_pt(const unsigned &b)
-  {
-   std::map<unsigned, TriangleMeshCurveSection*>::iterator it =
-    Boundary_curve_section_pt.find(b);
-   // Search for the polyline associated with the given boundary
-   if (it != Boundary_curve_section_pt.end())
-    {
-     return
-      dynamic_cast<TriangleMeshPolyLine*>(Boundary_curve_section_pt[b]);
-    }
-   // If the boundary was not established then return 0, or a null
-   // pointer
-   return 0;
-  }
-    
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
   /// \short Update the TriangulateIO object to the current nodal position
   /// and the centre hole coordinates.
   void update_triangulateio(Vector<Vector<double> >&internal_point)
-  {
+   {
     // Move the hole center
     // Get number of holes
-   unsigned nhole=Triangulateio.numberofholes;
-   unsigned count_coord=0;
-   for(unsigned ihole=0;ihole<nhole;ihole++)
+    unsigned nhole=Triangulateio.numberofholes;
+    unsigned count_coord=0;
+    for(unsigned ihole=0;ihole<nhole;ihole++)
     {
      Triangulateio.holelist[count_coord]+=internal_point[ihole][0];
      Triangulateio.holelist[count_coord+1]+=internal_point[ihole][1]; 
@@ -1461,20 +961,20 @@ class TriangleMeshParameters
      count_coord+=2;
     }
    
-   // Do the update
-   update_triangulateio();
-  }
+    // Do the update
+    update_triangulateio();
+   }
    
   /// \short Update the triangulateio object to the current nodal positions
   void update_triangulateio()
-  {   
-   // Get number of points
-   unsigned nnode = Triangulateio.numberofpoints;
-   double new_x=0;
-   double new_y=0;
+   {   
+    // Get number of points
+    unsigned nnode = Triangulateio.numberofpoints;
+    double new_x=0;
+    double new_y=0;
    
-   // Loop over the points
-   for(unsigned inod=0;inod<nnode;inod++)
+    // Loop over the points
+    for(unsigned inod=0;inod<nnode;inod++)
     {      
      // Get the node Id to be updated
      unsigned count=Oomph_vertex_nodes_id[inod];
@@ -1487,25 +987,25 @@ class TriangleMeshParameters
      Triangulateio.pointlist[count*2] = new_x;  
      Triangulateio.pointlist[(count*2)+1] = new_y;       
     }
-  }
+   }
 
 #ifdef OOMPH_HAS_MPI
   /// Used to dump info. related with distributed triangle meshes
   void dump_distributed_info_for_restart(std::ostream &dump_file);
   
   const unsigned read_unsigned_line_helper(std::istream &read_file)
-  {
-   std::string input_string;
+   {
+    std::string input_string;
    
-   // Read line up to termination sign
-   getline(read_file,input_string,'#');
+    // Read line up to termination sign
+    getline(read_file,input_string,'#');
    
-   // Ignore rest of line
-   read_file.ignore(200,'\n');
+    // Ignore rest of line
+    read_file.ignore(200,'\n');
    
-   // Convert
-   return std::atoi(input_string.c_str());
-  }
+    // Convert
+    return std::atoi(input_string.c_str());
+   }
   
   /// Used to read info. related with distributed triangle meshes
   void read_distributed_info_for_restart(std::istream &restart_file);
@@ -1514,16 +1014,16 @@ class TriangleMeshParameters
   /// the distribution after a re-starting for triangle meshes
   virtual void reestablish_distribution_info_for_restart(
    OomphCommunicator* comm_pt, std::istream &restart_file)
-  {
-   std::ostringstream error_stream;
-   error_stream << "Empty default reestablish disributed info method "
-                << "called.\n";
-   error_stream << "This should be overloaded in a specific "
-                << "RefineableTriangleMesh\n";
-   throw OomphLibError(error_stream.str(),
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-  }
+   {
+    std::ostringstream error_stream;
+    error_stream << "Empty default reestablish disributed info method "
+		 << "called.\n";
+    error_stream << "This should be overloaded in a specific "
+		 << "RefineableTriangleMesh\n";
+    throw OomphLibError(error_stream.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
 
 #endif // #ifdef OOMPH_HAS_MPI
 
@@ -1536,17 +1036,17 @@ class TriangleMeshParameters
     //Delete exisiting nodes
     unsigned n_node = this->nnode();
     for(unsigned n=n_node;n>0;--n)
-     {
-      delete this->Node_pt[n-1];
-      this->Node_pt[n-1] = 0;
-     }
+    {
+     delete this->Node_pt[n-1];
+     this->Node_pt[n-1] = 0;
+    }
     //Delete exisiting elements
     unsigned n_element = this->nelement();
     for(unsigned e=n_element;e>0;--e)
-     {
-      delete this->Element_pt[e-1];
-      this->Element_pt[e-1] = 0;
-     }
+    {
+     delete this->Element_pt[e-1];
+     this->Element_pt[e-1] = 0;
+    }
     //Flush the storage
     this->flush_element_and_node_storage();
 
@@ -1564,26 +1064,26 @@ class TriangleMeshParameters
 #ifdef OOMPH_HAS_MPI
     // Delete Halo(ed) information in the old mesh
     if (this->is_mesh_distributed())
-     {
-      this->Halo_node_pt.clear();
-      this->Root_halo_element_pt.clear();
+    {
+     this->Halo_node_pt.clear();
+     this->Root_halo_element_pt.clear();
       
-      this->Haloed_node_pt.clear();
-      this->Root_haloed_element_pt.clear();
+     this->Haloed_node_pt.clear();
+     this->Root_haloed_element_pt.clear();
       
-      this->External_halo_node_pt.clear();
-      this->External_halo_element_pt.clear();
+     this->External_halo_node_pt.clear();
+     this->External_halo_element_pt.clear();
       
-      this->External_haloed_node_pt.clear();
-      this->External_haloed_element_pt.clear();
-     }
+     this->External_haloed_node_pt.clear();
+     this->External_haloed_element_pt.clear();
+    }
 #endif
     
     unsigned nbound=nboundary();
     Boundary_coordinate_exists.resize(nbound,false);
     
     //Now build the new scaffold
-    Tmp_mesh_pt= new TriangleScaffoldMesh(this->Triangulateio);
+    this->Tmp_mesh_pt= new TriangleScaffoldMesh(this->Triangulateio);
     
     // Triangulation has been created -- remember to wipe it!
     Triangulateio_exists=true;
@@ -1592,157 +1092,80 @@ class TriangleMeshParameters
     build_from_scaffold(this->Time_stepper_pt,this->Use_attributes);
     
     // Kill the scaffold
-    delete Tmp_mesh_pt;
-    Tmp_mesh_pt=0;
+    delete this->Tmp_mesh_pt;
+    this->Tmp_mesh_pt=0;
     
 #ifdef OOMPH_HAS_MPI
     if (!this->is_mesh_distributed())
-     {
-      nbound = this->nboundary(); // The original number of boundaries
-     }
+    {
+     nbound = this->nboundary(); // The original number of boundaries
+    }
     else
-     {
-      nbound = this->initial_shared_boundary_id();
-      // NOTE: The total number of boundaries is the number of
-      // original bondaries plus the number of shared boundaries, but
-      // here we only establish boundary coordinates for the original
-      // boundaries. Once all the info. related with the distribution
-      // has been established then the number of boundaries is reset
-      // to the correct one (after reset the halo/haloed scheme)
-     }
+    {
+     nbound = this->initial_shared_boundary_id();
+     // NOTE: The total number of boundaries is the number of
+     // original bondaries plus the number of shared boundaries, but
+     // here we only establish boundary coordinates for the original
+     // boundaries. Once all the info. related with the distribution
+     // has been established then the number of boundaries is reset
+     // to the correct one (after reset the halo/haloed scheme)
+    }
 #else
     nbound = this->nboundary(); // The original number of boundaries
 #endif
     
     // Setup boundary coordinates for boundaries
     for (unsigned b=0;b<nbound;b++)
-     {
-      this->setup_boundary_coordinates(b);
-     }
+    {
+     this->template setup_boundary_coordinates<ELEMENT>(b);
+    }
     
     // Snap nodes only if the mesh is not distributed, if the mesh is
     // distributed it will be called after the re-establishment of the
     // halo/haloed scheme, and the proper identification of the segments
     // in the boundary
     if (!this->is_mesh_distributed())
-     {
-      //Deform the boundary onto any geometric objects
-      this->snap_nodes_onto_geometric_objects();
-     }
-    
+    {
+     //Deform the boundary onto any geometric objects
+     this->snap_nodes_onto_geometric_objects();
+    }    
    }
   
   /// Boolean defining if Triangulateio object has been built or not
-  bool triangulateio_exists(){return Triangulateio_exists;}
+  bool triangulateio_exists()
+   {
+    return Triangulateio_exists;
+   }
 
-  /// Enables the creation of points (by Triangle) on the outer and
-  /// internal boundaries
-  void enable_automatic_creation_of_vertices_on_boundaries()
-   {Allow_automatic_creation_of_vertices_on_boundaries = true;}
-  
-  /// Disables the creation of points (by Triangle) on the outer and
-  /// internal boundaries
-  void disable_automatic_creation_of_vertices_on_boundaries()
-   {Allow_automatic_creation_of_vertices_on_boundaries=false;}
-  
-  /// Returns the status of the variable
-  /// Allow_automatic_creation_of_vertices_on_boundaries
-  bool is_automatic_creation_of_vertices_on_boundaries_allowed()
-   {return Allow_automatic_creation_of_vertices_on_boundaries;}
-  
 #endif
 
   /// \short Return the vector that contains the oomph-lib node number
   /// for all vertex nodes in the TriangulateIO representation of the mesh
-  Vector<unsigned> oomph_vertex_nodes_id(){return Oomph_vertex_nodes_id;}
+  Vector<unsigned> oomph_vertex_nodes_id()
+   {
+    return Oomph_vertex_nodes_id;
+   }
    
-  /// \short Snap the boundary nodes onto any curvilinear boundaries
-  /// defined by geometric objects
-  void snap_nodes_onto_geometric_objects();
-
-  /// \short Gets a pointer to a set with all the nodes
-  /// related with a boundary
-  std::map<unsigned, std::set<Node*> > &nodes_on_boundary_pt() {
-	  return Nodes_on_boundary_pt;
-  }
-
-  /// \short Stores a pointer to a set with all the nodes
-  /// related with a boundary
-  std::map<unsigned, std::set<Node*> > Nodes_on_boundary_pt;
+  /// Timestepper used to build elements
+  TimeStepper* Time_stepper_pt;
   
-   protected:
+  /// Boolean flag to indicate whether to use attributes or not (required
+  /// for multidomain meshes)
+  bool Use_attributes;
+
+ protected:
   
   /// Build mesh from scaffold
   void build_from_scaffold(TimeStepper* time_stepper_pt,
                            const bool &use_attributes);
   
-#ifdef OOMPH_HAS_TRIANGLE_LIB  
-  
-  /// \short Create TriangulateIO object from outer boundaries,
-  /// internal boundaries, and open curves. Add the holes and regions
-  /// information as well
- void build_triangulateio(Vector<TriangleMeshPolygon*> &outer_polygons_pt,
-                          Vector<TriangleMeshPolygon*> &internal_polygons_pt,
-                          Vector<TriangleMeshOpenCurve*> &open_curves_pt,
-                          Vector<Vector<double> > &extra_holes_coordinates,
-                          std::map<unsigned, Vector<double> > 
-                          &regions_coordinates,
-                          std::map<unsigned, double>
-                          &regions_areas,
-                          TriangulateIO& triangulate_io);
+#ifdef OOMPH_HAS_TRIANGLE_LIB
  
- // Data structure filled when the connection matrix is created, for
- // each polyline, there are two vertex_connection_info structures,
- // one for each end
- struct vertex_connection_info
- {
-  bool is_connected;
-  unsigned boundary_id_to_connect;
-  unsigned boundary_chunk_to_connect;
-  unsigned vertex_number_to_connect;
- }; // vertex_connection_info
- 
- /// \short Helps to add information to the connection matrix of the
- /// given polyline
- void add_connection_matrix_info_helper(
-  TriangleMeshPolyLine* polyline_pt,
-  std::map<unsigned,std::map<unsigned,Vector<vertex_connection_info > > > 
-  &connection_matrix,
-  TriangleMeshPolyLine* next_polyline_pt = 0);
- 
- // Data structure to store the base vertex info, initial or final
- // vertex in the polylines have an associated base vertex
- struct base_vertex_info {
-  bool has_base_vertex_assigned;
-  bool is_base_vertex;
-  unsigned boundary_id;
-  unsigned boundary_chunk;
-  unsigned vertex_number;
- }; // base_vertex_info
- 
- // \short Initialise the base vertex structure, set every vertex to
- // no visited and not being a base vertex
- void initialise_base_vertex(
-  TriangleMeshPolyLine* polyline_pt,
-  std::map<unsigned,std::map<unsigned,Vector<base_vertex_info> > > 
-  &base_vertices);
- 
- // \short Helps to identify the base vertex of the given polyline
- void add_base_vertex_info_helper(
-  TriangleMeshPolyLine* polyline_pt,
-  std::map<unsigned,std::map<unsigned,Vector<base_vertex_info> > > 
-  &base_vertices,
-  std::map<unsigned,std::map<unsigned,Vector<vertex_connection_info> > > 
-  &connection_matrix,
-  std::map<unsigned, std::map<unsigned, unsigned> > 
-  &boundary_chunk_nvertices);
-
   /// \short Helper function to create TriangulateIO object (return in
   /// triangulate_io) from the .poly file 
   void build_triangulateio(const std::string& poly_file_name,
                            TriangulateIO& triangulate_io);
-  
-  
+    
   /// \short A general-purpose construction function that builds the
   /// mesh once the different specific constructors have assembled the
   /// appropriate information.
@@ -1766,16 +1189,16 @@ class TriangleMeshParameters
     
 #ifdef PARANOID
     if (element_area < 10e-14)
-     {
-      std::ostringstream warning_message;
-      warning_message
-       << "The current elements area was stated to (" << element_area 
-       << ").\nThe current precision to generate the input to triangle "
-       << "is fixed to 14 digits\n\n";
-       OomphLibWarning(warning_message.str(),
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-     }    
+    {
+     std::ostringstream warning_message;
+     warning_message
+      << "The current elements area was stated to (" << element_area 
+      << ").\nThe current precision to generate the input to triangle "
+      << "is fixed to 14 digits\n\n";
+     OomphLibWarning(warning_message.str(),
+		     OOMPH_CURRENT_FUNCTION,
+		     OOMPH_EXCEPTION_LOCATION);
+    }    
 #endif
     
     //Store the attribute flag
@@ -1807,14 +1230,14 @@ class TriangleMeshParameters
     
     // Convert TriangleMeshPolyLine and TriangleMeshClosedCurvePolyLine
     // to a triangulateio object
-    build_triangulateio(outer_boundary_pt,
-                        internal_polygon_pt,
-                        open_polylines_pt,
-                        extra_holes_coordinates,
-                        regions_coordinates,
-                        regions_areas,
-                        triangulate_io);
-
+    UnstructuredTwoDMeshGeometryBase::build_triangulateio(outer_boundary_pt,
+							  internal_polygon_pt,
+							  open_polylines_pt,
+							  extra_holes_coordinates,
+							  regions_coordinates,
+							  regions_areas,
+							  triangulate_io);
+ 
     // Initialize TriangulateIO structure
     TriangleHelper::initialise_triangulateio(Triangulateio);
 
@@ -1835,15 +1258,15 @@ class TriangleMeshParameters
 
     // Verify if creation of new points on boundaries is allowed
     if (!this->is_automatic_creation_of_vertices_on_boundaries_allowed())
-     {input_string_stream<<" -YY";}
+    {input_string_stream<<" -YY";}
     
     //Suppress insertion of additional points on outer boundary
     if(refine_boundary==false) 
-     {
-      input_string_stream << "-Y";
-      //Add the extra flag to suppress additional points on interior segments
-      if(refine_internal_boundary==false) {input_string_stream << "Y";}
-     }
+    {
+     input_string_stream << "-Y";
+     //Add the extra flag to suppress additional points on interior segments
+     if(refine_internal_boundary==false) {input_string_stream << "Y";}
+    }
 
     // Convert the Input string in *char required by the triangulate function
     char triswitches[100];
@@ -1853,703 +1276,34 @@ class TriangleMeshParameters
     triangulate(triswitches, &triangulate_io, &Triangulateio, 0);
     
     // Build scaffold
-    Tmp_mesh_pt= new TriangleScaffoldMesh(Triangulateio);
+    this->Tmp_mesh_pt= new TriangleScaffoldMesh(Triangulateio);
     
     //If we have filled holes then we must use the attributes
     if(!regions_coordinates.empty())
-     {
-      // Convert mesh from scaffold to actual mesh
-      build_from_scaffold(time_stepper_pt,true);
-      //Record the attribute flag
-      Use_attributes=true;
-     }
+    {
+     // Convert mesh from scaffold to actual mesh
+     build_from_scaffold(time_stepper_pt,true);
+     //Record the attribute flag
+     Use_attributes=true;
+    }
     //Otherwise use what was asked
     else
-     {
-      // Convert mesh from scaffold to actual mesh
-      build_from_scaffold(time_stepper_pt,use_attributes);
-     }
+    {
+     // Convert mesh from scaffold to actual mesh
+     build_from_scaffold(time_stepper_pt,use_attributes);
+    }
 
     // Kill the scaffold
-    delete Tmp_mesh_pt;
-    Tmp_mesh_pt=0;
+    delete this->Tmp_mesh_pt;
+    this->Tmp_mesh_pt=0;
     
     // Cleanup but leave hole and regions alone since it's still used
     bool clear_hole_data=false;
     TriangleHelper::clear_triangulateio(triangulate_io,clear_hole_data);
    }
 
-  /// \short Helper function to create polyline vertex coordinates for 
-  /// curvilinear boundary specified by boundary_pt, using either
-  /// equal increments in zeta or in (approximate) arclength
-  /// along the curviline. vertex_coord[i_vertex][i_dim] stores
-  /// i_dim-th coordinate of i_vertex-th vertex. 
-  /// polygonal_vertex_arclength_info[i_vertex] contains the pair of doubles
-  /// made of the arclength of the i_vertex-th vertex along the polygonal 
-  /// representation (.first), and the corresponding coordinate on the
-  /// GeomObject (.second)
-  void create_vertex_coordinates_for_polyline_no_connections(
-   TriangleMeshCurviLine* boundary_pt,
-   Vector<Vector<double> >& vertex_coord,
-   Vector<std::pair<double,double> >& polygonal_vertex_arclength_info)
-  {
-   
-   // Intrinsic coordinate along GeomObjects
-   Vector<double> zeta(1);
-   
-   // Position vector to point on GeomObject
-   Vector<double> posn(2); 
-   
-   // Start coordinate
-   double zeta_initial = boundary_pt->zeta_start();
-
-   //How many segments do we want on this polyline?
-   unsigned n_seg = boundary_pt->nsegment();
-   vertex_coord.resize(n_seg+1);
-   polygonal_vertex_arclength_info.resize(n_seg+1);
-   polygonal_vertex_arclength_info[0].first=0.0;
-   polygonal_vertex_arclength_info[0].second=zeta_initial;
-  
-   // Vertices placed in equal zeta increments
-   if (!(boundary_pt->space_vertices_evenly_in_arclength()))
-    {
-     //Read the values of the limiting coordinates, assuming equal
-     //spacing of the nodes
-     double zeta_increment = 
-      (boundary_pt->zeta_end()-boundary_pt->zeta_start())/(double(n_seg));
-   
-     //Loop over the n_seg+1 points bounding the segments
-     for(unsigned s=0;s<n_seg+1;s++)
-      {
-       // Get the coordinates
-       zeta[0]= zeta_initial + zeta_increment*double(s);            
-       boundary_pt->geom_object_pt()->position(zeta,posn);
-       vertex_coord[s]=posn;
-
-       // Bump up the polygonal arclength
-       if (s>0)
-        {
-         polygonal_vertex_arclength_info[s].first=
-          polygonal_vertex_arclength_info[s-1].first+
-          sqrt(pow(vertex_coord[s][0]-vertex_coord[s-1][0],2)+
-               pow(vertex_coord[s][1]-vertex_coord[s-1][1],2));
-         polygonal_vertex_arclength_info[s].second=zeta[0];
-
-        }
-      }
-    }
-   // Vertices placed in equal increments in (approximate) arclength
-   else
-    {
-     // Number of sampling points to compute arclength and
-     // arclength increments
-     unsigned nsample_per_segment=100;
-     unsigned nsample=nsample_per_segment*n_seg;
-   
-     // Work out start and increment
-     double zeta_increment=(boundary_pt->zeta_end()-
-                            boundary_pt->zeta_start())/(double(nsample));
-   
-     // Get coordinate of first point
-     Vector<double> start_point(2);
-     zeta[0]=zeta_initial;
-
-     boundary_pt->geom_object_pt()->position(zeta,start_point);
-   
-     // Storage for coordinates of end point
-     Vector<double> end_point(2);
-   
-     // Compute total arclength
-     double total_arclength=0.0;
-     for (unsigned i=1;i<nsample;i++)
-      {
-       // Next point
-       zeta[0]+=zeta_increment;
-     
-       // Get coordinate of end point
-       boundary_pt->geom_object_pt()->position(zeta,end_point);
-     
-       // Increment arclength
-       total_arclength+=sqrt(pow(end_point[0]-start_point[0],2)+
-                             pow(end_point[1]-start_point[1],2));
-     
-       // Shift back
-       start_point=end_point;
-      }
-   
-     // Desired arclength increment
-     double target_s_increment=total_arclength/(double(n_seg));
-
-     // Get coordinate of first point again
-     zeta[0]=zeta_initial;
-     boundary_pt->geom_object_pt()->position(zeta,start_point);
-   
-     // Assign as coordinate
-     vertex_coord[0]=start_point;
-   
-     // Start sampling point 
-     unsigned i_lo=1;
-   
-     //Loop over the n_seg-1 internal points bounding the segments
-     for(unsigned s=1;s<n_seg;s++)
-      {
-       // Visit potentially all sample points until we've found
-       // the one at which we exceed the target arclength increment
-       double arclength_increment=0.0;
-       for (unsigned i=i_lo;i<nsample;i++)
-        {
-         // Next point
-         zeta[0]+=zeta_increment;
-       
-         // Get coordinate of end point
-         boundary_pt->geom_object_pt()->position(zeta,end_point);
-       
-         // Increment arclength increment
-         arclength_increment+=sqrt(pow(end_point[0]-start_point[0],2)+
-                                   pow(end_point[1]-start_point[1],2));
-       
-         // Shift back
-         start_point=end_point;
-       
-         // Are we there yet?
-         if (arclength_increment>target_s_increment)
-          {
-           // Remember how far we've got
-           i_lo=i;
-
-           // And bail out
-           break;
-          }
-        }
-     
-       // Store the coordinates
-       vertex_coord[s]=end_point;
-       
-       // Bump up the polygonal arclength
-       if (s>0)
-        {
-         polygonal_vertex_arclength_info[s].first=
-          polygonal_vertex_arclength_info[s-1].first+
-          sqrt(pow(vertex_coord[s][0]-vertex_coord[s-1][0],2)+
-               pow(vertex_coord[s][1]-vertex_coord[s-1][1],2));
-         polygonal_vertex_arclength_info[s].second=zeta[0];
-        }
-      }
-   
-     // Final point
-     unsigned s=n_seg;
-     zeta[0]=boundary_pt->zeta_end();
-     boundary_pt->geom_object_pt()->position(zeta,end_point);
-     vertex_coord[s]=end_point;
-     polygonal_vertex_arclength_info[s].first=
-      polygonal_vertex_arclength_info[s-1].first+
-      sqrt(pow(vertex_coord[s][0]-vertex_coord[s-1][0],2)+
-           pow(vertex_coord[s][1]-vertex_coord[s-1][1],2));
-     polygonal_vertex_arclength_info[s].second=zeta[0];
-    }
-  }
-
-  /// \short Helper function to create polyline vertex coordinates for
-  /// curvilinear boundary specified by boundary_pt, using either
-  /// equal increments in zeta or in (approximate) arclength
-  /// along the curviline. vertex_coord[i_vertex][i_dim] stores
-  /// i_dim-th coordinate of i_vertex-th vertex.
-  /// polygonal_vertex_arclength_info[i_vertex] contains the pair of doubles
-  /// made of the arclength of the i_vertex-th vertex along the polygonal
-  /// representation (.first), and the corresponding coordinate on the
-  /// GeomObject (.second)
-  void create_vertex_coordinates_for_polyline_connections(
-      TriangleMeshCurviLine* boundary_pt,
-      Vector<Vector<double> >& vertex_coord,
-      Vector<std::pair<double,double> >& polygonal_vertex_arclength_info)
-  {
-   // Start coordinate
-   double zeta_initial = boundary_pt->zeta_start();
-   // Final coordinate
-   double zeta_final = boundary_pt->zeta_end();
-
-   Vector<double> *connection_points_pt =
-     boundary_pt->connection_points_pt();
-
-   unsigned n_connections = connection_points_pt->size();
-
-   // We need to sort the connection points
-   if (n_connections > 1)
-    {
-     std::sort(connection_points_pt->begin(), connection_points_pt->end());
-    }
-
-#ifdef PARANOID
-   // Are the connection points out of range of the polyline
-   bool out_of_range_connection_points = false;
-   std::ostringstream error_message;
-   // Check if the curviline should be created on a reversed way
-   bool reversed = false;
-   if (zeta_final < zeta_initial)
-     {reversed = true;}
-   if(!reversed)
-    {
-     if (zeta_initial > (*connection_points_pt)[0])
-      {
-       error_message
-       << "One of the specified connection points is out of the\n"
-       << "curviline limits. We found that the point ("
-       << (*connection_points_pt)[0] << ") is\n" << "less than the"
-       << "initial s value which is (" << zeta_initial << ").\n"
-       << "Initial value: ("<<zeta_initial<<")\n"
-       << "Final value: ("<<zeta_final<<")\n"
-       << std::endl;
-       out_of_range_connection_points = true;
-      }
-
-     if (zeta_final < (*connection_points_pt)[n_connections-1])
-      {
-       error_message
-       << "One of the specified connection points is out of the\n"
-       << "curviline limits. We found that the point ("
-       << (*connection_points_pt)[n_connections-1] << ") is\n"
-       << "greater than the final s value which is ("
-       << zeta_final << ").\n"
-       << "Initial value: ("<<zeta_initial<<")\n"
-       << "Final value: ("<<zeta_final<<")\n"
-       << std::endl;
-       out_of_range_connection_points = true;
-      }
-    }
-   else
-    {
-     if (zeta_initial < (*connection_points_pt)[0])
-      {
-       error_message
-       << "One of the specified connection points is out of the\n"
-       << "curviline limits. We found that the point ("
-       << (*connection_points_pt)[0] << ") is\n" << "greater than the"
-       << "initial s value which is (" << zeta_initial  << ").\n"
-       << "Initial value: ("<<zeta_initial<<")\n"
-       << "Final value: ("<<zeta_final<<")\n"
-       << std::endl;
-       out_of_range_connection_points = true;
-      }
-
-     if (zeta_final > (*connection_points_pt)[n_connections-1])
-      {
-       error_message
-       << "One of the specified connection points is out of the\n"
-       << "curviline limits. We found that the point ("
-       << (*connection_points_pt)[n_connections-1] << ") is\n"
-       << "less than the final s value which is ("
-       << zeta_final << ").\n"
-       << "Initial value: ("<<zeta_initial<<")\n"
-       << "Final value: ("<<zeta_final<<")\n"
-       << std::endl;
-       out_of_range_connection_points = true;
-      }
-    }
-
-   if (out_of_range_connection_points)
-    {
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
-#endif
-
-   // Intrinsic coordinate along GeomObjects
-   Vector<double> zeta(1);
-
-   // Position vector to point on GeomObject
-   Vector<double> posn(2);
-
-   //How many segments do we want on this polyline?
-   unsigned n_seg = boundary_pt->nsegment();
-
-   // How many connection vertices have we already created
-   unsigned i_connection = 0;
-   Vector<double> zeta_connection(1);
-
-   // If we have more connection points than the generated
-   // by the number of segments then we have to change the
-   // number of segments and create all the vertices
-   // according to the connection points list
-   if (n_connections >= n_seg - 1)
-    {
-     std::ostringstream warning_message;
-     warning_message
-     << "The number of segments specified for the curviline with\n"
-     << "boundary id (" <<  boundary_pt->boundary_id() << ") is less "
-     << "(or equal) than the ones that will be\ngenerated by using "
-     << "the specified number of connection points.\n"
-     << "You specified (" << n_seg << ") segments but ("
-     << n_connections + 1 << ") segments\nwill be generated."
-     << std::endl;
-     OomphLibWarning(warning_message.str(),
-       "TriangleMesh::create_vertex_coordinates_for_polyline_connections()",
-       OOMPH_EXCEPTION_LOCATION);
-
-     // We have to explicitly change the number of segments
-     boundary_pt->nsegment() = n_connections + 1;
-     n_seg = boundary_pt->nsegment();
-     vertex_coord.resize(n_seg+1);
-
-     // Initial coordinate and initial values
-     zeta[0]= zeta_initial;
-     boundary_pt->geom_object_pt()->position(zeta, posn);
-     vertex_coord[0]=posn;
-
-     polygonal_vertex_arclength_info.resize(n_seg+1);
-     polygonal_vertex_arclength_info[0].first=0.0;
-     polygonal_vertex_arclength_info[0].second=zeta_initial;
-
-     //Loop over the n_connections points bounding the segments
-     for(i_connection = 0; i_connection < n_connections; i_connection++)
-      {
-
-       // Get the coordinates
-       zeta[0]= (*connection_points_pt)[i_connection];
-       boundary_pt->geom_object_pt()->position(zeta, posn);
-       vertex_coord[i_connection + 1] = posn;
-
-       // Bump up the polygonal arclength
-       polygonal_vertex_arclength_info[i_connection + 1].first=
-         polygonal_vertex_arclength_info[i_connection].first+
-         sqrt(pow(vertex_coord[i_connection + 1][0]-
-           vertex_coord[i_connection][0],2)+
-           pow(vertex_coord[i_connection + 1][1]-
-             vertex_coord[i_connection][1],2));
-       polygonal_vertex_arclength_info[i_connection + 1].second=zeta[0];
-
-      }
-
-     // Final coordinate and final values
-     zeta[0] = zeta_final;
-     boundary_pt->geom_object_pt()->position(zeta, posn);
-     vertex_coord[n_seg]=posn;
-
-     polygonal_vertex_arclength_info[n_seg].first=
-       polygonal_vertex_arclength_info[n_seg-1].first+
-       sqrt(pow(vertex_coord[n_seg][0]-vertex_coord[n_seg-1][0],2)+
-         pow(vertex_coord[n_seg][1]-vertex_coord[n_seg-1][1],2));
-     polygonal_vertex_arclength_info[n_seg].second = zeta_final;
-
-    }
-   else
-    {
-     // Total number of vertices
-     unsigned n_t_vertices = n_seg+1;
-     // Number of vertices left for creation
-     unsigned l_vertices = n_t_vertices;
-     // Total number of already created vertices
-     unsigned n_assigned_vertices = 0;
-
-     // Stores the distance between current vertices in the list
-     // Edge vertices + Connection points - 1
-     Vector<double> delta_z(2 + n_connections - 1);
-
-     std::list<double> zeta_values_pt;
-     zeta_values_pt.push_back(zeta_initial);
-     for (unsigned s = 0; s < n_connections; s++)
-      {
-       zeta_values_pt.push_back((*connection_points_pt)[s]);
-      }
-     zeta_values_pt.push_back(zeta_final);
-
-     l_vertices-= 2; // Edge vertices
-     l_vertices-= n_connections; // Connection points
-     n_assigned_vertices+= 2; // Edge vertices
-     n_assigned_vertices+= n_connections; // Connection points
-
-     // Vertices placed in equal zeta increments
-     if (!(boundary_pt->space_vertices_evenly_in_arclength()))
-      {
-       double local_zeta_initial;
-       double local_zeta_final;
-       double local_zeta_increment;
-       double local_zeta_insert;
-       // How many vertices for each section
-       unsigned local_n_vertices;
-
-       std::list<double>::iterator l_it = zeta_values_pt.begin();
-       std::list<double>::iterator r_it = zeta_values_pt.begin();
-       r_it++;
-
-       for (unsigned h = 0; r_it!=zeta_values_pt.end(); l_it++,r_it++,h++)
-        {
-         delta_z[h] = *r_it-*l_it;
-        }
-
-       l_it = r_it = zeta_values_pt.begin();
-       r_it++;
-
-       for (unsigned h = 0; r_it!=zeta_values_pt.end(); h++)
-        {
-         local_n_vertices =
-          static_cast<unsigned>(((double)n_t_vertices * delta_z[h]) /
-                    std::fabs(zeta_final - zeta_initial));
-
-         local_zeta_initial = *l_it;
-         local_zeta_final = *r_it;
-         local_zeta_increment =
-           (local_zeta_final - local_zeta_initial) /
-           (double)(local_n_vertices + 1);
-
-         for (unsigned s=0; s<local_n_vertices;s++)
-          {
-           local_zeta_insert =
-             local_zeta_initial + local_zeta_increment*double(s+1);
-           zeta_values_pt.insert(r_it, local_zeta_insert);
-           n_assigned_vertices++;
-          }
-         // Moving to the next segment
-         l_it = r_it;
-         r_it++;
-
-        }
-
-       // Finishing it ...!!!
-#ifdef PARANOID
-       // Counting the vertices number and the total of
-       // assigned vertices values
-       unsigned s = zeta_values_pt.size();
-
-       if (s!=n_assigned_vertices)
-        {
-         error_message
-         << "The total number of assigned vertices is different from\n"
-         << "the number of elements in the z_values list. The number"
-         << "of\nelements in the z_values list is (" << s << ") but "
-         << "the number\n"
-         << "of assigned vertices is (" << n_assigned_vertices << ")."
-         << std::endl << std::endl;
-         throw OomphLibError(error_message.str(),
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-#endif
-
-       vertex_coord.resize(n_assigned_vertices);
-       polygonal_vertex_arclength_info.resize(n_assigned_vertices);
-       polygonal_vertex_arclength_info[0].first=0.0;
-       polygonal_vertex_arclength_info[0].second=zeta_initial;
-
-       // Creating the vertices with the corresponding z_values
-       l_it = zeta_values_pt.begin();
-       for (unsigned s = 0; l_it!=zeta_values_pt.end(); s++,l_it++)
-        {
-         // Get the coordinates
-         zeta[0]= *l_it;
-         boundary_pt->geom_object_pt()->position(zeta, posn);
-         vertex_coord[s] = posn;
-
-         // Bump up the polygonal arclength
-         if (s>0)
-          {
-           polygonal_vertex_arclength_info[s].first=
-             polygonal_vertex_arclength_info[s-1].first+
-             sqrt(pow(vertex_coord[s][0]-vertex_coord[s-1][0],2)+
-               pow(vertex_coord[s][1]-vertex_coord[s-1][1],2));
-          }
-        }
-      }
-     // Vertices placed in equal increments in (approximate) arclength
-     else
-      {
-       // Compute the total arclength
-       // Number of sampling points to compute arclength and
-       // arclength increments
-       unsigned nsample_per_segment=100;
-       unsigned nsample=nsample_per_segment*n_seg;
-
-       // Work out start and increment
-       double zeta_increment=
-         (zeta_final-zeta_initial)/(double(nsample));
-
-       // Get coordinate of first point
-       Vector<double> start_point(2);
-       zeta[0]=zeta_initial;
-       boundary_pt->geom_object_pt()->position(zeta,start_point);
-
-       // Storage for coordinates of end point
-       Vector<double> end_point(2);
-
-       // Compute total arclength
-       double total_arclength=0.0;
-       for (unsigned i=1;i<nsample;i++)
-        {
-         // Next point
-         zeta[0]+=zeta_increment;
-
-         // Get coordinate of end point
-         boundary_pt->geom_object_pt()->position(zeta,end_point);
-
-         // Increment arclength
-         total_arclength+=sqrt(pow(end_point[0]-start_point[0],2)+
-           pow(end_point[1]-start_point[1],2));
-
-         // Shift back
-         start_point=end_point;
-        }
-
-       double local_zeta_initial;
-       double local_zeta_final;
-       double local_zeta_increment;
-
-       // How many vertices per section
-       unsigned local_n_vertices;
-
-       std::list<double>::iterator l_it = zeta_values_pt.begin();
-       std::list<double>::iterator r_it = zeta_values_pt.begin();
-       r_it++;
-
-       for (unsigned h = 0; r_it!=zeta_values_pt.end(); h++)
-        {
-         // There is no need to move the r_it iterator since it is
-         // moved at the final of this loop
-         local_zeta_initial = *l_it;
-         local_zeta_final = *r_it;
-         local_zeta_increment =
-           (local_zeta_final - local_zeta_initial) /
-           (double)(nsample);
-
-         // Compute local arclength
-         // Get coordinate of first point
-         zeta[0]=local_zeta_initial;
-         boundary_pt->geom_object_pt()->position(zeta, start_point);
-
-         delta_z[h] = 0.0;
-
-         for (unsigned i=1;i<nsample;i++)
-          {
-           // Next point
-           zeta[0]+=local_zeta_increment;
-
-           // Get coordinate of end point
-           boundary_pt->geom_object_pt()->position(zeta, end_point);
-
-           // Increment arclength
-           delta_z[h]+=sqrt(pow(end_point[0]-start_point[0],2)+
-             pow(end_point[1]-start_point[1],2));
-
-           // Shift back
-           start_point=end_point;
-          }
-
-         local_n_vertices =
-          static_cast<unsigned>(((double)n_t_vertices * delta_z[h]) / 
-                                (total_arclength));
-
-         // Desired arclength increment
-         double local_target_s_increment=
-           delta_z[h]/double(local_n_vertices+1);
-
-         // Get coordinate of first point again
-         zeta[0]=local_zeta_initial;
-         boundary_pt->geom_object_pt()->position(zeta, start_point);
-
-         // Start sampling point
-         unsigned i_lo=1;
-
-         //Loop over the n_seg-1 internal points bounding the segments
-         for(unsigned s=0;s<local_n_vertices;s++)
-          {
-           // Visit potentially all sample points until we've found
-           // the one at which we exceed the target arclength increment
-           double local_arclength_increment=0.0;
-           for (unsigned i=i_lo;i<nsample;i++)
-            //for (unsigned i=i_lo;i<nsample_per_segment;i++)
-            {
-             // Next point
-             zeta[0]+=local_zeta_increment;
-
-             // Get coordinate of end point
-             boundary_pt->geom_object_pt()->position(zeta, end_point);
-
-             // Increment arclength increment
-             local_arclength_increment+=
-               sqrt(pow(end_point[0]-start_point[0],2)+
-                 pow(end_point[1]-start_point[1],2));
-
-             // Shift back
-             start_point=end_point;
-
-             // Are we there yet?
-             if (local_arclength_increment>local_target_s_increment)
-              {
-               // Remember how far we've got
-               i_lo=i;
-
-               // And bail out
-               break;
-              }
-            }
-
-           zeta_values_pt.insert(r_it, zeta[0]);
-           n_assigned_vertices++;
-
-          }
-         // Moving to the next segments
-         l_it = r_it;
-         r_it++;
-        }
-
-       // Finishing it ... !!!
-#ifdef PARANOID
-       // Counting the vertices number and the total of
-       // assigned vertices values
-       unsigned h = zeta_values_pt.size();
-
-       if (h!=n_assigned_vertices)
-        {
-         error_message
-         << "The total number of assigned vertices is different from\n"
-         << "the number of elements in the z_values list. The number of\n"
-         << "elements in the z_values list is (" << h << ") but the number\n"
-         << "of assigned vertices is (" << n_assigned_vertices << ")."
-         << std::endl << std::endl;
-         throw OomphLibError(error_message.str(),
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-#endif
-
-       vertex_coord.resize(n_assigned_vertices);
-       polygonal_vertex_arclength_info.resize(n_assigned_vertices);
-       polygonal_vertex_arclength_info[0].first=0.0;
-       polygonal_vertex_arclength_info[0].second=zeta_initial;
-
-       // Creating the vertices with the corresponding z_values
-       l_it = zeta_values_pt.begin();
-       for (unsigned s = 0; l_it!=zeta_values_pt.end(); s++,l_it++)
-        {
-         // Get the coordinates
-         zeta[0]= *l_it;
-         boundary_pt->geom_object_pt()->position(zeta, posn);
-         vertex_coord[s] = posn;
-
-         // Bump up the polygonal arclength
-         if (s>0)
-          {
-           polygonal_vertex_arclength_info[s].first=
-             polygonal_vertex_arclength_info[s-1].first+
-             sqrt(pow(vertex_coord[s][0]-vertex_coord[s-1][0],2)+
-               pow(vertex_coord[s][1]-vertex_coord[s-1][1],2));
-           polygonal_vertex_arclength_info[s].second=zeta[0];
-          }
-         
-        }
-       
-      } // Arclength uniformly spaced
-     
-    } // Less number of insertion points than vertices
-   
-  }
-
   /// Boolean defining if Triangulateio object has been built or not
   bool Triangulateio_exists;
-  
-  /// Flag to indicate whether the automatic creation of vertices
-  /// along the boundaries by Triangle is allowed
-  bool Allow_automatic_creation_of_vertices_on_boundaries;
   
 #endif // OOMPH_HAS_TRIANGLE_LIB
     
@@ -2559,698 +1313,28 @@ class TriangleMeshParameters
   /// \short Vector storing oomph-lib node number
   /// for all vertex nodes in the TriangulateIO representation of the mesh
   Vector<unsigned> Oomph_vertex_nodes_id;
-  
-  /// Vector of elements in each region differentiated by attribute (the key 
-  /// of the map is the attribute)
-  std::map<unsigned, Vector<FiniteElement* > > Region_element_pt;
-  
-  /// Vector of attributes associated with the elements in each region
-  Vector<double> Region_attribute;
-  
-  /// Polygon that defines outer boundaries
-  Vector<TriangleMeshPolygon*> Outer_boundary_pt;
-  
-  /// Vector of polygons that define internal polygons
-  Vector<TriangleMeshPolygon*> Internal_polygon_pt;
-  
-  /// Vector of open polylines that define internal curves
-  Vector<TriangleMeshOpenCurve*> Internal_open_curve_pt;
-
-  /// \short Storage for the geometric objects associated with any boundaries
-  std::map<unsigned, GeomObject*> Boundary_geom_object_pt;
-
-  /// Storage for extra coordinates for holes
-  Vector<Vector<double> > Extra_holes_coordinates;
-
-  /// Storage for extra coordinates for regions
-  /// The key on the map is the region id
-  std::map<unsigned, Vector<double> > Regions_coordinates;
-
-  /// A map that stores the associated curve section of the specified
-  /// boundary id
-  std::map<unsigned, TriangleMeshCurveSection*> Boundary_curve_section_pt;
-  
-  /// Storage for elements adjacent to a boundary in a particular region
-  Vector<std::map<unsigned,Vector<FiniteElement*> > > 
-   Boundary_region_element_pt;
-
-  /// \short Storage for the face index adjacent to a boundary in a particular
-  /// region
-  Vector<std::map<unsigned,Vector<int> > > Face_index_region_at_boundary;
-
-  /// \short  Storage for the limits of the boundary coordinates 
-  /// defined by the of geometric objects. Only used for curvilinear
-  /// boundaries.
-  std::map<unsigned, Vector<double> > Boundary_coordinate_limits;
-
-  /// \short Storage for pairs of doubles representing:
-  /// .first: the arclength along the polygonal representation of
-  ///         the curviline 
-  /// .second: the corresponding intrinsic coordinate on the associated
-  ///          geometric object
-  /// at which the vertices on the specified boundary are located.
-  /// Only used for boundaries represented by geom objects.
-  std::map<unsigned,Vector<std::pair<double,double> > > 
-   Polygonal_vertex_arclength_info;
-
-  /// Timestepper used to build elements
-  TimeStepper* Time_stepper_pt;
-
-  /// Boolean flag to indicate whether to use attributes or not
-  /// (required for multidomain meshes
-  bool Use_attributes;
-  
-protected:
-  
-  // \short A set that contains the curve sections created by this object
-  /// therefore it is necessary to free their associated memory
-  std::set<TriangleMeshCurveSection*> Free_curve_section_pt;
-  
-  // \short A set that contains the polygons created by this object
-  /// therefore it is necessary to free their associated memory
-  std::set<TriangleMeshPolygon*> Free_polygon_pt;
-  
-  // \short A set that contains the open curves created by this
-  /// object therefore it is necessary to free their associated memory
-  std::set<TriangleMeshOpenCurve*> Free_open_curve_pt;
-
-  /// \short Helper function to copy the connection information from
-  //the input curve(polyline or curviline) to the output polyline
-  void copy_connection_information(
-   TriangleMeshCurveSection* input_curve_pt,
-   TriangleMeshCurveSection* output_curve_pt);
-
- /// \short Helper function to copy the connection information from
- /// the input curve(polyline or curviline) to the output sub-polyline
- void copy_connection_information_to_sub_polylines(
-  TriangleMeshCurveSection* input_curve_pt, 
-  TriangleMeshCurveSection* output_curve_pt);
  
-#ifdef PARANOID
-  // Used to verify if any of the polygons (closedcurves) that define
-  // the mesh are of type ImmersedRigidBodyTriangleMeshPolygon, if
-  // that is the case it may lead to problems in case of using load
-  // balance
-  bool Immersed_rigid_body_triangle_mesh_polygon_used;
-#endif
-
-private:
-
-  /// \short Helper function that creates the associated polyline
-  /// representation for curvilines
-  TriangleMeshCurveSection *curviline_to_polyline(
-      TriangleMeshCurviLine* &curviline_pt,  unsigned &bnd_id)
-  {
-
-   // Create vertex coordinates for polygonal representation
-   Vector<Vector<double> > bound;
-   Vector<std::pair<double,double> > polygonal_vertex_arclength;
-
-   if (curviline_pt->are_there_connection_points())
-    {
-     this->create_vertex_coordinates_for_polyline_connections(
-       curviline_pt, bound, polygonal_vertex_arclength);
-    }
-   else
-    {
-     this->create_vertex_coordinates_for_polyline_no_connections(
-       curviline_pt, bound, polygonal_vertex_arclength);
-    }
-
-   // Store the vertex-arclength information
-   Polygonal_vertex_arclength_info[bnd_id]=polygonal_vertex_arclength;
-
-   // Build associated polyline
-   return new TriangleMeshPolyLine(bound, bnd_id);
-
-  }
-
-
-  
-  /// \short Get the associated vertex to the given s value by looking to
-  /// the list of s values created when changing from curviline to polyline
-  unsigned get_associated_vertex_to_svalue(
-      double &target_s_value,
-      unsigned &bnd_id) // hierher all const?
-  {
-   double s_tolerance=1.0e-14;
-   return get_associated_vertex_to_svalue(
-    target_s_value,
-    bnd_id,
-    s_tolerance);
-  }
-  
-  /// \short Get the associated vertex to the given s value by looking to
-  /// the list of s values created when changing from curviline to polyline
-  unsigned get_associated_vertex_to_svalue(
-   double &target_s_value,
-   unsigned &bnd_id,
-   double &s_tolerance)
-  {
-   // Create a pointer to the list of s coordinates and arclength values
-   // associated with a vertex
-    Vector<std::pair<double, double> > *vertex_info =
-      &Polygonal_vertex_arclength_info[bnd_id];
-
-    // Total vertex number
-    unsigned vector_size = vertex_info->size();
-
-    // Counter for current vertex number
-    unsigned n_vertex = 0;
-
-    // Find the associated value to the given s value
-    do {
-        // Store the current zeta value
-        double s = (*vertex_info)[n_vertex].second;
-
-        // When find it save the vertex number and return it
-        if (std::fabs(s - target_s_value) < s_tolerance)
-         {
-          break;
-         }
-
-        n_vertex++;
-
-    }while(n_vertex < vector_size);
-
-#ifdef PARANOID
-    if (n_vertex >= vector_size)
-      {
-        std::ostringstream error_message;
-        error_message
-        << "Could not find the associated vertex number in\n"
-        << "boundary " << bnd_id << " with the given s\n"
-        << "connection value (" << target_s_value << ") using\n"
-        << "this tolerance: " << s_tolerance << std::endl;
-        throw OomphLibError(error_message.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-
-    return n_vertex;
-
-  }
-
-  // \short Helper function that returns a polygon representation for
-  /// the given closed curve, it also computes the maximum boundary id of
-  /// the constituent curves.
-  /// If the TriangleMeshClosedCurve is already a TriangleMeshPolygon
-  /// we simply return a pointer to it. Otherwise a new TrilangleMeshPolygon
-  /// is created -- this is deleted automatically when the TriangleMesh
-  /// destructor is called, so no external book-keeping is required.
-  TriangleMeshPolygon *closed_curve_to_polygon_helper(
-    TriangleMeshClosedCurve* closed_curve_pt,
-    unsigned &max_bnd_id_local)
-  {
-   // How many separate boundaries do we have
-   unsigned nb = closed_curve_pt->ncurve_section();
-
-#ifdef PARANOID
-   if (nb<2)
-    {
-     std::ostringstream error_message;
-     error_message
-     << "TriangleMeshClosedCurve that defines outer boundary\n"
-     << "must be made up of at least two "
-     << "TriangleMeshCurveSections\n"
-     << "to allow the automatic set up boundary coordinates.\n"
-     << "Yours only has (" << nb << ")" << std::endl;
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-   
-   // Provide storage for accompanying polylines
-   Vector<TriangleMeshCurveSection*> my_boundary_polyline_pt(nb);
-   // Store refinement tolerance
-   Vector<double> refinement_tolerance(nb);
-   // Store unrefinement tolerance
-   Vector<double> unrefinement_tolerance(nb);
-   // Store max. length
-   Vector<double> max_length(nb);
-   
-   // Loop over boundaries that make up this boundary
-   for (unsigned b=0;b<nb;b++)
-    {
-     // Get pointer to the curve segment boundary that makes up
-     // this part of the boundary
-     TriangleMeshCurviLine *curviline_pt =
-      dynamic_cast<TriangleMeshCurviLine*>(
-       closed_curve_pt->curve_section_pt(b));
-     
-     TriangleMeshPolyLine *polyline_pt =
-      dynamic_cast<TriangleMeshPolyLine*>(
-       closed_curve_pt->curve_section_pt(b));
-     
-     if (curviline_pt != 0)
-      {
-       // Boundary id
-       unsigned bnd_id = curviline_pt->boundary_id();
-       
-       // Build associated polyline
-       my_boundary_polyline_pt[b] =
-        curviline_to_polyline(curviline_pt, bnd_id);
-       
-       // Copy the unrefinement tolerance
-       unrefinement_tolerance[b] = curviline_pt->unrefinement_tolerance();
-       // Copy the refinement tolerance
-       refinement_tolerance[b] = curviline_pt->refinement_tolerance();
-       // Copy the maximum length
-       max_length[b] = curviline_pt->maximum_length();
-       
-       // Updates bnd_id<--->curve section map
-       Boundary_curve_section_pt[bnd_id] = my_boundary_polyline_pt[b];
-         
-       // Keep track of curve sections that need to be deleted!!!
-       Free_curve_section_pt.insert(my_boundary_polyline_pt[b]);
-
-       // Keep track...
-       if (bnd_id>max_bnd_id_local)
-        {
-         max_bnd_id_local=bnd_id;
-        }
-
-      }
-     else if (polyline_pt != 0)
-      {
-       // Boundary id
-       unsigned bnd_id=polyline_pt->boundary_id();
-       
-       // Pass the pointer of the already existing polyline
-       my_boundary_polyline_pt[b] = polyline_pt;
-       
-       // Copy the unrefinement tolerance
-       unrefinement_tolerance[b] = polyline_pt->unrefinement_tolerance();
-       // Copy the refinement tolerance
-       refinement_tolerance[b] = polyline_pt->refinement_tolerance();
-       // Copy the maximum length
-       max_length[b] = polyline_pt->maximum_length();
-       
-       // Updates bnd_id<--->curve section map
-       Boundary_curve_section_pt[bnd_id] = my_boundary_polyline_pt[b];
-
-       // Keep track...
-       if (bnd_id>max_bnd_id_local)
-        {
-         max_bnd_id_local=bnd_id;
-        }
-      }
-     else
-      {
-       std::ostringstream error_stream;
-       error_stream
-        << "The 'curve_segment' is not a curviline neither a\n "
-        << "polyline: What is it?\n"
-        << std::endl;
-       throw OomphLibError(
-        error_stream.str(),
-        OOMPH_CURRENT_FUNCTION,
-        OOMPH_EXCEPTION_LOCATION);
-      }
-     
-    } //end of loop over boundaries
-   
-   // Create a new polygon by using the new created polylines
-   TriangleMeshPolygon *output_polygon_pt =
-    new TriangleMeshPolygon(my_boundary_polyline_pt,
-                            closed_curve_pt->internal_point());
-   
-   // Keep track of new created polygons that need to be deleted!!!
-   Free_polygon_pt.insert(output_polygon_pt);
-   
-   // Pass on refinement information
-   output_polygon_pt->set_polyline_refinement_tolerance(
-    closed_curve_pt->polyline_refinement_tolerance());
-   output_polygon_pt->set_polyline_unrefinement_tolerance(
-    closed_curve_pt->polyline_unrefinement_tolerance());
-   
-   // Loop over boundaries that make up this boundary and copy
-   // refinement, unrefinement and max length information
-   for (unsigned b=0;b<nb;b++)
-     {
-       // Set the unrefinement and refinement information
-       my_boundary_polyline_pt[b]->
-         set_unrefinement_tolerance(unrefinement_tolerance[b]);
-       
-       my_boundary_polyline_pt[b]->
-         set_refinement_tolerance(refinement_tolerance[b]);
-       
-       // Copy the maximum length constraint
-       my_boundary_polyline_pt[b]->set_maximum_length(max_length[b]);
-     }
-   
-   return output_polygon_pt;
-   
-  }
-  
-  // \short Helper function that creates and returns an open curve with
-  /// the polyline representation of its constituent curve sections. The
-  /// new created open curve is deleted when the TriangleMesh destructor
-  /// is called
-  TriangleMeshOpenCurve *create_open_curve_with_polyline_helper(
-    TriangleMeshOpenCurve* open_curve_pt,
-    unsigned &max_bnd_id_local)
-  {
-   unsigned nb=open_curve_pt->ncurve_section();
-
-   // Provide storage for accompanying polylines
-   Vector<TriangleMeshCurveSection*> my_boundary_polyline_pt(nb);
-   // Store refinement tolerance
-   Vector<double> refinement_tolerance(nb);
-   // Store unrefinement tolerance
-   Vector<double> unrefinement_tolerance(nb);
-   // Store max. length
-   Vector<double> max_length(nb);
-   
-   //Loop over the number of curve sections on the open curve
-   for (unsigned i = 0; i < nb; i++)
-    {
-     // Get pointer to the curve segment boundary that makes up
-     // this part of the boundary
-     TriangleMeshCurviLine *curviline_pt =
-       dynamic_cast<TriangleMeshCurviLine*>(
-         open_curve_pt->curve_section_pt(i));
-     TriangleMeshPolyLine *polyline_pt =
-       dynamic_cast<TriangleMeshPolyLine*>(
-         open_curve_pt->curve_section_pt(i));
-
-     if (curviline_pt != 0)
-      {
-       // Boundary id
-       unsigned bnd_id = curviline_pt->boundary_id();
-
-       // Build associated polyline
-       my_boundary_polyline_pt[i] =
-         curviline_to_polyline(curviline_pt, bnd_id);
-       
-       // Copy the unrefinement tolerance
-       unrefinement_tolerance[i] = curviline_pt->unrefinement_tolerance();
-       // Copy the refinement tolerance
-       refinement_tolerance[i] = curviline_pt->refinement_tolerance();
-       // Copy the maximum length
-       max_length[i] = curviline_pt->maximum_length();
-       
-       // Pass the connection information to the polyline representation
-       copy_connection_information(curviline_pt, my_boundary_polyline_pt[i]);
-       
-       // Updates bnd_id<--->curve section map
-       Boundary_curve_section_pt[bnd_id] = my_boundary_polyline_pt[i];
-
-       // Keep track of curve sections that need to be deleted!!!
-       Free_curve_section_pt.insert(my_boundary_polyline_pt[i]);
-
-       // Keep track...
-       if (bnd_id>max_bnd_id_local)
-        {
-         max_bnd_id_local=bnd_id;
-        }
-
-      }
-     else if (polyline_pt != 0)
-      {
-       // Boundary id
-       unsigned bnd_id=polyline_pt->boundary_id();
-
-       // Storage pointer
-       my_boundary_polyline_pt[i] = polyline_pt;
-       
-       // Copy the unrefinement tolerance
-       unrefinement_tolerance[i] = polyline_pt->unrefinement_tolerance();
-       // Copy the refinement tolerance
-       refinement_tolerance[i] = polyline_pt->refinement_tolerance();
-       // Copy the maximum length
-       max_length[i] = polyline_pt->maximum_length();
-       
-       // Pass the connection information to the polyline representation
-       copy_connection_information(polyline_pt, my_boundary_polyline_pt[i]);
-       
-       // Updates bnd_id<--->curve section map
-       Boundary_curve_section_pt[bnd_id] = my_boundary_polyline_pt[i];
-
-       // Keep track...
-       if (bnd_id>max_bnd_id_local)
-        {
-         max_bnd_id_local=bnd_id;
-        }
-
-      }
-     else
-      {
-       std::ostringstream error_stream;
-       error_stream
-       << "The 'curve_segment' (open) is not a curviline neither a\n "
-       << "polyline: What is it?\n"
-       << std::endl;
-       throw OomphLibError(error_stream.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-
-    } // end of loop over boundaries
-
-   // Create open curve with polylines boundaries
-   TriangleMeshOpenCurve *output_open_polyline_pt =
-     new TriangleMeshOpenCurve(my_boundary_polyline_pt);
-
-   // Keep track of open polylines that need to be deleted!!!
-   Free_open_curve_pt.insert(output_open_polyline_pt);
-
-   // Pass on refinement information
-   output_open_polyline_pt->set_polyline_refinement_tolerance(
-     open_curve_pt->polyline_refinement_tolerance());
-   output_open_polyline_pt->set_polyline_unrefinement_tolerance(
-     open_curve_pt->polyline_unrefinement_tolerance());
-   
-   // Loop over boundaries that make up this boundary and copy
-   // refinement, unrefinement and max length information
-   for (unsigned b=0;b<nb;b++)
-     {
-       // Set the unrefinement and refinement information
-       my_boundary_polyline_pt[b]->
-         set_unrefinement_tolerance(unrefinement_tolerance[b]);
-       
-       my_boundary_polyline_pt[b]->
-         set_refinement_tolerance(refinement_tolerance[b]);
-       
-       // Copy the maximum length constraint
-       my_boundary_polyline_pt[b]->set_maximum_length(max_length[b]);
-     }
-   
-   return output_open_polyline_pt;
-
-  }
-
-  // \short Stores the geometric objects associated to the
-  /// curve sections that compound the closed curve. It also
-  /// stores the limits defined by these geometric objects
-  void set_geom_objects_and_coordinate_limits_for_close_curve(
-    TriangleMeshClosedCurve* input_closed_curve_pt)
-  {
-
-   unsigned nb=input_closed_curve_pt->ncurve_section();
-
-#ifdef PARANOID
-   if (nb<2)
-    {
-     std::ostringstream error_message;
-     error_message
-     << "TriangleMeshCurve that defines closed boundary\n"
-     << "must be made up of at least two "
-     << "TriangleMeshCurveSection\n"
-     << "to allow the automatic set up boundary coordinates.\n"
-     << "Yours only has " << nb << std::endl;
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-   // TODO: Used for the ImmersedRigidBodyTriangleMeshPolygon objects only
-   //ImmersedRigidBodyTriangleMeshPolygon* bound_geom_obj_pt
-   GeomObject* bound_geom_obj_pt
-    //= dynamic_cast<ImmersedRigidBodyTriangleMeshPolygon*>(
-    = dynamic_cast<GeomObject*>(
-      input_closed_curve_pt);
-   
-   //If cast successful set up the coordinates
-   if(bound_geom_obj_pt!=0)
-    {
-     unsigned n_poly = input_closed_curve_pt->ncurve_section();
-     for(unsigned p=0;p<n_poly;p++)
-      {
-       //Read out the index of the boundary from the polyline
-       unsigned b_index =
-         input_closed_curve_pt->curve_section_pt(p)->boundary_id();
-
-       //Set the geometric object
-       Boundary_geom_object_pt[b_index] = bound_geom_obj_pt;
-
-       //The coordinates along each polyline boundary are scaled to
-       //of unit length so the total coordinate limits are simply
-       //(p,p+1)
-       Boundary_coordinate_limits[b_index].resize(2);
-       Boundary_coordinate_limits[b_index][0] = p;
-       Boundary_coordinate_limits[b_index][1] = p + 1.0;
-      }
-     
-#ifdef PARANOID
-     // If we are using parallel mesh adaptation and load balancing,
-     // we are going to need to check for the use of this type of
-     // Polygon at this stage, so switch on the flag
-     Immersed_rigid_body_triangle_mesh_polygon_used = true;
-#endif
-    }
-   else
-    {
-     // Loop over curve sections that make up this boundary
-     for (unsigned b=0;b<nb;b++)
-      {
-       TriangleMeshCurviLine* curviline_pt =
-         dynamic_cast<TriangleMeshCurviLine*>
-       (input_closed_curve_pt->curve_section_pt(b));
-
-       if (curviline_pt != 0)
-        {
-         //Read the values of the limiting coordinates
-         Vector<double> zeta_bound(2);
-         zeta_bound[0] = curviline_pt->zeta_start();
-         zeta_bound[1] = curviline_pt->zeta_end();
-
-         // Boundary id
-         unsigned bnd_id=curviline_pt->boundary_id();
-
-         //Set the boundary geometric object and limits
-         Boundary_geom_object_pt[bnd_id] =
-           curviline_pt->geom_object_pt();
-         Boundary_coordinate_limits[bnd_id] = zeta_bound;
-        }
-      } // for
-    } // else
-  } // function
-
-  // \short Stores the geometric objects associated to the
-  /// curve sections that compound the open curve. It also
-  /// stores the limits defined by these geometric objects
-  void set_geom_objects_and_coordinate_limits_for_open_curve(
-    TriangleMeshOpenCurve* input_open_curve_pt)
-  {
-   unsigned nb=input_open_curve_pt->ncurve_section();
-
-   // Loop over curve sections that make up this boundary
-   for (unsigned b=0;b<nb;b++)
-    {
-
-     TriangleMeshCurviLine* curviline_pt =
-       dynamic_cast<TriangleMeshCurviLine*>
-     (input_open_curve_pt->curve_section_pt(b));
-
-     if (curviline_pt != 0)
-      {
-       //Read the values of the limiting coordinates
-       Vector<double> zeta_bound(2);
-       zeta_bound[0] = curviline_pt->zeta_start();
-       zeta_bound[1] = curviline_pt->zeta_end();
-
-       // Boundary id
-       unsigned bnd_id=curviline_pt->boundary_id();
-
-       //Set the boundary geometric object and limits
-       Boundary_geom_object_pt[bnd_id] =
-         curviline_pt->geom_object_pt();
-       Boundary_coordinate_limits[bnd_id] = zeta_bound;
-      }
-    } // for
-  } // function
-  
-   public:
-  
-  /// \short Gets the vertex number on the destination polyline (used
-  /// to create the connections among shared boundaries)
-  const bool get_connected_vertex_number_on_destination_polyline(
-   TriangleMeshPolyLine *dst_polyline_pt,
-   Vector<double> &vertex_coordinates,
-   unsigned &vertex_number);
-  
-  // \short Sort the polylines coming from joining them. Check whether
-  // it is necessary to reverse them or not. Used when joining two curve
-  // polylines in order to create a polygon
-  void check_contiguousness_on_polylines_helper(
-   Vector<TriangleMeshPolyLine *> &polylines_pt, unsigned &index);
-  
-  // \short Sort the polylines coming from joining them. Check whether
-  // it is necessary to reverse them or not. Used when joining polylines
-  // and they still do not create a polygon
-  void check_contiguousness_on_polylines_helper(
-   Vector<TriangleMeshPolyLine *> &polylines_pt,
-   unsigned &index_halo_start, unsigned &index_halo_end);
-  
 #ifdef OOMPH_HAS_MPI
 
-   public:
+ public:
 
   // short The initial boundary id for shared boundaries
   const unsigned initial_shared_boundary_id()
-  {return Initial_shared_boundary_id;}
+   {return Initial_shared_boundary_id;}
   
   // short The final boundary id for shared boundaries
   const unsigned final_shared_boundary_id()
-  {return Final_shared_boundary_id;}
+   {return Final_shared_boundary_id;}
   
-   protected:
+
+ protected:
   
   // Stores the ids of the internal boundaries
   std::set<unsigned> Internal_boundaries;
-
-  // \short Stores the initial coordinates for the boundary
-  std::map<unsigned, Vector<double> > Boundary_initial_coordinate;
-  
-  // \short Stores the final coordinates for the boundary
-  std::map<unsigned, Vector<double> > Boundary_final_coordinate;
-
-  // \short Stores the initial zeta coordinate for the boundary
-  std::map<unsigned, Vector<double> > Boundary_initial_zeta_coordinate;
-  
-  // \short Stores the final zeta coordinate for the boundary
-  std::map<unsigned, Vector<double> > Boundary_final_zeta_coordinate;
-
-  // \short Stores the info. to know if it is necessary to reverse the
-  // segment based on a previous mesh
-  std::map<unsigned,Vector<unsigned> > Boundary_segment_inverted;
-  
-  // \short Stores the initial coordinates for the segments that appear
-  // when a boundary is splited among processors
-  std::map<unsigned, Vector<Vector<double> > > Boundary_segment_initial_coordinate;
-  
-  // \short Stores the final coordinates for the segments that appear
-  // when a boundary is splited among processors
-  std::map<unsigned, Vector<Vector<double> > > Boundary_segment_final_coordinate;
   
 /*   // \short Stores the initial arclength for the segments that appear when */
 /*   // a boundary is splited among processors (data from previous mesh) */
 /*   std::map<unsigned, Vector<double> > Boundary_segment_initial_arclength_previous_mesh; */
-
-  // \short Stores the initial arclength for the segments that appear when
-  // a boundary is splited among processors
-  std::map<unsigned, Vector<double> > Boundary_segment_initial_arclength;
-
-  // \short Stores the final arclength for the segments that appear when
-  // a boundary is splited among processors
-  std::map<unsigned, Vector<double> > Boundary_segment_final_arclength;
-
-  // \short Stores the initial zeta coordinate for the segments that
-  // appear when a boundary is splited among processors
-  std::map<unsigned, Vector<double> > Boundary_segment_initial_zeta;
-
-  // \short Stores the final zeta coordinate for the segments that
-  // appear when a boundary is splited among processors
-  std::map<unsigned, Vector<double> > Boundary_segment_final_zeta;
-  
-  // \short Used to store the nodes associated to a boundary and to an
-  // specific segment (this only applies in distributed meshes where the
-  // boundary is splitted in segments)
-  std::map<unsigned, Vector<Vector<Node*> > > Boundary_segment_node_pt;
   
   // \short Stores the initial number of vertices for the segments that
   // appear when a boundary is splited among processors
@@ -3259,68 +1343,68 @@ private:
   // Get the shared boundaries ids living in the current processor
   void shared_boundaries_in_this_processor(
    Vector<unsigned> &shared_boundaries_in_this_processor)
-  {
+   {
 #ifdef PARANOID
-   // Used to check if there are repeated shared boundaries
-   std::set<unsigned> shared_boundaries_in_this_processor_set;
+    // Used to check if there are repeated shared boundaries
+    std::set<unsigned> shared_boundaries_in_this_processor_set;
 #endif
-   // Get the number of processors
-   const unsigned n_proc = this->communicator_pt()->nproc();
-   // Get the current processor
-   const unsigned my_rank = this->communicator_pt()->my_rank();
-   // Loop over all the processor and get the shared boundaries ids
-   // associated with each processor
-   for (unsigned iproc = 0; iproc < n_proc; iproc++)
+    // Get the number of processors
+    const unsigned n_proc = this->communicator_pt()->nproc();
+    // Get the current processor
+    const unsigned my_rank = this->communicator_pt()->my_rank();
+    // Loop over all the processor and get the shared boundaries ids
+    // associated with each processor
+    for (unsigned iproc = 0; iproc < n_proc; iproc++)
     {
      // Work with other processors only
      if (iproc != my_rank)
+     {
+      // Get the number of boundaries shared with the "iproc"-th
+      // processor
+      const unsigned nshared_boundaries_with_iproc = 
+       this->nshared_boundaries(my_rank, iproc);
+       
+      // If there are shared boundaries associated with the current
+      // processor then add them
+      if (nshared_boundaries_with_iproc > 0)
       {
-       // Get the number of boundaries shared with the "iproc"-th
-       // processor
-       const unsigned nshared_boundaries_with_iproc = 
-        this->nshared_boundaries(my_rank, iproc);
-       
-       // If there are shared boundaries associated with the current
-       // processor then add them
-       if (nshared_boundaries_with_iproc > 0)
-        {
-         // Get the boundaries ids shared with "iproc"-th processor
-         Vector<unsigned> bound_ids_shared_with_iproc;
-         bound_ids_shared_with_iproc = 
-          this->shared_boundaries_ids(my_rank, iproc);
+       // Get the boundaries ids shared with "iproc"-th processor
+       Vector<unsigned> bound_ids_shared_with_iproc;
+       bound_ids_shared_with_iproc = 
+	this->shared_boundaries_ids(my_rank, iproc);
          
-         // Loop over shared boundaries with "iproc"-th processor
-         for (unsigned bs = 0; bs < nshared_boundaries_with_iproc; bs++)
-          {
-           const unsigned bnd_id = bound_ids_shared_with_iproc[bs];
+       // Loop over shared boundaries with "iproc"-th processor
+       for (unsigned bs = 0; bs < nshared_boundaries_with_iproc; bs++)
+       {
+	const unsigned bnd_id = bound_ids_shared_with_iproc[bs];
 #ifdef PARANOID
-           // Check that the current shared boundary id has not been
-           // previously added
-           std::set<unsigned>::iterator it = 
-            shared_boundaries_in_this_processor_set.find(bnd_id);
-           if (it != shared_boundaries_in_this_processor_set.end())
-            {
-             std::stringstream error;
-             error 
-              << "The current shared boundary (" << bnd_id << ") was\n"
-              << "already added by other pair of processors\n."
-              << "This means that there are repeated shared boundaries ids\n";
-             throw OomphLibError(error.str(),
-                                 OOMPH_CURRENT_FUNCTION,
-                                 OOMPH_EXCEPTION_LOCATION);
-            } // if (it != shared_boundaries_in_this_processor_set.end())
-           shared_boundaries_in_this_processor_set.insert(bnd_id);
+	// Check that the current shared boundary id has not been
+	// previously added
+	std::set<unsigned>::iterator it = 
+	 shared_boundaries_in_this_processor_set.find(bnd_id);
+	if (it != shared_boundaries_in_this_processor_set.end())
+	{
+	 std::stringstream error;
+	 error 
+	  << "The current shared boundary (" << bnd_id << ") was\n"
+	  << "already added by other pair of processors\n."
+	  << "This means that there are repeated shared boundaries ids\n";
+	 throw OomphLibError(error.str(),
+			     OOMPH_CURRENT_FUNCTION,
+			     OOMPH_EXCEPTION_LOCATION);
+	} // if (it != shared_boundaries_in_this_processor_set.end())
+	shared_boundaries_in_this_processor_set.insert(bnd_id);
 #endif
-           shared_boundaries_in_this_processor.push_back(bnd_id);
-          } // for (bs < nshared_boundaries_with_iproc)
+	shared_boundaries_in_this_processor.push_back(bnd_id);
+       } // for (bs < nshared_boundaries_with_iproc)
          
-        } // if (nshared_boundaries_with_iproc > 0)
+      } // if (nshared_boundaries_with_iproc > 0)
        
-      } // if (iproc != my_rank)
+     } // if (iproc != my_rank)
      
     } // for (iproc < nproc)
    
-  }
+   }
   
   // Access functions to boundaries shared with processors
   const unsigned nshared_boundaries(const unsigned &p, 
@@ -3352,11 +1436,11 @@ private:
    {return Shared_boundaries_ids[p][q][i];}
   
   const unsigned nshared_boundary_curves(const unsigned &p) const
-  {return Shared_boundary_polyline_pt[p].size();}
+   {return Shared_boundary_polyline_pt[p].size();}
   
   const unsigned nshared_boundary_polyline(const unsigned &p, 
                                            const unsigned &c) const
-  {return Shared_boundary_polyline_pt[p][c].size();}
+   {return Shared_boundary_polyline_pt[p][c].size();}
   
   Vector<TriangleMeshPolyLine*> &shared_boundary_polyline_pt(const unsigned &p,
                                                              const unsigned &c)
@@ -3365,21 +1449,21 @@ private:
   TriangleMeshPolyLine *shared_boundary_polyline_pt(const unsigned &p, 
                                                     const unsigned &c,
                                                     const unsigned &i) const
-  {return Shared_boundary_polyline_pt[p][c][i];}
+   {return Shared_boundary_polyline_pt[p][c][i];}
   
   const unsigned nshared_boundaries() const
-  {return Shared_boundary_element_pt.size();}
+   {return Shared_boundary_element_pt.size();}
   
   const unsigned nshared_boundary_element(const unsigned &b)
-  {
-   // First check if the boundary exist
-   std::map<unsigned, Vector<FiniteElement*> >::iterator it = 
-    Shared_boundary_element_pt.find(b);
-   if (it != Shared_boundary_element_pt.end())
+   {
+    // First check if the boundary exist
+    std::map<unsigned, Vector<FiniteElement*> >::iterator it = 
+     Shared_boundary_element_pt.find(b);
+    if (it != Shared_boundary_element_pt.end())
     {
      return Shared_boundary_element_pt[b].size();
     }
-   else
+    else
     {
      std::ostringstream error_stream;
      error_stream
@@ -3388,21 +1472,21 @@ private:
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
-  }
+   }
   
   void flush_shared_boundary_element()
-  {Shared_boundary_element_pt.clear();}
+   {Shared_boundary_element_pt.clear();}
   
   void flush_shared_boundary_element(const unsigned &b)
-  {
-   // First check if the boundary exist
-   std::map<unsigned, Vector<FiniteElement*> >::iterator it = 
-    Shared_boundary_element_pt.find(b);
-   if (it != Shared_boundary_element_pt.end())
+   {
+    // First check if the boundary exist
+    std::map<unsigned, Vector<FiniteElement*> >::iterator it = 
+     Shared_boundary_element_pt.find(b);
+    if (it != Shared_boundary_element_pt.end())
     {
      Shared_boundary_element_pt[b].clear();
     }
-   else
+    else
     {
      std::ostringstream error_stream;
      error_stream
@@ -3411,23 +1495,23 @@ private:
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
-  }
+   }
   
   void add_shared_boundary_element(const unsigned &b,
                                    FiniteElement* ele_pt)
-  {Shared_boundary_element_pt[b].push_back(ele_pt);}
+   {Shared_boundary_element_pt[b].push_back(ele_pt);}
   
   FiniteElement* shared_boundary_element_pt(const unsigned &b,
                                             const unsigned &e)
-  {
-   // First check if the boundary exist
-   std::map<unsigned, Vector<FiniteElement*> >::iterator it = 
-    Shared_boundary_element_pt.find(b);
-   if (it != Shared_boundary_element_pt.end())
+   {
+    // First check if the boundary exist
+    std::map<unsigned, Vector<FiniteElement*> >::iterator it = 
+     Shared_boundary_element_pt.find(b);
+    if (it != Shared_boundary_element_pt.end())
     {
      return Shared_boundary_element_pt[b][e];
     }
-   else
+    else
     {
      std::ostringstream error_stream;
      error_stream
@@ -3436,7 +1520,7 @@ private:
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
-  }
+   }
   
   void flush_face_index_at_shared_boundary()
    {Face_index_at_shared_boundary.clear();}
@@ -3446,36 +1530,36 @@ private:
    {Face_index_at_shared_boundary[b].push_back(i);}
   
   int face_index_at_shared_boundary(const unsigned &b,
-                                     const unsigned &e)
+				    const unsigned &e)
    {
     // First check if the boundary exist
     std::map<unsigned, Vector<int> >::iterator it = 
      Face_index_at_shared_boundary.find(b);
     if (it != Face_index_at_shared_boundary.end())
-     {
-      return Face_index_at_shared_boundary[b][e];
-     }
+    {
+     return Face_index_at_shared_boundary[b][e];
+    }
     else
-     {
-      std::ostringstream error_stream;
-      error_stream
-       << "The shared boundary ("<< b << ") does not exist!!!\n\n";
-      throw OomphLibError(error_stream.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+    {
+     std::ostringstream error_stream;
+     error_stream
+      << "The shared boundary ("<< b << ") does not exist!!!\n\n";
+     throw OomphLibError(error_stream.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
+    }
    }
   
   const unsigned nshared_boundary_node(const unsigned &b)
-  {
-   // First check if the boundary exist
-   std::map<unsigned, Vector<Node*> >::iterator it = 
-    Shared_boundary_node_pt.find(b);
-   if (it != Shared_boundary_node_pt.end())
+   {
+    // First check if the boundary exist
+    std::map<unsigned, Vector<Node*> >::iterator it = 
+     Shared_boundary_node_pt.find(b);
+    if (it != Shared_boundary_node_pt.end())
     {
      return Shared_boundary_node_pt[b].size();
     }
-   else
+    else
     {
      std::ostringstream error_stream;
      error_stream
@@ -3484,11 +1568,11 @@ private:
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
-  }
+   }
   
   // Flush ALL the shared boundary nodes
   void flush_shared_boundary_node()
-  {Shared_boundary_node_pt.clear();}
+   {Shared_boundary_node_pt.clear();}
   
   // Flush the boundary nodes associated to the shared boundary b
   void flush_shared_boundary_node(const unsigned &b)
@@ -3496,38 +1580,38 @@ private:
     
   // Add the node the shared boundary
   void add_shared_boundary_node(const unsigned &b, Node* node_pt)
-  {   
-   //Get the size of the Shared_boundary_node_pt vector
-   const unsigned nbound_node=Shared_boundary_node_pt[b].size();
-   bool node_already_on_this_boundary=false;
-   //Loop over the vector
-   for (unsigned n=0; n<nbound_node; n++)
+   {   
+    //Get the size of the Shared_boundary_node_pt vector
+    const unsigned nbound_node=Shared_boundary_node_pt[b].size();
+    bool node_already_on_this_boundary=false;
+    //Loop over the vector
+    for (unsigned n=0; n<nbound_node; n++)
     {
      // is the current node here already?
      if (node_pt==Shared_boundary_node_pt[b][n])
-      { 
-       node_already_on_this_boundary=true;
-      }
+     { 
+      node_already_on_this_boundary=true;
+     }
     }
    
-   //Add the base node pointer to the vector if it's not there already
-   if (!node_already_on_this_boundary)
+    //Add the base node pointer to the vector if it's not there already
+    if (!node_already_on_this_boundary)
     {
      Shared_boundary_node_pt[b].push_back(node_pt); 
     }
    
-  }
+   }
   
   Node* shared_boundary_node_pt(const unsigned &b, const unsigned &n)
-  {
-   // First check if the boundary exist
-   std::map<unsigned, Vector<Node*> >::iterator it = 
-    Shared_boundary_node_pt.find(b);
-   if (it != Shared_boundary_node_pt.end())
+   {
+    // First check if the boundary exist
+    std::map<unsigned, Vector<Node*> >::iterator it = 
+     Shared_boundary_node_pt.find(b);
+    if (it != Shared_boundary_node_pt.end())
     {
      return Shared_boundary_node_pt[b][n];
     }
-   else
+    else
     {
      std::ostringstream error_stream;
      error_stream
@@ -3536,7 +1620,7 @@ private:
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
-  }
+   }
   
   // Is the node on the shared boundary
   bool is_node_on_shared_boundary(const unsigned &b, Node* const &node_pt)
@@ -3545,27 +1629,27 @@ private:
     std::map<unsigned, Vector<Node*> >::iterator it = 
      Shared_boundary_node_pt.find(b);
     if (it != Shared_boundary_node_pt.end())
-     {
-      // Now check if the node lives on the shared boundary
-      Vector<Node*>::iterator it_shd_nodes =
-       std::find(Shared_boundary_node_pt[b].begin(),
-                 Shared_boundary_node_pt[b].end(),
-                 node_pt);
-      //If the node is on this boundary
-      if(it_shd_nodes!=Shared_boundary_node_pt[b].end())
-       {return true;}
-      else // The node is not on the boundary
-       {return false;}
-     }
+    {
+     // Now check if the node lives on the shared boundary
+     Vector<Node*>::iterator it_shd_nodes =
+      std::find(Shared_boundary_node_pt[b].begin(),
+		Shared_boundary_node_pt[b].end(),
+		node_pt);
+     //If the node is on this boundary
+     if(it_shd_nodes!=Shared_boundary_node_pt[b].end())
+     {return true;}
+     else // The node is not on the boundary
+     {return false;}
+    }
     else
-     {
-      std::ostringstream error_stream;
-      error_stream
-       << "The shared boundary ("<< b << ") does not exist!!!\n\n";
-      throw OomphLibError(error_stream.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+    {
+     std::ostringstream error_stream;
+     error_stream
+      << "The shared boundary ("<< b << ") does not exist!!!\n\n";
+     throw OomphLibError(error_stream.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
+    }
    }
   
   // Return the association of the shared boundaries with the processors
@@ -3578,16 +1662,16 @@ private:
      Shared_boundary_from_processors.find(b);
 #ifdef PARANOID
     if (it == Shared_boundary_from_processors.end())
-     {
-      std::ostringstream error_message;
-      error_message
-       <<"The boundary ("<<b<<") seems not to be shared by any processors,\n"
-       <<"it is possible that the boundary was created by the user an not\n"
-       <<"automatically by the common interfaces between processors-domains\n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+    {
+     std::ostringstream error_message;
+     error_message
+      <<"The boundary ("<<b<<") seems not to be shared by any processors,\n"
+      <<"it is possible that the boundary was created by the user an not\n"
+      <<"automatically by the common interfaces between processors-domains\n";
+     throw OomphLibError(error_message.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
+    }
 #endif
     return (*it).second;
    }
@@ -3606,9 +1690,9 @@ private:
     std::map<unsigned, unsigned>::iterator it = 
      Shared_boundary_overlaps_internal_boundary.find(shd_bnd_id);
     if (it != Shared_boundary_overlaps_internal_boundary.end())
-     {
-      return true;
-     }
+    {
+     return true;
+    }
     return false;
    }
   
@@ -3621,17 +1705,17 @@ private:
      Shared_boundary_overlaps_internal_boundary.find(shd_bnd_id);
 #ifdef PARANOID
     if (it == Shared_boundary_overlaps_internal_boundary.end())
-     {
-      std::ostringstream error_message;
-      error_message
-       <<"The shared boundary ("<<shd_bnd_id<<") does not lie on an internal "
-       << "boundary!!!.\n"
-       << "Make sure to call this method just for shared boundaries that lie "
-       << "on an internal boundary.\n\n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+    {
+     std::ostringstream error_message;
+     error_message
+      <<"The shared boundary ("<<shd_bnd_id<<") does not lie on an internal "
+      << "boundary!!!.\n"
+      << "Make sure to call this method just for shared boundaries that lie "
+      << "on an internal boundary.\n\n";
+     throw OomphLibError(error_message.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
+    }
 #endif
     return (*it).second;
    }
@@ -3641,26 +1725,26 @@ private:
   void get_shared_boundaries_overlapping_internal_boundary(
    const unsigned &internal_bnd_id,
    Vector<unsigned> &shd_bnd_ids)
-  {
-   // Clear any data in the output storage
-   shd_bnd_ids.clear();
-   // Loop over the map and store in the output vector the shared
-   // boundaries ids that overlap the internal boundary
-   std::map<unsigned, unsigned>::iterator it = 
-    Shared_boundary_overlaps_internal_boundary.begin();
-   for (; it !=Shared_boundary_overlaps_internal_boundary.end(); it++)
+   {
+    // Clear any data in the output storage
+    shd_bnd_ids.clear();
+    // Loop over the map and store in the output vector the shared
+    // boundaries ids that overlap the internal boundary
+    std::map<unsigned, unsigned>::iterator it = 
+     Shared_boundary_overlaps_internal_boundary.begin();
+    for (; it !=Shared_boundary_overlaps_internal_boundary.end(); it++)
     {
      // If the second entry is the internal boundary, then add the
      // first entry to the output vector
      if ((*it).second == internal_bnd_id)
-      {
-       // Add the first entry
-       shd_bnd_ids.push_back((*it).first);
-      }
+     {
+      // Add the first entry
+      shd_bnd_ids.push_back((*it).first);
+     }
     } // loop over the map entries
    
 #ifdef PARANOID
-   if (shd_bnd_ids.size() == 0)
+    if (shd_bnd_ids.size() == 0)
     {
      std::ostringstream error_message;
      error_message
@@ -3668,13 +1752,13 @@ private:
       << "boundaries overlapping it\n"
       << "Make sure to call this method just for internal boundaries that "
       << "are marked to as being\noverlaped by shared boundaries\n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
+     throw OomphLibError(error_message.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
     }
 #endif
    
-  }
+   }
   
   // \short Gets the storage that indicates if a shared boundary is part
   // of an internal boundary
@@ -3688,13 +1772,13 @@ private:
     std::map<unsigned, bool>::iterator it;
     it = Boundary_was_splitted.find(b);
     if (it == Boundary_was_splitted.end())
-     {
-      return false;
-     }
+    {
+     return false;
+    }
     else
-     {
-      return (*it).second;
-     }
+    {
+     return (*it).second;
+    }
    }
   
   // \short Gets the number of subpolylines that create the boundarya
@@ -3705,18 +1789,18 @@ private:
     it = Boundary_subpolylines.find(b);
 #ifdef PARANOID
     if (it == Boundary_subpolylines.end())
-     {
-      std::ostringstream error_message;
-      error_message
-       <<"The boundary ("<<b<<") was marked as been splitted but there\n"
-       <<"are not registered polylines to represent the boundary.\n"
-       <<"The new polylines were not set up when the boundary was found to\n"
-       <<"be splitted or the polylines have been explicitly deleted before\n"
-       <<"being used.";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+    {
+     std::ostringstream error_message;
+     error_message
+      <<"The boundary ("<<b<<") was marked as been splitted but there\n"
+      <<"are not registered polylines to represent the boundary.\n"
+      <<"The new polylines were not set up when the boundary was found to\n"
+      <<"be splitted or the polylines have been explicitly deleted before\n"
+      <<"being used.";
+     throw OomphLibError(error_message.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
+    }
 #endif
     return (*it).second.size();
    }
@@ -3729,18 +1813,18 @@ private:
     std::map<unsigned, Vector<TriangleMeshPolyLine*> >::iterator it;
     it = Boundary_subpolylines.find(b);
     if (it == Boundary_subpolylines.end())
-     {
-      std::ostringstream error_message;
-      error_message
-       <<"The boundary ("<<b<<") was marked as been splitted but there\n"
-       <<"are not registered polylines to represent the boundary.\n"
-       <<"The new polylines were not set up when the boundary was found to\n"
-       <<"be splitted or the polylines have been explicitly deleted before\n"
-       <<"being used.";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+    {
+     std::ostringstream error_message;
+     error_message
+      <<"The boundary ("<<b<<") was marked as been splitted but there\n"
+      <<"are not registered polylines to represent the boundary.\n"
+      <<"The new polylines were not set up when the boundary was found to\n"
+      <<"be splitted or the polylines have been explicitly deleted before\n"
+      <<"being used.";
+     throw OomphLibError(error_message.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
+    }
     return (*it).second;
    }
   
@@ -3753,12 +1837,12 @@ private:
     std::map<unsigned, std::vector<bool> >::iterator it;
     it = Boundary_marked_as_shared_boundary.find(b);
     if (it == Boundary_marked_as_shared_boundary.end())
-     {
-      // If no info. was found for the shared boundary then it may be
-      // a non internal boundary, so no shared boundaries are
-      // overlaping it
-      return false;
-     }
+    {
+     // If no info. was found for the shared boundary then it may be
+     // a non internal boundary, so no shared boundaries are
+     // overlaping it
+     return false;
+    }
     return (*it).second[isub];
    }
   
@@ -3941,61 +2025,61 @@ private:
    std::map<std::pair<Node*,Node*>, unsigned> &elements_edges_on_boundary,
    Vector<Vector<Vector<TriangleMeshPolyLine *> > > &output_polylines_pt);
   
-   // \short Break any possible loop created by the sorted list of
-   // nodes that is used to create a new shared polyline
-   void break_loops_on_shared_polyline_helper(
-    const unsigned &initial_shd_bnd_id, 
-    std::list<Node*> &input_nodes,
-    Vector<FiniteElement*> &input_boundary_element_pt, 
-    Vector<int> &input_face_index_element,
-    const int &input_connect_to_the_left, 
-    const int &input_connect_to_the_right,
-    Vector<std::list<Node*> > &output_sorted_nodes_pt, 
-    Vector<Vector<FiniteElement*> > &output_boundary_element_pt, 
-    Vector<Vector<int> > &output_face_index_element,
-    Vector<int> &output_connect_to_the_left,
-    Vector<int> &output_connect_to_the_right);
+  // \short Break any possible loop created by the sorted list of
+  // nodes that is used to create a new shared polyline
+  void break_loops_on_shared_polyline_helper(
+   const unsigned &initial_shd_bnd_id, 
+   std::list<Node*> &input_nodes,
+   Vector<FiniteElement*> &input_boundary_element_pt, 
+   Vector<int> &input_face_index_element,
+   const int &input_connect_to_the_left, 
+   const int &input_connect_to_the_right,
+   Vector<std::list<Node*> > &output_sorted_nodes_pt, 
+   Vector<Vector<FiniteElement*> > &output_boundary_element_pt, 
+   Vector<Vector<int> > &output_face_index_element,
+   Vector<int> &output_connect_to_the_left,
+   Vector<int> &output_connect_to_the_right);
    
-   // \short Break any possible loop created by the sorted list of
-   // nodes that is used to create a new shared polyline (modified
-   // version for load balance)
-   void break_loops_on_shared_polyline_load_balance_helper(
-    const unsigned &initial_shd_bnd_id, 
-    std::list<Node*> &input_nodes,
-    Vector<FiniteElement*> &input_boundary_element_pt,
-    Vector<FiniteElement*> &input_boundary_face_element_pt,
-    Vector<int> &input_face_index_element,
-    const int &input_connect_to_the_left, 
-    const int &input_connect_to_the_right,
-    Vector<std::list<Node*> > &output_sorted_nodes_pt, 
-    Vector<Vector<FiniteElement*> > &output_boundary_element_pt, 
-    Vector<Vector<FiniteElement*> > &output_boundary_face_element_pt, 
-    Vector<Vector<int> > &output_face_index_element,
-    Vector<int> &output_connect_to_the_left,
-    Vector<int> &output_connect_to_the_right);
+  // \short Break any possible loop created by the sorted list of
+  // nodes that is used to create a new shared polyline (modified
+  // version for load balance)
+  void break_loops_on_shared_polyline_load_balance_helper(
+   const unsigned &initial_shd_bnd_id, 
+   std::list<Node*> &input_nodes,
+   Vector<FiniteElement*> &input_boundary_element_pt,
+   Vector<FiniteElement*> &input_boundary_face_element_pt,
+   Vector<int> &input_face_index_element,
+   const int &input_connect_to_the_left, 
+   const int &input_connect_to_the_right,
+   Vector<std::list<Node*> > &output_sorted_nodes_pt, 
+   Vector<Vector<FiniteElement*> > &output_boundary_element_pt, 
+   Vector<Vector<FiniteElement*> > &output_boundary_face_element_pt, 
+   Vector<Vector<int> > &output_face_index_element,
+   Vector<int> &output_connect_to_the_left,
+   Vector<int> &output_connect_to_the_right);
    
-   // \short Create the shared polyline and fill the data structured
-   // that keep all the information associated with the creationg of the
-   // shared boundary
-   void create_shared_polyline(const unsigned &my_rank,
-                               const unsigned &shd_bnd_id,
-                               const unsigned &iproc,
-                               const unsigned &jproc,
-                               std::list<Node*> &sorted_nodes,
-                               const int &root_edge_bnd_id,
-                               Vector<FiniteElement*> 
-                               &bulk_bnd_ele_pt,
-                               Vector<int> &face_index_ele,
-                               Vector<Vector<TriangleMeshPolyLine *> > 
-                               &unsorted_polylines_pt,
-                               const int &connect_to_the_left_flag,
-                               const int &connect_to_the_right_flag);
+  // \short Create the shared polyline and fill the data structured
+  // that keep all the information associated with the creationg of the
+  // shared boundary
+  void create_shared_polyline(const unsigned &my_rank,
+			      const unsigned &shd_bnd_id,
+			      const unsigned &iproc,
+			      const unsigned &jproc,
+			      std::list<Node*> &sorted_nodes,
+			      const int &root_edge_bnd_id,
+			      Vector<FiniteElement*> 
+			      &bulk_bnd_ele_pt,
+			      Vector<int> &face_index_ele,
+			      Vector<Vector<TriangleMeshPolyLine *> > 
+			      &unsorted_polylines_pt,
+			      const int &connect_to_the_left_flag,
+			      const int &connect_to_the_right_flag);
    
-   public:
+ public:
    
-   /// Virtual function to perform the load balance routines
-   virtual void load_balance(const Vector<unsigned>& 
-                             target_domain_for_local_non_halo_element)
+  /// Virtual function to perform the load balance routines
+  virtual void load_balance(const Vector<unsigned>& 
+			    target_domain_for_local_non_halo_element)
    {
     std::ostringstream error_stream;
     error_stream << "Empty default load balancing function called.\n";
@@ -4006,28 +2090,26 @@ private:
                         OOMPH_EXCEPTION_LOCATION);
    }
    
-   /// Virtual function to perform the reset boundary elements info
-   /// routines. Generally used after load balance.
-   virtual void reset_boundary_element_info(
-    Vector<unsigned> &ntmp_boundary_elements,
-    Vector<Vector<unsigned> > &ntmp_boundary_elements_in_region,
-    Vector<FiniteElement*> &deleted_elements);
+  /// Virtual function to perform the reset boundary elements info
+  /// routines. Generally used after load balance.
+  virtual void reset_boundary_element_info(
+   Vector<unsigned> &ntmp_boundary_elements,
+   Vector<Vector<unsigned> > &ntmp_boundary_elements_in_region,
+   Vector<FiniteElement*> &deleted_elements);
    
 #endif // #ifdef OOMPH_HAS_MPI
-   
-   /// Output the nodes on the boundary and their respective boundary
-   /// coordinates(into separate tecplot zones)
-   void output_boundary_coordinates(const unsigned &b, 
-                                    std::ostream &outfile);
-   
-  /// Helper function that checks if a given point is inside a polygon
-  // (a set of sorted vertices that connected create a polygon)
-  bool is_point_inside_polygon_helper(
-   Vector<Vector<double> > polygon_vertices,
-   Vector<double> point);
+
+  
+ public:
+  
+  /// Output the nodes on the boundary and their respective boundary
+  /// coordinates(into separate tecplot zones)
+  void output_boundary_coordinates(const unsigned &b, 
+				   std::ostream &outfile);
+
   
  private:
-
+  
   // Reference :
   // http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain#C.2B.2B
   
@@ -4050,9 +2132,9 @@ private:
   // Returns a positive value, if OAB makes a counter-clockwise turn,
   // negative for clockwise turn, and zero if the points are collinear.
   coord2_t cross(const Point &O, const Point &A, const Point &B)
-  {
-   return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
-  }
+   {
+    return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
+   }
   
   // Returns a list of points on the convex hull in counter-clockwise order.
   // Note: the last point in the returned list is the same as the first one.
@@ -4097,162 +2179,162 @@ private:
 // Temporary flag to enable full annotation of RefineableTriangleMesh
 // comms
 //#define ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION
-template<class ELEMENT>
+ template<class ELEMENT>
  class RefineableTriangleMesh : public virtual TriangleMesh<ELEMENT>,
-  public virtual RefineableMeshBase
-  {
+				public virtual RefineableMeshBase
+ {
    
-    public:
+ public:
 
-   /// \short Function pointer to function that updates the 
-   /// mesh following the snapping of boundary nodes to the
-   /// boundaries (e.g. to move boundary nodes very slightly 
-   /// to satisfy volume constraints)
-   typedef void (*MeshUpdateFctPt)(Mesh* mesh_pt);
+  /// \short Function pointer to function that updates the 
+  /// mesh following the snapping of boundary nodes to the
+  /// boundaries (e.g. to move boundary nodes very slightly 
+  /// to satisfy volume constraints)
+  typedef void (*MeshUpdateFctPt)(Mesh* mesh_pt);
 
-   /// \short Build mesh, based on the specifications on
-   /// TriangleMeshParameters
-   RefineableTriangleMesh(
-     TriangleMeshParameters &triangle_mesh_parameters, 
-     TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
-    : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
-      {
-       // Initialise the data associated with adaptation
-       initialise_adaptation_data();
+  /// \short Build mesh, based on the specifications on
+  /// TriangleMeshParameters
+  RefineableTriangleMesh(
+   TriangleMeshParameters &triangle_mesh_parameters, 
+   TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
+   : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
+   {
+    // Initialise the data associated with adaptation
+    initialise_adaptation_data();
        
-       // Initialise the data associated with boundary refinements
-       initialise_boundary_refinement_data();
+    // Initialise the data associated with boundary refinements
+    initialise_boundary_refinement_data();
        
-      }
+   }
    
-   /// \short Build mesh, based on the polyfiles
-    RefineableTriangleMesh(const std::string& node_file_name,
-                           const std::string& element_file_name,
-                           const std::string& poly_file_name,
-                           TimeStepper* time_stepper_pt=
-                           &Mesh::Default_TimeStepper)
-     : TriangleMesh<ELEMENT>(node_file_name, 
-                             element_file_name, 
-                             poly_file_name, 
-                             time_stepper_pt)
-     {
-      // Create and fill the data structures to give rise to polylines so that
-      // the mesh can use the adapt methods
-      create_polylines_from_polyfiles(node_file_name, poly_file_name);
+  /// \short Build mesh, based on the polyfiles
+  RefineableTriangleMesh(const std::string& node_file_name,
+			 const std::string& element_file_name,
+			 const std::string& poly_file_name,
+			 TimeStepper* time_stepper_pt=
+			 &Mesh::Default_TimeStepper)
+   : TriangleMesh<ELEMENT>(node_file_name, 
+			   element_file_name, 
+			   poly_file_name, 
+			   time_stepper_pt)
+   {
+    // Create and fill the data structures to give rise to polylines so that
+    // the mesh can use the adapt methods
+    create_polylines_from_polyfiles(node_file_name, poly_file_name);
       
-      // Initialise the data associated with adaptation
-      initialise_adaptation_data();
+    // Initialise the data associated with adaptation
+    initialise_adaptation_data();
       
-      // Initialise the data associated with boundary refinements
-      initialise_boundary_refinement_data();
-     }
+    // Initialise the data associated with boundary refinements
+    initialise_boundary_refinement_data();
+   }
    
-   /// \short Build mesh from specified triangulation and
-   /// associated target areas for elements in it
-   RefineableTriangleMesh(const Vector<double> &target_area,
-                          TriangulateIO& triangulate_io,
-                          TimeStepper* time_stepper_pt=
-                              &Mesh::Default_TimeStepper,
-                          const bool &use_attributes=false,
-                          const bool &allow_automatic_creation_of_vertices_on_boundaries=true,
-                          OomphCommunicator* comm_pt = 0)
-    {
-     // Initialise the data associated with adaptation
-     initialise_adaptation_data();
+  /// \short Build mesh from specified triangulation and
+  /// associated target areas for elements in it
+  RefineableTriangleMesh(const Vector<double> &target_area,
+			 TriangulateIO& triangulate_io,
+			 TimeStepper* time_stepper_pt=
+			 &Mesh::Default_TimeStepper,
+			 const bool &use_attributes=false,
+			 const bool &allow_automatic_creation_of_vertices_on_boundaries=true,
+			 OomphCommunicator* comm_pt = 0)
+   {
+    // Initialise the data associated with adaptation
+    initialise_adaptation_data();
      
-     // Initialise the data associated with boundary refinements
-     initialise_boundary_refinement_data();
+    // Initialise the data associated with boundary refinements
+    initialise_boundary_refinement_data();
      
-     // Store Timestepper used to build elements
-     this->Time_stepper_pt=time_stepper_pt;
+    // Store Timestepper used to build elements
+    this->Time_stepper_pt=time_stepper_pt;
 
-     // Create triangulateio object to refine
-     TriangulateIO triangle_refine;
+    // Create triangulateio object to refine
+    TriangulateIO triangle_refine;
      
-     // Initialize triangulateio structure
-     TriangleHelper::initialise_triangulateio(this->Triangulateio);
+    // Initialize triangulateio structure
+    TriangleHelper::initialise_triangulateio(this->Triangulateio);
      
-     // Triangulation has been created -- remember to wipe it!
-     this->Triangulateio_exists=true;
+    // Triangulation has been created -- remember to wipe it!
+    this->Triangulateio_exists=true;
      
-     // Create refined  TriangulateIO structure based on target areas
-     this->refine_triangulateio(triangulate_io,
-                                target_area,
-                                triangle_refine);
+    // Create refined  TriangulateIO structure based on target areas
+    this->refine_triangulateio(triangulate_io,
+			       target_area,
+			       triangle_refine);
 
-     // Input string for triangle
-     std::stringstream input_string_stream;
-     input_string_stream<<"-pq30-ra"; 
+    // Input string for triangle
+    std::stringstream input_string_stream;
+    input_string_stream<<"-pq30-ra"; 
      
-     // Verify if creation of new points on boundaries is allowed
-     if (!allow_automatic_creation_of_vertices_on_boundaries)
-      {input_string_stream<<" -YY";}
+    // Verify if creation of new points on boundaries is allowed
+    if (!allow_automatic_creation_of_vertices_on_boundaries)
+    {input_string_stream<<" -YY";}
      
-     // Copy the allowing of creation of points on the boundaries status
-     this->Allow_automatic_creation_of_vertices_on_boundaries = 
-      allow_automatic_creation_of_vertices_on_boundaries;
+    // Copy the allowing of creation of points on the boundaries status
+    this->Allow_automatic_creation_of_vertices_on_boundaries = 
+     allow_automatic_creation_of_vertices_on_boundaries;
      
-     //Store the attribute flag
-     this->Use_attributes = use_attributes;
+    //Store the attribute flag
+    this->Use_attributes = use_attributes;
      
-     // Convert to a *char required by the triangulate function
-     char triswitches[100];
-     sprintf(triswitches,"%s",input_string_stream.str().c_str());
+    // Convert to a *char required by the triangulate function
+    char triswitches[100];
+    sprintf(triswitches,"%s",input_string_stream.str().c_str());
      
-     // Build triangulateio refined object
-     triangulate(triswitches, &triangle_refine, &this->Triangulateio, 0);
+    // Build triangulateio refined object
+    triangulate(triswitches, &triangle_refine, &this->Triangulateio, 0);
 
-     // Build scaffold
-     this->Tmp_mesh_pt=new TriangleScaffoldMesh(this->Triangulateio);
+    // Build scaffold
+    this->Tmp_mesh_pt=new TriangleScaffoldMesh(this->Triangulateio);
 
-     // Convert mesh from scaffold to actual mesh
-     this->build_from_scaffold(time_stepper_pt,use_attributes);
+    // Convert mesh from scaffold to actual mesh
+    this->build_from_scaffold(time_stepper_pt,use_attributes);
      
-     // Kill the scaffold
-     delete this->Tmp_mesh_pt;
-     this->Tmp_mesh_pt=0;
+    // Kill the scaffold
+    delete this->Tmp_mesh_pt;
+    this->Tmp_mesh_pt=0;
      
-     // Cleanup but leave hole alone as it's still used
-     bool clear_hole_data=false;
-     TriangleHelper::clear_triangulateio(triangle_refine,clear_hole_data);
+    // Cleanup but leave hole alone as it's still used
+    bool clear_hole_data=false;
+    TriangleHelper::clear_triangulateio(triangle_refine,clear_hole_data);
 
 #ifdef OOMPH_HAS_MPI
-     // Before calling setup boundary coordinates check if the mesh
-     // should be treated as a distributed mesh
-     if (comm_pt!=0)
-      {
-       // Set the communicator which will mark the mesh as distributed
-       this->set_communicator_pt(comm_pt);
-      }
+    // Before calling setup boundary coordinates check if the mesh
+    // should be treated as a distributed mesh
+    if (comm_pt!=0)
+    {
+     // Set the communicator which will mark the mesh as distributed
+     this->set_communicator_pt(comm_pt);
+    }
 #endif
      
-     // Setup boundary coordinates for boundaries
-     unsigned nb=nboundary();
-     for (unsigned b=0;b<nb;b++)
-      {
-       this->setup_boundary_coordinates(b);
-      }       
-    }
+    // Setup boundary coordinates for boundaries
+    unsigned nb=nboundary();
+    for (unsigned b=0;b<nb;b++)
+    {
+     this->template setup_boundary_coordinates<ELEMENT>(b);
+    }       
+   }
    
-   /// Empty Destructor
-   virtual ~RefineableTriangleMesh() {}
+  /// Empty Destructor
+  virtual ~RefineableTriangleMesh() {}
      
-   /// \short Enables info. and timings for tranferring of target
-   /// areas
-   void enable_timings_tranfering_target_areas()
+  /// \short Enables info. and timings for tranferring of target
+  /// areas
+  void enable_timings_tranfering_target_areas()
    {Print_timings_transfering_target_areas=true;}
    
-   /// \short Disables info. and timings for tranferring of target
-   /// areas
-   void disable_timings_tranfering_target_areas()
+  /// \short Disables info. and timings for tranferring of target
+  /// areas
+  void disable_timings_tranfering_target_areas()
    {Print_timings_transfering_target_areas=false;}
    
-   /// \short Enables info. and timings for projection
-   void enable_timings_projection()
+  /// \short Enables info. and timings for projection
+  void enable_timings_projection()
    {Print_timings_projection=true;}
    
-   /// \short Disables info. and timings for projection
-   void disable_timings_projection()
+  /// \short Disables info. and timings for projection
+  void disable_timings_projection()
    {Print_timings_projection=false;}
       
   /// \short Read/write access to number of bins in the x-direction
@@ -4283,82 +2365,82 @@ template<class ELEMENT>
   // Returns the status of using an iterative solver for the
   // projection problem
   bool use_iterative_solver_for_projection()
-  {return Use_iterative_solver_for_projection;}
+   {return Use_iterative_solver_for_projection;}
   
   /// Enables the use of an iterative solver for the projection
   /// problem
   void enable_iterative_solver_for_projection()
-  {Use_iterative_solver_for_projection=true;}
+   {Use_iterative_solver_for_projection=true;}
   
   /// Enables the use of an iterative solver for the projection
   /// problem
   void disable_iterative_solver_for_projection()
-  {Use_iterative_solver_for_projection=false;}
+   {Use_iterative_solver_for_projection=false;}
   
   /// Enables printing of timings for adaptation
   void enable_print_timings_adaptation(const unsigned &print_level=1)
-  {set_print_level_timings_adaptation(print_level);}
+   {set_print_level_timings_adaptation(print_level);}
   
   /// Disables printing of timings for adaptation
   void disable_print_timings_adaptation()
-  {Print_timings_level_adaptation=0;}
+   {Print_timings_level_adaptation=0;}
   
   /// Sets the printing level of timings for adaptation
   void set_print_level_timings_adaptation(const unsigned &print_level)
-  {
+   {
     const unsigned max_print_level = 3;
     // If printing level is greater than max. printing level
     if (print_level > max_print_level)
-      {
-        Print_timings_level_adaptation=max_print_level;
-      }
+    {
+     Print_timings_level_adaptation=max_print_level;
+    }
     else
-      {
-        Print_timings_level_adaptation=print_level;
-      }
-  }
+    {
+     Print_timings_level_adaptation=print_level;
+    }
+   }
   
   /// Enables printing of timings for load balance
   void enable_print_timings_load_balance(const unsigned &print_level=1)
-  {set_print_level_timings_load_balance(print_level);}
+   {set_print_level_timings_load_balance(print_level);}
   
   /// Disables printing of timings for load balance
   void disable_print_timings_load_balance()
-  {Print_timings_level_load_balance=0;}
+   {Print_timings_level_load_balance=0;}
   
   /// Sets the printing level of timings for load balance
   void set_print_level_timings_load_balance(const unsigned &print_level)
-  {
+   {
     const unsigned max_print_level = 3;
     // If printing level is greater than max. printing level
     if (print_level > max_print_level)
-      {
-        Print_timings_level_load_balance=max_print_level;
-      }
+    {
+     Print_timings_level_load_balance=max_print_level;
+    }
     else
-      {
-        Print_timings_level_load_balance=print_level;
-      }
-  }
+    {
+     Print_timings_level_load_balance=print_level;
+    }
+   }
   
   /// Doc the targets for mesh adaptation
   void doc_adaptivity_targets(std::ostream &outfile)
-  {
-   outfile << std::endl;
-   outfile << "Targets for mesh adaptation: " << std::endl;
-   outfile << "---------------------------- " << std::endl;
-   outfile << "Target for max. error: " << Max_permitted_error << std::endl;
-   outfile << "Target for min. error: " << Min_permitted_error << std::endl;
-   outfile << "Target min angle: " << Min_permitted_angle << std::endl;
-   outfile << "Min. allowed element size: " << Min_element_size << std::endl;
-   outfile << "Max. allowed element size: " << Max_element_size << std::endl;
-   outfile << "Don't unrefine if less than " << Max_keep_unrefined 
-           << " elements need unrefinement." << std::endl;
-   outfile << std::endl;
-  }
+   {
+    outfile << std::endl;
+    outfile << "Targets for mesh adaptation: " << std::endl;
+    outfile << "---------------------------- " << std::endl;
+    outfile << "Target for max. error: " << Max_permitted_error << std::endl;
+    outfile << "Target for min. error: " << Min_permitted_error << std::endl;
+    outfile << "Target min angle: " << Min_permitted_angle << std::endl;
+    outfile << "Min. allowed element size: " << Min_element_size << std::endl;
+    outfile << "Max. allowed element size: " << Max_element_size << std::endl;
+    outfile << "Don't unrefine if less than " << Max_keep_unrefined 
+	    << " elements need unrefinement." << std::endl;
+    outfile << std::endl;
+   }
   
-   /// Refine mesh uniformly and doc process
-   void refine_uniformly(DocInfo& doc_info)
+  /// Refine mesh uniformly and doc process
+  void refine_uniformly(DocInfo& doc_info)
    {
     // Set the element error to something big
     unsigned nelem=nelement();
@@ -4385,10 +2467,10 @@ template<class ELEMENT>
 /*                         OOMPH_EXCEPTION_LOCATION);  */
    }
    
-   /// \short Unrefine mesh uniformly: Return 0 for success,
-   /// 1 for failure (if unrefinement has reached the coarsest permitted
-   /// level)
-   unsigned unrefine_uniformly()
+  /// \short Unrefine mesh uniformly: Return 0 for success,
+  /// 1 for failure (if unrefinement has reached the coarsest permitted
+  /// level)
+  unsigned unrefine_uniformly()
    {
     throw OomphLibError("unrefine_uniformly() not implemented yet",
                         OOMPH_CURRENT_FUNCTION,
@@ -4397,155 +2479,154 @@ template<class ELEMENT>
     return 0;
    }
    
-   /// Adapt mesh, based on elemental error provided
-   void adapt(const Vector<double>& elem_error); 
+  /// Adapt mesh, based on elemental error provided
+  void adapt(const Vector<double>& elem_error); 
    
-   /// \short Access to function pointer to function that updates the 
-   /// mesh following the snapping of boundary nodes to the
-   /// boundaries (e.g. to move boundary nodes very slightly 
-   /// to satisfy volume constraints)
-   MeshUpdateFctPt& mesh_update_fct_pt()
+  /// \short Access to function pointer to function that updates the 
+  /// mesh following the snapping of boundary nodes to the
+  /// boundaries (e.g. to move boundary nodes very slightly 
+  /// to satisfy volume constraints)
+  MeshUpdateFctPt& mesh_update_fct_pt()
    {
     return Mesh_update_fct_pt;
    }
 
 #ifdef OOMPH_HAS_MPI   
-   unsigned nsorted_shared_boundary_node(unsigned &b)
+  unsigned nsorted_shared_boundary_node(unsigned &b)
    {
     std::map<unsigned, Vector<Node*> >::iterator it = 
      Sorted_shared_boundary_node_pt.find(b);
     if (it == Sorted_shared_boundary_node_pt.end())
-     {
-      std::ostringstream error_message;
-      error_message
-       <<"The boundary ("<<b<<") is not marked as shared\n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+    {
+     std::ostringstream error_message;
+     error_message
+      <<"The boundary ("<<b<<") is not marked as shared\n";
+     throw OomphLibError(error_message.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
+    }
     return (*it).second.size();
    }
    
-   void flush_sorted_shared_boundary_node()
-    {Sorted_shared_boundary_node_pt.clear();}
+  void flush_sorted_shared_boundary_node()
+   {Sorted_shared_boundary_node_pt.clear();}
    
-   Node* sorted_shared_boundary_node_pt(unsigned &b, unsigned &i)
+  Node* sorted_shared_boundary_node_pt(unsigned &b, unsigned &i)
    {
     std::map<unsigned, Vector<Node*> >::iterator it = 
      Sorted_shared_boundary_node_pt.find(b);
     if (it == Sorted_shared_boundary_node_pt.end())
-     {
-      std::ostringstream error_message;
-      error_message
-       <<"The boundary ("<<b<<") is not marked as shared\n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+    {
+     std::ostringstream error_message;
+     error_message
+      <<"The boundary ("<<b<<") is not marked as shared\n";
+     throw OomphLibError(error_message.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
+    }
     return (*it).second[i];
    }
 
 
-   Vector<Node*> sorted_shared_boundary_node_pt(unsigned &b)
+  Vector<Node*> sorted_shared_boundary_node_pt(unsigned &b)
    {
     std::map<unsigned, Vector<Node*> >::iterator it = 
      Sorted_shared_boundary_node_pt.find(b);
     if (it == Sorted_shared_boundary_node_pt.end())
-     {
-      std::ostringstream error_message;
-      error_message
-       <<"The boundary ("<<b<<") is not marked as shared\n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+    {
+     std::ostringstream error_message;
+     error_message
+      <<"The boundary ("<<b<<") is not marked as shared\n";
+     throw OomphLibError(error_message.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
+    }
     return (*it).second;
    }
 
 #endif // #ifdef OOMPH_HAS_MPI
    
-   /// Helper function to create polylines and fill associate data 
-   // structures, used when creating from a mesh from polyfiles
-   void create_polylines_from_polyfiles(const std::string& node_file_name,
-                                        const std::string& poly_file_name);
+  /// Helper function to create polylines and fill associate data 
+  // structures, used when creating from a mesh from polyfiles
+  void create_polylines_from_polyfiles(const std::string& node_file_name,
+				       const std::string& poly_file_name);
    
 #ifdef OOMPH_HAS_MPI
-   // \short Fill the boundary elements structures when dealing with
-   // shared boundaries that overlap internal boundaries
-   void fill_boundary_elements_and_nodes_for_internal_boundaries();
+  // \short Fill the boundary elements structures when dealing with
+  // shared boundaries that overlap internal boundaries
+  void fill_boundary_elements_and_nodes_for_internal_boundaries();
    
-   // \short Fill the boundary elements structures when dealing with
-   // shared boundaries that overlap internal boundaries. Document the
-   // number of elements on the shared boundaries that go to internal
-   // boundaries
-   void fill_boundary_elements_and_nodes_for_internal_boundaries(
-    std::ofstream& outfile);
+  // \short Fill the boundary elements structures when dealing with
+  // shared boundaries that overlap internal boundaries. Document the
+  // number of elements on the shared boundaries that go to internal
+  // boundaries
+  void fill_boundary_elements_and_nodes_for_internal_boundaries(
+   std::ofstream& outfile);
    
-   /// Used to re-establish any additional info. related with
-   /// the distribution after a re-starting for triangle meshes
-   void reestablish_distribution_info_for_restart(
-    OomphCommunicator* comm_pt, std::istream &restart_file)
-    {     
-     // Ensure that the mesh is distributed
-     if (this->is_mesh_distributed())
+  /// Used to re-establish any additional info. related with
+  /// the distribution after a re-starting for triangle meshes
+  void reestablish_distribution_info_for_restart(
+   OomphCommunicator* comm_pt, std::istream &restart_file)
+   {     
+    // Ensure that the mesh is distributed
+    if (this->is_mesh_distributed())
+    {
+     // Fill the structures for the boundary elements and face indexes
+     // of the boundary elements
+     this->fill_boundary_elements_and_nodes_for_internal_boundaries();
+       
+     // Re-establish the shared boundary elements and nodes scheme
+     // before re-establish halo and haloed elements
+     this->reset_shared_boundary_elements_and_nodes(comm_pt);
+       
+     // Sort the nodes on the boundaries so that they have the same order
+     // on all the boundaries
+     this->sort_nodes_on_shared_boundaries();
+       
+     // Re-establish the halo(ed) scheme
+     this->reset_halo_haloed_scheme();
+       
+     // Re-set the number of boundaries to the original one
+     const unsigned noriginal_boundaries = 
+      this->initial_shared_boundary_id();
+     this->set_nboundary(noriginal_boundaries);
+       
+     // Go through the original boudaries and re-establish the
+     // boundary coordinates
+     for (unsigned b = 0; b < noriginal_boundaries; b++)
+     {
+      // Identify the segment boundaries and re-call the
+      // setup_boundary_coordinates() method for the new boundaries
+      // from restart
+      this->identify_boundary_segments_and_assign_initial_zeta_values(b, this);
+         
+      if (this->boundary_geom_object_pt(b) != 0)
       {
-       // Fill the structures for the boundary elements and face indexes
-       // of the boundary elements
-       this->fill_boundary_elements_and_nodes_for_internal_boundaries();
+       // Re-set the boundary coordinates
+       this->template setup_boundary_coordinates<ELEMENT>(b);
+      }         
+     }
        
-       // Re-establish the shared boundary elements and nodes scheme
-       // before re-establish halo and haloed elements
-       this->reset_shared_boundary_elements_and_nodes(comm_pt);
+     //Deform the boundary onto any geometric objects
+     this->snap_nodes_onto_geometric_objects();
        
-       // Sort the nodes on the boundaries so that they have the same order
-       // on all the boundaries
-       this->sort_nodes_on_shared_boundaries();
-       
-       // Re-establish the halo(ed) scheme
-       this->reset_halo_haloed_scheme();
-       
-       // Re-set the number of boundaries to the original one
-       const unsigned noriginal_boundaries = 
-        this->initial_shared_boundary_id();
-       this->set_nboundary(noriginal_boundaries);
-       
-       // Go through the original boudaries and re-establish the
-       // boundary coordinates
-       for (unsigned b = 0; b < noriginal_boundaries; b++)
-        {
-         // Identify the segment boundaries and re-call the
-         // setup_boundary_coordinates() method for the new boundaries
-         // from restart
-         this->identify_boundary_segments_and_assign_initial_zeta_values(b, this);
-         
-         if (this->boundary_geom_object_pt(b) != 0)
-          {
-           // Re-set the boundary coordinates
-           this->setup_boundary_coordinates(b);
-          }
-         
-        }
-       
-       //Deform the boundary onto any geometric objects
-       this->snap_nodes_onto_geometric_objects();
-       
-      } // if (this->is_mesh_distributed())
+    } // if (this->is_mesh_distributed())
      
-    }
+   }
    
 #endif // #ifdef OOMPH_HAS_MPI
    
- /// Method used to update the polylines representation after restart
- void update_polyline_representation_from_restart()
-  {
+  /// Method used to update the polylines representation after restart
+  void update_polyline_representation_from_restart()
+   {
 #ifdef OOMPH_HAS_MPI
     // If the mesh is distributed then also update the shared
     // boundaries
     unsigned my_rank = 0;
     if (this->is_mesh_distributed())
-      {
-        my_rank = this->communicator_pt()->my_rank();
-      }
+    {
+     my_rank = this->communicator_pt()->my_rank();
+    }
 #endif
     
     // Update the polyline representation after restart
@@ -4553,599 +2634,599 @@ template<class ELEMENT>
     // First update all internal boundaries
     const unsigned ninternal = this->Internal_polygon_pt.size();
     for (unsigned i_internal = 0; i_internal < ninternal; i_internal++)
-      {
-        this->update_polygon_after_restart(
-          this->Internal_polygon_pt[i_internal]);
-      }
+    {
+     this->update_polygon_after_restart(
+      this->Internal_polygon_pt[i_internal]);
+    }
     
     // then update the external boundaries
     const unsigned nouter = this->Outer_boundary_pt.size();
     for (unsigned i_outer = 0; i_outer < nouter; i_outer++)
-      {
-        this->update_polygon_after_restart(this->Outer_boundary_pt[i_outer]);
-      }
+    {
+     this->update_polygon_after_restart(this->Outer_boundary_pt[i_outer]);
+    }
     
 #ifdef OOMPH_HAS_MPI
     // If the mesh is distributed then also update the shared
     // boundaries
     if (this->is_mesh_distributed())
+    {
+     const unsigned ncurves = this->nshared_boundary_curves(my_rank);
+     for (unsigned nc = 0; nc < ncurves; nc ++)
      {
-      const unsigned ncurves = this->nshared_boundary_curves(my_rank);
-      for (unsigned nc = 0; nc < ncurves; nc ++)
-       {
-        // Update the shared polyline
-        this->update_shared_curve_after_restart(
-          this->Shared_boundary_polyline_pt[my_rank][nc]//shared_curve
-                                                );
-       }
+      // Update the shared polyline
+      this->update_shared_curve_after_restart(
+       this->Shared_boundary_polyline_pt[my_rank][nc]//shared_curve
+       );
+     }
       
-     } // if (this->is_mesh_distributed())
+    } // if (this->is_mesh_distributed())
 #endif // #ifdef OOMPH_HAS_MPI
     
     const unsigned n_open_polyline = this->Internal_open_curve_pt.size();
     for (unsigned i = 0; i < n_open_polyline; i++)
-     {
-      this->update_open_curve_after_restart(
-         this->Internal_open_curve_pt[i]);
-     }
+    {
+     this->update_open_curve_after_restart(
+      this->Internal_open_curve_pt[i]);
+    }
     
-  }
+   }
  
 #ifdef OOMPH_HAS_MPI
  
- /// \short Performs the load balancing for unstructured meshes, the
- /// load balancing strategy is based on mesh migration
- void load_balance(const Vector<unsigned>& 
-                   input_target_domain_for_local_non_halo_element);
+  /// \short Performs the load balancing for unstructured meshes, the
+  /// load balancing strategy is based on mesh migration
+  void load_balance(const Vector<unsigned>& 
+		    input_target_domain_for_local_non_halo_element);
  
- /// Use the first and second group of elements to find the
- /// intersection between them to get the shared boundary
- /// elements from the first and second group
- void get_shared_boundary_elements_and_face_indexes(
-  const Vector<FiniteElement*> &first_element_pt,
-  const Vector<FiniteElement*> &second_element_pt,
-  Vector<FiniteElement*> &first_shared_boundary_element_pt,
-  Vector<unsigned> &first_shared_boundary_element_face_index,
-  Vector<FiniteElement*> &second_shared_boundary_element_pt,
-  Vector<unsigned> &second_shared_boundary_element_face_index);
+  /// Use the first and second group of elements to find the
+  /// intersection between them to get the shared boundary
+  /// elements from the first and second group
+  void get_shared_boundary_elements_and_face_indexes(
+   const Vector<FiniteElement*> &first_element_pt,
+   const Vector<FiniteElement*> &second_element_pt,
+   Vector<FiniteElement*> &first_shared_boundary_element_pt,
+   Vector<unsigned> &first_shared_boundary_element_face_index,
+   Vector<FiniteElement*> &second_shared_boundary_element_pt,
+   Vector<unsigned> &second_shared_boundary_element_face_index);
  
- /// \short Creates the new shared boundaries, this method is also in
- /// charge of computing the shared boundaries ids of each processor
- /// and send that info. to all the processors
- void create_new_shared_boundaries(std::set<FiniteElement*> 
-                                   &element_in_processor_pt,
-                                   Vector<Vector<FiniteElement*> >
-                                   &new_shared_boundary_element_pt,
-                                   Vector<Vector<unsigned> > 
-                                   &new_shared_boundary_element_face_index);
+  /// \short Creates the new shared boundaries, this method is also in
+  /// charge of computing the shared boundaries ids of each processor
+  /// and send that info. to all the processors
+  void create_new_shared_boundaries(std::set<FiniteElement*> 
+				    &element_in_processor_pt,
+				    Vector<Vector<FiniteElement*> >
+				    &new_shared_boundary_element_pt,
+				    Vector<Vector<unsigned> > 
+				    &new_shared_boundary_element_face_index);
  
- // Computes the degree of the nodes on the shared boundaries, the
- // degree of the node is computed from the global graph created by the
- // shared boundaries of all processors
- void compute_shared_node_degree_helper(Vector<Vector<FiniteElement*> >
-                                        &unsorted_face_ele_pt,
-                                        std::map<Node*, unsigned> 
-                                        &global_node_degree);
+  // Computes the degree of the nodes on the shared boundaries, the
+  // degree of the node is computed from the global graph created by the
+  // shared boundaries of all processors
+  void compute_shared_node_degree_helper(Vector<Vector<FiniteElement*> >
+					 &unsorted_face_ele_pt,
+					 std::map<Node*, unsigned> 
+					 &global_node_degree);
  
- // Sort the nodes on the new shared boundaries (after load balancing),
- // computes the alias of the nodes and creates the adjacency matrix
- // that represent the graph created by the shared edges between each
- // pair of processors
- void create_adjacency_matrix_new_shared_edges_helper(
-  Vector<Vector<FiniteElement*> > &unsorted_face_ele_pt,
-  Vector<Vector<Node*> > &tmp_sorted_shared_node_pt,
-  std::map<Node*, Vector<Vector<unsigned> > > &node_alias,
-  Vector<Vector<Vector<unsigned> > > &adjacency_matrix);
+  // Sort the nodes on the new shared boundaries (after load balancing),
+  // computes the alias of the nodes and creates the adjacency matrix
+  // that represent the graph created by the shared edges between each
+  // pair of processors
+  void create_adjacency_matrix_new_shared_edges_helper(
+   Vector<Vector<FiniteElement*> > &unsorted_face_ele_pt,
+   Vector<Vector<Node*> > &tmp_sorted_shared_node_pt,
+   std::map<Node*, Vector<Vector<unsigned> > > &node_alias,
+   Vector<Vector<Vector<unsigned> > > &adjacency_matrix);
    
- /// \short Get the nodes on the shared boundary (b), these are stored
- /// in the segment they belong
- void get_shared_boundary_segment_nodes_helper(
-  const unsigned &shd_bnd_id, Vector<Vector<Node*> > &tmp_segment_nodes);
+  /// \short Get the nodes on the shared boundary (b), these are stored
+  /// in the segment they belong
+  void get_shared_boundary_segment_nodes_helper(
+   const unsigned &shd_bnd_id, Vector<Vector<Node*> > &tmp_segment_nodes);
  
 #endif // #ifdef OOMPH_HAS_MPI
  
- /// \short Get the nodes on the boundary (b), these are stored in
- /// the segment they belong (also used by the load balance method
- /// to re-set the number of segments per boundary after load
- /// balance has taken place)
- void get_boundary_segment_nodes_helper(
-  const unsigned &b, Vector<Vector<Node*> > &tmp_segment_nodes);
+  /// \short Get the nodes on the boundary (b), these are stored in
+  /// the segment they belong (also used by the load balance method
+  /// to re-set the number of segments per boundary after load
+  /// balance has taken place)
+  void get_boundary_segment_nodes_helper(
+   const unsigned &b, Vector<Vector<Node*> > &tmp_segment_nodes);
  
- // Enable/disable unrefinement/refinement methods for original
- // boundaries
- void enable_boundary_unrefinement_constrained_by_target_areas()
- {Do_boundary_unrefinement_constrained_by_target_areas = true;}
+  // Enable/disable unrefinement/refinement methods for original
+  // boundaries
+  void enable_boundary_unrefinement_constrained_by_target_areas()
+   {Do_boundary_unrefinement_constrained_by_target_areas = true;}
  
- void disable_boundary_unrefinement_constrained_by_target_areas()
- {Do_boundary_unrefinement_constrained_by_target_areas = false;}
+  void disable_boundary_unrefinement_constrained_by_target_areas()
+   {Do_boundary_unrefinement_constrained_by_target_areas = false;}
  
- void enable_boundary_refinement_constrained_by_target_areas()
- {Do_boundary_refinement_constrained_by_target_areas = true;}
+  void enable_boundary_refinement_constrained_by_target_areas()
+   {Do_boundary_refinement_constrained_by_target_areas = true;}
  
- void disable_boundary_refinement_constrained_by_target_areas()
- {Do_boundary_refinement_constrained_by_target_areas = false;}
+  void disable_boundary_refinement_constrained_by_target_areas()
+   {Do_boundary_refinement_constrained_by_target_areas = false;}
  
- // Enable/disable unrefinement/refinement methods for shared
- // boundaries
- void enable_shared_boundary_unrefinement_constrained_by_target_areas()
- {Do_shared_boundary_unrefinement_constrained_by_target_areas = true;}
+  // Enable/disable unrefinement/refinement methods for shared
+  // boundaries
+  void enable_shared_boundary_unrefinement_constrained_by_target_areas()
+   {Do_shared_boundary_unrefinement_constrained_by_target_areas = true;}
  
- void disable_shared_boundary_unrefinement_constrained_by_target_areas()
- {Do_shared_boundary_unrefinement_constrained_by_target_areas = false;}
+  void disable_shared_boundary_unrefinement_constrained_by_target_areas()
+   {Do_shared_boundary_unrefinement_constrained_by_target_areas = false;}
  
- void enable_shared_boundary_refinement_constrained_by_target_areas()
- {Do_shared_boundary_refinement_constrained_by_target_areas = true;}
+  void enable_shared_boundary_refinement_constrained_by_target_areas()
+   {Do_shared_boundary_refinement_constrained_by_target_areas = true;}
  
- void disable_shared_boundary_refinement_constrained_by_target_areas()
- {Do_shared_boundary_refinement_constrained_by_target_areas = false;}
+  void disable_shared_boundary_refinement_constrained_by_target_areas()
+   {Do_shared_boundary_refinement_constrained_by_target_areas = false;}
  
- // From here to the end of the class everything is protected
-  protected:
+  // From here to the end of the class everything is protected
+ protected:
  
- /// A map that stores the vertices that receive connections, they
- /// are identified by the boundary number that receive the connection
- /// This is necessary for not erasing them on the adaptation process,
- /// specifically for the un-refinement process
- std::map<unsigned, std::set<Vector<double> > > Boundary_connections_pt;
+  /// A map that stores the vertices that receive connections, they
+  /// are identified by the boundary number that receive the connection
+  /// This is necessary for not erasing them on the adaptation process,
+  /// specifically for the un-refinement process
+  std::map<unsigned, std::set<Vector<double> > > Boundary_connections_pt;
  
- /// \short Verifies if the given boundary receives a connection, and
- /// if that is the case then returns the list of vertices that
- /// receive the connections
- const bool boundary_connections(const unsigned &b,
-                                 const unsigned &c,
-                                 std::set<Vector<double> > &vertices)
- {
-   // Search for the given boundary
-   std::map<unsigned, std::set<Vector<double> > >::
+  /// \short Verifies if the given boundary receives a connection, and
+  /// if that is the case then returns the list of vertices that
+  /// receive the connections
+  const bool boundary_connections(const unsigned &b,
+				  const unsigned &c,
+				  std::set<Vector<double> > &vertices)
+   {
+    // Search for the given boundary
+    std::map<unsigned, std::set<Vector<double> > >::
      iterator it = Boundary_connections_pt.find(b);
-   // Was the boundary found?
-   if (it != Boundary_connections_pt.end())
-     {
-       // Return the set of vertices that receive the connection
-       vertices = (*it).second;
-       return true;
-     }
-   else
-     {
-       return false;
-     }
+    // Was the boundary found?
+    if (it != Boundary_connections_pt.end())
+    {
+     // Return the set of vertices that receive the connection
+     vertices = (*it).second;
+     return true;
+    }
+    else
+    {
+     return false;
+    }
    
- }
+   }
  
- /// \short Synchronise the vertices that are marked for non deletion
- //  on the shared boundaries. Unrefinement of shared boundaries is
- //  performed only if the candidate node is not marked for non deletion
- const void synchronize_shared_boundary_connections();
+  /// \short Synchronise the vertices that are marked for non deletion
+  //  on the shared boundaries. Unrefinement of shared boundaries is
+  //  performed only if the candidate node is not marked for non deletion
+  const void synchronize_shared_boundary_connections();
   
- /// \short Mark the vertices that are not allowed for deletion by
- /// the unrefienment/refinement polyline methods. In charge of
- /// filling the Boundary_chunk_connections_pt structure
- void add_vertices_for_non_deletion();
+  /// \short Mark the vertices that are not allowed for deletion by
+  /// the unrefienment/refinement polyline methods. In charge of
+  /// filling the Boundary_chunk_connections_pt structure
+  void add_vertices_for_non_deletion();
  
- /// \short Adds the vertices from the sources boundary that are
- /// repeated in the destination boundary to the list of non
- /// delete-able vertices in the destination boundary
- void add_non_delete_vertices_from_boundary_helper(
-  Vector<Vector<Node*> > src_bound_segment_node_pt,
-  Vector<Vector<Node*> > dst_bound_segment_node_pt,
-  const unsigned &dst_bnd_id, const unsigned &dst_bnd_chunk);
+  /// \short Adds the vertices from the sources boundary that are
+  /// repeated in the destination boundary to the list of non
+  /// delete-able vertices in the destination boundary
+  void add_non_delete_vertices_from_boundary_helper(
+   Vector<Vector<Node*> > src_bound_segment_node_pt,
+   Vector<Vector<Node*> > dst_bound_segment_node_pt,
+   const unsigned &dst_bnd_id, const unsigned &dst_bnd_chunk);
  
- /// \short After unrefinement and refinement has taken place compute
- /// the new vertices numbers of the temporary representation of the
- //  boundaries to connect.
- void create_temporary_boundary_connections(
-    Vector<TriangleMeshPolygon *> &tmp_outer_polygons_pt,
-    Vector<TriangleMeshOpenCurve *> &tmp_open_curves_pt);
+  /// \short After unrefinement and refinement has taken place compute
+  /// the new vertices numbers of the temporary representation of the
+  //  boundaries to connect.
+  void create_temporary_boundary_connections(
+   Vector<TriangleMeshPolygon *> &tmp_outer_polygons_pt,
+   Vector<TriangleMeshOpenCurve *> &tmp_open_curves_pt);
  
- /// \short After unrefinement and refinement has taken place compute
- /// the new vertices numbers of the boundaries to connect (in a
- /// distributed scheme it may be possible that the destination boundary
- /// does no longer exist, therefore the connection is suspended and
- /// resumed after the adaptation processor
- void restore_boundary_connections(
-  Vector<TriangleMeshPolyLine*> &resume_initial_connection_polyline_pt,
-  Vector<TriangleMeshPolyLine*> &resume_final_connection_polyline_pt);
+  /// \short After unrefinement and refinement has taken place compute
+  /// the new vertices numbers of the boundaries to connect (in a
+  /// distributed scheme it may be possible that the destination boundary
+  /// does no longer exist, therefore the connection is suspended and
+  /// resumed after the adaptation processor
+  void restore_boundary_connections(
+   Vector<TriangleMeshPolyLine*> &resume_initial_connection_polyline_pt,
+   Vector<TriangleMeshPolyLine*> &resume_final_connection_polyline_pt);
   
- /// \short Restore the connections of the specific polyline
- /// The vertices numbering on the destination boundaries may have
- /// change because of (un)refinement in the destination boundaries.
- /// Also deals with connection that do not longer exist because the
- /// destination boundary does no longer exist because of the distribution
- /// process
- void restore_polyline_connections_helper(
-  TriangleMeshPolyLine* polyline_pt,
-  Vector<TriangleMeshPolyLine*> &resume_initial_connection_polyline_pt,
-  Vector<TriangleMeshPolyLine*> &resume_final_connection_polyline_pt);
+  /// \short Restore the connections of the specific polyline
+  /// The vertices numbering on the destination boundaries may have
+  /// change because of (un)refinement in the destination boundaries.
+  /// Also deals with connection that do not longer exist because the
+  /// destination boundary does no longer exist because of the distribution
+  /// process
+  void restore_polyline_connections_helper(
+   TriangleMeshPolyLine* polyline_pt,
+   Vector<TriangleMeshPolyLine*> &resume_initial_connection_polyline_pt,
+   Vector<TriangleMeshPolyLine*> &resume_final_connection_polyline_pt);
  
- /// \short Resume the boundary connections that may have been
- /// suspended because the destination boundary is no part of the
- /// domain. The connections are no permanently suspended because if
- /// load balance takes place the destination boundary may be part of
- /// the new domain representation therefore the connection would
- /// exist
- void resume_boundary_connections(
-  Vector<TriangleMeshPolyLine*> &resume_initial_connection_polyline_pt,
-  Vector<TriangleMeshPolyLine*> &resume_final_connection_polyline_pt);
+  /// \short Resume the boundary connections that may have been
+  /// suspended because the destination boundary is no part of the
+  /// domain. The connections are no permanently suspended because if
+  /// load balance takes place the destination boundary may be part of
+  /// the new domain representation therefore the connection would
+  /// exist
+  void resume_boundary_connections(
+   Vector<TriangleMeshPolyLine*> &resume_initial_connection_polyline_pt,
+   Vector<TriangleMeshPolyLine*> &resume_final_connection_polyline_pt);
  
- /// \short Computes the associated vertex number on the destination
- /// boundary
- bool get_connected_vertex_number_on_dst_boundary(
-  Vector<double> &vertex_coordinates,
-  const unsigned &dst_b_id, unsigned &vertex_number);
+  /// \short Computes the associated vertex number on the destination
+  /// boundary
+  bool get_connected_vertex_number_on_dst_boundary(
+   Vector<double> &vertex_coordinates,
+   const unsigned &dst_b_id, unsigned &vertex_number);
  
- /// \short Helper function that performs the unrefinement process
- // on the specified boundary by using the provided vertices
- /// representation. Optional boolean is used to run it as test only (if
- /// true is specified as input) in which case vertex coordinates aren't
- /// actually modified. Returned boolean indicates if polyline was (or
- /// would have been -- if called with check_only=false) changed.
- bool unrefine_boundary(const unsigned &b,
-                        const unsigned &c,
-                        Vector<Vector<double> > &vector_bnd_vertices,
-                        double &unrefinement_tolerance,
-                        const bool &check_only = false);
+  /// \short Helper function that performs the unrefinement process
+  // on the specified boundary by using the provided vertices
+  /// representation. Optional boolean is used to run it as test only (if
+  /// true is specified as input) in which case vertex coordinates aren't
+  /// actually modified. Returned boolean indicates if polyline was (or
+  /// would have been -- if called with check_only=false) changed.
+  bool unrefine_boundary(const unsigned &b,
+			 const unsigned &c,
+			 Vector<Vector<double> > &vector_bnd_vertices,
+			 double &unrefinement_tolerance,
+			 const bool &check_only = false);
  
- /// \short Helper function that performs the refinement process
- /// on the specified boundary by using the provided vertices
- /// representation. Optional boolean is used to run it as test only (if
- /// true is specified as input) in which case vertex coordinates aren't
- /// actually modified. Returned boolean indicates if polyline was (or
- /// would have been -- if called with check_only=false) changed.
- bool refine_boundary(Mesh* face_mesh_pt,
-                      Vector<Vector<double> > &vector_bnd_vertices,
-                      double &refinement_tolerance,
-                      const bool &check_only = false);
+  /// \short Helper function that performs the refinement process
+  /// on the specified boundary by using the provided vertices
+  /// representation. Optional boolean is used to run it as test only (if
+  /// true is specified as input) in which case vertex coordinates aren't
+  /// actually modified. Returned boolean indicates if polyline was (or
+  /// would have been -- if called with check_only=false) changed.
+  bool refine_boundary(Mesh* face_mesh_pt,
+		       Vector<Vector<double> > &vector_bnd_vertices,
+		       double &refinement_tolerance,
+		       const bool &check_only = false);
  
- // \short Helper function that applies the maximum length constraint
- // when it was specified. This will increase the number of points in
- // the current curve section in case that any segment on it does not
- // fulfils the requirement
- bool apply_max_length_constraint(Mesh* face_mesh_pt,
-                                  Vector<Vector<double> > 
-                                  &vector_bnd_vertices,
-                                  double &max_length_constraint);
+  // \short Helper function that applies the maximum length constraint
+  // when it was specified. This will increase the number of points in
+  // the current curve section in case that any segment on it does not
+  // fulfils the requirement
+  bool apply_max_length_constraint(Mesh* face_mesh_pt,
+				   Vector<Vector<double> > 
+				   &vector_bnd_vertices,
+				   double &max_length_constraint);
  
- /// \short Helper function that performs the unrefinement process on
- /// the specified boundary by using the provided vertices
- /// representation and the associated target area. Used only when the
- /// 'allow_automatic_creation_of_vertices_on_boundaries' flag is set to
- /// true.
- bool unrefine_boundary_constrained_by_target_area(
-  const unsigned &b, const unsigned &c, 
-  Vector<Vector<double> > &vector_bnd_vertices,
-  double &unrefinement_tolerance, Vector<double> &area_constraint);
+  /// \short Helper function that performs the unrefinement process on
+  /// the specified boundary by using the provided vertices
+  /// representation and the associated target area. Used only when the
+  /// 'allow_automatic_creation_of_vertices_on_boundaries' flag is set to
+  /// true.
+  bool unrefine_boundary_constrained_by_target_area(
+   const unsigned &b, const unsigned &c, 
+   Vector<Vector<double> > &vector_bnd_vertices,
+   double &unrefinement_tolerance, Vector<double> &area_constraint);
  
- /// \short Helper function that performs the refinement process on
- /// the specified boundary by using the provided vertices
- /// representation and the associated elements target area. Used
- /// only when the 'allow_automatic_creation_of_vertices_on_boundaries'
- /// flag is set to true.
- bool refine_boundary_constrained_by_target_area(
-  MeshAsGeomObject* mesh_geom_obj_pt,
-  Vector<Vector<double> > &vector_bnd_vertices,
-  double &refinement_tolerance, Vector<double> &area_constraint);
+  /// \short Helper function that performs the refinement process on
+  /// the specified boundary by using the provided vertices
+  /// representation and the associated elements target area. Used
+  /// only when the 'allow_automatic_creation_of_vertices_on_boundaries'
+  /// flag is set to true.
+  bool refine_boundary_constrained_by_target_area(
+   MeshAsGeomObject* mesh_geom_obj_pt,
+   Vector<Vector<double> > &vector_bnd_vertices,
+   double &refinement_tolerance, Vector<double> &area_constraint);
  
- /// \short Helper function that performs the unrefinement process
- /// on the specified boundary by using the provided vertices
- /// representation and the associated target area.
- /// NOTE: This is the version that applies unrefinement to shared
- /// boundaries
- bool unrefine_shared_boundary_constrained_by_target_area(
-  const unsigned &b, const unsigned &c, 
-  Vector<Vector<double> > &vector_bnd_vertices,
-  Vector<double> &area_constraint);
+  /// \short Helper function that performs the unrefinement process
+  /// on the specified boundary by using the provided vertices
+  /// representation and the associated target area.
+  /// NOTE: This is the version that applies unrefinement to shared
+  /// boundaries
+  bool unrefine_shared_boundary_constrained_by_target_area(
+   const unsigned &b, const unsigned &c, 
+   Vector<Vector<double> > &vector_bnd_vertices,
+   Vector<double> &area_constraint);
  
- /// \short Helper function that performs the refinement process
- /// on the specified boundary by using the provided vertices
- /// representation and the associated elements target area.
- /// NOTE: This is the version that applies refinement to shared
- /// boundaries
- bool refine_shared_boundary_constrained_by_target_area(
-  Vector<Vector<double> > &vector_bnd_vertices,
-  Vector<double> &area_constraint);
+  /// \short Helper function that performs the refinement process
+  /// on the specified boundary by using the provided vertices
+  /// representation and the associated elements target area.
+  /// NOTE: This is the version that applies refinement to shared
+  /// boundaries
+  bool refine_shared_boundary_constrained_by_target_area(
+   Vector<Vector<double> > &vector_bnd_vertices,
+   Vector<double> &area_constraint);
  
- // Flag that enables or disables boundary unrefinement (true by default)
- bool Do_boundary_unrefinement_constrained_by_target_areas;
- // Flag that enables or disables boundary refinement (true by default)
- bool Do_boundary_refinement_constrained_by_target_areas;
- // Flag that enables or disables boundary unrefinement (true by default)
- bool Do_shared_boundary_unrefinement_constrained_by_target_areas;
- // Flag that enables or disables boundary unrefinement (true by default)
- bool Do_shared_boundary_refinement_constrained_by_target_areas;
+  // Flag that enables or disables boundary unrefinement (true by default)
+  bool Do_boundary_unrefinement_constrained_by_target_areas;
+  // Flag that enables or disables boundary refinement (true by default)
+  bool Do_boundary_refinement_constrained_by_target_areas;
+  // Flag that enables or disables boundary unrefinement (true by default)
+  bool Do_shared_boundary_unrefinement_constrained_by_target_areas;
+  // Flag that enables or disables boundary unrefinement (true by default)
+  bool Do_shared_boundary_refinement_constrained_by_target_areas;
  
- // Set all the flags to true (the default values)
- void initialise_boundary_refinement_data()
- {
-   // All boundaries refinement and unrefinement are allowed by
-   // default
-   Do_boundary_unrefinement_constrained_by_target_areas = true;
-   Do_boundary_refinement_constrained_by_target_areas = true;
-   Do_shared_boundary_unrefinement_constrained_by_target_areas = true;
-   Do_shared_boundary_refinement_constrained_by_target_areas = true;
- }
+  // Set all the flags to true (the default values)
+  void initialise_boundary_refinement_data()
+   {
+    // All boundaries refinement and unrefinement are allowed by
+    // default
+    Do_boundary_unrefinement_constrained_by_target_areas = true;
+    Do_boundary_refinement_constrained_by_target_areas = true;
+    Do_shared_boundary_unrefinement_constrained_by_target_areas = true;
+    Do_shared_boundary_refinement_constrained_by_target_areas = true;
+   }
  
 #ifdef OOMPH_HAS_MPI
- // \short Stores the nodes in the boundaries in the same order in all the
-   // processors
-   // Sorted_shared_boundary_node_pt[bnd_id][i-th node] = Node*
-   // It is a map since the boundary id may not start at zero
-   std::map<unsigned, Vector<Node*> > Sorted_shared_boundary_node_pt;
+  // \short Stores the nodes in the boundaries in the same order in all the
+  // processors
+  // Sorted_shared_boundary_node_pt[bnd_id][i-th node] = Node*
+  // It is a map since the boundary id may not start at zero
+  std::map<unsigned, Vector<Node*> > Sorted_shared_boundary_node_pt;
       
-   // \short Sort the nodes on shared boundaries so that the processors
-   // that share a boundary agree with the order of the nodes on the
-   // boundary
-   void sort_nodes_on_shared_boundaries();
+  // \short Sort the nodes on shared boundaries so that the processors
+  // that share a boundary agree with the order of the nodes on the
+  // boundary
+  void sort_nodes_on_shared_boundaries();
    
-   // \short Re-establish the shared boundary elements after the
-   // adaptation process (the updating of shared nodes is optional and
-   // performed by default)
-   void reset_shared_boundary_elements_and_nodes(const bool flush_elements
-                                                 = true,
-                                                 const bool update_elements
-                                                 = true,
-                                                 const bool flush_nodes 
-                                                 = true, 
-                                                 const bool update_nodes 
-                                                 = true);
+  // \short Re-establish the shared boundary elements after the
+  // adaptation process (the updating of shared nodes is optional and
+  // performed by default)
+  void reset_shared_boundary_elements_and_nodes(const bool flush_elements
+						= true,
+						const bool update_elements
+						= true,
+						const bool flush_nodes 
+						= true, 
+						const bool update_nodes 
+						= true);
    
-   // \short In charge of. re-establish the halo(ed) scheme on all processors.
-   // Sends info. to create halo elements and nodes on the processors
-   // that need it. It uses and all to all communication strategy therefore
-   // must be called on all processors.
-   void reset_halo_haloed_scheme();
+  // \short In charge of. re-establish the halo(ed) scheme on all processors.
+  // Sends info. to create halo elements and nodes on the processors
+  // that need it. It uses and all to all communication strategy therefore
+  // must be called on all processors.
+  void reset_halo_haloed_scheme();
    
-   // \short Compute the names of the nodes on shared boundaries in
-   // this (my_rank) processor with other processors. Also compute the
-   // names of nodes on shared boundaries of other processors with
-   // other processors (useful when there is an element that requires
-   // to be sent to this (my_rank) processor because there is a shared
-   // node between this (my_rank) and other processors BUT there is
-   // not a shared boundary between this and the other processor
-   void compute_global_node_names_and_shared_nodes(
-     Vector<Vector<Vector<std::map<unsigned, Node*> > > > 
-     &other_proc_shd_bnd_node_pt,
-     Vector<Vector<Vector<unsigned> > > &global_node_names,
-     std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-     Vector<Node*> &global_shared_node_pt);
+  // \short Compute the names of the nodes on shared boundaries in
+  // this (my_rank) processor with other processors. Also compute the
+  // names of nodes on shared boundaries of other processors with
+  // other processors (useful when there is an element that requires
+  // to be sent to this (my_rank) processor because there is a shared
+  // node between this (my_rank) and other processors BUT there is
+  // not a shared boundary between this and the other processor
+  void compute_global_node_names_and_shared_nodes(
+   Vector<Vector<Vector<std::map<unsigned, Node*> > > > 
+   &other_proc_shd_bnd_node_pt,
+   Vector<Vector<Vector<unsigned> > > &global_node_names,
+   std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
+   Vector<Node*> &global_shared_node_pt);
    
-   // \short Get the original boundaries to which is associated each
-   // shared node, and send the info. to the related processors. We
-   // need to do this so that at the reset of halo(ed) info. stage,
-   // the info. be already updated.
-   void send_boundary_node_info_of_shared_nodes(
-     Vector<Vector<Vector<unsigned> > > &global_node_names,
-     std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-     Vector<Node*> &global_shared_node_pt);
+  // \short Get the original boundaries to which is associated each
+  // shared node, and send the info. to the related processors. We
+  // need to do this so that at the reset of halo(ed) info. stage,
+  // the info. be already updated.
+  void send_boundary_node_info_of_shared_nodes(
+   Vector<Vector<Vector<unsigned> > > &global_node_names,
+   std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
+   Vector<Node*> &global_shared_node_pt);
    
-   // \short In charge of creating additional halo(ed) elements on
-   // those processors that have no shared boundaries in common but have
-   // shared nodes
-   void reset_halo_haloed_scheme_helper(
-    Vector<Vector<Vector<std::map<unsigned, Node*> > > >
-    &other_proc_shd_bnd_node_pt,
-    Vector<Vector<Node *> > &iproc_currently_created_nodes_pt,
-    Vector<Vector<Vector<unsigned> > > &global_node_names,
-    std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-    Vector<Node*> &global_shared_node_pt);
+  // \short In charge of creating additional halo(ed) elements on
+  // those processors that have no shared boundaries in common but have
+  // shared nodes
+  void reset_halo_haloed_scheme_helper(
+   Vector<Vector<Vector<std::map<unsigned, Node*> > > >
+   &other_proc_shd_bnd_node_pt,
+   Vector<Vector<Node *> > &iproc_currently_created_nodes_pt,
+   Vector<Vector<Vector<unsigned> > > &global_node_names,
+   std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
+   Vector<Node*> &global_shared_node_pt);
    
-   // ====================================================================
-   // Methods for load balancing
-   // ====================================================================
+  // ====================================================================
+  // Methods for load balancing
+  // ====================================================================
    
 //#define ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION_LOAD_BALANCE
    
-   // *********************************************************************
-   // BEGIN: Methods to perform load balance
-   // *********************************************************************
+  // *********************************************************************
+  // BEGIN: Methods to perform load balance
+  // *********************************************************************
 
-   // Check if necessary to add the element to the new domain or if it has
-   // been previously added
-   unsigned try_to_add_element_pt_load_balance(
-    Vector<FiniteElement*> &new_elements_on_domain, 
-    FiniteElement* &ele_pt)
+  // Check if necessary to add the element to the new domain or if it has
+  // been previously added
+  unsigned try_to_add_element_pt_load_balance(
+   Vector<FiniteElement*> &new_elements_on_domain, 
+   FiniteElement* &ele_pt)
+   {
+    // Get the number of elements currently added to the new domain
+    const unsigned nnew_elements_on_domain = new_elements_on_domain.size();
+     
+    // Flag to state if has been added or not
+    bool already_on_new_domain = false;
+    unsigned new_domain_ele_index = 0;
+     
+    for (unsigned e = 0; e < nnew_elements_on_domain; e++)
     {
-     // Get the number of elements currently added to the new domain
-     const unsigned nnew_elements_on_domain = new_elements_on_domain.size();
-     
-     // Flag to state if has been added or not
-     bool already_on_new_domain = false;
-     unsigned new_domain_ele_index = 0;
-     
-     for (unsigned e = 0; e < nnew_elements_on_domain; e++)
-      {
-       if (ele_pt == new_elements_on_domain[e])
-        {
-         // It's already there, so...
-         already_on_new_domain = true;
-         // ...set the index of this element
-         new_domain_ele_index = e;
-         break;
-        }
-      }
-     
-     // Has it been found?
-     if (!already_on_new_domain)
-      {
-       // Not found, so add it:
-       new_elements_on_domain.push_back(ele_pt);
-       // Return the index where it's just been added
-       return nnew_elements_on_domain;
-      }
-     else
-      {
-       // Return the index where it was found
-       return new_domain_ele_index;
-      }
-     
+     if (ele_pt == new_elements_on_domain[e])
+     {
+      // It's already there, so...
+      already_on_new_domain = true;
+      // ...set the index of this element
+      new_domain_ele_index = e;
+      break;
+     }
     }
-   
-   /// \short Helper function to get the required elemental information from
-   /// the element to be sent. This info. involves the association of
-   /// the element to a boundary or region, and if its part of the
-   /// halo(ed) elements within a processor
-   void get_required_elemental_information_load_balance_helper(
-    unsigned& iproc,
-    Vector<Vector<FiniteElement*> > &f_haloed_ele_pt,
-    FiniteElement* ele_pt);
-   
-   // Check if necessary to add the node to the new domain or if it has been
-   // already added
-   unsigned try_to_add_node_pt_load_balance(
-    Vector<Node*> &new_nodes_on_domain,
-    Node*& node_pt)
+     
+    // Has it been found?
+    if (!already_on_new_domain)
     {
-     // Get the number of nodes currently added to the new domain
-     const unsigned nnew_nodes_on_domain = new_nodes_on_domain.size();
-     
-     // Flag to state if has been added or not
-     bool already_on_new_domain = false;
-     unsigned new_domain_node_index = 0;
-     
-     for (unsigned n = 0; n < nnew_nodes_on_domain; n++)
-      {
-       if (node_pt == new_nodes_on_domain[n])
-        {
-         // It's already there, so...
-         already_on_new_domain = true;
-         // ...set the index of this element
-         new_domain_node_index = n;
-         break;
-        }
-      }
-     
-     // Has it been found?
-     if (!already_on_new_domain)
-      {
-       // Not found, so add it:
-       new_nodes_on_domain.push_back(node_pt);
-       // Return the index where it's just been added
-       return nnew_nodes_on_domain;
-      }
-     else
-      {
-       // Return the index where it was found
-       return new_domain_node_index;
-      }
+     // Not found, so add it:
+     new_elements_on_domain.push_back(ele_pt);
+     // Return the index where it's just been added
+     return nnew_elements_on_domain;
+    }
+    else
+    {
+     // Return the index where it was found
+     return new_domain_ele_index;
+    }
      
    }
    
-   /// \short Helper function to add haloed node
-   void add_node_load_balance_helper(unsigned& iproc,
-                                     Vector<Vector<FiniteElement*> > 
-                                     &f_halo_ele_pt,
-                                     Vector<Node*> &new_nodes_on_domain,
-                                     Node* nod_pt);
+  /// \short Helper function to get the required elemental information from
+  /// the element to be sent. This info. involves the association of
+  /// the element to a boundary or region, and if its part of the
+  /// halo(ed) elements within a processor
+  void get_required_elemental_information_load_balance_helper(
+   unsigned& iproc,
+   Vector<Vector<FiniteElement*> > &f_haloed_ele_pt,
+   FiniteElement* ele_pt);
    
-   /// \short Helper function to get the required nodal information
-   /// from an haloed node so that a fully-functional node (and
-   /// therefore element) can be created on the receiving process
-   /// (this is the specific version for the load balance strategy,
-   /// the difference with the original method is that it checks if
-   /// the node is on a shared boundary no associated with the current
-   /// processor --my_rank--, or in a haloed element from other
-   /// processors
-   void get_required_nodal_information_load_balance_helper(
-    Vector<Vector<FiniteElement*> > &f_halo_ele_pt,
-    unsigned& iproc, 
-    Node* nod_pt);
+  // Check if necessary to add the node to the new domain or if it has been
+  // already added
+  unsigned try_to_add_node_pt_load_balance(
+   Vector<Node*> &new_nodes_on_domain,
+   Node*& node_pt)
+   {
+    // Get the number of nodes currently added to the new domain
+    const unsigned nnew_nodes_on_domain = new_nodes_on_domain.size();
+     
+    // Flag to state if has been added or not
+    bool already_on_new_domain = false;
+    unsigned new_domain_node_index = 0;
+     
+    for (unsigned n = 0; n < nnew_nodes_on_domain; n++)
+    {
+     if (node_pt == new_nodes_on_domain[n])
+     {
+      // It's already there, so...
+      already_on_new_domain = true;
+      // ...set the index of this element
+      new_domain_node_index = n;
+      break;
+     }
+    }
+     
+    // Has it been found?
+    if (!already_on_new_domain)
+    {
+     // Not found, so add it:
+     new_nodes_on_domain.push_back(node_pt);
+     // Return the index where it's just been added
+     return nnew_nodes_on_domain;
+    }
+    else
+    {
+     // Return the index where it was found
+     return new_domain_node_index;
+    }
+     
+   }
    
-   /// \short Helper function to create elements on the loop 
-   /// process based on the info received in 
-   /// send_and_received_elements_nodes_info
-   void create_element_load_balance_helper(unsigned& iproc,
-     Vector<Vector<FiniteElement*> > &f_haloed_ele_pt,
-     Vector<Vector<std::map<unsigned,FiniteElement*> > > 
-       &received_old_haloed_element_pt,
-     Vector<FiniteElement*> &new_elements_on_domain,
-     Vector<Node*> &new_nodes_on_domain,
-     Vector<Vector<Vector<std::map<unsigned, Node*> > > >
-       &other_proc_shd_bnd_node_pt,
-     Vector<Vector<Vector<unsigned> > > &global_node_names,
-     std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-     Vector<Node*> &global_shared_node_pt);
+  /// \short Helper function to add haloed node
+  void add_node_load_balance_helper(unsigned& iproc,
+				    Vector<Vector<FiniteElement*> > 
+				    &f_halo_ele_pt,
+				    Vector<Node*> &new_nodes_on_domain,
+				    Node* nod_pt);
    
-   /// \short Helper function to create elements on the loop 
-   /// process based on the info received in 
-   /// send_and_received_elements_nodes_info
-   /// This function is in charge of verify if the element is associated
-   /// to a boundary and associate to it if that is the case
-   void add_element_load_balance_helper(const unsigned &iproc,
-                                        Vector<Vector<std::map<
-                                        unsigned,FiniteElement*> > > 
-                                        &received_old_haloed_element_pt,
-                                        FiniteElement* ele_pt);
+  /// \short Helper function to get the required nodal information
+  /// from an haloed node so that a fully-functional node (and
+  /// therefore element) can be created on the receiving process
+  /// (this is the specific version for the load balance strategy,
+  /// the difference with the original method is that it checks if
+  /// the node is on a shared boundary no associated with the current
+  /// processor --my_rank--, or in a haloed element from other
+  /// processors
+  void get_required_nodal_information_load_balance_helper(
+   Vector<Vector<FiniteElement*> > &f_halo_ele_pt,
+   unsigned& iproc, 
+   Node* nod_pt);
    
-   /// \short Helper function to add a new node from load balance
-   void add_received_node_load_balance_helper(Node* &new_nod_pt, 
-     Vector<Vector<FiniteElement*> > &f_haloed_ele_pt,
-     Vector<Vector<std::map<unsigned,FiniteElement*> > > 
-       &received_old_haloed_element_pt,
-     Vector<Node*> &new_nodes_on_domain,
-     Vector<Vector<Vector<std::map<unsigned, Node*> > > >
-       &other_proc_shd_bnd_node_pt,
-     unsigned& iproc, unsigned& node_index, 
-     FiniteElement* const &new_el_pt,
-     Vector<Vector<Vector<unsigned> > > &global_node_names,
-     std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-     Vector<Node*> &global_shared_node_pt);
+  /// \short Helper function to create elements on the loop 
+  /// process based on the info received in 
+  /// send_and_received_elements_nodes_info
+  void create_element_load_balance_helper(unsigned& iproc,
+					  Vector<Vector<FiniteElement*> > &f_haloed_ele_pt,
+					  Vector<Vector<std::map<unsigned,FiniteElement*> > > 
+					  &received_old_haloed_element_pt,
+					  Vector<FiniteElement*> &new_elements_on_domain,
+					  Vector<Node*> &new_nodes_on_domain,
+					  Vector<Vector<Vector<std::map<unsigned, Node*> > > >
+					  &other_proc_shd_bnd_node_pt,
+					  Vector<Vector<Vector<unsigned> > > &global_node_names,
+					  std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
+					  Vector<Node*> &global_shared_node_pt);
    
-   /// \short Helper function which constructs a new node (on an
-   /// element) with the information sent from the load balance
-   /// process
-   void construct_new_node_load_balance_helper(Node* &new_nod_pt, 
-    Vector<Vector<FiniteElement*> > &f_haloed_ele_pt,
-    Vector<Vector<std::map<unsigned,FiniteElement*> > > 
-      &received_old_haloed_element_pt,
-    Vector<Node*> &new_nodes_on_domain,
-    Vector<Vector<Vector<std::map<unsigned, Node*> > > >
-      &other_proc_shd_bnd_node_pt,
-    unsigned& iproc, unsigned& node_index,
-    FiniteElement* const &new_el_pt,
-    Vector<Vector<Vector<unsigned> > > &global_node_names,
-    std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-    Vector<Node*> &global_shared_node_pt);
+  /// \short Helper function to create elements on the loop 
+  /// process based on the info received in 
+  /// send_and_received_elements_nodes_info
+  /// This function is in charge of verify if the element is associated
+  /// to a boundary and associate to it if that is the case
+  void add_element_load_balance_helper(const unsigned &iproc,
+				       Vector<Vector<std::map<
+				       unsigned,FiniteElement*> > > 
+				       &received_old_haloed_element_pt,
+				       FiniteElement* ele_pt);
    
-   // *********************************************************************
-   // END: Methods to perform load balance
-   // *********************************************************************
+  /// \short Helper function to add a new node from load balance
+  void add_received_node_load_balance_helper(Node* &new_nod_pt, 
+					     Vector<Vector<FiniteElement*> > &f_haloed_ele_pt,
+					     Vector<Vector<std::map<unsigned,FiniteElement*> > > 
+					     &received_old_haloed_element_pt,
+					     Vector<Node*> &new_nodes_on_domain,
+					     Vector<Vector<Vector<std::map<unsigned, Node*> > > >
+					     &other_proc_shd_bnd_node_pt,
+					     unsigned& iproc, unsigned& node_index, 
+					     FiniteElement* const &new_el_pt,
+					     Vector<Vector<Vector<unsigned> > > &global_node_names,
+					     std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
+					     Vector<Node*> &global_shared_node_pt);
    
-   // *********************************************************************
-   // Start communication variables
-   // *********************************************************************
-   /// \short Vector of flat-packed doubles to be communicated with
-   /// other processors
-   Vector<double> Flat_packed_doubles;
+  /// \short Helper function which constructs a new node (on an
+  /// element) with the information sent from the load balance
+  /// process
+  void construct_new_node_load_balance_helper(Node* &new_nod_pt, 
+					      Vector<Vector<FiniteElement*> > &f_haloed_ele_pt,
+					      Vector<Vector<std::map<unsigned,FiniteElement*> > > 
+					      &received_old_haloed_element_pt,
+					      Vector<Node*> &new_nodes_on_domain,
+					      Vector<Vector<Vector<std::map<unsigned, Node*> > > >
+					      &other_proc_shd_bnd_node_pt,
+					      unsigned& iproc, unsigned& node_index,
+					      FiniteElement* const &new_el_pt,
+					      Vector<Vector<Vector<unsigned> > > &global_node_names,
+					      std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
+					      Vector<Node*> &global_shared_node_pt);
    
-   /// \short Counter used when processing vector of flat-packed 
-   /// doubles
-   unsigned Counter_for_flat_packed_doubles;
+  // *********************************************************************
+  // END: Methods to perform load balance
+  // *********************************************************************
+   
+  // *********************************************************************
+  // Start communication variables
+  // *********************************************************************
+  /// \short Vector of flat-packed doubles to be communicated with
+  /// other processors
+  Vector<double> Flat_packed_doubles;
+   
+  /// \short Counter used when processing vector of flat-packed 
+  /// doubles
+  unsigned Counter_for_flat_packed_doubles;
 
-   /// \short Vector of flat-packed unsigneds to be communicated with
-   /// other processors
-   Vector<unsigned> Flat_packed_unsigneds;
+  /// \short Vector of flat-packed unsigneds to be communicated with
+  /// other processors
+  Vector<unsigned> Flat_packed_unsigneds;
 
-   /// \short Counter used when processing vector of flat-packed 
-   /// unsigneds
-   unsigned Counter_for_flat_packed_unsigneds;
+  /// \short Counter used when processing vector of flat-packed 
+  /// unsigneds
+  unsigned Counter_for_flat_packed_unsigneds;
 
 #ifdef ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION
-   // Temporary vector of strings to enable full annotation of
-   // RefineableTriangleMesh comms
-   Vector<std::string> Flat_packed_unsigneds_string;
+  // Temporary vector of strings to enable full annotation of
+  // RefineableTriangleMesh comms
+  Vector<std::string> Flat_packed_unsigneds_string;
 #endif
    
-   // *********************************************************************
-   // End communication variables
-   // *********************************************************************
+  // *********************************************************************
+  // End communication variables
+  // *********************************************************************
    
-   // *********************************************************************
-   // Start communication functions
-   // *********************************************************************
+  // *********************************************************************
+  // Start communication functions
+  // *********************************************************************
    
-   // Check if necessary to add the element as haloed or if it has been
-   // previously added to the haloed scheme
-   unsigned try_to_add_root_haloed_element_pt(const unsigned& p, 
-                                              GeneralisedElement*& el_pt)
+  // Check if necessary to add the element as haloed or if it has been
+  // previously added to the haloed scheme
+  unsigned try_to_add_root_haloed_element_pt(const unsigned& p, 
+					     GeneralisedElement*& el_pt)
    {
     // Loop over current storage
     unsigned n_haloed=this->nroot_haloed_element(p);
@@ -5154,35 +3235,35 @@ template<class ELEMENT>
     bool already_haloed_element=false;
     unsigned haloed_el_index=0;
     for (unsigned eh=0;eh<n_haloed;eh++)
+    {
+     if (el_pt==this->root_haloed_element_pt(p, eh))
      {
-      if (el_pt==this->root_haloed_element_pt(p, eh))
-       {
-        // It's already there, so...
-        already_haloed_element=true;
-        // ...set the index of this element
-        haloed_el_index=eh;
-        break;
-       }
+      // It's already there, so...
+      already_haloed_element=true;
+      // ...set the index of this element
+      haloed_el_index=eh;
+      break;
      }
+    }
      
     // Has it been found?
     if (!already_haloed_element)
-     {
-      // Not found, so add it:
-      this->add_root_haloed_element_pt(p, el_pt);
-      // Return the index where it's just been added
-      return n_haloed;
-     }
+    {
+     // Not found, so add it:
+     this->add_root_haloed_element_pt(p, el_pt);
+     // Return the index where it's just been added
+     return n_haloed;
+    }
     else
-     {
-      // Return the index where it was found
-      return haloed_el_index;
-     }
+    {
+     // Return the index where it was found
+     return haloed_el_index;
+    }
    }
   
-   // Check if necessary to add the node as haloed or if it has been
-   // previously added to the haloed scheme
-   unsigned try_to_add_haloed_node_pt(const unsigned& p, Node*& nod_pt)
+  // Check if necessary to add the node as haloed or if it has been
+  // previously added to the haloed scheme
+  unsigned try_to_add_haloed_node_pt(const unsigned& p, Node*& nod_pt)
    {
     // Loop over current storage
     unsigned n_haloed_nod=this->nhaloed_node(p);
@@ -5191,147 +3272,147 @@ template<class ELEMENT>
     bool is_an_haloed_node=false;
     unsigned haloed_node_index=0;
     for (unsigned k=0;k<n_haloed_nod;k++)
+    {
+     if (nod_pt==this->haloed_node_pt(p,k))
      {
-      if (nod_pt==this->haloed_node_pt(p,k))
-       {
-        is_an_haloed_node=true;
-        haloed_node_index=k;
-        break;
-       }
+      is_an_haloed_node=true;
+      haloed_node_index=k;
+      break;
      }
+    }
      
     // Has it been found?
     if (!is_an_haloed_node)
-     {
-      // Not found, so add it
-      this->add_haloed_node_pt(p, nod_pt);
-      // Return the index where it's just been added
-      return n_haloed_nod;
-     }
+    {
+     // Not found, so add it
+     this->add_haloed_node_pt(p, nod_pt);
+     // Return the index where it's just been added
+     return n_haloed_nod;
+    }
     else
-     {
-      // Return the index where it was found
-      return haloed_node_index;
-     }
+    {
+     // Return the index where it was found
+     return haloed_node_index;
+    }
    }
    
-   /// \short Helper function to get the required elemental information from
-   /// an haloed element. This info. involves the association of the element
-   /// to a boundary or region.
-   void get_required_elemental_information_helper(unsigned& iproc,
-                                                  FiniteElement* ele_pt);
+  /// \short Helper function to get the required elemental information from
+  /// an haloed element. This info. involves the association of the element
+  /// to a boundary or region.
+  void get_required_elemental_information_helper(unsigned& iproc,
+						 FiniteElement* ele_pt);
    
-   /// \short Helper function to get the required nodal information
-   /// from a haloed node so that a fully-functional halo node (and
-   /// therefore element) can be created on the receiving process
-   void get_required_nodal_information_helper(unsigned& iproc, Node* nod_pt);
+  /// \short Helper function to get the required nodal information
+  /// from a haloed node so that a fully-functional halo node (and
+  /// therefore element) can be created on the receiving process
+  void get_required_nodal_information_helper(unsigned& iproc, Node* nod_pt);
    
-   /// \short Helper function to add haloed node
-   void add_haloed_node_helper(unsigned& iproc, Node* nod_pt);
+  /// \short Helper function to add haloed node
+  void add_haloed_node_helper(unsigned& iproc, Node* nod_pt);
    
-   /// \short Helper function to send back halo and haloed information
-   void send_and_receive_elements_nodes_info(int& send_proc, int &recv_proc);
+  /// \short Helper function to send back halo and haloed information
+  void send_and_receive_elements_nodes_info(int& send_proc, int &recv_proc);
    
-   /// \short Helper function to create (halo) elements on the loop 
-   /// process based on the info received in send_and_received_located_info
-   void create_halo_element(unsigned &iproc,
-                            Vector<Node*> &new_nodes_on_domain,
-                            Vector<Vector<Vector<std::map<unsigned, 
-                            Node*> > > > &other_proc_shd_bnd_node_pt,
-                            Vector<Vector<Vector<unsigned> > > 
-                            &global_node_names,
-                            std::map<Vector<unsigned>, unsigned> 
-                            &node_name_to_global_index,
-                            Vector<Node*> &global_shared_node_pt);
+  /// \short Helper function to create (halo) elements on the loop 
+  /// process based on the info received in send_and_received_located_info
+  void create_halo_element(unsigned &iproc,
+			   Vector<Node*> &new_nodes_on_domain,
+			   Vector<Vector<Vector<std::map<unsigned, 
+			   Node*> > > > &other_proc_shd_bnd_node_pt,
+			   Vector<Vector<Vector<unsigned> > > 
+			   &global_node_names,
+			   std::map<Vector<unsigned>, unsigned> 
+			   &node_name_to_global_index,
+			   Vector<Node*> &global_shared_node_pt);
    
-   /// \short Helper function to create (halo) elements on the loop 
-   /// process based on the info received in send_and_received_located_info
-   /// This function is in charge of verify if the element is associated to
-   /// a boundary
-   void add_halo_element_helper(unsigned& iproc, FiniteElement* ele_pt);
+  /// \short Helper function to create (halo) elements on the loop 
+  /// process based on the info received in send_and_received_located_info
+  /// This function is in charge of verify if the element is associated to
+  /// a boundary
+  void add_halo_element_helper(unsigned& iproc, FiniteElement* ele_pt);
    
-   /// \short Helper function to add halo node
-   void add_halo_node_helper(Node* &new_nod_pt,
-                             Vector<Node*> &new_nodes_on_domain,
-                             Vector<Vector<Vector<std::map<unsigned, 
-                             Node*> > > > 
-                             &other_proc_shd_bnd_node_pt, 
-                             unsigned& iproc,
-                             unsigned& node_index,
-                             FiniteElement* const &new_el_pt,
-                             Vector<Vector<Vector<unsigned> > > 
-                             &global_node_names,
-                             std::map<Vector<unsigned>, unsigned> 
-                             &node_name_to_global_index,
-                             Vector<Node*> &global_shared_node_pt);
+  /// \short Helper function to add halo node
+  void add_halo_node_helper(Node* &new_nod_pt,
+			    Vector<Node*> &new_nodes_on_domain,
+			    Vector<Vector<Vector<std::map<unsigned, 
+			    Node*> > > > 
+			    &other_proc_shd_bnd_node_pt, 
+			    unsigned& iproc,
+			    unsigned& node_index,
+			    FiniteElement* const &new_el_pt,
+			    Vector<Vector<Vector<unsigned> > > 
+			    &global_node_names,
+			    std::map<Vector<unsigned>, unsigned> 
+			    &node_name_to_global_index,
+			    Vector<Node*> &global_shared_node_pt);
    
-   /// \short Helper function which constructs a new halo node 
-   /// (on an element) with the information sent from the haloed process
-   void construct_new_halo_node_helper(Node* &new_nod_pt, 
-                                       Vector<Node*> &new_nodes_on_domain,
-                                       Vector<Vector<Vector<std::map<unsigned, 
-                                       Node*> > > > 
-                                       &other_proc_shd_bnd_node_pt,
-                                       unsigned& iproc,
-                                       unsigned& node_index,
-                                       FiniteElement* const &new_el_pt,
-                                       Vector<Vector<Vector<unsigned> > > 
-                                       &global_node_names,
-                                       std::map<Vector<unsigned>, unsigned> 
-                                       &node_name_to_global_index,
-                                       Vector<Node*> &global_shared_node_pt);
+  /// \short Helper function which constructs a new halo node 
+  /// (on an element) with the information sent from the haloed process
+  void construct_new_halo_node_helper(Node* &new_nod_pt, 
+				      Vector<Node*> &new_nodes_on_domain,
+				      Vector<Vector<Vector<std::map<unsigned, 
+				      Node*> > > > 
+				      &other_proc_shd_bnd_node_pt,
+				      unsigned& iproc,
+				      unsigned& node_index,
+				      FiniteElement* const &new_el_pt,
+				      Vector<Vector<Vector<unsigned> > > 
+				      &global_node_names,
+				      std::map<Vector<unsigned>, unsigned> 
+				      &node_name_to_global_index,
+				      Vector<Node*> &global_shared_node_pt);
    
-   //Helper function that assigns/updates the references to the node
-   //so that it can be found with any other reference. The return
-   //value indicates whether or not a node was found on the same
-   //reference
-   void update_other_proc_shd_bnd_node_helper
-     (Node* &new_nod_pt, 
-      Vector<Vector<Vector<std::map<unsigned, Node*> > > > 
-      &other_proc_shd_bnd_node_pt,
-      Vector<unsigned> &other_processor_1,
-      Vector<unsigned> &other_processor_2,
-      Vector<unsigned> &other_shared_boundaries,
-      Vector<unsigned> &other_indexes,
-      Vector<Vector<Vector<unsigned> > > &global_node_names,
-      std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-      Vector<Node*> &global_shared_node_pt);
+  //Helper function that assigns/updates the references to the node
+  //so that it can be found with any other reference. The return
+  //value indicates whether or not a node was found on the same
+  //reference
+  void update_other_proc_shd_bnd_node_helper
+  (Node* &new_nod_pt, 
+   Vector<Vector<Vector<std::map<unsigned, Node*> > > > 
+   &other_proc_shd_bnd_node_pt,
+   Vector<unsigned> &other_processor_1,
+   Vector<unsigned> &other_processor_2,
+   Vector<unsigned> &other_shared_boundaries,
+   Vector<unsigned> &other_indexes,
+   Vector<Vector<Vector<unsigned> > > &global_node_names,
+   std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
+   Vector<Node*> &global_shared_node_pt);
    
-   // *********************************************************************
-   // End Communication funtions
-   // *********************************************************************
+  // *********************************************************************
+  // End Communication funtions
+  // *********************************************************************
 
 #endif // #ifdef OOMPH_HAS_MPI
    
-   /// \short Helper function that updates the input polygon's PSLG
-   /// by using the end-points of elements from FaceMesh(es) that are
-   /// constructed for the boundaries associated with the segments of the
-   /// polygon. Optional boolean is used to run it as test only (if 
-   /// true is specified as input) in which case polygon isn't actually
-   /// modified. Returned boolean indicates if polygon was (or would have
-   /// been -- if called with check_only=false) changed. 
-   bool update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
-                                       const bool& check_only=false);
+  /// \short Helper function that updates the input polygon's PSLG
+  /// by using the end-points of elements from FaceMesh(es) that are
+  /// constructed for the boundaries associated with the segments of the
+  /// polygon. Optional boolean is used to run it as test only (if 
+  /// true is specified as input) in which case polygon isn't actually
+  /// modified. Returned boolean indicates if polygon was (or would have
+  /// been -- if called with check_only=false) changed. 
+  bool update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
+				      const bool& check_only=false);
    
-   /// \short Helper function that updates the input open curve by using
-   /// end-points of elements from FaceMesh(es) that are constructed for the
-   /// boundaries associated with the polylines. Optional boolean is used to
-   /// run it as test only (if true is specified as input) in which case the
-   /// polylines are not actually modified. Returned boolean indicates if
-   /// polylines were (or would have been -- if called with check_only=false)
-   /// changed.
-   bool update_open_curve_using_face_mesh(
-     TriangleMeshOpenCurve* open_polyline_pt,
-     const bool& check_only=false);
+  /// \short Helper function that updates the input open curve by using
+  /// end-points of elements from FaceMesh(es) that are constructed for the
+  /// boundaries associated with the polylines. Optional boolean is used to
+  /// run it as test only (if true is specified as input) in which case the
+  /// polylines are not actually modified. Returned boolean indicates if
+  /// polylines were (or would have been -- if called with check_only=false)
+  /// changed.
+  bool update_open_curve_using_face_mesh(
+   TriangleMeshOpenCurve* open_polyline_pt,
+   const bool& check_only=false);
 
-   /// \short Generate a new PSLG representation of the inner hole
-   /// boundaries. Optional boolean is used to run it as test only (if 
-   /// true is specified as input) in which case PSLG isn't actually
-   /// modified. Returned boolean indicates if PSLG was (or would have
-   /// been -- if called with check_only=false) changed. 
-   virtual bool surface_remesh_for_inner_hole_boundaries(
-    Vector<Vector<double> > &internal_point_coord,
-    const bool& check_only=false);
+  /// \short Generate a new PSLG representation of the inner hole
+  /// boundaries. Optional boolean is used to run it as test only (if 
+  /// true is specified as input) in which case PSLG isn't actually
+  /// modified. Returned boolean indicates if PSLG was (or would have
+  /// been -- if called with check_only=false) changed. 
+  virtual bool surface_remesh_for_inner_hole_boundaries(
+   Vector<Vector<double> > &internal_point_coord,
+   const bool& check_only=false);
    
   /// \short Snap the boundary nodes onto any curvilinear boundaries
   void snap_nodes_onto_boundary(RefineableTriangleMesh<ELEMENT>* &new_mesh_pt,
@@ -5342,18 +3423,18 @@ template<class ELEMENT>
   /// boundary id. It means that the elements are not sorted along the
   /// boundary
   void create_unsorted_face_mesh_representation(
-      const unsigned &boundary_id,
-      Mesh* face_mesh_pt);
+   const unsigned &boundary_id,
+   Mesh* face_mesh_pt);
   
   /// \short Helper function
   /// Creates a sorted face mesh representation of the specified PolyLine
   /// It means that the elements are sorted along the boundary
   /// It also returns a map that indicated the inverted elements
   void create_sorted_face_mesh_representation(
-      const unsigned &boundary_id,
-      Mesh* face_mesh_pt,
-      std::map<FiniteElement*, bool> &is_inverted,
-      bool &inverted_face_mesh);
+   const unsigned &boundary_id,
+   Mesh* face_mesh_pt,
+   std::map<FiniteElement*, bool> &is_inverted,
+   bool &inverted_face_mesh);
 
   /// \short Helper function to construct face mesh representation of all 
   /// polylines, possibly with segments re-distributed between polylines 
@@ -5364,8 +3445,8 @@ template<class ELEMENT>
   /// \short Helper function to construct face mesh representation of
   /// open curves
   void get_face_mesh_representation(
-    TriangleMeshOpenCurve* open_polyline_pt,
-    Vector<Mesh*>& face_mesh_pt);
+   TriangleMeshOpenCurve* open_polyline_pt,
+   Vector<Mesh*>& face_mesh_pt);
   
   /// \short Updates the polylines representation after restart
   void update_polygon_after_restart(TriangleMeshPolygon* &polygon_pt);
@@ -5398,63 +3479,63 @@ template<class ELEMENT>
   
   /// Helper function to initialise data associated with adaptation
   void initialise_adaptation_data()
-  {
-   // Number of bins in the x-direction
-   // when transferring target areas by bin method
-   this->Nbin_x_for_area_transfer=100;
+   {
+    // Number of bins in the x-direction
+    // when transferring target areas by bin method
+    this->Nbin_x_for_area_transfer=100;
    
-   // Number of bins in the y-direction
-   // when transferring target areas by bin method
-   this->Nbin_y_for_area_transfer=100;
+    // Number of bins in the y-direction
+    // when transferring target areas by bin method
+    this->Nbin_y_for_area_transfer=100;
    
-   /// Number of bins in the x-direction when projecting the solution
-   /// from the old mesh into the new mesh
-   this->Nbin_x_for_projection=100;
+    /// Number of bins in the x-direction when projecting the solution
+    /// from the old mesh into the new mesh
+    this->Nbin_x_for_projection=100;
    
-   /// Number of bins in the y-direction when projecting the solution
-   /// from the old mesh into the new mesh
-   this->Nbin_y_for_projection=100;
+    /// Number of bins in the y-direction when projecting the solution
+    /// from the old mesh into the new mesh
+    this->Nbin_y_for_projection=100;
    
-   // Set max and min targets for adaptation
-   this->Max_element_size=1.0;
-   this->Min_element_size=0.001;
-   this->Min_permitted_angle=15.0;
+    // Set max and min targets for adaptation
+    this->Max_element_size=1.0;
+    this->Min_element_size=0.001;
+    this->Min_permitted_angle=15.0;
    
-   // Use by default an iterative solver for the projection problem
-   this->Use_iterative_solver_for_projection=true;
+    // Use by default an iterative solver for the projection problem
+    this->Use_iterative_solver_for_projection=true;
    
-   // Set the defaul value for printing level adaptation (default 0)
-   this->Print_timings_level_adaptation=0;
+    // Set the defaul value for printing level adaptation (default 0)
+    this->Print_timings_level_adaptation=0;
    
-   // Set the defaul value for printing level load balance (default 0)
-   this->Print_timings_level_load_balance=0;
+    // Set the defaul value for printing level load balance (default 0)
+    this->Print_timings_level_load_balance=0;
    
-   // By default we want no info. about timings for transferring of
-   // target areas
-   this->Print_timings_transfering_target_areas=false;
+    // By default we want no info. about timings for transferring of
+    // target areas
+    this->Print_timings_transfering_target_areas=false;
    
-   // By default we want no info. about timings for projection
-   this->Print_timings_projection=false;
+    // By default we want no info. about timings for projection
+    this->Print_timings_projection=false;
    
-   // Initialise function pointer to function that updates the
-   // mesh following the snapping of boundary nodes to the
-   // boundaries (e.g. to move boundary nodes very slightly
-   // to satisfy volume constraints)
-   Mesh_update_fct_pt=0;
+    // Initialise function pointer to function that updates the
+    // mesh following the snapping of boundary nodes to the
+    // boundaries (e.g. to move boundary nodes very slightly
+    // to satisfy volume constraints)
+    Mesh_update_fct_pt=0;
 
-  }
+   }
    
-   /// \short Build a new TriangulateIO object from previous TriangulateIO
-   /// based on target area for each element
-   void refine_triangulateio(TriangulateIO& triangulate_io, 
-                             const Vector<double> &target_area,
-                             TriangulateIO &triangle_refine);
+  /// \short Build a new TriangulateIO object from previous TriangulateIO
+  /// based on target area for each element
+  void refine_triangulateio(TriangulateIO& triangulate_io, 
+			    const Vector<double> &target_area,
+			    TriangulateIO &triangle_refine);
    
 
-   /// \short Compute target area based on the element's error and the
-   /// error target; return minimum angle (in degrees)
-   double compute_area_target(const Vector<double> &elem_error,
-                              Vector<double> &target_area)
+  /// \short Compute target area based on the element's error and the
+  /// error target; return minimum angle (in degrees)
+  double compute_area_target(const Vector<double> &elem_error,
+			     Vector<double> &target_area)
    {
     double min_angle=DBL_MAX;
     unsigned count_unrefined=0;
@@ -5463,85 +3544,85 @@ template<class ELEMENT>
     
     unsigned nel=this->nelement();
     for (unsigned e=0;e<nel;e++)
+    {
+      
+     // Get element
+     FiniteElement* el_pt=this->finite_element_pt(e);
+      
+     // Area 
+     double area=el_pt->size();
+
+
+     // Min angle based on vertex coordinates
+     // (vertices are enumerated first)
+     double ax=el_pt->node_pt(0)->x(0);
+     double ay=el_pt->node_pt(0)->x(1);
+        
+     double bx=el_pt->node_pt(1)->x(0);
+     double by=el_pt->node_pt(1)->x(1);
+        
+     double cx=el_pt->node_pt(2)->x(0);
+     double cy=el_pt->node_pt(2)->x(1);
+        
+     // Min angle
+     double angle0=
+      acos(((ax-cx)*(bx-cx)+(ay-cy)*(by-cy))/
+	   (sqrt((ax-cx)*(ax-cx)+(ay-cy)*(ay-cy))*
+	    sqrt((bx-cx)*(bx-cx)+(by-cy)*(by-cy))))*
+      180.0/MathematicalConstants::Pi;
+     min_angle=std::min(min_angle,angle0);
+        
+     double angle1=
+      acos(((ax-bx)*(cx-bx)+(ay-by)*(cy-by))/
+	   (sqrt((ax-bx)*(ax-bx)+(ay-by)*(ay-by))*
+	    sqrt((cx-bx)*(cx-bx)+(cy-by)*(cy-by))))*
+      180.0/MathematicalConstants::Pi;
+     min_angle=std::min(min_angle,angle1);
+        
+     double angle2=180.0-angle0-angle1;
+     min_angle=std::min(min_angle,angle2);
+        
+     // Mimick refinement in tree-based procedure: Target areas
+     // for elements that exceed permitted error is 1/3 of their
+     // current area, corresponding to a uniform sub-division.
+     double size_ratio=3.0;
+     if (elem_error[e]>max_permitted_error())
      {
-      
-      // Get element
-      FiniteElement* el_pt=this->finite_element_pt(e);
-      
-      // Area 
-      double area=el_pt->size();
-
-
-      // Min angle based on vertex coordinates
-      // (vertices are enumerated first)
-      double ax=el_pt->node_pt(0)->x(0);
-      double ay=el_pt->node_pt(0)->x(1);
-        
-      double bx=el_pt->node_pt(1)->x(0);
-      double by=el_pt->node_pt(1)->x(1);
-        
-      double cx=el_pt->node_pt(2)->x(0);
-      double cy=el_pt->node_pt(2)->x(1);
-        
-      // Min angle
-      double angle0=
-       acos(((ax-cx)*(bx-cx)+(ay-cy)*(by-cy))/
-            (sqrt((ax-cx)*(ax-cx)+(ay-cy)*(ay-cy))*
-             sqrt((bx-cx)*(bx-cx)+(by-cy)*(by-cy))))*
-       180.0/MathematicalConstants::Pi;
-      min_angle=std::min(min_angle,angle0);
-        
-      double angle1=
-       acos(((ax-bx)*(cx-bx)+(ay-by)*(cy-by))/
-            (sqrt((ax-bx)*(ax-bx)+(ay-by)*(ay-by))*
-             sqrt((cx-bx)*(cx-bx)+(cy-by)*(cy-by))))*
-       180.0/MathematicalConstants::Pi;
-      min_angle=std::min(min_angle,angle1);
-        
-      double angle2=180.0-angle0-angle1;
-      min_angle=std::min(min_angle,angle2);
-        
-        // Mimick refinement in tree-based procedure: Target areas
-        // for elements that exceed permitted error is 1/3 of their
-        // current area, corresponding to a uniform sub-division.
-        double size_ratio=3.0;
-        if (elem_error[e]>max_permitted_error())
-         {
-          // Reduce area
-          target_area[e]=std::max(area/size_ratio,Min_element_size);
+      // Reduce area
+      target_area[e]=std::max(area/size_ratio,Min_element_size);
           
-          //...but also make sure we're below the max element size
-          target_area[e]=std::min(target_area[e],Max_element_size);
+      //...but also make sure we're below the max element size
+      target_area[e]=std::min(target_area[e],Max_element_size);
           
-          if (target_area[e]!=Min_element_size)
-           {
-            count_refined++;
-           }
-          else
-           {
-            this->Nrefinement_overruled++;
-           }
-         }
-        else if (elem_error[e]<min_permitted_error())
-         {
-          // Increase the area
-          target_area[e]=std::min(size_ratio*area,Max_element_size);
-          
-          //...but also make sure we're above the min element size
-          target_area[e]=std::max(target_area[e],Min_element_size);
-          
-          if (target_area[e]!=Max_element_size)
-           {
-            count_unrefined++;
-           }
-         }
-        else
-         {
-          // Leave it alone but enforce size limits
-          double area_leave_alone = std::max(area,Min_element_size); 
-          target_area[e] = std::min(area_leave_alone,Max_element_size); 
-         }
+      if (target_area[e]!=Min_element_size)
+      {
+       count_refined++;
+      }
+      else
+      {
+       this->Nrefinement_overruled++;
+      }
      }
+     else if (elem_error[e]<min_permitted_error())
+     {
+      // Increase the area
+      target_area[e]=std::min(size_ratio*area,Max_element_size);
+          
+      //...but also make sure we're above the min element size
+      target_area[e]=std::max(target_area[e],Min_element_size);
+          
+      if (target_area[e]!=Max_element_size)
+      {
+       count_unrefined++;
+      }
+     }
+     else
+     {
+      // Leave it alone but enforce size limits
+      double area_leave_alone = std::max(area,Min_element_size); 
+      target_area[e] = std::min(area_leave_alone,Max_element_size); 
+     }
+    }
       
     
     // Tell everybody
@@ -5549,67 +3630,67 @@ template<class ELEMENT>
     this->Nunrefined=count_unrefined;
     
     if (this->Nrefinement_overruled!=0)
-     {
-      oomph_info 
-       << "\nNOTE: Refinement of " 
-       << this->Nrefinement_overruled << " elements was "
-       << "overruled \nbecause the target area would have "
-       << "been below \nthe minimum permitted area of " 
-       << Min_element_size 
-       << ".\nYou can change the minimum permitted area with the\n"
-       << "function RefineableTriangleMesh::min_element_size().\n\n";
-     }
+    {
+     oomph_info 
+      << "\nNOTE: Refinement of " 
+      << this->Nrefinement_overruled << " elements was "
+      << "overruled \nbecause the target area would have "
+      << "been below \nthe minimum permitted area of " 
+      << Min_element_size 
+      << ".\nYou can change the minimum permitted area with the\n"
+      << "function RefineableTriangleMesh::min_element_size().\n\n";
+    }
     return min_angle;
    }
   
-   /// \short Number of bins in the x-direction
-   /// when transferring target areas by bin method.
-   unsigned Nbin_x_for_area_transfer;
+  /// \short Number of bins in the x-direction
+  /// when transferring target areas by bin method.
+  unsigned Nbin_x_for_area_transfer;
 
-   /// \short Number of bins in the y-direction
-   /// when transferring target areas by bin method.
-   unsigned Nbin_y_for_area_transfer;
+  /// \short Number of bins in the y-direction
+  /// when transferring target areas by bin method.
+  unsigned Nbin_y_for_area_transfer;
 
-   /// \short Number of bins in the x-direction when projecting the
-   /// solution from the old mesh into the new mesh
-   unsigned Nbin_x_for_projection;
+  /// \short Number of bins in the x-direction when projecting the
+  /// solution from the old mesh into the new mesh
+  unsigned Nbin_x_for_projection;
    
-   /// \short Number of bins in the y-direction when projecting the
-   /// solution from the old mesh into the new mesh
-   unsigned Nbin_y_for_projection;
+  /// \short Number of bins in the y-direction when projecting the
+  /// solution from the old mesh into the new mesh
+  unsigned Nbin_y_for_projection;
    
-   /// Max permitted element size
-   double Max_element_size;
+  /// Max permitted element size
+  double Max_element_size;
    
-   /// Min permitted element size
-   double Min_element_size;
+  /// Min permitted element size
+  double Min_element_size;
    
-   /// Min angle before remesh gets triggered
-   double Min_permitted_angle;
+  /// Min angle before remesh gets triggered
+  double Min_permitted_angle;
       
-   /// Flag to indicate whether to use or not an iterative solver (CG
-   /// with diagonal preconditioned) for the projection problem
-   bool Use_iterative_solver_for_projection;
+  /// Flag to indicate whether to use or not an iterative solver (CG
+  /// with diagonal preconditioned) for the projection problem
+  bool Use_iterative_solver_for_projection;
    
-   /// Enable/disable printing timings for transfering target areas
-   bool Print_timings_transfering_target_areas;
+  /// Enable/disable printing timings for transfering target areas
+  bool Print_timings_transfering_target_areas;
    
-   /// Enable/disable printing timings for projection
-   bool Print_timings_projection;
+  /// Enable/disable printing timings for projection
+  bool Print_timings_projection;
    
-   /// The printing level for adaptation
-   unsigned Print_timings_level_adaptation;
+  /// The printing level for adaptation
+  unsigned Print_timings_level_adaptation;
    
-   /// The printing level for load balance
-   unsigned Print_timings_level_load_balance;
+  /// The printing level for load balance
+  unsigned Print_timings_level_load_balance;
    
-   /// \short Function pointer to function that updates the 
-   /// mesh following the snapping of boundary nodes to the
-   /// boundaries (e.g. to move boundary nodes very slightly 
-   /// to satisfy volume constraints)
-   MeshUpdateFctPt Mesh_update_fct_pt;
+  /// \short Function pointer to function that updates the 
+  /// mesh following the snapping of boundary nodes to the
+  /// boundaries (e.g. to move boundary nodes very slightly 
+  /// to satisfy volume constraints)
+  MeshUpdateFctPt Mesh_update_fct_pt;
 
-  }; 
+ }; 
 
 #endif
 
@@ -5625,43 +3706,43 @@ template<class ELEMENT>
 /// Unstructured Triangle Mesh upgraded to solid mesh
 //=========================================================================
  template<class ELEMENT>
-  class SolidTriangleMesh : public virtual TriangleMesh<ELEMENT>,
-  public virtual SolidMesh
-  {
+ class SolidTriangleMesh : public virtual TriangleMesh<ELEMENT>,
+			   public virtual SolidMesh
+ {
    
-    public:
+ public:
    
   /// \short Build mesh, based on closed curve that specifies
   /// the outer boundary of the domain and any number of internal
   /// clsed curves. Specify target area for uniform element size.
-    SolidTriangleMesh(
-       TriangleMeshParameters &triangle_mesh_parameters, 
-       TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
-     : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
-       {
-         //Assign the Lagrangian coordinates
-         set_lagrangian_nodal_coordinates();
-       }
+  SolidTriangleMesh(
+   TriangleMeshParameters &triangle_mesh_parameters, 
+   TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
+   : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
+   {
+    //Assign the Lagrangian coordinates
+    set_lagrangian_nodal_coordinates();
+   }
 
-   SolidTriangleMesh(const std::string& node_file_name,
-                     const std::string& element_file_name,
-                     const std::string& poly_file_name,
-                     TimeStepper* time_stepper_pt=
-                     &Mesh::Default_TimeStepper,
-                     const bool &use_attributes=false) :
-    TriangleMesh<ELEMENT>(node_file_name,
-                          element_file_name,
-                          poly_file_name,
-                          time_stepper_pt,
-                          use_attributes)
-    {
-     //Assign the Lagrangian coordinates
-     set_lagrangian_nodal_coordinates();
-    }
+  SolidTriangleMesh(const std::string& node_file_name,
+		    const std::string& element_file_name,
+		    const std::string& poly_file_name,
+		    TimeStepper* time_stepper_pt=
+		    &Mesh::Default_TimeStepper,
+		    const bool &use_attributes=false) :
+   TriangleMesh<ELEMENT>(node_file_name,
+			 element_file_name,
+			 poly_file_name,
+			 time_stepper_pt,
+			 use_attributes)
+   {
+    //Assign the Lagrangian coordinates
+    set_lagrangian_nodal_coordinates();
+   }
 
-   /// Empty Destructor
-     virtual ~SolidTriangleMesh() { }
-  };
+  /// Empty Destructor
+  virtual ~SolidTriangleMesh() { }
+ };
 
 #endif
 
@@ -5675,48 +3756,48 @@ template<class ELEMENT>
 /// Unstructured refineable Triangle Mesh upgraded to solid mesh
 //=========================================================================
  template<class ELEMENT>
-  class RefineableSolidTriangleMesh :
-public virtual RefineableTriangleMesh<ELEMENT>,
- public virtual SolidMesh
+ class RefineableSolidTriangleMesh :
+  public virtual RefineableTriangleMesh<ELEMENT>,
+  public virtual SolidMesh
  {
 
-   public:
+ public:
 
   /// \short Build mesh, based on the specifications on
   /// TriangleMeshParameter
   RefineableSolidTriangleMesh(
-    TriangleMeshParameters &triangle_mesh_parameters, 
-    TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
-  : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt),
-    RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
-    {
-      //Assign the Lagrangian coordinates
-      set_lagrangian_nodal_coordinates();
-    }
+   TriangleMeshParameters &triangle_mesh_parameters, 
+   TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
+   : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt),
+   RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
+   {
+    //Assign the Lagrangian coordinates
+    set_lagrangian_nodal_coordinates();
+   }
    
-   /// \short Build mesh from specified triangulation and
-   /// associated target areas for elements in it.
-   RefineableSolidTriangleMesh(const Vector<double> &target_area,
-                               TriangulateIO& triangulate_io,
-                               TimeStepper* time_stepper_pt=
-                                   &Mesh::Default_TimeStepper,
-                               const bool &use_attributes=false,
-                               const bool 
-                               &allow_automatic_creation_of_vertices_on_boundaries=true,
-                               OomphCommunicator* comm_pt = 0)  :
-    RefineableTriangleMesh<ELEMENT>(target_area,
-                                    triangulate_io,
-                                    time_stepper_pt,
-                                    use_attributes,
-                                    allow_automatic_creation_of_vertices_on_boundaries,
-                                    comm_pt)
-    {
-     //Assign the Lagrangian coordinates
-     set_lagrangian_nodal_coordinates();
-    }
+  /// \short Build mesh from specified triangulation and
+  /// associated target areas for elements in it.
+  RefineableSolidTriangleMesh(const Vector<double> &target_area,
+			      TriangulateIO& triangulate_io,
+			      TimeStepper* time_stepper_pt=
+			      &Mesh::Default_TimeStepper,
+			      const bool &use_attributes=false,
+			      const bool 
+			      &allow_automatic_creation_of_vertices_on_boundaries=true,
+			      OomphCommunicator* comm_pt = 0)  :
+   RefineableTriangleMesh<ELEMENT>(target_area,
+				   triangulate_io,
+				   time_stepper_pt,
+				   use_attributes,
+				   allow_automatic_creation_of_vertices_on_boundaries,
+				   comm_pt)
+   {
+    //Assign the Lagrangian coordinates
+    set_lagrangian_nodal_coordinates();
+   }
     
-    /// Empty Destructor
-    virtual ~RefineableSolidTriangleMesh() {}
+  /// Empty Destructor
+  virtual ~RefineableSolidTriangleMesh() {}
     
  };
 

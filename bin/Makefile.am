@@ -43,7 +43,8 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py \
            run_svnversion_if_it_exists.bash \
            find_errors_and_warnings_in_build_log.bash \
            find_compilation_failures_for_demo_drivers.bash \
-           check_if_executable_exists.bash bump_doc_txt.bash
+           check_if_executable_exists.bash bump_doc_txt.bash \
+           run_triangle_tests_only.bash
 
 
 

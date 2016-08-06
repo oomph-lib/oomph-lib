@@ -7,6 +7,39 @@
 
 
 
+
+# If we don't have malloc.h (most likely on a mac)
+#-------------------------------------------------
+# make an empty dummy version
+#----------------------------
+if !HAVE_MALLOCH
+
+# Dummy dependency to force build of malloc.h
+defs.h: malloc.h
+
+# Make it!
+malloc.h:
+	rm -f malloc.h
+	touch malloc.h
+
+# Already have malloc.h  -- this is just for testing
+#---------------------------------------------------
+else
+
+# Dummy dependency to force build of malloc_shite.h
+defs.h: malloc_shite.h
+
+# Make it!
+malloc_shite.h:
+	rm -f malloc_shite.h
+	touch malloc_shite.h
+
+# Endif for malloc
+#-----------------
+endif
+
+
+
 # Define the sources
 sources =  \
 frename.c	 kmetis.c	mmetis.c       selectq.c \
@@ -41,7 +74,7 @@ lib_LTLIBRARIES = liboomph_parmetis_3.1.1.la
 
 # Sources that the library depends on:
 #-------------------------------------
-liboomph_parmetis_3_1_1_la_SOURCES = $(headers_and_sources) $(extra_headers) 
+liboomph_parmetis_3_1_1_la_SOURCES = $(headers_and_sources) $(extra_headers)
 liboomph_parmetis_3_1_1_la_LDFLAGS = -static
 
 
@@ -91,4 +124,8 @@ install-data-hook:
 else
 install-data-hook: 
 endif
+
+# Tidy
+clean-local:
+	rm -f malloc.h malloc_shite.h
 

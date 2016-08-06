@@ -3775,6 +3775,11 @@ public:
   void fill_in_jacobian_for_newmark_accel(DenseMatrix<double> &jacobian);
  
 
+
+ /// \short Calculate the L2 norm of the displacement u=R-r to overload the
+ /// compute_norm function in the GeneralisedElement base class
+ void compute_norm(double& el_norm);
+
   protected:
 
  /// \short Helper function to fill in the residuals and (if flag==1) the 

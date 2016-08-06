@@ -91,9 +91,16 @@ template<class BASIC, class SOLID>
    SOLID::describe_local_dofs(out,current_string);
   }
 
+ /// \short Compute norm of solution: use the version in the BASIC
+ /// class if there's any ambiguity
+ void compute_norm(double& el_norm)
+ {
+  BASIC::compute_norm(el_norm);
+ }
+ 
  /// \short The required number of values is the sum of the two
  unsigned required_nvalue(const unsigned &n) const
-  {return BASIC::required_nvalue(n) + SOLID::required_nvalue(n);}
+ {return BASIC::required_nvalue(n) + SOLID::required_nvalue(n);}
  
  /// \short We assume that the solid stuff is stored at the end of
  /// the nodes, i.e. its index is the number of continuously interplated

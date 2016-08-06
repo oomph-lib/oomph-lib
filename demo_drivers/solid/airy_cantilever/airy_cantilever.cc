@@ -343,7 +343,7 @@ CantileverProblem<ELEMENT>::CantileverProblem()
  // Pin the left boundary (boundary 3) in both directions
  unsigned n_side = mesh_pt()->nboundary_node(3);
  
- //Loop over the nodes
+ // Loop over the nodes
  for(unsigned i=0;i<n_side;i++)
   {
    solid_mesh_pt()->boundary_node_pt(3,i)->pin_position(0);

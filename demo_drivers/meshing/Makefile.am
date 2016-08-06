@@ -6,6 +6,7 @@ mesh_from_geompack \
 mesh_from_tetgen \
 mesh_from_xfig_triangle \
 mesh_from_vmtk \
+quad_from_triangle_mesh \
 quadratic_vmtk_tetgen
 
 

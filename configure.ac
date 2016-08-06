@@ -228,6 +228,28 @@ fi;
 
 
 
+# Check for the malloc.h. Needed by metis. If we don't have it
+# use an empty replacement
+AC_CHECK_HEADER(malloc.h,[have_malloch=true;
+                            echo "Found malloc.h!";],
+                           [have_malloch=false;
+                            echo "Didn't find malloc.h -- using an empty replacement metis... Keep an eye on it!";])
+
+
+# Pass result of test to automake (makefiles can now check for 
+# status of HAVE_MALLOCH in any Makefile.am:
+AM_CONDITIONAL(HAVE_MALLOCH, test x$have_malloch = xtrue)
+
+# Add flag (don't use the obvious HAVE_MALLOCH as this may be used by
+# other packages too and may lead to clashes!)
+if test x$have_malloch = xtrue; then \
+    accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DOOMPH_HAS_MALLOCH"`; \
+fi;
+
+
+
+
+
 # Does C compiler support const?
 AC_C_CONST
 

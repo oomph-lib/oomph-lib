@@ -89,7 +89,16 @@
 --enable-suppress-doc
 --enable-symbolic-links-for-headers
 --disable-shared
-CXXFLAGS="-g  -DPARANOID -DRANGE_CHECKING -Wall"
-CFLAGS="-g -Wall"
-FFLAGS="-g -Wall"
+--enable-MPI
+--with-mpi-self-tests="mpirun -np 2"
+--with-mpi-self-tests-variablenp="mpirun -np OOMPHNP"
+CXXFLAGS="-g -Wall"
+CFLAGS="-g"
+FFLAGS="-g"
 FFLAGS_NO_OPT="-O0"
+CXX=mpicxx
+CC=mpicc
+F77=mpif77
+LD=mpif77
+
+

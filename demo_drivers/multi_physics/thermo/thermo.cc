@@ -151,6 +151,13 @@ public:
     output_fct(outfile,Nplot,time,exact_soln_pt);
   }
   
+ /// \short Compute norm of solution: use the version in the unsteady heat
+ /// class 
+ void compute_norm(double& el_norm)
+ {
+  QUnsteadyHeatElement<DIM,3>::compute_norm(el_norm);
+ }
+
  /// \short Validate against exact solution at given time
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error

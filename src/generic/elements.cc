@@ -6114,6 +6114,75 @@ void FaceElement::get_local_coordinate_in_bulk(
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
+
+
+//==================================================================
+/// Calculate the L2 norm of the displacement u=R-r to overload the
+/// compute_norm function in the GeneralisedElement base class
+//==================================================================
+ void SolidFiniteElement::compute_norm(double& el_norm)
+ {
+  // Initialise el_norm to 0.0
+  el_norm=0.0;
+  
+  unsigned n_dim=dim();
+
+  // Vector of local coordinates
+  Vector<double> s(n_dim);
+  
+  // Displacement vector, Lagrangian coordinate vector and Eulerian
+  // coordinate vector respectively
+  Vector<double> disp(n_dim,0.0);
+  Vector<double> xi(n_dim,0.0);
+  Vector<double> x(n_dim,0.0);
+  
+  // Find out how many nodes there are in the element
+  unsigned n_node=this->nnode();
+  
+  // Construct a shape function
+  Shape psi(n_node);
+  
+  // Get the number of integration points
+  unsigned n_intpt=this->integral_pt()->nweight();
+  
+  // Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {     
+    // Assign values of s
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      s[i]=this->integral_pt()->knot(ipt,i);
+     }
+    
+    // Get the integral weight
+    double w=this->integral_pt()->weight(ipt);
+    
+    // Get jacobian of mapping
+    double J=this->J_eulerian(s);
+    
+    // Premultiply the weights and the Jacobian
+    double W=w*J;
+    
+    // Get the Lagrangian and Eulerian coordinate at this point, respectively
+    this->interpolated_xi(s,xi);
+    this->interpolated_x(s,x);
+    
+    // Calculate the displacement vector, u=R-r=x-xi
+    for (unsigned idim=0;idim<n_dim;idim++)
+     {
+      disp[idim]=x[idim]-xi[idim];
+     }
+    
+    // Add to norm
+    for (unsigned ii=0;ii<n_dim;ii++)
+     {
+      el_norm+=(disp[ii]*disp[ii])*W;
+     }
+   }    
+ } // End of compute_norm(...)
+
+
+
 //=========================================================================
 /// \short Function to describe the local dofs of the element. The ostream 
 /// specifies the output stream to which the description 

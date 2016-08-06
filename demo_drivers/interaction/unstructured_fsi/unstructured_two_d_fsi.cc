@@ -158,8 +158,8 @@ public:
    setup_boundary_element_info();
    
    // Setup boundary coordinates for boundaries 1 and 2
-   this->setup_boundary_coordinates(1);
-   this->setup_boundary_coordinates(2);
+   this->template setup_boundary_coordinates<ELEMENT>(1);
+   this->template setup_boundary_coordinates<ELEMENT>(2);
   }
  
  /// Empty Destructor
@@ -250,9 +250,9 @@ public:
    ofstream some_file("RESLT/boundary_generation_test.dat");
    
    // Setup boundary coordinates for boundaries 1, 2 and 3
-   this->setup_boundary_coordinates(1);
-   this->setup_boundary_coordinates(2);
-   this->setup_boundary_coordinates(3,some_file);
+   this->template setup_boundary_coordinates<ELEMENT>(1);
+   this->template setup_boundary_coordinates<ELEMENT>(2);
+   this->template setup_boundary_coordinates<ELEMENT>(3,some_file);
 
    // Close it again
    some_file.close();

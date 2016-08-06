@@ -1335,7 +1335,7 @@ save_custom_distribution_to_file(Vector<unsigned> &input_distribution)
 int main(int argc, char* argv[])
 { 
   // Enable error by exceptions
-  feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW);
+  //feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW);
 
  // initialise MPI
 #ifdef OOMPH_HAS_MPI
