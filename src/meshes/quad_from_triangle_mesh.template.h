@@ -45,7 +45,7 @@
 // The mesh
 #include "../generic/problem.h"
 #include "../generic/quad_mesh.h"
-#include "triangle_mesh.h"
+#include "triangle_mesh.template.h"
 #include "../generic/triangle_scaffold_mesh.h" 
 #include "../generic/unstructured_two_d_mesh_geometry_base.h"
 #include "../generic/refineable_quad_mesh.h"
@@ -105,10 +105,10 @@ namespace oomph
      allow_automatic_creation_of_vertices_on_boundaries;
     
     // Store Timestepper used to build elements
-    Time_stepper_pt=time_stepper_pt;
+    this->Time_stepper_pt=time_stepper_pt;
     
     // Store the attributes
-    Use_attributes=use_attributes;
+    this->Use_attributes=use_attributes;
     
     // Build scaffold
     TriangleScaffoldMesh* tmp_mesh_pt=new TriangleScaffoldMesh(node_file_name,
@@ -116,7 +116,7 @@ namespace oomph
 							       poly_file_name);
  
     // Convert mesh from scaffold to actual mesh
-    build_from_scaffold(tmp_mesh_pt,time_stepper_pt,use_attributes);
+    this->build_from_scaffold(tmp_mesh_pt,time_stepper_pt,use_attributes);
 
     // Kill the scaffold
     delete tmp_mesh_pt;
@@ -146,7 +146,7 @@ namespace oomph
      triangle_mesh_parameters.is_automatic_creation_of_vertices_on_boundaries_allowed();
    
     // Store Timestepper used to build elements
-    Time_stepper_pt=time_stepper_pt;
+    this->Time_stepper_pt=time_stepper_pt;
     
     // ********************************************************************
     // First part - Get polylines representations
