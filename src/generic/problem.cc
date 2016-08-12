@@ -19983,8 +19983,6 @@ void Problem::setup_base_mesh_info_after_pruning()
 
 #endif
 
-
-
  /// Instantiation of public flag to allow suppression of warning 
  /// messages re reading in unstructured meshes during restart.
 bool Problem::Suppress_warning_about_actions_before_read_unstructured_meshes=

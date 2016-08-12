@@ -11,7 +11,8 @@ solid_contact_with_gravity_structured \
 solid_contact_with_gravity_unstructured \
 linear_solid_contact_with_gravity_structured \
 linear_solid_contact_with_gravity_unstructured \
-heated_linear_solid_contact_with_gravity
+heated_linear_solid_contact_with_gravity \
+spring_contact2
 
 #-------------------------------------------------
 
@@ -129,6 +130,16 @@ spring_contact_SOURCES = spring_contact.cc
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 spring_contact_LDADD = -L@libdir@ -lgeneric \
+				$(EXTERNAL_LIBS) $(FLIBS)
+
+#-------------------------------------------------
+
+# Sources for executable
+spring_contact2_SOURCES = spring_contact2.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+spring_contact2_LDADD = -L@libdir@ -lgeneric \
 				$(EXTERNAL_LIBS) $(FLIBS)
 
 #-------------------------------------------------

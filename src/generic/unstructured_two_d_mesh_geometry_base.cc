@@ -4760,6 +4760,11 @@ namespace oomph
   } // if (initial_connection || final_connection)  
  }
  
+
+  /// Public static flag to suppress warning; defaults to false
+ bool UnstructuredTwoDMeshGeometryBase::Suppress_warning_about_regions_and_boundaries=false;
+
+
 #endif // OOMPH_HAS_TRIANGLE_LIB
 
  

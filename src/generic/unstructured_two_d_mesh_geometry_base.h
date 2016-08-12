@@ -289,18 +289,18 @@ namespace oomph
     Unrefinement_tolerance=-1.0;
    }
 
-  // \short Allows to specify the maximum distance between two vertices
-  // that define the associated polyline of the curve section, it only
-  // takes effect on the unrefinement and refinement steps
+  /// \short Allows to specify the maximum distance between two vertices
+  /// that define the associated polyline of the curve section, it only
+  /// takes effect on the unrefinement and refinement steps
   void set_maximum_length(const double &maximum_length)
    {Maximum_length = maximum_length;}
 
-  // \short Disables the use of the maximum length criteria on the unrefinement
-  // or refinement steps
+  /// \short Disables the use of the maximum length criteria on the unrefinement
+  /// or refinement steps
   void disable_use_maximum_length()
    {Maximum_length=-1.0;}
 
-  // \short Gets access to the maximum length variable
+  /// \short Gets access to the maximum length variable
   double maximum_length()
    {return Maximum_length;}
  
@@ -310,7 +310,7 @@ namespace oomph
   /// Get last vertex coordinates
   virtual void final_vertex_coordinate(Vector<double> &vertex) = 0;
 
-  // \short Connects the initial vertex of the curve section to a desired
+  /// \short Connects the initial vertex of the curve section to a desired
   /// target polyline by specifying the vertex number. There is a checking
   /// which verifies that the initial vertex is close enough to the
   /// destination vertex on the target polyline by no more than the specified
@@ -320,7 +320,7 @@ namespace oomph
    const unsigned &vertex_number,
    const double &tolerance_for_connection = 1.0e-14);
 
-  // \short Connects the final vertex of the curve section to a desired
+  /// \short Connects the final vertex of the curve section to a desired
   /// target polyline by specifying the vertex number. There is a checking
   /// which verifies that the final vertex is close enough to the
   /// destination vertex on the target polyline by no more than the specified
@@ -330,7 +330,7 @@ namespace oomph
    const unsigned &vertex_number,
    const double &tolerance_for_connection = 1.0e-14);
 
-  // \short Connects the initial vertex of the curve section to a desired
+  /// \short Connects the initial vertex of the curve section to a desired
   /// target curviline by specifying the s value (intrinsic value on the
   /// geometric object of the curviline) where to connect on the target
   /// curviline. There is a checking which verifies that the initial vertex
@@ -341,7 +341,7 @@ namespace oomph
    const double &s_value,
    const double &tolerance_for_connection = 1.0e-14);
 
-  // \short Connects the final vertex of the curve section to a desired
+  /// \short Connects the final vertex of the curve section to a desired
   /// target curviline by specifying the s value (intrinsic value on the
   /// geometric object of the curviline) where to connect on the target
   /// curviline. There is a checking which verifies that the final vertex
@@ -525,7 +525,7 @@ namespace oomph
   /// curvilines
   double &tolerance_for_s_connection()
    {return Tolerance_for_s_connection;}
- 
+
  protected:
 
   /// \short Used for stating if the initial end is connected
@@ -777,7 +777,7 @@ namespace oomph
   /// than one polyline
   unsigned Boundary_chunk;
  
-  // \short Stores the information for connections received on the
+  /// \short Stores the information for connections received on the
   /// curviline. Used when converting to polyline
   Vector<double> Connection_points_pt;
 
@@ -1594,6 +1594,9 @@ namespace oomph
  {
  public:
   
+  /// Public static flag to suppress warning; defaults to false
+  static bool Suppress_warning_about_regions_and_boundaries;
+
   /// \short Empty constructor
   UnstructuredTwoDMeshGeometryBase() {}
 
@@ -1775,21 +1778,21 @@ namespace oomph
    Vector<double>& vertex_coordinates,
    unsigned& vertex_number);
   
-  // \short Sort the polylines coming from joining them. Check whether
-  // it is necessary to reverse them or not. Used when joining two curve
-  // polylines in order to create a polygon
+  /// \short Sort the polylines coming from joining them. Check whether
+  /// it is necessary to reverse them or not. Used when joining two curve
+  /// polylines in order to create a polygon
   void check_contiguousness_on_polylines_helper(
    Vector<TriangleMeshPolyLine* > &polylines_pt,unsigned &index);
   
-  // \short Sort the polylines coming from joining them. Check whether
-  // it is necessary to reverse them or not. Used when joining polylines
-  // and they still do not create a polygon
+  /// \short Sort the polylines coming from joining them. Check whether
+  /// it is necessary to reverse them or not. Used when joining polylines
+  /// and they still do not create a polygon
   void check_contiguousness_on_polylines_helper(
    Vector<TriangleMeshPolyLine* > &polylines_pt,
    unsigned &index_halo_start,unsigned &index_halo_end);
 
   /// Helper function that checks if a given point is inside a polygon
-  // (a set of sorted vertices that connected create a polygon)
+  /// (a set of sorted vertices that connected create a polygon)
   bool is_point_inside_polygon_helper(
    Vector<Vector<double> > polygon_vertices,Vector<double> point);
   
@@ -1880,8 +1883,8 @@ namespace oomph
     }   
    }
 
-  // \short Flag used at the setup_boundary_coordinate function to know
-  // if initial zeta values for segments have been assigned
+  /// \short Flag used at the setup_boundary_coordinate function to know
+  /// if initial zeta values for segments have been assigned
   std::map<unsigned,bool> Assigned_segments_initial_zeta_values;
   
   /// \short Return direct access to the initial coordinates of a boundary
@@ -1910,8 +1913,8 @@ namespace oomph
     return Boundary_final_zeta_coordinate;
    }
 
-  // \short Return the info. to know if it is necessary to reverse the
-  // segment based on a previous mesh
+  /// \short Return the info. to know if it is necessary to reverse the
+  /// segment based on a previous mesh
   std::map<unsigned, Vector<unsigned> >& boundary_segment_inverted()
    {
     return Boundary_segment_inverted;
@@ -2054,8 +2057,8 @@ namespace oomph
     return (*it).second;
    } 
 
-  // \short Return the info. to know if it is necessary to reverse the
-  // segment based on a previous mesh
+  /// \short Return the info. to know if it is necessary to reverse the
+  /// segment based on a previous mesh
   const Vector<unsigned> boundary_segment_inverted(const unsigned &b) const
    {
     std::map<unsigned, Vector<unsigned> >::const_iterator it =
@@ -2078,8 +2081,8 @@ namespace oomph
     return (*it).second;
    }
 
-  // \short Return the info. to know if it is necessary to reverse the
-  // segment based on a previous mesh
+  /// \short Return the info. to know if it is necessary to reverse the
+  /// segment based on a previous mesh
   Vector<unsigned>& boundary_segment_inverted(const unsigned &b)
    {
     std::map<unsigned, Vector<unsigned> >::iterator it =
@@ -2286,9 +2289,9 @@ namespace oomph
 			   &regions_areas,
 			   TriangulateIO& triangulate_io);
   
-  // Data structure filled when the connection matrix is created, for
-  // each polyline, there are two vertex_connection_info structures,
-  // one for each end
+  /// \short Data structure filled when the connection matrix is created, for
+  /// each polyline, there are two vertex_connection_info structures,
+  /// one for each end
   struct vertex_connection_info
   {
    bool is_connected;
@@ -2297,8 +2300,8 @@ namespace oomph
    unsigned vertex_number_to_connect;
   }; // vertex_connection_info
  
-  // Data structure to store the base vertex info, initial or final
-  // vertex in the polylines have an associated base vertex
+  /// \short Data structure to store the base vertex info, initial or final
+  /// vertex in the polylines have an associated base vertex
   struct base_vertex_info {
    bool has_base_vertex_assigned;
    bool is_base_vertex;
@@ -2315,14 +2318,14 @@ namespace oomph
    &connection_matrix,
    TriangleMeshPolyLine* next_polyline_pt = 0);
   
-  // \short Initialise the base vertex structure, set every vertex to
-  // no visited and not being a base vertex
+  /// \short Initialise the base vertex structure, set every vertex to
+  /// no visited and not being a base vertex
   void initialise_base_vertex(
    TriangleMeshPolyLine* polyline_pt,
    std::map<unsigned,std::map<unsigned,Vector<base_vertex_info> > > 
    &base_vertices);
  
-  // \short Helps to identify the base vertex of the given polyline
+  /// \short Helps to identify the base vertex of the given polyline
   void add_base_vertex_info_helper(
    TriangleMeshPolyLine* polyline_pt,
    std::map<unsigned,std::map<unsigned,Vector<base_vertex_info> > > 
@@ -2336,54 +2339,54 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
 
-  // \short Used to store the nodes associated to a boundary and to an
-  // specific segment (this only applies in distributed meshes where the
-  // boundary is splitted in segments)
+  /// \short Used to store the nodes associated to a boundary and to an
+  /// specific segment (this only applies in distributed meshes where the
+  /// boundary is splitted in segments)
   std::map<unsigned,Vector<Vector<Node*> > > Boundary_segment_node_pt;
 
-  // \short Stores the initial zeta coordinate for the segments that
-  // appear when a boundary is splited among processors
+  /// \short Stores the initial zeta coordinate for the segments that
+  /// appear when a boundary is splited among processors
   std::map<unsigned,Vector<double> > Boundary_segment_initial_zeta;
 
-  // \short Stores the final zeta coordinate for the segments that
-  // appear when a boundary is splited among processors
+  /// \short Stores the final zeta coordinate for the segments that
+  /// appear when a boundary is splited among processors
   std::map<unsigned,Vector<double> > Boundary_segment_final_zeta;
   
-  // \short Stores the initial coordinates for the boundary
+  /// \short Stores the initial coordinates for the boundary
   std::map<unsigned,Vector<double> > Boundary_initial_coordinate;
   
-  // \short Stores the final coordinates for the boundary
+  /// \short Stores the final coordinates for the boundary
   std::map<unsigned,Vector<double> > Boundary_final_coordinate;
   
-  // \short Stores the info. to know if it is necessary to reverse the
-  // segment based on a previous mesh
+  /// \short Stores the info. to know if it is necessary to reverse the
+  /// segment based on a previous mesh
   std::map<unsigned,Vector<unsigned> > Boundary_segment_inverted;
   
-  // \short Stores the initial zeta coordinate for the boundary
+  /// \short Stores the initial zeta coordinate for the boundary
   std::map<unsigned,Vector<double> > Boundary_initial_zeta_coordinate;
   
-  // \short Stores the final zeta coordinate for the boundary
+  /// \short Stores the final zeta coordinate for the boundary
   std::map<unsigned,Vector<double> > Boundary_final_zeta_coordinate;
 
-  // \short Stores the initial arclength for the segments that appear when
-  // a boundary is splited among processors
+  /// \short Stores the initial arclength for the segments that appear when
+  /// a boundary is splited among processors
   std::map<unsigned,Vector<double> > Boundary_segment_initial_arclength;
 
-  // \short Stores the final arclength for the segments that appear when
-  // a boundary is splited among processors
+  /// \short Stores the final arclength for the segments that appear when
+  /// a boundary is splited among processors
   std::map<unsigned,Vector<double> > Boundary_segment_final_arclength;
   
-  // \short Stores the initial coordinates for the segments that appear
-  // when a boundary is splited among processors
+  /// \short Stores the initial coordinates for the segments that appear
+  /// when a boundary is splited among processors
   std::map<unsigned,Vector<Vector<double> > > Boundary_segment_initial_coordinate;
   
-  // \short Stores the final coordinates for the segments that appear
-  // when a boundary is splited among processors
+  /// \short Stores the final coordinates for the segments that appear
+  /// when a boundary is splited among processors
   std::map<unsigned,Vector<Vector<double> > > Boundary_segment_final_coordinate;
   
 #endif
   
-  /// Flag to indicate whether the automatic creation of vertices
+  /// \short Flag to indicate whether the automatic creation of vertices
   /// along the boundaries by Triangle is allowed
   bool Allow_automatic_creation_of_vertices_on_boundaries;
   
@@ -2391,8 +2394,8 @@ namespace oomph
   /// defined by geometric objects
   void snap_nodes_onto_geometric_objects();
 
-  /// Vector of elements in each region differentiated by attribute (the key 
-  /// of the map is the attribute)
+  /// \short Vector of elements in each region differentiated by attribute 
+  /// (the key of the map is the attribute)
   std::map<unsigned,Vector<FiniteElement* > > Region_element_pt;
   
   /// Vector of attributes associated with the elements in each region
@@ -3146,7 +3149,7 @@ namespace oomph
     } // Less number of insertion points than vertices
    } 
   
-  // \short Helper function that returns a polygon representation for
+  /// \short Helper function that returns a polygon representation for
   /// the given closed curve, it also computes the maximum boundary id of
   /// the constituent curves.
   /// If the TriangleMeshClosedCurve is already a TriangleMeshPolygon
@@ -3302,7 +3305,7 @@ namespace oomph
     return output_polygon_pt;
    }
     
-  // \short Helper function that creates and returns an open curve with
+  /// \short Helper function that creates and returns an open curve with
   /// the polyline representation of its constituent curve sections. The
   /// new created open curve is deleted when the TriangleMesh destructor
   /// is called
@@ -3439,7 +3442,7 @@ namespace oomph
     return output_open_polyline_pt;
    }
   
-  // \short Stores the geometric objects associated to the
+  /// \short Stores the geometric objects associated to the
   /// curve sections that compound the closed curve. It also
   /// stores the limits defined by these geometric objects
   void set_geom_objects_and_coordinate_limits_for_close_curve(
@@ -3527,7 +3530,7 @@ namespace oomph
     } // else
    } // function
 
-  // \short Stores the geometric objects associated to the
+  /// \short Stores the geometric objects associated to the
   /// curve sections that compound the open curve. It also
   /// stores the limits defined by these geometric objects
   void set_geom_objects_and_coordinate_limits_for_open_curve(
@@ -3710,24 +3713,29 @@ namespace oomph
     unsigned nel_repeated_in_region = 0;
       
 #ifdef PARANOID
-    if (nel_in_region==0)
-    {
-     std::ostringstream warning_message;
-     std::string output_string=
-      "UnstructuredTwoDMeshGeometryBase::setup_boundary_coordinates()";
-      
-     warning_message
-      << "There are no elements associated with boundary (" << b << ")\n"
-      << "in region (" << region_id << "). This could happen because:\n"
-      << "1) You did not specified boundaries with this boundary id.\n"
-      << "---- Review carefully the indexing of your boundaries.\n"
-      << "2) The boundary (" << b << ") is not associated with region ("
-      << region_id << ").\n"
-      << "---- The boundary does not touch the region\n.";
-     OomphLibWarning(warning_message.str(),
-		     output_string,
-		     OOMPH_EXCEPTION_LOCATION);
-    }
+    if (!Suppress_warning_about_regions_and_boundaries)
+     {
+      if (nel_in_region==0)
+       {
+        std::ostringstream warning_message;
+        std::string output_string=
+         "UnstructuredTwoDMeshGeometryBase::setup_boundary_coordinates()";
+        warning_message
+         << "There are no elements associated with boundary (" << b << ")\n"
+         << "in region (" << region_id << "). This could happen because:\n"
+         << "1) You did not specify boundaries with this boundary id.\n"
+         << "---- Review carefully the indexing of your boundaries.\n"
+         << "2) The boundary (" << b << ") is not associated with region ("
+         << region_id << ").\n"
+         << "---- The boundary does not touch the region.\n"
+         << "You can suppress this warning by setting the static public bool\n\n"
+         << "   UnstructuredTwoDMeshGeometryBase::Suppress_warning_about_regions_and_boundaries\n\n"
+         << "to true.\n";
+        OomphLibWarning(warning_message.str(),
+                        output_string,
+                        OOMPH_EXCEPTION_LOCATION);
+       }
+     }
 #endif
       
     // Only bother to do anything else, if there are elements

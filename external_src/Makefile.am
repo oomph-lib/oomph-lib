@@ -1,9 +1,20 @@
 # Subdirectories get built into individual libraries
-SUBDIRS = oomph_hsl oomph_crbond_bessel oomph_arpack
+# Note that we specify . explicitly otherwise we descend into
+# subdirectories first; see
+#
+#   https://www.gnu.org/software/automake/manual/html_node/Subdirectories.html
+#
+SUBDIRS = . oomph_hsl oomph_crbond_bessel oomph_arpack
 
 
-
-
+# Build malloc.h in parmetis directory if needed (do it from here and
+# before descending into subdir because it may be build after
+# library itself (in which case the compilation will obviously fail.
+if ALREADY_HAVE_METIS
+else
+all-am:
+	cd oomph_parmetis_3.1.1; make dummy; pwd; ls -l malloc*; cd ..
+endif
 
 # Suppress triangle?
 if SUPPRESS_TRIANGLE_LIB

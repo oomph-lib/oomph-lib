@@ -477,7 +477,7 @@ private:
  /// Constitutive law used to determine the mesh deformation
  ConstitutiveLaw *Constitutive_law_pt;
 
- /// Geometric object for the leaflet (too apply lagrange mult)
+ /// Geometric object for the leaflet (to apply lagrange mult)
  MeshAsGeomObject* Wall_geom_object_pt;
  
  /// Geom object for the leaflet

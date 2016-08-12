@@ -15,7 +15,7 @@
 if !HAVE_MALLOCH
 
 # Dummy dependency to force build of malloc.h
-defs.h: malloc.h
+dummy: malloc.h
 
 # Make it!
 malloc.h:
@@ -27,7 +27,7 @@ malloc.h:
 else
 
 # Dummy dependency to force build of malloc_shite.h
-defs.h: malloc_shite.h
+dummy: malloc_shite.h
 
 # Make it!
 malloc_shite.h:
