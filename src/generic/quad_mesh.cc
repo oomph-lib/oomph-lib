@@ -177,11 +177,11 @@ void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
    unsigned nel=vector_of_boundary_element_pt[i].size();
     
    // Allocate storage for the face identifiers
-   Face_index_at_boundary[i].resize(nel);
+   //Face_index_at_boundary[i].resize(nel);
    
    // Loop over elements that have at least one corner node on this boundary
    //-----------------------------------------------------------------------
-   unsigned e_count=0;
+   //unsigned e_count=0;
    typedef Vector<FiniteElement*>::iterator IT;
    for (IT it=vector_of_boundary_element_pt[i].begin();
         it!=vector_of_boundary_element_pt[i].end();
@@ -217,7 +217,7 @@ void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
      int indicator=-10;
 
      //Check that we're finding exactly one boundary indicator
-     bool found=false;
+     //bool found=false;
 
      // Loop over coordinates
      for (unsigned ii=0;ii<2;ii++)
@@ -225,10 +225,13 @@ void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
        // Loop over upper/lower end of coordinates
        for (int sign=-1;sign<3;sign+=2)
         {
+         //If an index occurs twice then that face is on the boundary
+         //But we can have multiple faces on the same boundary id, so just add all the ones that we
+         //have
          if (count[(ii+1)*sign]==2)
           {
            // Check that we haven't found multiple boundaries
-           if (found)
+           /*if (found)
             {
              std::string error_message=
               "Trouble: Multiple boundary identifiers!\n";
@@ -242,14 +245,18 @@ void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
               OOMPH_CURRENT_FUNCTION,
               OOMPH_EXCEPTION_LOCATION);
             }
-           found=true;
+            found=true;*/
            indicator=(ii+1)*sign;
+
+           //Copy into the data structure
+           Boundary_element_pt[i].push_back(*it);
+           Face_index_at_boundary[i].push_back(indicator);
           }
         }
       }
      
      // Element has exactly two corner nodes on boundary
-     if (found)
+     /*if (found)
       {
        // Add to permanent storage
        Boundary_element_pt[i].push_back(fe_pt);
@@ -291,11 +298,11 @@ void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
          throw OomphLibError("Never get here",
                              OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
-        }
+                             }
 
        // Increment counter
        e_count++;
-      }
+       }*/
      
     }
   }
