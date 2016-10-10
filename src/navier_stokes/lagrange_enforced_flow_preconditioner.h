@@ -139,7 +139,7 @@ class LagrangeEnforcedflowPreconditioner
     
     // Null the function pointer which is used to create the subsidiary
     // preconditioners for the W block(s)
-    Lagrange_multiplier_subsidiary_preconditioner_function_pt = 0;
+    Lagrange_multiplier_subsidiary_preconditioner_fct_pt = 0;
 
     // Set the vector of preconditioner pointers for the W block(s) to zero.
     Lagrange_multiplier_preconditioner_pt.resize(0,0);
@@ -175,22 +175,9 @@ class LagrangeEnforcedflowPreconditioner
 
     N_velocity_doftypes = 0;
 
-    Doc_time = false;
-
-    Doc_prec = false;
-
-    Doc_linear_solver_info_pt = 0;
-
     Use_diagonal_w_block = true;
 
     Mapping_info_calculated = false;
-
-    Label_pt = 0;
-
-    Doc_prec_directory_pt = 0;
-
-    Do_matcat_test = false;
-    Do_vec_test = false;
   }
 
   /// destructor
@@ -214,44 +201,11 @@ class LagrangeEnforcedflowPreconditioner
   /// Setup method for the LagrangeEnforcedflowPreconditioner.
   void setup();
 
-  /// Add a scalar to each of the diagonal entry of a matrix.
-  void add_scaling_to_diag(double &Scaling, CRDoubleMatrix *&block_pt);
-
-  /// Extract the diagonal entries of a matrix.
-  void get_diag(CRDoubleMatrix *&block_pt, Vector<double>& diag);
-
-  /// Element-wise addition of two matrices.
-  void add_matrices(CRDoubleMatrix *&block_pt1, CRDoubleMatrix *&block_pt2);
-
   /// Use the diagonal approximation for the W block.
   void use_diagonal_w_block() {Use_diagonal_w_block = true;}
 
   /// Use block diagonal W block.
   void use_block_diagonal_w_block() {Use_diagonal_w_block  = false;}
-
-  ///Enable documentation of time
-  void enable_doc_prec() {Doc_prec = true;}
-
-  ///Disable documentation of time
-  void disable_doc_prec() {Doc_prec = false;}
-
-  ///Enable documentation of time
-  void enable_doc_time() {Doc_time = true;}
-
-  ///Disable documentation of time
-  void disable_doc_time() {Doc_time = false;}
-
-  /// Set  label
-  void set_label_pt(std::string* label_pt) 
-  {
-    Label_pt = label_pt;
-  }
-
-  /// 
-  void set_doc_prec_directory_pt(std::string* doc_prec_directory_pt) 
-  {
-    Doc_prec_directory_pt = doc_prec_directory_pt;
-  }
 
   /// \short Apply the preconditioner.
   /// r is the residual (rhs), z will contain the solution.
@@ -493,13 +447,6 @@ class LagrangeEnforcedflowPreconditioner
     }
   }
 
-  /// Maybe I need to remove this.
-  void set_doc_linear_solver_info_pt
-    (DocLinearSolverInfo* doc_linear_solver_info_pt)
-  {
-    Doc_linear_solver_info_pt = doc_linear_solver_info_pt;
-  }
-
   /// \short By default the Lagrange multiplier subsidiary systems are 
   /// preconditioner with SuperLUPreconditioner. For a different 
   /// preconditioner, pass a function to this 
@@ -507,28 +454,13 @@ class LagrangeEnforcedflowPreconditioner
   void set_lagrange_multiplier_subsidiary_preconditioner(
       SubsidiaryPreconditionerFctPt prec_fn)
   {
-    Lagrange_multiplier_subsidiary_preconditioner_function_pt = prec_fn;
+    Lagrange_multiplier_subsidiary_preconditioner_fct_pt = prec_fn;
   }
 
   /// \short Clears the memory.
   void clean_up_memory();
 
-  bool Do_matcat_test;
-  bool Do_vec_test;
-
   private:
-
-  /// 
-  std::string* Label_pt;
-
-  /// 
-  std::string *Doc_prec_directory_pt;
-
-  /// 
-  bool Doc_time;
-
-  /// 
-  bool Doc_prec;
 
   /// 
   bool Mapping_info_calculated;
@@ -542,7 +474,7 @@ class LagrangeEnforcedflowPreconditioner
 
   /// The Lagrange multiplier subsidiary preconditioner function pointer
   SubsidiaryPreconditionerFctPt 
-    Lagrange_multiplier_subsidiary_preconditioner_function_pt;
+    Lagrange_multiplier_subsidiary_preconditioner_fct_pt;
 
   /// Same W solvers are used in both exact and LSC.
   /// Pointer to the 'preconditioner' for the W matrix
@@ -593,35 +525,7 @@ class LagrangeEnforcedflowPreconditioner
 
   bool Replace_all_f_blocks;
 
-
-
-  /// \short Pointer to Doc_linear_solver_info.
-  /// used for book keeping purposes.
-  DocLinearSolverInfo* Doc_linear_solver_info_pt;
-
 }; // end of LagrangeEnforcedflowPreconditioner class
 
-
-
-
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
-
-
-
-// void LagrangeEnforcedflowPreconditioner::assemble_inv_press_and_veloc_mass_matrix_diagonal
 }
 #endif
