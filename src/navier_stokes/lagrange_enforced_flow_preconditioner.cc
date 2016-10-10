@@ -26,7 +26,7 @@
 //LIC// 
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
-//LIC//====================================================================
+//LIC//=====================================================================
 #include "lagrange_enforced_flow_preconditioner.h"
 
 namespace oomph
@@ -44,32 +44,110 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
         new InnerIterationPreconditioner
           <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>;
 
-   // Note: This makes CG a proper "inner iteration" for
-   // which GMRES (may) no longer converge. We should really
-   // use FGMRES or GMRESR for this. However, here the solver
-   // is so good that it'll converge very quickly anyway
-   // so there isn't much to be gained by limiting the number
-   // of iterations...
-   prec_pt->max_iter() = 4;
-   prec_pt->solver_pt()->solver_type() = TrilinosAztecOOSolver::CG;
-   prec_pt->solver_pt()->disable_doc_time();
-   return prec_pt;
+    // Note: This makes CG a proper "inner iteration" for
+    // which GMRES (may) no longer converge. We should really
+    // use FGMRES or GMRESR for this. However, here the solver
+    // is so good that it'll converge very quickly anyway
+    // so there isn't much to be gained by limiting the number
+    // of iterations...
+    prec_pt->max_iter() = 4;
+    prec_pt->solver_pt()->solver_type() = TrilinosAztecOOSolver::CG;
+    prec_pt->solver_pt()->disable_doc_time();
+    return prec_pt;
 #else
-   std::ostringstream err_msg;
-   err_msg << "Inner CG preconditioner is unavailable.\n"
-           << "Please install Trilinos.\n";
-   throw OomphLibError(err_msg.str(),
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
+    std::ostringstream err_msg;
+    err_msg << "Inner CG preconditioner is unavailable.\n"
+            << "Please install Trilinos.\n";
+    throw OomphLibError(err_msg.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
 #endif
+  } // function get_lagrange_multiplier_preconditioner
+} // namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+ /// \short Apply the preconditioner.
+ /// r is the residual (rhs), z will contain the solution.
+void LagrangeEnforcedflowPreconditioner::preconditioner_solve(
+    const DoubleVector& r, DoubleVector& z)
+{
+  // Working vectors.
+  DoubleVector temp_vec;
+  DoubleVector another_temp_vec;
+  DoubleVector yet_another_temp_vec;
+
+  // First we solve all the w blocks:
+  if(Lagrange_multiplier_preconditioner_is_block_preconditioner)
+  {
+    for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
+    {
+      Lagrange_multiplier_preconditioner_pt[l_i]->preconditioner_solve(r,z);
+    }
+  }
+  else
+  {
+    // Loop through all of the Lagrange multipliers
+    for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
+    {
+      // Get the block type of block l_i
+      const unsigned l_ii = N_fluid_doftypes + l_i;
+
+      // Extract the block
+      this->get_block_vector(l_ii,r,temp_vec);
+
+      Lagrange_multiplier_preconditioner_pt[l_i]
+        ->preconditioner_solve(temp_vec,another_temp_vec);
+
+      const unsigned vec_nrow_local = another_temp_vec.nrow_local();
+      double* vec_values_pt = another_temp_vec.values_pt();
+       
+      for (unsigned i = 0; i < vec_nrow_local; i++) 
+      {
+        vec_values_pt[i] = vec_values_pt[i]*Scaling_sigma;
+      }
+      this->return_block_vector(l_ii,another_temp_vec,z);
+       
+      temp_vec.clear();
+      another_temp_vec.clear();
+    }
   }
 
-}
+   // Now solve the Navier-Stokes block.
 
+   // At this point, all vectors are cleared.
+   if(Using_superlu_ns_preconditioner)
+   {
+     // Get the concatenated fluid vector.
+     Vector<unsigned> fluid_block_indices(N_fluid_doftypes,0);
+     for (unsigned b = 0; b < N_fluid_doftypes; b++) 
+     {
+       fluid_block_indices[b] = b;
+     }
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+     this->get_concatenated_block_vector(fluid_block_indices,r,temp_vec);
+
+     // temp_vec contains the (concatenated) fluid rhs.
+     Navier_stokes_preconditioner_pt
+       ->preconditioner_solve(temp_vec,another_temp_vec);
+
+     temp_vec.clear();
+
+     // Now return it.
+     this->return_concatenated_block_vector(fluid_block_indices,
+                                            another_temp_vec,z);
+
+     another_temp_vec.clear();
+   }
+   else
+   {
+     // This is a BlockPreconditioner
+     Navier_stokes_preconditioner_pt->preconditioner_solve(r,z);
+   }
+ } // end of preconditioner_solve
 
 
 //===========================================================================
@@ -447,8 +525,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
     //    Scaling_sigma = -CRDoubleMatrixHelpers::inf_norm(u_pt)
     //     *Scaling_sigma_multiplier;
 
-    Scaling_sigma = -CRDoubleMatrixHelpers::inf_norm(v_aug_pt)
-      *Scaling_sigma_multiplier;
+    Scaling_sigma = -CRDoubleMatrixHelpers::inf_norm(v_aug_pt);
 
     //    Scaling_sigma = CRDoubleMatrixHelpers::maximum_gershgorin_disk(v_aug_pt)
     //     *Scaling_sigma_multiplier;
@@ -1501,7 +1578,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
         v_aug_pt(v_row,v_col) = 0;
       }
     }
-    ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
     // Solver for the W block.
     Lagrange_multiplier_preconditioner_pt.resize(N_lagrange_doftypes,0);
@@ -1552,33 +1629,31 @@ void LagrangeEnforcedflowPreconditioner::setup()
 } // end of LagrangeEnforcedflowPreconditioner::setup
 
 
-  //========================================================================
-  /// \short Clears the memory.
-  //========================================================================
-  void LagrangeEnforcedflowPreconditioner::clean_up_memory()
+//========================================================================
+/// \short Clears the memory.
+//========================================================================
+void LagrangeEnforcedflowPreconditioner::clean_up_memory()
+{
+  // clean the block preconditioner base class memory
+  this->clear_block_preconditioner_base();
+
+  // Delete the Navier-Stokes preconditioner pointer.
+  //  for now, we do not delete the Navier Stokes preconditioner pointer.
+  // Since we did not create this preconditioner. We should...
+  // Create function pointers for both the Lagrange and Navier-Stokes block.
+  // At the moment, if SuperLU preconditioning is used for the NS block,
+  // There would be a memory leak since we have not deleted this...
+  //  delete Navier_stokes_preconditioner_pt;
+  //  Navier_stokes_preconditioner_pt = 0;
+
+  // Delete the Lagrange_multiplier_preconditioner_pt
+  unsigned n_lgr_mult_prec_size = Lagrange_multiplier_preconditioner_pt.size();
+  for (unsigned prec_i = 0; prec_i < n_lgr_mult_prec_size; prec_i++) 
   {
-    // clean the block preconditioner base class memory
-    this->clear_block_preconditioner_base();
+    delete Lagrange_multiplier_preconditioner_pt[prec_i];
+  }
 
-    // Delete the Navier-Stokes preconditioner pointer.
-    //  for now, we do not delete the Navier Stokes preconditioner pointer.
-    // Since we did not create this preconditioner. We should...
-    // Create function pointers for both the Lagrange and Navier-Stokes block.
-    // At the moment, if SuperLU preconditioning is used for the NS block,
-    // There would be a memory leak since we have not deleted this...
-    //  delete Navier_stokes_preconditioner_pt;
-    //  Navier_stokes_preconditioner_pt = 0;
-
-    // Delete the Lagrange_multiplier_preconditioner_pt
-    unsigned n_lgr_mult_prec_size = Lagrange_multiplier_preconditioner_pt.size();
-    for (unsigned prec_i = 0; prec_i < n_lgr_mult_prec_size; prec_i++) 
-    {
-      delete Lagrange_multiplier_preconditioner_pt[prec_i];
-    }
-
-    // Resize the vector to zero, to avoid any dangling pointers.
-    Lagrange_multiplier_preconditioner_pt.resize(0,0);
-  } // end of LagrangeEnforcedflowPreconditioner::clean_up_memory
-
-
-}// end oomph namespace
+  // Resize the vector to zero, to avoid any dangling pointers.
+  Lagrange_multiplier_preconditioner_pt.resize(0,0);
+} // func LagrangeEnforcedflowPreconditioner::clean_up_memory
+}// namespace oomph

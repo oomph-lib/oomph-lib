@@ -26,7 +26,7 @@
 //LIC// 
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
-//LIC//====================================================================
+//LIC//=====================================================================
 #ifndef OOMPH_LAGRANGE_ENFORCED_FLOW_PRECONDITIONERS_HEADER
 #define OOMPH_LAGRANGE_ENFORCED_FLOW_PRECONDITIONERS_HEADER
 
@@ -36,7 +36,6 @@
 #include <oomph-lib-config.h>
 #endif
 
-
 // oomphlib headers
 #include "../generic/matrices.h"
 #include "../generic/assembly_handler.h"
@@ -45,9 +44,14 @@
 #include "../generic/preconditioner.h"
 #include "../generic/SuperLU_preconditioner.h"
 #include "../generic/matrix_vector_product.h"
-#include "navier_stokes_elements.h"
-#include "refineable_navier_stokes_elements.h"
-#include "navier_stokes_preconditioners.h"
+#include "../generic/general_purpose_preconditioners.h"
+#include "../generic/general_purpose_block_preconditioners.h"
+#ifdef OOMPH_HAS_HYPRE
+#include "../generic/hypre_solver.h"
+#endif
+#ifdef OOMPH_HAS_TRILINOS
+#include "../generic/trilinos_solver.h"
+#endif
 
 namespace oomph
 {
@@ -92,10 +96,11 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 /// [0 1 2 3] [4  5  6   7   8 ] [9  10 11 12 ]
 /// [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1]
 /// 
-/// Given that we know the spatial dimension of the problem, this information
-/// can be conveniently stored in a Vector N_doftype_in_mesh = [4, 5, 4]. This
-/// Vector will be used to re-order the dof types to group together the
-/// velocity, pressure, then lagrange dof types like so: 
+/// Given that we know the spatial dimension of the problem, this 
+/// information can be conveniently stored in a Vector 
+/// N_doftype_in_mesh = [4, 5, 4]. This Vector will be used to re-order 
+/// the dof types to group together the velocity, pressure, then Lagrange 
+/// DOF types like so:
 /// 
 ///  0 4  9  1 5  10  2 6  11    3    7   8  12   
 /// [u up ut v vp vt  w wp wt ] [p] [Lp1 Lp2 Lt1] 
@@ -169,7 +174,6 @@ class LagrangeEnforcedflowPreconditioner
     // flag to indicate LSC preconditioner
     Use_default_norm_of_f_scaling = true;
     Scaling_sigma = 0.0;
-    Scaling_sigma_multiplier = 1.0;
     N_lagrange_doftypes = 0;
     N_fluid_doftypes = 0;
 
@@ -187,7 +191,8 @@ class LagrangeEnforcedflowPreconditioner
   }
 
   /// Broken copy constructor
-  LagrangeEnforcedflowPreconditioner (const LagrangeEnforcedflowPreconditioner&)
+  LagrangeEnforcedflowPreconditioner 
+    (const LagrangeEnforcedflowPreconditioner&)
   {
     BrokenCopy::broken_copy("LagrangeEnforcedflowPreconditioner");
   }
@@ -209,82 +214,7 @@ class LagrangeEnforcedflowPreconditioner
 
   /// \short Apply the preconditioner.
   /// r is the residual (rhs), z will contain the solution.
-  void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
-  {
-    // Working vectors.
-    DoubleVector temp_vec;
-    DoubleVector another_temp_vec;
-    DoubleVector yet_another_temp_vec;
-
-    // First we solve all the w blocks:
-    if(Lagrange_multiplier_preconditioner_is_block_preconditioner)
-    {
-      for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
-      {
-        Lagrange_multiplier_preconditioner_pt[l_i]->preconditioner_solve(r,z);
-      }
-    }
-    else
-    {
-
-      // Loop through all of the Lagrange multipliers
-      for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
-      {
-        // Get the block type of block l_i
-        const unsigned l_ii = N_fluid_doftypes + l_i;
-
-        // Extract the block
-        this->get_block_vector(l_ii,r,temp_vec);
-
-        Lagrange_multiplier_preconditioner_pt[l_i]
-          ->preconditioner_solve(temp_vec,another_temp_vec);
-
-        const unsigned vec_nrow_local = another_temp_vec.nrow_local();
-        double* vec_values_pt = another_temp_vec.values_pt();
-        
-        for (unsigned i = 0; i < vec_nrow_local; i++) 
-        {
-          vec_values_pt[i] = vec_values_pt[i]*Scaling_sigma;
-        }
-        this->return_block_vector(l_ii,another_temp_vec,z);
-        
-        temp_vec.clear();
-        another_temp_vec.clear();
-      }
-    }
-
-    // Now solve the Navier-Stokes block.
-
-    // At this point, all vectors are cleared.
-    if(Using_superlu_ns_preconditioner)
-    {
-      // Get the concatenated fluid vector.
-      Vector<unsigned> fluid_block_indices(N_fluid_doftypes,0);
-      for (unsigned b = 0; b < N_fluid_doftypes; b++) 
-      {
-        fluid_block_indices[b] = b;
-      }
-
-      this->get_concatenated_block_vector(fluid_block_indices,r,temp_vec);
-
-      // temp_vec contains the (concatenated) fluid rhs.
-      Navier_stokes_preconditioner_pt
-        ->preconditioner_solve(temp_vec,another_temp_vec);
-
-      temp_vec.clear();
-
-      // Now return it.
-      this->return_concatenated_block_vector(fluid_block_indices,
-                                             another_temp_vec,z);
-
-      another_temp_vec.clear();
-    }
-    else
-    {
-      // This is a BlockPreconditioner
-      Navier_stokes_preconditioner_pt->preconditioner_solve(r,z);
-    }
-  } // end of preconditioner_solve
+  void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
   /// Set the meshes, the first mesh must be the fluid mesh
   void set_meshes(const Vector<Mesh*> &mesh_pt)
@@ -383,19 +313,7 @@ class LagrangeEnforcedflowPreconditioner
     return Scaling_sigma;
   }
 
-  /// \short Access function to the Scaling sigma of the preconditioner
-  double& scaling_sigma_multiplier()
-  {
-    return Scaling_sigma_multiplier;
-  }
-
-  /// \short Function to get the scaling Sigma of the preconditioner
-  double scaling_sigma_multiplier() const
-  {
-    return Scaling_sigma_multiplier;
-  } 
-
-  /// Use default scaling?
+  /// \short Use default scaling?
   void use_default_norm_of_f_scaling()
   {
     Use_default_norm_of_f_scaling = true;
@@ -467,7 +385,6 @@ class LagrangeEnforcedflowPreconditioner
 
   /// \short the Scaling_sigma variable of this preconditioner
   double Scaling_sigma;
-  double Scaling_sigma_multiplier;
 
   /// 
   bool Use_default_norm_of_f_scaling;
