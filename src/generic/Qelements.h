@@ -3,9 +3,9 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC//    Version 1.0; svn revision $LastChangedRevision$
+//LIC//    Version 1.0; svn revision $LastChangedRevision: 1182 $
 //LIC//
-//LIC// $LastChangedDate$
+//LIC// $LastChangedDate: 2016-05-20 16:50:20 +0100 (Fri, 20 May 2016) $
 //LIC// 
 //LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
 //LIC// 
@@ -338,7 +338,8 @@ class QElementBase : public virtual QElementGeometricBase
  unsigned nnode_on_face() const
   {
    // c++ doesn't have pow(int, int) so we have to use all these casts...
-   return static_cast<unsigned>(pow(static_cast<double>(nnode_1d()), dim()-1));
+   return static_cast<unsigned>(std::pow(static_cast<double>(nnode_1d()), 
+                                          static_cast<double>(dim()-1)));
   }
 
  /// It's a Q element!
