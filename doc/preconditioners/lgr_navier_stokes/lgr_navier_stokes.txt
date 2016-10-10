@@ -1,15 +1,91 @@
-\mainpage The Least-Squares Commutator (LSC) Navier-Stokes preconditioner
+\mainpage Demo problem: A preconditioner for the solution of Navier-Stokes equations with weakly imposed boundary conditions via Lagrange multipliers.
+<!-- 
+How to use ImposeParallelOutflowElements:
+doc/navier_stokes/vmtk_fluid/vmtk_fluid.txt
 
-The purpose of this tutorial is to show how to use
-\c oomph-lib's  Least Squares Commutator (LSC) Navier-Stokes
-preconditioner.
+Use formats from:
+doc/preconditioners/prescribed_displ_lagr_mult
+doc/preconditioners/lsc_navier_stokes
+doc/preconditioners/pseudo_solid_fsi
+Also good format: http://www.maths.manchester.ac.uk/~mheil/doc/solid/prescribed_displ_lagr_mult/html/index.html
+-->
+
+The purpose of this tutorial is to show how to use \c oomph-lib's  Lagrange
+Enforced Flow Navier-Stokes preconditioner. Similarly to the problem considered
+in <a href="../../../navier_stokes/vmtk_fluid/html/index.html"> another
+tutorial</a>, the in- and outflow boundaries are not aligned with any
+coordinate planes. Parallel in- and outflow is therefore enforced by a Lagrange
+multiplier method, implemented using \c oomph-lib's \c FaceElements.
+
+<HR>
+<HR>
+
+\section model The model problem
+
+We will demonstrate the development and application of the preconditioner 
+using the Poiseuille flow through a unit square domain rotated by an
+arbitrary angle \f$\alpha\f$ (see REF). The domain
+\f$\Omega^{[\alpha]}\f$ is obtained by rotating the discrete points 
+\f$(x_1,x_2)\f$
+in the unit square \f$\Omega = [0,1]^2\f$ by the following transformation
+\f[
+R(\alpha)=
+\left( 
+\begin{array}{cc}
+{\cos(\alpha)} & {-\sin(\alpha)} \\ {\sin(\alpha)} & {\cos(\alpha)} 
+\end{array} 
+\right),
+ \ \ \ \ \ \ \ \ \ \ @E[eqnrotation]@
+\f]
+where \f$\alpha\f$ is the angle of rotation.
+The
+figure below show the flow field (velocity vectors and pressure contours) for a
+unit square domain rotated by an angle of \f$\alpha=30^\circ \f$ and a Reynolds
+number of \f$ Re = 100. \f$ The flow is driven by a prescribed parabolic 
+boundary condition.
+@I w 0.4\textwidth SimAng30Rey100Noel4 "Velocity field and pressure contours."
+
+For convenience, we present the boundary conditions for
+the non-rotated unit square \f$\alpha = 0^{\circ}\f$. In order to obtain the
+boundary conditions for \f$\alpha \neq 0^\circ\f$, we only have to apply
+the rotation (@R[eqnrotation]@).  The flow is driven by imposing a
+parabolic velocity profile along the inflow boundary \f$\Omega_I\f$. Along the
+characteristic boundary, \f$\Omega_C\f$, the no-slip condition \f$u_i = 0\f$, \f$i =
+1,2\f$ is prescribed.  We impose `parallel outflow' along the outlet 
+\f$\Omega_O\f$ by insisting that
+\f[
+{\bf u}\cdot {\bf t} = 0 \mbox{\ \ \ \ on $\Omega_{O}$.}
+ \ \ \ \ \ \ \ \ \ \ @E[eqnbcpostrong]@
+\f]
+We weakly enforce the flow constraint by augmenting the Navier-Stokes momentum
+residual equation
+\f[
+r_{i}^{u}
+=
+\int_{\Omega}
+\left[
+Re \,
+  \left(
+    St \, \frac{\partial u_i}{\partial t}
+         +u_j \frac{\partial u_i}{\partial x_j}\phi
+  \right)
+\right]
+ \ \ \ \ \ \ \ \ \ \ @E[eqnaugmentedresu]@
+\f]
+
+
+ by employing Lagrange multipliers to enforce the constraint 
+\f${\bf u} \cdot {\bf t} = 0\f$. We augment the Navier-Stokes momentum equations (discussed in REF) by a Lagrange multiplier term so that it becomes
+
+
 
 
 
 <HR>
 <HR>
 
-\section theory Theory
+
+\section theoryold Theoryold
 
 \c oomph-lib currently provides two types of (LBB-stable)
 Navier-Stokes elements: Taylor-Hood (Q2Q1) and Crouzeix-Raviart
@@ -128,7 +204,7 @@ NavierStokesSchurComplementPreconditioner::set_p_preconditioner(...)
 <HR>
 <HR>
 
-\section example An example
+\section exampleold An exampleold
 
 To demonstrate how to use the preconditioner, here are
 the relevant extracts from the driver code
@@ -166,7 +242,7 @@ a few straightforward steps:
    has the character of a pressure Poisson matrix, it may be
    solved efficiently with algebraic multigrid (AMG) -- at least
    for elements that employ a continuous pressure approximation;
-   see \ref comm_ex. In these cases an efficient
+   see \ref comm_exold. In these cases an efficient
    inexact solver is obtained by performing just a single
    multigrid cycle. 
    \n\n
@@ -214,7 +290,7 @@ a few straightforward steps:
 <HR>
 <HR> 
 
-\section comm_ex Further comments and exercises
+\section comm_exold Further comments and exercisesold
 
 Use the driver code 
 <A HREF="../../../../demo_drivers/linear_solvers/driven_cavity.cc">
@@ -293,7 +369,7 @@ with full optimisation (-O6) on an Intel Xeon 3.6GHz processor.
 <HR>
 
 
-\section sources Source files for this tutorial
+\section sourcesold Source files for this tutorialold
 - The source files for this tutorial are located in the directory:\n\n
 <CENTER>
 <A HREF="../../../../demo_drivers/linear_solvers/">
