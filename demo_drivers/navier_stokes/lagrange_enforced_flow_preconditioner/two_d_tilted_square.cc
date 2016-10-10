@@ -160,11 +160,45 @@ public:
 
   /// \short Update before Newton solve.
   void actions_before_newton_solve()
-  {}
+  {
+    // Alias the namespace for convenience
+    namespace GV = Global_Variables;
+    GV::Iterations.clear();
 
-  /// \short Update after Newton solve.
-  void actions_after_newton_solve()
-  {}
+    // Which is the inflow boundary?
+    const unsigned in_bound = Left_bound;
+
+    // The number of nodes on a boundary
+    unsigned num_nod = mesh_pt()->nboundary_node(in_bound);
+    for(unsigned inod=0;inod<num_nod;inod++)
+    {
+      Node* nod_pt=mesh_pt()->boundary_node_pt(in_bound,inod);
+
+      // Pin both velocity components
+      nod_pt->pin(0);
+      nod_pt->pin(1);
+    
+      // Get the x and y cartesian coordinates
+      double x0=nod_pt->x(0);
+      double x1=nod_pt->x(1);
+
+      // Tilt x1 by -Ang_rad, this will give us the original coordinate.
+      double x1_old = x0*sin(-GV::Ang_rad) + x1*cos(-GV::Ang_rad);
+
+      // Now calculate the parabolic inflow at this point.
+      double u0_old = (x1_old - GV::Y_min)*(GV::Y_max - x1_old);
+   
+      // Now apply the rotation to u0_old, using rotation matrices.
+      // with x = u0_old and y = 0, i.e. R*[u;0] since we have the
+      // velocity in the x direction only. There is no velocity
+      // in the y direction.
+      double u0=u0_old*cos(GV::Ang_rad);
+      double u1=u0_old*sin(GV::Ang_rad);
+
+      nod_pt->set_value(0,u0);
+      nod_pt->set_value(1,u1);
+    } // for  
+  }
 
   /// \short Update after Newton step - document the number of iterations 
   /// required for the iterative solver to converge.
@@ -198,14 +232,6 @@ public:
        (this->linear_solver_pt())->iterations();
     GV::Iterations.push_back(iters);
 #endif
- }
-
- void actions_before_distribute()
- {
- }
-
- void actions_after_distribute()
- {
  }
 
  /// Doc the solution
@@ -327,43 +353,6 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
       }
     }
   }
-
-  // Which is the inflow boundary?
-  const unsigned in_bound = Left_bound;
-
-  // The number of nodes on a boundary
-  unsigned num_nod;
-
-  num_nod = mesh_pt()->nboundary_node(in_bound);
-  for(unsigned inod=0;inod<num_nod;inod++)
-  {
-    Node* nod_pt=mesh_pt()->boundary_node_pt(in_bound,inod);
-
-    // Pin both velocity components
-    nod_pt->pin(0);
-    nod_pt->pin(1);
-    
-    // Get the x and y cartesian coordinates
-    double x0=nod_pt->x(0);
-    double x1=nod_pt->x(1);
-
-    // Tilt x1 by -SL::Ang, this will give us the original coordinate.
-    double x1_old = x0*sin(-GV::Ang_rad) + x1*cos(-GV::Ang_rad);
-
-    // Now calculate the parabolic inflow at this point.
-    double u0_old = (x1_old - GV::Y_min)*(GV::Y_max - x1_old);
-   
-    // Now apply the rotation to u0_old, using rotation matrices.
-    // with x = u0_old and y = 0, i.e. R*[u;0] since we have the
-    // velocity in the x direction only. There is no velocity
-    // in the y direction.
-    double u0=u0_old*cos(GV::Ang_rad);
-    double u1=u0_old*sin(GV::Ang_rad);
-
-    nod_pt->set_value(0,u0);
-    nod_pt->set_value(1,u1);
-  }
-
  
   //Complete the problem setup to make the elements fully functional
 
