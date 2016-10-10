@@ -118,59 +118,34 @@ void LagrangeEnforcedFlowPreconditioner::preconditioner_solve(
   // Step 1 - apply approximate W block inverse to Lagrange multiplier
   // unknowns
   // -----------------------------------------------------------------------
-
-  // If the W preconditioner is a block preconditioner, then the extraction
-  // associated unknowns and RHS is handled by the (subsidiary) block 
-  // preconditioner.
-//  if(W_preconditioner_is_block_preconditioner)
-//  {
-//    // Loop through the solve the subsystems associated with the W block.
-//    for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
-//    {
-//      W_preconditioner_pt[l_i]->preconditioner_solve(r,z);
-//    }
-//  }
-//  else
+  // For each subsystem associated with each Lagrange multiplier, we loop
+  // through and:
+  // 1) extract the block entries from r
+  // 2) apply the inverse
+  // 3) return the entries to z.
+  for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
   {
-    // For each subsystem associated with each Lagrange multiplier, we loop
-    // through and:
-    // 1) extract the block entries from r
-    // 2) apply the inverse
-    // 3) return the entries to z.
-    for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
+    // The Lagrange multiplier block type.
+    const unsigned l_ii = N_fluid_doftypes + l_i;
+
+    // Extract the block
+    this->get_block_vector(l_ii,r,temp_vec);
+
+    // Apply the inverse.
+    const unsigned vec_nrow_local = temp_vec.nrow_local();
+    double* vec_values_pt = temp_vec.values_pt();
+    for (unsigned i = 0; i < vec_nrow_local; i++) 
     {
-      // The Lagrange multiplier block type.
-      const unsigned l_ii = N_fluid_doftypes + l_i;
-
-      // Extract the block
-      this->get_block_vector(l_ii,r,temp_vec);
-
-
-      // Solve
-//      W_preconditioner_pt[l_i]
-//        ->preconditioner_solve(temp_vec,another_temp_vec);
-
-//      // Apply the scaling sigma. The reason why we apply the scaling sigma
-//      // here instead of within the W_preconditioner_pt is to reduce error 
-//      // propagation. If sigma is small - then 1/sigma is large, we want 
-//      // avoid large growth in values.
-      const unsigned vec_nrow_local = temp_vec.nrow_local();
-      double* vec_values_pt = temp_vec.values_pt();
-      for (unsigned i = 0; i < vec_nrow_local; i++) 
-      {
-//        vec_values_pt[i] = vec_values_pt[i]*Scaling_sigma;
-        vec_values_pt[i] 
-          = vec_values_pt[i]*Inv_w_diag_values[l_i][i];
-      } // for
-
-      // Return the unknowns
-      this->return_block_vector(l_ii,temp_vec,z);
-
-      // Clear vectors.
-      temp_vec.clear();
-//      another_temp_vec.clear();
+      vec_values_pt[i] 
+        = vec_values_pt[i]*Inv_w_diag_values[l_i][i];
     } // for
-  } // else
+
+    // Return the unknowns
+    this->return_block_vector(l_ii,temp_vec,z);
+
+    // Clear vectors.
+    temp_vec.clear();
+  } // for
 
   // -----------------------------------------------------------------------
   // Step 2 - apply the augmented Navier-Stokes matrix inverse to the 
@@ -195,7 +170,7 @@ void LagrangeEnforcedFlowPreconditioner::preconditioner_solve(
 
     temp_vec.clear();
 
-    // Now return it.
+    // Return it to the unknowns.
     this->return_concatenated_block_vector(fluid_block_indices,
         another_temp_vec,z);
 
@@ -203,16 +178,18 @@ void LagrangeEnforcedFlowPreconditioner::preconditioner_solve(
   }
   else
   {
-    // This is a BlockPreconditioner
+    // The Navier-Stokes preconditioner is a block preconditioner.
+    // Thus is handles all of the block vector extraction and returns.
     Navier_stokes_preconditioner_pt->preconditioner_solve(r,z);
   }
 } // end of preconditioner_solve
 
-/// \short Set the meshes, the first mesh must be the bulk fluid mesh
+/// \short Set the meshes, 
+/// the first mesh in the vector must be the bulk mesh.
 void LagrangeEnforcedFlowPreconditioner::set_meshes(
     const Vector<Mesh*> &mesh_pt)
 {
-  // There should be at least two meshes for this preconditioner.
+  // There should be at least two meshes passed to this preconditioner.
   const unsigned nmesh = mesh_pt.size();
 
 #ifdef PARANOID
@@ -258,8 +235,8 @@ void LagrangeEnforcedFlowPreconditioner::set_meshes(
   {
     std::ostringstream err_msg;
     err_msg << "In the first mesh, the elements have elemental dimension of "
-      << elemental_dim << ", with a nodal dimension of "
-      << nodal_dim << ".\n"
+      << elemental_dim << ",\n"
+      << "with a nodal dimension of " << nodal_dim << ".\n"
       << "The first mesh does not contain 'bulk' elements.\n"
       << "Please re-order your mesh_pt vector.\n";
 
@@ -289,20 +266,16 @@ void LagrangeEnforcedFlowPreconditioner::set_meshes(
   // So we store them local to this class.
   My_mesh_pt = mesh_pt;
   My_nmesh = nmesh;
-} // EoFunc set_meshes
+} // function set_meshes
 
 
 //===========================================================================
 /// Setup the Lagrange enforced flow preconditioner. This
-/// extracts blocks corresponding to the velocity and pressure unknowns,
-/// creates the matrices actually needed in the application of the
+/// extracts blocks corresponding to the velocity and lagrange multiplier 
+/// unknowns, creates the matrices actually needed in the application of the
 /// preconditioner and deletes what can be deleted... Note that
 /// this preconditioner needs a CRDoubleMatrix.
 //============================================================================
-
-//========================================================================
-/// Setup method for the LagrangeEnforcedFlowPreconditioner.
-//========================================================================
 void LagrangeEnforcedFlowPreconditioner::setup()
 {
   // clean
@@ -321,14 +294,8 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   }
 #endif
 
-
   // Set up the My_ndof_types_in_mesh vector.
-  // - this can be optimised by creating a lookup list to the master
-  // block preconditioner, so then we get the number of DOF types in each mesh
-  // from BlockPreconditioner::ndof_types_in_mesh(...). The function
-  //  Mesh::ndof_types() requires communication, so we store this for now.
-  //
-  //  We try to be a bit efficient by not setting up the list twice.
+  // We try to be a bit efficient by not setting up the list twice.
   if(My_ndof_types_in_mesh.size() == 0)
   {
     for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++) 
@@ -337,9 +304,12 @@ void LagrangeEnforcedFlowPreconditioner::setup()
     }
   }
 
-
+  // -----------------------------------------------------------------------
+  // Step 1 - Setting up the block types
+  //
   // To construct the desired block structure for this preconditioner, with
-  // assumption on the natural ordering of the DOF types, we require only the
+  // assumption on the natural ordering of the DOF types, we require only 
+  // the:
   //
   // (1) spatial dimension of the problem and
   // (2) the number of DOF types in each of the meshes.
@@ -383,7 +353,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   // give to the function block_setup(...).
   // 
   // First we work out a few variables to aid us in this endeavour.
-
+  // -----------------------------------------------------------------------
 
   // Get the spatial dimension of the problem.
   // This is used to create look up lists later.
@@ -440,15 +410,12 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   // total number of velocity DOF types is the spatial dimension multiplied
   // by the number of meshes.
   N_velocity_doftypes = My_nmesh*spatial_dim;
-//std::cout << "N_velocity_doftypes: " << N_velocity_doftypes << std::endl; 
 
   // Fluid has +1 for the pressure.
   N_fluid_doftypes = N_velocity_doftypes + 1;
-//std::cout << "N_fluid_doftypes: " << N_fluid_doftypes << std::endl; 
 
   // The rest are Lagrange multiplier DOF types.
   N_lagrange_doftypes = n_dof_types - N_fluid_doftypes;
-//std::cout << "N_lagrange_doftypes: " << N_lagrange_doftypes << std::endl; 
 
   ///////////////////////////////////////////////////////////
   //   Now create the DOF to block map for block_setup()   //
@@ -1762,14 +1729,14 @@ void LagrangeEnforcedFlowPreconditioner::clean_up_memory()
   //  Navier-Stokes_preconditioner_pt = 0;
 
   // Delete the W_preconditioner_pt
-  unsigned n_lgr_mult_prec_size = W_preconditioner_pt.size();
-  for (unsigned prec_i = 0; prec_i < n_lgr_mult_prec_size; prec_i++) 
-  {
-    delete W_preconditioner_pt[prec_i];
-  }
+//  unsigned n_lgr_mult_prec_size = W_preconditioner_pt.size();
+//  for (unsigned prec_i = 0; prec_i < n_lgr_mult_prec_size; prec_i++) 
+//  {
+//    delete W_preconditioner_pt[prec_i];
+//  }
 
   // Resize the vector to zero, to avoid any dangling pointers.
-  W_preconditioner_pt.resize(0,0);
+//  W_preconditioner_pt.resize(0,0);
 } // func LagrangeEnforcedFlowPreconditioner::clean_up_memory
 
 }// namespace oomph

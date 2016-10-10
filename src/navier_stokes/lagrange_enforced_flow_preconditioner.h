@@ -96,15 +96,14 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 /// |       | Wd |
 ///
 /// where  F_aug = F_ns + L^T*inv(Wd)*L is an augmented Navier-Stokes block 
-/// and Wd=Scaling_sigma*diag(LL^T).
+/// and Wd=(1/Scaling_sigma)*diag(LL^T).
 ///
 /// In our implementation of the preconditioner, the linear systems 
-/// associated with the diagonal blocks can either be solved "exactly", 
+/// associated with the (1,1) block can either be solved "exactly", 
 /// using SuperLU (in its incarnation as an exact preconditioner; 
 /// this is the default) or by any other Preconditioner (inexact solver) 
 /// specified via the access functions
 ///
-/// LagrangeEnforcedFlowPreconditioner::set_w_preconditioner(
 /// LagrangeEnforcedFlowPreconditioner::set_navier_stokes_preconditioner(...)
 ///
 /// Access to the elements is provided via meshes. However, a Vector of 
@@ -158,16 +157,11 @@ public:
   {
     // The null pointer.
     Navier_stokes_preconditioner_pt = 0;
-    W_preconditioner_fct_pt = 0;
-
-    // Set the vector of preconditioner pointers for the W block(s) to zero.
-    W_preconditioner_pt.resize(0,0);
 
     // By default, the linear systems associated with the diagonal blocks 
     // are solved "exactly" using SuperLU (in its incarnation as an exact 
     // preconditioner. This is not a block preconditioner. 
     Navier_stokes_preconditioner_is_block_preconditioner = false;
-    W_preconditioner_is_block_preconditioner = false;
 
     // Flag to indicate to use SuperLU or not.
     Using_superlu_ns_preconditioner = true;
@@ -297,16 +291,6 @@ public:
     }
   }
 
-  /// \short By default the subsidiary systems associated with the W matrix
-  /// are preconditioned with SuperLUPreconditioner. For a different 
-  /// preconditioner, pass a function to this function returning a different
-  /// subsidiary operator.
-  void set_w_preconditioner(
-      SubsidiaryPreconditionerFctPt prec_fct_pt)
-  {
-    W_preconditioner_fct_pt = prec_fct_pt;
-  }
-
   /// \short Clears the memory.
   void clean_up_memory();
 
@@ -326,18 +310,6 @@ private:
 
   /// \short Inverse W values
   Vector<Vector<double> > Inv_w_diag_values;
-
-  /// \short The W matrix subsidiary preconditioner function pointer
-  SubsidiaryPreconditionerFctPt W_preconditioner_fct_pt;
-
-  /// \short Each Lagrange multiplier constraint block is associated with
-  /// a unique W matrix. Pointer to the 'preconditioner' for each W 
-  /// matrices.
-  Vector<Preconditioner*> W_preconditioner_pt;
-
-  /// \short Boolean to indicate if the preconditioner for the W subsidiary
-  /// system is a block preconditioner or not.
-  bool W_preconditioner_is_block_preconditioner;
 
   /// \short Pointer to the 'preconditioner' for the Navier-Stokes block
   Preconditioner* Navier_stokes_preconditioner_pt;
