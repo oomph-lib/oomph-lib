@@ -1488,7 +1488,8 @@ void LagrangeEnforcedFlowPreconditioner::setup()
     // We chose this DOF ordering as it is the same as our block ordering, and
     // so will be easier when we replace blocks (discussed later).
     // 
-    { // encapsulating temp vectors.
+    
+//    { // encapsulating temp vectors.
 
       // We create the mapping with the help of two vectors.
       // Noting that the first spatial dimension number of dof types in each mesh
@@ -1520,13 +1521,13 @@ void LagrangeEnforcedFlowPreconditioner::setup()
 
       unsigned partial_sum_index = 0;
 
-      Subsidiary_list_bcpl.resize(0,0);
+      Vector<unsigned> subsidiary_list_bcpl;
       for(unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++)
       {
         // Store the velocity dof types.
         for(unsigned dim_i = 0; dim_i < spatial_dim; dim_i++)
         {
-          Subsidiary_list_bcpl.push_back(partial_sum_index + dim_i);
+          subsidiary_list_bcpl.push_back(partial_sum_index + dim_i);
         } // for spatial_dim
 
         // Update the DOF index
@@ -1534,19 +1535,19 @@ void LagrangeEnforcedFlowPreconditioner::setup()
       } // for My_nmesh
 
       // push back the pressure DOF type
-      Subsidiary_list_bcpl.push_back(spatial_dim);
+      subsidiary_list_bcpl.push_back(spatial_dim);
 
-    } // end of encapsulating
+//    } // end of encapsulating
 
     //    // Output for artificial test.
-    //    std::cout << "Subsidiary_list_bcpl:" << std::endl; 
-    //    for (unsigned i = 0; i < Subsidiary_list_bcpl.size(); i++) 
+    //    std::cout << "subsidiary_list_bcpl:" << std::endl; 
+    //    for (unsigned i = 0; i < subsidiary_list_bcpl.size(); i++) 
     //    {
-    //      std::cout << Subsidiary_list_bcpl[i] << std::endl;
+    //      std::cout << subsidiary_list_bcpl[i] << std::endl;
     //    }
     //    // With the artificial test data, this should output:
     //    // 0, 1, 2, 4, 5, 6, 9, 10, 11, 3
-    //    pause("Printed out Subsidiary_list_bcpl"); 
+    //    pause("Printed out subsidiary_list_bcpl"); 
 
     // The ns_dof_list will ensure that the NS preconditioner have the 
     // structure:
@@ -1554,7 +1555,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
     // ub vb up vp ut vt p
     navier_stokes_block_preconditioner_pt
       ->turn_into_subsidiary_block_preconditioner(
-          this, Subsidiary_list_bcpl, subsidiary_dof_type_coarsening_map);
+          this, subsidiary_list_bcpl, subsidiary_dof_type_coarsening_map);
 
     // Set the replacement blocks.
     //
@@ -1645,7 +1646,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
     delete w_pt[l_i];
   }
 
-  Mapping_info_calculated = true;
+  Preconditioner_has_been_setup = true;
 } // end of LagrangeEnforcedFlowPreconditioner::setup
 
 /// \short Function to set a new momentum matrix preconditioner 

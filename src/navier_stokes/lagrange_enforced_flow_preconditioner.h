@@ -86,9 +86,9 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 /// |  D |  0  |
 ///
 /// Here F is the momentum block, G the discrete gradient operator,
-/// and D the discrete divergence operator. (For unstabilised elements, 
+/// and D the discrete divergence operator. For unstabilised elements, 
 /// we have D = G^T and in much of the literature the divergence matrix is 
-/// denoted by B.)
+/// denoted by B.
 ///
 /// The Lagrange enforced flow preconditioner takes the form:
 /// | F_aug |    |
@@ -96,7 +96,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 /// |       | Wd |
 ///
 /// where  F_aug = F_ns + L^T*inv(Wd)*L is an augmented Navier-Stokes block 
-/// and Wd=diag(LL^T).
+/// and Wd=Scaling_sigma*diag(LL^T).
 ///
 /// In our implementation of the preconditioner, the linear systems 
 /// associated with the diagonal blocks can either be solved "exactly", 
@@ -185,7 +185,7 @@ public:
     N_lagrange_doftypes = 0;
     N_fluid_doftypes = 0;
     N_velocity_doftypes = 0;
-    Mapping_info_calculated = false;
+    Preconditioner_has_been_setup = false;
   } // constructor
 
   /// \short Destructor
@@ -297,8 +297,8 @@ public:
     }
   }
 
-  /// \short By default the Lagrange multiplier subsidiary systems are 
-  /// preconditioned with SuperLUPreconditioner. For a different 
+  /// \short By default the subsidiary systems associated with the W matrix
+  /// are preconditioned with SuperLUPreconditioner. For a different 
   /// preconditioner, pass a function to this function returning a different
   /// subsidiary operator.
   void set_w_preconditioner(
@@ -312,60 +312,57 @@ public:
 
 private:
 
-  /// \short Flag to indicate if the mappings are calculated.
-  bool Mapping_info_calculated;
+  /// \short Control flag is true if the preconditioner has been setup
+  /// (used so we can wipe the data when the preconditioner is
+  /// called again)
+  bool Preconditioner_has_been_setup;
 
-  /// \short the Scaling_sigma variable of this preconditioner
+  /// \short Scaling for the augmentation: Scaling_sigma*(LL^T)
   double Scaling_sigma;
 
-  /// \short 
+  /// \short Flag to indicate if we want to use the infinite norm of the
+  /// Navier-Stokes momentum block for the scaling sigma.
   bool Use_norm_f_for_scaling_sigma;
 
-  /// \short The Lagrange multiplier subsidiary preconditioner function 
-  /// pointer
+  /// \short The W matrix subsidiary preconditioner function pointer
   SubsidiaryPreconditionerFctPt W_preconditioner_fct_pt;
 
-  /// \short Same W solvers are used in both exact and LSC.
-  /// Pointer to the 'preconditioner' for the W matrix
+  /// \short Each Lagrange multiplier constraint block is associated with
+  /// a unique W matrix. Pointer to the 'preconditioner' for each W 
+  /// matrices.
   Vector<Preconditioner*> W_preconditioner_pt;
 
-  /// \short Boolean to indicate if the Lagrange multiplier preconditioner 
-  /// is a 
-  /// block preconditioner or not.
+  /// \short Boolean to indicate if the preconditioner for the W subsidiary
+  /// system is a block preconditioner or not.
   bool W_preconditioner_is_block_preconditioner;
 
   /// \short Pointer to the 'preconditioner' for the Navier-Stokes block
   Preconditioner* Navier_stokes_preconditioner_pt;
 
-  /// \short Boolean to indicate if the preconditioner for the 
-  /// Navier-Stokes block
-  /// is a block preconditioner or not.
+  /// \short Flag to indicate if the preconditioner for the Navier-Stokes 
+  /// block is a block preconditioner or not.
   bool Navier_stokes_preconditioner_is_block_preconditioner;
 
-  /// \short flag to indicate whether the default NS preconditioner is used
+  /// \short Flag to indicate whether the default NS preconditioner is used
   bool Using_superlu_ns_preconditioner;
 
-  /// \short the re-arraned DOF types: velocity, pressure, Lagrange.
-  Vector<unsigned> Doftype_list_vpl;
-
-  /// \short the re-arraned DOF types: bulk, constrained, pressure, lagrange.
-  Vector<unsigned> Subsidiary_list_bcpl;
-
-  /// \short Storage for the meshes. 
-  /// The first mesh must always be the Navier-Stokes (bulk) mesh.
+  /// \short Storage for the meshes. In our implementation, the first mesh 
+  /// must always be the Navier-Stokes (bulk) mesh, followed by surface 
+  /// meshes.
   Vector<Mesh*> My_mesh_pt;
 
-  /// \short 
+  /// \short The number of DOF types in each mesh. This is used create 
+  /// various lookup lists.
   Vector<unsigned> My_ndof_types_in_mesh;
 
-  /// \short Store the number of meshes. 
-  /// This is required to create the look up lists.
+  /// \short The number of meshes. This is used to create various lookup 
+  /// lists.
   unsigned My_nmesh;
 
-  /// \short The number of lagrange multiplier DOF types
+  /// \short The number of Lagrange multiplier DOF types.
   unsigned N_lagrange_doftypes;
 
-  /// \short The number of fluid DOF types (including pressure)
+  /// \short The number of fluid DOF types (including pressure).
   unsigned N_fluid_doftypes;
 
   /// \short The number of velocity DOF types.
