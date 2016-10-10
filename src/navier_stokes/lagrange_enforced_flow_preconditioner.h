@@ -54,41 +54,20 @@ namespace oomph
 
 namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 {
-#ifdef OOMPH_HAS_TRILINOS
-  /// \short CG with diagonal preconditioner for the lagrange multiplier
+  /// \short CG with diagonal preconditioner for the Lagrange multiplier
   /// subsidiary linear systems.
-//  Preconditioner* get_lagrange_multiplier_preconditioner()
-//  {
-//    InnerIterationPreconditioner
-//      <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>* prec_pt = 
-//        new InnerIterationPreconditioner
-//          <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>;
-//
-//   // Note: This makes CG a proper "inner iteration" for
-//   // which GMRES (may) no longer converge. We should really
-//   // use FGMRES or GMRESR for this. However, here the solver
-//   // is so good that it'll converge very quickly anyway
-//   // so there isn't much to be gained by limiting the number
-//   // of iterations...
-//   prec_pt->max_iter() = 4;
-//   prec_pt->solver_pt()->solver_type() = TrilinosAztecOOSolver::CG;
-//   prec_pt->solver_pt()->disable_doc_time();
-//   return prec_pt;
-//  }
   extern Preconditioner* get_lagrange_multiplier_preconditioner();
-
-#endif
 }
 
 
-//=============================================================================
+//==========================================================================
 /// \short The preconditioner for the Lagrange multiplier constrained 
 /// Navier-Stokes equations. The velocity components are constrained by 
 /// Lagrange multiplier, which are applied via OOMPH-LIB's FACE elements.
 /// 
 /// A Vector of meshes is taken, each mesh contains a different type of
 /// block preconditionable element. Each element must not only classify it's 
-/// own degrees of freedom but also the associated dof from the 'bulk' 
+/// own degrees of freedom but also the associated DOF from the 'bulk' 
 /// element.
 /// 
 /// The first mesh in the Vector Mesh_pt is assumed to be the 'bulk' mesh.
@@ -137,7 +116,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 /// and D the discrete divergence operator. (For unstabilised elements, 
 /// we have D = G^T and in much of the literature the divergence matrix is 
 /// denoted by B.) The L blocks
-//=============================================================================
+//==========================================================================
 class LagrangeEnforcedflowPreconditioner 
   : public BlockPreconditioner<CRDoubleMatrix>
 {

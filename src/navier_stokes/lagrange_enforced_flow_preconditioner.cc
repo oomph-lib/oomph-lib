@@ -34,29 +34,11 @@ namespace oomph
 
 namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 {
-#ifdef OOMPH_HAS_TRILINOS
-  /// \short CG with diagonal preconditioner for the lagrange multiplier
+  /// \short CG with diagonal preconditioner for the Lagrange multiplier
   /// subsidiary linear systems.
-//  Preconditioner* get_lagrange_multiplier_preconditioner()
-//  {
-//    InnerIterationPreconditioner
-//      <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>* prec_pt = 
-//        new InnerIterationPreconditioner
-//          <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>;
-//
-//   // Note: This makes CG a proper "inner iteration" for
-//   // which GMRES (may) no longer converge. We should really
-//   // use FGMRES or GMRESR for this. However, here the solver
-//   // is so good that it'll converge very quickly anyway
-//   // so there isn't much to be gained by limiting the number
-//   // of iterations...
-//   prec_pt->max_iter() = 4;
-//   prec_pt->solver_pt()->solver_type() = TrilinosAztecOOSolver::CG;
-//   prec_pt->solver_pt()->disable_doc_time();
-//   return prec_pt;
-//  }
   Preconditioner* get_lagrange_multiplier_preconditioner()
   {
+#ifdef OOMPH_HAS_TRILINOS
     InnerIterationPreconditioner
       <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>* prec_pt = 
         new InnerIterationPreconditioner
@@ -72,9 +54,16 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
    prec_pt->solver_pt()->solver_type() = TrilinosAztecOOSolver::CG;
    prec_pt->solver_pt()->disable_doc_time();
    return prec_pt;
+#else
+   std::ostringstream err_msg;
+   err_msg << "Inner CG preconditioner is unavailable.\n"
+           << "Please install Trilinos.\n";
+   throw OomphLibError(err_msg.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+#endif
   }
 
-#endif
 }
 
 
@@ -84,7 +73,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 
 
 //===========================================================================
-/// Setup the least-squares commutator Navier Stokes preconditioner. This
+/// Setup the Lagrange enforced flow preconditioner. This
 /// extracts blocks corresponding to the velocity and pressure unknowns,
 /// creates the matrices actually needed in the application of the
 /// preconditioner and deletes what can be deleted... Note that
