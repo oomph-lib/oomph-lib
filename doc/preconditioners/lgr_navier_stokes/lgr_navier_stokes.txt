@@ -1,14 +1,5 @@
 \mainpage Demo problem: A preconditioner for the solution of Navier-Stokes equations with weakly imposed boundary conditions via Lagrange multipliers.
-<!-- 
-How to use ImposeParallelOutflowElements:
-doc/navier_stokes/vmtk_fluid/vmtk_fluid.txt
 
-Use formats from:
-doc/preconditioners/prescribed_displ_lagr_mult
-doc/preconditioners/lsc_navier_stokes
-doc/preconditioners/pseudo_solid_fsi
-Also good format: http://www.maths.manchester.ac.uk/~mheil/doc/solid/prescribed_displ_lagr_mult/html/index.html
--->
 
 The purpose of this tutorial is to show how to use \c oomph-lib's  Lagrange
 Enforced Flow Navier-Stokes preconditioner. Similarly to the problem considered
@@ -16,8 +7,7 @@ in the <a href="../../../navier_stokes/vmtk_fluid/html/index.html"> Steady finit
 coordinate planes. Parallel outflow is therefore enforced by a Lagrange
 multiplier method, implemented using \c oomph-lib's \c FaceElement framework.
 
-\section model The model problem
-
+\section model The model problem, theory and preconditioner
 We will demonstrate the development and application of the preconditioner 
 using the Poiseuille flow through a unit square domain rotated by an
 arbitrary angle \f$\alpha\f$ (see the figure below). The domain
@@ -117,7 +107,7 @@ dS
 \f]
 Equation (@R[eqnaugmentedresufirstvar]@) reveals that the Lagrange 
 multipliers act as (negative) tangential traction 
-\f$(\lambda = -{\bf n}^T{\tau}{\bf t})\f$ that enforce the parallel flow across the boundary \f$\partial\Omega_{O}\f$. 
+\f$(\lambda = -{\mathbf{n}}^T{\mathbf{\tau}}{\mathbf{t}})\f$ that enforce the parallel flow across the boundary \f$\partial\Omega_{O}\f$. 
 We discretise this constraint by attaching \c ImposeParallelOutflowElements 
 to the boundaries of the "bulk" Navier-Stokes elements that are adjacent to 
 \f$ \partial \Omega_O \f$ as shown in the 
@@ -125,11 +115,11 @@ to the boundaries of the "bulk" Navier-Stokes elements that are adjacent to
 <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html"> Deformation of a solid by a prescribed boundary motion </a> tutorial which employs a similar technique used to enforce prescribed boundary 
 displacements in solid mechanics problems. We discretise the Navier-Stokes equations using \c oomph-lib's \c QTaylorHoodElements, see the <a href="../../../navier_stokes/driven_cavity/html/index.html"> 2D Driven Cavity Problem</a> tutorial for more information.
 
-Talk about ImposeParallelOutflowElements re-classifying the bulk unknowns?
+[RAYRAY - Talk about ImposeParallelOutflowElements re-classifying the  unknowns already classified by the bulk element?]
 
 The discretised problem therefore contains the following types of discrete 
 unknowns:
-- The fluid degrees of freedom (velocities and pressures).\n\n
+- The fluid degrees of freedom (velocity and pressure).\n\n
 - The nodal values representing the components of the (vector-valued)
   Lagrange multipliers. These only exist for the nodes on 
   \f$ \partial \Omega_O\f$. (The nodes are re-sized to
@@ -153,64 +143,31 @@ freedom into the following categories:
 For a 2D problem, the linear system to be solved in the course 
 of the Newton iteration can then be (formally) re-ordered 
 into the following block structure:
-\f[
-{\bf P} = 
-\left(
-\begin{array}{c||c}
-\begin{array}{cc}
-J_{11} & J_{12} \\
-J_{21} & J_{22}  \\
-\end{array} &
-\begin{array}{ccc}
-J_{13} & J_{14} & J_{15} \\
-J_{23} & J_{24} & J_{25} \\
-\end{array} \\
-\hline
-\hline
-&
-\begin{array}{cc|c}
-J_{33} & J_{34} & J_{35} \\
-J_{43} & J_{44} & J_{45} \\
-\hline
-J_{53} & J_{54} & J_{55} \\
-\end{array}
-\end{array}
-\right) =
-\left(
-\begin{array}{c|c}
-B_{11}  & B_{12}\\
-\hline
-        & B_{22} \\
-\end{array}
-\right).
-\hspace{3cm}
-@E[eqn:coarse_two_plus_two_plus_one_reordered_linear_system]@
-\f]
 
 \f[
 \left[
 \begin{array}{ccccc|c}
 { F_{\rm xx}}&{ F_{\rm x\bar{\rm
-      x}}}&{ F_{\rm xy}}&{ F_{\rm x\bar{\rm y}}}&{ B_{\rm x}}&\\
-{ F_{\bar{\rm x}\rm x}}&{ F_{\bar{\rm x}\bar{\rm x}}}&{ F_{\bar{\rm x}\rm y}}&{ F_{\bar{\rm x}\bar{\rm y}}}&{ B_{\rm x}}&{ M_{\rm x}}\\
+      x}}}&{ F_{\rm xy}}&{ F_{\rm x\bar{\rm y}}}&{ B_{\rm x}^{T}}&\\
+{ F_{\bar{\rm x}\rm x}}&{ F_{\bar{\rm x}\bar{\rm x}}}&{ F_{\bar{\rm x}\rm y}}&{ F_{\bar{\rm x}\bar{\rm y}}}&{ B_{\bar{\rm x}}^{T}}&{ M_{\rm x}}\\
 { F_{\rm yx}}&{ F_{\rm y\bar{\rm
-      x}}}&{ F_{\rm yy}}&{ F_{\rm y\bar{\rm y}}}&{ B_{\rm x}}&\\
+      x}}}&{ F_{\rm yy}}&{ F_{\rm y\bar{\rm y}}}&{ B_{\rm y}^{T}}&\\
 { F_{\bar{\rm y}\rm x}}&{ F_{\bar{\rm
       y}\bar{\rm x}}}&{ F_{\bar{\rm y}\rm y}}&{ 
-  F_{\bar{\rm y}\bar{\rm y}}}&{ B_{\rm x}}&{ M_{\rm y}}\\
-{ B_{\rm x}}&{ B_{\rm x}}&{ B_{\rm x}}&{ B_{\rm x}}&\\
+  F_{\bar{\rm y}\bar{\rm y}}}&{ B_{\bar{\rm y}}^{T}}&{ M_{\rm y}}\\
+{ B_{\rm x}}&{ B_{\bar{\rm x}}}&{ B_{\rm y}}&{ B_{\bar{\rm y}}}&\\
 \hline
 &{ M_{\rm x}}&&{ M_{\rm y}}&&
 \end{array}
 \right]
 \left[
 \begin{array}{c}
-\Delta \mathbf{X}_{\rm x}\\
-\Delta \mathbf{\overline{X}}_{\rm x}\\
-\Delta \mathbf{X}_{\rm y}\\
-\Delta \mathbf{\overline{X}}_{\rm y}\\
-\Delta \mathbf{L}_{\rm x}\\
-\Delta \mathbf{L}_{\rm y}
+\Delta \mathbf{U}_{\rm x}\\
+\Delta \mathbf{\overline{U}}_{\rm x}\\
+\Delta \mathbf{U}_{\rm y}\\
+\Delta \mathbf{\overline{U}}_{\rm y}\\
+\Delta \mathbf{P}\\
+\Delta \mathbf{\Lambda}
 \end{array}
 \right]
  =
@@ -221,226 +178,193 @@ B_{11}  & B_{12}\\
 \mathbf{r}_{\bar{\rm x}}\\
 \mathbf{r}_{\rm y}\\
 \mathbf{r}_{\bar{\rm y}}\\
-\mathbf{r}_{\rm l_x}\\
-\mathbf{r}_{\rm l_y}
+\mathbf{r}_{\rm p}\\
+\mathbf{r}_{\rm \Lambda}
 \end{array}
 \right].
 \ \ \ \ \ \   @E[linear_system]@
 \f]
-Here the vectors \f${\bf X}_{\rm x}\f$, \f${\bf X}_{\rm y}\f$, 
-\f${\bf L}_{\rm x}\f$ and \f${\bf
-  L}_{\rm y}\f$ contain the \f$x\f$ and \f$y\f$ components of the unknown
-nodal positions and Lagrange multipliers, respectively. The overbars 
+Here the vectors \f${\bf U}_{\rm x}\f$, \f${\bf U}_{\rm y}\f$, 
+\f${\bf P}\f$ and \f${\bf
+  \Lambda}\f$ contain the \f$x\f$ and \f$y\f$ components of the
+velocity unknowns, the pressure unknowns and Lagrange multipliers, respectively. The overbars 
 identify the unknown nodal positions that are constrained by the 
 Lagrange multiplier. The matrices \f$M_{\rm x}\f$ and \f$M_{\rm y}\f$ 
 are mass matrices 
-whose entries are formed from products of the basis functions,
-\f$[M_{{\rm x}}]_{ij}=[M_{{\rm y}}]_{ij} = 
-\int_{\partial D_{\rm prescr}} {\psi_i} \ {\psi_j} \ dS \f$.
-
-
-The discretised problem contains the 
-following types of discrete unknowns:
-- The velocity degrees of freedom. These are further subdivided into those which are affected by the Lagrange multiplier constraint and those which are not.\n\n
-- The pressure degrees of freedom.\n\n
-- The Lagrange multiplier degrees of freedom.\n\n
-.
-
-
-Using this classification of the unknowns,
-the linear system to be solved in the course 
-of the Newton iteration can be re-ordered 
-into the following block structure (in 2D):
+whose entries are formed from products of the basis functions multiplied by a component of the tangent vector at each discrete point on \f$\partial\Omega_{O}\f$, for example,
+\f$[M_{{\rm x}}]_{ij}
+=
+\int_{\partial \Omega_{O}} t_x {\psi_i} \ {\psi_j} \ dS \f$.
 \f[
-J \ \Delta {\bf x} = 
- \left[
-\begin{array}{c|c|cc}
-F& &C_{\rm fx}&\\ \hline C_{\rm sf}&S&C_{\rm sx}&\\ \hline
-&&E&C_{\rm xl}\\ &C_{\rm ls}&C_{\rm lx}&\\
+J_{\rm NS}
+=
+\left[
+\begin{array}{ccccc}
+{ F_{\rm xx}}&{ F_{\rm x\bar{\rm
+      x}}}&{ F_{\rm xy}}&{ F_{\rm x\bar{\rm y}}}&{ B_{\rm x}^{T}}\\
+{ F_{\bar{\rm x}\rm x}}&{ F_{\bar{\rm x}\bar{\rm x}}}&{ F_{\bar{\rm x}\rm y}}&{ F_{\bar{\rm x}\bar{\rm y}}}&{ B_{\bar{\rm x}}^{T}}\\
+{ F_{\rm yx}}&{ F_{\rm y\bar{\rm
+      x}}}&{ F_{\rm yy}}&{ F_{\rm y\bar{\rm y}}}&{ B_{\rm y}^{T}}\\
+{ F_{\bar{\rm y}\rm x}}&{ F_{\bar{\rm
+      y}\bar{\rm x}}}&{ F_{\bar{\rm y}\rm y}}&{ 
+  F_{\bar{\rm y}\bar{\rm y}}}&{ B_{\bar{\rm y}}^{T}}\\
+{ B_{\rm x}}&{ B_{\bar{\rm x}}}&{ B_{\rm y}}&{ B_{\bar{\rm y}}}
 \end{array}
-\right] \left[
+\right],
+ \ \ \ 
+L = 
+\left[
+\begin{array}{ccccc}
+ &{M_{\rm x}}& &{ M_{\rm x}} &
+\end{array}
+\right],
+ \ \ \ 
+\Delta \mathbf{X}_{\rm NS}
+=
+\left[
 \begin{array}{c}
- \Delta {\bf F}\\ 
-\hline \Delta {\bf S}\\ 
-\hline \Delta {\bf X}\\ 
-\Delta {\bf L}\\
+\Delta \mathbf{U}_{\rm x}\\
+\Delta \mathbf{\overline{U}}_{\rm x}\\
+\Delta \mathbf{U}_{\rm y}\\
+\Delta \mathbf{\overline{U}}_{\rm y}\\
+\Delta \mathbf{P}
 \end{array}
-\right] =- \left[
+\right],\mbox{\ \ \ \ and }
+ \ \ \ 
+\mathbf{r}_{\rm NS}
+=
+\left[
 \begin{array}{c}
-{\bf r}_{\rm f}\\ 
-\hline {\bf r}_{\rm s}\\ 
-\hline {\bf r}_{\rm x}\\ 
-{\bf r}_{\rm l}\\
+\mathbf{r}_{\rm x}\\
+\mathbf{r}_{\bar{\rm x}}\\
+\mathbf{r}_{\rm y}\\
+\mathbf{r}_{\bar{\rm y}}\\
+\mathbf{r}_{\rm p}
 \end{array}
-\right] 
-\ \ \ \ \ \ \ \ @E[fsi_linear_system]@
+\right].
 \f]
-where the vector \f${\bf F}\f$ contains the Navier-Stokes (fluid) unknowns 
-(velocities and pressure), \f${\bf S}\f$ represents unknowns describing the
-deformation of the fluid-loaded solid, \f${\bf X}\f$ represents 
-the nodal positions in the fluid mesh, and \f${\bf L}\f$ contains 
-the discrete Lagrange multipliers which impose
-the deformation of the FSI boundary in the fluid mesh.
-The three diagonal blocks in the Jacobian matrix, \f$J_{\rm FSI}\f$, are 
-the two ``single-physics'' 
-Jacobian matrices (\f$F\f$, the Navier-Stokes Jacobian; \f$S\f$, the 
-tangent stiffness matrix of the fluid-loaded solid) and 
-the Jacobian, 
+Then we can re-write (@R[linear_system]@) as
 \f[
-J_{\rm PS} = 
 \left[
 \begin{array}{cc}
-E&C_{\rm xl}\\ 
-C_{\rm lx}&\\
+{ J_{\rm NS}}&L^{T}\\
+L& 
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\Delta \mathbf{X}_{\rm NS}\\
+\Delta \mathbf{\Lambda}
+\end{array}
+\right]
+ =
+-
+\left[
+\begin{array}{c}
+\mathbf{r}_{\rm NS}\\
+\mathbf{r}_{\rm \Lambda}
+\end{array}
+\right].
+\ \ \ \ \ \   @E[linear_system_small]@
+\f]
+We have shown that 
+\f[
+P=
+\left[
+\begin{array}{cc}
+{ J_{\rm NS}} + L^{T}W^{-1} L& \\
+ & W
+\end{array}
+\right],
+\ \ \ \ \ \   @E[prec_ideal_small]@
+\f]
+where \f$W = \frac{1}{\sigma}LL^{T}\f$ is an optimal preconditioner for the 
+linear system (@R[linear_system_small]@) if we set 
+\f$ \sigma=\|F\|_{\infty} \f$ where \f$F\f$ is the compound \f$4\times 4\f$ 
+top-left block 
+\f[
+F
+=
+\left[
+\begin{array}{ccccc}
+{ F_{\rm xx}}&{ F_{\rm x\bar{\rm
+      x}}}&{ F_{\rm xy}}&{ F_{\rm x\bar{\rm y}}}\\
+{ F_{\bar{\rm x}\rm x}}&{ F_{\bar{\rm x}\bar{\rm x}}}&{ F_{\bar{\rm x}\rm y}}&{ F_{\bar{\rm x}\bar{\rm y}}}\\
+{ F_{\rm yx}}&{ F_{\rm y\bar{\rm
+      x}}}&{ F_{\rm yy}}&{ F_{\rm y\bar{\rm y}}}\\
+{ F_{\bar{\rm y}\rm x}}&{ F_{\bar{\rm
+      y}\bar{\rm x}}}&{ F_{\bar{\rm y}\rm y}}&{ 
+  F_{\bar{\rm y}\bar{\rm y}}}
 \end{array}
 \right]
 \f]
-
-
-
-
-
-
-
-The finite element discretisation and Newton linearisation of (@R[eqnaugmentedresufirstvar]@) and 
-(@R[eqnweakconstraint]@) give rise to a linear system with the following block structure
-
-
-
-
-
-
-<HR>
-<HR>
-
-\section theoryold Theoryold
-
-\c oomph-lib currently provides two types of (LBB-stable)
-Navier-Stokes elements: Taylor-Hood (Q2Q1) and Crouzeix-Raviart
-(Q2Q-1) elements. These contain two distinct types of degrees of freedom,
-namely the velocities and pressures. 
-
-The least-squares commutator (LSC; formerly BFBT) Navier-Stokes 
-preconditioner employs \c oomph-lib's <a href="../../../mpi/block_preconditioners/html/index.html">block-preconditioning framework</a>
-to (formally) re-order the linear system to be solved during the
-Newton iteration into 2x2 blocks, corresponding to the velocity 
-and pressure unknowns. We note that all velocity components are 
-treated as a single block of unknowns. The linear system
-therefore has the following block structure
+in the Jacobian matrix.
+Application of the preconditioner \f$P\f$ requires the repeated solution of 
+linear systems involving the diagonal blocks 
+\f${J_{\rm NS}} + L^{T}W^{-1} L\f$ and \f$W\f$.
+The matrix \f$W^{-1} = \sigma (LL^{T})^{-1} = \sigma ({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}\f$ is dense and will cause 
+the addition of dense sub-matrices to the Jacobian matrix:
 \f[
-\left( 
+\sigma L^{T}(LL^{T})^{-1}L
+=
+\sigma
+\left[
+\begin{array}{ccccc}
+\cal O &\cal O &\cal O &\cal O &\cal O \\
+ \cal O&{M_{\rm x}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm x}}&\cal O &{M_{\rm x}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm y}}&\cal O \\
+ \cal O&\cal O &\cal O &\cal O &\cal O \\
+ \cal O&{M_{\rm y}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm x}}&\cal O &{M_{\rm y}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm y}}& \cal O\\
+ \cal O&\cal O &\cal O &\cal O &\cal O
+\end{array}
+\right].
+\f]
+Numerical experiments show that an efficient implementation can be obtained by 
+replacing \f$W\f$ by its diagonal approximation 
+\f$\hat{W} = \mbox{diag}(M_{\rm x}^{2}+M_{\rm y}^{2})\f$. 
+Then the inversion of \f$W\f$ is straight forward and the addition of 
+\f$L^{T}{\hat{W}}^{-1}L\f$ to the Jacobian does not significantly increase 
+the number of non-zero entries in the matrix \f$J_{\rm NS}\f$.
+Denote the 
+efficient implementation by
+\f[
+\tilde{P}
+=
+\left[
 \begin{array}{cc}
-{\bf F} & {\bf G} \\ {\bf D} & {\bf 0} 
-\end{array} 
-\right)
-\left( 
-\begin{array}{c}
-{\bf z}_u \\ {\bf z}_p
-\end{array} 
-\right) =
-\left( 
-\begin{array}{c}
-{\bf r}_u \\ {\bf r}_p
-\end{array} 
-\right).
+{ \tilde{J}_{\rm NS}}& \\
+ & \hat{W}
+\end{array}
+\right],
+\ \ \ \ \ \   @E[prec_eff_small]@
 \f]
-Here \f$ {\bf F}\f$ is the momentum block,  \f$ {\bf G} \f$ the
-discrete gradient operator, and \f$ {\bf D}\f$ the discrete
-divergence operator. (For unstabilised elements, we have 
-\f$ {\bf D} = {\bf G}^T \f$ and in much of the literature
-the divergence matrix is denoted by \f$ {\bf B} \f$ .)
-
-An "exact" preconditioner would solve this system exactly and thus
-ensure the convergence of any iterative linear solver in a single 
-iteration. However, the application of such a preconditioner
-would, of course, be exactly as expensive as a direct solve.
-The LSC/BFBT preconditioner replaces the exact Jacobian by 
-a block-triangular approximation
-\f[
-\left( 
-\begin{array}{cc}
-{\bf F} & {\bf G} \\ {\bf 0} & -{\bf M}_s 
-\end{array} 
-\right) 
-\left( 
-\begin{array}{c}
-{\bf z}_u \\ {\bf z}_p
-\end{array} 
-\right) =
-\left( 
-\begin{array}{c}
-{\bf r}_u \\ {\bf r}_p
-\end{array} 
-\right),
-\f]
-where \f${\bf M}_s\f$ is an approximation to the pressure 
-Schur-complement \f$ {\bf S} = {\bf D} {\bf F}^{-1}{\bf G}. \f$
-This system can be solved in two steps:
--# Solve the second row for \f$ {\bf z}_p\f$ via
-   \f[ 
-   {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p
-   \f]
--# Given \f$ {\bf z}_p \f$ , solve the first row for \f$ {\bf z}_u\f$ via
-   \f[ 
-   {\bf z}_u = {\bf F}^{-1} \big( {\bf r}_u - {\bf G} {\bf z}_p \big)
-   \f]
-.
-In the LSC/BFBT preconditioner, the action of the inverse pressure
-Schur complement 
-\f[
-{\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p
-\f]
-is approximated by
-\f[
-{\bf z}_p = - 
-\big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}
-\big({\bf D} \widehat{\bf Q}^{-1}{\bf F} \widehat{\bf Q}^{-1}{\bf G}\big) 
-\big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}
-{\bf r}_p,
-\f]
-where  \f$ \widehat{\bf Q} \f$ is the diagonal of the velocity
-mass matrix. The evaluation of this expression involves
-two linear solves involving the matrix
-\f[
-{\bf P} = \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)
-\f]
-which has the character of a matrix arising from the discretisation 
-of a Poisson problem on the pressure space. We also have
-to evaluate matrix-vector products with the matrix 
-\f[
-{\bf E}={\bf D}\widehat{\bf Q}^{-1}{\bf F}\widehat{\bf Q}^{-1}{\bf G}
-\f]
-Details of the theory can be found in "Finite Elements and 
-Fast Iterative Solvers with Applications in Incompressible Fluid 
-Dynamics" by Howard C. Elman, David J. Silvester, and Andrew J. Wathen,
-published by Oxford University Press, 2006.
-\n\n
-
-In our implementation of the preconditioner, the linear systems
+where \f$\tilde{J}_{\rm NS} =J_{\rm NS}+ L^{T}{\hat{W}}^{-1}L\f$ is the augmented Navier-Stokes Jacobian matrix.
+In our implementation of the preconditioner, the linear system involving \f$\tilde{J}_{\rm NS}\f$
 can either be solved "exactly", using \c SuperLU (in its incarnation
 as an exact preconditioner; this is the default) or by any 
 other \c Preconditioner (interpreted as an "inexact solver") 
-specified via the access functions
+specified via the access function
 \code
-NavierStokesSchurComplementPreconditioner::set_f_preconditioner(...)
+LagrangeEnforcedFlowPreconditioner::set_navier_stokes_preconditioner(...)
 \endcode
-or 
-\code
-NavierStokesSchurComplementPreconditioner::set_p_preconditioner(...)
-\endcode
+Numerical experiments show that a nearly optimal preconditioner is obtained 
+by replacing the solution of the linear system involving the
+augmented Navier-Stokes Jacobian \f$ \hat{J}_{\rm NS} \f$ by an application of 
+  Elman, Silvester and Wathen's
+  <a href="../../lsc_navier_stokes/html/index.html">
+  Least-Squares Commutator (LSC)
+  preconditioner</a>, and by replacing the remaining block-solves within these preconditioners
+by a small number of AMG cycles.
 
 <HR>
 <HR>
 
-\section exampleold An exampleold
+\section example An example
 
 To demonstrate how to use the preconditioner, here are
 the relevant extracts from the driver code
-<A HREF="../../../../demo_drivers/linear_solvers/driven_cavity.cc">
-driven_cavity.cc</A> -- a straightforward
-modification of the code for
-<a href="../../../navier_stokes/driven_cavity/html/index.html">
-driven-cavity problem discussed elsewhere.</a> 
+<A HREF="../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc">
+two_d_tilted_square.cc</A> 
+
 As explained in the 
 <a href="../../../linear_solvers/html/index.html">Linear
 Solvers Tutorial</A> switching to an iterative linear solver
@@ -450,164 +374,29 @@ a few straightforward steps:
 -# <b>Create an instance of the IterativeLinearSolver and pass it to the
    Problem</b> \n\n
    In our problem, we choose \c GMRES as the linear solver: \n\n
-   \dontinclude driven_cavity.cc
+   \dontinclude two_d_tilted_square.cc
    \skipline Create oomph-lib
-   \until Solver_pt;
+   \until solver_pt;
    \n\n
 -# <b>Create an instance of the Preconditioner and pass it to the
    IterativeLinearSolver</b> \n\n
    \skipline Set preconditioner
    \until Solver_pt->preconditioner_pt()=Prec_pt;
    \n\n
--# <b>Customise the Preconditioner (if required)</b> \n\n
-   The behaviour of many preconditioners can be fine-tuned
-   for specific applications. The \c NavierStokesLSCPreconditioner
-   provides the option to perform the linear solves involving
-   the \f$ {\bf P} \f$ and  \f$ {\bf F} \f$ matrices with
-   inexact solvers (i.e. other preconditioners), rather than
-   with the "exact preconditioner" \c SuperLUPreconditioner. 
-   Since the matrix \f$ {\bf P} \f$
-   has the character of a pressure Poisson matrix, it may be
-   solved efficiently with algebraic multigrid (AMG) -- at least
-   for elements that employ a continuous pressure approximation;
-   see \ref comm_exold. In these cases an efficient
-   inexact solver is obtained by performing just a single
-   multigrid cycle. 
-   \n\n
-   Assuming that 
-   <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">
-   <code>Hypre</code></a> is available, we therefore provide the
-   option to use the \c Hypre
-   AMG solver to solve the linear systems involving the  \f$ {\bf P}
-   \f$ matrix. 
-   \n\n
-   \dontinclude driven_cavity.cc
-   \skipline OOMPH_HAS_HYPRE
-   \until new HyprePreconditioner;
-   \n 
-   We set the various solver flags to values that are appropriate
-   for 2D Poisson problems. This is most easily done by calling a helper
-   function, defined in the namespace \c Hypre_default_settings:
-   \n\n
-   \skipline Set parameters
-   \until  static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
-   \n
-   Next we specify the \c Preconditioner as the inexact solver
-   for the  \f$ {\bf P}
-   \f$ matrix,
-   \n\n
-   \until set_p_preconditioner
-   \n
-   and suppress the on-screen output from Hypre.
-   \n\n
-   \until }
-   \n
-   For modest Reynolds numbers, performing a single multigrid cycle also
-   provides a good approximate solver for linear systems involving
-   the momentum block, \f$ {\bf F}, \f$ so we repeat the steps
-   just listed, using the solver flags assigned in another
-   helper function in the namespace  \c Hypre_default_settings:
-   \n\n
-   \skipline F_matrix_preconditioner_pt = new HyprePreconditioner;
-   \until Prec_pt->set_f_preconditioner
 
-   The driver code contains various other preconditioning options which you
-   should explore yourself.
 .
 
 <HR>
 <HR> 
 
-\section comm_exold Further comments and exercisesold
-
-Use the driver code 
-<A HREF="../../../../demo_drivers/linear_solvers/driven_cavity.cc">
-demo_drivers/linear_solvers/driven_cavity.cc</a> to explore the
-behaviour of the preconditioner for the driven cavity problem.
-The driver code uses command line flags to specify various
-solver/preconditioner combinations. 
-
--# Show that for Taylor-Hood (Q2Q1) elements, the preconditioner
-   performs extremely well, i.e. the solve time increases
-   approximately linearly with the number of degrees of freedom.
-   \n\n
--# Show that for Crouzeix-Raviart (Q2Q-1) elements, the use
-   of the AMG solver for the pressure Schur complement block
-   leads to a very poor performance. 
-   \n\n
--# Examine iteration numbers and CPU times for various problem sizes
-   and show that for Taylor-Hood (Q2Q1) elements, the preconditioner
-   leads to near-optimal behaviour in the sense that the CPU times
-   increase approximately linearly with the number of unknowns.
-   Determine the "break-even" point in the CPU times for 
-   the solution by direct and iterative solvers. \b Hint: You may 
-   wish to use the shell script 
-   <A HREF="../../../../demo_drivers/linear_solvers/time_driven_cavity.bash">
-   time_driven_cavity.bash</a> to perform the parameter studies.
-   \n\n
-</A>
-.
-
-
-
-For your reference, here are a few timings (total time in seconds for
-the Newton solver) obtained from runs at a Reynolds number of
-\f$ Re=100 \f$ on various uniformly refined meshes. The first column in 
-the tables shows the total number of degrees of freedom; the
-subsequent columns show the solve times for different
-solver/preconditioner combinations. For instance, 
-GMRES [SuperLU,AMG] means that the linear systems were solved
-using the LSC preconditioner with an exact solve for the momentum
-block and an approximate AMG solve (a single multigrid cycle)
-for the pressure Schur complement block. All runs were performed 
-with full optimisation (-O6) on an Intel Xeon 3.6GHz processor.
-
-<b><center>Taylor Hood</center></b>
-
-<table border=1>
-<tr><th># of dofs</th><th>SuperLU</th><th>GMRES [SuperLU,SuperLU]</th><th>GMRES [SuperLU,AMG]</th><th>GMRES [AMG,SuperLU]</th><th>GMRES [AMG,AMG]</th></tr>
-<tr><td>842</td><td> 0.38 </td><td> 0.51 </td><td> 0.52 </td><td> 0.93 </td><td> 0.91</td></tr>
-<tr><td>3482</td><td> 2.32 </td><td> 2.56 </td><td> 2.28 </td><td> 3.15 </td><td> 3.04</td></tr>
-<tr><td>7922</td><td> 9.24 </td><td> 6.34 </td><td> 6.3 </td><td> 7.54 </td><td> 7.41</td></tr>
-<tr><td>14162</td><td> 15.71 </td><td> 18.06 </td><td> 17.84 </td><td> 13.8 </td><td> 13.46</td></tr>
-<tr><td>22202</td><td> 36.88 </td><td> 28.46 </td><td> 27.21 </td><td> 23.26 </td><td> 23.29</td></tr>
-<tr><td>32042</td><td> 62.29 </td><td> 37.27 </td><td> 36.26 </td><td> 29.38 </td><td> 25.84</td></tr>
-<tr><td>43682</td><td> 108.97 </td><td> 66.26 </td><td> 57.7 </td><td> 41.71 </td><td> 37.6</td></tr>
-</table>
-
-
-<b><center>Crouzeix Raviart</center></b>
-
-
-<table border=1>
-<tr><th># of dofs</th><th>SuperLU</th><th>GMRES [SuperLU,SuperLU]</th><th>GMRES [SuperLU,AMG]</th><th>GMRES [AMG,SuperLU]</th><th>GMRES [AMG,AMG]</th></tr>
-<tr><td>1021 </td><td> 0.29 </td><td> 0.51 </td><td> 0.72 </td><td> 0.72 </td><td> 0.99</td></tr>
-<tr><td>4241 </td><td> 1.82 </td><td> 2.79 </td><td> 4.83 </td><td> 3.62 </td><td> 7.03</td></tr>
-<tr><td>9661 </td><td> 7.06 </td><td> 8.06 </td><td> 20.43 </td><td> 9.64 </td><td> 27.33</td></tr>
-<tr><td>17281 </td><td> 20.79 </td><td> 19.62 </td><td> 67.62 </td><td> 20.15 </td><td> 87.39</td></tr>
-<tr><td>27101 </td><td> 55.43 </td><td> 44.34 </td><td> 169.8 </td><td> 46.04 </td><td> 227.11</td></tr>
-<tr><td>39121 </td><td> 93.75 </td><td> 64.02 </td><td> 277.29 </td><td> 39.73 </td><td> 314.25</td></tr>
-<tr><td>53341 </td><td> 108.96 </td><td> 78.27 </td><td> 521.00 </td><td>60.02 </td><td> 596.27</td></tr>
-</table>
 
 
 
 
-<HR>
-<HR>
 
 
-\section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
-<CENTER>
-<A HREF="../../../../demo_drivers/linear_solvers/">
-demo_drivers/linear_solvers/
-</A>
-</CENTER>\n
-- The driver code is: \n\n
-<CENTER>
-<A HREF="../../../../demo_drivers/linear_solvers/driven_cavity.cc">
-demo_drivers/linear_solvers/driven_cavity.cc
-</A>
-</CENTER>
+
+
+
+
 

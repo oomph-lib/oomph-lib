@@ -429,7 +429,7 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
 
   Prec_pt = lgr_prec_pt;
 
-
+  // Create oomph-lib iterative linear solver
   IterativeLinearSolver* solver_pt = new GMRES<CRDoubleMatrix>;
 
   // We use RHS preconditioning. Note that by default,
