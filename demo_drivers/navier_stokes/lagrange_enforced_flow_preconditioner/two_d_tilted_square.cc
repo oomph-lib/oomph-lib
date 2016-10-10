@@ -111,44 +111,6 @@ namespace Global_Variables
    return ang_deg * (MathematicalConstants::Pi / 180.0);
  }
 
- //=========================================================================
- /// Given a preconditioner, print out the hypre settings.
- //=========================================================================
- void print_hypre_settings(Preconditioner* preconditioner_pt)
- {
-   HyprePreconditioner* h_prec_pt 
-     = checked_dynamic_cast<HyprePreconditioner*>(preconditioner_pt);
-
-   // Print AMG iterations:
-   oomph_info << "HyprePreconditioner settings are: " << std::endl;
-   oomph_info << "Max_iter: " << h_prec_pt->amg_iterations() << std::endl;
-   oomph_info << "smoother iter: " << h_prec_pt->amg_smoother_iterations() 
-     << std::endl;
-   oomph_info << "Hypre_method: " << h_prec_pt->hypre_method() << std::endl;
-   oomph_info << "internal_preconditioner: " 
-     << h_prec_pt->internal_preconditioner() << std::endl;
-   oomph_info << "AMG_using_simple_smoothing: " 
-     << h_prec_pt->amg_using_simple_smoothing_flag() << std::endl; 
-   oomph_info << "AMG_simple_smoother: " 
-     << h_prec_pt->amg_simple_smoother() << std::endl; 
-   oomph_info << "AMG_complex_smoother: " 
-     << h_prec_pt->amg_complex_smoother() << std::endl; 
-   oomph_info << "AMG_coarsening: " 
-     << h_prec_pt->amg_coarsening() << std::endl;
-   oomph_info << "AMG_max_levels: " 
-     << h_prec_pt->amg_max_levels() << std::endl;
-   oomph_info << "AMG_damping: " 
-     << h_prec_pt->amg_damping() << std::endl;
-   oomph_info << "AMG_strength: " 
-     << h_prec_pt->amg_strength() << std::endl;;
-   oomph_info << "AMG_max_row_sum: " 
-     << h_prec_pt->amg_max_row_sum() << std::endl;
-   oomph_info << "AMG_truncation: " 
-     << h_prec_pt->amg_truncation() << std::endl;
-   oomph_info << "\n" << std::endl;
- }
-
-
  /// Storage for number of iterations during Newton steps 
  Vector<unsigned> Iterations;
 
@@ -430,6 +392,36 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
   oomph_info << "\n equation numbers : "
              << assign_eqn_numbers() << std::endl;
 
+
+  // We choose either trilinos or oomph-lib's GMRES as our linear solver
+  if(GV::Use_trilinos)
+  {
+#ifdef OOMPH_HAS_TRILINOS
+    // Create the trilinos solver.
+    TrilinosAztecOOSolver* trilinos_solver_pt = new TrilinosAztecOOSolver;
+    trilinos_solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
+
+    // Store the solver pointer.
+    Solver_pt = trilinos_solver_pt;
+#endif
+  }
+  else
+  {
+    // Create oomph-lib iterative linear solver.
+    IterativeLinearSolver* solver_pt = new GMRES<CRDoubleMatrix>;
+    
+    // We use RHS preconditioning. Note that by default,
+    // left hand preconditioning is used.
+    static_cast<GMRES<CRDoubleMatrix>*>(solver_pt)
+      ->set_preconditioner_RHS();
+
+    // Store the solver pointer.
+    Solver_pt = solver_pt;
+  }
+
+  // Set up other solver parameters.
+  Solver_pt->tolerance() = 1.0e-6;
+
   // Overview of solvers:
   //
   // The Jacobian takes the block form:
@@ -458,15 +450,15 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
   // For the (1,1) block, we can use SuperLU or the LSC preconditioner.
 
 
+  // Create the preconditioner
+  LagrangeEnforcedFlowPreconditioner* lgr_prec_pt
+    = new LagrangeEnforcedFlowPreconditioner;
+
   // Create the vector of mesh pointers!
   Vector<Mesh*> mesh_pt;
   mesh_pt.resize(2,0);
   mesh_pt[0] = Bulk_mesh_pt;
   mesh_pt[1] = Surface_mesh_P_pt;
-
-  // Create the preconditioner.
-  LagrangeEnforcedFlowPreconditioner* lgr_prec_pt
-    = new LagrangeEnforcedFlowPreconditioner;
 
   lgr_prec_pt->set_meshes(mesh_pt);
   
@@ -477,6 +469,7 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
     lsc_prec_pt = new NavierStokesSchurComplementPreconditioner(this);
     lsc_prec_pt->set_navier_stokes_mesh(Bulk_mesh_pt);
     lsc_prec_pt->use_lsc();
+    lgr_prec_pt->set_navier_stokes_preconditioner(lsc_prec_pt);
 
     if(GV::Use_amg_for_f)
     {
@@ -485,8 +478,6 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
         F_preconditioner_pt
           = Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper::
             boomer_amg_for_2D_momentum_simple_visc();
-        GV::print_hypre_settings(F_preconditioner_pt);
-
         lsc_prec_pt->set_f_preconditioner(F_preconditioner_pt);
       }
       else
@@ -494,7 +485,6 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
         F_preconditioner_pt
           = Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper::
             boomer_amg_for_2D_momentum_stressdiv_visc();
-        GV::print_hypre_settings(F_preconditioner_pt);
         lsc_prec_pt->set_f_preconditioner(F_preconditioner_pt);
       }
     }
@@ -506,51 +496,18 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
           boomer_amg_for_2D_poisson_problem();
       lsc_prec_pt->set_p_preconditioner(P_preconditioner_pt);
     }
-   
-    lgr_prec_pt->set_navier_stokes_preconditioner(lsc_prec_pt);
   }
   else
   {
     lgr_prec_pt->set_superlu_for_navier_stokes_preconditioner();
   }
 
-
   // Store the preconditioner pointers.
   Navier_stokes_prec_pt = lsc_prec_pt;
   Prec_pt = lgr_prec_pt;
 
-
-  if(GV::Use_trilinos)
-  {
-#ifdef OOMPH_HAS_TRILINOS
-    // Create the trilinos solver.
-    TrilinosAztecOOSolver* trilinos_solver_pt = new TrilinosAztecOOSolver;
-    trilinos_solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
-
-    // Store the solver pointer.
-    Solver_pt = trilinos_solver_pt;
-#endif
-  }
-  else
-  {
-    // Create oomph-lib iterative linear solver.
-    IterativeLinearSolver* solver_pt = new GMRES<CRDoubleMatrix>;
-    
-    // We use RHS preconditioning. Note that by default,
-    // left hand preconditioning is used.
-    static_cast<GMRES<CRDoubleMatrix>*>(solver_pt)
-      ->set_preconditioner_RHS();
-
-    // Store the solver pointer.
-    Solver_pt = solver_pt;
-  }
-
-  // Set up other solver parameters.
-  Solver_pt->tolerance() = 1.0e-6;
-//  Solver_pt->max_iter() = 110;
-
   // Pass the preconditioner to the solver.
-  Solver_pt->preconditioner_pt() = Prec_pt;
+  Solver_pt->preconditioner_pt() = lgr_prec_pt;
 
   // Pass the solver to the problem.
   this->linear_solver_pt() = Solver_pt;

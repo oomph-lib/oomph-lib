@@ -390,19 +390,36 @@ steps:
 
 -# <b>Create an instance of the IterativeLinearSolver and pass it to the
    Problem</b> \n\n
-   In our problem, we choose \c GMRES as the linear solver: \n\n
+   In our problem, we choose right preconditioned \c GMRES as the linear 
+   solver: \n\n
    \dontinclude two_d_tilted_square.cc
    \skipline Create oomph-lib
    \until solver_pt;
    \n\n
--# <b>Create an instance of the Preconditioner and pass it to the
-   IterativeLinearSolver</b> \n\n
-   \skipline Set preconditioner
-   \until Solver_pt->preconditioner_pt()=Prec_pt;
+-# <b>Create an instance of the Preconditioner and give it access to the 
+   meshes</b> \n\n
+   The \c LagrangeEnforceFlowPreconditioner takes a pointer of meshes. 
+   It is important that the bulk mesh is in position \c 0 :
+   \skipline Create the preconditioner
+   \until set_meshes(mesh_pt);
+   By default, \c SuperLUPreconditioner is used for all subsidiary block
+   solves. To use the LSC preconditioner to approximately solve the
+   sub-block system involving the momentum block, we invoke the following:
+   \skipline Create the NS LSC preconditioner
+   \until set_navier_stokes_preconditioner(lsc_prec_pt);
+   The LSC preconditioner is discussed in
+   <a href="../../lsc_navier_stokes/html/index.html">
+   another tutorial</A>.
+   \n\n
+-# <b>Pass the preconditioner to the solver, and the solver to the problem
+   </b> \n\n
+   \skipline Pass the preconditioner to the solver.
+   \until linear_solver_pt() = Solver_pt;
    \n\n
 
 .
 
+IterativeLinearSolver
 <HR>
 <HR> 
 
@@ -411,6 +428,19 @@ steps:
 
 
 
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner">
+demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc">
+demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc
+</A>
+</CENTER>
 
 
 
