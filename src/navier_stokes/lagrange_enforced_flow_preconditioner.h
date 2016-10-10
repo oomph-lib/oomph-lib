@@ -1328,6 +1328,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //    pause("I'm back"); 
   
 
+  double t_start_block_setup = TimingHelpers::timer();
   // Call the block setup
   this->block_setup(dof_to_block_map);
   this->turn_off_debug_flag();
