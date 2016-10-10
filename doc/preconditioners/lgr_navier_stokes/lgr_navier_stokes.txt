@@ -1,19 +1,25 @@
-\mainpage Demo problem: A preconditioner for the solution of Navier-Stokes equations with weakly imposed boundary conditions via Lagrange multipliers.
+\mainpage Demo problem: A preconditioner for the solution of Navier-Stokes equations with weakly imposed boundary conditions via Lagrange multipliers
 
 
 The purpose of this tutorial is to show how to use \c oomph-lib's  Lagrange
 Enforced Flow Navier-Stokes preconditioner. Similarly to the problem considered
-in the <a href="../../../navier_stokes/vmtk_fluid/html/index.html"> Steady finite-Reynolds-number flow through an iliac bifurcation</a> tutorial, the outflow boundary of the demo problem (discussed below) are not aligned with any
+in the <a href="../../../navier_stokes/vmtk_fluid/html/index.html"> Steady
+finite-Reynolds-number flow through an iliac bifurcation</a> tutorial, the
+outflow boundary of the demo problem (discussed below) are not aligned with any
 coordinate planes. Parallel outflow is therefore enforced by a Lagrange
 multiplier method, implemented using \c oomph-lib's \c FaceElement framework.
 
+<HR>
+<HR>
+
 \section model The model problem, theory and preconditioner
-We will demonstrate the development and application of the preconditioner 
-using the Poiseuille flow through a unit square domain rotated by an
-arbitrary angle \f$\alpha\f$ (see the figure below). The domain
-\f$\Omega^{[\alpha]}\f$ is obtained by rotating the discrete points 
-\f$(x_1,x_2)\f$
-in the unit square \f$\Omega = [0,1]^2\f$ by the following transformation
+
+We will demonstrate the development and application of the preconditioner using
+the Poiseuille flow through a unit square domain \f$\Omega^{[\alpha]} \in
+\mathbb{R}^2\f$ rotated by an arbitrary angle \f$\alpha\f$ (see the figure
+below). The domain \f$\Omega^{[\alpha]}\f$ is obtained by rotating the discrete
+points \f$(x_1,x_2)\f$ in the unit square \f$\Omega = [0,1]^2\f$ by the
+following transformation
 \f[
 R(\alpha)=
 \left( 
@@ -23,29 +29,31 @@ R(\alpha)=
 \right),
  \ \ \ \ \ \ \ \ \ \ @E[eqnrotation]@
 \f]
-where \f$\alpha\f$ is the angle of rotation.
-The
-figure below show the flow field (velocity vectors and pressure contours) for a
-unit square domain rotated by an angle of \f$\alpha=30^\circ \f$ and a Reynolds
-number of \f$ Re = 100 \f$. The flow is driven by a prescribed parabolic 
-boundary condition.
+where \f$\alpha\f$ is the angle of rotation.  The figure below show the flow
+field (velocity vectors and pressure contours) for a unit square domain rotated
+by an angle of \f$\alpha=30^\circ \f$ and a Reynolds number of \f$ Re = 100
+\f$. The flow is driven by a prescribed parabolic boundary condition.  
+
 @I w 0.4\textwidth SimAng30Rey100Noel4 "Velocity field and pressure contours."
 
-For convenience, we present the boundary conditions for
-the non-rotated unit square \f$\alpha = 0^{\circ}\f$. In order to obtain the
-boundary conditions for \f$\alpha \ne 0^\circ\f$, we only have to apply
-the rotation (@R[eqnrotation]@).  The flow is driven by imposing a
-parabolic velocity profile along the inflow boundary \f$\Omega_I\f$. Along the
-characteristic boundary, \f$\Omega_C\f$, the no-slip condition \f$u_i = 0\f$, \f$i =
-1,2\f$ is prescribed.  We impose `parallel outflow' along the outlet 
-\f$\Omega_O\f$ by insisting that
+For convenience, we present the boundary conditions for the non-rotated unit
+square \f$\alpha = 0^{\circ}\f$. In order to obtain the boundary conditions for
+\f$\alpha \ne 0^\circ\f$, we only have to apply the rotation
+(@R[eqnrotation]@).  The flow is driven by imposing a parabolic velocity
+profile along the inflow boundary \f$\Omega_I\f$. Along the characteristic
+boundary, \f$\Omega_C\f$, the no-slip condition \f$u_i = 0\f$, \f$i = 1,2\f$,
+is prescribed.  We impose `parallel outflow' along the outlet \f$\Omega_O\f$ by
+insisting that
 \f[     
-{\bf u}\cdot {\bf t}_{} = 0 \mbox{\ \ \ \ on $\Omega_{O}$.}
+{\bf u}\cdot {\bf t}_{} = 0 \mbox{\ \ \ \ on $\Omega_{O}$,}
  \ \ \ \ \ \ \ \ \ \ @E[eqnbcpostrong]@
-\f] 
-We weakly enforce the flow constraint by augmenting the Navier-Stokes momentum
-residual equation (introduced in the <a href="../../../navier_stokes/rayleigh_traction_channel/html/index.html"> Unsteady flow in a 2D channel, driven by an applied traction</a> tutorial) 
-with a Lagrange multiplier term so that it becomes
+\f]
+where \f$ {\bf t}\f$ is the tangent vector at each discrete point on the
+boundary \f$ \Omega_{O}\f$.  We weakly enforce the flow constraint by
+augmenting the Navier-Stokes momentum residual equation (introduced in the <a
+href="../../../navier_stokes/rayleigh_traction_channel/html/index.html">
+Unsteady flow in a 2D channel, driven by an applied traction</a> tutorial) with
+a Lagrange multiplier term so that it becomes
 \f[
 r_{il}^{u}
 =
@@ -72,7 +80,9 @@ where
 \int_{\partial \Omega} \lambda u_i t_i dS,
  \ \ \ \ \ \ \ \ \ \ @E[eqnlgrterm]@
 \f]
-and \f$\lambda\f$ is the Lagrange multiplier. Upon taking the first variation of the constraint with respect to the unknown velocity and the Lagrange multiplier, the residual form of the constrained momentum equation is
+and \f$\lambda\f$ is the Lagrange multiplier. Upon taking the first variation
+of the constraint with respect to the unknown velocity and the Lagrange
+multiplier, the residual form of the constrained momentum equation is
 \f[
 r_{il}^{u}
 =
@@ -102,20 +112,28 @@ r_{l}^{\lambda}
 u_i t_i \psi^\lambda
 dS
 =
-0.
+0,
  \ \ \ \ \ \ \ \ \ \ @E[eqnweakconstraint]@
 \f]
-Equation (@R[eqnaugmentedresufirstvar]@) reveals that the Lagrange 
-multipliers act as (negative) tangential traction 
-\f$(\lambda = -{\mathbf{n}}^T{\mathbf{\tau}}{\mathbf{t}})\f$ that enforce the parallel flow across the boundary \f$\partial\Omega_{O}\f$. 
-We discretise this constraint by attaching \c ImposeParallelOutflowElements 
-to the boundaries of the "bulk" Navier-Stokes elements that are adjacent to 
-\f$ \partial \Omega_O \f$ as shown in the 
-<a href="../../../navier_stokes/vmtk_fluid/html/index.html"> Steady finite-Reynolds-number flow through an iliac bifurcation</a> tutorial, also see the
-<a href="../../../solid/prescribed_displ_lagr_mult/html/index.html"> Deformation of a solid by a prescribed boundary motion </a> tutorial which employs a similar technique used to enforce prescribed boundary 
-displacements in solid mechanics problems. We discretise the Navier-Stokes equations using \c oomph-lib's \c QTaylorHoodElements, see the <a href="../../../navier_stokes/driven_cavity/html/index.html"> 2D Driven Cavity Problem</a> tutorial for more information.
+where \f$\psi^\lambda\f$ is a suitable basis function.  Equation
+(@R[eqnaugmentedresufirstvar]@) reveals that the Lagrange multipliers act as
+the (negative) tangential traction \f$(\lambda =
+-{\mathbf{n}}^T{\mathbf{\tau}}{\mathbf{t}})\f$ that enforce the parallel flow
+across the boundary \f$\partial\Omega_{O}\f$.  We discretise this constraint by
+attaching \c ImposeParallelOutflowElements to the boundaries of the "bulk"
+Navier-Stokes elements that are adjacent to \f$ \partial \Omega_O \f$ as shown
+in the <a href="../../../navier_stokes/vmtk_fluid/html/index.html"> Steady
+finite-Reynolds-number flow through an iliac bifurcation</a> tutorial, also see
+the <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">
+Deformation of a solid by a prescribed boundary motion </a> tutorial which
+employs a similar technique used to enforce prescribed boundary displacements
+in solid mechanics problems. We discretise the Navier-Stokes equations using \c
+oomph-lib's \c QTaylorHoodElements, see the <a
+href="../../../navier_stokes/driven_cavity/html/index.html"> 2D Driven Cavity
+Problem</a> tutorial for more information.
 
-[RAYRAY - Talk about ImposeParallelOutflowElements re-classifying the  unknowns already classified by the bulk element?]
+[RAYRAY - Talk about ImposeParallelOutflowElements re-classifying the  
+unknowns already classified by the bulk element?]
 
 The discretised problem therefore contains the following types of discrete 
 unknowns:
@@ -127,6 +145,7 @@ unknowns:
   attached to the bulk elements.)
 . 
 
+
 The preconditioner requires a further sub-division of these degrees of
 freedom into the following categories:
 - the unconstrained velocity in the x-direction
@@ -135,14 +154,12 @@ freedom into the following categories:
 - the constrained velocity in the x-direction
 - the constrained velocity in the y-direction
 - [the constrained velocity in the z-direction (only in 3D)]
-- the x-component of the Lagrange multiplier at the constrained nodes
-- the y-component of the Lagrange multiplier at the constrained nodes
-- [the z-component of the Lagrange multiplier at the constrained nodes
+- the Lagrange multiplier at the constrained nodes
+- [the other Lagrange multiplier at the constrained nodes
   (only in 3D)].
 .
-For a 2D problem, the linear system to be solved in the course 
-of the Newton iteration can then be (formally) re-ordered 
-into the following block structure:
+For a 2D problem, the linear system to be solved in the course of the Newton
+iteration can then be (formally) re-ordered into the following block structure:
 
 \f[
 \left[
@@ -184,17 +201,17 @@ into the following block structure:
 \right].
 \ \ \ \ \ \   @E[linear_system]@
 \f]
-Here the vectors \f${\bf U}_{\rm x}\f$, \f${\bf U}_{\rm y}\f$, 
-\f${\bf P}\f$ and \f${\bf
-  \Lambda}\f$ contain the \f$x\f$ and \f$y\f$ components of the
-velocity unknowns, the pressure unknowns and Lagrange multipliers, respectively. The overbars 
-identify the unknown nodal positions that are constrained by the 
-Lagrange multiplier. The matrices \f$M_{\rm x}\f$ and \f$M_{\rm y}\f$ 
-are mass matrices 
-whose entries are formed from products of the basis functions multiplied by a component of the tangent vector at each discrete point on \f$\partial\Omega_{O}\f$, for example,
+Here the vectors \f${\bf U}_{\rm x}\f$, \f${\bf U}_{\rm y}\f$, \f${\bf P}\f$
+and \f${\bf \Lambda}\f$ contain the \f$x\f$ and \f$y\f$ components of the
+velocity unknowns, the pressure unknowns and Lagrange multipliers unknowns,
+respectively. The overbars identify the unknown nodal positions that are
+constrained by the Lagrange multiplier. The matrices \f$M_{\rm x}\f$ and
+\f$M_{\rm y}\f$ are mass-like matrices whose entries are formed from products
+of the basis functions multiplied by a component of the tangent vector at each
+discrete point on \f$\partial\Omega_{O}\f$, for example,
 \f$[M_{{\rm x}}]_{ij}
 =
-\int_{\partial \Omega_{O}} t_x {\psi_i} \ {\psi_j} \ dS \f$.
+\int_{\partial \Omega_{O}} t_x {\psi_i} \ {\psi_j} \ dS \f$. Denote
 \f[
 J_{\rm NS}
 =
@@ -278,10 +295,9 @@ P=
 \right],
 \ \ \ \ \ \   @E[prec_ideal_small]@
 \f]
-where \f$W = \frac{1}{\sigma}LL^{T}\f$ is an optimal preconditioner for the 
-linear system (@R[linear_system_small]@) if we set 
-\f$ \sigma=\|F\|_{\infty} \f$ where \f$F\f$ is the compound \f$4\times 4\f$ 
-top-left block 
+where \f$W = \frac{1}{\sigma}LL^{T}\f$ is an optimal preconditioner for the
+linear system (@R[linear_system_small]@) if we set \f$ \sigma=\|F\|_{\infty}
+\f$ where \f$F\f$ is the compound \f$4\times 4\f$ top-left block 
 \f[
 F
 =
@@ -298,12 +314,11 @@ F
 \end{array}
 \right]
 \f]
-in the Jacobian matrix.
-Application of the preconditioner \f$P\f$ requires the repeated solution of 
-linear systems involving the diagonal blocks 
-\f${J_{\rm NS}} + L^{T}W^{-1} L\f$ and \f$W\f$.
-The matrix \f$W^{-1} = \sigma (LL^{T})^{-1} = \sigma ({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}\f$ is dense and will cause 
-the addition of dense sub-matrices to the Jacobian matrix:
+in the Jacobian matrix.  Application of the preconditioner \f$P\f$ requires the
+repeated solution of linear systems involving the diagonal blocks \f${J_{\rm
+NS}} + L^{T}W^{-1} L\f$ and \f$W\f$.  The matrix \f$W^{-1} = \sigma
+(LL^{T})^{-1} = \sigma ({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}\f$ is dense and
+will cause the addition of dense sub-matrices to the Jacobian matrix:
 \f[
 \sigma L^{T}(LL^{T})^{-1}L
 =
@@ -318,58 +333,60 @@ the addition of dense sub-matrices to the Jacobian matrix:
 \end{array}
 \right].
 \f]
-Numerical experiments show that an efficient implementation can be obtained by 
-replacing \f$W\f$ by its diagonal approximation 
-\f$\hat{W} = \mbox{diag}(M_{\rm x}^{2}+M_{\rm y}^{2})\f$. 
-Then the inversion of \f$W\f$ is straight forward and the addition of 
-\f$L^{T}{\hat{W}}^{-1}L\f$ to the Jacobian does not significantly increase 
-the number of non-zero entries in the matrix \f$J_{\rm NS}\f$.
-Denote the 
-efficient implementation by
+Numerical experiments show that an efficient implementation can be obtained by
+replacing \f$W\f$ by its diagonal approximation \f$\widehat{W} =
+\mbox{diag}(M_{\rm x}^{2}+M_{\rm y}^{2})\f$.  Then the inversion of \f$W\f$ is
+straight forward and the addition of \f$L^{T}{\widehat{W}}^{-1}L\f$ to the
+Jacobian does not significantly increase the number of non-zero entries in the
+matrix \f$J_{\rm NS}\f$.  Denote the efficient implementation by
 \f[
 \tilde{P}
 =
 \left[
 \begin{array}{cc}
 { \tilde{J}_{\rm NS}}& \\
- & \hat{W}
+ & \widehat{W}
 \end{array}
 \right],
 \ \ \ \ \ \   @E[prec_eff_small]@
 \f]
-where \f$\tilde{J}_{\rm NS} =J_{\rm NS}+ L^{T}{\hat{W}}^{-1}L\f$ is the augmented Navier-Stokes Jacobian matrix.
-In our implementation of the preconditioner, the linear system involving \f$\tilde{J}_{\rm NS}\f$
-can either be solved "exactly", using \c SuperLU (in its incarnation
-as an exact preconditioner; this is the default) or by any 
-other \c Preconditioner (interpreted as an "inexact solver") 
-specified via the access function
+where \f$\tilde{J}_{\rm NS} =J_{\rm NS}+ L^{T}{\widehat{W}}^{-1}L\f$ is the
+augmented Navier-Stokes Jacobian matrix.  In our implementation of the
+preconditioner, the linear system involving \f$\tilde{J}_{\rm NS}\f$ can either
+be solved "exactly", using \c SuperLU (in its incarnation as an exact
+preconditioner; this is the default) or by any other \c Preconditioner
+(interpreted as an "inexact solver") specified via the access function
 \code
 LagrangeEnforcedFlowPreconditioner::set_navier_stokes_preconditioner(...)
 \endcode
-Numerical experiments show that a nearly optimal preconditioner is obtained 
-by replacing the solution of the linear system involving the
-augmented Navier-Stokes Jacobian \f$ \hat{J}_{\rm NS} \f$ by an application of 
-  Elman, Silvester and Wathen's
-  <a href="../../lsc_navier_stokes/html/index.html">
-  Least-Squares Commutator (LSC)
-  preconditioner</a>, and by replacing the remaining block-solves within these preconditioners
-by a small number of AMG cycles.
+Numerical experiments show that a nearly optimal preconditioner is obtained by
+replacing the solution of the linear system involving the augmented
+Navier-Stokes Jacobian \f$ \tilde{J}_{\rm NS} \f$ by an application of Elman,
+Silvester and Wathen's <a href="../../lsc_navier_stokes/html/index.html">
+Least-Squares Commutator (LSC) preconditioner</a>, and by replacing the
+remaining block-solves within these preconditioners by a small number of AMG
+cycles.
+
+With these approximations, the computational cost of one application of
+\f$\tilde P\f$ is linear in the number of unknowns.  The optimality of the
+preconditioner can therefore be assessed by demonstrating that the number of
+GMRES iterations remains constant under mesh refinement.
 
 <HR>
 <HR>
 
-\section example An example
+\section example Demo driver and use of the preconditioner
 
-To demonstrate how to use the preconditioner, here are
-the relevant extracts from the driver code
-<A HREF="../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc">
-two_d_tilted_square.cc</A> 
 
-As explained in the 
-<a href="../../../linear_solvers/html/index.html">Linear
-Solvers Tutorial</A> switching to an iterative linear solver
-is typically performed in the \c Problem constructor and involves
-a few straightforward steps:
+
+To demonstrate how to use the preconditioner, here are the relevant extracts
+from the driver code <A
+HREF="../../../../demo_drivers/navier_stokes/lagrange_enforced_flow_preconditioner/two_d_tilted_square.cc">
+two_d_tilted_square.cc</A> which solves the model problem described above.  As
+explained in the <a href="../../../linear_solvers/html/index.html">Linear
+Solvers Tutorial</A> switching to an iterative linear solver is typically
+performed in the \c Problem constructor and involves a few straightforward
+steps:
 
 -# <b>Create an instance of the IterativeLinearSolver and pass it to the
    Problem</b> \n\n
