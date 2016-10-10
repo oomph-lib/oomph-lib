@@ -122,15 +122,15 @@ void LagrangeEnforcedFlowPreconditioner::preconditioner_solve(
   // If the W preconditioner is a block preconditioner, then the extraction
   // associated unknowns and RHS is handled by the (subsidiary) block 
   // preconditioner.
-  if(W_preconditioner_is_block_preconditioner)
-  {
-    // Loop through the solve the subsystems associated with the W block.
-    for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
-    {
-      W_preconditioner_pt[l_i]->preconditioner_solve(r,z);
-    }
-  }
-  else
+//  if(W_preconditioner_is_block_preconditioner)
+//  {
+//    // Loop through the solve the subsystems associated with the W block.
+//    for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
+//    {
+//      W_preconditioner_pt[l_i]->preconditioner_solve(r,z);
+//    }
+//  }
+//  else
   {
     // For each subsystem associated with each Lagrange multiplier, we loop
     // through and:
@@ -145,27 +145,30 @@ void LagrangeEnforcedFlowPreconditioner::preconditioner_solve(
       // Extract the block
       this->get_block_vector(l_ii,r,temp_vec);
 
+
       // Solve
-      W_preconditioner_pt[l_i]
-        ->preconditioner_solve(temp_vec,another_temp_vec);
+//      W_preconditioner_pt[l_i]
+//        ->preconditioner_solve(temp_vec,another_temp_vec);
 
 //      // Apply the scaling sigma. The reason why we apply the scaling sigma
 //      // here instead of within the W_preconditioner_pt is to reduce error 
 //      // propagation. If sigma is small - then 1/sigma is large, we want 
 //      // avoid large growth in values.
-//      const unsigned vec_nrow_local = another_temp_vec.nrow_local();
-//      double* vec_values_pt = another_temp_vec.values_pt();
-//      for (unsigned i = 0; i < vec_nrow_local; i++) 
-//      {
+      const unsigned vec_nrow_local = temp_vec.nrow_local();
+      double* vec_values_pt = temp_vec.values_pt();
+      for (unsigned i = 0; i < vec_nrow_local; i++) 
+      {
 //        vec_values_pt[i] = vec_values_pt[i]*Scaling_sigma;
-//      } // for
+        vec_values_pt[i] 
+          = vec_values_pt[i]*Inv_w_diag_values[l_i][i];
+      } // for
 
       // Return the unknowns
-      this->return_block_vector(l_ii,another_temp_vec,z);
+      this->return_block_vector(l_ii,temp_vec,z);
 
       // Clear vectors.
       temp_vec.clear();
-      another_temp_vec.clear();
+//      another_temp_vec.clear();
     } // for
   } // else
 
@@ -437,15 +440,15 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   // total number of velocity DOF types is the spatial dimension multiplied
   // by the number of meshes.
   N_velocity_doftypes = My_nmesh*spatial_dim;
-  //    std::cout << "N_velocity_doftypes: " << N_velocity_doftypes << std::endl; 
+//std::cout << "N_velocity_doftypes: " << N_velocity_doftypes << std::endl; 
 
   // Fluid has +1 for the pressure.
   N_fluid_doftypes = N_velocity_doftypes + 1;
-  //    std::cout << "N_fluid_doftypes: " << N_fluid_doftypes << std::endl; 
+//std::cout << "N_fluid_doftypes: " << N_fluid_doftypes << std::endl; 
 
   // The rest are Lagrange multiplier DOF types.
   N_lagrange_doftypes = n_dof_types - N_fluid_doftypes;
-  //    std::cout << "N_lagrange_doftypes: " << N_lagrange_doftypes << std::endl; 
+//std::cout << "N_lagrange_doftypes: " << N_lagrange_doftypes << std::endl; 
 
   ///////////////////////////////////////////////////////////
   //   Now create the DOF to block map for block_setup()   //
@@ -506,7 +509,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   // pressure DOF type. We want to consider this block type 9.
 
 
-  //  /////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
   //  // Start of artificial test data
   //  n_dof_types = 13;
   //  My_nmesh = 3;
@@ -544,7 +547,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
       // Fill in the velocity DOF types.
       for (unsigned dim_i = 0; dim_i < spatial_dim; dim_i++) 
       {
-        //dof_to_block_map[temp_index] = dim_i + mesh_i*spatial_dim;// fancy way.
+    //dof_to_block_map[temp_index] = dim_i + mesh_i*spatial_dim;// fancy way.
         dof_to_block_map[temp_index++] = velocity_val++;
       } // for
 
@@ -721,10 +724,11 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   //       2) Add the augmentation as determined by aug. row and aug. col.
 
   // Storage for the W block.
-  Vector<CRDoubleMatrix*> w_pt(N_lagrange_doftypes,0);
+//  Vector<CRDoubleMatrix*> w_pt(N_lagrange_doftypes,0);
 
   // Note that we do not need to store all the inverse w_i since they
   // are only used once per Lagrange multiplier.
+  Inv_w_diag_values.clear();
   for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
   {
     // Storage for the current Lagrange block mass matrices.
@@ -734,7 +738,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
     // Get the current Lagrange DOF type.
     // Recall that the ordering is:
     // | Fluid DOF types | Lagrange multiplier DOF types
-    //   u v w uc vc wc p  L1, ....
+    //   u v w uc vc wc p  L1, ...
     unsigned l_doftype = N_fluid_doftypes + l_i;
 
     // Store the mass matrix locations for the current Lagrange block.
@@ -816,7 +820,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
     // Now create the w_i and put it in w_pt.
 
     // Create both the w_i and inv_w_i matrices.
-    w_pt[l_i] = new CRDoubleMatrix(this->Block_distribution_pt[l_doftype]);
+//    w_pt[l_i] = new CRDoubleMatrix(this->Block_distribution_pt[l_doftype]);
     CRDoubleMatrix* inv_w_pt 
       = new CRDoubleMatrix(this->Block_distribution_pt[l_doftype]);
 
@@ -857,7 +861,6 @@ void LagrangeEnforcedFlowPreconditioner::setup()
         mm_pt[m_i]->multiply(*mmt_pt[m_i],*temp_mm_sqrd_pt);
 
         Vector<double> m_diag = temp_mm_sqrd_pt->diagonal_entries();
-        //        Vector<double> m_diag = mm_pt[m_i]->diagonal_entries();
 
         // Loop through the entries, add them.
         for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
@@ -874,12 +877,11 @@ void LagrangeEnforcedFlowPreconditioner::setup()
       // Divide by Scaling_sigma and create the inverse of w.
       for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
       {
-
         // w_i is a diagonal matrix, so take the inverse to
         // invert the matrix.
         invw_i_diag_values[row_i] = Scaling_sigma / w_i_diag_values[row_i];
 
-        w_i_diag_values[row_i] /= Scaling_sigma;
+//        w_i_diag_values[row_i] /= Scaling_sigma;
         w_i_column_indices[row_i] = row_i + l_i_first_row;
         w_i_row_start[row_i] = row_i;
       }
@@ -890,14 +892,16 @@ void LagrangeEnforcedFlowPreconditioner::setup()
       // number of columns.
       unsigned long l_i_nrow_global 
         = this->Block_distribution_pt[l_doftype]->nrow();
-      w_pt[l_i]->build(l_i_nrow_global,
-          w_i_diag_values,
-          w_i_column_indices,
-          w_i_row_start);
+//      w_pt[l_i]->build(l_i_nrow_global,
+//          w_i_diag_values,
+//          w_i_column_indices,
+//          w_i_row_start);
       inv_w_pt->build(l_i_nrow_global,
           invw_i_diag_values,
           w_i_column_indices,
           w_i_row_start);
+
+      Inv_w_diag_values.push_back(invw_i_diag_values);
     }
 
 
@@ -1657,50 +1661,50 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   }
   ///////////////////////////////////////////////////////////////////////////
 
-  // Solver for the W block.
-  W_preconditioner_pt.resize(N_lagrange_doftypes,0);
-  for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
-  {
-    if(W_preconditioner_fct_pt == 0)
-    {
-      W_preconditioner_pt[l_i] = new SuperLUPreconditioner;
-    }
-    else
-    {
-      // We use the preconditioner provided.
-      W_preconditioner_pt[l_i] = 
-        (*W_preconditioner_fct_pt)();
-    }
-
-    // Is this a block preconditioner?
-    BlockPreconditioner<CRDoubleMatrix>* w_block_preconditioner_pt = 
-      dynamic_cast<BlockPreconditioner<CRDoubleMatrix>* >
-      (W_preconditioner_pt[l_i]);
-
-    if(w_block_preconditioner_pt == 0)
-    {
-      W_preconditioner_is_block_preconditioner = false;
-
-      W_preconditioner_pt[l_i]->setup(w_pt[l_i]);
-    }
-    else
-    {
-
-      W_preconditioner_is_block_preconditioner = true;
-      Vector<unsigned> l_mult_dof_map;
-      l_mult_dof_map.push_back(N_fluid_doftypes + l_i);
-
-      W_preconditioner_pt[l_i]->
-        turn_into_subsidiary_block_preconditioner(this,l_mult_dof_map);
-      W_preconditioner_pt[l_i]->setup(matrix_pt());
-    }
-  }
-
-  // Delete w_pt(0,N_lagrange_doftypes)
-  for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
-  {
-    delete w_pt[l_i];
-  }
+//  // Solver for the W block.
+//  W_preconditioner_pt.resize(N_lagrange_doftypes,0);
+//  for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
+//  {
+//    if(W_preconditioner_fct_pt == 0)
+//    {
+//      W_preconditioner_pt[l_i] = new SuperLUPreconditioner;
+//    }
+//    else
+//    {
+//      // We use the preconditioner provided.
+//      W_preconditioner_pt[l_i] = 
+//        (*W_preconditioner_fct_pt)();
+//    }
+//
+//    // Is this a block preconditioner?
+//    BlockPreconditioner<CRDoubleMatrix>* w_block_preconditioner_pt = 
+//      dynamic_cast<BlockPreconditioner<CRDoubleMatrix>* >
+//      (W_preconditioner_pt[l_i]);
+//
+//    if(w_block_preconditioner_pt == 0)
+//    {
+//      W_preconditioner_is_block_preconditioner = false;
+//
+//      W_preconditioner_pt[l_i]->setup(w_pt[l_i]);
+//    }
+//    else
+//    {
+//
+//      W_preconditioner_is_block_preconditioner = true;
+//      Vector<unsigned> l_mult_dof_map;
+//      l_mult_dof_map.push_back(N_fluid_doftypes + l_i);
+//
+//      W_preconditioner_pt[l_i]->
+//        turn_into_subsidiary_block_preconditioner(this,l_mult_dof_map);
+//      W_preconditioner_pt[l_i]->setup(matrix_pt());
+//    }
+//  }
+//
+//  // Delete w_pt(0,N_lagrange_doftypes)
+//  for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
+//  {
+//    delete w_pt[l_i];
+//  }
 
   Preconditioner_has_been_setup = true;
 } // end of LagrangeEnforcedFlowPreconditioner::setup
