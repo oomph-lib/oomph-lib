@@ -1673,11 +1673,11 @@ void LagrangeEnforcedFlowPreconditioner::setup()
     }
 
     // Is this a block preconditioner?
-    BlockPreconditioner<CRDoubleMatrix>* L_block_preconditioner_pt = 
+    BlockPreconditioner<CRDoubleMatrix>* w_block_preconditioner_pt = 
       dynamic_cast<BlockPreconditioner<CRDoubleMatrix>* >
       (W_preconditioner_pt[l_i]);
 
-    if(L_block_preconditioner_pt == 0)
+    if(w_block_preconditioner_pt == 0)
     {
       W_preconditioner_is_block_preconditioner = false;
 
@@ -1690,9 +1690,9 @@ void LagrangeEnforcedFlowPreconditioner::setup()
       Vector<unsigned> l_mult_dof_map;
       l_mult_dof_map.push_back(N_fluid_doftypes + l_i);
 
-      L_block_preconditioner_pt->
+      W_preconditioner_pt[l_i]->
         turn_into_subsidiary_block_preconditioner(this,l_mult_dof_map);
-      L_block_preconditioner_pt->setup(matrix_pt());
+      W_preconditioner_pt[l_i]->setup(matrix_pt());
     }
   }
 
