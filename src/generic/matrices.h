@@ -3176,6 +3176,12 @@ template<class T,class MATRIX_TYPE>
  T SparseMatrix<T,MATRIX_TYPE>::Zero=T(0);
 
 
+namespace RRR
+{
+  extern std::string RayStr;
+  extern bool RayBool;
+}
+
  //=================================================================
  /// Namespace for helper functions for CRDoubleMatrices
  //=================================================================
@@ -3390,7 +3396,8 @@ template<class T,class MATRIX_TYPE>
       const Vector<LinearAlgebraDistribution*> &row_distribution_pt,
       const Vector<LinearAlgebraDistribution*> &col_distribution_pt,
       const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
-      CRDoubleMatrix &result_matrix);
+      CRDoubleMatrix &result_matrix,
+      bool debug_flag = false);
 
   /// \short Concatenate CRDoubleMatrix matrices.
   /// This calls the other concatenate_without_communication(...) function,
@@ -3399,7 +3406,8 @@ template<class T,class MATRIX_TYPE>
   void concatenate_without_communication(
       const Vector<LinearAlgebraDistribution*> &block_distribution_pt,
       const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
-      CRDoubleMatrix &result_matrix);
+      CRDoubleMatrix &result_matrix,
+      bool debug_flag = false);
 
 } // CRDoubleMatrixHelpers
 

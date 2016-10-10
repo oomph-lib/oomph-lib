@@ -36,6 +36,8 @@
 #include<set> 
 #include<map> 
 
+//#include <valgrind/callgrind.h>
+
 //oomph-lib headers
 #include "matrices.h"
 #include "linear_solver.h"
@@ -1241,6 +1243,7 @@ CRDoubleMatrix::CRDoubleMatrix()
 
     // set the serial matrix-matrix multiply method
 #ifdef OOMPH_HAS_TRILINOS
+//    Serial_matrix_matrix_multiply_method = 4;
     Serial_matrix_matrix_multiply_method = 2;
 #else
     Serial_matrix_matrix_multiply_method = 2;
@@ -1290,6 +1293,7 @@ CRDoubleMatrix::CRDoubleMatrix(const CRDoubleMatrix& other_matrix)
 
  // set the serial matrix-matrix multiply method
 #ifdef OOMPH_HAS_TRILINOS
+// Serial_matrix_matrix_multiply_method = 4;
  Serial_matrix_matrix_multiply_method = 2;
 #else
  Serial_matrix_matrix_multiply_method = 2;
@@ -1314,6 +1318,7 @@ CRDoubleMatrix::CRDoubleMatrix(const LinearAlgebraDistribution*
 
 // set the serial matrix-matrix multiply method
 #ifdef OOMPH_HAS_TRILINOS
+//    Serial_matrix_matrix_multiply_method = 4;
     Serial_matrix_matrix_multiply_method = 2;
 #else
     Serial_matrix_matrix_multiply_method = 2;
@@ -1343,6 +1348,7 @@ CRDoubleMatrix::CRDoubleMatrix(const LinearAlgebraDistribution* dist_pt,
 
  // set the serial matrix-matrix multiply method
 #ifdef OOMPH_HAS_TRILINOS
+// Serial_matrix_matrix_multiply_method = 4;
  Serial_matrix_matrix_multiply_method = 2;
 #else
  Serial_matrix_matrix_multiply_method = 2;
@@ -3205,6 +3211,12 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
   }
 }
 
+namespace RRR
+{
+  std::string RayStr="";
+  bool RayBool=false;
+}
+
 //=================================================================
 /// Namespace for helper functions for CRDoubleMatrices
 //=================================================================
@@ -4727,7 +4739,8 @@ namespace CRDoubleMatrixHelpers
   const Vector<LinearAlgebraDistribution*> &row_distribution_pt,
   const Vector<LinearAlgebraDistribution*> &col_distribution_pt,
   const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
-  CRDoubleMatrix &result_matrix)
+  CRDoubleMatrix &result_matrix,
+  bool debug_flag)
  {
   // The number of block rows and block columns.
   unsigned matrix_nrow = matrix_pt.nrow();
@@ -5047,13 +5060,26 @@ namespace CRDoubleMatrixHelpers
   // the sub matrix distributions.
   if(!result_matrix.distribution_pt()->built())
    {
+    double RRR1start = TimingHelpers::timer();
     // The result distribution
     LinearAlgebraDistribution tmp_distribution;
-
     LinearAlgebraDistributionHelpers::concatenate(row_distribution_pt,
                                                   tmp_distribution);
-
+    double RRR1end = TimingHelpers::timer();
+    if(debug_flag)
+    {
+    double RRR1diff = RRR1end - RRR1start;
+    oomph_info << "RRR1 concat lin dist: " << RRR1diff << std::endl; 
+    }
+    
+    double RRR2start = TimingHelpers::timer();
     result_matrix.build(&tmp_distribution);
+    double RRR2end = TimingHelpers::timer();
+    if(debug_flag)
+    {
+      double RRR2diff = RRR2end - RRR2start;
+      oomph_info << "RRR2 build mat: " << RRR2diff << std::endl; 
+    }
    }
   else
    // A distribution is supplied for the result matrix.
@@ -5205,21 +5231,69 @@ namespace CRDoubleMatrixHelpers
   // renamed for readability.
   unsigned nblock_col = matrix_ncol;
 
+  double RRR3start = TimingHelpers::timer();
   // construct the block offset
-  DenseMatrix<unsigned> col_offset(nproc,nblock_col,0);
+//  DenseMatrix<unsigned> col_offset(nproc,nblock_col,0);
+  std::vector<std::vector<unsigned> > col_offset(
+      nproc,
+      std::vector<unsigned>(nblock_col));
   unsigned off = 0;
   for (unsigned proc_i = 0; proc_i < nproc; proc_i++) 
    {
     for (unsigned block_i = 0; block_i < nblock_col; block_i++) 
      {
-      col_offset(proc_i,block_i) = off;
+      col_offset[proc_i][block_i] = off;
       off +=col_distribution_pt[block_i]->nrow_local(proc_i);
      }
    }
+  double RRR3end = TimingHelpers::timer();
+  if(debug_flag)
+  {
+    double RRR3diff = RRR3end-RRR3start;
+    oomph_info << "RRR3 construct col_offset: " << RRR3diff << std::endl; 
+  }
 
+  double RRR33start = TimingHelpers::timer();
+  // Do some pre-processing for the processor number a global row number is 
+  // on. This is required when permuting the column entries.
+  // We need to do this for each distribution, so we have a vector of 
+  // vectors. First index corresponds to the distribution, the second is
+  // the processor number.
+  std::vector<std::vector<unsigned> > p_for_rows(
+      nblock_col,std::vector<unsigned>());
+  // initialise 2D vector
+  for (unsigned blocki = 0; blocki < nblock_col; blocki++) 
+  {
+    int blockinrow = col_distribution_pt[blocki]->nrow();
+    p_for_rows[blocki].resize(blockinrow);
+    // FOR each global index in the block, work out the corresponding proc.
+    for (int rowi = 0; rowi < blockinrow; rowi++) 
+    {
+      unsigned p = 0;
+      int b_first_row = col_distribution_pt[blocki]->first_row(p);
+      int b_nrow_local = col_distribution_pt[blocki]->nrow_local(p);
+
+      while (rowi < b_first_row ||
+             rowi >= b_nrow_local + b_first_row)
+      {
+        p++;
+        b_first_row = col_distribution_pt[blocki]->first_row(p);
+        b_nrow_local = col_distribution_pt[blocki]->nrow_local(p);
+      }
+      p_for_rows[blocki][rowi] = p;
+    }
+  }
+  double RRR33end = TimingHelpers::timer();
+  if(debug_flag)
+  {
+    double RRR33diff = RRR33end-RRR33start;
+    oomph_info << "RRR33 Generate p_for_rows: " << RRR33diff << std::endl; 
+  }
+
+  double RRR4start = TimingHelpers::timer();
   // determine nnz of all blocks on this processor only.
   // This is used to create storage space.
-  unsigned res_nnz = 0;
+  unsigned long res_nnz = 0;
   for (unsigned row_i = 0; row_i < nblock_row; row_i++) 
    {
     for (unsigned col_i = 0; col_i < nblock_col; col_i++) 
@@ -5230,6 +5304,27 @@ namespace CRDoubleMatrixHelpers
        }
      }
    }
+  double RRR4end = TimingHelpers::timer();
+  if(debug_flag)
+  {
+    double RRR4diff = RRR4end-RRR4start;
+    oomph_info << "RRR4 calc nnz: " << RRR4diff << std::endl; 
+  }
+
+     // My rank
+    unsigned my_rank = comm_pt->my_rank();
+    my_rank = my_rank;
+
+    // Turn the above into a string.
+//      std::ostringstream myrankstream;
+//      myrankstream << "THISDOESNOTHINGnp" << my_rank << std::endl;
+//      std::string myrankstring = myrankstream.str();
+
+
+  double RRR5start = TimingHelpers::timer();
+
+//CALLGRIND_ZERO_STATS;
+//CALLGRIND_START_INSTRUMENTATION;
 
   // storage for the result matrix.
   int* res_row_start = new int[res_nrow_local+1];
@@ -5240,8 +5335,8 @@ namespace CRDoubleMatrixHelpers
   res_row_start[0] = 0;
     
   // loop over the block rows
-  unsigned res_i = 0; // index for the result matrix.
-  unsigned res_row_i = 0; // index for the row
+  unsigned long res_i = 0; // index for the result matrix.
+  unsigned long res_row_i = 0; // index for the row
   for (unsigned i = 0; i < nblock_row; i++) 
    {
     // loop over the rows of the current block local rows.
@@ -5262,30 +5357,37 @@ namespace CRDoubleMatrixHelpers
           int* b_column_index = matrix_pt(i,j)->column_index();
           double* b_value = matrix_pt(i,j)->value();
 
+          //memcpy( &dst[dstIdx], &src[srcIdx], numElementsToCopy * sizeof( Element ) );
+          // no ele to copy
+          int numEleToCopy = b_row_start[k+1] - b_row_start[k];
+          memcpy(res_value+res_i,b_value+b_row_start[k],numEleToCopy*sizeof(double));
           // Loop through the current local row.
           for (int l = b_row_start[k]; l < b_row_start[k+1]; l++)
            {
             // if b_column_index[l] was a row index, what processor
             // would it be on
-            unsigned p = 0;
-            int b_first_row = col_distribution_pt[j]->first_row(0);
-            int b_nrow_local = col_distribution_pt[j]->nrow_local(0);
+//            unsigned p = col_distribution_pt[j]
+//              ->rank_of_global_row_map(b_column_index[l]);
+            unsigned p = p_for_rows[j][b_column_index[l]];
 
-            while (b_column_index[l] < b_first_row || 
-                   b_column_index[l] >= b_nrow_local+b_first_row)
-             {
-              p++;
-              b_first_row = col_distribution_pt[j]->first_row(p);
-              b_nrow_local = col_distribution_pt[j]->nrow_local(p);
-             }
+            int b_first_row = col_distribution_pt[j]->first_row(p);
+//            int b_nrow_local = col_distribution_pt[j]->nrow_local(p);
+
+//            while (b_column_index[l] < b_first_row || 
+//                   b_column_index[l] >= b_nrow_local+b_first_row)
+//             {
+//              p++;
+//              b_first_row = col_distribution_pt[j]->first_row(p);
+//              b_nrow_local = col_distribution_pt[j]->nrow_local(p);
+//             }
 
             // determine the local equation number in the block j/processor p
             // "column block"
-            unsigned eqn = b_column_index[l]-b_first_row;
+            int eqn = b_column_index[l]-b_first_row;
 
             // add to the result matrix
-            res_value[res_i] = b_value[l];
-            res_column_index[res_i] = col_offset(p,j)+eqn;
+//            res_value[res_i] = b_value[l];
+            res_column_index[res_i] = col_offset[p][j]+eqn;
             res_row_start[res_row_i+1]++;
             res_i++;
            }
@@ -5297,19 +5399,43 @@ namespace CRDoubleMatrixHelpers
 
      }
    }
+//CALLGRIND_STOP_INSTRUMENTATION;
+//CALLGRIND_DUMP_STATS_AT(myrankstring.c_str());
 
+
+  double RRR5end = TimingHelpers::timer();
+  if(debug_flag)
+  {
+    double RRR5diff = RRR5end-RRR5start;
+    oomph_info << "RRR5 done the values: " << RRR5diff << std::endl; 
+  }
+
+  double RRR6start = TimingHelpers::timer();
   // Get the number of columns of the result matrix.
   unsigned res_ncol = 0;
   for (unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++) 
   {
     res_ncol += col_distribution_pt[block_col_i]->nrow();
   }
-  
+  double RRR6end = TimingHelpers::timer();
+  if(debug_flag)
+  {
+    double RRR6diff = RRR6end-RRR6start;
+    oomph_info << "RRR6 get no. cols took: " << RRR6diff << std::endl; 
+  }
+
+  double RRR7start = TimingHelpers::timer();
   // Build the result matrix.
   result_matrix.build_without_copy(res_ncol,res_nnz,
                                    res_value,
                                    res_column_index,
                                    res_row_start);
+  double RRR7end = TimingHelpers::timer();
+  if(debug_flag)
+  {
+    double RRR7diff = RRR7end-RRR7start;
+    oomph_info << "RRR7 built the matrix: " << RRR7diff << std::endl; 
+  }
  }
 
 
@@ -5323,7 +5449,8 @@ namespace CRDoubleMatrixHelpers
  void concatenate_without_communication(
   const Vector<LinearAlgebraDistribution*> &block_distribution_pt,
   const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
-  CRDoubleMatrix &result_matrix)
+  CRDoubleMatrix &result_matrix,
+  bool debug_flag)
  {
  
 #ifdef PARANOID
@@ -5357,7 +5484,8 @@ namespace CRDoubleMatrixHelpers
 #endif
   
   concatenate_without_communication(
-   block_distribution_pt,block_distribution_pt,matrix_pt,result_matrix);
+   block_distribution_pt,block_distribution_pt,matrix_pt,result_matrix,
+   debug_flag);
  }
 
 } // CRDoubleMatrixHelpers
