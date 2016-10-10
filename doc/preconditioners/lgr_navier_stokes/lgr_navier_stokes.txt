@@ -12,19 +12,15 @@ Also good format: http://www.maths.manchester.ac.uk/~mheil/doc/solid/prescribed_
 
 The purpose of this tutorial is to show how to use \c oomph-lib's  Lagrange
 Enforced Flow Navier-Stokes preconditioner. Similarly to the problem considered
-in <a href="../../../navier_stokes/vmtk_fluid/html/index.html"> another
-tutorial</a>, the in- and outflow boundaries are not aligned with any
-coordinate planes. Parallel in- and outflow is therefore enforced by a Lagrange
-multiplier method, implemented using \c oomph-lib's \c FaceElements.
-
-<HR>
-<HR>
+in the <a href="../../../navier_stokes/vmtk_fluid/html/index.html"> Steady finite-Reynolds-number flow through an iliac bifurcation</a> tutorial, the outflow boundary of the demo problem (discussed below) are not aligned with any
+coordinate planes. Parallel outflow is therefore enforced by a Lagrange
+multiplier method, implemented using \c oomph-lib's \c FaceElement framework.
 
 \section model The model problem
 
 We will demonstrate the development and application of the preconditioner 
 using the Poiseuille flow through a unit square domain rotated by an
-arbitrary angle \f$\alpha\f$ (see REF). The domain
+arbitrary angle \f$\alpha\f$ (see the figure below). The domain
 \f$\Omega^{[\alpha]}\f$ is obtained by rotating the discrete points 
 \f$(x_1,x_2)\f$
 in the unit square \f$\Omega = [0,1]^2\f$ by the following transformation
@@ -41,41 +37,274 @@ where \f$\alpha\f$ is the angle of rotation.
 The
 figure below show the flow field (velocity vectors and pressure contours) for a
 unit square domain rotated by an angle of \f$\alpha=30^\circ \f$ and a Reynolds
-number of \f$ Re = 100. \f$ The flow is driven by a prescribed parabolic 
+number of \f$ Re = 100 \f$. The flow is driven by a prescribed parabolic 
 boundary condition.
 @I w 0.4\textwidth SimAng30Rey100Noel4 "Velocity field and pressure contours."
 
 For convenience, we present the boundary conditions for
 the non-rotated unit square \f$\alpha = 0^{\circ}\f$. In order to obtain the
-boundary conditions for \f$\alpha \neq 0^\circ\f$, we only have to apply
+boundary conditions for \f$\alpha \ne 0^\circ\f$, we only have to apply
 the rotation (@R[eqnrotation]@).  The flow is driven by imposing a
 parabolic velocity profile along the inflow boundary \f$\Omega_I\f$. Along the
 characteristic boundary, \f$\Omega_C\f$, the no-slip condition \f$u_i = 0\f$, \f$i =
 1,2\f$ is prescribed.  We impose `parallel outflow' along the outlet 
 \f$\Omega_O\f$ by insisting that
-\f[
-{\bf u}\cdot {\bf t} = 0 \mbox{\ \ \ \ on $\Omega_{O}$.}
+\f[     
+{\bf u}\cdot {\bf t}_{} = 0 \mbox{\ \ \ \ on $\Omega_{O}$.}
  \ \ \ \ \ \ \ \ \ \ @E[eqnbcpostrong]@
-\f]
+\f] 
 We weakly enforce the flow constraint by augmenting the Navier-Stokes momentum
-residual equation
+residual equation (introduced in the <a href="../../../navier_stokes/rayleigh_traction_channel/html/index.html"> Unsteady flow in a 2D channel, driven by an applied traction</a> tutorial) 
+with a Lagrange multiplier term so that it becomes
 \f[
-r_{i}^{u}
+r_{il}^{u}
 =
-\int_{\Omega}
+\int_\Omega
 \left[
-Re \,
-  \left(
-    St \, \frac{\partial u_i}{\partial t}
-         +u_j \frac{\partial u_i}{\partial x_j}\phi
-  \right)
+  Re
+    \left(
+      St\frac{\partial u_i}{\partial t}
+      + u_j\frac{\partial u_i}{\partial x_j}
+    \right) \psi_l
+  + \tau_{ij}\frac{\partial \psi_l}{\partial x_j}
 \right]
+d\Omega
+-
+\int_{\partial\Omega}
+\tau_{ij} n_j\psi_l dS
++ \delta \Pi_{constraint} = 0,
  \ \ \ \ \ \ \ \ \ \ @E[eqnaugmentedresu]@
 \f]
+where
+\f[
+\Pi_{constraint}
+=
+\int_{\partial \Omega} \lambda u_i t_i dS,
+ \ \ \ \ \ \ \ \ \ \ @E[eqnlgrterm]@
+\f]
+and \f$\lambda\f$ is the Lagrange multiplier. Upon taking the first variation of the constraint with respect to the unknown velocity and the Lagrange multiplier, the residual form of the constrained momentum equation is
+\f[
+r_{il}^{u}
+=
+\int_\Omega
+\left[
+  Re
+    \left(
+      St\frac{\partial u_i}{\partial t}
+      + u_j\frac{\partial u_i}{\partial x_j}
+    \right) \psi_l
+  + \tau_{ij}\frac{\partial \psi_l}{\partial x_j}
+\right]
+d\Omega
+-
+\int_{\partial\Omega}
+\tau_{ij} n_j\psi_l dS
++ 
+\int_{\partial\Omega}
+\lambda\psi_l t_i = 0.
+ \ \ \ \ \ \ \ \ \ \ @E[eqnaugmentedresufirstvar]@
+\f]
+The weak formulation of (@R[eqnbcpostrong]@) is simply
+\f[
+r_{l}^{\lambda}
+=
+\int_\Omega
+u_i t_i \psi^\lambda
+dS
+=
+0.
+ \ \ \ \ \ \ \ \ \ \ @E[eqnweakconstraint]@
+\f]
+Equation (@R[eqnaugmentedresufirstvar]@) reveals that the Lagrange 
+multipliers act as (negative) tangential traction 
+\f$(\lambda = -{\bf n}^T{\tau}{\bf t})\f$ that enforce the parallel flow across the boundary \f$\partial\Omega_{O}\f$. 
+We discretise this constraint by attaching \c ImposeParallelOutflowElements 
+to the boundaries of the "bulk" Navier-Stokes elements that are adjacent to 
+\f$ \partial \Omega_O \f$ as shown in the 
+<a href="../../../navier_stokes/vmtk_fluid/html/index.html"> Steady finite-Reynolds-number flow through an iliac bifurcation</a> tutorial, also see the
+<a href="../../../solid/prescribed_displ_lagr_mult/html/index.html"> Deformation of a solid by a prescribed boundary motion </a> tutorial which employs a similar technique used to enforce prescribed boundary 
+displacements in solid mechanics problems. We discretise the Navier-Stokes equations using \c oomph-lib's \c QTaylorHoodElements, see the <a href="../../../navier_stokes/driven_cavity/html/index.html"> 2D Driven Cavity Problem</a> tutorial for more information.
+
+Talk about ImposeParallelOutflowElements re-classifying the bulk unknowns?
+
+The discretised problem therefore contains the following types of discrete 
+unknowns:
+- The fluid degrees of freedom (velocities and pressures).\n\n
+- The nodal values representing the components of the (vector-valued)
+  Lagrange multipliers. These only exist for the nodes on 
+  \f$ \partial \Omega_O\f$. (The nodes are re-sized to
+  accommodate the additional unknowns when the \c ImposeParallelOutflowElements are
+  attached to the bulk elements.)
+. 
+
+The preconditioner requires a further sub-division of these degrees of
+freedom into the following categories:
+- the unconstrained velocity in the x-direction
+- the unconstrained velocity in the y-direction
+- [the unconstrained velocity in the z-direction (only in 3D)]
+- the constrained velocity in the x-direction
+- the constrained velocity in the y-direction
+- [the constrained velocity in the z-direction (only in 3D)]
+- the x-component of the Lagrange multiplier at the constrained nodes
+- the y-component of the Lagrange multiplier at the constrained nodes
+- [the z-component of the Lagrange multiplier at the constrained nodes
+  (only in 3D)].
+.
+For a 2D problem, the linear system to be solved in the course 
+of the Newton iteration can then be (formally) re-ordered 
+into the following block structure:
+\f[
+{\bf P} = 
+\left(
+\begin{array}{c||c}
+\begin{array}{cc}
+J_{11} & J_{12} \\
+J_{21} & J_{22}  \\
+\end{array} &
+\begin{array}{ccc}
+J_{13} & J_{14} & J_{15} \\
+J_{23} & J_{24} & J_{25} \\
+\end{array} \\
+\hline
+\hline
+&
+\begin{array}{cc|c}
+J_{33} & J_{34} & J_{35} \\
+J_{43} & J_{44} & J_{45} \\
+\hline
+J_{53} & J_{54} & J_{55} \\
+\end{array}
+\end{array}
+\right) =
+\left(
+\begin{array}{c|c}
+B_{11}  & B_{12}\\
+\hline
+        & B_{22} \\
+\end{array}
+\right).
+\hspace{3cm}
+@E[eqn:coarse_two_plus_two_plus_one_reordered_linear_system]@
+\f]
+
+\f[
+\left[
+\begin{array}{ccccc|c}
+{ F_{\rm xx}}&{ F_{\rm x\bar{\rm
+      x}}}&{ F_{\rm xy}}&{ F_{\rm x\bar{\rm y}}}&{ B_{\rm x}}&\\
+{ F_{\bar{\rm x}\rm x}}&{ F_{\bar{\rm x}\bar{\rm x}}}&{ F_{\bar{\rm x}\rm y}}&{ F_{\bar{\rm x}\bar{\rm y}}}&{ B_{\rm x}}&{ M_{\rm x}}\\
+{ F_{\rm yx}}&{ F_{\rm y\bar{\rm
+      x}}}&{ F_{\rm yy}}&{ F_{\rm y\bar{\rm y}}}&{ B_{\rm x}}&\\
+{ F_{\bar{\rm y}\rm x}}&{ F_{\bar{\rm
+      y}\bar{\rm x}}}&{ F_{\bar{\rm y}\rm y}}&{ 
+  F_{\bar{\rm y}\bar{\rm y}}}&{ B_{\rm x}}&{ M_{\rm y}}\\
+{ B_{\rm x}}&{ B_{\rm x}}&{ B_{\rm x}}&{ B_{\rm x}}&\\
+\hline
+&{ M_{\rm x}}&&{ M_{\rm y}}&&
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\Delta \mathbf{X}_{\rm x}\\
+\Delta \mathbf{\overline{X}}_{\rm x}\\
+\Delta \mathbf{X}_{\rm y}\\
+\Delta \mathbf{\overline{X}}_{\rm y}\\
+\Delta \mathbf{L}_{\rm x}\\
+\Delta \mathbf{L}_{\rm y}
+\end{array}
+\right]
+ =
+-
+\left[
+\begin{array}{c}
+\mathbf{r}_{\rm x}\\
+\mathbf{r}_{\bar{\rm x}}\\
+\mathbf{r}_{\rm y}\\
+\mathbf{r}_{\bar{\rm y}}\\
+\mathbf{r}_{\rm l_x}\\
+\mathbf{r}_{\rm l_y}
+\end{array}
+\right].
+\ \ \ \ \ \   @E[linear_system]@
+\f]
+Here the vectors \f${\bf X}_{\rm x}\f$, \f${\bf X}_{\rm y}\f$, 
+\f${\bf L}_{\rm x}\f$ and \f${\bf
+  L}_{\rm y}\f$ contain the \f$x\f$ and \f$y\f$ components of the unknown
+nodal positions and Lagrange multipliers, respectively. The overbars 
+identify the unknown nodal positions that are constrained by the 
+Lagrange multiplier. The matrices \f$M_{\rm x}\f$ and \f$M_{\rm y}\f$ 
+are mass matrices 
+whose entries are formed from products of the basis functions,
+\f$[M_{{\rm x}}]_{ij}=[M_{{\rm y}}]_{ij} = 
+\int_{\partial D_{\rm prescr}} {\psi_i} \ {\psi_j} \ dS \f$.
 
 
- by employing Lagrange multipliers to enforce the constraint 
-\f${\bf u} \cdot {\bf t} = 0\f$. We augment the Navier-Stokes momentum equations (discussed in REF) by a Lagrange multiplier term so that it becomes
+The discretised problem contains the 
+following types of discrete unknowns:
+- The velocity degrees of freedom. These are further subdivided into those which are affected by the Lagrange multiplier constraint and those which are not.\n\n
+- The pressure degrees of freedom.\n\n
+- The Lagrange multiplier degrees of freedom.\n\n
+.
+
+
+Using this classification of the unknowns,
+the linear system to be solved in the course 
+of the Newton iteration can be re-ordered 
+into the following block structure (in 2D):
+\f[
+J \ \Delta {\bf x} = 
+ \left[
+\begin{array}{c|c|cc}
+F& &C_{\rm fx}&\\ \hline C_{\rm sf}&S&C_{\rm sx}&\\ \hline
+&&E&C_{\rm xl}\\ &C_{\rm ls}&C_{\rm lx}&\\
+\end{array}
+\right] \left[
+\begin{array}{c}
+ \Delta {\bf F}\\ 
+\hline \Delta {\bf S}\\ 
+\hline \Delta {\bf X}\\ 
+\Delta {\bf L}\\
+\end{array}
+\right] =- \left[
+\begin{array}{c}
+{\bf r}_{\rm f}\\ 
+\hline {\bf r}_{\rm s}\\ 
+\hline {\bf r}_{\rm x}\\ 
+{\bf r}_{\rm l}\\
+\end{array}
+\right] 
+\ \ \ \ \ \ \ \ @E[fsi_linear_system]@
+\f]
+where the vector \f${\bf F}\f$ contains the Navier-Stokes (fluid) unknowns 
+(velocities and pressure), \f${\bf S}\f$ represents unknowns describing the
+deformation of the fluid-loaded solid, \f${\bf X}\f$ represents 
+the nodal positions in the fluid mesh, and \f${\bf L}\f$ contains 
+the discrete Lagrange multipliers which impose
+the deformation of the FSI boundary in the fluid mesh.
+The three diagonal blocks in the Jacobian matrix, \f$J_{\rm FSI}\f$, are 
+the two ``single-physics'' 
+Jacobian matrices (\f$F\f$, the Navier-Stokes Jacobian; \f$S\f$, the 
+tangent stiffness matrix of the fluid-loaded solid) and 
+the Jacobian, 
+\f[
+J_{\rm PS} = 
+\left[
+\begin{array}{cc}
+E&C_{\rm xl}\\ 
+C_{\rm lx}&\\
+\end{array}
+\right]
+\f]
+
+
+
+
+
+
+
+The finite element discretisation and Newton linearisation of (@R[eqnaugmentedresufirstvar]@) and 
+(@R[eqnweakconstraint]@) give rise to a linear system with the following block structure
+
 
 
 
@@ -83,7 +312,6 @@ Re \,
 
 <HR>
 <HR>
-
 
 \section theoryold Theoryold
 
@@ -369,7 +597,7 @@ with full optimisation (-O6) on an Intel Xeon 3.6GHz processor.
 <HR>
 
 
-\section sourcesold Source files for this tutorialold
+\section sources Source files for this tutorial
 - The source files for this tutorial are located in the directory:\n\n
 <CENTER>
 <A HREF="../../../../demo_drivers/linear_solvers/">
