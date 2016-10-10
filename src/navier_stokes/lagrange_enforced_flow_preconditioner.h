@@ -63,6 +63,29 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
   /// \short CG with diagonal preconditioner for W-block subsidiary linear 
   /// systems.
   extern Preconditioner* get_w_cg_preconditioner();
+
+  /// \short Hypre Boomer AMG setting for the augmented momentum block
+  /// of a 2D Navier-Stokes problem using the simple form of the viscous
+  /// term (for serial code).
+  extern Preconditioner* boomer_amg_for_2D_momentum_simple_visc();
+
+  /// \short Hypre Boomer AMG setting for the augmented momentum block
+  /// of a 2D Navier-Stokes problem using the stress divergence form of the 
+  /// viscous term (for serial code).
+  extern Preconditioner* boomer_amg_for_2D_momentum_stressdiv_visc();
+
+  /// \short Hypre Boomer AMG setting for the augmented momentum block
+  /// of a 3D Navier-Stokes problem (for serial code).
+  extern Preconditioner* boomer_amg_for_3D_momentum();
+
+  /// \short Hypre Boomer AMG setting for the 2D Poisson problem 
+  /// (for serial code).  
+  extern Preconditioner* boomer_amg_for_2D_poisson_problem();
+
+  /// \short Hypre Boomer AMG setting for the 3D Poisson problem 
+  /// (for serial code).
+  extern Preconditioner* boomer_amg_for_3D_poisson_problem();
+
 } // namespace
 
 

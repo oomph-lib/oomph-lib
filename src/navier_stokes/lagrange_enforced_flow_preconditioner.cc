@@ -65,6 +65,209 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
                         OOMPH_EXCEPTION_LOCATION);
 #endif
   } // function get_w_cg_preconditioner
+
+  /// \short Hypre Boomer AMG setting for the augmented momentum block
+  /// of a 2D Navier-Stokes problem using the simple form of the viscous
+  /// term (for serial code).
+  Preconditioner* boomer_amg_for_2D_momentum_simple_visc()
+  {
+#ifdef OOMPH_HAS_HYPRE
+    // Create a new HyprePreconditioner
+    HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
+
+    // Coarsening strategy
+    // 1 = classical RS with no boundary treatment (not recommended in 
+    // parallel)
+    hypre_preconditioner_pt->amg_coarsening() = 1;
+  
+    // Strength of dependence = 0.25
+    hypre_preconditioner_pt->amg_strength() = 0.25;
+
+
+    // Set the smoothers
+    //   1 = Gauss-Seidel, sequential (very slow in parallel!)
+    hypre_preconditioner_pt->amg_simple_smoother() = 1;
+  
+    // Set smoother damping (not required, so set to -1)
+    hypre_preconditioner_pt->amg_damping() = -1;
+
+
+    // Set number of cycles to 1xV(2,2)
+    hypre_preconditioner_pt->set_amg_iterations(1);
+    hypre_preconditioner_pt->amg_smoother_iterations()=2;
+
+    return hypre_preconditioner_pt;
+#else
+    std::ostringstream err_msg;
+    err_msg << "hypre preconditioner is not available.\n"
+            << "Please install Hypre.\n";
+    throw OomphLibError(err_msg.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+#endif
+  } // function boomer_amg_for_2D_momentum_simple_visc
+
+  /// \short Hypre Boomer AMG setting for the augmented momentum block
+  /// of a 2D Navier-Stokes problem using the stress divergence form of the 
+  /// viscous term (for serial code).
+  Preconditioner* boomer_amg_for_2D_momentum_stressdiv_visc()
+  {
+#ifdef OOMPH_HAS_HYPRE
+    // Create a new HyprePreconditioner
+    HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
+
+    // Coarsening strategy
+    // 1 = classical RS with no boundary treatment (not recommended in 
+    // parallel)
+    hypre_preconditioner_pt->amg_coarsening() = 1;
+  
+    // Strength of dependence = 0.668
+    hypre_preconditioner_pt->amg_strength() = 0.668;
+
+
+    // Set the smoothers
+    //   1 = Gauss-Seidel, sequential (very slow in parallel!)
+    hypre_preconditioner_pt->amg_simple_smoother() = 1;
+  
+    // Set smoother damping (not required, so set to -1)
+    hypre_preconditioner_pt->amg_damping() = -1;
+
+
+    // Set number of cycles to 1xV(2,2)
+    hypre_preconditioner_pt->set_amg_iterations(1);
+    hypre_preconditioner_pt->amg_smoother_iterations()=2;
+
+    return hypre_preconditioner_pt;
+#else
+    std::ostringstream err_msg;
+    err_msg << "hypre preconditioner is not available.\n"
+            << "Please install Hypre.\n";
+    throw OomphLibError(err_msg.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+#endif
+  } // function boomer_amg_for_2D_momentum_stressdiv_visc
+
+  /// \short Hypre Boomer AMG setting for the augmented momentum block
+  /// of a 3D Navier-Stokes problem (for serial code).
+  Preconditioner* boomer_amg_for_3D_momentum()
+  {
+#ifdef OOMPH_HAS_HYPRE
+    // Create a new HyprePreconditioner
+    HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
+
+    // Coarsening strategy
+    // 1 = classical RS with no boundary treatment (not recommended in 
+    // parallel)
+    hypre_preconditioner_pt->amg_coarsening() = 1;
+  
+    // Strength of dependence = 0.668
+    hypre_preconditioner_pt->amg_strength() = 0.668;
+
+
+    // Set the smoothers
+    //   1 = Gauss-Seidel, sequential (very slow in parallel!)
+    hypre_preconditioner_pt->amg_simple_smoother() = 1;
+  
+    // Set smoother damping (not required, so set to -1)
+    hypre_preconditioner_pt->amg_damping() = -1;
+
+
+    // Set number of cycles to 1xV(2,2)
+    hypre_preconditioner_pt->set_amg_iterations(1);
+    hypre_preconditioner_pt->amg_smoother_iterations()=2;
+
+    return hypre_preconditioner_pt;
+#else
+    std::ostringstream err_msg;
+    err_msg << "hypre preconditioner is not available.\n"
+            << "Please install Hypre.\n";
+    throw OomphLibError(err_msg.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+#endif
+  } // function boomer_amg_for_3D_momentum
+
+  /// \short Hypre Boomer AMG setting for the 2D Poisson problem 
+  /// (for serial code).
+  Preconditioner* boomer_amg_for_2D_poisson_problem()
+  {
+#ifdef OOMPH_HAS_HYPRE
+    // Create a new HyprePreconditioner
+    HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
+
+    // Coarsening strategy
+    // 1 = classical RS with no boundary treatment (not recommended in 
+    // parallel)
+    hypre_preconditioner_pt->amg_coarsening() = 1;
+  
+    // Strength of dependence = 0.668
+    hypre_preconditioner_pt->amg_strength() = 0.25;
+
+
+    // Set the smoothers
+    //   0 = Jacobi
+    hypre_preconditioner_pt->amg_simple_smoother() = 0;
+  
+    // Set Jacobi damping = 2/3
+    hypre_preconditioner_pt->amg_damping() = 0.666;
+
+
+    // Set number of cycles to 1xV(2,2)
+    hypre_preconditioner_pt->set_amg_iterations(2);
+    hypre_preconditioner_pt->amg_smoother_iterations()=1;
+
+    return hypre_preconditioner_pt;
+#else
+    std::ostringstream err_msg;
+    err_msg << "hypre preconditioner is not available.\n"
+            << "Please install Hypre.\n";
+    throw OomphLibError(err_msg.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+#endif
+  } // function boomer_amg_for_2D_poisson_problem
+
+  /// \short Hypre Boomer AMG setting for the 3D Poisson problem 
+  /// (for serial code).
+  Preconditioner* boomer_amg_for_3D_poisson_problem()
+  {
+#ifdef OOMPH_HAS_HYPRE
+    // Create a new HyprePreconditioner
+    HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
+
+    // Coarsening strategy
+    // 1 = classical RS with no boundary treatment (not recommended in 
+    // parallel)
+    hypre_preconditioner_pt->amg_coarsening() = 1;
+  
+    // Strength of dependence = 0.7
+    hypre_preconditioner_pt->amg_strength() = 0.7;
+
+
+    // Set the smoothers
+    //   0 = Jacobi
+    hypre_preconditioner_pt->amg_simple_smoother() = 0;
+  
+    // Set smoother damping = 2/3
+    hypre_preconditioner_pt->amg_damping() = 0.666;
+
+
+    // Set number of cycles to 2xV(1,1)
+    hypre_preconditioner_pt->set_amg_iterations(2);
+    hypre_preconditioner_pt->amg_smoother_iterations()=1;
+
+    return hypre_preconditioner_pt;
+#else
+    std::ostringstream err_msg;
+    err_msg << "hypre preconditioner is not available.\n"
+            << "Please install Hypre.\n";
+    throw OomphLibError(err_msg.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+#endif
+  } // function boomer_amg_for_3D_poisson_problem
+
 } // namespace
 
 ////////////////////////////////////////////////////////////////////////////
