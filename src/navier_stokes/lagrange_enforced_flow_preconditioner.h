@@ -55,11 +55,13 @@
 
 namespace oomph
 {
-
+//==========================================================================
+/// Namespace for subsidiary preconditioner creation helper functions
+//==========================================================================
 namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 {
-  /// \short CG with diagonal preconditioner for the Lagrange multiplier
-  /// subsidiary linear systems.
+  /// \short CG with diagonal preconditioner for W-block subsidiary linear 
+  /// systems.
   extern Preconditioner* get_lagrange_multiplier_preconditioner();
 }
 
@@ -68,61 +70,77 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 /// \short The preconditioner for the Lagrange multiplier constrained 
 /// Navier-Stokes equations. The velocity components are constrained by 
 /// Lagrange multiplier, which are applied via OOMPH-LIB's FACE elements.
+///
+///
+/// The linearised Jacobian takes the block form:
 /// 
-/// A Vector of meshes is taken, each mesh contains a different type of
-/// block preconditionable element. Each element must not only classify it's 
-/// own degrees of freedom but also the associated DOF from the 'bulk' 
-/// element.
+/// | F_ns | L^T |
+/// |------------|
+/// |   L  | 0   |
+///
+/// where L correspond to the constrained block,
+/// F_ns is the Navier-Stokes block with the following block structure
+///
+/// |  F | G^T |
+/// |----------|
+/// |  D |  0  |
+///
+/// Here F is the momentum block, G the discrete gradient operator,
+/// and D the discrete divergence operator. (For unstabilised elements, 
+/// we have D = G^T and in much of the literature the divergence matrix is 
+/// denoted by B.)
+///
+/// The Lagrange enforced flow preconditioner takes the form:
+/// | F_aug |    |
+/// |-------|----|
+/// |       | Wd |
+///
+/// where  F_aug = F_ns + L^T*inv(Wd)*L is an augmented Navier-Stokes block 
+/// and Wd=diag(LL^T).
+///
+/// In our implementation of the preconditioner, the linear systems 
+/// associated with the diagonal blocks can either be solved "exactly", 
+/// using SuperLU (in its incarnation as an exact preconditioner; 
+/// this is the default) or by any other Preconditioner (inexact solver) 
+/// specified via the access functions
+///
+/// LagrangeEnforcedFlowPreconditioner::set_w_preconditioner(
+/// LagrangeEnforcedFlowPreconditioner::set_navier_stokes_preconditioner(...)
+///
+/// Access to the elements is provided via meshes. However, a Vector of 
+/// meshes is taken, each mesh contains a different type of block 
+/// preconditionable element. This allows the (re-)classification of the 
+/// constrained velocity DOF types.
 /// 
-/// The first mesh in the Vector Mesh_pt is assumed to be the 'bulk' mesh.
-/// The rest are assumed to contain FACEELMENTS applying the required 
-/// constraint.
+/// The first mesh in the Vector Mesh_pt must be the 'bulk' mesh.
+/// The rest are assumed to contain FACEELMENTS. 
 /// 
-/// Thus the most general block structure (in 3D) is: 
+/// Thus, the most general block structure (in 3D) is: 
 /// 
 ///  0 1 2 3   4 5 6 7  8  ..x   x+0 x+1 x+2 x+3 x+4 
 /// [u v w p] [u v w l1 l2 ...] [u   v   w   l1  l2 ...] ... 
 ///   Bulk       Surface 1             Surface 2         ... 
 /// 
-/// where the dof types in [] are the dof types in each mesh.
-/// It is assumed that in all surface mesh (after the bulk mesh), the first
-/// spatial dimension number of dof types are the constrained velocity.
+/// where the DOF types in [] are the DOF types associated with each mesh.
 /// 
-/// Consider the case of imposing parallel outflow (3 constrained velocity
-/// dof types and 2 lagrange multiplier dof types) and tangential flow (3
-/// constrained velocity dof types and 1 lagrange multiplier dof type)
-/// along two different boundaries in 3D. The resulting natural block dof
-/// type structure is: 
+/// For example, consider a unit cube domain [0,1]^3 with parallel outflow 
+/// imposed (in mesh 0) and tangential flow imposed (in mesh 1), then there 
+/// are 13 DOF types and our implementation respects the following 
+/// (natural) DOF type order:
+///
+///   bulk          mesh 0           mesh 1
 /// [0 1 2 3] [4  5  6   7   8 ] [9  10 11 12 ]
 /// [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1]
+///
+/// Via the appropriate mapping, the block_setup(...) function will
+/// re-order the DOF types into the following block types:
 /// 
-/// Given that we know the spatial dimension of the problem, this 
-/// information can be conveniently stored in a Vector 
-/// N_doftype_in_mesh = [4, 5, 4]. This Vector will be used to re-order 
-/// the dof types to group together the velocity, pressure, then Lagrange 
-/// DOF types like so:
-/// 
-///  0 4  9  1 5  10  2 6  11    3    7   8  12   
+///  0 1  2  3 4  5   6 7  8     9   10  11  12   <- Block type
+///  0 4  9  1 5  10  2 6  11    3    7   8  12   <- DOF type
 /// [u up ut v vp vt  w wp wt ] [p] [Lp1 Lp2 Lt1] 
-///
-///    0 4  9  1 5  10  2 6  11  3  7   8  12   
-///    u up ut v vp vt  w wp wt  p Lp1 Lp2 Lt1  
-///  ..... this is too hard to do without Latex....
-///
-/// We use the preconditioner in the form... check my first year report...
 /// 
-/// Giving rise to the blocked Jacobian:
-/// F G^t
-///      L
-/// D   
-///  L
-/// 
-/// Here F is the momentum block, G the discrete gradient operator,
-/// and D the discrete divergence operator. (For unstabilised elements, 
-/// we have D = G^T and in much of the literature the divergence matrix is 
-/// denoted by B.) The L blocks
 //==========================================================================
-class LagrangeEnforcedflowPreconditioner 
+class LagrangeEnforcedFlowPreconditioner 
   : public BlockPreconditioner<CRDoubleMatrix>
 {
   public:
@@ -135,27 +153,26 @@ class LagrangeEnforcedflowPreconditioner
   typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
 
   /// Constructor - sets the defaults for control flags
-  LagrangeEnforcedflowPreconditioner():BlockPreconditioner<CRDoubleMatrix>()
+  LagrangeEnforcedFlowPreconditioner()
+    : BlockPreconditioner<CRDoubleMatrix>()
   {
-    // Null the pointers:
-    
-    // The Navier Stokes preconditioner pointer.
+    // The Navier-Stokes preconditioner pointer.
     Navier_stokes_preconditioner_pt = 0;
     
     // Null the function pointer which is used to create the subsidiary
     // preconditioners for the W block(s)
-    Lagrange_multiplier_subsidiary_preconditioner_fct_pt = 0;
+    W_preconditioner_fct_pt = 0;
 
     // Set the vector of preconditioner pointers for the W block(s) to zero.
-    Lagrange_multiplier_preconditioner_pt.resize(0,0);
+    W_preconditioner_pt.resize(0,0);
 
     // By default, the Lagrange multiplier block is preconditioned by the 
     // SuperLU preconditioner. To be honest, it does not matter what we set
     // here, it is reset later in the function setup(...).
-    Lagrange_multiplier_preconditioner_is_block_preconditioner = false;
+    W_preconditioner_is_block_preconditioner = false;
 
-    // By default, the Navier Stokes block is preconditioned by the 
-    // Least Square Commutator (LSC) preconditioner. To be honest, it foes not
+    // By default, the Navier-Stokes block is preconditioned by the 
+    // Least Square Commutator (LSC) preconditioner. To be honest, it does not
     // matter what we set here, since it is reset in the function setup(...).
     Navier_stokes_preconditioner_is_block_preconditioner = true;
 
@@ -182,31 +199,31 @@ class LagrangeEnforcedflowPreconditioner
     Use_diagonal_w_block = true;
 
     Mapping_info_calculated = false;
-  }
+  } // constructor
 
-  /// destructor
-  virtual ~LagrangeEnforcedflowPreconditioner()
+  /// \short Destructor
+  virtual ~LagrangeEnforcedFlowPreconditioner()
   {
     this->clean_up_memory();
   }
 
-  /// Broken copy constructor
-  LagrangeEnforcedflowPreconditioner 
-    (const LagrangeEnforcedflowPreconditioner&)
+  /// \short Broken copy constructor
+  LagrangeEnforcedFlowPreconditioner 
+    (const LagrangeEnforcedFlowPreconditioner&)
   {
-    BrokenCopy::broken_copy("LagrangeEnforcedflowPreconditioner");
+    BrokenCopy::broken_copy("LagrangeEnforcedFlowPreconditioner");
   }
 
-  /// Broken assignment operator
-  void operator=(const LagrangeEnforcedflowPreconditioner&)
+  /// \short Broken assignment operator
+  void operator=(const LagrangeEnforcedFlowPreconditioner&)
   {
-    BrokenCopy::broken_assign(" LagrangeEnforcedflowPreconditioner");
+    BrokenCopy::broken_assign(" LagrangeEnforcedFlowPreconditioner");
   }
 
-  /// Setup method for the LagrangeEnforcedflowPreconditioner.
+  /// \short Setup method for the LagrangeEnforcedFlowPreconditioner.
   void setup();
 
-  /// Use the diagonal approximation for the W block.
+  /// \short Use the diagonal approximation for the W block.
   void use_diagonal_w_block() {Use_diagonal_w_block = true;}
 
   /// Use block diagonal W block.
@@ -216,89 +233,8 @@ class LagrangeEnforcedflowPreconditioner
   /// r is the residual (rhs), z will contain the solution.
   void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-  /// Set the meshes, the first mesh must be the fluid mesh
-  void set_meshes(const Vector<Mesh*> &mesh_pt)
-  {
-    // There should be at least two meshes for this preconditioner.
-    const unsigned nmesh = mesh_pt.size();
-
-#ifdef PARANOID
-    if(nmesh < 2)
-    {
-      std::ostringstream err_msg;
-      err_msg << "There should be at least two meshes.\n";
-      throw OomphLibError(err_msg.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Check that all pointers are not null
-    for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
-    {
-      if (mesh_pt[mesh_i]==0)
-      {
-        std::ostringstream err_msg;
-        err_msg << "The pointer mesh_pt[" << mesh_i << "] is null.\n";
-        throw OomphLibError(err_msg.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-      }
-    }
-
-    // We assume that the first mesh is the Navier Stokes "bulk" mesh. 
-    // To check this, the elemental dimension must be the same as the 
-    // nodal (spatial) dimension.
-    //
-    // We store the elemental dimension i.e. the number of local coordinates
-    // required to parametrise its geometry.
-    const unsigned elemental_dim = mesh_pt[0]->elemental_dimension();
-
-    // The dimension of the nodes in the first element in the (supposedly)
-    // bulk mesh.
-    const unsigned nodal_dim = mesh_pt[0]->nodal_dimension();
-
-    // Check if the first mesh is the "bulk" mesh.
-    // Here we assume only one mesh contains "bulk" elements.
-    // All subsequent meshes contain block preconditionable elements which
-    // re-classify the bulk velocity dofs to constrained velocity dofs.
-    if (elemental_dim != nodal_dim) 
-    {
-      std::ostringstream err_msg;
-      err_msg << "In the first mesh, the elements have elemental dimension of "
-              << elemental_dim << ", with a nodal dimension of "
-              << nodal_dim << ".\n"
-              << "The first mesh does not contain 'bulk' elements.\n"
-              << "Please re-order your mesh_pt vector.\n";
-
-      throw OomphLibError(err_msg.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-    
-    // Set the number of meshes 
-    this->set_nmesh(nmesh);
-    
-    // Set the meshes
-    for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
-     {
-      this->set_mesh(mesh_i,mesh_pt[mesh_i]);
-     }
-
-    // We also store the meshes and number of meshes locally in this class.
-    // This is slightly redundant, since we always have it stored in the upper
-    // most master block preconditioner. But at the moment there is no 
-    // mapping/look up scheme between master and subsidiary block 
-    // preconditioners for meshes.
-    // So if this is a subsidiary block preconditioner, we don't know which of
-    // the master's meshes belong to us. We need this information to set up
-    // look up lists in the function setup(...).
-    // So we store them local to this class.
-    My_mesh_pt = mesh_pt;
-    My_nmesh = nmesh;
-  } // EoFunc set_meshes
-
+  /// \short Set the meshes, the first mesh must be the fluid mesh
+  void set_meshes(const Vector<Mesh*> &mesh_pt);
 
   /// \short Access function to the Scaling sigma of the preconditioner
   double& scaling_sigma()
@@ -319,39 +255,10 @@ class LagrangeEnforcedflowPreconditioner
     Use_default_norm_of_f_scaling = true;
   }
 
-  /// Function to set a new momentum matrix preconditioner (inexact solver)
-  void set_navier_stokes_lsc_preconditioner(
-      Preconditioner* new_ns_preconditioner_pt = 0)
-  {
-    // Check if pointer is non-zero.
-    if(new_ns_preconditioner_pt == 0)
-    {
-      std::ostringstream warning_stream;
-      warning_stream << "WARNING: \n"
-                     << "The LSC preconditioner point is null.\n" 
-                     << "Using default (SuperLU) preconditioner.\n" 
-                     << std::endl;
-      OomphLibWarning(warning_stream.str(),
-                      OOMPH_CURRENT_FUNCTION,
-                      OOMPH_EXCEPTION_LOCATION);
-      
-      Navier_stokes_preconditioner_pt = 0;
-      Using_superlu_ns_preconditioner = true;
-    }
-    else
-    {
-      // If the default SuperLU preconditioner has been used
-      // clean it up now...
-      if (Using_superlu_ns_preconditioner 
-          && Navier_stokes_preconditioner_pt != 0)
-      {
-        delete Navier_stokes_preconditioner_pt;
-      }
-      
-      Navier_stokes_preconditioner_pt = new_ns_preconditioner_pt;
-      Using_superlu_ns_preconditioner = false;
-    }
-  }
+  /// \short Function to set a new Navier-Stokes matrix preconditioner 
+  /// (inexact solver)
+  void set_navier_stokes_preconditioner(
+      Preconditioner* new_ns_preconditioner_pt = 0);
 
   ///\short Function to (re-)set momentum matrix preconditioner (inexact
   /// solver) to SuperLU
@@ -369,10 +276,10 @@ class LagrangeEnforcedflowPreconditioner
   /// preconditioner with SuperLUPreconditioner. For a different 
   /// preconditioner, pass a function to this 
   /// method returning a different subsidiary operator.
-  void set_lagrange_multiplier_subsidiary_preconditioner(
+  void set_w_preconditioner(
       SubsidiaryPreconditionerFctPt prec_fn)
   {
-    Lagrange_multiplier_subsidiary_preconditioner_fct_pt = prec_fn;
+    W_preconditioner_fct_pt = prec_fn;
   }
 
   /// \short Clears the memory.
@@ -380,69 +287,69 @@ class LagrangeEnforcedflowPreconditioner
 
   private:
 
-  /// 
+  /// \short 
   bool Mapping_info_calculated;
 
   /// \short the Scaling_sigma variable of this preconditioner
   double Scaling_sigma;
 
-  /// 
+  /// \short 
   bool Use_default_norm_of_f_scaling;
 
-  /// The Lagrange multiplier subsidiary preconditioner function pointer
-  SubsidiaryPreconditionerFctPt 
-    Lagrange_multiplier_subsidiary_preconditioner_fct_pt;
+  /// \short The Lagrange multiplier subsidiary preconditioner function 
+  /// pointer
+  SubsidiaryPreconditionerFctPt W_preconditioner_fct_pt;
 
-  /// Same W solvers are used in both exact and LSC.
+  /// \short Same W solvers are used in both exact and LSC.
   /// Pointer to the 'preconditioner' for the W matrix
-  Vector<Preconditioner*> Lagrange_multiplier_preconditioner_pt;
+  Vector<Preconditioner*> W_preconditioner_pt;
 
-  /// Boolean to indicate if the Lagrange multiplier preconditioner is a 
+  /// \short Boolean to indicate if the Lagrange multiplier preconditioner 
+  /// is a 
   /// block preconditioner or not.
-  bool Lagrange_multiplier_preconditioner_is_block_preconditioner;
+  bool W_preconditioner_is_block_preconditioner;
 
-  /// Pointer to the 'preconditioner' for the Navier-Stokes block
+  /// \short Pointer to the 'preconditioner' for the Navier-Stokes block
   Preconditioner* Navier_stokes_preconditioner_pt;
 
-  /// Boolean to indicate if the preconditioner for the Navier Stokes block
+  /// \short Boolean to indicate if the preconditioner for the 
+  /// Navier-Stokes block
   /// is a block preconditioner or not.
   bool Navier_stokes_preconditioner_is_block_preconditioner;
 
-  /// flag to indicate whether the default NS preconditioner is used
+  /// \short flag to indicate whether the default NS preconditioner is used
   bool Using_superlu_ns_preconditioner;
 
-  /// Bool to use diagonal or block diagonal W block.
+  /// \short Bool to use diagonal or block diagonal W block.
   bool Use_diagonal_w_block;
 
-  /// the re-arraned doftypes: velocity, pressure, lagrange.
+  /// \short the re-arraned DOF types: velocity, pressure, Lagrange.
   Vector<unsigned> Doftype_list_vpl;
   
-  /// the re-arraned doftypes: bulk, constrained, pressure, lagrange.
+  /// \short the re-arraned DOF types: bulk, constrained, pressure, lagrange.
   Vector<unsigned> Subsidiary_list_bcpl;
 
   /// \short Storage for the meshes. 
   /// The first mesh must always be the Navier-Stokes (bulk) mesh.
   Vector<Mesh*> My_mesh_pt;
 
-  /// 
+  /// \short 
   Vector<unsigned> My_ndof_types_in_mesh;
 
   /// \short Store the number of meshes. 
   /// This is required to create the look up lists.
   unsigned My_nmesh;
 
-  /// \short The number of lagrange multiplier dof types
+  /// \short The number of lagrange multiplier DOF types
   unsigned N_lagrange_doftypes;
 
-  /// \short The number of fluid dof types (including pressure)
+  /// \short The number of fluid DOF types (including pressure)
   unsigned N_fluid_doftypes;
 
-  /// \short The number of velocity dof types.
+  /// \short The number of velocity DOF types.
   unsigned N_velocity_doftypes;
 
-  bool Replace_all_f_blocks;
-
-}; // end of LagrangeEnforcedflowPreconditioner class
+}; // end of LagrangeEnforcedFlowPreconditioner class
 
 }
 #endif

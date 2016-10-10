@@ -31,11 +31,13 @@
 
 namespace oomph
 {
-
+//==========================================================================
+/// Namespace for subsidiary preconditioner creation helper functions
+//==========================================================================
 namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 {
-  /// \short CG with diagonal preconditioner for the Lagrange multiplier
-  /// subsidiary linear systems.
+  /// \short CG with diagonal preconditioner for W-block subsidiary linear 
+  /// systems.
   Preconditioner* get_lagrange_multiplier_preconditioner()
   {
 #ifdef OOMPH_HAS_TRILINOS
@@ -63,16 +65,15 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
                         OOMPH_EXCEPTION_LOCATION);
 #endif
   } // function get_lagrange_multiplier_preconditioner
-} // namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
-
+} // namespace
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
- /// \short Apply the preconditioner.
- /// r is the residual (rhs), z will contain the solution.
-void LagrangeEnforcedflowPreconditioner::preconditioner_solve(
+/// \short Apply the preconditioner.
+/// r is the residual (rhs), z will contain the solution.
+void LagrangeEnforcedFlowPreconditioner::preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)
 {
   // Working vectors.
@@ -81,11 +82,11 @@ void LagrangeEnforcedflowPreconditioner::preconditioner_solve(
   DoubleVector yet_another_temp_vec;
 
   // First we solve all the w blocks:
-  if(Lagrange_multiplier_preconditioner_is_block_preconditioner)
+  if(W_preconditioner_is_block_preconditioner)
   {
     for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
     {
-      Lagrange_multiplier_preconditioner_pt[l_i]->preconditioner_solve(r,z);
+      W_preconditioner_pt[l_i]->preconditioner_solve(r,z);
     }
   }
   else
@@ -99,7 +100,7 @@ void LagrangeEnforcedflowPreconditioner::preconditioner_solve(
       // Extract the block
       this->get_block_vector(l_ii,r,temp_vec);
 
-      Lagrange_multiplier_preconditioner_pt[l_i]
+      W_preconditioner_pt[l_i]
         ->preconditioner_solve(temp_vec,another_temp_vec);
 
       const unsigned vec_nrow_local = another_temp_vec.nrow_local();
@@ -149,6 +150,88 @@ void LagrangeEnforcedflowPreconditioner::preconditioner_solve(
    }
  } // end of preconditioner_solve
 
+  /// \short Set the meshes, the first mesh must be the fluid mesh
+  void LagrangeEnforcedFlowPreconditioner::set_meshes(const Vector<Mesh*> &mesh_pt)
+  {
+    // There should be at least two meshes for this preconditioner.
+    const unsigned nmesh = mesh_pt.size();
+
+#ifdef PARANOID
+    if(nmesh < 2)
+    {
+      std::ostringstream err_msg;
+      err_msg << "There should be at least two meshes.\n";
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // Check that all pointers are not null
+    for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
+    {
+      if (mesh_pt[mesh_i]==0)
+      {
+        std::ostringstream err_msg;
+        err_msg << "The pointer mesh_pt[" << mesh_i << "] is null.\n";
+        throw OomphLibError(err_msg.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+
+    // We assume that the first mesh is the Navier-Stokes "bulk" mesh. 
+    // To check this, the elemental dimension must be the same as the 
+    // nodal (spatial) dimension.
+    //
+    // We store the elemental dimension i.e. the number of local coordinates
+    // required to parametrise its geometry.
+    const unsigned elemental_dim = mesh_pt[0]->elemental_dimension();
+
+    // The dimension of the nodes in the first element in the (supposedly)
+    // bulk mesh.
+    const unsigned nodal_dim = mesh_pt[0]->nodal_dimension();
+
+    // Check if the first mesh is the "bulk" mesh.
+    // Here we assume only one mesh contains "bulk" elements.
+    // All subsequent meshes contain block preconditionable elements which
+    // re-classify the bulk velocity DOFs to constrained velocity DOFs.
+    if (elemental_dim != nodal_dim) 
+    {
+      std::ostringstream err_msg;
+      err_msg << "In the first mesh, the elements have elemental dimension of "
+              << elemental_dim << ", with a nodal dimension of "
+              << nodal_dim << ".\n"
+              << "The first mesh does not contain 'bulk' elements.\n"
+              << "Please re-order your mesh_pt vector.\n";
+
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+    // Set the number of meshes 
+    this->set_nmesh(nmesh);
+    
+    // Set the meshes
+    for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
+     {
+      this->set_mesh(mesh_i,mesh_pt[mesh_i]);
+     }
+
+    // We also store the meshes and number of meshes locally in this class.
+    // This is slightly redundant, since we always have it stored in the upper
+    // most master block preconditioner. But at the moment there is no 
+    // mapping/look up scheme between master and subsidiary block 
+    // preconditioners for meshes.
+    // So if this is a subsidiary block preconditioner, we don't know which of
+    // the master's meshes belong to us. We need this information to set up
+    // look up lists in the function setup(...).
+    // So we store them local to this class.
+    My_mesh_pt = mesh_pt;
+    My_nmesh = nmesh;
+  } // EoFunc set_meshes
+
 
 //===========================================================================
 /// Setup the Lagrange enforced flow preconditioner. This
@@ -159,24 +242,24 @@ void LagrangeEnforcedflowPreconditioner::preconditioner_solve(
 //============================================================================
 
 //========================================================================
-/// Setup method for the LagrangeEnforcedflowPreconditioner.
+/// Setup method for the LagrangeEnforcedFlowPreconditioner.
 //========================================================================
-void LagrangeEnforcedflowPreconditioner::setup()
+void LagrangeEnforcedFlowPreconditioner::setup()
 {
   // clean
   this->clean_up_memory();
  
 #ifdef PARANOID
-    // Paranoid check that meshes have been set.
-    if(My_nmesh == 0)
-    {
-      std::ostringstream err_msg;
-      err_msg << "There are no meshes set. Please call set_meshes(...)\n"
-        << "with at least two mesh.";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
+  // Paranoid check that meshes have been set.
+  if(My_nmesh == 0)
+  {
+    std::ostringstream err_msg;
+    err_msg << "There are no meshes set. Please call set_meshes(...)\n"
+            << "with at least two mesh.";
+    throw OomphLibError(err_msg.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+  }
 #endif
 
 
@@ -203,8 +286,8 @@ void LagrangeEnforcedflowPreconditioner::setup()
   // (2) the number of DOF types in each of the meshes.
   //
   // Assumption: We assume the first mesh is always the "bulk" mesh 
-  // (the Navier Stokes mesh), which contains block preconditionable 
-  // Navier Stokes elements classifies the velocity and pressure 
+  // (the Navier-Stokes mesh), which contains block preconditionable 
+  // Navier-Stokes elements classifies the velocity and pressure 
   // degrees of freedom (ndof_types = 3(4) in 2(3)D). All subsequent meshes
   // contains the constrained velocity DOF types, then the Lagrange multiplier
   // DOF types.
@@ -253,7 +336,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
 
   // Check if the number of DOF types make sense.
 #ifdef PARANOID
-  // The Navier Stokes mesh should (classify $spatial_dim + 1) number of 
+  // The Navier-Stokes mesh should (classify $spatial_dim + 1) number of 
   // DOF types (velocities and pressure).
   // For the meshes classifying constrained DOF types, there will always be
   // $spatial_dim number of constrained velocity DOF types first, followed by 
@@ -388,7 +471,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
     //
     // We can loop through the number of meshes,
     //  fill in the first $spatial_dimension number of entries with velocity vals
-    //  then fill in the rest with Lagrange dof types.
+    //  then fill in the rest with Lagrange DOF types.
 
     // Index for the dof_to_block_map vector.
     unsigned temp_index = 0;
@@ -873,7 +956,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //      std::cout << "============================================" << std::endl; 
 //      std::cout << "============================================" << std::endl; 
 
-  // Recall that the dof type ordering is:
+  // Recall that the DOF type ordering is:
   // The general ordering for the DOF types (for this program, in 3D) is
   //
   //  0 1 2 3   4 5 6 7  8  ..x   x+0 x+1 x+2 x+3 x+4
@@ -906,7 +989,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
   // 5 -> 10
   // 6 -> 11
   //
-  // Since we just get the number of dof types in the meshes, and we know
+  // Since we just get the number of DOF types in the meshes, and we know
   // the number of meshes.
 
 //    oomph_info << "My_nmesh: " << My_nmesh << std::endl;
@@ -1243,7 +1326,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
     if(navier_stokes_block_preconditioner_pt == 0)
     {
       std::ostringstream error_message;
-      error_message << "Navier stokes preconditioner is not a block\n"
+      error_message << "Navier-stokes preconditioner is not a block\n"
         << "preconditioner." << std::endl;
       throw OomphLibError(
           error_message.str(),
@@ -1581,35 +1664,35 @@ void LagrangeEnforcedflowPreconditioner::setup()
 ///////////////////////////////////////////////////////////////////////////
 
     // Solver for the W block.
-    Lagrange_multiplier_preconditioner_pt.resize(N_lagrange_doftypes,0);
+    W_preconditioner_pt.resize(N_lagrange_doftypes,0);
     for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
     {
-      if(Lagrange_multiplier_subsidiary_preconditioner_fct_pt == 0)
+      if(W_preconditioner_fct_pt == 0)
       {
-        Lagrange_multiplier_preconditioner_pt[l_i] = new SuperLUPreconditioner;
+        W_preconditioner_pt[l_i] = new SuperLUPreconditioner;
       }
       else
       {
         // We use the preconditioner provided.
-        Lagrange_multiplier_preconditioner_pt[l_i] = 
-          (*Lagrange_multiplier_subsidiary_preconditioner_fct_pt)();
+        W_preconditioner_pt[l_i] = 
+          (*W_preconditioner_fct_pt)();
       }
 
       // Is this a block preconditioner?
       BlockPreconditioner<CRDoubleMatrix>* L_block_preconditioner_pt = 
         dynamic_cast<BlockPreconditioner<CRDoubleMatrix>* >
-        (Lagrange_multiplier_preconditioner_pt[l_i]);
+        (W_preconditioner_pt[l_i]);
 
       if(L_block_preconditioner_pt == 0)
       {
-        Lagrange_multiplier_preconditioner_is_block_preconditioner = false;
+        W_preconditioner_is_block_preconditioner = false;
 
-        Lagrange_multiplier_preconditioner_pt[l_i]->setup(w_pt[l_i]);
+        W_preconditioner_pt[l_i]->setup(w_pt[l_i]);
       }
       else
       {
 
-        Lagrange_multiplier_preconditioner_is_block_preconditioner = true;
+        W_preconditioner_is_block_preconditioner = true;
         Vector<unsigned> l_mult_dof_map;
         l_mult_dof_map.push_back(N_fluid_doftypes + l_i);
 
@@ -1626,34 +1709,69 @@ void LagrangeEnforcedflowPreconditioner::setup()
     }
 
     Mapping_info_calculated = true;
-} // end of LagrangeEnforcedflowPreconditioner::setup
+} // end of LagrangeEnforcedFlowPreconditioner::setup
 
+  /// \short Function to set a new momentum matrix preconditioner 
+  /// (inexact solver)
+void LagrangeEnforcedFlowPreconditioner::set_navier_stokes_preconditioner(
+      Preconditioner* new_ns_preconditioner_pt)
+  {
+    // Check if pointer is non-zero.
+    if(new_ns_preconditioner_pt == 0)
+    {
+      std::ostringstream warning_stream;
+      warning_stream << "WARNING: \n"
+                     << "The LSC preconditioner point is null.\n" 
+                     << "Using default (SuperLU) preconditioner.\n" 
+                     << std::endl;
+      OomphLibWarning(warning_stream.str(),
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION);
+      
+      Navier_stokes_preconditioner_pt = 0;
+      Using_superlu_ns_preconditioner = true;
+    }
+    else
+    {
+      // If the default SuperLU preconditioner has been used
+      // clean it up now...
+      if (Using_superlu_ns_preconditioner 
+          && Navier_stokes_preconditioner_pt != 0)
+      {
+        delete Navier_stokes_preconditioner_pt;
+      }
+      
+      Navier_stokes_preconditioner_pt = new_ns_preconditioner_pt;
+      Using_superlu_ns_preconditioner = false;
+    }
+  }
 
 //========================================================================
 /// \short Clears the memory.
 //========================================================================
-void LagrangeEnforcedflowPreconditioner::clean_up_memory()
+void LagrangeEnforcedFlowPreconditioner::clean_up_memory()
 {
   // clean the block preconditioner base class memory
   this->clear_block_preconditioner_base();
 
   // Delete the Navier-Stokes preconditioner pointer.
-  //  for now, we do not delete the Navier Stokes preconditioner pointer.
+  //  for now, we do not delete the Navier-Stokes preconditioner pointer.
   // Since we did not create this preconditioner. We should...
   // Create function pointers for both the Lagrange and Navier-Stokes block.
   // At the moment, if SuperLU preconditioning is used for the NS block,
   // There would be a memory leak since we have not deleted this...
-  //  delete Navier_stokes_preconditioner_pt;
-  //  Navier_stokes_preconditioner_pt = 0;
+  //  delete Navier-Stokes_preconditioner_pt;
+  //  Navier-Stokes_preconditioner_pt = 0;
 
-  // Delete the Lagrange_multiplier_preconditioner_pt
-  unsigned n_lgr_mult_prec_size = Lagrange_multiplier_preconditioner_pt.size();
+  // Delete the W_preconditioner_pt
+  unsigned n_lgr_mult_prec_size = W_preconditioner_pt.size();
   for (unsigned prec_i = 0; prec_i < n_lgr_mult_prec_size; prec_i++) 
   {
-    delete Lagrange_multiplier_preconditioner_pt[prec_i];
+    delete W_preconditioner_pt[prec_i];
   }
 
   // Resize the vector to zero, to avoid any dangling pointers.
-  Lagrange_multiplier_preconditioner_pt.resize(0,0);
-} // func LagrangeEnforcedflowPreconditioner::clean_up_memory
+  W_preconditioner_pt.resize(0,0);
+} // func LagrangeEnforcedFlowPreconditioner::clean_up_memory
+
 }// namespace oomph

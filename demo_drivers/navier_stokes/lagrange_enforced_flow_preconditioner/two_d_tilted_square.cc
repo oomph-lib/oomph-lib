@@ -406,8 +406,8 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
   mesh_pt[1] = Surface_mesh_P_pt;
 
   // Create the preconditioner.
-  LagrangeEnforcedflowPreconditioner* lgr_prec_pt
-    = new LagrangeEnforcedflowPreconditioner;
+  LagrangeEnforcedFlowPreconditioner* lgr_prec_pt
+    = new LagrangeEnforcedFlowPreconditioner;
 
   lgr_prec_pt->set_meshes(mesh_pt);
   
@@ -417,7 +417,7 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
     // Create the NS LSC preconditioner.
     lsc_prec_pt = new NavierStokesSchurComplementPreconditioner(this);
     lsc_prec_pt->set_navier_stokes_mesh(Bulk_mesh_pt);
-    lgr_prec_pt->set_navier_stokes_lsc_preconditioner(lsc_prec_pt);
+    lgr_prec_pt->set_navier_stokes_preconditioner(lsc_prec_pt);
   }
   else
   {

@@ -991,8 +991,7 @@ namespace oomph
   /// out vector distribution itself. 
   //===========================================================================
   void concatenate(const Vector<DoubleVector*> &in_vector_pt,
-                   DoubleVector &out_vector,
-                   bool debug_flag)
+                   DoubleVector &out_vector)
   {
    // How many in vectors to concatenate? 
    unsigned nvectors = in_vector_pt.size();
@@ -1046,7 +1045,6 @@ namespace oomph
    // If the out vector is not built, build it with a uniform distribution.
    if(!out_vector.built())
     {
-     double RRR1start = TimingHelpers::timer();
      // Nrow for the out vector is the sum of the nrow of the in vectors.
      unsigned tmp_nrow = 0;
      for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
@@ -1057,12 +1055,6 @@ namespace oomph
      // Build the out vector with uniform distribution.
      out_vector.build(LinearAlgebraDistribution(comm_pt,tmp_nrow,distributed)
                       ,0.0);
-     double RRR1end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR1diff = RRR1end - RRR1start;
-       oomph_info << "RRR1 out_vector.build: " << RRR1diff << std::endl; 
-     }
     }
    else
     {
@@ -1137,7 +1129,7 @@ namespace oomph
      // Serial version of the code.
      // This is trivial, we simply loop through the in vectors and 
      // fill in the out vector.
-     double RRR2start = TimingHelpers::timer();
+     
      // Out vector index.
      unsigned out_i = 0;
      
@@ -1159,14 +1151,6 @@ namespace oomph
          out_value_pt[out_i++] = in_value_pt[i];
         }
       }
-
-      double RRR2end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR2diff = RRR2end - RRR2start;
-       oomph_info << "RRR2 serial cat: " << RRR2diff << std::endl; 
-     }
-
     }
    // Otherwise we are dealing with a distributed vector.
    else
@@ -1191,7 +1175,6 @@ namespace oomph
      //
      // Then put the value and out_local_eqn at out_p in values_to_send
 
-     double RRR3start = TimingHelpers::timer();
      LinearAlgebraDistribution* out_distribution_pt
       = out_vector.distribution_pt();
      for (unsigned in_vec_i = 0; in_vec_i < nvectors; in_vec_i++) 
@@ -1231,14 +1214,6 @@ namespace oomph
        sum_of_vec_nrow += in_vector_pt[in_vec_i]->nrow();
       }
      
-     double RRR3end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR3diff = RRR3end - RRR3start;
-       oomph_info << "RRR3 Preparing data: " << RRR3diff << std::endl; 
-     }
-
-     double RRR4start = TimingHelpers::timer();
      // Prepare to send the data!
 
      // Storage for the number of data to be sent to each processor.
@@ -1265,14 +1240,7 @@ namespace oomph
      // Nb. Using push_back without reserving memory may cause multiple
      // re-allocation behind the scenes, this is expensive.
      send_values_data.reserve(total_ndata);
-     double RRR4end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR4diff = RRR4end - RRR4start;
-       oomph_info << "RRR4 preparing to send: " << RRR4diff << std::endl; 
-     }
      
-     double RRR5start = TimingHelpers::timer();
      // Loop over all the processors to "flat pack" the data for sending.
      for (unsigned rank = 0; rank < nproc; rank++) 
       {
@@ -1295,27 +1263,11 @@ namespace oomph
        send_n[rank] = send_values_data.size() - send_displacement[rank];
       } // Loop over processors
 
-     double RRR5end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR5diff = RRR5end - RRR5start;
-       oomph_info << "RRR5 flat packing data: " << RRR5diff << std::endl; 
-     }
-
-     double RRR6start = TimingHelpers::timer();
      // Storage for the number of data to be received from each processor.
      Vector<int> receive_n(nproc,0);
      MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
                   comm_pt->mpi_comm());
 
-     double RRR6end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR6diff = RRR6end - RRR6start;
-       oomph_info << "RRR6 alltoall n to send: " << RRR6diff << std::endl; 
-     }
-
-     double RRR7start = TimingHelpers::timer();
      // Prepare the data to be received
      // by working out the displacement from the received data.
      Vector<int> receive_displacement(nproc,0);
@@ -1325,14 +1277,7 @@ namespace oomph
        receive_displacement[rank] = receive_data_count;
        receive_data_count += receive_n[rank];
       }
-     double RRR7end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR7diff = RRR7end - RRR7start;
-       oomph_info << "RRR7 work out displacement: " << RRR7diff << std::endl; 
-     }
 
-     double RRR8start = TimingHelpers::timer();
      // Now resize the receive buffer for all data from all processors.
      // Make sure that it has size of at least one.
      if(receive_data_count == 0){receive_data_count++;}
@@ -1350,14 +1295,6 @@ namespace oomph
                    MPI_DOUBLE,
                    comm_pt->mpi_comm());
 
-     double RRR8end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR8diff = RRR8end - RRR8start;
-       oomph_info << "RRR8 alltoall send data: " << RRR8diff << std::endl; 
-     }
-
-     double RRR9start = TimingHelpers::timer();
      // Data from all other processors are stored in:
      // receive_values_data
      // Data already on this processor is stored in:
@@ -1373,14 +1310,7 @@ namespace oomph
 
        location_i += 2;
       }
-     double RRR9end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR9diff = RRR9end - RRR9start;
-       oomph_info << "RRR9 data on this processor: " << RRR9diff << std::endl; 
-     }
 
-     double RRR10start = TimingHelpers::timer();
      // Before we loop through the data on other processors, we need to check
      // if any data has been received.
      bool data_has_been_received = false;
@@ -1394,14 +1324,7 @@ namespace oomph
         }
        send_rank++;
       }
-     double RRR10end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR10diff = RRR10end - RRR10start;
-       oomph_info << "RRR10 check if data is recieved: " << RRR10diff << std::endl; 
-     }
 
-     double RRR11start = TimingHelpers::timer();
      location_i = 0;
      if(data_has_been_received)
       {
@@ -1413,13 +1336,6 @@ namespace oomph
          location_i += 2;
         }
       }
-     double RRR11end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR11diff = RRR11end - RRR11start;
-       oomph_info << "RRR11 data on other processors: " << RRR11diff << std::endl; 
-     }
-
 #else
      {
       std::ostringstream error_message;
@@ -1449,8 +1365,7 @@ namespace oomph
   /// to delete!
   //===========================================================================
   void concatenate(Vector<DoubleVector> &in_vector,
-                   DoubleVector &out_vector,
-                   bool debug_flag)
+                   DoubleVector &out_vector)
   {
     const unsigned n_in_vector = in_vector.size();
 
@@ -1461,7 +1376,7 @@ namespace oomph
       in_vector_pt[i] = &in_vector[i];
     }
 
-    DoubleVectorHelpers::concatenate(in_vector_pt,out_vector,debug_flag);
+    DoubleVectorHelpers::concatenate(in_vector_pt,out_vector);
   } // function concatenate
 
   //===========================================================================
@@ -1483,8 +1398,7 @@ namespace oomph
   /// the in vector.
   //===========================================================================
   void split(const DoubleVector & in_vector, 
-             Vector<DoubleVector*> &out_vector_pt,
-             bool debug_flag)
+             Vector<DoubleVector*> &out_vector_pt)
   {
    // How many out vectors do we have?
    unsigned nvec = out_vector_pt.size();
@@ -1587,7 +1501,6 @@ namespace oomph
      // Serial version of the code: loop through all the out vectors and 
      // insert the elements of in_vector.
      
-     double RRR1start = TimingHelpers::timer();
      // index for in vector, and in vector values.
      unsigned in_vec_i = 0;
      double* in_value_pt = in_vector.values_pt();
@@ -1605,13 +1518,6 @@ namespace oomph
          out_value_pt[out_val_i] = in_value_pt[in_vec_i++];
         }
       }
-     double RRR1end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR1diff = RRR1end - RRR1start;
-       oomph_info << "RRR1 split serial: " << RRR1diff << std::endl; 
-     }
-
     }
    // Otherwise we are dealing with a distributed vector.
    else
@@ -1641,7 +1547,6 @@ namespace oomph
      // Storage for the data (per processor) to send.
      Vector<Vector<double> > values_to_send(nproc);
 
-     double RRR2start = TimingHelpers::timer();
      // Sum of the nrow of the out vectors so far. This is used to work out
      // which out_vector a in_global_eqn belongs to.
      Vector<unsigned> sum_of_out_nrow(nvec+1);
@@ -1650,14 +1555,7 @@ namespace oomph
        sum_of_out_nrow[vec_i+1] = sum_of_out_nrow[vec_i]
         + out_vector_pt[vec_i]->nrow();
       }
-     double RRR2end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR2diff = RRR2end - RRR2start;
-       oomph_info << "RRR2 sum of nrow: " << RRR2diff << std::endl; 
-     }
   
-     double RRR3start = TimingHelpers::timer();
      // Loop through the in_vector local values.
      unsigned in_nrow_local = in_vector.nrow_local();
      for (unsigned in_local_eqn = 0; 
@@ -1701,16 +1599,9 @@ namespace oomph
        // The actual data.
        values_to_send[out_p].push_back(in_vector[in_local_eqn]);
       }
-     double RRR3end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR3diff = RRR3end - RRR3start;
-       oomph_info << "RRR3 Values to send: " << RRR3diff << std::endl; 
-     }
 
      // Prepare to send the data!
 
-     double RRR4start = TimingHelpers::timer();
      // Storage for the number of data to be sent to each processor.
      Vector<int>send_n(nproc,0);
 
@@ -1736,14 +1627,6 @@ namespace oomph
      // re-allocation behind the scenes, this is expensive.
      send_values_data.reserve(total_ndata);
 
-     double RRR4end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR4diff = RRR4end - RRR4start;
-       oomph_info << "RRR4 Send values vector: " << RRR4diff << std::endl; 
-     }
-
-     double RRR5start = TimingHelpers::timer();
      // Loop over all the processors to "flat pack" the data for sending.
      for (unsigned rank = 0; rank < nproc; rank++) 
       {
@@ -1765,26 +1648,12 @@ namespace oomph
        // Find the number of data to be added to the vector.
        send_n[rank] = send_values_data.size() - send_displacement[rank];
       } // Loop over processors
-     double RRR5end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR5diff = RRR5end - RRR5start;
-       oomph_info << "RRR5 flatpack data: " << RRR5diff << std::endl; 
-     }
 
-     double RRR6start = TimingHelpers::timer();
      // Storage for the number of data to be received from each processor.
      Vector<int> receive_n(nproc,0);
      MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
                   comm_pt->mpi_comm());
-     double RRR6end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR6diff = RRR6end - RRR6start;
-       oomph_info << "RRR6 alltoall n to send: " << RRR6diff << std::endl; 
-     }
 
-     double RRR7start = TimingHelpers::timer();
      // Prepare the data to be received
      // by working out the displacement from the received data.
      Vector<int> receive_displacement(nproc,0);
@@ -1794,14 +1663,7 @@ namespace oomph
        receive_displacement[rank] = receive_data_count;
        receive_data_count += receive_n[rank];
       }
-     double RRR7end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR7diff = RRR7end - RRR7start;
-       oomph_info << "RRR7 work out displacement: " << RRR7diff << std::endl; 
-     }
 
-     double RRR8start = TimingHelpers::timer();
      // Now resize the receive buffer for all data from all processors.
      // Make sure that it has size of at least one.
      if(receive_data_count == 0){receive_data_count++;}
@@ -1818,13 +1680,6 @@ namespace oomph
                    &receive_displacement[0],
                    MPI_DOUBLE,
                    comm_pt->mpi_comm());
-     double RRR8end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR8diff = RRR8end - RRR8start;
-       oomph_info << "RRR8 allltoall send data: " << RRR8diff << std::endl; 
-     }
-
 
      // Data from all other processors are stored in:
      // receive_values_data
@@ -1832,7 +1687,6 @@ namespace oomph
      // values_to_send[my_rank]
      //
 
-     double RRR9start = TimingHelpers::timer();
      // Index for values_to_send Vector.
      unsigned location_i = 0;
      // Loop through the data on this processor
@@ -1853,17 +1707,10 @@ namespace oomph
        // Insert the value in the out vector.
        (*out_vector_pt[out_vector_i])[out_local_eqn] = out_value;
       }
-     double RRR9end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR9diff = RRR9end - RRR9start;
-       oomph_info << "RRR9 data on this processor: " << RRR9diff << std::endl; 
-     }
 
      // Before we loop through the data on other processors, we need to check
      // if any data has been received. This is because the receive_values_data
      // has been resized to at least one, even if no data is sent.
-     double RRR10start = TimingHelpers::timer();
      bool data_has_been_received = false;
      unsigned send_rank = 0;
      while(send_rank < nproc)
@@ -1875,16 +1722,9 @@ namespace oomph
         }
        send_rank++;
       }
-     double RRR10end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR10diff = RRR10end - RRR10start;
-       oomph_info << "RRR10 check if data is recieved: " << RRR10diff << std::endl; 
-     }
 
      // Reset the index, it is now being used to index the receive_values_data
      // vector.
-     double RRR11start = TimingHelpers::timer();
      location_i = 0;
      if(data_has_been_received)
       {
@@ -1905,13 +1745,6 @@ namespace oomph
          (*out_vector_pt[out_vector_i])[out_local_eqn] = out_value;
         }
       }
-     double RRR11end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR11diff = RRR11end - RRR11start;
-       oomph_info << "RRR11 data on other processors: " << RRR11diff << std::endl; 
-     }
-
 #else
      {
       std::ostringstream error_message;
@@ -1940,8 +1773,7 @@ namespace oomph
   /// to delete!
   //===========================================================================
   void split(const DoubleVector & in_vector, 
-             Vector<DoubleVector> &out_vector,
-             bool debug_flag)
+             Vector<DoubleVector> &out_vector)
   {
     const unsigned n_out_vector = out_vector.size();
     Vector<DoubleVector*> out_vector_pt(n_out_vector,0);
@@ -1951,7 +1783,7 @@ namespace oomph
       out_vector_pt[i] = &out_vector[i];
     }
 
-    DoubleVectorHelpers::split(in_vector,out_vector_pt, debug_flag);
+    DoubleVectorHelpers::split(in_vector,out_vector_pt);
   } // function split(...)
 
   //===========================================================================
@@ -1993,8 +1825,7 @@ namespace oomph
   /// as defined by the distributions from the in vectors.
   //===========================================================================
   void concatenate_without_communication(
-   const Vector<DoubleVector*> &in_vector_pt, DoubleVector &out_vector,
-   bool debug_flag)
+   const Vector<DoubleVector*> &in_vector_pt, DoubleVector &out_vector)
   {
 
    // How many in vectors do we want to concatenate?
@@ -2042,7 +1873,6 @@ namespace oomph
    // If the out vector is not built, build it with the correct distribution.
    if(!out_vector.built())
     {
-     double RRR1start = TimingHelpers::timer();
      Vector<LinearAlgebraDistribution*> in_distribution_pt(nvectors,0);
      for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
       {
@@ -2053,13 +1883,6 @@ namespace oomph
      LinearAlgebraDistributionHelpers::concatenate(in_distribution_pt,
                                                    tmp_distribution);
      out_vector.build(tmp_distribution,0.0);
-     double RRR1end = TimingHelpers::timer();
-     if(debug_flag)
-     {
-       double RRR1diff = RRR1end - RRR1start;
-       oomph_info << "RRR1 VECCAT out_vector.build: " << RRR1diff << std::endl; 
-     }
-
     }
 
    // PARANOID checks which involves all in vectors and out vectors.
@@ -2146,7 +1969,6 @@ namespace oomph
 #endif
  
 
-   double RRR2start = TimingHelpers::timer();
    unsigned out_value_offset = 0;
 
    double* out_value_pt = out_vector.values_pt();
@@ -2168,13 +1990,6 @@ namespace oomph
      // Update the offset.
      out_value_offset += in_vector_nrow_local;
     }
-    double RRR2end = TimingHelpers::timer();
-    if(debug_flag)
-    {
-      double RRR2diff = RRR2end - RRR2start;
-      oomph_info << "RRR2 VECCAT done cat: " << RRR2diff << std::endl; 
-    }
-
   } // function concatenate_without_communication
 
   //===========================================================================
@@ -2193,8 +2008,7 @@ namespace oomph
   /// to delete!
   //===========================================================================
   void concatenate_without_communication(
-   Vector<DoubleVector> &in_vector, DoubleVector &out_vector,
-   bool debug_flag)
+   Vector<DoubleVector> &in_vector, DoubleVector &out_vector)
   {
 
     const unsigned n_in_vector = in_vector.size();
@@ -2207,8 +2021,7 @@ namespace oomph
     }
 
     DoubleVectorHelpers::concatenate_without_communication(in_vector_pt,
-                                                           out_vector,
-                                                           debug_flag);
+                                                           out_vector);
   } // function concatenate_without_communication
 
   //===========================================================================
@@ -2232,8 +2045,7 @@ namespace oomph
   /// distributions.
   //===========================================================================
   void split_without_communication(const DoubleVector &in_vector, 
-                                   Vector<DoubleVector*> &out_vector_pt,
-                                   bool debug_flag)
+                                   Vector<DoubleVector*> &out_vector_pt)
   {
    // How many out vectors do we need?
    unsigned nvec = out_vector_pt.size();
@@ -2336,7 +2148,6 @@ namespace oomph
     }
 #endif
 
-   double RRR1start = TimingHelpers::timer();
    // Loop through the sub vectors and insert the values from the
    // in vector.
    double* in_value_pt = in_vector.values_pt();
@@ -2356,13 +2167,6 @@ namespace oomph
      // Update the offset.
      in_value_offset += out_nrow_local;
     }
-   double RRR1end = TimingHelpers::timer();
-   if(debug_flag)
-   {
-     double RRR1diff = RRR1end - RRR1start;
-     oomph_info << "RRR1 VECSPLIT done split: " << RRR1diff << std::endl; 
-   }
-
   } // function split_distribution_vector
 
   //===========================================================================
@@ -2381,8 +2185,7 @@ namespace oomph
   /// to delete!
   //===========================================================================
   void split_without_communication(const DoubleVector &in_vector, 
-                                   Vector<DoubleVector> &out_vector,
-                                   bool debug_flag)
+                                   Vector<DoubleVector> &out_vector)
   {
    const unsigned n_out_vector = out_vector.size();
 
@@ -2394,7 +2197,7 @@ namespace oomph
    }
 
    DoubleVectorHelpers::split_without_communication(
-       in_vector,out_vector_pt, debug_flag);
+       in_vector,out_vector_pt);
 
   } // function split_distribution_vector
 
