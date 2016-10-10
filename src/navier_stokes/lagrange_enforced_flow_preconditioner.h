@@ -141,9 +141,9 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 /// 
 //==========================================================================
 class LagrangeEnforcedFlowPreconditioner 
-  : public BlockPreconditioner<CRDoubleMatrix>
+: public BlockPreconditioner<CRDoubleMatrix>
 {
-  public:
+public:
 
   /// \short This preconditioner includes the option to use subsidiary 
   /// operators other than SuperLUPreconditioner for this problem. 
@@ -152,15 +152,12 @@ class LagrangeEnforcedFlowPreconditioner
   /// responsible for the destruction of the subsidiary preconditioners.
   typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
 
-  /// Constructor - sets the defaults for control flags
+  /// Constructor - initialise variables.
   LagrangeEnforcedFlowPreconditioner()
     : BlockPreconditioner<CRDoubleMatrix>()
   {
-    // The Navier-Stokes preconditioner pointer.
+    // The null pointer.
     Navier_stokes_preconditioner_pt = 0;
-    
-    // Null the function pointer which is used to create the subsidiary
-    // preconditioners for the W block(s)
     W_preconditioner_fct_pt = 0;
 
     // Set the vector of preconditioner pointers for the W block(s) to zero.
@@ -174,7 +171,7 @@ class LagrangeEnforcedFlowPreconditioner
     // By default, the Navier-Stokes block is preconditioned by the 
     // Least Square Commutator (LSC) preconditioner. To be honest, it does not
     // matter what we set here, since it is reset in the function setup(...).
-    Navier_stokes_preconditioner_is_block_preconditioner = true;
+    Navier_stokes_preconditioner_is_block_preconditioner = false;
 
     // flag to indicate to use SuperLU or not.
     Using_superlu_ns_preconditioner = true;
@@ -196,6 +193,7 @@ class LagrangeEnforcedFlowPreconditioner
 
     N_velocity_doftypes = 0;
 
+    // RAYRAY remove this soon.
     Use_diagonal_w_block = true;
 
     Mapping_info_calculated = false;
@@ -210,9 +208,9 @@ class LagrangeEnforcedFlowPreconditioner
   /// \short Broken copy constructor
   LagrangeEnforcedFlowPreconditioner 
     (const LagrangeEnforcedFlowPreconditioner&)
-  {
-    BrokenCopy::broken_copy("LagrangeEnforcedFlowPreconditioner");
-  }
+    {
+      BrokenCopy::broken_copy("LagrangeEnforcedFlowPreconditioner");
+    }
 
   /// \short Broken assignment operator
   void operator=(const LagrangeEnforcedFlowPreconditioner&)
@@ -242,7 +240,7 @@ class LagrangeEnforcedFlowPreconditioner
     Use_default_norm_of_f_scaling = false;
     return Scaling_sigma;
   }
-  
+
   /// \short Function to get the scaling Sigma of the preconditioner
   double scaling_sigma() const
   {
@@ -285,7 +283,7 @@ class LagrangeEnforcedFlowPreconditioner
   /// \short Clears the memory.
   void clean_up_memory();
 
-  private:
+private:
 
   /// \short 
   bool Mapping_info_calculated;
@@ -325,7 +323,7 @@ class LagrangeEnforcedFlowPreconditioner
 
   /// \short the re-arraned DOF types: velocity, pressure, Lagrange.
   Vector<unsigned> Doftype_list_vpl;
-  
+
   /// \short the re-arraned DOF types: bulk, constrained, pressure, lagrange.
   Vector<unsigned> Subsidiary_list_bcpl;
 

@@ -105,132 +105,133 @@ void LagrangeEnforcedFlowPreconditioner::preconditioner_solve(
 
       const unsigned vec_nrow_local = another_temp_vec.nrow_local();
       double* vec_values_pt = another_temp_vec.values_pt();
-       
+
       for (unsigned i = 0; i < vec_nrow_local; i++) 
       {
         vec_values_pt[i] = vec_values_pt[i]*Scaling_sigma;
       }
       this->return_block_vector(l_ii,another_temp_vec,z);
-       
+
       temp_vec.clear();
       another_temp_vec.clear();
     }
   }
 
-   // Now solve the Navier-Stokes block.
+  // Now solve the Navier-Stokes block.
 
-   // At this point, all vectors are cleared.
-   if(Using_superlu_ns_preconditioner)
-   {
-     // Get the concatenated fluid vector.
-     Vector<unsigned> fluid_block_indices(N_fluid_doftypes,0);
-     for (unsigned b = 0; b < N_fluid_doftypes; b++) 
-     {
-       fluid_block_indices[b] = b;
-     }
-
-     this->get_concatenated_block_vector(fluid_block_indices,r,temp_vec);
-
-     // temp_vec contains the (concatenated) fluid rhs.
-     Navier_stokes_preconditioner_pt
-       ->preconditioner_solve(temp_vec,another_temp_vec);
-
-     temp_vec.clear();
-
-     // Now return it.
-     this->return_concatenated_block_vector(fluid_block_indices,
-                                            another_temp_vec,z);
-
-     another_temp_vec.clear();
-   }
-   else
-   {
-     // This is a BlockPreconditioner
-     Navier_stokes_preconditioner_pt->preconditioner_solve(r,z);
-   }
- } // end of preconditioner_solve
-
-  /// \short Set the meshes, the first mesh must be the fluid mesh
-  void LagrangeEnforcedFlowPreconditioner::set_meshes(const Vector<Mesh*> &mesh_pt)
+  // At this point, all vectors are cleared.
+  if(Using_superlu_ns_preconditioner)
   {
-    // There should be at least two meshes for this preconditioner.
-    const unsigned nmesh = mesh_pt.size();
+    // Get the concatenated fluid vector.
+    Vector<unsigned> fluid_block_indices(N_fluid_doftypes,0);
+    for (unsigned b = 0; b < N_fluid_doftypes; b++) 
+    {
+      fluid_block_indices[b] = b;
+    }
+
+    this->get_concatenated_block_vector(fluid_block_indices,r,temp_vec);
+
+    // temp_vec contains the (concatenated) fluid rhs.
+    Navier_stokes_preconditioner_pt
+      ->preconditioner_solve(temp_vec,another_temp_vec);
+
+    temp_vec.clear();
+
+    // Now return it.
+    this->return_concatenated_block_vector(fluid_block_indices,
+        another_temp_vec,z);
+
+    another_temp_vec.clear();
+  }
+  else
+  {
+    // This is a BlockPreconditioner
+    Navier_stokes_preconditioner_pt->preconditioner_solve(r,z);
+  }
+} // end of preconditioner_solve
+
+/// \short Set the meshes, the first mesh must be the fluid mesh
+void LagrangeEnforcedFlowPreconditioner::set_meshes(
+    const Vector<Mesh*> &mesh_pt)
+{
+  // There should be at least two meshes for this preconditioner.
+  const unsigned nmesh = mesh_pt.size();
 
 #ifdef PARANOID
-    if(nmesh < 2)
+  if(nmesh < 2)
+  {
+    std::ostringstream err_msg;
+    err_msg << "There should be at least two meshes.\n";
+    throw OomphLibError(err_msg.str(),
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+  }
+
+  // Check that all pointers are not null
+  for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
+  {
+    if (mesh_pt[mesh_i]==0)
     {
       std::ostringstream err_msg;
-      err_msg << "There should be at least two meshes.\n";
+      err_msg << "The pointer mesh_pt[" << mesh_i << "] is null.\n";
       throw OomphLibError(err_msg.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
     }
+  }
 
-    // Check that all pointers are not null
-    for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
-    {
-      if (mesh_pt[mesh_i]==0)
-      {
-        std::ostringstream err_msg;
-        err_msg << "The pointer mesh_pt[" << mesh_i << "] is null.\n";
-        throw OomphLibError(err_msg.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-      }
-    }
+  // We assume that the first mesh is the Navier-Stokes "bulk" mesh. 
+  // To check this, the elemental dimension must be the same as the 
+  // nodal (spatial) dimension.
+  //
+  // We store the elemental dimension i.e. the number of local coordinates
+  // required to parametrise its geometry.
+  const unsigned elemental_dim = mesh_pt[0]->elemental_dimension();
 
-    // We assume that the first mesh is the Navier-Stokes "bulk" mesh. 
-    // To check this, the elemental dimension must be the same as the 
-    // nodal (spatial) dimension.
-    //
-    // We store the elemental dimension i.e. the number of local coordinates
-    // required to parametrise its geometry.
-    const unsigned elemental_dim = mesh_pt[0]->elemental_dimension();
+  // The dimension of the nodes in the first element in the (supposedly)
+  // bulk mesh.
+  const unsigned nodal_dim = mesh_pt[0]->nodal_dimension();
 
-    // The dimension of the nodes in the first element in the (supposedly)
-    // bulk mesh.
-    const unsigned nodal_dim = mesh_pt[0]->nodal_dimension();
+  // Check if the first mesh is the "bulk" mesh.
+  // Here we assume only one mesh contains "bulk" elements.
+  // All subsequent meshes contain block preconditionable elements which
+  // re-classify the bulk velocity DOFs to constrained velocity DOFs.
+  if (elemental_dim != nodal_dim) 
+  {
+    std::ostringstream err_msg;
+    err_msg << "In the first mesh, the elements have elemental dimension of "
+      << elemental_dim << ", with a nodal dimension of "
+      << nodal_dim << ".\n"
+      << "The first mesh does not contain 'bulk' elements.\n"
+      << "Please re-order your mesh_pt vector.\n";
 
-    // Check if the first mesh is the "bulk" mesh.
-    // Here we assume only one mesh contains "bulk" elements.
-    // All subsequent meshes contain block preconditionable elements which
-    // re-classify the bulk velocity DOFs to constrained velocity DOFs.
-    if (elemental_dim != nodal_dim) 
-    {
-      std::ostringstream err_msg;
-      err_msg << "In the first mesh, the elements have elemental dimension of "
-              << elemental_dim << ", with a nodal dimension of "
-              << nodal_dim << ".\n"
-              << "The first mesh does not contain 'bulk' elements.\n"
-              << "Please re-order your mesh_pt vector.\n";
-
-      throw OomphLibError(err_msg.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(err_msg.str(),
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+  }
 #endif
 
-    // Set the number of meshes 
-    this->set_nmesh(nmesh);
-    
-    // Set the meshes
-    for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
-     {
-      this->set_mesh(mesh_i,mesh_pt[mesh_i]);
-     }
+  // Set the number of meshes 
+  this->set_nmesh(nmesh);
 
-    // We also store the meshes and number of meshes locally in this class.
-    // This is slightly redundant, since we always have it stored in the upper
-    // most master block preconditioner. But at the moment there is no 
-    // mapping/look up scheme between master and subsidiary block 
-    // preconditioners for meshes.
-    // So if this is a subsidiary block preconditioner, we don't know which of
-    // the master's meshes belong to us. We need this information to set up
-    // look up lists in the function setup(...).
-    // So we store them local to this class.
-    My_mesh_pt = mesh_pt;
-    My_nmesh = nmesh;
-  } // EoFunc set_meshes
+  // Set the meshes
+  for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
+  {
+    this->set_mesh(mesh_i,mesh_pt[mesh_i]);
+  }
+
+  // We also store the meshes and number of meshes locally in this class.
+  // This is slightly redundant, since we always have it stored in the upper
+  // most master block preconditioner. But at the moment there is no 
+  // mapping/look up scheme between master and subsidiary block 
+  // preconditioners for meshes.
+  // So if this is a subsidiary block preconditioner, we don't know which of
+  // the master's meshes belong to us. We need this information to set up
+  // look up lists in the function setup(...).
+  // So we store them local to this class.
+  My_mesh_pt = mesh_pt;
+  My_nmesh = nmesh;
+} // EoFunc set_meshes
 
 
 //===========================================================================
@@ -248,17 +249,17 @@ void LagrangeEnforcedFlowPreconditioner::setup()
 {
   // clean
   this->clean_up_memory();
- 
+
 #ifdef PARANOID
   // Paranoid check that meshes have been set.
   if(My_nmesh == 0)
   {
     std::ostringstream err_msg;
     err_msg << "There are no meshes set. Please call set_meshes(...)\n"
-            << "with at least two mesh.";
+      << "with at least two mesh.";
     throw OomphLibError(err_msg.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
 
@@ -381,15 +382,15 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   // total number of velocity DOF types is the spatial dimension multiplied
   // by the number of meshes.
   N_velocity_doftypes = My_nmesh*spatial_dim;
-//    std::cout << "N_velocity_doftypes: " << N_velocity_doftypes << std::endl; 
+  //    std::cout << "N_velocity_doftypes: " << N_velocity_doftypes << std::endl; 
 
   // Fluid has +1 for the pressure.
   N_fluid_doftypes = N_velocity_doftypes + 1;
-//    std::cout << "N_fluid_doftypes: " << N_fluid_doftypes << std::endl; 
+  //    std::cout << "N_fluid_doftypes: " << N_fluid_doftypes << std::endl; 
 
   // The rest are Lagrange multiplier DOF types.
   N_lagrange_doftypes = n_dof_types - N_fluid_doftypes;
-//    std::cout << "N_lagrange_doftypes: " << N_lagrange_doftypes << std::endl; 
+  //    std::cout << "N_lagrange_doftypes: " << N_lagrange_doftypes << std::endl; 
 
   ///////////////////////////////////////////////////////////
   //   Now create the DOF to block map for block_setup()   //
@@ -504,38 +505,38 @@ void LagrangeEnforcedFlowPreconditioner::setup()
 
   // With the artificial test data, we get the following list:
   // 0 1 2 9 3  4  5  10  11  6  7  8  12
-//    std::cout << "Lgr::setup dof_to_block_map: " << std::endl; 
-//    for (unsigned tmp_i = 0; tmp_i < dof_to_block_map.size(); tmp_i++) 
-//    {
-//      std::cout << dof_to_block_map[tmp_i] << " "; 
-//    }
-//    std::cout << "\n" << std::endl; 
-//    pause("I'm back"); 
-  
+  //    std::cout << "Lgr::setup dof_to_block_map: " << std::endl; 
+  //    for (unsigned tmp_i = 0; tmp_i < dof_to_block_map.size(); tmp_i++) 
+  //    {
+  //      std::cout << dof_to_block_map[tmp_i] << " "; 
+  //    }
+  //    std::cout << "\n" << std::endl; 
+  //    pause("I'm back"); 
+
 
   // Call the block setup
   this->block_setup(dof_to_block_map);
 
-//    pause("Lgr::setup() done block_setup, about to print dof block dist nrow"); 
+  //    pause("Lgr::setup() done block_setup, about to print dof block dist nrow"); 
 
-//    for (unsigned block_i = 0; block_i < nblock_types(); block_i++) 
-//    {
-//      const unsigned nrow = dof_block_distribution_pt(block_i)->nrow();
-//      std::cout << "dof block " << block_i << ", nrow = " << nrow << std::endl; 
-//    }
+  //    for (unsigned block_i = 0; block_i < nblock_types(); block_i++) 
+  //    {
+  //      const unsigned nrow = dof_block_distribution_pt(block_i)->nrow();
+  //      std::cout << "dof block " << block_i << ", nrow = " << nrow << std::endl; 
+  //    }
 
-//    pause("done dof block dist nrow, about to print out each block.");
-
-
-//    std::cout << "Print 1, NOT replaced." << std::endl; 
-//    std::cout << "============================================" << std::endl; 
-//    std::cout << "============================================" << std::endl; 
-//    std::cout << "============================================" << std::endl; 
-//    std::cout << "============================================" << std::endl; 
+  //    pause("done dof block dist nrow, about to print out each block.");
 
 
-//  pause("Dumped!"); 
-  
+  //    std::cout << "Print 1, NOT replaced." << std::endl; 
+  //    std::cout << "============================================" << std::endl; 
+  //    std::cout << "============================================" << std::endl; 
+  //    std::cout << "============================================" << std::endl; 
+  //    std::cout << "============================================" << std::endl; 
+
+
+  //  pause("Dumped!"); 
+
 
   //////////////////////////////////////////////////////////////////////////
   // Need to create the norms, used for Sigma, if required
@@ -549,7 +550,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   // use the rest immediately (to perform the augmentation).
   DenseMatrix<CRDoubleMatrix*> v_aug_pt(N_velocity_doftypes,
       N_velocity_doftypes,0);
-  
+
   for(unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
   {
     for(unsigned col_i = 0; col_i < N_velocity_doftypes; col_i++)
@@ -560,31 +561,31 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   } // for
 
 
- 
-//  unsigned tempnblocks = this->nblock_types();
-//  // RRR Checking the block dimensions.
-//  for (unsigned col_i = 0; col_i < tempnblocks; col_i++) 
-//  {
-//    CRDoubleMatrix tempblock;
-//    this->get_dof_level_block(0,col_i,tempblock);
-//    unsigned tempncol = tempblock.ncol();
-//    std::cout << "ncol: " << tempncol << std::endl; 
-//  }
-//std::cout << std::endl; 
-//
-//
-//  std::cout << "block ordering:" << std::endl; 
-//  
-//  // RRR Checking the block dimensions.
-//  for (unsigned col_i = 0; col_i < tempnblocks; col_i++) 
-//  {
-//    CRDoubleMatrix tempblock = this->get_block(0,col_i);
-//    unsigned tempncol = tempblock.ncol();
-//    std::cout << "ncol: " << tempncol << std::endl; 
-//    
-//  }
-//  pause("done!"); 
-  
+
+  //  unsigned tempnblocks = this->nblock_types();
+  //  // RRR Checking the block dimensions.
+  //  for (unsigned col_i = 0; col_i < tempnblocks; col_i++) 
+  //  {
+  //    CRDoubleMatrix tempblock;
+  //    this->get_dof_level_block(0,col_i,tempblock);
+  //    unsigned tempncol = tempblock.ncol();
+  //    std::cout << "ncol: " << tempncol << std::endl; 
+  //  }
+  //std::cout << std::endl; 
+  //
+  //
+  //  std::cout << "block ordering:" << std::endl; 
+  //  
+  //  // RRR Checking the block dimensions.
+  //  for (unsigned col_i = 0; col_i < tempnblocks; col_i++) 
+  //  {
+  //    CRDoubleMatrix tempblock = this->get_block(0,col_i);
+  //    unsigned tempncol = tempblock.ncol();
+  //    std::cout << "ncol: " << tempncol << std::endl; 
+  //    
+  //  }
+  //  pause("done!"); 
+
 
   if(Use_default_norm_of_f_scaling)
   {
@@ -802,13 +803,13 @@ void LagrangeEnforcedFlowPreconditioner::setup()
         mm_pt[m_i]->multiply(*mmt_pt[m_i],*temp_mm_sqrd_pt);
 
         Vector<double> m_diag = temp_mm_sqrd_pt->diagonal_entries();
-//        Vector<double> m_diag = mm_pt[m_i]->diagonal_entries();
+        //        Vector<double> m_diag = mm_pt[m_i]->diagonal_entries();
 
         // Loop through the entries, add them.
         for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
         {
           w_i_diag_values[row_i] += m_diag[row_i];
-//          w_i_diag_values[row_i] += (m_diag[row_i]* m_diag[row_i]);
+          //          w_i_diag_values[row_i] += (m_diag[row_i]* m_diag[row_i]);
         }
 
         delete temp_mm_sqrd_pt; temp_mm_sqrd_pt = 0;
@@ -818,7 +819,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
       // Divide by Scaling_sigma and create the inverse of w.
       for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
       {
-//          w_i_diag_values[row_i] /= Scaling_sigma;
+        //          w_i_diag_values[row_i] /= Scaling_sigma;
 
         // w_i is a diagonal matrix, so take the inverse to
         // invert the matrix.
@@ -844,9 +845,9 @@ void LagrangeEnforcedFlowPreconditioner::setup()
           w_i_row_start);
     }
     else
-    // We use the block diagonal form of the W block.
-    // RAYRAY check if I should remove this. I think I should.
-    // I don't think I use this.
+      // We use the block diagonal form of the W block.
+      // RAYRAY check if I should remove this. I think I should.
+      // I don't think I use this.
     {
       // NOTE: This seems very dodgy. 
       // A lot of functions has moved into CRDoubleMatrix
@@ -948,13 +949,13 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   ///////////////////////////////////////////////////////////////////////////////
 
 
-//      std::cout << "\n" << std::endl; 
-//      std::cout << "\n" << std::endl; 
-//      std::cout << "Print 2, Setting replacement blocks." << std::endl; 
-//      std::cout << "============================================" << std::endl; 
-//      std::cout << "============================================" << std::endl; 
-//      std::cout << "============================================" << std::endl; 
-//      std::cout << "============================================" << std::endl; 
+  //      std::cout << "\n" << std::endl; 
+  //      std::cout << "\n" << std::endl; 
+  //      std::cout << "Print 2, Setting replacement blocks." << std::endl; 
+  //      std::cout << "============================================" << std::endl; 
+  //      std::cout << "============================================" << std::endl; 
+  //      std::cout << "============================================" << std::endl; 
+  //      std::cout << "============================================" << std::endl; 
 
   // Recall that the DOF type ordering is:
   // The general ordering for the DOF types (for this program, in 3D) is
@@ -992,17 +993,17 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   // Since we just get the number of DOF types in the meshes, and we know
   // the number of meshes.
 
-//    oomph_info << "My_nmesh: " << My_nmesh << std::endl;
-//    for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++) 
-//    {
-//      oomph_info << "Doftypes in mesh " 
-//                 << mesh_i << ": " 
-//                 << My_ndof_types_in_mesh[mesh_i] << std::endl; 
-//      
-//    }
+  //    oomph_info << "My_nmesh: " << My_nmesh << std::endl;
+  //    for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++) 
+  //    {
+  //      oomph_info << "Doftypes in mesh " 
+  //                 << mesh_i << ": " 
+  //                 << My_ndof_types_in_mesh[mesh_i] << std::endl; 
+  //      
+  //    }
 
- /// Replace all f blocks
-//  if(Replace_all_f_blocks)
+  /// Replace all f blocks
+  //  if(Replace_all_f_blocks)
   {
     // Create the inverse to dof_to_block_map
     Vector<unsigned> temp_block_to_dof_map(n_dof_types,0);
@@ -1013,86 +1014,86 @@ void LagrangeEnforcedFlowPreconditioner::setup()
 
     // print it out to check.
 
-//    std::cout << "dof_to_block_map:" << std::endl;
-//    for (unsigned iii = 0; iii < dof_to_block_map.size(); iii++) 
-//    {
-//      std::cout << dof_to_block_map[iii] << std::endl; 
-//    }
-//
-//    std::cout << std::endl;
-//    std::cout << "block_to_dof_map: " << std::endl;
-//    for (unsigned iii = 0; iii < block_to_dof_map.size(); iii++) 
-//    {
-//      std::cout << block_to_dof_map[iii] << std::endl; 
-//    }
-    
-   
-   // Now do the replacement of all blocks in v_aug_pt 
-   for (unsigned block_row_i = 0; 
+    //    std::cout << "dof_to_block_map:" << std::endl;
+    //    for (unsigned iii = 0; iii < dof_to_block_map.size(); iii++) 
+    //    {
+    //      std::cout << dof_to_block_map[iii] << std::endl; 
+    //    }
+    //
+    //    std::cout << std::endl;
+    //    std::cout << "block_to_dof_map: " << std::endl;
+    //    for (unsigned iii = 0; iii < block_to_dof_map.size(); iii++) 
+    //    {
+    //      std::cout << block_to_dof_map[iii] << std::endl; 
+    //    }
+
+
+    // Now do the replacement of all blocks in v_aug_pt 
+    for (unsigned block_row_i = 0; 
         block_row_i < N_velocity_doftypes; block_row_i++) 
-   {
-     unsigned temp_dof_row_i = temp_block_to_dof_map[block_row_i];
-     for (unsigned block_col_i = 0; 
+    {
+      unsigned temp_dof_row_i = temp_block_to_dof_map[block_row_i];
+      for (unsigned block_col_i = 0; 
           block_col_i < N_velocity_doftypes; block_col_i++) 
-     {
-       unsigned temp_dof_col_i = temp_block_to_dof_map[block_col_i];
-       this->set_replacement_dof_block(
-           temp_dof_row_i,temp_dof_col_i,
-           v_aug_pt(block_row_i,block_col_i));
-     }
-   }
+      {
+        unsigned temp_dof_col_i = temp_block_to_dof_map[block_col_i];
+        this->set_replacement_dof_block(
+            temp_dof_row_i,temp_dof_col_i,
+            v_aug_pt(block_row_i,block_col_i));
+      }
+    }
   }
-//  else
-//  {
-//    unsigned blocked_row_i = spatial_dim;
-//    unsigned blocked_col_i = spatial_dim;
-//    unsigned doftype_row_running_total = My_ndof_types_in_mesh[0];
-//    unsigned doftype_col_running_total = My_ndof_types_in_mesh[0];
-//
-//    for (unsigned row_mesh_i = 1; row_mesh_i < My_nmesh; row_mesh_i++) 
-//    {
-//      // Get the indirection for the mesh
-//      for (unsigned row_dim_i = 0; row_dim_i < spatial_dim; row_dim_i++) 
-//      {
-//        const unsigned doftype_row_i = doftype_row_running_total 
-//          + row_dim_i;
-//
-//        // Now do the same for the columns
-//        for (unsigned col_mesh_i = 1; col_mesh_i < My_nmesh; col_mesh_i++) 
-//        {
-//          for (unsigned col_dim_i = 0; col_dim_i < spatial_dim; col_dim_i++)
-//          {
-//            const unsigned doftype_col_i = doftype_col_running_total
-//              + col_dim_i;
-//
-//            this->set_replacement_dof_block(
-//                doftype_row_i,doftype_col_i,
-//                v_aug_pt(blocked_row_i,blocked_col_i));
-//
-//            //            oomph_info << "(" << blocked_row_i << "," 
-//            //                              << blocked_col_i << ")" 
-//            //                       << " -> " 
-//            //                       << "(" << doftype_row_i << ","
-//            //                              << doftype_col_i << ")" << std::endl; 
-//
-//            blocked_col_i++;
-//          }
-//
-//          // Update the column dof type running total
-//          doftype_col_running_total += My_ndof_types_in_mesh[col_mesh_i];
-//        }
-//
-//        // reset the blocked col i and the running total for the next row
-//        blocked_col_i = spatial_dim;
-//        doftype_col_running_total = My_ndof_types_in_mesh[0];
-//
-//        // Update the blocked row_i
-//        blocked_row_i++;
-//      }
-//      // Update the row dof type running total
-//      doftype_row_running_total += My_ndof_types_in_mesh[row_mesh_i];
-//    }
-//  }
+  //  else
+  //  {
+  //    unsigned blocked_row_i = spatial_dim;
+  //    unsigned blocked_col_i = spatial_dim;
+  //    unsigned doftype_row_running_total = My_ndof_types_in_mesh[0];
+  //    unsigned doftype_col_running_total = My_ndof_types_in_mesh[0];
+  //
+  //    for (unsigned row_mesh_i = 1; row_mesh_i < My_nmesh; row_mesh_i++) 
+  //    {
+  //      // Get the indirection for the mesh
+  //      for (unsigned row_dim_i = 0; row_dim_i < spatial_dim; row_dim_i++) 
+  //      {
+  //        const unsigned doftype_row_i = doftype_row_running_total 
+  //          + row_dim_i;
+  //
+  //        // Now do the same for the columns
+  //        for (unsigned col_mesh_i = 1; col_mesh_i < My_nmesh; col_mesh_i++) 
+  //        {
+  //          for (unsigned col_dim_i = 0; col_dim_i < spatial_dim; col_dim_i++)
+  //          {
+  //            const unsigned doftype_col_i = doftype_col_running_total
+  //              + col_dim_i;
+  //
+  //            this->set_replacement_dof_block(
+  //                doftype_row_i,doftype_col_i,
+  //                v_aug_pt(blocked_row_i,blocked_col_i));
+  //
+  //            //            oomph_info << "(" << blocked_row_i << "," 
+  //            //                              << blocked_col_i << ")" 
+  //            //                       << " -> " 
+  //            //                       << "(" << doftype_row_i << ","
+  //            //                              << doftype_col_i << ")" << std::endl; 
+  //
+  //            blocked_col_i++;
+  //          }
+  //
+  //          // Update the column dof type running total
+  //          doftype_col_running_total += My_ndof_types_in_mesh[col_mesh_i];
+  //        }
+  //
+  //        // reset the blocked col i and the running total for the next row
+  //        blocked_col_i = spatial_dim;
+  //        doftype_col_running_total = My_ndof_types_in_mesh[0];
+  //
+  //        // Update the blocked row_i
+  //        blocked_row_i++;
+  //      }
+  //      // Update the row dof type running total
+  //      doftype_row_running_total += My_ndof_types_in_mesh[row_mesh_i];
+  //    }
+  //  }
 
 
   // AT this point, we have created the augmented fluid block in v_aug_pt
@@ -1115,112 +1116,112 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   if(Using_superlu_ns_preconditioner)
   {
 
-//      pause("Lgr::setup() done setting replacement blocks, about to check repl. blocks");
-//      MapMatrix<unsigned,CRDoubleMatrix*> re_block_pt = this->replacement_dof_block_pt();
-//
-//      for (unsigned dof_block_i = 0; dof_block_i < this->ndof_types(); dof_block_i++) 
-//      {
-//        for (unsigned dof_block_j = 0; dof_block_j < this->ndof_types(); dof_block_j++) 
-//        {
-//          CRDoubleMatrix* tmp_block_pt = re_block_pt.get(dof_block_i,dof_block_j);
-//          if(tmp_block_pt != 0)
-//          {
-//            const unsigned tmp_nrow = tmp_block_pt->nrow();
-//            const unsigned tmp_ncol = tmp_block_pt->ncol();
-//            std::cout << "block(" << dof_block_i <<","<<dof_block_j
-//                      <<") has been replaced, nrow: " 
-//                      << tmp_nrow << ", ncol: "<< tmp_ncol << std::endl;
-//          }
-//        }
-//      }
-//      pause("printed repl. block pt"); 
-//      
-//      
-//
-//
-//
-//
-//      std::cout << "Print 1, NOT replaced." << std::endl; 
-//      std::cout << "============================================" << std::endl; 
-//      std::cout << "============================================" << std::endl; 
-//      std::cout << "============================================" << std::endl; 
-//      std::cout << "============================================" << std::endl; 
-//      
-//      for (unsigned block_i = 0; block_i < nblock_types(); block_i++) 
-//      {
-//        for (unsigned block_j = 0; block_j < nblock_types(); block_j++) 
-//        {
-//          CRDoubleMatrix tmp_block = get_block(block_i,block_j);
-//          const unsigned tmp_block_nrow = tmp_block.nrow();
-//          const unsigned tmp_block_ncol = tmp_block.ncol();
-//          std::cout << "block(" << block_i  << "," << block_j << ")"
-//                    << " , nrow: " << tmp_block_nrow << ", col: " << tmp_block_ncol << std::endl; 
-//
-//          std::cout << "============================================" << std::endl; 
-//          std::cout << "\n" << std::endl; 
-//        }
-//      }
-//      
-//      pause("Got the nrow yo 222222222"); 
-//
-//      DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
-//                                                  N_fluid_doftypes,0);
-//      // put in v_aug_pt:
-//      for(unsigned v_i = 0; v_i < N_fluid_doftypes; v_i++)
-//      {
-//        for(unsigned v_j = 0; v_j < N_fluid_doftypes; v_j++)
-//        {
-//          f_subblock_pt(v_i,v_j) = new CRDoubleMatrix;
-//          this->get_block(v_i,v_j,*f_subblock_pt(v_i,v_j));
-//        }
-//      }
+    //      pause("Lgr::setup() done setting replacement blocks, about to check repl. blocks");
+    //      MapMatrix<unsigned,CRDoubleMatrix*> re_block_pt = this->replacement_dof_block_pt();
+    //
+    //      for (unsigned dof_block_i = 0; dof_block_i < this->ndof_types(); dof_block_i++) 
+    //      {
+    //        for (unsigned dof_block_j = 0; dof_block_j < this->ndof_types(); dof_block_j++) 
+    //        {
+    //          CRDoubleMatrix* tmp_block_pt = re_block_pt.get(dof_block_i,dof_block_j);
+    //          if(tmp_block_pt != 0)
+    //          {
+    //            const unsigned tmp_nrow = tmp_block_pt->nrow();
+    //            const unsigned tmp_ncol = tmp_block_pt->ncol();
+    //            std::cout << "block(" << dof_block_i <<","<<dof_block_j
+    //                      <<") has been replaced, nrow: " 
+    //                      << tmp_nrow << ", ncol: "<< tmp_ncol << std::endl;
+    //          }
+    //        }
+    //      }
+    //      pause("printed repl. block pt"); 
+    //      
+    //      
+    //
+    //
+    //
+    //
+    //      std::cout << "Print 1, NOT replaced." << std::endl; 
+    //      std::cout << "============================================" << std::endl; 
+    //      std::cout << "============================================" << std::endl; 
+    //      std::cout << "============================================" << std::endl; 
+    //      std::cout << "============================================" << std::endl; 
+    //      
+    //      for (unsigned block_i = 0; block_i < nblock_types(); block_i++) 
+    //      {
+    //        for (unsigned block_j = 0; block_j < nblock_types(); block_j++) 
+    //        {
+    //          CRDoubleMatrix tmp_block = get_block(block_i,block_j);
+    //          const unsigned tmp_block_nrow = tmp_block.nrow();
+    //          const unsigned tmp_block_ncol = tmp_block.ncol();
+    //          std::cout << "block(" << block_i  << "," << block_j << ")"
+    //                    << " , nrow: " << tmp_block_nrow << ", col: " << tmp_block_ncol << std::endl; 
+    //
+    //          std::cout << "============================================" << std::endl; 
+    //          std::cout << "\n" << std::endl; 
+    //        }
+    //      }
+    //      
+    //      pause("Got the nrow yo 222222222"); 
+    //
+    //      DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
+    //                                                  N_fluid_doftypes,0);
+    //      // put in v_aug_pt:
+    //      for(unsigned v_i = 0; v_i < N_fluid_doftypes; v_i++)
+    //      {
+    //        for(unsigned v_j = 0; v_j < N_fluid_doftypes; v_j++)
+    //        {
+    //          f_subblock_pt(v_i,v_j) = new CRDoubleMatrix;
+    //          this->get_block(v_i,v_j,*f_subblock_pt(v_i,v_j));
+    //        }
+    //      }
 
 
-//      DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
-//          N_fluid_doftypes,0);
-//      // put in v_aug_pt:
-//      for(unsigned v_i = 0; v_i < N_velocity_doftypes; v_i++)
-//      {
-//        for(unsigned v_j = 0; v_j < N_velocity_doftypes; v_j++)
-//        {
-//          f_subblock_pt(v_i,v_j) = v_aug_pt(v_i,v_j);
-//        }
-//      }
-//
-//      // Now get the B and B^T blocks. Note that we have left out the zero block.
-//
-//      // Fill in the pressure block B
-//      for(unsigned col_i = 0; col_i < N_velocity_doftypes; col_i++)
-//      {
-//        f_subblock_pt(N_velocity_doftypes,col_i) = new CRDoubleMatrix;
-//        this->get_block(N_velocity_doftypes,col_i,
-//            *f_subblock_pt(N_velocity_doftypes,col_i));
-//      }
-//
-//      // Fill in the pressure block B^T
-//      for(unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
-//      {
-//        f_subblock_pt(row_i,N_velocity_doftypes) = new CRDoubleMatrix;
-//        this->get_block(row_i,N_velocity_doftypes,
-//            *f_subblock_pt(row_i,N_velocity_doftypes));
-//      }
+    //      DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
+    //          N_fluid_doftypes,0);
+    //      // put in v_aug_pt:
+    //      for(unsigned v_i = 0; v_i < N_velocity_doftypes; v_i++)
+    //      {
+    //        for(unsigned v_j = 0; v_j < N_velocity_doftypes; v_j++)
+    //        {
+    //          f_subblock_pt(v_i,v_j) = v_aug_pt(v_i,v_j);
+    //        }
+    //      }
+    //
+    //      // Now get the B and B^T blocks. Note that we have left out the zero block.
+    //
+    //      // Fill in the pressure block B
+    //      for(unsigned col_i = 0; col_i < N_velocity_doftypes; col_i++)
+    //      {
+    //        f_subblock_pt(N_velocity_doftypes,col_i) = new CRDoubleMatrix;
+    //        this->get_block(N_velocity_doftypes,col_i,
+    //            *f_subblock_pt(N_velocity_doftypes,col_i));
+    //      }
+    //
+    //      // Fill in the pressure block B^T
+    //      for(unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
+    //      {
+    //        f_subblock_pt(row_i,N_velocity_doftypes) = new CRDoubleMatrix;
+    //        this->get_block(row_i,N_velocity_doftypes,
+    //            *f_subblock_pt(row_i,N_velocity_doftypes));
+    //      }
 
-      // Concatenate the sub matrices.
-//      CRDoubleMatrix* f_aug_pt = new CRDoubleMatrix;
+    // Concatenate the sub matrices.
+    //      CRDoubleMatrix* f_aug_pt = new CRDoubleMatrix;
 
 
-//      std::cout << "dof_block_dimension():" << std::endl;
-//      for (unsigned i = 0; i < 6; i++) 
-//      {
-//        std::cout << "i = " << i << ", val: " << this->dof_block_dimension(i) << std::endl;
-//        
-//      }
-//
-//      pause("bloodz"); 
-      
-      
+    //      std::cout << "dof_block_dimension():" << std::endl;
+    //      for (unsigned i = 0; i < 6; i++) 
+    //      {
+    //        std::cout << "i = " << i << ", val: " << this->dof_block_dimension(i) << std::endl;
+    //        
+    //      }
+    //
+    //      pause("bloodz"); 
+
+
     VectorMatrix<BlockSelector> f_aug_blocks(N_fluid_doftypes,
-                                             N_fluid_doftypes);
+        N_fluid_doftypes);
     for (unsigned block_i = 0; block_i < N_fluid_doftypes; block_i++) 
     {
       for (unsigned block_j = 0; block_j < N_fluid_doftypes; block_j++) 
@@ -1229,34 +1230,34 @@ void LagrangeEnforcedFlowPreconditioner::setup()
       }
     }
 
-///////////////////////////////////////////////////////////////////////////////      
-///////////////////////////////////////////////////////////////////////////////      
-///////////////////////////////////////////////////////////////////////////////      
+    ///////////////////////////////////////////////////////////////////////////////      
+    ///////////////////////////////////////////////////////////////////////////////      
+    ///////////////////////////////////////////////////////////////////////////////      
 
     CRDoubleMatrix f_aug_block 
       = this->get_concatenated_block(f_aug_blocks);
 
-//      pause("after get_concat_blocks"); 
+    //      pause("after get_concat_blocks"); 
 
-//      Vector<LinearAlgebraDistribution*> f_dist_pt(N_fluid_doftypes,0);
-//      for(unsigned f_i = 0; f_i < N_fluid_doftypes; f_i++)
-//      {
-//        f_dist_pt[f_i] = this->block_distribution_pt(f_i);
-//      }
+    //      Vector<LinearAlgebraDistribution*> f_dist_pt(N_fluid_doftypes,0);
+    //      for(unsigned f_i = 0; f_i < N_fluid_doftypes; f_i++)
+    //      {
+    //        f_dist_pt[f_i] = this->block_distribution_pt(f_i);
+    //      }
 
-//      CRDoubleMatrixHelpers::concatenate_without_communication
-//        (f_dist_pt,f_subblock_pt,*f_aug_pt);
+    //      CRDoubleMatrixHelpers::concatenate_without_communication
+    //        (f_dist_pt,f_subblock_pt,*f_aug_pt);
 
-      // delete the sub F pointers, this would also delete the 
-      // v_aug_pt
-//      for(unsigned row_i = 0; row_i < N_fluid_doftypes; row_i++)
-//      {
-//        for(unsigned col_i = 0; col_i < N_fluid_doftypes; col_i++)
-//        {
-//          delete f_subblock_pt(row_i, col_i);
-//          f_subblock_pt(row_i, col_i) = 0;
-//        }
-//      }
+    // delete the sub F pointers, this would also delete the 
+    // v_aug_pt
+    //      for(unsigned row_i = 0; row_i < N_fluid_doftypes; row_i++)
+    //      {
+    //        for(unsigned col_i = 0; col_i < N_fluid_doftypes; col_i++)
+    //        {
+    //          delete f_subblock_pt(row_i, col_i);
+    //          f_subblock_pt(row_i, col_i) = 0;
+    //        }
+    //      }
 
     if(Navier_stokes_preconditioner_pt == 0)
     {
@@ -1265,55 +1266,55 @@ void LagrangeEnforcedFlowPreconditioner::setup()
 
     Navier_stokes_preconditioner_pt->setup(&f_aug_block);
 
-//      Navier_stokes_preconditioner_pt->setup(f_aug_pt);
+    //      Navier_stokes_preconditioner_pt->setup(f_aug_pt);
 
-//      delete f_aug_pt;
-//      f_aug_pt = 0;
+    //      delete f_aug_pt;
+    //      f_aug_pt = 0;
   }
   else
   {
-//      std::cout << "\n" << std::endl; 
-//      std::cout << "\n" << std::endl; 
-//      std::cout << "\n" << std::endl; 
-      
-//      pause("Lgr::setup() Got to the else block"); 
-      
-      //////////////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////////////
+    //      std::cout << "\n" << std::endl; 
+    //      std::cout << "\n" << std::endl; 
+    //      std::cout << "\n" << std::endl; 
 
-//      std::cout << "Lgr using a block subsidiary preconditioner" << std::endl; 
-      
+    //      pause("Lgr::setup() Got to the else block"); 
 
-//      // Get the rest of the f block.
-//      DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
-//          N_fluid_doftypes,0);
-//      // put in v_aug_pt:
-//      for(unsigned v_i = 0; v_i < N_velocity_doftypes; v_i++)
-//      {
-//        for(unsigned v_j = 0; v_j < N_velocity_doftypes; v_j++)
-//        {
-//          f_subblock_pt(v_i,v_j) = v_aug_pt(v_i,v_j);
-//        }
-//      }
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
 
-//      // Fill in the pressure block B plus 1
-//      for(unsigned col_i = 0; col_i < N_fluid_doftypes; col_i++)
-//      {
-//        f_subblock_pt(N_velocity_doftypes,col_i) = new CRDoubleMatrix;
-//
-//        this->get_block(N_velocity_doftypes,col_i,
-//            *f_subblock_pt(N_velocity_doftypes,col_i));
-//      }
+    //      std::cout << "Lgr using a block subsidiary preconditioner" << std::endl; 
 
-//      // Fill in the pressure block B^T
-//      for(unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
-//      {
-//        f_subblock_pt(row_i,N_velocity_doftypes) = new CRDoubleMatrix;
-//
-//        this->get_block(row_i,N_velocity_doftypes,
-//            *f_subblock_pt(row_i,N_velocity_doftypes));
-//      }
+
+    //      // Get the rest of the f block.
+    //      DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
+    //          N_fluid_doftypes,0);
+    //      // put in v_aug_pt:
+    //      for(unsigned v_i = 0; v_i < N_velocity_doftypes; v_i++)
+    //      {
+    //        for(unsigned v_j = 0; v_j < N_velocity_doftypes; v_j++)
+    //        {
+    //          f_subblock_pt(v_i,v_j) = v_aug_pt(v_i,v_j);
+    //        }
+    //      }
+
+    //      // Fill in the pressure block B plus 1
+    //      for(unsigned col_i = 0; col_i < N_fluid_doftypes; col_i++)
+    //      {
+    //        f_subblock_pt(N_velocity_doftypes,col_i) = new CRDoubleMatrix;
+    //
+    //        this->get_block(N_velocity_doftypes,col_i,
+    //            *f_subblock_pt(N_velocity_doftypes,col_i));
+    //      }
+
+    //      // Fill in the pressure block B^T
+    //      for(unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
+    //      {
+    //        f_subblock_pt(row_i,N_velocity_doftypes) = new CRDoubleMatrix;
+    //
+    //        this->get_block(row_i,N_velocity_doftypes,
+    //            *f_subblock_pt(row_i,N_velocity_doftypes));
+    //      }
 
 
     // Determine whether the NS preconditioner is a block preconditioner (and
@@ -1370,8 +1371,8 @@ void LagrangeEnforcedFlowPreconditioner::setup()
     // p [9]
     //
     // Artificial test data:
-//    spatial_dim = 3;
-//    My_nmesh = 3;
+    //    spatial_dim = 3;
+    //    My_nmesh = 3;
 
     Vector<Vector<unsigned> > subsidiary_dof_type_coarsening_map;
 
@@ -1394,20 +1395,20 @@ void LagrangeEnforcedFlowPreconditioner::setup()
 
     subsidiary_dof_type_coarsening_map.push_back(ns_p_vec);
 
-//    std::cout << "Lgr: sub dof type coarsening map: " << std::endl; 
-//    for (unsigned i = 0; 
-//        i < subsidiary_dof_type_coarsening_map.size(); i++) 
-//    {
-//      for (unsigned j = 0; 
-//          j < subsidiary_dof_type_coarsening_map[i].size(); j++) 
-//      {
-//        std::cout << subsidiary_dof_type_coarsening_map[i][j] << " ";
-//      }
-//      std::cout << "\n"; 
-//    }
-//    pause("Outputted the dof type coarsen map."); 
-    
-      
+    //    std::cout << "Lgr: sub dof type coarsening map: " << std::endl; 
+    //    for (unsigned i = 0; 
+    //        i < subsidiary_dof_type_coarsening_map.size(); i++) 
+    //    {
+    //      for (unsigned j = 0; 
+    //          j < subsidiary_dof_type_coarsening_map[i].size(); j++) 
+    //      {
+    //        std::cout << subsidiary_dof_type_coarsening_map[i][j] << " ";
+    //      }
+    //      std::cout << "\n"; 
+    //    }
+    //    pause("Outputted the dof type coarsen map."); 
+
+
 
     //    Doftype_coarsen_map_fine.resize(0,0);
     //    Vector<unsigned> tmp0;
@@ -1564,22 +1565,22 @@ void LagrangeEnforcedFlowPreconditioner::setup()
       //      vector.
       // 4) Concatenate the two vectors.
 
-//      Artificial test data
-//      n_dof_types = 13;
-//      My_nmesh = 3;
-//      spatial_dim = 3;
-//      My_ndof_types_in_mesh.resize(3,0);
-//      My_ndof_types_in_mesh[0] = 4;
-//      My_ndof_types_in_mesh[1] = 5;
-//      My_ndof_types_in_mesh[2] = 4;
-//      // Outputting My_ndof_types_in_mesh
-//      for (unsigned i = 0; i < My_ndof_types_in_mesh.size(); i++) 
-//      {
-//        std::cout << "My_ndof_inmesh: " 
-//                  << My_ndof_types_in_mesh[i] << std::endl; 
-//      }
-//      pause("Need someone."); 
-      
+      //      Artificial test data
+      //      n_dof_types = 13;
+      //      My_nmesh = 3;
+      //      spatial_dim = 3;
+      //      My_ndof_types_in_mesh.resize(3,0);
+      //      My_ndof_types_in_mesh[0] = 4;
+      //      My_ndof_types_in_mesh[1] = 5;
+      //      My_ndof_types_in_mesh[2] = 4;
+      //      // Outputting My_ndof_types_in_mesh
+      //      for (unsigned i = 0; i < My_ndof_types_in_mesh.size(); i++) 
+      //      {
+      //        std::cout << "My_ndof_inmesh: " 
+      //                  << My_ndof_types_in_mesh[i] << std::endl; 
+      //      }
+      //      pause("Need someone."); 
+
 
       unsigned partial_sum_index = 0;
 
@@ -1601,15 +1602,15 @@ void LagrangeEnforcedFlowPreconditioner::setup()
 
     } // end of encapsulating
 
-//    // Output for artificial test.
-//    std::cout << "Subsidiary_list_bcpl:" << std::endl; 
-//    for (unsigned i = 0; i < Subsidiary_list_bcpl.size(); i++) 
-//    {
-//      std::cout << Subsidiary_list_bcpl[i] << std::endl;
-//    }
-//    // With the artificial test data, this should output:
-//    // 0, 1, 2, 4, 5, 6, 9, 10, 11, 3
-//    pause("Printed out Subsidiary_list_bcpl"); 
+    //    // Output for artificial test.
+    //    std::cout << "Subsidiary_list_bcpl:" << std::endl; 
+    //    for (unsigned i = 0; i < Subsidiary_list_bcpl.size(); i++) 
+    //    {
+    //      std::cout << Subsidiary_list_bcpl[i] << std::endl;
+    //    }
+    //    // With the artificial test data, this should output:
+    //    // 0, 1, 2, 4, 5, 6, 9, 10, 11, 3
+    //    pause("Printed out Subsidiary_list_bcpl"); 
 
     // The ns_dof_list will ensure that the NS preconditioner have the 
     // structure:
@@ -1625,126 +1626,126 @@ void LagrangeEnforcedFlowPreconditioner::setup()
     //  0 1 2   3  4  5    6  7  8     9   10  11  12   <- block index
     // [u v w | up vp wp | ut vt wt ] [p | Lp1 Lp2 Lt1] <- DOF type
 
-//      for (unsigned row_i = spatial_dim; row_i < N_velocity_doftypes; row_i++) 
-//      {
-//        for (unsigned col_i = spatial_dim; col_i < N_velocity_doftypes; col_i++) 
-//        {
-//          navier_stokes_block_preconditioner_pt
-//            ->set_replacement_dof_block(row_i,col_i,
-//                f_subblock_pt(row_i,col_i));
-//        }
-//      }
+    //      for (unsigned row_i = spatial_dim; row_i < N_velocity_doftypes; row_i++) 
+    //      {
+    //        for (unsigned col_i = spatial_dim; col_i < N_velocity_doftypes; col_i++) 
+    //        {
+    //          navier_stokes_block_preconditioner_pt
+    //            ->set_replacement_dof_block(row_i,col_i,
+    //                f_subblock_pt(row_i,col_i));
+    //        }
+    //      }
 
     //    pause("About to call setup of NS prec."); 
 
 
 
     navier_stokes_block_preconditioner_pt
-        ->setup(matrix_pt());
+      ->setup(matrix_pt());
 
-//      for (unsigned i = 0; i < N_fluid_doftypes; i++)
-//      {
-//        for (unsigned j = 0; j < N_fluid_doftypes; j++) 
-//        {
-//          delete f_subblock_pt(i,j);
-//        }
-//      }
-    } // else - NS prec is block preconditioner
-   
-    const unsigned v_aug_nrow = v_aug_pt.nrow();
-    const unsigned v_aug_ncol = v_aug_pt.ncol();
-    for (unsigned v_row = 0; v_row < v_aug_nrow; v_row++) 
-    {
-      for (unsigned v_col = 0; v_col < v_aug_ncol; v_col++) 
-      {
-        delete v_aug_pt(v_row,v_col);
-        v_aug_pt(v_row,v_col) = 0;
-      }
-    }
-///////////////////////////////////////////////////////////////////////////
+    //      for (unsigned i = 0; i < N_fluid_doftypes; i++)
+    //      {
+    //        for (unsigned j = 0; j < N_fluid_doftypes; j++) 
+    //        {
+    //          delete f_subblock_pt(i,j);
+    //        }
+    //      }
+  } // else - NS prec is block preconditioner
 
-    // Solver for the W block.
-    W_preconditioner_pt.resize(N_lagrange_doftypes,0);
-    for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
-    {
-      if(W_preconditioner_fct_pt == 0)
-      {
-        W_preconditioner_pt[l_i] = new SuperLUPreconditioner;
-      }
-      else
-      {
-        // We use the preconditioner provided.
-        W_preconditioner_pt[l_i] = 
-          (*W_preconditioner_fct_pt)();
-      }
-
-      // Is this a block preconditioner?
-      BlockPreconditioner<CRDoubleMatrix>* L_block_preconditioner_pt = 
-        dynamic_cast<BlockPreconditioner<CRDoubleMatrix>* >
-        (W_preconditioner_pt[l_i]);
-
-      if(L_block_preconditioner_pt == 0)
-      {
-        W_preconditioner_is_block_preconditioner = false;
-
-        W_preconditioner_pt[l_i]->setup(w_pt[l_i]);
-      }
-      else
-      {
-
-        W_preconditioner_is_block_preconditioner = true;
-        Vector<unsigned> l_mult_dof_map;
-        l_mult_dof_map.push_back(N_fluid_doftypes + l_i);
-
-        L_block_preconditioner_pt->
-          turn_into_subsidiary_block_preconditioner(this,l_mult_dof_map);
-        L_block_preconditioner_pt->setup(matrix_pt());
-      }
-    }
-
-    // Delete w_pt(0,N_lagrange_doftypes)
-    for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
-    {
-      delete w_pt[l_i];
-    }
-
-    Mapping_info_calculated = true;
-} // end of LagrangeEnforcedFlowPreconditioner::setup
-
-  /// \short Function to set a new momentum matrix preconditioner 
-  /// (inexact solver)
-void LagrangeEnforcedFlowPreconditioner::set_navier_stokes_preconditioner(
-      Preconditioner* new_ns_preconditioner_pt)
+  const unsigned v_aug_nrow = v_aug_pt.nrow();
+  const unsigned v_aug_ncol = v_aug_pt.ncol();
+  for (unsigned v_row = 0; v_row < v_aug_nrow; v_row++) 
   {
-    // Check if pointer is non-zero.
-    if(new_ns_preconditioner_pt == 0)
+    for (unsigned v_col = 0; v_col < v_aug_ncol; v_col++) 
     {
-      std::ostringstream warning_stream;
-      warning_stream << "WARNING: \n"
-                     << "The LSC preconditioner point is null.\n" 
-                     << "Using default (SuperLU) preconditioner.\n" 
-                     << std::endl;
-      OomphLibWarning(warning_stream.str(),
-                      OOMPH_CURRENT_FUNCTION,
-                      OOMPH_EXCEPTION_LOCATION);
-      
-      Navier_stokes_preconditioner_pt = 0;
-      Using_superlu_ns_preconditioner = true;
+      delete v_aug_pt(v_row,v_col);
+      v_aug_pt(v_row,v_col) = 0;
+    }
+  }
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Solver for the W block.
+  W_preconditioner_pt.resize(N_lagrange_doftypes,0);
+  for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
+  {
+    if(W_preconditioner_fct_pt == 0)
+    {
+      W_preconditioner_pt[l_i] = new SuperLUPreconditioner;
     }
     else
     {
-      // If the default SuperLU preconditioner has been used
-      // clean it up now...
-      if (Using_superlu_ns_preconditioner 
-          && Navier_stokes_preconditioner_pt != 0)
-      {
-        delete Navier_stokes_preconditioner_pt;
-      }
-      
-      Navier_stokes_preconditioner_pt = new_ns_preconditioner_pt;
-      Using_superlu_ns_preconditioner = false;
+      // We use the preconditioner provided.
+      W_preconditioner_pt[l_i] = 
+        (*W_preconditioner_fct_pt)();
+    }
+
+    // Is this a block preconditioner?
+    BlockPreconditioner<CRDoubleMatrix>* L_block_preconditioner_pt = 
+      dynamic_cast<BlockPreconditioner<CRDoubleMatrix>* >
+      (W_preconditioner_pt[l_i]);
+
+    if(L_block_preconditioner_pt == 0)
+    {
+      W_preconditioner_is_block_preconditioner = false;
+
+      W_preconditioner_pt[l_i]->setup(w_pt[l_i]);
+    }
+    else
+    {
+
+      W_preconditioner_is_block_preconditioner = true;
+      Vector<unsigned> l_mult_dof_map;
+      l_mult_dof_map.push_back(N_fluid_doftypes + l_i);
+
+      L_block_preconditioner_pt->
+        turn_into_subsidiary_block_preconditioner(this,l_mult_dof_map);
+      L_block_preconditioner_pt->setup(matrix_pt());
     }
   }
+
+  // Delete w_pt(0,N_lagrange_doftypes)
+  for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
+  {
+    delete w_pt[l_i];
+  }
+
+  Mapping_info_calculated = true;
+} // end of LagrangeEnforcedFlowPreconditioner::setup
+
+/// \short Function to set a new momentum matrix preconditioner 
+/// (inexact solver)
+void LagrangeEnforcedFlowPreconditioner::set_navier_stokes_preconditioner(
+    Preconditioner* new_ns_preconditioner_pt)
+{
+  // Check if pointer is non-zero.
+  if(new_ns_preconditioner_pt == 0)
+  {
+    std::ostringstream warning_stream;
+    warning_stream << "WARNING: \n"
+      << "The LSC preconditioner point is null.\n" 
+      << "Using default (SuperLU) preconditioner.\n" 
+      << std::endl;
+    OomphLibWarning(warning_stream.str(),
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+
+    Navier_stokes_preconditioner_pt = 0;
+    Using_superlu_ns_preconditioner = true;
+  }
+  else
+  {
+    // If the default SuperLU preconditioner has been used
+    // clean it up now...
+    if (Using_superlu_ns_preconditioner 
+        && Navier_stokes_preconditioner_pt != 0)
+    {
+      delete Navier_stokes_preconditioner_pt;
+    }
+
+    Navier_stokes_preconditioner_pt = new_ns_preconditioner_pt;
+    Using_superlu_ns_preconditioner = false;
+  }
+}
 
 //========================================================================
 /// \short Clears the memory.
