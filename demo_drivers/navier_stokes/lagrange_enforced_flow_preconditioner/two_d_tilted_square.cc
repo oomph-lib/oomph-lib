@@ -77,6 +77,9 @@ namespace Global_Variables
  static const double Lx = X_max - X_min;
  static const double Ly = Y_max - Y_min;
 
+ /// The viscous term
+ unsigned Visc = 0;
+
  /// Reynolds number
  double Re = 100.0;
 
@@ -418,8 +421,8 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
   mesh_pt[1] = Surface_mesh_P_pt;
 
   // Create the preconditioner.
-  LagrangeEnforcedflowPreconditioner* lgr_prec_pt
-    = new LagrangeEnforcedflowPreconditioner;
+  LagrangeEnforcedFlowPreconditioner* lgr_prec_pt
+    = new LagrangeEnforcedFlowPreconditioner;
 
   lgr_prec_pt->set_meshes(mesh_pt);
   
@@ -447,7 +450,7 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
 //      lsc_prec_pt->set_f_preconditioner(P_preconditioner_pt);
 //    }
    
-    lgr_prec_pt->set_navier_stokes_lsc_preconditioner(lsc_prec_pt);
+    lgr_prec_pt->set_navier_stokes_preconditioner(lsc_prec_pt);
   }
   else
   {
@@ -578,6 +581,9 @@ int main(int argc, char **argv)
   // Store command line arguments
   CommandLineArgs::setup(argc,argv);
 
+  // Store the viscous term, default is simple form.
+  CommandLineArgs::specify_command_line_flag("--visc", &GV::Visc);
+
   // Default is 100.0
   CommandLineArgs::specify_command_line_flag("--re", &GV::Re);
  
@@ -601,6 +607,23 @@ int main(int argc, char **argv)
   CommandLineArgs::doc_specified_flags();
 
   GV::Ang_rad = GV::degtorad(GV::Ang_deg);
+
+  if(GV::Visc == 0)
+  {
+    oomph_info << "Doing simple form" << std::endl; 
+    for (unsigned d = 0; d < GV::Dim; d++)
+    {
+      NavierStokesEquations<GV::Dim>::Gamma[d] = 0.0;
+    }
+  }
+  else
+  {
+    oomph_info << "Doing stress divergence form" << std::endl; 
+    for (unsigned d = 0; d < GV::Dim; d++)
+    {
+      NavierStokesEquations<GV::Dim>::Gamma[d] = 1.0;
+    }
+  }
   
   // Set the flag for lsc
   if(CommandLineArgs::command_line_flag_has_been_set("--use_lsc"))
@@ -639,12 +662,13 @@ int main(int argc, char **argv)
 
   // Print out the iteration counts
   const unsigned num_newton_steps = GV::Iterations.size();
-  oomph_info << num_newton_steps << std::endl; 
+  oomph_info << "RRRNS:\t"<<num_newton_steps << std::endl; 
   for (unsigned stepi = 0; stepi < num_newton_steps; stepi++) 
   {
-    oomph_info << GV::Iterations[stepi] << std::endl;
+    oomph_info << "RRRITS:\t" << GV::Iterations[stepi] << std::endl;
   }
- 
+  oomph_info << "RRR:\t" << std::endl; 
+  
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::finalize();
 #endif  

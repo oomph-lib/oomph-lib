@@ -7,7 +7,8 @@ sources =  \
 navier_stokes_elements.cc \
 refineable_navier_stokes_elements.cc \
 Tnavier_stokes_elements.cc \
-navier_stokes_preconditioners.cc 
+navier_stokes_preconditioners.cc \
+lagrange_enforced_flow_preconditioner.h
 
 # fluid_traction_elements.cc 
 
