@@ -90,6 +90,12 @@ namespace Global_Variables
  // Use LSC preconditioner for the Navier-Stokes block?
  bool Use_lsc = false;
 
+ // Use Boomer AMG for the momentum block?
+ bool Use_amg_for_f = false;
+
+ // Use Boomer AMG for the pressure block?
+ bool Use_amg_for_p = false;
+
  // Convert degrees to radians
  inline double degtorad(const double& ang_deg)
  {
@@ -259,6 +265,12 @@ private:
  // Preconditioner for the Navier-Stokes block
  Preconditioner* Navier_stokes_prec_pt;
 
+ // Preconditioner for the momentum block
+ Preconditioner* F_preconditioner_pt;
+
+ // Preconditioner for the pressure block
+ Preconditioner* P_preconditioner_pt;
+
  // Iterative linear solver
  IterativeLinearSolver* Solver_pt;
 
@@ -406,8 +418,8 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
   mesh_pt[1] = Surface_mesh_P_pt;
 
   // Create the preconditioner.
-  LagrangeEnforcedFlowPreconditioner* lgr_prec_pt
-    = new LagrangeEnforcedFlowPreconditioner;
+  LagrangeEnforcedflowPreconditioner* lgr_prec_pt
+    = new LagrangeEnforcedflowPreconditioner;
 
   lgr_prec_pt->set_meshes(mesh_pt);
   
@@ -417,11 +429,29 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
     // Create the NS LSC preconditioner.
     lsc_prec_pt = new NavierStokesSchurComplementPreconditioner(this);
     lsc_prec_pt->set_navier_stokes_mesh(Bulk_mesh_pt);
-    lgr_prec_pt->set_navier_stokes_preconditioner(lsc_prec_pt);
+    lsc_prec_pt->use_lsc();
+
+//    if(GV::Use_amg_for_f)
+//    {
+//      F_preconditioner_pt
+//        = Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper::
+//          boomer_amg_for_2D_momentum_stressdiv_visc();
+//      lsc_prec_pt->set_f_preconditioner(F_preconditioner_pt);
+//    }
+// 
+//    if(GV::Use_amg_for_p)
+//    {
+//      P_preconditioner_pt
+//        = Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper::
+//          boomer_amg_for_2D_poisson_problem();
+//      lsc_prec_pt->set_f_preconditioner(P_preconditioner_pt);
+//    }
+   
+    lgr_prec_pt->set_navier_stokes_lsc_preconditioner(lsc_prec_pt);
   }
   else
   {
-    lgr_prec_pt->set_superlu_for_navier_stokes_preconditioner();
+//    lgr_prec_pt->set_superlu_for_navier_stokes_preconditioner();
   }
 
 
@@ -429,17 +459,23 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
 
   Prec_pt = lgr_prec_pt;
 
+  TrilinosAztecOOSolver* trilinos_solver_pt = new TrilinosAztecOOSolver;
+  trilinos_solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
+
+  Solver_pt = trilinos_solver_pt;
+
+
   // Create oomph-lib iterative linear solver
-  IterativeLinearSolver* solver_pt = new GMRES<CRDoubleMatrix>;
+//  IterativeLinearSolver* solver_pt = new GMRES<CRDoubleMatrix>;
 
   // We use RHS preconditioning. Note that by default,
   // left hand preconditioning is used.
-  static_cast<GMRES<CRDoubleMatrix>*>(solver_pt)->set_preconditioner_RHS();
+//  static_cast<GMRES<CRDoubleMatrix>*>(solver_pt)->set_preconditioner_RHS();
 
-  solver_pt->tolerance() = 1.0e-6;
-  solver_pt->max_iter() = 100;
-  solver_pt->preconditioner_pt() = Prec_pt;
-  this->linear_solver_pt() = solver_pt;
+  Solver_pt->tolerance() = 1.0e-6;
+  Solver_pt->max_iter() = 110;
+  Solver_pt->preconditioner_pt() = Prec_pt;
+  this->linear_solver_pt() = Solver_pt;
   this->newton_solver_tolerance() = 1.0e-6;
 }
 
@@ -554,11 +590,19 @@ int main(int argc, char **argv)
   // Use the LSC preconditioner for the Navier-Stokes block?
   CommandLineArgs::specify_command_line_flag("--use_lsc");
 
+  // Use the amg for the momentum block?
+  CommandLineArgs::specify_command_line_flag("--use_amg_for_f");
+
+  // Use the amg for the pressure block?
+  CommandLineArgs::specify_command_line_flag("--use_amg_for_p");
+
   // Parse the above flags.
   CommandLineArgs::parse_and_assign();
   CommandLineArgs::doc_specified_flags();
 
   GV::Ang_rad = GV::degtorad(GV::Ang_deg);
+  
+  // Set the flag for lsc
   if(CommandLineArgs::command_line_flag_has_been_set("--use_lsc"))
   {
     GV::Use_lsc = true;
@@ -566,6 +610,26 @@ int main(int argc, char **argv)
   else
   {
     GV::Use_lsc = false;
+  }
+
+  // Set the flag for amg for the momentum block
+  if(CommandLineArgs::command_line_flag_has_been_set("--use_amg_for_f"))
+  {
+    GV::Use_amg_for_f = true;
+  }
+  else
+  {
+    GV::Use_amg_for_f = false;
+  }
+
+  // Set the flag for amg for the pressure block
+  if(CommandLineArgs::command_line_flag_has_been_set("--use_amg_for_p"))
+  {
+    GV::Use_amg_for_p = true;
+  }
+  else
+  {
+    GV::Use_amg_for_f = false;
   }
 
   TiltedCavityProblem< QTaylorHoodElement<GV::Dim> > problem;
