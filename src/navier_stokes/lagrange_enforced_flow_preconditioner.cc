@@ -38,7 +38,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 {
   /// \short CG with diagonal preconditioner for W-block subsidiary linear 
   /// systems.
-  Preconditioner* get_lagrange_multiplier_preconditioner()
+  Preconditioner* get_w_cg_preconditioner()
   {
 #ifdef OOMPH_HAS_TRILINOS
     InnerIterationPreconditioner
@@ -64,7 +64,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 #endif
-  } // function get_lagrange_multiplier_preconditioner
+  } // function get_w_cg_preconditioner
 } // namespace
 
 ///////////////////////////////////////////////////////////////////////
@@ -587,7 +587,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   //  pause("done!"); 
 
 
-  if(Use_default_norm_of_f_scaling)
+  if(Use_norm_f_for_scaling_sigma)
   {
     //    DenseMatrix<CRDoubleMatrix* > u_pt(My_nmesh,My_nmesh,0);
     //
@@ -776,7 +776,6 @@ void LagrangeEnforcedFlowPreconditioner::setup()
     // but in (2) we need to extract the diagonal of the 
     // block-diagonal matrix.
 
-    if(Use_diagonal_w_block) // This is the default.
     {
       // Get the number of local rows for this Lagrange block.
       unsigned long l_i_nrow_local 
@@ -844,69 +843,6 @@ void LagrangeEnforcedFlowPreconditioner::setup()
           w_i_column_indices,
           w_i_row_start);
     }
-    else
-      // We use the block diagonal form of the W block.
-      // RAYRAY check if I should remove this. I think I should.
-      // I don't think I use this.
-    {
-      // NOTE: This seems very dodgy. 
-      // A lot of functions has moved into CRDoubleMatrix
-      // such as get_diagonal_entries() and add()
-
-      // Square the first mass matrix. We assume that there is at least one.
-      mm_pt[0]->multiply((*mm_pt[0]),(*w_pt[l_i]));
-
-      // Square the other mass matrices and add the result to w_pt[l_i].
-      for (unsigned mm_i = 1; mm_i < n_mm; mm_i++)
-      {
-        // Squaring process.
-        CRDoubleMatrix* temp_mm_sqrd_pt = new CRDoubleMatrix;
-        temp_mm_sqrd_pt->build(this->Block_distribution_pt[l_doftype]);
-        mm_pt[mm_i]->multiply((*mm_pt[mm_i]),*temp_mm_sqrd_pt);
-
-        // adding to the partial sum of squared mass matrices.
-        //add_matrices(temp_mm_sqrd_pt,w_pt[l_i]);
-        temp_mm_sqrd_pt->add(*w_pt[l_i],*w_pt[l_i]);
-        delete temp_mm_sqrd_pt; temp_mm_sqrd_pt = 0;
-      }
-
-      // Now multiply by the Scaling sigma:
-      double* current_w_values = w_pt[l_i]->value();
-      long unsigned current_w_nnz = w_pt[l_i]->nnz();
-      for (unsigned nnz_i = 0; nnz_i < current_w_nnz; nnz_i++)
-      {
-        current_w_values[nnz_i] /= Scaling_sigma;
-      }
-
-      // w_i is complete.
-      // We have to create inv_w_pt by extracting 
-      // the diagonal entries of w_i.
-
-      // Get the number of local rows for this Lagrange block.
-      // We shall use the block in the first column.
-      unsigned long l_i_nrow_local = mm_pt[0]->nrow_local();
-
-      // A Vector for the diagonal entries of w_i.
-      Vector<double> inv_w_i_diag_values = w_pt[l_i]->diagonal_entries();
-
-      Vector<int> inv_w_i_row_start(l_i_nrow_local+1);
-      Vector<int> inv_w_i_column_indices(l_i_nrow_local);
-      // Invert the values to create the diagonal entries for inv_w_i: 
-      for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
-      {
-        inv_w_i_diag_values[row_i] = 1/inv_w_i_diag_values[row_i];
-        inv_w_i_column_indices[row_i] = row_i;
-        inv_w_i_row_start[row_i] = row_i;
-      }
-
-      inv_w_i_row_start[l_i_nrow_local] = l_i_nrow_local;
-      unsigned long l_i_nrow_global 
-        = this->Block_distribution_pt[l_doftype]->nrow();
-      inv_w_pt->build(l_i_nrow_global,
-          inv_w_i_diag_values,
-          inv_w_i_column_indices,
-          inv_w_i_row_start);
-    } // else - finished building w_i and inv_w_i
 
 
     ////////////////////////////////////////////////////////////////////////

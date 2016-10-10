@@ -62,8 +62,8 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 {
   /// \short CG with diagonal preconditioner for W-block subsidiary linear 
   /// systems.
-  extern Preconditioner* get_lagrange_multiplier_preconditioner();
-}
+  extern Preconditioner* get_w_cg_preconditioner();
+} // namespace
 
 
 //==========================================================================
@@ -163,39 +163,28 @@ public:
     // Set the vector of preconditioner pointers for the W block(s) to zero.
     W_preconditioner_pt.resize(0,0);
 
-    // By default, the Lagrange multiplier block is preconditioned by the 
-    // SuperLU preconditioner. To be honest, it does not matter what we set
-    // here, it is reset later in the function setup(...).
+    // By default, the linear systems associated with the diagonal blocks 
+    // are solved "exactly" using SuperLU (in its incarnation as an exact 
+    // preconditioner. This is not a block preconditioner. 
+    Navier_stokes_preconditioner_is_block_preconditioner = false;
     W_preconditioner_is_block_preconditioner = false;
 
-    // By default, the Navier-Stokes block is preconditioned by the 
-    // Least Square Commutator (LSC) preconditioner. To be honest, it does not
-    // matter what we set here, since it is reset in the function setup(...).
-    Navier_stokes_preconditioner_is_block_preconditioner = false;
-
-    // flag to indicate to use SuperLU or not.
+    // Flag to indicate to use SuperLU or not.
     Using_superlu_ns_preconditioner = true;
 
-    // Initially, there are no meshes set!
+    // Empty vector of meshes and set the number of meshes to zero.
     My_mesh_pt.resize(0,0);
-
-    // The number of meshes
     My_nmesh = 0;
 
     // The number of DOF types within the meshes.
     My_ndof_types_in_mesh.resize(0,0);
 
-    // flag to indicate LSC preconditioner
-    Use_default_norm_of_f_scaling = true;
+    // Initialise other variables.
+    Use_norm_f_for_scaling_sigma = true;
     Scaling_sigma = 0.0;
     N_lagrange_doftypes = 0;
     N_fluid_doftypes = 0;
-
     N_velocity_doftypes = 0;
-
-    // RAYRAY remove this soon.
-    Use_diagonal_w_block = true;
-
     Mapping_info_calculated = false;
   } // constructor
 
@@ -221,46 +210,73 @@ public:
   /// \short Setup method for the LagrangeEnforcedFlowPreconditioner.
   void setup();
 
-  /// \short Use the diagonal approximation for the W block.
-  void use_diagonal_w_block() {Use_diagonal_w_block = true;}
-
-  /// Use block diagonal W block.
-  void use_block_diagonal_w_block() {Use_diagonal_w_block  = false;}
-
   /// \short Apply the preconditioner.
   /// r is the residual (rhs), z will contain the solution.
   void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-  /// \short Set the meshes, the first mesh must be the fluid mesh
+  /// \short Set the meshes,
+  /// the first mesh in the vector must be the bulk mesh.
   void set_meshes(const Vector<Mesh*> &mesh_pt);
 
-  /// \short Access function to the Scaling sigma of the preconditioner
-  double& scaling_sigma()
+  /// \short Set flag to use the infinite norm of the Navier-Stokes F matrix
+  /// as the scaling sigma. This is the default behaviour. Note: the norm of
+  /// the NS F matrix positive, however, we actually use the negative of 
+  /// the norm. This is because the underlying Navier-Stokes Jacobian is 
+  /// multiplied by -1. Ask Andrew/Matthias for more detail.
+  void use_norm_f_for_scaling_sigma()
   {
-    Use_default_norm_of_f_scaling = false;
-    return Scaling_sigma;
+    Use_norm_f_for_scaling_sigma = true;
   }
 
-  /// \short Function to get the scaling Sigma of the preconditioner
+  /// \short Access function to set the scaling sigma. 
+  /// Note: this also sets the flag to use the infinite norm of 
+  /// the Navier-Stokes F matrix as the scaling sigma to false.
+  /// Warning is given if trying to set scaling sigma to be equal to 
+  /// or greater than zero.
+  void set_scaling_sigma(const double& scaling_sigma)
+  {
+    // Check if scaling sigma is zero or positive.
+#ifdef PARANOID
+    if(scaling_sigma == 0.0)
+    {
+      std::ostringstream warning_stream;
+      warning_stream << "WARNING: \n"
+        << "Setting scaling_sigma = 0.0 may cause values.\n";
+      OomphLibWarning(warning_stream.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+    if(scaling_sigma > 0.0)
+    {
+      std::ostringstream warning_stream;
+      warning_stream << "WARNING: " << std::endl
+        << "The scaling (scaling_sigma) is positive: " 
+        << Scaling_sigma << "\n"
+        << "Performance may be degraded.\n";
+      OomphLibWarning(warning_stream.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+    Scaling_sigma = scaling_sigma;
+    Use_norm_f_for_scaling_sigma = false;
+  }
+
+  /// \short Read (const) function to get the scaling sigma.
   double scaling_sigma() const
   {
     return Scaling_sigma;
   }
 
-  /// \short Use default scaling?
-  void use_default_norm_of_f_scaling()
-  {
-    Use_default_norm_of_f_scaling = true;
-  }
-
-  /// \short Function to set a new Navier-Stokes matrix preconditioner 
+  /// \short Set a new Navier-Stokes matrix preconditioner 
   /// (inexact solver)
   void set_navier_stokes_preconditioner(
       Preconditioner* new_ns_preconditioner_pt = 0);
 
-  ///\short Function to (re-)set momentum matrix preconditioner (inexact
+  ///\short Set Navier-Stokes matrix preconditioner (inexact
   /// solver) to SuperLU
-  void set_superlu_preconditioner_for_navier_stokes_block()
+  void set_superlu_for_navier_stokes_preconditioner()
   {
     if (!Using_superlu_ns_preconditioner)
     {
@@ -268,16 +284,27 @@ public:
       Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
       Using_superlu_ns_preconditioner = true;
     }
+    else
+    {
+#ifdef PARANOID
+      std::ostringstream warning_stream;
+      warning_stream << "WARNING: \n"
+        << "Already using SuperLU for the Navier-Stokes preconditioner.\n";
+      OomphLibWarning(warning_stream.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+#endif
+    }
   }
 
   /// \short By default the Lagrange multiplier subsidiary systems are 
-  /// preconditioner with SuperLUPreconditioner. For a different 
-  /// preconditioner, pass a function to this 
-  /// method returning a different subsidiary operator.
+  /// preconditioned with SuperLUPreconditioner. For a different 
+  /// preconditioner, pass a function to this function returning a different
+  /// subsidiary operator.
   void set_w_preconditioner(
-      SubsidiaryPreconditionerFctPt prec_fn)
+      SubsidiaryPreconditionerFctPt prec_fct_pt)
   {
-    W_preconditioner_fct_pt = prec_fn;
+    W_preconditioner_fct_pt = prec_fct_pt;
   }
 
   /// \short Clears the memory.
@@ -285,14 +312,14 @@ public:
 
 private:
 
-  /// \short 
+  /// \short Flag to indicate if the mappings are calculated.
   bool Mapping_info_calculated;
 
   /// \short the Scaling_sigma variable of this preconditioner
   double Scaling_sigma;
 
   /// \short 
-  bool Use_default_norm_of_f_scaling;
+  bool Use_norm_f_for_scaling_sigma;
 
   /// \short The Lagrange multiplier subsidiary preconditioner function 
   /// pointer
@@ -317,9 +344,6 @@ private:
 
   /// \short flag to indicate whether the default NS preconditioner is used
   bool Using_superlu_ns_preconditioner;
-
-  /// \short Bool to use diagonal or block diagonal W block.
-  bool Use_diagonal_w_block;
 
   /// \short the re-arraned DOF types: velocity, pressure, Lagrange.
   Vector<unsigned> Doftype_list_vpl;

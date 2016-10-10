@@ -421,7 +421,7 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
   }
   else
   {
-    lgr_prec_pt->set_superlu_preconditioner_for_navier_stokes_block();
+    lgr_prec_pt->set_superlu_for_navier_stokes_preconditioner();
   }
 
 
