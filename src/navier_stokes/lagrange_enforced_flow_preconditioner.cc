@@ -234,8 +234,8 @@ void LagrangeEnforcedFlowPreconditioner::set_meshes(
   if (elemental_dim != nodal_dim) 
   {
     std::ostringstream err_msg;
-    err_msg << "In the first mesh, the elements have elemental dimension of "
-      << elemental_dim << ",\n"
+    err_msg << "In the first mesh, the elements have elemental dimension "
+      << "of " << elemental_dim << ",\n"
       << "with a nodal dimension of " << nodal_dim << ".\n"
       << "The first mesh does not contain 'bulk' elements.\n"
       << "Please re-order your mesh_pt vector.\n";
@@ -256,14 +256,15 @@ void LagrangeEnforcedFlowPreconditioner::set_meshes(
   }
 
   // We also store the meshes and number of meshes locally in this class.
-  // This is slightly redundant, since we always have it stored in the upper
-  // most master block preconditioner. But at the moment there is no 
-  // mapping/look up scheme between master and subsidiary block 
-  // preconditioners for meshes.
-  // So if this is a subsidiary block preconditioner, we don't know which of
+  // This may seem slightly redundant, since we always have all the meshes
+  // stored in the upper most master block preconditioner. 
+  // But at the moment there is no mapping/look up scheme between 
+  // master and subsidiary block preconditioners for meshes.
+  //
+  // If this is a subsidiary block preconditioner, we don't know which of
   // the master's meshes belong to us. We need this information to set up
   // look up lists in the function setup(...).
-  // So we store them local to this class.
+  // Thus we store them local to this class.
   My_mesh_pt = mesh_pt;
   My_nmesh = nmesh;
 } // function set_meshes
@@ -297,7 +298,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
 
   // -----------------------------------------------------------------------
   // Step 1 - Construct the dof_to_block_map vector.
-  //
+  // -----------------------------------------------------------------------
   // Assumption: The first mesh is always the "bulk" mesh 
   // (Navier-Stokes mesh), which contains block preconditionable 
   // Navier-Stokes elements. Thus the bulk elements classify the velocity 
@@ -420,11 +421,8 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   //
   // The block structure is determined by the vector dof_to_block_map we 
   // give to the function block_setup(...).
-  // 
-  // -----------------------------------------------------------------------
 
-
-  // This preconditioner permutes the DOF types to get the block types.
+  // This preconditioner permutes the DOF numbers to get the block numbers.
   // I.e. nblock_types = ndof_types, but they are re-ordered 
   // so that we have (in order):
   // 1) bulk velocity DOF types
@@ -445,22 +443,22 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   // convenience:
   //
   // Natural DOF type ordering:
-  //  0 1 2 3   4  5  6   7   8    9  10 11 12   <- DOF type ordering.
+  //  0 1 2 3   4  5  6   7   8    9  10 11 12   <- DOF number.
   // [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1] <- DOF type.
   //
   // Desired block structure:
-  //  0 1 2   3  4  5    6  7  8     9   10  11  12   <- block index
+  //  0 1 2   3  4  5    6  7  8     9   10  11  12   <- block number
   // [u v w | up vp wp | ut vt wt ] [p | Lp1 Lp2 Lt1] <- DOF type
   //
   // dof_to_block_map[$dof_number] = $block_number
   //
   // Required dof_to_block_map:
-  //  0 1 2 9 3  4  5  10  11  6  7  8  12   <- block type
+  //  0 1 2 9 3  4  5  10  11  6  7  8  12   <- block number
   // [u v w p up vp wp Lp1 Lp2 ut vt wt Lt1] <- DOF type
   //
   // Consider the 4th entry of the dof_to_block_map, this represents the 
-  // pressure DOF type, from the desired block structure, we see this takes
-  // the value 9.
+  // pressure DOF type, from the desired block structure we see this takes
+  // the block number 9.
   //
   // One way to generalise the construction of the dof_to_block_map  is to
   // lump the first $spatial_dimension number of DOF types
@@ -478,10 +476,10 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   unsigned temp_index = 0;
 
   // Value for the velocity DOF type.
-  unsigned velocity_val = 0;
+  unsigned velocity_number = 0;
 
-  // Value for the pressure/Lagrange DOF type.
-  unsigned pressure_lgr_val = N_velocity_doftypes;
+  // Value for the pressure/Lagrange multiplier DOF type.
+  unsigned pres_lgr_number = N_velocity_doftypes;
 
   // Loop through the number of meshes.
   for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++)
@@ -489,7 +487,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
     // Fill in the velocity DOF types.
     for (unsigned dim_i = 0; dim_i < spatial_dim; dim_i++) 
     {
-      dof_to_block_map[temp_index++] = velocity_val++;
+      dof_to_block_map[temp_index++] = velocity_number++;
     } // for
 
     // Loop through the pressure/Lagrange multiplier DOF types.
@@ -497,12 +495,13 @@ void LagrangeEnforcedFlowPreconditioner::setup()
     for (unsigned doftype_i = spatial_dim; 
          doftype_i < ndof_type_in_mesh_i; doftype_i++) 
     {
-      dof_to_block_map[temp_index++] = pressure_lgr_val++;
+      dof_to_block_map[temp_index++] = pres_lgr_number++;
     } // for
   } // for
 
   // Call the block setup
   this->block_setup(dof_to_block_map);
+
 
   // -----------------------------------------------------------------------
   // Step 2 - Get the infinite norm of Navier-Stokes F block.
@@ -568,7 +567,6 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   //   3.3) Perform the augmentation: v_aug + m_i * inv(w_i) * m_j
   //
   //   3.4) Clean up memory.
-  //
 
   // Storage for the inv w diag values.
   Inv_w_diag_values.clear();
@@ -673,7 +671,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
     // Create mm*mm^T, and component-wise add the mass matrices
     for(unsigned m_i = 0; m_i < n_mm; m_i++)
     {
-      // create mm*mm^T
+      // Create mm*mm^T
       CRDoubleMatrix temp_mm_sqrd;
       temp_mm_sqrd.build(mm_pt[m_i]->distribution_pt());
       mm_pt[m_i]->multiply(*mmt_pt[m_i],temp_mm_sqrd);
@@ -688,16 +686,14 @@ void LagrangeEnforcedFlowPreconditioner::setup()
       }
     }
     
+    // Storage for inv_w matrix vectors
     Vector<double> invw_i_diag_values(l_i_nrow_local,0);
-
     Vector<int> w_i_column_indices(l_i_nrow_local);
     Vector<int> w_i_row_start(l_i_nrow_local+1);
 
     // Divide by Scaling_sigma and create the inverse of w.
     for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
     {
-      // w_i is a diagonal matrix, so take the inverse to
-      // invert the matrix.
       invw_i_diag_values[row_i] = Scaling_sigma / w_i_diag_values[row_i];
 
       w_i_column_indices[row_i] = row_i + l_i_first_row;
@@ -706,7 +702,7 @@ void LagrangeEnforcedFlowPreconditioner::setup()
 
     w_i_row_start[l_i_nrow_local] = l_i_nrow_local;
 
-    // Theses are square matrices. So we use the l_i_nrow_global for the
+    // Theses are square matrices. So we can use the l_i_nrow_global for the
     // number of columns.
     unsigned long l_i_nrow_global 
       = this->Block_distribution_pt[lgr_block_num]->nrow();
@@ -762,79 +758,29 @@ void LagrangeEnforcedFlowPreconditioner::setup()
   // -----------------------------------------------------------------------
   // Step 4 - Replace all the velocity blocks
   // -----------------------------------------------------------------------
+  // When we replace (DOF) blocks, the indices have to respect the DOF type
+  // ordering. This is because only DOF type information is passed between
+  // preconditioners. So we need to create the inverse of the 
+  // dof_to_block_map... a block_to_dof_map!
   //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  // Recall that the DOF type ordering is:
-  // The general ordering for the DOF types (for this program, in 3D) is
-  //
-  //  0 1 2 3   4 5 6 7  8  ..x   x+0 x+1 x+2 x+3 x+4
-  // [u v w p] [u v w l1 l2 ...] [u   v   w   l1  l2 ...] ...
-  //
-  // Eg:
-  // [0 1 2 3] [4  5  6   7   8 ] [9  10 11 12 ]
-  // [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1]
-  //
-  // With these information we can construct the desired block structure:
-  //   0 1 2   3  4  5    6  7  8    9   10  11  12
-  // | u v w | up vp wp | ut vt wt | p | Lp1 Lp2 Lt1 |
-  //
-  // So we need to map:
-  // 3 -> 4
-  // 4 -> 5
-  // 5 -> 6
-  //
-  // 6 -> 9
-  // 7 -> 10
-  // 8 -> 11
-  //
-  // Actually, it will be easier to go from:
-  //
-  // 1 -> 4
-  // 2 -> 5
-  // 3 -> 6
-  //
-  // 4 -> 9
-  // 5 -> 10
-  // 6 -> 11
-  //
-  // Since we just get the number of DOF types in the meshes, and we know
-  // the number of meshes.
-
-  // Create the inverse to dof_to_block_map
-  Vector<unsigned> temp_block_to_dof_map(n_dof_types,0);
+  // Note: Once the DOF blocks have been replaced, further calls to 
+  // get_block at this preconditioning hierarchy level and/or lower will use
+  // the (nearest) replaced blocks.
+  Vector<unsigned> block_to_dof_map(n_dof_types,0);
   for (unsigned dof_i = 0; dof_i < n_dof_types; dof_i++) 
   {
-    temp_block_to_dof_map[dof_to_block_map[dof_i]] = dof_i;
+    block_to_dof_map[dof_to_block_map[dof_i]] = dof_i;
   }
-
-  // print it out to check.
-  //    std::cout << "dof_to_block_map:" << std::endl;
-  //    for (unsigned iii = 0; iii < dof_to_block_map.size(); iii++) 
-  //    {
-  //      std::cout << dof_to_block_map[iii] << std::endl; 
-  //    }
-  //    std::cout << std::endl;
-  //    std::cout << "block_to_dof_map: " << std::endl;
-  //    for (unsigned iii = 0; iii < block_to_dof_map.size(); iii++) 
-  //    {
-  //      std::cout << block_to_dof_map[iii] << std::endl; 
-  //    }
 
   // Now do the replacement of all blocks in v_aug_pt 
   for (unsigned block_row_i = 0; 
       block_row_i < N_velocity_doftypes; block_row_i++) 
   {
-    unsigned temp_dof_row_i = temp_block_to_dof_map[block_row_i];
+    unsigned temp_dof_row_i = block_to_dof_map[block_row_i];
     for (unsigned block_col_i = 0; 
         block_col_i < N_velocity_doftypes; block_col_i++) 
     {
-      unsigned temp_dof_col_i = temp_block_to_dof_map[block_col_i];
+      unsigned temp_dof_col_i = block_to_dof_map[block_col_i];
       this->set_replacement_dof_block(
           temp_dof_row_i,temp_dof_col_i,
           v_aug_pt(block_row_i,block_col_i));
@@ -843,28 +789,152 @@ void LagrangeEnforcedFlowPreconditioner::setup()
 
   // -----------------------------------------------------------------------
   // Step 5 - Set up Navier-Stokes preconditioner
+  // If the subsidiary fluid preconditioner is a block preconditioner:
+  //   5.1) Set up the dof_number_in_master_map
+  //   5.2) Set up the doftype_coarsen_map
+  // otherwise:
+  //   5.3) Concatenate the fluid matrices into one big matrix and pass it
+  //        to the solver.
   // -----------------------------------------------------------------------
-
-  // AT this point, we have created the augmented fluid block in v_aug_pt
-  //
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
-
-  // Setup the fluid subsidiary preconditioner
-  //
-  // We solve the fluid block using different preconditioners.
-  //
-  // 1) For exact block preconditioning, we use the SuperLU solver.
-  // For this, we have to form the fluid block by extracting the 
-  // pressure matrices.
-  //
-  // 2) For Exact LSC block preconditioning we do not need to form the whole
-  // fluid block since the pressure and velocity are solved separately.
-  //
-  if(Using_superlu_ns_preconditioner)
+  
+  // First we determine if we're using a block preconditioner or not.
+  BlockPreconditioner<CRDoubleMatrix>* 
+    navier_stokes_block_preconditioner_pt
+      = dynamic_cast<BlockPreconditioner<CRDoubleMatrix>* >
+      (Navier_stokes_preconditioner_pt);
+  Navier_stokes_preconditioner_is_block_preconditioner = true;
+  if(navier_stokes_block_preconditioner_pt == 0)
   {
+    Navier_stokes_preconditioner_is_block_preconditioner = false;
+  }
+
+  // If the Navier-Stokes preconditioner is a block preconditioner, then we
+  // need to turn it into a subsidiary block preconditioner.
+  if(Navier_stokes_preconditioner_is_block_preconditioner)
+  {
+    // Assumption: All Navier-Stokes block preconditioners take $dim
+    // number of velocity DOF types and 1 pressure DOF type.
+
+    // Step 5.1: Set up the dof_number_in_master_map
+
+    // First we create the dof_number_in_master_map vector to pass to the
+    // subsidiary preconditioner's
+    // turn_into_subsidiary_block_preconditioner(...) function.
+    //
+    // This vector maps the subsidiary DOF numbers and the master DOF 
+    // numbers and has the construction:
+    //
+    //   dof_number_in_master_map[subsidiary DOF number] = master DOF number
+    //
+    // Example: Using the example above, our problem has the natural 
+    // DOF type ordering:
+    //
+    //  0 1 2 3   4  5  6   7   8    9  10 11 12   <- DOF number in master
+    // [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1] <- DOF type
+    //
+    // For now, we ignore the fact that this preconditioner's number of 
+    // DOF types may be more fine grain than what is assumed by the 
+    // subsidiary block preconditioner. Normally, the order of the values in
+    // dof_number_in_master_map matters, since the indices must match the 
+    // DOF type in the subsidiary block preconditioner (see the assumption 
+    // above). For example, if the (subsidiary) LSC block preconditioner 
+    // requires the DOF type ordering:
+    // 
+    // [0 1 2 3]
+    //  u v w p
+    //
+    // Then the dof_number_in_master_map vector must match the u velocity 
+    // DOF type in the subsidiary preconditioner with the u velocity in the
+    // master preconditioner, etc...
+    //
+    // However, we shall see (later) that it does not matter in this 
+    // instance because the DOF type coarsening feature overrides the 
+    // ordering provided here.
+    //
+    // For now, we only need to ensure that the subsidiary preconditioner 
+    // knows about 10 master DOF types (9 velocity and 1 pressure), the 
+    // ordering does not matter.
+    //
+    // We pass to the subsidiary block preconditioner the following 
+    // dof_number_in_master_map:
+    // [0 1 2 4  5  6  9  10 11 3] <- DOF number in master
+    //  u v w up vp wp ut vt wt p  <- corresponding DOF type
+
+    // Variable to keep track of the DOF number.
+    unsigned temp_dof_number = 0;
+
+    // Storage for the dof_number_in_master_map
+    Vector<unsigned> dof_number_in_master_map;
+    for(unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++)
+    {
+      // Store the velocity dof types.
+      for(unsigned dim_i = 0; dim_i < spatial_dim; dim_i++)
+      {
+        dof_number_in_master_map.push_back(temp_dof_number + dim_i);
+      } // for spatial_dim
+
+      // Update the DOF index
+      temp_dof_number += My_ndof_types_in_mesh[mesh_i];
+    } // for My_nmesh
+
+    // Push back the pressure DOF type
+    dof_number_in_master_map.push_back(spatial_dim);
+
+
+    // Step 5.2 DOF type coarsening.
+    
+    // Since this preconditioner works with more fine grained DOF types than
+    // the subsidiary block preconditioner, we need to tell the subsidiary 
+    // preconditioner which DOF types to coarsen together.
+    //
+    // The LSC preconditioner expects 2(3) velocity dof types, and 1 
+    // pressure DOF types. Thus, we give it this list: 
+    // u [0, 3, 6]
+    // v [1, 4, 7]
+    // w [2, 5, 8]
+    // p [9]
+    //
+    // See how the ordering of dof_number_in_master_map (constructed above)
+    // does not matter as long as we construct the doftype_coarsen_map 
+    // correctly.
+
+    // Storage for which subsidiary DOF types to coarsen
+    Vector<Vector<unsigned> > doftype_coarsen_map;
+    for (unsigned direction = 0; direction < spatial_dim; direction++)
+    {
+      Vector<unsigned> dir_doftypes_vec(My_nmesh,0);
+      for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++) 
+      {
+        dir_doftypes_vec[mesh_i] = spatial_dim*mesh_i+direction;
+      }
+      doftype_coarsen_map.push_back(dir_doftypes_vec);
+    }
+
+    Vector<unsigned> ns_p_vec(1,0);
+    
+    // This is simply the number of velocity dof types,
+    ns_p_vec[0] = My_nmesh*spatial_dim; 
+
+    doftype_coarsen_map.push_back(ns_p_vec);
+
+    // Turn the Navier-Stokes block preconditioner into a subsidiary block
+    // preconditioner.
+    navier_stokes_block_preconditioner_pt
+      ->turn_into_subsidiary_block_preconditioner(
+          this, dof_number_in_master_map, doftype_coarsen_map);
+
+    // Call the setup function
+    navier_stokes_block_preconditioner_pt
+      ->setup(matrix_pt());
+  }
+  else
+  {
+    // Step 5.3: This is not a block preconditioner, thus we need to 
+    // concatenate all the fluid matrices and pass them to the solver.
+    
+    // Select all the fluid blocks (velocity and pressure)
     VectorMatrix<BlockSelector> f_aug_blocks(N_fluid_doftypes,
-        N_fluid_doftypes);
+                                             N_fluid_doftypes);
     for (unsigned block_i = 0; block_i < N_fluid_doftypes; block_i++) 
     {
       for (unsigned block_j = 0; block_j < N_fluid_doftypes; block_j++) 
@@ -873,335 +943,36 @@ void LagrangeEnforcedFlowPreconditioner::setup()
       }
     }
 
+    // Note: This will use the replaced blocks.
     CRDoubleMatrix f_aug_block 
       = this->get_concatenated_block(f_aug_blocks);
 
-    if(Navier_stokes_preconditioner_pt == 0)
+    if(Using_superlu_ns_preconditioner) 
     {
-      Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
-    }
-
-    Navier_stokes_preconditioner_pt->setup(&f_aug_block);
-  }
-  else
-  {
-  // Determine whether the NS preconditioner is a block preconditioner (and
-    // therefore a subsidiary preconditioner)
-#ifdef PARANOID
-    BlockPreconditioner<CRDoubleMatrix>* 
-      navier_stokes_block_preconditioner_pt
-      = dynamic_cast<BlockPreconditioner<CRDoubleMatrix>* >
-      (Navier_stokes_preconditioner_pt);
-
-    if(navier_stokes_block_preconditioner_pt == 0)
-    {
-      std::ostringstream error_message;
-      error_message << "Navier-stokes preconditioner is not a block\n"
-        << "preconditioner." << std::endl;
-      throw OomphLibError(
-          error_message.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-#else
-    BlockPreconditioner<CRDoubleMatrix>* 
-      navier_stokes_block_preconditioner_pt
-      = static_cast<BlockPreconditioner<CRDoubleMatrix>* >
-      (Navier_stokes_preconditioner_pt);
-#endif
-
-    // Tell the LSC preconditioner which DOF type should be treated as one
-    // These DOF types are local to the LSC preconditioner.
-    // For example, for the artificial test data:
-    // 
-    // ub vb wb p up vp wp Lp1 Lp2 ut vt wt Lt
-    // 0  1  2  3 4  5  6  7   8   9  10 11  12 DOF type order.
-    //
-    // Assume that we gave this list to turn_into_subsidiary:
-    // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 MARK1 (see below)
-    // ub vb wb up vp wp ut vt wt p
-    // 0  1  2  4  5  6  9  10 11 3 turn_into_sub list.
-    //
-    // What the turn_into_sub list says is: your dof type
-    // 0 is my dof type 0
-    // 1 is my dof type 1
-    // 2 is my dof type 2
-    // 3 is my dof type 4 (we've skipped a pressure).
-    // etc....
-    // your dof type 9 is my dof type 3 (for the pressure)
-    //
-    // NOW: We have to tell the LSC preconditioner which dof types to
-    // treat as one. The LSC preconditioner 
-    // expects 2 or 3 velocity dof types, and one pressure DOF types.
-    // We give it this list (Look at the list MARK1):
-    // u [0, 3, 6]
-    // v [1, 4, 7]
-    // w [2, 5, 8]
-    // p [9]
-    //
-    // Artificial test data:
-    //    spatial_dim = 3;
-    //    My_nmesh = 3;
-
-    Vector<Vector<unsigned> > subsidiary_dof_type_coarsening_map;
-
-    for (unsigned direction = 0; direction < spatial_dim; direction++)
-    {
-      Vector<unsigned> dir_doftypes_vec(My_nmesh,0);
-      for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++) 
+      if(Navier_stokes_preconditioner_pt == 0)
       {
-        dir_doftypes_vec[mesh_i] = spatial_dim*mesh_i+direction;
+        Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
       }
-
-      // Push it in!
-      subsidiary_dof_type_coarsening_map.push_back(dir_doftypes_vec);
+    }
+    else
+    {
+      if(Navier_stokes_preconditioner_pt == 0)
+      {
+        std::ostringstream err_msg;
+        err_msg << "Not using SuperLUPreconditioner for NS block,\n"
+                << "but the Navier_stokes_preconditioner_pt is null.\n";
+        throw OomphLibError(err_msg.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
     }
 
-    Vector<unsigned> ns_p_vec(1,0);
-    // This is simply the number of velocity dof types,
-    // But we work it out anyway so the artificial test data is used.
-    ns_p_vec[0] = My_nmesh*spatial_dim; 
+    // Setup the solver.
+    Navier_stokes_preconditioner_pt->setup(&f_aug_block);
+  
+  } // else
 
-    subsidiary_dof_type_coarsening_map.push_back(ns_p_vec);
-
-    //    std::cout << "Lgr: sub dof type coarsening map: " << std::endl; 
-    //    for (unsigned i = 0; 
-    //        i < subsidiary_dof_type_coarsening_map.size(); i++) 
-    //    {
-    //      for (unsigned j = 0; 
-    //          j < subsidiary_dof_type_coarsening_map[i].size(); j++) 
-    //      {
-    //        std::cout << subsidiary_dof_type_coarsening_map[i][j] << " ";
-    //      }
-    //      std::cout << "\n"; 
-    //    }
-    //    pause("Outputted the dof type coarsen map."); 
-
-    //    Doftype_coarsen_map_fine.resize(0,0);
-    //    Vector<unsigned> tmp0;
-    //    tmp0.push_back(0);
-    //    tmp0.push_back(1);
-    //    tmp0.push_back(2);
-    //    tmp0.push_back(3);
-    //    Vector<unsigned> tmp1;
-    //    tmp1.push_back(4);
-    //    tmp1.push_back(5);
-    //    tmp1.push_back(6);
-    //    tmp1.push_back(7);
-    //    Vector<unsigned> tmp2;
-    //    tmp2.push_back(8);
-    //    tmp2.push_back(9);
-    //    tmp2.push_back(10);
-    //    tmp2.push_back(11);
-    //    Vector<unsigned> tmp3;
-    //    tmp3.push_back(12);
-    //    tmp3.push_back(13);
-    //    Vector<unsigned> tmp4;
-    //    tmp4.push_back(14);
-    //    tmp4.push_back(15);
-    //    Doftype_coarsen_map_fine.push_back(tmp0);
-    //    Doftype_coarsen_map_fine.push_back(tmp1);
-    //    Doftype_coarsen_map_fine.push_back(tmp2);
-    //    Doftype_coarsen_map_fine.push_back(tmp3);
-    //    Doftype_coarsen_map_fine.push_back(tmp4);
-    //    pause("Before turn into..."); 
-
-// Now we create the dof_number_in_master_map vector to pass to the
-// turn_into_subsidiary_block_preconditioner(...) function.
-//
-// This vector tells the subsidiary block preconditioner what it's DOF type
-// is in relation it's parent block preconditioner.
-//
-// In general, we want:
-//
-//   dof_number_in_master_map[subsidiary DOF type] = master DOF type
-//
-// 
-// Example: Using the example above, our problem has the natural 
-// DOF type ordering:
-//
-//  0 1 2 3   4  5  6   7   8    9  10 11 12   <- Natural DOF type ordering.
-// [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1] <- DOF type.
-//
-// We need to create a vector telling the subsidiary block preconditioner
-// which DOF types it will work with, in our case, it will work with the
-// fluid DOF types: u, v, w, p, up, vp, wp, ut, vt and wt.
-//
-// Furthermore, the ordering of the DOF type matters, most importantly,
-// THIS preconditioner needs to be aware of the natural DOF type required
-// by the subsidiary block preconditioner. The Navier-Stokes Schur Complement
-// block preconditioner works with $spatial_dimension + 1 DOF types, BUT, 
-// this block preconditioner has split the velocity DOF types into a finer 
-// grain DOF type structure required by the Navier-Stokes preconditioner. 
-// We will discuss coarsening DOF types later, for now we focus on the
-// dof_number_in_master_map vector.
-//
-// We start by discussing a simpler example, lets say this preconditioner 
-// does not have a finer DOF type splitting than required by the subsidiary
-// block preconditioner, so let the natural DOF type ordering of this
-// block preconditioner be:
-// 0 1 2 3 4  5
-// u v w p L1 L2
-//
-// This preconditioner must know the natural DOF type ordering required by
-// the subsidiary block preconditioner. For our implementation of the LSC
-// preconditioner, we require the velocity DOF types first, then the pressure
-// DOF type. In 3D, this would be:
-//
-// LSC block preconditioner DOF type ordering:
-// 0 1 2 3
-// u v w p
-//
-// We must map each of the subsidiary DOF type with a parent DOF type.
-//
-// So the dof_number_in_master_map would be:
-// [0, 1, 2, 3], which says:
-//
-// subsidiary DOF type 0 -> master DOF type 0
-// subsidiary DOF type 1 -> master DOF type 1
-// subsidiary DOF type 2 -> master DOF type 2
-// subsidiary DOF type 3 -> master DOF type 3
-//
-// This is a trivial mapping. 
-//
-// Another example, lets assume that the natural DOF type ordering of this 
-// preconditioner be:
-// 0  1  2 3 4 5
-// L1 L2 u v w p
-//
-// Then the dof_number_in_master_map would be:
-// [2, 3, 4, 5], which says:
-// 
-// subsidiary DOF type 0 -> master DOF type 2
-// subsidiary DOF type 1 -> master DOF type 3
-// subsidiary DOF type 2 -> master DOF type 4
-// subsidiary DOF type 3 -> master DOF type 5
-//
-// Another example, assume that this block preconditioner has the natural
-// DOF type ordering:
-// 0 1  2 3  4 5  6 7
-// v L1 p L2 u L3 w L4
-//
-// Then the dof_number_in_master_map would be
-// [4 0 6 2], which says: 
-//
-// subsidiary DOF type 0 -> master DOF type 4
-// subsidiary DOF type 1 -> master DOF type 0
-// subsidiary DOF type 2 -> master DOF type 6
-// subsidiary DOF type 3 -> master DOF type 2
-//
-// BACK TO OUR PRECONDITIONER
-//
-// For your convenience, we repeat the natural DOF type ordering of this 
-// block preconditioner here:
-//
-//  0 1 2 3   4  5  6   7   8    9  10 11 12   <- Natural DOF type ordering.
-// [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1] <- DOF type.
-//
-// First, we ignore the fact that there are more DOF types than required by
-// the subsidiary block preconditioner. We give the subsidiary block 
-// preconditioner the following dof_number_in_master_map:
-// [0 1 2 4  5  6  9  10 11 3]
-//  u v w up vp wp ut vt wt p
-// 
-// Which basically says to the subsidiary block preconditioner:
-// "you will work with my DOF types 0, 1, 2, 4, etc.."
-//
-// We chose this DOF ordering as it is the same as our block ordering, and
-// so will be easier when we replace blocks (discussed later).
-// 
-
-  // We create the mapping with the help of two vectors.
-  // Noting that the first spatial dimension number of dof types in each mesh
-  // corresponds to the velocity dof types, and the rest are either pressure
-  // (in the case of the bulk mesh) or lagrange multiplier dof types, we
-  // simply:
-  // 1) Loop through the meshes
-  // 2)   Loop through the spatial_dim, store the dof type in the v_vector.
-  // 3)   Loop through the remaining dof types, store the dof type in the l
-  //      vector.
-  // 4) Concatenate the two vectors.
-  //      Artificial test data
-  //      n_dof_types = 13;
-  //      My_nmesh = 3;
-  //      spatial_dim = 3;
-  //      My_ndof_types_in_mesh.resize(3,0);
-  //      My_ndof_types_in_mesh[0] = 4;
-  //      My_ndof_types_in_mesh[1] = 5;
-  //      My_ndof_types_in_mesh[2] = 4;
-  //      // Outputting My_ndof_types_in_mesh
-  //      for (unsigned i = 0; i < My_ndof_types_in_mesh.size(); i++) 
-  //      {
-  //        std::cout << "My_ndof_inmesh: " 
-  //                  << My_ndof_types_in_mesh[i] << std::endl; 
-  //      }
-  //      pause("Need someone."); 
-
-      unsigned partial_sum_index = 0;
-
-      Vector<unsigned> subsidiary_list_bcpl;
-      for(unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++)
-      {
-        // Store the velocity dof types.
-        for(unsigned dim_i = 0; dim_i < spatial_dim; dim_i++)
-        {
-          subsidiary_list_bcpl.push_back(partial_sum_index + dim_i);
-        } // for spatial_dim
-
-        // Update the DOF index
-        partial_sum_index += My_ndof_types_in_mesh[mesh_i];
-      } // for My_nmesh
-
-      // push back the pressure DOF type
-      subsidiary_list_bcpl.push_back(spatial_dim);
-
-    //    // Output for artificial test.
-    //    std::cout << "subsidiary_list_bcpl:" << std::endl; 
-    //    for (unsigned i = 0; i < subsidiary_list_bcpl.size(); i++) 
-    //    {
-    //      std::cout << subsidiary_list_bcpl[i] << std::endl;
-    //    }
-    //    // With the artificial test data, this should output:
-    //    // 0, 1, 2, 4, 5, 6, 9, 10, 11, 3
-    //    pause("Printed out subsidiary_list_bcpl"); 
-
-    // The ns_dof_list will ensure that the NS preconditioner have the 
-    // structure:
-    // 0  1  2  3  4  5  6
-    // ub vb up vp ut vt p
-    navier_stokes_block_preconditioner_pt
-      ->turn_into_subsidiary_block_preconditioner(
-          this, subsidiary_list_bcpl, subsidiary_dof_type_coarsening_map);
-
-    // Set the replacement blocks.
-    //
-    // Recall: block structure:
-    //  0 1 2   3  4  5    6  7  8     9   10  11  12   <- block index
-    // [u v w | up vp wp | ut vt wt ] [p | Lp1 Lp2 Lt1] <- DOF type
-
-//  for (unsigned row_i = spatial_dim; row_i < N_velocity_doftypes; row_i++) 
-//  {
-//  for (unsigned col_i = spatial_dim; col_i < N_velocity_doftypes; col_i++) 
-//   {
-   //          navier_stokes_block_preconditioner_pt
-    //            ->set_replacement_dof_block(row_i,col_i,
-    //                f_subblock_pt(row_i,col_i));
-    //        }
-    //      }
-    //    pause("About to call setup of NS prec."); 
-
-    navier_stokes_block_preconditioner_pt
-      ->setup(matrix_pt());
-
-    //      for (unsigned i = 0; i < N_fluid_doftypes; i++)
-    //      {
-    //        for (unsigned j = 0; j < N_fluid_doftypes; j++) 
-    //        {
-    //          delete f_subblock_pt(i,j);
-    //        }
-    //      }
-  } // else - NS prec is block preconditioner
-
+  // Clean up memory
   const unsigned v_aug_nrow = v_aug_pt.nrow();
   const unsigned v_aug_ncol = v_aug_pt.ncol();
   for (unsigned v_row = 0; v_row < v_aug_nrow; v_row++) 
@@ -1244,6 +1015,7 @@ void LagrangeEnforcedFlowPreconditioner::set_navier_stokes_preconditioner(
         && Navier_stokes_preconditioner_pt != 0)
     {
       delete Navier_stokes_preconditioner_pt;
+      Navier_stokes_preconditioner_pt = 0;
     }
 
     Navier_stokes_preconditioner_pt = new_ns_preconditioner_pt;
@@ -1259,15 +1031,15 @@ void LagrangeEnforcedFlowPreconditioner::clean_up_memory()
   // clean the block preconditioner base class memory
   this->clear_block_preconditioner_base();
 
-  // Delete the Navier-Stokes preconditioner pointer.
-  //  for now, we do not delete the Navier-Stokes preconditioner pointer.
-  // Since we did not create this preconditioner. We should...
-  // Create function pointers for both the Lagrange and Navier-Stokes block.
-  // At the moment, if SuperLU preconditioning is used for the NS block,
-  // There would be a memory leak since we have not deleted this...
-  //  delete Navier-Stokes_preconditioner_pt;
-  //  Navier-Stokes_preconditioner_pt = 0;
+  // Delete the Navier-Stokes preconditioner pointer if we have created it.
+  if(Using_superlu_ns_preconditioner && 
+     Navier_stokes_preconditioner_pt != 0)
+  {
+    delete Navier_stokes_preconditioner_pt;
+    Navier_stokes_preconditioner_pt = 0;
+  }
 
+  Preconditioner_has_been_setup = false;
 } // func LagrangeEnforcedFlowPreconditioner::clean_up_memory
 
 }// namespace oomph
