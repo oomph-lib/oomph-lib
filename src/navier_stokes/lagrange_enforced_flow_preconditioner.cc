@@ -85,24 +85,9 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 //========================================================================
 void LagrangeEnforcedflowPreconditioner::setup()
 {
-  First_NS_solve = true;
-  // For debugging
-  
-  double t_start_clean_up_memory = TimingHelpers::timer();
   // clean
   this->clean_up_memory();
-  double t_end_clean_up_memory = TimingHelpers::timer();
  
-//  if(Doc_time)
-  { 
-    const double t_clean_up_memory = t_end_clean_up_memory 
-                                     - t_start_clean_up_memory;
-
-    oomph_info << "LGR: clean_up_memory: " 
-               << t_clean_up_memory << std::endl;
-  }
-
-
 #ifdef PARANOID
     // Paranoid check that meshes have been set.
     if(My_nmesh == 0)
@@ -184,11 +169,9 @@ void LagrangeEnforcedflowPreconditioner::setup()
   // This is used to create look up lists later.
   // Note: Mesh::nodal_dimension() requires communication, use it sparingly!
   unsigned spatial_dim = My_mesh_pt[0]->nodal_dimension();
-//    std::cout << "spatial_dim: " << spatial_dim << std::endl; 
 
   // Get the number of DOF types.
   unsigned n_dof_types = ndof_types();
-//    std::cout << "n_dof_types: " << n_dof_types << std::endl; 
 
   // Check if the number of DOF types make sense.
 #ifdef PARANOID
@@ -369,16 +352,8 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //    pause("I'm back"); 
   
 
-  double t_start_block_setup = TimingHelpers::timer();
   // Call the block setup
   this->block_setup(dof_to_block_map);
-  this->turn_off_debug_flag();
-
-  // RAYTIME
-  double t_end_block_setup = TimingHelpers::timer();
-  double t_block_setup = t_end_block_setup - t_start_block_setup;
-  oomph_info << "LGR: block_setup: " << t_block_setup << std::endl;
-
 
 //    pause("Lgr::setup() done block_setup, about to print dof block dist nrow"); 
 
@@ -397,103 +372,6 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //    std::cout << "============================================" << std::endl; 
 //    std::cout << "============================================" << std::endl; 
 
-if(Do_matcat_test)
-{
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-// New test for parallel performance.
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
-
-  unsigned internal_nblock_types = this->internal_nblock_types();
-  unsigned internal_ndof_types = this->internal_ndof_types();
-
-  oomph_info << "internal_nblock_types: " << internal_nblock_types << std::endl; 
-  oomph_info << "internal_ndof_types: " << internal_ndof_types << std::endl; 
-
-  // Print out the nrow of blocks.
-//  for (unsigned block_i = 0; block_i < internal_nblock_types; block_i++)
-//  {
-//    CRDoubleMatrix temp_mat;
-//    this->internal_get_block(0,block_i,temp_mat);
-//    unsigned tnrow = temp_mat.nrow();
-//    unsigned tncol = temp_mat.ncol();
-//    oomph_info << "block 0," << block_i << "), nrow: "  << tnrow << ", ncol: " << tncol<< std::endl; 
-//  }
-  
-  
-  unsigned totalnnz=0;
-  Vector<LinearAlgebraDistribution*> block_row_dist_pt;
-  DenseMatrix<CRDoubleMatrix*> mat_to_cat_pt(
-      internal_nblock_types,
-      internal_nblock_types,0);
-  
-  double t_start_internal_get_block = TimingHelpers::timer();
-
-  for (unsigned block_i = 0; block_i < internal_nblock_types; block_i++) 
-  {
-    for (unsigned block_j = 0; block_j < internal_nblock_types; block_j++) 
-    {
-      mat_to_cat_pt(block_i,block_j) = new CRDoubleMatrix;
-      this->internal_get_block(block_i,block_j,*mat_to_cat_pt(block_i,block_j));
-      
-      unsigned blocknnz = mat_to_cat_pt(block_i,block_j)->nnz();
-
-      totalnnz += blocknnz;
-      
-      // Push back the distribution for concatenation.
-      if(block_j == 0)
-      {
-        block_row_dist_pt.push_back(
-            mat_to_cat_pt(block_i,block_j)->distribution_pt());
-      }
-
-      // Print out the 
-      const unsigned tmp_block_nrow 
-        = mat_to_cat_pt(block_i,block_j)->nrow();
-
-      const unsigned tmp_block_ncol 
-        = mat_to_cat_pt(block_i,block_j)->ncol();
-      const unsigned tmp_block_nrow_local
-        = mat_to_cat_pt(block_i,block_j)->nrow_local();
-
-      std::cout << "block(" << block_i  << "," << block_j << ") "
-                  << ", nrow: " << tmp_block_nrow 
-                  << ", ncol: "   << tmp_block_ncol
-                  << ", nrowlocal: " << tmp_block_nrow_local 
-                  << ", (local) nnz: " << blocknnz << std::endl;
-    }
-    std::cout << "\n" << std::endl; 
-  }
-  double t_end_internal_get_block = TimingHelpers::timer();
-  double t_internal_get_block = t_end_internal_get_block - t_start_internal_get_block;
-  oomph_info << "LGR: internal_get_block: " << t_internal_get_block << std::endl;
-
-  //    pause("done print out the blocks.");
-
-  oomph_info << "totalnnz: " << totalnnz << std::endl; 
-  LinearAlgebraDistribution tmp_dist;
-  LinearAlgebraDistributionHelpers::concatenate(block_row_dist_pt,
-                                                tmp_dist);
-  CRDoubleMatrix result_matrix;
-  result_matrix.build(&tmp_dist);
-
-  double t_start_matcat = TimingHelpers::timer();
-  CRDoubleMatrixHelpers::concatenate_without_communication(
-    block_row_dist_pt,mat_to_cat_pt,result_matrix,true);
-  double t_end_matcat = TimingHelpers::timer();
-  double t_matcat = t_end_matcat - t_start_matcat;
-  oomph_info << "LGR: matcat: " << t_matcat << std::endl;
-
-  exit(EXIT_SUCCESS);
-
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-// END OF New test for parallel performance.
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-}
 
 if(!Do_vec_test)
 {
@@ -750,11 +628,6 @@ if(!Do_vec_test)
   }
 #endif
 
-
-  std::streamsize cout_precision = std::cout.precision();
-  oomph_info << "RAYSIGMA: " << std::setprecision(15) << Scaling_sigma
-    << std::setprecision(cout_precision)
-    << std::endl;
 
   //////////////////////////////////////////////////////////////////////////
   //                Now create the augmented fluid matrix.                //
@@ -1727,20 +1600,9 @@ if(!Do_vec_test)
     // structure:
     // 0  1  2  3  4  5  6
     // ub vb up vp ut vt p
-    // RAYTIME
-    double t_start_turn_into_subsidairy = TimingHelpers::timer();
-    
     navier_stokes_block_preconditioner_pt
       ->turn_into_subsidiary_block_preconditioner(
           this, Subsidiary_list_bcpl, subsidiary_dof_type_coarsening_map);
-    // RAYTIME
-    double t_end_turn_into_subsidairy = TimingHelpers::timer();
-      //pause("Lgr: Done turn_into_sub..."); 
-    double t_turn_into_sub = t_end_turn_into_subsidairy - t_start_turn_into_subsidairy;
-    oomph_info << "LGR: turn_into_subsidairy: " << t_turn_into_sub << std::endl;
-    //    pause("After turn_into..."); 
-
-
 
     // Set the replacement blocks.
     //
@@ -1787,7 +1649,6 @@ if(!Do_vec_test)
     ///////////////////////////////////////////////////////////////////////////////
 
     // Solver for the W block.
-    double t_w_prec_start = TimingHelpers::timer();
     Lagrange_multiplier_preconditioner_pt.resize(N_lagrange_doftypes,0);
     for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
     {
@@ -1826,27 +1687,11 @@ if(!Do_vec_test)
       }
     }
 
-    double t_w_prec_finish = TimingHelpers::timer();
-//    if(Doc_time)
-    {
-      double t_w_prec_time = t_w_prec_finish - t_w_prec_start;
-      oomph_info << "LGR: t_w_prec_time: "
-        << t_w_prec_time << "\n";
-    }
-
-    double t_start_delete_w = TimingHelpers::timer();
-
     // Delete w_pt(0,N_lagrange_doftypes)
     for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
     {
       delete w_pt[l_i];
     }
-    double t_end_delete_w = TimingHelpers::timer();
-
-    double t_delete_w = t_end_delete_w - t_start_delete_w;
-
-    oomph_info << "LGR: delete_w time: "
-        << t_delete_w << "\n";
 
     Mapping_info_calculated = true;
 } // if ! Do_vec_test

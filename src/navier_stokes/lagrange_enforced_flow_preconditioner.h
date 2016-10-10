@@ -185,8 +185,6 @@ class LagrangeEnforcedflowPreconditioner
 
     Mapping_info_calculated = false;
 
-    First_NS_solve = true;
-
     Label_pt = 0;
 
     Doc_prec_directory_pt = 0;
@@ -259,78 +257,6 @@ class LagrangeEnforcedflowPreconditioner
   /// r is the residual (rhs), z will contain the solution.
   void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
   {
-
-if(Do_vec_test)
-{
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-// New test for parallel performance.
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
-    
-  double t_start_int_get_block_vector = TimingHelpers::timer();
-  unsigned internal_nblock_types = this->internal_nblock_types();
-  // Now see if internet_get_vector works
-  Vector<DoubleVector> dof_vectors;
-  dof_vectors.resize(internal_nblock_types);
-  for (unsigned blocki = 0; blocki < internal_nblock_types; blocki++)
-  {
-    this->internal_get_block_vector(blocki,r,dof_vectors[blocki]);
-  }
-  double t_end_int_get_block_vector = TimingHelpers::timer();
-  double t_int_get_block_vector = t_end_int_get_block_vector 
-                                  - t_start_int_get_block_vector;
-  oomph_info << "LGRSOLVE: int_get_block: " << t_int_get_block_vector << std::endl;
-
-
-///////////////////////////////////////////
-
-  double t_start_veccat = TimingHelpers::timer();
-  // Now to concatenate the vectors.
-  Vector<DoubleVector*> dof_vectors_pt(internal_nblock_types);
-  for (unsigned blocki = 0; blocki < internal_nblock_types; blocki++) 
-  {
-    dof_vectors_pt[blocki] = &dof_vectors[blocki];
-  }
-
-  DoubleVector outvec;
-  DoubleVectorHelpers::concatenate_without_communication(
-      dof_vectors_pt,outvec,true);
-  double t_end_veccat = TimingHelpers::timer();
-  double t_veccat = t_end_veccat-t_start_veccat;
-  oomph_info << "LGRSOLVE: veccat: " << t_veccat << std::endl;
-
-///////////////////////////////////////////
-
-  double t_start_vecsplit = TimingHelpers::timer();
-  DoubleVectorHelpers::split_without_communication(
-      outvec,dof_vectors_pt,true);
-  double t_end_vecsplit = TimingHelpers::timer();
-  double t_vecsplit = t_end_vecsplit-t_start_vecsplit;
-  oomph_info << "LGRSOLVE: vecsplit: " << t_vecsplit << std::endl;
-
-//////////
-  
-  double t_start_int_ret_block_vector = TimingHelpers::timer();
-  for (unsigned blocki = 0; blocki < internal_nblock_types; blocki++) 
-  {
-    this->internal_return_block_vector(blocki,dof_vectors[blocki],z);
-  }
-  double t_end_int_ret_block_vector = TimingHelpers::timer();
-  double t_int_ret_block_vector = t_end_int_ret_block_vector 
-                                  - t_start_int_ret_block_vector;
-  oomph_info << "LGRSOLVE: int_ret_block: " << t_int_ret_block_vector << std::endl;
-  exit(EXIT_SUCCESS);
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-// END OF New test for parallel performance.
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-}
-
-    double t_lgrsolve_start = TimingHelpers::timer();
-
     // Working vectors.
     DoubleVector temp_vec;
     DoubleVector another_temp_vec;
@@ -353,23 +279,11 @@ if(Do_vec_test)
         // Get the block type of block l_i
         const unsigned l_ii = N_fluid_doftypes + l_i;
 
-        double t_w_get_block_vec_start = TimingHelpers::timer();
         // Extract the block
         this->get_block_vector(l_ii,r,temp_vec);
-        double t_w_get_block_vec_finish = TimingHelpers::timer();
-        double t_w_get_block_vec_time = t_w_get_block_vec_finish-
-          t_w_get_block_vec_start;
-        oomph_info << "LGRSOLVE: get_block_vector w" << l_i << ": " 
-          <<  t_w_get_block_vec_time<< std::endl; 
-        
 
-        double t_w_solve_start = TimingHelpers::timer();
         Lagrange_multiplier_preconditioner_pt[l_i]
           ->preconditioner_solve(temp_vec,another_temp_vec);
-        double t_w_solve_finish = TimingHelpers::timer();
-        double t_w_solve_time = t_w_solve_finish - t_w_solve_start;
-        oomph_info << "LGRSOLVE: solve w" << l_i << ": " 
-          <<  t_w_solve_time<< std::endl; 
 
         const unsigned vec_nrow_local = another_temp_vec.nrow_local();
         double* vec_values_pt = another_temp_vec.values_pt();
@@ -378,13 +292,7 @@ if(Do_vec_test)
         {
           vec_values_pt[i] = vec_values_pt[i]*Scaling_sigma;
         }
-        double t_w_return_block_vec_start = TimingHelpers::timer();
         this->return_block_vector(l_ii,another_temp_vec,z);
-        double t_w_return_block_vec_finish = TimingHelpers::timer();
-        double t_w_return_block_vec_time = t_w_return_block_vec_finish-
-          t_w_return_block_vec_start;
-        oomph_info << "LGRSOLVE: return_block_vector w" << l_i << ": " 
-          << t_w_return_block_vec_time << std::endl; 
         
         temp_vec.clear();
         another_temp_vec.clear();
@@ -403,13 +311,7 @@ if(Do_vec_test)
         fluid_block_indices[b] = b;
       }
 
-      double t_get_fluid_block_vec_start = TimingHelpers::timer();
       this->get_concatenated_block_vector(fluid_block_indices,r,temp_vec);
-      double t_get_fluid_block_vec_finish = TimingHelpers::timer();
-      double t_get_fluid_block_vector_time = t_get_fluid_block_vec_finish
-        - t_get_fluid_block_vec_start;
-      oomph_info << "LGRSOLVE: get_block_vector f: " 
-                 << t_get_fluid_block_vector_time << std::endl; 
 
       // temp_vec contains the (concatenated) fluid rhs.
       Navier_stokes_preconditioner_pt
@@ -418,14 +320,8 @@ if(Do_vec_test)
       temp_vec.clear();
 
       // Now return it.
-      double t_return_fluid_block_vec_start = TimingHelpers::timer();
       this->return_concatenated_block_vector(fluid_block_indices,
                                              another_temp_vec,z);
-      double t_return_fluid_block_vec_finish = TimingHelpers::timer();
-      double t_return_fluid_block_vector_time = t_return_fluid_block_vec_finish
-        - t_return_fluid_block_vec_start;
-      oomph_info << "LGRSOLVE: return_block_vector f: " 
-                 << t_return_fluid_block_vector_time << std::endl; 
 
       another_temp_vec.clear();
     }
@@ -434,13 +330,6 @@ if(Do_vec_test)
       // This is a BlockPreconditioner
       Navier_stokes_preconditioner_pt->preconditioner_solve(r,z);
     }
-
-    double t_lgrsolve_finish = TimingHelpers::timer();
-    double t_lgrsolve_time = t_lgrsolve_finish - t_lgrsolve_start;
-    oomph_info << "LGRSOLVE: total: " 
-                 << t_lgrsolve_time << std::endl; 
-
-    First_NS_solve = false;
   } // end of preconditioner_solve
 
   /// Set the meshes, the first mesh must be the fluid mesh
@@ -552,18 +441,6 @@ if(Do_vec_test)
     return Scaling_sigma_multiplier;
   } 
 
-  /// \short Helper function to assemble the diagonal of the pressure
-  /// and velocity mass matrices from the elemental contributions defined in
-  /// NavierStokesEquations<DIM>.
-  /// If do_both=true, both are computed, otherwise only the velocity
-  /// mass matrix (the LSC version of the preconditioner only needs
-  /// that one)
-//  void assemble_inv_press_and_veloc_mass_matrix_diagonal(
-//       CRDoubleMatrix*& inv_p_mass_pt,
-//       CRDoubleMatrix*& inv_v_mass_pt,
-//       const unsigned& procnumber);
-
-
   /// Use default scaling?
   void use_default_norm_of_f_scaling()
   {
@@ -572,21 +449,41 @@ if(Do_vec_test)
 
   /// Function to set a new momentum matrix preconditioner (inexact solver)
   void set_navier_stokes_lsc_preconditioner(
-      Preconditioner* new_ns_preconditioner_pt)
+      Preconditioner* new_ns_preconditioner_pt = 0)
   {
-    // If the default preconditioner has been used
-    // clean it up now...
-    if (Using_superlu_ns_preconditioner)
+    // Check if pointer is non-zero.
+    if(new_ns_preconditioner_pt == 0)
     {
-      delete Navier_stokes_preconditioner_pt;
+      std::ostringstream warning_stream;
+      warning_stream << "WARNING: \n"
+                     << "The LSC preconditioner point is null.\n" 
+                     << "Using default (SuperLU) preconditioner.\n" 
+                     << std::endl;
+      OomphLibWarning(warning_stream.str(),
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION);
+      
+      Navier_stokes_preconditioner_pt = 0;
+      Using_superlu_ns_preconditioner = true;
     }
-    Navier_stokes_preconditioner_pt = new_ns_preconditioner_pt;
-    Using_superlu_ns_preconditioner = false;
+    else
+    {
+      // If the default SuperLU preconditioner has been used
+      // clean it up now...
+      if (Using_superlu_ns_preconditioner 
+          && Navier_stokes_preconditioner_pt != 0)
+      {
+        delete Navier_stokes_preconditioner_pt;
+      }
+      
+      Navier_stokes_preconditioner_pt = new_ns_preconditioner_pt;
+      Using_superlu_ns_preconditioner = false;
+    }
   }
 
   ///\short Function to (re-)set momentum matrix preconditioner (inexact
   /// solver) to SuperLU
-  void set_navier_stokes_superlu_preconditioner()
+  void set_superlu_preconditioner_for_navier_stokes_block()
   {
     if (!Using_superlu_ns_preconditioner)
     {
@@ -693,9 +590,6 @@ if(Do_vec_test)
 
   /// \short The number of velocity dof types.
   unsigned N_velocity_doftypes;
-
-  // hierher Ray -- what's this?
-  bool First_NS_solve;
 
   bool Replace_all_f_blocks;
 
