@@ -209,6 +209,9 @@ class LagrangeEnforcedflowPreconditioner
     Label_pt = 0;
 
     Doc_prec_directory_pt = 0;
+
+    Do_matcat_test = false;
+    Do_vec_test = false;
   }
 
   /// destructor
@@ -275,20 +278,77 @@ class LagrangeEnforcedflowPreconditioner
   /// r is the residual (rhs), z will contain the solution.
   void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
   {
-    // Counter for the current linear solver iteration.
-    // This is used when dumping the rhs block vector,
-    // we only want the first Newton Step.
-    if(Doc_prec && First_NS_solve)
-    {
-      std::string currentsetting 
-        = *Label_pt + "NS"
-        + StringConversion::to_string(Doc_linear_solver_info_pt
-            ->current_nnewton_step());
-      // Dump out the block rhs if  it is the first Newton Iteration.
-      DoubleVector x; // Will contain the re-ordered rhs
-      this->get_block_ordered_preconditioner_vector(r,x);
-      x.output( *Doc_prec_directory_pt + "/rhsx_" + currentsetting,15);
-    }
+
+if(Do_vec_test)
+{
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+// New test for parallel performance.
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+
+    
+  double t_start_int_get_block_vector = TimingHelpers::timer();
+  unsigned internal_nblock_types = this->internal_nblock_types();
+  // Now see if internet_get_vector works
+  Vector<DoubleVector> dof_vectors;
+  dof_vectors.resize(internal_nblock_types);
+  for (unsigned blocki = 0; blocki < internal_nblock_types; blocki++)
+  {
+    this->internal_get_block_vector(blocki,r,dof_vectors[blocki]);
+  }
+  double t_end_int_get_block_vector = TimingHelpers::timer();
+  double t_int_get_block_vector = t_end_int_get_block_vector 
+                                  - t_start_int_get_block_vector;
+  oomph_info << "LGRSOLVE: int_get_block: " << t_int_get_block_vector << std::endl;
+
+
+///////////////////////////////////////////
+
+  double t_start_veccat = TimingHelpers::timer();
+  // Now to concatenate the vectors.
+  Vector<DoubleVector*> dof_vectors_pt(internal_nblock_types);
+  for (unsigned blocki = 0; blocki < internal_nblock_types; blocki++) 
+  {
+    dof_vectors_pt[blocki] = &dof_vectors[blocki];
+  }
+
+  DoubleVector outvec;
+  DoubleVectorHelpers::concatenate_without_communication(
+      dof_vectors_pt,outvec,true);
+  double t_end_veccat = TimingHelpers::timer();
+  double t_veccat = t_end_veccat-t_start_veccat;
+  oomph_info << "LGRSOLVE: veccat: " << t_veccat << std::endl;
+
+///////////////////////////////////////////
+
+  double t_start_vecsplit = TimingHelpers::timer();
+  DoubleVectorHelpers::split_without_communication(
+      outvec,dof_vectors_pt,true);
+  double t_end_vecsplit = TimingHelpers::timer();
+  double t_vecsplit = t_end_vecsplit-t_start_vecsplit;
+  oomph_info << "LGRSOLVE: vecsplit: " << t_vecsplit << std::endl;
+
+//////////
+  
+  double t_start_int_ret_block_vector = TimingHelpers::timer();
+  for (unsigned blocki = 0; blocki < internal_nblock_types; blocki++) 
+  {
+    this->internal_return_block_vector(blocki,dof_vectors[blocki],z);
+  }
+  double t_end_int_ret_block_vector = TimingHelpers::timer();
+  double t_int_ret_block_vector = t_end_int_ret_block_vector 
+                                  - t_start_int_ret_block_vector;
+  oomph_info << "LGRSOLVE: int_ret_block: " << t_int_ret_block_vector << std::endl;
+  exit(EXIT_SUCCESS);
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+// END OF New test for parallel performance.
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+}
+
+    double t_lgrsolve_start = TimingHelpers::timer();
 
     // Working vectors.
     DoubleVector temp_vec;
@@ -305,25 +365,46 @@ class LagrangeEnforcedflowPreconditioner
     }
     else
     {
+
       // Loop through all of the Lagrange multipliers
       for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
       {
         // Get the block type of block l_i
         const unsigned l_ii = N_fluid_doftypes + l_i;
 
+        double t_w_get_block_vec_start = TimingHelpers::timer();
         // Extract the block
         this->get_block_vector(l_ii,r,temp_vec);
+        double t_w_get_block_vec_finish = TimingHelpers::timer();
+        double t_w_get_block_vec_time = t_w_get_block_vec_finish-
+          t_w_get_block_vec_start;
+        oomph_info << "LGRSOLVE: get_block_vector w" << l_i << ": " 
+          <<  t_w_get_block_vec_time<< std::endl; 
+        
+
+        double t_w_solve_start = TimingHelpers::timer();
         Lagrange_multiplier_preconditioner_pt[l_i]
           ->preconditioner_solve(temp_vec,another_temp_vec);
+        double t_w_solve_finish = TimingHelpers::timer();
+        double t_w_solve_time = t_w_solve_finish - t_w_solve_start;
+        oomph_info << "LGRSOLVE: solve w" << l_i << ": " 
+          <<  t_w_solve_time<< std::endl; 
 
         const unsigned vec_nrow_local = another_temp_vec.nrow_local();
         double* vec_values_pt = another_temp_vec.values_pt();
+        
         for (unsigned i = 0; i < vec_nrow_local; i++) 
         {
           vec_values_pt[i] = vec_values_pt[i]*Scaling_sigma;
         }
-
+        double t_w_return_block_vec_start = TimingHelpers::timer();
         this->return_block_vector(l_ii,another_temp_vec,z);
+        double t_w_return_block_vec_finish = TimingHelpers::timer();
+        double t_w_return_block_vec_time = t_w_return_block_vec_finish-
+          t_w_return_block_vec_start;
+        oomph_info << "LGRSOLVE: return_block_vector w" << l_i << ": " 
+          << t_w_return_block_vec_time << std::endl; 
+        
         temp_vec.clear();
         another_temp_vec.clear();
       }
@@ -341,7 +422,13 @@ class LagrangeEnforcedflowPreconditioner
         fluid_block_indices[b] = b;
       }
 
+      double t_get_fluid_block_vec_start = TimingHelpers::timer();
       this->get_concatenated_block_vector(fluid_block_indices,r,temp_vec);
+      double t_get_fluid_block_vec_finish = TimingHelpers::timer();
+      double t_get_fluid_block_vector_time = t_get_fluid_block_vec_finish
+        - t_get_fluid_block_vec_start;
+      oomph_info << "LGRSOLVE: get_block_vector f: " 
+                 << t_get_fluid_block_vector_time << std::endl; 
 
       // temp_vec contains the (concatenated) fluid rhs.
       Navier_stokes_preconditioner_pt
@@ -350,8 +437,15 @@ class LagrangeEnforcedflowPreconditioner
       temp_vec.clear();
 
       // Now return it.
+      double t_return_fluid_block_vec_start = TimingHelpers::timer();
       this->return_concatenated_block_vector(fluid_block_indices,
                                              another_temp_vec,z);
+      double t_return_fluid_block_vec_finish = TimingHelpers::timer();
+      double t_return_fluid_block_vector_time = t_return_fluid_block_vec_finish
+        - t_return_fluid_block_vec_start;
+      oomph_info << "LGRSOLVE: return_block_vector f: " 
+                 << t_return_fluid_block_vector_time << std::endl; 
+
       another_temp_vec.clear();
     }
     else
@@ -359,6 +453,11 @@ class LagrangeEnforcedflowPreconditioner
       // This is a BlockPreconditioner
       Navier_stokes_preconditioner_pt->preconditioner_solve(r,z);
     }
+
+    double t_lgrsolve_finish = TimingHelpers::timer();
+    double t_lgrsolve_time = t_lgrsolve_finish - t_lgrsolve_start;
+    oomph_info << "LGRSOLVE: total: " 
+                 << t_lgrsolve_time << std::endl; 
 
     First_NS_solve = false;
   } // end of preconditioner_solve
@@ -536,6 +635,9 @@ class LagrangeEnforcedflowPreconditioner
   /// \short Clears the memory.
   void clean_up_memory();
 
+  bool Do_matcat_test;
+  bool Do_vec_test;
+
   private:
 
   /// 
@@ -613,6 +715,10 @@ class LagrangeEnforcedflowPreconditioner
 
   // hierher Ray -- what's this?
   bool First_NS_solve;
+
+  bool Replace_all_f_blocks;
+
+
 
   /// \short Pointer to Doc_linear_solver_info.
   /// used for book keeping purposes.
@@ -1220,10 +1326,17 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //    }
 //    std::cout << "\n" << std::endl; 
 //    pause("I'm back"); 
-    
+  
 
   // Call the block setup
   this->block_setup(dof_to_block_map);
+  this->turn_off_debug_flag();
+
+  // RAYTIME
+  double t_end_block_setup = TimingHelpers::timer();
+  double t_block_setup = t_end_block_setup - t_start_block_setup;
+  oomph_info << "LGR: block_setup: " << t_block_setup << std::endl;
+
 
 //    pause("Lgr::setup() done block_setup, about to print dof block dist nrow"); 
 
@@ -1241,30 +1354,140 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //    std::cout << "============================================" << std::endl; 
 //    std::cout << "============================================" << std::endl; 
 //    std::cout << "============================================" << std::endl; 
-//
-//    for (unsigned block_i = 0; block_i < nblock_types(); block_i++) 
-//    {
-//      for (unsigned block_j = 0; block_j < nblock_types(); block_j++) 
-//      {
-//        CRDoubleMatrix tmp_block = get_block(block_i,block_j);
-//        const unsigned tmp_block_nrow = tmp_block.nrow();
-//        const unsigned tmp_block_ncol = tmp_block.ncol();
-//        std::cout << "block(" << block_i  << "," << block_j << ")"
-//                  << " , nrow: " << tmp_block_nrow << ", col: " 
-//                  << tmp_block_ncol << std::endl;
-//
-//        std::cout << "============================================" << std::endl; 
-//        std::cout << "\n" << std::endl; 
-//      }
-//    }
-//    pause("done un replaced blocks"); 
-    
+
+if(Do_matcat_test)
+{
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+// New test for parallel performance.
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 
 
-  Doc_prec = false;
+  unsigned internal_nblock_types = this->internal_nblock_types();
+  unsigned internal_ndof_types = this->internal_ndof_types();
+
+  oomph_info << "internal_nblock_types: " << internal_nblock_types << std::endl; 
+  oomph_info << "internal_ndof_types: " << internal_ndof_types << std::endl; 
+
+  // Print out the nrow of blocks.
+//  for (unsigned block_i = 0; block_i < internal_nblock_types; block_i++)
+//  {
+//    CRDoubleMatrix temp_mat;
+//    this->internal_get_block(0,block_i,temp_mat);
+//    unsigned tnrow = temp_mat.nrow();
+//    unsigned tncol = temp_mat.ncol();
+//    oomph_info << "block 0," << block_i << "), nrow: "  << tnrow << ", ncol: " << tncol<< std::endl; 
+//  }
+  
+  
+  unsigned totalnnz=0;
+  Vector<LinearAlgebraDistribution*> block_row_dist_pt;
+  DenseMatrix<CRDoubleMatrix*> mat_to_cat_pt(
+      internal_nblock_types,
+      internal_nblock_types,0);
+  
+  double t_start_internal_get_block = TimingHelpers::timer();
+
+  for (unsigned block_i = 0; block_i < internal_nblock_types; block_i++) 
+  {
+    for (unsigned block_j = 0; block_j < internal_nblock_types; block_j++) 
+    {
+      mat_to_cat_pt(block_i,block_j) = new CRDoubleMatrix;
+      this->internal_get_block(block_i,block_j,*mat_to_cat_pt(block_i,block_j));
+      
+      unsigned blocknnz = mat_to_cat_pt(block_i,block_j)->nnz();
+
+      totalnnz += blocknnz;
+      
+      // Push back the distribution for concatenation.
+      if(block_j == 0)
+      {
+        block_row_dist_pt.push_back(
+            mat_to_cat_pt(block_i,block_j)->distribution_pt());
+      }
+
+      // Print out the 
+      const unsigned tmp_block_nrow 
+        = mat_to_cat_pt(block_i,block_j)->nrow();
+
+      const unsigned tmp_block_ncol 
+        = mat_to_cat_pt(block_i,block_j)->ncol();
+      const unsigned tmp_block_nrow_local
+        = mat_to_cat_pt(block_i,block_j)->nrow_local();
+
+      std::cout << "block(" << block_i  << "," << block_j << ") "
+                  << ", nrow: " << tmp_block_nrow 
+                  << ", ncol: "   << tmp_block_ncol
+                  << ", nrowlocal: " << tmp_block_nrow_local 
+                  << ", (local) nnz: " << blocknnz << std::endl;
+    }
+    std::cout << "\n" << std::endl; 
+  }
+  double t_end_internal_get_block = TimingHelpers::timer();
+  double t_internal_get_block = t_end_internal_get_block - t_start_internal_get_block;
+  oomph_info << "LGR: internal_get_block: " << t_internal_get_block << std::endl;
+
+  //    pause("done print out the blocks.");
+
+  oomph_info << "totalnnz: " << totalnnz << std::endl; 
+  LinearAlgebraDistribution tmp_dist;
+  LinearAlgebraDistributionHelpers::concatenate(block_row_dist_pt,
+                                                tmp_dist);
+  CRDoubleMatrix result_matrix;
+  result_matrix.build(&tmp_dist);
+
+  double t_start_matcat = TimingHelpers::timer();
+  CRDoubleMatrixHelpers::concatenate_without_communication(
+    block_row_dist_pt,mat_to_cat_pt,result_matrix,true);
+  double t_end_matcat = TimingHelpers::timer();
+  double t_matcat = t_end_matcat - t_start_matcat;
+  oomph_info << "LGR: matcat: " << t_matcat << std::endl;
+
+  exit(EXIT_SUCCESS);
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+// END OF New test for parallel performance.
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+}
+
+if(!Do_vec_test)
+{
+  Doc_prec = true;
 
   if(Doc_prec)
   {
+
+/// New test
+////////////////////////////////////////////////////////////////////////////
+{
+  unsigned nblock = this->internal_nblock_types();
+  for (unsigned blocki = 0; blocki < nblock; blocki++) 
+  {
+    for (unsigned blockj = 0; blockj < nblock; blockj++) 
+    {
+      CRDoubleMatrix tempblock;
+      this->get_block(blocki,blockj,tempblock);
+      std::stringstream blockname;
+      blockname << "b("
+      << std::setw(2) << std::setfill('0') << blocki << ","
+      << std::setw(2) << std::setfill('0') << blockj <<")";
+      unsigned ttnnz = tempblock.nnz();
+      unsigned ttnrow = tempblock.nrow();
+      unsigned ttncol = tempblock.ncol();
+      oomph_info << blockname.str() << " nnz: " << ttnnz << " nrow: " << ttnrow << " ncol: " <<ttncol << std::endl; 
+
+//      tempblock.sparse_indexed_output(blockname.str(),15,true);
+    }
+      oomph_info << "\n" << std::endl;
+  }
+
+  exit(EXIT_SUCCESS);
+}
+////////////////////////////////////////////////////////////////////////////
+
     //    unsigned my_rank 
     //     = master_distribution_pt()->communicator_pt()->my_rank();
     //    unsigned nproc 
@@ -1298,6 +1521,14 @@ void LagrangeEnforcedflowPreconditioner::setup()
 //      }
 //      precinfo_ofstream.close();
 
+////////////////////////////////////////////////////////////////////////////
+    // This is new, just for double checking, I'm outputting the numbers of
+    // rows and columns for each block.
+    std::ofstream blocknrowncol_ofstream;
+    std::string blocknrowncol_string = "temprawmat/blocknrowncol";
+    blocknrowncol_ofstream.open(blocknrowncol_string.c_str());
+
+
     // Now output all the blocks.
     // Loop through all the blocks and output them.
     for(unsigned Mi=0; Mi<nblock_types; Mi++)
@@ -1312,11 +1543,17 @@ void LagrangeEnforcedflowPreconditioner::setup()
           << std::setw(2) << std::setfill('0') << Mi
           << std::setw(2) << std::setfill('0') << Mj;
         sub_matrix_pt->sparse_indexed_output(blockname.str(),15,true);
+
+        // Now output the nrow and ncol.
+        blocknrowncol_ofstream << "block " << Mi << " " << Mj << " "
+                               << sub_matrix_pt->nrow() << " " 
+                               << sub_matrix_pt->ncol() << std::endl;
         delete sub_matrix_pt;
         sub_matrix_pt = 0;
       }//for
     }//for
-
+    
+    blocknrowncol_ofstream.close();
     // Now get the mass matrices for LSC solve
 
     // Extract all of the inv_v_mass.
@@ -1337,7 +1574,7 @@ void LagrangeEnforcedflowPreconditioner::setup()
       blockname << "temprawmat/vmm_"
         << std::setw(2) << std::setfill('0') << required_block
         << std::setw(2) << std::setfill('0') << required_block;
-      inv_v_mass_pt->sparse_indexed_output(blockname.str());
+      inv_v_mass_pt->sparse_indexed_output(blockname.str(),15,true);
       delete inv_v_mass_pt;
       inv_v_mass_pt = 0;
     }
@@ -1357,13 +1594,13 @@ void LagrangeEnforcedflowPreconditioner::setup()
       blockname << "temprawmat/pmm_"
         << std::setw(2) << std::setfill('0') << required_block
         << std::setw(2) << std::setfill('0') << required_block;
-      inv_p_mass_pt->sparse_indexed_output(blockname.str());
+      inv_p_mass_pt->sparse_indexed_output(blockname.str(),15,true);
       delete inv_p_mass_pt;
       inv_p_mass_pt = 0;
     }
   }// if Doc_prec
 
-  //pause("Dumped!"); 
+//  pause("Dumped!"); 
   
 
   //////////////////////////////////////////////////////////////////////////
@@ -1637,11 +1874,13 @@ void LagrangeEnforcedflowPreconditioner::setup()
         mm_pt[m_i]->multiply(*mmt_pt[m_i],*temp_mm_sqrd_pt);
 
         Vector<double> m_diag = temp_mm_sqrd_pt->diagonal_entries();
+//        Vector<double> m_diag = mm_pt[m_i]->diagonal_entries();
 
         // Loop through the entries, add them.
         for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
         {
           w_i_diag_values[row_i] += m_diag[row_i];
+//          w_i_diag_values[row_i] += (m_diag[row_i]* m_diag[row_i]);
         }
 
         delete temp_mm_sqrd_pt; temp_mm_sqrd_pt = 0;
@@ -2172,15 +2411,38 @@ void LagrangeEnforcedflowPreconditioner::setup()
 
 
     // Tell the LSC preconditioner which DOF type should be treated as one
-    // dof type. i.e.
-    // 0   0  2  4
-    // u = ub up ut
+    // These DOF types are local to the LSC preconditioner.
+    // For example, for the artificial test data:
+    // 
+    // ub vb wb p up vp wp Lp1 Lp2 ut vt wt Lt
+    // 0  1  2  3 4  5  6  7   8   9  10 11  12 DOF type order.
     //
-    // 1   1  3  5
-    // v = vb vp vt
+    // Assume that we gave this list to turn_into_subsidiary:
+    // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 MARK1 (see below)
+    // ub vb wb up vp wp ut vt wt p
+    // 0  1  2  4  5  6  9  10 11 3 turn_into_sub list.
     //
-    // 2   6
-    // p = p
+    // What the turn_into_sub list says is: your dof type
+    // 0 is my dof type 0
+    // 1 is my dof type 1
+    // 2 is my dof type 2
+    // 3 is my dof type 4 (we've skipped a pressure).
+    // etc....
+    // your dof type 9 is my dof type 3 (for the pressure)
+    //
+    // NOW: We have to tell the LSC preconditioner which dof types to
+    // treat as one. The LSC preconditioner 
+    // expects 2 or 3 velocity dof types, and one pressure DOF types.
+    // We give it this list (Look at the list MARK1):
+    // u [0, 3, 6]
+    // v [1, 4, 7]
+    // w [2, 5, 8]
+    // p [9]
+    //
+    // Artificial test data:
+//    spatial_dim = 3;
+//    My_nmesh = 3;
+
     Vector<Vector<unsigned> > subsidiary_dof_type_coarsening_map;
 
     for (unsigned direction = 0; direction < spatial_dim; direction++)
@@ -2196,19 +2458,25 @@ void LagrangeEnforcedflowPreconditioner::setup()
     }
 
     Vector<unsigned> ns_p_vec(1,0);
-    ns_p_vec[0] = N_velocity_doftypes;
+    // This is simply the number of velocity dof types,
+    // But we work it out anyway so the artificial test data is used.
+    ns_p_vec[0] = My_nmesh*spatial_dim; 
 
     subsidiary_dof_type_coarsening_map.push_back(ns_p_vec);
 
-//      std::cout << "Lgr: sub dof type coarsening map: " << std::endl; 
-//      for (unsigned i = 0; i < subsidiary_dof_type_coarsening_map.size(); i++) 
+//    std::cout << "Lgr: sub dof type coarsening map: " << std::endl; 
+//    for (unsigned i = 0; 
+//        i < subsidiary_dof_type_coarsening_map.size(); i++) 
+//    {
+//      for (unsigned j = 0; 
+//          j < subsidiary_dof_type_coarsening_map[i].size(); j++) 
 //      {
-//        for (unsigned j = 0; j < subsidiary_dof_type_coarsening_map[i].size(); j++) 
-//        {
-//          std::cout << subsidiary_dof_type_coarsening_map[i][j] << " ";
-//        }
-//        std::cout << "\n"; 
+//        std::cout << subsidiary_dof_type_coarsening_map[i][j] << " ";
 //      }
+//      std::cout << "\n"; 
+//    }
+//    pause("Outputted the dof type coarsen map."); 
+    
       
 
     //    Doftype_coarsen_map_fine.resize(0,0);
@@ -2366,7 +2634,24 @@ void LagrangeEnforcedflowPreconditioner::setup()
       //      vector.
       // 4) Concatenate the two vectors.
 
-      unsigned dof_index = 0;
+//      Artificial test data
+//      n_dof_types = 13;
+//      My_nmesh = 3;
+//      spatial_dim = 3;
+//      My_ndof_types_in_mesh.resize(3,0);
+//      My_ndof_types_in_mesh[0] = 4;
+//      My_ndof_types_in_mesh[1] = 5;
+//      My_ndof_types_in_mesh[2] = 4;
+//      // Outputting My_ndof_types_in_mesh
+//      for (unsigned i = 0; i < My_ndof_types_in_mesh.size(); i++) 
+//      {
+//        std::cout << "My_ndof_inmesh: " 
+//                  << My_ndof_types_in_mesh[i] << std::endl; 
+//      }
+//      pause("Need someone."); 
+      
+
+      unsigned partial_sum_index = 0;
 
       Subsidiary_list_bcpl.resize(0,0);
       for(unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++)
@@ -2374,11 +2659,11 @@ void LagrangeEnforcedflowPreconditioner::setup()
         // Store the velocity dof types.
         for(unsigned dim_i = 0; dim_i < spatial_dim; dim_i++)
         {
-          Subsidiary_list_bcpl.push_back(dof_index++);
+          Subsidiary_list_bcpl.push_back(partial_sum_index + dim_i);
         } // for spatial_dim
 
         // Update the DOF index
-        dof_index = My_ndof_types_in_mesh[mesh_i];
+        partial_sum_index += My_ndof_types_in_mesh[mesh_i];
       } // for My_nmesh
 
       // push back the pressure DOF type
@@ -2386,21 +2671,34 @@ void LagrangeEnforcedflowPreconditioner::setup()
 
     } // end of encapsulating
 
-      // Output for artificial test.
-//        std::cout << "Subsidiary_list_bcpl:" << std::endl; 
-//        for (unsigned i = 0; i < Subsidiary_list_bcpl.size(); i++) 
-//        {
-//          std::cout << Subsidiary_list_bcpl[i] << std::endl;
-//        }
-//        pause("Printed out Subsidiary_list_bcpl"); 
+//    // Output for artificial test.
+//    std::cout << "Subsidiary_list_bcpl:" << std::endl; 
+//    for (unsigned i = 0; i < Subsidiary_list_bcpl.size(); i++) 
+//    {
+//      std::cout << Subsidiary_list_bcpl[i] << std::endl;
+//    }
+//    // With the artificial test data, this should output:
+//    // 0, 1, 2, 4, 5, 6, 9, 10, 11, 3
+//    pause("Printed out Subsidiary_list_bcpl"); 
 
     // The ns_dof_list will ensure that the NS preconditioner have the 
     // structure:
     // 0  1  2  3  4  5  6
     // ub vb up vp ut vt p
+    // RAYTIME
+    double t_start_turn_into_subsidairy = TimingHelpers::timer();
+    
     navier_stokes_block_preconditioner_pt
-        ->turn_into_subsidiary_block_preconditioner(this, Subsidiary_list_bcpl,
-            subsidiary_dof_type_coarsening_map);
+      ->turn_into_subsidiary_block_preconditioner(
+          this, Subsidiary_list_bcpl, subsidiary_dof_type_coarsening_map);
+    // RAYTIME
+    double t_end_turn_into_subsidairy = TimingHelpers::timer();
+      //pause("Lgr: Done turn_into_sub..."); 
+    double t_turn_into_sub = t_end_turn_into_subsidairy - t_start_turn_into_subsidairy;
+    oomph_info << "LGR: turn_into_subsidairy: " << t_turn_into_sub << std::endl;
+    //    pause("After turn_into..."); 
+
+
 
     // Set the replacement blocks.
     //
@@ -2509,8 +2807,8 @@ void LagrangeEnforcedflowPreconditioner::setup()
         << t_delete_w << "\n";
 
     Mapping_info_calculated = true;
-    
-  } // end of LagrangeEnforcedflowPreconditioner::setup
+} // if ! Do_vec_test
+} // end of LagrangeEnforcedflowPreconditioner::setup
 
 
   //========================================================================
