@@ -67,23 +67,64 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
   } // function get_w_cg_preconditioner
 } // namespace
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 
 /// \short Apply the preconditioner.
 /// r is the residual (rhs), z will contain the solution.
 void LagrangeEnforcedFlowPreconditioner::preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)
 {
+#ifdef PARANOID
+  if (Preconditioner_has_been_setup==false)
+   {
+    std::ostringstream error_message;
+    error_message << "setup() must be called before using "
+                  << "preconditioner_solve()";
+    throw OomphLibError(
+     error_message.str(),
+     OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
+   }
+  if (z.built())
+   {
+    if (z.nrow() != r.nrow())
+     {
+      std::ostringstream error_message;
+      error_message << "The vectors z and r must have the same number of "
+                    << "of global rows";
+      throw OomphLibError(
+       error_message.str(),
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);      
+     }
+   }
+#endif
+
+  // if z is not setup then give it the same distribution
+  if (!z.distribution_pt()->built())
+   {
+    z.build(r.distribution_pt(),0.0);
+   }
+
   // Working vectors.
   DoubleVector temp_vec;
   DoubleVector another_temp_vec;
   DoubleVector yet_another_temp_vec;
 
-  // First we solve all the w blocks:
+
+  // -----------------------------------------------------------------------
+  // Step 1 - apply approximate W block inverse to Lagrange multiplier
+  // unknowns
+  // -----------------------------------------------------------------------
+
+  // If the W preconditioner is a block preconditioner, then the extraction
+  // associated unknowns and RHS is handled by the (subsidiary) block 
+  // preconditioner.
   if(W_preconditioner_is_block_preconditioner)
   {
+    // Loop through the solve the subsystems associated with the W block.
     for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
     {
       W_preconditioner_pt[l_i]->preconditioner_solve(r,z);
@@ -91,38 +132,52 @@ void LagrangeEnforcedFlowPreconditioner::preconditioner_solve(
   }
   else
   {
-    // Loop through all of the Lagrange multipliers
+    // For each subsystem associated with each Lagrange multiplier, we loop
+    // through and:
+    // 1) extract the block entries from r
+    // 2) apply the inverse
+    // 3) return the entries to z.
     for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
     {
-      // Get the block type of block l_i
+      // The Lagrange multiplier block type.
       const unsigned l_ii = N_fluid_doftypes + l_i;
 
       // Extract the block
       this->get_block_vector(l_ii,r,temp_vec);
 
+      // Solve
       W_preconditioner_pt[l_i]
         ->preconditioner_solve(temp_vec,another_temp_vec);
 
-      const unsigned vec_nrow_local = another_temp_vec.nrow_local();
-      double* vec_values_pt = another_temp_vec.values_pt();
+//      // Apply the scaling sigma. The reason why we apply the scaling sigma
+//      // here instead of within the W_preconditioner_pt is to reduce error 
+//      // propagation. If sigma is small - then 1/sigma is large, we want 
+//      // avoid large growth in values.
+//      const unsigned vec_nrow_local = another_temp_vec.nrow_local();
+//      double* vec_values_pt = another_temp_vec.values_pt();
+//      for (unsigned i = 0; i < vec_nrow_local; i++) 
+//      {
+//        vec_values_pt[i] = vec_values_pt[i]*Scaling_sigma;
+//      } // for
 
-      for (unsigned i = 0; i < vec_nrow_local; i++) 
-      {
-        vec_values_pt[i] = vec_values_pt[i]*Scaling_sigma;
-      }
+      // Return the unknowns
       this->return_block_vector(l_ii,another_temp_vec,z);
 
+      // Clear vectors.
       temp_vec.clear();
       another_temp_vec.clear();
-    }
-  }
+    } // for
+  } // else
 
-  // Now solve the Navier-Stokes block.
+  // -----------------------------------------------------------------------
+  // Step 2 - apply the augmented Navier-Stokes matrix inverse to the 
+  // velocity and pressure unknowns
+  // -----------------------------------------------------------------------
 
   // At this point, all vectors are cleared.
   if(Using_superlu_ns_preconditioner)
   {
-    // Get the concatenated fluid vector.
+    // Which block types corresponds to the fluid block types.
     Vector<unsigned> fluid_block_indices(N_fluid_doftypes,0);
     for (unsigned b = 0; b < N_fluid_doftypes; b++) 
     {
@@ -150,7 +205,7 @@ void LagrangeEnforcedFlowPreconditioner::preconditioner_solve(
   }
 } // end of preconditioner_solve
 
-/// \short Set the meshes, the first mesh must be the fluid mesh
+/// \short Set the meshes, the first mesh must be the bulk fluid mesh
 void LagrangeEnforcedFlowPreconditioner::set_meshes(
     const Vector<Mesh*> &mesh_pt)
 {
@@ -808,22 +863,23 @@ void LagrangeEnforcedFlowPreconditioner::setup()
         for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
         {
           w_i_diag_values[row_i] += m_diag[row_i];
-          //          w_i_diag_values[row_i] += (m_diag[row_i]* m_diag[row_i]);
+          // w_i_diag_values[row_i] += (m_diag[row_i]* m_diag[row_i]);
         }
 
         delete temp_mm_sqrd_pt; temp_mm_sqrd_pt = 0;
       }
 
 
+      // NOTE: We do scale with sigma here!
       // Divide by Scaling_sigma and create the inverse of w.
       for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
       {
-        //          w_i_diag_values[row_i] /= Scaling_sigma;
 
         // w_i is a diagonal matrix, so take the inverse to
         // invert the matrix.
         invw_i_diag_values[row_i] = Scaling_sigma / w_i_diag_values[row_i];
 
+        w_i_diag_values[row_i] /= Scaling_sigma;
         w_i_column_indices[row_i] = row_i + l_i_first_row;
         w_i_row_start[row_i] = row_i;
       }

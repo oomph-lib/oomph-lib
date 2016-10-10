@@ -324,6 +324,9 @@ private:
   /// Navier-Stokes momentum block for the scaling sigma.
   bool Use_norm_f_for_scaling_sigma;
 
+  /// \short Inverse W values
+  Vector<Vector<double> > Inv_w_diag_values;
+
   /// \short The W matrix subsidiary preconditioner function pointer
   SubsidiaryPreconditionerFctPt W_preconditioner_fct_pt;
 
