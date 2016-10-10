@@ -301,17 +301,6 @@ public:
       Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
       Using_superlu_ns_preconditioner = true;
     }
-    else
-    {
-#ifdef PARANOID
-      std::ostringstream warning_stream;
-      warning_stream << "WARNING: \n"
-        << "Already using SuperLU for the Navier-Stokes preconditioner.\n";
-      OomphLibWarning(warning_stream.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-#endif
-    }
   }
 
   /// \short Clears the memory.

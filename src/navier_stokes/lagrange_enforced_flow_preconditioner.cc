@@ -201,7 +201,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     // parallel)
     hypre_preconditioner_pt->amg_coarsening() = 1;
   
-    // Strength of dependence = 0.668
+    // Strength of dependence = 0.25
     hypre_preconditioner_pt->amg_strength() = 0.25;
 
 
@@ -210,7 +210,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     hypre_preconditioner_pt->amg_simple_smoother() = 0;
   
     // Set Jacobi damping = 2/3
-    hypre_preconditioner_pt->amg_damping() = 0.666;
+    hypre_preconditioner_pt->amg_damping() = 0.668;
 
 
     // Set number of cycles to 1xV(2,2)

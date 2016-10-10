@@ -90,6 +90,9 @@ namespace Global_Variables
  // Number of elements in 1D
  unsigned Noel = 4;
 
+ // Use trilinos?
+ bool Use_trilinos = false;
+
  // Use LSC preconditioner for the Navier-Stokes block?
  bool Use_lsc = false;
 
@@ -99,11 +102,52 @@ namespace Global_Variables
  // Use Boomer AMG for the pressure block?
  bool Use_amg_for_p = false;
 
+ // Soln number (for doc_solution)
+ unsigned Soln_num = 0;
+
  // Convert degrees to radians
  inline double degtorad(const double& ang_deg)
  {
    return ang_deg * (MathematicalConstants::Pi / 180.0);
  }
+
+ //=========================================================================
+ /// Given a preconditioner, print out the hypre settings.
+ //=========================================================================
+ void print_hypre_settings(Preconditioner* preconditioner_pt)
+ {
+   HyprePreconditioner* h_prec_pt 
+     = checked_dynamic_cast<HyprePreconditioner*>(preconditioner_pt);
+
+   // Print AMG iterations:
+   oomph_info << "HyprePreconditioner settings are: " << std::endl;
+   oomph_info << "Max_iter: " << h_prec_pt->amg_iterations() << std::endl;
+   oomph_info << "smoother iter: " << h_prec_pt->amg_smoother_iterations() 
+     << std::endl;
+   oomph_info << "Hypre_method: " << h_prec_pt->hypre_method() << std::endl;
+   oomph_info << "internal_preconditioner: " 
+     << h_prec_pt->internal_preconditioner() << std::endl;
+   oomph_info << "AMG_using_simple_smoothing: " 
+     << h_prec_pt->amg_using_simple_smoothing_flag() << std::endl; 
+   oomph_info << "AMG_simple_smoother: " 
+     << h_prec_pt->amg_simple_smoother() << std::endl; 
+   oomph_info << "AMG_complex_smoother: " 
+     << h_prec_pt->amg_complex_smoother() << std::endl; 
+   oomph_info << "AMG_coarsening: " 
+     << h_prec_pt->amg_coarsening() << std::endl;
+   oomph_info << "AMG_max_levels: " 
+     << h_prec_pt->amg_max_levels() << std::endl;
+   oomph_info << "AMG_damping: " 
+     << h_prec_pt->amg_damping() << std::endl;
+   oomph_info << "AMG_strength: " 
+     << h_prec_pt->amg_strength() << std::endl;;
+   oomph_info << "AMG_max_row_sum: " 
+     << h_prec_pt->amg_max_row_sum() << std::endl;
+   oomph_info << "AMG_truncation: " 
+     << h_prec_pt->amg_truncation() << std::endl;
+   oomph_info << "\n" << std::endl;
+ }
+
 
  /// Storage for number of iterations during Newton steps 
  Vector<unsigned> Iterations;
@@ -434,51 +478,84 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
     lsc_prec_pt->set_navier_stokes_mesh(Bulk_mesh_pt);
     lsc_prec_pt->use_lsc();
 
-//    if(GV::Use_amg_for_f)
-//    {
-//      F_preconditioner_pt
-//        = Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper::
-//          boomer_amg_for_2D_momentum_stressdiv_visc();
-//      lsc_prec_pt->set_f_preconditioner(F_preconditioner_pt);
-//    }
-// 
-//    if(GV::Use_amg_for_p)
-//    {
-//      P_preconditioner_pt
-//        = Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper::
-//          boomer_amg_for_2D_poisson_problem();
-//      lsc_prec_pt->set_f_preconditioner(P_preconditioner_pt);
-//    }
+    if(GV::Use_amg_for_f)
+    {
+      if(GV::Visc == 0)
+      {
+        F_preconditioner_pt
+          = Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper::
+            boomer_amg_for_2D_momentum_simple_visc();
+        GV::print_hypre_settings(F_preconditioner_pt);
+
+        lsc_prec_pt->set_f_preconditioner(F_preconditioner_pt);
+      }
+      else
+      {
+        F_preconditioner_pt
+          = Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper::
+            boomer_amg_for_2D_momentum_stressdiv_visc();
+        GV::print_hypre_settings(F_preconditioner_pt);
+        lsc_prec_pt->set_f_preconditioner(F_preconditioner_pt);
+      }
+    }
+ 
+    if(GV::Use_amg_for_p)
+    {
+      P_preconditioner_pt
+        = Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper::
+          boomer_amg_for_2D_poisson_problem();
+      lsc_prec_pt->set_p_preconditioner(P_preconditioner_pt);
+    }
    
     lgr_prec_pt->set_navier_stokes_preconditioner(lsc_prec_pt);
   }
   else
   {
-//    lgr_prec_pt->set_superlu_for_navier_stokes_preconditioner();
+    lgr_prec_pt->set_superlu_for_navier_stokes_preconditioner();
   }
 
 
+  // Store the preconditioner pointers.
   Navier_stokes_prec_pt = lsc_prec_pt;
-
   Prec_pt = lgr_prec_pt;
 
-  TrilinosAztecOOSolver* trilinos_solver_pt = new TrilinosAztecOOSolver;
-  trilinos_solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
 
-  Solver_pt = trilinos_solver_pt;
+  if(GV::Use_trilinos)
+  {
+#ifdef OOMPH_HAS_TRILINOS
+    // Create the trilinos solver.
+    TrilinosAztecOOSolver* trilinos_solver_pt = new TrilinosAztecOOSolver;
+    trilinos_solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
 
+    // Store the solver pointer.
+    Solver_pt = trilinos_solver_pt;
+#endif
+  }
+  else
+  {
+    // Create oomph-lib iterative linear solver.
+    IterativeLinearSolver* solver_pt = new GMRES<CRDoubleMatrix>;
+    
+    // We use RHS preconditioning. Note that by default,
+    // left hand preconditioning is used.
+    static_cast<GMRES<CRDoubleMatrix>*>(solver_pt)
+      ->set_preconditioner_RHS();
 
-  // Create oomph-lib iterative linear solver
-//  IterativeLinearSolver* solver_pt = new GMRES<CRDoubleMatrix>;
+    // Store the solver pointer.
+    Solver_pt = solver_pt;
+  }
 
-  // We use RHS preconditioning. Note that by default,
-  // left hand preconditioning is used.
-//  static_cast<GMRES<CRDoubleMatrix>*>(solver_pt)->set_preconditioner_RHS();
-
+  // Set up other solver parameters.
   Solver_pt->tolerance() = 1.0e-6;
-  Solver_pt->max_iter() = 110;
+//  Solver_pt->max_iter() = 110;
+
+  // Pass the preconditioner to the solver.
   Solver_pt->preconditioner_pt() = Prec_pt;
+
+  // Pass the solver to the problem.
   this->linear_solver_pt() = Solver_pt;
+
+  // Set the Newton solver tolerance.
   this->newton_solver_tolerance() = 1.0e-6;
 }
 
@@ -487,21 +564,22 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
 //========================================================================
 template<class ELEMENT>
 void TiltedCavityProblem<ELEMENT>::doc_solution()
-{
-
-//  namespace NSPP = NavierStokesProblemParameters;
-  
-//  std::ofstream some_file;
-//  std::stringstream filename;
-//  filename << NSPP::Soln_dir_str<<"/"<<NSPP::Label_str<<".dat";
+{    
+  // Alias the namespace for convenience
+  namespace GV = Global_Variables; 
+ 
+  // Create the soln file name string.
+  std::stringstream filename;
+  filename <<"RESLT/soln"<<GV::Soln_num<<".dat";
 
   // Number of plot points
-//  unsigned npts=5;
+  unsigned npts=5;
 
   // Output solution
-//  some_file.open(filename.str().c_str());
-//  Bulk_mesh_pt->output(some_file,npts);
-//  some_file.close();
+  std::ofstream some_file;
+  some_file.open(filename.str().c_str());
+  Bulk_mesh_pt->output(some_file,npts);
+  some_file.close();
 }
 
 //============start_of_create_parall_outflow_lagrange_elements===========
@@ -593,6 +671,9 @@ int main(int argc, char **argv)
   // Defaults to 4
   CommandLineArgs::specify_command_line_flag("--noel", &GV::Noel);
 
+  // Use trilinos solver?
+  CommandLineArgs::specify_command_line_flag("--use_trilinos");
+
   // Use the LSC preconditioner for the Navier-Stokes block?
   CommandLineArgs::specify_command_line_flag("--use_lsc");
 
@@ -601,6 +682,8 @@ int main(int argc, char **argv)
 
   // Use the amg for the pressure block?
   CommandLineArgs::specify_command_line_flag("--use_amg_for_p");
+  
+  CommandLineArgs::specify_command_line_flag("--soln_num", &GV::Soln_num);
 
   // Parse the above flags.
   CommandLineArgs::parse_and_assign();
@@ -624,7 +707,28 @@ int main(int argc, char **argv)
       NavierStokesEquations<GV::Dim>::Gamma[d] = 1.0;
     }
   }
-  
+ 
+  // Set the flag for trilinos solver
+  if(CommandLineArgs::command_line_flag_has_been_set("--use_trilinos"))
+  {
+#ifdef OOMPH_HAS_TRILINOS
+    GV::Use_trilinos = true;
+#else
+    std::ostringstream warning_stream;
+    warning_stream << "WARNING: \n"
+      << "No trilinos installed, using oomphlib's GMRES solver.\n";
+    OomphLibWarning(warning_stream.str(),
+      OOMPH_CURRENT_FUNCTION,
+      OOMPH_EXCEPTION_LOCATION);
+
+    GV::Use_trilinos = false;
+#endif
+  }
+  else
+  {
+    GV::Use_trilinos = false;
+  }
+ 
   // Set the flag for lsc
   if(CommandLineArgs::command_line_flag_has_been_set("--use_lsc"))
   {
@@ -660,14 +764,28 @@ int main(int argc, char **argv)
   // Solve the problem
   problem.newton_solve();
 
-  // Print out the iteration counts
-  const unsigned num_newton_steps = GV::Iterations.size();
-  oomph_info << "RRRNS:\t"<<num_newton_steps << std::endl; 
-  for (unsigned stepi = 0; stepi < num_newton_steps; stepi++) 
+  if(CommandLineArgs::command_line_flag_has_been_set("--soln_num"))
   {
-    oomph_info << "RRRITS:\t" << GV::Iterations[stepi] << std::endl;
+    problem.doc_solution();
+
+    // Create the soln file name string.
+    std::stringstream filename;
+    filename <<"RESLT/iter"<<GV::Soln_num<<".dat";
+    std::ofstream some_file;
+    some_file.open(filename.str().c_str());
+
+    // Print out the iteration counts
+    const unsigned num_newton_steps = GV::Iterations.size();
+    some_file << num_newton_steps << "\n";
+    for (unsigned stepi = 0; stepi < num_newton_steps; stepi++) 
+    {
+      some_file << GV::Iterations[stepi] << "\n";
+    }
+    some_file << "\n";
+    some_file.close();
+
   }
-  oomph_info << "RRR:\t" << std::endl; 
+
   
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::finalize();
