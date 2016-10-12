@@ -62,18 +62,18 @@ using namespace oomph;
 namespace Global_Variables
 {
 
- // Problem dimension
+ /// Problem dimension
  static const unsigned Dim = 2;
 
- // Min and max x value respectively.
+ /// Min and max x value respectively.
  static const double X_min = 0.0;
  static const double X_max = 1.0;
 
- // Min and max y value respectively.
+ /// Min and max y value respectively.
  static const double Y_min = 0.0;
  static const double Y_max = 1.0;
 
- // The domain length in the x and y direction respectively.
+ /// The domain length in the x and y direction respectively.
  static const double Lx = X_max - X_min;
  static const double Ly = Y_max - Y_min;
 
@@ -83,29 +83,29 @@ namespace Global_Variables
  /// Reynolds number
  double Re = 100.0;
 
- // Tilting angle of the domain with the x-axis
+ /// Tilting angle of the domain with the x-axis
  double Ang_deg = 30.0;
  double Ang_rad = -1.0;
 
- // Number of elements in 1D
+ /// Number of elements in 1D
  unsigned Noel = 4;
 
- // Use trilinos?
+ /// Use trilinos?
  bool Use_trilinos = false;
 
- // Use LSC preconditioner for the Navier-Stokes block?
+ /// Use LSC preconditioner for the Navier-Stokes block?
  bool Use_lsc = false;
 
- // Use Boomer AMG for the momentum block?
+ /// Use Boomer AMG for the momentum block?
  bool Use_amg_for_f = false;
 
- // Use Boomer AMG for the pressure block?
+ /// Use Boomer AMG for the pressure block?
  bool Use_amg_for_p = false;
 
- // Soln number (for doc_solution)
+ /// Soln number (for doc_solution)
  unsigned Soln_num = 0;
 
- // Convert degrees to radians
+ /// Convert degrees to radians
  inline double degtorad(const double& ang_deg)
  {
    return ang_deg * (MathematicalConstants::Pi / 180.0);
@@ -268,19 +268,19 @@ private:
  /// Pointer to the "surface" mesh
  Mesh* Surface_mesh_P_pt;
 
- // Preconditioner
+ /// Preconditioner
  Preconditioner* Prec_pt;
 
- // Preconditioner for the Navier-Stokes block
+ /// Preconditioner for the Navier-Stokes block
  Preconditioner* Navier_stokes_prec_pt;
 
- // Preconditioner for the momentum block
+ /// Preconditioner for the momentum block
  Preconditioner* F_preconditioner_pt;
 
- // Preconditioner for the pressure block
+ /// Preconditioner for the pressure block
  Preconditioner* P_preconditioner_pt;
 
- // Iterative linear solver
+ /// Iterative linear solver
  IterativeLinearSolver* Solver_pt;
 
  // Enumeration for the boundaries of the rectangular domain
@@ -293,9 +293,17 @@ private:
  //    -------------
  //         0
  //
+ 
+ /// Bottom boundary
  unsigned Bottom_bound; // 0
+
+ /// Right boundary
  unsigned Right_bound;  // 1
+
+ /// Top boundary
  unsigned Top_bound;    // 2
+
+ /// Left boundary
  unsigned Left_bound;   // 3
 
 };

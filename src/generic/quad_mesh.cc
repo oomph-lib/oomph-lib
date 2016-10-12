@@ -174,7 +174,8 @@ void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
  for (unsigned i=0;i<nbound;i++)
   {
    // Number of elements on this boundary
-   unsigned nel=vector_of_boundary_element_pt[i].size();
+   // nel is unused, so I've commented it out - RWhite.
+//   unsigned nel=vector_of_boundary_element_pt[i].size();
     
    // Allocate storage for the face identifiers
    //Face_index_at_boundary[i].resize(nel);

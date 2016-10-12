@@ -107,7 +107,7 @@ bool GeneralisedElement::Suppress_warning_about_repeated_external_data=true;
   //Allocate new storage for the pointers to data
   Data** new_data_pt = new Data*[n_internal_data + n_external_data + 1];
 
-  //Copy the old iternal values across to the beginning of the array
+  //Copy the old internal values across to the beginning of the array
   for(unsigned i=0;i<n_internal_data;i++) {new_data_pt[i] = Data_pt[i];}
   
   //Now add the new value to the end of the internal data
@@ -162,7 +162,7 @@ bool GeneralisedElement::Suppress_warning_about_repeated_external_data=true;
   //Create storage for all equations, initialised to NULL
   unsigned long *new_eqn_number = new unsigned long[new_n_dof];
 
-  //Copy over the exisiting values to the start new storage
+  //Copy over the existing values to the start new storage
   for(unsigned i=0;i<n_dof;i++) {new_eqn_number[i] = Eqn_number[i];}
   
   //Set an index to the next position in the new storage
@@ -222,7 +222,7 @@ bool GeneralisedElement::Suppress_warning_about_repeated_external_data=true;
 
     //Now delete the old storage
     delete[] Dof_pt;
-    //Set the pointer to address the new storaga
+    //Set the pointer to address the new storage
     Dof_pt = new_dof_pt;
    }
 
@@ -333,7 +333,7 @@ std::deque<double*> GeneralisedElement::Dof_pt_deque;
   //Allocate new storage for the pointers to data
   Data** new_data_pt = new Data*[n_internal_data + n_external_data + 1];
   
-  //Copy the old iternal and external values across to the new array
+  //Copy the old internal and external values across to the new array
   for(unsigned i=0;i<(n_internal_data + n_external_data);i++) 
    {new_data_pt[i] = Data_pt[i];}
   
@@ -473,7 +473,7 @@ std::deque<double*> GeneralisedElement::Dof_pt_deque;
       std::ostringstream warning_stream;
       warning_stream << "Data removed from element's external data   "
                      << std::endl
-                     << "You may have to update the indices for remaning data "
+                     << "You may have to update the indices for remaining data "
                      << std::endl
                      << "This can be achieved by using add_external_data()    "
                      << std::endl;
@@ -1161,7 +1161,7 @@ describe_local_dofs(std::ostream& out,const std::string& current_string) const
  {
   //Locally cache the number of external data
   const unsigned n_external_data = Nexternal_data;
-  //If there aren't any external data, then return straight awayy
+  //If there aren't any external data, then return straight away
   if(n_external_data == 0) {return;}
 
   //Call the update function to ensure that the element is in
@@ -1934,7 +1934,7 @@ assemble_local_to_eulerian_jacobian(const DShape &dpsids,
 
 //=========================================================================
 /// Internal function that is used to assemble the jacobian of second
-/// derivatives of the the mapping from local coordinates (s) to the 
+/// derivatives of the mapping from local coordinates (s) to the 
 /// eulerian coordinates (x), given the second derivatives of the 
 /// shape functions. 
 //=========================================================================
@@ -1942,7 +1942,7 @@ assemble_local_to_eulerian_jacobian(const DShape &dpsids,
  assemble_local_to_eulerian_jacobian2(const DShape &d2psids,
                                       DenseMatrix<double> &jacobian2) const
  {
-  //Find the the dimension of the element
+  //Find the dimension of the element
   const unsigned el_dim = dim();
   //Find the number of shape functions and shape functions types
   //Must be equal to the number of nodes and their position types
@@ -5534,7 +5534,7 @@ void FaceElement::continuous_tangent_and_outer_unit_normal
    for(unsigned i=0;i<spatial_dim;i++) 
     {unit_normal[i] *= Normal_sign/normal_length;}
 
-   // Next we create the conintuous tangent vectors!
+   // Next we create the continuous tangent vectors!
    if(Tangent_direction_pt != 0)
     // There is a general direction that the first tangent vector should follow.
     {
@@ -5624,7 +5624,7 @@ void FaceElement::continuous_tangent_and_outer_unit_normal
        tang_vec[1][1]= -(b*c*z)/(a_sq + b_sq);
        tang_vec[1][2]= z;
        // NB : we didn't use the fact that N is normalized,
-       // that's why we have these insimplified formulas
+       // that's why we have these unsimplified formulas
       }
      else if (c!=0.0)
       {
@@ -5682,7 +5682,7 @@ void FaceElement::continuous_tangent_and_outer_unit_normal
 {
  //Find the dimension of the element
  const unsigned element_dim = dim();
- //Find the local coordiantes of the ipt-th integration point
+ //Find the local coordinates of the ipt-th integration point
  Vector<double> s(element_dim);
  for(unsigned i=0;i<element_dim;i++) {s[i] = integral_pt()->knot(ipt,i);}
  //Call the outer unit normal function
