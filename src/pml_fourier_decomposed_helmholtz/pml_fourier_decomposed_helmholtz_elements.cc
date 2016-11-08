@@ -182,9 +182,12 @@ namespace oomph
 /// (real and imag part) in every case
 //======================================================================
  template<unsigned NNODE_1D>
- const unsigned QPmlFourierDecomposedHelmholtzElement<NNODE_1D>::
+ const unsigned QPMLFourierDecomposedHelmholtzElement<NNODE_1D>::
  Initial_Nvalue=2;
 
+ /// PML Helmholtz equations static data, so that by default we can point to a 0
+ double PMLFourierDecomposedHelmholtzEquations::
+  Default_Physical_Constant_Value = 0.0;
 
 //======================================================================
 /// Compute element residual Vector and/or element Jacobian matrix
@@ -194,7 +197,7 @@ namespace oomph
 ///
 /// Pure version without hanging nodes
 //======================================================================
- void  PmlFourierDecomposedHelmholtzEquations::
+ void  PMLFourierDecomposedHelmholtzEquations::
  fill_in_generic_residual_contribution_pml_fourier_decomposed_helmholtz
  (Vector<double> &residuals,
   DenseMatrix<double> &jacobian,
@@ -268,26 +271,8 @@ namespace oomph
     get_source_pml_fourier_decomposed_helmholtz
      (ipt,interpolated_x,source);
 
-    double r = interpolated_x[0];
     double n = (double)pml_fourier_wavenumber();
     double n_squared = n*n;
-
-    //Determine absorption factor
-    //--------------------------
-    // double alpha=0.0; effacer
-    // get_alpha_pml_fourier_decomposed_helmholtz(ipt,interpolated_x,alpha);
-
-    //Determine sound speed
-    //--------------------- effacer
-    // double c=0.0;
-    // get_c_pml_fourier_decomposed_helmholtz(ipt,interpolated_x,c);
-
-
-    /// \short Use soundspeed, absorption and frequency effacer
-    /// to precompute expressions to be subsequently used
-    //double c_squared = c * c;
-    //double alpha_squared = alpha * alpha;
-    // double omega_squared = omega() * omega();
 
 
    // Declare a vector of complex numbers for pml weights on the Laplace bit
@@ -305,73 +290,75 @@ namespace oomph
                             pml_k_squared_factor);
 
 
-   //Declare the complex r variable
-   std::complex<double> complex_r = std::complex<double>(1.0,0.0);
-
    // Determine the complex r variable.  The variable is
    // only complex once it enters the right pml domain or either
    // of the two corner pml domains, otherwise it acts like the
    // variable r.
+   std::complex<double> complex_r = std::complex<double>(1.0,0.0);
    compute_complex_r(ipt, interpolated_x, complex_r);
-
-
-   // Compute the coefficients needed for the residuals.
-   // The variables below use the complex variable r and the
-   // various pml weights.
-   std::complex<double> complex_r_squared = (complex_r*complex_r);
-   std::complex<double> div_comp_r =
-    (1.0 / std::complex<double> (
-      complex_r_squared.real(), complex_r_squared.imag()) );
-   double expr1 = k_squared()-(n_squared*div_comp_r.real() );
-   double expr2 = - (n_squared*div_comp_r.imag() );
-
-
+   
+   // Calculate Jacobian
+   // ------------------
+   std::complex<double> pml_k_squared_jacobian = 
+     - pml_k_squared_factor * ( k_squared() - n_squared / complex_r * complex_r)
+     * complex_r * W;
+   
+   // Term from the Laplace operator
+   Vector<std::complex<double> > pml_laplace_jacobian(2);
+   for (unsigned k=0;k<2;k++)
+    {
+     pml_laplace_jacobian[k] = pml_laplace_factor[k]* complex_r * W;
+    }
+    
+    // Calculate residuals
+    // -------------------
+    // Note: it is a linear equation so residual = jacobian * u
+    std::complex<double> pml_k_squared_residual = pml_k_squared_jacobian 
+      * interpolated_u;
+    
+    // Term from the Laplace operator
+    Vector<std::complex<double> > pml_laplace_residual(2);
+    for (unsigned k=0;k<2;k++)
+     {
+      pml_laplace_residual[k] = pml_laplace_jacobian[k] * interpolated_dudx[k];
+     }
+    
    // Assemble residuals and Jacobian
    //--------------------------------
-
    // Loop over the test functions
    for(unsigned l=0;l<n_node;l++)
     {
-
-     // first, compute the real part contribution
-     //-------------------------------------------
-
-     //Get the local equations
+     //Get the equation numbers
      local_eqn_real =
       nodal_local_eqn
       (l,u_index_pml_fourier_decomposed_helmholtz().real());
      local_eqn_imag =
       nodal_local_eqn
       (l,u_index_pml_fourier_decomposed_helmholtz().imag());
+      
+     // first, add the real contributions
+     //-------------------------------------------
 
      /*IF it's not a boundary condition*/
      if(local_eqn_real >= 0)
       {
-       // Add body force/source term and Helmholtz bit
-       residuals[local_eqn_real] +=
-        ((pml_k_squared_factor.real()*
-          (expr2*interpolated_u.imag()-expr1*interpolated_u.real() ))
-         +(pml_k_squared_factor.imag()*
-           (expr1*interpolated_u.imag()+expr2*interpolated_u.real()))
-         )*test(l)*r*W;
+       // Add k squared term of equation 
+       residuals[local_eqn_real] += pml_k_squared_residual.real()*test(l);
 
-       // The Laplace bit
+       // Add the term from the Laplace operator
        for (unsigned k=0;k<2;k++)
         {
-         residuals[local_eqn_real] +=
-          (pml_laplace_factor[k].real()*interpolated_dudx[k].real() -
-           pml_laplace_factor[k].imag()*interpolated_dudx[k].imag() )*
-          dtestdx(l,k)*r*W;
+         residuals[local_eqn_real]+=pml_laplace_residual[k].real()*dtestdx(l,k);
         }
 
-
-       // Calculate the jacobian
-       //-----------------------
+       // Add contributions to the jacobian
+       //----------------------------------
        if(flag)
         {
          //Loop over the velocity shape functions again
          for(unsigned l2=0;l2<n_node;l2++)
           {
+           // Get the unknown numbers
            local_unknown_real =
             nodal_local_eqn
             (l2,u_index_pml_fourier_decomposed_helmholtz().real());
@@ -379,35 +366,32 @@ namespace oomph
             nodal_local_eqn
             (l2,u_index_pml_fourier_decomposed_helmholtz().imag());
 
-
            //If at a non-zero degree of freedom add in the entry
            if(local_unknown_real >= 0)
             {
-             // Add the helmholtz contribution
+             // Add the helmholtz contribution to the jacobian
              jacobian(local_eqn_real,local_unknown_real) +=
-              ( -(pml_k_squared_factor.real()*(expr1)) +
-                (pml_k_squared_factor.imag()*expr2 ) )*psi(l2)*test(l)*r*W;
+              pml_k_squared_jacobian.real() * psi(l2)*test(l);
 
-             //Add contribution to elemental Matrix
+             // Add the term from the Laplace operator to the jacobian
              for (unsigned k=0;k<2;k++)
               {
                jacobian(local_eqn_real,local_unknown_real) +=
-                pml_laplace_factor[k].real()*dpsidx(l2,k)*dtestdx(l,k)*r*W;
+                pml_laplace_jacobian[k].real()*dpsidx(l2,k)*dtestdx(l,k);
               }
             }
            //If at a non-zero degree of freedom add in the entry
            if(local_unknown_imag >= 0)
             {
-             // Add the helmholtz contribution
+             // Add k squared term to jacobian
              jacobian(local_eqn_real,local_unknown_imag) +=
-              ( (pml_k_squared_factor.real()*expr2) +
-                (pml_k_squared_factor.imag()*expr1 ) )*psi(l2)*test(l)*r*W;
+              - pml_k_squared_jacobian.imag()*psi(l2)*test(l);
 
              //Add contribution to elemental Matrix
              for (unsigned k=0;k<2;k++)
               {
                jacobian(local_eqn_real,local_unknown_imag) +=
-                -pml_laplace_factor[k].imag()*dpsidx(l2,k)*dtestdx(l,k)*r*W;
+                - pml_laplace_jacobian[k].imag()*dpsidx(l2,k)*dtestdx(l,k);
               }
             }
 
@@ -415,38 +399,22 @@ namespace oomph
         } // end of if(flag)
       }
 
-     // Second, compute the imaginary part contribution
+     // Second, add the imaginary contribution
      //------------------------------------------------
 
-     //Get the local equation
-     local_eqn_imag =
-      nodal_local_eqn
-      (l,u_index_pml_fourier_decomposed_helmholtz().imag());
-     local_eqn_real =
-      nodal_local_eqn
-      (l,u_index_pml_fourier_decomposed_helmholtz().real());
-
-     /*IF it's not a boundary condition*/
+     // IF it's not a boundary condition
      if(local_eqn_imag >= 0)
       {
-       // Add body force/source term and Helmholtz bit
-       residuals[local_eqn_imag] +=
-        ((-pml_k_squared_factor.real()*
-          (expr1*interpolated_u.imag()+expr2*interpolated_u.real() ))
-         +(pml_k_squared_factor.imag()*
-           (expr2*interpolated_u.imag()-expr1*interpolated_u.real() ))
-         )*test(l)*r*W;
+       // Add k squared term of equation
+       residuals[local_eqn_imag] += pml_k_squared_residual.imag()*test(l);
 
-       // The Laplace bit itself
+       // Add the term from the Laplace operator
        for (unsigned k=0;k<2;k++)
         {
-         residuals[local_eqn_imag] +=
-          (pml_laplace_factor[k].real()*interpolated_dudx[k].imag() +
-           pml_laplace_factor[k].imag()*interpolated_dudx[k].real())*
-          dtestdx(l,k)*r*W;
+         residuals[local_eqn_imag]+=pml_laplace_residual[k].imag()*dtestdx(l,k);
         }
 
-       // Calculate the jacobian
+       // Add the contribution to the jacobian
        //-----------------------
        if(flag)
         {
@@ -464,14 +432,13 @@ namespace oomph
             {
              //Add the helmholtz contribution
              jacobian(local_eqn_imag,local_unknown_imag) +=
-              ((-pml_k_squared_factor.real()*expr1)+
-               (pml_k_squared_factor.imag()*expr2) )*psi(l2)*test(l)*r*W;
+              pml_k_squared_jacobian.real()*psi(l2)*test(l);
 
              //Add contribution to elemental Matrix
              for (unsigned k=0;k<2;k++)
               {
                jacobian(local_eqn_imag,local_unknown_imag) +=
-                pml_laplace_factor[k].real()*dpsidx(l2,k)*dtestdx(l,k)*r*W;
+                pml_laplace_jacobian[k].real()*dpsidx(l2,k)*dtestdx(l,k);
               }
             }
            //If at a non-zero degree of freedom add in the entry
@@ -479,14 +446,13 @@ namespace oomph
             {
              //Add the helmholtz contribution
              jacobian(local_eqn_imag,local_unknown_real) +=
-              ((-pml_k_squared_factor.real()*expr2)-
-               (pml_k_squared_factor.imag()*expr1) )*psi(l2)*test(l)*r*W;
+              pml_k_squared_jacobian.imag()*psi(l2)*test(l);
 
              //Add contribution to elemental Matrix
              for (unsigned k=0;k<2;k++)
               {
                jacobian(local_eqn_imag,local_unknown_real) +=
-                pml_laplace_factor[k].imag()*dpsidx(l2,k)*dtestdx(l,k)*r*W;
+                pml_laplace_jacobian[k].imag()*dpsidx(l2,k)*dtestdx(l,k);
               }
             }
           }
@@ -504,7 +470,7 @@ namespace oomph
 //======================================================================
 /// Self-test:  Return 0 for OK
 //======================================================================
- unsigned  PmlFourierDecomposedHelmholtzEquations::self_test()
+ unsigned  PMLFourierDecomposedHelmholtzEquations::self_test()
  {
 
   bool passed=true;
@@ -535,7 +501,7 @@ namespace oomph
 ///
 /// nplot points in each coordinate direction
 //======================================================================
- void  PmlFourierDecomposedHelmholtzEquations::output
+ void  PMLFourierDecomposedHelmholtzEquations::output
  (std::ostream &outfile,
   const unsigned &nplot)
  {
@@ -582,7 +548,7 @@ namespace oomph
 ///
 /// Output at nplot points in each coordinate direction
 //======================================================================
- void  PmlFourierDecomposedHelmholtzEquations::output_real
+ void  PMLFourierDecomposedHelmholtzEquations::output_real
  (std::ostream &outfile,
   const double& phi,
   const unsigned &nplot)
@@ -623,7 +589,7 @@ namespace oomph
 ///
 /// nplot points in each coordinate direction
 //======================================================================
- void  PmlFourierDecomposedHelmholtzEquations::output(FILE* file_pt,
+ void  PMLFourierDecomposedHelmholtzEquations::output(FILE* file_pt,
                                                    const unsigned &nplot)
  {
   //Vector of local coordinates
@@ -669,7 +635,7 @@ namespace oomph
  ///
  ///   r,z,u_exact
 //======================================================================
- void PmlFourierDecomposedHelmholtzEquations::output_fct(
+ void PMLFourierDecomposedHelmholtzEquations::output_fct(
   std::ostream &outfile,
   const unsigned &nplot,
   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
@@ -724,7 +690,7 @@ namespace oomph
 ///
 /// Output at nplot points in each coordinate direction
 //======================================================================
- void PmlFourierDecomposedHelmholtzEquations::output_real_fct(
+ void PMLFourierDecomposedHelmholtzEquations::output_real_fct(
   std::ostream &outfile,
   const double& phi,
   const unsigned &nplot,
@@ -777,7 +743,7 @@ namespace oomph
  /// Plot error at a given number of plot points.
  ///
 //======================================================================
- void PmlFourierDecomposedHelmholtzEquations::compute_error(
+ void PMLFourierDecomposedHelmholtzEquations::compute_error(
   std::ostream &outfile,
   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
   double& error, double& norm)
@@ -858,7 +824,7 @@ namespace oomph
 //======================================================================
  /// Compute norm of fe solution
 //======================================================================
- void PmlFourierDecomposedHelmholtzEquations::compute_norm
+ void PMLFourierDecomposedHelmholtzEquations::compute_norm
  (double& norm)
  {
 
@@ -915,8 +881,12 @@ namespace oomph
 //====================================================================
 // Force build of templates
 //====================================================================
-template class QPmlFourierDecomposedHelmholtzElement<2>;
-template class QPmlFourierDecomposedHelmholtzElement<3>;
-template class QPmlFourierDecomposedHelmholtzElement<4>;
+template class QPMLFourierDecomposedHelmholtzElement<2>;
+template class QPMLFourierDecomposedHelmholtzElement<3>;
+template class QPMLFourierDecomposedHelmholtzElement<4>;
+
+BermudezPMLMappingAndTransformedCoordinate 
+  PMLFourierDecomposedHelmholtzEquations::
+  Default_pml_mapping_and_transformed_coordinate;
 
 }

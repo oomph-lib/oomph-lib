@@ -40,11 +40,11 @@ namespace oomph
 /// (real and imag part) in every case
 //======================================================================
  template<unsigned DIM, unsigned NNODE_1D>
- const unsigned QPmlHelmholtzElement<DIM,NNODE_1D>::Initial_Nvalue = 2;
+ const unsigned QPMLHelmholtzElement<DIM,NNODE_1D>::Initial_Nvalue = 2;
 
  /// PML Helmholtz equations static data, so that by default we can point to a 0
  template <unsigned DIM>
- double PmlHelmholtzEquations<DIM>::Default_Physical_Constant_Value = 0.0; // faire: why is this not const (wasn't in navier_stokes.cc), but it is above
+ double PMLHelmholtzEquations<DIM>::Default_Physical_Constant_Value = 0.0; // faire: why is this not const (wasn't in navier_stokes.cc), but it is above
 
 //======================================================================
 /// Compute element residual Vector and/or element Jacobian matrix
@@ -55,7 +55,7 @@ namespace oomph
 /// Pure version without hanging nodes
 //======================================================================
 template <unsigned DIM>
-void  PmlHelmholtzEquations<DIM>::
+void  PMLHelmholtzEquations<DIM>::
 fill_in_generic_residual_contribution_helmholtz(Vector<double> &residuals,
                                                 DenseMatrix<double> &jacobian,
                                                 const unsigned& flag)
@@ -305,7 +305,7 @@ fill_in_generic_residual_contribution_helmholtz(Vector<double> &residuals,
 /// Self-test:  Return 0 for OK
 //======================================================================
 template <unsigned DIM>
-unsigned  PmlHelmholtzEquations<DIM>::self_test()
+unsigned  PMLHelmholtzEquations<DIM>::self_test()
 {
 
  bool passed=true;
@@ -337,7 +337,7 @@ unsigned  PmlHelmholtzEquations<DIM>::self_test()
 /// nplot points in each coordinate direction
 //======================================================================
 template <unsigned DIM>
-void  PmlHelmholtzEquations<DIM>::output(std::ostream &outfile,
+void  PMLHelmholtzEquations<DIM>::output(std::ostream &outfile,
                                     const unsigned &nplot)
 {
 
@@ -383,7 +383,7 @@ void  PmlHelmholtzEquations<DIM>::output(std::ostream &outfile,
 /// Output at nplot points in each coordinate direction
 //======================================================================
 template <unsigned DIM>
-void  PmlHelmholtzEquations<DIM>::output_real(std::ostream &outfile,
+void  PMLHelmholtzEquations<DIM>::output_real(std::ostream &outfile,
                                            const double& phi,
                                            const unsigned &nplot)
 {
@@ -429,7 +429,7 @@ void  PmlHelmholtzEquations<DIM>::output_real(std::ostream &outfile,
 /// Output at nplot points in each coordinate direction
 //======================================================================
 template <unsigned DIM>
-void  PmlHelmholtzEquations<DIM>::output_total_real(
+void  PMLHelmholtzEquations<DIM>::output_total_real(
  std::ostream &outfile,
  FiniteElement::SteadyExactSolutionFctPt incoming_wave_fct_pt,
  const double& phi,
@@ -491,7 +491,7 @@ void  PmlHelmholtzEquations<DIM>::output_total_real(
 /// Output at nplot points in each coordinate direction
 //======================================================================
 template <unsigned DIM>
-void  PmlHelmholtzEquations<DIM>::output_imag(std::ostream &outfile,
+void  PMLHelmholtzEquations<DIM>::output_imag(std::ostream &outfile,
                                            const double& phi,
                                            const unsigned &nplot)
 {
@@ -532,7 +532,7 @@ void  PmlHelmholtzEquations<DIM>::output_imag(std::ostream &outfile,
 /// nplot points in each coordinate direction
 //======================================================================
 template <unsigned DIM>
-void  PmlHelmholtzEquations<DIM>::output(FILE* file_pt,
+void  PMLHelmholtzEquations<DIM>::output(FILE* file_pt,
                                     const unsigned &nplot)
 {
  //Vector of local coordinates
@@ -578,7 +578,7 @@ void  PmlHelmholtzEquations<DIM>::output(FILE* file_pt,
  ///   x,y,u_exact    or    x,y,z,u_exact
 //======================================================================
 template <unsigned DIM>
-void PmlHelmholtzEquations<DIM>::output_fct(std::ostream &outfile,
+void PMLHelmholtzEquations<DIM>::output_fct(std::ostream &outfile,
                                        const unsigned &nplot,
                   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
 {
@@ -634,7 +634,7 @@ void PmlHelmholtzEquations<DIM>::output_fct(std::ostream &outfile,
 /// Output at nplot points in each coordinate direction
 //======================================================================
 template <unsigned DIM>
-void PmlHelmholtzEquations<DIM>::output_real_fct(
+void PMLHelmholtzEquations<DIM>::output_real_fct(
  std::ostream &outfile,
  const double& phi,
  const unsigned &nplot,
@@ -690,7 +690,7 @@ void PmlHelmholtzEquations<DIM>::output_real_fct(
 /// Output at nplot points in each coordinate direction
 //======================================================================
 template <unsigned DIM>
-void PmlHelmholtzEquations<DIM>::output_imag_fct(
+void PMLHelmholtzEquations<DIM>::output_imag_fct(
  std::ostream &outfile,
  const double& phi,
  const unsigned &nplot,
@@ -745,7 +745,7 @@ void PmlHelmholtzEquations<DIM>::output_imag_fct(
  ///
 //======================================================================
 template <unsigned DIM>
-void PmlHelmholtzEquations<DIM>::compute_error(std::ostream &outfile,
+void PMLHelmholtzEquations<DIM>::compute_error(std::ostream &outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                        double& error, double& norm)
 {
@@ -826,7 +826,7 @@ void PmlHelmholtzEquations<DIM>::compute_error(std::ostream &outfile,
  /// Compute norm of fe solution
 //======================================================================
 template <unsigned DIM>
-void PmlHelmholtzEquations<DIM>::compute_norm(double& norm)
+void PMLHelmholtzEquations<DIM>::compute_norm(double& norm)
 {
 
  // Initialise
@@ -877,23 +877,23 @@ void PmlHelmholtzEquations<DIM>::compute_norm(double& norm)
 //====================================================================
 // Force build of templates
 //====================================================================
-template class PmlHelmholtzEquations<1>;
-template class PmlHelmholtzEquations<2>;
-template class PmlHelmholtzEquations<3>;
+template class PMLHelmholtzEquations<1>;
+template class PMLHelmholtzEquations<2>;
+template class PMLHelmholtzEquations<3>;
 
 template<unsigned DIM>
-BermudezPMLMapping PmlHelmholtzEquations<DIM>::Default_pml_mapping;
+BermudezPMLMapping PMLHelmholtzEquations<DIM>::Default_pml_mapping;
 
-template class QPmlHelmholtzElement<1,2>;
-template class QPmlHelmholtzElement<1,3>;
-template class QPmlHelmholtzElement<1,4>;
+template class QPMLHelmholtzElement<1,2>;
+template class QPMLHelmholtzElement<1,3>;
+template class QPMLHelmholtzElement<1,4>;
 
-template class QPmlHelmholtzElement<2,2>;
-template class QPmlHelmholtzElement<2,3>;
-template class QPmlHelmholtzElement<2,4>;
+template class QPMLHelmholtzElement<2,2>;
+template class QPMLHelmholtzElement<2,3>;
+template class QPMLHelmholtzElement<2,4>;
 
-template class QPmlHelmholtzElement<3,2>;
-template class QPmlHelmholtzElement<3,3>;
-template class QPmlHelmholtzElement<3,4>;
+template class QPMLHelmholtzElement<3,2>;
+template class QPMLHelmholtzElement<3,3>;
+template class QPMLHelmholtzElement<3,4>;
 
 }

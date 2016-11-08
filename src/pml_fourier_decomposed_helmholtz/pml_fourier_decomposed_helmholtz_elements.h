@@ -81,20 +81,28 @@ namespace oomph
 /// Class to hold the mapping function for the PML
 ///
 //=======================================================================
-class PMLMapping
+class PMLMappingAndTransformedCoordinate
 {
 
 public:
 
   /// Default constructor (empty)
-  PMLMapping(){};
+  PMLMappingAndTransformedCoordinate(){};
 
- /// \short Pure virtual to return PML mapping gamma, where gamma is the
- /// \f$d\tilde x / d x\f$ as  function of \f$\nu\f$ where \f$\nu = x - h\f$ where h is
- /// the vector from the origin to the start of the PML
- virtual std::complex<double> gamma(const double& nu_i,
+  /// \short Pure virtual to return PML mapping gamma, where gamma is the
+  /// \f$d\tilde x / d x\f$ as  function of \f$\nu\f$ where \f$\nu = x - h\f$ where h is
+  /// the vector from the origin to the start of the PML
+  virtual std::complex<double> gamma(const double& nu_i,
    const double& pml_width_i,
-   const double& wavenumber_local) = 0;
+   const double& k_squared) = 0;
+   
+  /// \short Pure virtual to return PML transformed coordinate, also known as 
+  /// \f$d\tilde x \f$ as  function of \f$\nu\f$ where \f$\nu = x - h\f$ where h 
+  /// is the vector from the origin to the start of the PML
+  virtual std::complex<double> transformed_coordinate(const double& nu_i,
+   const double& pml_width_i,
+   const double& pml_inner_boundary,
+   const double& k_squared) = 0;
 
 };
 
@@ -102,27 +110,40 @@ public:
 //=======================================================================
 /// The mapping function propsed by Bermudez et al, appears to be the best
 /// and so this will be the default mapping (see definition of
-/// PmlHelmholtzEquations)
+/// PMLHelmholtzEquations)
 //=======================================================================
-class BermudezPMLMapping : public PMLMapping
+class BermudezPMLMappingAndTransformedCoordinate : 
+  public PMLMappingAndTransformedCoordinate
 {
 
   public:
 
   /// Default constructor (empty)
-  BermudezPMLMapping(){};
+  BermudezPMLMappingAndTransformedCoordinate(){};
 
   /// \short Overwrite the pure PML mapping coefficient function to return the
-  /// coeffcients proposed by Bermudez et al
+  /// mapping function proposed by Bermudez et al
   std::complex<double> gamma(const double& nu_i,
                              const double& pml_width_i,
-                             const double& wavenumber_local)
+                             const double& k_squared)
   {
      /// \short return \f$\gamma=1 + (1/k)(i/|outer_boundary - x|)\f$ or more
      /// abstractly \f$\gamma = 1 + \frac i {k\delta_{pml}}(1/|1-\bar\nu|)\f$
-     return 1.0 + (1.0 / std::complex<double> (wavenumber_local, 0))
-      * std::complex<double>
-       (0.0, 1.0/(std::fabs(pml_width_i - nu_i)));
+     return 1.0 + std::complex<double> (1.0 / sqrt(k_squared), 0)
+      * std::complex<double> (0.0, 1.0/(std::fabs(pml_width_i - nu_i)));
+  }
+  
+  /// \short Overwrite the pure PML mapping coefficient function to return the
+  /// transformed coordinate proposed by Bermudez et al
+  std::complex<double> transformed_coordinate(const double& nu_i,
+                             const double& pml_width_i,
+                             const double& pml_inner_boundary,
+                             const double& k_squared)
+  {
+    /// \short return \f$\tilde x = h + \nu + \log(1-|\nu / \delta|)\f$
+    double log_arg = 1.0 - std::fabs(nu_i / pml_width_i);
+    return std::complex<double> (pml_inner_boundary + nu_i,
+                                 -log(log_arg)/sqrt(k_squared) );
   }
 
 };
@@ -146,7 +167,7 @@ class BermudezPMLMapping : public PMLMapping
 /// This contains the generic maths. Shape functions, geometric
 /// mapping etc. must get implemented in derived class.
 //=============================================================
- class PmlFourierDecomposedHelmholtzEquations :
+ class PMLFourierDecomposedHelmholtzEquations :
  public virtual PMLElementBase<2>,
   public virtual FiniteElement
  {
@@ -155,34 +176,28 @@ class BermudezPMLMapping : public PMLMapping
 
   /// \short Function pointer to source function fct(x,f(x)) --
   /// x is a Vector!
-  typedef void (*PmlFourierDecomposedHelmholtzSourceFctPt)(
+  typedef void (*PMLFourierDecomposedHelmholtzSourceFctPt)(
    const Vector<double>& x,
    std::complex<double>& f);
 
-/* effacer start
-  /// \short Function pointer to sound speed field
-  /// x is a vector!
-  typedef void (*CFctPt)(const Vector<double>& x, double& f);
-
-  /// \short Function pointer to absorption field
-  /// x is a vector!
-  typedef void (*AlphaFctPt)(const Vector<double>& x, double& f);
-effacer end
-  */
-
-
   /// Constructor
-   PmlFourierDecomposedHelmholtzEquations() : Source_fct_pt(0),
-   K_squared_pt(0),
-    //Omega_pt(0), C_fct_pt(0), Alpha_fct_pt(0), effacer
-    N_pml_fourier_pt(0)
-   {}
+   PMLFourierDecomposedHelmholtzEquations() : Source_fct_pt(0),
+   K_squared_pt(0), N_pml_fourier_pt(0)
+   {
+     // Provide pointer to static method (Save memory)
+     Pml_mapping_and_transformed_coordinate_pt = 
+     &PMLFourierDecomposedHelmholtzEquations::
+     Default_pml_mapping_and_transformed_coordinate;
+     
+     Alpha_pt = &Default_Physical_Constant_Value;
+   }
+
 
   /// Broken copy constructor
-  PmlFourierDecomposedHelmholtzEquations(
-   const PmlFourierDecomposedHelmholtzEquations& dummy)
+  PMLFourierDecomposedHelmholtzEquations(
+   const PMLFourierDecomposedHelmholtzEquations& dummy)
    {
-    BrokenCopy::broken_copy("PmlFourierDecomposedHelmholtzEquations");
+    BrokenCopy::broken_copy("PMLFourierDecomposedHelmholtzEquations");
    }
 
   /// Broken assignment operator
@@ -190,10 +205,10 @@ effacer end
 //when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
 //realise that two separate implementations of the broken function are the same and so,
 //quite rightly, it shouts.
-  /*void operator=(const PmlFourierDecomposedHelmholtzEquations&)
+  /*void operator=(const PMLFourierDecomposedHelmholtzEquations&)
    {
     BrokenCopy::broken_assign
-     ("PmlFourierDecomposedHelmholtzEquations");
+     ("PMLFourierDecomposedHelmholtzEquations");
      }*/
 
   /// \short Return the index at which the unknown value
@@ -226,31 +241,19 @@ effacer end
  #endif
     return *K_squared_pt;
    }
-
-/*effacer start
-  /// Get pointer to frequency
-  double*& omega_pt()
-   {
-    return Omega_pt;
-   }
-
-
-  /// Get omega
-  double omega()
-  {
-#ifdef PARANOID
-   if (Omega_pt==0)
+   
+   /// Get pointer to complex shift
+   double*& alpha_pt()
     {
-     throw OomphLibError(
-      "Please set pointer to omega using access fct to pointer!",
-      OOMPH_CURRENT_FUNCTION,
-      OOMPH_EXCEPTION_LOCATION);
+     return Alpha_pt;
     }
-#endif
-   return *Omega_pt;
-  }
-  effacer end
-*/
+
+
+   /// Get complex shift
+   double alpha()
+   {
+    return *Alpha_pt;
+   }
 
   /// Get pointer to Fourier wavenumber
   int*& pml_fourier_wavenumber_pt()
@@ -315,7 +318,7 @@ effacer end
                          exact_soln_pt)
   {
    throw OomphLibError(
-    "There is no time-dependent output_fct() for PmlFourierDecomposedHelmholtz elements ",
+    "There is no time-dependent output_fct() for PMLFourierDecomposedHelmholtz elements ",
     OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
@@ -344,7 +347,7 @@ effacer end
                     const double& time, double& error, double& norm)
  {
   throw OomphLibError(
-   "There is no time-dependent compute_error() for PmlFourierDecomposedHelmholtz elements",
+   "There is no time-dependent compute_error() for PMLFourierDecomposedHelmholtz elements",
    OOMPH_CURRENT_FUNCTION,
    OOMPH_EXCEPTION_LOCATION);
  }
@@ -354,12 +357,12 @@ effacer end
 
 
  /// Access function: Pointer to source function
- PmlFourierDecomposedHelmholtzSourceFctPt& source_fct_pt()
+ PMLFourierDecomposedHelmholtzSourceFctPt& source_fct_pt()
   {return Source_fct_pt;}
 
 
  /// Access function: Pointer to source function. Const version
- PmlFourierDecomposedHelmholtzSourceFctPt source_fct_pt() const
+ PMLFourierDecomposedHelmholtzSourceFctPt source_fct_pt() const
  {return Source_fct_pt;}
 
 
@@ -396,66 +399,6 @@ effacer end
     values_to_pin[j]=j;
    }
  }
-
-/* effacer start
- /// Access function: Pointer to sound speed function
- CFctPt& c_fct_pt() {return C_fct_pt;}
-
- /// Access function: Pointer to sound speed function. Const version
- CFctPt c_fct_pt() const {return C_fct_pt;}
-
- /// Get soundspeed term at (Eulerian) position x. This function is
- /// virtual to allow overloading in multi-physics problems where
- /// the strength of the sound speed function might be determined by
- /// another system of equations.
- inline virtual void get_c_pml_fourier_decomposed_helmholtz(
-  const unsigned& ipt,
-  const Vector<double>& x,
-  double& c) const
-  {
-#ifdef PARANOID
-   if (C_fct_pt==0)
-    {
-     throw OomphLibError(
-      "Please set function pointer that sets wave speed.!",
-      OOMPH_CURRENT_FUNCTION,
-      OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-   // Get wave speed
-   (*C_fct_pt)(x,c);
-  }
-
-
- /// Access function: Pointer to damping function
- AlphaFctPt& alpha_fct_pt() {return Alpha_fct_pt;}
-
-  /// Access function: Pointer to damping function. Const version
- AlphaFctPt alpha_fct_pt() const {return Alpha_fct_pt;}
-
- /// \short Get absorption term at (Eulerian) position x. This function is
- /// virtual to allow overloading in multi-physics problems where
- /// the strength of the source function might be determined by
- /// another system of equations.
- inline virtual void get_alpha_pml_fourier_decomposed_helmholtz(
-  const unsigned& ipt,
-  const Vector<double>& x,
-  double& alpha) const
-  {
-   //If no damping function has been set, return zero
-   if(Alpha_fct_pt==0)
-    {
-     alpha = 0.0;
-    }
-   else
-    {
-     // Get damping
-     (*Alpha_fct_pt)(x,alpha);
-    }
-  }
-  effacer end
-  */
 
 
  /// Get flux: flux[i] = du/dx_i for real and imag part
@@ -562,75 +505,80 @@ effacer end
  unsigned self_test();
 
 
-   protected:
+protected:
 
 
 
-/// \short Compute pml coefficients at position x and integration point ipt.
-/// Note, this implementation is different to the one in PmlHelmholtz
-/// If you want the flexibility of your own PML mapping function you'll have to
-/// implement it yourself
- void compute_pml_coefficients(
-  const unsigned& ipt,
-  const Vector<double>& x,
-  Vector< std::complex<double> >& pml_laplace_factor,
-  std::complex<double>& pml_k_squared_factor)
+ /// \short Compute pml coefficients at position x and integration point ipt.
+ /// pml_laplace_factor is used in the residual contribution from the laplace
+ /// operator, similarly pml_k_squared_factor is used in the contribution from
+ /// the k^2 of the Helmholtz operator.
+  void compute_pml_coefficients(
+   const unsigned& ipt,
+   const Vector<double>& x,
+   Vector< std::complex<double> >& pml_laplace_factor,
+   std::complex<double>& pml_k_squared_factor)
  {
-  // Cache c effacer
-  // double c_local=0.0;
-  // get_c_pml_fourier_decomposed_helmholtz(ipt,x,c_local);
 
-  // Cache alpha effacer
-  // double alpha_local=0.0;
-  // get_c_pml_fourier_decomposed_helmholtz(ipt,x,alpha_local);
+   /// Vector which points from the inner boundary to x
+   Vector<double> nu(2);
+   for(unsigned k=0; k<2; k++)
+   {
+     nu[k] = x[k] - this->Pml_inner_boundary[k];
+   }
 
-  // Cache omega effacer
-  // double omega_local = omega();
+   /// Vector which points from the inner boundary to the edge of the boundary
+   Vector<double> pml_width(2);
+   for(unsigned k=0; k<2; k++)
+   {
+     pml_width[k] = this->Pml_outer_boundary[k] - this->Pml_inner_boundary[k];
+   }
 
-  // Declare gamma_i vector of complex numbers for PML factors
-  Vector<std::complex<double> > pml_gamma(2);
+   // Declare gamma_i vectors of complex numbers for PML weights
+   Vector<std::complex<double> > pml_gamma(2);
 
-  if (this->Pml_is_enabled)
-  {
+   if (this->Pml_is_enabled)
+   {
+     // Cache k_squared to pass into mapping function
+     double k_squared_local = k_squared();
 
-    // Cache k (wavenumber), note: we do it in the loop to save doing sqrt in bulk
-    double k_local = sqrt(k_squared());
-    
-    // Loop over both dimensions
-    for(unsigned k=0; k<2; k++) 
-    {
-      // If PML is enabled in the respective direction
-      if (this->Pml_direction_active[k])
-      {
-        pml_gamma[k] = 1.0 + 1.0 / k_local
-        * std::complex<double>
-                (0.0, 1.0/(std::fabs(this->Pml_outer_boundary[k] - x[k]) ));
-      }
-      else
-      {
-        pml_gamma[k] = 1.0;
-      }
-    }
-    
+     for(unsigned k=0; k<2; k++)
+     {
+       // If PML is enabled in the respective direction
+       if (this->Pml_direction_active[k])
+       {
+         pml_gamma[k] = Pml_mapping_and_transformed_coordinate_pt->
+         gamma(nu[k], pml_width[k], k_squared_local);
+       }
+       else
+       {
+         pml_gamma[k] = 1.0;
+       }
+     }
 
     /// \short  for 2D, in order:
     /// g_y/g_x, g_x/g_y for Laplace bit and g_x*g_y for Helmholtz bit
+    /// for 3D, in order: g_y*g_x/g_x, g*x*g_z/g_y, g_x*g_y/g_z for Laplace bit
+    /// and g_x*g_y*g_z for Helmholtz factor
     pml_laplace_factor[0] = pml_gamma[1] / pml_gamma[0];
     pml_laplace_factor[1] = pml_gamma[0] / pml_gamma[1];
     pml_k_squared_factor = pml_gamma[0] * pml_gamma[1];
 
-  }
-  else
-   {
-    /// \short The weights all default to 1.0 as if the propagation
-    /// medium is the physical domain
-    pml_laplace_factor[0] = std::complex<double> (1.0,0.0);
-    pml_laplace_factor[1] = std::complex<double> (1.0,0.0);
-    pml_k_squared_factor = std::complex<double> (1.0,0.0);
+
    }
+   else
+    {
+     /// \short The weights all default to 1.0 as if the propagation
+     /// medium is the physical domain
+     for(unsigned k=0; k<2; k++)
+     {
+       pml_laplace_factor[k] = std::complex<double> (1.0,0.0);
+     }
+
+     pml_k_squared_factor = std::complex<double> (1.0,0.0);
+    }
 
  }
-
 
 
 /// \short Compute complex variable r at position x[0] and
@@ -639,27 +587,8 @@ effacer end
                         const Vector<double>& x,
                         std::complex<double>& complex_r)
  {
-  // Cache c effacer
-  //double c_local=0.0;
-  //get_c_pml_fourier_decomposed_helmholtz(ipt,x,c_local);
-
-  // Cache alpha effacer
-  // double alpha_local=0.0;
-  //get_alpha_pml_fourier_decomposed_helmholtz(ipt,x,alpha_local);
-
-  // Cache omega effacer
-  // double omega_local = omega();
-
   // Cache current position r
   double r = x[0];
-
-  // Precompute expressions to be subsequently used effacer
-  /*double c_squared=c_local*c_local; //1
-  double alpha_squared=alpha_local*alpha_local; //0
-  double omega_squared=omega_local*omega_local; //k^2
-  double expr1 = (omega_squared/c_squared)+alpha_squared; // k^2
-  double expr2 = omega_local/c_local; //k*/
-
 
   /// The complex r variable is only imaginary on two
   /// conditions: First, the decaying nature of the
@@ -670,13 +599,13 @@ effacer end
   // If the complex r variable is imaginary
   if (this->Pml_is_enabled && (this->Pml_direction_active[0]))
    {
-    // Determine the arguement for the log function
-    double log_arg = std::fabs((this->Pml_outer_boundary[0] -
-                         this->Pml_inner_boundary[0]) /
-                        (this->Pml_outer_boundary[0] - r) );
-
-    // Determine the complex r variable: r+i/k log(h+\delta-h/(h+\delta-r))
-    complex_r=std::complex<double> (r , log(log_arg)/sqrt(k_squared()) ); //
+    double nu = x[0] - Pml_inner_boundary[0];
+    double pml_width = Pml_outer_boundary[0] - Pml_inner_boundary[0];
+    double k_squared_local = k_squared();
+    
+    // Determine the complex r variable
+    complex_r = Pml_mapping_and_transformed_coordinate_pt->
+     transformed_coordinate(nu,pml_width,Pml_inner_boundary[0],k_squared_local);
    }
   else
    {
@@ -686,6 +615,24 @@ effacer end
    }
 
  } // end of compute_complex_r
+ 
+ /// Return a pointer to the PML Mapping object
+ PMLMappingAndTransformedCoordinate* &pml_mapping_and_transformed_coordinate_pt() 
+ {
+   return Pml_mapping_and_transformed_coordinate_pt;
+ }
+
+ /// Return a pointer to the PML Mapping object (const version)
+ PMLMappingAndTransformedCoordinate* const 
+  &pml_mapping_and_transformed_coordinate_pt() const 
+ {
+   return Pml_mapping_and_transformed_coordinate_pt;
+ }
+
+ /// Static so that the class doesn't need to instantiate a new default
+ /// everytime it uses it
+ static BermudezPMLMappingAndTransformedCoordinate 
+  Default_pml_mapping_and_transformed_coordinate;
 
 
  /// \short Shape/test functions and derivs w.r.t. to global coords at
@@ -716,29 +663,24 @@ effacer end
    const unsigned& flag);
 
  /// Pointer to source function:
- PmlFourierDecomposedHelmholtzSourceFctPt Source_fct_pt;
+ PMLFourierDecomposedHelmholtzSourceFctPt Source_fct_pt;
 
- /// Pointer to frequency (must be set!)
- // double* Omega_pt; effacer
+ /// Pointer to k^2 (wavenumber squared)
+ double* K_squared_pt;
 
-  /// Pointer to frequency (must be set!)
-  double* K_squared_pt;
+ /// \short Pointer to class which holds the pml mapping function (also known 
+ /// as gamma) and the associated transformed coordinate
+ PMLMappingAndTransformedCoordinate* Pml_mapping_and_transformed_coordinate_pt;
+ 
+ /// Pointer to wavenumber complex shift
+ double *Alpha_pt;
 
-/* effacer start
- /// \short Pointer to soundspeed field,
- /// containing the wavespeed distribution across the domain.
- /// (Must be set)
- CFctPt C_fct_pt;
-
- /// \short Pointer to absorption field,
- /// containing the absorption distribution across the domain.
- /// If not set we set the damping to zero.
- AlphaFctPt Alpha_fct_pt;
- effacer end*/
+ /// Static default value for the physical constants (initialised to zero)
+ static double Default_Physical_Constant_Value;
 
  /// Pointer to Fourier wave number
  int* N_pml_fourier_pt;
-
+ 
  };
 
 
@@ -751,14 +693,14 @@ effacer end
 
 
 //======================================================================
-/// QPmlFourierDecomposedHelmholtzElement elements are
-/// linear/quadrilateral/brick-shaped PmlFourierDecomposedHelmholtz
+/// QPMLFourierDecomposedHelmholtzElement elements are
+/// linear/quadrilateral/brick-shaped PMLFourierDecomposedHelmholtz
 /// elements with isoparametric interpolation for the function.
 //======================================================================
  template <unsigned NNODE_1D>
-  class QPmlFourierDecomposedHelmholtzElement :
+  class QPMLFourierDecomposedHelmholtzElement :
   public virtual QElement<2,NNODE_1D>,
-  public virtual PmlFourierDecomposedHelmholtzEquations
+  public virtual PMLFourierDecomposedHelmholtzEquations
   {
 
     private:
@@ -771,24 +713,24 @@ effacer end
 
 
    ///\short  Constructor: Call constructors for QElement and
-   /// PmlFourierDecomposedHelmholtz equations
-    QPmlFourierDecomposedHelmholtzElement() :
-   QElement<2,NNODE_1D>(), PmlFourierDecomposedHelmholtzEquations()
+   /// PMLFourierDecomposedHelmholtz equations
+    QPMLFourierDecomposedHelmholtzElement() :
+   QElement<2,NNODE_1D>(), PMLFourierDecomposedHelmholtzEquations()
     {}
 
    /// Broken copy constructor
-   QPmlFourierDecomposedHelmholtzElement(
-    const QPmlFourierDecomposedHelmholtzElement<NNODE_1D>& dummy)
+   QPMLFourierDecomposedHelmholtzElement(
+    const QPMLFourierDecomposedHelmholtzElement<NNODE_1D>& dummy)
     {
-     BrokenCopy::broken_copy("QPmlFourierDecomposedHelmholtzElement");
+     BrokenCopy::broken_copy("QPMLFourierDecomposedHelmholtzElement");
     }
 
    /// Broken assignment operator
    /*void operator=(const
-                  QPmlFourierDecomposedHelmholtzElement<NNODE_1D>&)
+                  QPMLFourierDecomposedHelmholtzElement<NNODE_1D>&)
     {
      BrokenCopy::broken_assign
-      ("QPmlFourierDecomposedHelmholtzElement");
+      ("QPMLFourierDecomposedHelmholtzElement");
       }*/
 
 
@@ -799,12 +741,12 @@ effacer end
 
    /// \short Output function: r,z,u
    void output(std::ostream &outfile)
-   {PmlFourierDecomposedHelmholtzEquations::output(outfile);}
+   {PMLFourierDecomposedHelmholtzEquations::output(outfile);}
 
    ///  \short Output function:
    ///   r,z,u at n_plot^2 plot points
    void output(std::ostream &outfile, const unsigned &n_plot)
-   {PmlFourierDecomposedHelmholtzEquations::output(outfile,n_plot);}
+   {PMLFourierDecomposedHelmholtzEquations::output(outfile,n_plot);}
 
    /// \short Output function for real part of full time-dependent solution
    /// u = Re( (u_r +i u_i) exp(-i omega t)
@@ -813,24 +755,24 @@ effacer end
    /// direction
    void output_real(std::ostream &outfile, const double& phi,
                     const unsigned &n_plot)
-   {PmlFourierDecomposedHelmholtzEquations::output_real
+   {PMLFourierDecomposedHelmholtzEquations::output_real
      (outfile,phi,n_plot);}
 
    /// \short C-style output function:  r,z,u
    void output(FILE* file_pt)
-   {PmlFourierDecomposedHelmholtzEquations::output(file_pt);}
+   {PMLFourierDecomposedHelmholtzEquations::output(file_pt);}
 
    ///  \short C-style output function:
    ///   r,z,u  at n_plot^2 plot points
    void output(FILE* file_pt, const unsigned &n_plot)
-   {PmlFourierDecomposedHelmholtzEquations::output(file_pt,n_plot);}
+   {PMLFourierDecomposedHelmholtzEquations::output(file_pt,n_plot);}
 
    /// \short Output function for an exact solution:
    /// r,z,u_exact at n_plot^2 plot points
    void output_fct(std::ostream &outfile, const unsigned &n_plot,
                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
    {
-    PmlFourierDecomposedHelmholtzEquations::output_fct(outfile,n_plot,
+    PMLFourierDecomposedHelmholtzEquations::output_fct(outfile,n_plot,
                                                     exact_soln_pt);
    }
 
@@ -844,7 +786,7 @@ effacer end
                         const unsigned &n_plot,
                         FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
    {
-    PmlFourierDecomposedHelmholtzEquations::output_real_fct
+    PMLFourierDecomposedHelmholtzEquations::output_real_fct
      (outfile,phi,
       n_plot,exact_soln_pt);
    }
@@ -857,7 +799,7 @@ effacer end
                    const double& time,
                    FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
    {
-    PmlFourierDecomposedHelmholtzEquations::output_fct
+    PMLFourierDecomposedHelmholtzEquations::output_fct
      (outfile,n_plot,time,exact_soln_pt);
    }
 
@@ -896,7 +838,7 @@ effacer end
 /// Galerkin: Test functions = shape functions
 //======================================================================
  template<unsigned NNODE_1D>
- double QPmlFourierDecomposedHelmholtzElement<NNODE_1D>::
+ double QPMLFourierDecomposedHelmholtzElement<NNODE_1D>::
   dshape_and_dtest_eulerian_pml_fourier_decomposed_helmholtz(
    const Vector<double> &s,
    Shape &psi,
@@ -925,7 +867,7 @@ effacer end
 /// Galerkin: Test functions = shape functions
 //======================================================================
  template<unsigned NNODE_1D>
-  double QPmlFourierDecomposedHelmholtzElement<NNODE_1D>::
+  double QPMLFourierDecomposedHelmholtzElement<NNODE_1D>::
   dshape_and_dtest_eulerian_at_knot_pml_fourier_decomposed_helmholtz(
    const unsigned &ipt,
    Shape &psi,
@@ -951,14 +893,14 @@ effacer end
 
 
 //=======================================================================
-/// Face geometry for the QPmlFourierDecomposedHelmholtzElement
+/// Face geometry for the QPMLFourierDecomposedHelmholtzElement
 /// elements:
 /// The spatial dimension of the face elements is one lower than that of the
 /// bulk element but they have the same number of points
 /// along their 1D edges.
 //=======================================================================
  template<unsigned NNODE_1D>
-  class FaceGeometry<QPmlFourierDecomposedHelmholtzElement<NNODE_1D> >:
+  class FaceGeometry<QPMLFourierDecomposedHelmholtzElement<NNODE_1D> >:
   public virtual QElement<1,NNODE_1D>
   {
 
@@ -980,7 +922,7 @@ effacer end
 /// Fourier decomposed Helmholtz upgraded to become projectable
 //==========================================================
  template<class FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT>
- class ProjectablePmlFourierDecomposedHelmholtzElement :
+ class ProjectablePMLFourierDecomposedHelmholtzElement :
   public virtual ProjectableElement<FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT>
  {
 
@@ -989,7 +931,7 @@ effacer end
 
   /// \short Constructor [this was only required explicitly
   /// from gcc 4.5.2 onwards...]
-  ProjectablePmlFourierDecomposedHelmholtzElement(){}
+  ProjectablePMLFourierDecomposedHelmholtzElement(){}
 
   /// \short Specify the values associated with field fld.
   /// The information is returned in a vector of pairs which comprise
@@ -1216,7 +1158,7 @@ effacer end
 //=======================================================================
  template<class ELEMENT>
  class FaceGeometry
-  <ProjectablePmlFourierDecomposedHelmholtzElement<ELEMENT> >
+  <ProjectablePMLFourierDecomposedHelmholtzElement<ELEMENT> >
   : public virtual FaceGeometry<ELEMENT>
   {
     public:
@@ -1230,7 +1172,7 @@ effacer end
 //=======================================================================
  template<class ELEMENT>
  class FaceGeometry<FaceGeometry
-  <ProjectablePmlFourierDecomposedHelmholtzElement<ELEMENT> > >
+  <ProjectablePMLFourierDecomposedHelmholtzElement<ELEMENT> > >
   : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
   {
  public:
@@ -1249,8 +1191,8 @@ effacer end
 //=======================================================================
   template<unsigned NNODE_1D>
 class PMLLayerElement<
- QPmlFourierDecomposedHelmholtzElement<NNODE_1D> > :
- public virtual QPmlFourierDecomposedHelmholtzElement<NNODE_1D>
+ QPMLFourierDecomposedHelmholtzElement<NNODE_1D> > :
+ public virtual QPMLFourierDecomposedHelmholtzElement<NNODE_1D>
 {
 
   public:
@@ -1258,7 +1200,7 @@ class PMLLayerElement<
  /// \short Constructor: Call the constructor for the
  /// appropriate QElement
  PMLLayerElement() :
-  QPmlFourierDecomposedHelmholtzElement<NNODE_1D>()
+  QPMLFourierDecomposedHelmholtzElement<NNODE_1D>()
   {}
 
 };

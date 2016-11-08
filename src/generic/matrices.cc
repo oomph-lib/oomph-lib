@@ -33,6 +33,8 @@
 #include "mpi.h"
 #endif
 
+#include <cstring>
+
 #include<set> 
 #include<map> 
 

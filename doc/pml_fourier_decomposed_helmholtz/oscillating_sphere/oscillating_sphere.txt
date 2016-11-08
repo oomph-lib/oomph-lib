@@ -118,7 +118,7 @@ of the Poisson equation:
   values and setting them to the appropriate prescribed values. 
   
 - Neumann (flux) boundary conditions are imposed via 
-  \c FaceElements (here the \c PmlFourierDecomposedHelmholtzFluxElements). 
+  \c FaceElements (here the \c PMLFourierDecomposedHelmholtzFluxElements). 
    <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">
   As usual</a> we attach these to the faces of the "bulk" elements
   that are subject to the Neumann boundary conditions.
@@ -235,7 +235,7 @@ mesh boundaries we distinguish three different cases
 
 The finite-element-discretised equations (modified by the PML terms 
 discussed above) are implemented in the 
-\c PmlFourierDecomposedHelmholtzEquations class. 
+\c PMLFourierDecomposedHelmholtzEquations class. 
 As usual, we provide 
 fully functional elements by combining these with geometric
 finite elements (from the Q and T families -- corresponding (in 2D)
@@ -247,7 +247,7 @@ set to 1.
 boundaries of a given bulk mesh is facilitated by helper
 functions which automatically erect layers of (quadrilateral)
 PML elements. The layers are built from 
-\c QPmlFourierDecomposedHelmholtzElement<NNODE_1D> elements and
+\c QPMLFourierDecomposedHelmholtzElement<NNODE_1D> elements and
 the parameter \c NNODE_1D is automatically chosen to match that of
 the elements in the bulk mesh. The bulk mesh can contain quads or triangles
 (as shown in the specific example presented below).
@@ -261,10 +261,10 @@ the propagation of waves from the surface of a unit sphere.
 
 The specific domain used in this case can be seen in the figure below.
 We create an unstructured mesh of six-noded 
-\c TPmlFourierDecomposedHelmholtzElements
+\c TPMLFourierDecomposedHelmholtzElements
 to create the finite computational domain surrounding a sphere.
 This is surrounded by three axis-aligned PML layers and two
-corner meshes (each made of nine-noded \c QPmlFourierDecomposedHelmholtzElements).
+corner meshes (each made of nine-noded \c QPMLFourierDecomposedHelmholtzElements).
 
 @I w 0.5\textwidth comp_domain "The computational domain used in the example problem. "
 
@@ -626,7 +626,7 @@ to facilitate the use of the elements
 in multi-physics problems we avoid accessing the unknowns
 directly in this manner but provide the virtual function
 \code
-std::complex<unsigned> PmlFourierDecomposedHelmholtzEquations::u_index_pml_fourier_decomposed_helmholtz()
+std::complex<unsigned> PMLFourierDecomposedHelmholtzEquations::u_index_pml_fourier_decomposed_helmholtz()
 \endcode
 which returns a complex number made of the two unsigneds that indicate
 which nodal value represents the real and imaginary parts of the solution.

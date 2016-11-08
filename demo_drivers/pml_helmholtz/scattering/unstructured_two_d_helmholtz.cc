@@ -325,8 +325,8 @@ PMLProblem<ELEMENT>::PMLProblem()
  for(unsigned e=0;e<n_element;e++)
   {
    // Upcast from GeneralisedElement to Helmholtz bulk element
-   PmlHelmholtzEquations<2> *el_pt =
-    dynamic_cast<PmlHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
+   PMLHelmholtzEquations<2> *el_pt =
+    dynamic_cast<PMLHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
 
    //Set the k_squared double pointer
    el_pt->k_squared_pt() = &GlobalParameters::K_squared;
@@ -404,9 +404,9 @@ void PMLProblem<ELEMENT>::actions_after_adapt()
 
  for(unsigned e=0;e<n_element;e++)
   {
-   // Upcast from GeneralisedElement to PmlHelmholtz bulk element
-   PmlHelmholtzEquations<2> *el_pt =
-    dynamic_cast<PmlHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
+   // Upcast from GeneralisedElement to PMLHelmholtz bulk element
+   PMLHelmholtzEquations<2> *el_pt =
+    dynamic_cast<PMLHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
 
    //Set the frequency function pointer
    el_pt->k_squared_pt() = &GlobalParameters::K_squared;
@@ -640,24 +640,24 @@ int main(int argc, char **argv)
 #ifdef ADAPTIVE
 
  // Set up the problem with projectable 2D six-node elements from the
- // TPmlHelmholtzElement family.
- PMLProblem<ProjectablePmlHelmholtzElement
-  <TPmlHelmholtzElement<2,3> > > problem;
+ // TPMLHelmholtzElement family.
+ PMLProblem<ProjectablePMLHelmholtzElement
+  <TPMLHelmholtzElement<2,3> > > problem;
 
  // Set up the problem with 2D ten-node elements from the
- // TPmlHelmholtzElement family.
- // PMLProblem<ProjectablePmlHelmholtzElement
- //  <TPmlHelmholtzElement<2,4> > > problem;
+ // TPMLHelmholtzElement family.
+ // PMLProblem<ProjectablePMLHelmholtzElement
+ //  <TPMLHelmholtzElement<2,4> > > problem;
 
 #else
 
  // Set up the problem with 2D six-node elements from the
- // TPmlHelmholtzElement family.
- PMLProblem<TPmlHelmholtzElement<2,3> >  problem;
+ // TPMLHelmholtzElement family.
+ PMLProblem<TPMLHelmholtzElement<2,3> >  problem;
 
  // Set up the problem with 2D ten-node elements from the
- // TPmlHelmholtzElement family.
- //   PMLProblem<TPmlHelmholtzElement<2,4> >  problem;
+ // TPMLHelmholtzElement family.
+ //   PMLProblem<TPMLHelmholtzElement<2,4> >  problem;
 
 #endif
 

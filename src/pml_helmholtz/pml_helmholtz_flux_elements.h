@@ -50,12 +50,12 @@ namespace oomph
 
 //======================================================================
 /// \short A class for elements that allow the post-processing of
-/// radiated power and flux on the boundaries of PmlHelmholtz elements.
+/// radiated power and flux on the boundaries of PMLHelmholtz elements.
 /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
 /// policy class.
 //======================================================================
 template <class ELEMENT>
-class PmlHelmholtzPowerElement : public virtual FaceGeometry<ELEMENT>,
+class PMLHelmholtzPowerElement : public virtual FaceGeometry<ELEMENT>,
 public virtual FaceElement
 {
 
@@ -64,22 +64,22 @@ public:
 
  /// \short Constructor, takes the pointer to the "bulk" element and the
  /// index of the face to which the element is attached.
- PmlHelmholtzPowerElement(FiniteElement* const &bulk_el_pt,
+ PMLHelmholtzPowerElement(FiniteElement* const &bulk_el_pt,
                                   const int& face_index);
 
  ///\short  Broken empty constructor
- PmlHelmholtzPowerElement()
+ PMLHelmholtzPowerElement()
   {
    throw OomphLibError(
-    "Don't call empty constructor for PmlHelmholtzPowerElement",
+    "Don't call empty constructor for PMLHelmholtzPowerElement",
     OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
  /// Broken copy constructor
- PmlHelmholtzPowerElement(const PmlHelmholtzPowerElement& dummy)
+ PMLHelmholtzPowerElement(const PMLHelmholtzPowerElement& dummy)
   {
-   BrokenCopy::broken_copy("PmlHelmholtzPowerElement");
+   BrokenCopy::broken_copy("PMLHelmholtzPowerElement");
   }
 
  /// Broken assignment operator
@@ -87,9 +87,9 @@ public:
 //when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
 //realise that two separate implementations of the broken function are the same and so,
 //quite rightly, it shouts.
- /*void operator=(const PmlHelmholtzPowerElement&)
+ /*void operator=(const PMLHelmholtzPowerElement&)
   {
-   BrokenCopy::broken_assign("PmlHelmholtzPowerElement");
+   BrokenCopy::broken_assign("PMLHelmholtzPowerElement");
    }*/
 
 
@@ -414,8 +414,8 @@ protected:
 /// in the bulk element.
 //===========================================================================
 template<class ELEMENT>
-PmlHelmholtzPowerElement<ELEMENT>::
-PmlHelmholtzPowerElement(FiniteElement* const &bulk_el_pt,
+PMLHelmholtzPowerElement<ELEMENT>::
+PMLHelmholtzPowerElement(FiniteElement* const &bulk_el_pt,
                    const int &face_index) :
   FaceGeometry<ELEMENT>(), FaceElement()
   {
@@ -455,7 +455,7 @@ PmlHelmholtzPowerElement(FiniteElement* const &bulk_el_pt,
    //in most cases, oh well, the price we pay for generality
    U_index_helmholtz = std::complex<unsigned>(0,1);
 
-   //Cast to the appropriate PmlHelmholtzEquation so that we can
+   //Cast to the appropriate PMLHelmholtzEquation so that we can
    //find the index at which the variable is stored
    //We assume that the dimension of the full problem is the same
    //as the dimension of the node, if this is not the case you will have
@@ -465,16 +465,16 @@ PmlHelmholtzPowerElement(FiniteElement* const &bulk_el_pt,
      //One dimensional problem
     case 1:
     {
-     PmlHelmholtzEquations<1>* eqn_pt =
-      dynamic_cast<PmlHelmholtzEquations<1>*>(bulk_el_pt);
+     PMLHelmholtzEquations<1>* eqn_pt =
+      dynamic_cast<PMLHelmholtzEquations<1>*>(bulk_el_pt);
      //If the cast has failed die
      if(eqn_pt==0)
       {
        std::string error_string =
-        "Bulk element must inherit from PmlHelmholtzEquations.";
+        "Bulk element must inherit from PMLHelmholtzEquations.";
        error_string +=
         "Nodes are one dimensional, but cannot cast the bulk element to\n";
-       error_string += "PmlHelmholtzEquations<1>\n.";
+       error_string += "PMLHelmholtzEquations<1>\n.";
        error_string +=
         "If you desire this functionality, you must implement it yourself\n";
 
@@ -494,16 +494,16 @@ PmlHelmholtzPowerElement(FiniteElement* const &bulk_el_pt,
     //Two dimensional problem
     case 2:
     {
-     PmlHelmholtzEquations<2>* eqn_pt =
-      dynamic_cast<PmlHelmholtzEquations<2>*>(bulk_el_pt);
+     PMLHelmholtzEquations<2>* eqn_pt =
+      dynamic_cast<PMLHelmholtzEquations<2>*>(bulk_el_pt);
      //If the cast has failed die
      if(eqn_pt==0)
       {
        std::string error_string =
-        "Bulk element must inherit from PmlHelmholtzEquations.";
+        "Bulk element must inherit from PMLHelmholtzEquations.";
        error_string +=
         "Nodes are two dimensional, but cannot cast the bulk element to\n";
-       error_string += "PmlHelmholtzEquations<2>\n.";
+       error_string += "PMLHelmholtzEquations<2>\n.";
        error_string +=
         "If you desire this functionality, you must implement it yourself\n";
 
@@ -523,16 +523,16 @@ PmlHelmholtzPowerElement(FiniteElement* const &bulk_el_pt,
     //Three dimensional problem
     case 3:
     {
-     PmlHelmholtzEquations<3>* eqn_pt =
-      dynamic_cast<PmlHelmholtzEquations<3>*>(bulk_el_pt);
+     PMLHelmholtzEquations<3>* eqn_pt =
+      dynamic_cast<PMLHelmholtzEquations<3>*>(bulk_el_pt);
      //If the cast has failed die
      if(eqn_pt==0)
       {
        std::string error_string =
-        "Bulk element must inherit from PmlHelmholtzEquations.";
+        "Bulk element must inherit from PMLHelmholtzEquations.";
        error_string +=
         "Nodes are three dimensional, but cannot cast the bulk element to\n";
-       error_string += "PmlHelmholtzEquations<3>\n.";
+       error_string += "PMLHelmholtzEquations<3>\n.";
        error_string +=
         "If you desire this functionality, you must implement it yourself\n";
 
@@ -572,12 +572,12 @@ PmlHelmholtzPowerElement(FiniteElement* const &bulk_el_pt,
 
 //======================================================================
 /// \short A class for elements that allow the imposition of an
-/// applied flux on the boundaries of PmlHelmholtz elements.
+/// applied flux on the boundaries of PMLHelmholtz elements.
 /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
 /// policy class.
 //======================================================================
 template <class ELEMENT>
-class PmlHelmholtzFluxElement : public virtual FaceGeometry<ELEMENT>,
+class PMLHelmholtzFluxElement : public virtual FaceGeometry<ELEMENT>,
 public virtual FaceElement
 {
 
@@ -586,38 +586,38 @@ public:
  /// \short Function pointer to the prescribed-flux function fct(x,f(x)) --
  /// x is a Vector and  the flux is a complex. NOTE THAT f(x) represents
  /// c^2 du/dn!
- typedef void (*PmlHelmholtzPrescribedFluxFctPt)
+ typedef void (*PMLHelmholtzPrescribedFluxFctPt)
   (const Vector<double>& x, std::complex<double>& flux);
 
  /// \short Constructor, takes the pointer to the "bulk" element and the
  /// index of the face to which the element is attached.
- PmlHelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
+ PMLHelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
                     const int& face_index);
 
  ///\short  Broken empty constructor
- PmlHelmholtzFluxElement()
+ PMLHelmholtzFluxElement()
   {
    throw OomphLibError(
-    "Don't call empty constructor for PmlHelmholtzFluxElement",
+    "Don't call empty constructor for PMLHelmholtzFluxElement",
     OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
  /// Broken copy constructor
- PmlHelmholtzFluxElement(const PmlHelmholtzFluxElement& dummy)
+ PMLHelmholtzFluxElement(const PMLHelmholtzFluxElement& dummy)
   {
-   BrokenCopy::broken_copy("PmlHelmholtzFluxElement");
+   BrokenCopy::broken_copy("PMLHelmholtzFluxElement");
   }
 
  /// Broken assignment operator
- /*void operator=(const PmlHelmholtzFluxElement&)
+ /*void operator=(const PMLHelmholtzFluxElement&)
   {
-   BrokenCopy::broken_assign("PmlHelmholtzFluxElement");
+   BrokenCopy::broken_assign("PMLHelmholtzFluxElement");
    }*/
 
 
  /// Access function for the prescribed-flux function pointer
- PmlHelmholtzPrescribedFluxFctPt& flux_fct_pt() {return Flux_fct_pt;}
+ PMLHelmholtzPrescribedFluxFctPt& flux_fct_pt() {return Flux_fct_pt;}
 
 
  /// Add the element's contribution to its residual vector
@@ -751,7 +751,7 @@ protected:
 
 
  /// Function pointer to the (global) prescribed-flux function
- PmlHelmholtzPrescribedFluxFctPt Flux_fct_pt;
+ PMLHelmholtzPrescribedFluxFctPt Flux_fct_pt;
 
  ///The spatial dimension of the problem
  unsigned Dim;
@@ -773,8 +773,8 @@ protected:
 /// in the bulk element.
 //===========================================================================
 template<class ELEMENT>
-PmlHelmholtzFluxElement<ELEMENT>::
-PmlHelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
+PMLHelmholtzFluxElement<ELEMENT>::
+PMLHelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
                    const int &face_index) :
   FaceGeometry<ELEMENT>(), FaceElement()
   {
@@ -817,7 +817,7 @@ PmlHelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
    //in most cases, oh well, the price we pay for generality
    U_index_helmholtz = std::complex<unsigned>(0,1);
 
-   //Cast to the appropriate PmlHelmholtzEquation so that we can
+   //Cast to the appropriate PMLHelmholtzEquation so that we can
    //find the index at which the variable is stored
    //We assume that the dimension of the full problem is the same
    //as the dimension of the node, if this is not the case you will have
@@ -827,16 +827,16 @@ PmlHelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
      //One dimensional problem
     case 1:
     {
-     PmlHelmholtzEquations<1>* eqn_pt =
-      dynamic_cast<PmlHelmholtzEquations<1>*>(bulk_el_pt);
+     PMLHelmholtzEquations<1>* eqn_pt =
+      dynamic_cast<PMLHelmholtzEquations<1>*>(bulk_el_pt);
      //If the cast has failed die
      if(eqn_pt==0)
       {
        std::string error_string =
-        "Bulk element must inherit from PmlHelmholtzEquations.";
+        "Bulk element must inherit from PMLHelmholtzEquations.";
        error_string +=
         "Nodes are one dimensional, but cannot cast the bulk element to\n";
-       error_string += "PmlHelmholtzEquations<1>\n.";
+       error_string += "PMLHelmholtzEquations<1>\n.";
        error_string +=
         "If you desire this functionality, you must implement it yourself\n";
 
@@ -856,16 +856,16 @@ PmlHelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
     //Two dimensional problem
     case 2:
     {
-     PmlHelmholtzEquations<2>* eqn_pt =
-      dynamic_cast<PmlHelmholtzEquations<2>*>(bulk_el_pt);
+     PMLHelmholtzEquations<2>* eqn_pt =
+      dynamic_cast<PMLHelmholtzEquations<2>*>(bulk_el_pt);
      //If the cast has failed die
      if(eqn_pt==0)
       {
        std::string error_string =
-        "Bulk element must inherit from PmlHelmholtzEquations.";
+        "Bulk element must inherit from PMLHelmholtzEquations.";
        error_string +=
         "Nodes are two dimensional, but cannot cast the bulk element to\n";
-       error_string += "PmlHelmholtzEquations<2>\n.";
+       error_string += "PMLHelmholtzEquations<2>\n.";
        error_string +=
         "If you desire this functionality, you must implement it yourself\n";
 
@@ -885,16 +885,16 @@ PmlHelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
     //Three dimensional problem
     case 3:
     {
-     PmlHelmholtzEquations<3>* eqn_pt =
-      dynamic_cast<PmlHelmholtzEquations<3>*>(bulk_el_pt);
+     PMLHelmholtzEquations<3>* eqn_pt =
+      dynamic_cast<PMLHelmholtzEquations<3>*>(bulk_el_pt);
      //If the cast has failed die
      if(eqn_pt==0)
       {
        std::string error_string =
-        "Bulk element must inherit from PmlHelmholtzEquations.";
+        "Bulk element must inherit from PMLHelmholtzEquations.";
        error_string +=
         "Nodes are three dimensional, but cannot cast the bulk element to\n";
-       error_string += "PmlHelmholtzEquations<3>\n.";
+       error_string += "PMLHelmholtzEquations<3>\n.";
        error_string +=
         "If you desire this functionality, you must implement it yourself\n";
 
@@ -928,7 +928,7 @@ PmlHelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
 /// Compute the element's residual vector and the (zero) Jacobian matrix.
 //===========================================================================
 template<class ELEMENT>
-void PmlHelmholtzFluxElement<ELEMENT>::
+void PMLHelmholtzFluxElement<ELEMENT>::
 fill_in_generic_residual_contribution_helmholtz_flux(
  Vector<double> &residuals, DenseMatrix<double> &jacobian,
  const unsigned& flag)

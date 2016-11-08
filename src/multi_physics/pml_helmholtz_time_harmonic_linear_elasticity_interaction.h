@@ -43,14 +43,14 @@ namespace oomph
 //======================================================================
 /// A class for elements that allow the imposition of an applied traction
 /// in the equations of time-harmonic linear elasticity from a
-/// PmlHelmholtz potential (interpreted as a displacement potential
+/// PMLHelmholtz potential (interpreted as a displacement potential
 /// for the fluid in a  quasi-steady, linearised FSI problem.)
 /// The geometrical information can be read from the FaceGeometry<ELEMENT>
 /// class and thus, we can be generic enough without the need to have
 /// a separate equations class.
 //======================================================================
  template <class ELASTICITY_BULK_ELEMENT, class HELMHOLTZ_BULK_ELEMENT>
- class TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement :
+ class TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement :
   public virtual FaceGeometry<ELASTICITY_BULK_ELEMENT>,
   public virtual FaceElement,
   public virtual ElementWithExternalElement
@@ -82,7 +82,7 @@ namespace oomph
 
   /// \short Constructor, which takes a "bulk" element and the
   /// value of the index and its limit
-  TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement(
+  TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement(
    FiniteElement* const &element_pt,
    const int &face_index) :
   FaceGeometry<ELASTICITY_BULK_ELEMENT>(), FaceElement(),
@@ -118,7 +118,7 @@ namespace oomph
 #endif
 
     // Set source element storage: one interaction with an external
-    // element -- the PmlHelmholtz bulk element that provides
+    // element -- the PMLHelmholtz bulk element that provides
     // the pressure
     this->set_ninteraction(1);
 
@@ -504,7 +504,7 @@ namespace oomph
 /// used in the fluid and solid equations (default is 1.0)
 //=================================================================
 template <class ELASTICITY_BULK_ELEMENT, class HELMHOLTZ_BULK_ELEMENT>
-double TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement<
+double TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement<
   ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT>::Default_Q_Value=1.0;
 
 
@@ -512,7 +512,7 @@ double TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement<
 /// Return the residuals
 //=====================================================================
  template <class ELASTICITY_BULK_ELEMENT, class HELMHOLTZ_BULK_ELEMENT>
- void TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement<
+ void TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement<
   ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT>::
  fill_in_contribution_to_residuals_helmholtz_traction(
   Vector<double> &residuals)
@@ -695,7 +695,7 @@ double TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement<
 /// policy class.
 //======================================================================
  template <class HELMHOLTZ_BULK_ELEMENT, class ELASTICITY_BULK_ELEMENT>
- class PmlHelmholtzFluxFromNormalDisplacementBCElement :
+ class PMLHelmholtzFluxFromNormalDisplacementBCElement :
   public virtual FaceGeometry<HELMHOLTZ_BULK_ELEMENT>,
   public virtual FaceElement,
   public virtual ElementWithExternalElement
@@ -706,16 +706,16 @@ double TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement<
 
   /// \short Constructor, takes the pointer to the "bulk" element and the
   /// face index identifying the face to which the element is attached.
-  PmlHelmholtzFluxFromNormalDisplacementBCElement(
+  PMLHelmholtzFluxFromNormalDisplacementBCElement(
    FiniteElement* const &bulk_el_pt,
    const int& face_index);
 
   /// Broken copy constructor
-  PmlHelmholtzFluxFromNormalDisplacementBCElement(
-   const PmlHelmholtzFluxFromNormalDisplacementBCElement& dummy)
+  PMLHelmholtzFluxFromNormalDisplacementBCElement(
+   const PMLHelmholtzFluxFromNormalDisplacementBCElement& dummy)
    {
     BrokenCopy::broken_copy
-     ("PmlHelmholtzFluxFromNormalDisplacementBCElement");
+     ("PMLHelmholtzFluxFromNormalDisplacementBCElement");
    }
 
   /// Broken assignment operator
@@ -724,10 +724,10 @@ double TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement<
 //realise that two separate implementations of the broken function are the same and so,
 //quite rightly, it shouts.
   /*void operator=(const
-                 PmlHelmholtzFluxFromNormalDisplacementBCElement&)
+                 PMLHelmholtzFluxFromNormalDisplacementBCElement&)
    {
     BrokenCopy::broken_assign
-     ("PmlHelmholtzFluxFromNormalDisplacementBCElement");
+     ("PMLHelmholtzFluxFromNormalDisplacementBCElement");
      }*/
 
 
@@ -912,9 +912,9 @@ double TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement<
 /// this face element is to be attached.
 //===========================================================================
  template <class HELMHOLTZ_BULK_ELEMENT, class ELASTICITY_BULK_ELEMENT>
- PmlHelmholtzFluxFromNormalDisplacementBCElement
+ PMLHelmholtzFluxFromNormalDisplacementBCElement
  <HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT>::
- PmlHelmholtzFluxFromNormalDisplacementBCElement(
+ PMLHelmholtzFluxFromNormalDisplacementBCElement(
   FiniteElement* const &bulk_el_pt,
   const int &face_index) :
   FaceGeometry<HELMHOLTZ_BULK_ELEMENT>(), FaceElement()
@@ -963,7 +963,7 @@ double TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement<
   // pay for generality
   U_index_helmholtz_from_displacement = std::complex<unsigned>(0,0);
 
-  //Cast to the appropriate PmlHelmholtzEquation so that we can
+  //Cast to the appropriate PMLHelmholtzEquation so that we can
   //find the index at which the variable is stored
   //We assume that the dimension of the full problem is the same
   //as the dimension of the node, if this is not the case you will have
@@ -973,16 +973,16 @@ double TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement<
     //One dimensional problem
    case 1:
    {
-    PmlHelmholtzEquations<1>* eqn_pt =
-     dynamic_cast<PmlHelmholtzEquations<1>*>(bulk_el_pt);
+    PMLHelmholtzEquations<1>* eqn_pt =
+     dynamic_cast<PMLHelmholtzEquations<1>*>(bulk_el_pt);
     //If the cast has failed die
     if(eqn_pt==0)
      {
       std::string error_string =
-       "Bulk element must inherit from PmlHelmholtzEquations.";
+       "Bulk element must inherit from PMLHelmholtzEquations.";
       error_string +=
        "Nodes are one dimensional, but cannot cast the bulk element to\n";
-      error_string += "PmlHelmholtzEquations<1>\n.";
+      error_string += "PMLHelmholtzEquations<1>\n.";
       error_string +=
        "If you desire this functionality, you must implement it yourself\n";
 
@@ -1003,16 +1003,16 @@ double TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement<
    //Two dimensional problem
    case 2:
    {
-    PmlHelmholtzEquations<2>* eqn_pt =
-     dynamic_cast<PmlHelmholtzEquations<2>*>(bulk_el_pt);
+    PMLHelmholtzEquations<2>* eqn_pt =
+     dynamic_cast<PMLHelmholtzEquations<2>*>(bulk_el_pt);
     //If the cast has failed die
     if(eqn_pt==0)
      {
       std::string error_string =
-       "Bulk element must inherit from PmlHelmholtzEquations.";
+       "Bulk element must inherit from PMLHelmholtzEquations.";
       error_string +=
        "Nodes are two dimensional, but cannot cast the bulk element to\n";
-      error_string += "PmlHelmholtzEquations<2>\n.";
+      error_string += "PMLHelmholtzEquations<2>\n.";
       error_string +=
        "If you desire this functionality, you must implement it yourself\n";
 
@@ -1032,16 +1032,16 @@ double TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement<
    //Three dimensional problem
    case 3:
    {
-    PmlHelmholtzEquations<3>* eqn_pt =
-     dynamic_cast<PmlHelmholtzEquations<3>*>(bulk_el_pt);
+    PMLHelmholtzEquations<3>* eqn_pt =
+     dynamic_cast<PMLHelmholtzEquations<3>*>(bulk_el_pt);
     //If the cast has failed die
     if(eqn_pt==0)
      {
       std::string error_string =
-       "Bulk element must inherit from PmlHelmholtzEquations.";
+       "Bulk element must inherit from PMLHelmholtzEquations.";
       error_string +=
        "Nodes are three dimensional, but cannot cast the bulk element to\n";
-      error_string += "PmlHelmholtzEquations<3>\n.";
+      error_string += "PMLHelmholtzEquations<3>\n.";
       error_string +=
        "If you desire this functionality, you must implement it yourself\n";
 
@@ -1080,7 +1080,7 @@ double TimeHarmonicLinElastLoadedByPmlHelmholtzPressureBCElement<
 /// the Jacobian matrix.
 //===========================================================================
  template <class HELMHOLTZ_BULK_ELEMENT, class ELASTICITY_BULK_ELEMENT>
- void PmlHelmholtzFluxFromNormalDisplacementBCElement
+ void PMLHelmholtzFluxFromNormalDisplacementBCElement
  <HELMHOLTZ_BULK_ELEMENT,ELASTICITY_BULK_ELEMENT>::
  fill_in_generic_residual_contribution_helmholtz_flux_from_displacement(
   Vector<double> &residuals, DenseMatrix<double> &jacobian,

@@ -37,7 +37,7 @@ namespace oomph
 
 
 /////////////////////////////////////////////////////////////////////////
-// TPmlFourierDecomposedHelmholtzElement
+// TPMLFourierDecomposedHelmholtzElement
 /////////////////////////////////////////////////////////////////////////
 
 
@@ -47,14 +47,14 @@ namespace oomph
 /// (real and imag part) in every case
 //======================================================================
 template<unsigned NNODE_1D>
-const unsigned TPmlFourierDecomposedHelmholtzElement<NNODE_1D>::
+const unsigned TPMLFourierDecomposedHelmholtzElement<NNODE_1D>::
 Initial_Nvalue = 2;
 
 //====================================================================
 // Force build of templates
 //====================================================================
-template class TPmlFourierDecomposedHelmholtzElement<2>;
-template class TPmlFourierDecomposedHelmholtzElement<3>;
-template class TPmlFourierDecomposedHelmholtzElement<4>;
+template class TPMLFourierDecomposedHelmholtzElement<2>;
+template class TPMLFourierDecomposedHelmholtzElement<3>;
+template class TPMLFourierDecomposedHelmholtzElement<4>;
 
 }

@@ -230,20 +230,20 @@ namespace oomph
 /// Class to impose point source to (wrapped) Helmholtz element
 //=====================================================================
 template<class ELEMENT>
-class PmlHelmholtzPointSourceElement : public virtual ELEMENT
+class PMLHelmholtzPointSourceElement : public virtual ELEMENT
 {
 
 public:
 
  /// Constructor
- PmlHelmholtzPointSourceElement()
+ PMLHelmholtzPointSourceElement()
   {
    // Initialise
    Point_source_magnitude=std::complex<double>(0.0,0.0);
   }
 
  /// Destructor (empty)
- ~PmlHelmholtzPointSourceElement(){}
+ ~PMLHelmholtzPointSourceElement(){}
 
  /// Set local coordinate and magnitude of point source
  void setup(const Vector<double>& s_point_source,
@@ -356,7 +356,7 @@ private:
 /// wrapped element
 //=======================================================================
  template<class ELEMENT>
- class FaceGeometry<PmlHelmholtzPointSourceElement<ELEMENT> >
+ class FaceGeometry<PMLHelmholtzPointSourceElement<ELEMENT> >
   : public virtual FaceGeometry<ELEMENT>
  {
  public:
@@ -369,7 +369,7 @@ private:
 /// that for the underlying wrapped element
 //=======================================================================
  template<class ELEMENT>
- class FaceGeometry<FaceGeometry<PmlHelmholtzPointSourceElement<ELEMENT> > >
+ class FaceGeometry<FaceGeometry<PMLHelmholtzPointSourceElement<ELEMENT> > >
   : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
  {
  public:
@@ -382,7 +382,7 @@ private:
 /// PML layers.
 //=======================================================================
  template<class ELEMENT>
-class PMLLayerElement<PmlHelmholtzPointSourceElement<ELEMENT> > :
+class PMLLayerElement<PMLHelmholtzPointSourceElement<ELEMENT> > :
  public virtual PMLLayerElement<ELEMENT>
 {
 
@@ -403,8 +403,8 @@ class PMLLayerElement<PmlHelmholtzPointSourceElement<ELEMENT> > :
 //=======================================================================
  template<class ELEMENT>
 class PMLLayerElement<
-  ProjectablePmlFourierDecomposedHelmholtzElement<
-  PmlHelmholtzPointSourceElement<ELEMENT> > >:
+  ProjectablePMLFourierDecomposedHelmholtzElement<
+  PMLHelmholtzPointSourceElement<ELEMENT> > >:
  public virtual PMLLayerElement<ELEMENT>
 {
 
@@ -430,16 +430,16 @@ class PMLLayerElement<
 /// Problem class
 //=====================================================================
 template<class ELEMENT>
-class PmlFourierDecomposedHelmholtzProblem : public Problem
+class PMLFourierDecomposedHelmholtzProblem : public Problem
 {
 
 public:
 
  /// Constructor
- PmlFourierDecomposedHelmholtzProblem();
+ PMLFourierDecomposedHelmholtzProblem();
 
  /// Destructor (empty)
- ~PmlFourierDecomposedHelmholtzProblem(){}
+ ~PMLFourierDecomposedHelmholtzProblem(){}
 
  /// Update the problem specs before solve (empty)
  void actions_before_newton_solve(){}
@@ -544,7 +544,7 @@ private:
 /// Create BC elements on outer boundary
 //========================================================================
 template<class ELEMENT>
-void PmlFourierDecomposedHelmholtzProblem<ELEMENT>::
+void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::
 create_power_monitor_mesh()
 {
  // Loop over outer boundaries
@@ -562,9 +562,9 @@ create_power_monitor_mesh()
      int face_index = Bulk_mesh_pt->face_index_at_boundary(b,e);
 
      // Build the corresponding element
-     PmlFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT>*
+     PMLFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT>*
       flux_element_pt = new
-      PmlFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT>
+      PMLFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT>
       (bulk_elem_pt,face_index);
 
      //Add the flux boundary element
@@ -581,7 +581,7 @@ create_power_monitor_mesh()
 /// Actions before adapt: Wipe the mesh of face elements
 //========================================================================
 template<class ELEMENT>
-void PmlFourierDecomposedHelmholtzProblem<ELEMENT>::
+void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::
 actions_before_adapt()
 {
  // Before adapting the added PML meshes must be removed
@@ -619,7 +619,7 @@ actions_before_adapt()
 ///  Actions after adapt: Rebuild the face element meshes
 //========================================================================
 template<class ELEMENT>
-void PmlFourierDecomposedHelmholtzProblem<ELEMENT>::
+void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::
 actions_after_adapt()
 {
 
@@ -649,7 +649,7 @@ actions_after_adapt()
 // functional
 //==================================================================
 template<class ELEMENT>
-void PmlFourierDecomposedHelmholtzProblem<ELEMENT>::
+void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::
 complete_problem_setup()
 {
  // Complete the build of all elements so they are fully functional
@@ -657,8 +657,8 @@ complete_problem_setup()
  for(unsigned i=0;i<n_element;i++)
   {
    // Upcast from GeneralsedElement to the present element
-   PmlFourierDecomposedHelmholtzEquations *el_pt = dynamic_cast<
-    PmlFourierDecomposedHelmholtzEquations*>(
+   PMLFourierDecomposedHelmholtzEquations *el_pt = dynamic_cast<
+    PMLFourierDecomposedHelmholtzEquations*>(
      mesh_pt()->element_pt(i));
 
    if (!(el_pt==0))
@@ -690,7 +690,7 @@ complete_problem_setup()
 /// Set point source
 //========================================================================
 template<class ELEMENT>
-void PmlFourierDecomposedHelmholtzProblem<ELEMENT>::
+void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::
 setup_point_source()
 {
  // Create mesh as geometric object
@@ -732,7 +732,7 @@ setup_point_source()
 // Apply extra bounday conditions if given an odd Fourier wavenumber
 //==================================================================
 template<class ELEMENT>
-void PmlFourierDecomposedHelmholtzProblem<ELEMENT>::
+void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::
 apply_zero_dirichlet_boundary_conditions()
 {
  // Apply zero dirichlet conditions on the bottom straight boundary
@@ -790,8 +790,8 @@ apply_zero_dirichlet_boundary_conditions()
 /// Constructor for Pml Fourier-decomposed Helmholtz problem
 //========================================================================
 template<class ELEMENT>
-PmlFourierDecomposedHelmholtzProblem<ELEMENT>::
-PmlFourierDecomposedHelmholtzProblem()
+PMLFourierDecomposedHelmholtzProblem<ELEMENT>::
+PMLFourierDecomposedHelmholtzProblem()
 {
   string trace_file_location = ProblemParameters::Directory + "/trace.dat";
 
@@ -975,7 +975,7 @@ PmlFourierDecomposedHelmholtzProblem()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void PmlFourierDecomposedHelmholtzProblem<ELEMENT>::
+void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::
 doc_solution(DocInfo& doc_info)
 {
 
@@ -999,8 +999,8 @@ doc_solution(DocInfo& doc_info)
  unsigned nn_element=Power_monitor_mesh_pt->nelement();
  for(unsigned e=0;e<nn_element;e++)
   {
-   PmlFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT> *el_pt =
-    dynamic_cast<PmlFourierDecomposedHelmholtzPowerMonitorElement
+   PMLFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT> *el_pt =
+    dynamic_cast<PMLFourierDecomposedHelmholtzPowerMonitorElement
     <ELEMENT>*>(Power_monitor_mesh_pt->element_pt(e));
    power += el_pt->global_power_contribution(some_file);
   }
@@ -1072,7 +1072,7 @@ doc_solution(DocInfo& doc_info)
 /// Create flux elements on inner boundary
 //==========================================================
 template<class ELEMENT>
-void  PmlFourierDecomposedHelmholtzProblem<ELEMENT>::
+void  PMLFourierDecomposedHelmholtzProblem<ELEMENT>::
 create_flux_elements_on_inner_boundary()
 {
  // Apply flux bc on inner boundary (boundary 5)
@@ -1090,9 +1090,9 @@ create_flux_elements_on_inner_boundary()
    int face_index = Bulk_mesh_pt->face_index_at_boundary(b,e);
 
    // Build the corresponding prescribed incoming-flux element
-   PmlFourierDecomposedHelmholtzFluxElement<ELEMENT>*
+   PMLFourierDecomposedHelmholtzFluxElement<ELEMENT>*
     flux_element_pt = new
-    PmlFourierDecomposedHelmholtzFluxElement<ELEMENT>
+    PMLFourierDecomposedHelmholtzFluxElement<ELEMENT>
     (bulk_elem_pt,face_index);
 
    //Add the prescribed incoming-flux element to the surface mesh
@@ -1111,7 +1111,7 @@ create_flux_elements_on_inner_boundary()
 /// Create PML meshes and add them to the problem's sub-meshes
 //============================================================================
 template<class ELEMENT>
-void PmlFourierDecomposedHelmholtzProblem<ELEMENT>::create_pml_meshes()
+void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::create_pml_meshes()
 {
  // Bulk mesh bottom boundary id
  unsigned int bottom_boundary_id = 1;
@@ -1240,20 +1240,20 @@ int main(int argc, char **argv)
 #ifdef ADAPTIVE
 
  // Create the problem with 2D projectable six-node elements from the
- // TPmlFourierDecomposedHelmholtzElement family,
+ // TPMLFourierDecomposedHelmholtzElement family,
  // allowing for the imposition of a point source (via another
  // templated wrapper)
- PmlFourierDecomposedHelmholtzProblem<
- ProjectablePmlFourierDecomposedHelmholtzElement<
- PmlHelmholtzPointSourceElement<
- TPmlFourierDecomposedHelmholtzElement<3> > > > problem;
+ PMLFourierDecomposedHelmholtzProblem<
+ ProjectablePMLFourierDecomposedHelmholtzElement<
+ PMLHelmholtzPointSourceElement<
+ TPMLFourierDecomposedHelmholtzElement<3> > > > problem;
 
 #else
 
  // Create the problem with 2D six-node elements from the
- // TPmlFourierDecomposedHelmholtzElement family.
- PmlFourierDecomposedHelmholtzProblem
-  <TPmlFourierDecomposedHelmholtzElement<3> >
+ // TPMLFourierDecomposedHelmholtzElement family.
+ PMLFourierDecomposedHelmholtzProblem
+  <TPMLFourierDecomposedHelmholtzElement<3> >
   problem;
 
 #endif

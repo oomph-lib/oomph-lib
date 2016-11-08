@@ -93,7 +93,7 @@ straightforward:
 - Dirichlet conditions are imposed by pinning the relevant nodal
   values and setting them to the appropriate prescribed values. 
 - Neumann (flux) boundary conditions are imposed via 
-  \c FaceElements (here the \c PmlHelmholtzFluxElements). 
+  \c FaceElements (here the \c PMLHelmholtzFluxElements). 
    <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">
   As usual</a> we attach these to the faces of the "bulk" elements
   that are subject to the Neumann boundary conditions.
@@ -229,7 +229,7 @@ shown in the sketch below:
 
 The finite-element-discretised equations (@R[helmholtz]@)
 (modified by the PML terms discussed above) are implemented in 
-the \c PmlHelmholtzEquations<DIM> class which is templated
+the \c PMLHelmholtzEquations<DIM> class which is templated
 by the spatial dimension, \c DIM.  As usual, we provide 
 fully functional elements by combining these with geometric
 finite elements (from the Q and T families -- corresponding (in 2D)
@@ -241,7 +241,7 @@ set to 1.
 boundaries of a given bulk mesh is facilitated by helper
 functions which automatically erect layers of (quadrilateral)
 PML elements. The layers are built from 
-\c QPmlHelmholtzElement<2,NNODE_1D> elements and
+\c QPMLHelmholtzElement<2,NNODE_1D> elements and
 the parameter \c NNODE_1D is automatically chosen to match that of
 the elements in the bulk mesh. The bulk mesh can contain quads or triangles
 (as shown in the specific example presented below).
@@ -287,10 +287,10 @@ detect visually.
 
 
 The specific domain used in this case can be seen in the figure below.
-We create an unstructured mesh of six-noded \c TPmlHelmholtzElements
+We create an unstructured mesh of six-noded \c TPMLHelmholtzElements
 to create the finite computational domain surrounding a circular disk.
 This is surrounded by four axis-aligned PML layers and four
-corner meshes (each made of nine-noded \c QPmlHelmholtzElements).
+corner meshes (each made of nine-noded \c QPMLHelmholtzElements).
 
 
 @I w 0.75\textwidth Mesh "The computational domain used in the example problem. "

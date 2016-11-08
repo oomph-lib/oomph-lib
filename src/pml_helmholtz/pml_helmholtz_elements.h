@@ -70,14 +70,14 @@ namespace oomph
    /// the vector from the origin to the start of the PML
    virtual std::complex<double> gamma(const double& nu_i,
      const double& pml_width_i,
-     const double& k_squared_local) = 0;
+     const double& k_squared) = 0;
 
   };
 
   //=======================================================================
   /// The mapping function propsed by Bermudez et al, appears to be the best
   /// and so this will be the default mapping (see definition of
-  /// PmlHelmholtzEquations)
+  /// PMLHelmholtzEquations)
   //=======================================================================
   class BermudezPMLMapping : public PMLMapping
   {
@@ -91,11 +91,11 @@ namespace oomph
     /// coeffcients proposed by Bermudez et al
     std::complex<double> gamma(const double& nu_i,
                                const double& pml_width_i,
-                               const double& k_squared_local)
+                               const double& k_squared)
     {
        /// \short return \f$\gamma=1 + (1/k)(i/|outer_boundary - x|)\f$ or more
        /// abstractly \f$\gamma = 1 + \frac i {k\delta_{pml}}(1/|1-\bar\nu|)\f$
-       return 1.0 + (1.0 / std::complex<double> (sqrt(k_squared_local), 0))
+       return 1.0 + (1.0 / std::complex<double> (sqrt(k_squared), 0))
         * std::complex<double>
          (0.0, 1.0/(std::fabs(pml_width_i - nu_i)));
     }
@@ -114,7 +114,7 @@ namespace oomph
 /// mapping etc. must get implemented in derived class.
 //=============================================================
 template <unsigned DIM>
- class PmlHelmholtzEquations :
+ class PMLHelmholtzEquations :
  public virtual PMLElementBase<DIM>,
  public virtual FiniteElement
 {
@@ -123,23 +123,22 @@ public:
 
  /// \short Function pointer to source function fct(x,f(x)) --
  /// x is a Vector!
- typedef void (*PmlHelmholtzSourceFctPt)(const Vector<double>& x,
+ typedef void (*PMLHelmholtzSourceFctPt)(const Vector<double>& x,
                                       std::complex<double>& f);
 
  /// Constructor
- PmlHelmholtzEquations() : Source_fct_pt(0),
-  K_squared_pt(0)
+ PMLHelmholtzEquations() : Source_fct_pt(0), K_squared_pt(0)
   {
     // Provide pointer to static method (Save memory)
-    Pml_mapping_pt = &PmlHelmholtzEquations::Default_pml_mapping;
+    Pml_mapping_pt = &PMLHelmholtzEquations::Default_pml_mapping;
     Alpha_pt = &Default_Physical_Constant_Value;
   }
 
 
  /// Broken copy constructor
- PmlHelmholtzEquations(const PmlHelmholtzEquations& dummy)
+ PMLHelmholtzEquations(const PMLHelmholtzEquations& dummy)
   {
-   BrokenCopy::broken_copy("PmlHelmholtzEquations");
+   BrokenCopy::broken_copy("PMLHelmholtzEquations");
   }
 
  /// Broken assignment operator
@@ -147,9 +146,9 @@ public:
 //when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
 //realise that two separate implementations of the broken function are the same and so,
 //quite rightly, it shouts.
- /*void operator=(const PmlHelmholtzEquations&)
+ /*void operator=(const PMLHelmholtzEquations&)
   {
-   BrokenCopy::broken_assign("PmlHelmholtzEquations");
+   BrokenCopy::broken_assign("PMLHelmholtzEquations");
    }*/
 
  /// \short Return the index at which the unknown value
@@ -341,7 +340,7 @@ void  output_total_real(
                          exact_soln_pt)
   {
    throw OomphLibError(
-  "There is no time-dependent output_fct() for PmlHelmholtz elements ",
+  "There is no time-dependent output_fct() for PMLHelmholtz elements ",
   OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
@@ -381,7 +380,7 @@ void  output_total_real(
                     const double& time, double& error, double& norm)
   {
    throw OomphLibError(
-"There is no time-dependent compute_error() for PmlHelmholtz elements",
+"There is no time-dependent compute_error() for PMLHelmholtz elements",
 OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
@@ -391,10 +390,10 @@ OOMPH_CURRENT_FUNCTION,
  void compute_norm(double& norm);
 
  /// Access function: Pointer to source function
- PmlHelmholtzSourceFctPt& source_fct_pt() {return Source_fct_pt;}
+ PMLHelmholtzSourceFctPt& source_fct_pt() {return Source_fct_pt;}
 
  /// Access function: Pointer to source function. Const version
- PmlHelmholtzSourceFctPt source_fct_pt() const {return Source_fct_pt;}
+ PMLHelmholtzSourceFctPt source_fct_pt() const {return Source_fct_pt;}
 
 
  /// Get source term at (Eulerian) position x. This function is
@@ -702,11 +701,11 @@ protected:
   Vector<double> &residuals, DenseMatrix<double> &jacobian,
   const unsigned& flag);
 
-  /// Pointer to wavenumber complex shift
-double *Alpha_pt;
+ /// Pointer to wavenumber complex shift
+ double *Alpha_pt;
 
  /// Pointer to source function:
- PmlHelmholtzSourceFctPt Source_fct_pt;
+ PMLHelmholtzSourceFctPt Source_fct_pt;
 
  /// Pointer to wave number (must be set!)
  double* K_squared_pt;
@@ -727,13 +726,13 @@ double *Alpha_pt;
 
 
 //======================================================================
-/// \short QPmlHelmholtzElement elements are linear/quadrilateral/
-/// brick-shaped PmlHelmholtz elements with isoparametric
+/// \short QPMLHelmholtzElement elements are linear/quadrilateral/
+/// brick-shaped PMLHelmholtz elements with isoparametric
 /// interpolation for the function.
 //======================================================================
 template <unsigned DIM, unsigned NNODE_1D>
- class QPmlHelmholtzElement : public virtual QElement<DIM,NNODE_1D>,
- public virtual PmlHelmholtzEquations<DIM>
+ class QPMLHelmholtzElement : public virtual QElement<DIM,NNODE_1D>,
+ public virtual PMLHelmholtzEquations<DIM>
 {
 
 private:
@@ -746,22 +745,22 @@ private:
 
 
  ///\short  Constructor: Call constructors for QElement and
- /// PmlHelmholtz equations
- QPmlHelmholtzElement() :
-  QElement<DIM,NNODE_1D>(), PmlHelmholtzEquations<DIM>()
+ /// PMLHelmholtz equations
+ QPMLHelmholtzElement() :
+  QElement<DIM,NNODE_1D>(), PMLHelmholtzEquations<DIM>()
   {}
 
  /// Broken copy constructor
- QPmlHelmholtzElement
-  (const QPmlHelmholtzElement<DIM,NNODE_1D>& dummy)
+ QPMLHelmholtzElement
+  (const QPMLHelmholtzElement<DIM,NNODE_1D>& dummy)
   {
-   BrokenCopy::broken_copy("QPmlHelmholtzElement");
+   BrokenCopy::broken_copy("QPMLHelmholtzElement");
   }
 
  /// Broken assignment operator
- /*void operator=(const QPmlHelmholtzElement<DIM,NNODE_1D>&)
+ /*void operator=(const QPMLHelmholtzElement<DIM,NNODE_1D>&)
   {
-   BrokenCopy::broken_assign("QPmlHelmholtzElement");
+   BrokenCopy::broken_assign("QPMLHelmholtzElement");
    }*/
 
 
@@ -773,13 +772,13 @@ private:
  /// \short Output function:
  ///  x,y,u   or    x,y,z,u
  void output(std::ostream &outfile)
-  {PmlHelmholtzEquations<DIM>::output(outfile);}
+  {PMLHelmholtzEquations<DIM>::output(outfile);}
 
 
  ///  \short Output function:
  ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &n_plot)
-  {PmlHelmholtzEquations<DIM>::output(outfile,n_plot);}
+  {PMLHelmholtzEquations<DIM>::output(outfile,n_plot);}
 
  /// \short Output function for real part of full time-dependent solution
  /// u = Re( (u_r +i u_i) exp(-i omega t)
@@ -788,7 +787,7 @@ private:
  /// direction
  void output_real(std::ostream &outfile, const double& phi,
                   const unsigned &n_plot)
- {PmlHelmholtzEquations<DIM>::output_real(outfile,phi,n_plot);}
+ {PMLHelmholtzEquations<DIM>::output_real(outfile,phi,n_plot);}
 
  /// \short Output function for imaginary part of full time-dependent solution
  /// u = Im( (u_r +i u_i) exp(-i omega t))
@@ -797,26 +796,26 @@ private:
  /// direction
  void output_imag(std::ostream &outfile, const double& phi,
                   const unsigned &n_plot)
- {PmlHelmholtzEquations<DIM>::output_imag(outfile,phi,n_plot);}
+ {PMLHelmholtzEquations<DIM>::output_imag(outfile,phi,n_plot);}
 
 
  /// \short C-style output function:
  ///  x,y,u   or    x,y,z,u
  void output(FILE* file_pt)
-  {PmlHelmholtzEquations<DIM>::output(file_pt);}
+  {PMLHelmholtzEquations<DIM>::output(file_pt);}
 
 
  ///  \short C-style output function:
  ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
  void output(FILE* file_pt, const unsigned &n_plot)
-  {PmlHelmholtzEquations<DIM>::output(file_pt,n_plot);}
+  {PMLHelmholtzEquations<DIM>::output(file_pt,n_plot);}
 
 
  /// \short Output function for an exact solution:
  ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
  void output_fct(std::ostream &outfile, const unsigned &n_plot,
                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
-  {PmlHelmholtzEquations<DIM>::output_fct(outfile,
+  {PMLHelmholtzEquations<DIM>::output_fct(outfile,
                                                   n_plot,
                                                   exact_soln_pt);}
 
@@ -831,7 +830,7 @@ private:
                       const unsigned &n_plot,
                       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
  {
-  PmlHelmholtzEquations<DIM>::output_real_fct(outfile,
+  PMLHelmholtzEquations<DIM>::output_real_fct(outfile,
                                                       phi,
                                                       n_plot,
                                                       exact_soln_pt);
@@ -847,7 +846,7 @@ private:
                       const unsigned &n_plot,
                       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
  {
-  PmlHelmholtzEquations<DIM>::output_imag_fct(outfile,
+  PMLHelmholtzEquations<DIM>::output_imag_fct(outfile,
                                                       phi,
                                                       n_plot,
                                                       exact_soln_pt);
@@ -860,7 +859,7 @@ private:
  void output_fct(std::ostream &outfile, const unsigned &n_plot,
                  const double& time,
                  FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
-  {PmlHelmholtzEquations<DIM>::output_fct(outfile,
+  {PMLHelmholtzEquations<DIM>::output_fct(outfile,
                                                   n_plot,
                                                   time,
                                                   exact_soln_pt);}
@@ -897,7 +896,7 @@ protected:
 /// Galerkin: Test functions = shape functions
 //======================================================================
 template<unsigned DIM, unsigned NNODE_1D>
- double QPmlHelmholtzElement<DIM,NNODE_1D>::dshape_and_dtest_eulerian_helmholtz(
+ double QPMLHelmholtzElement<DIM,NNODE_1D>::dshape_and_dtest_eulerian_helmholtz(
   const Vector<double> &s,
   Shape &psi,
   DShape &dpsidx,
@@ -925,7 +924,7 @@ template<unsigned DIM, unsigned NNODE_1D>
 /// Galerkin: Test functions = shape functions
 //======================================================================
 template<unsigned DIM, unsigned NNODE_1D>
-double QPmlHelmholtzElement<DIM,NNODE_1D>::
+double QPMLHelmholtzElement<DIM,NNODE_1D>::
  dshape_and_dtest_eulerian_at_knot_helmholtz(
   const unsigned &ipt,
   Shape &psi,
@@ -951,13 +950,13 @@ double QPmlHelmholtzElement<DIM,NNODE_1D>::
 
 
 //=======================================================================
-/// Face geometry for the QPmlHelmholtzElement elements: The spatial
+/// Face geometry for the QPMLHelmholtzElement elements: The spatial
 /// dimension of the face elements is one lower than that of the
 /// bulk element but they have the same number of points
 /// along their 1D edges.
 //=======================================================================
 template<unsigned DIM, unsigned NNODE_1D>
-class FaceGeometry<QPmlHelmholtzElement<DIM,NNODE_1D> >:
+class FaceGeometry<QPMLHelmholtzElement<DIM,NNODE_1D> >:
  public virtual QElement<DIM-1,NNODE_1D>
 {
 
@@ -975,11 +974,11 @@ class FaceGeometry<QPmlHelmholtzElement<DIM,NNODE_1D> >:
 
 
 //=======================================================================
-/// Face geometry for the 1D QPmlHelmholtzElement elements:
+/// Face geometry for the 1D QPMLHelmholtzElement elements:
 /// Point elements
 //=======================================================================
 template<unsigned NNODE_1D>
-class FaceGeometry<QPmlHelmholtzElement<1,NNODE_1D> >:
+class FaceGeometry<QPMLHelmholtzElement<1,NNODE_1D> >:
  public virtual PointElement
 {
 
@@ -998,10 +997,10 @@ class FaceGeometry<QPmlHelmholtzElement<1,NNODE_1D> >:
 
 
 //==========================================================
-/// PmlHelmholtz upgraded to become projectable
+/// PMLHelmholtz upgraded to become projectable
 //==========================================================
  template<class HELMHOLTZ_ELEMENT>
- class ProjectablePmlHelmholtzElement :
+ class ProjectablePMLHelmholtzElement :
   public virtual ProjectableElement<HELMHOLTZ_ELEMENT>
  {
 
@@ -1010,7 +1009,7 @@ class FaceGeometry<QPmlHelmholtzElement<1,NNODE_1D> >:
 
   /// \short Constructor [this was only required explicitly
   /// from gcc 4.5.2 onwards...]
-  ProjectablePmlHelmholtzElement(){}
+  ProjectablePMLHelmholtzElement(){}
 
   /// \short Specify the values associated with field fld.
   /// The information is returned in a vector of pairs which comprise
@@ -1023,7 +1022,7 @@ class FaceGeometry<QPmlHelmholtzElement<1,NNODE_1D> >:
      {
       std::stringstream error_stream;
       error_stream
-       << "PmlHelmholtz elements only store 2 fields so fld = "
+       << "PMLHelmholtz elements only store 2 fields so fld = "
        << fld << " is illegal \n";
       throw OomphLibError(
        error_stream.str(),
@@ -1062,7 +1061,7 @@ class FaceGeometry<QPmlHelmholtzElement<1,NNODE_1D> >:
      {
       std::stringstream error_stream;
       error_stream
-       << "PmlHelmholtz elements only store two fields so fld = "
+       << "PMLHelmholtz elements only store two fields so fld = "
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
@@ -1091,7 +1090,7 @@ class FaceGeometry<QPmlHelmholtzElement<1,NNODE_1D> >:
      {
       std::stringstream error_stream;
       error_stream
-       << "PmlHelmholtz elements only store two fields so fld = "
+       << "PMLHelmholtz elements only store two fields so fld = "
        << fld << " is illegal.\n";
       throw OomphLibError(
        error_stream.str(),
@@ -1121,7 +1120,7 @@ class FaceGeometry<QPmlHelmholtzElement<1,NNODE_1D> >:
      {
       std::stringstream error_stream;
       error_stream
-       << "PmlHelmholtz elements only store two fields so fld = "
+       << "PMLHelmholtz elements only store two fields so fld = "
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
@@ -1171,7 +1170,7 @@ class FaceGeometry<QPmlHelmholtzElement<1,NNODE_1D> >:
      {
       std::stringstream error_stream;
       error_stream
-       << "PmlHelmholtz elements only store two fields so fld = "
+       << "PMLHelmholtz elements only store two fields so fld = "
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
@@ -1192,7 +1191,7 @@ class FaceGeometry<QPmlHelmholtzElement<1,NNODE_1D> >:
      {
       std::stringstream error_stream;
       error_stream
-       << "PmlHelmholtz elements only store two fields so fld = "
+       << "PMLHelmholtz elements only store two fields so fld = "
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
@@ -1229,7 +1228,7 @@ class FaceGeometry<QPmlHelmholtzElement<1,NNODE_1D> >:
 /// wrapped element
 //=======================================================================
  template<class ELEMENT>
- class FaceGeometry<ProjectablePmlHelmholtzElement<ELEMENT> >
+ class FaceGeometry<ProjectablePMLHelmholtzElement<ELEMENT> >
   : public virtual FaceGeometry<ELEMENT>
  {
  public:
@@ -1246,8 +1245,8 @@ class FaceGeometry<QPmlHelmholtzElement<1,NNODE_1D> >:
 //=======================================================================
   template<unsigned NNODE_1D>
 class PMLLayerElement<
- QPmlHelmholtzElement<2,NNODE_1D> > :
- public virtual QPmlHelmholtzElement<2,NNODE_1D>
+ QPMLHelmholtzElement<2,NNODE_1D> > :
+ public virtual QPMLHelmholtzElement<2,NNODE_1D>
 {
 
   public:
@@ -1255,7 +1254,7 @@ class PMLLayerElement<
  /// \short Constructor: Call the constructor for the
  /// appropriate QElement
  PMLLayerElement() :
-  QPmlHelmholtzElement<2,NNODE_1D>()
+  QPMLHelmholtzElement<2,NNODE_1D>()
   {}
 
 };

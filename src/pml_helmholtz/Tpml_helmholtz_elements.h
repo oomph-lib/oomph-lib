@@ -50,38 +50,38 @@ namespace oomph
 
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-// TPmlHelmholtzElement
+// TPMLHelmholtzElement
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
 
 
 //======================================================================
-/// TPmlHelmholtzElement<DIM,NNODE_1D> elements are 
-/// isoparametric triangular DIM-dimensional PmlHelmholtz elements 
+/// TPMLHelmholtzElement<DIM,NNODE_1D> elements are 
+/// isoparametric triangular DIM-dimensional PMLHelmholtz elements 
 /// with  NNODE_1D nodal points along each element edge. Inherits from 
-/// TElement and PmlHelmholtzEquations
+/// TElement and PMLHelmholtzEquations
 //======================================================================
 template <unsigned DIM, unsigned NNODE_1D>
-class TPmlHelmholtzElement : public TElement<DIM,NNODE_1D>, 
- public PmlHelmholtzEquations<DIM>,
+class TPMLHelmholtzElement : public TElement<DIM,NNODE_1D>, 
+ public PMLHelmholtzEquations<DIM>,
  public virtual ElementWithZ2ErrorEstimator
 {
  
  public:
  
  ///\short  Constructor: Call constructors for TElement and 
- /// PmlHelmholtz equations
- TPmlHelmholtzElement() : 
-  TElement<DIM,NNODE_1D>(), PmlHelmholtzEquations<DIM>()
+ /// PMLHelmholtz equations
+ TPMLHelmholtzElement() : 
+  TElement<DIM,NNODE_1D>(), PMLHelmholtzEquations<DIM>()
   { }
 
 
  /// Broken copy constructor
- TPmlHelmholtzElement
-  (const TPmlHelmholtzElement<DIM,NNODE_1D>& dummy) 
+ TPMLHelmholtzElement
+  (const TPMLHelmholtzElement<DIM,NNODE_1D>& dummy) 
   { 
-   BrokenCopy::broken_copy("TPmlHelmholtzElement");
+   BrokenCopy::broken_copy("TPMLHelmholtzElement");
   } 
  
  /// Broken assignment operator
@@ -89,9 +89,9 @@ class TPmlHelmholtzElement : public TElement<DIM,NNODE_1D>,
 //when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
 //realise that two separate implementations of the broken function are the same and so,
 //quite rightly, it shouts.
- /*void operator=(const TPmlHelmholtzElement<DIM,NNODE_1D>&) 
+ /*void operator=(const TPMLHelmholtzElement<DIM,NNODE_1D>&) 
   {
-   BrokenCopy::broken_assign("TPmlHelmholtzElement");
+   BrokenCopy::broken_assign("TPMLHelmholtzElement");
    }*/
 
  /// \short  Access function for Nvalue: # of `values' (pinned or dofs) 
@@ -103,14 +103,14 @@ class TPmlHelmholtzElement : public TElement<DIM,NNODE_1D>,
  ///  x,y,u   or    x,y,z,u
  void output(std::ostream &outfile)
   {
-   PmlHelmholtzEquations<DIM>::output(outfile);
+   PMLHelmholtzEquations<DIM>::output(outfile);
   }
 
  ///  \short Output function:  
  ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &n_plot)
   {
-   PmlHelmholtzEquations<DIM>::output(outfile,n_plot);
+   PMLHelmholtzEquations<DIM>::output(outfile,n_plot);
   }
 
 
@@ -118,7 +118,7 @@ class TPmlHelmholtzElement : public TElement<DIM,NNODE_1D>,
  ///  x,y,u   or    x,y,z,u
  void output(FILE* file_pt)
   {
-   PmlHelmholtzEquations<DIM>::output(file_pt);
+   PMLHelmholtzEquations<DIM>::output(file_pt);
   }
 
 
@@ -126,7 +126,7 @@ class TPmlHelmholtzElement : public TElement<DIM,NNODE_1D>,
  ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
  void output(FILE* file_pt, const unsigned &n_plot)
   {
-   PmlHelmholtzEquations<DIM>::output(file_pt,n_plot);
+   PMLHelmholtzEquations<DIM>::output(file_pt,n_plot);
   }
 
 
@@ -135,7 +135,7 @@ class TPmlHelmholtzElement : public TElement<DIM,NNODE_1D>,
  void output_fct(std::ostream &outfile, const unsigned &n_plot,
                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
  {
-  PmlHelmholtzEquations<DIM>::output_fct(outfile,n_plot,exact_soln_pt);
+  PMLHelmholtzEquations<DIM>::output_fct(outfile,n_plot,exact_soln_pt);
  }
 
  
@@ -145,7 +145,7 @@ class TPmlHelmholtzElement : public TElement<DIM,NNODE_1D>,
                  const double& time,
                  FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
-   PmlHelmholtzEquations<DIM>::output_fct(outfile,
+   PMLHelmholtzEquations<DIM>::output_fct(outfile,
                                                   n_plot,
                                                   time,
                                                   exact_soln_pt);
@@ -210,7 +210,7 @@ protected:
 
 //!! Cleanup - this was not here before!
 template<unsigned DIM, unsigned NNODE_1D>
-const unsigned TPmlHelmholtzElement<DIM,NNODE_1D>::Initial_Nvalue = 2;
+const unsigned TPMLHelmholtzElement<DIM,NNODE_1D>::Initial_Nvalue = 2;
 
 //Inline functions:
 
@@ -223,7 +223,7 @@ const unsigned TPmlHelmholtzElement<DIM,NNODE_1D>::Initial_Nvalue = 2;
 //======================================================================
 template<unsigned DIM, unsigned NNODE_1D>
 double 
-TPmlHelmholtzElement<DIM,NNODE_1D>::dshape_and_dtest_eulerian_helmholtz
+TPMLHelmholtzElement<DIM,NNODE_1D>::dshape_and_dtest_eulerian_helmholtz
  (
   const Vector<double> &s, 
   Shape &psi, 
@@ -258,7 +258,7 @@ TPmlHelmholtzElement<DIM,NNODE_1D>::dshape_and_dtest_eulerian_helmholtz
 /// Galerkin: Test functions = shape functions
 //======================================================================
 template<unsigned DIM, unsigned NNODE_1D>
-double TPmlHelmholtzElement<DIM,NNODE_1D>::
+double TPMLHelmholtzElement<DIM,NNODE_1D>::
 dshape_and_dtest_eulerian_at_knot_helmholtz(
  const unsigned &ipt,
  Shape &psi, 
@@ -282,13 +282,13 @@ dshape_and_dtest_eulerian_at_knot_helmholtz(
 
 
 //=======================================================================
-/// Face geometry for the TPmlHelmholtzElement elements: The spatial 
+/// Face geometry for the TPMLHelmholtzElement elements: The spatial 
 /// dimension of the face elements is one lower than that of the
 /// bulk element but they have the same number of points
 /// along their 1D edges.
 //=======================================================================
 template<unsigned DIM, unsigned NNODE_1D>
-class FaceGeometry<TPmlHelmholtzElement<DIM,NNODE_1D> >: 
+class FaceGeometry<TPMLHelmholtzElement<DIM,NNODE_1D> >: 
  public virtual TElement<DIM-1,NNODE_1D>
 {
 
@@ -301,11 +301,11 @@ class FaceGeometry<TPmlHelmholtzElement<DIM,NNODE_1D> >:
 };
 
 //=======================================================================
-/// Face geometry for the 1D TPmlHelmholtzElement elements: 
+/// Face geometry for the 1D TPMLHelmholtzElement elements: 
 /// Point elements
 //=======================================================================
 template<unsigned NNODE_1D>
-class FaceGeometry<TPmlHelmholtzElement<1,NNODE_1D> >: 
+class FaceGeometry<TPMLHelmholtzElement<1,NNODE_1D> >: 
  public virtual PointElement
 {
 
@@ -327,15 +327,15 @@ class FaceGeometry<TPmlHelmholtzElement<1,NNODE_1D> >:
 /// PML layers. It's the corresponding quads.
 //=======================================================================
   template<unsigned NNODE_1D> 
-class PMLLayerElement<TPmlHelmholtzElement<2,NNODE_1D> > : 
- public virtual QPmlHelmholtzElement<2,NNODE_1D>
+class PMLLayerElement<TPMLHelmholtzElement<2,NNODE_1D> > : 
+ public virtual QPMLHelmholtzElement<2,NNODE_1D>
 {
 
   public:
  
  /// \short Constructor: Call the constructor for the
  /// appropriate QElement
- PMLLayerElement(): QPmlHelmholtzElement<2,NNODE_1D>() 
+ PMLLayerElement(): QPMLHelmholtzElement<2,NNODE_1D>() 
   {}
 
 };
@@ -349,16 +349,16 @@ class PMLLayerElement<TPmlHelmholtzElement<2,NNODE_1D> > :
 /// PML layers. It's the corresponding quads.
 //=======================================================================
   template<unsigned NNODE_1D>
-class PMLLayerElement<ProjectablePmlHelmholtzElement
-   <TPmlHelmholtzElement<2,NNODE_1D> > > : 
- public virtual QPmlHelmholtzElement<2,NNODE_1D>
+class PMLLayerElement<ProjectablePMLHelmholtzElement
+   <TPMLHelmholtzElement<2,NNODE_1D> > > : 
+ public virtual QPMLHelmholtzElement<2,NNODE_1D>
 {
 
   public:
  
  /// \short Constructor: Call the constructor for the
  /// appropriate QElement
- PMLLayerElement(): QPmlHelmholtzElement<2,NNODE_1D>() 
+ PMLLayerElement(): QPMLHelmholtzElement<2,NNODE_1D>() 
   {}
 
 };

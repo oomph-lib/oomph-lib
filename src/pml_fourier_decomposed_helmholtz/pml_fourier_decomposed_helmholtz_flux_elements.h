@@ -55,7 +55,7 @@ namespace oomph
 /// policy class.
 //======================================================================
  template <class ELEMENT>
-  class PmlFourierDecomposedHelmholtzFluxElement :
+  class PMLFourierDecomposedHelmholtzFluxElement :
  public virtual FaceGeometry<ELEMENT>,
   public virtual FaceElement
   {
@@ -65,30 +65,30 @@ namespace oomph
    /// \short Function pointer to the prescribed-flux function fct(x,f(x)) --
    /// x is a Vector and  the flux is a complex
 
-   typedef void (*PmlFourierDecomposedHelmholtzPrescribedFluxFctPt)
+   typedef void (*PMLFourierDecomposedHelmholtzPrescribedFluxFctPt)
     (const Vector<double>& x, std::complex<double>& flux);
 
    /// \short Constructor, takes the pointer to the "bulk" element and the
    /// index of the face to which the element is attached.
-   PmlFourierDecomposedHelmholtzFluxElement(
+   PMLFourierDecomposedHelmholtzFluxElement(
     FiniteElement* const &bulk_el_pt,
     const int& face_index);
 
    ///\short  Broken empty constructor
-   PmlFourierDecomposedHelmholtzFluxElement()
+   PMLFourierDecomposedHelmholtzFluxElement()
     {
      throw OomphLibError(
-      "Don't call empty constructor for PmlFourierDecomposedHelmholtzFluxElement",
+      "Don't call empty constructor for PMLFourierDecomposedHelmholtzFluxElement",
       OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 
    /// Broken copy constructor
-   PmlFourierDecomposedHelmholtzFluxElement(
-    const PmlFourierDecomposedHelmholtzFluxElement& dummy)
+   PMLFourierDecomposedHelmholtzFluxElement(
+    const PMLFourierDecomposedHelmholtzFluxElement& dummy)
     {
      BrokenCopy::broken_copy
-      ("PmlFourierDecomposedHelmholtzFluxElement");
+      ("PMLFourierDecomposedHelmholtzFluxElement");
     }
 
    /// Broken assignment operator
@@ -96,15 +96,15 @@ namespace oomph
 //when used in the virtual inheritence hierarchy. Essentially the compiler doesn't
 //realise that two separate implementations of the broken function are the same and so,
 //quite rightly, it shouts.
-   /*void operator=(const PmlFourierDecomposedHelmholtzFluxElement&)
+   /*void operator=(const PMLFourierDecomposedHelmholtzFluxElement&)
     {
      BrokenCopy::broken_assign
-      ("PmlFourierDecomposedHelmholtzFluxElement");
+      ("PMLFourierDecomposedHelmholtzFluxElement");
       }*/
 
 
    /// Access function for the prescribed-flux function pointer
-   PmlFourierDecomposedHelmholtzPrescribedFluxFctPt& flux_fct_pt()
+   PMLFourierDecomposedHelmholtzPrescribedFluxFctPt& flux_fct_pt()
     {return Flux_fct_pt;}
 
 
@@ -236,7 +236,7 @@ namespace oomph
 
 
    /// Function pointer to the (global) prescribed-flux function
-   PmlFourierDecomposedHelmholtzPrescribedFluxFctPt Flux_fct_pt;
+   PMLFourierDecomposedHelmholtzPrescribedFluxFctPt Flux_fct_pt;
 
   };
 
@@ -254,8 +254,8 @@ namespace oomph
 /// in the bulk element.
 //===========================================================================
  template<class ELEMENT>
-  PmlFourierDecomposedHelmholtzFluxElement<ELEMENT>::
-  PmlFourierDecomposedHelmholtzFluxElement(
+  PMLFourierDecomposedHelmholtzFluxElement<ELEMENT>::
+  PMLFourierDecomposedHelmholtzFluxElement(
    FiniteElement* const &bulk_el_pt,
    const int &face_index) :
   FaceGeometry<ELEMENT>(), FaceElement()
@@ -273,13 +273,13 @@ namespace oomph
     std::complex<unsigned>(0,1);
 
    // Now read out indices from bulk element
-   PmlFourierDecomposedHelmholtzEquations* eqn_pt =
-    dynamic_cast<PmlFourierDecomposedHelmholtzEquations*>(bulk_el_pt);
+   PMLFourierDecomposedHelmholtzEquations* eqn_pt =
+    dynamic_cast<PMLFourierDecomposedHelmholtzEquations*>(bulk_el_pt);
    //If the cast has failed die
    if(eqn_pt==0)
     {
      std::string error_string =
-      "Bulk element must inherit from PmlFourierDecomposedHelmholtzEquations.";
+      "Bulk element must inherit from PMLFourierDecomposedHelmholtzEquations.";
      throw OomphLibError(
       error_string,
       OOMPH_CURRENT_FUNCTION,
@@ -299,7 +299,7 @@ namespace oomph
 /// Compute the element's residual vector and the (zero) Jacobian matrix.
 //===========================================================================
  template<class ELEMENT>
-  void PmlFourierDecomposedHelmholtzFluxElement<ELEMENT>::
+  void PMLFourierDecomposedHelmholtzFluxElement<ELEMENT>::
   fill_in_generic_residual_contribution_pml_fourier_decomposed_helmholtz_flux(
    Vector<double> &residuals, DenseMatrix<double> &jacobian,
    const unsigned& flag)
@@ -409,7 +409,7 @@ namespace oomph
 /// policy class.
 //======================================================================
 template <class ELEMENT>
- class PmlFourierDecomposedHelmholtzPowerMonitorElement :
+ class PMLFourierDecomposedHelmholtzPowerMonitorElement :
 public virtual FaceGeometry<ELEMENT>,
  public virtual FaceElement
  {
@@ -417,32 +417,32 @@ public virtual FaceGeometry<ELEMENT>,
 
   /// \short Constructor, takes the pointer to the "bulk" element and the
   /// index of the face to which the element is attached.
-  PmlFourierDecomposedHelmholtzPowerMonitorElement
+  PMLFourierDecomposedHelmholtzPowerMonitorElement
    (FiniteElement* const &bulk_el_pt,
     const int& face_index);
 
   ///\short Broken empty constructor
-  PmlFourierDecomposedHelmholtzPowerMonitorElement()
+  PMLFourierDecomposedHelmholtzPowerMonitorElement()
    {
     throw OomphLibError(
-     "Don't call empty constructor for PmlFourierDecomposedHelmholtzPowerMonitorElement",
+     "Don't call empty constructor for PMLFourierDecomposedHelmholtzPowerMonitorElement",
      OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 
   /// Broken copy constructor
-  PmlFourierDecomposedHelmholtzPowerMonitorElement
-   (const PmlFourierDecomposedHelmholtzPowerMonitorElement& dummy)
+  PMLFourierDecomposedHelmholtzPowerMonitorElement
+   (const PMLFourierDecomposedHelmholtzPowerMonitorElement& dummy)
    {
     BrokenCopy::broken_copy
-     ("PmlFourierDecomposedHelmholtzPowerMonitorElement");
+     ("PMLFourierDecomposedHelmholtzPowerMonitorElement");
    }
 
   /// Broken assignment operator
-  /*void operator=(const PmlFourierDecomposedHelmholtzPowerMonitorElement&)
+  /*void operator=(const PMLFourierDecomposedHelmholtzPowerMonitorElement&)
    {
     BrokenCopy::broken_assign
-     ("PmlFourierDecomposedHelmholtzPowerMonitorElement");
+     ("PMLFourierDecomposedHelmholtzPowerMonitorElement");
      }*/
 
 
@@ -702,8 +702,8 @@ public virtual FaceGeometry<ELEMENT>,
 /// Constructor, takes the pointer to the "bulk" element and the face index.
 //===========================================================================
 template<class ELEMENT>
-PmlFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT>::
-PmlFourierDecomposedHelmholtzPowerMonitorElement
+PMLFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT>::
+PMLFourierDecomposedHelmholtzPowerMonitorElement
  (FiniteElement* const &bulk_el_pt,
   const int &face_index) :
   FaceGeometry<ELEMENT>(), FaceElement()
@@ -717,17 +717,17 @@ PmlFourierDecomposedHelmholtzPowerMonitorElement
    U_index_pml_fourier_decomposed_helmholtz =
     std::complex<unsigned>(0,1);
 
-   // Cast to the appropriate PmlFourierDecomposedHelmholtzEquation
+   // Cast to the appropriate PMLFourierDecomposedHelmholtzEquation
    // so that we can find the index at which the variable is stored
    // We assume that the dimension of the full problem is the same
    // as the dimension of the node, if this is not the case you will have
    // to write custom elements, sorry
-   PmlFourierDecomposedHelmholtzEquations* eqn_pt =
-   dynamic_cast<PmlFourierDecomposedHelmholtzEquations*>(bulk_el_pt);
+   PMLFourierDecomposedHelmholtzEquations* eqn_pt =
+   dynamic_cast<PMLFourierDecomposedHelmholtzEquations*>(bulk_el_pt);
   if(eqn_pt==0)
    {
     std::string error_string =
-     "Bulk element must inherit from PmlFourierDecomposedHelmholtzEquations.";
+     "Bulk element must inherit from PMLFourierDecomposedHelmholtzEquations.";
     throw OomphLibError(
      error_string,
      OOMPH_CURRENT_FUNCTION,

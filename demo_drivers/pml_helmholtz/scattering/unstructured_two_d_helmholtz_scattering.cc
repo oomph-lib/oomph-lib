@@ -524,8 +524,8 @@ PMLProblem<ELEMENT>::PMLProblem()
  for(unsigned e=0;e<n_element;e++)
   {
    // Upcast from GeneralisedElement to Pml Helmholtz bulk element
-   PmlHelmholtzEquations<2> *el_pt =
-    dynamic_cast<PmlHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
+   PMLHelmholtzEquations<2> *el_pt =
+    dynamic_cast<PMLHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
 
    if (el_pt!=0)
     {
@@ -604,9 +604,9 @@ void PMLProblem<ELEMENT>::actions_after_adapt()
 
  for(unsigned e=0;e<n_element;e++)
   {
-   // Upcast from GeneralisedElement to PmlHelmholtz bulk element
-   PmlHelmholtzEquations<2> *el_pt =
-    dynamic_cast<PmlHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
+   // Upcast from GeneralisedElement to PMLHelmholtz bulk element
+   PMLHelmholtzEquations<2> *el_pt =
+    dynamic_cast<PMLHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
 
    if (el_pt!=0)
     {
@@ -661,8 +661,8 @@ void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  unsigned nn_element=Helmholtz_power_boundary_mesh_pt->nelement();
  for(unsigned e=0;e<nn_element;e++)
   {
-   PmlHelmholtzPowerElement<ELEMENT> *el_pt =
-    dynamic_cast<PmlHelmholtzPowerElement<ELEMENT>*>(
+   PMLHelmholtzPowerElement<ELEMENT> *el_pt =
+    dynamic_cast<PMLHelmholtzPowerElement<ELEMENT>*>(
      Helmholtz_power_boundary_mesh_pt->element_pt(e));
    power += el_pt->global_power_contribution(some_file);
   }
@@ -763,8 +763,8 @@ create_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
    int face_index = bulk_mesh_pt->face_index_at_boundary(b,e);
 
    // Build the corresponding prescribed incoming-flux element
-   PmlHelmholtzFluxElement<ELEMENT>* flux_element_pt = new
-    PmlHelmholtzFluxElement<ELEMENT>(bulk_elem_pt,face_index);
+   PMLHelmholtzFluxElement<ELEMENT>* flux_element_pt = new
+    PMLHelmholtzFluxElement<ELEMENT>(bulk_elem_pt,face_index);
 
    //Add the prescribed incoming-flux element to the surface mesh
    helmholtz_inner_boundary_mesh_pt->add_element_pt(flux_element_pt);
@@ -799,8 +799,8 @@ create_power_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
    int face_index = bulk_mesh_pt->face_index_at_boundary(b,e);
 
    // Build the corresponding prescribed power element
-   PmlHelmholtzPowerElement<ELEMENT>* power_element_pt = new
-    PmlHelmholtzPowerElement<ELEMENT>(bulk_elem_pt,face_index);
+   PMLHelmholtzPowerElement<ELEMENT>* power_element_pt = new
+    PMLHelmholtzPowerElement<ELEMENT>(bulk_elem_pt,face_index);
 
    //Add the prescribed power element to the surface mesh
    helmholtz_power_boundary_mesh_pt->add_element_pt(power_element_pt);
@@ -923,15 +923,15 @@ int main(int argc, char **argv)
 #ifdef ADAPTIVE
 
  // Set up the problem with projectable 2D six-node elements from the
- // TPmlHelmholtzElement family.
- PMLProblem<ProjectablePmlHelmholtzElement
-  <TPmlHelmholtzElement<2,3> > > problem;
+ // TPMLHelmholtzElement family.
+ PMLProblem<ProjectablePMLHelmholtzElement
+  <TPMLHelmholtzElement<2,3> > > problem;
 
 #else
 
  // Set up the problem with 2D six-node elements from the
- // TPmlHelmholtzElement family.
- PMLProblem<TPmlHelmholtzElement<2,3> >  problem;
+ // TPMLHelmholtzElement family.
+ PMLProblem<TPMLHelmholtzElement<2,3> >  problem;
 #endif
 
  // Create label for output

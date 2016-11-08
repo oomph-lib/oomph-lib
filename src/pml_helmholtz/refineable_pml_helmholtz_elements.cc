@@ -44,7 +44,7 @@ namespace oomph
 /// Pure version without hanging nodes
 //======================================================================
 template <unsigned DIM>
-void  RefineablePmlHelmholtzEquations<DIM>::
+void  RefineablePMLHelmholtzEquations<DIM>::
 fill_in_generic_residual_contribution_helmholtz(Vector<double> &residuals,
                                                     DenseMatrix<double> &jacobian,
                                                     const unsigned& flag)
@@ -462,16 +462,16 @@ fill_in_generic_residual_contribution_helmholtz(Vector<double> &residuals,
 //====================================================================
 // Force build of templates
 //====================================================================
-template class RefineableQPmlHelmholtzElement<1,2>;
-template class RefineableQPmlHelmholtzElement<1,3>;
-template class RefineableQPmlHelmholtzElement<1,4>;
+template class RefineableQPMLHelmholtzElement<1,2>;
+template class RefineableQPMLHelmholtzElement<1,3>;
+template class RefineableQPMLHelmholtzElement<1,4>;
 
-template class RefineableQPmlHelmholtzElement<2,2>;
-template class RefineableQPmlHelmholtzElement<2,3>;
-template class RefineableQPmlHelmholtzElement<2,4>;
+template class RefineableQPMLHelmholtzElement<2,2>;
+template class RefineableQPMLHelmholtzElement<2,3>;
+template class RefineableQPMLHelmholtzElement<2,4>;
 
-template class RefineableQPmlHelmholtzElement<3,2>;
-template class RefineableQPmlHelmholtzElement<3,3>;
-template class RefineableQPmlHelmholtzElement<3,4>;
+template class RefineableQPMLHelmholtzElement<3,2>;
+template class RefineableQPMLHelmholtzElement<3,3>;
+template class RefineableQPMLHelmholtzElement<3,4>;
 
 }
