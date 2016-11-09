@@ -29,7 +29,8 @@ vmtk_fluid \
 unstructured_fluid \
 unstructured_three_d_fluid \
 flux_control \
-schur_complement_preconditioner 
+schur_complement_preconditioner \
+lagrange_enforced_flow_preconditioner
 
 if SUPPRESS_TRIANGLE_LIB
 else
