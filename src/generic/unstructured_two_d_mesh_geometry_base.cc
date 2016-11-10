@@ -4761,8 +4761,10 @@ namespace oomph
  }
  
 
-  /// Public static flag to suppress warning; defaults to false
- bool UnstructuredTwoDMeshGeometryBase::Suppress_warning_about_regions_and_boundaries=false;
+ /// Public static flag to suppress warning; defaults to true because
+ /// it really clutters up the output. It's unlikely to ever be a
+ /// genuine error... 
+ bool UnstructuredTwoDMeshGeometryBase::Suppress_warning_about_regions_and_boundaries=true;
 
 
 #endif // OOMPH_HAS_TRIANGLE_LIB
