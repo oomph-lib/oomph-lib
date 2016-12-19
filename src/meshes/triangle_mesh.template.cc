@@ -109,7 +109,15 @@ namespace oomph
   
   // Map of Element attribute pairs
   std::map<double, Vector<FiniteElement*> > element_attribute_map;
-  
+
+  // If we're using attributes
+  if (use_attributes)
+  {  
+   // If we're using attributes then we need attribute 0 which will
+   // be associated with region 0
+   element_attribute_map[0].resize(0);
+  }
+    
   // Loop over elements in scaffold mesh, visit their nodes
   for (unsigned e = 0; e < nelem; e++)
    {
@@ -142,8 +150,8 @@ namespace oomph
         if (boundaries_pt != 0)
          {
           //Create new boundary node
-          new_node_pt = 
-           finite_element_pt(e)->construct_boundary_node(j, time_stepper_pt);
+          new_node_pt=
+           finite_element_pt(e)->construct_boundary_node(j,time_stepper_pt);
 
           // Add to boundaries
           for (std::set<unsigned>::iterator it = boundaries_pt->begin(); it
@@ -156,8 +164,7 @@ namespace oomph
         else
          {
           //Create new normal node
-          new_node_pt = finite_element_pt(e)-> construct_node(j,
-                                                              time_stepper_pt);
+          new_node_pt = finite_element_pt(e)->construct_node(j,time_stepper_pt);
          }
 
         // Give it a number (not necessarily the global node
@@ -185,20 +192,23 @@ namespace oomph
        }
      }
 
+    // If we're using attributes
     if (use_attributes)
-     {
-      element_attribute_map[Tmp_mesh_pt->element_attribute(e)].push_back(
-       finite_element_pt(e));
-     }
+    {      
+     element_attribute_map[Tmp_mesh_pt->element_attribute(e)].push_back(
+      finite_element_pt(e));
+    }
    }
-
+  
   //Now let's construct lists
   //Find the number of attributes
   if (use_attributes)
    {
     unsigned n_attribute = element_attribute_map.size();
+
     //There are n_attribute different regions
     this->Region_attribute.resize(n_attribute);
+    
     //Copy the vectors in the map over to our internal storage
     unsigned count = 0;
     for (std::map<double, Vector<FiniteElement*> >::iterator it =
@@ -209,6 +219,7 @@ namespace oomph
        it->second;
       ++count;
      }
+    
    }
 
   // At this point we've created all the elements and
@@ -7067,9 +7078,10 @@ namespace oomph
  /// Create TriangulateIO object via the .poly file
  //========================================================================
  template <class ELEMENT>
- void TriangleMesh<ELEMENT>::build_triangulateio(
-   const std::string& poly_file_name,
-   TriangulateIO& triangulate_io)
+ void TriangleMesh<ELEMENT>::
+ build_triangulateio(const std::string& poly_file_name,
+		     TriangulateIO& triangulate_io,
+		     bool &use_attributes)
   {
 
    // Process poly file
@@ -7279,6 +7291,10 @@ namespace oomph
      triangulate_io.regionlist =
      (double *) malloc(triangulate_io.numberofregions * 4 * sizeof(double));
 
+     // Check for using regions
+     if (nregion > 0)
+     {use_attributes=true;}
+   
      // Loop over the regions to get coords and store value onto the
      // TriangulateIO object
      for(unsigned i=0;i<nregion;i++)
@@ -29323,15 +29339,15 @@ update_other_proc_shd_bnd_node_helper
   
   oomph_info << "Maximum target area: " << max_area << std::endl;
   oomph_info << "Minimum target area: " << min_area << std::endl;
-  oomph_info << "Number of elements to be refined "
+  oomph_info << "Number of elements to be refined: "
              << this->Nrefined << std::endl;
-  oomph_info << "Number of elements to be unrefined "
+  oomph_info << "Number of elements to be unrefined: "
              << this->Nunrefined << std::endl;
-  oomph_info << "Min angle "<< min_angle << std::endl;
+  oomph_info << "Min. angle: " << min_angle << std::endl;
 
   double orig_max_area, orig_min_area;
   this->max_and_min_element_size(orig_max_area, orig_min_area);
-  oomph_info << "Max/min element size in original mesh: "
+  oomph_info << "Max./min. element size in original mesh: "
              << orig_max_area << " "
              << orig_min_area << std::endl;
   
@@ -30034,9 +30050,9 @@ update_other_proc_shd_bnd_node_helper
     
     if (Print_timings_level_adaptation>2)
       {
-        oomph_info<<"CPU for snaping nodes onto boundaries "
-                  <<"(background mesh): "
-                   << t_total_snap_nodes_bg_mesh << std::endl;
+        oomph_info<< "CPU for snapping nodes onto boundaries "
+                  << "(background mesh): "
+		  << t_total_snap_nodes_bg_mesh << std::endl;
       }
     
     // Update mesh further?
@@ -30145,7 +30161,7 @@ update_other_proc_shd_bnd_node_helper
       Multi_domain_functions::Doc_full_stats=false;
      }
     
-    oomph_info << "time for setup of mesh as geom obj: "
+    oomph_info << "Time for setup of mesh as geometric object: "
                << TimingHelpers::timer()-t0_geom_obj
                << std::endl;
     
@@ -30160,25 +30176,25 @@ update_other_proc_shd_bnd_node_helper
      mesh_geom_obj_pt->get_fill_stats(n_bin,max_n_entry,min_n_entry,
                                       tot_n_entry,n_empty);
      
-     oomph_info 
-       << "Before bin diffusion: nbin:("<<n_bin<<")"
-       << " nempty:("<<n_empty<<")"
-       << " min:("<<min_n_entry<<")"
-       << " max:("<<max_n_entry<<")"
-       << " av entries:("<<double(tot_n_entry)/double(n_bin)<<")"
-       << std::endl;
+     oomph_info << "Before bin diffusion:"
+		<< " nbin:("<<n_bin<<")"
+		<< " nempty:("<<n_empty<<")"
+		<< " min:("<<min_n_entry<<")"
+		<< " max:("<<max_n_entry<<")"
+		<< " average entries:("<<double(tot_n_entry)/double(n_bin)<<")"
+		<< std::endl;
      
-     oomph_info << "time for bin stats: "
+     oomph_info << "Time for bin stats: "
                 << TimingHelpers::timer()-t_stats
                 << std::endl;
     }
     
     // Fill bin by diffusion
     double t0_bin_diff=TimingHelpers::timer();
-    oomph_info << "going into diffusion bit...\n";
+    oomph_info << "Going into diffusion bit...\n";
     mesh_geom_obj_pt->fill_bin_by_diffusion();
-    oomph_info << "back from diffusion bit...\n";
-    oomph_info << "time for bin diffusion: "
+    oomph_info << "Back from diffusion bit...\n";
+    oomph_info << "Time for bin diffusion: "
                << TimingHelpers::timer()-t0_bin_diff
                << std::endl;
     
@@ -30193,15 +30209,15 @@ update_other_proc_shd_bnd_node_helper
      mesh_geom_obj_pt->get_fill_stats(n_bin,max_n_entry,min_n_entry,
                                       tot_n_entry,n_empty);
      
-     oomph_info 
-       << "After bin diffusion: nbin:("<<n_bin<<")"
-       << " nempty:("<<n_empty<<")"
-       << " min:("<<min_n_entry<<")"
-       << " max:("<<max_n_entry<<")"
-       << " av entries:("<<double(tot_n_entry)/double(n_bin)<<")"
-       << std::endl;
+     oomph_info << "After bin diffusion:"
+		<< " nbin:("<<n_bin<<")"
+		<< " nempty:("<<n_empty<<")"
+		<< " min:("<<min_n_entry<<")"
+		<< " max:("<<max_n_entry<<")"
+		<< " average entries:("<<double(tot_n_entry)/double(n_bin)<<")"
+		<< std::endl;
      
-     oomph_info << "time for bin stats: "
+     oomph_info << "Time for bin stats: "
                 << TimingHelpers::timer()-t_stats
                 << std::endl;
     }
@@ -30381,7 +30397,7 @@ update_other_proc_shd_bnd_node_helper
         
        } // for (e<nelem)
       
-      oomph_info << "time for loop over int pts in new mesh: "
+      oomph_info << "Time for loop over integration points in new mesh: "
                  << TimingHelpers::timer()-t0_loop_int_pts  
                  << std::endl;
       
@@ -30462,7 +30478,7 @@ update_other_proc_shd_bnd_node_helper
         if (new_area<=0.0)
          {
           std::ostringstream error_stream;
-          error_stream << "This shouldn't happen! Element whose centroid is at"
+          error_stream << "This shouldn't happen! Element whose centroid is at "
                        <<  (f_ele_pt->node_pt(0)->x(0)+
                             f_ele_pt->node_pt(1)->x(0)+
                             f_ele_pt->node_pt(2)->x(0))/3.0 << " "
@@ -30533,11 +30549,11 @@ update_other_proc_shd_bnd_node_helper
       
       if (done) 
        {
-        oomph_info << "All area adjustments accomodated by max. permitted area reduction \n";
+        oomph_info << "All area adjustments accommodated by max. permitted area reduction \n";
        }
       else
        {
-         oomph_info << "NOT all area adjustments accomodated by max. permitted area reduction \n";
+         oomph_info << "NOT all area adjustments accommodated by max. permitted area reduction \n";
        }
       
       //hierher.close();
@@ -30590,8 +30606,8 @@ update_other_proc_shd_bnd_node_helper
           
           oomph_info << "CPU for creation of new adapted mesh "
                      << t_sub_total_create_new_adapted_mesh
-                     <<"[nele="<<n_element_new_adapted_mesh
-                     <<"] (iter "<< iter << "): "
+                     << "[nele="<<n_element_new_adapted_mesh
+                     << "] (iter "<< iter << "): "
                      << t_sub_total_create_new_adapted_mesh << std::endl;
         }
       
@@ -30695,7 +30711,7 @@ update_other_proc_shd_bnd_node_helper
       
       if (Print_timings_level_adaptation>2)
         {
-          oomph_info << "CPU for snaping nodes onto boundaries (new mesh) "
+          oomph_info << "CPU for snapping nodes onto boundaries (new mesh) "
                      << "(iter "<<iter<<"): "
                      << t_sub_total_snap_nodes_new_mesh<< std::endl;
         }
@@ -30765,7 +30781,8 @@ update_other_proc_shd_bnd_node_helper
         // Are all processors done?
         if (nproc_not_done > 0)
          {
-          oomph_info << "At least one processors requires further refinement. Go for another iteration." << std::endl;
+          oomph_info << "At least one processors requires further refinement. "
+		     << "Go for another iteration." << std::endl;
           done = false;
          }
         
@@ -30794,7 +30811,8 @@ update_other_proc_shd_bnd_node_helper
       
       if (!done)
        {
-        oomph_info << "Going for another iteration. Current iteration (" << iter << ")" << std::endl;
+        oomph_info << "Going for another iteration. Current iteration ("
+		   << iter << ")" << std::endl;
 
         // Use the new mesh as the tmp mesh
         tmp_new_mesh_pt=new_mesh_pt;
@@ -30807,7 +30825,7 @@ update_other_proc_shd_bnd_node_helper
     //current mesh
     delete mesh_geom_obj_pt;
     
-    oomph_info << "CPU for iterative generation of new mesh (TOTAL) " 
+    oomph_info << "CPU for iterative generation of new mesh (TOTAL): " 
                << TimingHelpers::timer()-t_iter
                << std::endl;
     
@@ -30889,7 +30907,7 @@ update_other_proc_shd_bnd_node_helper
     //Multi_domain_functions::Sort_bin_entries=true;
     
     double t_proj=TimingHelpers::timer();
-    oomph_info << "about to do projection\n";
+    oomph_info << "About to begin projection.\n";
     
     // Project current solution onto new mesh
     //---------------------------------------
@@ -31055,7 +31073,7 @@ update_other_proc_shd_bnd_node_helper
     //Multi_domain_functions::Doc_stats=false;
     //Multi_domain_functions::Doc_full_stats=false;
     
-    oomph_info << "CPU for projection of solution onto new mesh " 
+    oomph_info << "CPU for projection of solution onto new mesh: " 
                << TimingHelpers::timer()-t_proj
                << std::endl;
     
@@ -31142,7 +31160,7 @@ update_other_proc_shd_bnd_node_helper
     
     //Also copy over the new boundary and region information
     unsigned n_region = new_mesh_pt->nregion();
-    //Only bother if we have regions
+    // Only bother if we have regions
     if(n_region > 1)
      {
       //Deal with the region information first
@@ -31322,11 +31340,11 @@ update_other_proc_shd_bnd_node_helper
      {
       // Report timings related with setting boundary coordinates of
       // nodes on segments
-      oomph_info << "CPU for segments connectivity (first stage): "
+      oomph_info << "CPU for segments connectivity (first stage) [sec]: "
                  << t_total_first_stage_segments_connectivity << std::endl;
-      oomph_info << "CPU for segments connectivity (second stage): "
+      oomph_info << "CPU for segments connectivity (second stage) [sec]: "
                  << t_total_second_stage_segments_connectivity << std::endl;
-      oomph_info << "CPU for segments connectivity (third stage): "
+      oomph_info << "CPU for segments connectivity (third stage) [sec]: "
                  << t_total_third_stage_segments_connectivity << std::endl;
      }        
     
@@ -31337,19 +31355,19 @@ update_other_proc_shd_bnd_node_helper
        t_total_second_stage_segments_connectivity +
        t_total_third_stage_segments_connectivity;
       
-      oomph_info << "CPU for segments connectivity (TOTAL): "
+      oomph_info << "CPU for segments connectivity (TOTAL) [sec]: "
                  << t_total_segments_connectivity << std::endl;
       
       if (Print_timings_level_adaptation>2)
        {
         // Report timings for snaping of nodes onto boundaries
-        oomph_info << "CPU for snaping nodes onto boundaries "
-                   << "(new mesh): "
+        oomph_info << "CPU for snapping nodes onto boundaries "
+                   << "(new mesh) [sec]: "
                    << t_total_snap_nodes << std::endl;
        }
       
       t_total_snap_nodes+=t_total_snap_nodes_bg_mesh;
-      oomph_info << "CPU for snaping nodes onto boundaries (TOTAL): "
+      oomph_info << "CPU for snapping nodes onto boundaries (TOTAL) [sec]: "
                  << t_total_snap_nodes << std::endl;
      }
     
@@ -31361,7 +31379,7 @@ update_other_proc_shd_bnd_node_helper
                << max_area << " "
                << min_area << std::endl;
     
-    oomph_info << "CPU for final bits... " 
+    oomph_info << "CPU time for final bits [sec]: " 
                << TimingHelpers::timer()-t_rest
                << std::endl;
    }
@@ -31373,7 +31391,8 @@ update_other_proc_shd_bnd_node_helper
    }
   
   double CPU_for_adaptation = TimingHelpers::timer()-t_start_overall;
-  oomph_info <<"CPU for adaptation: " << CPU_for_adaptation << std::endl;
+  oomph_info <<"CPU time for adaptation [sec]: "
+	     << CPU_for_adaptation << std::endl;
   
   // ------------------------------------------
   // DISTRIBUTED MESH: BEGIN

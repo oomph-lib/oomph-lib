@@ -406,7 +406,8 @@ namespace oomph
   void create_triangulateio_from_polyfiles(
    const std::string& node_file_name,
    const std::string& element_file_name,
-   const std::string& poly_file_name, TriangulateIO &triangle_io,
+   const std::string& poly_file_name,
+   TriangulateIO &triangle_io,
    bool &use_attributes)
   {
    //Initialise the TriangulateIO data structure
@@ -670,7 +671,7 @@ namespace oomph
 
    // Check for using regions
    if (n_regions > 0)
-   {use_attributes = true;}
+   {use_attributes=true;}
 
    // Dummy for regions number
    unsigned dummy_region;
@@ -699,11 +700,9 @@ namespace oomph
 			 OOMPH_CURRENT_FUNCTION,
 			 OOMPH_EXCEPTION_LOCATION);
     }
- 
    }
 
    poly_file.close();
-
   }
 
   
@@ -3392,7 +3391,7 @@ namespace oomph
       // This is used to define a target area for the region, zero
       // means no target area defined
       triangulate_io.regionlist[4*p-1] = regions_areas[region_id];
-      // Increase the auxiliar counter
+      // Increase the auxiliary counter
       p++;
      } // Loop over the regions map
     

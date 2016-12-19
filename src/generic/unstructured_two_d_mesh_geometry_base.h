@@ -1622,19 +1622,64 @@ namespace oomph
     return Region_element_pt.size();
    }
   
-  /// Return the number of elements in region i
+  /// Return the number of elements in the i-th region
   unsigned nregion_element(const unsigned &i) 
    {
-    return Region_element_pt[i].size();
-   }
-  
+    // Create an iterator to iterate over Region_element_pt
+    std::map<unsigned,Vector<FiniteElement* > >::iterator it;
+
+    // Find the entry of Region_element_pt associated with the i-th region
+    it=Region_element_pt.find(i);
+
+    // If there is an entry associated with the i-th region
+    if (it!=Region_element_pt.end())
+    {
+     return (it->second).size();
+    }
+    else
+    {
+     return 0;
+    }
+   } // End of nregion_element
+
   /// Return the e-th element in the i-th region
   FiniteElement* region_element_pt(const unsigned &i,
                                    const unsigned &e)
    {
-    return Region_element_pt[i][e];
-   }
+    // Create an iterator to iterate over Region_element_pt
+    std::map<unsigned,Vector<FiniteElement* > >::iterator it;
 
+    // Find the entry of Region_element_pt associated with the i-th region
+    it=Region_element_pt.find(i);
+
+    // If there is an entry associated with the i-th region
+    if (it!=Region_element_pt.end())
+    {
+     // Return a pointer to the e-th element in the i-th region
+     return (it->second)[e];
+    }
+    else
+    {
+     // Create a stringstream object
+     std::stringstream error_message;
+
+     // Create the error message
+     error_message << "There are no regions associated with "
+		   << "region ID " << i << ".";
+     
+     // Throw an error
+     throw OomphLibError(error_message.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION); 
+    }
+   } // End of region_element_pt
+
+  /// Return the number of attributes used in the mesh
+  unsigned nregion_attribute()
+   {
+    return Region_attribute.size();
+   }
+  
   /// Return the attribute associated with region i
   double region_attribute(const unsigned &i)
    {
