@@ -391,7 +391,7 @@ namespace oomph
         // Ignore pinned values.
         if(local_eqn >= 0)
          {
-          // Store the dof loopup in temporary pair: First entry in pair
+          // Store the dof lookup in temporary pair: First entry in pair
           // is the global equation number; second entry is the LOCAL dof type.
           // It is assumed that the velocity dof types comes first. We do not
           // re-classify the pressure dof types as they are not constrained.
