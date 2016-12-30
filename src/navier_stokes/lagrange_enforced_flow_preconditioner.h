@@ -78,6 +78,10 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
   /// of a 3D Navier-Stokes problem (for serial code).
   extern Preconditioner* boomer_amg_for_3D_momentum();
 
+  /// \short Hypre Boomer AMG setting for the augmented momentum block
+  /// of a 3D Navier-Stokes problem (for serial code).
+  extern Preconditioner* boomer_amg2v22_for_3D_momentum();
+
   /// \short Hypre Boomer AMG setting for the 2D Poisson problem 
   /// (for serial code).  
   extern Preconditioner* boomer_amg_for_2D_poisson_problem();

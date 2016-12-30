@@ -188,6 +188,48 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 #endif
   } // function boomer_amg_for_3D_momentum
 
+  /// \short Hypre Boomer AMG setting for the augmented momentum block
+  /// of a 3D Navier-Stokes problem (for serial code).
+  Preconditioner* boomer_amg2v22_for_3D_momentum()
+  {
+#ifdef OOMPH_HAS_HYPRE
+    // Create a new HyprePreconditioner
+    HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
+
+    // Coarsening strategy
+    // 1 = classical RS with no boundary treatment (not recommended in 
+    // parallel)
+    hypre_preconditioner_pt->amg_coarsening() = 1;
+  
+    // Strength of dependence = 0.668
+    hypre_preconditioner_pt->amg_strength() = 0.8;
+
+
+    // Set the smoothers
+    //   1 = Gauss-Seidel, sequential (very slow in parallel!)
+    hypre_preconditioner_pt->amg_simple_smoother() = 1;
+  
+    // Set smoother damping (not required, so set to -1)
+    hypre_preconditioner_pt->amg_damping() = -1;
+
+
+    // Set number of cycles to 1xV(2,2)
+    hypre_preconditioner_pt->set_amg_iterations(2);
+    hypre_preconditioner_pt->amg_smoother_iterations()=2;
+
+    return hypre_preconditioner_pt;
+#else
+    std::ostringstream err_msg;
+    err_msg << "hypre preconditioner is not available.\n"
+            << "Please install Hypre.\n";
+    throw OomphLibError(err_msg.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+#endif
+  } // function boomer_amg_for_3D_momentum
+
+
+
   /// \short Hypre Boomer AMG setting for the 2D Poisson problem 
   /// (for serial code).
   Preconditioner* boomer_amg_for_2D_poisson_problem()
