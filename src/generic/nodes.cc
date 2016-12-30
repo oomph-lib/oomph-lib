@@ -2204,7 +2204,9 @@ void Node::set_nonhanging()
 //=======================================================================
 void Node::add_to_boundary(const unsigned &b)
 {
- throw OomphLibError("Cannot add non BoundaryNode<NODE> to boundary",
+ std::stringstream ss;
+ ss << "Cannot add non BoundaryNode<NODE> to boundary " << b <<"\n";
+ throw OomphLibError(ss.str(),
                      OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
