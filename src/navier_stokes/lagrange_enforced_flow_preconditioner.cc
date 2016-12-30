@@ -162,7 +162,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     hypre_preconditioner_pt->amg_coarsening() = 1;
   
     // Strength of dependence = 0.668
-    hypre_preconditioner_pt->amg_strength() = 0.668;
+    hypre_preconditioner_pt->amg_strength() = 0.8;
 
 
     // Set the smoothers
@@ -250,7 +250,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     hypre_preconditioner_pt->amg_simple_smoother() = 0;
   
     // Set smoother damping = 2/3
-    hypre_preconditioner_pt->amg_damping() = 0.666;
+    hypre_preconditioner_pt->amg_damping() = 0.668;
 
 
     // Set number of cycles to 2xV(1,1)
