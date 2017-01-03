@@ -766,8 +766,27 @@ public:
           {
            oomph_info << nod1_pt->x(i) << " ";
           }
+         if (nod1_pt->is_a_copy()||
+             nod2_pt->is_a_copy())
+          {
+           oomph_info 
+            << "\n\n[NOTE: message issued as diagonistic rather than an error\n"
+            << " because at least one of the nodes is a copy; you may still\n"
+            << " want to check this out. BACKGROUND: Copied nodes share the same Data but\n"
+            << " will, in general, have different spatial positions (e.g. when used\n"
+            << " as periodic nodes); however there are cases when they are located\n"
+            << " at the same spatial position (e.g. in oomph-lib's annular mesh which\n"
+            << " is a rolled-around version of the rectangular quadmesh). In such cases,\n"
+            << " the nodes could have been deleted and completely replaced by \n"
+            << " pointers to existing nodes, but may have been left there for convenience\n"
+            << " or out of laziness...]\n";
+          }
+         else
+          {
+           failed=true;
+          }
          oomph_info << std::endl << std::endl;
-         failed=true;
+
         }
       }
     }
