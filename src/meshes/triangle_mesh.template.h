@@ -443,61 +443,6 @@ namespace oomph
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-  /// \short Constructor based on TriangulateIO object
-  TriangleMesh(TriangulateIO& triangulate_io,
-               TimeStepper* time_stepper_pt=
-	       &Mesh::Default_TimeStepper,
-               const bool &use_attributes=false,
-               const bool &allow_automatic_creation_of_vertices_on_boundaries=true)
-   {
-    // Mesh can only be built with 2D Telements.
-    MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
-
-    // Initialize the value for allowing creation of points on boundaries
-    this->Allow_automatic_creation_of_vertices_on_boundaries = 
-     allow_automatic_creation_of_vertices_on_boundaries;
-    
-#ifdef OOMPH_HAS_MPI    
-    // Initialize the flag to indicate this is the first time to
-    // compute the holes left by the halo elements
-    First_time_compute_holes_left_by_halo_elements = true;
-#endif // #ifdef OOMPH_HAS_MPI
-    
-    //Store the attributes flag
-    Use_attributes=use_attributes;
-
-    // Store Timestepper used to build elements
-    Time_stepper_pt=time_stepper_pt;
-    
-    // Build scaffold
-    this->Tmp_mesh_pt=new TriangleScaffoldMesh(triangulate_io);
-    
-    // Initialize TriangulateIO structure
-    TriangleHelper::initialise_triangulateio(Triangulateio);
-    
-    // Triangulation has been created -- remember to wipe it!
-    Triangulateio_exists=true;
-   
-    // Deep-copy triangulateio data into the Triangulateio private object
-    bool quiet=true;
-    Triangulateio=TriangleHelper::
-     deep_copy_of_triangulateio_representation(triangulate_io,quiet);
-    
-    // Convert mesh from scaffold to actual mesh
-    build_from_scaffold(time_stepper_pt,use_attributes);
-    
-    // Kill the scaffold
-    delete this->Tmp_mesh_pt;
-    this->Tmp_mesh_pt=0;
-    
-    // Setup boundary coordinates for boundaries
-    unsigned nb=nboundary();
-    for (unsigned b=0;b<nb;b++)
-    {
-     this->template setup_boundary_coordinates<ELEMENT>(b);
-    }
-   }
-
   /// \short Build mesh, based on the specifications on
   /// TriangleMeshParameters
   TriangleMesh(TriangleMeshParameters &triangle_mesh_parameters, 
