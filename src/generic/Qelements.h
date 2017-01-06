@@ -3,9 +3,9 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC//    Version 1.0; svn revision $LastChangedRevision: 1182 $
+//LIC//    Version 1.0; svn revision $LastChangedRevision$
 //LIC//
-//LIC// $LastChangedDate: 2016-05-20 16:50:20 +0100 (Fri, 20 May 2016) $
+//LIC// $LastChangedDate$
 //LIC// 
 //LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
 //LIC// 
@@ -681,6 +681,7 @@ public:
  /// \short Return the paraview element type.
  /// Needs to be implemented for each new geometric element type; see
  /// http://www.vtk.org/VTK/img/file-formats.pdf
+ /// Use type "VTK_LINE" (== 3) for 2D quad elements
  void write_paraview_type(std::ofstream& file_out,
                           const unsigned& nplot) const
   {
@@ -1008,8 +1009,9 @@ public:
      
      file_out << i%(nplot-1)+d*nplot+counter << " "
               << i%(nplot-1)+1+d*nplot+counter << " "
-              << i%(nplot-1)+(d+1)*nplot+counter << " "
-              << i%(nplot-1)+1+(d+1)*nplot+counter << std::endl;
+              << i%(nplot-1)+1+(d+1)*nplot+counter << " "
+              << i%(nplot-1)+(d+1)*nplot+counter
+              << std::endl;
     }
    counter+=nplot_points_paraview(nplot);
   }
@@ -1017,13 +1019,14 @@ public:
  /// \short Return the paraview element type.
  /// Needs to be implemented for each new geometric element type; see
  /// http://www.vtk.org/VTK/img/file-formats.pdf
+ /// Use type "VTK_QUAD" (== 9) for 2D quad elements
  void write_paraview_type(std::ofstream& file_out,
                           const unsigned& nplot) const
   {
    unsigned local_loop=nsub_elements_paraview(nplot);
    for(unsigned i=0;i<local_loop;i++)
     {
-     file_out << "8" << std::endl;
+     file_out << "9" << std::endl;
     }
   }
  
@@ -1364,9 +1367,9 @@ public:
  /// \short Fill in the offset information for paraview plot.
  /// Needs to be implemented for each new geometric element type; see
  /// http://www.vtk.org/VTK/img/file-formats.pdf
-void write_paraview_output_offset_information(std::ofstream& file_out,
+ void write_paraview_output_offset_information(std::ofstream& file_out,
                                                const unsigned& nplot,
-                                              unsigned& counter) const
+                                               unsigned& counter) const
   {
    // Number of local elements we want to plot over
    unsigned plot=nsub_elements_paraview(nplot);
@@ -1385,17 +1388,17 @@ void write_paraview_output_offset_information(std::ofstream& file_out,
        unsigned d=((i-(i%(nplot-1)))/(nplot-1));
        
      
-       // lower level of rectangles
+       // Lower level of rectangle
        file_out << i%(nplot-1)+d*nplot+r*nplot*nplot+counter << " "
                 << i%(nplot-1)+1+d*nplot+r*nplot*nplot+counter << " "
-                << i%(nplot-1)+(d+1)*nplot+r*nplot*nplot+counter << " "
                 << i%(nplot-1)+1+(d+1)*nplot+r*nplot*nplot+counter << " "
+                << i%(nplot-1)+(d+1)*nplot+r*nplot*nplot+counter << " "
         
-        // Upper level of rectangle
+       // Upper level of rectangle
                 << i%(nplot-1)+d*nplot+(r+1)*nplot*nplot+counter << " "
                 << i%(nplot-1)+1+d*nplot+(r+1)*nplot*nplot+counter << " "
-                << i%(nplot-1)+(d+1)*nplot+(r+1)*nplot*nplot+counter << " "
-                << i%(nplot-1)+1+(d+1)*nplot+(r+1)*nplot*nplot+counter 
+                << i%(nplot-1)+1+(d+1)*nplot+(r+1)*nplot*nplot+counter << " "
+                << i%(nplot-1)+(d+1)*nplot+(r+1)*nplot*nplot+counter
                 << std::endl;
       }
     }
@@ -1405,13 +1408,14 @@ void write_paraview_output_offset_information(std::ofstream& file_out,
  /// \short Return the paraview element type.
  /// Needs to be implemented for each new geometric element type; see
  /// http://www.vtk.org/VTK/img/file-formats.pdf
+ /// Use type "VTK_HEXAHEDRON" (== 12) for 2D quad elements
  void write_paraview_type(std::ofstream& file_out,
                           const unsigned& nplot) const
   {
    unsigned local_loop=nsub_elements_paraview(nplot);
    for(unsigned i=0;i<local_loop;i++)
     {
-     file_out << "11" << std::endl;
+     file_out << "12" << std::endl;
     }
   }
 
