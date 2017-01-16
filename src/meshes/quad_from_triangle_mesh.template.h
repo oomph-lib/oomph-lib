@@ -420,12 +420,12 @@ namespace oomph
     // Convert TriangleMeshPolyLine and TriangleMeshClosedCurvePolyLine
     // to a triangulateio object
     UnstructuredTwoDMeshGeometryBase::build_triangulateio(outer_boundary_pt,
-							       internal_polygon_pt,
-							       open_polylines_pt,
-							       extra_holes_coordinates,
-							       regions_coordinates,
-							       regions_areas,
-							       triangulate_io);
+							  internal_polygon_pt,
+							  open_polylines_pt,
+							  extra_holes_coordinates,
+							  regions_coordinates,
+							  regions_areas,
+							  triangulate_io);
 
     // Initialize TriangulateIO structure
     TriangleHelper::initialise_triangulateio(triangulate_out);
@@ -563,8 +563,6 @@ namespace oomph
  ////////////////////////////////////////////////////////////////////
  ////////////////////////////////////////////////////////////////////
  
-
-#ifdef OOMPH_HAS_TRIANGLE_LIB  
  
 //=========================================================================
 /// Unstructured refineable QuadFromTriangleMesh 
@@ -577,6 +575,8 @@ namespace oomph
    
  public:
 
+#ifdef OOMPH_HAS_TRIANGLE_LIB
+  
   /// \short Build mesh, based on the specifications on
   /// TriangleMeshParameters
   RefineableQuadFromTriangleMesh(TriangleMeshParameters&
@@ -587,7 +587,34 @@ namespace oomph
    {
     this->setup_quadtree_forest();
    }
-   
+
+#endif
+  
+  /// Refine mesh uniformly
+  virtual void refine_uniformly()
+   {
+    DocInfo doc_info;
+    doc_info.directory()="";
+    doc_info.disable_doc();
+    refine_uniformly(doc_info);
+   }
+  
+  /// Refine mesh uniformly and doc process
+  void refine_uniformly(DocInfo& doc_info)
+   {
+    // Find the number of elements in the mesh
+    unsigned nelem=this->nelement();
+
+    // Set the element error to something big
+    Vector<double> elem_error(nelem,DBL_MAX);
+
+    // Refine everything
+    adapt(elem_error);
+   }
+  
+  /// Overload the adapt function (to ensure nodes are snapped to the boundary)
+  void adapt(const Vector<double>& elem_error);
+  
   /// \short Build mesh, based on the polyfiles
   RefineableQuadFromTriangleMesh(const std::string& node_file_name,
 				 const std::string& element_file_name,
@@ -605,20 +632,14 @@ namespace oomph
   /// Empty Destructor
   virtual ~RefineableQuadFromTriangleMesh() {}
      
-  /// Overload the adapt function (to ensure nodes are snapped to the boundary)
-  void adapt(const Vector<double>& elem_error);
 
  }; 
 
-#endif
-
 
  ////////////////////////////////////////////////////////////////////
  ////////////////////////////////////////////////////////////////////
  ////////////////////////////////////////////////////////////////////
 
-
-#ifdef OOMPH_HAS_TRIANGLE_LIB
  
 //=========================================================================
 /// Unstructured QuadFromTriangleMesh upgraded to solid mesh
@@ -645,8 +666,9 @@ namespace oomph
     // Assign the Lagrangian coordinates
     set_lagrangian_nodal_coordinates();
    }
-   
 
+#ifdef OOMPH_HAS_TRIANGLE_LIB
+  
   /// \short Build mesh, based on closed curve that specifies
   /// the outer boundary of the domain and any number of internal
   /// clsed curves. Specify target area for uniform element size.
@@ -659,11 +681,12 @@ namespace oomph
     set_lagrangian_nodal_coordinates();
    }
 
+#endif
+  
   /// Empty Destructor
-  virtual ~SolidQuadFromTriangleMesh() {}
+  virtual ~SolidQuadFromTriangleMesh(){}
  };
 
-#endif
  
  
 ////////////////////////////////////////////////////////////////////////
@@ -671,8 +694,6 @@ namespace oomph
 ////////////////////////////////////////////////////////////////////////
 
  
-#ifdef OOMPH_HAS_TRIANGLE_LIB
-  
 //=========================================================================
 /// Unstructured refineable QuadFromTriangleMesh upgraded to solid mesh
 //=========================================================================
@@ -684,8 +705,8 @@ namespace oomph
 
  public:
 
-  /// \short Build mesh from specified triangulation and
-  /// associated target areas for elements in it.
+  /// \short Build mesh from specified triangulation and associated
+  /// target areas for elements in it.
   RefineableSolidQuadFromTriangleMesh(const std::string& node_file_name,
 				      const std::string& element_file_name,
 				      const std::string& poly_file_name,
@@ -702,6 +723,8 @@ namespace oomph
     set_lagrangian_nodal_coordinates();
    }
     
+#ifdef OOMPH_HAS_TRIANGLE_LIB
+  
   /// \short Build mesh, based on the specifications on
   /// TriangleMeshParameter
   RefineableSolidQuadFromTriangleMesh(
@@ -715,12 +738,13 @@ namespace oomph
     set_lagrangian_nodal_coordinates();
    }
    
+#endif
+  
   /// Empty Destructor
   virtual ~RefineableSolidQuadFromTriangleMesh() {}
     
  };
  
-#endif
   
 }
 

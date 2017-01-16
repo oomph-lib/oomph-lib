@@ -281,8 +281,7 @@ class FaceGeometry<RefineableQPMLHelmholtzElement<DIM,NNODE_1D> >:
 /// PML layers. Same!
 //=======================================================================
 template<unsigned NNODE_1D>
- class PMLLayerElement<
- RefineableQPMLHelmholtzElement<2,NNODE_1D> > :
+ class PMLLayerElement<RefineableQPMLHelmholtzElement<2,NNODE_1D> > :
  public virtual RefineableQPMLHelmholtzElement<2,NNODE_1D>
  {
   

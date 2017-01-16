@@ -1372,7 +1372,7 @@ CRDoubleMatrix::~CRDoubleMatrix()
 }
  
 //=============================================================================
-/// rebuild the matrix - assembles an empty matrix with a defined distribution
+/// Rebuild the matrix - assembles an empty matrix with a defined distribution
 //=============================================================================
 void CRDoubleMatrix::build(const LinearAlgebraDistribution* distribution_pt)
 {
@@ -1381,7 +1381,298 @@ void CRDoubleMatrix::build(const LinearAlgebraDistribution* distribution_pt)
 }
 
 //=============================================================================
-/// clean method
+/// \short Runs through the column index vector and checks if the entries
+/// are arranged arbitrarily or if they follow the regular lexicographical
+/// of matrices. If a boolean argument is provided with the assignment
+/// TRUE then information on the first entry which is not in the correct
+/// position will also be given
+//=============================================================================
+ bool CRDoubleMatrix::entries_are_sorted(const bool& doc_unordered_entries) const
+ {
+#ifdef OOMPH_HAS_MPI
+  // We only need to produce a warning if the matrix is distributed
+  if (this->distributed())
+  {
+   // Create an ostringstream object to store the warning message
+   std::ostringstream warning_message;
+
+   // Create the warning messsage
+   warning_message << "This method currently works for serial but "
+		   << "has not been implemented for use with MPI!\n";
+
+   // Issue the warning
+   OomphLibWarning(warning_message.str(),
+		   OOMPH_CURRENT_FUNCTION,
+		   OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+  
+  // Get the number of rows in this matrix
+  unsigned n_rows=this->nrow();
+ 
+  // Acquire access to the value, row_start and column_index arrays from
+  // the CR matrix. Since we do not change anything in row_start_pt we
+  // give it the const prefix
+  const int* column_index_pt=this->column_index();
+  const int* row_start_pt=this->row_start();
+
+  // Loop over the rows of matrix
+  for (unsigned i=0;i<n_rows;i++)
+  {
+   // Calculate the number of nonzeros in the i-th row
+   unsigned nnz_row_i=*(row_start_pt+i+1)-*(row_start_pt+i);
+
+   // Get the index of the first entry in row i
+   unsigned i_row_start=*(row_start_pt+i);
+  
+   // Loop over the entries of the i-th row
+   for (unsigned j=0;j<nnz_row_i-1;j++)
+   {
+    // Check if the column index of the following entry is greater than the
+    // current entry
+    if ((*(column_index_pt+i_row_start+j+1))<
+	(*(column_index_pt+i_row_start+j)))
+    {
+     // If the input argument was set to TRUE we document we output information
+     // of the first entry which is not in the correct position
+     if (doc_unordered_entries)
+     {
+      // Tell the user
+      oomph_info << "Matrix has not been correctly sorted!"
+		 << "\nOn row: " << i
+		 << "\nEntry: " << j
+		 << "\nEntry 1 = " << *(column_index_pt+i_row_start+j)
+		 << "\nEntry 2 = " << *(column_index_pt+i_row_start+j+1)
+		 << std::endl;
+     }
+      
+     // It hasn't worked
+     return false;
+    } // if ((*(column_index_pt+i_row_start+j+1)) ...
+   } // for (unsigned j=0;j<nnz_row_i-1;j++)
+  } // for (unsigned i=0;i<n_rows;i++)
+
+  // If it gets here without a warning then the entries in each row of
+  // the matrix are ordered by increasing column index
+  return true;
+ } // End of entries_are_sorted()
+ 
+//=============================================================================
+/// \short This helper function sorts the entries in the column index vector
+/// and the value vector. During the construction of the matrix the entries
+/// were most likely assigned in an arbitrary order. As a result, it cannot
+/// be assumed that the entries in the column index vector corresponding to
+/// each row of the matrix have been arranged in increasing order. During
+/// the setup an additional vector will be set up; Index_of_diagonal_entries.
+/// The i-th entry of this vector contains the index of the last entry
+/// below or on the diagonal. If there are no entries below or on the
+/// diagonal then the corresponding entry is -1. If, however, there are
+/// no entries in the row then the entry is irrelevant and is kept
+/// as the initialised value; 0. 
+//=============================================================================
+ void CRDoubleMatrix::sort_entries()
+ {
+#ifdef OOMPH_HAS_MPI
+  // We only need to produce a warning if the matrix is distributed
+  if (this->distributed())
+  {
+   // Create an ostringstream object to store the warning message
+   std::ostringstream warning_message;
+
+   // Create the warning messsage
+   warning_message << "This method currently works for serial but "
+		   << "has not been tested with MPI!\n";
+
+   // Issue the warning
+   OomphLibWarning(warning_message.str(),
+		   OOMPH_CURRENT_FUNCTION,
+		   OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+  
+  // Get the number of rows in the matrix
+  unsigned n_rows=this->nrow();
+   
+  // Acquire access to the value, row_start and column_index arrays from
+  // the CR matrix. Since we do not change anything in row_start_pt we
+  // give it the const prefix
+  double* value_pt=this->value();
+  int* column_index_pt=this->column_index();
+  const int* row_start_pt=this->row_start();
+
+  // Resize the Index_of_diagonal_entries vector
+  Index_of_diagonal_entries.resize(n_rows,0);
+	
+  // Vector of pairs to store the column_index of each value in the i-th row
+  // and its corresponding matrix entry
+  Vector<std::pair<int,double> > column_index_and_value_row_i;
+  
+  // Loop over the rows of the matrix
+  for (unsigned i=0;i<n_rows;i++)
+  {
+   // Find the number of nonzeros in the i-th row
+   unsigned nnz_row_i=*(row_start_pt+i+1)-*(row_start_pt+i);
+
+   // Variable to store the start of the i-th row
+   unsigned i_row_start=*(row_start_pt+i);
+     
+   // If there are no nonzeros in this row then the i-th entry of the vector
+   // Index_of_diagonal_entries is irrelevant so we can simply let it be 0
+   if (nnz_row_i==0)
+   {
+    // Set the i-th entry
+    Index_of_diagonal_entries[i]=0;
+   }
+   // If there are nonzeros in the i-th row
+   else
+   {
+    // If there is more than one entry in the row resize the vector
+    // column_index_and_value_row_i
+    column_index_and_value_row_i.resize(nnz_row_i);
+   
+    // Loop over the entries in the row
+    for (unsigned j=0;j<nnz_row_i;j++)
+    {
+     // Assign the appropriate entries to column_index_and_value_row_i
+     column_index_and_value_row_i[j]=
+      std::make_pair(*(column_index_pt+i_row_start+j),
+		     *(value_pt+i_row_start+j));
+    }
+
+    // Sort the vector of pairs using the struct CRDoubleMatrixComparisonHelper
+    std::sort(column_index_and_value_row_i.begin(),
+	      column_index_and_value_row_i.end(),
+	      Comparison_struct);
+
+    //-----------------------------------------------------------------------
+    // Now that the entries of the i-th row have been sorted we can read them
+    // back into value_pt and column_index_pt:
+    //-----------------------------------------------------------------------
+    
+    // Create a boolean variable to indicate whether or not the i-th entry of
+    // Index_of_diagonal_entries has been set
+    bool is_ith_entry_set=false;
+  
+    // Loop over the entries in the vector column_index_and_value_row_i and
+    // assign its entries to value_pt and column_index_pt
+    for (unsigned j=0;j<nnz_row_i;j++)
+    {
+     // Set the column index of the j-th nonzero value in the i-th row of
+     // the matrix
+     *(column_index_pt+i_row_start+j)=column_index_and_value_row_i[j].first;
+   
+     // Set the value of the j-th nonzero value in the i-th row of
+     // the matrix
+     *(value_pt+i_row_start+j)=column_index_and_value_row_i[j].second;
+
+     // This if statement is used to set the i-th entry of the vector
+     // Index_of_diagonal_entries if it has not yet been set
+     if (!is_ith_entry_set)
+     {
+      // If the column index of the first entry in row i is greater than the
+      // row number then the first entry must lie above the diagonal
+      if (unsigned(*(column_index_pt+i_row_start))>i)
+      {
+       // If the column index of the first entry in the row is greater than
+       // the row number, i, then the i-th entry of Index_of_diagonal_entries
+       // needs to be set to -1 to indicate there are no entries below or on
+       // the diagonal
+       Index_of_diagonal_entries[i]=-1;
+
+       // Indicate that the i-th entry of Index_of_diagonal_entries has
+       // been set
+       is_ith_entry_set=true;
+      }
+      // If there are entries below or on the diagonal
+      else
+      {
+       // If there is only one entry in the row then we know that this will
+       // be the last entry below or on the diagonal because we have
+       // eliminated the possibility that if there is only one entry,
+       // that it lies above the diagonal 
+       if (nnz_row_i==1)
+       {
+	// Set the index of the current entry to be the value of i-th entry
+	// of Index_of_diagonal_entries
+	Index_of_diagonal_entries[i]=i_row_start+j;
+
+	// Indicate that the i-th entry of Index_of_diagonal_entries has
+	// been set
+	is_ith_entry_set=true;
+       }
+       // It remains to now check the case that there is more than one
+       // entry in the row. If there is more than one entry in the row
+       // and there are entries below or on the diagonal then we have
+       // three cases:
+       //          (1) The current entry lies on the diagonal;
+       //          (2) The current entry lies above the diagonal;
+       //          (3) The current entry lies below the diagonal;
+       // The first case can easily be checked as done below. If the second
+       // case occurs then we have just passed the last entry. We know this
+       // because at least one entry lies on or below the diagonal. If the
+       // second case it true then we need to assign the previous entry to
+       // the vector Index_of_diagonal_entries. Finally, we are left with
+       // case (3), which can be split into two cases:
+       //          (3.1) The current entry lies below the diagonal but it
+       //                is not the last entry below or on the diagonal;
+       //          (3.2) The current entry lies below the diagonal and is
+       //                the last entry below or on the diagonal.
+       // If case (3.1) holds then we can simply wait until we get to the
+       // next entry in the row and examine that. If the next entry lies
+       // on the diagonal then it will be swept up by case (1). If the
+       // next entry lies above the diagonal then case (2) will sweep it up
+       // and if neither is the case then we wait until the next entry and
+       // so on. If, instead, case (3.2) holds then our last check simply
+       // needs to check if the current entry is the last entry in the row
+       // because if the last entry lies on the diagonal, case (1) will
+       // sweep it up. If it lies above the diagonal, case (2) will take
+       // care of it. Therefore, the only remaining case is that it lies
+       // strictly below the diagonal and since it is the last entry in
+       // the row it means the index of this entry needs to be assigned
+       // to Index_of_diagonal_entries
+	
+       // Case (1) : The current entry lies on the diagonal
+       else if (unsigned(*(column_index_pt+i_row_start+j))==i)
+       {
+	// Set the index of the current entry to be the value of i-th entry
+	// of Index_of_diagonal_entries
+	Index_of_diagonal_entries[i]=i_row_start+j;
+
+	// Indicate that the i-th entry of Index_of_diagonal_entries has
+	// been set
+	is_ith_entry_set=true;
+       }
+       // Case (2) : The current entry lies above the diagonal
+       else if (unsigned(*(column_index_pt+i_row_start+j))>i)
+       {	 
+	// Set the index of the current entry to be the value of i-th entry
+	// of Index_of_diagonal_entries
+	Index_of_diagonal_entries[i]=i_row_start+j-1;
+
+	// Indicate that the i-th entry of Index_of_diagonal_entries has
+	// been set
+	is_ith_entry_set=true;
+       }
+       // Case (3.2) : The current entry is the last entry in the row
+       else if (j==nnz_row_i-1)
+       {
+	// Set the index of the current entry to be the value of i-th entry
+	// of Index_of_diagonal_entries
+	Index_of_diagonal_entries[i]=i_row_start+j;
+
+	// Indicate that the i-th entry of Index_of_diagonal_entries has
+	// been set
+	is_ith_entry_set=true;	 
+       } // if (nnz_row_i==1) else if
+      } // if (*(column_index_pt+i_row_start)>i)       
+     } // if (!is_ith_entry_set)
+    } // for (unsigned j=0;j<nnz_row_i;j++)       
+   } // if (nnz_row_i==0) else
+  } // for (unsigned i=0;i<n_rows;i++)
+ } // End of sort_entries()
+  
+//=============================================================================
+/// Clean method
 //=============================================================================
 void CRDoubleMatrix::clear() 
 {
@@ -1610,10 +1901,8 @@ OOMPH_CURRENT_FUNCTION,
   }
 }
 
-
-
 //=================================================================
-/// Multiply the  transposed matrix by the vector x: soln=A^T x
+/// Multiply the transposed matrix by the vector x: soln=A^T x
 //=================================================================
 void CRDoubleMatrix::multiply_transpose(const DoubleVector &x, 
                                         DoubleVector &soln) const
@@ -1704,7 +1993,6 @@ OOMPH_CURRENT_FUNCTION,
     }
   }
 }
-
 
 //===========================================================================
 /// Function to multiply this matrix by the CRDoubleMatrix matrix_in.
@@ -2955,6 +3243,148 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
     }
 #endif
  }
+  
+//=============================================================================
+/// Compute transpose of matrix
+//=============================================================================
+ void CRDoubleMatrix::get_matrix_transpose(CRDoubleMatrix* result) const
+ { 
+  // Get the number of non_zeros 
+  unsigned long nnon_zeros=this->nnz();
+    
+  // Find the number of rows and columns in the transposed
+  // matrix. We differentiate these from those associated
+  // with the original matrix by appending the characters
+  // '_t' onto the end
+  unsigned long n_rows=this->nrow();
+  unsigned long n_rows_t=this->ncol();
+
+#ifdef OOMPH_HAS_MPI
+  // We only need to produce a warning if the matrix is distributed
+  if (this->distributed())
+  {
+   // Create an ostringstream object to store the warning message
+   std::ostringstream warning_message;
+
+   // Create the warning messsage
+   warning_message << "This method currently works for serial but "
+		   << "has not been tested with MPI!\n";
+
+   // Issue the warning
+   OomphLibWarning(warning_message.str(),
+		   OOMPH_CURRENT_FUNCTION,
+		   OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+  
+  // Set up the distribution for the transposed matrix  
+  result->distribution_pt()->build(this->distribution_pt()->
+				   communicator_pt(),n_rows_t,false);
+  
+  // Acquire access to the value, row_start and column_index
+  // arrays from the CR matrix
+  const double* value_pt=this->value();
+  const int* row_start_pt=this->row_start();
+  const int* column_index_pt=this->column_index();
+  
+  // Allocate space for the row_start and column_index vectors
+  // associated with the transpose of the current matrix. 
+  Vector<double> value_t(nnon_zeros,0.0);
+  Vector<int> column_index_t(nnon_zeros,0);
+  Vector<int> row_start_t(n_rows_t+1,0);
+
+  // Loop over the column index vector and count how many times
+  // each column number occurs and increment the appropriate
+  // entry in row_start_t whose i+1'th entry will contain the
+  // number of non-zeros in the i'th column of the matrix (this
+  // is done so that the cumulative sum done next returns the
+  // correct result)
+  for (unsigned i=0;i<nnon_zeros;i++)
+  {
+   // Assign entries to row_start_t (noting the first
+   // entry is left as 0 for the cumulative sum done later)
+   row_start_t[*(column_index_pt+i)+1]++;
+  }
+  
+  // Calculate the sum of the first i entries in the row_start_t
+  // vector and store the values in the i'th entry of row_start_t
+  for (unsigned i=1;i<n_rows_t+1;i++)
+  {
+   // Calculate the cumulative sum
+   row_start_t[i]+=row_start_t[i-1];
+  }
+
+  // Allocate space for variables to store the indices of the
+  // start and end of the non-zeros in a given row of the matrix
+  unsigned i_row_s=0;
+  unsigned i_row_e=0;
+
+  // Initialise 3 extra variables for readability of the
+  // code in the subsequent piece of code
+  unsigned a=0;
+  unsigned b=0;
+  unsigned c=0;
+
+  // Vector needed to count the number of entries added
+  // to each segment in column_index_t where each segment
+  // is associated with each row in the transposed matrix
+  Vector<int> counter(n_rows_t,0);
+  
+  // Set the entries in column_index_t. To do this we loop
+  // over each row of the original matrix (equivalently
+  // the number of columns in the transpose)
+  for (unsigned i_row=0;i_row<n_rows;i_row++)
+  {	
+   // Here we find the indices of the start and end
+   // of the non-zeros in i_row'th row of the matrix.
+   // [Note, there should be a -1 on i_row_e but this
+   // is ignored so that we use a strict inequality
+   // in the subsequent for-loop!]
+   i_row_s=*(row_start_pt+i_row);
+   i_row_e=*(row_start_pt+i_row+1);
+
+   // Loop over the entries in the i_row'th row
+   // of the matrix
+   for (unsigned j=i_row_s;j<i_row_e;j++)
+   {
+	    
+    // The value of a is the column index of the j'th
+    // element in the i_row'th row of the original matrix
+    // (which is also the row index of the associated
+    // non-zero in the transposed matrix)
+    a=*(column_index_pt+j);
+
+    // The value of b will be used to find the start
+    // of the appropriate segment of column_index_t
+    // that the non-zero belongs in
+    b=row_start_t[a];
+
+    // Find the number of elements already added to
+    // this segment (to find which entry of the segment
+    // the value i_row, the column index of the non-zero
+    // in the transposed matrix, should be assigned to)
+    c=counter[*(column_index_pt+j)];
+
+    // Assign the value i_row to the appropriate entry
+    // in column_index_t
+    column_index_t[b+c]=i_row;
+    value_t[b+c]=*(value_pt+j);
+
+    // Increment the j'th value of the vector counter
+    // to indicate another non-zero index has been
+    // added into the 
+    counter[*(column_index_pt+j)]++;
+
+   } // End of for-loop over i_row'th row of the matrix
+   
+  } // End of for-loop over rows of the matrix
+
+  // Build the matrix (note: the value of n_cols for the
+  // transposed matrix is n_rows for the original matrix)
+  result->build(n_rows,value_t,column_index_t,row_start_t);
+  
+ } // End of the function 
+
 
 //=============================================================================
 /// Compute infinity (maximum) norm of matrix

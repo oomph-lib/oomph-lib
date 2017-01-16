@@ -26,9 +26,9 @@ fi
 # Tolerance for number of iterations
 threshold=`echo $3`
 if [ "$diff" -le "$threshold" ]; then
-    echo "   [OK] Number of lines in convergence histories agree "\
-         "within threshold of " $threshold
+    echo "   [OK] Number of lines in convergence histories agree"\
+         "within threshold of "$threshold
 else
-    echo "   [FAILED] Number of lines in convergence histories differ " \
-         "by " $diff " which exceeds the threshold of "  $threshold
+    echo "   [FAILED] Number of lines in convergence histories differ "\
+         "by "$diff" which exceeds the threshold of "$threshold
 fi

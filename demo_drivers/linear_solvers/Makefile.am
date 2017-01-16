@@ -50,7 +50,7 @@ endif
 #                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 
-#-------------------------------------------------------------------
+#----------------------------------------------------------------------
 
 # Sources for executable
 driven_cavity_SOURCES = driven_cavity.cc
@@ -64,10 +64,10 @@ driven_cavity_LDADD = \
 
 #----------------------------------------------------------------------
 
-
 # Sources for executable
 two_d_linear_elasticity_with_simple_block_diagonal_preconditioner_SOURCES = \
-two_d_linear_elasticity_with_simple_block_diagonal_preconditioner.cc simple_block_preconditioners.h
+two_d_linear_elasticity_with_simple_block_diagonal_preconditioner.cc \
+simple_block_preconditioners.h
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.

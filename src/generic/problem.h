@@ -994,6 +994,14 @@ public:
 
 #endif
 
+ /// \short Actions that are to be performed before a mesh adaptation.
+ /// These might include removing any additional elements, such as traction
+ /// boundary elements before the adaptation.
+ virtual void actions_before_adapt(){}
+
+ /// Actions that are to be performed after a mesh adaptation.
+ virtual void actions_after_adapt(){}
+
   protected:
 
  /// \short Any actions that are to be performed before a complete
@@ -1050,14 +1058,6 @@ public:
 
  /// \short Actions that should be performed after each explicit time step.
  virtual void actions_after_explicit_timestep() {}
-
- /// \short Actions that are to be performed before a mesh adaptation.
- /// These might include removing any additional elements, such as traction
- /// boundary elements before the adaptation.
- virtual void actions_before_adapt(){}
-
- /// Actions that are to be performed after a mesh adaptation.
- virtual void actions_after_adapt(){}
 
  /// \short Actions that are to be performed before reading in 
  /// restart data for problems involving unstructured bulk meshes.

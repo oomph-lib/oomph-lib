@@ -342,8 +342,8 @@ void TreeBasedRefineableMeshBase::adapt(const Vector<double>& elemental_error)
    }
 
 
-  //Select elements for refinement and unrefinement
-  //==============================================
+  // Select elements for refinement and unrefinement
+  //================================================
   // Reset counter for number of elements that would like to be
   // refined further but can't
   nrefinement_overruled()=0;
@@ -352,72 +352,75 @@ void TreeBasedRefineableMeshBase::adapt(const Vector<double>& elemental_error)
   // the refinement wishes of brothers (who we only access via pointers)
   std::map<RefineableElement*,bool> wants_to_be_unrefined;
 
+  // Initialise a variable to store the number of elements for refinment
   unsigned n_refine=0;
+  
   // Loop over all elements and mark them according to the error criterion
   unsigned long Nelement=this->nelement();
   for (unsigned long e=0;e<Nelement;e++)
-   {
-    //(Cast) pointer to the element
-    RefineableElement* el_pt =
-     dynamic_cast<RefineableElement*>(this->element_pt(e));
+  {
+   // (Cast) pointer to the element
+   RefineableElement* el_pt =
+    dynamic_cast<RefineableElement*>(this->element_pt(e));
  
-   //Initially element is not to be refined
-    el_pt->deselect_for_refinement();
+   // Initially element is not to be refined
+   el_pt->deselect_for_refinement();
     
-    //If the element error exceeds the threshold ...
-    if(elemental_error[e] > refine_tol)
-     {
-      // ... and its refinement level is less than the maximum desired level
-      //mark is to be refined
-      if ((el_pt->refinement_is_enabled())&&
-          (el_pt->refinement_level() < max_refinement_level()))
-       {
-        el_pt->select_for_refinement();
-        n_refine++;
-       }
-      // ... otherwise mark it as having been over-ruled
-      else
-       {
-        nrefinement_overruled()+=1;
-       }
-     }
-    
-    //Now worry about unrefinement (first pass)
-
-    // Is my error too small AND do I have a father?
-    if ((elemental_error[e]<unrefine_tol)&&
-        (el_pt->tree_pt()->father_pt()!=0))
-     {
-      //Flag to indicate whether to unrefine
-      bool unrefine=true;
-      unsigned n_sons = el_pt->tree_pt()->father_pt()->nsons();
-      // Are all brothers leaf nodes?
-      for (unsigned ison=0;ison<n_sons;ison++)
-       {
-        // (At least) one brother is not a leaf: end of story; we're not doing
-        // it (= the unrefinement)
-        if (!(el_pt->tree_pt()->father_pt()->son_pt(ison)->is_leaf()))
-         {unrefine=false;}
-       }
-
-      // Don't allow unrefinement of elements that would become larger
-      // than the minimum legal refinement level
-      if (el_pt->refinement_level()-1<min_refinement_level())
-       {unrefine=false;}
-
-      // So, all things considered, is the element eligbible for refinement?
-      if(unrefine) {wants_to_be_unrefined[el_pt]=true;}
-      else {wants_to_be_unrefined[el_pt]=false;}
-     }
+   // If the element error exceeds the threshold ...
+   if(elemental_error[e] > refine_tol)
+   {
+    // ... and its refinement level is less than the maximum desired level
+    // mark is to be refined
+    if ((el_pt->refinement_is_enabled())&&
+	(el_pt->refinement_level() < max_refinement_level()))
+    {
+     el_pt->select_for_refinement();
+     n_refine++;
+    }
+    // ... otherwise mark it as having been over-ruled
+    else
+    {
+     nrefinement_overruled()+=1;
+    }
    }
-  
-  oomph_info 
-   << " \n Number of elements to be refined: " << n_refine << std::endl;
-  oomph_info << " \n Number of elements whose refinement was overruled: " 
-            << nrefinement_overruled() << std::endl;
+    
+   // Now worry about unrefinement (first pass):
 
-  //Second pass for unrefinement --- an element cannot be unrefined unless
-  //all brothers want to be unrefined.
+   // Is my error too small AND do I have a father?
+   if ((elemental_error[e]<unrefine_tol)&&
+       (el_pt->tree_pt()->father_pt()!=0))
+   {
+    // Flag to indicate whether to unrefine
+    bool unrefine=true;
+    unsigned n_sons = el_pt->tree_pt()->father_pt()->nsons();
+    
+    // Are all brothers leaf nodes?
+    for (unsigned ison=0;ison<n_sons;ison++)
+    {
+     // (At least) one brother is not a leaf: end of story; we're not doing
+     // it (= the unrefinement)
+     if (!(el_pt->tree_pt()->father_pt()->son_pt(ison)->is_leaf()))
+     {unrefine=false;}
+    }
+
+    // Don't allow unrefinement of elements that would become larger
+    // than the minimum legal refinement level
+    if (el_pt->refinement_level()-1<min_refinement_level())
+    {unrefine=false;}
+
+    // So, all things considered, is the element eligbible for refinement?
+    if(unrefine) {wants_to_be_unrefined[el_pt]=true;}
+    else {wants_to_be_unrefined[el_pt]=false;}
+   }
+  }
+  
+  oomph_info << " \n Number of elements to be refined: "
+	     << n_refine << std::endl;
+  oomph_info << " \n Number of elements whose refinement was overruled: " 
+	     << nrefinement_overruled() << std::endl;
+
+  // Second pass for unrefinement --- an element cannot be unrefined unless
+  // all brothers want to be unrefined.
   // Loop over all elements again and let the first set of sons check if their
   // brothers also want to be unrefined
   unsigned n_unrefine=0;
@@ -503,7 +506,7 @@ void TreeBasedRefineableMeshBase::adapt(const Vector<double>& elemental_error)
 
   // There may be some issues with unrefinement too, but I have not
   // been able to come up with an example (either in my head or in a
-  // particular problem) where anything has arisen.  I can see that
+  // particular problem) where anything has arisen. I can see that
   // there may be an issue if n_unrefine differs across processes so
   // that (total_n_unrefine > max_keep_unrefined()) on some but not 
   // all processes. I haven't seen any examples of this yet so the 
@@ -526,7 +529,7 @@ void TreeBasedRefineableMeshBase::adapt(const Vector<double>& elemental_error)
 #endif
 
   oomph_info << "---> " << total_n_refine << " elements to be refined, and "
-             << total_n_unrefine << " to be unrefined, in total." << std::endl;
+             << total_n_unrefine << " to be unrefined, in total.\n" << std::endl;
 
   if ((total_n_refine > 0) || (total_n_unrefine > max_keep_unrefined()))
    {
@@ -555,8 +558,6 @@ void TreeBasedRefineableMeshBase::adapt(const Vector<double>& elemental_error)
         // No halo with self: Send unrefinement info to proc d
         if (d!=my_rank) 
          {
-          
-
           // Get the vector of halo elements whose non-halo counterpart
           // are on processor d
           Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
@@ -739,10 +740,10 @@ void TreeBasedRefineableMeshBase::adapt(const Vector<double>& elemental_error)
 #endif
 #endif
 
-    //Perform the actual adaptation
+    // Perform the actual adaptation
     adapt_mesh(local_doc_info);
 
-    //The number of refineable elements is still local to each process
+    // The number of refineable elements is still local to each process
     Nunrefined=n_unrefine;
     Nrefined=n_refine;
    }
@@ -783,7 +784,7 @@ void TreeBasedRefineableMeshBase::adapt(const Vector<double>& elemental_error)
     if (n_refine==0)
      {
       oomph_info 
-       << "\n Not enough benefit in adapting mesh. " 
+       << " Not enough benefit in adapting mesh."
        << std::endl << std::endl;
      }
     Nunrefined=0;
@@ -804,7 +805,7 @@ get_refinement_levels(unsigned& min_refinement_level,
  min_refinement_level=UINT_MAX;
  max_refinement_level=0;
  
- //Loop over all elements
+ // Loop over all elements
  unsigned long n_element=this->nelement();
  if (n_element==0)
   {
@@ -1284,7 +1285,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
                   << max_error << " is too big\n";
      error_stream
       << "i.e. bigger than RefineableElement::max_integrity_tolerance()="
-      << RefineableElement::max_integrity_tolerance() << std::endl;
+      << RefineableElement::max_integrity_tolerance() << "\n" << std::endl;
 
      std::ofstream some_file;
      some_file.open("ProblemMesh.dat");
@@ -1315,7 +1316,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
                 << max_error << " is OK" << std::endl;
      oomph_info 
       << "i.e. less than RefineableElement::max_integrity_tolerance()="
-      << RefineableElement::max_integrity_tolerance() << std::endl;
+      << RefineableElement::max_integrity_tolerance() << "\n" << std::endl;
     }
  
 
@@ -1834,8 +1835,7 @@ void TreeBasedRefineableMeshBase::refine_selected_elements(
 
 
 //========================================================================
-/// Refine to same degree as the reference mesh.
-///
+/// \short Refine to same degree as the reference mesh.
 //========================================================================
 void TreeBasedRefineableMeshBase::refine_base_mesh_as_in_reference_mesh(
  TreeBasedRefineableMeshBase* const &ref_mesh_pt)
@@ -1850,6 +1850,49 @@ void TreeBasedRefineableMeshBase::refine_base_mesh_as_in_reference_mesh(
  refine_base_mesh(to_be_refined);
 }
 
+ 
+//========================================================================
+/// \short Refine to same degree as the reference mesh minus one. Useful
+/// function for multigrid solvers; allows the easy copy of a mesh
+/// to the level of refinement just below the current one. Returns
+/// a boolean variable which indicates if the reference mesh has not
+/// been refined at all
+//========================================================================
+ bool TreeBasedRefineableMeshBase::
+ refine_base_mesh_as_in_reference_mesh_minus_one(
+  TreeBasedRefineableMeshBase* const &ref_mesh_pt)
+ {
+  // Assign storage for refinement pattern
+  Vector<Vector<unsigned> > to_be_refined;
+
+  // Get refinement pattern of reference mesh:
+  ref_mesh_pt->get_refinement_pattern(to_be_refined);
+
+  // Find the length of the vector
+  unsigned nrefinement_levels=to_be_refined.size();
+
+  // If the reference mesh has not been refined a single time then
+  // we cannot create an unrefined copy so stop here
+  if (nrefinement_levels==0)
+  {
+   return false;
+  }
+  // If the reference mesh has been refined at least once
+  else
+  {  
+   // Remove the last entry of the vector to make sure we refine to
+   // the same level minus one
+   to_be_refined.resize(nrefinement_levels-1);  
+
+   // Refine mesh according to given refinement pattern
+   refine_base_mesh(to_be_refined);
+
+   // Indicate that it was possible to create an unrefined copy
+   return true;
+  }
+ }
+
+ 
 //========================================================================
 /// Refine mesh once so that its topology etc becomes that of the 
 /// (finer!) reference mesh -- if possible! Useful for meshes in multigrid 
@@ -4556,10 +4599,11 @@ void TreeBasedRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
     {
      std::ostringstream error_stream;
      error_stream << "Mesh refined: Max. error in integrity check: " 
-                  << max_error << " is too big\n";
-     error_stream
-      << "i.e. bigger than RefineableElement::max_integrity_tolerance()="
-      << RefineableElement::max_integrity_tolerance() << std::endl;
+                  << max_error << " is too big"
+		  << "\ni.e. bigger than RefineableElement::"
+		  << "max_integrity_tolerance()="
+		  << RefineableElement::max_integrity_tolerance()
+		  << std::endl;
  
      std::ofstream some_file;
      some_file.open("ProblemMesh.dat");
@@ -4578,7 +4622,7 @@ void TreeBasedRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
       }
      some_file.close();
  
-     error_stream << "Doced problem mesh in ProblemMesh.dat" << std::endl;
+     error_stream << "Documented problem mesh in ProblemMesh.dat" << std::endl;
  
      throw OomphLibError(error_stream.str(),
                          OOMPH_CURRENT_FUNCTION,
@@ -4589,7 +4633,8 @@ void TreeBasedRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
      oomph_info << "Mesh refined: Max. error in integrity check: " 
                 << max_error << " is OK" << std::endl;
      oomph_info << "i.e. less than RefineableElement::max_integrity_tolerance()="
-                << RefineableElement::max_integrity_tolerance() << std::endl;
+                << RefineableElement::max_integrity_tolerance()
+		<< "\n" << std::endl;
     }
  
 
@@ -4597,7 +4642,7 @@ void TreeBasedRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
     {
      t_end = TimingHelpers::timer();
      oomph_info
-      <<"Time for (paranoid only) checking of integrity: " 
+      << "Time for (paranoid only) checking of integrity: " 
       << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
@@ -4641,11 +4686,6 @@ void TreeBasedRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
      t_start = TimingHelpers::timer();
     }
    
-   
-   
-   
-   
-
    //Now we can correct the nodes on boundaries that were hanging that
    //are no longer hanging
    //Only bother if we have more than two dimensions

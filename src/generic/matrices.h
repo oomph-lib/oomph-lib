@@ -903,6 +903,55 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  /// Destructor
  virtual ~CRDoubleMatrix();
  
+ /// \short Access function: returns the vector Index_of_diagonal_entries.
+ /// The i-th entry of the vector contains the index of the last entry
+ /// below or on the diagonal. If there are no entries below or on the
+ /// diagonal then the corresponding entry is -1. If, however, there are
+ /// no entries in the row then the entry is irrelevant and is kept
+ /// as the initialised value; 0. 
+ const Vector<int> get_index_of_diagonal_entries() const
+  {
+   // Check to see if the vector has been set up
+   if (Index_of_diagonal_entries.size()==0)
+   {
+    // Make the warning
+    std::string err_strng="The Index_of_diagonal_entries vector has not been ";
+    err_strng+="set up yet. Run sort_entries() to set this vector up.";
+
+    // Throw the warning
+    OomphLibWarning(err_strng,
+		    "CRDoubleMatrix::get_index_of_diagonal_entries()",
+		    OOMPH_EXCEPTION_LOCATION);
+   }
+    
+   // Return the vector
+   return Index_of_diagonal_entries;
+  } // End of index_of_diagonal_entries
+ 
+ /// \short Create a struct to provide a comparison function for std::sort
+ struct CRDoubleMatrixComparisonHelper
+ {
+  // Define the comparison operator
+  bool operator() (const std::pair<int,double>& pair_1,
+		   const std::pair<int,double>& pair_2)
+   {
+    // If the first argument of pair_1 is less than the first argument of
+    // pair_2 then return TRUE otherwise return FALSE
+    return (pair_1.first < pair_2.first);
+   }
+ } Comparison_struct;
+ 
+ /// \short Runs through the column index vector and checks if the entries
+ /// follow the regular lexicographical ordering of matrix entries, i.e.
+ /// it will check (at the i-th row of the matrix) if the entries in the
+ /// column index vector associated with this row are in increasing order
+ bool entries_are_sorted(const bool& doc_unordered_entries=false) const;
+
+ /// \short Sorts the entries associated with each row of the matrix in the
+ /// column index vector and the value vector into ascending order and sets
+ /// up the Index_of_diagonal_entries vector
+ void sort_entries();
+ 
  /// \short build method: vector of values, vector of column indices,
  /// vector of row starts and number of rows and columns.
  void build(const LinearAlgebraDistribution* distribution_pt,
@@ -1132,6 +1181,9 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  /// destruction of the new matrix.
  CRDoubleMatrix* global_matrix() const;
 
+ /// \short Returns the transpose of this matrix
+ void get_matrix_transpose(CRDoubleMatrix* result) const;
+   
  /// \short returns the inf-norm of this matrix
  double inf_norm() const;
 
@@ -1145,6 +1197,10 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
 
  private:
 
+ /// \short Vector whose i'th entry contains the index of the last entry below
+ /// or on the diagonal of the i'th row of the matrix
+ Vector<int> Index_of_diagonal_entries;
+ 
  /// \short Flag to determine which matrix-matrix multiplication method is used
  /// (for serial (or global) matrices)
  unsigned Serial_matrix_matrix_multiply_method;
@@ -2625,12 +2681,9 @@ class CCDoubleMatrix : public DoubleMatrixBase,
 };
 
 
-
-
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-
 
 
 //============================================================================

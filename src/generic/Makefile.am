@@ -112,7 +112,8 @@ trapezoid_rule.h \
 preconditioner_array.h pml_meshes.h \
 generalised_timesteppers.h vector_matrix.h face_mesh_project.h \
 generalised_newtonian_constitutive_models.h \
-unstructured_two_d_mesh_geometry_base.h
+unstructured_two_d_mesh_geometry_base.h \
+geometric_multigrid.h
 
 
 

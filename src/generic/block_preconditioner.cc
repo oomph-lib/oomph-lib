@@ -3529,7 +3529,7 @@ namespace oomph
        {
          std::ostringstream error_message;
          error_message << "The distribution of the block vector " << b
-           << "must match the"
+           << " must match the"
            << " specified distribution at "
            << "Block_distribution_pt["
            << block_vec_number[b] << "].\n"

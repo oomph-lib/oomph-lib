@@ -626,8 +626,6 @@ void run_it(LinearSolver* linear_solver_pt)
            << std::endl;
  error_file2.close();
 
-
-
 } //end of run_it
 
 
@@ -799,23 +797,47 @@ int main(int argc, char *argv[])
      std::cout << "Solving with GS" << std::endl;  
   
      break;
+     
+     // Damped Jacobi
+     //--------------
+    case 5:
+      
+     // This solver can't handle non-symmetric matrices
+     TanhSolnForAdvectionDiffusion::Peclet=0.0;
+
+     // Build solver 
+     it_linear_solver_pt = new DampedJacobi<CRDoubleMatrix>;
+   
+     // Note: Doesn't have a preconditioner
+   
+     // Switch on doc of convergence history and adjust tolerance
+     it_linear_solver_pt->tolerance()=tol;
+     it_linear_solver_pt->
+      open_convergence_history_file_stream("RESLT/convergence.dat");
+   
+     // Set solver flag
+     linear_solver_pt=it_linear_solver_pt;
+   
+     // doc
+     std::cout << "Solving with damped Jacobi" << std::endl;  
+  
+     break;
 
 
      // Wrong
      //------
     default:
 
-     throw OomphLibError(
-      "Invalid command line argument: solver flag: ",
-      OOMPH_CURRENT_FUNCTION,
-      OOMPH_EXCEPTION_LOCATION);
+     throw OomphLibError("Invalid command line argument: solver flag: ",
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
      break;
    
     }
 
    // Build problem and solve it with specified linear solver
    run_it(linear_solver_pt);
-
+ 
    delete it_linear_solver_pt;
 
    // Comment this out if you want an endless loop to test

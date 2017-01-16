@@ -67,102 +67,7 @@ public:
 					  time_stepper_pt),
   RefineableSolidQuadFromTriangleMesh<ELEMENT>(triangle_mesh_parameters,
 					       time_stepper_pt)
-  {}
-
-//  // Calculate the L2 norm of the displacement u=R-r to overload the
-//  // compute_norm function in the GeneralisedElement base class
-//  void compute_norm(double& norm)
-//   {
-//    // Initialse the norm
-//    norm=0.0;
-
-//    // Per-element norm
-//    double el_norm=0;
-
-//    // Loop over the elements
-//    unsigned long n_element=this->nelement();
-//    for (unsigned long e=0;e<n_element;e++)
-//    {
-//     // Get a pointer to the e'th element 
-//     ELEMENT* el_pt=dynamic_cast<ELEMENT*>(this->element_pt(e));
-
-// #ifdef OOMPH_HAS_MPI
-//     // Compute error for each non-halo element
-//     if (!(el_pt->is_halo()))
-// #endif
-//     {
-//      // Compute the norm of the solution over this element
-//      el_compute_norm(el_pt,el_norm);
-//     }
-    
-//     norm+=el_norm;
-//    } // (unsigned long e=0;e<n_element;e++)
-//   } // End of compute_norm(...)
- 
-//  // Calculate the L2 norm of the displacement u=R-r to overload the
-//  // compute_norm function in the GeneralisedElement base class
-//  void el_compute_norm(ELEMENT* el_pt,double& el_norm)
-//   {
-//    // Initialise el_norm to 0.0
-//    el_norm=0.0;
-
-//    // Get the dimension of the element
-//    unsigned ndim=el_pt->dim();
-    
-//    // Vector of local coordinates
-//    Vector<double> s(ndim);
-    
-//    // Displacement vector, Lagrangian coordinate vector and Eulerian
-//    // coordinate vector respectively
-//    Vector<double> disp(ndim,0.0);
-//    Vector<double> xi(ndim,0.0);
-//    Vector<double> x(ndim,0.0);
-    
-//    // Find out how many nodes there are in the element
-//    unsigned n_node=el_pt->nnode();
-
-//    // Construct a shape function
-//    Shape psi(n_node);
-
-//    // Get the number of integration points
-//    unsigned n_intpt=el_pt->integral_pt()->nweight();
-    
-//    // Loop over the integration points
-//    for(unsigned ipt=0;ipt<n_intpt;ipt++)
-//    {     
-//     // Assign values of s
-//     for(unsigned i=0;i<ndim;i++)
-//     {
-//      s[i]=el_pt->integral_pt()->knot(ipt,i);
-//     }
-
-//     // Get the integral weight
-//     double w=el_pt->integral_pt()->weight(ipt);
-
-//     // Get jacobian of mapping
-//     double J=el_pt->J_eulerian(s);
-   
-//     // Premultiply the weights and the Jacobian
-//     double W=w*J;
-   
-//     // Get the Lagrangian and Eulerian coordinate at this point, respectively
-//     el_pt->interpolated_xi(s,xi);
-//     el_pt->interpolated_x(s,x);
-
-//     // Calculate the displacement, u=R-r=x-xi
-//     for (unsigned idim=0;idim<ndim;idim++)
-//     {
-//      disp[idim]=x[idim]-xi[idim];
-//     }
-
-//     // Add to norm
-//     for (unsigned ii=0;ii<ndim;ii++)
-//     {
-//      el_norm+=(disp[ii]*disp[ii])*W;
-//     }
-//    }    
-//   } // End of compute_norm(...)
- 
+  {} 
 
  /// Empty Destructor
  virtual ~MyMesh() { }
@@ -330,15 +235,14 @@ UnstructuredSolidProblem<ELEMENT,MESH>::UnstructuredSolidProblem() :
  Outer_boundary_polyline_pt = new TriangleMeshPolygon(boundary_segment_pt);
 
 
- // There are no holes
- //-------------------------------
- 
- // Now build the mesh, based on the boundaries specified by
- //---------------------------------------------------------
- // polygons just created
- //----------------------
+ // There are no holes. Now build the mesh, based on the 
+ //-----------------------------------------------------
+ // boundaries specified by polygons just created
+ //----------------------------------------------
+ // Set the element area
  double uniform_element_area=0.2;
 
+ // Create a TriangleMeshClosedCurve object defining the outer boundary
  TriangleMeshClosedCurve* closed_curve_pt=Outer_boundary_polyline_pt;
 
  // Use the TriangleMeshParameters object for gathering all

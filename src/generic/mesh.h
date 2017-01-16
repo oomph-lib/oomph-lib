@@ -913,6 +913,15 @@ public:
  void output_paraview(std::ofstream &file_out, 
                       const unsigned &nplot) const;
 
+ /// \short Output in paraview format into specified file. Breaks up each
+ /// element into sub-elements for plotting purposes. We assume
+ /// that all elements are of the same type (fct will break 
+ /// break (in paranoid mode) if paraview output fcts of the
+ /// elements are inconsistent). 
+ void output_fct_paraview(std::ofstream &file_out, 
+ 			  const unsigned &nplot,
+ 			  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt) const;
+
  /// Output for all elements
  void output(std::ostream &outfile);
 

@@ -5,7 +5,7 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 
 #Set the number of tests to be checked
-NUM_TESTS=85
+NUM_TESTS=89
 
 # Threshold for number of iterations in comparison of convergence histories
 #===========================================================================
@@ -488,7 +488,7 @@ mkdir RESLT
 echo "done"
 echo " " >> validation.log
 echo "Adv diff linear solver test with GMRES validation" >> validation.log
-echo "---------------------------------------------------" >> validation.log
+echo "-------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
@@ -548,7 +548,7 @@ mkdir RESLT
 echo "done"
 echo " " >> validation.log
 echo "Adv diff linear solver test with BiCGStab validation" >> validation.log
-echo "---------------------------------------------------" >> validation.log
+echo "----------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
@@ -614,7 +614,7 @@ mkdir RESLT
 echo "done"
 echo " " >> validation.log
 echo "Adv diff linear solver test with CG validation" >> validation.log
-echo "---------------------------------------------------" >> validation.log
+echo "----------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
@@ -677,7 +677,7 @@ mkdir RESLT
 echo "done"
 echo " " >> validation.log
 echo "Adv diff linear solver test with GS validation" >> validation.log
-echo "---------------------------------------------------" >> validation.log
+echo "----------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
@@ -733,6 +733,71 @@ fi
 
 mv RESLT RESLT_GS
 
+
+
+# Validation with GS
+#-------------------
+echo "Running adv diff linear solver test with DampedJacobi "
+mkdir RESLT
+../adv_diff_iterative_linear_solver_tester 5 > OUTPUT_DampedJacobi
+echo "done"
+echo " " >> validation.log
+echo "Adv diff linear solver test with Damped Jacobi validation" >> validation.log
+echo "---------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/soln0.dat > DampedJacobi_results.dat
+cat RESLT/convergence.dat > DampedJacobi_convergence.dat
+cat RESLT/la_solve_convergence.dat > DampedJacobi_la_solve_convergence.dat
+cat RESLT/resolve_error.dat RESLT/la_solve_error.dat > DampedJacobi_solve_error.dat
+
+
+    
+if test "$1" = "no_fpdiff"; then
+
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have validata" \
+        >> validation.log
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have validata" \
+        >> validation.log
+
+else
+
+    #Compare number of iterations against reference data and append
+    ../../../bin/compare_file_length_with_tolerance.bash DampedJacobi_convergence.dat \
+        ../validata/DampedJacobi_convergence.dat $threshold_for_number_of_iterations \
+        >>  validation.log
+    
+    
+    #Compare number of iterations against reference data and append
+    ../../../bin/compare_file_length_with_tolerance.bash \
+        DampedJacobi_la_solve_convergence.dat \
+        ../validata/DampedJacobi_la_solve_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+
+fi
+
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../bin/fpdiff.py ../validata/results_Pe0.dat.gz  \
+         DampedJacobi_results.dat >> validation.log
+fi
+
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../bin/fpdiff.py ../validata/DampedJacobi_solve_error.dat.gz  \
+          DampedJacobi_solve_error.dat >> validation.log
+fi
+
+
+mv RESLT RESLT_DampedJacobi
 
 
 

@@ -521,9 +521,16 @@ public:
                                  elements_to_be_refined_pt);
 
  
- /// Refine base mesh to same degree as reference mesh (relative
+ /// \short Refine base mesh to same degree as reference mesh (relative
  /// to original unrefined mesh).
  virtual void refine_base_mesh_as_in_reference_mesh(
+  TreeBasedRefineableMeshBase* const &ref_mesh_pt);
+ 
+ /// \short Refine base mesh to same degree as reference mesh minus one
+ /// level of refinement (relative to original unrefined mesh). Useful
+ /// function for multigrid solvers; allows the easy copy of a mesh
+ /// to the level of refinement just below the current one
+ virtual bool refine_base_mesh_as_in_reference_mesh_minus_one(
   TreeBasedRefineableMeshBase* const &ref_mesh_pt);
 
  /// \short Refine mesh once so that its topology etc becomes that of the 

@@ -277,7 +277,10 @@ private:
 template<class ELASTICITY_ELEMENT, class HELMHOLTZ_ELEMENT>
 CoatedDiskProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::CoatedDiskProblem() 
 {
-
+ // To suppress boundary warnings (to avoid a lot of warnings) uncomment
+ // the following code:
+ //UnstructuredTwoDMeshGeometryBase::
+ // Suppress_warning_about_regions_and_boundaries=true;
 
  // Solid mesh
  //-----------

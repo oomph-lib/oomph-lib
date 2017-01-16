@@ -1733,9 +1733,9 @@ describe_nodal_local_dofs(std::ostream& out,
       std::ostringstream error_stream;
       error_stream 
        << "Determinant of Jacobian matrix is zero --- "
-       << "singular mapping!\n The determinant of the "
-       << "jacobian is "<<std::fabs(jacobian)
-       << "which is smaller than the treshold "
+       << "singular mapping!\nThe determinant of the "
+       << "jacobian is " << std::fabs(jacobian)
+       << " which is smaller than the treshold "
        << Tolerance_for_singular_jacobian <<"\n"
        << "You can change this treshold, by specifying "
        << "FiniteElement::Tolerance_for_singular_jacobian \n"

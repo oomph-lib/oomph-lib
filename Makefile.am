@@ -63,7 +63,7 @@ endif
 
 # The ultimate list of sub-directories (does not include user drivers!)
 #----------------------------------------------------------------------
-SUBDIRS = $(sub_dirs) $(doc_dirs) self_test 
+SUBDIRS = $(sub_dirs) $(doc_dirs) self_test
 
 # The ultimate list of sub-directories that are to be distributed
 #----------------------------------------------------------------

@@ -1,5 +1,5 @@
 //LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
+//LIC// This file forms part of oomph-lib, the object-oriented,
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
@@ -46,22 +46,47 @@ namespace oomph
 {
 
 //======================================================================
-/// Build with the help of the scaffold mesh coming  
-/// from the triangle mesh generator Triangle.
+/// \short Build the full mesh with the help of the scaffold mesh coming 
+/// from the triangle mesh generator, Triangle. To build this quad 
+/// element based mesh we make use of the fact that a triangle element 
+/// can be split as shown in the diagram below:
+/// 
+///                  N2 
+///                 | |                 N0 : 1st scaffold element node       
+///                |   |                N1 : 2nd scaffold element node
+///               |     |               N2 : 3rd scaffold element node
+///              |       |  
+///           C |   Q_2   | B           Edge 0 : N0 --> N1
+///            | |       | |            Edge 1 : N1 --> N2
+///           |   |     |   |           Edge 2 : N2 --> N0
+///          |     |   |     | 
+///         |       | |       |         A : Midpoint of edge 0
+///        |   Q_0   |   Q_1   |        B : Midpoint of edge 1
+///       |          |          |       C : Midpoint of edge 2
+///      |           |           |
+///     N0 __________|__________ N1
+///                  A
+///
+/// The intersection of all three quad elements is the centroid. Using
+/// this splitting, the subsequent mesh will consist of quadrilaterals
+/// whose shape which depend on the structure of the underlying mesh.
 //======================================================================
- template <class ELEMENT>
+ template<class ELEMENT>
  void QuadFromTriangleMesh<ELEMENT>::build_from_scaffold(
   TriangleScaffoldMesh* tmp_mesh_pt,TimeStepper* time_stepper_pt,
   const bool &use_attributes)
  {   
   // Create space for elements
   unsigned nelem=tmp_mesh_pt->nelement();
+
+  // We will have 3 quad elements per scaffold element
   Element_pt.resize(3*nelem);
    
   // Set number of boundaries
   unsigned nbound=tmp_mesh_pt->nboundary();
  
-  // Resize the boundary information
+  // Resize the boundary information (the number of boundaries doesn't
+  // change)
   set_nboundary(nbound);
 
   // Stores each element attached to a boundary and the index of the
@@ -70,22 +95,37 @@ namespace oomph
   Face_index_at_boundary.resize(nbound);
 
   // Create a quad element for nodal data
-  ELEMENT* el_pt=new ELEMENT;
+  ELEMENT* temp_el_pt=new ELEMENT;
  
-  // Get node numbers from correct element type
-  unsigned nnode_el=el_pt->nnode();
-  unsigned nnode_1d=el_pt->nnode_1d();
+  // Get the number of nodes in a quad element
+  unsigned nnode_el=temp_el_pt->nnode();
+
+  // Find the number of nodes along one edge of a quad element
+  unsigned nnode_1d=temp_el_pt->nnode_1d();
+
+  // Calculate the number of nodes that will lie along an edge of a
+  // triangle element in the scaffold mesh
   unsigned nnode_edge=2*nnode_1d-1;
 
   // Delete the element pointer
-  delete el_pt;
-  el_pt=0;
+  delete temp_el_pt;
+
+  // Make it a null pointer
+  temp_el_pt=0;
 
   // Create dummy linear quad for geometry
   QElement<2,2> dummy_element;
+
+  // The dimension of the element
   unsigned n_dim=2;
+
+  // The position type
   unsigned n_position_type=1;
+
+  // Don't assign memory for any values
   unsigned initial_n_value=0;
+
+  // Loop over the nodes of the element and make them
   for (unsigned j=0;j<4;j++)
   {
    dummy_element.node_pt(j)=new Node(n_dim,n_position_type,initial_n_value);
@@ -100,43 +140,61 @@ namespace oomph
   // Create a map to return a vector of pointers to nnode_1d nodes where
   // the input is an edge. If the edge hasn't been set up then this will
   // return a null pointer. Note: all node pointers on an edge will be
-  // stored in clockwise ordering. Therefore, to copy the data from an
-  // edge in one element into the neighbouring element joined by the given
-  // edge we must proceed through the vector backwards (noting that the
-  // going clockwise through an edge in one element is the same as
-  // going anticlockwise through the neighbouring element)
+  // stored in clockwise ordering. Therefore, to copy the data of an
+  // edge into the adjoining element we must proceed through the vector
+  // backwards (as progressing through an edge of an element in a clockwise
+  // manner is equivalent to proceeding through the edge of the neighbouring
+  // element in an anti-clockwise manner)
   std::map<Edge,Vector<Node*> > edge_nodes_map;
   
-  // Setup map to check if the scaffold mesh node has been set up in the quad
-  // mesh. If the node has been set up this map will return a pointer to it
-  // otherwise it will return a null pointer
+  // Set up a map to check if the scaffold mesh node has been set up in the
+  // quad mesh. If the node has been set up this map will return a pointer
+  // to it otherwise it will return a null pointer
   std::map<Node*,Node*> scaffold_to_quad_mesh_node;
   
   // Loop over elements in scaffold mesh
   unsigned new_el_count=0;
+
+  // Create storage for the coordinates of the centroid
   Vector<double> centroid(2);
+
+  // Create storage for the coordinates of the vertices of the triangle
   Vector<Vector<double> > triangle_vertex(3);
+
+  // Loop over all of the elements in the scaffold mesh
   for (unsigned e=0;e<nelem;e++)
-  {   
-   // Find centroid and vertices
+  {
+   // Initialise centroid values for the e-th triangle element
    centroid[0]=0.0;
    centroid[1]=0.0;
+
+   // Loop over the scaffold element nodes
    for (unsigned j=0;j<3;j++)
    {
+    // Resize the j-th triangle_vertex entry to contain the x and
+    // y-coordinate
     triangle_vertex[j].resize(2);
+
+    // Get the coordinates 
     double x=tmp_mesh_pt->finite_element_pt(e)->node_pt(j)->x(0);
     double y=tmp_mesh_pt->finite_element_pt(e)->node_pt(j)->x(1);
+
+    // Increment the centroid coordinates
     centroid[0]+=x;
     centroid[1]+=y;
+
+    // Assign the triangle_vertex coordinates
     triangle_vertex[j][0]=x;
     triangle_vertex[j][1]=y;
    }
+
+   // Divide the centroid entries by 3 to get the centroid coordinates
    centroid[0]/=3.0;
    centroid[1]/=3.0;
    
    // Create element pointers and assign them to a vector
    //----------------------------------------------------
-   // Make new quad elements
+   // Make new quad elements of the type specified by the template parameter
    ELEMENT* el0_pt=new ELEMENT;
    ELEMENT* el1_pt=new ELEMENT;
    ELEMENT* el2_pt=new ELEMENT;
@@ -904,7 +962,6 @@ namespace oomph
     el2_pt->node_pt(j)->x(0)=x[0];
     el2_pt->node_pt(j)->x(1)=x[1];
    }
-
    
    // We now need to loop over nodes corner_2 to (corner_3-1) and copy the
    // given information from Q1. We do not need to set up the (corner_3)'th
@@ -917,7 +974,6 @@ namespace oomph
     el2_pt->node_pt(j)=el1_pt->node_pt(corner_1+(j-corner_2)*nnode_1d);
    }
 
-
    // Add the element pointers to Element_pt and then increment the counter
    Element_pt[new_el_count]=el0_pt;
    Element_pt[new_el_count+1]=el1_pt;
@@ -927,27 +983,20 @@ namespace oomph
    // Assign the edges to the edge map
    edge_nodes_map[edge0]=edge0_vector_pt;
    edge_nodes_map[edge1]=edge1_vector_pt;
-   edge_nodes_map[edge2]=edge2_vector_pt;
-
-#ifdef PARANOID
-   // Make sure that there are no duplicate nodes created in Node_pt
-   // Come back and finish this off.
-#endif
-  
-   // hierher: Yet to do: (See triangle_mesh for template)
-   // - possibly copy attributes (are they ever used?)
-   // - Setup elements next to boundaries scheme
-   // - re-enable boundary coordinates
-   
+   edge_nodes_map[edge2]=edge2_vector_pt;   
   }
 
   // Indicate that the look up scheme has been set up
   Lookup_for_elements_next_boundary_is_setup=true;
   
-  // Delete nodes of dummy element
+  // Clean the dummy element nodes
   for (unsigned j=0;j<4;j++)
   {
+   // Delete the j-th dummy element node
    delete dummy_element.node_pt(j);
+   
+   // Make it a null pointer
+   dummy_element.node_pt(j)=0;
   }
 
  }
@@ -958,29 +1007,24 @@ namespace oomph
  ////////////////////////////////////////////////////////////////////
 
 
-#ifdef OOMPH_HAS_TRIANGLE_LIB  
  
 //======================================================================
 /// Adapt problem based on specified elemental error estimates
 //======================================================================
  template <class ELEMENT>
- void RefineableQuadFromTriangleMesh<ELEMENT>::adapt(const Vector<double>& elem_error)
+ void RefineableQuadFromTriangleMesh<ELEMENT>::
+ adapt(const Vector<double>& elem_error)
  {
   // Call the adapt function from the TreeBasedRefineableMeshBase base class
   TreeBasedRefineableMeshBase::adapt(elem_error);
-    
+     
+#ifdef OOMPH_HAS_TRIANGLE_LIB
   // Move the nodes on the new boundary onto the old curvilinear
   // boundary. If the boundary is straight this will do precisely
   // nothing but will be somewhat inefficient
-  unsigned nbound=this->nboundary();
-  for (unsigned ibound=0;ibound<nbound;ibound++)
-  {
-   this->snap_nodes_onto_geometric_objects();
-  }
- }
- 
+  this->snap_nodes_onto_geometric_objects();
 #endif
- 
-}
+ } // End of adapt
+} // End of namespace oomph
 
-#endif // OOMPH_QUAD_FROM_TRIANGLE_MESH_CC
+#endif // OOMPH_QUAD_FROM_TRIANGLE_MESH_TEMPLATE_CC

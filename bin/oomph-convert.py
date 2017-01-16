@@ -373,7 +373,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
 
     # Cell connectivity
     #---------------------------------------------------------------------------
-    sys.stdout.write("Write cell connectivity..................")
+    sys.stdout.write("Write cell connectivity...................")
     sys.stdout.flush()
     output.write(VtkXml.connectivityHeader)
     pos = 0 # Current cell origin node index
@@ -467,7 +467,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
 
     # Cell offset
     #---------------------------------------------------------------------------
-    sys.stdout.write("Write cell offsets.......................")
+    sys.stdout.write("Write cell offsets........................")
     sys.stdout.flush()
     output.write(VtkXml.offsetsHeader)
     offset = 0
@@ -489,7 +489,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
 
     # Cell types
     #---------------------------------------------------------------------------
-    sys.stdout.write("Write cell types.........................")
+    sys.stdout.write("Write cell types..........................")
     sys.stdout.flush()
 
     output.write(VtkXml.typesHeader)    
@@ -559,7 +559,6 @@ def error(message):
 #
 ################################################################################
 #
-
 
 class TecplotParsingError(Exception):
     """ Raised when an error occurs while parsing a Tecplot file.

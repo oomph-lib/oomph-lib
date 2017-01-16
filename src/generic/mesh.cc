@@ -1172,16 +1172,17 @@ void Mesh::read(std::ifstream &restart_file)
   }
 }
 
-
-//=======================================================
-/// Output in paraview format into specified file. Breaks up each
-/// element into sub-elements for plotting purposes. We assume
-/// that all elements are of the same type (fct will break 
-/// break (in paranoid mode) if paraview output fcts of the
-/// elements are inconsistent). 
-//=======================================================
-void  Mesh::output_paraview(std::ofstream &file_out, 
-                            const unsigned &nplot) const
+ 
+//========================================================
+/// Output in paraview format into specified file.
+///
+/// Breaks up each element into sub-elements for plotting
+/// purposes. We assume that all elements are of the same
+/// type (fct will break (in paranoid mode) if paraview
+/// output fcts of the elements are inconsistent). 
+//========================================================
+void Mesh::output_paraview(std::ofstream &file_out, 
+			   const unsigned &nplot) const
 {
 
  // Change the scientific format so that E is used rather than e
@@ -1230,7 +1231,7 @@ void  Mesh::output_paraview(std::ofstream &file_out,
 
  // Make variables to hold the number of nodes and elements
  unsigned long number_of_nodes=0;
- unsigned long  total_number_of_elements=0;
+ unsigned long total_number_of_elements=0;
 
  // Loop over all the elements to find total number of plot points
  for(unsigned i=0;i<number_of_elements;i++)
@@ -1470,6 +1471,303 @@ void  Mesh::output_paraview(std::ofstream &file_out,
 }
  
 
+//========================================================
+/// Output in paraview format into specified file.
+///
+/// Breaks up each element into sub-elements for plotting
+/// purposes. We assume that all elements are of the same
+/// type (fct will break (in paranoid mode) if paraview
+/// output fcts of the elements are inconsistent). 
+//========================================================
+ void Mesh::output_fct_paraview(std::ofstream &file_out, 
+				const unsigned &nplot,
+				FiniteElement::SteadyExactSolutionFctPt exact_soln_pt) const
+{
+
+ // Change the scientific format so that E is used rather than e
+ file_out.setf(std::ios_base::uppercase);
+
+ // Decide how many elements there are to be plotted
+ unsigned long number_of_elements=this->Element_pt.size();
+   
+ // Cast to finite element and return if cast fails. 
+ FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(element_pt(0));
+
+#ifdef PARANOID
+ if (fe_pt==0)
+  {
+   throw OomphLibError(
+    "Recast for FiniteElement failed for element 0!\n",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+
+#ifdef PARANOID
+ // Check if all elements have the same number of degrees of freedom,
+ // if they don't, paraview will break
+ unsigned el_zero_ndof=fe_pt->nscalar_paraview();
+ for(unsigned i=1;i<number_of_elements;i++)
+  {
+   FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(element_pt(i));
+   unsigned el_i_ndof=fe_pt->nscalar_paraview();
+   if(el_zero_ndof!=el_i_ndof)
+    {
+     std::stringstream error_stream;
+     error_stream 
+      <<  "Element " << i << " has different number of degrees of freedom\n"
+      << "than from previous elements, Paraview cannot handle this.\n"
+      << "We suggest that the problem is broken up into submeshes instead." 
+      << std::endl;
+     throw OomphLibError(
+      error_stream.str(),
+      OOMPH_CURRENT_FUNCTION,
+      OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+#endif
+
+ // Make variables to hold the number of nodes and elements
+ unsigned long number_of_nodes=0;
+ unsigned long total_number_of_elements=0;
+
+ // Loop over all the elements to find total number of plot points
+ for(unsigned i=0;i<number_of_elements;i++)
+  {
+   // Cast to FiniteElement and (in paranoid mode) check
+   // if cast has failed. 
+   FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(element_pt(i));
+
+#ifdef PARANOID
+   if (fe_pt==0)
+    {
+     std::stringstream error_stream;
+     error_stream 
+      <<  "Recast for element " << i << " failed" << std::endl;
+     throw OomphLibError(
+      error_stream.str(),
+      OOMPH_CURRENT_FUNCTION,
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   number_of_nodes+=fe_pt->nplot_points_paraview(nplot);
+   total_number_of_elements+=fe_pt->nsub_elements_paraview(nplot);
+
+  }
+   
+   
+ // File Declaration
+ //------------------
+   
+ // Insert the necessary lines plus header of file, and 
+ // number of nodes and elements
+ file_out 
+  << "<?xml version=\"1.0\"?>\n"
+  << "<VTKFile type=\"UnstructuredGrid\" version=\"0.1\" "
+  << "byte_order=\"LittleEndian\">\n"
+  << "<UnstructuredGrid>\n" 
+  << "<Piece NumberOfPoints=\""
+  << number_of_nodes
+  << "\" NumberOfCells=\""
+  << total_number_of_elements
+  <<"\">\n";
+   
+   
+ // Point Data
+ //-----------
+
+ // Check the number of degrees of freedom 
+ unsigned ndof = fe_pt->nscalar_paraview();
+   
+ // Point data is going in here
+ file_out << "<PointData ";
+   
+ // Insert just the first scalar name, since paraview reads everything
+ // else after that as being of the same type. Get information from 
+ // first element.
+ file_out << "Scalars=\""
+          << fe_pt->scalar_name_paraview(0)
+          << "\">\n";
+   
+ // Loop over i scalar fields and j number of elements
+ for(unsigned i=0;i<ndof;i++)
+  {
+   file_out << "<DataArray type=\"Float32\" "
+            << "Name=\""
+            << fe_pt->scalar_name_paraview(i)
+            << "\" "
+            << "format=\"ascii\""
+            << ">\n";
+
+   for(unsigned j=0;j<number_of_elements;j++)
+    {
+     // Cast to FiniteElement and (in paranoid mode) check
+     // if cast has failed. 
+     FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(element_pt(j));
+         
+#ifdef PARANOID
+     if (fe_pt==0)
+      {
+       std::stringstream error_stream;
+       error_stream 
+        <<  "Recast for element " << j << " failed" << std::endl;
+       throw OomphLibError(
+        error_stream.str(),
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+         
+     fe_pt->scalar_value_fct_paraview(file_out,i,nplot,exact_soln_pt);
+    }
+       
+   // Close of the DataArray
+   file_out << "</DataArray>\n";
+  }
+   
+ // Close off the PointData set 
+ file_out  << "</PointData>\n";
+   
+   
+ // Geometric Points
+ //------------------
+   
+ file_out
+  << "<Points>\n"
+  << "<DataArray type=\"Float32\""
+  << " NumberOfComponents=\""
+  // This always has to be 3 for an unstructured grid
+  << 3  << "\" "
+  << "format=\"ascii\">\n";
+   
+ // Loop over all the elements to print their plot points
+ for(unsigned i=0;i<number_of_elements;i++)
+  {
+   // Cast to FiniteElement and (in paranoid mode) check
+   // if cast has failed. 
+   FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(element_pt(i));
+     
+#ifdef PARANOID
+   if (fe_pt==0)
+    {
+     std::stringstream error_stream;
+     error_stream 
+      <<  "Recast for element " << i << " faild" << std::endl;
+     throw OomphLibError(
+      error_stream.str(),
+      OOMPH_CURRENT_FUNCTION,
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+     
+   fe_pt->output_paraview(file_out,nplot);
+  }
+   
+ file_out 
+  << "</DataArray>\n"
+  << "</Points>\n";
+   
+   
+ // Cells
+ //-------
+   
+ file_out 
+  << "<Cells>\n"
+  << "<DataArray type=\"Int32\" Name=\"connectivity\" format=\"ascii\">\n";
+   
+ // Make counter for keeping track of all the local elements,
+ // because Paraview requires global coordinates
+ unsigned counter=0;
+   
+ // Write connectivity with the local elements
+ for(unsigned i=0;i<number_of_elements;i++)
+  {
+   // Cast to FiniteElement and (in paranoid mode) check
+   // if cast has failed. 
+   FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(element_pt(i));
+     
+#ifdef PARANOID
+   if (fe_pt==0)
+    {
+     std::stringstream error_stream;
+     error_stream 
+      <<  "Recast for element " << i << " faild" << std::endl;
+     throw OomphLibError(
+      error_stream.str(),
+      OOMPH_CURRENT_FUNCTION,
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   fe_pt->write_paraview_output_offset_information(file_out,nplot,counter);
+  }
+   
+ file_out << "</DataArray>\n"
+          << "<DataArray type=\"Int32\" "
+          << "Name=\"offsets\" format=\"ascii\">\n";
+   
+ // Make variable that holds the current offset number
+ unsigned offset_sum=0;
+   
+ // Write the offset for the specific elements
+ for(unsigned i=0;i<number_of_elements;i++)
+  {
+   // Cast to FiniteElement and (in paranoid mode) check
+   // if cast has failed. 
+   FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(element_pt(i));
+     
+#ifdef PARANOID
+   if (fe_pt==0)
+    {
+     std::stringstream error_stream;
+     error_stream 
+      <<  "Recast for element " << i << " failed" << std::endl;
+     throw OomphLibError(
+      error_stream.str(),
+      OOMPH_CURRENT_FUNCTION,
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   fe_pt->write_paraview_offsets(file_out,nplot,offset_sum);
+  }
+   
+ file_out <<"</DataArray>\n"
+          <<"<DataArray type=\"UInt8\" Name=\"types\">\n";
+   
+ // Loop over all elements to get the type that they have
+ for(unsigned i=0;i<number_of_elements;i++)
+  {
+   // Cast to FiniteElement and (in paranoid mode) check
+   // if cast has failed. 
+   FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(element_pt(i));
+     
+#ifdef PARANOID
+   if (fe_pt==0)
+    {
+     std::stringstream error_stream;
+     error_stream 
+      <<  "Recast for element " << i << " failed" << std::endl;
+     throw OomphLibError(
+      error_stream.str(),
+      OOMPH_CURRENT_FUNCTION,
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+     
+   fe_pt->write_paraview_type(file_out,nplot);
+  }
+   
+ file_out <<"</DataArray>\n"
+          <<"</Cells>\n";
+   
+   
+ // File Closure
+ //-------------
+ file_out <<"</Piece>\n"
+          <<"</UnstructuredGrid>\n"
+          <<"</VTKFile>";
+}
 
 //========================================================
 /// Output function for the mesh class

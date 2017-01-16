@@ -14,7 +14,9 @@ headers =  \
 pml_helmholtz_elements.h \
 pml_helmholtz_flux_elements.h \
 Tpml_helmholtz_elements.h \
-refineable_pml_helmholtz_elements.h
+refineable_pml_helmholtz_elements.h \
+complex_smoother.h \
+helmholtz_geometric_multigrid.h
 
 # Define name of library 
 libname = pml_helmholtz

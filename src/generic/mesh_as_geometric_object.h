@@ -451,7 +451,7 @@ public:
                             const bool &called_within_spiral);
   
  /// \short Version of spiraling locate zeta used for the projection
- /// during the unstructured mesh adatation
+ /// during the unstructured mesh adaptation
  void my_spiraling_locate_zeta(const Vector<double>& zeta,
                                GeomObject*& sub_geom_object_pt,
                                Vector<double>& s,

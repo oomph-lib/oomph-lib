@@ -183,10 +183,46 @@ public:
   }
    
  /// Return number of elements in x direction
- const unsigned& nx() const {return Nx;}
+ const unsigned& nx() const
+  {
+   // Return the value of Nx
+   return Nx;
+  }
 
-  /// Return number of elements in y direction
- const unsigned& ny() const {return Ny;}
+ /// Return number of elements in y direction
+ const unsigned& ny() const
+  {
+   // Return the value of Ny
+   return Ny;
+  }
+
+ /// Return the minimum value of x coordinate
+ const double x_min() const
+  {
+   // Return the value of Xmin
+   return Xmin;
+  }
+ 
+ /// Return the maximum value of x coordinate
+ const double x_max() const
+  {
+   // Return the value of Xmax
+   return Xmax;
+  }
+
+ /// Return the minimum value of y coordinate
+ const double y_min() const
+  {
+   // Return the value of Ymin
+   return Ymin;
+  }
+ 
+ /// Return the maximum value of y coordinate 
+ const double y_max() const
+  {
+   // Return the value of Ymax
+   return Ymax;
+  }
  
  /// \short Reorder the elements: By default they are ordered
  /// in "horizontal" layers (increasing in x, then in y). This

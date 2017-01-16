@@ -141,9 +141,8 @@ fill_in_generic_residual_contribution_helmholtz(Vector<double> &residuals,
                             
    //Alpha adjusts the pml factors, the imaginary part produces cross terms
    std::complex<double> alpha_pml_k_squared_factor = std::complex<double>(
-     pml_k_squared_factor.real() -  alpha() * pml_k_squared_factor.imag(),
-     alpha() * pml_k_squared_factor.real() +  pml_k_squared_factor.imag()
-   );
+     pml_k_squared_factor.real() - alpha() * pml_k_squared_factor.imag(),
+     alpha() * pml_k_squared_factor.real() + pml_k_squared_factor.imag());
    
    
   //  std::complex<double> alpha_pml_k_squared_factor
@@ -188,7 +187,7 @@ fill_in_generic_residual_contribution_helmholtz(Vector<double> &residuals,
          -pml_laplace_factor[k].imag() * interpolated_dudx[k].imag()
          )*dtestdx(l,k)*W;
         }
-
+ 
        // Calculate the jacobian
        //-----------------------
        if(flag)
@@ -337,7 +336,7 @@ unsigned  PMLHelmholtzEquations<DIM>::self_test()
 /// nplot points in each coordinate direction
 //======================================================================
 template <unsigned DIM>
-void  PMLHelmholtzEquations<DIM>::output(std::ostream &outfile,
+void PMLHelmholtzEquations<DIM>::output(std::ostream &outfile,
                                     const unsigned &nplot)
 {
 
@@ -383,12 +382,11 @@ void  PMLHelmholtzEquations<DIM>::output(std::ostream &outfile,
 /// Output at nplot points in each coordinate direction
 //======================================================================
 template <unsigned DIM>
-void  PMLHelmholtzEquations<DIM>::output_real(std::ostream &outfile,
-                                           const double& phi,
-                                           const unsigned &nplot)
+void PMLHelmholtzEquations<DIM>::output_real(std::ostream &outfile,
+					     const double& phi,
+					     const unsigned &nplot)
 {
-
- //Vector of local coordinates
+ // Vector of local coordinates
  Vector<double> s(DIM);
 
  // Tecplot header info
@@ -398,7 +396,6 @@ void  PMLHelmholtzEquations<DIM>::output_real(std::ostream &outfile,
  unsigned num_plot_points=nplot_points(nplot);
  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
   {
-
    // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
    std::complex<double> u(interpolated_u_pml_helmholtz(s));
@@ -407,7 +404,6 @@ void  PMLHelmholtzEquations<DIM>::output_real(std::ostream &outfile,
      outfile << interpolated_x(s,i) << " ";
     }
    outfile << u.real()*cos(phi)+u.imag()*sin(phi) << std::endl;
-
   }
 
  // Write tecplot footer (e.g. FE connectivity lists)
@@ -429,14 +425,13 @@ void  PMLHelmholtzEquations<DIM>::output_real(std::ostream &outfile,
 /// Output at nplot points in each coordinate direction
 //======================================================================
 template <unsigned DIM>
-void  PMLHelmholtzEquations<DIM>::output_total_real(
+void PMLHelmholtzEquations<DIM>::output_total_real(
  std::ostream &outfile,
  FiniteElement::SteadyExactSolutionFctPt incoming_wave_fct_pt,
  const double& phi,
  const unsigned &nplot)
 {
-
- //Vector of local coordinates
+ // Vector of local coordinates
  Vector<double> s(DIM);
 
  // Vector for coordintes
@@ -452,7 +447,6 @@ void  PMLHelmholtzEquations<DIM>::output_total_real(
  unsigned num_plot_points=nplot_points(nplot);
  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
   {
-
    // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
    std::complex<double> u(interpolated_u_pml_helmholtz(s));
@@ -468,10 +462,8 @@ void  PMLHelmholtzEquations<DIM>::output_total_real(
      outfile << interpolated_x(s,i) << " ";
     }
 
-   outfile <<
-    (u.real()+incoming_soln[0])*cos(phi)+
+   outfile << (u.real()+incoming_soln[0])*cos(phi)+
     (u.imag()+incoming_soln[1])*sin(phi) << std::endl;
-
   }
 
  // Write tecplot footer (e.g. FE connectivity lists)
@@ -495,8 +487,7 @@ void  PMLHelmholtzEquations<DIM>::output_imag(std::ostream &outfile,
                                            const double& phi,
                                            const unsigned &nplot)
 {
-
- //Vector of local coordinates
+ // Vector of local coordinates
  Vector<double> s(DIM);
 
  // Tecplot header info
@@ -506,7 +497,6 @@ void  PMLHelmholtzEquations<DIM>::output_imag(std::ostream &outfile,
  unsigned num_plot_points=nplot_points(nplot);
  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
   {
-
    // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
    std::complex<double> u(interpolated_u_pml_helmholtz(s));
@@ -515,7 +505,6 @@ void  PMLHelmholtzEquations<DIM>::output_imag(std::ostream &outfile,
      outfile << interpolated_x(s,i) << " ";
     }
    outfile << u.imag()*cos(phi)-u.real()*sin(phi) << std::endl;
-
   }
 
  // Write tecplot footer (e.g. FE connectivity lists)
@@ -532,10 +521,10 @@ void  PMLHelmholtzEquations<DIM>::output_imag(std::ostream &outfile,
 /// nplot points in each coordinate direction
 //======================================================================
 template <unsigned DIM>
-void  PMLHelmholtzEquations<DIM>::output(FILE* file_pt,
-                                    const unsigned &nplot)
+void PMLHelmholtzEquations<DIM>::output(FILE* file_pt,
+					const unsigned &nplot)
 {
- //Vector of local coordinates
+ // Vector of local coordinates
  Vector<double> s(DIM);
 
  // Tecplot header info
@@ -578,15 +567,15 @@ void  PMLHelmholtzEquations<DIM>::output(FILE* file_pt,
  ///   x,y,u_exact    or    x,y,z,u_exact
 //======================================================================
 template <unsigned DIM>
-void PMLHelmholtzEquations<DIM>::output_fct(std::ostream &outfile,
-                                       const unsigned &nplot,
-                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
+void PMLHelmholtzEquations<DIM>::
+output_fct(std::ostream &outfile,const unsigned &nplot,
+	   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
 {
- //Vector of local coordinates
+ // Vector of local coordinates
  Vector<double> s(DIM);
 
-  // Vector for coordintes
-  Vector<double> x(DIM);
+ // Vector for coordinates
+ Vector<double> x(DIM);
 
  // Tecplot header info
  outfile << tecplot_zone_string(nplot);
@@ -598,7 +587,6 @@ void PMLHelmholtzEquations<DIM>::output_fct(std::ostream &outfile,
  unsigned num_plot_points=nplot_points(nplot);
  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
   {
-
    // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
 
@@ -608,12 +596,12 @@ void PMLHelmholtzEquations<DIM>::output_fct(std::ostream &outfile,
    // Get exact solution at this point
    (*exact_soln_pt)(x,exact_soln);
 
-   //Output x,y,...,u_exact
+   // Output x,y,...,u_exact
    for(unsigned i=0;i<DIM;i++)
     {
      outfile << x[i] << " ";
     }
-   outfile << exact_soln[0] << " " <<  exact_soln[1] << std::endl;
+   outfile << exact_soln[0] << " " << exact_soln[1] << std::endl;
   }
 
  // Write tecplot footer (e.g. FE connectivity lists)
@@ -640,11 +628,11 @@ void PMLHelmholtzEquations<DIM>::output_real_fct(
  const unsigned &nplot,
  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
 {
- //Vector of local coordinates
+ // Vector of local coordinates
  Vector<double> s(DIM);
 
-  // Vector for coordintes
-  Vector<double> x(DIM);
+ // Vector for coordinates
+ Vector<double> x(DIM);
 
  // Tecplot header info
  outfile << tecplot_zone_string(nplot);
@@ -656,7 +644,6 @@ void PMLHelmholtzEquations<DIM>::output_real_fct(
  unsigned num_plot_points=nplot_points(nplot);
  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
   {
-
    // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
 
@@ -666,7 +653,7 @@ void PMLHelmholtzEquations<DIM>::output_real_fct(
    // Get exact solution at this point
    (*exact_soln_pt)(x,exact_soln);
 
-   //Output x,y,...,u_exact
+   // Output x,y,...,u_exact
    for(unsigned i=0;i<DIM;i++)
     {
      outfile << x[i] << " ";

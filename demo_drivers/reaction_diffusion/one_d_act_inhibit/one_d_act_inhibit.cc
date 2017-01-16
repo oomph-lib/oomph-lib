@@ -311,6 +311,9 @@ int main()
 
  //Set up the problem
  //------------------
+ // DREIGIAU: There's an inherent problem with the 1D elements. Doesn't
+ // seem to be a problem with 2D elements but we can't even initialise
+ // a new object of the type used to template the problem below.
  
  // Create the problem with 1D three-node refineable elements from the
  // RefineableLineAdvectionDiffusionReactionElement family. 

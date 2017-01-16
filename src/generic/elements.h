@@ -1254,7 +1254,7 @@ namespace Locate_zeta_helpers
 
 //========================================================================
 /// \short A general Finite Element class.
-////
+///
 /// The main components of a FiniteElement are:
 /// - pointers to its Nodes
 /// - pointers to its internal Data (inherited from GeneralisedElement)
@@ -2839,6 +2839,19 @@ public:
  virtual void scalar_value_paraview(std::ofstream& file_out,
                                     const unsigned& i,
                                     const unsigned& nplot)  const
+  {
+   throw OomphLibError(
+    "This function hasn't been implemented for this element",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ /// \short Write values of the i-th scalar field at the plot points. Broken
+ /// virtual. Needs to be implemented for each new specific element type.
+ virtual void scalar_value_fct_paraview(std::ofstream& file_out,
+ 					const unsigned& i,
+ 					const unsigned& nplot,
+ 					FiniteElement::SteadyExactSolutionFctPt exact_soln_pt) const
   {
    throw OomphLibError(
     "This function hasn't been implemented for this element",

@@ -8745,10 +8745,10 @@ void Problem::newton_solve()
  double t_start = TimingHelpers::timer();
  Max_res.clear();
 
- //Find total number of dofs
+ // Find total number of dofs
  unsigned long n_dofs = ndof();
 
- //Set up the Vector to hold the solution
+ // Set up the Vector to hold the solution
  DoubleVector dx;
 
  //-----Variables for the globally convergent Newton method------
@@ -8756,14 +8756,15 @@ void Problem::newton_solve()
  // Set up the vector to hold the gradient
  DoubleVector gradient;
 
+ // Other variables
  double half_residual_squared=0.0;
  double max_step=0.0;
 
  //--------------------------------------------------------------
 
- //Set the counter
+ // Set the counter
  unsigned count=0;
- //Set the loop flag
+ // Set the loop flag
  unsigned LOOP_FLAG=1;
 
  if(Use_globally_convergent_newton_method)
@@ -8789,18 +8790,18 @@ void Problem::newton_solve()
    Linear_solver_pt->reset_gradient();
   }
 
- //Update anything that needs updating
+ // Update anything that needs updating
  actions_before_newton_solve();
 
  // Reset number of Newton iterations taken
  Nnewton_iter_taken=0;
 
- //Now do the Newton loop
+ // Now do the Newton loop
  do
   {
    count++;
 
-   //Do any updates that are required
+   // Do any updates that are required
    actions_before_newton_step();
 
 
@@ -8874,7 +8875,7 @@ void Problem::newton_solve()
          //oomph_info << "residual: " << n + first_row << " " << dx[n] << "\n";
          //}
 
-         oomph_info << "Initial Maximum residuals " << maxres << std::endl;
+         oomph_info << "\nInitial Maximum residuals " << maxres << std::endl;
         }
 
        if((maxres < Newton_solver_tolerance) &&
@@ -15683,6 +15684,7 @@ void Problem::p_refine_uniformly(const unsigned& i_mesh,
 //========================================================================
 unsigned Problem::unrefine_uniformly()
 {
+ // Call actions_before_adapt()
  actions_before_adapt();
 
  // Has unrefinement been successful?
@@ -15706,7 +15708,7 @@ unsigned Problem::unrefine_uniformly()
                 << std::endl;
     }
   }
- //Multiple submeshes
+ // Multiple submeshes
  else
   {
    // Loop over submeshes
@@ -15724,15 +15726,15 @@ unsigned Problem::unrefine_uniformly()
                   << std::endl;
       }
     }
-   //Rebuild the global mesh
+   // Rebuild the global mesh
    rebuild_global_mesh();
   }
 
- //Any actions after the adaptation phase
+ // Any actions after the adaptation phase
  actions_after_adapt();
 
- //Do equation numbering
- oomph_info <<"Number of equations: "
+ // Do equation numbering
+ oomph_info << " Number of equations: "
             << assign_eqn_numbers() << std::endl;
 
  // Judge success

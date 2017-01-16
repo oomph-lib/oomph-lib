@@ -4076,8 +4076,8 @@ unsigned OcTree::self_test()
   }
  else
   {
-   oomph_info << "\n \n Passed self_test() for OcTree: Max. error "
-              << max_error << std::endl<< std::endl;
+   oomph_info << "Passed self_test() for OcTree: Max. error "
+              << max_error << std::endl;
    return 0;
   }
  
@@ -5529,8 +5529,8 @@ unsigned OcTreeForest::self_test()
   }
  else
   {
-   oomph_info << "\n \n Passed self_test() for OcTreeForest: Max. error "
-              << max_error << std::endl<< std::endl;
+   oomph_info << "\nPassed self_test() for OcTreeForest: Max. error "
+              << max_error << std::endl;
    return 0;
   }
  
@@ -5582,7 +5582,7 @@ void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
   if (max_error>Tree::max_neighbour_finding_tolerance())
    {
     std::ostringstream error_stream;
-    error_stream << "Max. error in octree neighbour finding: " 
+    error_stream << "\nMax. error in octree neighbour finding: " 
                  << max_error << " is too big" << std::endl;
     error_stream 
      << "i.e. bigger than Tree::max_neighbour_finding_tolerance()=" 
@@ -5601,7 +5601,7 @@ void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
    }
   else
    {
-    oomph_info << "Max. error in octree neighbour finding: " 
+    oomph_info << "\nMax. error in octree neighbour finding: " 
                << max_error << " is OK" << std::endl;
     oomph_info << "i.e. less than OcTree::max_neighbour_finding_tolerance()=" 
                << OcTree::max_neighbour_finding_tolerance() << std::endl;

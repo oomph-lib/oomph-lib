@@ -351,7 +351,7 @@ void run(const string& dir_name,
 
  // Check if we're ready to go:
  //----------------------------
- cout << "\n\n\nProblem self-test ";
+ cout << "\n\n\nProblem self-test:";
  if (problem.self_test()==0) 
   {
    cout << "passed: Problem can be solved." << std::endl;
@@ -519,8 +519,8 @@ int main()
    //---------------------------------------------------------
    
    cout << std::endl;
-   cout << " Use HSL frontal solver MA42 without element re-ordering: "<< std::endl;
-   cout << "======================================================== " << std::endl;
+   cout << " Use HSL frontal solver MA42 without element re-ordering: " << std::endl;
+   cout << "========================================================= " << std::endl;
    cout << std::endl;
 
    // Start cpu clock
@@ -604,8 +604,8 @@ int main()
    //-----------------------------------
    
    cout << std::endl;
-   cout << " Use dense matrix LU decomposion: " << std::endl;
-   cout << "================================= " << std::endl;
+   cout << " Use dense matrix LU decomposition: " << std::endl;
+   cout << "=================================== " << std::endl;
    cout << std::endl;
 
    // Start cpu clock
@@ -641,8 +641,8 @@ int main()
    //-----------------------------------
    
    cout << std::endl;
-   cout << " Use dense FD-ed matrix LU decomposion: " << std::endl;
-   cout << "======================================= " << std::endl;
+   cout << " Use dense FD-ed matrix LU decomposition: " << std::endl;
+   cout << "========================================= " << std::endl;
    cout << std::endl;
 
    // Start cpu clock
@@ -689,19 +689,19 @@ int main()
      cout << "=============================================== " << std::endl;
     }
 
-   cout << "CPU time with SuperLU comressed row                 : " 
+   cout << "CPU time with SuperLU compressed row                 : " 
         <<  superlu_cr_cpu[mess] << std::endl;
-   cout << "CPU time with SuperLU comressed col                 : " 
+   cout << "CPU time with SuperLU compressed col                 : " 
         <<  superlu_cc_cpu[mess] << std::endl;
 #ifdef HAVE_HSL_SOURCES
-   cout << "CPU time with MA42 frontal solver                   : " 
+   cout << "CPU time with MA42 frontal solver                    : " 
         <<  hsl_ma42_cpu[mess] << std::endl;
-   cout << "CPU time with MA42 frontal solver (incl reordering) : " 
+   cout << "CPU time with MA42 frontal solver (incl. reordering) : " 
         <<  hsl_ma42_reordered_cpu[mess] << std::endl;
 #endif
-   cout << "CPU time with dense LU solver (fewer elements!)     : " 
+   cout << "CPU time with dense LU solver (fewer elements!)      : " 
         <<  dense_lu_cpu[mess] << std::endl;  
-   cout << "CPU time with dense LU solver & FD (fewer elements!): " 
+   cout << "CPU time with dense LU solver & FD (fewer elements!) : " 
         <<  fd_lu_cpu[mess] << std::endl;  
    cout << std::endl   << std::endl   << std::endl ;
   }

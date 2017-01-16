@@ -677,6 +677,64 @@ public:
  {return std::complex<unsigned>(U_index_helmholtz.real(),U_index_helmholtz.imag());}
 
 
+  /// \short The number of "DOF types" that degrees of freedom in this element
+  /// are sub-divided into: real and imaginary part
+  unsigned ndof_types() const
+   {
+    return 2;
+   }
+ 
+  /// \short Create a list of pairs for all unknowns in this element,
+  /// so that the first entry in each pair contains the global equation
+  /// number of the unknown, while the second one contains the number
+  /// of the "DOF type" that this unknown is associated with.
+  /// (Function can obviously only be called if the equation numbering
+  /// scheme has been set up.) Real=0; Imag=1
+  void get_dof_numbers_for_unknowns(
+   std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
+   {
+    // temporary pair (used to store dof lookup prior to being added to list)
+    std::pair<unsigned,unsigned> dof_lookup;
+
+    // number of nodes
+    unsigned n_node = this->nnode();
+
+    // loop over the nodes
+    for (unsigned n = 0; n < n_node; n++)
+    {
+     // determine local eqn number for real part
+     int local_eqn_number =
+      this->nodal_local_eqn(n,this->U_index_helmholtz.real());
+
+     // ignore pinned values
+     if (local_eqn_number >= 0)
+     {
+      // store dof lookup in temporary pair: First entry in pair
+      // is global equation number; second entry is dof type
+      dof_lookup.first = this->eqn_number(local_eqn_number);
+      dof_lookup.second = 0;
+
+      // add to list
+      dof_lookup_list.push_front(dof_lookup);
+     }
+
+     // determine local eqn number for imag part
+     local_eqn_number =
+      this->nodal_local_eqn(n, this->U_index_helmholtz.imag());
+
+     // ignore pinned values
+     if (local_eqn_number >= 0)
+     {
+      // store dof lookup in temporary pair: First entry in pair
+      // is global equation number; second entry is dof type
+      dof_lookup.first = this->eqn_number(local_eqn_number);
+      dof_lookup.second = 1;
+
+      // add to list
+      dof_lookup_list.push_front(dof_lookup);
+     }
+    }
+   }
 protected:
 
  /// \short Function to compute the shape and test functions and to return

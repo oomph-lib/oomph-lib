@@ -215,7 +215,8 @@ namespace GlobalParameters
    /// coeffcients proposed by Bermudez et al
    std::complex<double> gamma(const double& nu_i,
                               const double& pml_width_i,
-                              const double& k_squared_local)
+                              const double& k_squared_local,
+                              const double& alpha_shift=0.0)
    {
       // (return) gamma = 1 + (1/k) * (i/|outer_boundary - x|)
       /*return 1.0 + (1.0 / std::complex<double> (sqrt(k_squared_local), 0))

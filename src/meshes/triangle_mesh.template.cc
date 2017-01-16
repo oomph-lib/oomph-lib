@@ -31362,12 +31362,12 @@ update_other_proc_shd_bnd_node_helper
        {
         // Report timings for snaping of nodes onto boundaries
         oomph_info << "CPU for snapping nodes onto boundaries "
-                   << "(new mesh) [sec]: "
+                   << "(new mesh): "
                    << t_total_snap_nodes << std::endl;
        }
       
       t_total_snap_nodes+=t_total_snap_nodes_bg_mesh;
-      oomph_info << "CPU for snapping nodes onto boundaries (TOTAL) [sec]: "
+      oomph_info << "CPU for snapping nodes onto boundaries (TOTAL): "
                  << t_total_snap_nodes << std::endl;
      }
     

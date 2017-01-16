@@ -6,8 +6,7 @@ set -o errexit
 # Crash if any unset variables are used
 set -o nounset
 
-
-# Get the directory that autogen.sh is in (stolen frome stackoverflow:
+# Get the directory that autogen.sh is in (stolen from stackoverflow:
 # http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
 # ), this is the oomph-lib root directory. Doesn't follow symlinks to the
 # script itself, should be robust for anything else. If you move autogen.sh
@@ -19,17 +18,16 @@ cd "$oomph_root"
 # Load helper functions
 source bin/autogen_helpers.sh
 
-
 # Initialise command line flags (single dash, single letter!)
 # for David's non-interactive autogen.sh
 non_interactive_flags=""
 
 # Do you want to rebuild from scratch?
 #-------------------------------------
-#If so specify --rebuild as command line argument. Default is 
+# If so specify --rebuild as command line argument. Default is 
 # to just do the normal ".configure, make, make install, make check" sequence.
 
-#Bail out if more than two command line arguments
+# Bail out if more than two command line arguments
 if (test $# -gt 2); then 
   echo " "
   echo "ERROR: Too many command line options!"
@@ -38,21 +36,20 @@ if (test $# -gt 2); then
   EchoUsageForInteractiveScript
 fi   
 
-
-#Process the command line options
+# Process the command line options
 raw_build=false
 while (test $# -gt 0)
 do
    case "$1" in
-     #Set the rebuild flag
+     # Set the rebuild flag
      --rebuild) 
       echo "             [Doing complete rebuild from scratch.]"
       raw_build=true
       non_interactive_flags=`echo $non_interactive_flags`" -r ";;
-     #Set the jobs flag
+     # Set the jobs flag
      --jobs*)
       non_interactive_flags=`echo $non_interactive_flags`" -j "`echo $1| awk '{print substr($0,8)}'`;;
-     #Anything else bail out     
+     # Anything else bail out     
       *)  
        echo " "
        echo "ERROR: Unrecognised command line option!"
@@ -63,13 +60,9 @@ do
    shift
 done
 
-
-
 if (test "$raw_build" = "false"); then
    echo "                     [Doing normal build.]"
 fi   
-
-
 
 #====================================================================
 # Start Q/A session
@@ -80,7 +73,6 @@ echo "============================================================= "
 echo "        oomph-lib interactive installation script" 
 echo "============================================================= "
 echo " "
-
 
 # Choose build directory (for lib,include)
 build_dir="$oomph_root/build"
@@ -145,7 +137,6 @@ if (test -d  $build_dir); then
     fi
 fi
 
-
 echo "Self tests"
 echo "=========="
 echo "Following the installation of oomph-lib you can run a comprehensive set of"
@@ -159,7 +150,6 @@ if YesNoRead "(serially) if the build is successful?" "n"; then
 else
     run_self_tests="false"
 fi
-
 
 # Choose configure options file
 #------------------------------
@@ -187,7 +177,6 @@ if [[ -f $configure_options_file ]]; then
 else
     accept_configure_options="false"
 fi
-
 
 # Continue asking if the options are OK until approved
 while [[ $accept_configure_options != "true" ]]; do
@@ -224,7 +213,6 @@ while [[ $accept_configure_options != "true" ]]; do
         echo "File number out of range, trying again." 1>&2
         continue
     fi
-
 
     # If options are to be read from the command line then store the
     # options in the file config/configure_options/current
@@ -267,7 +255,6 @@ while [[ $accept_configure_options != "true" ]]; do
     else
         accept_configure_options="false"
     fi
-
 done
 
 echo
@@ -282,7 +269,6 @@ if YesNoRead "Build with \"make -k\"?" "y"; then
       non_interactive_flags=`echo $non_interactive_flags`" -k "
 fi
 echo " "
-
 
 echo
 echo
@@ -300,12 +286,13 @@ echo " "
 # Start actual build process
 #====================================================================
 
+# Start the timer
+start=`date +%s`
 
 # Call non-interactive autogen
 build_command="./non_interactive_autogen.sh -b $build_dir -c ${oomph_root}/$configure_options_file $non_interactive_flags"
 echo "The interactive part of the build process is over."
 echo "Running $build_command"
-
 
 $build_command
 
@@ -315,7 +302,6 @@ if test "$run_self_tests" == "true"; then
     echo "Running self test command: $self_test_command"
     $self_test_command
 fi
-
 
 echo " "
 echo "=============================================================== "
@@ -330,3 +316,21 @@ echo "To run self tests you can use 'make check -k' or './bin/parallel_self_test
 echo " "
 echo "=============================================================== "
 echo " "
+
+# End the timer
+end=`date +%s`
+
+# Calculate the time taken to run the non-interactive part of the script
+time_taken=$((end-start))
+
+# Output
+echo "=============================================================== "
+if test "$run_self_tests" == "true";
+then
+    echo "Time taken for setup and self-tests: $time_taken"
+else    
+    echo "Time taken for complete setup: $time_taken"
+fi
+echo "=============================================================== "
+echo " "
+

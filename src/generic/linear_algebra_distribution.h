@@ -519,8 +519,6 @@ class LinearAlgebraDistribution
      return Distribution_pt->built();
     }
    
-    protected:
-   
    /// \short setup the distribution of this distributable linear algebra
    /// object
    void build_distribution(const LinearAlgebraDistribution* const dist_pt)
@@ -535,6 +533,8 @@ class LinearAlgebraDistribution
      Distribution_pt->build(dist);
     }
 
+    protected:
+   
    /// \short clear the distribution of this distributable linear algebra 
    /// object
    void clear_distribution()

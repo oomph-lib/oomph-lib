@@ -1121,8 +1121,9 @@ public:
  virtual void unpin_all() {Data::unpin_all();}
 
 
- /// Code that encapsulates the hanging status of the node (incl. the geometric
- /// hanging status) as \f$  \sum_{i=-1}{nval-1} Node::is_hanging(i) 2^{i+1} \f$
+ /// \short Code that encapsulates the hanging status of the node (incl. the
+ /// geometric hanging status) as
+ /// \f$  \sum_{i=-1}{nval-1} Node::is_hanging(i) 2^{i+1} \f$
  unsigned hang_code()
  {
   unsigned hang_code=0;

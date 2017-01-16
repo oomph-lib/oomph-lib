@@ -441,7 +441,11 @@ namespace oomph
     }
    }
 
+ protected:
+  
 #ifdef OOMPH_HAS_TRIANGLE_LIB
+
+ public:
 
   /// \short Build mesh, based on the specifications on
   /// TriangleMeshParameters
@@ -644,7 +648,7 @@ namespace oomph
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
-   
+       
     this->generic_constructor(outer_boundary_polygon_pt,
 			      internal_polygon_pt,
 			      internal_open_curve_poly_pt,
@@ -2154,8 +2158,7 @@ namespace oomph
     initialise_adaptation_data();
        
     // Initialise the data associated with boundary refinements
-    initialise_boundary_refinement_data();
-       
+    initialise_boundary_refinement_data();       
    }
 
 #endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
@@ -2183,7 +2186,9 @@ namespace oomph
     // Initialise the data associated with boundary refinements
     initialise_boundary_refinement_data();
    }
-   
+
+ protected:
+  
 #ifdef OOMPH_HAS_TRIANGLE_LIB
   
   /// \short Build mesh from specified triangulation and
@@ -2195,7 +2200,8 @@ namespace oomph
 			 TimeStepper* time_stepper_pt=
 			 &Mesh::Default_TimeStepper,
 			 const bool &use_attributes=false,
-			 const bool &allow_automatic_creation_of_vertices_on_boundaries=true,
+			 const bool
+			 &allow_automatic_creation_of_vertices_on_boundaries=true,
 			 OomphCommunicator* comm_pt = 0)
    {
     // Initialise the data associated with adaptation
@@ -2234,14 +2240,14 @@ namespace oomph
      allow_automatic_creation_of_vertices_on_boundaries;
      
     //Store the attribute flag
-    this->Use_attributes = use_attributes;
+    this->Use_attributes=use_attributes;
      
     // Convert to a *char required by the triangulate function
     char triswitches[100];
     sprintf(triswitches,"%s",input_string_stream.str().c_str());
      
     // Build triangulateio refined object
-    triangulate(triswitches, &triangle_refine, &this->Triangulateio, 0);
+    triangulate(triswitches,&triangle_refine,&this->Triangulateio,0);
 
     // Build scaffold
     this->Tmp_mesh_pt=new TriangleScaffoldMesh(this->Triangulateio);
@@ -2274,7 +2280,9 @@ namespace oomph
      this->template setup_boundary_coordinates<ELEMENT>(b);
     }       
    }
-   
+
+ public:
+  
 #endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
   
   /// Empty Destructor
@@ -3677,17 +3685,17 @@ namespace oomph
   /// \short Build mesh, based on closed curve that specifies
   /// the outer boundary of the domain and any number of internal
   /// clsed curves. Specify target area for uniform element size.
-  SolidTriangleMesh(
-   TriangleMeshParameters &triangle_mesh_parameters, 
-   TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
-   : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
+  SolidTriangleMesh(TriangleMeshParameters &triangle_mesh_parameters, 
+		    TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
+   : TriangleMesh<ELEMENT>(triangle_mesh_parameters,
+			   time_stepper_pt)
    {
     //Assign the Lagrangian coordinates
     set_lagrangian_nodal_coordinates();
    }
   
 #endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
-
+  
   SolidTriangleMesh(const std::string& node_file_name,
 		    const std::string& element_file_name,
 		    const std::string& poly_file_name,
@@ -3711,8 +3719,9 @@ namespace oomph
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////// 
+  
+#ifdef OOMPH_HAS_TRIANGLE_LIB
  
 //=========================================================================
 /// Unstructured refineable Triangle Mesh upgraded to solid mesh
@@ -3724,8 +3733,6 @@ namespace oomph
  {
 
  public:
-
-#ifdef OOMPH_HAS_TRIANGLE_LIB
   
   /// \short Build mesh, based on the specifications on
   /// TriangleMeshParameter
@@ -3744,31 +3751,29 @@ namespace oomph
   /// \short Build mesh from specified triangulation and
   /// associated target areas for elements in it.
   RefineableSolidTriangleMesh(const Vector<double> &target_area,
-			      TriangulateIO& triangulate_io,
-			      TimeStepper* time_stepper_pt=
-			      &Mesh::Default_TimeStepper,
-			      const bool &use_attributes=false,
-			      const bool 
-			      &allow_automatic_creation_of_vertices_on_boundaries=true,
-			      OomphCommunicator* comm_pt = 0)  :
+  			      TriangulateIO& triangulate_io,
+  			      TimeStepper* time_stepper_pt=
+  			      &Mesh::Default_TimeStepper,
+  			      const bool &use_attributes=false,
+  			      const bool 
+  			      &allow_automatic_creation_of_vertices_on_boundaries=true,
+  			      OomphCommunicator* comm_pt = 0)  :
    RefineableTriangleMesh<ELEMENT>(target_area,
-				   triangulate_io,
-				   time_stepper_pt,
-				   use_attributes,
-				   allow_automatic_creation_of_vertices_on_boundaries,
-				   comm_pt)
+  				   triangulate_io,
+  				   time_stepper_pt,
+  				   use_attributes,
+  				   allow_automatic_creation_of_vertices_on_boundaries,
+  				   comm_pt)
    {
     //Assign the Lagrangian coordinates
     set_lagrangian_nodal_coordinates();
    }
-
-  
-#endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
   
   /// Empty Destructor
-  virtual ~RefineableSolidTriangleMesh() {}
-    
+  virtual ~RefineableSolidTriangleMesh(){}    
  };
+ 
+#endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
  
 }
 
