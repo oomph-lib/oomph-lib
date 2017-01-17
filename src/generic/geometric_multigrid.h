@@ -1780,28 +1780,6 @@ namespace oomph
  template<unsigned DIM>
  void MGSolver<DIM>::setup_interpolation_matrices_unstructured()
  {
-  // Variable to hold the number of sons in an element
-  unsigned n_sons;
-  
-  // Number of son elements
-  if (DIM==2)
-  {
-   n_sons=4;
-  }
-  else if (DIM==3)
-  {
-   n_sons=8;
-  }
-  else
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream << "DIM should be 2 or 3 not "
-			<< DIM << std::endl;
-   throw OomphLibError(error_message_stream.str(),
-		       OOMPH_CURRENT_FUNCTION,
-		       OOMPH_EXCEPTION_LOCATION);
-  }
-
   // Vector of local coordinates in the element
   Vector<double> s(DIM,0.0);
 
