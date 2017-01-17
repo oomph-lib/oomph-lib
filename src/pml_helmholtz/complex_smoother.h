@@ -1096,16 +1096,16 @@ namespace oomph
   /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
   /// \f[
   /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \\
+  /// \overline{\cos\theta} & \overline{\sin\theta} \cr
   /// -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \\
+  /// dx \cr
   /// dy
   /// \end{bmatrix}
   /// =
   /// \begin{bmatrix}
-  /// r \\
+  /// r \cr
   /// 0
   /// \end{bmatrix},
   /// \f]
@@ -1200,16 +1200,16 @@ namespace oomph
   /// update:
   /// \f[
   /// \begin{bmatrix}
-  /// dx \\
+  /// dx \cr
   /// dy
   /// \end{bmatrix}
   /// \leftarrow
   /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \\
+  /// \overline{\cos\theta} & \overline{\sin\theta} \cr
   /// -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \\
+  /// dx \cr
   /// dy
   /// \end{bmatrix}.
   /// \f]
@@ -2328,16 +2328,16 @@ namespace oomph
   /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
   /// \f[
   /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \\
+  /// \overline{\cos\theta} & \overline{\sin\theta} \cr
   /// -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \\
+  /// dx \cr
   /// dy
   /// \end{bmatrix}
   /// =
   /// \begin{bmatrix}
-  /// r \\
+  /// r \cr
   /// 0
   /// \end{bmatrix},
   /// \f]
@@ -2432,16 +2432,16 @@ namespace oomph
   /// update:
   /// \f[
   /// \begin{bmatrix}
-  /// dx \\
+  /// dx \cr
   /// dy
   /// \end{bmatrix}
   /// \leftarrow
   /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \\
+  /// \overline{\cos\theta} & \overline{\sin\theta} \cr
   /// -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \\
+  /// dx \cr
   /// dy
   /// \end{bmatrix}.
   /// \f]
