@@ -30313,7 +30313,7 @@ update_other_proc_shd_bnd_node_helper
     double t_total_limit_target_areas = 0.0;
     // The timing to create the new mesh
     double t_total_create_new_adapted_mesh = 0.0;
-    // The timing for the snaping of the nodes on the new meshes
+    // The timing for the snapping of the nodes on the new meshes
     double t_total_snap_nodes = 0.0;
     // The timing to check whether other processors need to adapt
     double t_total_wait_other_processors = 0.0;
@@ -30852,230 +30852,240 @@ update_other_proc_shd_bnd_node_helper
     // BEGIN: Project solution from the old to the new mesh
     // ==============================================================
     
-    // Take the time for the projection step
-    double tt_start_projection=TimingHelpers::timer();
-    
-    // Print info. for tranfering target areas
-    if (Print_timings_projection)
+    // Check that the projection step is not disabled
+    if (!Disable_projection)
      {
-      // Switch timings and stats on
-      Multi_domain_functions::Doc_timings=true;
-      Multi_domain_functions::Doc_stats=true;
-      Multi_domain_functions::Doc_full_stats=true;
-     }
-    
-    // Change the size of bins
-    
-    // Backup the number of bins on the multi domain fucntions
-    const unsigned backup_bin_x_projection=Multi_domain_functions::Nx_bin;
-    const unsigned backup_bin_y_projection=Multi_domain_functions::Ny_bin;
-    Multi_domain_functions::Nx_bin=Nbin_x_for_projection;
-    Multi_domain_functions::Ny_bin=Nbin_y_for_projection;
-        
-    // Backup the number of chunks
-    const unsigned backup_n_spiral_chunk=
-     Multi_domain_functions::N_spiral_chunk;
-    // We need to adjust the number of chunks with the size of the bin
-    // (the default value is 1 chunk for bin size = 100)
-    Multi_domain_functions::N_spiral_chunk=
-     static_cast<unsigned>(std::ceil(Nbin_x_for_projection*1.0e-2));
-    // Limit to no more than 20 chunks per spiral, otherwise it takes
-    // a lot of time (experimentally tested)
-    if (Multi_domain_functions::N_spiral_chunk>20)
-     {
-      Multi_domain_functions::N_spiral_chunk=20;
-     }
-    // Ensure that the minimun number of chunks is 1
-    if (Multi_domain_functions::N_spiral_chunk < 1)
-     {
-      Multi_domain_functions::N_spiral_chunk=1;
-     }
-    
-    // Document the number of bins
-    if (Print_timings_level_adaptation>1)
-     {
-      oomph_info << "Nbins for projection (in mesh adaptation) "
-                 << "Nx_bin="<< Multi_domain_functions::Nx_bin
-                 << " Ny_bin="<< Multi_domain_functions::Ny_bin 
-                 << std::endl;
-     }
-    
-    // Enable setting up of multi domain interaction for projection
-    Multi_domain_functions::Setup_multi_domain_for_projection=true;
-    //Multi_domain_functions::N_spiral_chunk=UINT_MAX;
-    //Multi_domain_functions::Nsample_points=1;
-    //Multi_domain_functions::Sort_bin_entries=true;
-    
-    double t_proj=TimingHelpers::timer();
-    oomph_info << "About to begin projection.\n";
-    
-    // Project current solution onto new mesh
-    //---------------------------------------
-    ProjectionProblem<ELEMENT>* project_problem_pt=
-     new ProjectionProblem<ELEMENT>;
-    
-    // Projection requires to be enabled as distributed if working
-    // with a distributed mesh
-#ifdef OOMPH_HAS_MPI
-    if (this->is_mesh_distributed())
-     {
-      // ------------------------------------------
-      // DISTRIBUTED MESH: BEGIN
-      // ------------------------------------------
-       
-      // We need to back up the time stepper object since the
-      // projection class creates a new one
-      Time* backed_up_time_pt = this->Time_stepper_pt->time_pt();
+      // Take the time for the projection step
+      double tt_start_projection=TimingHelpers::timer();
       
-      // Set the projection problem as distributed
-      project_problem_pt->enable_problem_distributed();
-      
-      // Pass the time stepper to the projection problem (used when
-      // setting multi_domain_interation)
-      project_problem_pt->add_time_stepper_pt(this->Time_stepper_pt);
-      
-      // Set the mesh used for the projection object
-      project_problem_pt->mesh_pt()=new_mesh_pt;
-      //project_problem_pt->disable_suppress_output_during_projection();
-      
-      // Use iterative solver for projection? By default, an iterative
-      // solver is used for the projection stage
-      if(!this->use_iterative_solver_for_projection())
+      // Print info. for tranfering target areas
+      if (Print_timings_projection)
        {
-        project_problem_pt->disable_use_iterative_solver_for_projection();
+        // Switch timings and stats on
+        Multi_domain_functions::Doc_timings=true;
+        Multi_domain_functions::Doc_stats=true;
+        Multi_domain_functions::Doc_full_stats=true;
        }
       
-      // Do the projection
-      project_problem_pt->project(this);
+      // Change the size of bins
       
-      // Reset the time stepper object (only affects distributed meshes)
-      this->Time_stepper_pt->time_pt() = backed_up_time_pt;
-      
-      // ------------------------------------------
-      // DISTRIBUTED MESH: END
-      // ------------------------------------------
-      
-     } // if (this->is_mesh_distributed())
-    else
-#endif // #ifdef OOMPH_HAS_MPI
-     {
-      // Set the mesh used for the projection object
-      project_problem_pt->mesh_pt()=new_mesh_pt;
-      //project_problem_pt->disable_suppress_output_during_projection();
-      
-      // Use iterative solver for projection? By default, an iterative
-      // solver is used for the projection stage
-      if(!this->use_iterative_solver_for_projection())
+      // Backup the number of bins on the multi domain fucntions
+      const unsigned backup_bin_x_projection=Multi_domain_functions::Nx_bin;
+      const unsigned backup_bin_y_projection=Multi_domain_functions::Ny_bin;
+      Multi_domain_functions::Nx_bin=Nbin_x_for_projection;
+      Multi_domain_functions::Ny_bin=Nbin_y_for_projection;
+          
+      // Backup the number of chunks
+      const unsigned backup_n_spiral_chunk=
+       Multi_domain_functions::N_spiral_chunk;
+      // We need to adjust the number of chunks with the size of the bin
+      // (the default value is 1 chunk for bin size = 100)
+      Multi_domain_functions::N_spiral_chunk=
+       static_cast<unsigned>(std::ceil(Nbin_x_for_projection*1.0e-2));
+      // Limit to no more than 20 chunks per spiral, otherwise it takes
+      // a lot of time (experimentally tested)
+      if (Multi_domain_functions::N_spiral_chunk>20)
        {
-        project_problem_pt->disable_use_iterative_solver_for_projection();
+        Multi_domain_functions::N_spiral_chunk=20;
+       }
+      // Ensure that the minimun number of chunks is 1
+      if (Multi_domain_functions::N_spiral_chunk < 1)
+       {
+        Multi_domain_functions::N_spiral_chunk=1;
        }
       
-      // Do the projection
-      project_problem_pt->project(this);
-     }
-    
-    // Reset printing info. for projection
-    if (Print_timings_projection)
-     {
-      // Switch timings and stats off
-      Multi_domain_functions::Doc_timings=false;
-      Multi_domain_functions::Doc_stats=false;
-      Multi_domain_functions::Doc_full_stats=false;
-     }
-    
-    // Reset to previous values
-    Multi_domain_functions::Nx_bin=backup_bin_x_projection;
-    Multi_domain_functions::Ny_bin=backup_bin_y_projection;
-    Multi_domain_functions::N_spiral_chunk=backup_n_spiral_chunk;
-    //Multi_domain_functions::Sort_bin_entries=false;
-    //Multi_domain_functions::Nsample_points=5;
-    //Multi_domain_functions::N_spiral_chunk=1;
-    
-    // Disable setting up of multi domain interaction for projection
-    Multi_domain_functions::Setup_multi_domain_for_projection=false;
-    
-    // Get the total time for projection
-    const double tt_projection = TimingHelpers::timer()-tt_start_projection;
-    
-    if (Print_timings_level_adaptation>1)
-     {
-      // Get the number of elements in the old mesh (this)
-      const unsigned n_element = this->nelement();
-      // Get the number of elements in the new mesh
-      const unsigned n_element_new = new_mesh_pt->nelement();
-      oomph_info << "CPU for projection (in mesh adaptation) "
-                 << "[n_ele_old_mesh="<< n_element 
-                 <<", n_ele_new_mesh="<< n_element_new<<"]: " 
-                 << tt_projection << std::endl;
+      // Document the number of bins
+      if (Print_timings_level_adaptation>1)
+       {
+        oomph_info << "Nbins for projection (in mesh adaptation) "
+                   << "Nx_bin="<< Multi_domain_functions::Nx_bin
+                   << " Ny_bin="<< Multi_domain_functions::Ny_bin 
+                   << std::endl;
+       }
       
-      // ------------------------------------------
-      // DISTRIBUTED MESH: BEGIN
-      // ------------------------------------------
+      // Enable setting up of multi domain interaction for projection
+      Multi_domain_functions::Setup_multi_domain_for_projection=true;
+      //Multi_domain_functions::N_spiral_chunk=UINT_MAX;
+      //Multi_domain_functions::Nsample_points=1;
+      //Multi_domain_functions::Sort_bin_entries=true;
+      
+      double t_proj=TimingHelpers::timer();
+      oomph_info << "About to begin projection.\n";
+      
+      // Project current solution onto new mesh
+      //---------------------------------------
+      ProjectionProblem<ELEMENT>* project_problem_pt=
+       new ProjectionProblem<ELEMENT>;
+      
+      // Projection requires to be enabled as distributed if working
+      // with a distributed mesh
 #ifdef OOMPH_HAS_MPI
       if (this->is_mesh_distributed())
        {
-        // The maximum number of elements in the mesh (over all
-        // processors)
-        unsigned n_this_element_new = n_element_new;
-        unsigned n_max_element_new_global = 0;
-        // Get the maximum number of elements over all processors
-        MPI_Reduce(&n_this_element_new, &n_max_element_new_global,
-                   1, MPI_UNSIGNED, MPI_MAX, 0,
-                   this->communicator_pt()->mpi_comm());
+        // ------------------------------------------
+        // DISTRIBUTED MESH: BEGIN
+        // ------------------------------------------
+         
+        // We need to back up the time stepper object since the
+        // projection class creates a new one
+        Time* backed_up_time_pt = this->Time_stepper_pt->time_pt();
         
-        // The time for projection for this processor
-        double tt_this_projection = tt_projection;
-        double tt_global_min_projection = 0.0;
-        double tt_global_max_projection = 0.0;
+        // Set the projection problem as distributed
+        project_problem_pt->enable_problem_distributed();
         
-        // Get the minimum and maximum time for projection
-        MPI_Reduce(&tt_this_projection, &tt_global_min_projection,
-                   1, MPI_DOUBLE, MPI_MIN, 0,
-                   this->communicator_pt()->mpi_comm());
-        MPI_Reduce(&tt_this_projection, &tt_global_max_projection,
-                   1, MPI_DOUBLE, MPI_MAX, 0,
-                   this->communicator_pt()->mpi_comm());
+        // Pass the time stepper to the projection problem (used when
+        // setting multi_domain_interation)
+        project_problem_pt->add_time_stepper_pt(this->Time_stepper_pt);
         
-        if (this->communicator_pt()->my_rank() == 0)
+        // Set the mesh used for the projection object
+        project_problem_pt->mesh_pt()=new_mesh_pt;
+        //project_problem_pt->disable_suppress_output_during_projection();
+        
+        // Use iterative solver for projection? By default, an iterative
+        // solver is used for the projection stage
+        if(!this->use_iterative_solver_for_projection())
          {
-          oomph_info << "CPU for projection global (MIN): "
-                     << tt_global_min_projection << std::endl;
-          oomph_info << "CPU for projection global (MAX) "
-                     << "[n_max_ele_new_global="
-                     << n_max_element_new_global<<"]: "
-                     << tt_global_max_projection << std::endl;
-          
-          std::cerr << "CPU for projection global (MIN): "
-                    << tt_global_min_projection << std::endl;
-          std::cerr << "CPU for projection global (MAX): "
-                    << "[n_max_ele_new_global="
-                    << n_max_element_new_global<<"]: "
-                    << tt_global_max_projection << std::endl;
-          
+          project_problem_pt->disable_use_iterative_solver_for_projection();
          }
         
-       }
+        // Do the projection
+        project_problem_pt->project(this);
+        
+        // Reset the time stepper object (only affects distributed meshes)
+        this->Time_stepper_pt->time_pt() = backed_up_time_pt;
+        
+        // ------------------------------------------
+        // DISTRIBUTED MESH: END
+        // ------------------------------------------
+        
+       } // if (this->is_mesh_distributed())
+      else
 #endif // #ifdef OOMPH_HAS_MPI
-      // ------------------------------------------
-      // DISTRIBUTED MESH: END
-      // ------------------------------------------
+       {
+        // Set the mesh used for the projection object
+        project_problem_pt->mesh_pt()=new_mesh_pt;
+        //project_problem_pt->disable_suppress_output_during_projection();
+        
+        // Use iterative solver for projection? By default, an iterative
+        // solver is used for the projection stage
+        if(!this->use_iterative_solver_for_projection())
+         {
+          project_problem_pt->disable_use_iterative_solver_for_projection();
+         }
+        
+        // Do the projection
+        project_problem_pt->project(this);
+       }
       
-     } // if (Print_timings_level_adaptation>1)
-    
-    // Reset
-    Multi_domain_functions::Nx_bin=backup_bin_x_projection;
-    Multi_domain_functions::Ny_bin=backup_bin_y_projection;
-    //Multi_domain_functions::Sort_bin_entries=false;
-    Multi_domain_functions::Setup_multi_domain_for_projection=false;
-    
-    // Switch timings and stats off
-    //Multi_domain_functions::Doc_timings=false;
-    //Multi_domain_functions::Doc_stats=false;
-    //Multi_domain_functions::Doc_full_stats=false;
-    
-    oomph_info << "CPU for projection of solution onto new mesh: " 
-               << TimingHelpers::timer()-t_proj
-               << std::endl;
+      // Reset printing info. for projection
+      if (Print_timings_projection)
+       {
+        // Switch timings and stats off
+        Multi_domain_functions::Doc_timings=false;
+        Multi_domain_functions::Doc_stats=false;
+        Multi_domain_functions::Doc_full_stats=false;
+       }
+      
+      // Reset to previous values
+      Multi_domain_functions::Nx_bin=backup_bin_x_projection;
+      Multi_domain_functions::Ny_bin=backup_bin_y_projection;
+      Multi_domain_functions::N_spiral_chunk=backup_n_spiral_chunk;
+      //Multi_domain_functions::Sort_bin_entries=false;
+      //Multi_domain_functions::Nsample_points=5;
+      //Multi_domain_functions::N_spiral_chunk=1;
+      
+      // Disable setting up of multi domain interaction for projection
+      Multi_domain_functions::Setup_multi_domain_for_projection=false;
+      
+      // Get the total time for projection
+      const double tt_projection = TimingHelpers::timer()-tt_start_projection;
+      
+      if (Print_timings_level_adaptation>1)
+       {
+        // Get the number of elements in the old mesh (this)
+        const unsigned n_element = this->nelement();
+        // Get the number of elements in the new mesh
+        const unsigned n_element_new = new_mesh_pt->nelement();
+        oomph_info << "CPU for projection (in mesh adaptation) "
+                   << "[n_ele_old_mesh="<< n_element 
+                   <<", n_ele_new_mesh="<< n_element_new<<"]: " 
+                   << tt_projection << std::endl;
+        
+        // ------------------------------------------
+        // DISTRIBUTED MESH: BEGIN
+        // ------------------------------------------
+#ifdef OOMPH_HAS_MPI
+        if (this->is_mesh_distributed())
+         {
+          // The maximum number of elements in the mesh (over all
+          // processors)
+          unsigned n_this_element_new = n_element_new;
+          unsigned n_max_element_new_global = 0;
+          // Get the maximum number of elements over all processors
+          MPI_Reduce(&n_this_element_new, &n_max_element_new_global,
+                     1, MPI_UNSIGNED, MPI_MAX, 0,
+                     this->communicator_pt()->mpi_comm());
+          
+          // The time for projection for this processor
+          double tt_this_projection = tt_projection;
+          double tt_global_min_projection = 0.0;
+          double tt_global_max_projection = 0.0;
+          
+          // Get the minimum and maximum time for projection
+          MPI_Reduce(&tt_this_projection, &tt_global_min_projection,
+                     1, MPI_DOUBLE, MPI_MIN, 0,
+                     this->communicator_pt()->mpi_comm());
+          MPI_Reduce(&tt_this_projection, &tt_global_max_projection,
+                     1, MPI_DOUBLE, MPI_MAX, 0,
+                     this->communicator_pt()->mpi_comm());
+          
+          if (this->communicator_pt()->my_rank() == 0)
+           {
+            oomph_info << "CPU for projection global (MIN): "
+                       << tt_global_min_projection << std::endl;
+            oomph_info << "CPU for projection global (MAX) "
+                       << "[n_max_ele_new_global="
+                       << n_max_element_new_global<<"]: "
+                       << tt_global_max_projection << std::endl;
+            
+            std::cerr << "CPU for projection global (MIN): "
+                      << tt_global_min_projection << std::endl;
+            std::cerr << "CPU for projection global (MAX): "
+                      << "[n_max_ele_new_global="
+                      << n_max_element_new_global<<"]: "
+                      << tt_global_max_projection << std::endl;
+            
+           }
+          
+         }
+#endif // #ifdef OOMPH_HAS_MPI
+        // ------------------------------------------
+        // DISTRIBUTED MESH: END
+        // ------------------------------------------
+        
+       } // if (Print_timings_level_adaptation>1)
+      
+      // Reset
+      Multi_domain_functions::Nx_bin=backup_bin_x_projection;
+      Multi_domain_functions::Ny_bin=backup_bin_y_projection;
+      //Multi_domain_functions::Sort_bin_entries=false;
+      Multi_domain_functions::Setup_multi_domain_for_projection=false;
+      
+      // Switch timings and stats off
+      //Multi_domain_functions::Doc_timings=false;
+      //Multi_domain_functions::Doc_stats=false;
+      //Multi_domain_functions::Doc_full_stats=false;
+      
+      oomph_info << "CPU for projection of solution onto new mesh: " 
+                 << TimingHelpers::timer()-t_proj
+                 << std::endl;
+
+     } // if (!Disable_projection)
+    else
+     {
+      oomph_info << "Projection disabled! The new mesh will contain zeros"
+                 << std::endl;
+     }
     
     // ==============================================================
     // END: Project solution from the old to the new mesh
@@ -31307,6 +31317,9 @@ update_other_proc_shd_bnd_node_helper
       resume_boundary_connections(resume_initial_connection_polyline_pt,
                                   resume_final_connection_polyline_pt);
             
+      // Delete the projection problem
+      delete project_problem_pt;
+
      } // if (this->is_mesh_distributed())
     
 #endif // #ifdef OOMPH_HAS_MPI
@@ -31331,9 +31344,8 @@ update_other_proc_shd_bnd_node_helper
     // Flush the mesh
     new_mesh_pt->flush_element_and_node_storage();
     
-    // Delete the mesh and the projection problem
+    // Delete the mesh
     delete new_mesh_pt;
-    delete project_problem_pt;
     
     // Resume of timings
     if (Print_timings_level_adaptation>2)
@@ -31360,7 +31372,7 @@ update_other_proc_shd_bnd_node_helper
       
       if (Print_timings_level_adaptation>2)
        {
-        // Report timings for snaping of nodes onto boundaries
+        // Report timings for snapping of nodes onto boundaries
         oomph_info << "CPU for snapping nodes onto boundaries "
                    << "(new mesh): "
                    << t_total_snap_nodes << std::endl;

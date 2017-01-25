@@ -2297,6 +2297,14 @@ namespace oomph
   /// areas
   void disable_timings_tranfering_target_areas()
    {Print_timings_transfering_target_areas=false;}
+
+  /// \short Enables the solution projection step during adaptation
+  void enable_projection()
+   {Disable_projection=false;}
+
+  /// \short Disables the solution projection step during adaptation
+  void disable_projection()
+   {Disable_projection=true;}
    
   /// \short Enables info. and timings for projection
   void enable_timings_projection()
@@ -3469,6 +3477,9 @@ namespace oomph
     this->Max_element_size=1.0;
     this->Min_element_size=0.001;
     this->Min_permitted_angle=15.0;
+
+    // By default we want to do projection
+    this->Disable_projection=false;
    
     // Use by default an iterative solver for the projection problem
     this->Use_iterative_solver_for_projection=true;
@@ -3640,13 +3651,16 @@ namespace oomph
   /// Min angle before remesh gets triggered
   double Min_permitted_angle;
       
+  /// Enable/disable solution projection during adaptation
+  bool Disable_projection;
+   
   /// Flag to indicate whether to use or not an iterative solver (CG
   /// with diagonal preconditioned) for the projection problem
   bool Use_iterative_solver_for_projection;
    
   /// Enable/disable printing timings for transfering target areas
   bool Print_timings_transfering_target_areas;
-   
+
   /// Enable/disable printing timings for projection
   bool Print_timings_projection;
    
