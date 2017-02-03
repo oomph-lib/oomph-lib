@@ -31080,6 +31080,9 @@ update_other_proc_shd_bnd_node_helper
                  << TimingHelpers::timer()-t_proj
                  << std::endl;
 
+      // Delete the projection problem
+      delete project_problem_pt;
+      
      } // if (!Disable_projection)
     else
      {
@@ -31316,9 +31319,6 @@ update_other_proc_shd_bnd_node_helper
       // Resume the connections in boundaries were it was suspended
       resume_boundary_connections(resume_initial_connection_polyline_pt,
                                   resume_final_connection_polyline_pt);
-            
-      // Delete the projection problem
-      delete project_problem_pt;
 
      } // if (this->is_mesh_distributed())
     
@@ -31346,6 +31346,10 @@ update_other_proc_shd_bnd_node_helper
     
     // Delete the mesh
     delete new_mesh_pt;
+
+    //Now we can delete the projection problem
+    //delete project_problem_pt;
+    
     
     // Resume of timings
     if (Print_timings_level_adaptation>2)
