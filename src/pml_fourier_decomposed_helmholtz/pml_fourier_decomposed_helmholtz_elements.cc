@@ -300,7 +300,7 @@ namespace oomph
    // Calculate Jacobian
    // ------------------
    std::complex<double> pml_k_squared_jacobian = 
-     - pml_k_squared_factor * ( k_squared() - n_squared / complex_r * complex_r)
+     - pml_k_squared_factor * ( k_squared() - n_squared / (complex_r * complex_r))
      * complex_r * W;
    
    // Term from the Laplace operator
