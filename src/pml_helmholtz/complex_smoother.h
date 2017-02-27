@@ -1100,12 +1100,12 @@ namespace oomph
   /// -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \cr
+  /// dx \\
   /// dy
   /// \end{bmatrix}
   /// =
   /// \begin{bmatrix}
-  /// r \cr
+  /// r \\
   /// 0
   /// \end{bmatrix},
   /// \f]
@@ -1200,16 +1200,16 @@ namespace oomph
   /// update:
   /// \f[
   /// \begin{bmatrix}
-  /// dx \cr
+  /// dx \\
   /// dy
   /// \end{bmatrix}
   /// \leftarrow
   /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \cr
+  /// \overline{\cos\theta} & \overline{\sin\theta} \\
   /// -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \cr
+  /// dx \\
   /// dy
   /// \end{bmatrix}.
   /// \f]
@@ -2328,16 +2328,16 @@ namespace oomph
   /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
   /// \f[
   /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \cr
+  /// \overline{\cos\theta} & \overline{\sin\theta} \\
   /// -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \cr
+  /// dx \\
   /// dy
   /// \end{bmatrix}
   /// =
   /// \begin{bmatrix}
-  /// r \cr
+  /// r \\
   /// 0
   /// \end{bmatrix},
   /// \f]
@@ -2432,16 +2432,16 @@ namespace oomph
   /// update:
   /// \f[
   /// \begin{bmatrix}
-  /// dx \cr
+  /// dx \\
   /// dy
   /// \end{bmatrix}
   /// \leftarrow
   /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \cr
+  /// \overline{\cos\theta} & \overline{\sin\theta} \\
   /// -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \cr
+  /// dx \\
   /// dy
   /// \end{bmatrix}.
   /// \f]
@@ -2810,17 +2810,17 @@ namespace oomph
   } // if (resid<=Tolerance)
 
   // Initialise a vector of orthogonal basis vectors
-  Vector<Vector<DoubleVector> > v;
+  Vector<Vector<DoubleVector> > block_v;
 
   // Resize the number of vectors needed
-  v.resize(n_row+1);
+  block_v.resize(n_row+1);
 
   // Resize each Vector of DoubleVectors to store the real and imaginary
   // part of a given vector
   for (unsigned dof_type=0;dof_type<n_row+1;dof_type++)
   {
    // Create two DoubleVector objects in each Vector
-   v[dof_type].resize(n_dof_types);
+   block_v[dof_type].resize(n_dof_types);
   }
 
   // Initialise the upper hessenberg matrix. Since we are not using
@@ -2835,14 +2835,14 @@ namespace oomph
   {
    // Build the k-th part of the zeroth vector. Here k=0 and k=1 correspond
    // to the real and imaginary part of the zeroth vector, respectively
-   v[0][dof_type].build(this->block_distribution_pt(dof_type),0.0);
+   block_v[0][dof_type].build(this->block_distribution_pt(dof_type),0.0);
   }
 
   // Loop over the real and imaginary parts of v
   for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
   {   
    // For fast access
-   double* v0_pt=v[0][dof_type].values_pt();
+   double* v0_pt=block_v[0][dof_type].values_pt();
    
    // For fast access
    const double* block_r_pt=block_r[dof_type].values_pt();     
@@ -2891,7 +2891,7 @@ namespace oomph
     {
      // Solve Jv[j]=Mw for w. Note, we cannot use inbuilt complex matrix
      // algebra here as we're using distributed vectors
-     complex_matrix_multiplication(Matrices_storage_pt,v[j],block_temp);
+     complex_matrix_multiplication(Matrices_storage_pt,block_v[j],block_temp);
      
      // Copy block_temp into temp
      this->return_block_vectors(block_temp,temp);
@@ -2900,7 +2900,7 @@ namespace oomph
      this->return_block_vectors(block_w,w);
      
      // Apply the preconditioner
-     preconditioner_pt()->preconditioner_solve(temp,w);
+     this->preconditioner_pt()->preconditioner_solve(temp,w);
      
      // Copy w into block_w
      this->get_block_vectors(w,block_w);   
@@ -2909,10 +2909,10 @@ namespace oomph
     else 
     {
      // Copy the real and imaginary part of v[j] into one vector, vj
-     this->return_block_vectors(v[j],vj);
+     this->return_block_vectors(block_v[j],vj);
      
      // Use w=JM^{-1}v by saad p270
-     preconditioner_pt()->preconditioner_solve(vj,temp);
+     this->preconditioner_pt()->preconditioner_solve(vj,temp);
      
      // Copy w into block_w
      this->get_block_vectors(temp,block_temp);
@@ -2936,10 +2936,10 @@ namespace oomph
    for (unsigned i=0;i<j+1;i++)
    {
     // For fast access
-    const double* vi_r_pt=v[i][0].values_pt();
+    const double* vi_r_pt=block_v[i][0].values_pt();
    
     // For fast access
-    const double* vi_c_pt=v[i][1].values_pt();
+    const double* vi_c_pt=block_v[i][1].values_pt();
     
     // Loop over the entries of v and w
     for (unsigned k=0;k<n_row;k++)
@@ -2979,21 +2979,23 @@ namespace oomph
    // its value to the appropriate entry in the Hessenberg matrix
    hessenberg[j][j+1]=sqrt(pow(norm_r,2.0)+pow(norm_c,2.0));
 
-   // Build the real part of the next orthogonal vector
-   v[j+1][0].build(IterativeLinearSolver::distribution_pt(),0.0);
-
-   // Build the imaginary part of the next orthogonal vector
-   v[j+1][1].build(IterativeLinearSolver::distribution_pt(),0.0);
-
+   // Build the (j+1)-th basis vector
+   for (unsigned dof_type=0;dof_type<n_dof_types;dof_type++)
+   {
+    // Build the k-th part of the zeroth vector. Here k=0 and k=1 correspond
+    // to the real and imaginary part of the zeroth vector, respectively
+    block_v[j+1][dof_type].build(this->block_distribution_pt(dof_type),0.0);
+   }
+   
    // Check if the value of hessenberg[j][j+1] is zero. If it
    // isn't then we update the next entries in v
    if (hessenberg[j][j+1]!=0.0)
    {    
     // For fast access
-    double* v_r_pt=v[j+1][0].values_pt();
+    double* v_r_pt=block_v[j+1][0].values_pt();
    
     // For fast access
-    double* v_c_pt=v[j+1][1].values_pt();
+    double* v_c_pt=block_v[j+1][1].values_pt();
     
     // For fast access
     const double* block_w_r_pt=block_w[0].values_pt();
@@ -3084,7 +3086,7 @@ namespace oomph
 
     // Update the result vector using the result, x=x_0+V_m*y (where V_m
     // is given by v here)
-    update(j,hessenberg,s,v,block_solution);
+    update(j,hessenberg,s,block_v,block_solution);
 
     // Copy the vectors in block_solution to solution
     this->return_block_vectors(block_solution,solution);
@@ -3129,7 +3131,7 @@ namespace oomph
   {
    // Update the result vector using the result, x=x_0+V_m*y (where V_m
    // is given by v here)
-   update(Max_iter-1,hessenberg,s,v,block_solution);
+   update(Max_iter-1,hessenberg,s,block_v,block_solution);
 
    // Copy the vectors in block_solution to solution
    this->return_block_vectors(block_solution,solution);
