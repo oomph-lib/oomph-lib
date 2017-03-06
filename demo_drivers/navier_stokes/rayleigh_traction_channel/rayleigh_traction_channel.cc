@@ -87,7 +87,7 @@ namespace ExactSoln
   
   // Extract real part and stick into vector
   u.resize(2);
-  u[0]=imag(sol);
+  u[0]=real(sol);
   u[1]=0.0;
 
  }
@@ -115,7 +115,7 @@ namespace ExactSoln
    
   //Extract real part and stick into vector
   traction.resize(2);
-  traction[0]=imag(sol);
+  traction[0]=real(sol);
   traction[1]=0.0;
  } 
 
