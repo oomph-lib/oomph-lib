@@ -88,7 +88,7 @@ namespace ExactSoln
   
   // Assign real solution
   u.resize(2);
-  u[0]=real(sol);
+  u[0]=imag(sol);
   u[1]=0.0;
  }
 
@@ -109,7 +109,7 @@ namespace ExactSoln
    /(exp(I*lambda)-exp(-I*lambda)) );
 
   // Assign real solution
-  u=real(sol);
+  u=imag(sol);
 
  }
 
