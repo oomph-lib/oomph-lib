@@ -27,7 +27,8 @@ navier_stokes_surface_drag_torque_elements.h \
 navier_stokes_flux_control_elements.h \
 impose_parallel_outflow_element.h \
 impose_impenetrability_element.h \
-lagrange_enforced_flow_preconditioner.h
+lagrange_enforced_flow_preconditioner.h \
+vorticity_smoother.h
 
 # Template only files. These should be included in include directory
 # but should not be listed in combined header file
