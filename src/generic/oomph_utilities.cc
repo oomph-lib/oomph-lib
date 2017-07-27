@@ -311,9 +311,9 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
      unknowns[i]=backup;
     }
 
-   oomph_info << "\n\nJacobian: "<< std::endl;
-   jacobian.sparse_indexed_output(std::cout);
-   oomph_info << std::endl;
+   // oomph_info << "\n\nJacobian: "<< std::endl;
+   // jacobian.sparse_indexed_output(std::cout);
+   // oomph_info << std::endl;
 
    // Get gradient
    if (Use_step_length_control)
