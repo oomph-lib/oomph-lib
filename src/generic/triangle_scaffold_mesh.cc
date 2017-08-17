@@ -658,8 +658,7 @@ namespace oomph
 //=====================================================================
  TriangleScaffoldMesh::TriangleScaffoldMesh(TriangulateIO& triangle_data)
  {
-  
-  // Number of elements
+// Number of elements
   unsigned n_element = static_cast<unsigned>(triangle_data.numberoftriangles);
   
   // Number of nodes per element
@@ -724,7 +723,7 @@ namespace oomph
       Element_attribute[i] = triangle_data.triangleattributelist[i];
      }
    }
-  
+
   // Resize the Element vector
   Element_pt.resize(n_element);
   
@@ -1009,9 +1008,15 @@ namespace oomph
    }
   if (broken)
    {
-    throw OomphLibError(error_stream.str(),
+    error_stream <<
+     "This error means that some of the nodes are not connected \n"  <<
+      " to (bulk) elements. This can happen if there is an isolated\n" <<
+      " boundary line in the mesh. One possible cause for this is\n" <<
+      " specifying a hole coordinate in the wrong place so that there\n" <<
+      " a gap between the mesh and the outer boundary.\n";
+     throw OomphLibError(error_stream.str(),
                         OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
+                         OOMPH_EXCEPTION_LOCATION);
    }
 
   // Check things and throw if mesh is broken...

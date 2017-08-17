@@ -2144,6 +2144,15 @@ namespace oomph
   /// to satisfy volume constraints)
   typedef void (*MeshUpdateFctPt)(Mesh* mesh_pt);
 
+  /// \short Function pointer to a function that can generate
+  /// a point within the ihole-th hole, so that this can be
+  /// overloaded by the user if they have a better way of
+  /// doing it than our clunky default. The function
+  /// should update the components of the
+  /// Vector  poly_pt->internal_point()
+  typedef void (*InternalHolePointUpdateFctPt)(
+   const unsigned &ihole, TriangleMeshPolygon* poly_pt);
+  
 #ifdef OOMPH_HAS_TRIANGLE_LIB
   
   /// \short Build mesh, based on the specifications on
@@ -2467,6 +2476,17 @@ namespace oomph
    {
     return Mesh_update_fct_pt;
    }
+
+  /// \short Access to function pointer to can be
+  /// used to generate the internal point for the ihole-th
+  ///hole. 
+  InternalHolePointUpdateFctPt& internal_hole_point_update_fct_pt()
+   {
+    return Internal_hole_point_update_fct_pt;
+   }
+
+  
+
 
 #ifdef OOMPH_HAS_MPI   
   unsigned nsorted_shared_boundary_node(unsigned &b)
@@ -3503,6 +3523,10 @@ namespace oomph
     // to satisfy volume constraints)
     Mesh_update_fct_pt=0;
 
+    // Initialise function point for update of internal hole
+    // point to null
+    Internal_hole_point_update_fct_pt=0;
+    
    }
   
 #ifdef OOMPH_HAS_TRIANGLE_LIB
@@ -3676,6 +3700,11 @@ namespace oomph
   /// to satisfy volume constraints)
   MeshUpdateFctPt Mesh_update_fct_pt;
 
+  /// \short Function pointer to function that can be set
+  /// to update the position of the central point in internal
+  /// holes
+  InternalHolePointUpdateFctPt Internal_hole_point_update_fct_pt;
+  
  }; 
 
 

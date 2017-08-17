@@ -1433,9 +1433,11 @@ namespace oomph
 //=====================================================================
  TriangleMeshClosedCurve::TriangleMeshClosedCurve(
   const Vector<TriangleMeshCurveSection*> &curve_section_pt,
-  const Vector<double>& internal_point_pt) :
+  const Vector<double>& internal_point_pt,
+  const bool &is_internal_point_fixed) :
   TriangleMeshCurve(curve_section_pt),
-  Internal_point_pt(internal_point_pt)
+  Internal_point_pt(internal_point_pt),
+  Is_internal_point_fixed(is_internal_point_fixed)
  {
   
   // Matching of curve sections i.e. the last vertex of the i curve
@@ -1595,9 +1597,10 @@ namespace oomph
 //=========================================================================
  TriangleMeshPolygon::TriangleMeshPolygon(
   const Vector<TriangleMeshCurveSection*>& boundary_polyline_pt,
-  const Vector<double>& internal_point_pt) :
+  const Vector<double>& internal_point_pt,
+  const bool &is_internal_point_fixed) :
   TriangleMeshCurve(boundary_polyline_pt),
-  TriangleMeshClosedCurve(boundary_polyline_pt, internal_point_pt),
+  TriangleMeshClosedCurve(boundary_polyline_pt, internal_point_pt,is_internal_point_fixed),
   Enable_redistribution_of_segments_between_polylines(false),
   Can_update_configuration(false),
   Polygon_fixed(false)

@@ -10373,6 +10373,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
   //the data storage is changed (if the timestepper has to be changed,
   //which happens if this is the first time that a continuation step is 
   //taken)
+  //ALH: Don't think this is true because it has happened above....
   return arc_length_step_solve_helper(parameter_pt,ds,max_adapt);
  }
 

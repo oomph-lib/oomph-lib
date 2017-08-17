@@ -1244,10 +1244,11 @@ namespace oomph
 
  public:
 
-  /// Empty constructor
+  /// Constructor prototype
   TriangleMeshClosedCurve(
    const Vector<TriangleMeshCurveSection*> &curve_section_pt,
-   const Vector<double>& internal_point_pt = Vector<double>(0));
+   const Vector<double>& internal_point_pt = Vector<double>(0),
+   const bool &is_internal_point_fixed=false);
 
   /// Empty destructor
   virtual ~TriangleMeshClosedCurve() { }
@@ -1304,11 +1305,25 @@ namespace oomph
   /// Coordinates of the internal point
   Vector<double> &internal_point() {return Internal_point_pt;}
 
+  /// Fix the internal point (i.e. do not allow our automatic machinery
+  /// to update it)
+  void fix_internal_point() {Is_internal_point_fixed = true;}
+
+  /// Unfix the internal point (i.e. allow our automatic machinery
+  /// to update it)
+  void unfix_internal_point() {Is_internal_point_fixed = false;}
+
+  /// Test whether the internal point is fixed
+  bool is_internal_point_fixed() const {return Is_internal_point_fixed;}
+  
  protected:
 
   /// Vector of vertex coordinates
   Vector<double> Internal_point_pt;
 
+  /// Indicate whether the internal point should be updated automatically
+  bool Is_internal_point_fixed;
+  
  };
 
 ///////////////////////////////////////////////////////////////////////
@@ -1340,7 +1355,8 @@ namespace oomph
   /// mode for this constraint
   TriangleMeshPolygon(const Vector<TriangleMeshCurveSection*>&
 		      boundary_polyline_pt,
-		      const Vector<double>& internal_point_pt=Vector<double>(0));
+		      const Vector<double>& internal_point_pt=Vector<double>(0),
+                      const bool &is_internal_point_fixed=false);
 
   /// Empty virtual destructor
   virtual ~TriangleMeshPolygon() { }
@@ -3322,7 +3338,7 @@ namespace oomph
     // Create a new polygon by using the new created polylines
     TriangleMeshPolygon *output_polygon_pt=
      new TriangleMeshPolygon(my_boundary_polyline_pt,
-			     closed_curve_pt->internal_point());
+			     closed_curve_pt->internal_point(),closed_curve_pt->is_internal_point_fixed());
    
     // Keep track of new created polygons that need to be deleted!!!
     Free_polygon_pt.insert(output_polygon_pt);

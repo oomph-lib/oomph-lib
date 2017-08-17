@@ -30056,7 +30056,7 @@ update_other_proc_shd_bnd_node_helper
       }
     
     // Update mesh further?
-    if (Mesh_update_fct_pt!=0)
+    if(Mesh_update_fct_pt!=0)
      {
       Mesh_update_fct_pt(tmp_new_mesh_pt);
      }
@@ -36120,6 +36120,7 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
     TriangleMeshPolygon* const poly_pt
     = this->Internal_polygon_pt[ihole];
 
+    
     //Can the polygon update its own configuration, in which case this
     //is easy
     if(poly_pt->can_update_reference_configuration())
@@ -36153,63 +36154,125 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
        }
       //if we not only want to check, then we actually perform
       //the update
-
       else
        {
         update_was_performed=
         this->update_polygon_using_face_mesh(poly_pt);
        }
 
+      //Now we need to sort out the hole coordinates
       if (!poly_pt->internal_point().empty())
        {
-
-        //Now sort out the hole coordinates
-        Vector<double> vertex_coord;
-        unsigned n_polyline = poly_pt->npolyline();
-
-        // Initialize Vector hole_coordinates
-        vertex_coord.resize(2);
-        internal_point_coord[ihole].resize(2);
-
-        //Hole centre will be found by averaging the position of
-        //all vertex nodes
-        internal_point_coord[ihole][0] = 0.0;
-        internal_point_coord[ihole][1] = 0.0;
-
-        for(unsigned p=0;p<n_polyline;p++)
+        //If fixed don't update and simply
+        //Read out the existing value
+        if(poly_pt->is_internal_point_fixed())
          {
-          Vector<double> poly_ave(2,0.0);
-          //How many vertices are there in the segment
-          unsigned n_vertex = poly_pt->polyline_pt(p)->nvertex();
-          for(unsigned v=0;v<n_vertex;v++)
+          // Get the vector of hole coordinates
+          internal_point_coord[ihole]=poly_pt->internal_point();
+         }
+        //This is where the work starts and this could be made much
+        //better than the current hack
+        else
+         {
+          //If the user has set their own function then use that
+          if(this->Internal_hole_point_update_fct_pt!=0)
            {
-            vertex_coord = poly_pt->polyline_pt(p)->vertex_coordinate(v);
+            this->Internal_hole_point_update_fct_pt(ihole,poly_pt);
+           }
+          //Otherwise use our clunky default
+          else
+           {
+            //Now sort out the hole coordinates
+            Vector<double> vertex_coord;
+            unsigned n_polyline = poly_pt->npolyline();
+            
+            // Initialize Vector hole_coordinates
+            vertex_coord.resize(2);
+            internal_point_coord[ihole].resize(2);
+            
+            //Hole centre will be found by averaging the position of
+            //all vertex nodes
+            internal_point_coord[ihole][0] = 0.0;
+            internal_point_coord[ihole][1] = 0.0;
+            
+            for(unsigned p=0;p<n_polyline;p++)
+             {
+              Vector<double> poly_ave(2,0.0);
+              //How many vertices are there in the segment
+              unsigned n_vertex = poly_pt->polyline_pt(p)->nvertex();
+              for(unsigned v=0;v<n_vertex;v++)
+               {
+                vertex_coord = poly_pt->polyline_pt(p)->vertex_coordinate(v);
+                for(unsigned i=0;i<2;i++)
+                 {
+                  poly_ave[i] += vertex_coord[i];
+                 }
+               }
+              
+              //Add the average polyline coordinate to the hole centre
+              for(unsigned i=0;i<2;i++)
+               {
+                internal_point_coord[ihole][i] += poly_ave[i]/n_vertex;
+               }
+             }
+            
+            //Now average out the hole centre
             for(unsigned i=0;i<2;i++)
              {
-              poly_ave[i] += vertex_coord[i];
+              internal_point_coord[ihole][i] /= n_polyline;
              }
-           }
-
-          //Add the average polyline coordinate to the hole centre
-          for(unsigned i=0;i<2;i++)
-           {
-            internal_point_coord[ihole][i] += poly_ave[i]/n_vertex;
+            
+            //We have now found the hole centre stored in internal_point_coordinate[ihole][i]
+            
+            //Find polylines that intersect at y average value
+            //Alice's version but this does not work if the end point of a
+            //segment is the intersection point (i.e. at the y average value)
+            /*Vector<double> vertex_coord2;
+              unsigned n_intersect=0;
+              double x_average=0.0;
+              
+              for(unsigned p=0;p<n_polyline;p++)
+              {
+              //How many vertices are there in the segment
+              unsigned n_vertex = poly_pt->polyline_pt(p)->nvertex();
+              for(unsigned v=0;v<n_vertex-1;v++)
+              {
+              vertex_coord =  poly_pt->polyline_pt(p)->vertex_coordinate(v);
+              vertex_coord2 = poly_pt->polyline_pt(p)->vertex_coordinate(v+1);
+              std::cout << vertex_coord[0] << " " << vertex_coord[1]
+              << " " <<
+              vertex_coord2[0] << " " <<
+              
+              vertex_coord2[1] << "\n";
+              //Does the line between vertices intersect the vertical position
+              if((vertex_coord[1] -internal_point_coord[ihole][1])*
+              (vertex_coord2[1] - internal_point_coord[ihole][1]) < 0.0)
+              {
+              ++n_intersect; x_average += 0.5*(vertex_coord[0] + vertex_coord2[0]);
+              }
+              }
+              }
+              
+              //Now just report the value if we have had intersections
+              if(n_intersect != 0)
+              {
+              //Report
+              std::cout << "I have computed a hole " << x_average << " " << n_intersect << " "
+              << x_average/((double)n_intersect) << std::endl;
+              internal_point_coord[ihole][0] = x_average/((double)n_intersect);
+              }
+            */
+            
+            //Set the new hole centre
+            poly_pt->internal_point() = internal_point_coord[ihole];
+            //std::cout << "I've had my centre updated to "
+            //          << internal_point_coord[ihole][0]
+            //          << " " << internal_point_coord[ihole][1] << "\n";
            }
          }
-
-        //Now average out the hole centre
-        for(unsigned i=0;i<2;i++)
-         {
-          internal_point_coord[ihole][i] /= n_polyline;
-         }
-
-        //Set the new hole centre
-        poly_pt->internal_point() = internal_point_coord[ihole];
         
-      }
-
+       }
      }
-
    } //End of the action (n_hole for)
 
   if(check_only)
