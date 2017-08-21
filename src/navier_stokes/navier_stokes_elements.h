@@ -537,16 +537,6 @@ template <unsigned DIM>
   RankFourTensor<double> &d_dtestdx_dX,
   DenseMatrix<double> &djacobian_dX) const=0;
  
- /// \short Compute the pressure shape and test functions and derivatives 
- /// w.r.t. global coords at local coordinate s.
- /// Return Jacobian of mapping between local and global coordinates.
- virtual double dpshape_and_dptest_eulerian_nst(const Vector<double> &s, 
-                                                Shape &ppsi, 
-                                                DShape &dppsidx, 
-                                                Shape &ptest, 
-                                                DShape &dptestdx) const=0;
-  
-
  /// \short Calculate the body force at a given time and local and/or 
  /// Eulerian position. This function is virtual so that it can be 
  /// overloaded in multi-physics elements where the body force might
@@ -799,6 +789,15 @@ public:
  virtual void pshape_nst(const Vector<double> &s, Shape &psi, 
                          Shape &test) const=0;
 
+ /// \short Compute the pressure shape and test functions and derivatives 
+ /// w.r.t. global coords at local coordinate s.
+ /// Return Jacobian of mapping between local and global coordinates.
+ virtual double dpshape_and_dptest_eulerian_nst(const Vector<double> &s, 
+                                                Shape &ppsi, 
+                                                DShape &dppsidx, 
+                                                Shape &ptest, 
+                                                DShape &dptestdx) const=0;
+  
  /// \short Velocity i at local node n. Uses suitably interpolated value 
  /// for hanging nodes. The use of u_index_nst() permits the use of this
  /// element as the basis for multi-physics elements. The default
@@ -1596,14 +1595,6 @@ class QCrouzeixRaviartElement : public virtual QElement<DIM,3>,
   RankFourTensor<double> &d_dtestdx_dX,
   DenseMatrix<double> &djacobian_dX) const;
 
- /// \short Pressure shape and test functions and their derivs 
- /// w.r.t. to global coords  at local coordinate s (taken from geometry)
- /// Return Jacobian of mapping between local and global coordinates.
- inline double dpshape_and_dptest_eulerian_nst(const Vector<double> &s, 
-                                             Shape &ppsi, 
-                                             DShape &dppsidx, 
-                                             Shape &ptest, 
-                                             DShape &dptestdx) const;
  
 public:
 
@@ -1641,6 +1632,14 @@ public:
  /// Return number of pressure values
  unsigned npres_nst() const {return DIM+1;} 
 
+ /// \short Pressure shape and test functions and their derivs 
+ /// w.r.t. to global coords  at local coordinate s (taken from geometry)
+ /// Return Jacobian of mapping between local and global coordinates.
+ inline double dpshape_and_dptest_eulerian_nst(const Vector<double> &s, 
+                                             Shape &ppsi, 
+                                             DShape &dppsidx, 
+                                             Shape &ptest, 
+                                             DShape &dptestdx) const;
 
  /// Return the local equation numbers for the pressure values.
  inline int p_local_eqn(const unsigned &n) const
@@ -2138,16 +2137,6 @@ class QTaylorHoodElement : public virtual QElement<DIM,3>,
   DShape &dtestdx,
   RankFourTensor<double> &d_dtestdx_dX,
   DenseMatrix<double> &djacobian_dX) const;
-
-
- /// \short Pressure shape and test functions and their derivs 
- /// w.r.t. to global coords  at local coordinate s (taken from geometry).
- /// Return Jacobian of mapping between local and global coordinates.
- inline double dpshape_and_dptest_eulerian_nst(const Vector<double> &s, 
-                                               Shape &ppsi, 
-                                               DShape &dppsidx, 
-                                               Shape &ptest, 
-                                               DShape &dptestdx) const;
  
   public:
 
@@ -2184,6 +2173,15 @@ class QTaylorHoodElement : public virtual QElement<DIM,3>,
  double p_nst(const unsigned &t, const unsigned &n_p) const
  {return this->nodal_value(t,Pconv[n_p],this->p_nodal_index_nst());}
  
+ /// \short Pressure shape and test functions and their derivs 
+ /// w.r.t. to global coords  at local coordinate s (taken from geometry).
+ /// Return Jacobian of mapping between local and global coordinates.
+ inline double dpshape_and_dptest_eulerian_nst(const Vector<double> &s, 
+                                               Shape &ppsi, 
+                                               DShape &dppsidx, 
+                                               Shape &ptest, 
+                                               DShape &dptestdx) const;
+
  /// Return number of pressure values
  unsigned npres_nst() const 
   {return static_cast<unsigned>(pow(2.0,static_cast<int>(DIM)));}

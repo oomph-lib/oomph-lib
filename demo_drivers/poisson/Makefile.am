@@ -1,4 +1,5 @@
 SUBDIRS = \
+poisson_with_singularity \
 one_d_poisson \
 one_d_poisson_generic_only \
 one_d_poisson_adapt \

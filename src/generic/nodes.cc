@@ -488,6 +488,44 @@ void Data::value(const unsigned& t, Vector<double>& values) const
  for(unsigned i=0;i<n_value;i++) {values[i] = value(t,i);}
 }
 
+
+
+//================================================================
+/// Assign (global) equation number. Overloaded version for nodes.
+/// Checks if a hanging value has a non-negative equation number
+/// and if so shouts and then sets it to Is_constrained. Then drops
+/// down to Data version which does the actual work
+//================================================================
+void Node::assign_eqn_numbers(unsigned long &global_number, 
+                              Vector<double *> &dof_pt)
+{
+
+ //Loop over the number of values
+ const unsigned eqn_number_range = nvalue();
+ for(unsigned i=0;i<eqn_number_range;i++)
+  {
+   // Is it hanging and not constrained or pinned? If so shout and constrain it
+   if((is_hanging(i)) && (!is_constrained(i)) && (!is_pinned(i)))
+    {
+#ifdef PARANOID
+     std::ostringstream warn_message;
+     warn_message 
+      << "Node::assign_eqn_numbers(...) noticed that " << i << " -th value\n"
+      << "is hanging but not constrained. This shouldn't happen and is\n"
+      << "probably because a hanging value was unpinned manually\n"
+      << "Rectifying this now...\n";
+     OomphLibWarning(warn_message.str(),
+                     OOMPH_CURRENT_FUNCTION,
+                     OOMPH_EXCEPTION_LOCATION);
+#endif
+     constrain(i);
+    }
+  }
+ // Now descend
+ Data::assign_eqn_numbers(global_number, dof_pt);
+}
+
+
 //=====================================================================
 /// If pointer parameter_pt addresses internal data values then return
 /// return true, otherwise return false

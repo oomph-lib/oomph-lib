@@ -1,4 +1,5 @@
 SUBDIRS = \
+navier_stokes_with_singularity \
 driven_cavity \
 adaptive_driven_cavity \
 hp_adaptive_driven_cavity \

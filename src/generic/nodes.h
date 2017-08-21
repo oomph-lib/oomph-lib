@@ -178,6 +178,7 @@ class Data
 
   public:
 
+
  /// \short Helper function that should be overloaded derived classes
  /// that contain copies of data. The function must
  /// unset (NULL out) the internal pointers to the copied data.
@@ -981,6 +982,11 @@ public:
  /// not data
  virtual bool does_pointer_correspond_to_position_data(
   double* const &parameter_pt) {return false;}
+
+ /// \short Assign global equation numbers; increment global number 
+ /// of unknowns, global_ndof; and add any new dofs to the dof_pt.
+ virtual void assign_eqn_numbers(unsigned long &global_ndof, 
+                                 Vector<double *> &dof_pt);
 
  /// \short Return (Eulerian) spatial dimension of the node.
  unsigned ndim() const {return Ndim;}

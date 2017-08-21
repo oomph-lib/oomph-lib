@@ -14,34 +14,36 @@ touch Validation
 rm -r -f Validation
 mkdir Validation
 
-# Validation for line visualiser adaptive rectangular driven cavity
-#------------------------------------------------------------------
+# Validation for demo poisson
+#----------------------------
 cd Validation
 
-echo "Running adaptive rectangular driven cavity line visualiser validation "
+echo "Running 2D demo poisson validation "
 mkdir RESLT
-../adaptive_driven_cavity > OUTPUT
+../two_d_poisson > OUTPUT_two_d_poisson
 echo "done"
 echo " " >> validation.log
-echo "Adaptive rectangular driven cavity line visualiser validation" >> validation.log
-echo "-------------------------------------------------------------" >> validation.log
+echo "2D demo poisson validation" >> validation.log
+echo "--------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat  RESLT/soln0.dat RESLT/soln1.dat \
- > results.dat
+cat RESLT/soln0.dat > two_d_poisson_results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../bin/fpdiff.py ../validata/results.dat.gz  \
-         results.dat >> validation.log
+../../../../bin/fpdiff.py ../validata/two_d_poisson_results.dat.gz   \
+    two_d_poisson_results.dat  >> validation.log
 fi
 
-# Append log to main validation log
-cat validation.log >> ../../../validation.log
+
+# Append output to global validation log file
+#--------------------------------------------
+cat validation.log >> ../../../../validation.log
+
 
 cd ..
 
