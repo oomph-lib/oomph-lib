@@ -39,7 +39,7 @@ else
 fi
 
 # Append log to main validation log
-cat validation.log >> ../../validation.log
+cat validation.log >> ../../../validation.log
 
 
 cd ..

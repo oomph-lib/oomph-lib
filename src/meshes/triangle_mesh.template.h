@@ -452,6 +452,10 @@ namespace oomph
   TriangleMesh(TriangleMeshParameters &triangle_mesh_parameters, 
                TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
    {
+
+    // Store the region target areas
+    Regions_areas=triangle_mesh_parameters.target_area_for_region();
+
     // Mesh can only be built with 2D Telements.
     MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
 
@@ -1284,6 +1288,10 @@ namespace oomph
 
  protected:
   
+  /// \short Target areas for regions; defaults to 0.0 which (luckily)
+  /// implies "no specific target area" for triangle!
+  std::map<unsigned, double> Regions_areas;
+
   // Stores the ids of the internal boundaries
   std::set<unsigned> Internal_boundaries;
   
@@ -3549,16 +3557,27 @@ namespace oomph
     unsigned count_refined=0;
     this->Nrefinement_overruled=0;
     
+    // Record max. area constraint set by region
+    std::map<FiniteElement*,double> max_area_from_region; 
+    for (std::map<unsigned, double>::iterator it=this->Regions_areas.begin();
+         it!=this->Regions_areas.end();it++)
+     {
+      unsigned r=(*it).first;
+      unsigned nel=this->nregion_element(r);
+      for(unsigned e=0;e<nel;e++)
+       {
+        max_area_from_region[this->region_element_pt(r,e)]=(*it).second;
+       }
+     }
+    
     unsigned nel=this->nelement();
     for (unsigned e=0;e<nel;e++)
     {
-      
      // Get element
      FiniteElement* el_pt=this->finite_element_pt(e);
       
      // Area 
      double area=el_pt->size();
-
 
      // Min angle based on vertex coordinates
      // (vertices are enumerated first)
@@ -3629,6 +3648,15 @@ namespace oomph
       double area_leave_alone = std::max(area,Min_element_size); 
       target_area[e] = std::min(area_leave_alone,Max_element_size); 
      }
+
+     // Enforce max areas from regions
+     std::map<FiniteElement*,double>::iterator it=
+      max_area_from_region.find(el_pt);
+     if (it!=max_area_from_region.end())
+      {
+       target_area[e]=std::min(target_area[e],(*it).second);
+      }
+
     }
       
     

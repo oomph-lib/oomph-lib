@@ -797,7 +797,6 @@ void HermiteBeamElement::output(const unsigned& t, std::ostream &outfile,
     }
    outfile << std::endl;
   }
- outfile << std::endl;
 }
 
 
@@ -901,8 +900,6 @@ void HermiteBeamElement::output(std::ostream &outfile, const unsigned &n_plot)
    outfile << sqrt(scalar_accel) << " ";
    outfile << std::endl;
   }
-
-  outfile << std::endl;
 }
 
 
@@ -960,8 +957,6 @@ void HermiteBeamElement::output(const unsigned& t, FILE* file_pt,
    //outfile << std::endl;
    fprintf(file_pt,"\n");
   }
- //outfile << std::endl;
- fprintf(file_pt,"\n");
 }
 
 
@@ -1074,8 +1069,6 @@ void HermiteBeamElement::output(FILE* file_pt, const unsigned &n_plot)
    //outfile << std::endl;
    fprintf(file_pt,"\n");
   }
- //outfile << std::endl;
- fprintf(file_pt,"\n");
 }
 
 

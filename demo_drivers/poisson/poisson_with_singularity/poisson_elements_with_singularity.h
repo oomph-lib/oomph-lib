@@ -276,9 +276,13 @@ class SingularPoissonSolutionElement : public virtual GeneralisedElement
     for (unsigned j=0;j<n_node;j++)
      {
       // Find the local equation number of the node
-      unsigned node_eqn_number = external_local_eqn(j,0);
-      // Add the contribution of the node to the local jacobian
-      jacobian(eqn_number,node_eqn_number) = dpsidx(j,*Direction_pt);
+      int node_eqn_number = external_local_eqn(j,0);
+      if (node_eqn_number>=0)
+       {
+       // Add the contribution of the node to the local jacobian
+       jacobian(eqn_number,node_eqn_number) = dpsidx(j,*Direction_pt);
+       }
+
      }
    }
   
@@ -869,9 +873,13 @@ class PoissonElementWithSingularity : public virtual BASIC_POISSON_ELEMENT
           for (unsigned i=0;i<n_sing;i++)
            {
             // Find the contribution of the additional unknowns to the jacobian
-            jacobian(local_eqn_number_boundary_node,
-                     local_equation_number_C[i]) += 
-             singular_function(i,global_coordinate_boundary_node);
+            int local_unknown=local_equation_number_C[i];
+            if (local_unknown>=0)
+             {
+              jacobian(local_eqn_number_boundary_node,
+                       local_unknown) += 
+               singular_function(i,global_coordinate_boundary_node);
+             }
            }
              
          }
