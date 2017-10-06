@@ -52,7 +52,7 @@ pml_helmholtz \
 axisym_linear_elasticity \
 acoustic_fsi \
 fourier_decomposed_acoustic_fsi \
-generalised_time_harmonic_linear_elasticity \
+pml_time_harmonic_linear_elasticity \
 deliberately_broken_doc_for_checking \
 acknowledgements \
 search_results

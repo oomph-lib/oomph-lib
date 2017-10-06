@@ -18,7 +18,7 @@ mkdir Validation
 #---------------------------------------------------
 cd Validation
 
-echo "Running generalised time-periodic linear elasticity "
+echo "Running PML time-harmonic linear elasticity "
 mkdir RESLT
 ../time_harmonic_elasticity_driver --l_pml 1.6 --n_pml 4 --max_adapt 0 --validation > OUTPUT_non_adapt
 echo "done"
@@ -42,12 +42,12 @@ mv RESLT RESLT_non_adapt
 
 # Validation for adaptive case - triangular mesh
 #-----------------------------------------------
-echo "Running adaptive generalised time-periodic linear elasticity "
+echo "Running adaptive PML time-harmonic linear elasticity "
 mkdir RESLT
 ../time_harmonic_elasticity_driver --l_pml 1.6 --n_pml 4 --max_adapt 1 --validation > OUTPUT_adapt
 echo "done"
 echo " " >> validation.log
-echo "Adaptive generalised time-periodic linear elasticity" >> validation.log
+echo "Adaptive PML time-harmonic linear elasticity" >> validation.log
 echo "---------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
@@ -66,12 +66,12 @@ mv RESLT RESLT_adapt
 
 # Validation for non-adaptive case - rectangular mesh
 #---------------------------------------------------
-echo "Running quad bulk element generalised time-periodic linear elasticity"
+echo "Running quad bulk element PML time-harmonic linear elasticity"
 mkdir RESLT
 ../time_harmonic_elasticity_driver_source --l_pml 4.0 --n_pml 4 --validation > OUTPUT_source
 echo "done"
 echo " " >> validation.log
-echo "Quad bulk element generalised time-periodic linear elasticity" >> validation.log
+echo "Quad bulk element PML time-harmonic linear elasticity" >> validation.log
 echo "-------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log

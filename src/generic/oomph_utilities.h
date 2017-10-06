@@ -51,6 +51,7 @@
 #include<cmath>
 #include<map>
 #include<ctime>
+#include<complex>
 
 //oomph-lib headers
 #include "Vector.h"
@@ -113,6 +114,9 @@ namespace MathematicalConstants
 {
  /// 50 digits from maple
  const double Pi=3.1415926535897932384626433832795028841971693993751;
+ 
+ /// The imaginary unit
+ const std::complex<double> I(0.0,1.0);
 }
 
 

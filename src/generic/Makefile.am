@@ -109,7 +109,7 @@ matrix_vector_product.h projection.h line_visualiser.h \
 Subparametric_Telements.h \
 sum_of_matrices.h implicit_midpoint_rule.h \
 trapezoid_rule.h \
-preconditioner_array.h pml_meshes.h \
+preconditioner_array.h pml_meshes.h pml_mapping_functions.h \
 generalised_timesteppers.h vector_matrix.h face_mesh_project.h \
 generalised_newtonian_constitutive_models.h \
 unstructured_two_d_mesh_geometry_base.h \

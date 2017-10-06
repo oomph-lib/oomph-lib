@@ -37,7 +37,7 @@
 
 //Oomph-lib includes
 #include "generic.h"
-#include "generalised_time_harmonic_linear_elasticity.h"
+#include "pml_time_harmonic_linear_elasticity.h"
 #include "oomph_crbond_bessel.h"
 
 //The meshes
@@ -112,7 +112,7 @@ namespace Global_Parameters
  double Omega_sq=30.0; 
   
  /// The elasticity tensor
- GeneralisedTimeHarmonicIsotropicElasticityTensor* E_pt;
+ PMLTimeHarmonicIsotropicElasticityTensor* E_pt;
  
  /// Thickness of annulus
  double H_annulus=0.5;
@@ -531,10 +531,10 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::complete_problem_setup()
  unsigned nel=this->mesh_pt()->nelement();
  for (unsigned e=0;e<nel;e++)
   {     
-   /// \short Upcast from GeneralisedElement to time harmonic 
+   /// \short Upcast from PMLElement to time harmonic 
    /// linear elasticity bulk element
-   GeneralisedTimeHarmonicLinearElasticityEquations<2> *el_pt = 
-    dynamic_cast<GeneralisedTimeHarmonicLinearElasticityEquations<2>*>
+   PMLTimeHarmonicLinearElasticityEquations<2> *el_pt = 
+    dynamic_cast<PMLTimeHarmonicLinearElasticityEquations<2>*>
     (mesh_pt()->element_pt(e));
    
    // Set the constitutive law
@@ -917,7 +917,7 @@ int main(int argc, char **argv)
  doc_info.set_directory(Global_Parameters::Directory);
 
  // Build elasticity tensor
- Global_Parameters::E_pt=new GeneralisedTimeHarmonicIsotropicElasticityTensor(
+ Global_Parameters::E_pt=new PMLTimeHarmonicIsotropicElasticityTensor(
     Global_Parameters::Nu);
 
 
@@ -925,14 +925,14 @@ int main(int argc, char **argv)
 
  //Set up the problem
  ElasticAnnulusProblem<
- ProjectableGeneralisedTimeHarmonicLinearElasticityElement
-  <TGeneralisedTimeHarmonicLinearElasticityElement<2,3> > 
+ ProjectablePMLTimeHarmonicLinearElasticityElement
+  <TPMLTimeHarmonicLinearElasticityElement<2,3> > 
  > problem;
 
 #else
 
  //Set up the problem
- ElasticAnnulusProblem<TGeneralisedTimeHarmonicLinearElasticityElement<2,3> > 
+ ElasticAnnulusProblem<TPMLTimeHarmonicLinearElasticityElement<2,3> > 
   problem;
 
 #endif

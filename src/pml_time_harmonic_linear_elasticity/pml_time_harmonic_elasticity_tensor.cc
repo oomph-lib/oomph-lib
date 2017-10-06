@@ -28,7 +28,7 @@
 //LIC// 
 //LIC//====================================================================
 //Non-inline function for the Elasticity Tensor
-#include "generalised_time_harmonic_elasticity_tensor.h"
+#include "pml_time_harmonic_elasticity_tensor.h"
 
 namespace oomph
 {
@@ -57,7 +57,7 @@ namespace oomph
                             19 & E_{2333} \\
                             20 & E_{3333} 
                             \end{array}\f] **/
- const unsigned GeneralisedTimeHarmonicElasticityTensor::Index[3][3][3][3] = 
+ const unsigned PMLTimeHarmonicElasticityTensor::Index[3][3][3][3] = 
  {
   {{{0,1,6},{1,2,7},{6,7,8}},
    {{1,3,9},{3,4,10},{9,10,11}},
@@ -74,7 +74,7 @@ namespace oomph
 
 
  ///\short Translation scheme for the isotropic elasticity tensor
- const unsigned GeneralisedTimeHarmonicIsotropicElasticityTensor::StaticIndex[21] =
+ const unsigned PMLTimeHarmonicIsotropicElasticityTensor::StaticIndex[21] =
  {1,0,2,3,0,1,0,0,2,0,0,0,3,0,0,0,0,2,3,0,1};
 
 }

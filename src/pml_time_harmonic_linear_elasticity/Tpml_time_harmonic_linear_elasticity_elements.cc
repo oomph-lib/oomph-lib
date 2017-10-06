@@ -28,7 +28,7 @@
 //LIC// 
 //LIC//====================================================================
 //Non-inline functions for Linear elasticity elements
-#include "Tgeneralised_time_harmonic_linear_elasticity_elements.h"
+#include "Tpml_time_harmonic_linear_elasticity_elements.h"
 
 
 namespace oomph
@@ -37,20 +37,20 @@ namespace oomph
 
 
 /////////////////////////////////////////////////////////////////////////
-// TGeneralisedTimeHarmonicLinearElasticityElement
+// TPMLTimeHarmonicLinearElasticityElement
 /////////////////////////////////////////////////////////////////////////
 
 
 //====================================================================
 // Force build of templates
 //====================================================================
-template class TGeneralisedTimeHarmonicLinearElasticityElement<2,2>;
-template class TGeneralisedTimeHarmonicLinearElasticityElement<2,3>;
-template class TGeneralisedTimeHarmonicLinearElasticityElement<2,4>;
+template class TPMLTimeHarmonicLinearElasticityElement<2,2>;
+template class TPMLTimeHarmonicLinearElasticityElement<2,3>;
+template class TPMLTimeHarmonicLinearElasticityElement<2,4>;
 
-template class TGeneralisedTimeHarmonicLinearElasticityElement<3,2>;
-template class TGeneralisedTimeHarmonicLinearElasticityElement<3,3>;
+template class TPMLTimeHarmonicLinearElasticityElement<3,2>;
+template class TPMLTimeHarmonicLinearElasticityElement<3,3>;
 // no integration scheme for this one yet...
-// template class TGeneralisedTimeHarmonicLinearElasticityElement<3,4>;
+// template class TPMLTimeHarmonicLinearElasticityElement<3,4>;
 
 }

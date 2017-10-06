@@ -340,6 +340,25 @@ class PMLLayerElement<TPMLHelmholtzElement<2,NNODE_1D> > :
 
 };
 
+//=======================================================================
+/// Face geometry for the TPMLHelmholtzElement elements: The spatial 
+/// dimension of the face elements is one lower than that of the
+/// bulk element but they have the same number of points
+/// along their 1D edges.
+//=======================================================================
+template<unsigned DIM, unsigned NNODE_1D>
+class FaceGeometry<PMLLayerElement<TPMLHelmholtzElement<DIM,NNODE_1D> > >: 
+ public virtual QElement<DIM-1,NNODE_1D>
+{
+
+  public:
+ 
+ /// \short Constructor: Call the constructor for the
+ /// appropriate lower-dimensional TElement
+ FaceGeometry() : QElement<DIM-1,NNODE_1D>() {}
+
+};
+
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -364,6 +383,7 @@ class PMLLayerElement<ProjectablePMLHelmholtzElement
 };
 
 }
+
 
 
 #endif

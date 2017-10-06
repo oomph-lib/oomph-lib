@@ -260,7 +260,7 @@ ranges from roughly \f$ 10.0 \f$ to \f$ 50.0 \f$.
 
 The finite-element-discretised equations
 (modified by the PML terms discussed above) are implemented in 
-the \c GeneralisedTimeHarmonicLinearElasticityEquations<DIM> class which is templated
+the \c PMLTimeHarmonicLinearElasticityEquations<DIM> class which is templated
 by the spatial dimension, \c DIM.  As usual, we provide 
 fully functional elements by combining these with geometric
 finite elements (from the Q and T families -- corresponding (in 2D)
@@ -272,7 +272,7 @@ set to 1.
 boundaries of a given bulk mesh is facilitated by helper
 functions which automatically erect layers of (quadrilateral)
 PML elements. The layers are built from 
-\c QGeneralisedTimeHarmonicLinearElasticityElement<2,NNODE_1D> elements and
+\c QPMLTimeHarmonicLinearElasticityElement<2,NNODE_1D> elements and
 the parameter \c NNODE_1D is automatically chosen to match that of
 the elements in the bulk mesh. The bulk mesh can contain quads or triangles
 (as shown in the specific example presented below).
@@ -316,14 +316,14 @@ boundaries and 3D is straightforward (if tedious) to implement
 Within \c oomph-lib, the non-dimensional version of equations 
 (@R[nondimeqn]@) with 
 the constitutive equations (@R[nondimconstitutive]@) are implemented 
-in the \c GeneralisedTimeHarmonicLinearElasticityEquations<DIM> equations 
+in the \c PMLTimeHarmonicLinearElasticityEquations<DIM> equations 
 class, where the template parameter \c DIM indicates the spatial dimension. 
 Following our usual approach, discussed in the
 <A HREF="../../../doc/quick_guide/html/index.html"> (Not-So-)Quick
 Guide,</A> this equation class is then combined with a geometric finite
 element to form a fully-functional finite element. 
 For instance, the combination of the 
-\c GeneralisedTimeHarmonicLinearElasticityEquations<2>
+\c PMLTimeHarmonicLinearElasticityEquations<2>
 class with the geometric finite element \c QElement<2,3> yields a nine-node 
 quadrilateral element. As usual, the mapping 
 between local and global (Eulerian) coordinates within an element is given by,
@@ -622,7 +622,7 @@ clock time and number of degrees of freedom.
 \section comm_ex Comments and Exercises
 
 \subsection comments Comments
-- If you inspect the <A HREF="../../../demo_drivers/generalised_time_harmonic_linear_elasticity/time_harmonic_elasticity_driver.cc">driver code</a>
+- If you inspect the <A HREF="../../../demo_drivers/pml_time_harmonic_linear_elasticity/time_harmonic_elasticity_driver.cc">driver code</a>
   you will notice that it also contains relevant code to perform 
   spatially adaptive simulations of the problem -- the adaptive
   version of the code is selected with \c \#ifdefs.
@@ -705,14 +705,14 @@ methodologies to
 \section sources Source files for this tutorial
 - The source files for this tutorial are located in the directory:
 <CENTER>
-<A HREF="../../../demo_drivers/generalised_time_harmonic_linear_elasticity/">
-demo_drivers/generalised_time_harmonic_linear_elasticity/
+<A HREF="../../../demo_drivers/pml_time_harmonic_linear_elasticity/">
+demo_drivers/pml_time_harmonic_linear_elasticity/
 </A>
 </CENTER>
 - The driver code is: 
 <CENTER>
-<A HREF="../../../demo_drivers/generalised_time_harmonic_linear_elasticity/time_harmonic_elasticity_driver.cc">
-demo_drivers/generalised_time_harmonic_linear_elasticity/time_harmonic_elasticity_driver.cc
+<A HREF="../../../demo_drivers/pml_time_harmonic_linear_elasticity/time_harmonic_elasticity_driver.cc">
+demo_drivers/pml_time_harmonic_linear_elasticity/time_harmonic_elasticity_driver.cc
 </A>
 </CENTER>
 .

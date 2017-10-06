@@ -30,7 +30,7 @@
 // Non-inline functions for elements that solve the equations of linear
 // elasticity in cartesian coordinates
 
-#include "generalised_time_harmonic_linear_elasticity_elements.h"
+#include "pml_time_harmonic_linear_elasticity_elements.h"
 
 
 namespace oomph
@@ -38,7 +38,7 @@ namespace oomph
 
 /// Static default value for square of frequency
  template <unsigned DIM>
- double GeneralisedTimeHarmonicLinearElasticityEquationsBase<DIM>::
+ double PMLTimeHarmonicLinearElasticityEquationsBase<DIM>::
  Default_omega_sq_value=1.0;
  
 
@@ -50,7 +50,7 @@ namespace oomph
 /// Compute the strain tensor at local coordinate s
 //======================================================================
  template<unsigned DIM>
- void GeneralisedTimeHarmonicLinearElasticityEquationsBase<DIM>::get_strain(
+ void PMLTimeHarmonicLinearElasticityEquationsBase<DIM>::get_strain(
   const Vector<double> &s,
   DenseMatrix<std::complex<double> >& strain) const
  {
@@ -72,7 +72,7 @@ namespace oomph
   if(n_position_type != 1)
    {
     std::ostringstream error_message;
-    error_message << "GeneralisedTimeHarmonicLinearElasticity is not yet " 
+    error_message << "PMLTimeHarmonicLinearElasticity is not yet " 
                   << "implemented for more than one position type" 
                   <<  std::endl;
     throw OomphLibError(error_message.str(),
@@ -159,7 +159,7 @@ namespace oomph
 /// displacement formulation.
 //======================================================================
 template<unsigned DIM>
-void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::
+void PMLTimeHarmonicLinearElasticityEquations<DIM>::
 get_stress(const Vector<double> &s,
            DenseMatrix<std::complex<double> >&stress) const
 {
@@ -204,11 +204,11 @@ get_stress(const Vector<double> &s,
 /// Compute the residuals for the linear elasticity equations in 
 /// cartesian coordinates. Flag indicates if we want Jacobian too.
 //=======================================================================
- template <unsigned DIM>
- void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::
- fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
+template <unsigned DIM>
+void PMLTimeHarmonicLinearElasticityEquations<DIM>::
+fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
   Vector<double> &residuals, DenseMatrix<double> &jacobian,unsigned flag)
- {
+{
   //Find out how many nodes there are
   unsigned n_node = this->nnode();
   
@@ -219,7 +219,7 @@ get_stress(const Vector<double> &s,
   if(n_position_type != 1)
    {
     std::ostringstream error_message;
-    error_message << "GeneralisedTimeHarmonicLinearElasticity is not yet " 
+    error_message << "PMLTimeHarmonicLinearElasticity is not yet " 
                   << "implemented for more than one position type" 
                   <<  std::endl;
     throw OomphLibError(error_message.str(),
@@ -320,21 +320,19 @@ get_stress(const Vector<double> &s,
     this->body_force(interpolated_x,b);
     
     //Premultiply the weights and the Jacobian
-    double W = w*J; 
+    double W = w*J;
 
-   // Declare a vector of complex numbers for pml weights on the Laplace bit
-   Vector< std::complex<double> > pml_stiffness_weight(DIM);
-   // Declare a complex number for pml weights on the mass matrix bit
-   std::complex<double> pml_mass_weight = std::complex<double>(1.0,0.0);
 
-   /// \short All the PML weights that participate in the assemby process 
-   /// are computed here. pml_stiffness_weight will contain the entries
-   /// for the stiffness bit, while pml_mass_weight contains the contributions
-   /// to the mass bit. Both default to 1.0, should the PML not be 
-   /// enabled via enable_pml.
-   compute_pml_coefficients(ipt, interpolated_x, 
-                            pml_stiffness_weight, 
-                            pml_mass_weight); 
+    /// \short All the PML weights that participate in the assemby process 
+    /// are computed here. pml_stiffness_weight will contain the entries
+    /// which modify the terms from the Laplace operators, while 
+    /// pml_mass_weight contains the contributions 
+    /// to the mass bit. Both default to 1.0, should the PML not be 
+    /// enabled via enable_pml.
+    Vector< std::complex<double> > pml_stiffness_weight(DIM);
+    std::complex<double> pml_mass_weight = std::complex<double>(1.0,0.0);
+    this->compute_pml_coefficients(ipt, interpolated_x, pml_stiffness_weight, 
+                                   pml_mass_weight); 
     
 //=====EQUATIONS OF LINEAR ELASTICITY ========
     
@@ -554,7 +552,7 @@ get_stress(const Vector<double> &s,
 /// Output exact solution x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
 //=======================================================================
  template <unsigned DIM>
- void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::output_fct(
+ void PMLTimeHarmonicLinearElasticityEquations<DIM>::output_fct(
   std::ostream &outfile, 
   const unsigned &nplot, 
   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
@@ -608,13 +606,13 @@ get_stress(const Vector<double> &s,
 /// Output: x,y,[z],u,v,[w]
 //=======================================================================
  template <unsigned DIM>
- void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::output(
+ void PMLTimeHarmonicLinearElasticityEquations<DIM>::output(
   std::ostream &outfile, const unsigned &nplot)
  {
-  //Set output Vector
-  Vector<double> s(DIM);
-  Vector<double> x(DIM);
-  Vector<std::complex<double> > u(DIM);
+   // Initialise local coord, global coord and solution vectors
+   Vector<double> s(DIM);
+   Vector<double> x(DIM);
+   Vector<std::complex<double> > u(DIM);
   
   // Tecplot header info
   outfile << this->tecplot_zone_string(nplot);
@@ -651,13 +649,192 @@ get_stress(const Vector<double> &s,
  }
  
 
+//======================================================================
+/// Output function for real part of full time-dependent solution
+/// constructed by adding the scattered field
+///
+///  u = Re( (u_r +i u_i) exp(-i omega t)
+///
+/// at phase angle omega t = phi computed here, to the corresponding
+/// incoming wave specified via the function pointer.
+///
+///   x,y,u   or    x,y,z,u
+///
+/// Output at nplot points in each coordinate direction
+//======================================================================
+template <unsigned DIM>
+void  PMLTimeHarmonicLinearElasticityEquations<DIM>::output_total_real(
+ std::ostream &outfile,
+ FiniteElement::SteadyExactSolutionFctPt incoming_wave_fct_pt,
+ const double& phi,
+ const unsigned &nplot)
+{
+
+  // Initialise local coord, global coord and solution vectors
+  Vector<double> s(DIM);
+  Vector<double> x(DIM);
+  Vector<std::complex<double> > u(DIM);
+
+  // Real and imag part of incoming wave
+  Vector<double> incoming_soln(2*DIM);
+
+  // Tecplot header info
+  outfile << this->tecplot_zone_string(nplot);
+
+  // Loop over plot points
+  unsigned num_plot_points=this->nplot_points(nplot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+    // Get local coordinates of plot point
+    this->get_s_plot(iplot,nplot,s);
+
+    // Get Eulerian coordinates and displacements
+    this->interpolated_x(s,x);
+    this->interpolated_u_time_harmonic_linear_elasticity(s,u);
+
+    // Get exact solution at this point
+    (*incoming_wave_fct_pt)(x,incoming_soln);
+
+    //Output the x,y,..
+    for(unsigned i=0;i<DIM;i++) 
+    {outfile << x[i] << " ";}
+
+    // Output u,v,..
+    for(unsigned i=0;i<DIM;i++) 
+    {
+      outfile << (u[i].real()+incoming_soln[2*i])*cos(phi)+
+                 (u[i].imag()+incoming_soln[2*i+1])*sin(phi) << " ";
+    }
+
+    outfile << std::endl;
+
+  }
+
+  // Write tecplot footer (e.g. FE connectivity lists)
+  this->write_tecplot_zone_footer(outfile,nplot);
+
+}
+
+//======================================================================
+/// Output function for imaginary part of full time-dependent solution
+///
+///  u = Im( (u_r +i u_i) exp(-i omega t))
+///
+/// at phase angle omega t = phi.
+///
+///   x,y,u   or    x,y,z,u
+///
+/// Output at nplot points in each coordinate direction
+//======================================================================
+template <unsigned DIM>
+void  PMLTimeHarmonicLinearElasticityEquations<DIM>
+  ::output_real(std::ostream &outfile,
+                const double& phi,
+                const unsigned &nplot)
+{
+
+  // Initialise local coord, global coord and solution vectors
+  Vector<double> s(DIM);
+  Vector<double> x(DIM);
+  Vector<std::complex<double> > u(DIM);
+
+  // Tecplot header info
+  outfile << this->tecplot_zone_string(nplot);
+
+  // Loop over plot points
+  unsigned num_plot_points=this->nplot_points(nplot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+
+    // Get local coordinates of plot point
+    this->get_s_plot(iplot,nplot,s);
+
+    // Get Eulerian coordinates and displacements
+    this->interpolated_x(s,x);
+    this->interpolated_u_time_harmonic_linear_elasticity(s,u);
+
+    //Output the x,y,..
+    for(unsigned i=0;i<DIM;i++) 
+    {outfile << x[i] << " ";}
+
+    // Output u,v,..
+    for(unsigned i=0;i<DIM;i++) 
+    {
+      outfile << u[i].real()*cos(phi)+ u[i].imag()*sin(phi) << " ";
+    }
+
+    outfile << std::endl;
+
+  }
+
+  // Write tecplot footer (e.g. FE connectivity lists)
+  this->write_tecplot_zone_footer(outfile,nplot);
+
+}
+
+//======================================================================
+/// Output function for imaginary part of full time-dependent solution
+///
+///  u = Im( (u_r +i u_i) exp(-i omega t))
+///
+/// at phase angle omega t = phi.
+///
+///   x,y,u   or    x,y,z,u
+///
+/// Output at nplot points in each coordinate direction
+//======================================================================
+template <unsigned DIM>
+void  PMLTimeHarmonicLinearElasticityEquations<DIM>
+  ::output_imag(std::ostream &outfile,
+                const double& phi,
+                const unsigned &nplot)
+{
+
+  // Initialise local coord, global coord and solution vectors
+  Vector<double> s(DIM);
+  Vector<double> x(DIM);
+  Vector<std::complex<double> > u(DIM);
+
+  // Tecplot header info
+  outfile << this->tecplot_zone_string(nplot);
+
+  // Loop over plot points
+  unsigned num_plot_points=this->nplot_points(nplot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+
+    // Get local coordinates of plot point
+    this->get_s_plot(iplot,nplot,s);
+
+    // Get Eulerian coordinates and displacements
+    this->interpolated_x(s,x);
+    this->interpolated_u_time_harmonic_linear_elasticity(s,u);
+
+    //Output the x,y,..
+    for(unsigned i=0;i<DIM;i++) 
+    {outfile << x[i] << " ";}
+
+    // Output u,v,..
+    for(unsigned i=0;i<DIM;i++) 
+    {
+      outfile << u[i].imag()*cos(phi)- u[i].real()*sin(phi) << " ";
+    }
+
+    outfile << std::endl;
+
+  }
+
+  // Write tecplot footer (e.g. FE connectivity lists)
+  this->write_tecplot_zone_footer(outfile,nplot);
+
+}
 
 
 //=======================================================================
 /// C-style output: x,y,[z],u,v,[w]
 //=======================================================================
 template <unsigned DIM>
-void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::output(
+void PMLTimeHarmonicLinearElasticityEquations<DIM>::output(
  FILE* file_pt, const unsigned &nplot)
 {
  //Vector of local coordinates
@@ -703,7 +880,7 @@ void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::output(
 /// Compute norm of the solution
 //=======================================================================
 template <unsigned DIM>
-void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::compute_norm(
+void PMLTimeHarmonicLinearElasticityEquations<DIM>::compute_norm(
  double& norm)
 {
  
@@ -764,7 +941,7 @@ void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::compute_norm(
  ///
 //======================================================================
 template <unsigned DIM>
-void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::compute_error(
+void PMLTimeHarmonicLinearElasticityEquations<DIM>::compute_error(
  std::ostream &outfile, 
  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
  double& error, double& norm)
@@ -837,13 +1014,15 @@ void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::compute_error(
  
  
 //Instantiate the required elements
-template class GeneralisedTimeHarmonicLinearElasticityEquationsBase<2>;
-template class GeneralisedTimeHarmonicLinearElasticityEquations<2>;
+template class PMLTimeHarmonicLinearElasticityEquationsBase<2>;
+template class PMLTimeHarmonicLinearElasticityEquations<2>;
 
-template class QGeneralisedTimeHarmonicLinearElasticityElement<3,3>;
-template class GeneralisedTimeHarmonicLinearElasticityEquationsBase<3>;
-template class GeneralisedTimeHarmonicLinearElasticityEquations<3>;
+template class QPMLTimeHarmonicLinearElasticityElement<3,3>;
+template class PMLTimeHarmonicLinearElasticityEquationsBase<3>;
+template class PMLTimeHarmonicLinearElasticityEquations<3>;
 
+template<unsigned DIM> ContinuousBermudezPMLMapping 
+  PMLTimeHarmonicLinearElasticityEquationsBase<DIM>::Default_pml_mapping;
 
 
 }

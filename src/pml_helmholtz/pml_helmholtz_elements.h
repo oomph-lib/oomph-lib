@@ -46,6 +46,7 @@
 #include "../generic/oomph_utilities.h"
 #include "../generic/pml_meshes.h"
 #include "../generic/projection.h"
+#include "../generic/pml_mapping_functions.h"
 
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
@@ -53,61 +54,6 @@
 
 namespace oomph
 {
- //=======================================================================
- /// Class to hold the mapping function for the PML
- ///
- //=======================================================================
- class PMLMapping
- {
-
- public:
-
-  /// Default constructor (empty)
-  PMLMapping(){};
-
-  /// \short Pure virtual to return PML mapping gamma, where gamma is the
-  /// \f$d\tilde x / d x\f$ as  function of \f$\nu\f$ where \f$\nu = x - h\f$ where h is
-  /// the vector from the origin to the start of the PML
-  virtual std::complex<double> gamma(const double& nu_i,
-				     const double& pml_width_i,
-				     const double& k_squared_local,
-				     const double& alpha_shift=0.0) = 0;
-
- };
-
- //=======================================================================
- /// The mapping function propsed by Bermudez et al, appears to be the best
- /// and so this will be the default mapping (see definition of
- /// PMLHelmholtzEquations)
- //=======================================================================
- class BermudezPMLMapping : public PMLMapping
- {
-
- public:
-
-  /// Default constructor (empty)
-  BermudezPMLMapping(){};
-
-  /// \short Overwrite the pure PML mapping coefficient function to return the
-  /// coeffcients proposed by Bermudez et al
-  std::complex<double> gamma(const double& nu_i,
-			     const double& pml_width_i,
-			     const double& k_squared_local,
-			     const double& alpha_shift=0.0)
-   {
-    /// \short return \f$\gamma=1 + (1/k)(i/|outer_boundary - x|)\f$ or more
-    /// abstractly \f$\gamma = 1 + \frac i {k\delta_{pml}}(1/|1-\bar\nu|)\f$
-    return 1.0 + (1.0 / std::complex<double> (sqrt(k_squared_local), 0))
-     * std::complex<double>
-     (0.0, 1.0/(std::fabs(pml_width_i - nu_i)));
-   }
-
- };
-
-
- ////////////////////////////////////////////////////////////////////////
- ////////////////////////////////////////////////////////////////////////
- ////////////////////////////////////////////////////////////////////////
 
 //=============================================================
 /// A class for all isoparametric elements that solve the
@@ -120,7 +66,6 @@ namespace oomph
   public virtual PMLElementBase<DIM>,
   public virtual FiniteElement
  {
-
  public:
 
   /// \short Function pointer to source function fct(x,f(x)) --

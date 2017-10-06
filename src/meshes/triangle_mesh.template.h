@@ -1265,7 +1265,14 @@ namespace oomph
   bool Triangulateio_exists;
   
 #endif // OOMPH_HAS_TRIANGLE_LIB
-    
+  
+  /// \short Target areas for regions; defaults to 0.0 which (luckily)
+  /// implies "no specific target area" for triangle!
+  std::map<unsigned, double> Regions_areas;
+
+  // Stores the ids of the internal boundaries
+  std::set<unsigned> Internal_boundaries;
+  
   /// Temporary scaffold mesh
   TriangleScaffoldMesh* Tmp_mesh_pt;
     
@@ -1287,13 +1294,6 @@ namespace oomph
   
 
  protected:
-  
-  /// \short Target areas for regions; defaults to 0.0 which (luckily)
-  /// implies "no specific target area" for triangle!
-  std::map<unsigned, double> Regions_areas;
-
-  // Stores the ids of the internal boundaries
-  std::set<unsigned> Internal_boundaries;
   
 /*   // \short Stores the initial arclength for the segments that appear when */
 /*   // a boundary is splited among processors (data from previous mesh) */

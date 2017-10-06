@@ -30,8 +30,8 @@
 //Header file for refineable linear elasticity elements
 
 //Include guard to prevent multiple inclusions of this header
-#ifndef OOMPH_REFINEABLE_LINEAR_ELASTICITY_ELEMENTS_HEADER
-#define OOMPH_REFINEABLE_LINEAR_ELASTICITY_ELEMENTS_HEADER
+#ifndef OOMPH_REFINEABLE_TIME_HARMONIC_LINEAR_ELASTICITY_ELEMENTS_HEADER
+#define OOMPH_REFINEABLE_TIME_HARMONIC_LINEAR_ELASTICITY_ELEMENTS_HEADER
 
 //oomph-lib headers
 #include "time_harmonic_linear_elasticity_elements.h"

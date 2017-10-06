@@ -12,7 +12,7 @@ time_harmonic_elasticity_driver_source_SOURCES = time_harmonic_elasticity_driver
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-time_harmonic_elasticity_driver_source_LDADD = -L@libdir@ -lgeneralised_time_harmonic_linear_elasticity -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+time_harmonic_elasticity_driver_source_LDADD = -L@libdir@ -lpml_time_harmonic_linear_elasticity -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #--------------------------------------
 
@@ -21,7 +21,7 @@ time_harmonic_elasticity_driver_SOURCES = time_harmonic_elasticity_driver.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-time_harmonic_elasticity_driver_LDADD = -L@libdir@ -lgeneralised_time_harmonic_linear_elasticity -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+time_harmonic_elasticity_driver_LDADD = -L@libdir@ -lpml_time_harmonic_linear_elasticity -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #--------------------------------------
 

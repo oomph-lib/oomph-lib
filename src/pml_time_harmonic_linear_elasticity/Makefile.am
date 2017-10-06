@@ -4,17 +4,17 @@
 
 # Define the sources
 sources =  \
-generalised_time_harmonic_elasticity_tensor.cc generalised_time_harmonic_linear_elasticity_elements.cc \
-Tgeneralised_time_harmonic_linear_elasticity_elements.cc
+pml_time_harmonic_elasticity_tensor.cc pml_time_harmonic_linear_elasticity_elements.cc \
+Tpml_time_harmonic_linear_elasticity_elements.cc
 
 # Include files which shouldn't be compiled
 incl_cc_files =
 
 # Define the headers
 headers =  \
-generalised_time_harmonic_elasticity_tensor.h generalised_time_harmonic_linear_elasticity_elements.h \
-generalised_time_harmonic_linear_elasticity_traction_elements.h \
-Tgeneralised_time_harmonic_linear_elasticity_elements.h
+pml_time_harmonic_elasticity_tensor.h pml_time_harmonic_linear_elasticity_elements.h \
+pml_time_harmonic_linear_elasticity_traction_elements.h \
+Tpml_time_harmonic_linear_elasticity_elements.h
 
 
 # Template only files. These should be included in include directory
@@ -22,18 +22,18 @@ Tgeneralised_time_harmonic_linear_elasticity_elements.h
 templates = 
 
 # Define name of library
-libname = generalised_time_harmonic_linear_elasticity
+libname = pml_time_harmonic_linear_elasticity
 
 # Combine headers and sources
 headers_and_sources = $(headers) $(sources)
 
 # Define the library that gets placed in lib directory
 #-----------------------------------------------------
-lib_LTLIBRARIES = libgeneralised_time_harmonic_linear_elasticity.la
+lib_LTLIBRARIES = libpml_time_harmonic_linear_elasticity.la
 
 # Sources that the library depends on: 
 #-------------------------------------
-libgeneralised_time_harmonic_linear_elasticity_la_SOURCES = $(headers_and_sources)
+libpml_time_harmonic_linear_elasticity_la_SOURCES = $(headers_and_sources)
 
 # The library's include headers:
 #-------------------------------
@@ -43,7 +43,7 @@ libgeneralised_time_harmonic_linear_elasticity_la_SOURCES = $(headers_and_source
 include_HEADERS = $(libname).h 
 
 #Here's the subdirectory where the actual header files are placed
-library_includedir=$(includedir)/generalised_time_harmonic_linear_elasticity
+library_includedir=$(includedir)/pml_time_harmonic_linear_elasticity
 
 #These are the header files that are to be placed in subdirectory
 library_include_HEADERS=$(headers) $(incl_cc_files) $(templates)
