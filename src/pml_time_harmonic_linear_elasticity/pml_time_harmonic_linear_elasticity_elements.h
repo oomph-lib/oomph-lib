@@ -312,88 +312,77 @@ public:
  }
 
  /// \short Compute pml coefficients at position x and integration point ipt.
- /// pml_stiffness_weight is used in the same way as an anisotropic stiffness,
- /// similarly pml_mass_weight acts like a mass factor
+ /// pml_inverse_jacobian_diagonal contains the diagonal terms from the inverse
+ /// of the Jacobian of the PML transformation. These are used to transform
+ /// derivatives in real x to derivatives in transformed space \f$\tilde x \f$.
+ /// This can be interpreted as an anisotropic stiffness.
+ /// pml_jacobian_det is the determinant of the Jacobian of the PML 
+ /// transformation, this allows us to transform volume integrals in 
+ /// transformed space to real space.
+ /// This can be interpreted as a mass factor
+ /// If the PML is not enabled via enable_pml, both default to 1.0.
  void compute_pml_coefficients(
   const unsigned& ipt,
   const Vector<double>& x,
-  Vector< std::complex<double> >& pml_stiffness_weight,
-  std::complex<double>& pml_mass_weight)
+  Vector< std::complex<double> >& pml_inverse_jacobian_diagonal,
+  std::complex<double>& pml_jacobian_det)
  {
-   /// Vector which points from the inner boundary to x
-   Vector<double> nu(DIM);
+   /// \short The factors all default to 1.0 if the propagation
+   /// medium is the physical domain (no PML transformation)
    for(unsigned k=0; k<DIM; k++)
    {
-     nu[k] = x[k] - this->Pml_inner_boundary[k];
+     pml_inverse_jacobian_diagonal[k] = std::complex<double> (1.0,0.0);
    }
+   pml_jacobian_det = std::complex<double> (1.0,0.0);
 
-   /// Vector which points from the inner boundary to the edge of the boundary
-   Vector<double> pml_width(DIM);
-   for(unsigned k=0; k<DIM; k++)
-   {
-     pml_width[k] = this->Pml_outer_boundary[k] - this->Pml_inner_boundary[k];
-   }
-
+   // Only calculate PML factors if PML is enabled
    if (this->Pml_is_enabled)
    {
-     // If the Pml_mapping_pt is set, we use the uniaxial mapping
-     if (this->Pml_mapping_pt != 0)
+     /// Vector which points from the inner boundary to x
+     Vector<double> nu(DIM);
+     for(unsigned k=0; k<DIM; k++)
      {
-       // Declare gamma_i vectors of complex numbers for PML weights
-       Vector<std::complex<double> > pml_gamma(DIM);
-
-       /// 
-       double wavenumber_squared = 2.0*(1.0+this->nu()) * this->omega_sq();
-
-       for(unsigned k=0; k<DIM; k++) {
-         // If PML is enabled in the respective direction
-         if (this->Pml_direction_active[k])
-         {
-           pml_gamma[k] = Pml_mapping_pt->gamma(nu[k], pml_width[k],
-                                                wavenumber_squared);
-         }
-         else
-         {
-           pml_gamma[k] = 1.0;
-         }
-       }
-
-       /// \short  for 2D, in order:
-       /// g_y/g_x, g_x/g_y for Laplace factor and g_x*g_y for Helmholtz factor
-       /// for 3D, in order: g_y*g_x/g_x, g*x*g_z/g_y, g_x*g_y/g_z for Laplace
-       /// factor and g_x*g_y*g_z for Helmholtz factor
-       if (DIM == 2)
-       {
-         pml_stiffness_weight[0] = pml_gamma[1] / pml_gamma[0];
-         pml_stiffness_weight[1] = pml_gamma[0] / pml_gamma[1];
-         pml_mass_weight = pml_gamma[0] * pml_gamma[1];
-       }
-       else // if (DIM == 3)
-       {
-         pml_stiffness_weight[0] = pml_gamma[1] * pml_gamma[2] / pml_gamma[0];
-         pml_stiffness_weight[1] = pml_gamma[0] * pml_gamma[2] / pml_gamma[1];
-         pml_stiffness_weight[2] = pml_gamma[0] * pml_gamma[1] / pml_gamma[2];
-         pml_mass_weight = pml_gamma[0] * pml_gamma[1] * pml_gamma[2];
-       }
+       nu[k] = x[k] - this->Pml_inner_boundary[k];
      }
-     else
+
+     /// Vector which points from the inner boundary to the edge of the boundary
+     Vector<double> pml_width(DIM);
+     for(unsigned k=0; k<DIM; k++)
      {
+       pml_width[k] = this->Pml_outer_boundary[k] - this->Pml_inner_boundary[k];
+     }
+
+#ifdef PARANOID
+     // Check if the Pml_mapping_pt is set
+     if (this->Pml_mapping_pt == 0)
+      {
        std::ostringstream error_message_stream;
        error_message_stream << "Pml_mapping_pt needs to be set " << std::endl;
 
        throw OomphLibError(error_message_stream.str(),OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+     // Declare gamma_i vectors of complex numbers for PML weights
+     Vector<std::complex<double> > pml_gamma(DIM);
+
+     /// Calculate the square of the non-dimensional wavenumber
+     double wavenumber_squared = 2.0*(1.0+this->nu()) * this->omega_sq();
+
+     for(unsigned k=0; k<DIM; k++) {
+       // If PML is enabled in the respective direction
+       if (this->Pml_direction_active[k])
+       {
+         std::complex<double> pml_gamma =
+          Pml_mapping_pt->gamma(nu[k], pml_width[k], wavenumber_squared);
+         
+         // The diagonals of the INVERSE of the PML transformation jacobian are 
+         // 1/gamma
+         pml_inverse_jacobian_diagonal[k] = 1.0/pml_gamma;
+         // To get the determinant, multiply all the diagonals together
+         pml_jacobian_det *= pml_gamma;
+       }
      }
-   }
-   else
-   {
-     /// \short The factors all default to 1.0 if the propagation
-     /// medium is the physical domain (no PML transformation)
-     for(unsigned k=0; k<DIM; k++)
-     {
-       pml_stiffness_weight[k] = std::complex<double> (1.0,0.0);
-     }
-     pml_mass_weight = std::complex<double> (1.0,0.0);
    }
  }
  

@@ -316,62 +316,82 @@ fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
      }
     
     //Get body force 
-    Vector<std::complex<double> > b(DIM);
-    this->body_force(interpolated_x,b);
+    Vector<std::complex<double> > body_force_vec(DIM);
+    this->body_force(interpolated_x,body_force_vec);
     
     //Premultiply the weights and the Jacobian
     double W = w*J;
 
 
     /// \short All the PML weights that participate in the assemby process 
-    /// are computed here. pml_stiffness_weight will contain the entries
-    /// which modify the terms from the Laplace operators, while 
-    /// pml_mass_weight contains the contributions 
-    /// to the mass bit. Both default to 1.0, should the PML not be 
-    /// enabled via enable_pml.
-    Vector< std::complex<double> > pml_stiffness_weight(DIM);
-    std::complex<double> pml_mass_weight = std::complex<double>(1.0,0.0);
-    this->compute_pml_coefficients(ipt, interpolated_x, pml_stiffness_weight, 
-                                   pml_mass_weight); 
-    
-//=====EQUATIONS OF LINEAR ELASTICITY ========
-    
+    /// are computed here. pml_inverse_jacobian_diagonals are are used to
+    /// transform derivatives in real x to derivatives in transformed space
+    /// \f$\tilde x \f$.
+    /// pml_jacobian_det allows us to transform volume integrals in 
+    /// transformed space to real space.
+    /// If the PML is not enabled via enable_pml, both default to 1.0.
+    Vector< std::complex<double> > pml_inverse_jacobian_diagonal(DIM);
+    std::complex<double> pml_jacobian_det;
+    this->compute_pml_coefficients(ipt, interpolated_x, 
+                                   pml_inverse_jacobian_diagonal,
+                                   pml_jacobian_det);
+
     //Loop over the test functions, nodes of the element
     for(unsigned l=0;l<n_node;l++)
      {
       //Loop over the displacement components
       for(unsigned a=0;a<DIM;a++)
        {
-        //Get the REAL equation number
+        //Get real and imaginary equation numbers
         local_eqn_real = this->nodal_local_eqn(l,u_nodal_index[a].real());
         local_eqn_imag = this->nodal_local_eqn(l,u_nodal_index[a].imag());
-        
+
+        //===== EQUATIONS OF PML TIME HARMONIC LINEAR ELASTICITY ========
+        // (This is where the maths happens)
+
+        // Calculate jacobian and residual contributions from acceleration and 
+        // body force
+        std::complex<double> mass_jacobian_contribution = 
+        -omega_sq_local*pml_jacobian_det;
+        std::complex<double> mass_residual_contribution = 
+        (-omega_sq_local*interpolated_u[a]-body_force_vec[a])*pml_jacobian_det;
+
+        // Calculate jacobian and residual contributions from stress term
+        std::complex<double> stress_jacobian_contributions[DIM][DIM][DIM];
+        std::complex<double> stress_residual_contributions[DIM];
+        for(unsigned b=0;b<DIM;b++)
+         {
+          stress_residual_contributions[b] = 0.0;
+          for(unsigned c=0;c<DIM;c++)
+           {
+            for(unsigned d=0;d<DIM;d++)
+             {
+              stress_jacobian_contributions[b][c][d] = 
+               this->E(a,b,c,d)*pml_jacobian_det
+                *pml_inverse_jacobian_diagonal[b]
+                *pml_inverse_jacobian_diagonal[d];
+
+              stress_residual_contributions[b] += 
+               stress_jacobian_contributions[b][c][d]*interpolated_dudx(c,d);
+             }
+           }
+         }
+
+         //===== ADD CONTRIBUTIONS TO GLOBAL RESIDUALS AND JACOBIAN ========
+
         /*IF it's not a boundary condition*/
         if(local_eqn_real >= 0)
          {
           // Acceleration and body force
-          residuals[local_eqn_real] += 
-           ( (-omega_sq_local*interpolated_u[a].real()-b[a].real())
-              *pml_mass_weight.real() 
-            +( omega_sq_local*interpolated_u[a].imag()+b[a].imag())
-              *pml_mass_weight.imag() 
-           )*psi(l)*W;
+          residuals[local_eqn_real] += mass_residual_contribution.real()
+                                        *psi(l)*W;
           
           // Stress term
           for(unsigned b=0;b<DIM;b++)
            {
-            for(unsigned c=0;c<DIM;c++)
-             {
-              for(unsigned d=0;d<DIM;d++)
-               {
-                //Add the stress terms to the residuals
-                residuals[local_eqn_real] +=
-                 this->E(a,b,c,d).real()*(
-                  pml_stiffness_weight[d].real()*interpolated_dudx(c,d).real() 
-                - pml_stiffness_weight[d].imag()*interpolated_dudx(c,d).imag()
-                 )*dpsidx(l,b)*W;
-               }
-             }
+            //Add the stress terms to the residuals
+            residuals[local_eqn_real] += stress_residual_contributions[b].real()
+                                          *dpsidx(l,b)*W;
            }
           
           //Jacobian entries
@@ -393,8 +413,8 @@ fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
                   // Inertial term
                   if (a==c)
                    {
-                    jacobian(local_eqn_real,local_unknown_real) -=
-                     omega_sq_local*pml_mass_weight.real()*psi(l)*psi(l2)*W;
+                    jacobian(local_eqn_real,local_unknown_real) +=
+                     mass_jacobian_contribution.real()*psi(l)*psi(l2)*W;
                    }
 
                   // Stress term 
@@ -404,8 +424,7 @@ fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
                      {
                       //Add the contribution to the Jacobian matrix
                       jacobian(local_eqn_real,local_unknown_real) +=
-                       this->E(a,b,c,d).real()
-                        *pml_stiffness_weight[d].real()
+                       stress_jacobian_contributions[b][c][d].real()
                         *dpsidx(l2,d)*dpsidx(l,b)*W;
                      }
                    }
@@ -416,8 +435,8 @@ fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
                   // Inertial term
                   if (a==c)
                    {
-                    jacobian(local_eqn_real,local_unknown_imag) +=
-                     omega_sq_local*pml_mass_weight.imag()*psi(l)*psi(l2)*W;
+                    jacobian(local_eqn_real,local_unknown_imag) -=
+                     mass_jacobian_contribution.imag()*psi(l)*psi(l2)*W;
                    }
 
                   // Stress term 
@@ -427,8 +446,7 @@ fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
                      {
                       //Add the contribution to the Jacobian matrix
                       jacobian(local_eqn_real,local_unknown_imag) -=
-                       this->E(a,b,c,d).real()
-                        *pml_stiffness_weight[d].imag()
+                       stress_jacobian_contributions[b][c][d].imag()
                         *dpsidx(l2,d)*dpsidx(l,b)*W;
                      }
                    }
@@ -441,39 +459,19 @@ fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
          } //End of if not boundary condition for real eqn
 
 
-
-        //Get the IMAG equation number
-        local_eqn_imag = this->nodal_local_eqn(l,u_nodal_index[a].imag());
-        local_eqn_real = this->nodal_local_eqn(l,u_nodal_index[a].real());
-        
         /*IF it's not a boundary condition*/
         if(local_eqn_imag >= 0)
          {
           // Acceleration and body force
-          residuals[local_eqn_imag] += 
-           ( (-omega_sq_local*interpolated_u[a].imag()-b[a].imag())
-              *pml_mass_weight.real() 
-           + (-omega_sq_local*interpolated_u[a].real()-b[a].real())
-              *pml_mass_weight.imag() 
-           )*psi(l)*W;
+          residuals[local_eqn_imag] += mass_residual_contribution.imag()
+                                        *psi(l)*W;
           
           // Stress term
           for(unsigned b=0;b<DIM;b++)
            {
-            for(unsigned c=0;c<DIM;c++)
-             {
-              for(unsigned d=0;d<DIM;d++)
-               {
-                //Add the stress terms to the residuals
-                residuals[local_eqn_imag] +=
-                 this->E(a,b,c,d).real()
-                  *(pml_stiffness_weight[d].imag()
-                    *interpolated_dudx(c,d).real() 
-                  + pml_stiffness_weight[d].real()
-                    *interpolated_dudx(c,d).imag()
-                  )*dpsidx(l,b)*W;
-               }
-             }
+            //Add the stress terms to the residuals
+            residuals[local_eqn_imag] += stress_residual_contributions[b].imag()
+                                          *dpsidx(l,b)*W;
            }
           
           //Jacobian entries
@@ -495,8 +493,8 @@ fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
                   // Inertial term
                   if (a==c)
                    {
-                    jacobian(local_eqn_imag,local_unknown_imag) -=
-                     omega_sq_local*pml_mass_weight.real()*psi(l)*psi(l2)*W;
+                    jacobian(local_eqn_imag,local_unknown_imag) +=
+                     mass_jacobian_contribution.real()*psi(l)*psi(l2)*W;
                    }
 
                   // Stress term 
@@ -505,9 +503,8 @@ fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
                     for(unsigned d=0;d<DIM;d++)
                      {
                       //Add the contribution to the Jacobian matrix
-                      jacobian(local_eqn_imag,local_unknown_imag) +=
-                       this->E(a,b,c,d).real()
-                        *pml_stiffness_weight[d].real()
+                      jacobian(local_eqn_imag,local_unknown_imag) += 
+                       stress_jacobian_contributions[b][c][d].real()
                         *dpsidx(l2,d)*dpsidx(l,b)*W;
                      }
                    }
@@ -518,8 +515,8 @@ fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
                   // Inertial term
                   if (a==c)
                    {
-                    jacobian(local_eqn_imag,local_unknown_real) -=
-                     omega_sq_local*pml_mass_weight.imag()*psi(l)*psi(l2)*W;
+                    jacobian(local_eqn_imag,local_unknown_real) +=
+                     mass_jacobian_contribution.imag()*psi(l)*psi(l2)*W;
                    }
 
                   // Stress term 
@@ -528,9 +525,8 @@ fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
                     for(unsigned d=0;d<DIM;d++)
                      {
                       //Add the contribution to the Jacobian matrix
-                      jacobian(local_eqn_imag,local_unknown_real) +=
-                       this->E(a,b,c,d).real()
-                        *pml_stiffness_weight[d].imag()
+                      jacobian(local_eqn_imag,local_unknown_real) += 
+                       stress_jacobian_contributions[b][c][d].imag()
                         *dpsidx(l2,d)*dpsidx(l,b)*W;
                      }
                    }
