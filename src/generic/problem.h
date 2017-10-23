@@ -584,6 +584,10 @@ namespace oomph
 
  //--------------------- Newton solver parameters
 
+ /// \short Relaxation fator for Newton method (only a fractional Newton
+ /// correction is applied if this is less than 1; default 1).
+ double Relaxation_factor;
+
  /// \short The Tolerance below which the Newton Method is deemed to have
  /// converged
  double Newton_solver_tolerance;
@@ -1134,6 +1138,11 @@ public:
    actions_before_newton_convergence_check();
    actions_after_newton_solve();
   }
+
+ /// \short Empty virtual function; provides hook to perform actions after the
+ /// increase in the arclength parameter (during continuation)
+ virtual void actions_after_parameter_increase(double* const &parameter_pt)
+ {}
 
  /// \short Access function to the derivative of the i-th (local) 
  /// dof with respect to

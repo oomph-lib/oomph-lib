@@ -86,6 +86,7 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
   Must_recompute_load_balance_for_assembly(true),
   Halo_scheme_pt(0),
 #endif
+  Relaxation_factor(1.0),
   Newton_solver_tolerance(1.0e-8),
   Max_newton_iterations(10),
   Nnewton_iter_taken(0),
@@ -8982,7 +8983,7 @@ void Problem::newton_solve()
     {
      for (unsigned l = 0; l < ndof_local; l++)
       {
-       *Dof_pt[l] -= dx_pt[l];
+       *Dof_pt[l] -= Relaxation_factor*dx_pt[l];
       }
     }
 #ifdef OOMPH_HAS_MPI
@@ -10587,8 +10588,15 @@ double Problem::arc_length_step_solve_helper(double* const &parameter_pt,
      
      //Assume that we shall accept the step
      STEP_REJECTED=false;
+
      //Set initial value of the parameter
      *parameter_pt = Parameter_current + Parameter_derivative*Ds_current;
+
+     // Perform any actions...
+     actions_after_parameter_increase(parameter_pt);
+
+     Ds_current = (*parameter_pt - Parameter_current)/Parameter_derivative;
+
      //Loop over the (local) variables and set their initial values
      for(unsigned long l=0;l<ndof_local;l++)
       {
@@ -12877,7 +12885,6 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
     }
   }
 
-
  // Initialise timestep -- also sets the weights for all timesteppers
  // in the problem.
  if (unsteady_restart) initialise_dt(dt);
@@ -12946,7 +12953,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
       mmesh_pt->update_polyline_representation_from_restart();        
      }
 #endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
-      
+
   }
 
  // Read global data:
