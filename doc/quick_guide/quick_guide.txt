@@ -841,7 +841,7 @@ same as the number of nodes:
   an arbitrary number of nodes so that the class
   \code
   template <unsigned NNODE>
-  class GeometricLineElement<NNODE> : public FiniteElement
+  class GeometricLineElement : public FiniteElement
   \endcode
   represents 1D line elements with \c NNODE nodes. Consider carefully
   which member functions you can implement in generality and
@@ -853,7 +853,7 @@ same as the number of nodes:
   \c ThreeNodePoissonElement classes to the general class
   \code
   template <unsigned NNODE>
-  class PoissonLineElement<NNODE> : public GeometricLineElement<NNODE>
+  class PoissonLineElement : public GeometricLineElement<NNODE>
   \endcode 
 - Validate all elements against the exact solution and
   confirm the theoretical error estimate which predicts that 
