@@ -1,8 +1,17 @@
 #!/bin/bash
 
+# Get the OOPMH-LIB root directory from a makefile
+#-------------------------------------------------
+OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+
+# The base directory
+#-------------------
+base_dir=`pwd`;
+
 # Set the number of tests to be checked
 #--------------------------------------
-NUM_TESTS=146
+NUM_TESTS=148
+number_of_tests=0;
 
 # Which code do you want to run?
 #-------------------------------
@@ -373,9 +382,17 @@ do
 	./$compare_data ../$store$validata_file_0 $result_dir$file_0 >> validation.log
     fi
     
+    # Move the result directory into storage
+    #---------------------------------------
+    mv $result_dir ./$result_dir"_"$code$nnode$pre$post$adapt
+    
     # Notify the user that we've finished the test
     echo "done"
 done
+
+# Append output to global validation log file
+#--------------------------------------------
+cat validation.log >> ../../../../validation.log
 
 # Jump to the base directory
 #---------------------------
@@ -384,3 +401,15 @@ cd ..
 # Delete the useless results directory
 #-------------------------------------
 rm -rf $result_dir
+
+#######################################################################
+
+#Check that we get the correct number of OKs
+# validate_ok_count will exit with status
+# 0 if all tests has passed.
+# 1 if some tests failed.
+# 2 if there are more 'OK' than expected.
+. $OOMPH_ROOT_DIR/bin/validate_ok_count
+
+# Never get here
+exit 10

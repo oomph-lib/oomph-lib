@@ -680,8 +680,8 @@ void FluxPoissonMGProblem<ELEMENT,MESH>::doc_solution()
 /// \short Demonstrate how to solve 2D Poisson problem with flux boundary 
 /// conditions
 //========================================================================
-int main(int argc, char *argv[])
-{
+int main(int argc, char **argv)
+{ 
  //------------------------
  // Command line arguments
  //------------------------
@@ -874,5 +874,5 @@ int main(int argc, char *argv[])
  delete problem_pt;
 
  // Make it a null pointer
- problem_pt=0;  
+ problem_pt=0;
 } // End of main

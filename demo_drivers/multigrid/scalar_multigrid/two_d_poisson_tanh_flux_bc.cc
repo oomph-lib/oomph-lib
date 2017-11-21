@@ -561,7 +561,7 @@ void FluxPoissonMGProblem<ELEMENT,MESH>::doc_solution(DocInfo& doc_info)
 /// \short Demonstrate how to solve 2D Poisson problem with flux boundary
 /// conditions.
 //========================================================================
-int main()
+int main(int argc, char **argv)
 {
  //------------------------------------
  // Sort out documentation information:
