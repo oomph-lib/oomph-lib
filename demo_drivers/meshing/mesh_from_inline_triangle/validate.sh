@@ -22,7 +22,7 @@ cd Validation
 
 echo "Running inline triangle mesh generation test (curvilinear outer boundary)"
 mkdir RESLT
-../mesh_from_inline_triangle --validation > OUTPUT
+../mesh_from_inline_triangle --validation > RESLT/OUTPUT
 
 echo "done"
 echo " " >> validation.log
@@ -52,7 +52,7 @@ mv RESLT RESLT_curvilinear_outer_boundary
 
 echo "Running inline triangle mesh generation test (polygonal outer boundary)"
 mkdir RESLT
-../mesh_from_inline_triangle_polygon --validation > OUTPUT
+../mesh_from_inline_triangle_polygon --validation > RESLT/OUTPUT
 
 echo "done"
 echo " " >> validation.log
@@ -83,7 +83,7 @@ mv RESLT RESLT_polygonal_outer_boundary
 
 echo "Running inline triangle mesh generation test (no adaptation)"
 mkdir RESLT
-../mesh_from_inline_triangle_no_adapt --validation > OUTPUT
+../mesh_from_inline_triangle_no_adapt --validation >  RESLT/OUTPUT
 
 echo "done"
 echo " " >> validation.log

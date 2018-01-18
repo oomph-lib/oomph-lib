@@ -48,6 +48,8 @@ for file in `echo $validate_sh_list`; do
     fi
     if [ $do_it -eq 1 ]; then
         cd $dir
+        #echo "executing make check-if-...-exist in:"
+        #pwd
         make check-if-executables-exist | grep 'LIKELY' >> $failed_file
         cd $current_dir
     fi

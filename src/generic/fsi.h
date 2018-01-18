@@ -649,7 +649,6 @@ namespace FSI_functions
    Mesh* const &solid_mesh_pt,
    const unsigned& face=0)
   {
-
    // Thin wrapper to multi-domain function
    Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh
     <FLUID_ELEMENT, DIM_FLUID>(problem_pt,
@@ -718,6 +717,7 @@ namespace FSI_functions
    Mesh* const &solid_mesh_pt, 
    Mesh* const &lagrange_multiplier_mesh_pt)
  {
+
   // Thin wrapper to multi-domain function
   Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh
    <SOLID_ELEMENT, DIM_SOLID>(problem_pt,

@@ -882,6 +882,19 @@ int main(int argc, char* argv[])
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
+ // Sample point container
+ CommandLineArgs::specify_command_line_flag("--non_ref_bin");
+ CommandLineArgs::specify_command_line_flag("--ref_bin");
+#ifdef OOMPH_HAS_CGAL
+ CommandLineArgs::specify_command_line_flag("--cgal");
+#endif 
+
+ // Parse command line
+ CommandLineArgs::parse_and_assign();
+ 
+ // Doc what has actually been specified on the command line
+ CommandLineArgs::doc_specified_flags();
+
  const unsigned max_adapt = 3;
 
  // Label for output
@@ -889,6 +902,40 @@ int main(int argc, char* argv[])
  
  // Output directory
  doc_info.set_directory("RESLT");
+
+ // Only set one!
+ unsigned count=0;
+ if (CommandLineArgs::command_line_flag_has_been_set("--non_ref_bin"))
+  {
+   count++;
+   MeshAsGeomObject_Helper::Default_sample_point_container_version=
+    UseNonRefineableBinArray;
+  }
+ if (CommandLineArgs::command_line_flag_has_been_set("--ref_bin"))
+  {
+   count++;
+   MeshAsGeomObject_Helper::Default_sample_point_container_version=
+    UseRefineableBinArray;
+  }
+
+#ifdef OOMPH_HAS_CGAL
+ if (CommandLineArgs::command_line_flag_has_been_set("--cgal"))
+  {
+   count++;
+   MeshAsGeomObject_Helper::Default_sample_point_container_version=
+    UseCGALSamplePointContainer;
+  }
+#endif
+
+ if (count>1)
+  {
+   std::ostringstream error_message;
+   error_message
+    << "Can only choose one of --non_ref_bin, --ref_bin or --cgal!";
+   throw OomphLibError(error_message.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
 
  // Do the problem with linear elements
  //---------------------------------------

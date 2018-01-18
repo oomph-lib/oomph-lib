@@ -44,13 +44,9 @@ namespace oomph
 //====================================================================
 // Force build of templates
 //====================================================================
-template class TAxisymmetricLinearElasticityElement<2,2>;
-template class TAxisymmetricLinearElasticityElement<2,3>;
-template class TAxisymmetricLinearElasticityElement<2,4>;
+template class TAxisymmetricLinearElasticityElement<2>;
+template class TAxisymmetricLinearElasticityElement<3>;
+template class TAxisymmetricLinearElasticityElement<4>;
 
-template class TAxisymmetricLinearElasticityElement<3,2>;
-template class TAxisymmetricLinearElasticityElement<3,3>;
-// no integration scheme for this one yet...
-// template class TAxisymmetricLinearElasticityElement<3,4>;
 
 }

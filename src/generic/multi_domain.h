@@ -44,12 +44,6 @@
 #include <oomph-lib-config.h>
 #endif
 
-
-// Flag to allow switching between vector-based multi-domain lookup
-// schemes and the old version (kept alive for now...)
-#define USE_VECTOR_BASED_MD
-//#undef USE_VECTOR_BASED_MD
-
 //Oomph-lib headers
 #include "geom_objects.h"
 #include "problem.h"
@@ -158,62 +152,6 @@ namespace Multi_domain_functions
   /// \short Enumerators for element status in location procedure
   enum{ New, Exists, Not_found};
 
-  // Default parameters for the binning method
-  //------------------------------------------
-
-  /// \short Bool to tell the MeshAsGeomObject whether to calculate
-  /// the extreme coordinates of the bin structure
-  extern bool Compute_extreme_bin_coordinates;
-
-  /// \short Number of bins in the first dimension in binning method in
-  /// setup_multi_domain_interaction().
-  extern unsigned Nx_bin;
-
-  /// \short Number of bins in the second dimension in binning method in
-  /// setup_multi_domain_interaction().
-  extern unsigned Ny_bin;
-
-  /// \short Number of bins in the third dimension in binning method in
-  /// setup_multi_domain_interaction().
-  extern unsigned Nz_bin;
-
-  /// Number of spirals to be searched in one go
-  extern unsigned N_spiral_chunk;
-
-  /// \short (Measure of) the number of sampling points within the elements 
-  /// when populating the bin
-  extern unsigned Nsample_points;
-
-  /// \short Minimum and maximum coordinates for
-  /// each dimension of the bin structure used in
-  /// MeshAsGeomObject::locate_zeta(...). 
-  /// These can be set by user if they know their mesh's extreme coordinates
-  /// (or the MeshAsGeomObject calculates these values by default based
-  /// upon the mesh itself; see MeshAsGeomObject::get_max_and_min_coords(...))
-  /// They default to "incorrect" values initially.
-
-  /// \short Minimum coordinate in first dimension
-  extern double X_min;
-
-  /// \short Maximum coordinate in first dimension
-  extern double X_max;
-
-  /// \short Minimum coordinate in second dimension
-  extern double Y_min;
-
-  /// \short Maximum coordinate in second dimension
-  extern double Y_max;
-
-  /// \short Minimum coordinate in third dimension
-  extern double Z_min;
-
-  /// \short Maximum coordinate in third dimension
-  extern double Z_max;
-
-  /// \short Percentage offset to add to each extreme of the bin structure.
-  /// Default value of 0.05.
-  extern double Percentage_offset;
-
   /// \short Boolean to indicate when to use the bulk element as the
   /// external element.  Defaults to false, you must have set up FaceElements
   /// properly first in order for it to work
@@ -225,13 +163,7 @@ namespace Multi_domain_functions
   /// therefore set to true by default but retention
   /// of this flag allows easy return to previous implementation.
   extern bool Allow_use_of_halo_elements_as_external_elements;
-  
-  /// \short The total time for sorting the elements in the bins
-  extern double Total_time_for_sorting_elements_in_bins;
-  
-  /// Set up multi-domain for projection
-  extern bool Setup_multi_domain_for_projection;
-  
+    
   /// \short Indicate whether we are allowed to use halo elements as
   /// external elements for projection, possibly only required in
   /// parallel unstructured mesh generation during the projection
@@ -274,9 +206,10 @@ namespace Multi_domain_functions
    Vector<Mesh*>& face_mesh_pt,
    const unsigned& interaction=0);
   
+
   /// \short Identify the \c FaceElements (stored in the mesh pointed to by
   /// \c face_mesh_pt) that are adjacent to the bulk elements next to the
-  /// \c boundary_in_bulk_mesh -th boundary of the mesh pointed to by 
+  /// \c boundary_in_bulk_mesh -th boundary of the mesh pointed to by
   /// \c bulk_mesh_pt. The \c FaceElements must be derived
   /// from the \c ElementWithExternalElement base class and the adjacent
   /// bulk elements are stored as their external elements.
@@ -384,37 +317,32 @@ namespace Multi_domain_functions
   /// This is the vector-based version which operates simultaneously
   /// on the meshes contained in the Vector arguments.
   template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT>
-   void setup_multi_domain_interaction(Problem* problem_pt,
-                                       const Vector<Mesh*>& mesh_pt,
-                                       Mesh* const &external_mesh_pt,
-                                       const Vector<Mesh*>& external_face_mesh_pt,
-                                       const unsigned& interaction_index=0);
-
-
+   void setup_multi_domain_interaction(
+    Problem* problem_pt,
+    const Vector<Mesh*>& mesh_pt,
+    Mesh* const &external_mesh_pt,
+    const Vector<Mesh*>& external_face_mesh_pt,
+    const unsigned& interaction_index=0);
+  
+  
   /// Auxiliary helper function 
   template<class EXT_ELEMENT, class GEOM_OBJECT>
-   void aux_setup_multi_domain_interaction(Problem* problem_pt,
-                                           Mesh* const &mesh_pt,
-                                           Mesh* const &external_mesh_pt,
-                                           const unsigned& interaction_index,
-                                           Mesh* const &external_face_mesh_pt=0);
-
+   void aux_setup_multi_domain_interaction(
+    Problem* problem_pt,
+    Mesh* const &mesh_pt,
+    Mesh* const &external_mesh_pt,
+    const unsigned& interaction_index,
+    Mesh* const &external_face_mesh_pt=0);
+  
   /// Auxiliary helper function 
   template<class EXT_ELEMENT, class GEOM_OBJECT>
-   void aux_setup_multi_domain_interaction(Problem* problem_pt,
-                                           const Vector<Mesh*>& mesh_pt,
-                                           Mesh* const &external_mesh_pt,
-                                           const unsigned& interaction_index,
-                                           const Vector<Mesh*>& external_face_mesh_pt);
-
-
-  
-  /// \short Helper function to locate "local" zeta coordinates
-  void locate_zeta_for_local_coordinates
-   (Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
-    MeshAsGeomObject* &mesh_geom_obj_pt,
-    const unsigned& interaction_index);
-  
+   void aux_setup_multi_domain_interaction(
+    Problem* problem_pt,
+    const Vector<Mesh*>& mesh_pt,
+    Mesh* const &external_mesh_pt,
+    const unsigned& interaction_index,
+    const Vector<Mesh*>& external_face_mesh_pt);
+    
   /// \short Helper function to locate "local" zeta coordinates
   /// This is the vector-based version which operates simultaenously
   /// on the meshes contained in the Vectors.
@@ -425,15 +353,10 @@ namespace Multi_domain_functions
   
 
 #ifdef OOMPH_HAS_MPI
+
   /// \short Helper function to send any "missing" zeta coordinates to
   /// the next process and receive any coordinates from previous process
   void send_and_receive_missing_zetas(Problem* problem_pt);
-
-  /// \short Helper function to locate these "missing" zeta coordinates
-  void locate_zeta_for_missing_coordinates(
-   int& iproc, Mesh* const &external_mesh_pt,Problem* problem_pt,
-    MeshAsGeomObject* &mesh_geom_obj_pt);
-
 
   /// \short Helper function to locate these "missing" zeta coordinates.
   /// This is the vector-based function which operates simultaneously
@@ -447,15 +370,6 @@ namespace Multi_domain_functions
   void send_and_receive_located_info(int& iproc, Mesh* const &external_mesh_pt,
                                      Problem* problem_pt);
 
-  /// \short Helper function to create external (halo) elements on the loop 
-  /// process based on the info received in send_and_received_located_info
-  template<class EXT_ELEMENT>
-   void create_external_halo_elements(int& iproc, Mesh* const &mesh_pt,
-                                      Mesh* const &external_mesh_pt,
-                                      Problem* problem_pt,
-                                      const unsigned& interaction_index);
-
-
   /// \short Create external (halo) elements on the loop process based on the
   /// information received from each locate_zeta call on other processes
   /// This is the vector-based function which operates simultaneously
@@ -466,7 +380,6 @@ namespace Multi_domain_functions
    Problem* problem_pt, const unsigned& interaction_index);
 
   // Helper functions for external haloed node identification
-
 
   /// \short Helper function to add external haloed nodes, inc. masters
   /// of external haloed nodes
@@ -583,22 +496,6 @@ namespace Multi_domain_functions
   /// during the external storage creation at the end of the procedure
   void clean_up();
   
-  /// \short Bool to decide if to sort entries in bin during locate_zeta
-  /// operation (default: false)
-  extern bool Sort_bin_entries;
-    
-  /// \short Vector of zeta coordinates that we're currently trying to locate;
-  /// used in sorting of bin entries in further_away() comparison function
-  extern Vector<double> Zeta_coords_for_further_away_comparison;
-  
-  /// \short Comparison function for sorting entries in bin: Returns true if
-  /// point identified by p1 (comprising pointer to finite element and
-  /// vector of local coordinates within that element) is closer to
-  /// Zeta_coords_for_further_away_comparison than p2
-  bool first_closer_than_second(
-   const std::pair<FiniteElement*,Vector<double> >& p1,
-   const std::pair<FiniteElement*,Vector<double> >& p2);
-
  }
 
 

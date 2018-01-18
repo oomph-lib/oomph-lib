@@ -27,7 +27,6 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-
 #include "periodic_orbit_handler.h"
 
 namespace oomph

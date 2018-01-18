@@ -51,7 +51,8 @@ two_d_parallel_unstructured_adaptive_poisson_LDADD = \
 # include directory.
 AM_CPPFLAGS += -I@includedir@
 
-EXTRA_DIST += validata/TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP2_SQUARE/input_distribution_0.dat\
+EXTRA_DIST += compare.bash  compare_sample_point_containers.bash  compare_times.bash \
+validata/TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP2_SQUARE/input_distribution_0.dat\
 validata/TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP2_SQUARE/input_distribution_1.dat\
 validata/TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP3_SQUARE/input_distribution_0.dat\
 validata/TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP3_SQUARE/input_distribution_1.dat\

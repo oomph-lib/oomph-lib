@@ -175,6 +175,10 @@ AC_CHECK_HEADER(execinfo.h,[have_execinfo=true;
                            [have_execinfo=false;
                             echo "Can't use stacktrace in debugging";])
 
+# Check to see if we're on a Mac (the only system which has
+# the OS name "Darwin")
+AM_CONDITIONAL(HAVE_DARWIN, test $(uname) == "Darwin")
+
 # Pass result of test to automake (makefiles can now check for 
 # status of HAVE_STACKTRACE in any Makefile.am:
 AM_CONDITIONAL(HAVE_STACKTRACE, test x$have_execinfo = xtrue)
@@ -779,6 +783,70 @@ AC_ARG_ENABLE(use-gfortran-libraries-for-oomph-flapack,
 # Pass result of test to automake (makefiles can now check for 
 # status of ADD_LGFORTRAN_TO_OOMPH_LAPACK in any Makefile.am
 AM_CONDITIONAL(ADD_LGFORTRAN_TO_OOMPH_LAPACK, test x$use_gfortran_libraries_for_oomph_flapack = xtrue)
+
+
+
+
+#----------------------
+# CGAL stuff
+#----------------------
+
+# Suppress build of cgal and underlying third party distributions?
+# If yes, run configure as './configure --enable-suppress-cgal-build'
+AC_ARG_ENABLE(suppress-cgal-build,
+              [  --enable-suppress-cgal-build Suppress building of cgal and underlying third party distributions],
+              [want_cgal_build=false],
+              [want_cgal_build=true])
+
+# Pass result of test to automake (makefiles can now check for 
+# status of WANT_CGAL in any Makefile.am)
+AM_CONDITIONAL(WANT_CGAL_BUILD, test x$want_cgal_build = xtrue)
+
+
+
+
+# Do we want to install cgal and associated third party distributions
+# in permament location?
+AC_ARG_WITH(cgal-permanent-installation-dir,
+[  --with-cgal-permanent-installation-dir[=ABSOLUTE_PATH_TO_PERMAMENT_INSTALL_DIRECTORY] Install cgal and associated third party distributions permamently
+                          in specified directory.],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    install_cgal_in_permanent_dir=true
+    CGAL_PERMANENT_INSTALLATION_DIR=$withval
+  fi
+])
+AC_SUBST(CGAL_PERMANENT_INSTALLATION_DIR)
+
+# Pass result of test to automake (makefiles can now check for 
+# status of CGAL_PERMANENT_INSTALLATION_DIR_SPECIFIED in any Makefile.am)
+AM_CONDITIONAL(CGAL_PERMANENT_INSTALLATION_DIR_SPECIFIED, test x$install_cgal_in_permanent_dir = xtrue)
+
+if test x$install_cgal_in_permanent_dir = xtrue; then
+
+if test -e $CGAL_PERMANENT_INSTALLATION_DIR; then 
+   echo "Permanent install directory for CGAL and associated third party"
+   echo "distributions"
+   echo " " 
+   echo "   "$CGAL_PERMANENT_INSTALLATION_DIR
+   echo " " 
+   echo "already exists."
+else
+   mkdir $CGAL_PERMANENT_INSTALLATION_DIR
+   echo " "
+   echo "Created permanent install directory for CGAL and associated"
+   echo "third party distributions:"
+   echo " " 
+   echo "   "$CGAL_PERMANENT_INSTALLATION_DIR
+   echo " " 
+fi
+
+fi
+
+#----------------------
+# End CGAL stuff
+#----------------------
+
+
 
 
 
@@ -2017,8 +2085,608 @@ AM_CONDITIONAL(OOMPH_HAS_MUMPS, test x$have_mumps = xtrue)
 AC_SUBST(MUMPS_LIB)
 AC_SUBST(MUMPS_INCLUDE)
 
+#................................................................
 
 
+#................................................................
+# Start build cgal and associated third party distributions
+#................................................................
+
+
+#---------------------------------------------------
+# Potential location for the boost libraries.
+#
+# If the BOOST is available on 
+# your machine, specify the library directory
+# i.e. the one above the lib and include directories
+# with --with-boost
+#----------------------------------------------------
+BOOST_DIR=
+BOOST_LIB=
+BOOST_LIB=
+check_for_boost=false
+dont_build_boost=false
+AC_ARG_WITH(boost,
+[  --with-boost[=DIR]  use boost library in directory DIR
+                          i.e. library is in DIR/lib
+                          and include files are in DIR/include
+                          or specify "auto" (without quotation marks!) 
+                          if the library is specified automatically 
+                          by your compiler/linker],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    check_for_boost=true
+    dont_build_boost=true
+    BOOST_DIR=$withval
+    BOOST_LIB="$withval/lib"
+    BOOST_INCLUDE="$withval/include"
+  fi
+])
+
+
+# Do they exist?
+have_boost=false
+if test x$check_for_boost = xtrue; then \
+if test -d $BOOST_LIB; then \
+    have_boost=true; \
+    echo "Found the boost libraries in"; \
+    echo " "; \
+    echo "   "  $BOOST_LIB ; \
+    echo " "; \
+else \
+   if test "$BOOST_DIR" == "auto"; then \
+       have_boost=true; \
+       echo "Will assume that boost library is specified automatically by"; \
+       echo "compiler/linker."; \
+   else \
+       have_boost=false; \
+       echo "Did NOT find the boost libraries in"; \
+       echo " "; \
+       echo "   "  $BOOST_LIB ; \
+       echo " "; \
+   fi;\
+fi; \
+if test -d $BOOST_INCLUDE; then \
+    have_boost=true; \
+    echo "Found the boost include files in"; \
+    echo " "; \
+    echo "   "  $BOOST_INCLUDE ; \
+    echo " "; \
+else \
+   if test "$BOOST_DIR" == "auto"; then \
+       have_boost=true; \
+       echo "Will assume that boost library is specified automatically by"; \
+       echo "compiler/linker."; \
+    else \
+      have_boost=false; \
+      echo "Did NOT find the boost include files in"; \
+      echo " "; \
+      echo "   "  $BOOST_INCLUDE ; \
+      echo " "; \
+    fi; \
+fi; \
+else \
+   echo "No boost library directory specified"; \ 
+
+   # Will boost library be built? 
+   #-----------------------------
+   if test x$want_cgal_build = xtrue; then  \
+      echo "Building boost within oomph-lib as part of cgal build process"; \
+      will_have_boost=true; \
+   else \ 
+      echo "Not building boost within oomph-lib as part of cgal build process"; \
+      will_have_boost=false; \
+   fi; \
+   if test x$will_have_boost = xtrue; then \
+    have_boost=true; \
+    if test x$install_cgal_in_permanent_dir = xtrue; then  \
+      BOOST_DIR="$CGAL_PERMANENT_INSTALLATION_DIR/boost_default_installation";
+      BOOST_LIB="$CGAL_PERMANENT_INSTALLATION_DIR/boost_default_installation/lib";
+      BOOST_INCLUDE="$CGAL_PERMANENT_INSTALLATION_DIR/boost_default_installation/include";
+    else \
+
+      BOOST_DIR="`pwd`/external_distributions/boost/boost_default_installation";
+      BOOST_LIB="`pwd`/external_distributions/boost/boost_default_installation/lib";
+      BOOST_INCLUDE="`pwd`/external_distributions/boost/boost_default_installation/include";
+    fi;
+    echo "BOOST_DIR    : " $BOOST_DIR
+    echo "BOOST_LIB    : " $BOOST_LIB
+    echo "BOOST_INCLUDE: " $BOOST_INCLUDE
+   fi;
+fi
+
+
+
+# Do we have the boost libraries? If so add them to the 
+#------------------------------------------------------
+# external distributions; if not wipe the variables
+#--------------------------------------------------
+if test x$have_boost = xfalse; then 
+  BOOST_LIB='' ; \
+  BOOST_INCLUDE='' ;\
+else \
+  if test "$BOOST_DIR" == "auto"; then \
+    BOOST_LIB='' ; \
+    BOOST_INCLUDE='' ;\
+    external_dist_libraries_include=`echo $external_dist_libraries_include " -DOOMPH_HAS_BOOST"` ; \
+  else \
+    external_dist_libraries=`echo $external_dist_libraries " -lpthread -lboost_thread -lboost_system "` ; \
+    external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$BOOST_LIB -Wl,-rpath,$BOOST_LIB ` ; \
+    external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$BOOST_INCLUDE -DOOMPH_HAS_BOOST` ; \
+  fi 
+fi
+
+
+
+#Tell everybody about it...
+#AM_CONDITIONAL(OOMPH_HAS_BOOST, test x$have_boost = xtrue)
+
+#Tell everybody about it...
+AM_CONDITIONAL(DONT_BUILD_BOOST, test x$dont_build_boost = xtrue)
+
+# Make thes variables available to all Makefile.am-s
+AC_SUBST(BOOST_LIB)
+AC_SUBST(BOOST_INCLUDE)
+AC_SUBST(BOOST_DIR)
+
+#................................................................
+
+#................................................................
+
+
+#---------------------------------------------------
+# Potential location for the gmp libraries.
+#
+# If the GMP is available on 
+# your machine, specify the library directory
+# i.e. the one above the lib and include directories
+# with --with-gmp
+#----------------------------------------------------
+GMP_DIR=
+GMP_LIB=
+GMP_LIB=
+check_for_gmp=false
+dont_build_gmp=false
+AC_ARG_WITH(gmp,
+[  --with-gmp[=DIR]  use gmp library in directory DIR
+                          i.e. library is in DIR/lib
+                          and include files are in DIR/include
+                          or specify "auto" (without quotation marks!) 
+                          if the library is specified automatically 
+                          by your compiler/linker],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    check_for_gmp=true
+    dont_build_gmp=true
+    GMP_DIR=$withval
+    GMP_LIB="$withval/lib"
+    GMP_INCLUDE="$withval/include"
+  fi
+])
+
+
+# Do they exist?
+have_gmp=false
+if test x$check_for_gmp = xtrue; then \
+if test -d $GMP_LIB; then \
+    have_gmp=true; \
+    echo "Found the gmp libraries in"; \
+    echo " "; \
+    echo "   "  $GMP_LIB ; \
+    echo " "; \
+else \
+   if test "$GMP_DIR" == "auto"; then \
+       have_gmp=true; \
+       echo "Will assume that gmp library is specified automatically by"; \
+       echo "compiler/linker."; \
+   else \
+       have_gmp=false; \
+       echo "Did NOT find the gmp libraries in"; \
+       echo " "; \
+       echo "   "  $GMP_LIB ; \
+       echo " "; \
+   fi;\
+fi; \
+if test -d $GMP_INCLUDE; then \
+    have_gmp=true; \
+    echo "Found the gmp include files in"; \
+    echo " "; \
+    echo "   "  $GMP_INCLUDE ; \
+    echo " "; \
+else \
+   if test "$GMP_DIR" == "auto"; then \
+       have_gmp=true; \
+       echo "Will assume that gmp library is specified automatically by"; \
+       echo "compiler/linker."; \
+    else \
+      have_gmp=false; \
+      echo "Did NOT find the gmp include files in"; \
+      echo " "; \
+      echo "   "  $GMP_INCLUDE ; \
+      echo " "; \
+    fi; \
+fi; \
+else \
+   echo "No gmp library directory specified"; \ 
+
+   # Will gmp library be built?
+   #---------------------------
+   if test x$want_cgal_build = xtrue; then  \
+      echo "Building gmp within oomph-lib as part of cgal build process"; \
+      will_have_gmp=true; \
+   else \ 
+      echo "Not building gmp within oomph-lib as part of cgal build process"; \
+      will_have_gmp=false; \
+   fi; \
+   if test x$will_have_gmp = xtrue; then \
+    have_gmp=true; \
+    if test x$install_cgal_in_permanent_dir = xtrue; then  \
+      GMP_DIR="$CGAL_PERMANENT_INSTALLATION_DIR/gmp_default_installation";
+      GMP_LIB="$CGAL_PERMANENT_INSTALLATION_DIR/gmp_default_installation/lib";
+      GMP_INCLUDE="$CGAL_PERMANENT_INSTALLATION_DIR/gmp_default_installation/include";
+    else \
+      GMP_DIR="`pwd`/external_distributions/gmp/gmp_default_installation"
+      GMP_LIB="`pwd`/external_distributions/gmp/gmp_default_installation/lib"
+      GMP_INCLUDE="`pwd`/external_distributions/gmp/gmp_default_installation/include"
+    fi;
+    echo "GMP_DIR    : " $GMP_DIR
+    echo "GMP_LIB    : " $GMP_LIB
+    echo "GMP_INCLUDE: " $GMP_INCLUDE
+   fi;
+fi
+
+
+
+# Do we have the gmp libraries? If so add them to the 
+#------------------------------------------------------
+# external distributions; if not wipe the variables
+#--------------------------------------------------
+if test x$have_gmp = xfalse; then 
+  GMP_LIB='' ; \
+  GMP_INCLUDE='' ;\
+else \
+  if test "$GMP_DIR" == "auto"; then \
+    GMP_LIB='' ; \
+    GMP_INCLUDE='' ;\
+    external_dist_libraries_include=`echo $external_dist_libraries_include " -DOOMPH_HAS_GMP"` ; \
+  else \
+    external_dist_libraries=`echo $external_dist_libraries " -lgmp"` ; \
+    external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$GMP_LIB` ; \
+    external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$GMP_INCLUDE -DOOMPH_HAS_GMP` ; \
+  fi 
+fi
+
+#Tell everybody about it...
+#AM_CONDITIONAL(OOMPH_HAS_GMP, test x$have_gmp = xtrue)
+
+#Tell everybody about it...
+AM_CONDITIONAL(DONT_BUILD_GMP, test x$dont_build_gmp = xtrue)
+
+# Make thes variables available to all Makefile.am-s
+AC_SUBST(GMP_LIB)
+AC_SUBST(GMP_INCLUDE)
+AC_SUBST(GMP_DIR)
+
+#................................................................
+
+
+#---------------------------------------------------
+# Potential location for the mpfr libraries.
+#
+# If the MPFR is available on 
+# your machine, specify the library directory
+# i.e. the one above the lib and include directories
+# with --with-mpfr
+#----------------------------------------------------
+MPFR_DIR=
+MPFR_LIB=
+MPFR_LIB=
+check_for_mpfr=false
+dont_build_mpfr=false
+AC_ARG_WITH(mpfr,
+[  --with-mpfr[=DIR]  use mpfr library in directory DIR
+                          i.e. library is in DIR/lib
+                          and include files are in DIR/include
+                          or specify "auto" (without quotation marks!) 
+                          if the library is specified automatically 
+                          by your compiler/linker],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    check_for_mpfr=true
+    dont_build_mpfr=true
+    MPFR_DIR=$withval
+    MPFR_LIB="$withval/lib"
+    MPFR_INCLUDE="$withval/include"
+  fi
+])
+
+
+# Do they exist?
+have_mpfr=false
+if test x$check_for_mpfr = xtrue; then \
+if test -d $MPFR_LIB; then \
+    have_mpfr=true; \
+    echo "Found the mpfr libraries in"; \
+    echo " "; \
+    echo "   "  $MPFR_LIB ; \
+    echo " "; \
+else \
+   if test "$MPFR_DIR" == "auto"; then \
+       have_mpfr=true; \
+       echo "Will assume that mpfr library is specified automatically by"; \
+       echo "compiler/linker."; \
+   else \
+       have_mpfr=false; \
+       echo "Did NOT find the mpfr libraries in"; \
+       echo " "; \
+       echo "   "  $MPFR_LIB ; \
+       echo " "; \
+   fi;\
+fi; \
+if test -d $MPFR_INCLUDE; then \
+    have_mpfr=true; \
+    echo "Found the mpfr include files in"; \
+    echo " "; \
+    echo "   "  $MPFR_INCLUDE ; \
+    echo " "; \
+else \
+   if test "$MPFR_DIR" == "auto"; then \
+       have_mpfr=true; \
+       echo "Will assume that mpfr library is specified automatically by"; \
+       echo "compiler/linker."; \
+    else \
+      have_mpfr=false; \
+      echo "Did NOT find the mpfr include files in"; \
+      echo " "; \
+      echo "   "  $MPFR_INCLUDE ; \
+      echo " "; \
+    fi; \
+fi; \
+else \
+   echo "No mpfr library directory specified"; \ 
+
+   # Will mpfr library be built?
+   #----------------------------
+   if test x$want_cgal_build = xtrue; then  \
+      echo "Building mpfr within oomph-lib as part of cgal build process"; \
+      will_have_mpfr=true; \
+   else \ 
+      echo "Not building mpfr within oomph-lib as part of cgal build process"; \
+      will_have_mpfr=false; \
+   fi; \
+   if test x$will_have_mpfr = xtrue; then \
+    have_mpfr=true; \
+    if test x$install_cgal_in_permanent_dir = xtrue; then  \
+      MPFR_DIR="$CGAL_PERMANENT_INSTALLATION_DIR/mpfr_default_installation";
+      MPFR_LIB="$CGAL_PERMANENT_INSTALLATION_DIR/mpfr_default_installation/lib";
+      MPFR_INCLUDE="$CGAL_PERMANENT_INSTALLATION_DIR/mpfr_default_installation/include";
+    else \
+      MPFR_DIR="`pwd`/external_distributions/mpfr/mpfr_default_installation"
+      MPFR_LIB="`pwd`/external_distributions/mpfr/mpfr_default_installation/lib"
+      MPFR_INCLUDE="`pwd`/external_distributions/mpfr/mpfr_default_installation/include"
+    fi;
+    echo "MPFR_DIR    : " $MPFR_DIR
+    echo "MPFR_LIB    : " $MPFR_LIB
+    echo "MPFR_INCLUDE: " $MPFR_INCLUDE
+   fi;
+fi
+
+
+
+# Do we have the mpfr libraries? If so add them to the 
+#------------------------------------------------------
+# external distributions; if not wipe the variables
+#--------------------------------------------------
+if test x$have_mpfr = xfalse; then 
+  MPFR_LIB='' ; \
+  MPFR_INCLUDE='' ;\
+else \
+  if test "$MPFR_DIR" == "auto"; then \
+    MPFR_LIB='' ; \
+    MPFR_INCLUDE='' ;\
+    external_dist_libraries_include=`echo $external_dist_libraries_include " -DOOMPH_HAS_MPFR"` ; \
+  else \
+    external_dist_libraries=`echo $external_dist_libraries " -lmpfr"` ; \
+    external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$MPFR_LIB` ; \
+    external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$MPFR_INCLUDE -DOOMPH_HAS_MPFR` ; \
+  fi 
+fi
+
+
+
+#Tell everybody about it...
+#AM_CONDITIONAL(OOMPH_HAS_MPFR, test x$have_mpfr = xtrue)
+
+#Tell everybody about it...
+AM_CONDITIONAL(DONT_BUILD_MPFR, test x$dont_build_mpfr = xtrue)
+
+# Make thes variables available to all Makefile.am-s
+AC_SUBST(MPFR_LIB)
+AC_SUBST(MPFR_INCLUDE)
+AC_SUBST(MPFR_DIR)
+
+#................................................................
+
+
+#---------------------------------------------------
+# Potential location for the cgal libraries.
+#
+# If the CGAL is available on 
+# your machine, specify the library directory
+# i.e. the one above the lib and include directories
+# with --with-cgal
+#----------------------------------------------------
+CGAL_DIR=
+CGAL_LIB=
+CGAL_LIB=
+check_for_cgal=false
+dont_build_cgal=false
+AC_ARG_WITH(cgal,
+[  --with-cgal[=DIR]  use cgal library in directory DIR
+                          i.e. library is in DIR/lib
+                          and include files are in DIR/include
+                          or specify "auto" (without quotation marks!) 
+                          if the library is specified automatically 
+                          by your compiler/linker],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    check_for_cgal=true
+    dont_build_cgal=true
+    CGAL_DIR=$withval
+    CGAL_LIB="$withval/lib"
+    CGAL_INCLUDE="$withval/include"
+  fi
+])
+
+
+# Do they exist?
+have_cgal=false
+if test x$check_for_cgal = xtrue; then \
+if test -d $CGAL_LIB; then \
+    have_cgal=true; \
+    echo "Found the cgal libraries in"; \
+    echo " "; \
+    echo "   "  $CGAL_LIB ; \
+    echo " "; \
+else \
+   if test "$CGAL_DIR" == "auto"; then \
+       have_cgal=true; \
+       echo "Will assume that cgal library is specified automatically by"; \
+       echo "compiler/linker."; \
+   else \
+       have_cgal=false; \
+       echo "Did NOT find the cgal libraries in"; \
+       echo " "; \
+       echo "   "  $CGAL_LIB ; \
+       echo " "; \
+   fi;\
+fi; \
+if test -d $CGAL_INCLUDE; then \
+    have_cgal=true; \
+    echo "Found the cgal include files in"; \
+    echo " "; \
+    echo "   "  $CGAL_INCLUDE ; \
+    echo " "; \
+else \
+   if test "$CGAL_DIR" == "auto"; then \
+       have_cgal=true; \
+       echo "Will assume that cgal library is specified automatically by"; \
+       echo "compiler/linker."; \
+    else \
+      have_cgal=false; \
+      echo "Did NOT find the cgal include files in"; \
+      echo " "; \
+      echo "   "  $CGAL_INCLUDE ; \
+      echo " "; \
+    fi; \
+fi; \
+else \
+   echo "No cgal library directory specified"; \ 
+
+   # Will cgal library be built?
+   #----------------------------
+   if test x$want_cgal_build = xtrue; then  \
+      echo "Building cgal within oomph-lib as part of cgal build process"; \
+      will_have_cgal=true; \
+   else \ 
+      echo "Not building cgal within oomph-lib as part of cgal build process"; \
+      will_have_cgal=false; \
+   fi; \
+   if test x$will_have_cgal = xtrue; then \
+    have_cgal=true; \
+    if test x$install_cgal_in_permanent_dir = xtrue; then  \
+      CGAL_DIR="$CGAL_PERMANENT_INSTALLATION_DIR/cgal_default_installation";
+      CGAL_LIB="$CGAL_PERMANENT_INSTALLATION_DIR/cgal_default_installation/lib";
+      CGAL_INCLUDE="$CGAL_PERMANENT_INSTALLATION_DIR/cgal_default_installation/include";
+    else \
+      CGAL_DIR="`pwd`/external_distributions/cgal/cgal_default_installation"
+      CGAL_LIB="`pwd`/external_distributions/cgal/cgal_default_installation/lib"
+      CGAL_INCLUDE="`pwd`/external_distributions/cgal/cgal_default_installation/include"
+    fi;
+    echo "CGAL_DIR    : " $CGAL_DIR
+    echo "CGAL_LIB    : " $CGAL_LIB
+    echo "CGAL_INCLUDE: " $CGAL_INCLUDE
+   fi;
+fi
+
+
+
+# Do we have the cgal libraries? If so add them to the 
+#------------------------------------------------------
+# external distributions; if not wipe the variables
+#--------------------------------------------------
+if test x$have_cgal = xfalse; then 
+  CGAL_LIB='' ; \
+  CGAL_INCLUDE='' ;\
+else \
+  if test "$CGAL_DIR" == "auto"; then \
+    CGAL_LIB='' ; \
+    CGAL_INCLUDE='' ;\
+    external_dist_libraries_include=`echo $external_dist_libraries_include " -DOOMPH_HAS_CGAL"` ; \
+  else \
+    external_dist_libraries=`echo $external_dist_libraries " -lCGAL_Core -lCGAL "` ; \
+    # external_dist_libraries=`echo $external_dist_libraries " -lCGAL_Core -lCGAL_ImageIO -lCGAL "` ; \
+    external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$CGAL_LIB -Wl,-rpath,$CGAL_LIB` ; \
+    external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$CGAL_INCLUDE -DOOMPH_HAS_CGAL` ; \
+  fi 
+fi
+
+
+
+#Tell everybody about it...
+AM_CONDITIONAL(OOMPH_HAS_CGAL, test x$have_cgal = xtrue)
+
+#Tell everybody about it...
+AM_CONDITIONAL(DONT_BUILD_CGAL, test x$dont_build_cgal = xtrue)
+
+# Make thes variables available to all Makefile.am-s
+AC_SUBST(CGAL_LIB)
+AC_SUBST(CGAL_INCLUDE)
+AC_SUBST(CGAL_DIR)
+
+
+#... doc ...
+
+# Do we want to build cgal and associated third party distributions ?
+if test x$want_cgal_build = xtrue; then  \
+
+    if test x$check_for_cgal = xfalse; then \
+      echo "We're building cgal and associated third party distributions" ; \  
+    fi
+
+else \
+
+  echo "Not building cgal and associated third party distributions "; \
+  echo " "; \
+
+  # Install cgal and associated third party distributions in permament
+  # directory?
+  if test x$install_cgal_in_permanent_dir = xtrue; then  \
+     echo " "; \
+     echo "================================================================ "; \
+     echo "WARNING: Makes no sense to specify cgal install directory"; \
+     echo "         with --with-cgal-permanent-installation-dir when"; \
+     echo "         suppressing cgal build with --enable-suppress-cgal-build"; \
+     echo "         We won't build it (and therefore not install it either)."; \
+     echo "================================================================ "; \
+     echo " "; \
+  fi; \
+  echo " "; \
+
+fi;
+
+# Install cgal and associated third party distributions in permament
+# directory?
+if test x$want_cgal_build = xtrue; then  \
+if test x$install_cgal_in_permanent_dir = xtrue; then  \
+
+  echo "Installing cgal and associated third party distributions in:" $CGAL_PERMANENT_INSTALLATION_DIR; \
+
+else \
+
+  echo "Installing cgal and associated third party distributions within oomph-lib's external_distributions directory. "; \
+
+fi;
+fi;
+
+#................................................................
+# end cgal build
 #................................................................
 
 
@@ -2150,6 +2818,15 @@ fi
 
 
 
+echo " " 
+echo "/////////////////////////////////////////////////////////////////////////////////"
+echo " "
+echo "external_dist_libraries        : $external_dist_libraries"
+echo "external_dist_libraries_lib    : $external_dist_libraries_lib"
+echo "external_dist_libraries_include: $external_dist_libraries_include"
+echo " " 
+echo "/////////////////////////////////////////////////////////////////////////////////"
+echo " "
 
 # Now add the third-party external libraries that are shared by all 
 #------------------------------------------------------------------
@@ -2241,7 +2918,4 @@ fi])
     
 
 
-
-
-# hierher
 AC_CREATE_PREFIX_CONFIG_H

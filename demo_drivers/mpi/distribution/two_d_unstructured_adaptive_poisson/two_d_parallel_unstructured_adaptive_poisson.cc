@@ -1095,23 +1095,20 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  cout << "error: " << sqrt(error) << std::endl;
  cout << "norm : " << sqrt(norm) << std::endl << std::endl;
  
- // Because we want the global error and norm we need to send/receive
+ // Because we want the global norm we need to send/receive
  // information to/from the other processors
+ double norm_soln=0.0;
+ mesh_pt()->compute_norm(norm_soln);  
 #ifdef OOMPH_HAS_MPI
  if (mesh_pt()->is_mesh_distributed())
   {
-   double error_reduced = 0;
-   double norm_reduced = 0;
-   MPI_Allreduce(&error, &error_reduced, 1, MPI_DOUBLE, MPI_SUM, 
-                 this->communicator_pt()->mpi_comm());
-   MPI_Allreduce(&norm, &norm_reduced, 1, MPI_DOUBLE, MPI_SUM, 
+   double norm_reduced = 0.0;
+   MPI_Allreduce(&norm_soln, &norm_reduced, 1, MPI_DOUBLE, MPI_SUM, 
                  this->communicator_pt()->mpi_comm());
    
-   cout << "error reduced: " << sqrt(error_reduced) << std::endl;
    cout << "norm reduced: " << sqrt(norm_reduced) << std::endl << std::endl;
    
-   // Output the global error and norm which considers all processors
-   trace_file << sqrt(error_reduced) << std::endl;
+   // Output the global norm which considers all processors
    trace_file << sqrt(norm_reduced) << std::endl;
   }
 #endif
@@ -1334,8 +1331,6 @@ save_custom_distribution_to_file(Vector<unsigned> &input_distribution)
 //========================================================================
 int main(int argc, char* argv[])
 { 
-  // Enable error by exceptions
-  //feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW);
 
  // initialise MPI
 #ifdef OOMPH_HAS_MPI
@@ -1359,7 +1354,14 @@ int main(int argc, char* argv[])
  // Element size
  CommandLineArgs::specify_command_line_flag("--element_size",
                                             &TestArguments::Element_size);
- 
+
+ // Sample point container
+ CommandLineArgs::specify_command_line_flag("--non_ref_bin");
+ CommandLineArgs::specify_command_line_flag("--ref_bin");
+#ifdef OOMPH_HAS_CGAL
+ CommandLineArgs::specify_command_line_flag("--cgal");
+#endif
+
  // Max adaptations
  CommandLineArgs::specify_command_line_flag("--max_adapt",
                                             &TestArguments::Max_adapt);
@@ -1406,6 +1408,41 @@ int main(int argc, char* argv[])
  // Swith timings on
  Global_timings::Doc_comprehensive_timings = true;
  
+ // Only set one!
+ unsigned count=0;
+ if (CommandLineArgs::command_line_flag_has_been_set("--non_ref_bin"))
+  {
+   count++;
+   MeshAsGeomObject_Helper::Default_sample_point_container_version=
+    UseNonRefineableBinArray;
+  }
+ if (CommandLineArgs::command_line_flag_has_been_set("--ref_bin"))
+  {
+   count++;
+   MeshAsGeomObject_Helper::Default_sample_point_container_version=
+    UseRefineableBinArray;
+  }
+
+#ifdef OOMPH_HAS_CGAL
+ if (CommandLineArgs::command_line_flag_has_been_set("--cgal"))
+  {
+   count++;
+   MeshAsGeomObject_Helper::Default_sample_point_container_version=
+    UseCGALSamplePointContainer;
+  }
+#endif
+
+ if (count>1)
+  {
+   std::ostringstream error_message;
+   error_message
+    << "Can only choose one of --non_ref_bin, --ref_bin or --cgal!";
+   throw OomphLibError(error_message.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+
  // Use quadratic elements to solve the problem
  //----------------------------------------------
  
@@ -1436,18 +1473,6 @@ int main(int argc, char* argv[])
  // Set the number of bins for area transfer
  problem.mesh_pt()->nbin_x_for_area_transfer() = 100; // default values
  problem.mesh_pt()->nbin_y_for_area_transfer() = 100; // default values
- 
- // Set the number of bins for projection (increase if the projection
- // stage takes too much time, default 100)
- problem.mesh_pt()->nbin_x_for_projection() = 1000;
- problem.mesh_pt()->nbin_y_for_projection() = 1000;
- 
- // Enable printing of timings for mesh adaptation (set the printing
- // level, default=0)
- //problem.mesh_pt()->enable_printing_timings_adaptation(2);
- // Enable printing of timings for mesh load balance (set the printing
- // level, default=0)
- //problem.mesh_pt()->enable_printing_timings_load_balance(3);
  
 #ifdef OOMPH_HAS_MPI
  // Store the distribution of the elements
@@ -1481,9 +1506,7 @@ int main(int argc, char* argv[])
  
  problem.mesh_pt()->output(file_initial_distributed_mesh, 2);
 #endif // OOMPH_HAS_MPI
- 
- 
- 
+  
  // Solve the problem doing (parallel unstructured) mesh adaptation
  problem.newton_solve(TestArguments::Max_adapt);
   

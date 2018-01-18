@@ -11,7 +11,6 @@ base_dir=`pwd`;
 # Set the number of tests to be checked
 #--------------------------------------
 NUM_TESTS=148
-number_of_tests=0;
 
 # Which code do you want to run?
 #-------------------------------

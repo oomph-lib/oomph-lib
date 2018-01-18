@@ -889,9 +889,6 @@ void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt,
 //Main driver loop
 int main()
 {
-  Multi_domain_functions::Nx_bin = 100;
-  Multi_domain_functions::Ny_bin = 100;
-
 
  double max_error = 1.0e-3;
  double min_error = 1.0e-5;

@@ -63,5 +63,5 @@ docfile = doc
 
 EXTRA_DIST += oomph-lib_header.html.template oomph-lib_footer.html.template \
 css js\
-extra_latex_style_files
+extra_latex_style_files navbar_toggle.js raw_doxygen
 

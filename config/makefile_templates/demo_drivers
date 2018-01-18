@@ -7,7 +7,7 @@ TESTS_ENVIRONMENT = MPI_RUN_COMMAND='@MPI_RUN_COMMAND@' MPI_VARIABLENP_RUN_COMMA
 # Choose self tests
 if COMPARE_AGAINST_VALIDATA
   # Test script
-  TESTS = validate.sh
+  TESTS = $(top_builddir)/bin/wrapper_for_validate.sh 
 else
   # Just run the executables
   TESTS = $(top_builddir)/bin/dummy_validate.sh
@@ -18,13 +18,13 @@ EXTRA_DIST = validate.sh validata
 
 #Additional cleanup commands
 clean-local: 
-	rm -rf Validation *~
+	rm -rf validate_sh_timing_generated_by_make_check.dat Validation *~
 
 # Print top_builddir
 print-top_builddir: 
 	echo $(top_builddir)
 
 # Check if the executables exist
-check-if-executables-exist:
+check-if-executables-exist: 
 	$(top_builddir)/bin/check_if_executable_exists.bash `echo $(check_PROGRAMS)`
 

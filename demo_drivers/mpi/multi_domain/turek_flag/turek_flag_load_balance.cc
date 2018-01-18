@@ -1307,8 +1307,6 @@ int main(int argc, char* argv[])
   MPI_Helpers::init(argc,argv);
 #endif
 
-
-
   // Switch off output modifier
  oomph_info.output_modifier_pt() = &default_output_modifier;
 

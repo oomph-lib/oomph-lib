@@ -55,7 +55,7 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/helmholtz_soln0.dat RESLT/trace.dat > result_unstructured.dat
+cat RESLT/trace.dat > result_unstructured.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log

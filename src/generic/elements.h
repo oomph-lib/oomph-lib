@@ -1226,14 +1226,22 @@ namespace Locate_zeta_helpers
  /// Maximum number of Newton iterations
  extern unsigned Max_newton_iterations;
  
- /// Rounding tolerance for whether coordinate is in element or not
+ /// Rounding tolerance for whether coordinate is in element or not.
+ /// Bit subtle -- this is obviously related to the Newton tolerance
+ /// but not quite the same!
  extern double Rounding_tolerance;
+
+ /// \short Multiplier for (zeta-based) outer radius of element used for
+ /// deciding that point is outside element. Set to negative value
+ /// to suppress test.
+ extern double Radius_multiplier_for_fast_exit_from_locate_zeta;
 
  /// Number of points along one dimension of each element used
  /// to create coordinates within the element in order to see
  /// which has the smallest initial residual (and is therefore used
  /// as the initial guess in the Newton method for locate_zeta)
  extern unsigned N_local_points;
+
 }
 
 
@@ -1789,6 +1797,14 @@ public:
     OOMPH_EXCEPTION_LOCATION);
    return true;
   }
+
+
+ /// \short Compute centre of gravity of all nodes and radius of node that
+ /// is furthest from it. Used to assess approximately if a point
+ /// is likely to be contained with an element in locate_zeta-like
+ /// operations
+ void get_centre_of_gravity_and_max_radius_in_terms_of_zeta(
+  Vector<double>& cog, double& max_radius) const;
 
  /// \short Get local coordinates of node j in the element; vector 
  /// sets its own size (broken virtual)
@@ -2935,8 +2951,13 @@ public:
 
  /// \short  Get cector of local coordinates of plot point i (when plotting 
  /// nplot points in each "coordinate direction").
+ /// Generally these plot points will be uniformly spaced across the element.
+ /// The optional final boolean flag (default: false) allows them to
+ /// be shifted inwards to avoid duplication of plot point points between
+ /// elements -- useful when they are used in locate_zeta, say.
  virtual void get_s_plot(const unsigned& i, const unsigned& nplot,
-                         Vector<double>& s) const //senare
+                         Vector<double>& s, 
+                         const bool& shifted_to_interior=false) const 
   {
    throw OomphLibError(
     "get_s_plot(...) is not implemented for this element\n",

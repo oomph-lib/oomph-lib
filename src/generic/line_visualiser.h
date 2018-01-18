@@ -223,8 +223,6 @@ namespace oomph
           }
         }
    
-       // hierher: Get rid of mpi Helpers
-   
        // Gather information on root
    
        // Find out who's found the points
@@ -633,18 +631,14 @@ namespace oomph
    Plot_point.resize(Nplot_points);
    
    // Transform mesh into a geometric object
-   // hierher change this to the mesh's own commmunicator
-   unsigned suppress_synchronisation_of_bins_flag=1;
-   MeshAsGeomObject mesh_geom_tmp(mesh_pt,Comm_pt,
-                                  suppress_synchronisation_of_bins_flag);
-   
+   MeshAsGeomObject mesh_geom_tmp(mesh_pt);
+
    // Limit the search radius
-   mesh_geom_tmp.max_search_radius()=Max_search_radius;
+   mesh_geom_tmp.sample_point_container_pt()->max_search_radius()=
+    Max_search_radius;
 
    // Loop over input points
    double tt_start=TimingHelpers::timer();
-   //oomph_info << "Looking for " << Nplot_points << " plot points\n";
-
    for (unsigned i=0; i<Nplot_points; i++)
     {
      // Local coordinate of the plot point with its element
@@ -712,8 +706,6 @@ namespace oomph
            tmp_proc_point_found_plus_one[i]=my_rank+1;
           }     
         }
-   
-       // hierher: Get rid of mpi Helpers
    
        // Gather information on root
    

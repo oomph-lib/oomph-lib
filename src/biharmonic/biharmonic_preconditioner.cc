@@ -213,8 +213,9 @@ namespace Biharmonic_schur_complement_Hypre_defaults
 
   default:
 
-   oomph_info << "Never get here...\n";
-   abort();
+   throw OomphLibError("Wrong type of preconditioner.",
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
   }
 
  

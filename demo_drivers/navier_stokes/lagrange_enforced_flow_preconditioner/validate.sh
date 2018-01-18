@@ -33,10 +33,10 @@ Re100="--re 100"
 Noel8="--noel 8"
 Noel16="--noel 16"
 
-../${PROG} ${GENPARAM} ${Prec1} ${Visc1} ${Ang67} ${Re100} ${Noel8} --soln_num 0
-../${PROG} ${GENPARAM} ${Prec1} ${Visc1} ${Ang67} ${Re100} ${Noel16} --soln_num 1
-../${PROG} ${GENPARAM} ${Prec2} ${Visc1} ${Ang67} ${Re100} ${Noel8} --soln_num 2
-../${PROG} ${GENPARAM} ${Prec2} ${Visc1} ${Ang67} ${Re100} ${Noel16} --soln_num 3
+../${PROG} ${GENPARAM} ${Prec1} ${Visc1} ${Ang67} ${Re100} ${Noel8} --soln_num 0 > OUTPUT0
+../${PROG} ${GENPARAM} ${Prec1} ${Visc1} ${Ang67} ${Re100} ${Noel16} --soln_num 1 > OUTPUT1
+../${PROG} ${GENPARAM} ${Prec2} ${Visc1} ${Ang67} ${Re100} ${Noel8} --soln_num 2 > OUTPUT2
+../${PROG} ${GENPARAM} ${Prec2} ${Visc1} ${Ang67} ${Re100} ${Noel16} --soln_num 3 > OUTPUT3
 
 echo "done"
 echo " " >> validation.log

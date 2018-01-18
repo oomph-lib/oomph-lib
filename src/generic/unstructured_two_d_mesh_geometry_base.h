@@ -3909,20 +3909,23 @@ namespace oomph
    nel = this->nboundary_element(b);
     
 #ifdef PARANOID 
-    if (nel==0)
-     {
-      std::ostringstream warning_message;
-      std::string output_string=
-       "UnstructuredTwoDMeshGeometryBase::setup_boundary_coordinates()";
-      warning_message
-       << "There are no elements associated with boundary (" << b << ").\n"
-       << "This could happen because you did not specify boundaries with\n"
-       << "this boundary id. Review carefully the indexing of your\n"
-       << "boundaries.";
-      OomphLibWarning(warning_message.str(),
-                      output_string,
-                      OOMPH_EXCEPTION_LOCATION);
-     }
+   if (!Suppress_warning_about_regions_and_boundaries)
+    {
+     if (nel==0)
+      {
+       std::ostringstream warning_message;
+       std::string output_string=
+        "UnstructuredTwoDMeshGeometryBase::setup_boundary_coordinates()";
+       warning_message
+        << "There are no elements associated with boundary (" << b << ").\n"
+        << "This could happen because you did not specify boundaries with\n"
+        << "this boundary id. Review carefully the indexing of your\n"
+        << "boundaries.";
+       OomphLibWarning(warning_message.str(),
+                       output_string,
+                       OOMPH_EXCEPTION_LOCATION);
+      }
+    }
 #endif
     
    //Only bother to do anything else, if there are elements

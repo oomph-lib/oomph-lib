@@ -71,13 +71,6 @@ void TElement<1,NNODE_1D>::output(std::ostream &outfile)
     {
      outfile << node_pt(l)->x(i) << " ";
     }
-   //Find out how many data values at the node
-   unsigned initial_nvalue = node_pt(l)->nvalue();
-   //Lopp over the data and output whether pinned or not
-   for(unsigned i=0;i<initial_nvalue;i++)
-    {
-     outfile << node_pt(l)->is_pinned(i) << " ";
-    }
    outfile << std::endl;
   }
   outfile << std::endl;
@@ -136,14 +129,6 @@ void TElement<1,NNODE_1D>::output(FILE* file_pt)
     {
      //outfile << Node_pt[l]->x(i) << " ";
      fprintf(file_pt,"%g ",node_pt(l)->x(i));
-    }
-   //Find out how many data values at the node
-   unsigned initial_nvalue = node_pt(l)->nvalue();
-   //Lopp over the data and output whether pinned or not
-   for(unsigned i=0;i<initial_nvalue;i++)
-    {
-     //outfile << Node_pt[l]->is_pinned(i) << " ";
-     fprintf(file_pt,"%i ",node_pt(l)->is_pinned(i));
     }
    //outfile << std::endl;
    fprintf(file_pt,"\n");
@@ -566,13 +551,6 @@ void TElement<2,NNODE_1D>::output(std::ostream &outfile)
     {
      outfile << node_pt(n)->x(i) << " ";
     }
-   //Find out how many data values at the node
-   unsigned initial_nvalue = node_pt(n)->nvalue();
-   //Loop over the data and output whether pinned or not
-   for(unsigned i=0;i<initial_nvalue;i++)
-    {
-     outfile << node_pt(n)->is_pinned(i) << " ";
-    }
    outfile << std::endl;
   }
  
@@ -643,14 +621,6 @@ void TElement<2,NNODE_1D>::output(FILE* file_pt)
     {
      fprintf(file_pt,"%g ", node_pt(n)->x(i));
      //outfile << node_pt(n)->x(i) << " ";
-    }
-   //Find out how many data values at the node
-   unsigned initial_nvalue = node_pt(n)->nvalue();
-   //Loop over the data and output whether pinned or not
-   for(unsigned i=0;i<initial_nvalue;i++)
-    {
-     fprintf(file_pt,"%i ",node_pt(n)->is_pinned(i));
-     //outfile << node_pt(n)->is_pinned(i) << " ";
     }
    fprintf(file_pt,"\n");
    //outfile << std::endl;
@@ -732,13 +702,6 @@ void TElement<3,NNODE_1D>::output(std::ostream &outfile)
     {
      outfile << node_pt(n)->x(i) << " ";
     }
-//    //Find out how many data values at the node
-//    unsigned initial_nvalue = node_pt(n)->nvalue();
-//    //Loop over the data and output whether pinned or not
-//    for(unsigned i=0;i<initial_nvalue;i++)
-//     {
-//      outfile << node_pt(n)->is_pinned(i) << " ";
-//     }
    outfile << std::endl;
   }
  
@@ -806,14 +769,6 @@ void TElement<3,NNODE_1D>::output(FILE* file_pt)
     {
      fprintf(file_pt,"%g ", node_pt(n)->x(i));
      //outfile << node_pt(n)->x(i) << " ";
-    }
-   //Find out how many data values at the node
-   unsigned initial_nvalue = node_pt(n)->nvalue();
-   //Loop over the data and output whether pinned or not
-   for(unsigned i=0;i<initial_nvalue;i++)
-    {
-     fprintf(file_pt,"%i ",node_pt(n)->is_pinned(i));
-     //outfile << node_pt(n)->is_pinned(i) << " ";
     }
    fprintf(file_pt,"\n");
    //outfile << std::endl;

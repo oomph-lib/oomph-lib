@@ -12,3 +12,6 @@ one_d_womersley_SOURCES = one_d_womersley.cc
 one_d_womersley_LDADD = -L@libdir@ -lwomersley -lnavier_stokes -lgeneric \
 				$(EXTERNAL_LIBS) $(FLIBS)
 
+
+EXTRA_DIST+=flux_control_elements_bk.h
+

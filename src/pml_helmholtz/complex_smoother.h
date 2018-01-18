@@ -1100,13 +1100,11 @@ namespace oomph
   /// -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \\
-  /// dy
+  /// dx \\ dy
   /// \end{bmatrix}
   /// =
   /// \begin{bmatrix}
-  /// r \\
-  /// 0
+  /// r \\ 0
   /// \end{bmatrix},
   /// \f]
   /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
@@ -1200,17 +1198,14 @@ namespace oomph
   /// update:
   /// \f[
   /// \begin{bmatrix}
-  /// dx \\
-  /// dy
+  /// dx \\ dy
   /// \end{bmatrix}
   /// \leftarrow
   /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \\
-  /// -\sin\theta & \cos\theta
+  /// \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \\
-  /// dy
+  /// dx \\ dy
   /// \end{bmatrix}.
   /// \f]
   /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
@@ -2328,17 +2323,14 @@ namespace oomph
   /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
   /// \f[
   /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \\
-  /// -\sin\theta & \cos\theta
+  /// \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \\
-  /// dy
+  /// dx \\ dy
   /// \end{bmatrix}
   /// =
   /// \begin{bmatrix}
-  /// r \\
-  /// 0
+  /// r \\ 0
   /// \end{bmatrix},
   /// \f]
   /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
@@ -2432,17 +2424,14 @@ namespace oomph
   /// update:
   /// \f[
   /// \begin{bmatrix}
-  /// dx \\
-  /// dy
+  /// dx \\ dy
   /// \end{bmatrix}
   /// \leftarrow
   /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \\
-  /// -\sin\theta & \cos\theta
+  /// \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \\
-  /// dy
+  /// dx \\ dy
   /// \end{bmatrix}.
   /// \f]
   /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.

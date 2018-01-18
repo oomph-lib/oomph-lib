@@ -267,6 +267,10 @@ $makefile_list
 external_distributions/Makefile
 external_distributions/hypre/Makefile
 external_distributions/trilinos/Makefile
+external_distributions/gmp/Makefile
+external_distributions/mpfr/Makefile
+external_distributions/boost/Makefile
+external_distributions/cgal/Makefile
 external_distributions/mumps_and_scalapack/Makefile
 ])
 EOF
@@ -343,9 +347,9 @@ if [[ "$new_configure_options" != "$old_configure_options" || "$generate_config_
 
     # Finally run configure itself to convert "Makefile.in"s into "Makefile"s
     echo
-    echo "Running ./configure --prefix $build_dir $new_configure_options $extra_configure_options " # --disable-shared " # hierher
+    echo "Running ./configure --prefix $build_dir $new_configure_options $extra_configure_options " 
     echo
-    /bin/sh -c "./configure --prefix $build_dir $new_configure_options $extra_configure_options " # --disable-shared " # hierher
+    /bin/sh -c "./configure --prefix $build_dir $new_configure_options $extra_configure_options " 
 
     # Test that the mpi commands work with these configure options
     # (automatically passes if no variable MPI_RUN_COMMAND in makefile).
@@ -369,30 +373,26 @@ fi
 
 
 # Make all libraries
-echo
-echo "Running `make $make_options` in $PWD"
+echo " "
+echo "Running make with make_options:"
+echo " "
+echo $make_options
+echo " " 
+
 make $make_options
-echo "done"
+
+echo "done make from within noninteractive autogen.sh"
 
 
 # Install the libraries (in build directory specified above)
-# echo
-# echo "running `make $make_options install` in $PWD"
-make $make_options install
-echo "done"
+echo " "
+echo "Running make install with make_options"
+echo " "
+echo $make_options
+echo " " 
 
-# Run tests if requested
-if [ $run_self_tests == 1 ]
-then
-    echo "I'm about to run the self tests"
-    self_test_command="make check -k"
-    echo "Running self test command: $self_test_command"
-    $self_test_command 
-    echo " " 
-    echo "Done with self-tests"
-    echo " " 
-else
-    echo "NOT running self tests"
-fi
+make $make_options install
+
+echo "done make install from within noninteractive autogen.sh"
 
 

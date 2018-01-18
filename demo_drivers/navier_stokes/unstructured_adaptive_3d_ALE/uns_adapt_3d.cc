@@ -1498,10 +1498,6 @@ void FallingBlockProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 //========================================================================
 int main(int argc, char* argv[])
 {
- Multi_domain_functions::Nx_bin = 100;
- Multi_domain_functions::Ny_bin = 100;
- Multi_domain_functions::Nz_bin = 100;
-
  // Label for output
  DocInfo doc_info;
  

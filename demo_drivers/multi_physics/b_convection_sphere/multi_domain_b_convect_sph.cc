@@ -359,21 +359,6 @@ FlowAroundHalfCylinderProblem<NST_ELEMENT,AD_ELEMENT>::FlowAroundHalfCylinderPro
   add_sub_mesh(Adv_diff_mesh_pt);
   build_global_mesh();
   
-
-  // Change default number of bins in each dimension
-  Multi_domain_functions::Nx_bin=500;
-  Multi_domain_functions::Ny_bin=1000;
-  
-  // Don't compute extreme bin coordinates
-  Multi_domain_functions::Compute_extreme_bin_coordinates=false;
-  
-  // Specify extreme bin coordinates directly
-  Multi_domain_functions::X_min=0.0;
-  Multi_domain_functions::X_max=radius;
-  Multi_domain_functions::Y_min=0.0;
-  Multi_domain_functions::Y_max=length;
-  
-  
   // Set external elements for the multi-domain solution.
   Multi_domain_functions::
    setup_multi_domain_interactions<NST_ELEMENT,AD_ELEMENT>

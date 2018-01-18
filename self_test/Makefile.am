@@ -6,7 +6,7 @@
 #------------------------------------------------------------
 if WANT_EXTENDED_SELF_TESTS
   full_self_test = \
-    navier_stokes poisson matrix_matrix_multiply line_visualiser deliberately_broken_code_for_self_test_test
+    navier_stokes poisson matrix_matrix_multiply line_visualiser deliberately_broken_code_for_self_test_test locate_zeta
 if WANT_MPI
   full_self_test += mpi
 endif

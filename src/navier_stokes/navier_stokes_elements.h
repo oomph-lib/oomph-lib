@@ -1090,6 +1090,9 @@ public:
                  const double& time,
                  FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
 
+   /// \short Compute norm of solution: square of the L2 norm of the velocities
+   void compute_norm(double& norm);
+
  /// \short Validate against exact solution at given time
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error

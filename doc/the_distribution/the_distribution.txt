@@ -43,6 +43,7 @@ See the <a href="../../change_log/html/index.html">change log page</a> for an ov
    -# \ref external_src
       -# \ref blas
       -# \ref lapack
+   -# \ref external_dist_cgal_etc
    -# \ref external_dist
       -# \ref hypre
       -# \ref trilinos
@@ -348,7 +349,33 @@ within \c oomph-lib.
 \subsection ext_dist The external_distributions directory
 
 \c oomph-lib provides interfaces to various third-party libraries
-whose sources are too big to be included in the \c oomph-lib 
+which have their own build machinery. Some of these libraries are built by
+default in the course of the oomph-lib installation, using tar 
+files that are distributed with \c oomph-lib; others
+will only be built if the user places the relevant tar files
+into the approproriate location within the \c oomph-lib directory
+structure.
+
+\subsubsection cgal External distributions that are built by default
+
+By default \c oomph-lib builds CGAL, the Computational Geometry Algorithms 
+Library, <a href="http://www.cgal.org">http://www.cgal.org</a>. This
+library requires three other libraries which we also install:
+- The GNU Multiple Precision Arithmetic Library (GMP), 
+  <a href="https://gmplib.org">https://gmplib.org</a>.
+- The GNU MPFR Library <a href="http://www.mpfr.org">https://gmplib.org</a>.
+- The Boost library, <a href="http://www.boost.org">http://www.boost.org</a>.
+.
+Note that the installation of these libraries is not quick. We
+therefore provide the option to (i) suppress their installation (in which case
+\c oomph-lib will employ a sub-optimal "locate_zeta" algorithm in its
+multi-domain algorithms) or to (ii) link against already existing 
+installations of the libraries; see \ref external_dist_cgal_etc for details.
+
+\subsubsection trilinos_hypre_external External distributions that are not built by default
+
+\c oomph-lib provides interfaces to various optional third-party libraries
+whose sources we deemed to be too big to be included in the \c oomph-lib 
 distribution. If you wish to use these we expect you to install them
 yourself. To facilitate this task, we provide the option
 to let the \c oomph-lib build machinery perform the installation
@@ -474,6 +501,74 @@ you can link against it by specifying the configure option
 \code
 --with-lapack=/home/mheil/local/lib/lapack/lapack.a
 \endcode
+
+
+\subsection external_dist_cgal_etc External (third-party) libraries whose tar files are distributed with oomph-lib
+
+By default \c oomph-lib builds CGAL, the Computational Geometry Algorithms 
+Library, <a href="http://www.cgal.org">http://www.cgal.org</a>. This
+library requires three other libraries which we also install:
+- The GNU Multiple Precision Arithmetic Library (GMP), 
+  <a href="https://gmplib.org">https://gmplib.org</a>.
+- The GNU MPFR Library <a href="http://www.mpfr.org">https://gmplib.org</a>.
+- The Boost library, <a href="http://www.boost.org">http://www.boost.org</a>.
+.
+These four libraries are built from tar files that we downloaded
+from the relevant webpages and then included into the \c oomph-lib
+distribution. We adopted this procedure to ensure that the versions 
+of the libraries are consistent with each other.
+
+\subsubsection cgal_default_install Default CGAL installation.
+ 
+By default the four libraries are installed within \c oomph-lib's
+\c external_distributions directory, and the paths to the relevant
+\c lib and \c include directories are propagated to \c oomph-lib's
+\c Makefile s. The installations are deleted by "make clean" or 
+"make distclean", i.e. they are treated like any other \c oomph-lib
+code.
+
+\subsubsection cgal_permanent_install Installing CGAL in a permanent location
+
+Given that the installation of the libraries takes a fair amount of
+time, we also provide the option to install them in a permanent location
+outside the \c oomph-lib directory structure. This is done by
+specifying the configure flag:
+\code
+--with-cgal-permanent-installation-dir=ABSOLUTE_PATH_TO_PERMAMENT_INSTALL_DIRECTORY
+\endcode
+where \c ABSOLUTE_PATH_TO_PERMAMENT_INSTALL_DIRECTORY specifies what
+it says. So, for instance, specifying 
+\code
+--with-cgal-permanent-installation-dir=/home/mheil/junk_default_installation
+\endcode
+installs the libraries in \c /home/mheil/junk_default_installation.
+In subsequent rebuilds of \c oomph-lib it is then possible to 
+specify the location of these libraries using configure options.
+Following an \c oomph-lib installation with 
+\c --with-cgal-permanent-installation-dir these configure options 
+are displayed at the end of the \c oomph-lib build procedure. (They are
+also contained in the file  
+\c external_distributions/cgal_configure_flags.txt.)
+For instance, if the libraries have been installed in 
+\c /home/mheil/junk_default_installation the relevant, the configure
+options are:
+\code
+--with-boost=/home/mheil/junk_default_installation/boost_default_installation
+--with-gmp=/home/mheil/junk_default_installation/gmp_default_installation
+--with-mpfr=/home/mheil/junk_default_installation/mpfr_default_installation
+--with-cgal=/home/mheil/junk_default_installation/cgal_default_installation
+\endcode
+
+hierher auto?
+
+\subsubsection cgal_no_install Suppressing the CGAL installation
+Finally, it is possible to suppress the installation of CGAL (and the
+related libraries) using the configure option
+\code
+--enable-suppress-cgal-build
+\endcode
+In this case \c oomph-lib will employ a sub-optimal "locate_zeta" 
+algorithm in its multi-domain algorithms.
 
 \subsection external_dist External (third-party) libraries that are not distributed with oomph-lib
 

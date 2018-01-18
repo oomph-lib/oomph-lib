@@ -24,3 +24,4 @@ matrix_concatenation_without_communication_LDADD = \
 # the include directory which we specify with -I
 AM_CPPFLAGS +=   -I@includedir@  
 
+EXTRA_DIST+=run.sh

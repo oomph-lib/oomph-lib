@@ -1281,8 +1281,14 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
 
  /// \short Pointer to the j-th vertex node in the element
  Node* vertex_node_pt(const unsigned& j) const
-  {return BASIC::vertex_node_pt(j);}
-
+ {return BASIC::vertex_node_pt(j);}
+ 
+ /// \short Compute norm of solution. Use version in BASIC element.
+ void compute_norm(double& norm)
+ {
+  BASIC::compute_norm(norm);
+ }
+ 
  /// \short Plot the error when compared against a given exact flux.
  /// Also calculates the norm of the error and that of the exact flux.
  /// Use version in BASIC element

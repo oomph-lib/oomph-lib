@@ -685,8 +685,6 @@ void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt,
 //Main driver loop
 int main()
 {
-//  Multi_domain_functions::Nx_bin = 100;
-//  Multi_domain_functions::Ny_bin = 100;
 
  //Construct and solve the problem
  //This maximum refinement level means that we fit (easily) into a 

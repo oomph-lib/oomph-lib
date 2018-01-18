@@ -309,13 +309,19 @@ class BlockSelector
 
   /// \short Output function, outputs the Row_index, Column_index, Wanted and
   /// the address of the Replacement_block_pt.
+ /// P.M.: The address of a null pointer on a Mac is 0x0 but for self-tests
+ /// the address needs to be simply 0. Easy (but hacky) check sorts that out...
   friend std::ostream& operator<<(std::ostream& o_stream,
                            const BlockSelector& block_selector)
   {
     o_stream << "Row_index = " << block_selector.row_index() << "\n"
              << "Column_index = " << block_selector.column_index() << "\n"
              << "Wanted = " << block_selector.wanted() << "\n"
-             << "Replacement_block_pt = " << block_selector.replacement_block_pt();
+	   << "Replacement_block_pt = ";
+  if (block_selector.replacement_block_pt()==0)
+  {
+   o_stream << 0;
+  }
 
     return o_stream;
   }

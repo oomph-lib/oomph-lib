@@ -1486,12 +1486,23 @@ public:
 
  /// \short  Get vector of local coordinates of plot point i (when plotting 
  /// nplot points in each "coordinate direction").
- void get_s_plot(const unsigned& i, const unsigned& nplot,
-                 Vector<double>& s) const 
-  {
+ void get_s_plot(
+  const unsigned& i, 
+  const unsigned& nplot,
+  Vector<double>& s,
+  const bool& use_equally_spaced_interior_sample_points=false) const 
+ {
    if (nplot>1)
     {
      s[0] = double(i)/double(nplot-1);
+
+     if (use_equally_spaced_interior_sample_points)
+      {
+       double range=1.0;
+       double dx_new=range/double(nplot);
+       double range_new=double(nplot-1)*dx_new;
+       s[0]=0.5*dx_new+range_new*s[0]/range;
+      }
     }
    else
     {
@@ -1786,9 +1797,12 @@ public:
 
  /// \short  Get vector of local coordinates of plot point i (when plotting 
  /// nplot points in each "coordinate direction").
- void get_s_plot(const unsigned& iplot, const unsigned& nplot,
-                 Vector<double>& s) const
-  {
+ void get_s_plot(
+  const unsigned& iplot, 
+  const unsigned& nplot,
+  Vector<double>& s,
+  const bool& use_equally_spaced_interior_sample_points=false) const
+ {
    if (nplot>1)
     {
      unsigned np=0,i,j;
@@ -1800,6 +1814,14 @@ public:
           {
            s[0] = double(j)/double(nplot-1);
            s[1] = double(i)/double(nplot-1);
+           if (use_equally_spaced_interior_sample_points)
+            {
+             double range=1.0;
+             double dx_new=range/(double(nplot)+0.5);
+             double range_new=double(nplot-1)*dx_new;
+             s[0]=0.5*dx_new+range_new*s[0]/range;
+             s[1]=0.5*dx_new+range_new*s[1]/range;
+            }
            return;
           }
          ++np;
@@ -3284,8 +3306,11 @@ public:
   
   /// \short  Get vector of local coordinates of plot point i (when plotting
   /// nplot points in each "coordinate direction).
-  void get_s_plot(const unsigned& iplot, const unsigned& nplot,
-                  Vector<double>& s) const
+  void get_s_plot(
+   const unsigned& iplot, 
+   const unsigned& nplot,
+   Vector<double>& s,
+   const bool& use_equally_spaced_interior_sample_points=false) const
   {
    if (nplot>1)
     {
@@ -3302,6 +3327,15 @@ public:
               s[0] = double(j)/double(nplot-1);
               s[1] = double(i)/double(nplot-1);
               s[2] = double(k)/double(nplot-1);
+              if (use_equally_spaced_interior_sample_points)
+               {
+                double range=1.0;
+                double dx_new=range/double(nplot+1);       
+                double range_new=double(nplot-1)*dx_new;
+                s[0]=0.5*dx_new+range_new*s[0]/range;
+                s[1]=0.5*dx_new+range_new*s[1]/range;
+                s[2]=0.5*dx_new+range_new*s[2]/range;
+               }
               return;
              }
             }

@@ -2,7 +2,8 @@
 #-----------------------
 # Define the sources
 sources =  \
-axisym_linear_elasticity_elements.cc
+axisym_linear_elasticity_elements.cc \
+Taxisym_linear_elasticity_elements.cc 
 
 # Define the headers
 headers =  \

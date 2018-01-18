@@ -112,7 +112,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/pseudo_elastic_TH.dat.gz \
-    result_pseudo_elastic_TH.dat 0.1 1.0e-8 >> validation.log
+    result_pseudo_elastic_TH.dat 0.5 1.0e-8 >> validation.log
 fi
 
 
@@ -145,7 +145,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/pseudo_elastic_CR.dat.gz \
-    result_pseudo_elastic_CR.dat 0.1 1.0e-8 >> validation.log
+    result_pseudo_elastic_CR.dat 7.0 1.50e-6 >> validation.log
 fi
 
 mv RESLT RESLT_pseudo_elastic_CR
@@ -350,7 +350,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/macro_adapt_CR.dat.gz \
-    result_macro_adapt_CR.dat 0.1 1.0e-8 >> validation.log
+    result_macro_adapt_CR.dat 7.0 1.5e-6 >> validation.log
 fi
 
 
@@ -418,7 +418,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/alg_adapt_CR.dat.gz \
-    result_algebraic_adapt_CR.dat 0.1 1.0e-8 >> validation.log
+    result_algebraic_adapt_CR.dat 7.0 1.5e-6 >> validation.log
 fi
 
 

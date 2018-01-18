@@ -127,3 +127,4 @@ do-we-have-mpi:
 	@echo "$(MPI_RUN_COMMAND)" | tr -d '[[:space:]]' | wc -m > .tmp.wc; echo "START_BLA"`cat .tmp.wc`"END_BLA"; rm .tmp.wc
 
 
+

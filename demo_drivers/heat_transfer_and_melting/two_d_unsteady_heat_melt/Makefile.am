@@ -218,7 +218,8 @@ exact.map    stefan_boltzmann_validation.map
 
 EXTRA_DIST+= \
 heated_linear_hertz_validation.pvsm \
-plot_heated_linear_hertz.bash
+plot_heated_linear_hertz.bash \
+animate.py
 
 
 

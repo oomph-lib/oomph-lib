@@ -299,7 +299,9 @@ public:
  /// \short  Get cector of local coordinates of plot point i (when plotting 
  /// nplot points in each "coordinate direction).
  void get_s_plot(const unsigned& i, const unsigned& nplot,
-                 Vector<double>& s) const;
+                 Vector<double>& s,
+                 const bool& use_equally_spaced_interior_sample_points=false) 
+  const;
 
  /// \short Return string for tecplot zone header (when plotting 
  /// nplot points in each "coordinate direction)
@@ -341,13 +343,22 @@ public:
 /// points in each coordinate direction).
 //=======================================================================
 template<> 
-inline void QHermiteElement<1>::get_s_plot(const unsigned& i,
-                                           const unsigned& nplot,
-                                           Vector<double>& s) const
+inline void QHermiteElement<1>::get_s_plot(
+ const unsigned& i,
+ const unsigned& nplot,
+ Vector<double>& s,
+ const bool& use_equally_spaced_interior_sample_points) const
  {
   if (nplot>1)
    {
     s[0]=-1.0+2.0*double(i)/double(nplot-1);
+    if (use_equally_spaced_interior_sample_points)
+     {
+      double range=2.0;
+      double dx_new=range/double(nplot);
+      double range_new=double(nplot-1)*dx_new;
+      s[0]=-1.0+0.5*dx_new+range_new*(1.0+s[0])/range;
+     }
    }
   else
    {
@@ -382,9 +393,11 @@ inline unsigned QHermiteElement<1>::nplot_points(const unsigned& nplot) const
 /// points in each "coordinate direction).
 //=======================================================================
 template<> 
-inline void QHermiteElement<2>::get_s_plot(const unsigned& i,
-                                           const unsigned& nplot,
-                                           Vector<double>& s) const
+inline void QHermiteElement<2>::get_s_plot(
+ const unsigned& i,
+ const unsigned& nplot,
+ Vector<double>& s,
+ const bool& use_equally_spaced_interior_sample_points) const
  {
   if (nplot>1)
    {
@@ -393,6 +406,17 @@ inline void QHermiteElement<2>::get_s_plot(const unsigned& i,
     
     s[0]=-1.0+2.0*double(i0)/double(nplot-1);
     s[1]=-1.0+2.0*double(i1)/double(nplot-1);
+
+    if (use_equally_spaced_interior_sample_points)
+     {
+      double range=2.0;
+      double dx_new=range/double(nplot);
+      double range_new=double(nplot-1)*dx_new;
+      s[0]=-1.0+0.5*dx_new+range_new*(1.0+s[0])/range;
+      s[1]=-1.0+0.5*dx_new+range_new*(1.0+s[1])/range;
+
+     }
+
    }
   else
    {

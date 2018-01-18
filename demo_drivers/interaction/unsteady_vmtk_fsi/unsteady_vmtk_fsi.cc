@@ -305,10 +305,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  // We have a large number of sub-meshes with very few elements
  // in this problem: Reduce the number of bins in the MeshAsGeomObject
  // representations of these meshes to avoid memory problems
- Multi_domain_functions::Nx_bin=1;
- Multi_domain_functions::Ny_bin=1;
- Multi_domain_functions::Nz_bin=1;
-
+ NonRefineableBinArray::Default_n_bin_1d=1;
 
  // Allocate the timestepper for the Navier-Stokes equations
  BDF<2>* fluid_time_stepper_pt=new BDF<2>;

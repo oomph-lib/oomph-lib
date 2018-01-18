@@ -364,28 +364,6 @@ RefineableConvectionProblem()
  // Change default parameters for setup of bins and doc stats
  Multi_domain_functions::Doc_stats=true;
 
- // Change from the default number of bins in each direction
- Multi_domain_functions::Nx_bin=30;
- Multi_domain_functions::Ny_bin=10;
-
- // Change the minimum and maximum bin coordinates 
- // and avoid the computation of the bin boundaries "on the fly"
- Multi_domain_functions::Compute_extreme_bin_coordinates=false;
- Multi_domain_functions::X_min=0.0;
- Multi_domain_functions::X_max=3.0;
- Multi_domain_functions::Y_min=0.0;
- Multi_domain_functions::Y_max=1.0;
-
- // Set the percentage offset to zero
- Multi_domain_functions::Percentage_offset=0.0;
-
- // Set the parameter that controls the number of sampling points
- // for the setup of the bin structure. (Note that, in general, this is not
- // the same as the actual number of sampling points for the elements --
- // it plays a role similar to the nplot parameter for the output
- // functions
- Multi_domain_functions::Nsample_points=1;
-
  // Set external elements for the multi-domain solution.
  Multi_domain_functions::
   setup_multi_domain_interactions<NST_ELEMENT,AD_ELEMENT>

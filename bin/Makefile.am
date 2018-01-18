@@ -44,9 +44,10 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py \
            find_errors_and_warnings_in_build_log.bash \
            find_compilation_failures_for_demo_drivers.bash \
            check_if_executable_exists.bash bump_doc_txt.bash \
-           run_triangle_tests_only.bash make_combined_pvd.bash
-
-
+           run_triangle_tests_only.bash make_combined_pvd.bash \
+           run_selected_self_tests_based_on_string.bash \
+           wrapper_for_validate.sh meld_against_files_in_different_dir.bash \
+           docs_spelling.bash  docs_spelling_dict.aspell.en.pws
 
 fig2poly:
 	(cd ../demo_drivers/meshing/mesh_from_xfig_triangle; make install)

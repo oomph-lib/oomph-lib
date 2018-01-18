@@ -292,9 +292,41 @@ start=`date +%s`
 # Call non-interactive autogen
 build_command="./non_interactive_autogen.sh -b $build_dir -c ${oomph_root}/$configure_options_file $non_interactive_flags"
 echo "The interactive part of the build process is over."
-echo "Running $build_command"
+echo "Running non interactive build command: "
+echo " "
+echo  $build_command
+echo " " 
 
 $build_command
+
+echo " "
+echo "Done running non interactive autogen.sh"
+echo " "
+
+if [ -e external_distributions/cgal_configure_flags.txt ]; then
+    echo " "
+    echo "==================================================================="
+    echo " "
+    echo "As part of the oomph-lib build process I've installed CGAL"
+    echo "and the pre-requisite third-party libraries (gmp, mpfr and boost)"
+    echo "in the specified directory. To avoid the lengthy rebuild"
+    echo "of these libraries during any subsequent recompiles, insert"
+    echo "these flags: "
+    echo " "
+    cat external_distributions/cgal_configure_flags.txt
+    echo " " 
+    echo "into the configure option script"
+    echo " "
+    echo "      config/configure_options/current "
+    echo " "
+    echo "and remove the flag:"
+    echo " "
+    echo " --with-cgal-permanent-installation-dir=..."
+    echo " "
+    echo "==================================================================="
+fi
+
+
 
 # Run tests if requested
 if test "$run_self_tests" == "true"; then
@@ -317,6 +349,7 @@ echo " "
 echo "=============================================================== "
 echo " "
 
+
 # End the timer
 end=`date +%s`
 
@@ -327,10 +360,36 @@ time_taken=$((end-start))
 echo "=============================================================== "
 if test "$run_self_tests" == "true";
 then
-    echo "Time taken for setup and self-tests: $time_taken"
+    echo "Time taken for setup and self-tests: $time_taken sec"
 else    
-    echo "Time taken for complete setup: $time_taken"
+    echo "Time taken for complete setup: $time_taken sec"
 fi
 echo "=============================================================== "
 echo " "
 
+# Repeat report about cgal build because it will have been hidden
+# by output from self-tests:
+if test "$run_self_tests" == "true"; then
+if [ -e external_distributions/cgal_configure_flags.txt ]; then
+    echo " "
+    echo "==================================================================="
+    echo " "
+    echo "As part of the oomph-lib build process I've installed CGAL"
+    echo "and the pre-requisite third-party libraries (gmp, mpfr and boost)"
+    echo "in the specified directory. To avoid the lengthy rebuild"
+    echo "of these libraries during any subsequent recompiles, insert"
+    echo "these flags: "
+    echo " "
+    cat external_distributions/cgal_configure_flags.txt
+    echo " " 
+    echo "into the configure option script"
+    echo " "
+    echo "      config/configure_options/current "
+    echo " "
+    echo "and remove the flag:"
+    echo " "
+    echo " --with-cgal-permanent-installation-dir=..."
+    echo " "
+    echo "==================================================================="
+fi
+fi

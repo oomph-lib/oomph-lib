@@ -14,6 +14,8 @@ with any problems.
   - \ref self_tests \n\n
   - \ref run1 \n\n
   - \ref run2 \n\n
+  - \ref only_compile_dont_run \n\n
+  - \ref grep_run \n\n
   - \ref link \n\n
   - \ref missing_this \n\n 
 - \ref compilation_and_seg \n\n
@@ -447,6 +449,69 @@ have to be as closely related as in this example. While we usually
 create the name of the executable by dropping the
 postfix of the source file, this is not guaranteed! Inspect 
 the \c Makefile.am if \c make doesn't give you what you want.
+
+
+########################################################################
+<HR>
+
+\subsection only_compile_dont_run Running the self-tests takes a long time. Is it possible to suppress the execution of the built driver codes and only check if they compile? (Mainly useful for developers).
+
+
+Issuing \c make \c check from the top 
+level \c oomph-lib directory descends into all oomph-lib directories
+that contain demo driver codes, builds these and then runs them
+using the script \c validate.sh which typically also compares
+the output against some reference data 
+that is stored in the \c validata sub-directories. This process 
+(which allows for some tolerances
+in floating point data) assesses that
+the installation is working properly, but the entire procedure obviously
+takes a long time. As a developer, you may want to check (more) quickly
+if the changes you've made to any source code (in \c src) still compile
+without running any of the self-tests. It is easy to suppress 
+the execution of the self tests because the \c validate.sh script is, in fact,
+run through the wrapper script
+\code
+bin/wrapped_validate.sh
+\endcode
+which, by default, runs \c validate.sh through \c time, allowing us to
+report the run times. However, you can easily edit this file and
+make it do other things. For instance, if you put \c exit onto the 
+first line it won't do anything at all. Success! If you then issue
+\code
+make check
+\endcode
+(without the "-k"!) from the top level, the build machinery will 
+descend through all the demo driver directories, build the
+executables and stop when it encounters the first error. 
+If you want to continue with the compilation after encountering
+failures do 
+\code
+make -k check
+\endcode
+You can assess all the failures at the same time by searching
+backwards through the on-screen output.
+
+\n\n
+
+
+########################################################################
+<HR>
+
+\subsection grep_run I only want to run the self-tests for demo driver codes that contain a certain string (typically a class name; again mainly useful for developers)
+
+The script
+\code
+bin/run_selected_self_tests_based_on_string.bash
+\endcode
+will search through all demo driver directories and run the self tests
+in all directories where the source code of a demo driver contains a 
+certain string. You can specify the string and the search directory in the
+script or via the command line. Run
+\code
+bin/run_selected_self_tests_based_on_string.bash --help
+\endcode
+for details.
 
 ########################################################################
 <HR>

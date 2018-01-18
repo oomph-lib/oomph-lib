@@ -9390,7 +9390,7 @@ newton_solve_continuation(double* const &parameter_pt,
     {
 #ifdef OOMPH_HAS_MPI
      // Synchronise the solution on different processors (on each submesh)
-       this->synchronise_all_dofs();
+     this->synchronise_all_dofs();
 #endif
 
      actions_before_newton_convergence_check();
@@ -16308,6 +16308,7 @@ void Problem::synchronise_all_dofs()
  bool do_halos=true;
  bool do_external_halos=false;
  this->synchronise_dofs(do_halos,do_external_halos);
+
 
  do_halos=false;
  do_external_halos=true;

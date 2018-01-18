@@ -64,7 +64,7 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/soln0.dat RESLT/soln1.dat  \
+cat RESLT/norm0.dat RESLT/norm1.dat  \
     > box_poisson_adapt_results.dat
 
 if test "$1" = "no_fpdiff"; then
@@ -125,7 +125,7 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/soln0.dat RESLT/soln1.dat \
+cat RESLT/norm0.dat RESLT/norm1.dat \
     > box_navier_stokes_adapt_results.dat
 
 if test "$1" = "no_fpdiff"; then

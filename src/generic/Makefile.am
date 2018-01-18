@@ -48,7 +48,8 @@ matrix_vector_product.cc \
 sum_of_matrices.cc \
 implicit_midpoint_rule.cc \
 preconditioner_array.cc general_purpose_block_preconditioners.cc pml_meshes.cc \
-unstructured_two_d_mesh_geometry_base.cc
+unstructured_two_d_mesh_geometry_base.cc sample_point_container.cc \
+sample_point_parameters.cc 
 #face_element_as_geometric_object.cc
 
 if OOMPH_HAS_MUMPS
@@ -113,8 +114,8 @@ preconditioner_array.h pml_meshes.h pml_mapping_functions.h \
 generalised_timesteppers.h vector_matrix.h face_mesh_project.h \
 generalised_newtonian_constitutive_models.h \
 unstructured_two_d_mesh_geometry_base.h \
-geometric_multigrid.h
-
+geometric_multigrid.h sample_point_container.h \
+sample_point_parameters.h sparse_vector.h
 
 
 if OOMPH_HAS_MUMPS

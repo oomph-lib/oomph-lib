@@ -37,7 +37,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/result_linear_solid_contact_with_gravity_unstructured.dat.gz \
-    result_linear_solid_contact_with_gravity_unstructured.dat 1.5 2.1e-6 >> validation.log
+    result_linear_solid_contact_with_gravity_unstructured.dat 2.5 3.1e-6 >> validation.log
 fi
 
 mv RESLT RESLT_linear_solid_contact_with_gravity_unstructured
@@ -91,7 +91,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/result_solid_contact_with_gravity_unstructured.dat.gz \
-    result_solid_contact_with_gravity_unstructured.dat 0.1 1.0e-9 >> validation.log
+    result_solid_contact_with_gravity_unstructured.dat 1.1 2.0e-7 >> validation.log
 fi
 
 mv RESLT RESLT_solid_contact_with_gravity_unstructured

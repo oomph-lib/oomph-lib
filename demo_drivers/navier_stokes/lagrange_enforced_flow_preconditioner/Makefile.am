@@ -29,6 +29,9 @@ two_d_tilted_square_LDADD = -L@libdir@ \
 #---------------------------------------------------------------
 
 
+EXTRA_DIST+=run.sh
+
+
 #EXTRA_DIST+=analyse_fp_2d.mcr  analyse_fp_3d.mcr  animate_3d.mcr
 
 

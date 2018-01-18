@@ -67,6 +67,13 @@ public:
                   &Mesh::Default_TimeStepper);
 
 
+ /// Destructor
+ ~EighthSphereMesh()
+  {
+   delete Domain_pt;
+   Domain_pt=0;
+  }
+
 protected :
 
  /// Pointer to the domain

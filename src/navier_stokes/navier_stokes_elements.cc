@@ -193,6 +193,63 @@ Vector<double> NavierStokesEquations<DIM>::Default_Gravity_vector(DIM,0.0);
  }
 
 
+
+//=======================================================================
+/// Compute norm of the solution
+//=======================================================================
+template <unsigned DIM>
+void NavierStokesEquations<DIM>::compute_norm(double& norm)
+{
+ 
+ // Initialise
+ norm=0.0;
+ 
+ //Vector of local coordinates
+ Vector<double> s(DIM);
+ 
+ // Solution
+ double u=0.0;
+ 
+ //Find out how many nodes there are in the element
+ unsigned n_node = this->nnode();
+ 
+ Shape psi(n_node);
+ 
+ //Set the value of n_intpt
+ unsigned n_intpt = this->integral_pt()->nweight();
+ 
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   
+   //Assign values of s
+   for(unsigned i=0;i<DIM;i++)
+    {
+     s[i] = this->integral_pt()->knot(ipt,i);
+    }
+   
+   //Get the integral weight
+   double w = this->integral_pt()->weight(ipt);
+   
+   // Get jacobian of mapping
+   double J=this->J_eulerian(s);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+   
+   for (unsigned i=0;i<DIM;i++)
+    {
+     // Get FE function value
+     u=this->interpolated_u_nst(s,i);
+     
+     // Add to  norm
+     norm+=u*u*W;
+    }
+
+  }
+}
+
+
 //======================================================================
 /// Validate against exact velocity solution at given time.
 /// Solution is provided via function pointer.

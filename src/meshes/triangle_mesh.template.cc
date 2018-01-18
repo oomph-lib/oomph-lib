@@ -212,7 +212,7 @@ namespace oomph
     //Copy the vectors in the map over to our internal storage
     unsigned count = 0;
     for (std::map<double, Vector<FiniteElement*> >::iterator it =
-          element_attribute_map.begin(); it != element_attribute_map.end(); ++it)
+          element_attribute_map.begin(); it!=element_attribute_map.end(); ++it)
      {
       this->Region_attribute[count] = it->first;
       Region_element_pt[static_cast<unsigned>(Region_attribute[count])] = 
@@ -1000,9 +1000,10 @@ namespace oomph
      <<"The number of segments ("<<nsegments<<") and the number of "
      <<"sets of nodes ("<<segment_all_nodes_pt.size()<<") representing\n"
      <<"the\nsegments is different!!!\n\n";
-    throw OomphLibError(error_message.str(),
-                        "TriangleMesh::identify_boundary_segments_and_assign_initial_zeta_values()",
-                        OOMPH_EXCEPTION_LOCATION);
+    throw OomphLibError(
+     error_message.str(),
+     OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
    }
 #endif
   
@@ -1044,9 +1045,10 @@ namespace oomph
        <<nsegments_initial_coordinates<<" is different from "
        <<"the\nnumber of segments that present final coordinates "
        <<nsegments_final_coordinates<<"\n\n";
-      throw OomphLibError(error_message.str(),
-                          "TriangleMesh::identify_boundary_segments_and_assign_initial_zeta_values()",
-                          OOMPH_EXCEPTION_LOCATION);
+      throw OomphLibError(
+       error_message.str(),
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
      } // if (nsegments_initial_coordinates!=nsegments_final_coordinates)
     
     // Also check that the number of segments found in the previous
@@ -1059,9 +1061,10 @@ namespace oomph
        <<"final coordinates ("
        <<nsegments_initial_coordinates<<") is different from\n"
        <<"the number of found segments ("<< nsegments <<").\n\n";
-      throw OomphLibError(error_message.str(),
-                          "TriangleMesh::identify_boundary_segments_and_assign_initial_zeta_values()",
-                          OOMPH_EXCEPTION_LOCATION);
+      throw OomphLibError(
+       error_message.str(),
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
      } // if (nsegments_initial_coordinates != nsegments)
 #endif
     
@@ -1339,7 +1342,7 @@ namespace oomph
          << "found when trying to identify it with the original mesh's\n"
          << "segment coordinates\n";
         throw OomphLibError(error_message.str(),
-                            "TriangleMesh::identify_boundary_segments_and_assign_initial_zeta_values()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        } // if (!found_original_segment)
 #endif
@@ -1481,7 +1484,7 @@ namespace oomph
            << "Current segment arclength: ("
            << segment_arclength[is] <<")\n";
           throw OomphLibError(error_message.str(),
-                              "TriangleMesh::identify_boundary_segments_and_assign_initial_zeta_values()",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
 #endif
@@ -1532,7 +1535,7 @@ namespace oomph
            << "Original segment final arclength: ("
            << original_segment_final_arclength<<")\n";
           throw OomphLibError(error_message.str(),
-                              "TriangleMesh::identify_boundary_segments_and_assign_initial_zeta_values()",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
 #endif
@@ -2087,7 +2090,7 @@ namespace oomph
      << "The number of segments is zero, but the number of nonhalo\n"
      << "elements is: (" << nnon_halo_face_elements << ")\n";
     throw OomphLibError(error_message.str(),
-                        "TriangleMesh::compute_boundary_segments_connectivity_and_initial_zeta_values()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    } // if (nnon_halo_face_elements > 0 && nsegments == 0)
 #endif
@@ -2115,9 +2118,9 @@ namespace oomph
       std::ostringstream error_message;
       error_message
        << "The (" << is << ")-th segment has no elements\n";
-       throw OomphLibError(error_message.str(),
-                           "TriangleMesh::compute_boundary_segments_connectivity_and_initial_zeta_values()",
-                           OOMPH_EXCEPTION_LOCATION);      
+      throw OomphLibError(error_message.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);      
      } // if (segment_sorted_ele_pt[is].size() == 0)
 #endif
     
@@ -2202,9 +2205,6 @@ namespace oomph
         // Coordinates of right node
         double x_right = nod_pt->x(0);
         double y_right = nod_pt->x(1);
-        
-//        DEBP(x_right);
-//        DEBP(y_right);
         
         // Increment boundary coordinate (the arclength)
         zeta[0] += sqrt(
@@ -2445,7 +2445,7 @@ namespace oomph
          << "the processor holding\nthe non-halo counterpart is "
          << "negative!\n";
         throw OomphLibError(error_message.str(),
-                            "TriangleMesh::compute_boundary_segments_connectivity_and_initial_zeta_values()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
 #endif
@@ -2487,7 +2487,7 @@ namespace oomph
          << "not found in the vector of halo\nelements associated "
          << "with the (" << left_processor << ") processor.\n\n";
         throw OomphLibError(error_message.str(),
-                            "TriangleMesh::compute_boundary_segments_connectivity_and_initial_zeta_values()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        } // if (!left_halo_element_found)
 #endif
@@ -2509,7 +2509,7 @@ namespace oomph
          << "element of the current segment ("<<is<<") is marked as halo,\n"
          << "but the face element created from it is nonhalo\n";
         throw OomphLibError(error_message.str(),
-                            "TriangleMesh::compute_boundary_segments_connectivity_and_initial_zeta_values()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        } // if (tmp_left_bulk_ele_pt->is_halo())
 #endif
@@ -2550,7 +2550,7 @@ namespace oomph
          << "not found in the vector of haloed\nelements associated "
          << "with processor ("<< left_processor << ").\n";
         throw OomphLibError(error_message.str(),
-                            "TriangleMesh::compute_boundary_segments_connectivity_and_initial_zeta_values()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
 #endif
@@ -7765,11 +7765,8 @@ namespace oomph
       
         // Set the values in the containers
         
-// hierher
-//      this->UnstructuredTwoDMeshGeometryBase::boundary_initial_coordinate(b)=
+
         this->boundary_initial_coordinate(b)=initial_coordinates;
-// hierher
-//      this->UnstructuredTwoDMeshGeometryBase::boundary_final_coordinate(b)=
         this->boundary_final_coordinate(b)=final_coordinates;
       
         // ... now read the zeta values
@@ -15031,21 +15028,47 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
  // ===================================================================
  // The comparison class for the map that sorts the nodes on the
  // shared boundary (using a lexicographic order)
- struct classcomp {
+ // ===================================================================
+ struct classcomp
+ {
+
+  // Tolerance for lower-left comparison
+  static double Tol;
+
+
+  // Comparison operator for "lower left" ordering
   bool operator() (const std::pair<double, double> &lhs, 
                    const std::pair<double, double> &rhs) const
    {
-    if (lhs.second < rhs.second)
+    double diff_y=lhs.second-rhs.second;
+    if (diff_y<-Tol)    // (lhs.second < rhs.second)
      {
       return true;
      }
     else 
      {
-      // // Are "equal" with 1.0e-14 tolerance
-      // if (lhs.second - rhs.second < 1.0e-14)
-      // Are equal?
-      if (lhs.second == rhs.second)
+      // Are they "equal" with 1.0e-14 tolerance?
+      if (diff_y<Tol) // (lhs.second == rhs.second)
        {
+#ifdef PARANOID
+        double diff_x=lhs.first-rhs.first;
+        if (fabs(diff_x)<Tol)
+         { 
+          std::ostringstream warning_message;
+          warning_message
+           << "Dodgy \"lower left\" (lexicographic) comparison "
+           << "of points with cooordinates: "
+           << " lhs = ( " << lhs.first << " , " << lhs.second << " ) \n"
+           << " rhs = ( " << rhs.first << " , " << rhs.second << " ) \n"
+           << "x and y coordinates differ by less than tolerance!\n"
+           << "diff_x = " << diff_x << "\n"
+           << "diff_y = " << diff_y << "\n"
+           << "Tol    = " << Tol << "\n";
+           OomphLibError(warning_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+         }
+#endif
         if (lhs.first < rhs.first)
          {
           return true;
@@ -15060,10 +15083,45 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
         return false;
        }
      }
-   }
+    
+    
    
- }; // struct classcomp
+    // if (lhs.second < rhs.second)
+    //  {
+    //   return true;
+    //  }
+    // else 
+    //  {
+    //   // // Are "equal" with 1.0e-14 tolerance
+    //   // if (lhs.second - rhs.second < 1.0e-14)
+    //   // Are equal?
+    //   if (lhs.second == rhs.second)
+    //    {
+    //     if (lhs.first < rhs.first)
+    //      {
+    //       return true;
+    //      }
+    //     else
+    //      {
+    //       return false;
+    //      }
+    //    }
+    //   else
+    //    {
+    //     return false;
+    //    }
+    //  }
+    
+    
+   }
+  
+ } Bottom_left_sorter; // struct classcomp
  
+
+ // Assign value for tolerance
+ double classcomp::Tol=1.0e-14;
+
+
  //======================================================================
  // Sort the nodes on shared boundaries so that the processors that share
  // a boundary agree with the order of the nodes on the boundary
@@ -15077,6 +15135,7 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
   
   // Get the number of shared boundaries
   const unsigned nmy_rank_shd_bnd = my_rank_shared_boundaries_ids.size();
+
   // Loop over the shared boundaries
   for (unsigned i = 0; i < nmy_rank_shd_bnd; i++)
    {
@@ -15085,13 +15144,22 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
     //std::map<std::pair<double, double>, Node*> sorted_nodes_pt;
     std::map<std::pair<double, double>, Node*, classcomp> sorted_nodes_pt;
     
+
+#ifdef PARANOID
+
+    // Check min distance between nodes; had better be less than the
+    // tolerance used for the bottom left sorting
+    double min_distance_squared=DBL_MAX;
+
+#endif
+
     // Get the boundary id
     const unsigned b = my_rank_shared_boundaries_ids[i];
     
     // Get the number of nodes on the current boundary
     const unsigned nbnd_node = this->nshared_boundary_node(b);
     
-    // Go through all the nodes on the boundary and temporarly store
+    // Go through all the nodes on the boundary and temporarily store
     // them on the map container
     for (unsigned i_node = 0; i_node < nbnd_node; i_node++)
      {
@@ -15099,6 +15167,48 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
       std::pair<double, double> vertex = std::make_pair(node_pt->x(0),
                                                           node_pt->x(1));
       sorted_nodes_pt[vertex] = node_pt;
+
+
+
+#ifdef PARANOID
+
+      // Check for minimum distance
+      for (unsigned j_node = 0; j_node < nbnd_node; j_node++)
+       {
+        if (i_node!=j_node)
+         {
+          Node* node2_pt = this->shared_boundary_node_pt(b, j_node);
+          
+          // Squared distance
+          double squared_distance=0.0;
+          for (unsigned ii=0;ii<2;ii++)
+           {
+            squared_distance+=
+             (node_pt->x(ii)-node2_pt->x(ii))*
+             (node_pt->x(ii)-node2_pt->x(ii));
+           }
+          if (squared_distance<min_distance_squared)
+           {
+            min_distance_squared=squared_distance;
+           }
+         }
+       }
+      
+      if (sqrt(min_distance_squared)<Bottom_left_sorter.Tol)
+       {        
+        std::ostringstream warning_message;
+        warning_message
+         << "Minimum distance between nodes on boundary " << b << "\n"
+         << "is " << sqrt(min_distance_squared) << " which is less than "
+         << "Bottom_left_sorter.Tol = " << Bottom_left_sorter.Tol << "\n"
+         << "This may screw up the ordering of the nodes on shared boundaries\n";
+        OomphLibWarning(warning_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+       }
+     
+#endif
+
      }
     
     unsigned counter = 0;
@@ -15115,7 +15225,7 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
       // Store the pointer to the node
       this->Sorted_shared_boundary_node_pt[b][counter++] = (*it_map).second;
      }
-    
+
    } // for (i < nmy_rank_shd_bnd)
   
  }
@@ -15193,6 +15303,8 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
       
       if (update_nodes)
        {
+
+
         const unsigned nboundary_node = this->nboundary_node(b);
         for (unsigned n = 0; n < nboundary_node; n++)
          {
@@ -29311,8 +29423,8 @@ update_other_proc_shd_bnd_node_helper
     
    }
   
-  // std::ofstream hierher;
-  // hierher.open((Global_string_for_annotation:: String[0]+"overall_target_areas"+
+  // std::ofstream tmp;
+  // tmp.open((Global_string_for_annotation:: String[0]+"overall_target_areas"+
   //               StringConversion::to_string(Global_unsigned::Number)+".dat").c_str());
   
   // Get maximum target area
@@ -29324,7 +29436,7 @@ update_other_proc_shd_bnd_node_helper
     if (target_area[e]>max_area) max_area=target_area[e];
     if (target_area[e]<min_area) min_area=target_area[e];
     
-    // hierher << (finite_element_pt(e)->node_pt(0)->x(0)+
+    // tmp << (finite_element_pt(e)->node_pt(0)->x(0)+
     //            finite_element_pt(e)->node_pt(1)->x(0)+
     //           finite_element_pt(e)->node_pt(2)->x(0))/3.0 << " "
     //        << (finite_element_pt(e)->node_pt(0)->x(1)+
@@ -29335,7 +29447,7 @@ update_other_proc_shd_bnd_node_helper
     //        << elem_error[e]  << " " << std::endl;
    }
   
-  //hierher.close();
+  //tmp.close();
   
   oomph_info << "Maximum target area: " << max_area << std::endl;
   oomph_info << "Minimum target area: " << min_area << std::endl;
@@ -30085,114 +30197,108 @@ update_other_proc_shd_bnd_node_helper
     // ==============================================================
     
     // Get the TriangulateIO object associated with that mesh
-    TriangulateIO tmp_new_triangulateio=
-     tmp_new_mesh_pt->triangulateio_representation();
-    RefineableTriangleMesh<ELEMENT>* new_mesh_pt=0;
-    
-    // Adjust size of bins
-    const unsigned backup_bin_x_target_areas=Multi_domain_functions::Nx_bin;
-    const unsigned backup_bin_y_target_areas=Multi_domain_functions::Ny_bin;
-    
-    Multi_domain_functions::Nx_bin=Nbin_x_for_area_transfer;
-    Multi_domain_functions::Ny_bin=Nbin_y_for_area_transfer;
-    
-    // Limit the number of sample points
-    //    const unsigned backup_n_sample_points=
-    //      Multi_domain_functions::Nsample_points;
-    //    Multi_domain_functions::Nsample_points=1;
-    
-    // Print info. for tranferring of target areas
-    if (Print_timings_transfering_target_areas)
-     {
-      // Switch timings and stats on
-      Multi_domain_functions::Doc_timings=true;
-      Multi_domain_functions::Doc_stats=true;
-      Multi_domain_functions::Doc_full_stats=true;
-     }
-    
-    // Make a mesh as geom object representation of the temporary
-    // mesh -- this also builds up the internal bin structure 
-    // from which we'll recover the target areas
-    double t0_geom_obj=TimingHelpers::timer();
-    
-    // If the mesh is a solid mesh then do the mapping based on the
-    // Eulerian coordinates
-    bool backup= MeshAsGeomObject::Use_eulerian_coordinates_during_setup;
-    if (solid_mesh_pt!=0)
-     {
-      MeshAsGeomObject::Use_eulerian_coordinates_during_setup=true;
-     }
-    
-    MeshAsGeomObject* mesh_geom_obj_pt;
-    
-    // We need to be careful when creating the mesh_as_geom_object
-    // representation of the mesh. We need to check whether we are
-    // dealing with a distributed mesh or not
+     TriangulateIO tmp_new_triangulateio =
+      tmp_new_mesh_pt->triangulateio_representation();
+     RefineableTriangleMesh<ELEMENT>* new_mesh_pt = 0;
+
+     // If the mesh is a solid mesh then do the mapping based on the
+     // Eulerian coordinates
+     bool use_eulerian_coords=false;
+     if (solid_mesh_pt!=0)
+      {
+       use_eulerian_coords=true;
+      }
+
+     MeshAsGeomObject* mesh_geom_obj_pt=0;
+     
+     // We need to be careful when creating the mesh_as_geom_object
+     // representation of the mesh. We need to check whether we are
+     // dealing with a distributed mesh or not
 #ifdef OOMPH_HAS_MPI
-    if (this->is_mesh_distributed())
-     {
-      mesh_geom_obj_pt = 
-       new MeshAsGeomObject(this, MPI_Helpers::communicator_pt());
-     }
-    else
-     {
-      mesh_geom_obj_pt = new MeshAsGeomObject(this);
-     }
-#else
-    mesh_geom_obj_pt = new MeshAsGeomObject(this);
+     if (this->is_mesh_distributed())
+      {
+       NonRefineableBinArrayParameters params(this); 
+       if (use_eulerian_coords)
+        {
+         params.enable_use_eulerian_coordinates_during_setup();
+        }
+       Vector<unsigned> bin_dim(2);
+       bin_dim[0]=Nbin_x_for_area_transfer;
+       bin_dim[1]=Nbin_y_for_area_transfer;
+       params.dimensions_of_bin_array()=bin_dim;
+       mesh_geom_obj_pt = new MeshAsGeomObject(&params);
+      }
+     else
+      {
+       NonRefineableBinArrayParameters params(this);
+       if (use_eulerian_coords)
+        {
+         params.enable_use_eulerian_coordinates_during_setup();
+        }
+       Vector<unsigned> bin_dim(2);
+       bin_dim[0]=Nbin_x_for_area_transfer;
+       bin_dim[1]=Nbin_y_for_area_transfer;
+       params.dimensions_of_bin_array()=bin_dim;
+       mesh_geom_obj_pt = new MeshAsGeomObject(&params);
+      }
+#else     
+     NonRefineableBinArrayParameters params(this);
+     if (use_eulerian_coords)
+      {
+       params.enable_use_eulerian_coordinates_during_setup();
+      }
+     Vector<unsigned> bin_dim(2);
+     bin_dim[0]=Nbin_x_for_area_transfer;
+     bin_dim[1]=Nbin_y_for_area_transfer;
+     params.dimensions_of_bin_array()=bin_dim;
+     mesh_geom_obj_pt = new MeshAsGeomObject(&params);
 #endif
+     
+    // Set up a map from pointer to element to its number
+    // in the mesh
+    std::map<GeneralisedElement*,unsigned> element_number;
+    unsigned nelem=this->nelement();
     
-    if (solid_mesh_pt!=0)
+    // Create a vector to store the min target area of each bin (at
+    // this stage the number of bins should not be that large, so it
+    // should be safe to build a vector for the total number of bins)
+    Vector<double> bin_min_target_area;
+    
+    // Get pointer to sample point container
+    NonRefineableBinArray* bin_array_pt=
+     dynamic_cast<NonRefineableBinArray*>(mesh_geom_obj_pt->
+                                          sample_point_container_pt());
+    if (bin_array_pt==0)
      {
-      MeshAsGeomObject::Use_eulerian_coordinates_during_setup=backup;
+      throw OomphLibError(
+       "Sample point container has to be NonRefineableBinArray",
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
      }
-    
-    // Reset to previous values for bin sizes for transferring of
-    // target areas
-    Multi_domain_functions::Nx_bin=backup_bin_x_target_areas;
-    Multi_domain_functions::Ny_bin=backup_bin_y_target_areas;
-    //    Multi_domain_functions::Nsample_points=backup_n_sample_points;
-    
-    if (Print_timings_transfering_target_areas)
-     {
-      // Switch timings and stats off
-      Multi_domain_functions::Doc_timings=false;
-      Multi_domain_functions::Doc_stats=false;
-      Multi_domain_functions::Doc_full_stats=false;
-     }
-    
-    oomph_info << "Time for setup of mesh as geometric object: "
-               << TimingHelpers::timer()-t0_geom_obj
-               << std::endl;
-    
-    // Do some stats
+
     {
-     double t_stats=TimingHelpers::timer();
      unsigned n_bin=0;
      unsigned max_n_entry=0;
      unsigned min_n_entry=UINT_MAX;
      unsigned tot_n_entry=0;
      unsigned n_empty=0;
-     mesh_geom_obj_pt->get_fill_stats(n_bin,max_n_entry,min_n_entry,
-                                      tot_n_entry,n_empty);
+     bin_array_pt->get_fill_stats(n_bin,max_n_entry,min_n_entry,
+                                  tot_n_entry,n_empty);
      
      oomph_info << "Before bin diffusion:"
-		<< " nbin:("<<n_bin<<")"
-		<< " nempty:("<<n_empty<<")"
-		<< " min:("<<min_n_entry<<")"
-		<< " max:("<<max_n_entry<<")"
-		<< " average entries:("<<double(tot_n_entry)/double(n_bin)<<")"
-		<< std::endl;
-     
-     oomph_info << "Time for bin stats: "
-                << TimingHelpers::timer()-t_stats
+                << " nbin:("<<n_bin<<")"
+                << " nempty:("<<n_empty<<")"
+                << " min:("<<min_n_entry<<")"
+                << " max:("<<max_n_entry<<")"
+                << " average entries:("
+                << double(tot_n_entry)/double(n_bin)<<")"
                 << std::endl;
     }
     
     // Fill bin by diffusion
     double t0_bin_diff=TimingHelpers::timer();
     oomph_info << "Going into diffusion bit...\n";
-    mesh_geom_obj_pt->fill_bin_by_diffusion();
+    bin_array_pt->fill_bin_by_diffusion();
     oomph_info << "Back from diffusion bit...\n";
     oomph_info << "Time for bin diffusion: "
                << TimingHelpers::timer()-t0_bin_diff
@@ -30200,32 +30306,25 @@ update_other_proc_shd_bnd_node_helper
     
     // Do some stats
     {
-     double t_stats=TimingHelpers::timer();
      unsigned n_bin=0;
      unsigned max_n_entry=0;
      unsigned min_n_entry=UINT_MAX;
      unsigned tot_n_entry=0;
      unsigned n_empty=0;
-     mesh_geom_obj_pt->get_fill_stats(n_bin,max_n_entry,min_n_entry,
-                                      tot_n_entry,n_empty);
+     bin_array_pt->get_fill_stats(n_bin,max_n_entry,min_n_entry,
+                                  tot_n_entry,n_empty);
      
      oomph_info << "After bin diffusion:"
-		<< " nbin:("<<n_bin<<")"
-		<< " nempty:("<<n_empty<<")"
-		<< " min:("<<min_n_entry<<")"
-		<< " max:("<<max_n_entry<<")"
-		<< " average entries:("<<double(tot_n_entry)/double(n_bin)<<")"
-		<< std::endl;
-     
-     oomph_info << "Time for bin stats: "
-                << TimingHelpers::timer()-t_stats
+                << " nbin:("<<n_bin<<")"
+                << " nempty:("<<n_empty<<")"
+                << " min:("<<min_n_entry<<")"
+                << " max:("<<max_n_entry<<")"
+                << " average entries:("
+                << double(tot_n_entry)/double(n_bin)<<")"
                 << std::endl;
     }
     
-    // Set up a map from pointer to element to its number
-    // in the mesh
-    std::map<GeneralisedElement*,unsigned> element_number;
-    unsigned nelem=this->nelement();
+    // Populate container for relation between element pointers and numbers
     for (unsigned e=0;e<nelem;e++)
      {
       element_number[this->element_pt(e)]=e;
@@ -30235,14 +30334,16 @@ update_other_proc_shd_bnd_node_helper
     
     // Timing for map
     double t_total_map=0.0;
+    
     // Counter for map
     unsigned counter_map = 0;
     
     // Get access to the bins (we need access to the content of the
     // bins to compute the minimum of the target areas of the elements
     // in each bin)
-    const std::map<unsigned,Vector<std::pair<FiniteElement*,Vector<double> > > >*
-      bins_pt=mesh_geom_obj_pt->get_all_bins_content();
+    const std::map<unsigned,Vector<std::pair<FiniteElement*,
+                                             Vector<double> > > >*
+     bins_pt=bin_array_pt->get_all_bins_content();
     
     // Get the number of bins
     const unsigned n_bin=bins_pt->size();
@@ -30250,16 +30351,24 @@ update_other_proc_shd_bnd_node_helper
     // Create a vector to store the min target area of each bin (at
     // this stage the number of bins should not be that large, so it
     // should be safe to build a vector for the total number of bins)
-    Vector<double> bin_min_target_area(n_bin, 0.0);
+    bin_min_target_area.resize(n_bin);
+    for (unsigned u=0;u<n_bin;u++)
+     {
+      bin_min_target_area[u]=0.0;
+     }
     // loop over the bins, get their elements and compute the minimum
     // target area of all of them
-    typedef std::map<unsigned,Vector<std::pair<FiniteElement*,Vector<double> > > >::const_iterator IT;
+    typedef std::map<unsigned,
+                     Vector<std::pair<FiniteElement*,
+                                      Vector<double> > > >::const_iterator IT;
     for (IT it=bins_pt->begin();it!=bins_pt->end();it++)
      {
       // The bin number
       unsigned ib=(*it).first;
+      
       // Get the number of elements in the bin
       const unsigned n_ele_bin = (*it).second.size();
+      
       // loop over the elements in the bin
       for (unsigned ee=0;ee<n_ele_bin;ee++)
        {
@@ -30292,118 +30401,138 @@ update_other_proc_shd_bnd_node_helper
     oomph_info << "CPU for map[counter="<<counter_map<<"]: "
                << t_total_map << std::endl;
     
+    
+    // Optional output for debugging (keep it around!)
+    const bool output_bins=false;
+    if (output_bins)
+     {
+      unsigned length=bin_min_target_area.size();
+      for (unsigned u = 0;u<length;u++)
+       {
+        oomph_info << "Bin n" << u << ",target area: "
+                   << bin_min_target_area[u]<<std::endl;
+       }
+     }
+    
     // Now start iterating to refine mesh recursively
     //-----------------------------------------------
     bool done=false;
     unsigned iter=0;
-    
 #ifdef OOMPH_HAS_MPI
     // The number of elements that require (un)refinement
     unsigned n_ele_need_refinement = 0;
 #endif
     
-    // Timing (total) for get bin
-    double t_total_get_bin=0.0;
-    
     // The timing for the third stage of segments connectivity
     double t_total_third_stage_segments_connectivity = 0.0;
+    
     // The timing for the transfering target areas
     double t_total_transfer_target_areas = 0.0;
+    
     // The timing for the copying of target areas
     double t_total_limit_target_areas = 0.0;
+    
     // The timing to create the new mesh
     double t_total_create_new_adapted_mesh = 0.0;
+
     // The timing for the snapping of the nodes on the new meshes
     double t_total_snap_nodes = 0.0;
+    
     // The timing to check whether other processors need to adapt
     double t_total_wait_other_processors = 0.0;
-    
     double t_iter=TimingHelpers::timer();
-    
     while (!done)
-     {
-      // Accept by default but overwrite if things go wrong below
-      done=true;
-      
-      double t_start_transfer_target_areas=TimingHelpers::timer();
-      double t0_loop_int_pts=TimingHelpers::timer();
-      
-      // Loop over elements in new (tmp) mesh and visit all
-      // its integration points. Check where it's located in the bin
-      // structure of the current mesh and pass the target area
-      // to the new element
-      nelem=tmp_new_mesh_pt->nelement();
-      
-      // Store the target areas for elements in the temporary
-      // TriangulateIO mesh
-      Vector<double> new_transferred_target_area(nelem,0.0);
-      
-      for (unsigned e=0;e<nelem;e++)
-       { // start loop el
-        ELEMENT* el_pt=dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e));
-        unsigned nint=el_pt->integral_pt()->nweight();
-        for (unsigned ipt=0;ipt<nint;ipt++)
-         {
-          // Get the coordinate of current point
-          Vector<double> s(2);
-          for(unsigned i=0;i<2;i++)
-           {
-            s[i] = el_pt->integral_pt()->knot(ipt,i);
-           }
-	  
-          Vector<double> x(2);
-          el_pt->interpolated_x(s,x);
-	  
-          // Find the bin that contains that point and its contents
-          int bin_number=0;
+    {
+     // Accept by default but overwrite if things go wrong below
+     done=true;
+     
+     double t_start_transfer_target_areas=TimingHelpers::timer();
+     double t0_loop_int_pts=TimingHelpers::timer();
+     
+     // Loop over elements in new (tmp) mesh and visit all
+     // its integration points. Check where it's located in the bin
+     // structure of the current mesh and pass the target area
+     // to the new element
+     nelem=tmp_new_mesh_pt->nelement();
+
+     // Store the target areas for elements in the temporary
+     // TriangulateIO mesh
+     Vector<double> new_transferred_target_area(nelem,0.0);
+     
+     for (unsigned e=0;e<nelem;e++)
+      { // start loop el
+       ELEMENT* el_pt=dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e));
+       unsigned nint=el_pt->integral_pt()->nweight();
+       for (unsigned ipt=0;ipt<nint;ipt++)
+        {
+         // Get the coordinate of current point
+         Vector<double> s(2);
+         for(unsigned i=0;i<2;i++)
+          {
+           s[i] = el_pt->integral_pt()->knot(ipt,i);
+          }
+         
+         Vector<double> x(2);
+         el_pt->interpolated_x(s,x);
+         
+         // Find the bin that contains that point and its contents
+         int bin_number=0;
+         bin_array_pt->get_bin(x,bin_number);
+         
+         // Did we find it?
+         if (bin_number<0)
+          {
+           // Not even within bin boundaries... odd
+           std::stringstream error_message;
+           error_message
+            << "Very odd -- we're looking for a point[ "
+            << x[0] << " " << x[1] << " ] that's not even \n"
+            << "located within the bin boundaries.\n";
+           throw OomphLibError(error_message.str(),
+                               "RefineableTriangleMesh::adapt()",
+                               OOMPH_EXCEPTION_LOCATION);
+          } // if (bin_number<0)
+         else
+          {            
+           // Go for smallest target area of any element in this bin
+           // to force "one level" of refinement (the one-level-ness
+           // is enforced below by limiting the actual reduction in
+           // area
+           if (new_transferred_target_area[e]!=0)
+            {
+             new_transferred_target_area[e]=
+              std::min(new_transferred_target_area[e], 
+                       bin_min_target_area[bin_number]);
+            }
+           else
+            {
+             new_transferred_target_area[e]=bin_min_target_area[bin_number];
+            }
+           
+          }
+         
+        } // for (ipt<nint)
+       
+      } // for (e<nelem)
           
-          double t_get_bin=TimingHelpers::timer();
-          mesh_geom_obj_pt->get_bin(x,bin_number);
-          t_total_get_bin+=TimingHelpers::timer()-t_get_bin;
-	  
-          // Did we find it?
-          if (bin_number<0)
-           {
-            // Not even within bin boundaries... odd
-            std::stringstream error_message;
-            error_message
-             << "Very odd -- we're looking for a point[ "
-             << x[0] << " " << x[1] << " ] that's not even \n"
-             << "located within the bin boundaries.\n";
-            throw OomphLibError(error_message.str(),
-                                "RefineableTriangleMesh::adapt()",
-                                OOMPH_EXCEPTION_LOCATION);
-           } // if (bin_number<0)
-          else
-           {            
-            // Go for smallest target area of any element in this bin
-            // to force "one level" of refinement (the one-level-ness
-            // is enforced below by limiting the actual reduction in
-            // area
-            if (new_transferred_target_area[e]!=0)
-             {
-              new_transferred_target_area[e]=
-               std::min(new_transferred_target_area[e], 
-                        bin_min_target_area[bin_number]);
-             }
-            else
-             {
-              new_transferred_target_area[e]=bin_min_target_area[bin_number];
-             }
-            
-           }
-          
-         } // for (ipt<nint)
-        
-       } // for (e<nelem)
-      
-      oomph_info << "Time for loop over integration points in new mesh: "
-                 << TimingHelpers::timer()-t0_loop_int_pts  
-                 << std::endl;
-      
-      // //hierher
+     // do some output (keep it alive!)
+     const bool output_target_areas=false;
+     if (output_target_areas)
+      {
+       unsigned length=new_transferred_target_area.size();
+       for (unsigned u = 0; u < length;u++)
+        {
+         oomph_info << "Element" << u << ",target area: "
+                    << new_transferred_target_area[u] << std::endl;
+        }
+      }
+     oomph_info << "Time for loop over integration points in new mesh: "
+                << TimingHelpers::timer()-t0_loop_int_pts  
+                << std::endl;
+     
+    
       // {
-      // hierher.open((Global_string_for_annotation:: String[0]+"binned_target_areas"+
+      // tmp.open((Global_string_for_annotation:: String[0]+"binned_target_areas"+
       //               StringConversion::to_string(Global_unsigned::Number)+".dat").c_str());
   
       // Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > bin_content=
@@ -30420,13 +30549,13 @@ update_other_proc_shd_bnd_node_helper
       //     Vector<double> x(2);
       //     el_pt->interpolated_x(s,x);
       //     unsigned e_current=element_number[gen_el_pt];
-      //     hierher << x[0] << " " << x[1] << " " 
+      //     tmp << x[0] << " " << x[1] << " " 
       //             << target_area[e_current] << " " 
       //             << el_pt->size() << " " 
       //             << std::endl;
       //    }
       //  }
-      // hierher.close();
+      // tmp.close();
       // }
       
       const double t_sub_total_transfer_target_areas = 
@@ -30453,7 +30582,7 @@ update_other_proc_shd_bnd_node_helper
       // tmp_new_mesh_pt->output(("intermediate_mesh"+
       //                         StringConversion::to_string(iter)+".dat").c_str()); 
       
-      // hierher.open((Global_string_for_annotation:: String[0]+"target_areas_intermediate_mesh_iter"+
+      // tmp.open((Global_string_for_annotation:: String[0]+"target_areas_intermediate_mesh_iter"+
       //               StringConversion::to_string(iter)+"_"+
       //               StringConversion::to_string(Global_unsigned::Number)+".dat").c_str());
       
@@ -30498,13 +30627,11 @@ update_other_proc_shd_bnd_node_helper
           if (new_target_area[e]<f_ele_pt->size()/3.0)
            {
             new_target_area[e]=f_ele_pt->size()/3.0;
-            //tmp_new_mesh_pt->finite_element_pt(e)->size()/3.0;
 	    
             // We'll need to give it another go later
             done=false;
             
-           } // if (new_target_area[e]<
-             //      tmp_new_mesh_pt->finite_element_pt(e)->size()/3.0)
+           } 
       
 #ifdef OOMPH_HAS_MPI
           // Keep track of the elements that require (un)refinement
@@ -30512,19 +30639,7 @@ update_other_proc_shd_bnd_node_helper
 #endif // #ifdef OOMPH_HAS_MPI
           
          } // else if (new_area <= 0.0)
-        
-      // hierher 
-        /*
-        oomph_info << e << " " << (tmp_new_mesh_pt->finite_element_pt(e)->node_pt(0)->x(0)+
-           tmp_new_mesh_pt->finite_element_pt(e)->node_pt(1)->x(0)+
-           tmp_new_mesh_pt->finite_element_pt(e)->node_pt(2)->x(0))/3.0 << " "
-       << (tmp_new_mesh_pt->finite_element_pt(e)->node_pt(0)->x(1)+
-           tmp_new_mesh_pt->finite_element_pt(e)->node_pt(1)->x(1)+
-           tmp_new_mesh_pt->finite_element_pt(e)->node_pt(2)->x(1))/3.0 << " "
-       << new_target_area[e] << " " 
-       << tmp_new_mesh_pt->finite_element_pt(e)->size()<< std::endl;
-        */
-        
+                
        } // for (e < nel_new)
       
       const double t_sub_total_limit_target_areas = 
@@ -30549,14 +30664,18 @@ update_other_proc_shd_bnd_node_helper
       
       if (done) 
        {
-        oomph_info << "All area adjustments accommodated by max. permitted area reduction \n";
+        oomph_info 
+         << "All area adjustments accommodated by max. permitted area"
+         << " reduction \n";
        }
       else
        {
-         oomph_info << "NOT all area adjustments accommodated by max. permitted area reduction \n";
+         oomph_info 
+          << "NOT all area adjustments accommodated by max. "
+          << "permitted area reduction \n";
        }
       
-      //hierher.close();
+      //tmp.close();
       //pause("doced binned_target_areas.dat and interemdiate mesh targets");
       
       // Now create the new mesh from TriangulateIO structure
@@ -30820,7 +30939,7 @@ update_other_proc_shd_bnd_node_helper
        }
       
      } // end of iteration (while (!done))
-    
+
     //Delete the temporary geometric object representation of the
     //current mesh
     delete mesh_geom_obj_pt;
@@ -30866,48 +30985,6 @@ update_other_proc_shd_bnd_node_helper
         Multi_domain_functions::Doc_stats=true;
         Multi_domain_functions::Doc_full_stats=true;
        }
-      
-      // Change the size of bins
-      
-      // Backup the number of bins on the multi domain fucntions
-      const unsigned backup_bin_x_projection=Multi_domain_functions::Nx_bin;
-      const unsigned backup_bin_y_projection=Multi_domain_functions::Ny_bin;
-      Multi_domain_functions::Nx_bin=Nbin_x_for_projection;
-      Multi_domain_functions::Ny_bin=Nbin_y_for_projection;
-          
-      // Backup the number of chunks
-      const unsigned backup_n_spiral_chunk=
-       Multi_domain_functions::N_spiral_chunk;
-      // We need to adjust the number of chunks with the size of the bin
-      // (the default value is 1 chunk for bin size = 100)
-      Multi_domain_functions::N_spiral_chunk=
-       static_cast<unsigned>(std::ceil(Nbin_x_for_projection*1.0e-2));
-      // Limit to no more than 20 chunks per spiral, otherwise it takes
-      // a lot of time (experimentally tested)
-      if (Multi_domain_functions::N_spiral_chunk>20)
-       {
-        Multi_domain_functions::N_spiral_chunk=20;
-       }
-      // Ensure that the minimun number of chunks is 1
-      if (Multi_domain_functions::N_spiral_chunk < 1)
-       {
-        Multi_domain_functions::N_spiral_chunk=1;
-       }
-      
-      // Document the number of bins
-      if (Print_timings_level_adaptation>1)
-       {
-        oomph_info << "Nbins for projection (in mesh adaptation) "
-                   << "Nx_bin="<< Multi_domain_functions::Nx_bin
-                   << " Ny_bin="<< Multi_domain_functions::Ny_bin 
-                   << std::endl;
-       }
-      
-      // Enable setting up of multi domain interaction for projection
-      Multi_domain_functions::Setup_multi_domain_for_projection=true;
-      //Multi_domain_functions::N_spiral_chunk=UINT_MAX;
-      //Multi_domain_functions::Nsample_points=1;
-      //Multi_domain_functions::Sort_bin_entries=true;
       
       double t_proj=TimingHelpers::timer();
       oomph_info << "About to begin projection.\n";
@@ -30964,7 +31041,8 @@ update_other_proc_shd_bnd_node_helper
        {
         // Set the mesh used for the projection object
         project_problem_pt->mesh_pt()=new_mesh_pt;
-        //project_problem_pt->disable_suppress_output_during_projection();
+        
+        // project_problem_pt->disable_suppress_output_during_projection();
         
         // Use iterative solver for projection? By default, an iterative
         // solver is used for the projection stage
@@ -30985,17 +31063,6 @@ update_other_proc_shd_bnd_node_helper
         Multi_domain_functions::Doc_stats=false;
         Multi_domain_functions::Doc_full_stats=false;
        }
-      
-      // Reset to previous values
-      Multi_domain_functions::Nx_bin=backup_bin_x_projection;
-      Multi_domain_functions::Ny_bin=backup_bin_y_projection;
-      Multi_domain_functions::N_spiral_chunk=backup_n_spiral_chunk;
-      //Multi_domain_functions::Sort_bin_entries=false;
-      //Multi_domain_functions::Nsample_points=5;
-      //Multi_domain_functions::N_spiral_chunk=1;
-      
-      // Disable setting up of multi domain interaction for projection
-      Multi_domain_functions::Setup_multi_domain_for_projection=false;
       
       // Get the total time for projection
       const double tt_projection = TimingHelpers::timer()-tt_start_projection;
@@ -31064,18 +31131,7 @@ update_other_proc_shd_bnd_node_helper
         // ------------------------------------------
         
        } // if (Print_timings_level_adaptation>1)
-      
-      // Reset
-      Multi_domain_functions::Nx_bin=backup_bin_x_projection;
-      Multi_domain_functions::Ny_bin=backup_bin_y_projection;
-      //Multi_domain_functions::Sort_bin_entries=false;
-      Multi_domain_functions::Setup_multi_domain_for_projection=false;
-      
-      // Switch timings and stats off
-      //Multi_domain_functions::Doc_timings=false;
-      //Multi_domain_functions::Doc_stats=false;
-      //Multi_domain_functions::Doc_full_stats=false;
-      
+            
       oomph_info << "CPU for projection of solution onto new mesh: " 
                  << TimingHelpers::timer()-t_proj
                  << std::endl;
@@ -31346,10 +31402,6 @@ update_other_proc_shd_bnd_node_helper
     
     // Delete the mesh
     delete new_mesh_pt;
-
-    //Now we can delete the projection problem
-    //delete project_problem_pt;
-    
     
     // Resume of timings
     if (Print_timings_level_adaptation>2)
@@ -31387,8 +31439,8 @@ update_other_proc_shd_bnd_node_helper
                  << t_total_snap_nodes << std::endl;
      }
     
-    double max_area;
-    double min_area;
+    double max_area=0.0;
+    double min_area=0.0;
     
     this->max_and_min_element_size(max_area, min_area);
     oomph_info << "Max/min element size in adapted mesh: "
@@ -31455,7 +31507,9 @@ update_other_proc_shd_bnd_node_helper
   // ------------------------------------------
   
 #endif // #ifdef OOMPH_HAS_MPI
-  
+ 
+
+
  }
 
 //=========================================================================
@@ -35006,24 +35060,7 @@ refine_boundary(Mesh* face_mesh_pt,
 
   // Create a geometric object from the mesh to represent
   //the curvilinear boundary
-
-  //MeshAsGeomObject* mesh_geom_obj_pt =
-  //  new MeshAsGeomObject(face_mesh_pt);
-
-  MeshAsGeomObject* mesh_geom_obj_pt;
-#ifdef OOMPH_HAS_MPI
-  if (this->is_mesh_distributed())
-   {
-     mesh_geom_obj_pt = 
-      new MeshAsGeomObject(face_mesh_pt, MPI_Helpers::communicator_pt());
-   }
-  else
-   {
-    mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
-   }
-#else
-  mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
-#endif
+  MeshAsGeomObject* mesh_geom_obj_pt=new MeshAsGeomObject(face_mesh_pt);
 
   // Get the total number of current vertices
   unsigned n_vertex=vector_bnd_vertices.size();
@@ -35172,23 +35209,7 @@ refine_boundary(Mesh* face_mesh_pt,
 
   // Create a geometric object from the mesh to represent
   //the curvilinear boundary
-  //MeshAsGeomObject* mesh_geom_obj_pt =
-  // new MeshAsGeomObject(face_mesh_pt);
-
-  MeshAsGeomObject* mesh_geom_obj_pt;
-#ifdef OOMPH_HAS_MPI
-  if (this->is_mesh_distributed())
-   {
-     mesh_geom_obj_pt = 
-      new MeshAsGeomObject(face_mesh_pt, MPI_Helpers::communicator_pt());
-   }
-  else
-   {
-    mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
-   }
-#else
-  mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
-#endif
+  MeshAsGeomObject* mesh_geom_obj_pt=new MeshAsGeomObject(face_mesh_pt);
 
   // Get the total number of current vertices
   unsigned n_vertex=vector_bnd_vertices.size();
@@ -35305,8 +35326,6 @@ create_unsorted_face_mesh_representation(
   // interpreted as GeomObjects
 
   // Build the face mesh
-// hierher
-//  Mesh::template build_face_mesh<ELEMENT,FaceElementAsGeomObject>
   this->template build_face_mesh<ELEMENT,FaceElementAsGeomObject>
    (boundary_id,face_mesh_pt);
   
@@ -37358,18 +37377,7 @@ update_polygon_using_elements_area(TriangleMeshPolygon* &polygon_pt,
    // here to ensure that all processors (in a distributed context)
    // get this representation just once, and because an AllToAll MPI
    // communication is used in this calling
-   MeshAsGeomObject* mesh_geom_obj_pt;
-#ifdef OOMPH_HAS_MPI
-   if (this->is_mesh_distributed())
-    {
-     mesh_geom_obj_pt = 
-      new MeshAsGeomObject(face_mesh_pt[p], MPI_Helpers::communicator_pt());
-    }
-   else
-#endif
-    {
-     mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt[p]);
-    }
+   MeshAsGeomObject* mesh_geom_obj_pt=new MeshAsGeomObject(face_mesh_pt[p]);
    
    // Set of coordinates on the boundary
    // Set entries are ordered on first entry in vector which stores
@@ -38311,18 +38319,7 @@ update_open_curve_using_elements_area(TriangleMeshOpenCurve* &open_curve_pt,
    // here to ensure that all processors (in a distributed context)
    // get this representation just once, and because an AllToAll MPI
    // communication is used in this calling
-   MeshAsGeomObject* mesh_geom_obj_pt;
-#ifdef OOMPH_HAS_MPI
-   if (this->is_mesh_distributed())
-    {
-     mesh_geom_obj_pt = 
-      new MeshAsGeomObject(face_mesh_pt[cs], MPI_Helpers::communicator_pt());
-    }
-   else
-#endif
-    {
-     mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt[cs]);
-    }
+   MeshAsGeomObject* mesh_geom_obj_pt=new MeshAsGeomObject(face_mesh_pt[cs]);
    
    //Get the boundary id
    const unsigned bound = 
@@ -40929,20 +40926,7 @@ update_polygon_after_restart(TriangleMeshPolygon* &polygon_pt)
    // to ensure that all processors (in a distributed context) get this
    // representation just once, and because an AllToAll MPI communication
    // is used in this calling
-   MeshAsGeomObject* mesh_geom_obj_pt;
-#ifdef OOMPH_HAS_MPI
-   if (this->is_mesh_distributed())
-    {     
-     mesh_geom_obj_pt = 
-      new MeshAsGeomObject(face_mesh_pt[p], MPI_Helpers::communicator_pt());
-    }
-   else
-    {
-     mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt[p]);
-    }
-#else
-   mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt[p]);
-#endif
+   MeshAsGeomObject* mesh_geom_obj_pt=new MeshAsGeomObject(face_mesh_pt[p]);
 
    // Set of coordinates that are on the boundary
    // Set entries are ordered on first entry in vector which stores
@@ -41694,21 +41678,8 @@ update_open_curve_after_restart(TriangleMeshOpenCurve* &open_curve_pt)
    // to ensure that all processors (in a distributed context) get this
    // representation just once, and because an AllToAll MPI communication
    // is used in this calling
-   MeshAsGeomObject* mesh_geom_obj_pt;
-#ifdef OOMPH_HAS_MPI
-   if (this->is_mesh_distributed())
-    {
-     mesh_geom_obj_pt = 
-      new MeshAsGeomObject(face_mesh_pt[cs], MPI_Helpers::communicator_pt());
-    }
-   else
-    {
-     mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt[cs]);
-    }
-#else
-   mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt[cs]);
-#endif
-   
+   MeshAsGeomObject* mesh_geom_obj_pt=new MeshAsGeomObject(face_mesh_pt[cs]);
+
    //Get the boundary id
    const unsigned bound = open_curve_pt->curve_section_pt(cs)->boundary_id();
    
@@ -43343,12 +43314,11 @@ fill_boundary_elements_and_nodes_for_internal_boundaries(
        // Do not forget to participate in the communication
        Mesh* face_mesh_pt = new Mesh();
        create_unsorted_face_mesh_representation(b, face_mesh_pt);
-              
-       MeshAsGeomObject* mesh_geom_obj_pt = 
-        new MeshAsGeomObject(face_mesh_pt, MPI_Helpers::communicator_pt());
+       MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
        
        //Delete the allocated memory for the geometric object and face mesh
        delete mesh_geom_obj_pt;
+
        // Flush the nodes from the face mesh to make sure we
        // don't delete them (the bulk mesh still needs them!)
        face_mesh_pt->flush_node_storage();
@@ -43412,10 +43382,8 @@ fill_boundary_elements_and_nodes_for_internal_boundaries(
        // Do not forget to participate in the communication
        Mesh* face_mesh_pt = new Mesh();
        create_unsorted_face_mesh_representation(b, face_mesh_pt);
-       
-       MeshAsGeomObject* mesh_geom_obj_pt = 
-        new MeshAsGeomObject(face_mesh_pt, MPI_Helpers::communicator_pt());
-       
+       MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
+
        //Delete the allocated memory for the geometric object and face mesh
        delete mesh_geom_obj_pt;
        // Flush the nodes from the face mesh to make sure we
@@ -43617,24 +43585,7 @@ fill_boundary_elements_and_nodes_for_internal_boundaries(
    create_unsorted_face_mesh_representation(b, face_mesh_pt);
    
    //Now that the coordinates have been set up we can do the snapping
-   
-   //Now make the mesh as geometric object
-   //MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
-   
-  MeshAsGeomObject* mesh_geom_obj_pt;
-#ifdef OOMPH_HAS_MPI
-  if (this->is_mesh_distributed())
-   {
-     mesh_geom_obj_pt = 
-      new MeshAsGeomObject(face_mesh_pt, MPI_Helpers::communicator_pt());
-   }
-  else
-   {
-    mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
-   }
-#else
-  mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
-#endif
+  MeshAsGeomObject* mesh_geom_obj_pt=new MeshAsGeomObject(face_mesh_pt);
 
   //Now assign the new nodes positions based on the old meshes
   //potentially curvilinear boundary (its geom object incarnation)

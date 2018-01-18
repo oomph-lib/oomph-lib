@@ -1069,9 +1069,9 @@ void LinearisedAxisymPoroelasticBJS_FSIElement
          //Jacobian entries
          if(flag)
           {
-
-           oomph_info << "Jac not done yet\n";
-           abort();
+           throw OomphLibError("Jacobian not done yet",
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION);
 
            //Loop over the lagrange multiplier unknowns
            for(unsigned l2=0;l2<n_node;l2++)
@@ -1124,10 +1124,10 @@ void LinearisedAxisymPoroelasticBJS_FSIElement
 
          //Jacobian entries
          if(flag)
-          {
-           
-           oomph_info << "NOT DONE YET\n";
-           abort();
+          {           
+           throw OomphLibError("Jacobian not done yet",
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION);
 
            // Loop over the velocity unknowns [derivs w.r.t. to
            // wall velocity taken care of by fd-ing

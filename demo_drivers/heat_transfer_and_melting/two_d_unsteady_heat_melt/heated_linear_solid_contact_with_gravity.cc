@@ -3873,13 +3873,6 @@ private:
    
    Multi_domain_functions::
     Accept_failed_locate_zeta_in_setup_multi_domain_interaction=false;
-
-
-
-
-   // hierher
-   Multi_domain_functions::Percentage_offset=1000.0;
-
  
    // Find external elements (penetrator flux elements) that provide
    // the target temperature
@@ -4625,13 +4618,6 @@ void ContactProblem<ELEMENT>::doc_solution()
 int main(int argc, char* argv[])
 {
  //feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
-
-
-
- // hierher
- Multi_domain_functions::Nx_bin=10000;
- Multi_domain_functions::Ny_bin=10000;
-
 
  FiniteElement::Accept_negative_jacobian=true;
 

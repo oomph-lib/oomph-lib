@@ -6857,7 +6857,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
    error_message
     << "If you believe this to be acceptable for your problem\n"
     << "increase Problem::Max_permitted_error_for_halo_check and re-run \n";
-   throw OomphLibError(error_message.str(),
+    throw OomphLibError(error_message.str(),
                        OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
@@ -7348,7 +7348,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
 
                  //Throw error
                  throw OomphLibError("Node doesn't exist!",
-OOMPH_CURRENT_FUNCTION,
+                                     OOMPH_CURRENT_FUNCTION,
                                      OOMPH_EXCEPTION_LOCATION);
                 }
 
@@ -7423,7 +7423,7 @@ OOMPH_CURRENT_FUNCTION,
  if (shout_and_terminate)
   {
    throw OomphLibError("Error in halo checking",
-OOMPH_CURRENT_FUNCTION,
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

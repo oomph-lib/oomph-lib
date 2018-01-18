@@ -7,11 +7,14 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 #Set the number of tests to be checked
 NUM_TESTS=1
 
+
 # Setup validation directory
 #---------------------------
 touch Validation
 rm -r -f Validation
 mkdir Validation
+
+
 
 # Validation for unstructured fluid
 #----------------------------------

@@ -204,6 +204,9 @@ public:
   }
 
 
+   /// \short Compute norm of solution: square of the L2 norm
+   void compute_norm(double& norm);
+
  /// Get error against and norm of exact solution
  void compute_error(std::ostream &outfile, 
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,

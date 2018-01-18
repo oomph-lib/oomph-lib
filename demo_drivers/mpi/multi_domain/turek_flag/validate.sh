@@ -46,7 +46,7 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 sleep 10
-cat RESLT_TUREK_LOAD_BALANCE/soln1_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/soln1_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/soln2_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/soln2_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/solid_soln1_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/solid_soln1_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/solid_soln2_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/solid_soln2_on_proc1.dat metis_input_for_validation.dat > turek_flag_load_balance_external_results.dat
+cat RESLT_TUREK_LOAD_BALANCE/soln1_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/soln1_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/soln2_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/soln2_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/solid_soln1_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/solid_soln1_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/solid_soln2_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/solid_soln2_on_proc1.dat > turek_flag_load_balance_external_results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log

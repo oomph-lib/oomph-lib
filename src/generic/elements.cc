@@ -1626,14 +1626,21 @@ namespace Locate_zeta_helpers
  /// Maximum number of newton iterations
  unsigned Max_newton_iterations = 10;
  
- /// Rounding tolerance for whether coordinate is in element or not
- double Rounding_tolerance = 1.0e-12;
+ /// \short Rounding tolerance for whether coordinate is in element or not
+ /// Bit subtle -- this is obviously related to the Newton tolerance
+ /// but not quite the same!
+ double Rounding_tolerance = 1.0e-7; 
+
+ /// \short Multiplier for (zeta-based) outer radius of element used for
+ /// deciding that point is outside element. Set to negative value
+ /// to suppress test.
+ double Radius_multiplier_for_fast_exit_from_locate_zeta=1.5;
 
  /// Number of points along one dimension of each element used
  /// to create coordinates within the element in order to see
  /// which has the smallest initial residual (and is therefore used
  /// as the initial guess in the Newton method when locating coordinate)
- unsigned N_local_points = 2;
+ unsigned N_local_points = 5;
 }
 
 
@@ -3833,7 +3840,45 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
    return 0;
   }
    
+//======================================================================
+/// Compute centre of gravity of all nodes and radius of node that
+/// is furthest from it. Used to assess approximately if a point
+/// is likely to be contained with an element in locate_zeta-like
+/// operations. NOTE: All computed in terms of zeta!
+//======================================================================
+ void FiniteElement::get_centre_of_gravity_and_max_radius_in_terms_of_zeta(
+  Vector<double>& cog, double& max_radius) const
+ {
+  // Initialise
+  cog.resize(Elemental_dimension);
+  max_radius=0.0;
 
+  // Get cog
+  unsigned nnod=nnode();
+  for (unsigned j=0;j<nnod;j++)
+   {
+    for (unsigned i=0;i<Elemental_dimension;i++)
+     {
+      cog[i]+=zeta_nodal(j,0,i);
+     }
+   }
+  for (unsigned i=0;i<Elemental_dimension;i++)
+   {
+    cog[i]/=double(nnod);
+   }
+
+  // Get max distance
+  for (unsigned j=0;j<nnod;j++)
+   {
+    double dist_squared=0.0;
+    for (unsigned i=0;i<Elemental_dimension;i++)
+     {
+      dist_squared+=(cog[i]-zeta_nodal(j,0,i))*(cog[i]-zeta_nodal(j,0,i));
+     }
+    if (dist_squared>max_radius) max_radius=dist_squared;
+   }
+  max_radius=sqrt(max_radius);
+ }
 
 //======================================================================
 /// Return FE interpolated coordinate x[i] at local coordinate s
@@ -4533,222 +4578,215 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
 void FiniteElement::locate_zeta(const Vector<double> &zeta,
                                 GeomObject*& geom_object_pt, Vector<double> &s,
                                 const bool& use_coordinate_as_initial_guess)
+{
+ 
+ //Find the number of coordinates, the dimension of the element
+ //This must be the same for the local and intrinsic global coordinate
+ unsigned ncoord = this->dim();
+ 
+ // Fast return based on centre of gravity and max. radius of any nodal
+ // point 
+ if (Locate_zeta_helpers::Radius_multiplier_for_fast_exit_from_locate_zeta>0.0)
+  {
+   Vector<double> cog(ncoord);
+   double max_radius=0.0;
+   get_centre_of_gravity_and_max_radius_in_terms_of_zeta(cog,max_radius);
+   
+   // Get radius
+   double radius=0.0;
+   for (unsigned i=0;i<ncoord;i++)
     {
-     //Find the number of coordinates, the dimension of the element
-     //This must be the same for the local and intrinsic global coordinate
-     unsigned ncoord = this->dim();
-
-     //Assign storage for the vector and matrix used in Newton's method
-     Vector<double> dx(ncoord,0.0);
-     DenseDoubleMatrix jacobian(ncoord,ncoord,0.0);
-
-     // Make a list of (equally-spaced) local coordinates inside the element
-     unsigned n_list=Locate_zeta_helpers::N_local_points; 
-     double list_space=(1.0/(double(n_list)-1.0))*(s_max()-s_min());
-     Vector<Vector<double> > s_list;
-
-     // If the boolean argument use_coordinate_as_initial_guess was set
-     // to true then we don't need to initialise s
-     if (!use_coordinate_as_initial_guess)
-      {
-       // If there is no macro element
-       if(Macro_elem_pt==0)
-        {
-         // Default to the centre of the element
-         for(unsigned i=0;i<ncoord;i++)
-          {
-           s[i] = 0.5*(s_max()+s_min());
-          }
-        }
-       else
-        {
-         // Create a list of coordinates within the element
-         if (ncoord==1)
-          {
-           for (unsigned i=0;i<n_list;i++)
-            {
-             Vector<double> s_c(ncoord);
-             s_c[0]=s_min()+(double(i)*list_space);
-             s_list.push_back(s_c);
-            }
-          }
-         else if (ncoord==2)
-          {
-           for (unsigned i=0;i<n_list;i++)
-            {
-             for (unsigned j=0;j<n_list;j++)
-              {
-               Vector<double> s_c(ncoord);
-               s_c[0]=s_min()+(double(i)*list_space);
-               s_c[1]=s_min()+(double(j)*list_space);
-               s_list.push_back(s_c);
-              }
-            }
-          }
-         else if (ncoord==3)
-          {
-           for (unsigned i=0;i<n_list;i++)
-            {
-             for (unsigned j=0;j<n_list;j++)
-              {
-               for (unsigned k=0;k<n_list;k++)
-                {
-                 Vector<double> s_c(ncoord);
-                 s_c[0]=s_min()+(double(i)*list_space);
-                 s_c[1]=s_min()+(double(j)*list_space);
-                 s_c[2]=s_min()+(double(k)*list_space);
-                 s_list.push_back(s_c);
-                }
-              }
-            }
-          }
-         else
-          {
-           // Shouldn't get in here...
-           std::ostringstream error_stream;
-           error_stream << "Element dimension is not equal to 1, 2 or 3 - ?\n";
-           throw OomphLibError(error_stream.str(),
-                               OOMPH_CURRENT_FUNCTION,
-                               OOMPH_EXCEPTION_LOCATION);
-          }
-        }
-      }
-
-     //Counter for the number of Newton steps
-     unsigned count=0;
-
-     //Control flag for the Newton loop
-     bool keep_going=true;
-   
-     //Storage for the interpolated value of x
-     Vector<double> inter_x(ncoord);
-   
-     // If no macro element, or we have specified the coordinate already
-     if ((macro_elem_pt()==0) || (use_coordinate_as_initial_guess))
-      {
-       //Get the value of x at the initial guess
-       this->interpolated_zeta(s,inter_x);
-   
-       //Set up the residuals
-       for(unsigned i=0;i<ncoord;i++) {dx[i] = zeta[i] - inter_x[i];}
-      }
-     else
-      {
-       // Find the smallest residual from the list of coordinates made earlier
-       double my_min_resid=DBL_MAX;
-       Vector<double> s_local(ncoord);
-       Vector<double> work_x(ncoord);
-       Vector<double> work_dx(ncoord);
-
-       unsigned n_list_coord=s_list.size();
-
-       for (unsigned i_coord=0; i_coord<n_list_coord; i_coord++)
-        {
-         for (unsigned i=0;i<ncoord;i++)
-          {
-           s_local[i]=s_list[i_coord][i];
-          }
-         // get_x for this coordinate
-         this->interpolated_zeta(s_local,work_x);
-
-         // calculate residuals
-         for(unsigned i=0;i<ncoord;i++)
-          {
-           work_dx[i] = zeta[i] - work_x[i];
-          }
-
-         double maxres =
-          std::fabs(*std::max_element(work_dx.begin(),work_dx.end(),
-                                     AbsCmp<double>()));
-
-         // test against previous residuals
-         if (maxres<my_min_resid)
-          {
-           my_min_resid=maxres;
-           dx=work_dx;
-           inter_x=work_x;
-           s=s_local;
-          }
-
-        }
-
-      }
-
-     //Main Newton Loop
-     do    // start of do while loop
-      {
-       //Increase loop counter
-       count++;
-
-       //Bail out if necessary (without an error for now...)
-       if(count > Locate_zeta_helpers::Max_newton_iterations)
-        {
-         keep_going=false;
-         continue;
-        }
-	     
-       //If it's the first time round the loop, check the initial residuals
-       if(count==1)
-        {
-         double maxres =
-          std::fabs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
-
-         //If it's small enough exit
-         if(maxres < Locate_zeta_helpers::Newton_tolerance)
-          {
-           keep_going=false;
-           continue;
-          }
-        }
-
-       //Is there a macro element? If so, assemble the Jacobian by FD-ing
-       if (macro_elem_pt()!=0)
-        {
-         // Assemble jacobian on the fly by finite differencing
-         Vector<double> work_s=s;
-         Vector<double> r=inter_x; // i.e. the result of previous call to get_x
-
-         // Finite difference step
-         double fd_step=GeneralisedElement::Default_fd_jacobian_step;
-
-         // Storage for calculated r from incremented s
-         Vector<double> work_r(ncoord,0.0);
-
-         // Loop over s coordinates
-         for (unsigned i=0; i<ncoord; i++)
-          {
-           // Increment work_s by a small amount
-           work_s[i]+=fd_step;
-
-           // Calculate work_r from macro element
-           this->interpolated_zeta(work_s,work_r);
-
-           // Loop over r to fill Jacobian
-           for (unsigned j=0; j<ncoord; j++)
-            {
-             jacobian(j,i)=-(work_r[j]-r[j])/fd_step;
-            }
-         
-           // Reset work_s
-           work_s[i]=s[i];
-
-          }
-
-        }
-       else // no macro element, so compute Jacobian with shape functions etc.
-        {
-         //Compute the entries of the Jacobian matrix
-         unsigned n_node = this->nnode();
-         unsigned n_position_type = this->nnodal_position_type();
-         Shape psi(n_node,n_position_type);
-         DShape dpsids(n_node,n_position_type,ncoord);
-
-         //Get the local shape functions and their derivatives
-         dshape_local(s,psi,dpsids);
+     radius+=(cog[i]-zeta[i])*(cog[i]-zeta[i]);
+    }
+   radius=sqrt(radius);
+   if (radius>
+       Locate_zeta_helpers::Radius_multiplier_for_fast_exit_from_locate_zeta*
+       max_radius)
+    {
+     // oomph_info << "Zeta: [ ";
+     // for (unsigned i=0;i<ncoord;i++)
+     //  {
+     //   oomph_info << zeta[i] << " ";
+     //  }
+     // oomph_info << " ] is at radius " << radius << " from c.o.g. [ ";
+     // for (unsigned i=0;i<ncoord;i++)
+     //  {
+     //   oomph_info << cog[i] << " ";
+     //  }
+     // oomph_info << " ] which is greater than " 
+     //            << Locate_zeta_helpers::Radius_multiplier_for_fast_exit_from_locate_zeta 
+     //            << " x max radius " 
+     //            << " ( " << max_radius  << " ) and therefore deemed to be outside element" 
+     //            << std::endl;          
      
-         //Calculate the values of dxds
-         DenseMatrix<double> interpolated_dxds(ncoord,ncoord,0.0);
+     geom_object_pt=0;
+     return;    
+    }
+  }
+  
+ //Assign storage for the vector and matrix used in Newton's method
+ Vector<double> dx(ncoord,0.0);
+ DenseDoubleMatrix jacobian(ncoord,ncoord,0.0);
+ 
+ // // Make a list of (equally-spaced) local coordinates inside the element
+ // unsigned n_list=Locate_zeta_helpers::N_local_points; 
 
+ // double list_space=(1.0/(double(n_list)-1.0))*(s_max()-s_min());
+ 
+ // Possible initial guesses for Newton's method
+ Vector<Vector<double> > s_list;
+ 
+ // If the boolean argument use_coordinate_as_initial_guess was set
+ // to true then we don't need to initialise s
+ if (!use_coordinate_as_initial_guess)
+  {
+   //Vector of local coordinates
+   Vector<double> s_c(ncoord);
+   
+   // Loop over plot points
+   unsigned num_plot_points=nplot_points(Locate_zeta_helpers::N_local_points);
+   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+    {
+     // Get local coordinates of plot point
+     get_s_plot(iplot,Locate_zeta_helpers::N_local_points,s_c);
+     s_list.push_back(s_c);
+    }
+  }
+ 
+ //Counter for the number of Newton steps
+ unsigned count=0;
+ 
+ //Control flag for the Newton loop
+ bool keep_going=true;
+ 
+ //Storage for the interpolated value of x
+ Vector<double> inter_x(ncoord);
+ 
+ // Ifwe have specified the coordinate already
+ if (use_coordinate_as_initial_guess)
+  {
+   //Get the value of x at the initial guess
+   this->interpolated_zeta(s,inter_x);
+   
+   //Set up the residuals
+   for(unsigned i=0;i<ncoord;i++) {dx[i] = zeta[i] - inter_x[i];}
+  }
+ else
+  {
+   // Find the smallest residual from the list of coordinates made earlier
+   double my_min_resid=DBL_MAX;
+   Vector<double> s_local(ncoord);
+   Vector<double> work_x(ncoord);
+   Vector<double> work_dx(ncoord);
+   
+   unsigned n_list_coord=s_list.size();
+   
+   for (unsigned i_coord=0; i_coord<n_list_coord; i_coord++)
+    {
+     for (unsigned i=0;i<ncoord;i++)
+      {
+       s_local[i]=s_list[i_coord][i];
+      }
+     // get_x for this coordinate
+     this->interpolated_zeta(s_local,work_x);
+     
+     // calculate residuals
+     for(unsigned i=0;i<ncoord;i++)
+      {
+       work_dx[i] = zeta[i] - work_x[i];
+      }
+     
+     double maxres =
+      std::fabs(*std::max_element(work_dx.begin(),work_dx.end(),
+                                  AbsCmp<double>()));
+     
+     // test against previous residuals
+     if (maxres<my_min_resid)
+      {
+       my_min_resid=maxres;
+       dx=work_dx;
+       inter_x=work_x;
+       s=s_local;
+      }
+     
+    }
+  }
+ 
+ //Main Newton Loop
+ do    // start of do while loop
+  {
+   //Increase loop counter
+   count++;
+   
+   //Bail out if necessary (without an error for now...)
+   if(count > Locate_zeta_helpers::Max_newton_iterations)
+    {
+     keep_going=false;
+     continue;
+    }
+   
+   //If it's the first time round the loop, check the initial residuals
+   if(count==1)
+    {
+     double maxres =
+      std::fabs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
+     
+     //If it's small enough exit
+     if(maxres < Locate_zeta_helpers::Newton_tolerance)
+      {
+       keep_going=false;
+       continue;
+      }
+    }
+   
+   //Is there a macro element? If so, assemble the Jacobian by FD-ing
+   if (macro_elem_pt()!=0)
+    {
+     // Assemble jacobian on the fly by finite differencing
+     Vector<double> work_s=s;
+     Vector<double> r=inter_x; // i.e. the result of previous call to get_x
+     
+     // Finite difference step
+     double fd_step=GeneralisedElement::Default_fd_jacobian_step;
+     
+     // Storage for calculated r from incremented s
+     Vector<double> work_r(ncoord,0.0);
+     
+     // Loop over s coordinates
+     for (unsigned i=0; i<ncoord; i++)
+      {
+       // Increment work_s by a small amount
+       work_s[i]+=fd_step;
+       
+       // Calculate work_r from macro element
+       this->interpolated_zeta(work_s,work_r);
+       
+       // Loop over r to fill Jacobian
+       for (unsigned j=0; j<ncoord; j++)
+        {
+         jacobian(j,i)=-(work_r[j]-r[j])/fd_step;
+        }
+       
+       // Reset work_s
+       work_s[i]=s[i];
+       
+      }
+     
+    }
+   else // no macro element, so compute Jacobian with shape functions etc.
+    {
+     //Compute the entries of the Jacobian matrix
+     unsigned n_node = this->nnode();
+     unsigned n_position_type = this->nnodal_position_type();
+     Shape psi(n_node,n_position_type);
+     DShape dpsids(n_node,n_position_type,ncoord);
+     
+     //Get the local shape functions and their derivatives
+     dshape_local(s,psi,dpsids);
+     
+     //Calculate the values of dxds
+     DenseMatrix<double> interpolated_dxds(ncoord,ncoord,0.0);
+     
 // MH: No longer needed
 //          //This implementation will only work for n_position_type=1
 //          //since the function nodal_position_gen does not yet exist
@@ -4765,97 +4803,97 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
 //                                OOMPH_EXCEPTION_LOCATION);
 //           }
 // #endif
-
-         // Loop over the nodes
-         for(unsigned l=0;l<n_node;l++)
-          {
-           // Loop over position type even though it should be 1; the
-           // functionality for n_position_type>1 will exist in the future
-           for(unsigned k=0;k<n_position_type;k++)
-            {
-             // Add the contribution from the nodal coordinates to the matrix
-             for(unsigned i=0;i<ncoord;i++)
-              {
-               for(unsigned j=0;j<ncoord;j++)
-                {
-                 interpolated_dxds(i,j) +=
-                  this->zeta_nodal(l,k,i)*dpsids(l,k,j);
-                }
-              }
-            }
-          }
-
-         //The entries of the Jacobian matrix are merely dresiduals/ds
-         //i.e. \f$ -dx/ds \f$
+     
+     // Loop over the nodes
+     for(unsigned l=0;l<n_node;l++)
+      {
+       // Loop over position type even though it should be 1; the
+       // functionality for n_position_type>1 will exist in the future
+       for(unsigned k=0;k<n_position_type;k++)
+        {
+         // Add the contribution from the nodal coordinates to the matrix
          for(unsigned i=0;i<ncoord;i++)
           {
            for(unsigned j=0;j<ncoord;j++)
             {
-             jacobian(i,j) = - interpolated_dxds(i,j);
+             interpolated_dxds(i,j) +=
+              this->zeta_nodal(l,k,i)*dpsids(l,k,j);
             }
           }
-
         }
-
-       //Now solve the damn thing
-       try
-        {
-         jacobian.solve(dx);
-        }
-       catch(OomphLibError &error)
-        {
-         // I've caught the error so shut up!
-         error.disable_error_message();
-#ifdef PARANOID
-         oomph_info << "Error in linear solve for "
-                    << "FiniteElement::locate_zeta()"
-                    << std::endl;
-         oomph_info << "Should not affect the result!" << std::endl;
-#endif
-        }
-
-       //Add the correction to the local coordinates
-       for(unsigned i=0;i<ncoord;i++) {s[i] -= dx[i];}
+      }
      
-       //Get the new residuals
-       this->interpolated_zeta(s,inter_x);
-       for(unsigned i=0;i<ncoord;i++) {dx[i] = zeta[i] - inter_x[i];}
-     
-       //Get the maximum residuals
-       double maxres =
-        std::fabs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
-
-       //If we have converged jump straight to the test at the end of the loop
-       if(maxres < Locate_zeta_helpers::Newton_tolerance)
+     //The entries of the Jacobian matrix are merely dresiduals/ds
+     //i.e. \f$ -dx/ds \f$
+     for(unsigned i=0;i<ncoord;i++)
+      {
+       for(unsigned j=0;j<ncoord;j++)
         {
-         keep_going=false;
-         continue;
+         jacobian(i,j) = - interpolated_dxds(i,j);
         }
       }
-     while(keep_going);
-
-     //Test whether the local coordinate are valid or not
-     bool valid=local_coord_is_valid(s,
-                                     Locate_zeta_helpers::Rounding_tolerance);
-     if (!valid)
-      {
-       geom_object_pt=0;
-       return;
-      }
-
-     // It is also possible now that it may not have converged "correctly", 
-     // i.e. count is greater than Max_newton_iterations
-     if (count > Locate_zeta_helpers::Max_newton_iterations)
-      {
-       // Don't trust the current answer, return null
-       geom_object_pt=0;
-       return;
-      }
-
-     //Otherwise the required point is located in "this" element:
-     geom_object_pt = this;
-
+     
     }
+   
+   //Now solve the damn thing
+   try
+    {
+     jacobian.solve(dx);
+    }
+   catch(OomphLibError &error)
+    {
+     // I've caught the error so shut up!
+     error.disable_error_message();
+#ifdef PARANOID
+     oomph_info << "Error in linear solve for "
+                << "FiniteElement::locate_zeta()"
+                << std::endl;
+     oomph_info << "Should not affect the result!" << std::endl;
+#endif
+    }
+   
+   //Add the correction to the local coordinates
+   for(unsigned i=0;i<ncoord;i++) {s[i] -= dx[i];}
+   
+   //Get the new residuals
+   this->interpolated_zeta(s,inter_x);
+   for(unsigned i=0;i<ncoord;i++) {dx[i] = zeta[i] - inter_x[i];}
+   
+   //Get the maximum residuals
+   double maxres =
+    std::fabs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
+   
+   //If we have converged jump straight to the test at the end of the loop
+   if(maxres < Locate_zeta_helpers::Newton_tolerance)
+    {
+     keep_going=false;
+     continue;
+    }
+  }
+ while(keep_going);
+ 
+ //Test whether the local coordinate are valid or not
+ bool valid=local_coord_is_valid(s,
+                                 Locate_zeta_helpers::Rounding_tolerance);
+ if (!valid)
+  {
+   geom_object_pt=0;
+   return;
+  }
+ 
+ // It is also possible now that it may not have converged "correctly", 
+ // i.e. count is greater than Max_newton_iterations
+ if (count > Locate_zeta_helpers::Max_newton_iterations)
+  {
+   // Don't trust the current answer, return null
+   geom_object_pt=0;
+   return;
+  }
+  
+ //Otherwise the required point is located in "this" element:
+ geom_object_pt = this;
+}
+
 
 
 //=======================================================================
