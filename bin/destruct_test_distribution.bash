@@ -338,6 +338,7 @@ for do_mpi in 0 1; do
             fi
             # Build and run self tests
             echo "./non_interactive_autogen.sh -S &> test_build.log  " >> build_script.bash            
+            echo "make -k check &>> test_build.log  " >> build_script.bash       
             
 #------------------------------------------------------
 # Make the test directory and run tests
