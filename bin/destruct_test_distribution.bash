@@ -337,7 +337,7 @@ for do_mpi in 0 1; do
                 echo "echo \"LD=mpif77\" >> config/configure_options/current" >> build_script.bash 
             fi
             # Build and run self tests
-            echo "./non_interactive_autogen.sh -S &> test_build.log  " >> build_script.bash            
+            echo "./non_interactive_autogen.sh &> test_build.log  " >> build_script.bash            
             echo "make -k check &>> test_build.log  " >> build_script.bash       
             
 #------------------------------------------------------
