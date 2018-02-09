@@ -890,8 +890,7 @@ namespace oomph
    {
     // Write the error message into a string
     std::string error_message="Solve function for class\n\n";
-    error_message+="ComplexGMRES";
-    error_message+="\n\n";
+    error_message+="ComplexGMRES\n\n";
     error_message+="is deliberately broken to avoid the accidental \n";
     error_message+="use of the inappropriate C++ default. If you \n";
     error_message+="really need one for this class, write it yourself...\n";
@@ -1048,7 +1047,6 @@ namespace oomph
     // not run along the columns of the triangular matrix but rather
     // up the rows.
     //-----------------------------------------------------------------
-
     // The outer loop is a loop over the columns of the Hessenberg matrix
     // since the indexing is reversed
     for (int i=int(k);i>=0;i--)
@@ -1100,11 +1098,13 @@ namespace oomph
   /// -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \\ dy
+  /// dx \\
+  /// dy
   /// \end{bmatrix}
   /// =
   /// \begin{bmatrix}
-  /// r \\ 0
+  /// r \\
+  /// 0
   /// \end{bmatrix},
   /// \f]
   /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
@@ -1198,14 +1198,17 @@ namespace oomph
   /// update:
   /// \f[
   /// \begin{bmatrix}
-  /// dx \\ dy
+  /// dx \\
+  /// dy
   /// \end{bmatrix}
   /// \leftarrow
   /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta
+  /// \overline{\cos\theta} & \overline{\sin\theta} \\
+  /// -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \\ dy
+  /// dx \\
+  /// dy
   /// \end{bmatrix}.
   /// \f]
   /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
@@ -1837,6 +1840,18 @@ namespace oomph
   /// the problem's fully assembled Jacobian and residual vector.
   void solve(Problem* const &problem_pt,DoubleVector &result)
    { 
+#ifdef OOMPH_HAS_MPI
+  // Make sure that this is running in serial. Can't guarantee it'll
+  // work when the problem is distributed over several processors
+  if (MPI_Helpers::communicator_pt()->nproc()>1)
+  {
+   // Throw a warning
+   OomphLibWarning("Can't guarantee the MG solver will work in parallel!",
+		   OOMPH_CURRENT_FUNCTION,
+		   OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+  
     // Find # of degrees of freedom (variables)
     unsigned n_dof=problem_pt->ndof();
  
@@ -1848,7 +1863,10 @@ namespace oomph
 
     // Get rid of any previously stored data
     clean_up_memory();
-
+    
+    // Grab the communicator from the MGProblem object and assign it
+    this->set_comm_pt(problem_pt->communicator_pt());
+    
     // Setup the distribution
     LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_dof,false);
 
@@ -2323,14 +2341,17 @@ namespace oomph
   /// \f$ \sin(\theta) \f$ (i.e. sn) such that:
   /// \f[
   /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta
+  /// \overline{\cos\theta} & \overline{\sin\theta} \\
+  /// -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \\ dy
+  /// dx \\
+  /// dy
   /// \end{bmatrix}
   /// =
   /// \begin{bmatrix}
-  /// r \\ 0
+  /// r \\
+  /// 0
   /// \end{bmatrix},
   /// \f]
   /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
@@ -2424,14 +2445,17 @@ namespace oomph
   /// update:
   /// \f[
   /// \begin{bmatrix}
-  /// dx \\ dy
+  /// dx \\
+  /// dy
   /// \end{bmatrix}
   /// \leftarrow
   /// \begin{bmatrix}
-  /// \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta
+  /// \overline{\cos\theta} & \overline{\sin\theta} \\
+  /// -\sin\theta & \cos\theta
   /// \end{bmatrix}
   /// \begin{bmatrix}
-  /// dx \\ dy
+  /// dx \\
+  /// dy
   /// \end{bmatrix}.
   /// \f]
   /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
@@ -3312,6 +3336,18 @@ class HelmholtzFGMRESMG : public virtual HelmholtzGMRESMG<MATRIX>
  /// the problem's fully assembled Jacobian and residual vector.
  void solve(Problem* const &problem_pt,DoubleVector &result)
   { 
+#ifdef OOMPH_HAS_MPI
+  // Make sure that this is running in serial. Can't guarantee it'll
+  // work when the problem is distributed over several processors
+  if (MPI_Helpers::communicator_pt()->nproc()>1)
+  {
+   // Throw a warning
+   OomphLibWarning("Can't guarantee the MG solver will work in parallel!",
+		   OOMPH_CURRENT_FUNCTION,
+		   OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+  
    // Find # of degrees of freedom (variables)
    unsigned n_dof=problem_pt->ndof();
  
@@ -3324,6 +3360,9 @@ class HelmholtzFGMRESMG : public virtual HelmholtzGMRESMG<MATRIX>
    // Get rid of any previously stored data
    this->clean_up_memory();
 
+   // Grab the communicator from the MGProblem object and assign it
+   this->set_comm_pt(problem_pt->communicator_pt());
+    
    // Setup the distribution
    LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_dof,false);
 

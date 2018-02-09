@@ -1,4 +1,4 @@
 SUBDIRS = \
-scalar_multigrid #\
+scalar_multigrid\
 helmholtz_multigrid
 

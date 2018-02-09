@@ -98,7 +98,7 @@ namespace oomph
    Tolerance(1.0e-09),
    Npre_smooth(2),
    Npost_smooth(2),
-   Nvcycle(2),
+   Nvcycle(1),
    Doc_time(true),
    Suppress_v_cycle_output(false),
    Suppress_all_output(false),
@@ -306,25 +306,10 @@ namespace oomph
   /// which can be overloaded for a specific problem.
   void pre_smooth(const unsigned& level)
    {
-    // HIERHER: Delete
-    // Calculate the residual norm
-    //double res_initial=residual_norm(level);
-    //double norm=1.0;
-
-    // Output
-    //std::cout << "\nOn level: " << level
-    // << "\nResidual before: " << norm << std::endl;
-    
     // Run pre-smoother 'max_iter' times
     Pre_smoothers_storage_pt[level]->
      complex_smoother_solve(Rhs_mg_vectors_storage[level],
 			    X_mg_vectors_storage[level]);
-    
-    // Calculate the residual norm
-    //double res_new=residual_norm(level)/res_initial;
-
-    // Output
-    //std::cout << "Residual after: " << res_new << std::endl;
     
     // Calculate the residual vector on this level
     residual_norm(level);
@@ -1127,6 +1112,18 @@ namespace oomph
  template<unsigned DIM>
  void HelmholtzMGPreconditioner<DIM>::full_setup()
  {
+#ifdef OOMPH_HAS_MPI
+  // Make sure that this is running in serial. Can't guarantee it'll
+  // work when the problem is distributed over several processors
+  if (MPI_Helpers::communicator_pt()->nproc()>1)
+  {
+   // Throw a warning
+   OomphLibWarning("Can't guarantee the MG solver will work in parallel!",
+		   OOMPH_CURRENT_FUNCTION,
+		   OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+  
   // Initialise the timer start variable
   double t_fs_start=0.0;
 
@@ -1214,7 +1211,7 @@ namespace oomph
   // If this is not the first Newton step then we will already have things
   // in storage. If this is the case, delete them
   clean_up_memory();
-   
+
   // Resize the Mg_hierarchy_pt vector
   Mg_hierarchy_pt.resize(1,0);
 
@@ -1340,7 +1337,7 @@ namespace oomph
     oomph_info << "\n - Number of equations: "
 	       << new_problem_pt->assign_eqn_numbers()
 	       << "\n" << std::endl;
- 
+  
     // Add the new problem pointer onto the vector of MG levels
     // and increment the value of level by 1 
     Mg_hierarchy_pt.push_back(new_problem_pt);	
@@ -1365,9 +1362,9 @@ namespace oomph
      oomph_info << "Reached the coarsest level! "
 		<< "Number of levels: " << Nlevel << std::endl;
     }
-   } // if (managed_to_unrefine)
-  } // while (managed_to_unrefine)
-
+   } // if (managed_to_create_unrefined_copy)
+  } // while (managed_to_create_unrefined_copy)
+  
   //------------------------------------------------------------------
   // Given that we know the number of levels in the hierarchy we can
   // resize the vectors which will store all the information required
@@ -1504,7 +1501,6 @@ namespace oomph
   // Grab the k_squared value from the element pointer and square root.
   // Note, we assume the wavenumber is the same everywhere in the mesh
   // and it is also the same on every level.
-  // hierher: This is true unless we wish to look at dispersion analysis
   Wavenumber=sqrt(pml_helmholtz_el_pt->k_squared());
 
   // We don't need the pointer anymore so make it a null pointer but don't
@@ -2344,7 +2340,7 @@ namespace oomph
 /// \short Find the value of the parameters h on the level-th problem in
 /// the hierarchy. The value of h is determined by looping over each element
 /// in the mesh and calculating the length of each side and take the maximum
-/// value.Note, this is a heuristic calculation; if the mesh is nonuniform
+/// value. Note, this is a heuristic calculation; if the mesh is non-uniform
 /// or adaptive refinement is used then the value of h, is not the same
 /// everywhere so we find the maximum edge width instead. If, however,
 /// uniform refinement is used on a uniform mesh (using quad elements) then
@@ -2558,50 +2554,6 @@ namespace oomph
    // Start the clock
    t_m_start=TimingHelpers::timer();
   }
-
-  
-  //===================================================TO_BE_DELETED=========
-  // Temporary vector
-  Vector<double> edge_widths(Nlevel,0.0);
-    
-  // Create storage for the wavenumber value
-  double k=Wavenumber;
-  
-  // Loop over the levels and assign the pre- and post-smoother pointers
-  for (unsigned i=0;i<Nlevel;i++)
-  {   
-   // Calculate the i-th entry of Wavenumber and Max_edge_width
-   maximum_edge_width(i,edge_widths[i]);
-    
-   // Create storage for the interval spacing
-   double h=edge_widths[i];
-    
-   // Estimate the value of kh and output
-   double kh=k*h;
-   double omega=(12.0-4.0*pow(kh,2.0))/(18.0-3.0*pow(kh,2.0));
-   double pi=MathematicalConstants::Pi;
-   double omega_2=(2.0-pow(kh,2.0))/(2.0*pow(sin(pi*h/2),2.0)-0.5*pow(kh,2.0));
-   oomph_info << "--------------------------"
-	      << "\nTable of estimated values:"
-	      << "\n--------------------------"
-	      << "\nk: " << k
-	      << "\nh: " << h
-	      << "\nkh: " << kh
-	      << "\nrho: " << 1.0/(1.0-(1.0/3.0)*pow(kh,2.0))
-	      << "\nomega: " << omega;
-
-   // If we're working on the coarsest grids or kh is high enough
-   if (kh>2*cos(pi*h/2))
-   {
-    oomph_info << "\n(0,omega_2): (0," << omega_2 << ")";
-   }
-
-   // Carry on outputting
-   oomph_info << "\n--------------------------"
-	      << std::endl;
-  }
-  //===================================================TO_BE_DELETED=========
-
    
   // Loop over the levels and assign the pre- and post-smoother pointers
   for (unsigned i=0;i<Nlevel-1;i++)
@@ -2634,9 +2586,6 @@ namespace oomph
      
      // Assign the pre-smoother pointer
      Pre_smoothers_storage_pt[i]=gmres_pt;
-
-     // Enable the documentation of the convergence (HIERHER: Temporary!)
-     //gmres_pt->enable_doc_convergence_history();
     }
    }
    // Otherwise we use the pre-smoother factory function pointer to
@@ -2708,12 +2657,6 @@ namespace oomph
   {
    // Set the number of pre-smoothing iterations as the value of Npre_smooth
    Pre_smoothers_storage_pt[i]->max_iter()=Npre_smooth;
-
-   // HIERHER: delete
-   if (i==1)
-   {
-    Pre_smoothers_storage_pt[i]->max_iter()=2;
-   }
    
    // Set the number of pre-smoothing iterations as the value of Npost_smooth
    Post_smoothers_storage_pt[i]->max_iter()=Npost_smooth;
@@ -2797,7 +2740,7 @@ namespace oomph
 
  
 //===================================================================
-/// \short Setup the interpolation matrices
+/// \short Set up the interpolation matrices
 //===================================================================
  template<unsigned DIM>
  void HelmholtzMGPreconditioner<DIM>::setup_interpolation_matrices()
@@ -2877,13 +2820,13 @@ namespace oomph
    unsigned coarse_level=level+1;
       
    // Make a pointer to the mesh on the finer level and dynamic_cast
-   // it as an object of the refineable mesh class
+   // it as an object of the refineable mesh class.
    Mesh* ref_fine_mesh_pt=Mg_hierarchy_pt[fine_level]->mesh_pt();
 
    // Make a pointer to the mesh on the coarse level and dynamic_cast
    // it as an object of the refineable mesh class
    Mesh* ref_coarse_mesh_pt=Mg_hierarchy_pt[coarse_level]->mesh_pt();
-
+   
    // Access information about the number of elements in the fine mesh
    // from the pointer to the fine mesh (to loop over the rows of the
    // interpolation matrix)
@@ -2944,13 +2887,35 @@ namespace oomph
    // because once we reach the PML layer (if there is one) there will be
    // no tree structure to match in between levels as PML elements are
    // simply regenerated once the bulk mesh has been refined.
-   while(e_fine<n_bulk_mesh_element)
+   while (e_fine<n_bulk_mesh_element)
    {    
     // Pointer to element in fine mesh
     RefineableQElement<DIM>* el_fine_pt=
      dynamic_cast<RefineableQElement<DIM>*>
      (ref_fine_mesh_pt->finite_element_pt(e_fine));
-      
+
+#ifdef PARANOID
+    // Make sure the coarse level element pointer is not a null pointer. If
+    // it is something has gone wrong
+    if (e_coarse>ref_coarse_mesh_pt->nelement()-1)
+    {
+     // Create an output stream
+     std::ostringstream error_message_stream;
+
+     // Create an error message
+     error_message_stream << "The coarse level mesh has "
+			  << ref_coarse_mesh_pt->nelement()
+			  << " elements but the coarse\nelement loop "
+			  << "is looking at the "
+			  << e_coarse << "-th element!" << std::endl;
+
+     // Throw the error message
+     throw OomphLibError(error_message_stream.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+     
     // Pointer to element in coarse mesh
     RefineableQElement<DIM>* el_coarse_pt=
      dynamic_cast<RefineableQElement<DIM>*>
@@ -2958,14 +2923,14 @@ namespace oomph
     
     // If the levels are different then the element in the fine
     // mesh has been unrefined between these two levels
-    if (el_fine_pt->tree_pt()->level()!=el_coarse_pt->tree_pt()->level()) 
+    if (el_fine_pt->tree_pt()->level()>el_coarse_pt->tree_pt()->level()) 
     {
      // The element in the fine mesh has been unrefined between these two
      // levels. Hence it and its three brothers (ASSUMED to be stored
      // consecutively in the Mesh's vector of pointers to its constituent
      // elements -- we'll check this!) share the same father element in
      // the coarse mesh, currently pointed to by el_coarse_pt.
-     for(unsigned i=0;i<n_sons;i++)
+     for (unsigned i=0;i<n_sons;i++)
      {	   
       // Set mapping to father element in coarse mesh
       coarse_mesh_reference_element_pt[
@@ -2979,14 +2944,41 @@ namespace oomph
     // The element in the fine mesh has not been unrefined between 
     // these two levels, so the reference element is the same-sized
     // equivalent element in the coarse mesh
-    else
+    else if (el_fine_pt->tree_pt()->level()==el_coarse_pt->tree_pt()->level())
     {
-     // Set the mapping between the two elements since they are
-     // the same element
-     coarse_mesh_reference_element_pt[el_fine_pt]=el_coarse_pt;
-
+     // The element in the fine mesh has not been unrefined between these two
+     // levels
+     coarse_mesh_reference_element_pt[
+      dynamic_cast<RefineableQElement<DIM>*>
+      (ref_fine_mesh_pt->finite_element_pt(e_fine))]=el_coarse_pt;
+	    
      // Increment counter for elements in fine mesh
      e_fine++;
+    }
+    // If the element has been unrefined between levels. Not something
+    // we can deal with at the moment (although it would be relatively
+    // simply to implement...).
+    // Option 1: Find the son elements (from the coarse mesh) associated
+    // with the father element (from the fine mesh) and extract the
+    // appropriate nodal values to find the nodal values in the father
+    // element. 
+    // Option 2: Use the function
+    //                       unrefine_uniformly();
+    // to ensure that the coarser meshes really only have father elements
+    // or the element itself.
+    else
+    {
+     // Create an output stream
+     std::ostringstream error_message_stream;
+
+     // Create an error message
+     error_message_stream << "Element unrefined between levels! Can't "
+			  << "handle this case yet..." << std::endl;
+
+     // Throw the error message
+     throw OomphLibError(error_message_stream.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
     } // if (el_fine_pt->tree_pt()->level()!=...) 
     
     // Increment counter for elements in coarse mesh
@@ -3004,8 +2996,6 @@ namespace oomph
    // index of each contribution, i.e. the global equation of the coarse
    // mesh node which supplies a contribution. We don't know how many
    // entries this will have so we dynamically allocate entries at run time
-   // hierher: should we reserve this before run time? We can probably estimate
-   // the number of contributions from the value of nnode_1d
    Vector<int> column_index;
    
    // Create the value vector which will be used to store the nonzero
@@ -3015,7 +3005,7 @@ namespace oomph
 
    // The value of index will tell us which row of the interpolation matrix
    // we're working on in the following for loop
-   // hierher: should this worry us? We assume that every node we cover is
+   // DRAIG: Should this worry us? We assume that every node we cover is
    // the next node in the mesh (we loop over the elements and the nodes
    // inside that). This does work but it may not work for some meshes
    unsigned index=0;
@@ -3717,29 +3707,6 @@ namespace oomph
     restrict_residual(i);
 	  
    } // Moving down the V-cycle
-
-   // // Output the matrix and rhs vector that we want
-   // // Create an output stream
-   // std::ofstream outfile;
-
-   // // Create an output name
-   // std::string file1="matrix_r.dat";
-   // outfile.open(file1);
-   // Mg_matrices_storage_pt[Nlevel-2][0]->sparse_indexed_output_helper(outfile);
-   // outfile.close();
-   
-   // std::string file2="matrix_c.dat";
-   // outfile.open(file2);
-   // Mg_matrices_storage_pt[Nlevel-2][1]->sparse_indexed_output_helper(outfile);
-   // outfile.close();
-
-   // std::string rhs_r="rhs_r.dat";
-   // Rhs_mg_vectors_storage[Nlevel-2][0].output(rhs_r);
-   // std::string rhs_c="rhs_c.dat";
-   // Rhs_mg_vectors_storage[Nlevel-2][1].output(rhs_c);
-   
-   // // Exit!
-   //exit(0);
   
    //-----------------------------------------------------------
    // Reached the lowest level: Do a direct solve, using the RHS
