@@ -1626,11 +1626,6 @@ namespace Locate_zeta_helpers
  /// Maximum number of newton iterations
  unsigned Max_newton_iterations = 10;
  
- /// \short Rounding tolerance for whether coordinate is in element or not
- /// Bit subtle -- this is obviously related to the Newton tolerance
- /// but not quite the same!
- double Rounding_tolerance = 1.0e-7; 
-
  /// \short Multiplier for (zeta-based) outer radius of element used for
  /// deciding that point is outside element. Set to negative value
  /// to suppress test.
@@ -4340,11 +4335,9 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
     // make sense
     FiniteElement* tmp_pt=const_cast<FiniteElement*>(this);
     FaceElement* face_el_pt=dynamic_cast<FaceElement*>(tmp_pt);
-    //oomph_info << "ntest face_el_pt: " << ntest << " " << face_el_pt << std::endl;
     if (face_el_pt==0)
      {
       ntest=2;
-      //oomph_info << "Changed to ntest=" << ntest << std::endl;
      }
    
     // For now overwrite -- the stuff above fails for Bretherton.
@@ -4602,23 +4595,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
    if (radius>
        Locate_zeta_helpers::Radius_multiplier_for_fast_exit_from_locate_zeta*
        max_radius)
-    {
-     // oomph_info << "Zeta: [ ";
-     // for (unsigned i=0;i<ncoord;i++)
-     //  {
-     //   oomph_info << zeta[i] << " ";
-     //  }
-     // oomph_info << " ] is at radius " << radius << " from c.o.g. [ ";
-     // for (unsigned i=0;i<ncoord;i++)
-     //  {
-     //   oomph_info << cog[i] << " ";
-     //  }
-     // oomph_info << " ] which is greater than " 
-     //            << Locate_zeta_helpers::Radius_multiplier_for_fast_exit_from_locate_zeta 
-     //            << " x max radius " 
-     //            << " ( " << max_radius  << " ) and therefore deemed to be outside element" 
-     //            << std::endl;          
-     
+    {   
      geom_object_pt=0;
      return;    
     }
@@ -4872,13 +4849,32 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
   }
  while(keep_going);
  
- //Test whether the local coordinate are valid or not
- bool valid=local_coord_is_valid(s,
-                                 Locate_zeta_helpers::Rounding_tolerance);
+ //Test whether the local coordinates are valid or not
+ bool valid=local_coord_is_valid(s);
+
+ // If not valid, experimentally push back into element
+ // and see if the result is still valid (within the Newton tolerance)
  if (!valid)
   {
-   geom_object_pt=0;
-   return;
+   move_local_coord_back_into_element(s);
+
+   // Check residuals again
+   this->interpolated_zeta(s,inter_x);
+   for(unsigned i=0;i<ncoord;i++) {dx[i] = zeta[i] - inter_x[i];}
+   
+   //Get the maximum residuals
+   double maxres =
+    std::fabs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
+   
+   // Are we still OK?
+   if(maxres > Locate_zeta_helpers::Newton_tolerance)
+    {
+     // oomph_info 
+     // << "Pushing back inside has violated the Newton tolerance: max_res = "
+     // << maxres << std::endl;
+     geom_object_pt=0;
+     return;
+    }
   }
  
  // It is also possible now that it may not have converged "correctly", 

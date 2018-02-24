@@ -149,32 +149,20 @@ class QElementBase : public virtual QElementGeometricBase
    return true;
   }
  
- /// \short Check whether the local coordinate are valid or not, allowing for
- /// rounding tolerance. Nodal coordinate is adjusted to move the
- /// point back into the element if it's outside the element
- /// to within that tolerance
- bool local_coord_is_valid(Vector<double> &s, 
-                           const double & rounding_tolerance)
-  {
-   unsigned ncoord = dim();
-   for(unsigned i=0;i<ncoord;i++)
-    {
-     // We're outside
-     if((s[i] - s_max() >  rounding_tolerance) ||
-        (s_min() - s[i] >  rounding_tolerance))
-      {
-       return false;
-      }
-     else
-      {
-       // Adjust to move it onto the boundary
-       if (s[i] > s_max() ) s[i] = s_max();
-       if (s[i] < s_min() ) s[i] = s_min();
-      }
-    }
-   return true;
-  }
+ /// \short Adjust local coordinates so that they're located inside
+ /// the element
+ void move_local_coord_back_into_element(Vector<double> &s) const
+ {
+  unsigned ncoord = dim();
+  for(unsigned i=0;i<ncoord;i++)
+   {
+    // Adjust to move it onto the boundary
+    if (s[i] > s_max() ) s[i] = s_max();
+    if (s[i] < s_min() ) s[i] = s_min();
+   }
+ }
  
+
  /// \short Set pointer to macro element also sets up storage for the
  /// reference coordinates and initialises them
  virtual void set_macro_elem_pt(MacroElement* macro_elem_pt)

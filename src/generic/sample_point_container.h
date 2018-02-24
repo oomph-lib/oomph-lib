@@ -464,11 +464,29 @@ class BinArray : public virtual SamplePointContainer
  virtual ~BinArray(){}
  
   /// \short Helper function for computing the bin indices of neighbouring bins
-  /// at a given "radius" of the specified bin
+  /// at a given "radius" of the specified bin. Final, optional boolean
+  /// (default: true) chooses to use the old version which appears to be
+  /// faster than Louis' new one after all (in the few cases where this
+  /// functionality is still used -- not all if we have cgal!)
   void get_neighbouring_bins_helper(const unsigned& bin_index,
                                     const unsigned& radius,
-                                    Vector<unsigned>& neighbouring_bin_index);
+                                    Vector<unsigned>& neighbouring_bin_index,
+                                    const bool& use_old_version=true);
 
+ /// \short Profiling function to compare performance of two different
+ /// versions of the get_neighbouring_bins_helper(...) function
+ void profile_get_neighbouring_bins_helper();
+
+  
+ /// \short Get (linearly enumerated) bin index of bin that
+ /// contains specified zeta
+ unsigned coords_to_bin_index(const Vector<double>& zeta);
+ 
+  
+ /// \short  Get "coordinates" of bin that contains specified zeta
+ void coords_to_vectorial_bin_index(const Vector<double>& zeta,
+                                    Vector<unsigned>& bin_index);
+ 
  /// Output bins (boundaries and number of sample points in them)
  virtual void output_bins(std::ofstream& outfile)=0;
 
@@ -771,13 +789,7 @@ class BinArray : public virtual SamplePointContainer
                                          const unsigned& n_element);
 
   
-  /// \short Get (linearly enumerated) bin index of bin that
-  /// contains specified zeta
-  unsigned coords_to_bin_index(const Vector<double>& zeta);
 
-  /// \short  Get "coordinates" of bin that contains specified zeta
-  void coords_to_vectorial_bin_index(const Vector<double>& zeta,
-                                     Vector<unsigned>& bin_index);
 
   /// Vector of pointers to constituent RefineableBins.
   Vector<RefineableBin*> Bin_pt;
@@ -849,7 +861,25 @@ class BinArray : public virtual SamplePointContainer
   /// Constructor 
   NonRefineableBinArray(SamplePointContainerParameters* 
                         bin_array_parameters_pt);
-  
+
+  /// Destructor:
+  ~NonRefineableBinArray()
+   {
+    flush_bins_of_objects();
+   }
+
+ /// \short Broken copy constructor.
+ NonRefineableBinArray(const NonRefineableBinArray& data)
+  {
+   BrokenCopy::broken_copy("NonRefineableBinArray");
+  }
+ 
+ /// Broken assignment operator.
+ void operator=(const NonRefineableBinArray&) 
+  {
+   BrokenCopy::broken_assign("NonRefineableBinArray");
+  }
+
   /// \short Find sub-GeomObject (finite element) and the local coordinate 
   /// s within it that contains point with global coordinate zeta. 
   /// sub_geom_object_pt=0 if point can't be found.
@@ -954,6 +984,8 @@ class BinArray : public virtual SamplePointContainer
  /// up to the specified "radius" (default 1)
  void fill_bin_by_diffusion(const unsigned& bin_diffusion_radius = 1);
 
+
+
  /// Output bins
  void output_bins(std::ofstream& outfile);
 
@@ -1010,7 +1042,7 @@ class BinArray : public virtual SamplePointContainer
  /// for total number of bins in active use by any MeshAsGeomObject)
  void flush_bins_of_objects()
  {
-  //Total_nbin_cells_counter -= Bin_object_coord_pairs.nnz();
+  Total_nbin_cells_counter -= Bin_object_coord_pairs.nnz();
   Bin_object_coord_pairs.clear();
  }
 
@@ -1121,6 +1153,18 @@ class CGALSamplePointContainer : public virtual SamplePointContainer
                   GeomObject*& sub_geom_object_pt,
                   Vector<double>& s);
  
+
+ /// \short Find the sub geometric object and local coordinate therein that
+ /// corresponds to the intrinsic coordinate zeta, using up to the specified
+ /// number of sample points as initial guess for the Newton-based search.
+ /// If this fails, return the nearest sample point.
+ void limited_locate_zeta(
+  const Vector<double>& zeta, 
+  const unsigned& max_sample_points_for_newton_based_search,
+  GeomObject*& sub_geom_object_pt,
+  Vector<double>& s);
+
+
  /// Dimension of the zeta ( =  dim of local coordinate of elements)
  unsigned ndim_zeta() const
   {

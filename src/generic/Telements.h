@@ -1203,55 +1203,32 @@ template<>
 
   }
  
- /// \short Check whether the local coordinates are valid or not and
- /// allow for rounding tolerance. If the local coordinate specifed
- /// by s is "slightly" outside the element (as specified by
- /// rounding_tolerance) we move the point back into the element. 
- bool local_coord_is_valid(Vector<double> &s, 
-                           const double &rounding_tolerance)
-  {
-
+ /// \short Adjust local coordinates so that they're located inside
+ /// the element
+ void move_local_coord_back_into_element(Vector<double> &s) const
+ {
    // Check coordinates
    unsigned ncoord=dim();
    double sum=0.0;
    for (unsigned i=0;i<ncoord;i++)
     {
-     //We allow a slight rounding tolerance
-     //Each coordinate must be positive
-     if (s[i]<0.0)
-      {
-       if (fabs(s[i])<rounding_tolerance)
-        {
-         s[i]=0.0;
-        }
-       else
-        {
-         return false;
-        }
-      }
+     //Each coordinate must be positive individually
+     if (s[i]<0.0) s[i]=0.0;
      sum+=s[i];
     }
    
-   
    //Sum must be less than 1
    double excess=sum-1.0;
-   if (sum<=1.0)
+   if (excess>0.0)
     {
-     return true;
-    }
-   else if ( (excess >= 0.0) && ( excess < rounding_tolerance) )
-    {
-     //In this case, we subtract 10% more than excess to refit
-     double sub = (1.1*excess)/3.0 ;
+     // Subtract excess equally from all coordinates
+     double sub=excess/double(ncoord);
      for (unsigned i=0;i<ncoord;i++)
       {
        s[i]-=sub;
       }
-     return true;
     }
    
-   // We're genuinely outside the element -- bail out.
-   return false;
 
   }
 

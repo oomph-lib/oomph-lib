@@ -30209,40 +30209,21 @@ update_other_proc_shd_bnd_node_helper
        use_eulerian_coords=true;
       }
 
-     MeshAsGeomObject* mesh_geom_obj_pt=0;
+
+#ifdef OOMPH_HAS_CGAL
+
+     // Make cgal-based bin
+     CGALSamplePointContainerParameters cgal_params(this);
+     if (use_eulerian_coords)
+      {
+       cgal_params.enable_use_eulerian_coordinates_during_setup();
+      }
+     MeshAsGeomObject* mesh_geom_obj_pt=new MeshAsGeomObject(&cgal_params);
      
-     // We need to be careful when creating the mesh_as_geom_object
-     // representation of the mesh. We need to check whether we are
-     // dealing with a distributed mesh or not
-#ifdef OOMPH_HAS_MPI
-     if (this->is_mesh_distributed())
-      {
-       NonRefineableBinArrayParameters params(this); 
-       if (use_eulerian_coords)
-        {
-         params.enable_use_eulerian_coordinates_during_setup();
-        }
-       Vector<unsigned> bin_dim(2);
-       bin_dim[0]=Nbin_x_for_area_transfer;
-       bin_dim[1]=Nbin_y_for_area_transfer;
-       params.dimensions_of_bin_array()=bin_dim;
-       mesh_geom_obj_pt = new MeshAsGeomObject(&params);
-      }
-     else
-      {
-       NonRefineableBinArrayParameters params(this);
-       if (use_eulerian_coords)
-        {
-         params.enable_use_eulerian_coordinates_during_setup();
-        }
-       Vector<unsigned> bin_dim(2);
-       bin_dim[0]=Nbin_x_for_area_transfer;
-       bin_dim[1]=Nbin_y_for_area_transfer;
-       params.dimensions_of_bin_array()=bin_dim;
-       mesh_geom_obj_pt = new MeshAsGeomObject(&params);
-      }
-#else     
-     NonRefineableBinArrayParameters params(this);
+#else
+
+     // Make nonrefineable bin
+     NonRefineableBinArrayParameters params(this); 
      if (use_eulerian_coords)
       {
        params.enable_use_eulerian_coordinates_during_setup();
@@ -30251,14 +30232,21 @@ update_other_proc_shd_bnd_node_helper
      bin_dim[0]=Nbin_x_for_area_transfer;
      bin_dim[1]=Nbin_y_for_area_transfer;
      params.dimensions_of_bin_array()=bin_dim;
-     mesh_geom_obj_pt = new MeshAsGeomObject(&params);
-#endif
+     MeshAsGeomObject* mesh_geom_obj_pt=new MeshAsGeomObject(&params);
      
+#endif
+
     // Set up a map from pointer to element to its number
     // in the mesh
     std::map<GeneralisedElement*,unsigned> element_number;
     unsigned nelem=this->nelement();
-    
+    for (unsigned e=0;e<nelem;e++)
+     {
+      element_number[this->element_pt(e)]=e;
+     }
+
+#ifndef OOMPH_HAS_CGAL
+
     // Create a vector to store the min target area of each bin (at
     // this stage the number of bins should not be that large, so it
     // should be safe to build a vector for the total number of bins)
@@ -30324,11 +30312,6 @@ update_other_proc_shd_bnd_node_helper
                 << std::endl;
     }
     
-    // Populate container for relation between element pointers and numbers
-    for (unsigned e=0;e<nelem;e++)
-     {
-      element_number[this->element_pt(e)]=e;
-     }
     
     // For each bin, compute the minimum of the target areas in the bin
     
@@ -30414,6 +30397,9 @@ update_other_proc_shd_bnd_node_helper
        }
      }
     
+#endif
+
+
     // Now start iterating to refine mesh recursively
     //-----------------------------------------------
     bool done=false;
@@ -30458,7 +30444,6 @@ update_other_proc_shd_bnd_node_helper
      // Store the target areas for elements in the temporary
      // TriangulateIO mesh
      Vector<double> new_transferred_target_area(nelem,0.0);
-     
      for (unsigned e=0;e<nelem;e++)
       { // start loop el
        ELEMENT* el_pt=dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e));
@@ -30475,6 +30460,71 @@ update_other_proc_shd_bnd_node_helper
          Vector<double> x(2);
          el_pt->interpolated_x(s,x);
          
+#if OOMPH_HAS_CGAL
+
+         // Try the five nearest sample points for Newton search
+         // then just settle on the nearest one
+         GeomObject* geom_obj_pt=0;
+         unsigned max_sample_points=
+          Max_sample_points_for_limited_locate_zeta_during_target_area_transfer;
+         dynamic_cast<CGALSamplePointContainer*>(mesh_geom_obj_pt->
+                                                 sample_point_container_pt())->
+          limited_locate_zeta(x,max_sample_points,
+                              geom_obj_pt,s);
+#ifdef PARANOID
+         if (geom_obj_pt==0)
+          {
+           std::stringstream error_message;
+           error_message
+            << "Limited locate zeta failed for zeta = [ "
+            << x[0] << " " << x[1] << " ]. Makes no sense!\n";
+           throw OomphLibError(error_message.str(),
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION);
+          }
+         else
+          {
+#endif
+           FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(geom_obj_pt);
+#ifdef PARANOID
+           if (fe_pt==0)
+            {
+             std::stringstream error_message;
+             error_message
+              << "Cast to FE for GeomObject returned by limited locate zeta failed for zeta = [ "
+              << x[0] << " " << x[1] << " ]. Makes no sense!\n";
+             throw OomphLibError(error_message.str(),
+                                 OOMPH_CURRENT_FUNCTION,
+                                 OOMPH_EXCEPTION_LOCATION);
+            }
+           else
+            {
+#endif
+             // What's the target area of the element that contains this point
+             double tg_area=target_area[element_number[fe_pt]];
+
+             // Go for smallest target area over all integration 
+             // points in new element
+             // to force "one level" of refinement (the one-level-ness
+             // is enforced below by limiting the actual reduction in
+             // area
+             if (new_transferred_target_area[e]!=0)
+              {
+               new_transferred_target_area[e]=
+                std::min(new_transferred_target_area[e], 
+                         tg_area);
+              }
+             else
+              {
+               new_transferred_target_area[e]=tg_area;
+              }
+#ifdef PARANOID
+            }
+          }
+#endif
+
+#else
+
          // Find the bin that contains that point and its contents
          int bin_number=0;
          bin_array_pt->get_bin(x,bin_number);
@@ -30510,10 +30560,13 @@ update_other_proc_shd_bnd_node_helper
             }
            
           }
-         
+        
+#endif
+
         } // for (ipt<nint)
        
       } // for (e<nelem)
+
           
      // do some output (keep it alive!)
      const bool output_target_areas=false;
@@ -30592,18 +30645,26 @@ update_other_proc_shd_bnd_node_helper
       // the equivalent of one sub-division per iteration
 #ifdef OOMPH_HAS_MPI
       unsigned n_ele_need_refinement_iter = 0;
-#endif // #ifdef OOMPH_HAS_MPI
-      
+#endif 
+
+
+      // Don't delete! Keep these around for debugging
+      // ofstream tmp_mesh_file;
+      // tmp_mesh_file.open("tmp_mesh_file.dat");
+      // tmp_new_mesh_pt->output(tmp_mesh_file);
+      // tmp_mesh_file.close();
+      // ofstream target_areas_file;
+      // target_areas_file.open("target_areas_file.dat");
+
       const unsigned nel_new=tmp_new_mesh_pt->nelement();
-      Vector<double> new_target_area(nel_new);
+      Vector<double> new_target_area(nel_new);   
       for (unsigned e=0;e<nel_new;e++)
        {
         // The finite element
         FiniteElement* f_ele_pt = tmp_new_mesh_pt->finite_element_pt(e);
-        // No target area found for this element -- keep its size
-        // by setting target area to -1 for Triangle
+
+        // Transferred target area
         const double new_area=new_transferred_target_area[e];
-        
         if (new_area<=0.0)
          {
           std::ostringstream error_stream;
@@ -30621,6 +30682,8 @@ update_other_proc_shd_bnd_node_helper
          }
         else
          {
+
+
           // Limit target area to the equivalent of uniform refinement
           // during this stage of the iteration
           new_target_area[e]=new_area;
@@ -30632,16 +30695,33 @@ update_other_proc_shd_bnd_node_helper
             done=false;
             
            } 
-      
+          
+          // Don't delete! Keep around for debugging
+          // target_areas_file 
+          //  <<  (f_ele_pt->node_pt(0)->x(0)+
+          //       f_ele_pt->node_pt(1)->x(0)+
+          //       f_ele_pt->node_pt(2)->x(0))/3.0 << " "
+          //  << (f_ele_pt->node_pt(0)->x(1)+
+          //      f_ele_pt->node_pt(1)->x(1)+
+          //      f_ele_pt->node_pt(2)->x(1))/3.0 << " "
+          //  << new_area << " " 
+          //  << new_target_area[e] << std::endl;
+
+
+
 #ifdef OOMPH_HAS_MPI
           // Keep track of the elements that require (un)refinement
           n_ele_need_refinement_iter++;
-#endif // #ifdef OOMPH_HAS_MPI
+#endif
           
          } // else if (new_area <= 0.0)
                 
        } // for (e < nel_new)
-      
+
+
+      // Don't delete! Keep around for debugging
+      // target_areas_file.close();   
+
       const double t_sub_total_limit_target_areas = 
         TimingHelpers::timer() - t_start_limit_target_areas;
       
@@ -30676,7 +30756,7 @@ update_other_proc_shd_bnd_node_helper
        }
       
       //tmp.close();
-      //pause("doced binned_target_areas.dat and interemdiate mesh targets");
+      //pause("doced binned_target_areas.dat and intermediate mesh targets");
       
       // Now create the new mesh from TriangulateIO structure
       //-----------------------------------------------------

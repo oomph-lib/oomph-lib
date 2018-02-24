@@ -318,6 +318,83 @@ else
 fi
 
 
+# Do we have a sufficiently recent version of libtool installed?
+#---------------------------------------------------------------
+
+# Convert libtool version number into single int -- strip dots and
+# accomodate up to three digits for each part version id
+libtool_version=`libtool --version | \
+   head -n 1 | $AWK  '{ print $NF}' | $AWK 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+# Need at least version 242 --> 2004002
+if test "$libtool_version" -ge 2004002; then 
+  echo "Congratulations!"
+  echo "I have located a (sufficiently) up-to-date version of libtool ( " 
+  echo $libtool_version" ) and can build cgal and associated libraries."  
+  have_up_to_date_libtool=true    
+else
+  echo " "; \
+  echo "==============================================================="; \
+  echo "Trouble: Your version of libtool is: " `libtool --version | head -n 1 | $AWK  '{ print $NF}'` 
+  echo "Please upgrade to version 2.4.2 or higher."
+  echo "I cannot/will not build cgal and associated libraries."
+  echo "==============================================================="; \
+  echo " "; \
+  have_up_to_date_libtool=false    
+fi
+AM_CONDITIONAL(HAVE_UP_TO_DATE_LIBTOOL, test x$have_up_to_date_libtool = xtrue)
+
+
+# Do we have cmake installed?
+#-----------------------------
+AC_CHECK_PROG(have_cmake,cmake,true,false)
+if test x$have_cmake = xfalse; then \
+  echo " "; \
+  echo "================================================================="; \
+  echo "Cannot find cmake on your system"; \
+  echo "---> Will not be able to build Trilinos > 9 and cgal etc."; \
+  echo "If you want to build Trilinos 10 or higher "; \
+  echo "please get your system administrator to install cmake for you. "; \
+  echo " "; \
+  echo "=================================================================="; \
+  echo " "; \
+else \
+  echo "Congratulations! I have located cmake."; \
+fi
+AM_CONDITIONAL(HAVE_CMAKE, test x$have_cmake = xtrue)
+
+
+# Do we have a sufficiently recent version of cmake installed?
+#---------------------------------------------------------------
+have_up_to_date_cmake=false
+if test x$have_cmake = xtrue; then \
+
+# Convert libtool version number into single int -- strip dots and
+# accomodate up to three digits for each part version id
+cmake_version=`cmake --version | \
+   head -n 1 | $AWK  '{ print $NF}' | $AWK 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+# Need at least version 2.8.11 --> 2008011
+if test "$cmake_version" -ge 2008011; then
+  echo "Congratulations!"
+  echo "I have located a (sufficiently) up-to-date version of cmake ( " 
+  echo $cmake_version" ) and can build cgal and associated libraries."  
+  have_up_to_date_cmake=true    
+else
+  echo " "; \
+  echo "==============================================================="; \
+  echo "Trouble: Your version of cmake is: " `cmake --version | head -n 1 | $AWK  '{ print $NF}'` 
+  echo "Please upgrade to version 2.8.1 or higher."
+  echo "I cannot/will not build cgal and associated libraries."
+  echo "==============================================================="; \
+  echo " "; \
+  have_up_to_date_cmake=false    
+fi
+
+
+fi 
+AM_CONDITIONAL(HAVE_UP_TO_DATE_CMAKE, test x$have_up_to_date_cmake = xtrue)
+
+
+
 
 # Do we have (a sufficiently recent version of) doxygen installed?
 #-----------------------------------------------------------------
@@ -798,11 +875,16 @@ AC_ARG_ENABLE(suppress-cgal-build,
               [want_cgal_build=false],
               [want_cgal_build=true])
 
+if  test x$have_up_to_date_libtool = xfalse; then
+    want_cgal_build=false
+fi
+if  test x$have_up_to_date_cmake = xfalse; then
+    want_cgal_build=false
+fi
+
 # Pass result of test to automake (makefiles can now check for 
 # status of WANT_CGAL in any Makefile.am)
 AM_CONDITIONAL(WANT_CGAL_BUILD, test x$want_cgal_build = xtrue)
-
-
 
 
 # Do we want to install cgal and associated third party distributions
@@ -821,8 +903,9 @@ AC_SUBST(CGAL_PERMANENT_INSTALLATION_DIR)
 # status of CGAL_PERMANENT_INSTALLATION_DIR_SPECIFIED in any Makefile.am)
 AM_CONDITIONAL(CGAL_PERMANENT_INSTALLATION_DIR_SPECIFIED, test x$install_cgal_in_permanent_dir = xtrue)
 
+if  test x$have_up_to_date_libtool = xtrue; then
+if  test x$have_up_to_date_cmake = xtrue; then
 if test x$install_cgal_in_permanent_dir = xtrue; then
-
 if test -e $CGAL_PERMANENT_INSTALLATION_DIR; then 
    echo "Permanent install directory for CGAL and associated third party"
    echo "distributions"
@@ -839,7 +922,8 @@ else
    echo "   "$CGAL_PERMANENT_INSTALLATION_DIR
    echo " " 
 fi
-
+fi
+fi
 fi
 
 #----------------------
@@ -1381,26 +1465,6 @@ AC_SUBST(HYPRE_INCLUDE)
 
 
 #................................................................
-
-
-
-# Do we have cmake installed?
-#-----------------------------
-AC_CHECK_PROG(have_cmake,cmake,true,false)
-if test x$have_cmake = xfalse; then \
-  echo " "; \
-  echo "================================================================="; \
-  echo "Cannot find cmake on your system"; \
-  echo "---> Will not be able to build Trilinos > 9 "; \
-  echo "If you want to build Trilinos 10 or higher "; \
-  echo "please get your system administrator to install cmake for you. "; \
-  echo " "; \
-  echo "=================================================================="; \
-  echo " "; \
-else \
-  echo "Congratulations! I have located cmake."; \
-fi
-AM_CONDITIONAL(HAVE_CMAKE, test x$have_cmake = xtrue)
 
 
 
@@ -2091,6 +2155,7 @@ AC_SUBST(MUMPS_INCLUDE)
 #................................................................
 # Start build cgal and associated third party distributions
 #................................................................
+
 
 
 #---------------------------------------------------

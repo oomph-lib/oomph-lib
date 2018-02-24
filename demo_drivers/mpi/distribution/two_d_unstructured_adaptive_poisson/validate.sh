@@ -267,7 +267,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../../bin/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_square_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_square_results.dat 5.0 1.0e-10 >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_square_results.dat 6.5 1.0e-10 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP4_SQUARE

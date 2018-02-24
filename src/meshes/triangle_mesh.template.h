@@ -2336,13 +2336,24 @@ namespace oomph
    {Print_timings_projection=false;}
       
   /// \short Read/write access to number of bins in the x-direction
-  /// when transferring target areas by bin method
+  /// when transferring target areas by bin method. Only used if we
+  /// don't have CGAL!
   unsigned& nbin_x_for_area_transfer(){return Nbin_x_for_area_transfer;}
   
   /// \short Read/write access to number of bins in the y-direction
-  /// when transferring target areas by bin method
+  /// when transferring target areas by bin method. Only used if we
+  /// don't have CGAL!
   unsigned& nbin_y_for_area_transfer(){return Nbin_y_for_area_transfer;}
   
+  /// \short Read/write access to number of sample points from which
+  /// we try to locate zeta by Newton method when transferring target areas
+  /// using cgal-based sample point container. If Newton method doesn't
+  /// converge from any of these we use the nearest sample point. 
+  unsigned max_sample_points_for_limited_locate_zeta_during_target_area_transfer()
+  {
+   return Max_sample_points_for_limited_locate_zeta_during_target_area_transfer;
+  }
+
   /// Max element size allowed during adaptation
   double& max_element_size(){return Max_element_size;}
   
@@ -3484,13 +3495,19 @@ namespace oomph
   void initialise_adaptation_data()
    {
     // Number of bins in the x-direction
-    // when transferring target areas by bin method
+    // when transferring target areas by bin method. Only used if we
+    // don't have CGAL!
     this->Nbin_x_for_area_transfer=100;
    
     // Number of bins in the y-direction
-    // when transferring target areas by bin method
+    // when transferring target areas by bin method. Only used if we
+    // don't have CGAL!
     this->Nbin_y_for_area_transfer=100;
-   
+
+    // Initialise "what it says" -- used when transferring target areas
+    // using cgal-based sample point container
+    Max_sample_points_for_limited_locate_zeta_during_target_area_transfer=5;
+
     // Set max and min targets for adaptation
     this->Max_element_size=1.0;
     this->Min_element_size=0.001;
@@ -3669,13 +3686,19 @@ namespace oomph
    }
   
   /// \short Number of bins in the x-direction
-  /// when transferring target areas by bin method.
+  /// when transferring target areas by bin method. Only used if we
+  /// don't have CGAL!
   unsigned Nbin_x_for_area_transfer;
 
   /// \short Number of bins in the y-direction
-  /// when transferring target areas by bin method.
+  /// when transferring target areas by bin method. Only used if we
+  /// don't have CGAL!
   unsigned Nbin_y_for_area_transfer;
    
+  /// \short Default value for max. number of sample points used for locate_zeta
+  /// when transferring target areas using cgal-based sample point container
+  unsigned Max_sample_points_for_limited_locate_zeta_during_target_area_transfer;
+
   /// Max permitted element size
   double Max_element_size;
    

@@ -1219,6 +1219,131 @@ void RefineableBinArray::get_bin_boundaries(const unsigned& bin_index,
  }
  
 
+ //========================================================================
+ /// Profiling function to compare performance of two different
+ /// versions of the get_neighbouring_bins_helper(...) function
+ //========================================================================
+ void BinArray::profile_get_neighbouring_bins_helper()
+ { 
+
+  unsigned old_faster=0;
+  unsigned new_faster=0;
+  double t_total_new=0.0;
+  double t_total_old=0.0;
+
+  unsigned dim=ndim_zeta();
+
+  // Choose bin in middle of the domain
+  Vector<double> zeta(dim);
+  for(unsigned i=0;i<dim;i++)
+   {
+    zeta[i]=0.5*(Min_and_max_coordinates[i].first+
+                 Min_and_max_coordinates[i].second);
+   }
+  
+  // Finding the bin in which the point is located
+  int bin_index = coords_to_bin_index(zeta); 
+  
+#ifdef PARANOID
+  if (bin_index < 0)
+   {
+    throw OomphLibError("Negative bin index...",
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  // Start at this radius (radius = 0 is the central bin)
+  unsigned radius = 0; 
+  
+  // "coordinates" of the bin which is most likely to contain the
+  // point
+  Vector<unsigned> bin_index_v(dim);
+  coords_to_vectorial_bin_index(zeta, bin_index_v);
+  
+  // We loop over all the dimensions to find the maximum radius we have to
+  // do the spiraling if we want to be sure there is no bin left at the end
+  unsigned max_radius = 0; 
+  for (unsigned k=0;k<dim;k++)
+   {
+    unsigned local=std::max((bin_index_v[k] + 1),
+                            (Dimensions_of_bin_array[k] - bin_index_v[k] - 1));
+    if (local > max_radius)
+     {
+      max_radius = local;
+     }
+   }
+  
+  // Vector which will store the indices of the neighbouring bins
+  // at the current radius
+  Vector<unsigned> bin_index_at_current_radius_old;
+  Vector<unsigned> bin_index_at_current_radius_new;
+  while (radius <= max_radius)
+   {
+    // Get the neighbouring bins
+    bin_index_at_current_radius_old.clear();
+    double t_start=TimingHelpers::timer();
+    get_neighbouring_bins_helper(bin_index, 
+                                 radius,
+                                 bin_index_at_current_radius_old,true);
+    unsigned nbin_at_current_radius_old = bin_index_at_current_radius_old.size();
+    double t_end=TimingHelpers::timer();
+    double t_old=t_end-t_start;
+
+    bin_index_at_current_radius_new.clear();
+    double t_start_new=TimingHelpers::timer();
+    get_neighbouring_bins_helper(bin_index, 
+                                 radius,
+                                 bin_index_at_current_radius_new,false);
+    unsigned nbin_at_current_radius_new = bin_index_at_current_radius_new.size();
+    double t_end_new=TimingHelpers::timer();
+
+    double t_new=t_end_new-t_start_new;
+
+    if (nbin_at_current_radius_new!=nbin_at_current_radius_old)
+     {
+      oomph_info << "Number of bins don't match: new = "
+                 << nbin_at_current_radius_new
+                 << "old = "
+                 << nbin_at_current_radius_old 
+                 << " radius = " << radius 
+                 << std::endl;
+      oomph_info << "Old: " << std::endl;
+      for (unsigned i=0;i<nbin_at_current_radius_old;i++)
+       {
+        oomph_info <<  bin_index_at_current_radius_old[i] << " ";
+       }
+      oomph_info << std::endl;
+      oomph_info << "New: " << std::endl;
+      for (unsigned i=0;i<nbin_at_current_radius_new;i++)
+       {
+        oomph_info <<  bin_index_at_current_radius_new[i] << " ";
+       }
+      oomph_info << std::endl;
+     }    
+
+    t_total_new+=t_new;
+    t_total_old+=t_old;
+
+    if (t_new<t_old)
+     {
+      new_faster++;
+     }
+    else
+     {
+      old_faster++;
+     }
+    radius++;
+   }
+
+
+  oomph_info << "Number of times old/new version was faster: "
+             << old_faster << " " << new_faster << std::endl
+             << "Total old/new time: " << t_total_old << " " 
+             << t_total_new << " " << std::endl;
+  
+ }
+
 
 //==============================================================================
 /// Helper function for computing the bin indices of neighbouring bins
@@ -1227,16 +1352,23 @@ void RefineableBinArray::get_bin_boundaries(const unsigned& bin_index,
  void BinArray::get_neighbouring_bins_helper(const unsigned& bin_index,
                                              const unsigned& radius,
                                              Vector<unsigned>& 
-                                             neighbouring_bin_index)
+                                             neighbouring_bin_index,
+                                             const bool& use_old_version)
  {
-
-  // Keep old version around for comparisons
-  bool use_old_version=false;
 
   // OLD VERSION
   if (use_old_version)
    {
-    
+    neighbouring_bin_index.clear();
+
+    // Quick return (slightly hacky -- the machinery below adds the
+    // "home" bin twice...)
+    if (radius==0)
+     {      
+      neighbouring_bin_index.push_back(bin_index);
+      return;
+     }
+
     // translate old code
     unsigned level=radius;
     unsigned bin=bin_index;
@@ -1699,7 +1831,7 @@ unsigned RefineableBinArray::total_number_of_sample_points_computed_recursively(
  /// Get (linearly enumerated) bin index of bin that
  /// contains specified zeta
 //============================================================
- unsigned RefineableBinArray::coords_to_bin_index(const Vector<double>& zeta)
+ unsigned BinArray::coords_to_bin_index(const Vector<double>& zeta)
  {
   unsigned coef = 1;
   unsigned n_bin = 0;
@@ -1829,7 +1961,7 @@ unsigned RefineableBinArray::total_number_of_sample_points_computed_recursively(
 //==================================================================
  /// Get "coordinates" of bin that contains specified zeta
 //==================================================================
- void RefineableBinArray::coords_to_vectorial_bin_index(
+ void BinArray::coords_to_vectorial_bin_index(
   const Vector<double>& zeta,
   Vector<unsigned>& bin_index)
  {  
@@ -1950,7 +2082,6 @@ unsigned RefineableBinArray::total_number_of_sample_points_computed_recursively(
    get_neighbouring_bins_helper(bin_index, 
                                 radius,
                                 bin_index_at_current_radius);
-   
    // How many are there
    unsigned nbin_at_current_radius = bin_index_at_current_radius.size();
    unsigned n_bin = nbin();
@@ -2537,7 +2668,6 @@ unsigned NonRefineableBinArray::total_number_of_sample_points_computed_recursive
 
 
 
-
  //========================================================================
  /// Fill bin by diffusion, populating each empty bin with the same content
  /// as the first non-empty bin found during a spiral-based search
@@ -2546,6 +2676,9 @@ unsigned NonRefineableBinArray::total_number_of_sample_points_computed_recursive
  void NonRefineableBinArray::fill_bin_by_diffusion(const unsigned&
                                                    bin_diffusion_radius)
  {
+  // oomph_info << "PROFILING GET_NEIGHBOURING_BINS_HELPER():" << std::endl;
+  // profile_get_neighbouring_bins_helper();
+
   // Loop over all bins to check if they're empty
   std::list<unsigned> empty_bins;
   unsigned n_bin = nbin();
@@ -2960,7 +3093,6 @@ unsigned NonRefineableBinArray::total_number_of_sample_points_computed_recursive
 /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
 /// on return from this function, none of the constituent sub-objects 
 /// contain the required coordinate.
-/// Only search in nonempty bins
 //==============================================================================
  void NonRefineableBinArray::locate_zeta(const Vector<double>& zeta, 
                                          GeomObject*& sub_geom_object_pt,
@@ -3045,6 +3177,58 @@ unsigned NonRefineableBinArray::total_number_of_sample_points_computed_recursive
     // Total number of bins to be visited
     unsigned n_nbr_bin=neighbour_bin.size();
     
+    // // keep around and add "false" as last argument to previous call
+    // // to get_neighbouring_bins_helper(...) for annotation below to make sense
+    // {
+    //  Vector<unsigned> old_neighbour_bin;
+    //  get_neighbouring_bins_helper(bin_number, 
+    //                               i_level,
+    //                               old_neighbour_bin,
+    //                               true); // true=use old version!
+    //  unsigned nbin_new = neighbour_bin.size();
+    //  unsigned nbin_old = old_neighbour_bin.size();
+    //  unsigned n=std::min(nbin_new,nbin_old);
+    //  std::sort(old_neighbour_bin.begin(),
+    //            old_neighbour_bin.end());
+    //  std::sort(neighbour_bin.begin(),
+    //            neighbour_bin.end());
+    //  oomph_info << "# of neighbouring bins: "
+    //             << nbin_new << " " << nbin_old;
+    //  if (nbin_new!=nbin_old)
+    //   {
+    //    oomph_info << " DIFFERENT!";
+    //   }
+    //  oomph_info << std::endl;
+    //  for (unsigned i=0;i<n;i++)
+    //   {
+    //    oomph_info << neighbour_bin[i] << " " 
+    //               << old_neighbour_bin[i] << " ";
+    //    if (neighbour_bin[i]!= 
+    //        old_neighbour_bin[i])
+    //     {
+    //      oomph_info << "DIFFFFERENT";
+    //     }
+    //    oomph_info << std::endl;
+    //   }
+    //  if (nbin_new>nbin_old)
+    //   {
+    //    for (unsigned i=n;i<nbin_new;i++)
+    //     {
+    //      oomph_info << "NNEW:" << neighbour_bin[i] 
+    //                 << std::endl;
+    //     }
+    //   }
+    //  if (nbin_old>nbin_new)
+    //   {
+    //    for (unsigned i=n;i<nbin_old;i++)
+    //     {
+    //      oomph_info << "OOLD:" << old_neighbour_bin[i] 
+    //                 << std::endl;
+    //     }
+    //   }
+    // }
+    
+
     // Set bool for finding zeta
     bool found_zeta=false;
     for (unsigned i_nbr=0;i_nbr<n_nbr_bin;i_nbr++)
@@ -3109,8 +3293,10 @@ unsigned NonRefineableBinArray::total_number_of_sample_points_computed_recursive
             // Attempt to find zeta within a sub-object
             el_pt->locate_zeta(zeta,sub_geom_object_pt,s,
                                use_coordinate_as_initial_guess);
+
+
             Total_number_of_sample_points_visited_during_locate_zeta_from_top_level++;
-            
+
             // Always fail? (Used for debugging, e.g. to trace out 
             // spiral path)
             if (BinArray::Always_fail_elemental_locate_zeta)
@@ -3411,7 +3597,6 @@ double CGALSamplePointContainer::get_sample_points()
 /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
 /// on return from this function, none of the constituent sub-objects 
 /// contain the required coordinate.
-/// Only search in nonempty bins
 //==============================================================================
  void CGALSamplePointContainer::locate_zeta(const Vector<double>& zeta, 
                                             GeomObject*& sub_geom_object_pt,
@@ -3471,20 +3656,13 @@ double CGALSamplePointContainer::get_sample_points()
   bool can_increase_n_nearest_neighbours=true;
   bool keep_going=true;
   while (keep_going)
-   {
-
-    // // hierher kill
-    // double start_t=TimingHelpers::timer(); 
-    
+   {    
     //Find specified number of nearest neighbours only
     const unsigned n_nearest_neighbours_actual = 
      std::min(n_nearest_neighbours,n_nearest_neighbours_max);
-    K_neighbor_search_d search(*CGAL_tree_d_pt, query, n_nearest_neighbours_actual);
-  
-    // oomph_info << "hierher: time for finding " 
-    //            << n_nearest_neighbours_actual << " nearest neighbours: "
-    //            << TimingHelpers::timer()-start_t << std::endl;
-    
+    K_neighbor_search_d search(*CGAL_tree_d_pt, query, 
+                               n_nearest_neighbours_actual);
+      
     // Search
     unsigned count=0;
     for(K_neighbor_search_d::iterator it = search.begin(); 
@@ -3492,15 +3670,9 @@ double CGALSamplePointContainer::get_sample_points()
      {
       count++;
 
-      // oomph_info << "                      BLA: " << count << " " 
-      //            << n_neighbours_visited_last_time << " " 
-      //            << first_sample_point_to_actually_lookup_during_locate_zeta() ;
-
       if ((count>n_neighbours_visited_last_time)&&
           (count>first_sample_point_to_actually_lookup_during_locate_zeta()))
        { 
-        //oomph_info << " ... doing it!" << std::endl;
-
         // Recover the sample point
         SamplePoint* sample_point_pt=boost::get<1>(it->first);
         
@@ -3512,7 +3684,8 @@ double CGALSamplePointContainer::get_sample_points()
 #ifdef OOMPH_HAS_MPI
         // We only look at the sample point if it isn't halo
         // if we are set up to ignore the halo elements
-        if (ignore_halo_elements_during_locate_zeta_search()&&(el_pt->is_halo()))
+        if (ignore_halo_elements_during_locate_zeta_search()&&
+            (el_pt->is_halo()))
          {
           // Halo
          }
@@ -3550,15 +3723,11 @@ double CGALSamplePointContainer::get_sample_points()
              }
             if (dist_sq>Max_search_radius*Max_search_radius)
              {
-              // oomph_info << "Not doing it (cgal) because dist_sq = " 
-              //            << dist_sq << "> Max_search_radius*Max_search_radius"
-              //            << Max_search_radius*Max_search_radius << std::endl;
               do_it=false;
              }
            }
           if (do_it)
            {
-            
             // History of sample points visited
             if (SamplePointContainer::Visited_sample_points_file.is_open())
              {          
@@ -3601,8 +3770,6 @@ double CGALSamplePointContainer::get_sample_points()
             
             if (sub_geom_object_pt!=0)
              {
-              // oomph_info << "Found point after visiting " << count 
-              //            << " sample points" << std::endl;
               return;
              }
            }
@@ -3612,15 +3779,7 @@ double CGALSamplePointContainer::get_sample_points()
 #endif
         
        }
-      // else
-      //  {
-      //   oomph_info << "... not doing it\n";
-      //  }
      }
-
-    // oomph_info << "Have searched through all " 
-    //            << n_nearest_neighbours_actual << " nearest neighbours "
-    //            << "without finding point\n";
 
     n_neighbours_visited_last_time=count;
 
@@ -3629,26 +3788,194 @@ double CGALSamplePointContainer::get_sample_points()
      {
       unsigned factor_for_increase_in_nearest_neighbours=10;
       n_nearest_neighbours*=factor_for_increase_in_nearest_neighbours;
-      // oomph_info << "Increased  number of nearest neighbours to " 
-      //            << n_nearest_neighbours << std::endl;
 
       // There's no point going any further (next time)
       if (n_nearest_neighbours>n_nearest_neighbours_max)
        {
-        //oomph_info << "Going no further" << std::endl;
         can_increase_n_nearest_neighbours=false;
        }
      }
+    // Bailing out; not found but we can't increase number of search pts further
     else
      {
-      // oomph_info << "Bailing out; not found but we can't "
-      //            << "increase number of search pts further"
-      //            << std::endl;
       keep_going=false;
      }
    } // while loop to increase number of nearest neighbours
  }
  
+
+
+//==============================================================================
+/// \short Find the sub geometric object and local coordinate therein that
+/// corresponds to the intrinsic coordinate zeta, using up to the specified
+/// number of sample points as initial guess for the Newton-based search.
+/// If this fails, return the nearest sample point.
+//==============================================================================
+ void CGALSamplePointContainer::limited_locate_zeta(
+  const Vector<double>& zeta, 
+  const unsigned& max_sample_points_for_newton_based_search,
+  GeomObject*& sub_geom_object_pt,
+  Vector<double>& s)
+ {
+
+  // Reset counter for number of sample points visited.
+  Total_number_of_sample_points_visited_during_locate_zeta_from_top_level=0;
+  
+  // Initialise return to null -- if it's still null when we're
+  // leaving we've failed!
+  sub_geom_object_pt=0;
+  
+  // Number of sample points
+  unsigned n_sample=Sample_point_pt.size();
+
+  // Create CGAL query -- this is the point we want!
+  Point_d query(zeta.size(),zeta.begin(),zeta.end());
+
+  // Max. number of nearest neighbours
+  const unsigned n_nearest_neighbours_max = 
+   std::min(n_sample,max_sample_points_for_newton_based_search);
+
+  // Find 'em
+  K_neighbor_search_d search(*CGAL_tree_d_pt, query, n_nearest_neighbours_max);
+
+  // Do Newton method starting from each of the nearest sample points
+  for(K_neighbor_search_d::iterator it = search.begin(); 
+      it != search.end(); it++)
+   {
+    // Recover the sample point
+    SamplePoint* sample_point_pt=boost::get<1>(it->first);
+    
+    // Get the element
+    FiniteElement* el_pt=Mesh_pt->finite_element_pt(
+     sample_point_pt->element_index_in_mesh());
+    
+    
+#ifdef OOMPH_HAS_MPI
+
+    // We only look at the sample point if it isn't halo
+    // if we are set up to ignore the halo elements
+    if (ignore_halo_elements_during_locate_zeta_search()&&(el_pt->is_halo()))
+     {
+      // Halo
+     }
+    else
+     { // not halo
+
+#endif
+      
+      // Provide initial guess for Newton search using local coordinate
+      // of sample point        
+      bool use_equally_spaced_interior_sample_points=
+       SamplePointContainer::Use_equally_spaced_interior_sample_points;
+      unsigned i=sample_point_pt->sample_point_index_in_element();
+      el_pt->get_s_plot(i,
+                        nsample_points_generated_per_element(),
+                        s,
+                        use_equally_spaced_interior_sample_points);
+      
+      bool do_it=true;
+      if (Max_search_radius<DBL_MAX)
+       {
+        unsigned cached_dim_zeta=ndim_zeta();
+        Vector<double> zeta_sample(cached_dim_zeta);
+        if (use_eulerian_coordinates_during_setup())
+         {
+          el_pt->interpolated_x(s,zeta_sample);
+         }
+        else
+         {
+          el_pt->interpolated_zeta(s,zeta_sample);
+         }     
+        double dist_sq=0.0;
+        for (unsigned ii=0;ii<cached_dim_zeta;ii++)
+         {
+          dist_sq+=(zeta[ii]-zeta_sample[ii])*(zeta[ii]-zeta_sample[ii]);
+         }
+        if (dist_sq>Max_search_radius*Max_search_radius)
+         {
+          do_it=false;
+         }
+       }
+      if (do_it)
+       {
+        
+        // History of sample points visited
+        if (SamplePointContainer::Visited_sample_points_file.is_open())
+         {          
+          unsigned cached_dim_zeta=ndim_zeta();
+          Vector<double> zeta_sample(cached_dim_zeta);
+          if (use_eulerian_coordinates_during_setup())
+           {
+            el_pt->interpolated_x(s,zeta_sample);
+           }
+          else
+           {
+            el_pt->interpolated_zeta(s,zeta_sample);
+           }     
+          double dist=0.0;
+          for (unsigned ii=0;ii<cached_dim_zeta;ii++)
+           {
+            SamplePointContainer::Visited_sample_points_file 
+             << zeta_sample[ii] << " ";    
+            dist+=(zeta[ii]-zeta_sample[ii])*(zeta[ii]-zeta_sample[ii]);
+           }
+          SamplePointContainer::Visited_sample_points_file 
+           << total_number_of_sample_points_visited_during_locate_zeta_from_top_level()
+           << " " << sqrt(dist)
+           << std::endl;
+         }
+        
+        // Bump counter
+        total_number_of_sample_points_visited_during_locate_zeta_from_top_level()++;
+        
+        bool use_coordinate_as_initial_guess=true;
+        el_pt->locate_zeta(zeta, sub_geom_object_pt, s,
+                           use_coordinate_as_initial_guess);
+        
+        // Always fail? (Used for debugging, e.g. to trace out 
+        // spiral path)
+        if (SamplePointContainer::Always_fail_elemental_locate_zeta)
+         {
+          sub_geom_object_pt=0;
+         }
+        
+        if (sub_geom_object_pt!=0)
+         {
+          return;
+         }
+       }
+      
+#ifdef OOMPH_HAS_MPI
+     }
+#endif
+    
+   }
+
+  // We've searched over all the sample points but the Newton method 
+  // hasn't converged from any, so just use the nearest one
+  K_neighbor_search_d::iterator it = search.begin(); 
+  
+  // Recover the sample point
+  SamplePoint* sample_point_pt=boost::get<1>(it->first);
+  
+  // Get the element
+  FiniteElement* el_pt=Mesh_pt->finite_element_pt(
+   sample_point_pt->element_index_in_mesh());
+
+  // Get local coordinate of sample point in element
+  bool use_equally_spaced_interior_sample_points=
+   SamplePointContainer::Use_equally_spaced_interior_sample_points;
+  unsigned i=sample_point_pt->sample_point_index_in_element();
+  el_pt->get_s_plot(i,
+                    nsample_points_generated_per_element(),
+                    s,
+                    use_equally_spaced_interior_sample_points);
+      
+  sub_geom_object_pt=el_pt;
+ }
+
+
+
 #endif // cgal
 
 } // end of namespace extension

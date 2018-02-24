@@ -1226,11 +1226,6 @@ namespace Locate_zeta_helpers
  /// Maximum number of Newton iterations
  extern unsigned Max_newton_iterations;
  
- /// Rounding tolerance for whether coordinate is in element or not.
- /// Bit subtle -- this is obviously related to the Newton tolerance
- /// but not quite the same!
- extern double Rounding_tolerance;
-
  /// \short Multiplier for (zeta-based) outer radius of element used for
  /// deciding that point is outside element. Set to negative value
  /// to suppress test.
@@ -1785,17 +1780,14 @@ public:
    return true;
   }
  
- ///\short Check whether the local coordinate are valid or not, allowing for
- /// a rounding tolerance. If the point is outside the element by less
- /// than the tolerance, we move it back into the element. 
- virtual bool local_coord_is_valid(Vector<double> &s, 
-                                   const double &rounding_tolerance)
+ ///\short Adjust local coordinates so that they're located inside
+ /// the element
+ virtual void move_local_coord_back_into_element(Vector<double> &s) const
   {
    throw OomphLibError(
-    "local_coord_is_valid is not implemented for this element\n",
+    "move_local_coords_back_into_element() is not implemented for this element\n",
     OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
-   return true;
   }
 
 
