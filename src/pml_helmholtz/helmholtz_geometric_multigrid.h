@@ -3239,19 +3239,9 @@ namespace oomph
  void HelmholtzMGPreconditioner<DIM>::
  setup_interpolation_matrices_unstructured()
  {
-  // Variable to hold the number of sons in an element
-  unsigned n_sons;
   
-  // Number of son elements
-  if (DIM==2)
-  {
-   n_sons=4;
-  }
-  else if (DIM==3)
-  {
-   n_sons=8;
-  }
-  else
+#ifdef PARANOID
+  if ((DIM!=2)&&(DIM!=3))
   {
    std::ostringstream error_message_stream;
    error_message_stream << "DIM should be 2 or 3 not "
@@ -3260,6 +3250,7 @@ namespace oomph
 		       OOMPH_CURRENT_FUNCTION,
 		       OOMPH_EXCEPTION_LOCATION);
   }
+#endif
 
   // Vector of local coordinates in the element
   Vector<double> s(DIM,0.0);
