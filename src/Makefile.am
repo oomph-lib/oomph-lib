@@ -21,6 +21,7 @@ axisym_poroelasticity \
 pml_time_harmonic_linear_elasticity \
 axisym_displ_based_foeppl_von_karman \
 linearised_axisym_navier_stokes \
+linearised_navier_stokes \
 generalised_newtonian_navier_stokes \
 generalised_newtonian_axisym_navier_stokes
 

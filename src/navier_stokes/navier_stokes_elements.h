@@ -1519,6 +1519,39 @@ public:
   }
 
 
+  /// Return FE interpolated derivatives of velocity component u[i]
+ /// w.r.t spatial global coordinate direction x[j] at local coordinate s
+ double interpolated_dudx_nst(const Vector<double> &s, 
+                              const unsigned &i,
+                              const unsigned &j) const
+ {
+  // Determine number of nodes
+  const unsigned n_node = nnode();
+  
+  // Allocate storage for local shape function and its derivatives
+  // with respect to space
+   Shape psif(n_node);
+   DShape dpsifdx(n_node,DIM);
+
+   // Find values of shape function (ignore jacobian)
+   (void)this->dshape_eulerian(s,psif,dpsifdx);
+   
+   // Get the index at which the velocity is stored
+   const unsigned u_nodal_index = u_index_nst(i);
+
+   // Initialise value of dudx
+   double interpolated_dudx = 0.0;
+   
+   // Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     interpolated_dudx += nodal_value(l,u_nodal_index)*dpsifdx(l,j);
+    }
+   
+   return(interpolated_dudx);
+  }
+
+
  /// \short Output solution in data vector at local cordinates s:
  /// x,y [,z], u,v,[w], p
  void point_output_data(const Vector<double> &s, Vector<double>& data)
