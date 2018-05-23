@@ -101,6 +101,26 @@ public:
  /// that the unknown is always stored at the same index at each node.
  virtual inline unsigned u_index_poisson() const {return 0;}
 
+
+ /// \short Output solution in data vector at local cordinates s:
+ /// x,y [,z], u
+ void point_output_data(const Vector<double> &s, Vector<double>& data)
+ {
+  // Dimension
+  unsigned dim=s.size();
+  
+  // Resize data for values
+  data.resize(dim+1);
+  
+  // Write values in the vector
+  for (unsigned i=0; i<dim; i++)
+   {
+    data[i]=interpolated_x(s,i);
+   }
+  data[dim]=this->interpolated_u_poisson(s);
+ }
+
+
  /// \short Number of scalars/fields output by this element. Reimplements
  /// broken virtual function in base class.
  unsigned nscalar_paraview() const
