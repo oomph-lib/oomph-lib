@@ -94,7 +94,7 @@ public:
       }
 
     }
-   setup_boundary_element_info();
+   TetgenMesh<ELEMENT>::setup_boundary_element_info();
 
   }
 

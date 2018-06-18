@@ -226,7 +226,7 @@ namespace oomph
   // created their vertex nodes. Now we need to create
   // the additional (midside and internal) nodes!
 
-  unsigned boundary_id;
+  unsigned boundary_id=0;
 
   // Get number of nodes along element edge and dimension of element (2)
   // from first element
@@ -371,6 +371,7 @@ namespace oomph
        
      } //end of loop over edges
    } //end of loop over elements
+
 
   // Lookup scheme has now been setup
   Lookup_for_elements_next_boundary_is_setup = true;

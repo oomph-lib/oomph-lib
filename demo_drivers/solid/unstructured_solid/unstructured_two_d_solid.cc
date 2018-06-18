@@ -89,9 +89,10 @@ public:
       }
     }
 
+   std::cout << "About to setup the boundary elements" << std::endl;
    // Re-setup boundary info, i.e. elements next to boundaries
-   setup_boundary_element_info();
-
+   TriangleMesh<ELEMENT>::setup_boundary_element_info();
+   //This is the bit that has gone wrong
   }
 
  /// Empty Destructor
@@ -203,7 +204,7 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem()
 
  // Make traction mesh
  Traction_mesh_pt=new SolidMesh;
-
+ 
  // How many bulk elements are adjacent to boundary b?
  unsigned n_element = Solid_mesh_pt->nboundary_element(b);
  

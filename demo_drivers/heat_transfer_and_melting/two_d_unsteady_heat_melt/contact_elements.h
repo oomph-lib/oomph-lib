@@ -768,7 +768,7 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
-     set_integration_scheme(new PiecewiseGauss<1,3>(s_min(),s_max()));
+     set_integration_scheme(new PiecewiseGauss<1,3>(this->s_min(),this->s_max()));
    }
  
 
@@ -788,6 +788,17 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
     return  oomph::FiniteElement::zeta_nodal(n,k,i);
    }
 
+   //Explicit overload for s_min
+   double s_min() const
+   {
+    return FaceGeometry<ELEMENT>::s_min();
+   }
+
+   double s_max() const
+   {
+    return FaceGeometry<ELEMENT>::s_max();
+   }
+   
    /// \short Allow only proper non-penetration (without "stick", i.e.
    /// we don't allow negative contact pressures) 
    void disable_stick()
@@ -911,8 +922,8 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
      }
     else
      {
-      const double smin=s_min();
-      const double smax=s_max();
+      const double smin=this->s_min();
+      const double smax=this->s_max();
       const double sl=smin+0.25*(smax-smin);
       const double sr=smin+0.75*(smax-smin);
       if (s[0]<=sl)
@@ -940,8 +951,8 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
    /// or the contact pressure
    void shape_i(const Vector<double>& s, Shape &psi) const
    {  
-    const double smin=s_min();
-    const double smax=s_max();
+    const double smin=this->s_min();
+    const double smax=this->s_max();
     const double sl=smin+0.25*(smax-smin);
     const double sr=smin+0.75*(smax-smin);
     if (s[0]<=sl)

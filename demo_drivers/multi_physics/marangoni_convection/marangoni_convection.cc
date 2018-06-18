@@ -358,20 +358,20 @@ public:
      Surface_pinned = false;
      
      //Unpin the heights of all the spines in the middle
-     unsigned n_spine = mesh_pt()->nspine();
+     unsigned n_spine = Bulk_mesh_pt->nspine();
      for(unsigned n=0;n<n_spine;n++)
       {
-       mesh_pt()->spine_pt(n)->spine_height_pt()->unpin(0);
+       Bulk_mesh_pt->spine_pt(n)->spine_height_pt()->unpin(0);
       }
      
      //If we on the top wall, v velocity is no longer pinned
      unsigned ibound=2;
      //Loop over the number of nodes on the boundary
-     unsigned num_nod= mesh_pt()->nboundary_node(ibound);
+     unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
      for (unsigned inod=0;inod<num_nod;inod++)
       {
        //Loop over the desired values stored at the nodes and unpin
-       mesh_pt()->boundary_node_pt(ibound,inod)->unpin(1);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->unpin(1);
       }
      
      //Unfix the pressure
@@ -379,11 +379,11 @@ public:
 
      // Loop over the elements to set up element-specific 
      // and re-enable ALE
-     unsigned n_element = mesh_pt()->nbulk();
+     unsigned n_element = Bulk_mesh_pt->nelement;
      for(unsigned i=0;i<n_element;i++)
       {
        // Upcast from GeneralsedElement to the present element
-       ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->bulk_element_pt(i));
+       ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
        el_pt->enable_ALE();
       }

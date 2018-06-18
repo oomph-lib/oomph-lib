@@ -96,7 +96,7 @@ public:
    }
 
    // Re-setup boundary info, i.e. elements next to boundaries
-   this->setup_boundary_element_info();
+   QuadFromTriangleMesh<ELEMENT>::setup_boundary_element_info();
   }
 
  // Calculate the L2 norm of the displacement u=R-r to overload the

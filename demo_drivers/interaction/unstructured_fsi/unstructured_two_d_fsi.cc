@@ -155,7 +155,7 @@ public:
     }// done boundary assignment
 
    // Identify the elements next to the newly created boundaries
-   setup_boundary_element_info();
+   TriangleMesh<ELEMENT>::setup_boundary_element_info();
    
    // Setup boundary coordinates for boundaries 1 and 2
    this->template setup_boundary_coordinates<ELEMENT>(1);
@@ -238,7 +238,7 @@ public:
        if (nod_pt->x(1)<0.2) this->add_boundary_node(0,nod_pt);
       }
     }
-   this->setup_boundary_element_info();
+   TriangleMesh<ELEMENT>::setup_boundary_element_info();
    
    // Open a file to doc the FaceElements that are used to
    // create the boundary coordinates. The elements must
