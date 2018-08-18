@@ -4016,7 +4016,8 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
 /// coordinates at the position. Works directly from the base vectors
 /// without assuming that coordinates match spatial dimension. Will
 /// be overloaded in FaceElements, in which the elemental dimension does
-/// not match the spatial dimension.
+/// not match the spatial dimension. WARNING: this is always positive
+/// and cannot be used to check if the element is inverted, say!
 //========================================================================
  double FiniteElement::J_eulerian(const Vector<double> &s) const
  {
@@ -4073,10 +4074,6 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
     oomph_info << "More than 3 dimensions in J_eulerian()" << std::endl;
     break;
    }
-
-#ifdef PARANOID
-  check_jacobian(det);
-#endif
 
   //Return the Jacobian (square-root of the determinant of the metric tensor)
   return sqrt(det);
@@ -4149,6 +4146,56 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
  
   //Return the Jacobian (square-root of the determinant of the metric tensor)
   return sqrt(det);
+ }
+
+//========================================================================
+/// \short Check that Jacobian of mapping between local and Eulerian
+/// coordinates at all integration points is positive.
+//========================================================================
+void FiniteElement::check_J_eulerian_at_knots(bool& passed) const
+ {
+
+  // Bypass check deep down in the guts...
+  bool backup=FiniteElement::Accept_negative_jacobian;
+  FiniteElement::Accept_negative_jacobian=true;
+
+  // Let's be optimistic...
+  passed=true;
+
+  //Find the number of nodes
+  const unsigned n_node = nnode();
+
+  //Find the number of position types
+  const unsigned n_position_type = nnodal_position_type();
+
+  //Find the dimension of the node and element
+  const unsigned n_dim_node = nodal_dimension();
+  const unsigned n_dim_element = dim();
+
+  //Set up dummy memory for the shape functions
+  Shape psi(n_node,n_position_type);
+  DShape dpsi(n_node,n_dim_element);
+
+  unsigned nintpt=integral_pt()->nweight();
+  for (unsigned ipt=0;ipt<nintpt;ipt++)
+   {
+    double jac=dshape_eulerian_at_knot(ipt,psi,dpsi);
+
+    // Are we dead yet?
+    if (jac<=0.0)
+     {
+      passed=false;
+      
+      // Reset
+      FiniteElement::Accept_negative_jacobian=backup;
+
+      return;
+     }
+   }
+
+  // Reset
+  FiniteElement::Accept_negative_jacobian=backup;
+
  }
 
 //====================================================================
@@ -5230,6 +5277,104 @@ void FaceElement::output_zeta(std::ostream &outfile, const unsigned& nplot)
   
   // Return 
   return sqrt(Adet);
+ }
+
+//========================================================================
+/// \short Check that Jacobian of mapping between local and Eulerian
+/// coordinates at all integration points is positive.
+//========================================================================
+ void FaceElement::check_J_eulerian_at_knots(bool& passed) const
+ {
+  // Let's be optimistic...
+  passed=true;
+
+  //Find the number of nodes
+  const unsigned n_node = nnode();
+
+  //Find the number of position types
+  const unsigned n_position_type = nnodal_position_type();
+
+  //Find the dimension of the node and element
+  const unsigned n_dim = nodal_dimension();
+  const unsigned n_dim_el = dim();
+
+  //Set up dummy memory for the shape functions
+  Shape psi(n_node,n_position_type);
+  DShape dpsids(n_node,n_position_type,n_dim_el);
+
+
+  unsigned nintpt=integral_pt()->nweight();
+  for (unsigned ipt=0;ipt<nintpt;ipt++)
+   {
+    
+    //Get the shape functions and local derivatives at the knot
+    //This call may use the stored versions, which is why this entire
+    //function doesn't just call J_eulerian(s), after reading out s from
+    //the knots.
+    dshape_local_at_knot(ipt,psi,dpsids);
+    
+    //Also calculate the surface Vectors (derivatives wrt local coordinates)
+    DenseMatrix<double> interpolated_A(n_dim_el,n_dim,0.0);   
+    
+    //Calculate positions and derivatives
+    for(unsigned l=0;l<n_node;l++) 
+     {
+      //Loop over positional dofs
+      for(unsigned k=0;k<n_position_type;k++)
+       {
+        //Loop over coordinates
+        for(unsigned i=0;i<n_dim;i++)
+         {
+          //Loop over LOCAL derivative directions, to calculate the tangent(s)
+          for(unsigned j=0;j<n_dim_el;j++)
+           {
+            interpolated_A(j,i) += 
+             nodal_position_gen(l,bulk_position_type(k),i)*dpsids(l,k,j);
+           }
+         }
+       }
+     }
+    
+    //Now find the local deformed metric tensor from the tangent Vectors
+    DenseMatrix<double> A(n_dim_el,n_dim_el,0.0);
+    for(unsigned i=0;i<n_dim_el;i++)
+     {
+      for(unsigned j=0;j<n_dim_el;j++)
+       {
+        //Take the dot product
+        for(unsigned k=0;k<n_dim;k++)
+         { 
+          A(i,j) += interpolated_A(i,k)*interpolated_A(j,k);
+         }
+       }
+     }
+    
+    //Find the determinant of the metric tensor
+    double Adet =0.0;
+    switch(n_dim_el) 
+     {
+     case 1:
+      Adet = A(0,0);
+      break;
+     case 2:
+      Adet = A(0,0)*A(1,1) - A(0,1)*A(1,0);
+      break;
+     default:
+      throw 
+       OomphLibError("Wrong dimension in FaceElement",
+                     "FaceElement::J_eulerian_at_knot()",
+                     OOMPH_EXCEPTION_LOCATION);
+     }
+    
+
+    // Are we dead yet?
+    if (Adet<=0.0)
+     {
+      passed=false;
+      return;
+     }
+   }
+
  }
 
 //=======================================================================

@@ -1991,6 +1991,10 @@ public:
  /// coordinates at the ipt-th integration point
  virtual double J_eulerian_at_knot(const unsigned &ipt) const;
  
+/// \short Check that Jacobian of mapping between local and Eulerian
+/// coordinates at all integration points is positive.
+ void check_J_eulerian_at_knots(bool& passed) const;
+
  /// \short Helper function used to check for singular or negative
  /// Jacobians in the transform from local to global or Lagrangian
  /// coordinates.
@@ -4284,6 +4288,10 @@ class FaceElement: public virtual FiniteElement
  /// coordinates at the ipt-th integration point
  /// Overloaded from FiniteElement.
  double J_eulerian_at_knot(const unsigned &ipt) const;
+ 
+ /// \short Check that Jacobian of mapping between local and Eulerian
+/// coordinates at all integration points is positive.
+ void check_J_eulerian_at_knots(bool& passed) const;
  
  /// \short Return FE interpolated coordinate x[i] at local coordinate s.
  /// Overloaded to get information from bulk.
