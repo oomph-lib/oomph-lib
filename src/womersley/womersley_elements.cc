@@ -41,6 +41,20 @@ template<unsigned DIM>
 double WomersleyEquations<DIM>::Default_ReSt_value = 0.0;
 
 
+//========================================================================
+/// Instantiation of static bool to suppress warning; initialise to false.
+//========================================================================
+ bool TemplateFreeWomersleyMeshBase::Suppress_warning_about_unpinned_nst_dofs=
+  false;
+
+
+//========================================================================
+/// Zero!
+//========================================================================
+double TemplateFreeWomersleyImpedanceTubeBase::Zero=0.0;
+
+
+
 
 //======================================================================
 // Set the data for the number of Variables at each node
@@ -360,6 +374,7 @@ template <unsigned DIM>
 void  WomersleyEquations<DIM>::output(std::ostream &outfile, 
                                       const unsigned &nplot)
 {
+
  //Vector of local coordinates
  Vector<double> s(DIM);
  

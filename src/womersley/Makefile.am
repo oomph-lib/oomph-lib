@@ -4,7 +4,8 @@
 
 # Define the sources
 sources =  \
-womersley_elements.cc 
+womersley_elements.cc \
+Twomersley_elements.cc 
 
 
 # Include files which shouldn't be compiled
@@ -12,7 +13,8 @@ incl_cc_files =
 
 # Define the headers
 headers =  \
-womersley_elements.h  
+womersley_elements.h \
+Twomersley_elements.h
 
 # Define name of library
 libname = womersley

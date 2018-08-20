@@ -84,6 +84,10 @@ class TemplateFreeWomersleyImpedanceTubeBase
  /// and its derivative, dp_in/dq.
  virtual void get_response(double& p_in,
                            double& dp_in_dq)=0;
+
+ /// Zero!
+ static double Zero;
+
 };
 
 
@@ -782,7 +786,7 @@ public:
  /// elements. (Note that the mesh must be created, and boundary
  /// conditions applied BEFORE creating the Womersley problem.
  /// This is to facilitate the re-use of this class
- /// for different geometries.)
+ /// for different geometries.
  WomersleyProblem(double* re_st_pt, 
                   double* prescribed_volume_flux_pt,
                   TimeStepper* time_stepper_pt,
@@ -823,10 +827,19 @@ public:
     }
   }
 
- /// Doc the solution
+ /// \short Doc the solution incl. trace file for various quantities of
+ /// interest (to some...)
  void doc_solution(DocInfo& doc_info, 
                    std::ofstream& trace_file,
                    const double& z_out=0.0);
+
+ /// Doc the solution
+ void doc_solution(DocInfo& doc_info, 
+                   const double& z_out=0.0)
+ {
+  std::ofstream trace_file;
+  doc_solution(doc_info,trace_file,z_out);
+ }
 
  /// \short Access function to the single-valued Data object that
  /// contains the unknown pressure gradient (used if flux is prescribed)
@@ -921,7 +934,8 @@ WomersleyProblem<ELEMENT,DIM>::WomersleyProblem(
 
 
  // Do equation numbering
- oomph_info <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+ oomph_info <<"Number of equations in WomersleyProblem: " 
+            << assign_eqn_numbers() << std::endl; 
 
 } // end of constructor
 
@@ -990,9 +1004,9 @@ WomersleyProblem<ELEMENT,DIM>::WomersleyProblem(
  // created in the ImposeFluxForWomersleyElement 
  Pressure_gradient_data_pt=Flux_el_pt->pressure_gradient_data_pt();
 
-
  // Do equation numbering
- oomph_info <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+ oomph_info <<"Number of equations in WomersleyProblem: " 
+            << assign_eqn_numbers() << std::endl; 
 
 } // end of constructor
 
@@ -1021,7 +1035,8 @@ doc_solution(DocInfo& doc_info,
              const double& z_out)
 { 
 
- std::ofstream some_file;
+ std::ofstream some_file; 
+ std::ofstream some_file1;
  std::ostringstream filename;
 
  // Number of plot points
@@ -1029,25 +1044,21 @@ doc_solution(DocInfo& doc_info,
  npts=5;
 
 
+ // Compute total volume flux directly
+ double flux=0.0;
+
  // Output solution 
  //-----------------
  filename << doc_info.directory() << "/womersley_soln"
           << doc_info.number() << ".dat";
+ some_file1.open(filename.str().c_str());
 
- some_file.open(filename.str().c_str());
- mesh_pt()->output(some_file,npts);
- some_file.close();
-
-
- // Compute total volume flux directly
- double flux=0.0;
-
- // Assemble contributions from elements and output 3D solution
  filename.str("");
  filename << doc_info.directory() << "/womersley_soln_3d_"
           << doc_info.number() << ".dat";
-
  some_file.open(filename.str().c_str());
+
+ // Assemble contributions from elements and output 3D solution
  unsigned nelem=mesh_pt()->nelement();
  for (unsigned e=0;e<nelem;e++)
   {
@@ -1055,10 +1066,12 @@ doc_solution(DocInfo& doc_info,
    if (el_pt!=0)
     {
      flux+=el_pt->get_volume_flux();
-     el_pt->output_3d(some_file,npts,z_out);
+     el_pt->output_3d(some_file,npts,z_out); 
+     el_pt->output(some_file1,npts); 
     }
   }
  some_file.close();
+ some_file1.close();
 
  double prescribed_g=0.0;
  if (Prescribed_pressure_gradient_fct_pt!=0)
@@ -1073,13 +1086,16 @@ doc_solution(DocInfo& doc_info,
    prescribed_q=*Prescribed_volume_flux_pt;
   }
 
- trace_file 
-  << time_pt()->time() << " " 
-  << pressure_gradient_data_pt()->value(0) << " " 
-  << flux << " "
-  << prescribed_g << " " 
-  << prescribed_q << " " 
-  << std::endl;
+ if (trace_file.is_open())
+  {
+   trace_file 
+    << time_pt()->time() << " " 
+    << pressure_gradient_data_pt()->value(0) << " " 
+    << flux << " "
+    << prescribed_g << " " 
+    << prescribed_q << " " 
+    << std::endl;
+  }
 
 } // end of doc_solution
 
@@ -1218,6 +1234,20 @@ public:
  
  /// \short Set up the Womersley tubes so that a subsequent call
  /// to get_response(...) computes the inlet pressure for the currently
+ /// prescribed instantaneous flow rate. Steady version!
+ void setup()
+ {
+  // Dummy parameters
+  double* re_st_pt=&Zero; 
+  double dt=0.0; 
+  double q_initial=0;
+  TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper;
+  setup(re_st_pt,dt,q_initial,time_stepper_pt);
+ }
+
+
+ /// \short Set up the Womersley tubes so that a subsequent call
+ /// to get_response(...) computes the inlet pressure for the currently
  /// prescribed instantaneous flow rate, assuming that at all previous times
  /// the tube conveyed steady, fully-developed flow with flowrate q_initial.
  /// dt specifies the timestep for the subsequent time integration.
@@ -1274,6 +1304,9 @@ public:
 
    // Re-use Jacobian
    Womersley_problem_pt->enable_jacobian_reuse();
+
+   // Shut up
+   Womersley_problem_pt->linear_solver_pt()->disable_doc_time();
 
    // Do a dummy solve with time-dependent terms switched on
    // to generate (and store) the Jacobian. (We're not using
@@ -1498,255 +1531,6 @@ protected:
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-
-
-/* //==================================================================== */
-/* /// Base class for Womersley impedance tube. Allows the computation */
-/* /// of the inlet pressure p_in into a uniform tube of specified length  */
-/* /// that is assumed to convey fully-developed, but time-dependent flow with a */
-/* /// presribed instantaneous flow rate, q. Also computes the derivative */
-/* /// dp_in/dq required when this is used to determine impedance-type */
-/* /// outlet boundary conditions in a Navier-Stokes computation.  */
-/* /// This version of the Womersley impedance tube base class is designed */
-/* /// to be used with a Navier-Stokes outflow mesh of  */
-/* /// NavierStokesFluxControlElements */
-/* //==================================================================== */
-/* template<class ELEMENT, unsigned DIM> */
-/* class WomersleyImpedanceTubeBaseForNavierStokesBlockPreconditioner :  */
-/* public virtual TemplateFreeWomersleyImpedanceTubeBase */
-/* { */
-
-/* public: */
-
-/*  /// \short Constructor: Specify length of tube and the pointer to the */
-/*  /// mesh of NavierStokesFluxControlElements that are attached  */
-/*  /// to the outflow cross-section of a (higher-dimensional)  */
-/*  /// Navier Stokes mesh and provide the inflow into the ImpedanceTube. */
-/*  /// Outlet pressure is set to zero. */
-/*  WomersleyImpedanceTubeBaseForNavierStokesBlockPreconditioner( */
-/*   const double& length, */
-/*   Mesh* navier_stokes_outflow_mesh_pt) : */
-/*   Length(length), */
-/*   P_out(0.0),  */
-/*   Navier_stokes_outflow_mesh_pt(navier_stokes_outflow_mesh_pt) */
-/*   { */
-/*    // Initialise currently prescribed flux */
-/*    Current_volume_flux_pt= new double(0.0); */
-/*   } */
-
-/*  /// Access fct to outlet pressure */
-/*  double& p_out(){return P_out;} */
-
-/*  /// \short Pure virtual function in which the user of a derived class */
-/*  /// must create the mesh of WomersleyElements (of the type specified */
-/*  /// by the class's template argument) and apply the boundary conditions. */
-/*  /// The Womersley elements use the timestepper specified as the */
-/*  /// input argument. */
-/*  virtual Mesh* build_mesh_and_apply_boundary_conditions(TimeStepper*  */
-/*                                                         time_stepper_pt)=0; */
- 
- 
-/*  /// \short Set up the Womersley tubes so that a subsequent call */
-/*  /// to get_response(...) computes the inlet pressure for the currently */
-/*  /// prescribed instantaneous flow rate, assuming that at all previous times */
-/*  /// the tube conveyed steady, fully-developed flow with flowrate q_initial. */
-/*  /// dt specifies the timestep for the subsequent time integration. */
-/*  /// Specify: Womersley number, (constant) timestep, the initial volume */
-/*  /// flux (from which the subsequent impulsive start is performed) and, */
-/*  /// optionally the pointer to the timestepper to be used in the Womersley */
-/*  /// elements (defaults to BDF<2>). */
-/*  void setup(double* re_st_pt,  */
-/*             const double& dt,  */
-/*             const double& q_initial, */
-/*             TimeStepper* time_stepper_pt=0) */
-/*   { */
-/*    // Create timestepper if none specified so far */
-/*    if (time_stepper_pt==0) */
-/*     { */
-/*      time_stepper_pt=new BDF<2>; */
-/*     } */
-
-/*    //Build mesh and apply bcs */
-/*    Mesh* my_mesh_pt=build_mesh_and_apply_boundary_conditions(time_stepper_pt); */
-
-/*    // Build problem */
-/*    Womersley_problem_pt= */
-/*     new WomersleyProblem<ELEMENT,DIM>(re_st_pt,Current_volume_flux_pt, */
-/*                                       time_stepper_pt,my_mesh_pt); */
-
-/*    /// By default, we do want to suppress the output from the */
-/*    /// Newton solver */
-/*    Womersley_problem_pt->disable_info_in_newton_solve(); */
-/*    oomph_info */
-/*     << "NOTE: We're suppressing timings etc from Newton solver in\n" */
-/*     << "      WomersleyImpedanceTubeBaseForNavierStokesBlockPreconditioner. " */
-/*     << std::endl; */
-
-/*    // Initialise timestep -- also sets the weights for all timesteppers */
-/*    // in the problem. */
-/*    Womersley_problem_pt->initialise_dt(dt); */
-
-/*    // Set currently imposed flux  */
-/*    *Current_volume_flux_pt=q_initial; */
-
-/*    // Assign steady initial solution for this flux */
-/*    Womersley_problem_pt->steady_newton_solve(); */
-   
-/*    // Allow for resolve */
-/*    Womersley_problem_pt->linear_solver_pt()->enable_resolve(); */
-
-/*    // Re-use Jacobian */
-/*    Womersley_problem_pt->enable_jacobian_reuse(); */
-
-/*    // Do a dummy solve with time-dependent terms switched on */
-/*    // to generate (and store) the Jacobian. (We're not using */
-/*    // a Newton solve because the initial residual may be zero */
-/*    // in which case the Jacobian would never be computed!) */
-/*    unsigned n_dof=Womersley_problem_pt->ndof(); */
-
-/*    // Local scope to make sure dx goes out of scope */
-/*    { */
-/*     Vector<double> dx(n_dof); */
-/*     Womersley_problem_pt->linear_solver_pt()->solve(Womersley_problem_pt,dx); */
-/*    } */
-
-   
-/*    // Pre-compute derivative of p_in w.r.t. q */
-
-/*    // Setup vector of derivatives of residuals & unknowns w.r.t. Q */
-/*    Vector<double> drdq(n_dof,0.0); */
-/*    Vector<double> dxdq(n_dof,0.0); */
-
-/*    // What's the global equation number of the equation that */
-/*    // determines the pressure gradient */
-/*    unsigned g_eqn=Womersley_problem_pt-> */
-/*     pressure_gradient_data_pt()->eqn_number(0); */
-
-/*    // Derivative of volume constraint residual w.r.t. prescribed */
-/*    // instantaenous volume flux (in ImposeFluxForWomersleyElement) */
-/*    drdq[g_eqn]=-1.0; */
-
-/*    // Solve for derivatives of unknowns in Womersley problem, w.r.t. */
-/*    // instantaenous volume flux (in ImposeFluxForWomersleyElement) */
-/*    Womersley_problem_pt->linear_solver_pt()->resolve(drdq,dxdq); */
-   
-/*    // Rate of change of inflow pressure w.r.t to instantaneous */
-/*    // volume flux */
-/*    Dp_in_dq=dxdq[g_eqn]*Length; */
-/*   } */
-
-
-/*  /// Access to underlying Womersley problem */
-/*  WomersleyProblem<ELEMENT,DIM>* womersley_problem_pt() */
-/*   { */
-/*    return Womersley_problem_pt; */
-/*   } */
-
-
-
-/*  /// \short Shift history values to allow coputation of next timestep. */
-/*  /// Note: When used with a full Navier-Stokes problem this function */
-/*  /// must be called in actions_before_implicit_timestep() */
-/*  void shift_time_values(const double& dt) */
-/*   { */
-/*    // Shift the history values in the Womersley problem */
-/*    Womersley_problem_pt->shift_time_values(); */
-
-/*    // Advance global time and set current value of dt  */
-/*    Womersley_problem_pt->time_pt()->time()+=dt; */
-/*    Womersley_problem_pt->time_pt()->dt()=dt; */
-   
-/*    //Find out how many timesteppers there are */
-/*    unsigned n_time_steppers = Womersley_problem_pt->ntime_stepper(); */
-   
-/*    //Loop over them all and set the weights */
-/*    for(unsigned i=0;i<n_time_steppers;i++) */
-/*     { */
-/*      Womersley_problem_pt->time_stepper_pt(i)->set_weights(); */
-/*     } */
-/*   } */
-
-
-
-/*  /// \short Compute total current volume flux into the "impedance tube" that */
-/*  /// provides the flow resistance (flux is either obtained from */
-/*  /// the function that specifies it externally or by by adding up the flux */
-/*  /// through all NavierStokesFluxControlElement in */
-/*  /// the mesh pointed to by the Navier_stokes_outflow_mesh_pt. */
-/*  double total_volume_flux_into_impedance_tube()  */
-/*   { */
-/*    unsigned nelem=Navier_stokes_outflow_mesh_pt->nelement(); */
-/*    double flux=0.0; */
-/*    for (unsigned e=0;e<nelem;e++) */
-/*     { */
-/*      flux+=dynamic_cast<TemplateFreeNavierStokesFluxControlElementBase*>( */
-/*       Navier_stokes_outflow_mesh_pt->element_pt(e))->get_volume_flux(); */
-/*     } */
-/*    return flux; */
-/*   } */
- 
- 
-/*  /// \short Compute inlet pressure, p_in, required to achieve the currently */
-/*  /// imposed, instantaneous volume flux q prescribed by  */
-/*  /// total_volume_flux_into_impedance_tube(), and its */
-/*  /// derivative, dp_in/dq. */
-/*  void get_response(double& p_in, */
-/*                    double& dp_in_dq) */
-/*   { */
-/*    // Set currently imposed flux  */
-/*    *Current_volume_flux_pt=total_volume_flux_into_impedance_tube(); */
-
-/*    // Do a Newton solve to compute the pressure gradient */
-/*    // required to achieve the imposed instantaneous flow rate */
-/*    Womersley_problem_pt->newton_solve(); */
-   
-/*    // Compute inflow pressure based on computed pressure gradient, */
-/*    // the length of tube, and the outlet pressure */
-/*    p_in=-Womersley_problem_pt->pressure_gradient_data_pt()->value(0)*Length+ */
-/*     P_out; */
-  
-/*    // Return pre-computed value  for dp_in/dq */
-/*    dp_in_dq=Dp_in_dq;  */
-/*   } */
-
- 
-/* protected: */
- 
- 
-/*  /// Length of the tube */
-/*  double Length; */
-
-/*  /// \short Derivative of inflow pressure w.r.t. instantaenous volume flux */
-/*  /// (Note: Can be pre-computed) */
-/*  double Dp_in_dq; */
-
-/*  /// \short Pointer to double that specifies the currently imposed  */
-/*  /// instantaneous volume flux into the impedance tube. This is */
-/*  /// used to communicate with the Womersley elements which require */
-/*  /// access to the flux via a pointer to a double. */
-/*  double* Current_volume_flux_pt; */
-
-/*  /// \short Pointer to Womersley problem that determines the */
-/*  /// pressure gradient along the tube */
-/*  WomersleyProblem<ELEMENT,DIM>* Womersley_problem_pt; */
-
-/*  /// Outlet pressure */
-/*  double P_out; */
-
-/*  /// \short Pointer to the mesh of NavierStokesImpedanceTractionElements */
-/*  /// that are attached to the outflow cross-section of the higher-dimensional */
-/*  /// Navier Stokes mesh and provide the inflow into the Impedance tube. */
-/*  Mesh* Navier_stokes_outflow_mesh_pt; */
-
-/* }; */
-
-
-
-
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-
 //Inline functions:
 
 
@@ -1864,15 +1648,36 @@ class FaceGeometry<QWomersleyElement<1,NNODE_1D> >:
 
 
 //====================================================================
+/// Template-free base class
+//====================================================================
+class TemplateFreeWomersleyMeshBase 
+{
+
+public:
+
+ /// Static bool to suppress warning
+ static bool Suppress_warning_about_unpinned_nst_dofs;
+
+};
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+//====================================================================
 /// Mesh of Womersley elements whose topology, nodal position etc.
 /// matches that of a given mesh of face elements in the outflow
 /// cross-section of a full Navier-Stokes mesh.
 //====================================================================
 template <class WOMERSLEY_ELEMENT>
-class WomersleyMesh : public Mesh
+ class WomersleyMesh : public virtual Mesh, 
+ public virtual TemplateFreeWomersleyMeshBase 
 {
 
 public:
+
 
  /// \short Constructor: Pass pointer to  mesh of face elements in the outflow
  /// cross-section of a full Navier-Stokes mesh, the timestepper
@@ -1948,6 +1753,16 @@ public:
    // Initialise count of newly created nodes
    unsigned node_count=0;
 
+
+   // This is awkward do diagnose: We're assuming that
+   // the boundary conditions have been applied for the
+   // underlying Navier-Stokes problem before calling
+   // this function (otherwise it's really tricky to 
+   // apply the right boundary conditions here), but it's
+   // hard to police. Issue definite (but suppressable) 
+   // warning if nothing has been pinned at all.
+   unsigned n_pinned_nodes=0;
+
    // Loop over nst and womersley elements in tandem to sort out
    // which new nodes are required
    for (unsigned e=0;e<nelem;e++)
@@ -1984,7 +1799,16 @@ public:
           }
 
          // Set pin status
-         if (n_st_node_pt->is_pinned(w_index)) new_node_pt->pin(0);
+         if (n_st_node_pt->is_pinned(w_index))
+          {
+           new_node_pt->pin(0);
+           n_pinned_nodes++;
+          }
+         else
+          {
+           // shouldn't need this, but...
+           new_node_pt->unpin(0);
+          }
 
          // Record which Womersley node the 
          // Navier Stokes node is associated with
@@ -2000,10 +1824,54 @@ public:
          finite_element_pt(e)->node_pt(j)=
           equivalent_womersley_node_pt[n_st_node_pt];
         }
-
+      }
+     
+     bool passed=true;
+     finite_element_pt(e)->check_J_eulerian_at_knots(passed);
+     if (!passed)
+      {
+       //Reverse the nodes
+       unsigned nnod=finite_element_pt(e)->nnode();
+       Vector<Node*> orig_nod_pt(nnod);
+       for (unsigned j=0;j<nnod;j++)
+        {
+         orig_nod_pt[j]=finite_element_pt(e)->node_pt(j);
+        }
+       for (unsigned j=0;j<nnod;j++)
+        {
+         finite_element_pt(e)->node_pt(j)=orig_nod_pt[nnod-j-1];
+        }
+       bool passed=true;
+       finite_element_pt(e)->check_J_eulerian_at_knots(passed);
+       if (!passed)
+        {
+         throw OomphLibError(
+          "Element remains inverted even after reversing the local node numbers",
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);       
+        }
       }
     }
    
+   
+#ifdef PARANOID
+   if (!Suppress_warning_about_unpinned_nst_dofs)
+    {
+     if (n_pinned_nodes==0)
+      {
+       std::stringstream bla;
+       bla << "Boundary conditions must be applied in Navier-Stokes\n"
+           << "problem before attaching impedance elements.\n"
+           << "Note: This warning can be suppressed by setting the\n"
+           << "global static boolean\n\n"
+           << "     TemplateFreeWomersleyMeshBase::Suppress_warning_about_unpinned_nst_dofs\n\n"
+           << "to true\n";
+       OomphLibWarning(bla.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);       
+      }
+    }
+#endif
    
 #ifdef PARANOID
      if (nnode()!=nnode_n_st)
