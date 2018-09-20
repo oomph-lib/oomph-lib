@@ -7,8 +7,17 @@
 #include <config.h>
 #endif
 
-// Oomph-lib headers
+// For the Problem class
 #include "problem.h"
+
+// For the TreeBasedRefineableMeshBase and MeshAsGeomObject class
+#include "refineable_mesh.h"
+#include "mesh_as_geometric_object.h"
+
+// For the RefineableQElement class
+#include "Qelements.h"
+
+// Other obvious stuff
 #include "matrices.h"
 #include "iterative_linear_solver.h"
 #include "preconditioner.h"
@@ -27,11 +36,11 @@ namespace oomph
     
   /// Constructor. Initialise pointers to coarser and finer levels
   MGProblem()
-   {}
+  {}
   
   /// Destructor (empty)
   virtual ~MGProblem()
-   {}
+  {}
     
   /// \short This function needs to be implemented in the derived problem:
   /// Returns a pointer to a new object of the same type as the derived
@@ -71,18 +80,18 @@ namespace oomph
   
   /// Access function to set the pre-smoother creation function.
   void set_pre_smoother_factory_function(PreSmootherFactoryFctPt pre_smoother_fn)
-   {
-    // Assign the function pointer
-    Pre_smoother_factory_function_pt=pre_smoother_fn;
-   }
+  {
+   // Assign the function pointer
+   Pre_smoother_factory_function_pt=pre_smoother_fn;
+  }
   
   /// Access function to set the post-smoother creation function.
   void set_post_smoother_factory_function(
    PostSmootherFactoryFctPt post_smoother_fn)
-   {
-    // Assign the function pointer
-    Post_smoother_factory_function_pt=post_smoother_fn;
-   }
+  {
+   // Assign the function pointer
+   Post_smoother_factory_function_pt=post_smoother_fn;
+  }
   
   /// \short Constructor: Set up default values for number of V-cycles
   /// and pre- and post-smoothing steps.
@@ -99,90 +108,90 @@ namespace oomph
    Doc_everything(false),
    Has_been_setup(false),
    Has_been_solved(false)
-   {
-    // Set the tolerance in the base class
-    this->Tolerance=1.0e-09;
+  {
+   // Set the tolerance in the base class
+   this->Tolerance=1.0e-09;
     
-    // Set the pointer to the finest level as the first
-    // entry in Mg_hierarchy
-    Mg_hierarchy.push_back(Mg_problem_pt);
-   } // End of MGSolver
+   // Set the pointer to the finest level as the first
+   // entry in Mg_hierarchy
+   Mg_hierarchy.push_back(Mg_problem_pt);
+  } // End of MGSolver
 
   /// Delete any dynamically allocated data
   ~MGSolver()
-   {
-    // Run the function written to clean up the memory
-    clean_up_memory();    
-   } // End of ~MGSolver
+  {
+   // Run the function written to clean up the memory
+   clean_up_memory();    
+  } // End of ~MGSolver
 
   /// Clean up anything that needs to be cleaned up
   void clean_up_memory()
+  {
+   // We only need to destroy data if the solver has been set up and
+   // the data hasn't already been cleared
+   if (Has_been_setup)
    {
-    // We only need to destroy data if the solver has been set up and
-    // the data hasn't already been cleared
-    if (Has_been_setup)
+    // Loop over all of the levels in the hierarchy
+    for (unsigned i=0;i<Nlevel-1;i++)
     {
-     // Loop over all of the levels in the hierarchy
-     for (unsigned i=0;i<Nlevel-1;i++)
-     {
-      // Delete the pre-smoother associated with this level
-      delete Pre_smoothers_storage_pt[i];
+     // Delete the pre-smoother associated with this level
+     delete Pre_smoothers_storage_pt[i];
 
-      // Make it a null pointer
-      Pre_smoothers_storage_pt[i]=0;
+     // Make it a null pointer
+     Pre_smoothers_storage_pt[i]=0;
       
-      // Delete the post-smoother associated with this level
-      delete Post_smoothers_storage_pt[i];
+     // Delete the post-smoother associated with this level
+     delete Post_smoothers_storage_pt[i];
       
-      // Make it a null pointer
-      Post_smoothers_storage_pt[i]=0;
+     // Make it a null pointer
+     Post_smoothers_storage_pt[i]=0;
       
-      // Delete the system matrix associated with the i-th level
-      delete Mg_matrices_storage_pt[i];
+     // Delete the system matrix associated with the i-th level
+     delete Mg_matrices_storage_pt[i];
 
-      // Make it a null pointer
-      Mg_matrices_storage_pt[i]=0;
-     }
+     // Make it a null pointer
+     Mg_matrices_storage_pt[i]=0;
+    }
 
-     // Loop over all but the coarsest of the levels in the hierarchy
-     for (unsigned i=0;i<Nlevel-1;i++)
-     {
-      // Delete the interpolation matrix associated with the i-th level
-      delete Interpolation_matrices_storage_pt[i];
+    // Loop over all but the coarsest of the levels in the hierarchy
+    for (unsigned i=0;i<Nlevel-1;i++)
+    {
+     // Delete the interpolation matrix associated with the i-th level
+     delete Interpolation_matrices_storage_pt[i];
       
-      // Make it a null pointer
-      Interpolation_matrices_storage_pt[i]=0;
+     // Make it a null pointer
+     Interpolation_matrices_storage_pt[i]=0;
       
-      // Delete the restriction matrix associated with the i-th level
-      delete Restriction_matrices_storage_pt[i];
+     // Delete the restriction matrix associated with the i-th level
+     delete Restriction_matrices_storage_pt[i];
       
-      // Make it a null pointer
-      Restriction_matrices_storage_pt[i]=0;
-     }
+     // Make it a null pointer
+     Restriction_matrices_storage_pt[i]=0;
+    }
      
-     // If this solver has been set up then a hierarchy of problems
-     // will have been set up. If the user chose to document everything
-     // then the coarse-grid multigrid problems will have been kept alive
-     // which means we now have to loop over the coarse-grid levels and
-     // destroy them
-     if (Doc_everything)
+    // If this solver has been set up then a hierarchy of problems
+    // will have been set up. If the user chose to document everything
+    // then the coarse-grid multigrid problems will have been kept alive
+    // which means we now have to loop over the coarse-grid levels and
+    // destroy them
+    if (Doc_everything)
+    {
+     // Loop over the levels
+     for (unsigned i=1;i<Nlevel;i++)
      {
-      // Loop over the levels
-      for (unsigned i=1;i<Nlevel;i++)
-      {
-       // Delete the i-th level problem
-       delete Mg_hierarchy[i];
+      // Delete the i-th level problem
+      delete Mg_hierarchy[i];
 
-       // Make the associated pointer a null pointer
-       Mg_hierarchy[i]=0;
-      }
-     } // if (Doc_everything)
+      // Make the associated pointer a null pointer
+      Mg_hierarchy[i]=0;
+     }
+    } // if (Doc_everything)
 
-     // Everything has been deleted now so we need to indicate that the
-     // solver is not set up
-     Has_been_setup=false;
-    } // if (Has_been_setup) 
-   } // End of clean_up_memory
+    // Everything has been deleted now so we need to indicate that the
+    // solver is not set up
+    Has_been_setup=false;
+   } // if (Has_been_setup) 
+  } // End of clean_up_memory
   
   /// \short Makes a vector which will be used in the self-test. Is currently
   /// set to make the entries of the vector represent a plane wave propagating
@@ -214,100 +223,100 @@ namespace oomph
   /// \short Disable all output from mg_solve apart from the number of
   /// V-cycles used to solve the problem
   void disable_v_cycle_output()
-   {
-    // Set the value of Doc_time (inherited from LinearSolver) to false
-    Doc_time=false;
+  {
+   // Set the value of Doc_time (inherited from LinearSolver) to false
+   Doc_time=false;
 
-    // Enable the suppression of output from the V-cycle
-    Suppress_v_cycle_output=true;    
-   } // End of disable_v_cycle_output
+   // Enable the suppression of output from the V-cycle
+   Suppress_v_cycle_output=true;    
+  } // End of disable_v_cycle_output
 
   /// \short Suppress anything that can be suppressed, i.e. any timings.
   /// Things like mesh adaptation can not however be silenced using this
   void disable_output()
-   {
-    // Set the value of Doc_time (inherited from LinearSolver) to false
-    Doc_time=false;
+  {
+   // Set the value of Doc_time (inherited from LinearSolver) to false
+   Doc_time=false;
     
-    // Enable the suppression of output from the V-cycle
-    Suppress_v_cycle_output=true;
+   // Enable the suppression of output from the V-cycle
+   Suppress_v_cycle_output=true;
 
-    // Enable the suppression of everything
-    Suppress_all_output=true;    
+   // Enable the suppression of everything
+   Suppress_all_output=true;    
 
-    // Store the output stream pointer
-    Stream_pt=oomph_info.stream_pt();
+   // Store the output stream pointer
+   Stream_pt=oomph_info.stream_pt();
 
-    // Now set the oomph_info stream pointer to the null stream to
-    // disable all possible output
-    oomph_info.stream_pt()=&oomph_nullstream;    
-   } // End of disable_output
+   // Now set the oomph_info stream pointer to the null stream to
+   // disable all possible output
+   oomph_info.stream_pt()=&oomph_nullstream;    
+  } // End of disable_output
 
   /// \short Enable the output of the V-cycle timings and other output
   void enable_v_cycle_output()
-   {
-    // Enable time documentation
-    Doc_time=true;
+  {
+   // Enable time documentation
+   Doc_time=true;
 
-    // Enable output from the MG solver
-    Suppress_v_cycle_output=false;    
-   } // End of enable_v_cycle_output
+   // Enable output from the MG solver
+   Suppress_v_cycle_output=false;    
+  } // End of enable_v_cycle_output
 
   /// \short Enable the output from anything that could have been suppressed
   void enable_doc_everything()
-   {
-    // Enable the documentation of everything (if this is set to TRUE then
-    // the function self_test() will be run which outputs a solution
-    // represented on each level of the hierarchy
-    Doc_everything=true;    
-   } // End of enable_doc_everything
+  {
+   // Enable the documentation of everything (if this is set to TRUE then
+   // the function self_test() will be run which outputs a solution
+   // represented on each level of the hierarchy
+   Doc_everything=true;    
+  } // End of enable_doc_everything
   
   /// \short Enable the output from anything that could have been suppressed
   void enable_output()
-   {
-    // Enable time documentation
-    Doc_time=true;
+  {
+   // Enable time documentation
+   Doc_time=true;
 
-    // Enable output from everything during the full setup of the solver
-    Suppress_all_output=false;
+   // Enable output from everything during the full setup of the solver
+   Suppress_all_output=false;
 
-    // Enable output from the MG solver
-    Suppress_v_cycle_output=false;    
-   } // End of enable_output
+   // Enable output from the MG solver
+   Suppress_v_cycle_output=false;    
+  } // End of enable_output
   
   /// \short Suppress the output of both smoothers and SuperLU
   void disable_smoother_and_superlu_doc_time()
+  {
+   // Loop over all levels of the hierarchy
+   for (unsigned i=0;i<Nlevel-1;i++)
    {
-    // Loop over all levels of the hierarchy
-    for (unsigned i=0;i<Nlevel-1;i++)
-    {
-     // Disable time documentation on each level (for each pre-smoother)
-     Pre_smoothers_storage_pt[i]->disable_doc_time();
+    // Disable time documentation on each level (for each pre-smoother)
+    Pre_smoothers_storage_pt[i]->disable_doc_time();
 
-     // Disable time documentation on each level (for each post-smoother)
-     Post_smoothers_storage_pt[i]->disable_doc_time();
-    }
+    // Disable time documentation on each level (for each post-smoother)
+    Post_smoothers_storage_pt[i]->disable_doc_time();
+   }
 
-    // We only do a direct solve on the coarsest level so this is the only
-    // place we need to silence SuperLU
-    Mg_matrices_storage_pt[Nlevel-1]->linear_solver_pt()->disable_doc_time();    
-   } // End of disable_smoother_and_superlu_doc_time
+   // We only do a direct solve on the coarsest level so this is the only
+   // place we need to silence SuperLU
+   Mg_matrices_storage_pt[Nlevel-1]->linear_solver_pt()->disable_doc_time();    
+  } // End of disable_smoother_and_superlu_doc_time
   
   /// Return the number of post-smoothing iterations (lvalue)
   unsigned& npost_smooth() 
-   {
-    // Return the number of post-smoothing iterations to be done on each
-    // level of the hierarchy
-    return Npost_smooth;
-   } // End of npost_smooth
+  {
+   // Return the number of post-smoothing iterations to be done on each
+   // level of the hierarchy
+   return Npost_smooth;
+  } // End of npost_smooth
  
   /// Return the number of pre-smoothing iterations (lvalue)
   unsigned& npre_smooth() 
-   { 
-    // Return the number of pre-smoothing iterations to be done on each
-    // level of the hierarchy
-    return Npre_smooth;    
-   } // End of npre_smooth
+  { 
+   // Return the number of pre-smoothing iterations to be done on each
+   // level of the hierarchy
+   return Npre_smooth;    
+  } // End of npre_smooth
    
   /// \short Pre-smoother: Perform 'max_iter' smoothing steps on the
   /// linear system Ax=b with current RHS vector, b, starting with
@@ -315,18 +324,18 @@ namespace oomph
   /// Uses the default smoother (set in the MGProblem constructor)
   /// which can be overloaded for a specific problem.
   void pre_smooth(const unsigned& level)
-   {
-    // Run pre-smoother 'max_iter' times
-    Pre_smoothers_storage_pt[level]->
-     smoother_solve(Rhs_mg_vectors_storage[level],
-		    X_mg_vectors_storage[level]);
+  {
+   // Run pre-smoother 'max_iter' times
+   Pre_smoothers_storage_pt[level]->
+    smoother_solve(Rhs_mg_vectors_storage[level],
+		   X_mg_vectors_storage[level]);
     
-    // Calculate the residual r=b-Ax and assign it 
-    Mg_matrices_storage_pt[level]->
-     residual(X_mg_vectors_storage[level],
-	      Rhs_mg_vectors_storage[level],
-	      Residual_mg_vectors_storage[level]);    
-   } // End of pre_smooth
+   // Calculate the residual r=b-Ax and assign it 
+   Mg_matrices_storage_pt[level]->
+    residual(X_mg_vectors_storage[level],
+	     Rhs_mg_vectors_storage[level],
+	     Residual_mg_vectors_storage[level]);    
+  } // End of pre_smooth
   
   /// \short Post-smoother: Perform max_iter smoothing steps on the
   /// linear system Ax=b with current RHS vector, b, starting with
@@ -334,38 +343,38 @@ namespace oomph
   /// the MGProblem constructor) which can be overloaded for specific
   /// problem.
   void post_smooth(const unsigned& level)
-   {
-    // Run post-smoother 'max_iter' times
-    Post_smoothers_storage_pt[level]->
-     smoother_solve(Rhs_mg_vectors_storage[level],
-		    X_mg_vectors_storage[level]);    
-   } // End of post_smooth
+  {
+   // Run post-smoother 'max_iter' times
+   Post_smoothers_storage_pt[level]->
+    smoother_solve(Rhs_mg_vectors_storage[level],
+		   X_mg_vectors_storage[level]);    
+  } // End of post_smooth
   
   /// \short Return norm of residual r=b-Ax and the residual vector itself
   /// on the level-th level
   double residual_norm(const unsigned& level)
-   {
-    // And zero the entries of residual
-    Residual_mg_vectors_storage[level].initialise(0.0);
+  {
+   // And zero the entries of residual
+   Residual_mg_vectors_storage[level].initialise(0.0);
     
-    // Get the residual
-    Mg_matrices_storage_pt[level]->residual(X_mg_vectors_storage[level],
-					    Rhs_mg_vectors_storage[level],
-					    Residual_mg_vectors_storage[level]);
+   // Get the residual
+   Mg_matrices_storage_pt[level]->residual(X_mg_vectors_storage[level],
+					   Rhs_mg_vectors_storage[level],
+					   Residual_mg_vectors_storage[level]);
 
-    // Return the norm of the residual
-    return Residual_mg_vectors_storage[level].norm();    
-   } // End of residual_norm
+   // Return the norm of the residual
+   return Residual_mg_vectors_storage[level].norm();    
+  } // End of residual_norm
 
   /// \short Call the direct solver (SuperLU) to solve the problem exactly.
   // The result is placed in X_mg
   void direct_solve()
-   {
-    // Get solution by direct solve:
-    Mg_matrices_storage_pt[Nlevel-1]->
-     solve(Rhs_mg_vectors_storage[Nlevel-1],
-	   X_mg_vectors_storage[Nlevel-1]);    
-   } // End of direct_solve
+  {
+   // Get solution by direct solve:
+   Mg_matrices_storage_pt[Nlevel-1]->
+    solve(Rhs_mg_vectors_storage[Nlevel-1],
+	  X_mg_vectors_storage[Nlevel-1]);    
+  } // End of direct_solve
   
   /// \short Builds a CRDoubleMatrix that is used to interpolate the
   /// residual between levels. The transpose can be used as the full
@@ -376,14 +385,14 @@ namespace oomph
 				int* row_st,
 				unsigned& ncol,
 				unsigned& nnz)
-   {
-    // Dynamically allocate the interpolation matrix
-    Interpolation_matrices_storage_pt[level]=new CRDoubleMatrix;
+  {
+   // Dynamically allocate the interpolation matrix
+   Interpolation_matrices_storage_pt[level]=new CRDoubleMatrix;
 
-    // Build the matrix
-    Interpolation_matrices_storage_pt[level]->
-     build_without_copy(ncol,nnz,value,col_index,row_st);    
-   } // End of interpolation_matrix_set
+   // Build the matrix
+   Interpolation_matrices_storage_pt[level]->
+    build_without_copy(ncol,nnz,value,col_index,row_st);    
+  } // End of interpolation_matrix_set
 
   /// \short Builds a CRDoubleMatrix that is used to interpolate the
   /// residual between levels. The transpose can be used as the full
@@ -394,59 +403,59 @@ namespace oomph
 				Vector<int>& row_st,
 				unsigned& ncol,
 				unsigned& nrow)
-   {
-    // Dynamically allocate the interpolation matrix
-    Interpolation_matrices_storage_pt[level]=new CRDoubleMatrix;
+  {
+   // Dynamically allocate the interpolation matrix
+   Interpolation_matrices_storage_pt[level]=new CRDoubleMatrix;
     
-    // Make the distribution pointer
-    LinearAlgebraDistribution* dist_pt=
-     new LinearAlgebraDistribution(Mg_hierarchy[level]->
-				   communicator_pt(),nrow,false);
+   // Make the distribution pointer
+   LinearAlgebraDistribution* dist_pt=
+    new LinearAlgebraDistribution(Mg_hierarchy[level]->
+				  communicator_pt(),nrow,false);
 
 #ifdef PARANOID
 #ifdef OOMPH_HAS_MPI
-    // Set up the warning messages
-    std::string warning_message="Setup of interpolation matrix distribution ";
-    warning_message+="has not been tested with MPI.";
+   // Set up the warning messages
+   std::string warning_message="Setup of interpolation matrix distribution ";
+   warning_message+="has not been tested with MPI.";
 
-    // If we're not running the code in serial
-    if (dist_pt->communicator_pt()->nproc()>1)
-    {
-     // Throw a warning
-     OomphLibWarning(warning_message,
-		     OOMPH_CURRENT_FUNCTION,
-		     OOMPH_EXCEPTION_LOCATION);
-    }
+   // If we're not running the code in serial
+   if (dist_pt->communicator_pt()->nproc()>1)
+   {
+    // Throw a warning
+    OomphLibWarning(warning_message,
+		    OOMPH_CURRENT_FUNCTION,
+		    OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
 #endif
     
-    // Build the matrix itself
-    Interpolation_matrices_storage_pt[level]->
-     build(dist_pt,ncol,value,col_index,row_st);
+   // Build the matrix itself
+   Interpolation_matrices_storage_pt[level]->
+    build(dist_pt,ncol,value,col_index,row_st);
 
-    // Delete the newly created distribution pointer
-    delete dist_pt;
+   // Delete the newly created distribution pointer
+   delete dist_pt;
 
-    // Make it a null pointer
-    dist_pt=0;    
-   } // End of interpolation_matrix_set
+   // Make it a null pointer
+   dist_pt=0;    
+  } // End of interpolation_matrix_set
     
   /// \short Builds a CRDoubleMatrix on each level that is used to
   /// restrict the residual between levels. The transpose can be used
   /// as the interpolation matrix
   void set_restriction_matrices_as_interpolation_transposes()
+  {
+   for (unsigned i=0;i<Nlevel-1;i++)
    {
-    for (unsigned i=0;i<Nlevel-1;i++)
-    {
-     // Dynamically allocate the restriction matrix
-     Restriction_matrices_storage_pt[i]=new CRDoubleMatrix;
+    // Dynamically allocate the restriction matrix
+    Restriction_matrices_storage_pt[i]=new CRDoubleMatrix;
    
-     // Set the restriction matrix to be the transpose of the
-     // interpolation matrix
-     Interpolation_matrices_storage_pt[i]->
-      get_matrix_transpose(Restriction_matrices_storage_pt[i]);
-    }
-   } // End of set_restriction_matrices_as_interpolation_transposes
+    // Set the restriction matrix to be the transpose of the
+    // interpolation matrix
+    Interpolation_matrices_storage_pt[i]->
+     get_matrix_transpose(Restriction_matrices_storage_pt[i]);
+   }
+  } // End of set_restriction_matrices_as_interpolation_transposes
   
   /// \short Restrict residual (computed on level-th MG level) to the next
   /// coarser mesh and stick it into the coarse mesh RHS vector.
@@ -480,97 +489,97 @@ namespace oomph
   /// \short Virtual function in the base class that needs to be implemented
   /// later but for now just leave it empty
   void solve(Problem* const& problem_pt, DoubleVector& result)
-   {    
-    // Dynamically cast problem_pt of type Problem to a MGProblem pointer
-    MGProblem* mg_problem_pt=dynamic_cast<MGProblem*>(problem_pt);
+  {    
+   // Dynamically cast problem_pt of type Problem to a MGProblem pointer
+   MGProblem* mg_problem_pt=dynamic_cast<MGProblem*>(problem_pt);
 
 #ifdef PARANOID
-    // PARANOID check - If the dynamic_cast produces a null pointer the
-    // input was not a MGProblem
-    if (0==mg_problem_pt)
-    {
-     throw OomphLibError("Input problem must be of type MGProblem.",
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
-    // PARANOID check - If a node in the input problem has more than
-    // one value we cannot deal with it so arbitarily check the first one
-    if (problem_pt->mesh_pt()->node_pt(0)->nvalue()!=1)
-    {
-     // How many dofs are there in the first node
-     unsigned n_value=problem_pt->mesh_pt()->node_pt(0)->nvalue();
+   // PARANOID check - If the dynamic_cast produces a null pointer the
+   // input was not a MGProblem
+   if (0==mg_problem_pt)
+   {
+    throw OomphLibError("Input problem must be of type MGProblem.",
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
+   // PARANOID check - If a node in the input problem has more than
+   // one value we cannot deal with it so arbitarily check the first one
+   if (problem_pt->mesh_pt()->node_pt(0)->nvalue()!=1)
+   {
+    // How many dofs are there in the first node
+    unsigned n_value=problem_pt->mesh_pt()->node_pt(0)->nvalue();
      
-     // Make the error message
-     std::ostringstream error_message_stream;
-     error_message_stream << "Cannot currently deal with more than 1 dof"
-			  << " per node. This problem has " << n_value
-			  << " dofs per node."
-			  << std::endl;
+    // Make the error message
+    std::ostringstream error_message_stream;
+    error_message_stream << "Cannot currently deal with more than 1 dof"
+			 << " per node. This problem has " << n_value
+			 << " dofs per node."
+			 << std::endl;
 
-     // Throw the error message
-     throw OomphLibError(error_message_stream.str(),
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
+    // Throw the error message
+    throw OomphLibError(error_message_stream.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
 
-    // Assign the new MGProblem pointer to Mg_problem_pt
-    Mg_problem_pt=mg_problem_pt;
+   // Assign the new MGProblem pointer to Mg_problem_pt
+   Mg_problem_pt=mg_problem_pt;
 
-    // Set up all of the required MG structures
-    full_setup();
+   // Set up all of the required MG structures
+   full_setup();
    
-    // Run the MG method and assign the solution to result
-    mg_solve(result);
+   // Run the MG method and assign the solution to result
+   mg_solve(result);
 
-    // Only output if the V-cycle output isn't suppressed
-    if (!Suppress_v_cycle_output)
-    {
-     // Notify user that the hierarchy of levels is complete
-     oomph_info << "\n================="
-		<< "Multigrid Solve Complete"
-		<< "=================\n"
-		<< std::endl;
-    }
+   // Only output if the V-cycle output isn't suppressed
+   if (!Suppress_v_cycle_output)
+   {
+    // Notify user that the hierarchy of levels is complete
+    oomph_info << "\n================="
+	       << "Multigrid Solve Complete"
+	       << "=================\n"
+	       << std::endl;
+   }
     
-    // If the user did not request all output be suppressed
-    if (!Suppress_all_output)
+   // If the user did not request all output be suppressed
+   if (!Suppress_all_output)
+   {
+    // If the user requested all V-cycle output be suppressed
+    if (Suppress_v_cycle_output)
     {
-     // If the user requested all V-cycle output be suppressed
-     if (Suppress_v_cycle_output)
-     {
-      // Create an extra line spacing
-      oomph_info << std::endl;
-     }
-     
-     // Output number of V-cycles taken to solve
-     if (Has_been_solved)
-     {
-      oomph_info << "Total number of V-cycles required for solve: "
-		 << V_cycle_counter << std::endl;
-     }
-     else
-     {    
-      oomph_info << "Total number of V-cycles used: "
-		 << V_cycle_counter << std::endl;
-     }
-    } // if (!Suppress_all_output)
-  
-    // Only enable and assign the stream pointer again if we originally
-    // suppressed everything otherwise it won't be set yet
-    if (Suppress_all_output)
-    {
-     // Now enable the stream pointer again
-     oomph_info.stream_pt()=Stream_pt;
+     // Create an extra line spacing
+     oomph_info << std::endl;
     }
-   } // End of solve
+     
+    // Output number of V-cycles taken to solve
+    if (Has_been_solved)
+    {
+     oomph_info << "Total number of V-cycles required for solve: "
+		<< V_cycle_counter << std::endl;
+    }
+    else
+    {    
+     oomph_info << "Total number of V-cycles used: "
+		<< V_cycle_counter << std::endl;
+    }
+   } // if (!Suppress_all_output)
+  
+   // Only enable and assign the stream pointer again if we originally
+   // suppressed everything otherwise it won't be set yet
+   if (Suppress_all_output)
+   {
+    // Now enable the stream pointer again
+    oomph_info.stream_pt()=Stream_pt;
+   }
+  } // End of solve
     
   /// Number of iterations
   unsigned iterations() const
-   {
-    // Return the number of V-cycles which have been done
-    return V_cycle_counter;    
-   } // End of iterations
+  {
+   // Return the number of V-cycles which have been done
+   return V_cycle_counter;    
+  } // End of iterations
 
  protected:
   
@@ -705,74 +714,87 @@ namespace oomph
 
   /// Constructor.
   MGPreconditioner(MGProblem* mg_problem_pt) : MGSolver<DIM>(mg_problem_pt)
-   {
-    // Set the number of V-cycles to be 1 (as expected as a preconditioner)
-    this->Nvcycle=2;   
-   } // End of MGPreconditioner (constructor)
+  {
+   // Set the number of V-cycles to be 1 (as expected as a preconditioner)
+   this->Nvcycle=2;   
+  } // End of MGPreconditioner (constructor)
  
   /// Destructor (empty)
   ~MGPreconditioner(){};
  
   /// Broken copy constructor.
   MGPreconditioner(const MGPreconditioner&)
-   {
-    BrokenCopy::broken_copy("MGPreconditioner");
-   }
+  {
+   BrokenCopy::broken_copy("MGPreconditioner");
+  }
 
   /// Broken assignment operator.
   void operator=(const MGPreconditioner&)
-   {
-    BrokenCopy::broken_assign("MGPreconditioner");
-   }
+  {
+   BrokenCopy::broken_assign("MGPreconditioner");
+  }
 
   /// \short Function to set up a preconditioner for the linear system
   void setup()
+  {
+#ifdef OOMPH_HAS_MPI
+   // Make sure that this is running in serial. Can't guarantee it'll
+   // work when the problem is distributed over several processors
+   if (MPI_Helpers::communicator_pt()->nproc()>1)
    {
-    this->full_setup();
+    // Throw a warning
+    OomphLibWarning("Can't guarantee the MG solver will work in parallel!",
+		    OOMPH_CURRENT_FUNCTION,
+		    OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+   // Call the helper function that actually does all the work
+   this->full_setup();
     
-    // Only enable and assign the stream pointer again if we originally
-    // suppressed everything otherwise it won't be set yet
-    if (this->Suppress_all_output)
-    {
-     // Now enable the stream pointer again
-     oomph_info.stream_pt()=this->Stream_pt;
-    }
-   } // End of setup
+   // Only enable and assign the stream pointer again if we originally
+   // suppressed everything otherwise it won't be set yet
+   if (this->Suppress_all_output)
+   {
+    // Now enable the stream pointer again
+    oomph_info.stream_pt()=this->Stream_pt;
+   }
+  } // End of setup
   
   /// \short Function applies MG to the vector r for a full solve
   virtual void preconditioner_solve(const DoubleVector& rhs,DoubleVector &z)
-   { 
+  { 
 #ifdef PARANOID
-    if (this->Mg_problem_pt->ndof()!=rhs.nrow())
-    {
-     throw OomphLibError("Matrix and RHS vector sizes incompatible.",
-			 OOMPH_CURRENT_FUNCTION,
-			 OOMPH_EXCEPTION_LOCATION);
-    }
+   if (this->Mg_problem_pt->ndof()!=rhs.nrow())
+   {
+    throw OomphLibError("Matrix and RHS vector sizes incompatible.",
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
    
-    // Set the right-hand side vector on the finest level to r
-    this->Rhs_mg_vectors_storage[0]=rhs;
+   // Set the right-hand side vector on the finest level to r
+   this->Rhs_mg_vectors_storage[0]=rhs;
    
-    // Run the MG method and assign the solution to z
-    this->mg_solve(z);
+   // Run the MG method and assign the solution to z
+   this->mg_solve(z);
    
-    // Only output if the V-cycle output isn't suppressed
-    if (!(this->Suppress_v_cycle_output))
-    {
-     // Notify user that the hierarchy of levels is complete
-     oomph_info << "\n==========Multigrid Preconditioner Solve Complete========="
-		<< "\n" <<  std::endl;
-    }
+   // Only output if the V-cycle output isn't suppressed
+   if (!(this->Suppress_v_cycle_output))
+   {
+    // Notify user that the hierarchy of levels is complete
+    oomph_info << "\n==========Multigrid Preconditioner Solve Complete========="
+	       << "\n" <<  std::endl;
+   }
     
-    // Only enable and assign the stream pointer again if we originally
-    // suppressed everything otherwise it won't be set yet
-    if (this->Suppress_all_output)
-    {
-     // Now enable the stream pointer again
-     oomph_info.stream_pt()=this->Stream_pt;
-    }
-   } // End of preconditioner_solve
+   // Only enable and assign the stream pointer again if we originally
+   // suppressed everything otherwise it won't be set yet
+   if (this->Suppress_all_output)
+   {
+    // Now enable the stream pointer again
+    oomph_info.stream_pt()=this->Stream_pt;
+   }
+  } // End of preconditioner_solve
 
   /// Clean up memory
   void clean_up_memory(){}
@@ -870,7 +892,7 @@ namespace oomph
   setup_transfer_matrices();
    
   // Set up the data structures on each level, i.e. the system matrix,
-  // LHS and RHS vectors and smoothers
+  // LHS and RHS vectors
   setup_mg_structures();
 
   // Set up the smoothers on all of the levels
@@ -1954,127 +1976,6 @@ namespace oomph
 			    fine_n_unknowns);
   } // End of loop over each level
  } // End of setup_interpolation_matrices_unstructured
-
- //=========================================================================
- /// \short Given the son type of the element and the local coordinate s of
- /// a given node in the son element, return the local coordinate s in its
- /// father element. 3D case.
- //=========================================================================
- template<>
- void MGSolver<3>::level_up_local_coord_of_node(const int& son_type,
-						Vector<double>& s)
- {   
-  // If the element is unrefined between the levels the local coordinate
-  // of the node in one element is the same as that in the other element
-  // therefore we only need to perform calculations if the levels are
-  // different (i.e. son_type is not OMEGA)
-  if (son_type!=Tree::OMEGA)
-  {
-   // Scale the local coordinate from the range [-1,1]x[-1,1]x[-1,1]
-   // to the range [0,1]x[0,1]x[0,1] to match the width of the local
-   // coordinate range of the fine element from the perspective of
-   // the father element. This then simply requires a shift of the
-   // coordinates to match which type of son element we're dealing with
-   s[0]=(s[0]+1.0)/2.0;
-   s[1]=(s[1]+1.0)/2.0;
-   s[2]=(s[2]+1.0)/2.0;
-
-   // Cases: The son_type determines how the local coordinates should be
-   // shifted to give the local coordinates in the coarse mesh element
-   switch(son_type)
-   {
-   case OcTreeNames::LDF:
-    s[0]-=1;
-    s[1]-=1;
-    break;
-
-   case OcTreeNames::LDB:
-    s[0]-=1;
-    s[1]-=1;
-    s[2]-=1;
-    break;
-
-   case OcTreeNames::LUF:
-    s[0]-=1;
-    break;
-
-   case OcTreeNames::LUB:
-    s[0]-=1;
-    s[2]-=1;
-    break;
-
-   case OcTreeNames::RDF:
-    s[1]-=1;
-    break;
-
-   case OcTreeNames::RDB:
-    s[1]-=1;
-    s[2]-=1;
-    break;
-
-   case OcTreeNames::RUF:
-    break;
-
-   case OcTreeNames::RUB:
-    s[2]-=1;
-    break;     
-   }
-  } // if son_type!=Tree::OMEGA   
- } // End of level_up_local_coord_of_node
-
- //=========================================================================
- /// \short Given the son type of the element and the local coordinate s of
- /// a given node in the son element, return the local coordinate s in its
- /// father element. 2D case.
- //=========================================================================
- template<>
- void MGSolver<2>::level_up_local_coord_of_node(const int& son_type,
-						Vector<double>& s)
- {         
-  // If the element is unrefined between the levels the local coordinate
-  // of the node in one element is the same as that in the other element
-  // therefore we only need to perform calculations if the levels are
-  // different (i.e. son_type is not OMEGA)
-  if (son_type!=Tree::OMEGA)
-  {
-   // Scale the local coordinate from the range [-1,1]x[-1,1] to the range
-   // [0,1]x[0,1] to match the width of the local coordinate range of the
-   // fine element from the perspective of the father element. This
-   // then simply requires a shift of the coordinates to match which type
-   // of son element we're dealing with
-   s[0]=(s[0]+1.0)/2.0;
-   s[1]=(s[1]+1.0)/2.0;
-
-   // Cases: The son_type determines how the local coordinates should be
-   // shifted to give the local coordinates in the coarse mesh element
-   switch(son_type)
-   {
-    // If we're dealing with the bottom-left element we need to shift
-    // the range [0,1]x[0,1] to [-1,0]x[-1,0]
-   case QuadTreeNames::SW:
-    s[0]-=1;
-    s[1]-=1;
-    break;
-
-    // If we're dealing with the bottom-right element we need to shift
-    // the range [0,1]x[0,1] to [0,1]x[-1,0]
-   case QuadTreeNames::SE:
-    s[1]-=1;
-    break;
-
-    // If we're dealing with the top-right element we need to shift the
-    // range [0,1]x[0,1] to [0,1]x[0,1], i.e. nothing needs to be done
-   case QuadTreeNames::NE:
-    break;
-
-    // If we're dealing with the top-left element we need to shift
-    // the range [0,1]x[0,1] to [-1,0]x[0,1]
-   case QuadTreeNames::NW:
-    s[0]-=1;
-    break;
-   }
-  } // if son_type!=Tree::OMEGA
- } // End of level_up_local_coord_of_node
 
  //===================================================================
  /// \short Restrict residual (computed on current MG level) to

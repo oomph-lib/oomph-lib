@@ -1045,6 +1045,99 @@ class TGauss<2,4> : public Integral
 
 //------------------------------------------------------------
 //"Full integration" weights for 2D triangles
+// accurate up to points 19, degree of precision 8, a rule from ACM TOMS
+// algorithm #584. 
+// http://people.sc.fsu.edu/~jburkardt/datasets/quadrature_rules_tri/quadrature_rules_tri.html
+// TOMS589_19 a 19 point Gauss rule accurate to order 8
+//------------------------------------------------------------
+template<>
+class TGauss<2,9> : public Integral
+{
+  private:
+
+ /// Number of integration points in the scheme
+ static const unsigned Npts=19;
+ /// Array to hold the weights and knots (defined in cc file)
+ static const double Knot[19][2], Weight[19];
+
+  public:
+
+ /// Default constructor (empty)
+ TGauss(){};
+
+ /// Broken copy constructor
+ TGauss(const TGauss& dummy) 
+  { 
+   BrokenCopy::broken_copy("TGauss");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const TGauss&) 
+  {
+   BrokenCopy::broken_assign("TGauss");
+  }
+
+ /// Number of integration points of the scheme
+ unsigned nweight() const {return Npts;}
+
+ /// Return coordinate x[j] of integration point i
+ double knot(const unsigned &i, const unsigned &j) const
+  {return Knot[i][j];}
+
+ /// Return weight of integration point i
+ double weight(const unsigned &i) const {return Weight[i];}
+
+};
+
+//------------------------------------------------------------
+//"Full integration" weights for 2D triangles
+// accurate up to order 16
+// http://people.sc.fsu.edu/~jburkardt/datasets/quadrature_rules_tri/
+// quadrature_rules_tri.html
+// This uses the order 16 Dunavant rule, computed using software available from
+// https://people.sc.fsu.edu/~jburkardt/cpp_src/triangle_dunavant_rule/triangle_dunavant_rule.html
+// This integegration scheme is accurate up to order 16 and uses 52 points
+//------------------------------------------------------------
+ template<>
+ class TGauss<2,16> : public Integral
+ {
+ private:
+  
+  /// Number of integration points in the scheme
+  static const unsigned Npts=52;
+  /// Array to hold the weights and knots (defined in cc file)
+  static const double Knot[52][2], Weight[52];
+  
+ public:
+  
+  /// Default constructor (empty)
+  TGauss(){};
+   
+  /// Broken copy constructor
+  TGauss(const TGauss& dummy) 
+   { 
+    BrokenCopy::broken_copy("TGauss");
+   } 
+  
+  /// Broken assignment operator
+  void operator=(const TGauss&) 
+   {
+    BrokenCopy::broken_assign("TGauss");
+   }
+  
+  /// Number of integration points of the scheme
+  unsigned nweight() const {return Npts;}
+  
+  /// Return coordinate x[j] of integration point i
+  double knot(const unsigned &i, const unsigned &j) const
+   {return Knot[i][j];}
+  
+  /// Return weight of integration point i
+  double weight(const unsigned &i) const {return Weight[i];}
+ };
+
+//------------------------------------------------------------
+//"Full integration" weights for 2D triangles
 // accurate up to order 15
 // http://people.sc.fsu.edu/~jburkardt/datasets/quadrature_rules_tri/quadrature_rules_tri.html
 //------------------------------------------------------------

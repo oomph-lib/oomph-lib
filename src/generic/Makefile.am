@@ -49,7 +49,7 @@ sum_of_matrices.cc \
 implicit_midpoint_rule.cc \
 preconditioner_array.cc general_purpose_block_preconditioners.cc pml_meshes.cc \
 unstructured_two_d_mesh_geometry_base.cc sample_point_container.cc \
-sample_point_parameters.cc 
+sample_point_parameters.cc geometric_multigrid.cc
 #face_element_as_geometric_object.cc
 
 if OOMPH_HAS_MUMPS
