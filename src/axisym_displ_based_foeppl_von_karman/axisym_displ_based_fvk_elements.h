@@ -375,14 +375,14 @@ namespace oomph
    /// Pointer to Poisson's ratio
    double* Nu_pt;
 
+   /// \short Flag which stores whether we are using a linear, 
+   /// pure bending model instead of the full non-linear Foeppl-von Karman
+   bool Linear_bending_model;
+   
    private:
    
    /// Default value for physical constants
    static double Default_Physical_Constant_Value;
-   
-   /// \short Flag which stores whether we are using a linear, 
-   /// pure bending model instead of the full non-linear Foeppl-von Karman
-   bool Linear_bending_model;
    
  };
  
