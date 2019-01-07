@@ -96,8 +96,8 @@ template<class ELEMENT>
    /// closed curves, also specified by TriangleMeshClosedSurfaces.
    /// Also specify target area for uniform element size.
    RefineableTetgenMesh(
-    TetgenMeshFacetedSurface* const &outer_boundary_pt,
-    Vector<TetgenMeshFacetedSurface*>& internal_closed_surface_pt,
+    TetMeshFacetedClosedSurface* const &outer_boundary_pt,
+    Vector<TetMeshFacetedSurface*>& internal_closed_surface_pt,
     const double &element_volume,
     TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper,
     const bool &use_attributes=false) :
@@ -252,7 +252,7 @@ template<class ELEMENT>
    /// constructed for the boundaries associated with the segments of the
    /// polygon.
    void update_faceted_surface_using_face_mesh(
-    TetgenMeshFacetedSurface* faceted_surface_pt)
+    TetMeshFacetedClosedSurface* faceted_surface_pt)
     {
      //The easiest thing to do is simply to update the
      //positions of the key control nodes, leaving the connectivity alone,
@@ -270,7 +270,7 @@ template<class ELEMENT>
        //Get the boundary id of the facet. Need to subtract one, 
        //which is confusing now I think about it.
        //ALH: Should fix this.
-       unsigned bound = faceted_surface_pt->facet_boundary_id(f) -1;
+       unsigned bound = faceted_surface_pt->one_based_facet_boundary_id(f) -1;
        
        // Create a face mesh adjacent to the fluid mesh's bound-th boundary. 
        // The face mesh consists of FaceElements that may also be 
@@ -389,7 +389,7 @@ template<class ELEMENT>
 
      //Now just create the new boundary
      delete faceted_surface_pt;
-     faceted_surface_pt = new TetgenMeshFacetedSurface(
+     faceted_surface_pt = new TetMeshFacetedClosedSurface(
       facet_point,new_facet,new_facet_boundary_id);
 
 
@@ -420,8 +420,8 @@ template<class ELEMENT>
      for(unsigned ihole=0;ihole<n_hole;ihole++)
       {
        //Cache the pointer to the representation
-       TetgenMeshFacetedSurface* const faceted_surface_pt =
-        this->Internal_surface_pt[ihole];
+       TetgenMeshClosedFacetedSurface* const faceted_surface_pt =
+        dynamic_cast<TetgenMeshClosedFacetedSurface*>(this->Internal_surface_pt[ihole]);
 
        //Now can the surface update its own representation goes in here
        
@@ -1267,8 +1267,8 @@ public virtual SolidMesh
   /// the outer boundary of the domain and any number of internal
   /// closed curves. Specify target area for uniform element size.
   RefineableSolidTetgenMesh(
-   TetgenMeshFacetedSurface* const &outer_boundary_pt,
-   Vector<TetgenMeshFacetedSurface*>& internal_closed_surface_pt,
+   TetgenMeshOLDFacetedSurface* const &outer_boundary_pt,
+   Vector<TetgenMeshOLDFacetedSurface*>& internal_closed_surface_pt,
    const double &element_volume,
    TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper,
    const bool &use_attributes=false) :
@@ -1677,9 +1677,9 @@ public:
  VolumeConstraintElement* Vol_constraint_el_pt;
 
  /// Storage for the outer boundary object
- TetgenMeshFacetedSurface* Outer_boundary_pt;
+ TetgenMeshOLDFacetedSurface* Outer_boundary_pt;
 
- Vector<TetgenMeshFacetedSurface*> Inner_boundary_pt;
+ Vector<TetgenMeshOLDFacetedSurface*> Inner_boundary_pt;
 
 };
 
@@ -1801,7 +1801,7 @@ RisingBubbleProblem<ELEMENT>::RisingBubbleProblem()
 
  //Make the outer boundary object
  Outer_boundary_pt = 
-  new TetgenMeshFacetedSurface(box_point,box_facet,box_facet_boundary_id);
+  new TetgenMeshOLDFacetedSurface(box_point,box_facet,box_facet_boundary_id);
  
 
   //Set basic icosahedron points
@@ -1985,11 +1985,13 @@ RisingBubbleProblem<ELEMENT>::RisingBubbleProblem()
 
  //Create the inner boundary object
  Inner_boundary_pt.resize(1);
- Inner_boundary_pt[0] = new TetgenMeshFacetedSurface(icosa_point,icosa_facet,
-                                                     icosa_facet_boundary_id);
+ Inner_boundary_pt[0] = 
+  new TetgenMeshClosedFacetedSurface(icosa_point,icosa_facet,
+                                     icosa_facet_boundary_id);
 
  Vector<double> inner_point(3,0.0);
- Inner_boundary_pt[0]->set_hole(inner_point);
+ dynamic_cast<TetgenMeshClosedFacetedSurface*>(Inner_boundary_pt[0])->
+  set_hole(inner_point);
 
  /*in.numberofregions = 1;
  in.regionlist = new double[5*in.numberofregions];

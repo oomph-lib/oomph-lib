@@ -1225,9 +1225,6 @@ public:
    const int n_value = static_cast<int>(this->nvalue());
    if((i < -1) || (i > n_value) )
     {
-/*      oomph_info << i << " " << n_value << " "  */
-/*                << (i < -1) << " "  */
-/*                << (i > n_value) << "\n"; */
      std::ostringstream error_message;
      error_message << "Range Error: Value " << i
                    << " is not in the range (-1," << n_value << ")";
@@ -1309,6 +1306,10 @@ public:
  /// Broken virtual interface provides run-time 
  /// error checking
  virtual unsigned ncoordinates_on_boundary(const unsigned &b);
+
+ /// Have boundary coordinates been set up? Broken virtual interface 
+ /// provides run-time error checking
+ virtual bool boundary_coordinates_have_been_set_up();
 
  /// \short Return the vector of the k-th generalised boundary coordinates 
  /// on mesh boundary b. Broken virtual interface provides run-time 
@@ -2031,6 +2032,12 @@ class BoundaryNodeBase
  void operator=(const BoundaryNodeBase&) 
   {BrokenCopy::broken_assign("BoundaryNodeBase");}
 
+ /// Have boundary coordinates been set up?
+ bool boundary_coordinates_have_been_set_up()
+ {
+  return (Boundary_coordinates_pt!=0);
+ }
+
  /// \short Access to pointer to set of mesh boundaries that this 
  /// node occupies; NULL if the node is not on any boundary
  void get_boundaries_pt(std::set<unsigned>* &boundaries_pt) 
@@ -2350,6 +2357,12 @@ public:
    BrokenCopy::broken_assign("BoundaryNode");
   }
 
+ /// Have boundary coordinates been set up?
+ bool boundary_coordinates_have_been_set_up()
+ {
+  return BoundaryNodeBase::boundary_coordinates_have_been_set_up();
+ }
+
  /// \short Access to pointer to set of mesh boundaries that this 
  /// node occupies; NULL if the node is not on any boundary
  /// Final overload
@@ -2526,17 +2539,21 @@ public:
    {
     //Set the first index to by number of values
     (*Index_of_first_value_assigned_by_face_element_pt)[face_id] =
-     n_value;
+     n_value;    
    }
   //Otherwise this ID has been used previously
   else
-   {
+   {    
     //Find the number of values associated with this id
     const unsigned n_value_for_id =
      this->nvalue_assigned_by_face_element(face_id);
+
     //If the number of current values is equal to the desired values
     // do nothing and return
-    if(n_value_for_id==n_additional_value) {return;}
+    if(n_value_for_id==n_additional_value)
+     {
+      return;
+     }
     //Otherwise
     else
      {
@@ -2565,7 +2582,7 @@ public:
      } //Case when we are actually requesting additional values
    } //End case when ID has already been touched
   
-     //Now finally resize the storage
+  //Now finally resize the storage
   this->resize(n_value + n_additional_value);
  }
 

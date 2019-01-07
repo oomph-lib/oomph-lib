@@ -50,7 +50,7 @@ namespace oomph
 
 //=========start of TetgenMesh class======================================
 /// \short  Unstructured tet mesh based on output from Tetgen:
-/// http://wias-berlin.de/software/tetgen//
+/// http://wias-berlin.de/software/tetgen/
 //========================================================================
 template <class ELEMENT>
 class TetgenMesh : public virtual TetMeshBase
@@ -71,7 +71,7 @@ public:
             const std::string& face_file_name,
             TimeStepper* time_stepper_pt=
             &Mesh::Default_TimeStepper,
-            const bool &use_attributes=false)
+            const bool &use_attributes=false) 
    : Tetgenio_exists(false),
      Tetgenio_pt(0)
   {
@@ -94,6 +94,14 @@ public:
    // Kill the scaffold
    delete Tmp_mesh_pt;
    Tmp_mesh_pt=0;
+   
+   // Setup boundary coordinates 
+   unsigned nb=nboundary();
+   for (unsigned b=0;b<nb;b++)
+    {
+     bool switch_normal=false;
+     setup_boundary_coordinates<ELEMENT>(b,switch_normal); 
+    }
   }
 
 
@@ -127,6 +135,14 @@ public:
    // Kill the scaffold
    delete Tmp_mesh_pt;
    Tmp_mesh_pt=0;
+
+   // Setup boundary coordinates 
+   unsigned nb=nboundary();
+   for (unsigned b=0;b<nb;b++)
+    {
+     bool switch_normal=false;
+     setup_boundary_coordinates<ELEMENT>(b,switch_normal); 
+    }
   }
 
 
@@ -145,7 +161,7 @@ public:
             const bool& split_corner_elements,
             TimeStepper* time_stepper_pt=
             &Mesh::Default_TimeStepper,
-            const bool &use_attributes=false) : Outer_boundary_pt(0)
+            const bool &use_attributes=false)
               
   {
    // Mesh can only be built with 3D Telements.
@@ -194,7 +210,7 @@ public:
    // Split corner elements
    if (split_corner_elements)
     {
-     split_elements_in_corners();
+     split_elements_in_corners<ELEMENT>();
     }
 
    // Setup boundary coordinates 
@@ -202,7 +218,7 @@ public:
    for (unsigned b=0;b<nb;b++)
     {
      bool switch_normal=false;
-     setup_boundary_coordinates(b,switch_normal); 
+     setup_boundary_coordinates<ELEMENT>(b,switch_normal); 
     }
   }
 
@@ -219,7 +235,7 @@ public:
             const bool& split_corner_elements,
             TimeStepper* time_stepper_pt=
             &Mesh::Default_TimeStepper,
-            const bool &use_attributes=false) : Outer_boundary_pt(0)
+            const bool &use_attributes=false)
               
   {
    // Mesh can only be built with 3D Telements.
@@ -267,18 +283,25 @@ public:
    // Split corner elements
    if (split_corner_elements)
     {
-     split_elements_in_corners();
+     split_elements_in_corners<ELEMENT>();
+    }
+   
+   // Setup boundary coordinates 
+   unsigned nb=nboundary();
+   for (unsigned b=0;b<nb;b++)
+    {
+     bool switch_normal=false;
+     setup_boundary_coordinates<ELEMENT>(b,switch_normal); 
     }
   }
 
 
-  /// \short Build mesh, based on a TetgenMeshClosedSurface that specifies
+  /// \short Build mesh, based on a TetgenMeshFactedClosedSurface that specifies
   /// the outer boundary of the domain and any number of internal
-  /// closed curves, also specified by TriangleMeshClosedSurfaces.
-  /// Also specify target area for uniform element size.
-  TetgenMesh(TetgenMeshFacetedSurface* const &outer_boundary_pt,
-             Vector<TetgenMeshFacetedSurface*>& 
-             internal_closed_surface_pt,
+  /// boundaries, specified by TetMeshFacetedSurfaces.
+  /// Also specify target size for uniform element size.
+  TetgenMesh(TetMeshFacetedClosedSurface* const &outer_boundary_pt,
+             Vector<TetMeshFacetedSurface*>& internal_surface_pt,
              const double &element_volume,
              TimeStepper* time_stepper_pt=
              &Mesh::Default_TimeStepper,
@@ -292,34 +315,92 @@ public:
     
     // Store timestepper used to build elements
     Time_stepper_pt = time_stepper_pt;
-    
-    //Store the boundary
-    Outer_boundary_pt = outer_boundary_pt;
+
+    // Copy across
+    Outer_boundary_pt=outer_boundary_pt;
+ 
+    // Setup reverse lookup scheme
+    {
+     unsigned n_facet=Outer_boundary_pt->nfacet();
+     for (unsigned f=0;f<n_facet;f++)
+      {
+       unsigned b=Outer_boundary_pt->one_based_facet_boundary_id(f);
+       if (b!=0) 
+        {
+         Tet_mesh_faceted_surface_pt[b-1]=Outer_boundary_pt;
+         Tet_mesh_facet_pt[b-1]=Outer_boundary_pt->facet_pt(f);
+        }
+       else
+        {
+         std::ostringstream error_message;
+         error_message << "Boundary IDs have to be one-based. Yours is " 
+                       << b << "\n";
+         throw OomphLibError(error_message.str(),
+                             OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+
 
     //Store the internal boundary
-    Internal_surface_pt = internal_closed_surface_pt;
+    Internal_surface_pt = internal_surface_pt;
+
+    // Setup reverse lookup scheme
+    {
+     unsigned n=Internal_surface_pt.size();
+     for (unsigned i=0;i<n;i++)
+      {
+       unsigned n_facet=Internal_surface_pt[i]->nfacet();
+       for (unsigned f=0;f<n_facet;f++)
+        {
+         unsigned b=Internal_surface_pt[i]->one_based_facet_boundary_id(f);
+         if (b!=0) 
+          {
+           Tet_mesh_faceted_surface_pt[b-1]=Internal_surface_pt[i];   
+           Tet_mesh_facet_pt[b-1]=Internal_surface_pt[i]->facet_pt(f);
+          }
+         else
+          {
+           std::ostringstream error_message;
+           error_message << "Boundary IDs have to be one-based. Yours is " 
+                         << b << "\n";
+           throw OomphLibError(error_message.str(),
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION);
+          }
+        }
+      }
+    }
+
 
     //Tetgen data structure for the input and output
     tetgenio in;
-
     this->build_tetgenio(outer_boundary_pt,
-                         internal_closed_surface_pt,
+                         internal_surface_pt,
                          in);
+
 
     //Now tetrahedralise
     std::stringstream input_string;
-    input_string << "pAa" << element_volume;
+    input_string << "pAa" << element_volume; // Andrew's parameters
+
+    //input_string << "Vpq1.414Aa" << element_volume; 
+    // << "Q"; // Q for quiet!
+    // << "V"; // V for verbose incl. quality output!
 
     //If any of the boundaries should not be split add the "Y" flag
-    bool can_boundaries_be_split = outer_boundary_pt->can_boundaries_be_split();
+    bool can_boundaries_be_split = 
+     outer_boundary_pt->boundaries_can_be_split_in_tetgen();
     {
-     unsigned n_internal=internal_closed_surface_pt.size();
+     unsigned n_internal=internal_surface_pt.size();
      for(unsigned i=0;i<n_internal;i++)
       {
        can_boundaries_be_split &= 
-        internal_closed_surface_pt[i]->can_boundaries_be_split();
+        internal_surface_pt[i]->boundaries_can_be_split_in_tetgen();
       }
     }
+
     //If we can't split the boundaries add the flag
     if(can_boundaries_be_split==false) {input_string << "Y";}
 
@@ -330,7 +411,6 @@ public:
     //Make a new tetgen representation
     this->Tetgenio_exists = true;
     Tetgenio_pt = new tetgenio;
-
     tetrahedralize(tetswitches, &in, this->Tetgenio_pt);
 
     // Build scaffold
@@ -340,15 +420,25 @@ public:
     //the atributes
     bool regions_exist = false;
     {
-     unsigned n_internal=internal_closed_surface_pt.size();
+     unsigned n_internal=internal_surface_pt.size();
      for(unsigned i=0;i<n_internal;i++)
       {
-       regions_exist |= 
-        internal_closed_surface_pt[i]->is_region();
+       TetMeshFacetedClosedSurface* srf_pt=
+        dynamic_cast<TetMeshFacetedClosedSurface*>(internal_surface_pt[i]);
+       if (srf_pt!=0)
+        {
+         unsigned n_int_pts=srf_pt->ninternal_point_for_tetgen();
+         for (unsigned j=0;j<n_int_pts;j++)
+          {
+           regions_exist |= 
+           srf_pt->internal_point_identifies_region_for_tetgen(j); 
+          }
+        }
       }
     }
+
     //If there are regions, use the attributes
-    if(regions_exist==true) {Use_attributes=true;}
+    if(regions_exist) {Use_attributes=true;}
     
     // Convert mesh from scaffold to actual mesh
     build_from_scaffold(time_stepper_pt,Use_attributes);
@@ -356,12 +446,24 @@ public:
     // Kill the scaffold
     delete Tmp_mesh_pt;
     Tmp_mesh_pt=0;
+
+    // Setup boundary coordinates 
+    unsigned nb=nboundary();
+    for (unsigned b=0;b<nb;b++)
+     {
+      bool switch_normal=false;
+      setup_boundary_coordinates<ELEMENT>(b,switch_normal); 
+     }
+
+    // Now snap onto geometric objects associated with triangular facets
+    // (if any!)
+    snap_nodes_onto_geometric_objects();
+
    }
     
-  ///\short Build tetgenio object from the TetgenMeshClosedSurfaces
-  void build_tetgenio(TetgenMeshFacetedSurface* const &outer_boundary_pt,
-                      Vector<TetgenMeshFacetedSurface*> 
-                      &internal_closed_surface_pt,
+  ///\short Build tetgenio object from the TetMeshFacetedSurfaces
+  void build_tetgenio(TetMeshFacetedSurface* const &outer_boundary_pt,
+                      Vector<TetMeshFacetedSurface*>& internal_surface_pt,
                       tetgenio& tetgen_io)
   {
    //Pointer to Tetgen facet
@@ -375,7 +477,7 @@ public:
    tetgen_io.useindex = true;
 
    //Find the number of internal surfaces
-   const unsigned n_internal = internal_closed_surface_pt.size();
+   const unsigned n_internal = internal_surface_pt.size();
 
    //Find the number of points on the outer boundary
    const unsigned n_outer_vertex = outer_boundary_pt->nvertex();
@@ -386,7 +488,7 @@ public:
    Vector<unsigned> internal_vertex_offset(n_internal);
    for(unsigned h=0;h<n_internal;++h)
     {
-     n_internal_vertex[h] = internal_closed_surface_pt[h]->nvertex();
+     n_internal_vertex[h] = internal_surface_pt[h]->nvertex();
      internal_vertex_offset[h] = tetgen_io.numberofpoints;
      tetgen_io.numberofpoints += n_internal_vertex[h];
     }
@@ -412,7 +514,7 @@ public:
        for(unsigned i=0;i<3;++i)
         {
          tetgen_io.pointlist[counter] = 
-          internal_closed_surface_pt[h]->vertex_coordinate(n,i);
+          internal_surface_pt[h]->vertex_coordinate(n,i);
          ++counter;
         }
       }
@@ -424,7 +526,7 @@ public:
    for(unsigned n=0;n<n_outer_vertex;++n)
     {
      tetgen_io.pointmarkerlist[counter] = 
-      outer_boundary_pt->vertex_boundary_id(n);
+      outer_boundary_pt->one_based_vertex_boundary_id(n); 
      ++counter;
     }
    for(unsigned h=0;h<n_internal;++h)
@@ -433,7 +535,7 @@ public:
      for(unsigned n=0;n<n_inner;++n)
       {
        tetgen_io.pointmarkerlist[counter] = 
-        internal_closed_surface_pt[h]->vertex_boundary_id(n);
+        internal_surface_pt[h]->one_based_vertex_boundary_id(n); 
        ++counter;
       }
     }
@@ -445,7 +547,7 @@ public:
    Vector<unsigned> n_inner_facet(n_internal);
    for(unsigned h=0;h<n_internal;++h)
     {
-     n_inner_facet[h] = internal_closed_surface_pt[h]->nfacet();
+     n_inner_facet[h] = internal_surface_pt[h]->nfacet();
      tetgen_io.numberoffacets += n_inner_facet[h];
     }
 
@@ -464,7 +566,7 @@ public:
      f->holelist = NULL;
      p = &f->polygonlist[0];
 
-     Vector<unsigned> facet = outer_boundary_pt->facet(n);
+     Vector<unsigned> facet = outer_boundary_pt->vertex_index_in_tetgen(n); 
      
      p->numberofvertices = facet.size();
      p->vertexlist = new int[p->numberofvertices];
@@ -476,7 +578,7 @@ public:
 
      //Set up the boundary markers
      tetgen_io.facetmarkerlist[counter] = 
-      outer_boundary_pt->facet_boundary_id(n);
+      outer_boundary_pt->one_based_facet_boundary_id(n); 
      //Increase the counter
      ++counter;
     }
@@ -499,7 +601,7 @@ public:
        f->holelist = NULL;
        p = &f->polygonlist[0];
        
-       Vector<unsigned> facet = internal_closed_surface_pt[h]->facet(n);
+       Vector<unsigned> facet=internal_surface_pt[h]->vertex_index_in_tetgen(n);
 
        p->numberofvertices = facet.size();
        p->vertexlist = new int[p->numberofvertices];
@@ -510,38 +612,57 @@ public:
         }
        //Set up the boundary markers
        tetgen_io.facetmarkerlist[counter] = 
-        internal_closed_surface_pt[h]->facet_boundary_id(n);
+        internal_surface_pt[h]->one_based_facet_boundary_id(n); 
        ++counter;
       }
 
-     //If it's a hole add it
-     if(internal_closed_surface_pt[h]->is_hole()) 
+     //If it's a hole/region add it
+     TetMeshFacetedClosedSurface* srf_pt=
+      dynamic_cast<TetMeshFacetedClosedSurface*>(internal_surface_pt[h]);
+     if (srf_pt!=0)
       {
-       ++tetgen_io.numberofholes;
-      }
-     //Otherwise it may be region
-     else
-      {
-       if(internal_closed_surface_pt[h]->is_region())
+       unsigned n_int_pts=srf_pt->ninternal_point_for_tetgen();
+       for (unsigned j=0;j<n_int_pts;j++)
         {
-         ++tetgen_io.numberofregions;
+         if (srf_pt->internal_point_identifies_hole_for_tetgen(j))
+          {
+           ++tetgen_io.numberofholes;
+          }
+         //Otherwise it may be region
+         else
+          {
+           if (srf_pt->internal_point_identifies_region_for_tetgen(j))
+            {
+             ++tetgen_io.numberofregions;
+            }
+          }
         }
       }
     }
 
    //Set storage for the holes
    tetgen_io.holelist = new double[3*tetgen_io.numberofholes];
+
    //Loop over all the internal boundaries again
    counter=0;
    for(unsigned h=0;h<n_internal;++h)
     {
-     if(internal_closed_surface_pt[h]->is_hole())
+     TetMeshFacetedClosedSurface* srf_pt=
+      dynamic_cast<TetMeshFacetedClosedSurface*>(internal_surface_pt[h]);
+     if (srf_pt!=0)
       {
-       for(unsigned i=0;i<3;++i)
+       unsigned n_int_pts=srf_pt->ninternal_point_for_tetgen();
+       for (unsigned j=0;j<n_int_pts;j++)
         {
-         tetgen_io.holelist[counter] = 
-          internal_closed_surface_pt[h]->internal_point(i);
-         ++counter;
+         if (srf_pt->internal_point_identifies_hole_for_tetgen(j))
+          {
+           for(unsigned i=0;i<3;++i)
+            {
+             tetgen_io.holelist[counter] = 
+              srf_pt->internal_point_for_tetgen(j,i); 
+             ++counter;
+            }
+          }
         }
       }
     }
@@ -552,25 +673,34 @@ public:
    counter=0;
    for(unsigned h=0;h<n_internal;++h)
     {
-     if(internal_closed_surface_pt[h]->is_region())
+     TetMeshFacetedClosedSurface* srf_pt=
+      dynamic_cast<TetMeshFacetedClosedSurface*>(internal_surface_pt[h]);
+     if (srf_pt!=0)
       {
-       for(unsigned i=0;i<3;++i)
+       unsigned n_int_pts=srf_pt->ninternal_point_for_tetgen();
+       for (unsigned j=0;j<n_int_pts;j++)
         {
-         tetgen_io.regionlist[counter] = 
-          internal_closed_surface_pt[h]->internal_point(i);
-         ++counter;
+         if (srf_pt->internal_point_identifies_region_for_tetgen(j)) 
+          {
+           for(unsigned i=0;i<3;++i)
+            {
+             tetgen_io.regionlist[counter] = 
+              srf_pt->internal_point_for_tetgen(j,i);
+             ++counter;
+            }
+           tetgen_io.regionlist[counter] =
+            static_cast<double>(srf_pt->region_id_for_tetgen(j)); 
+           ++counter;
+           //Area target
+           tetgen_io.regionlist[counter] = 0.0;
+           ++counter;
+          }
         }
-       tetgen_io.regionlist[counter] =
-        static_cast<double>(internal_closed_surface_pt[h]->region());
-       ++counter;
-       //Area target
-       tetgen_io.regionlist[counter] = 0.0;
-       ++counter;
       }
     }
   }
 
-
+  
  /// Empty destructor 
  ~TetgenMesh() 
   {
@@ -612,213 +742,8 @@ public:
  void deep_copy_of_tetgenio(tetgenio* const &input_pt,
                             tetgenio* &output_pt);
 
- /// \short Setup boundary coordinate on boundary b which is
- /// assumed to be planar. Boundary coordinates are the
- /// x-y coordinates in the plane of that boundary with the
- /// x-axis along the line from the (lexicographically)
- /// "lower left" to the "upper right" node. The y axis
- /// is obtained by taking the cross-product of the positive
- /// x direction with the outer unit normal computed by
- /// the face elements.
- void setup_boundary_coordinates(const unsigned& b)
- {
-  // Dummy file
-  std::ofstream some_file;
-  
-  // Don't switch the normal
-  bool switch_normal=false;
-
-  this->setup_boundary_coordinates_generic(b,switch_normal,some_file);
- }
- 
- /// \short Setup boundary coordinate on boundary b which is
- /// assumed to be planar. Boundary coordinates are the
- /// x-y coordinates in the plane of that boundary with the
- /// x-axis along the line from the (lexicographically)
- /// "lower left" to the "upper right" node. The y axis
- /// is obtained by taking the cross-product of the positive
- /// x direction with the outer unit normal computed by
- /// the face elements. 
- void setup_boundary_coordinates(const unsigned& b, const bool& switch_normal)
- {
-  // Dummy file
-  std::ofstream some_file;
-  
-  this->setup_boundary_coordinates_generic(b,switch_normal,some_file);
- }
- 
-
- /// \short Setup boundary coordinate on boundary b which is
- /// assumed to be planar. Boundary coordinates are the
- /// x-y coordinates in the plane of that boundary with the
- /// x-axis along the line from the (lexicographically)
- /// "lower left" to the "upper right" node. The y axis
- /// is obtained by taking the cross-product of the positive
- /// x direction with the outer unit normal computed by
- /// the face elements. Doc faces in output file.
- void setup_boundary_coordinates(const unsigned& b,
-                                 std::ofstream& outfile)
-  {
-   // Don't switch the normal
-   bool switch_normal=false;
-   
-   this->setup_boundary_coordinates_generic(b,switch_normal,outfile);
-  }
-
- /// \short Setup boundary coordinate on boundary b which is
- /// assumed to be planar. Boundary coordinates are the
- /// x-y coordinates in the plane of that boundary with the
- /// x-axis along the line from the (lexicographically)
- /// "lower left" to the "upper right" node. The y axis
- /// is obtained by taking the cross-product of the positive
- /// x direction with the outer unit normal computed by
- /// the face elements (or its negative if switch_normal is set
- /// to true). Doc faces in output file.
- void setup_boundary_coordinates(const unsigned& b,
-                                 const bool& switch_normal,
-                                 std::ofstream& outfile)
- {
-  this->setup_boundary_coordinates_generic(b,switch_normal,outfile);
- }
-
- /// \short Setup boundary coordinate on boundary b which is
- /// assumed to be planar. Boundary coordinates are the
- /// x-y coordinates in the plane of that boundary with the
- /// x-axis along the line from the (lexicographically)
- /// "lower left" to the "upper right" node. The y axis
- /// is obtained by taking the cross-product of the positive
- /// x direction with the outer unit normal computed by
- /// the face elements (or its negative if switch_normal is set
- /// to true). Doc faces in output file.
- virtual void setup_boundary_coordinates_generic(const unsigned& b,
-                                                 const bool& switch_normal,
-                                                 std::ofstream& outfile);
- 
-
-  /// Return the number of elements adjacent to boundary b in region r
-  inline unsigned nboundary_element_in_region(const unsigned &b,
-                                        const unsigned &r) const
-   {
-    //Need to use a constant iterator here to keep the function "const"
-    //Return an iterator to the appropriate entry, if we find it
-    std::map<unsigned,Vector<FiniteElement*> >::const_iterator it =
-     Boundary_region_element_pt[b].find(r);
-    if(it!=Boundary_region_element_pt[b].end())
-     {
-      return (it->second).size();
-     }
-    //Otherwise there are no elements adjacent to boundary b in the region r
-    else
-     {
-      return 0;
-     }
-   }
-
-  /// Return pointer to the e-th element adjacent to boundary b in region r
-  FiniteElement* boundary_element_in_region_pt(const unsigned &b, 
-                                               const unsigned &r,
-                                               const unsigned &e) const
-  {
-   //Use a constant iterator here to keep function "const" overall
-   std::map<unsigned,Vector<FiniteElement*> >::const_iterator it =
-    Boundary_region_element_pt[b].find(r);
-   if(it!=Boundary_region_element_pt[b].end())
-    {
-     return (it->second)[e];
-    }
-   else
-    {
-     return 0;
-    }
-  }
-
-  /// Return face index of the e-th element adjacent to boundary b in region r
-  int face_index_at_boundary_in_region(const unsigned &b, 
-                                       const unsigned &r,
-                                       const unsigned &e) const
-   {
-    //Use a constant iterator here to keep function "const" overall
-    std::map<unsigned,Vector<int> >::const_iterator it =
-     Face_index_region_at_boundary[b].find(r);
-    if(it!=Face_index_region_at_boundary[b].end())
-     {
-      return (it->second)[e];
-     }
-    else
-     {
-      std::ostringstream error_message;
-      error_message << "Face indices not set up for boundary " 
-                    << b << " in region " << r << "\n";
-      error_message 
-       << "This probably means that the boundary is not adjacent to region\n";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-   }
 
 
-  /// Return the number of regions specified by attributes
-  unsigned nregion() {return Region_element_pt.size();}
-  
-  /// Return the number of elements in region i
-  unsigned nregion_element(const unsigned &i) 
-  {return Region_element_pt[i].size();}
-  
-  /// Return the attribute associated with region i
-  double region_attribute(const unsigned &i)
-  {return Region_attribute[i];}
-  
-  /// Return the e-th element in the i-th region
-  FiniteElement* region_element_pt(const unsigned &i,
-                                   const unsigned &e)
-  {return Region_element_pt[i][e];}
- 
- /// \short Snap boundaries specified by the IDs listed in boundary_id to
- /// a quadratric surface, specified in the file 
- /// quadratic_surface_file_name. This is usually used with vmtk-based
- /// meshes for which oomph-lib's xda to poly conversion code produces the files
- /// "quadratic_fsi_boundary.dat" and "quadratic_outer_solid_boundary.dat"
- /// which specify the quadratic FSI boundary (for the fluid and the solid)
- /// and the quadratic representation of the outer boundary of the solid. 
- /// When used with these files, the flag switch_normal should be
- /// set to true when calling the function for the outer boundary of the
- /// solid. The DocInfo object can be used to label optional output
- /// files. (Uses directory and label).
- void snap_to_quadratic_surface(const Vector<unsigned>& boundary_id,
-                                const std::string& quadratic_surface_file_name,
-                                const bool& switch_normal,
-                                DocInfo& doc_info);
-
- /// \short Snap boundaries specified by the IDs listed in boundary_id to
- /// a quadratric surface, specified in the file 
- /// quadratic_surface_file_name. This is usually used with vmtk-based
- /// meshes for which oomph-lib's xda to poly conversion code produces the files
- /// "quadratic_fsi_boundary.dat" and "quadratic_outer_solid_boundary.dat"
- /// which specify the quadratic FSI boundary (for the fluid and the solid)
- /// and the quadratic representation of the outer boundary of the solid. 
- /// When used with these files, the flag switch_normal should be
- /// set to true when calling the function for the outer boundary of the
- /// solid. 
- void snap_to_quadratic_surface(const Vector<unsigned>& boundary_id,
-                                const std::string& quadratic_surface_file_name,
-                                const bool& switch_normal)
- {
-  // Dummy doc info
-  DocInfo doc_info;
-  doc_info.disable_doc();
-  snap_to_quadratic_surface(boundary_id,quadratic_surface_file_name,
-                            switch_normal,doc_info);
-  
- }
- 
-
- /// \short Non-Delaunay split elements that have three faces on a boundary
- /// into sons. Timestepper species timestepper for new nodes; defaults
- /// to to steady timestepper.
- void split_elements_in_corners(TimeStepper* time_stepper_pt=
-                                &Mesh::Default_TimeStepper);
- 
 
   protected:
 
@@ -826,8 +751,8 @@ public:
  void build_from_scaffold(TimeStepper* time_stepper_pt, 
                           const bool &use_attributes);
 
-
-  protected:
+ /// Temporary scaffold mesh
+ TetgenScaffoldMesh* Tmp_mesh_pt;
 
  /// \short Boolean to indicate whether a tetgenio representation of the
  /// mesh exists
@@ -836,34 +761,7 @@ public:
  /// \short Tetgen representation of mesh
  tetgenio* Tetgenio_pt;
 
- /// Temporary scaffold mesh
- TetgenScaffoldMesh* Tmp_mesh_pt;
-
- /// Vectors of elements in each region differentiated by attribute
- Vector<Vector<FiniteElement*> > Region_element_pt;
-
- /// Vector of attributes associated with the elements in each region
- Vector<double> Region_attribute;
-
- /// Storage for elements adjacent to a boundary in a particular region
- Vector<std::map<unsigned,Vector<FiniteElement*> > > 
-  Boundary_region_element_pt;
- 
- /// \short Storage for the face index adjacent to a boundary in a particular
- /// region
- Vector<std::map<unsigned,Vector<int> > > Face_index_region_at_boundary;
- 
- /// Faceted surface that defines outer boundaries
- TetgenMeshFacetedSurface* Outer_boundary_pt;
- 
- /// Vector to faceted surfaces that define internal boundaries
- Vector<TetgenMeshFacetedSurface*> Internal_surface_pt;
-
-
- /// Timestepper used to build elements
- TimeStepper* Time_stepper_pt;
-
- /// Boolean flag to indicate whether to use attributes or not
+ /// \short Boolean flag to indicate whether to use attributes or not
  /// (required for multidomain meshes)
  bool Use_attributes;
  
@@ -879,18 +777,18 @@ public:
 
 //==============start_mesh=================================================
 /// Tetgen-based mesh upgraded to become a solid mesh. Automatically
-/// enumerates all boundaries
+/// enumerates all boundaries.
 //=========================================================================
 template<class ELEMENT>
-class SolidTetMesh : public virtual TetgenMesh<ELEMENT>,
-                     public virtual SolidMesh 
+ class SolidTetgenMesh : public virtual TetgenMesh<ELEMENT>, 
+ public virtual SolidMesh 
 {
  
 public:
  
  /// \short Constructor. Boundary coordinates are setup 
  /// automatically.
-  SolidTetMesh(const std::string& node_file_name,
+  SolidTetgenMesh(const std::string& node_file_name,
                const std::string& element_file_name,
                const std::string& face_file_name,
                const bool& split_corner_elements,
@@ -903,24 +801,12 @@ public:
   {
    //Assign the Lagrangian coordinates
    set_lagrangian_nodal_coordinates();
-   
-   // Find out elements next to boundary
-   setup_boundary_element_info();
-   
-   // Setup boundary coordinates for all boundaries without switching
-   // direction of normal
-   bool switch_normal=false;
-   unsigned nb=this->nboundary();
-   for (unsigned b=0;b<nb;b++) 
-    {
-     this->setup_boundary_coordinates(b,switch_normal);
-    }
   }
 
- /// \short Constructor. Boundary coordinates are setup 
+ /// \short Constructor. Boundary coordinates are re-setup 
  /// automatically, with the orientation of the outer unit
  /// normal determined by switch_normal.
-  SolidTetMesh(const std::string& node_file_name,
+  SolidTetgenMesh(const std::string& node_file_name,
                const std::string& element_file_name,
                const std::string& face_file_name,
                const bool& split_corner_elements,
@@ -935,19 +821,18 @@ public:
    //Assign the Lagrangian coordinates
    set_lagrangian_nodal_coordinates();
    
-   // Find out elements next to boundary
-   setup_boundary_element_info();
-   
-   // Setup boundary coordinates for all boundaries
+   // Re-setup boundary coordinates for all boundaries with specified
+   // orientation of nnormal
    unsigned nb=this->nboundary();
-   for (unsigned b=0;b<nb;b++) 
+   for (unsigned b=0;b<nb;b++)
     {
-     this->setup_boundary_coordinates(b,switch_normal);
+     this->template setup_boundary_coordinates<ELEMENT>(b,switch_normal);
     }
+
   }
 
  /// Empty Destructor
- virtual ~SolidTetMesh() { }
+ virtual ~SolidTetgenMesh() { }
 
 };
  

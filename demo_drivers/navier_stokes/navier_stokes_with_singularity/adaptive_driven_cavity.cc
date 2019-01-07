@@ -60,6 +60,8 @@ namespace Global_Physical_Variables
 } // end_of_namespace
 
 
+#include "finite_re_perturbation.h"
+
 
 //==start_of_problem_class============================================
 /// Driven cavity problem in rectangular domain, templated
@@ -127,12 +129,58 @@ public:
    // Now set the first pressure dof in the last element to 0.0
    unsigned nel=mesh_pt()->nelement();
    fix_pressure(nel-1,0,0.0);
+   
+   // Now we have the mesh, let's set up the plot points
+   setup_line_plot_points();
+
   } // end_of_actions_after_adapt
  
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
  
  
+ /// Build line plot points
+ void setup_line_plot_points()
+  {
+   // Get geom object
+   delete Mesh_as_geom_object_pt;
+   Mesh_as_geom_object_pt=new MeshAsGeomObject(mesh_pt());
+
+   // Number of radial lines
+   unsigned n_phi=5;
+   Line_plot_point.resize(n_phi);
+
+   // How many points to you want?
+   unsigned npt=100;
+   double r_max=0.1;
+   Vector<double> zeta(2);   
+   Vector<double> s(2);
+   GeomObject* geom_object_pt=0;
+   for (unsigned i=0;i<n_phi;i++)
+    {
+     Line_plot_point[i].resize(npt);
+     double phi=0.5*MathematicalConstants::Pi*double(i)/double(n_phi-1);
+     oomph_info << "setup at phi : " << phi/(0.5*MathematicalConstants::Pi) 
+                << " pi/2" << std::endl;
+     for (unsigned j=0;j<npt;j++)
+      {
+       double r=r_max*double(j+1)/double(npt);
+       zeta[0]=r*cos(phi);
+       zeta[1]=r*sin(phi);
+       Mesh_as_geom_object_pt->locate_zeta(zeta,geom_object_pt,s);
+        if (geom_object_pt==0)
+         {
+          oomph_info << "Point : " 
+                     << zeta[0] << " " 
+                     << zeta[1] << " " 
+                     << " not found in setup of line plots" 
+                     << std::endl;
+         }   
+        Line_plot_point[i][j]=std::make_pair(geom_object_pt,s);
+      }
+    }
+  }
+
 private:
 
  ///Fix pressure in element e at pressure dof pdof and set to pvalue
@@ -143,6 +191,12 @@ private:
    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->
                           fix_pressure(pdof,pvalue);
   } // end_of_fix_pressure
+
+ /// Mesh as geom object representation of mesh
+ MeshAsGeomObject* Mesh_as_geom_object_pt;
+
+ /// Line_plot_point[i_phi][i_rho]
+ Vector<Vector<std::pair<GeomObject*,Vector<double> > > > Line_plot_point;
 
 }; // end_of_problem_class
 
@@ -156,6 +210,9 @@ template<class ELEMENT>
 RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
 { 
 
+ // Null out 
+ Mesh_as_geom_object_pt=0;
+ 
  // Setup mesh
 
  // # of elements in x-direction
@@ -173,6 +230,9 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
  // Build and assign mesh
  Problem::mesh_pt() = 
   new RefineableRectangularQuadMesh<ELEMENT>(n_x,n_y,l_x,l_y);
+
+ // Now we have the mesh, let's set up the plot points
+ setup_line_plot_points();
 
  // Set error estimator
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
@@ -249,7 +309,7 @@ template<class ELEMENT>
 void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 { 
 
- ofstream some_file;
+ ofstream some_file, some_file2;
  char filename[100];
 
  // Number of plot points
@@ -271,6 +331,112 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  mesh_pt()->output(some_file,npts);
  some_file.close();
  
+ // Output perturbation solution 
+ //-----------------------------
+ sprintf(filename,"%s/perturbation_soln_two_term%i.dat",
+         doc_info.directory().c_str(),
+         doc_info.number());
+ PerturbationSolution::N_terms_for_plot=2;
+ some_file.open(filename);
+ mesh_pt()->output_fct(
+  some_file,npts,
+  PerturbationSolution::perturbation_soln_for_plot);
+ some_file.close();
+
+ // Output perturbation solution 
+ //-----------------------------
+ sprintf(filename,"%s/perturbation_soln_one_term%i.dat",
+         doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+ PerturbationSolution::N_terms_for_plot=1;
+ mesh_pt()->output_fct(
+  some_file,npts,
+  PerturbationSolution::perturbation_soln_for_plot);
+ some_file.close();
+
+
+ // Output first-order perturbation solution (Stokes)
+ //--------------------------------------------------
+ sprintf(filename,"%s/first_order_perturbation%i.dat",
+         doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+ mesh_pt()->output_fct(
+  some_file,npts,
+  PerturbationSolution::first_order_perturbation_for_plot);
+ some_file.close();
+
+
+
+ // Output second-order perturbation solution (Stokes)
+ //--------------------------------------------------
+ sprintf(filename,"%s/second_order_perturbation%i.dat",
+         doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+ mesh_pt()->output_fct(
+  some_file,npts,
+  PerturbationSolution::second_order_perturbation_for_plot);
+ some_file.close();
+
+
+
+ // Do line plots
+ sprintf(filename,"%s/line_plot%i.dat",
+         doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+ sprintf(filename,"%s/second_order_perturbation_line_plot%i.dat",
+         doc_info.directory().c_str(),
+         doc_info.number());
+ some_file2.open(filename);
+ Vector<double> s(2); 
+ Vector<double> x(2); 
+ Vector<double> u(2);
+ double p=0.0;
+ Vector<double> soln(3);
+ unsigned nphi=Line_plot_point.size();
+ for (unsigned i=0;i<nphi;i++)
+  {
+   unsigned nr=Line_plot_point[i].size();
+   some_file << "ZONE T=\"Re=" << Global_Physical_Variables::Re 
+             << "; <GREEK>j</GREEK> = " << i << "/" << nphi-1 
+             << " <GREEK>p</GREEK>/2 \"" 
+             << std::endl;  
+   some_file2 << "ZONE T=\"Re=" << Global_Physical_Variables::Re 
+             << "; <GREEK>j</GREEK> = " << i << "/" << nphi-1 
+             << " <GREEK>p</GREEK>/2 \"" 
+             << std::endl;  
+   for (unsigned j=0;j<nr;j++)
+    {
+     ELEMENT* el_pt=dynamic_cast<ELEMENT*>(Line_plot_point[i][j].first);
+     s=Line_plot_point[i][j].second;
+     el_pt->interpolated_x(s,x);
+     el_pt->interpolated_u_nst(s,u);
+     p=el_pt->interpolated_p_nst(s);
+     some_file << x[0] << " " 
+               << x[1] << " " 
+               << sqrt(x[0]*x[0]+x[1]*x[1]) << " " 
+               << u[0] << " " 
+               << u[1] << " " 
+               << p << " " 
+               << std::endl;
+
+     PerturbationSolution::second_order_perturbation_for_plot(x,soln);
+     some_file2 << x[0] << " " 
+                << x[1] << " " 
+                << sqrt(x[0]*x[0]+x[1]*x[1]) << " " 
+                << soln[0] << " " 
+                << soln[1] << " " 
+                << soln[2] << " " 
+                << std::endl;
+    }
+  }
+ some_file.close();
+ some_file2.close();
+
+
 } // end_of_doc_solution
 
 

@@ -3660,7 +3660,7 @@ namespace oomph
   /// \short Get the associated vertex to the given s value by looking to
   /// the list of s values created when changing from curviline to polyline
   unsigned get_associated_vertex_to_svalue(double &target_s_value,
-					   unsigned &bnd_id) //hierher all const?
+					   unsigned &bnd_id) 
    {
     double s_tolerance=1.0e-14;
     return get_associated_vertex_to_svalue(target_s_value,bnd_id,s_tolerance);
@@ -3768,6 +3768,22 @@ namespace oomph
    {
     unsigned region_id = static_cast<unsigned>(this->Region_attribute[rr]);
       
+#ifdef PARANOID
+    double diff=fabs(Region_attribute[rr]-
+                     static_cast<double>(static_cast<unsigned>(
+                                          this->Region_attribute[rr])));
+    if (diff>0.0) 
+     {
+      std::ostringstream error_message;
+      error_message
+       << "Region attributes should be unsigneds because we \n" 
+       << "only use them to set region ids\n";
+      throw OomphLibError(error_message.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
     // Loop over all elements on boundaries in region rr
     unsigned nel_in_region = 
      this->nboundary_element_in_region(b,region_id);

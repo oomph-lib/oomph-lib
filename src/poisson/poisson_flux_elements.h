@@ -120,14 +120,49 @@ public:
    fill_in_generic_residual_contribution_poisson_flux(residuals,jacobian,1);
   }
 
- /// Output function -- forward to broken version in FiniteElement
- /// until somebody decides what exactly they want to plot here...
- void output(std::ostream &outfile) {FiniteElement::output(outfile);}
+ /// Output function
+ void output(std::ostream &outfile)
+ {
+  const unsigned n_plot=5;
+  output(outfile,n_plot);
+ }
 
- /// \short Output function -- forward to broken version in FiniteElement
- /// until somebody decides what exactly they want to plot here...
- void output(std::ostream &outfile, const unsigned &n_plot)
-  {FiniteElement::output(outfile,n_plot);}
+ /// \short Output function
+ void output(std::ostream &outfile, const unsigned &nplot)
+  {
+   
+   // Dimension of element 
+   unsigned el_dim=dim();
+
+   //Vector of local coordinates
+   Vector<double> s(el_dim);
+   
+   // Tecplot header info
+   outfile << tecplot_zone_string(nplot);
+   
+   // Loop over plot points
+   unsigned num_plot_points=nplot_points(nplot);
+   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+    {
+     
+     // Get local coordinates of plot point
+     get_s_plot(iplot,nplot,s);
+     
+     Vector<double> x(el_dim+1);
+     for(unsigned i=0;i<el_dim+1;i++) 
+      {
+       x[i]=interpolated_x(s,i);
+       outfile << x[i] << " ";
+      }
+     double flux=0.0;
+     get_flux(x,flux);
+     outfile << flux << std::endl;   
+    }
+   
+   // Write tecplot footer (e.g. FE connectivity lists)
+   write_tecplot_zone_footer(outfile,nplot);
+
+  }
 
 
  /// C-style output function -- forward to broken version in FiniteElement

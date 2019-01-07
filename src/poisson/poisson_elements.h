@@ -182,6 +182,58 @@ public:
 
      return "Poisson solution";
   }
+ 
+ 
+ /// \short Write values of the i-th scalar field at the plot points. Needs
+ /// to be implemented for each new specific element type.
+ void scalar_value_fct_paraview(std::ofstream& file_out,
+                                const unsigned& i,
+                                const unsigned& nplot,
+                                FiniteElement::SteadyExactSolutionFctPt
+                                exact_soln_pt) const
+ {
+
+#ifdef PARANOID
+  if (i!=0)
+   {
+    std::stringstream error_stream;
+    error_stream
+     << "Poisson equation has only one field. Can't call "
+     << "this function for value " << i << std::endl;
+    throw OomphLibError(
+     error_stream.str(),
+     OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  //Vector of local coordinates
+  Vector<double> s(DIM);
+  
+  // Vector for coordinates
+  Vector<double> x(DIM);
+  
+  // Exact solution Vector
+  Vector<double> exact_soln(1);
+  
+  // Loop over plot points
+  unsigned num_plot_points=nplot_points_paraview(nplot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+   {
+    // Get local coordinates of plot point
+    get_s_plot(iplot,nplot,s);
+    
+    // Get x position as Vector
+    interpolated_x(s,x);
+    
+    // Get exact solution at this point
+    (*exact_soln_pt)(x,exact_soln);
+    
+    // Write it
+    file_out << exact_soln[0] << std::endl;
+    
+   }
+ }
 
  /// Output with default number of plot points
  void output(std::ostream &outfile) 
@@ -350,6 +402,32 @@ public:
   }
 
 
+ /// Get derivative of flux w.r.t. to nodal values: 
+ /// dflux_dnodal_u[i][j] = d ( du/dx_i ) / dU_j
+ void get_dflux_dnodal_u(const Vector<double>& s, 
+                         Vector<Vector<double> >& dflux_dnodal_u) const
+ {
+   //Find out how many nodes there are in the element
+   const unsigned n_node = nnode();
+
+   //Set up memory for the shape and test functions
+   Shape psi(n_node);
+   DShape dpsidx(n_node,DIM);
+ 
+   //Call the derivatives of the shape and test functions
+   dshape_eulerian(s,psi,dpsidx);
+     
+   // And here it is...
+   for(unsigned i=0;i<DIM;i++)
+    {
+     for(unsigned j=0;j<n_node;j++)
+      {
+       dflux_dnodal_u[i][j] = dpsidx(j,i);
+      }
+    }
+  }
+
+
  /// Add the element's contribution to its residual vector (wrapper)
  void fill_in_contribution_to_residuals(Vector<double> &residuals)
   {
@@ -373,7 +451,7 @@ public:
 
  /// \short Return FE representation of function value u_poisson(s) 
  /// at local coordinate s
- inline double interpolated_u_poisson(const Vector<double> &s) const
+ virtual inline double interpolated_u_poisson(const Vector<double> &s) const
   {
    //Find number of nodes
    const unsigned n_node = nnode();

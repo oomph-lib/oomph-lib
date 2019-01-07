@@ -70,6 +70,6 @@ circular_couette_without_pseudo_singularity_subtracted_off_CXXFLAGS = -DDONT_USE
 # include directory.
 #AM_CPPFLAGS += -I@includedir@  
 
-EXTRA_DIST+=deriv_blend.map  run_adaptive_driven_cavity.bash  run_convergence_test_circular_couette.bash  run_convergence_test_driven_cavity.bash convergence_and_cpu_couette.lay compare_driven_cavity_different_re.pvsm  compare_driven_cavity.pvsm  validate_grad_u_sing.pvsm
+EXTRA_DIST+=deriv_blend.map  run_adaptive_driven_cavity.bash  run_convergence_test_circular_couette.bash  run_convergence_test_driven_cavity.bash convergence_and_cpu_couette.lay compare_driven_cavity_different_re.pvsm  compare_driven_cavity.pvsm  validate_grad_u_sing.pvsm run_re_dependence.bash subtract_and_scale.bash finite_re_vs_asymptotics_along_lines.lay 
 
 

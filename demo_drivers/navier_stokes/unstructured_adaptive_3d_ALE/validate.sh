@@ -3,6 +3,22 @@
 # Get the OOPMH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
+# Bypass self-tests if executable hasn't been built (almost
+# certainly because there's no cgal
+if [ ! -f uns_adapt_3d ]; then
+    echo " "
+    echo "Skipping unstructured adaptive 3D Navier Stokes ALE validation,"
+    echo "presumably because driver code wasn't compiled because we don't"
+    echo "have CGAL."
+    echo " "
+    echo " " > validation.log
+    echo "Skipping unstructured adaptive 3D Navier Stokes ALE validation," >> validation.log
+    echo "presumably because driver code wasn't compiled because we don't" >> validation.log
+    echo "have CGAL." >> validation.log
+    echo " " >> validation.log
+    cat validation.log >> ../../../validation.log
+    exit
+fi
 
 #Set the number of tests to be checked
 NUM_TESTS=1

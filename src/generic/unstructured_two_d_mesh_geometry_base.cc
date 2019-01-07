@@ -4045,7 +4045,7 @@ namespace oomph
  
  //======================================================================
  /// Move the nodes on boundaries with associated Geometric Objects so
- /// that the exactly coincide with the geometric object. This requires
+ /// that they exactly coincide with the geometric object. This requires
  /// that the boundary coordinates are set up consistently
  //======================================================================
  void UnstructuredTwoDMeshGeometryBase::snap_nodes_onto_geometric_objects()

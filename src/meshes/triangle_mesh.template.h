@@ -114,7 +114,7 @@ namespace oomph
     Outer_boundary_pt[0] = outer_boundary_pt;
    }
  
-  /// Constructor: Takes nothing and initialize the other paremeters to
+  /// Constructor: Takes nothing and initializes the other parameters to
   /// the default ones
   TriangleMeshParameters()
    : Element_area(0.2),
@@ -1269,15 +1269,6 @@ namespace oomph
   bool Triangulateio_exists;
   
 #endif // OOMPH_HAS_TRIANGLE_LIB
-
-  // hierher kill
-  /* /// \short Target areas for regions; defaults to 0.0 which (luckily) */
-  /* /// implies "no specific target area" for triangle! */
-  /* std::map<unsigned, double> Regions_areas; */
-
-  // hierher kill
-  /* // Stores the ids of the internal boundaries */
-  /* std::set<unsigned> Internal_boundaries; */
   
   /// Temporary scaffold mesh
   TriangleScaffoldMesh* Tmp_mesh_pt;
@@ -1301,12 +1292,6 @@ namespace oomph
 
  protected:
   
-
-  /* // hierher kill? But if anything keep here */
-  /* /// Stores the ids of the internal boundaries */
-  /* std::set<unsigned> Internal_boundaries; */
-
-
   /// Get the shared boundaries ids living in the current processor
   void shared_boundaries_in_this_processor(
    Vector<unsigned> &shared_boundaries_in_this_processor)

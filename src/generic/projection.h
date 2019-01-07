@@ -685,7 +685,9 @@ class ProjectionProblem : public virtual Problem
   // ProjectionProblem class
   template<class FRIEND_PROJECTABLE_ELEMENT> friend class RefineableTriangleMesh;
   template<class FRIEND_PROJECTABLE_ELEMENT> friend class RefineableTetgenMesh;
-  template<class FRIEND_PROJECTABLE_ELEMENT> friend class BackupMeshForProjection;
+  template<class FRIEND_PROJECTABLE_ELEMENT> friend class BackupMeshForProjection;  
+  template<class FRIEND_PROJECTABLE_ELEMENT> friend class RefineableGmshTetMesh;
+
   // The classes are friend only when the templated element of the
   // friend class matches the templated element of the
   // ProjectionProblem class

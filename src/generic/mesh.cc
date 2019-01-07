@@ -1017,24 +1017,7 @@ void Mesh::output_boundaries(std::ostream &outfile)
   }
 }
 
-//======================================================== 
-/// Output the nodes on the boundaries and their 
-/// respective boundary coordinates(into separate tecplot 
-/// zones)
-//======================================================== 
-void Mesh::output_boundaries_coordinates(std::ostream &outfile)
-{
- //Loop over the boundaries
- const unsigned nbound = nboundary();
- for(unsigned ibound = 0; ibound < nbound; ibound++)
-  {
-   unsigned nelement = Boundary_element_pt[ibound].size();
-   if (nelement>0)
-    {
-     output_boundary_coordinates(ibound, outfile);
-    } // if (nelement > 0)
-  } // for (ibound < nbound)
-}
+
 
 
 //===================================================================
@@ -2992,9 +2975,6 @@ void Mesh::synchronise_shared_nodes(const bool& report_stats)
               << t_end-t_start << std::endl;
   }
 }
-
-
-
 
 
 

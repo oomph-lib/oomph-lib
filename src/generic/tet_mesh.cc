@@ -32,6 +32,7 @@
 
 #include "map_matrix.h"
 #include "tet_mesh.h"
+#include "Telements.h"
 
 
 namespace oomph
@@ -42,7 +43,7 @@ namespace oomph
 /// Global static data that specifies the permitted 
 /// error in the setup of the boundary coordinates
 //================================================================
-double TetMeshBase::Tolerance_for_boundary_finding=1.0e-12;
+double TetMeshBase::Tolerance_for_boundary_finding=1.0e-5;
 
 
 //================================================================
@@ -65,7 +66,8 @@ void TetMeshBase::setup_boundary_element_info(std::ostream &outfile)
  Face_index_at_boundary.clear();
  Boundary_element_pt.resize(nbound);
  Face_index_at_boundary.resize(nbound);
- 
+ Lookup_for_elements_next_boundary_is_setup=false;
+
  // Temporary vector of vectors of pointers to elements on the boundaries: 
  // This is a vector to ensure UNIQUE ordering in all processors
  Vector<Vector<FiniteElement*> > vector_of_boundary_element_pt;
@@ -193,14 +195,17 @@ void TetMeshBase::setup_boundary_element_info(std::ostream &outfile)
 
        //If we're on more than one boundary, this is weird, so die
        if(count > 1)
-        {         
+        {       
          std::ostringstream error_stream;
+         fe_pt->output(error_stream); 
          error_stream << "Face " << i << " is on " << 
           count << " boundaries.\n";
-         error_stream << "This is rather strange, so I'm going to die\n";
-         error_stream << "Your mesh may be too coarse or your tetgen mesh\n";
-         error_stream << "may be screwed up...\n";
-         throw OomphLibError(
+         error_stream << "This is rather strange.\n";
+         error_stream << "Your mesh may be too coarse or your tet mesh\n";
+         error_stream << "may be screwed up. I'm skipping the automated\n";
+         error_stream << "setup of the elements next to the boundaries\n";
+         error_stream << "lookup schemes.\n";
+         OomphLibWarning(
           error_stream.str(),
           OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
@@ -299,5 +304,519 @@ void TetMeshBase::setup_boundary_element_info(std::ostream &outfile)
  Lookup_for_elements_next_boundary_is_setup=true;
 
 }
+
+
+
+
+
+//======================================================================
+/// Assess mesh quality: Ratio of max. edge length to min. height,
+/// so if it's very large it's BAAAAAD.
+//======================================================================
+void TetMeshBase::assess_mesh_quality(std::ofstream& some_file)
+{
+ Vector<Vector<double> > edge(6);
+ for (unsigned e=0;e<6;e++)
+  {
+   edge[e].resize(3);
+  }
+ unsigned nel=this->nelement();
+ for (unsigned e=0;e<nel;e++)
+  {
+   FiniteElement* fe_pt=this->finite_element_pt(e);
+   for (unsigned i=0;i<3;i++)
+    {
+     edge[0][i]=fe_pt->node_pt(2)->x(i)-fe_pt->node_pt(1)->x(i);
+     edge[1][i]=fe_pt->node_pt(0)->x(i)-fe_pt->node_pt(2)->x(i);
+     edge[2][i]=fe_pt->node_pt(1)->x(i)-fe_pt->node_pt(0)->x(i);
+     edge[3][i]=fe_pt->node_pt(3)->x(i)-fe_pt->node_pt(0)->x(i);
+     edge[4][i]=fe_pt->node_pt(3)->x(i)-fe_pt->node_pt(1)->x(i);
+     edge[5][i]=fe_pt->node_pt(3)->x(i)-fe_pt->node_pt(2)->x(i);
+    }
+
+   double max_length=0.0;
+   for (unsigned j=0;j<6;j++)
+    {
+     double length=0.0;
+     for (unsigned i=0;i<3;i++)
+      {
+       length+=edge[j][i]*edge[j][i];
+      }
+     length=sqrt(length);
+     if (length>max_length) max_length=length;
+    }
+   
+
+   double min_height=DBL_MAX;
+   for (unsigned j=0;j<4;j++)
+    {
+     Vector<double> normal(3);
+     unsigned e0=0;
+     unsigned e1=0;    
+     unsigned e2=0;
+     switch(j)
+      {
+      case 0:
+       e0=4;
+       e1=5;
+       e2=1;
+       break;
+
+      case 1:
+       e0=1;
+       e1=3;
+       e2=2;
+       break;
+
+      case 2:
+       e0=3;
+       e1=4;
+       e2=1;
+       break;
+
+      case 3:
+       e0=1;
+       e1=2;
+       e2=3;
+       break;
+
+      default:
+
+       oomph_info << "never get here\n";
+       abort();
+      }
+
+     normal[0]=edge[e0][1]*edge[e1][2]-edge[e0][2]*edge[e1][1];
+     normal[1]=edge[e0][2]*edge[e1][0]-edge[e0][0]*edge[e1][2];
+     normal[2]=edge[e0][0]*edge[e1][1]-edge[e0][1]*edge[e1][0];
+     double norm=
+      normal[0]*normal[0]+
+      normal[1]*normal[1]+
+      normal[2]*normal[2];
+     double inv_norm=1.0/sqrt(norm);
+     normal[0]*=inv_norm;
+     normal[1]*=inv_norm;
+     normal[2]*=inv_norm;
+
+     double height=fabs(
+      edge[e2][0]*normal[0]+
+      edge[e2][1]*normal[1]+
+      edge[e2][2]*normal[2]);
+
+     if (height<min_height) min_height=height;
+    }
+   
+   double aspect_ratio=max_length/min_height;
+   
+   some_file << "ZONE N=4, E=1, F=FEPOINT, ET=TETRAHEDRON\n";
+   for (unsigned j=0;j<4;j++)
+    {
+     for (unsigned i=0;i<3;i++)
+      {
+       some_file << fe_pt->node_pt(j)->x(i) << " ";
+      }
+     some_file << aspect_ratio << std::endl;
+    }
+   some_file << "1 2 3 4" << std::endl;   
+  }
+}
+
+
+
+ //======================================================================
+ /// Move the nodes on boundaries with associated Geometric Objects (if any)
+ /// so that they exactly coincide with the geometric object. This requires
+ /// that the boundary coordinates are set up consistently
+ //======================================================================
+void TetMeshBase::snap_nodes_onto_geometric_objects()
+ {
+
+  // Backup in case elements get inverted
+  std::map<Node*,Vector<double> > old_nodal_posn;  
+  std::map<Node*,Vector<double> > new_nodal_posn;
+  unsigned nnod=nnode();
+  for (unsigned j=0;j<nnod;j++)
+   {
+    Node* nod_pt=node_pt(j);
+    Vector<double> x(3);
+    nod_pt->position(x);
+    old_nodal_posn[nod_pt]=x;
+   }
+
+  // Loop over all boundaries
+  unsigned n_bound = this->nboundary();
+  for (unsigned b = 0; b < n_bound; b++)
+  {
+   bool do_it=true;
+
+   // Accumulate reason for not snapping
+   std::stringstream reason;
+   reason << "Can't snap nodes on boundary " << b 
+          << " onto geom object because: \n";
+   
+   TetMeshFacetedSurface* faceted_surface_pt=0;
+   std::map<unsigned,TetMeshFacetedSurface*>::iterator it=
+    Tet_mesh_faceted_surface_pt.find(b);
+   if (it!=Tet_mesh_faceted_surface_pt.end())
+    {
+     faceted_surface_pt=(*it).second;
+    }
+
+   // Facet associated with this boundary?
+   if (faceted_surface_pt==0) 
+    {
+     reason << "-- no facets asssociated with boundary\n";
+     do_it=false;
+    }
+
+   // Get geom object associated with facet
+   GeomObject* geom_obj_pt=0;
+   if (do_it)
+    {
+     geom_obj_pt=
+      faceted_surface_pt->geom_object_with_boundaries_pt();
+     if (geom_obj_pt==0)
+      {
+       reason << "-- no geom object associated with boundary\n";
+       do_it=false;
+      }
+    }
+   
+   // Triangular facet?
+   if (Triangular_facet_vertex_boundary_coordinate[b].size()==0)
+    { 
+     reason << "-- facet has to be triangular and vertex coordinates have\n"
+            << "   to have been set up\n";
+     do_it=false;
+    }
+
+   // We need boundary coordinates!
+   if (!Boundary_coordinate_exists[b])
+    {
+     reason << "-- no boundary coordinates were set up\n";   
+     do_it=false;
+    }
+
+
+   
+   // Which facet is associated with this boundary?
+   unsigned facet_id_of_boundary=0;
+   TetMeshFacet* f_pt=0;
+   if (do_it)
+    {
+     unsigned nf=faceted_surface_pt->nfacet();
+     for (unsigned f=0;f<nf;f++)
+      {
+       if ((faceted_surface_pt->
+            one_based_facet_boundary_id(f)-1)==b)
+        {
+         facet_id_of_boundary=f;
+         break;
+        }
+      }
+     f_pt=faceted_surface_pt->
+      facet_pt(facet_id_of_boundary);
+   
+     
+     // Three vertices?
+     unsigned nv=f_pt->nvertex();
+     if (nv!=3)
+      {
+       reason << "-- number of facet vertices is " << nv << " rather than 3\n";
+       do_it=false;
+      }
+     
+     // Have we set up zeta coordinates in geometric object?   
+     if ((f_pt->vertex_pt(0)->zeta_in_geom_object().size()!=2)||
+         (f_pt->vertex_pt(1)->zeta_in_geom_object().size()!=2)||
+         (f_pt->vertex_pt(2)->zeta_in_geom_object().size()!=2))
+      {
+       reason << "-- no boundary coordinates were set up\n";   
+       do_it=false;
+      }
+    }
+   
+   
+   // Are we ready to go?
+   if (!do_it)
+    {
+     const bool tell_us_why=false;
+     if (tell_us_why)
+      {
+       oomph_info << reason.str() << std::endl;
+      }
+    }
+   else
+    {
+     
+     // Setup area coordinantes in triangular facet
+     double x1=Triangular_facet_vertex_boundary_coordinate[b][0][0];
+     double y1=Triangular_facet_vertex_boundary_coordinate[b][0][1];
+     
+     double x2=Triangular_facet_vertex_boundary_coordinate[b][1][0];
+     double y2=Triangular_facet_vertex_boundary_coordinate[b][1][1];
+     
+     double x3=Triangular_facet_vertex_boundary_coordinate[b][2][0];
+     double y3=Triangular_facet_vertex_boundary_coordinate[b][2][1];
+     
+     double detT=(y2-y3)*(x1-x3)+(x3-x2)*(y1-y3);
+     
+     
+     // Boundary coordinate (cartesian coordinates inside facet)
+     Vector<double> zeta(2);
+     
+     // Loop over all nodes on that boundary
+     const unsigned n_boundary_node = this->nboundary_node(b);
+     for (unsigned n = 0; n < n_boundary_node; ++n)
+      {
+       // Get the boundary node and coordinates
+       Node* const nod_pt = this->boundary_node_pt(b,n);
+       nod_pt->get_coordinates_on_boundary(b,zeta);
+       
+       // Now we have zeta, the cartesian boundary coordinates
+       // in the (assumed to be triangular) boundary facet; let's 
+       // work out the area coordinates
+       // Notation as in 
+       // https://en.wikipedia.org/wiki/Barycentric_coordinate_system
+       double s0=((y2-y3)*(zeta[0]-x3)+(x3-x2)*(zeta[1]-y3))/detT;
+       double s1=((y3-y1)*(zeta[0]-x3)+(x1-x3)*(zeta[1]-y3))/detT;
+       double s2=1.0-s0-s1;
+       
+       Vector<double> zeta_in_geom_obj(2,0.0);
+       Vector<double> position_from_geom_obj(3,0.0);
+       
+       // Vertex zeta coordinates
+       Vector<double> zeta_0(2);
+       zeta_0=f_pt->vertex_pt(0)->zeta_in_geom_object();
+       
+       Vector<double> zeta_1(2);
+       zeta_1=f_pt->vertex_pt(1)->zeta_in_geom_object();
+       
+       Vector<double> zeta_2(2);
+       zeta_2=f_pt->vertex_pt(2)->zeta_in_geom_object();
+       
+
+#ifdef PARANOID         
+      
+       // Compute zeta values of the vertices from parametrisation of
+       // boundaries
+       double tol=1.0e-12;
+       Vector<double> zeta_from_boundary(2);
+       Vector<double> zeta_vertex(2);
+       for (unsigned v=0;v<3;v++)
+        {
+         zeta_vertex=f_pt->vertex_pt(v)->zeta_in_geom_object();
+         for (unsigned alt=0;alt<2;alt++)
+          {
+           switch (v)
+            {
+             
+            case 0:
+             
+             if (alt==0)
+              {
+               faceted_surface_pt->
+                boundary_zeta01(facet_id_of_boundary,0.0,zeta_from_boundary);
+              }
+             else
+              {
+               faceted_surface_pt->
+                boundary_zeta20(facet_id_of_boundary,1.0,zeta_from_boundary);
+              }
+             break;
+             
+            case 1:
+             
+             if (alt==0)
+              {
+               faceted_surface_pt->
+                boundary_zeta01(facet_id_of_boundary,1.0,zeta_from_boundary);
+              }
+             else
+              {
+               faceted_surface_pt->
+                boundary_zeta12(facet_id_of_boundary,0.0,zeta_from_boundary);
+              }
+             break;
+             
+            case 2:
+             
+             if (alt==0)
+              {
+               faceted_surface_pt->
+                boundary_zeta12(facet_id_of_boundary,1.0,zeta_from_boundary);
+              }
+             else
+              {
+               faceted_surface_pt->
+                boundary_zeta20(facet_id_of_boundary,0.0,zeta_from_boundary);
+              }
+             break;
+            }
+           
+           double error=sqrt(pow((zeta_vertex[0]-zeta_from_boundary[0]),2)+
+                             pow((zeta_vertex[1]-zeta_from_boundary[1]),2));
+           if (error>tol)
+            {
+             std::ostringstream error_message;
+             error_message 
+              << "Error in parametrisation of boundary coordinates \n"
+              << "for vertex " << v << " [alt=" << alt
+              << "] in facet " << facet_id_of_boundary << " : \n"
+              << "zeta_vertex = [ " 
+              << zeta_vertex[0] << " " 
+              << zeta_vertex[1] << " ] \n"
+              << "zeta_from_boundary      = [ " 
+              << zeta_from_boundary[0] << " " 
+              << zeta_from_boundary[1] << " ] \n"
+              << std::endl;
+             throw OomphLibError(error_message.str(),
+                                 OOMPH_CURRENT_FUNCTION,
+                                 OOMPH_EXCEPTION_LOCATION);
+            }
+          }
+        }
+        
+#endif
+
+       // Compute zeta values of the interpolation parameters
+       Vector<double> zeta_a(3,0.0);
+       Vector<double> zeta_b(3,0.0);
+       Vector<double> zeta_c(3,0.0);
+       Vector<double> zeta_d(3,0.0);
+       Vector<double> zeta_e(3,0.0);
+       Vector<double> zeta_f(3,0.0);
+       faceted_surface_pt->
+        boundary_zeta01(facet_id_of_boundary,    s1,zeta_a);
+       faceted_surface_pt->
+        boundary_zeta01(facet_id_of_boundary,1.0-s0,zeta_d);
+       
+       faceted_surface_pt->
+        boundary_zeta12(facet_id_of_boundary,    s2,zeta_c);
+       faceted_surface_pt->
+        boundary_zeta12(facet_id_of_boundary,1.0-s1,zeta_f);
+       
+       faceted_surface_pt->
+        boundary_zeta20(facet_id_of_boundary,1.0-s2,zeta_b);
+       faceted_surface_pt->
+        boundary_zeta20(facet_id_of_boundary,    s0,zeta_e);
+       
+       // Transfinite mapping
+       zeta_in_geom_obj[0] = 
+        s0*(zeta_a[0]+zeta_b[0]-zeta_0[0])+
+        s1*(zeta_c[0]+zeta_d[0]-zeta_1[0])
+        +s2*(zeta_e[0]+zeta_f[0]-zeta_2[0]);
+       zeta_in_geom_obj[1] = 
+        s0*(zeta_a[1]+zeta_b[1]-zeta_0[1])+
+        s1*(zeta_c[1]+zeta_d[1]-zeta_1[1])
+        +s2*(zeta_e[1]+zeta_f[1]-zeta_2[1]);
+       
+       unsigned n_tvalues=1+nod_pt->position_time_stepper_pt()->nprev_values();
+       for (unsigned t = 0; t < n_tvalues; ++t)
+        {
+         // Get the position according to the underlying geometric object
+         geom_obj_pt->position(t,zeta_in_geom_obj,position_from_geom_obj);
+         
+         // Move the node
+         for (unsigned i=0;i<3;i++)
+          {
+           nod_pt->x(t,i)=position_from_geom_obj[i];
+          }
+        }
+      }
+    }
+  }
+
+  // Check if any element is inverted
+  bool some_element_is_inverted=false;
+  unsigned count=0;
+  unsigned nel=nelement();
+  for (unsigned e=0;e<nel;e++)
+   {
+    FiniteElement* el_pt=finite_element_pt(e);
+    bool passed=true;
+    el_pt->check_J_eulerian_at_knots(passed);
+    if (!passed)
+     {
+      some_element_is_inverted=true;
+      char filename[100];
+      std::ofstream some_file;
+      sprintf(filename,"overly_distorted_element%i.dat",count);
+      some_file.open(filename);
+      unsigned nnod_1d=el_pt->nnode_1d();
+      el_pt->output(some_file,nnod_1d);  
+      some_file.close();
+
+      // Reset to old nodal position
+      unsigned nnod=el_pt->nnode();  
+      for (unsigned j=0;j<nnod;j++)
+       {
+        Node* nod_pt=el_pt->node_pt(j);
+        Vector<double> x_current(3);
+        nod_pt->position(x_current);   
+        new_nodal_posn[nod_pt]=x_current;
+        Vector<double> old_x(old_nodal_posn[nod_pt]);
+        for (unsigned i=0;i<3;i++)
+         {
+          nod_pt->x(i)=old_x[i];
+         }
+       }
+      
+      // Plot
+      sprintf(filename,"orig_overly_distorted_element%i.dat",count);
+      some_file.open(filename);
+      el_pt->output(some_file,nnod_1d);
+      some_file.close();
+
+      // Reset
+      for (unsigned j=0;j<nnod;j++)
+       {
+        Node* nod_pt=el_pt->node_pt(j);
+        for (unsigned i=0;i<3;i++)
+         {
+          nod_pt->x(i)=new_nodal_posn[nod_pt][i];
+         }
+       }
+
+      // Bump
+      count++;
+     }
+   }
+  if (some_element_is_inverted)
+   {
+    std::ostringstream error_message;
+    error_message 
+     << "A number of elements, namely: " << count 
+     << " are inverted after snapping. Their shapes are in "
+     << " overly_distorted_element*.dat and orig_overly_distorted_element*.dat"
+     << "Next person to get this error: Please implement a straightforward\n"
+     << "variant of one of the functors in src/mesh_smoothing to switch\n"
+     << "to harmonic mapping\n"
+     << std::endl;
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  else
+   {
+
+    oomph_info << "No elements are inverted after snapping. Yay!"
+               << std::endl;
+   }
+
+ }
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+
+
+
 
 }

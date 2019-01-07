@@ -241,13 +241,13 @@ private:
   //end npinned_solid_boundary
 
  /// Bulk solid mesh
- SolidTetMesh<SOLID_ELEMENT>* Solid_mesh_pt;
+ SolidTetgenMesh<SOLID_ELEMENT>* Solid_mesh_pt;
 
  /// Meshes of FSI traction elements
  Vector<SolidMesh*> Solid_fsi_traction_mesh_pt;
 
  /// Bulk fluid mesh
- SolidTetMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
+ SolidTetgenMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
  /// Mesh containing the FaceElements that monitor the inflow
  Mesh* Inflow_flux_monitor_mesh_pt;
@@ -385,7 +385,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  string face_file_name="fluid.1.face";
  bool split_corner_elements=true;
  bool switch_normal=true;
- Fluid_mesh_pt =  new SolidTetMesh<FLUID_ELEMENT>(node_file_name,
+ Fluid_mesh_pt =  new SolidTetgenMesh<FLUID_ELEMENT>(node_file_name,
                                                   element_file_name,
                                                   face_file_name,
                                                   split_corner_elements,
@@ -441,7 +441,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  node_file_name="solid.1.node";
  element_file_name="solid.1.ele";
  face_file_name="solid.1.face";
- Solid_mesh_pt =  new SolidTetMesh<SOLID_ELEMENT>(node_file_name,
+ Solid_mesh_pt =  new SolidTetgenMesh<SOLID_ELEMENT>(node_file_name,
                                                   element_file_name,
                                                   face_file_name,
                                                   wall_time_stepper_pt);

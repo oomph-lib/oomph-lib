@@ -48,14 +48,14 @@ using namespace oomph;
 /// Tetgen-based mesh upgraded to become a solid mesh
 //=========================================================================
 template<class ELEMENT>
-class MySolidTetMesh : public virtual TetgenMesh<ELEMENT>, 
+class MySolidTetgenMesh : public virtual TetgenMesh<ELEMENT>, 
                        public virtual SolidMesh 
 {
  
 public:
  
  /// Constructor: 
- MySolidTetMesh(const std::string& node_file_name,
+ MySolidTetgenMesh(const std::string& node_file_name,
                 const std::string& element_file_name,
                 const std::string& face_file_name,
                 TimeStepper* time_stepper_pt=
@@ -71,7 +71,7 @@ public:
   }
 
  /// Empty Destructor
- virtual ~MySolidTetMesh() { }
+ virtual ~MySolidTetgenMesh() { }
 
 
 };
@@ -163,7 +163,7 @@ private:
  void create_traction_elements();
 
  /// Bulk solid mesh
- MySolidTetMesh<ELEMENT>* Solid_mesh_pt;
+ MySolidTetgenMesh<ELEMENT>* Solid_mesh_pt;
 
  /// Meshes of traction elements
  Vector<SolidMesh*> Solid_traction_mesh_pt;
@@ -189,7 +189,7 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem()
  string node_file_name="solid_iliac.1.node";
  string element_file_name="solid_iliac.1.ele";
  string face_file_name="solid_iliac.1.face";
- Solid_mesh_pt =  new MySolidTetMesh<ELEMENT>(node_file_name,
+ Solid_mesh_pt =  new MySolidTetgenMesh<ELEMENT>(node_file_name,
                                               element_file_name,
                                               face_file_name);
  

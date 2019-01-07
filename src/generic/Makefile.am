@@ -50,7 +50,6 @@ implicit_midpoint_rule.cc \
 preconditioner_array.cc general_purpose_block_preconditioners.cc pml_meshes.cc \
 unstructured_two_d_mesh_geometry_base.cc sample_point_container.cc \
 sample_point_parameters.cc geometric_multigrid.cc
-#face_element_as_geometric_object.cc
 
 if OOMPH_HAS_MUMPS
 sources+=mumps_fortran_solver.F mumps_solver.cc
@@ -115,8 +114,8 @@ generalised_timesteppers.h vector_matrix.h face_mesh_project.h \
 generalised_newtonian_constitutive_models.h \
 unstructured_two_d_mesh_geometry_base.h \
 geometric_multigrid.h sample_point_container.h \
-sample_point_parameters.h sparse_vector.h
-
+sample_point_parameters.h sparse_vector.h \
+geom_obj_with_boundary.h
 
 if OOMPH_HAS_MUMPS
 headers+=mumps_solver.h

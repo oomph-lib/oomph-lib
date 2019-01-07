@@ -2234,6 +2234,20 @@ void Node::set_nonhanging()
 }
 
 
+//=======================================================================
+/// Interface for function to report if boundary coordinates have been
+/// set up for this node
+/// Broken here in order to report run-time errors. Must be overloaded
+/// by all boundary nodes
+//=======================================================================
+bool Node::boundary_coordinates_have_been_set_up()
+ {
+  std::stringstream ss;
+  ss << "Node (bas class) can't have boundary coordinates\n";
+  throw OomphLibError(ss.str(),
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION);
+ }
 
 //=======================================================================
 /// Interface for function to add the node to the mesh boundary b.

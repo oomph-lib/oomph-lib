@@ -766,7 +766,7 @@ protected:
 /// TreeBasedRefineableMesh<ELEMENT>
 //=======================================================================
 template <class ELEMENT>
-class TreeBasedRefineableMesh : public TreeBasedRefineableMeshBase
+class TreeBasedRefineableMesh : public virtual TreeBasedRefineableMeshBase
  {
    private:
    
@@ -834,6 +834,189 @@ class TreeBasedRefineableMesh : public TreeBasedRefineableMeshBase
   virtual ~TreeBasedRefineableMesh() { }
 
  };
+
+
+
+
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
+//=======================================================================
+/// Base class for refineable tet meshes
+//=======================================================================
+class RefineableTetMeshBase : public virtual RefineableMeshBase
+ {
+
+
+   public:
+
+   /// Max element size allowed during adaptation
+   double& max_element_size(){return Max_element_size;}
+   
+   /// Min element size allowed during adaptation
+   double& min_element_size(){return Min_element_size;}
+   
+   /// Min edge ratio before remesh gets triggered
+   double& max_permitted_edge_ratio(){return Max_permitted_edge_ratio;}
+   
+
+   /// Doc the targets for mesh adaptation
+   void doc_adaptivity_targets(std::ostream &outfile)
+   {
+    outfile << std::endl;
+    outfile << "Targets for mesh adaptation: " << std::endl;
+    outfile << "---------------------------- " << std::endl;
+    outfile << "Target for max. error: " << Max_permitted_error << std::endl;
+    outfile << "Target for min. error: " << Min_permitted_error << std::endl;
+    outfile << "Target max edge ratio: " 
+            << Max_permitted_edge_ratio << std::endl;
+    outfile << "Min. allowed element size: " << Min_element_size << std::endl;
+    outfile << "Max. allowed element size: " << Max_element_size << std::endl;
+    outfile << "Don't unrefine if less than " << Max_keep_unrefined 
+            << " elements need unrefinement." << std::endl;
+    outfile << std::endl;
+   }
+   
+
+
+   /// \short Compute target volume based on the elements' error and the
+   /// error target; return max edge ratio
+   double compute_volume_target(const Vector<double> &elem_error,
+                                Vector<double> &target_volume)
+   {
+     double max_edge_ratio=0.0;
+     unsigned count_unrefined=0;
+     unsigned count_refined=0;
+     this->Nrefinement_overruled=0;
+     
+     unsigned nel=this->nelement();
+     for (unsigned e=0;e<nel;e++)
+      {
+       // Get element
+       FiniteElement* el_pt=this->finite_element_pt(e);
+       
+       // Calculate the volume of the element
+       double volume=el_pt->size();
+       
+       //Find the vertex coordinates
+       // (vertices are enumerated first)
+       double vertex[4][3];
+       for(unsigned n=0;n<4;++n)
+        {
+         for(unsigned i=0;i<3;++i)
+          {
+           vertex[n][i] = el_pt->node_pt(n)->x(i);
+          }
+        }
+       
+       //Compute the radius of the circumsphere of the tetrahedron
+       //Algorithm stolen from tetgen for consistency
+       DenseDoubleMatrix A(3);
+       for(unsigned i=0;i<3;++i)
+        {
+         A(0,i) = vertex[1][i] - vertex[0][i];
+         A(1,i) = vertex[2][i] - vertex[0][i];
+         A(2,i) = vertex[3][i] - vertex[0][i];
+        }
+       
+       Vector<double> rhs(3);
+       // Compute the right hand side vector b (3x1).
+       for(unsigned i=0;i<3;++i)
+        {
+         rhs[i] = 0.0;
+         for(unsigned k=0;k<3;++k)
+          {
+           rhs[i] += A(i,k)*A(i,k);
+          }
+         rhs[i] *= 0.5;
+        }
+       
+       //Solve the linear system, in which the rhs is over-written with 
+       //the solution
+       A.solve(rhs);
+
+       //Calculate the circum-radius
+       double circum_radius = 
+        sqrt(rhs[0]*rhs[0] + rhs[1]*rhs[1] + rhs[2]*rhs[2]);
+       
+       //Now find the shortest edge length
+       Vector<double> edge(3);
+       double min_length = DBL_MAX;
+       for(unsigned start=0;start<4;++start)
+        {
+         for(unsigned end=start+1;end<4;++end)
+          {
+           for(unsigned i=0;i<3;++i)
+            {
+             edge[i] = vertex[start][i] - vertex[end][i];
+            }
+           double length = 
+            sqrt(edge[0]*edge[0] + edge[1]*edge[1] + edge[2]*edge[2]);
+           if(length < min_length) {min_length = length;}
+          }
+        }
+       
+       //Now calculate the minimum edge ratio for this element
+       double local_max_edge_ratio = circum_radius/min_length;
+       if(local_max_edge_ratio > max_edge_ratio)
+        {
+         max_edge_ratio = local_max_edge_ratio;
+        }
+
+       // Mimick refinement in tree-based procedure: Target volumes
+       // for elements that exceed permitted error is 1/4 of their
+       // current volume, corresponding to a uniform sub-division.
+       if (elem_error[e] > this->max_permitted_error())
+        {
+         target_volume[e]=std::max(volume/4.0,Min_element_size);
+         if (target_volume[e]!=Min_element_size)
+          {
+           count_refined++;
+          }
+         else
+          {
+           this->Nrefinement_overruled++;
+          }
+        }
+       else if (elem_error[e] < this->min_permitted_error())
+        {
+         target_volume[e]=std::min(4.0*volume,Max_element_size);
+         if (target_volume[e]!=Max_element_size)
+          {
+           count_unrefined++;
+          }
+        }
+       else
+        {
+         // Leave it alone
+         target_volume[e] = std::max(volume,Min_element_size); 
+        }
+       
+      } //End of loop over elements
+     
+     // Tell everybody
+     this->Nrefined=count_refined;
+     this->Nunrefined=count_unrefined;
+     
+     return max_edge_ratio;
+   }
+
+   /// Max permitted element size
+   double Max_element_size;
+   
+   /// Min permitted element size
+   double Min_element_size;
+   
+   /// Max edge ratio before remesh gets triggered
+   double Max_permitted_edge_ratio;
+
+ };
+
+
+
 
 }
 

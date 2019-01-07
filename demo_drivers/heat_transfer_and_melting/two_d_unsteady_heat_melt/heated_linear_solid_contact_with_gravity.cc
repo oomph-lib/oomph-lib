@@ -340,7 +340,7 @@ public:
 
 
 //=======================================================================
-/// Face geometry of the combined element
+/// Face geometry of the customised element
 //=======================================================================
 template<unsigned int DIM, unsigned int NNODE_1D>
 class FaceGeometry<TLinearHeatAndElasticityElement<DIM,NNODE_1D> >: 
@@ -349,6 +349,7 @@ public virtual TElement<DIM-1,NNODE_1D>
   public:
  FaceGeometry() : TElement<DIM-1,NNODE_1D>() {}
 };
+
 
 
 

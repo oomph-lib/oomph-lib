@@ -975,45 +975,6 @@ public:
    outfile.close();
   }
 
- /// Output the nodes on the boundary and their respective boundary
- /// coordinates(into separate tecplot zones)
- virtual void output_boundary_coordinates(const unsigned &b,
-                                          std::ostream &outfile)
-  {
-   std::ostringstream error_stream;
-   error_stream 
-    << "Empty default output_boundary_coordinates() method called.\n"
-    << "This should be overloaded on the specific mesh that you are using\n";
-    throw OomphLibError(error_stream.str(),
-                        "Mesh::output_boundary_coordinates",
-                        OOMPH_EXCEPTION_LOCATION);
-  }
- 
- /// Output the nodes on the boundary and their respective boundary
- /// coordinates(into separate tecplot zones)
- void output_boundary_coordinates(const unsigned &b, 
-                                  const std::string& output_filename)
-  {
-   std::ofstream outfile;
-   outfile.open(output_filename.c_str());
-   output_boundary_coordinates(b, outfile);
-   outfile.close();
-  }
- 
- /// Output the nodes on the boundaries and their respective boundary
- /// coordinates(into separate tecplot zones)
- void output_boundaries_coordinates(std::ostream &outfile);
- 
- /// Output the nodes on the boundaries and their respective boundary
- /// coordinates(into separate tecplot zones)
- void output_boundaries_coordinates(const std::string& output_filename)
-  {
-   std::ofstream outfile;
-   outfile.open(output_filename.c_str());
-   output_boundaries_coordinates(outfile);
-   outfile.close();
-  }
- 
  /// \short Assign initial values for an impulsive start
  void assign_initial_values_impulsive();
 

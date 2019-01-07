@@ -49,14 +49,14 @@ using namespace oomph;
 /// Tetgen-based mesh upgraded to become a solid mesh
 //=========================================================================
 template<class ELEMENT>
-class MySolidTetMesh : public virtual TetgenMesh<ELEMENT>, 
+class MySolidTetgenMesh : public virtual TetgenMesh<ELEMENT>, 
                        public virtual SolidMesh 
 {
  
 public:
  
  /// Constructor: 
- MySolidTetMesh(const std::string& node_file_name,
+ MySolidTetgenMesh(const std::string& node_file_name,
                 const std::string& element_file_name,
                 const std::string& face_file_name,
                 TimeStepper* time_stepper_pt=
@@ -78,14 +78,14 @@ public:
     {
      sprintf(filename,"RESLT/solid_boundary_test%i.dat",b);
      some_file.open(filename);
-     this->setup_boundary_coordinates(b,some_file);
+     this->template setup_boundary_coordinates<ELEMENT>(b,some_file);
      some_file.close();
     }
 
   }
 
  /// Empty Destructor
- virtual ~MySolidTetMesh() { }
+ virtual ~MySolidTetgenMesh() { }
 
 };
 
@@ -137,7 +137,8 @@ public:
     {
      sprintf(filename,"RESLT/fluid_boundary_test%i.dat",b);
      some_file.open(filename);
-     this->setup_boundary_coordinates(b,switch_normal,some_file);
+     this->template setup_boundary_coordinates<ELEMENT>
+      (b,switch_normal,some_file);
      some_file.close();
     }
   }
@@ -257,7 +258,7 @@ private:
 
 
  /// Bulk solid mesh
- MySolidTetMesh<SOLID_ELEMENT>* Solid_mesh_pt;
+ MySolidTetgenMesh<SOLID_ELEMENT>* Solid_mesh_pt;
 
  /// Meshes of FSI traction elements
  Vector<SolidMesh*> Solid_fsi_traction_mesh_pt;
@@ -354,7 +355,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  node_file_name="solid_iliac.1.node";
  element_file_name="solid_iliac.1.ele";
  face_file_name="solid_iliac.1.face";
- Solid_mesh_pt =  new MySolidTetMesh<SOLID_ELEMENT>(node_file_name,
+ Solid_mesh_pt =  new MySolidTetgenMesh<SOLID_ELEMENT>(node_file_name,
                                                     element_file_name,
                                                     face_file_name);
  

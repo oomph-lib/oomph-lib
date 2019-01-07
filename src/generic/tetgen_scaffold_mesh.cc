@@ -88,6 +88,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
  unsigned dummy_attribute;
    
  // Element attributes may be used to distinguish internal regions
+ // NOTE: This stores doubles because tetgen forces us to!
  Element_attribute.resize(n_element,0.0);
 
  // Dummy storage for element numbers
@@ -347,6 +348,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
        //Construct the boundary ndoe
        Node_pt[global_node_number-1] = 
         finite_element_pt(e)->construct_boundary_node(3);
+
        //Add to the boundary lookup scheme
        add_boundary_node(bound[global_node_number-1]-1,
                          Node_pt[global_node_number-1]);
@@ -384,6 +386,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
          //Construct the boundary ndoe
          Node_pt[global_node_number-1] = 
           finite_element_pt(e)->construct_boundary_node(j);
+
          //Add to the boundary lookup scheme
          add_boundary_node(bound[global_node_number-1]-1,
                            Node_pt[global_node_number-1]);
@@ -741,6 +744,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
   }
     
  // Element attributes may be used to distinguish internal regions
+ // NOTE: This stores doubles because tetgen forces us to!
  Element_attribute.resize(n_element,0.0);
    
  // Resize storage for the global node numbers listed element-by-element
@@ -923,9 +927,10 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
      if((boundary_markers_flag==1) && 
         (bound[global_node_number-1] > 0))
       {
-       //Construct the boundary ndoe
+      //Construct the boundary ndoe
        Node_pt[global_node_number-1] = 
         finite_element_pt(e)->construct_boundary_node(3);
+
        //Add to the boundary lookup scheme
        add_boundary_node(bound[global_node_number-1]-1,
                          Node_pt[global_node_number-1]);
@@ -963,6 +968,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
          //Construct the boundary ndoe
          Node_pt[global_node_number-1] = 
           finite_element_pt(e)->construct_boundary_node(j);
+
          //Add to the boundary lookup scheme
          add_boundary_node(bound[global_node_number-1]-1,
                            Node_pt[global_node_number-1]);

@@ -156,7 +156,7 @@ using namespace oomph;
  bool switch_normal;
 
  /// Storage for mesh
- SolidTetMesh<TPVDElement<3,3> >* Orig_mesh_pt;
+ SolidTetgenMesh<TPVDElement<3,3> >* Orig_mesh_pt;
  
  // Loop over fluid and solid meshes
  for (unsigned do_solid=0;do_solid<2;do_solid++)
@@ -176,7 +176,7 @@ using namespace oomph;
      element_file_name="short_coarse_mesh_files/solid.1.ele";
      face_file_name="short_coarse_mesh_files/solid.1.face";
      split_corner_elements=true;
-     Orig_mesh_pt = new SolidTetMesh<TPVDElement<3,3> >(node_file_name,
+     Orig_mesh_pt = new SolidTetgenMesh<TPVDElement<3,3> >(node_file_name,
                                                         element_file_name,
                                                         face_file_name,
                                                         split_corner_elements);
@@ -195,7 +195,7 @@ using namespace oomph;
      face_file_name="short_coarse_mesh_files/fluid.1.face";
      split_corner_elements=true;
      switch_normal=true;
-     Orig_mesh_pt =  new SolidTetMesh<TPVDElement<3,3> >(node_file_name,
+     Orig_mesh_pt =  new SolidTetgenMesh<TPVDElement<3,3> >(node_file_name,
                                                          element_file_name,
                                                          face_file_name,
                                                          split_corner_elements,
@@ -219,14 +219,14 @@ using namespace oomph;
     {
    // Snap FSI interface to quadratic surface
      switch_normal=false; 
-     Orig_mesh_pt->snap_to_quadratic_surface(
+     Orig_mesh_pt->template snap_to_quadratic_surface<TPVDElement<3,3> >(
       solid_fsi_boundary_id,
       "short_coarse_mesh_files/quadratic_fsi_boundary.dat",
       switch_normal);
 
      // Snap outer solid interface to quadratic surface
      switch_normal=true;
-     Orig_mesh_pt->snap_to_quadratic_surface(
+     Orig_mesh_pt->template snap_to_quadratic_surface<TPVDElement<3,3> >(
       solid_outer_boundary_id,
       "short_coarse_mesh_files/quadratic_outer_solid_boundary.dat",
       switch_normal);
@@ -235,7 +235,7 @@ using namespace oomph;
     {
      // Snap FSI interface to quadratic surface
      switch_normal=false; 
-     Orig_mesh_pt->snap_to_quadratic_surface(
+     Orig_mesh_pt->template snap_to_quadratic_surface<TPVDElement<3,3> >(
       fluid_fsi_boundary_id,
       "short_coarse_mesh_files/quadratic_fsi_boundary.dat",
       switch_normal);
@@ -456,7 +456,7 @@ using namespace oomph;
  bool switch_normal;
 
  /// Storage for mesh
- SolidTetMesh<TPVDElement<3,3> >* Orig_mesh_pt;
+ SolidTetgenMesh<TPVDElement<3,3> >* Orig_mesh_pt;
  
  // Loop over fluid and solid meshes
  for (unsigned do_solid=0;do_solid<2;do_solid++)
@@ -476,7 +476,7 @@ using namespace oomph;
      element_file_name="short_coarse_mesh_files/solid.1.ele";
      face_file_name="short_coarse_mesh_files/solid.1.face";
      split_corner_elements=true;
-     Orig_mesh_pt = new SolidTetMesh<TPVDElement<3,3> >(node_file_name,
+     Orig_mesh_pt = new SolidTetgenMesh<TPVDElement<3,3> >(node_file_name,
                                                         element_file_name,
                                                         face_file_name,
                                                         split_corner_elements);
@@ -495,7 +495,7 @@ using namespace oomph;
      face_file_name="short_coarse_mesh_files/fluid.1.face";
      split_corner_elements=true;
      switch_normal=true;
-     Orig_mesh_pt =  new SolidTetMesh<TPVDElement<3,3> >(node_file_name,
+     Orig_mesh_pt =  new SolidTetgenMesh<TPVDElement<3,3> >(node_file_name,
                                                          element_file_name,
                                                          face_file_name,
                                                          split_corner_elements,
@@ -519,14 +519,14 @@ using namespace oomph;
     {
    // Snap FSI interface to quadratic surface
      switch_normal=false; 
-     Orig_mesh_pt->snap_to_quadratic_surface(
+     Orig_mesh_pt->template snap_to_quadratic_surface<TPVDElement<3,3> >(
       solid_fsi_boundary_id,
       "short_coarse_mesh_files/quadratic_fsi_boundary.dat",
       switch_normal);
 
      // Snap outer solid interface to quadratic surface
      switch_normal=true;
-     Orig_mesh_pt->snap_to_quadratic_surface(
+     Orig_mesh_pt->template snap_to_quadratic_surface<TPVDElement<3,3> >(
       solid_outer_boundary_id,
       "short_coarse_mesh_files/quadratic_outer_solid_boundary.dat",
       switch_normal);
@@ -535,7 +535,7 @@ using namespace oomph;
     {
      // Snap FSI interface to quadratic surface
      switch_normal=false; 
-     Orig_mesh_pt->snap_to_quadratic_surface(
+     Orig_mesh_pt->template snap_to_quadratic_surface<TPVDElement<3,3> >(
       fluid_fsi_boundary_id,
       "short_coarse_mesh_files/quadratic_fsi_boundary.dat",
       switch_normal);
@@ -746,8 +746,8 @@ using namespace oomph;
  bool switch_normal;
 
  /// Storage for mesh and copy
- SolidTetMesh<TPVDElement<3,3> >* Orig_mesh_pt;
- SolidTetMesh<TPVDElement<3,3> >* Copy_of_mesh_pt;
+ SolidTetgenMesh<TPVDElement<3,3> >* Orig_mesh_pt;
+ SolidTetgenMesh<TPVDElement<3,3> >* Copy_of_mesh_pt;
 
  // Loop over fluid and solid meshes
  for (unsigned do_solid=0;do_solid<2;do_solid++)
@@ -767,12 +767,12 @@ using namespace oomph;
      element_file_name="short_coarse_mesh_files/solid.1.ele";
      face_file_name="short_coarse_mesh_files/solid.1.face";
      split_corner_elements=true;
-     Orig_mesh_pt = new SolidTetMesh<TPVDElement<3,3> >(node_file_name,
+     Orig_mesh_pt = new SolidTetgenMesh<TPVDElement<3,3> >(node_file_name,
                                                         element_file_name,
                                                         face_file_name,
                                                         split_corner_elements);
      /// ...and another copy
-     Copy_of_mesh_pt=new SolidTetMesh<TPVDElement<3,3> >(node_file_name,
+     Copy_of_mesh_pt=new SolidTetgenMesh<TPVDElement<3,3> >(node_file_name,
                                                          element_file_name,
                                                          face_file_name,
                                                          split_corner_elements);
@@ -791,13 +791,13 @@ using namespace oomph;
      face_file_name="short_coarse_mesh_files/fluid.1.face";
      split_corner_elements=true;
      switch_normal=true;
-     Orig_mesh_pt =  new SolidTetMesh<TPVDElement<3,3> >(node_file_name,
+     Orig_mesh_pt =  new SolidTetgenMesh<TPVDElement<3,3> >(node_file_name,
                                                          element_file_name,
                                                          face_file_name,
                                                          split_corner_elements,
                                                          switch_normal);
      /// ...and another copy
-     Copy_of_mesh_pt=new SolidTetMesh<TPVDElement<3,3> >(node_file_name,
+     Copy_of_mesh_pt=new SolidTetgenMesh<TPVDElement<3,3> >(node_file_name,
                                                          element_file_name,
                                                          face_file_name,
                                                          split_corner_elements,
@@ -820,7 +820,7 @@ using namespace oomph;
    if (do_solid==1) 
     {
      switch_normal=false; 
-     Orig_mesh_pt->snap_to_quadratic_surface(
+     Orig_mesh_pt->template snap_to_quadratic_surface<TPVDElement<3,3> >(
       solid_fsi_boundary_id,
       "short_coarse_mesh_files/quadratic_fsi_boundary.dat",
       switch_normal);
@@ -828,7 +828,7 @@ using namespace oomph;
    else
     {
      switch_normal=false; 
-     Orig_mesh_pt->snap_to_quadratic_surface(
+     Orig_mesh_pt->template snap_to_quadratic_surface<TPVDElement<3,3> >(
       fluid_fsi_boundary_id,
       "short_coarse_mesh_files/quadratic_fsi_boundary.dat",
       switch_normal);

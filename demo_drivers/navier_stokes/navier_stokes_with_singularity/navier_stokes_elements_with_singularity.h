@@ -846,6 +846,86 @@ void compute_error(std::ostream &outfile,
 }
 
 
+ /// \short Overloaded version of the interpolated velocity solution including
+ /// the singular contributions
+ inline Vector<double> interpolated_u_nst(const Vector<double> &s) 
+  const
+ {
+  // Find the dimension of the problem
+  unsigned cached_dim=this->dim();
+  
+  //Find number of nodes
+  const unsigned n_node = this->nnode();
+  
+  //Initialise value of u
+  Vector<double> interpolated_u(cached_dim,0.0);
+  
+  // Calculate the global coordinate associated with s
+  Vector<double> x(cached_dim,0.0);
+  
+  //Local shape function
+  Shape psif(n_node);
+  
+  //Find values of shape function
+  this->shape(s,psif);
+  
+  //Loop over the spatial directions
+  for (unsigned d=0;d<cached_dim;d++)
+   {
+    //Get the index at which the unknown is stored
+    const unsigned u_nodal_index = this->u_index_nst(d);
+    
+    //Loop over the local nodes and sum
+    for(unsigned j=0;j<n_node;j++) 
+     {
+      interpolated_u[d] += this->nodal_value(j,u_nodal_index)*psif[j];
+      x[d]+=this->raw_nodal_position(j,d)*psif(j);
+     }
+   }
+ 
+  // Add the contribution of the singularities (all of them, summed)
+  Vector<double> u_bar_local=u_bar(x);
+  for (unsigned d=0;d<cached_dim;d++)
+   {
+    interpolated_u[d] += u_bar_local[d]; 
+   }
+  return(interpolated_u);
+ }
+ 
+ /// Version of interpolated pressure including the singular contributions
+ inline double interpolated_p_nst(const Vector<double>& s) const
+ {
+  // Initialise pressure value with fe part
+  double interpolated_p = interpolated_p_nst_fe_only(s);
+
+  // Calculate the global coordinate associated with s
+  unsigned cached_dim = this->dim();
+  Vector<double> x(cached_dim,0.0);
+
+  //Find number of nodes
+  const unsigned n_node = this->nnode();
+  
+  //Local shape function
+  Shape psif(n_node);
+  
+  //Find values of shape function
+  this->shape(s,psif);
+  
+  //Loop over the local nodes and sum
+  for(unsigned j=0;j<n_node;j++) 
+   {
+    for (unsigned d=0;d<cached_dim;d++)
+     {
+      x[d]+=this->raw_nodal_position(j,d)*psif(j);
+     }
+   }
+
+  // Add the singularities contribution (all of them, summed)
+  interpolated_p+=p_bar(x);
+  
+  return interpolated_p;
+}
+
 
   private:
 
@@ -1001,52 +1081,6 @@ void compute_error(std::ostream &outfile,
    return interpolated_u;
   }
  
- /// \short Overloaded version of the interpolated velocity solution including
- /// the singular contributions
- inline Vector<double> interpolated_u_nst(const Vector<double> &s) 
-  const
- {
-  // Find the dimension of the problem
-  unsigned cached_dim=this->dim();
-  
-  //Find number of nodes
-  const unsigned n_node = this->nnode();
-  
-  //Initialise value of u
-  Vector<double> interpolated_u(cached_dim,0.0);
-  
-  // Calculate the global coordinate associated with s
-  Vector<double> x(cached_dim,0.0);
-  
-  //Local shape function
-  Shape psif(n_node);
-  
-  //Find values of shape function
-  this->shape(s,psif);
-  
-  //Loop over the spatial directions
-  for (unsigned d=0;d<cached_dim;d++)
-   {
-    //Get the index at which the unknown is stored
-    const unsigned u_nodal_index = this->u_index_nst(d);
-    
-    //Loop over the local nodes and sum
-    for(unsigned j=0;j<n_node;j++) 
-     {
-      interpolated_u[d] += this->nodal_value(j,u_nodal_index)*psif[j];
-      x[d]+=this->raw_nodal_position(j,d)*psif(j);
-     }
-   }
- 
-  // Add the contribution of the singularities (all of them, summed)
-  Vector<double> u_bar_local=u_bar(x);
-  for (unsigned d=0;d<cached_dim;d++)
-   {
-    interpolated_u[d] += u_bar_local[d]; 
-   }
-  return(interpolated_u);
- }
- 
 
  /// \short Return FE representation of pressure solution WITHOUT singular
  /// contributions at local coordinate s
@@ -1074,40 +1108,6 @@ void compute_error(std::ostream &outfile,
 
   return interpolated_p;
  }
-
- /// Version of interpolated pressure including the singular contributions
- inline double interpolated_p_nst(const Vector<double>& s) const
- {
-  // Initialise pressure value with fe part
-  double interpolated_p = interpolated_p_nst_fe_only(s);
-
-  // Calculate the global coordinate associated with s
-  unsigned cached_dim = this->dim();
-  Vector<double> x(cached_dim,0.0);
-
-  //Find number of nodes
-  const unsigned n_node = this->nnode();
-  
-  //Local shape function
-  Shape psif(n_node);
-  
-  //Find values of shape function
-  this->shape(s,psif);
-  
-  //Loop over the local nodes and sum
-  for(unsigned j=0;j<n_node;j++) 
-   {
-    for (unsigned d=0;d<cached_dim;d++)
-     {
-      x[d]+=this->raw_nodal_position(j,d)*psif(j);
-     }
-   }
-
-  // Add the singularities contribution (all of them, summed)
-  interpolated_p+=p_bar(x);
-  
-  return interpolated_p;
-}
 
 
  /// Overloaded fill-in function 

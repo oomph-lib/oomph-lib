@@ -69,8 +69,6 @@ public:
  unsigned global_node_number(const unsigned &i)
  {return Global_node[i];}
 
-
-
  /// \short Return the boundary id of the i-th face in the e-th element:
  /// This is zero-based as in tetgen. Zero means the face is not
  /// on a boundary. Postive numbers identify the boundary.
@@ -101,7 +99,9 @@ public:
  unsigned face_index(const unsigned& e, const unsigned& i) const
   {return Face_index[e][i];}
 
- /// \short Return the attribute of the element e
+ /// \short Return the attribute of the element e.
+ /// NOTE: Attributes are doubles because tetgen forces us to! We only
+ /// use them for region IDs
  double element_attribute(const unsigned &e) const
   {return Element_attribute[e];}
 
@@ -133,7 +133,9 @@ protected:
  // the elements' edges
  Vector<Vector<unsigned> > Face_index;
 
- /// \short Vector of double attributes for each element
+ /// \short Vector of double attributes for each element.
+ /// NOTE: This stores doubles because tetgen forces us to! We only
+ /// use it for region IDs
  Vector<double> Element_attribute;
 
 };

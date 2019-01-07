@@ -111,6 +111,19 @@ fi
 
 # Get ready for new install
 tar xf $tar_file
+
+# Hack to comment out rounding check
+dir_above_tar_file=`pwd`
+offensive_file=`find . -name 'Interval_nt.h'`
+offensive_dir=`dirname $offensive_file`
+cd $offensive_dir
+mv Interval_nt.h Interval_nt.h.orig
+sed 's/CGAL_assertion_msg(-CGAL_IA_MUL/\/\/CGAL_assertion_msg(-CGAL_IA_MUL/g' Interval_nt.h.orig | sed 's/\"Wrong rounding:/\/\/\"Wrong rounding:/g' | sed 's/CGAL_assertion_msg(-CGAL_IA_DIV/\/\/CGAL_assertion_msg(-CGAL_IA_DIV/g' > Interval_nt.h
+echo " " 
+echo "oomph-lib has commented out rounding check"
+echo " " 
+cd $dir_above_tar_file
+
 cd $dir
 src_dir=`pwd`
 mkdir $install_dir
