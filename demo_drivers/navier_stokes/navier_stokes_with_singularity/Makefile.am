@@ -20,7 +20,7 @@ adaptive_driven_cavity_LDADD = -L@libdir@ -lnavier_stokes -lgeneric $(EXTERNAL_L
 #---------------------------------------------------------------------------
 
 # Sources for executable
-driven_cavity_SOURCES = driven_cavity.cc navier_stokes_elements_with_singularity.h
+driven_cavity_SOURCES = driven_cavity.cc navier_stokes_elements_with_singularity.h finite_re_perturbation.h
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
@@ -29,7 +29,7 @@ driven_cavity_LDADD = -L@libdir@ -lnavier_stokes -lgeneric $(EXTERNAL_LIBS) $(FL
 #---------------------------------------------------------------------------
 
 # Sources for executable
-driven_cavity_without_singularity_subtracted_off_SOURCES = driven_cavity.cc navier_stokes_elements_with_singularity.h
+driven_cavity_without_singularity_subtracted_off_SOURCES = driven_cavity.cc navier_stokes_elements_with_singularity.h finite_re_perturbation.h
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
@@ -41,7 +41,7 @@ driven_cavity_without_singularity_subtracted_off_CXXFLAGS = -DDONT_USE_SINGULARI
 #---------------------------------------------------------------------------
 
 # Sources for executable
-circular_couette_SOURCES = driven_cavity.cc navier_stokes_elements_with_singularity.h
+circular_couette_SOURCES = driven_cavity.cc navier_stokes_elements_with_singularity.h 
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
@@ -53,7 +53,7 @@ circular_couette_CXXFLAGS = -DCOUETTE
 #---------------------------------------------------------------------------
 
 # Sources for executable
-circular_couette_without_pseudo_singularity_subtracted_off_SOURCES = driven_cavity.cc navier_stokes_elements_with_singularity.h
+circular_couette_without_pseudo_singularity_subtracted_off_SOURCES = driven_cavity.cc navier_stokes_elements_with_singularity.h finite_re_perturbation.h
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
