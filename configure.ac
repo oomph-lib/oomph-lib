@@ -717,6 +717,24 @@ fi;
 
 
 
+# Do we want to run the gmsh tests?
+AC_ARG_WITH(gmsh-self-tests,
+[  --with-gmsh-self-tests[=GMSH_RUN_COMMAND] run gmsh self-tests.  Requires
+                          specification of the string required to run gmsh
+                          from the command line. GMSH_RUN_COMMAND. E.g. if
+                          gmsh on your machine needs to be run with 
+
+                             /usr/bin/gmsh 
+
+                          then set GMSH_RUN_COMMAND to "/usr/bin/gmsh"],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    run_gmsh_self_tests=true
+    GMSH_RUN_COMMAND=$withval
+  fi
+])
+AC_SUBST(GMSH_RUN_COMMAND)
+
+
 
 
 # Do we want to run the mpi tests?

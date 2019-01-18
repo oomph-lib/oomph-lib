@@ -77,6 +77,8 @@ namespace Global_Parameters
  /// (Half)height of the box
  double Box_half_length = 1.0;
 
+ /// Specify how to call gmsh from the command line
+ std::string Gmsh_command_line_invocation="/home/mheil/gmesh/bin/bin/gmsh";
 
 }
 
@@ -371,13 +373,10 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
  // Build the mesh
  //--------------- 
 
- // Specify how to call gmsh from the command line
- std::string gmsh_command_line_invocation="/home/mheil/gmesh/bin/bin/gmsh";
-
  // Setup parameters for gmsh
  GmshParameters* gmsh_parameters_pt=
   new GmshParameters(Outer_boundary_pt,
-                     gmsh_command_line_invocation);
+                     Global_Parameters::Gmsh_command_line_invocation);
 
  // Element volume
  gmsh_parameters_pt->element_volume()=
@@ -807,11 +806,38 @@ int main(int argc, char* argv[])
  // Suppress bulk output
  CommandLineArgs::specify_command_line_flag("--suppress_bulk_output");
 
+#ifndef DO_TETGEN
+
+ // Gmsh command line invocation
+ CommandLineArgs::specify_command_line_flag
+  ("--gmsh_command_line",
+   &Global_Parameters::Gmsh_command_line_invocation);
+
+#endif
+
  // Parse command line
  CommandLineArgs::parse_and_assign(); 
  
  // Doc what has actually been specified on the command line
  CommandLineArgs::doc_specified_flags();
+
+#ifndef DO_TETGEN
+
+ // Are you suicidal?
+ if (!CommandLineArgs::command_line_flag_has_been_set("--gmsh_command_line"))
+  {
+   std::string error_msg
+    ("You haven't specified how gmsh is invoked on the command line\n");
+   error_msg += "on your computer, so I'll use the default\n\n" + 
+    Global_Parameters::Gmsh_command_line_invocation
+    + "\n\nwhich, unless you're mheil, is unlikely to work and I will "
+    + "now die...\n";
+   throw OomphLibError(error_msg, 
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+#endif
 
  // Note that this can make tetgen die!
  //feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);

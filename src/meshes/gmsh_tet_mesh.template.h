@@ -432,8 +432,12 @@ namespace oomph
      {
       gmsh_command_line_string +=" >> "+gmsh_onscreen_output_file_name;
      }
-    system(gmsh_command_line_string.c_str());
 
+    // Note return flag isn't particularly well defined but we report it
+    // anyway to aid detection of problems...
+    int return_flag=system(gmsh_command_line_string.c_str());
+    oomph_info << "fyi: return from system command: " << return_flag 
+               << std::endl;
     oomph_info << "Time for gmsh system call           : "
                << TimingHelpers::timer()-t_start
                << " sec " << std::endl;

@@ -23,6 +23,44 @@ fi
 #Set the number of tests to be checked
 NUM_TESTS=4
 
+# Have we specified command to run gmsh?
+#---------------------------------------
+run_gmsh=1
+
+# Run this twice just in case Makefile.am re-generates itself and
+# creates some output in the process
+make -s --no-print-directory spit_out_gmsh_command
+gmsh_command=`make -s --no-print-directory spit_out_gmsh_command`
+if [ "$gmsh_command" = "" ]; then 
+    NUM_TESTS=2    
+    echo " "
+    echo "Haven't specified command to run gmsh on command line."
+    echo "Therefore not running gmsh-based self-tests!"
+    echo " "
+    run_gmsh=0
+else
+    echo " "
+    echo "Specified command to run gmsh on command line:"
+    echo " "
+    echo "     "$gmsh_command
+    echo " "
+    rm -f .gmsh_version_number_dont_create_this_file
+    `$gmsh_command --version 2>  .gmsh_version_number_dont_create_this_file`
+    version=`cat .gmsh_version_number_dont_create_this_file`
+    rm -f .gmsh_version_number_dont_create_this_file
+    echo "gmsh version: "$version
+    if [ "$version" != "3.0.6" ]; then
+        echo "Wrong version number; I require 3.0.6 (for now) to be on the"
+        echo "safe side. To avoid problems with self-tests, I'm not running"
+        echo "them. Please investigate if your version of gmsh"
+        echo "is compatible..."
+        NUM_TESTS=2    
+        run_gmsh=0
+    else
+        echo "Version of gmsh is correct."
+    fi
+fi
+
 # Suppress (very costly!) bulk output -- re-enable if there are any problems...
 suppress_bulk_output_flag=""
 suppress_bulk_output_flag="--suppress_bulk_output"
@@ -66,10 +104,11 @@ mv RESLT RESLT_tetgen_curved
 
 # Validation for mesh generation from gmsh
 #-------------------------------------------
+if [ $run_gmsh -eq 1 ]; then
 
 echo "Running adaptive gmsh mesh generation for curved boundaries"
 mkdir RESLT
-../curved_facet_bounded_mesh_from_gmsh $suppress_bulk_output_flag > OUTPUT_gmsh_curved
+../curved_facet_bounded_mesh_from_gmsh --gmsh_command_line $gmsh_command $suppress_bulk_output_flag > OUTPUT_gmsh_curved
 echo "done"
 echo " " >> validation.log
 echo "Adaptive gmsh mesh generation for curved boundaries validation" >> validation.log
@@ -91,6 +130,7 @@ fi
 
 mv RESLT RESLT_gmsh_curved
 
+fi
 
 
 ###### hierher
@@ -127,10 +167,11 @@ mv RESLT RESLT_tetgen_planar
 
 # Validation for mesh generation from gmsh
 #-------------------------------------------
+if [ $run_gmsh -eq 1 ]; then
 
 echo "Running adaptive gmsh mesh generation for planar boundaries"
 mkdir RESLT
-../planar_facet_bounded_mesh_from_gmsh $suppress_bulk_output_flag > OUTPUT_gmsh_planar
+../planar_facet_bounded_mesh_from_gmsh --gmsh_command_line $gmsh_command $suppress_bulk_output_flag > OUTPUT_gmsh_planar
 echo "done"
 echo " " >> validation.log
 echo "Adaptive gmsh mesh generation for planar boundaries validation" >> validation.log
@@ -151,6 +192,7 @@ else
 fi
 
 mv RESLT RESLT_gmsh_planar
+fi
 
 #### hierher
 #fi
