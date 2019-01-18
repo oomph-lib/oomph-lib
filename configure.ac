@@ -320,11 +320,20 @@ fi
 
 # Do we have a sufficiently recent version of libtool installed?
 #---------------------------------------------------------------
+# Check to see if we're on a Mac (the only system which has
+# the OS name "Darwin")
+if test $(uname) == "Darwin"
+then
+    LIBTOOL_COMMAND=glibtool;
+else
+    LIBTOOL_COMMAND=libtool;
+fi
 
 # Convert libtool version number into single int -- strip dots and
 # accomodate up to three digits for each part version id
-libtool_version=`libtool --version | \
+libtool_version=`$LIBTOOL_COMMAND --version | \
    head -n 1 | $AWK  '{ print $NF}' | $AWK 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+   
 # Need at least version 242 --> 2004002
 if test "$libtool_version" -ge 2004002; then 
   echo "Congratulations!"
@@ -334,7 +343,7 @@ if test "$libtool_version" -ge 2004002; then
 else
   echo " "; \
   echo "==============================================================="; \
-  echo "Trouble: Your version of libtool is: " `libtool --version | head -n 1 | $AWK  '{ print $NF}'` 
+  echo "Trouble: Your version of libtool is: " `$LIBTOOL_COMMAND --version | head -n 1 | $AWK  '{ print $NF}'` 
   echo "Please upgrade to version 2.4.2 or higher."
   echo "I cannot/will not build cgal and associated libraries."
   echo "==============================================================="; \
