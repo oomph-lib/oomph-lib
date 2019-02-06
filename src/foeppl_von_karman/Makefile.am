@@ -3,13 +3,13 @@
 # Define the sources
 sources =  \
 foeppl_von_karman_elements.cc Tfoeppl_von_karman_elements.cc \
-foeppl_von_karman_displacement_elements.cc Tfoeppl_von_karman_displacement_elements.cc
+displacement_based_foeppl_von_karman_elements.cc Tdisplacement_based_foeppl_von_karman_elements.cc
 
 # Define the headers
 headers =  \
 foeppl_von_karman_elements.h Tfoeppl_von_karman_elements.h \
 foeppl_von_karman_volume_constraint_element.h \
-foeppl_von_karman_displacement_elements.h Tfoeppl_von_karman_displacement_elements.h
+displacement_based_foeppl_von_karman_elements.h Tdisplacement_based_foeppl_von_karman_elements.h
 
 # Define name of library
 libname = foeppl_von_karman

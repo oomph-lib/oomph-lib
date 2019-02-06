@@ -52,10 +52,10 @@ namespace oomph
 /// A class for all isoparametric elements that solve the
 /// Foeppl von Karman equations.
 /// \f[
-/// \nabla^4 w -  12  \frac{\partial}{\partial x_{\beta}} 
-///                   \left( \sigma^{\alpha \beta}
-///                          \frac{\partial w}{\partial x_{\alpha}}
-///                   \right) = p(x,y)
+/// \nabla^4 w -  \eta  \frac{\partial}{\partial x_{\beta}} 
+///                     \left( \sigma^{\alpha \beta}
+///                            \frac{\partial w}{\partial x_{\alpha}}
+///                     \right) = p(x,y)
 /// \f]
 /// and
 /// \f[
@@ -64,7 +64,7 @@ namespace oomph
 /// This contains the generic maths. Shape functions, geometric
 /// mapping etc. must get implemented in derived class.
 //=============================================================
-class FoepplvonKarmanDisplacementEquations : public virtual FiniteElement
+class DisplacementBasedFoepplvonKarmanEquations : public virtual FiniteElement
 {
 
 public:
@@ -82,26 +82,29 @@ public:
  /// \short Constructor (must initialise the Pressure_fct_pt and the
  /// Traction_fct_pt. Also set physical parameters to their default
  /// values.
- FoepplvonKarmanDisplacementEquations() 
+ DisplacementBasedFoepplvonKarmanEquations() 
   : Pressure_fct_pt(0), Traction_fct_pt(0)
   {
    //Set default
    Nu_pt = &Default_Nu_Value;
    
+   // Set all the physical constants to the default value (zero)
+   Eta_pt = &Default_Physical_Constant_Value;
+
    // Linear bending model?
    Linear_bending_model = false;
   }
  
  /// Broken copy constructor
- FoepplvonKarmanDisplacementEquations(const FoepplvonKarmanDisplacementEquations& dummy)
+ DisplacementBasedFoepplvonKarmanEquations(const DisplacementBasedFoepplvonKarmanEquations& dummy)
   {
-   BrokenCopy::broken_copy("FoepplvonKarmanDisplacementEquations");
+   BrokenCopy::broken_copy("DisplacementBasedFoepplvonKarmanEquations");
   }
  
  /// Broken assignment operator
- void operator=(const FoepplvonKarmanDisplacementEquations&)
+ void operator=(const DisplacementBasedFoepplvonKarmanEquations&)
   {
-   BrokenCopy::broken_assign("FoepplvonKarmanDisplacementEquations");
+   BrokenCopy::broken_assign("DisplacementBasedFoepplvonKarmanEquations");
   }
  
  /// Poisson's ratio
@@ -110,6 +113,12 @@ public:
  /// Pointer to Poisson's ratio
  double* &nu_pt() {return Nu_pt;}
  
+ /// Eta
+ const double &eta() const {return *Eta_pt;}
+
+ /// Pointer to eta
+ double* &eta_pt() {return Eta_pt;}
+
  /// \short Return the index at which the i-th unknown value
  /// is stored. The default value, i, is appropriate for single-physics
  /// problems. By default, these are:
@@ -332,15 +341,17 @@ public:
    // Get Poisson's ratio
    const double _nu = nu();
    
+   double inv_denom=1.0/(1.0-_nu*_nu);
+
    // The stress tensor values
    // sigma_xx
-   sigma(0,0) = (e_xx + _nu*e_yy);
+   sigma(0,0) = (e_xx + _nu*e_yy)*inv_denom;
    
    // sigma_yy
-   sigma(1,1) = (e_yy + _nu*e_xx);
+   sigma(1,1) = (e_yy + _nu*e_xx)*inv_denom;
    
    // sigma_xy = sigma_yx
-   sigma(0,1) = sigma(1,0) = e_xy*(1.0 - _nu);
+   sigma(0,1) = sigma(1,0) = e_xy/(1.0+_nu); 
    
   }
   
@@ -558,7 +569,7 @@ public:
            residuals[local_eqn] += 
             interpolated_dlaplacian_wdx[k]*dtestdx(l,k)*W;
           }
-         
+
          // Sigma_alpha_beta part
          if(!Linear_bending_model)
           {
@@ -569,7 +580,7 @@ public:
              for(unsigned beta=0;beta<2;beta++)
               {
                residuals[local_eqn]-=
-                12.0*sigma(alpha,beta)*
+                eta()*sigma(alpha,beta)*
                 interpolated_dwdx[alpha]*dtestdx(l,beta)*W;
               }
             }
@@ -726,6 +737,9 @@ protected:
   /// Pointer to global Poisson's ratio
   double *Nu_pt;
   
+ /// Pointer to global eta
+ double *Eta_pt;
+
   /// Pointer to pressure function:
   FoepplvonKarmanPressureFctPt Pressure_fct_pt;
 
@@ -737,6 +751,9 @@ private:
   /// Default value for Poisson's ratio
   static double Default_Nu_Value;
   
+  /// Default value for physical constants
+  static double Default_Physical_Constant_Value;
+
   /// \short Flag which stores whether we are using a linear, pure
   /// bending model instead of the full non-linear Foeppl-von Karman
   bool Linear_bending_model;
@@ -748,7 +765,7 @@ private:
 /// Foeppl von Karman upgraded to become projectable
 //==========================================================
   template<class FVK_ELEMENT>
-  class ProjectableFoepplvonKarmanDisplacementElement :
+  class ProjectableDisplacementBasedFoepplvonKarmanElement :
     public virtual ProjectableElement<FVK_ELEMENT>
   {
     
@@ -946,7 +963,7 @@ private:
 /// wrapped element
 //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<ProjectableFoepplvonKarmanDisplacementElement<ELEMENT> >
+  class FaceGeometry<ProjectableDisplacementBasedFoepplvonKarmanElement<ELEMENT> >
     : public virtual FaceGeometry<ELEMENT>
   {
   public:
@@ -959,7 +976,7 @@ private:
 /// that for the underlying wrapped element
 //=======================================================================
   template<class ELEMENT>
-  class FaceGeometry<FaceGeometry<ProjectableFoepplvonKarmanDisplacementElement<ELEMENT> > >
+  class FaceGeometry<FaceGeometry<ProjectableDisplacementBasedFoepplvonKarmanElement<ELEMENT> > >
     : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
   {
   public:

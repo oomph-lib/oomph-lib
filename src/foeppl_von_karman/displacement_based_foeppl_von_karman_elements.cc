@@ -29,22 +29,27 @@
 //LIC//====================================================================
 //Non-inline functions for FoepplvonKarman displacement elements
 
-#include "foeppl_von_karman_displacement_elements.h"
+#include "displacement_based_foeppl_von_karman_elements.h"
 
 #include <iostream>
 
 namespace oomph
 {
   
-  // Foeppl von Karman displacement equations static data
-  
-  /// Default value for Poisson's ratio
-  double FoepplvonKarmanDisplacementEquations::Default_Nu_Value = 0.5;
-  
+ // Foeppl von Karman displacement equations static data
+ 
+ /// Default value for Poisson's ratio
+ double DisplacementBasedFoepplvonKarmanEquations::Default_Nu_Value = 0.5;
+ 
+  /// Default value physical constants
+ double DisplacementBasedFoepplvonKarmanEquations::
+ Default_Physical_Constant_Value = 0.0;
+
+
 //======================================================================
 /// Self-test:  Return 0 for OK
 //======================================================================
-unsigned FoepplvonKarmanDisplacementEquations::self_test()
+unsigned DisplacementBasedFoepplvonKarmanEquations::self_test()
 {
   
   bool passed=true;
@@ -74,7 +79,7 @@ unsigned FoepplvonKarmanDisplacementEquations::self_test()
 ///
 /// nplot points in each coordinate direction
 //======================================================================
-void FoepplvonKarmanDisplacementEquations::output(std::ostream &outfile,
+void DisplacementBasedFoepplvonKarmanEquations::output(std::ostream &outfile,
                                                   const unsigned &nplot)
 {
   
@@ -142,7 +147,7 @@ void FoepplvonKarmanDisplacementEquations::output(std::ostream &outfile,
 ///
 /// nplot points in each coordinate direction
 //======================================================================
-void  FoepplvonKarmanDisplacementEquations::output(FILE* file_pt,
+void  DisplacementBasedFoepplvonKarmanEquations::output(FILE* file_pt,
                                              const unsigned &nplot)
 {
   //Vector of local coordinates
@@ -179,7 +184,7 @@ void  FoepplvonKarmanDisplacementEquations::output(FILE* file_pt,
  ///
  ///   x,y,w_exact
 //======================================================================
- void FoepplvonKarmanDisplacementEquations::output_fct(std::ostream &outfile,
+ void DisplacementBasedFoepplvonKarmanEquations::output_fct(std::ostream &outfile,
                                                  const unsigned &nplot,
                                                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
  {
@@ -234,7 +239,7 @@ void  FoepplvonKarmanDisplacementEquations::output(FILE* file_pt,
 /// Plot error at a given number of plot points.
 ///
 //======================================================================
- void FoepplvonKarmanDisplacementEquations::compute_error(std::ostream &outfile,
+ void DisplacementBasedFoepplvonKarmanEquations::compute_error(std::ostream &outfile,
                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                    double& error, double& norm)
  {
@@ -259,8 +264,7 @@ void  FoepplvonKarmanDisplacementEquations::output(FILE* file_pt,
    // Tecplot
    outfile << "ZONE" << std::endl;
    
-   // Exact solution Vector (here a scalar)
-   //Vector<double> exact_soln(1);
+   // Exact solution vector
    Vector<double> exact_soln(3);
    
    //Loop over the integration points
@@ -270,7 +274,7 @@ void  FoepplvonKarmanDisplacementEquations::output(FILE* file_pt,
        //Assign values of s
        for(unsigned i=0;i<2;i++)
          {
-           s[i] = integral_pt()->knot(ipt,i);
+          s[i] = integral_pt()->knot(ipt,i);
          }
        
        //Get the integral weight

@@ -209,7 +209,8 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
            eta()*
           (interpolated_continuous_d2wdx2*interpolated_continuous_d2phidy2
          + interpolated_continuous_d2wdy2*interpolated_continuous_d2phidx2
-         - 2*interpolated_continuous_d2wdxdy*interpolated_continuous_d2phidxdy)
+         - 2.0*interpolated_continuous_d2wdxdy*
+           interpolated_continuous_d2phidxdy)
           *test(l)*W;
        }
       }

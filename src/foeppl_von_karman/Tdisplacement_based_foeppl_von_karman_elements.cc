@@ -29,7 +29,7 @@
 //LIC//====================================================================
 //Non-inline functions for TFoepplvonKarmanDisplacement elements
 
-#include "Tfoeppl_von_karman_displacement_elements.h"
+#include "Tdisplacement_based_foeppl_von_karman_elements.h"
 
 
 namespace oomph
@@ -37,20 +37,20 @@ namespace oomph
 
 
 /////////////////////////////////////////////////////////////////////////
-// TFoepplvonKarmanDisplacementElement
+// TDisplacementBasedFoepplvonKarmanElement
 /////////////////////////////////////////////////////////////////////////
 
 //======================================================================
 // Set the data for the number of Variables at each node, always 4
 //======================================================================
 template<unsigned NNODE_1D>
-const unsigned TFoepplvonKarmanDisplacementElement<NNODE_1D>::Initial_Nvalue = 4;
+const unsigned TDisplacementBasedFoepplvonKarmanElement<NNODE_1D>::Initial_Nvalue = 4;
 
 //====================================================================
 // Force build of templates
 //====================================================================
-template class TFoepplvonKarmanDisplacementElement<2>;
-template class TFoepplvonKarmanDisplacementElement<3>;
-template class TFoepplvonKarmanDisplacementElement<4>;
+template class TDisplacementBasedFoepplvonKarmanElement<2>;
+template class TDisplacementBasedFoepplvonKarmanElement<3>;
+template class TDisplacementBasedFoepplvonKarmanElement<4>;
 
 } // namespace oomph

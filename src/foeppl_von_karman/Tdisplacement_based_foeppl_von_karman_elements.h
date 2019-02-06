@@ -44,14 +44,14 @@
 #include "../generic/Telements.h"
 #include "../generic/error_estimator.h"
 
-#include "foeppl_von_karman_displacement_elements.h"
+#include "displacement_based_foeppl_von_karman_elements.h"
 
 namespace oomph
 {
 
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-// TFoepplvonKarmanDisplacementElement
+// TDisplacementBasedFoepplvonKarmanElement
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
@@ -62,14 +62,15 @@ namespace oomph
 
 
 //======================================================================
-/// TFoepplvonKarmanDisplacementElement<NNODE_1D> elements are isoparametric
+/// TDisplacementBasedFoepplvonKarmanElement<NNODE_1D> elements are 
+/// isoparametric
 /// triangular 2-dimensional Foeppl von Karman elements with NNODE_1D
 /// nodal points along each element edge. Inherits from TElement and
-/// FoepplvonKarmanDisplacementEquations
+/// DisplacementBasedFoepplvonKarmanEquations
 //======================================================================
 template <unsigned NNODE_1D>
-class TFoepplvonKarmanDisplacementElement : public virtual TElement<2,NNODE_1D>,
-                                      public virtual FoepplvonKarmanDisplacementEquations,
+class TDisplacementBasedFoepplvonKarmanElement : public virtual TElement<2,NNODE_1D>,
+                                      public virtual DisplacementBasedFoepplvonKarmanEquations,
                                       public virtual ElementWithZ2ErrorEstimator
 {
   
@@ -77,21 +78,21 @@ public:
   
   ///\short  Constructor: Call constructors for TElement and
   /// Foeppl von Karman equations
-  TFoepplvonKarmanDisplacementElement() : TElement<2,NNODE_1D>(), 
-                                    FoepplvonKarmanDisplacementEquations()
+  TDisplacementBasedFoepplvonKarmanElement() : TElement<2,NNODE_1D>(), 
+                                    DisplacementBasedFoepplvonKarmanEquations()
   { }
   
   
   /// Broken copy constructor
-  TFoepplvonKarmanDisplacementElement(const TFoepplvonKarmanDisplacementElement<NNODE_1D>& dummy)
+  TDisplacementBasedFoepplvonKarmanElement(const TDisplacementBasedFoepplvonKarmanElement<NNODE_1D>& dummy)
   {
-    BrokenCopy::broken_copy("TFoepplvonKarmanDisplacementElement");
+    BrokenCopy::broken_copy("TDisplacementBasedFoepplvonKarmanElement");
   }
   
   /// Broken assignment operator
-  void operator=(const TFoepplvonKarmanDisplacementElement<NNODE_1D>&)
+  void operator=(const TDisplacementBasedFoepplvonKarmanElement<NNODE_1D>&)
   {
-    BrokenCopy::broken_assign("TFoepplvonKarmanDisplacementElement");
+    BrokenCopy::broken_assign("TDisplacementBasedFoepplvonKarmanElement");
   }
   
   /// \short Access function for Nvalue: # of `values' (pinned or
@@ -239,14 +240,14 @@ public:
   ///  x,y,w
   void output(std::ostream &outfile)
   {
-    FoepplvonKarmanDisplacementEquations::output(outfile);
+    DisplacementBasedFoepplvonKarmanEquations::output(outfile);
   }
   
   ///  \short Output function:
   ///   x,y,w at n_plot^2 plot points
   void output(std::ostream &outfile, const unsigned &n_plot)
   {
-    FoepplvonKarmanDisplacementEquations::output(outfile,n_plot);
+    DisplacementBasedFoepplvonKarmanEquations::output(outfile,n_plot);
   }
   
   
@@ -254,7 +255,7 @@ public:
   ///  x,y,w
   void output(FILE* file_pt)
   {
-    FoepplvonKarmanDisplacementEquations::output(file_pt);
+    DisplacementBasedFoepplvonKarmanEquations::output(file_pt);
   }
   
   
@@ -262,7 +263,7 @@ public:
   ///   x,y,w at n_plot^2 plot points
   void output(FILE* file_pt, const unsigned &n_plot)
   {
-    FoepplvonKarmanDisplacementEquations::output(file_pt,n_plot);
+    DisplacementBasedFoepplvonKarmanEquations::output(file_pt,n_plot);
   }
   
   
@@ -271,7 +272,7 @@ public:
   void output_fct(std::ostream &outfile, const unsigned &n_plot,
                   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
-    FoepplvonKarmanDisplacementEquations::output_fct(outfile,n_plot,exact_soln_pt);
+    DisplacementBasedFoepplvonKarmanEquations::output_fct(outfile,n_plot,exact_soln_pt);
   }
   
   
@@ -281,7 +282,7 @@ public:
                   const double& time,
                   FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
-    FoepplvonKarmanDisplacementEquations::output_fct(outfile,n_plot,time,exact_soln_pt);
+    DisplacementBasedFoepplvonKarmanEquations::output_fct(outfile,n_plot,time,exact_soln_pt);
   }
   
 protected:
@@ -341,7 +342,7 @@ private:
 /// Galerkin: Test functions = shape functions
 //======================================================================
 template<unsigned NNODE_1D>
-double TFoepplvonKarmanDisplacementElement<NNODE_1D>::dshape_and_dtest_eulerian_fvk(
+double TDisplacementBasedFoepplvonKarmanElement<NNODE_1D>::dshape_and_dtest_eulerian_fvk(
  const Vector<double> &s,
  Shape &psi,
  DShape &dpsidx,
@@ -375,7 +376,7 @@ double TFoepplvonKarmanDisplacementElement<NNODE_1D>::dshape_and_dtest_eulerian_
 /// Galerkin: Test functions = shape functions
 //======================================================================
 template<unsigned NNODE_1D>
-double TFoepplvonKarmanDisplacementElement<NNODE_1D>::
+double TDisplacementBasedFoepplvonKarmanElement<NNODE_1D>::
 dshape_and_dtest_eulerian_at_knot_fvk(
                                       const unsigned &ipt,
                                       Shape &psi,
@@ -398,13 +399,13 @@ dshape_and_dtest_eulerian_at_knot_fvk(
   
   
 //=======================================================================
-/// Face geometry for the TFoepplvonKarmanDisplacementElement
+/// Face geometry for the TDisplacementBasedFoepplvonKarmanElement
 //  elements:The spatial / dimension of the face elements is one lower
 //  than that of the / bulk element but they have the same number of
 //  points / along their 1D edges.
 //=======================================================================
 template<unsigned NNODE_1D>
-class FaceGeometry<TFoepplvonKarmanDisplacementElement<NNODE_1D> >:
+class FaceGeometry<TDisplacementBasedFoepplvonKarmanElement<NNODE_1D> >:
  public virtual TElement<1,NNODE_1D>
 {
   
