@@ -41,5 +41,5 @@ axisym_fvk_LDADD = -L@libdir@  -laxisym_foeppl_von_karman -lgeneric $(EXTERNAL_L
 #----------------------------------------------------------------------
 
 
-EXTRA_DIST = run_all_versions.bash compare_u_r.lay  compare_w.lay
+EXTRA_DIST += run_all_versions.bash compare_u_r.lay  compare_w.lay
 

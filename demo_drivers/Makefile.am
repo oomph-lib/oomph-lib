@@ -54,7 +54,8 @@ linearised_axisym_navier_stokes \
 linearised_free_surface_axisym_navier_stokes \
 generalised_newtonian_navier_stokes \
 generalised_newtonian_axisym_navier_stokes \
-multigrid
+multigrid \
+all_foeppl_von_karman
 if WANT_MPI
 SUBDIRS += mpi
 endif
