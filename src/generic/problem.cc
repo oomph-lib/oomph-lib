@@ -7265,7 +7265,7 @@ void Problem::parallel_sparse_assemble
  // allocate and post sends and recvs
  double base;
  MPI_Aint communication_base;
- MPI_Address(&base,&communication_base);
+ MPI_Get_address(&base,&communication_base);
  unsigned n_comm_types = 1 + 1*n_vector + 3*n_matrix;
  Vector<MPI_Request> recv_reqs;
  Vector<MPI_Request> send_reqs;
@@ -7300,7 +7300,7 @@ void Problem::parallel_sparse_assemble
 
        // equations
        count[pt] = 1;
-       MPI_Address(eqns_from_proc[p],&offsets[pt]);
+       MPI_Get_address(eqns_from_proc[p],&offsets[pt]);
        offsets[pt] -= communication_base;
        MPI_Type_contiguous(n_eqn_from_proc[p],MPI_UNSIGNED,&types[pt]);
        MPI_Type_commit(&types[pt]);
@@ -7310,7 +7310,7 @@ void Problem::parallel_sparse_assemble
        for (unsigned v = 0; v < n_vector; v++)
         {
          count[pt] = 1;
-         MPI_Address(residuals_from_proc(p,v),&offsets[pt]);
+         MPI_Get_address(residuals_from_proc(p,v),&offsets[pt]);
          offsets[pt] -= communication_base;
          MPI_Type_contiguous(n_eqn_from_proc[p],MPI_DOUBLE,&types[pt]);
          MPI_Type_commit(&types[pt]);
@@ -7322,7 +7322,7 @@ void Problem::parallel_sparse_assemble
         {
          // row start
          count[pt] = 1;
-         MPI_Address(row_start_from_proc(p,m),&offsets[pt]);
+         MPI_Get_address(row_start_from_proc(p,m),&offsets[pt]);
          offsets[pt] -= communication_base;
          MPI_Type_contiguous(n_eqn_from_proc[p]+1,MPI_UNSIGNED,&types[pt]);
          MPI_Type_commit(&types[pt]);
@@ -7331,7 +7331,7 @@ void Problem::parallel_sparse_assemble
 
          // column indices
          count[pt] = 1;
-         MPI_Address(column_indices_from_proc(p,m),&offsets[pt]);
+         MPI_Get_address(column_indices_from_proc(p,m),&offsets[pt]);
          offsets[pt] -= communication_base;
          MPI_Type_contiguous(nnz_from_proc(p,m),MPI_UNSIGNED,&types[pt]);
          MPI_Type_commit(&types[pt]);
@@ -7339,7 +7339,7 @@ void Problem::parallel_sparse_assemble
 
          // values
          count[pt] = 1;
-         MPI_Address(values_from_proc(p,m),&offsets[pt]);
+         MPI_Get_address(values_from_proc(p,m),&offsets[pt]);
          offsets[pt] -= communication_base;
          MPI_Type_contiguous(nnz_from_proc(p,m),MPI_DOUBLE,&types[pt]);
          MPI_Type_commit(&types[pt]);
@@ -7348,7 +7348,7 @@ void Problem::parallel_sparse_assemble
 
        // build the combined type
        MPI_Datatype recv_type;
-       MPI_Type_struct(n_comm_types,count,offsets,types,&recv_type);
+       MPI_Type_create_struct(n_comm_types,count,offsets,types,&recv_type);
        MPI_Type_commit(&recv_type);
        for (unsigned t = 0; t < n_comm_types; t++)
         {
@@ -7371,7 +7371,7 @@ void Problem::parallel_sparse_assemble
 
        // equations
        count[pt] = 1;
-       MPI_Address(eqns_for_proc[p],&offsets[pt]);
+       MPI_Get_address(eqns_for_proc[p],&offsets[pt]);
        offsets[pt] -= communication_base;
        MPI_Type_contiguous(n_eqn_for_proc[p],MPI_UNSIGNED,&types[pt]);
        MPI_Type_commit(&types[pt]);
@@ -7381,7 +7381,7 @@ void Problem::parallel_sparse_assemble
        for (unsigned v = 0; v < n_vector; v++)
         {
          count[pt] = 1;
-         MPI_Address(residuals_for_proc(p,v),&offsets[pt]);
+         MPI_Get_address(residuals_for_proc(p,v),&offsets[pt]);
          offsets[pt] -= communication_base;
          MPI_Type_contiguous(n_eqn_for_proc[p],MPI_DOUBLE,&types[pt]);
          MPI_Type_commit(&types[pt]);
@@ -7393,7 +7393,7 @@ void Problem::parallel_sparse_assemble
         {
          // row start
          count[pt] = 1;
-         MPI_Address(row_start_for_proc(p,m),&offsets[pt]);
+         MPI_Get_address(row_start_for_proc(p,m),&offsets[pt]);
          offsets[pt] -= communication_base;
          MPI_Type_contiguous(n_eqn_for_proc[p]+1,MPI_UNSIGNED,&types[pt]);
          MPI_Type_commit(&types[pt]);
@@ -7402,7 +7402,7 @@ void Problem::parallel_sparse_assemble
 
          // column indices
          count[pt] = 1;
-         MPI_Address(column_indices_for_proc(p,m),&offsets[pt]);
+         MPI_Get_address(column_indices_for_proc(p,m),&offsets[pt]);
          offsets[pt] -= communication_base;
          MPI_Type_contiguous(nnz_for_proc(p,m),MPI_UNSIGNED,&types[pt]);
          MPI_Type_commit(&types[pt]);
@@ -7410,7 +7410,7 @@ void Problem::parallel_sparse_assemble
 
          // values
          count[pt] = 1;
-         MPI_Address(values_for_proc(p,m),&offsets[pt]);
+         MPI_Get_address(values_for_proc(p,m),&offsets[pt]);
          offsets[pt] -= communication_base;
          MPI_Type_contiguous(nnz_for_proc(p,m),MPI_DOUBLE,&types[pt]);
          MPI_Type_commit(&types[pt]);
@@ -7419,7 +7419,7 @@ void Problem::parallel_sparse_assemble
 
        // build the combined type
        MPI_Datatype send_type;
-       MPI_Type_struct(n_comm_types,count,offsets,types,&send_type);
+       MPI_Type_create_struct(n_comm_types,count,offsets,types,&send_type);
        MPI_Type_commit(&send_type);
        for (unsigned t = 0; t < n_comm_types; t++)
         {

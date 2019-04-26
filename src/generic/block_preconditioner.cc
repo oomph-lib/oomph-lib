@@ -932,7 +932,7 @@ namespace oomph
     if (matrix_distributed)
      {
       MPI_Aint base_displacement_sparse;
-      MPI_Address(nreq_sparse,&base_displacement_sparse);
+      MPI_Get_address(nreq_sparse,&base_displacement_sparse);
 
       int zero = 0;
       for (unsigned p = 0; p < nproc; p++)
@@ -986,20 +986,20 @@ namespace oomph
           // index in dof block
           MPI_Type_contiguous(nreq_sparse[p],MPI_UNSIGNED,&types[0]);
           MPI_Type_commit(&types[0]);
-          MPI_Address(&Index_in_dof_block_sparse[begin],&displacements[0]);
+          MPI_Get_address(&Index_in_dof_block_sparse[begin],&displacements[0]);
           displacements[0] -= base_displacement_sparse;
           lengths[0] = 1;
 
           // dof number
           MPI_Type_contiguous(nreq_sparse[p],MPI_UNSIGNED,&types[1]);
           MPI_Type_commit(&types[1]);
-          MPI_Address(&Dof_number_sparse[begin],&displacements[1]);
+          MPI_Get_address(&Dof_number_sparse[begin],&displacements[1]);
           displacements[1] -= base_displacement_sparse;
           lengths[1] = 1;
 
           // build the final type
           MPI_Datatype recv_type;
-          MPI_Type_struct(2,lengths,displacements,types,&recv_type);
+          MPI_Type_create_struct(2,lengths,displacements,types,&recv_type);
           MPI_Type_commit(&recv_type);
           MPI_Type_free(&types[0]);
           MPI_Type_free(&types[1]);
@@ -1236,7 +1236,7 @@ namespace oomph
 
       // the base displacements for the sends
       MPI_Aint base_displacement;
-      MPI_Address(my_global_dofs,&base_displacement);
+      MPI_Get_address(my_global_dofs,&base_displacement);
 
 #ifdef PARANOID
       // storage for paranoid check to ensure that every row as been
@@ -1266,7 +1266,7 @@ namespace oomph
             // my global dofs
             MPI_Type_contiguous(ndof_to_send[p],MPI_UNSIGNED_LONG,&types[0]);
             MPI_Type_commit(&types[0]);
-            MPI_Address(my_global_dofs + first_dof_to_send[p],
+            MPI_Get_address(my_global_dofs + first_dof_to_send[p],
                         &displacements[0]);
             displacements[0] -= base_displacement;
             lengths[0] = 1;
@@ -1274,14 +1274,14 @@ namespace oomph
             // my dof numbers
             MPI_Type_contiguous(ndof_to_send[p],MPI_UNSIGNED,&types[1]);
             MPI_Type_commit(&types[1]);
-            MPI_Address(my_dof_numbers + first_dof_to_send[p],
+            MPI_Get_address(my_dof_numbers + first_dof_to_send[p],
                         &displacements[1]);
             displacements[1] -= base_displacement;
             lengths[1] = 1;
 
             // build the final type
             MPI_Datatype send_type;
-            MPI_Type_struct(2,lengths,displacements,types,&send_type);
+            MPI_Type_create_struct(2,lengths,displacements,types,&send_type);
             MPI_Type_commit(&send_type);
             MPI_Type_free(&types[0]);
             MPI_Type_free(&types[1]);
@@ -1310,20 +1310,20 @@ namespace oomph
             // my global dofs
             MPI_Type_contiguous(ndof_to_recv[p],MPI_UNSIGNED_LONG,&types[0]);
             MPI_Type_commit(&types[0]);
-            MPI_Address(global_dofs_recv[p],&displacements[0]);
+            MPI_Get_address(global_dofs_recv[p],&displacements[0]);
             displacements[0] -= base_displacement;
             lengths[0] = 1;
 
             // my dof numbers
             MPI_Type_contiguous(ndof_to_recv[p],MPI_UNSIGNED,&types[1]);
             MPI_Type_commit(&types[1]);
-            MPI_Address(dof_numbers_recv[p],&displacements[1]);
+            MPI_Get_address(dof_numbers_recv[p],&displacements[1]);
             displacements[1] -= base_displacement;
             lengths[1] = 1;
 
             // build the final type
             MPI_Datatype recv_type;
-            MPI_Type_struct(2,lengths,displacements,types,&recv_type);
+            MPI_Type_create_struct(2,lengths,displacements,types,&recv_type);
             MPI_Type_commit(&recv_type);
             MPI_Type_free(&types[0]);
             MPI_Type_free(&types[1]);
@@ -1535,7 +1535,7 @@ namespace oomph
                     MPI_STATUS_IGNORE);
        }
       MPI_Aint base_displacement;
-      MPI_Address(dof_number_sparse_send,&base_displacement);
+      MPI_Get_address(dof_number_sparse_send,&base_displacement);
       unsigned first_row = this->distribution_pt()->first_row();
       for (unsigned p = 0; p < nproc; ++p)
        {
@@ -1566,20 +1566,20 @@ namespace oomph
           // index in dof block
           MPI_Type_contiguous(nreq_sparse_for_proc[p],MPI_UNSIGNED,&types[0]);
           MPI_Type_commit(&types[0]);
-          MPI_Address(index_in_dof_block_sparse_send[p],&displacements[0]);
+          MPI_Get_address(index_in_dof_block_sparse_send[p],&displacements[0]);
           displacements[0] -= base_displacement;
           lengths[0] = 1;
 
           // dof number
           MPI_Type_contiguous(nreq_sparse_for_proc[p],MPI_UNSIGNED,&types[1]);
           MPI_Type_commit(&types[1]);
-          MPI_Address(dof_number_sparse_send[p],&displacements[1]);
+          MPI_Get_address(dof_number_sparse_send[p],&displacements[1]);
           displacements[1] -= base_displacement;
           lengths[1] = 1;
 
           // build the final type
           MPI_Datatype send_type;
-          MPI_Type_struct(2,lengths,displacements,types,&send_type);
+          MPI_Type_create_struct(2,lengths,displacements,types,&send_type);
           MPI_Type_commit(&send_type);
           MPI_Type_free(&types[0]);
           MPI_Type_free(&types[1]);
@@ -2156,7 +2156,7 @@ namespace oomph
 
     // finally post the sends and recvs
     MPI_Aint base_displacement;
-    MPI_Address(matrix_pt(),&base_displacement);
+    MPI_Get_address(matrix_pt(),&base_displacement);
     Vector<MPI_Request> req_rows;
     for (unsigned p = 0; p < nproc; p++)
      {
@@ -2176,7 +2176,7 @@ namespace oomph
               MPI_Type_contiguous(Nrows_to_send_for_get_block(b,p),
                                   MPI_INT,&send_types[send_ptr]);
               MPI_Type_commit(&send_types[send_ptr]);
-              MPI_Address(block_rows_to_send(b,p),
+              MPI_Get_address(block_rows_to_send(b,p),
                           &send_displacements[send_ptr]);
               send_displacements[send_ptr] -= base_displacement;
               send_sz[send_ptr] = 1;
@@ -2184,7 +2184,7 @@ namespace oomph
              }
            }
           MPI_Datatype final_send_type;
-          MPI_Type_struct(nsend_for_rows[p],send_sz,send_displacements,
+          MPI_Type_create_struct(nsend_for_rows[p],send_sz,send_displacements,
                           send_types,&final_send_type);
           MPI_Type_commit(&final_send_type);
           for (unsigned i = 0; i < nsend_for_rows[p]; i++)
@@ -2212,7 +2212,7 @@ namespace oomph
               MPI_Type_contiguous(Nrows_to_recv_for_get_block(b,p),
                                   MPI_INT,&recv_types[recv_ptr]);
               MPI_Type_commit(&recv_types[recv_ptr]);
-              MPI_Address(Rows_to_recv_for_get_block(b,p),
+              MPI_Get_address(Rows_to_recv_for_get_block(b,p),
                           &recv_displacements[recv_ptr]);
               recv_displacements[recv_ptr] -= base_displacement;
               recv_sz[recv_ptr] = 1;
@@ -2220,7 +2220,7 @@ namespace oomph
              }
            }
           MPI_Datatype final_recv_type;
-          MPI_Type_struct(nrecv_for_rows[p],recv_sz,recv_displacements,
+          MPI_Type_create_struct(nrecv_for_rows[p],recv_sz,recv_displacements,
                           recv_types,&final_recv_type);
           MPI_Type_commit(&final_recv_type);
           for (unsigned i = 0; i < nrecv_for_rows[p]; i++)
@@ -3257,7 +3257,7 @@ namespace oomph
 
           // build the final datatype
           MPI_Datatype type_send;
-          MPI_Type_struct(nblock_send[p],lengths,displacements,
+          MPI_Type_create_struct(nblock_send[p],lengths,displacements,
                           block_send_types,&type_send);
           MPI_Type_commit(&type_send);
 
@@ -3288,7 +3288,7 @@ namespace oomph
 
           // all displacements are computed relative to s[0] values
           MPI_Aint displacements_base;
-          MPI_Address(s[0].values_pt(),&displacements_base);
+          MPI_Get_address(s[0].values_pt(),&displacements_base);
 
           // now build
           unsigned ptr = 0;
@@ -3302,7 +3302,7 @@ namespace oomph
                                Rows_to_recv_for_get_block(required_block,p),MPI_DOUBLE,
                                &block_recv_types[ptr]);
               MPI_Type_commit(&block_recv_types[ptr]);
-              MPI_Address(s[b].values_pt(),&displacements[ptr]);
+              MPI_Get_address(s[b].values_pt(),&displacements[ptr]);
               displacements[ptr] -= displacements_base;
               lengths[ptr] = 1;
               ptr++;
@@ -3311,7 +3311,7 @@ namespace oomph
 
           // build the final data type
           MPI_Datatype type_recv;
-          MPI_Type_struct(nblock_recv[p],lengths,displacements,
+          MPI_Type_create_struct(nblock_recv[p],lengths,displacements,
                           block_recv_types,&type_recv);
           MPI_Type_commit(&type_recv);
 
@@ -3813,7 +3813,7 @@ namespace oomph
 
           // build the final datatype
           MPI_Datatype type_recv;
-          MPI_Type_struct(nblock_recv[p],lengths,displacements,
+          MPI_Type_create_struct(nblock_recv[p],lengths,displacements,
                           block_recv_types,&type_recv);
           MPI_Type_commit(&type_recv);
 
@@ -3844,7 +3844,7 @@ namespace oomph
 
           // all displacements are computed relative to s[0] values
           MPI_Aint displacements_base;
-          MPI_Address(const_cast<double*>(s[0].values_pt()),
+          MPI_Get_address(const_cast<double*>(s[0].values_pt()),
                       &displacements_base);
 
           // now build
@@ -3859,7 +3859,7 @@ namespace oomph
                                Rows_to_recv_for_get_block(required_block,p),MPI_DOUBLE,
                                &block_send_types[ptr]);
               MPI_Type_commit(&block_send_types[ptr]);
-              MPI_Address(const_cast<double*>(s[b].values_pt()),
+              MPI_Get_address(const_cast<double*>(s[b].values_pt()),
                           &displacements[ptr]);
               displacements[ptr] -= displacements_base;
               lengths[ptr] = 1;
@@ -3869,7 +3869,7 @@ namespace oomph
 
           // build the final data type
           MPI_Datatype type_send;
-          MPI_Type_struct(nblock_send[p],lengths,displacements,
+          MPI_Type_create_struct(nblock_send[p],lengths,displacements,
                           block_send_types,&type_send);
           MPI_Type_commit(&type_send);
 
@@ -5323,8 +5323,8 @@ namespace oomph
           
           // get the start address of the vectors
           MPI_Aint displacement[2];
-          MPI_Address(values_for_proc[p],&displacement[0]);
-          MPI_Address(column_index_for_proc[p],&displacement[1]);
+          MPI_Get_address(values_for_proc[p],&displacement[0]);
+          MPI_Get_address(column_index_for_proc[p],&displacement[1]);
           
           // compute the displacements
           displacement[1] -= displacement[0];
@@ -5336,7 +5336,7 @@ namespace oomph
 
           // build the struct data type
           MPI_Datatype final_type;
-          MPI_Type_struct(2,length,displacement,types,&final_type);
+          MPI_Type_create_struct(2,length,displacement,types,&final_type);
           MPI_Type_commit(&final_type);
           MPI_Type_free(&types[0]);
           MPI_Type_free(&types[1]);
@@ -5473,8 +5473,8 @@ namespace oomph
           
           // compute the displacements
           MPI_Aint displacements[2];
-          MPI_Address(values_recv,&displacements[0]);
-          MPI_Address(column_index_recv,&displacements[1]);
+          MPI_Get_address(values_recv,&displacements[0]);
+          MPI_Get_address(column_index_recv,&displacements[1]);
           displacements[1] -= displacements[0];
           displacements[0] -= displacements[0];
           
@@ -5484,7 +5484,7 @@ namespace oomph
           
           // create the final datatype
           MPI_Datatype final_type;
-          MPI_Type_struct(2,length,displacements,types,&final_type);
+          MPI_Type_create_struct(2,length,displacements,types,&final_type);
           MPI_Type_commit(&final_type);
 	  MPI_Type_free(&types[0]);
 	  MPI_Type_free(&types[1]);

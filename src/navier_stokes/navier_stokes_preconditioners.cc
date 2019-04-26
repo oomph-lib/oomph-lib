@@ -1141,7 +1141,7 @@ namespace oomph
       
       //the base displacement for the sends
       MPI_Aint base_displacement;
-      MPI_Address(v_or_p_values,&base_displacement); 
+      MPI_Get_address(v_or_p_values,&base_displacement); 
       
       //allocate storage for the data to be received
       //and post the sends and recvs
@@ -1171,7 +1171,7 @@ namespace oomph
             MPI_Type_contiguous(n_unclassified_recv[p],MPI_DOUBLE,
                                 &recv_types[0]);
             MPI_Type_commit(&recv_types[0]);
-            MPI_Address(unclassified_contributions_recv[p],
+            MPI_Get_address(unclassified_contributions_recv[p],
                         &recv_displacements[0]);
             recv_displacements[0] -= base_displacement;
             recv_sz[0] = 1;
@@ -1180,14 +1180,14 @@ namespace oomph
             MPI_Type_contiguous(n_unclassified_recv[p],MPI_UNSIGNED,
                                 &recv_types[1]);
             MPI_Type_commit(&recv_types[1]);
-            MPI_Address(unclassified_indices_recv[p],
+            MPI_Get_address(unclassified_indices_recv[p],
                         &recv_displacements[1]);
             recv_displacements[1] -= base_displacement;
             recv_sz[1] = 1;
               
             //build the final recv type
             MPI_Datatype final_recv_type;
-            MPI_Type_struct(2,recv_sz,recv_displacements,recv_types,
+            MPI_Type_create_struct(2,recv_sz,recv_displacements,recv_types,
                             &final_recv_type);
             MPI_Type_commit(&final_recv_type);
               
@@ -1214,7 +1214,7 @@ namespace oomph
             MPI_Type_contiguous(n_unclassified_send[p],MPI_DOUBLE,
                                 &send_types[0]);
             MPI_Type_commit(&send_types[0]);
-            MPI_Address(&unclassified_contributions_send[p][0],
+            MPI_Get_address(&unclassified_contributions_send[p][0],
                         &send_displacements[0]);
             send_displacements[0] -= base_displacement;
             send_sz[0] = 1;
@@ -1223,14 +1223,14 @@ namespace oomph
             MPI_Type_contiguous(n_unclassified_send[p],MPI_UNSIGNED,
                                 &send_types[1]);
             MPI_Type_commit(&send_types[1]);
-            MPI_Address(&unclassified_indices_send[p][0],
+            MPI_Get_address(&unclassified_indices_send[p][0],
                         &send_displacements[1]);
             send_displacements[1] -= base_displacement;
             send_sz[1] = 1;
               
             //build the final send type
             MPI_Datatype final_send_type;
-            MPI_Type_struct(2,send_sz,send_displacements,send_types,
+            MPI_Type_create_struct(2,send_sz,send_displacements,send_types,
                             &final_send_type);
             MPI_Type_commit(&final_send_type);
               
@@ -1363,7 +1363,7 @@ namespace oomph
             MPI_Type_contiguous(n_classified_recv[p],MPI_DOUBLE,
                                 &recv_types[0]);
             MPI_Type_commit(&recv_types[0]);
-            MPI_Address(classified_contributions_recv[p],
+            MPI_Get_address(classified_contributions_recv[p],
                         &recv_displacements[0]);
             recv_displacements[0] -= base_displacement;
             recv_sz[0] = 1;
@@ -1372,14 +1372,14 @@ namespace oomph
             MPI_Type_contiguous(n_classified_recv[p],MPI_UNSIGNED,
                                 &recv_types[1]);
             MPI_Type_commit(&recv_types[1]);
-            MPI_Address(classified_indices_recv[p],
+            MPI_Get_address(classified_indices_recv[p],
                         &recv_displacements[1]);
             recv_displacements[1] -= base_displacement;
             recv_sz[1] = 1;
               
             //build the final recv type
             MPI_Datatype final_recv_type;
-            MPI_Type_struct(2,recv_sz,recv_displacements,recv_types,
+            MPI_Type_create_struct(2,recv_sz,recv_displacements,recv_types,
                             &final_recv_type);
             MPI_Type_commit(&final_recv_type);
               
@@ -1406,7 +1406,7 @@ namespace oomph
             MPI_Type_contiguous(n_classified_send[p],MPI_DOUBLE,
                                 &send_types[0]);
             MPI_Type_commit(&send_types[0]);
-            MPI_Address(&classified_contributions_send[p][0],
+            MPI_Get_address(&classified_contributions_send[p][0],
                         &send_displacements[0]);
             send_displacements[0] -= base_displacement;
             send_sz[0] = 1;
@@ -1415,14 +1415,14 @@ namespace oomph
             MPI_Type_contiguous(n_classified_send[p],MPI_UNSIGNED,
                                 &send_types[1]);
             MPI_Type_commit(&send_types[1]);
-            MPI_Address(&classified_indices_send[p][0],
+            MPI_Get_address(&classified_indices_send[p][0],
                         &send_displacements[1]);
             send_displacements[1] -= base_displacement;
             send_sz[1] = 1;
               
             //build the final send type
             MPI_Datatype final_send_type;
-            MPI_Type_struct(2,send_sz,send_displacements,send_types,
+            MPI_Type_create_struct(2,send_sz,send_displacements,send_types,
                             &final_send_type);
             MPI_Type_commit(&final_send_type);
               

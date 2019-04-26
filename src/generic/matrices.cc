@@ -2774,7 +2774,7 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
        // post the sends and recvs for the matrix data
        Vector<MPI_Request> recv_req;
        MPI_Aint base_address;
-       MPI_Address(new_value,&base_address);
+       MPI_Get_address(new_value,&base_address);
        for (int p = 0; p < nproc; p++)
         {
          // communicated with other processors
@@ -2799,7 +2799,7 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
                                  &types[0]);
              MPI_Type_commit(&types[0]);
              len[0] = 1;
-             MPI_Address(current_row_start+first_row_to_send,&offsets[0]);
+             MPI_Get_address(current_row_start+first_row_to_send,&offsets[0]);
              offsets[0] -= base_address;
 
              // values
@@ -2809,7 +2809,7 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
                                  &types[1]);
              MPI_Type_commit(&types[1]);
              len[1] = 1;
-             MPI_Address(current_value+first_coef_to_send,&offsets[1]);
+             MPI_Get_address(current_value+first_coef_to_send,&offsets[1]);
              offsets[1] -= base_address;
 
              // column index
@@ -2817,12 +2817,12 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
                                  &types[2]);
              MPI_Type_commit(&types[2]);
              len[2] = 1;
-             MPI_Address(current_column_index+first_coef_to_send,&offsets[2]);
+             MPI_Get_address(current_column_index+first_coef_to_send,&offsets[2]);
              offsets[2] -= base_address;
 
              // build the combined datatype
              MPI_Datatype send_type;
-             MPI_Type_struct(3,len,offsets,types,&send_type);
+             MPI_Type_create_struct(3,len,offsets,types,&send_type);
              MPI_Type_commit(&send_type);
              MPI_Type_free(&types[0]);
              MPI_Type_free(&types[1]);
@@ -2855,7 +2855,7 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
                                  &types[0]);
              MPI_Type_commit(&types[0]);
              len[0] = 1;
-             MPI_Address(new_row_start+first_row_to_recv,&offsets[0]);
+             MPI_Get_address(new_row_start+first_row_to_recv,&offsets[0]);
              offsets[0] -= base_address;
 
              // values
@@ -2864,7 +2864,7 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
                                  &types[1]);
              MPI_Type_commit(&types[1]);
              len[1] = 1;
-             MPI_Address(new_value+first_coef_to_recv,&offsets[1]);
+             MPI_Get_address(new_value+first_coef_to_recv,&offsets[1]);
              offsets[1] -= base_address;
 
              // column index
@@ -2872,12 +2872,12 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
                                  &types[2]);
              MPI_Type_commit(&types[2]);
              len[2] = 1;
-             MPI_Address(new_column_index+first_coef_to_recv,&offsets[2]);
+             MPI_Get_address(new_column_index+first_coef_to_recv,&offsets[2]);
              offsets[2] -= base_address;
 
              // build the combined datatype
              MPI_Datatype recv_type;
-             MPI_Type_struct(3,len,offsets,types,&recv_type);
+             MPI_Type_create_struct(3,len,offsets,types,&recv_type);
              MPI_Type_commit(&recv_type);
              MPI_Type_free(&types[0]);
              MPI_Type_free(&types[1]);
@@ -3021,7 +3021,7 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
        Vector<MPI_Request> recv_req;
        Vector<MPI_Request> send_req;
        MPI_Aint base_address;
-       MPI_Address(global_value,&base_address);
+       MPI_Get_address(global_value,&base_address);
 
        // SEND
        if (dist_nrow_local[my_rank] > 0)
@@ -3038,27 +3038,27 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
          // row start
          MPI_Type_contiguous(dist_nrow_local[my_rank],MPI_INT,&types[0]);
          MPI_Type_commit(&types[0]);
-         MPI_Address(dist_row_start,&offsets[0]);
+         MPI_Get_address(dist_row_start,&offsets[0]);
          offsets[0] -= base_address;
          len[0] = 1;
 
          // value
          MPI_Type_contiguous(nnz,MPI_DOUBLE,&types[1]);
          MPI_Type_commit(&types[1]);
-         MPI_Address(dist_value,&offsets[1]);
+         MPI_Get_address(dist_value,&offsets[1]);
          offsets[1] -= base_address;
          len[1] = 1;
 
          // column indices
          MPI_Type_contiguous(nnz,MPI_INT,&types[2]);
          MPI_Type_commit(&types[2]);
-         MPI_Address(dist_column_index,&offsets[2]);
+         MPI_Get_address(dist_column_index,&offsets[2]);
          offsets[2] -= base_address;
          len[2] = 1;
 
          // build the send type
          MPI_Datatype send_type;
-         MPI_Type_struct(3,len,offsets,types,&send_type);
+         MPI_Type_create_struct(3,len,offsets,types,&send_type);
          MPI_Type_commit(&send_type);
          MPI_Type_free(&types[0]);
          MPI_Type_free(&types[1]);
@@ -3100,27 +3100,27 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
              // row start
              MPI_Type_contiguous(dist_nrow_local[p],MPI_INT,&types[0]);
              MPI_Type_commit(&types[0]);
-             MPI_Address(global_row_start+dist_first_row[p],&offsets[0]);
+             MPI_Get_address(global_row_start+dist_first_row[p],&offsets[0]);
              offsets[0] -= base_address;
              len[0] = 1;
              
              // value
              MPI_Type_contiguous(dist_nnz_pt[p],MPI_DOUBLE,&types[1]);
              MPI_Type_commit(&types[1]);
-             MPI_Address(global_value+nnz_offset[p],&offsets[1]);
+             MPI_Get_address(global_value+nnz_offset[p],&offsets[1]);
              offsets[1] -= base_address;
              len[1] = 1;
              
              // column indices
              MPI_Type_contiguous(dist_nnz_pt[p],MPI_INT,&types[2]);
              MPI_Type_commit(&types[2]);
-             MPI_Address(global_column_index+nnz_offset[p],&offsets[2]);
+             MPI_Get_address(global_column_index+nnz_offset[p],&offsets[2]);
              offsets[2] -= base_address;
              len[2] = 1;
 
              // build the send type
              MPI_Datatype recv_type;
-             MPI_Type_struct(3,len,offsets,types,&recv_type);
+             MPI_Type_create_struct(3,len,offsets,types,&recv_type);
              MPI_Type_commit(&recv_type);
              MPI_Type_free(&types[0]);
              MPI_Type_free(&types[1]);

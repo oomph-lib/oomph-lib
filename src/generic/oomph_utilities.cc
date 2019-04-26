@@ -1232,7 +1232,7 @@ MPIOutputModifier oomph_mpi_output;
 
  // Change MPI error handler so that error will return
  // rather than aborting
- MPI_Errhandler_set(oomph_comm_world, MPI_ERRORS_RETURN);
+ MPI_Comm_set_errhandler(oomph_comm_world, MPI_ERRORS_RETURN);
 
  // Use MPI output modifier: Each processor precedes its output
  // by its rank

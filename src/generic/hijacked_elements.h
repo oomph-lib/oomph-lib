@@ -151,14 +151,21 @@ public:
  
   
  /// \short Hijack the i-th value stored at internal data n.
- /// Return a custom-made (copied) data object that contains only 
+ /// Optionally return a custom-made (copied) data object that contains only 
  /// the hijacked value. This can be used as the input to other elements.
  /// Note that the calling program assumes responsibility for this 
- /// data object and must clean it up.
- Data *hijack_internal_value(const unsigned &n, const unsigned &i)
+ /// data object and must clean it up. The default is that
+ /// the data object is returned
+  Data *hijack_internal_value(const unsigned &n, const unsigned &i,
+			      const bool &return_data=true)
   {
+   //Initialise pointer to zero
+   Data *temp_data_pt = 0;
+
+   //If desired,
    //Create a new Data object containing only the value that is to be hijacked
-   Data* temp_data_pt = new HijackedData(i,this->internal_data_pt(n));  
+   if(return_data)
+     {temp_data_pt = new HijackedData(i,this->internal_data_pt(n));}
  
    //Mark the value as hijacked
    hijack_global_eqn(this->internal_data_pt(n)->eqn_number_pt(i));
@@ -169,13 +176,19 @@ public:
  
 
  /// \short Hijack the i-th value stored at external data n.
- /// Return a custom-made (copied) data object that contains only 
+ /// Optionally return a custom-made (copied) data object that contains only 
  /// the hijacked value. Note that the calling program assumes
- /// responsibility for this data object and must clean it up
- Data *hijack_external_value(const unsigned &n, const unsigned &i)
+ /// responsibility for this data object and must clean it up.
+ /// The default is that the data object is returned
+  Data *hijack_external_value(const unsigned &n, const unsigned &i,
+			      const bool &return_data=true)
   {
-   //Create a new Data object containing only the value that is to be hijacked
-   Data* temp_data_pt = new HijackedData(i,this->external_data_pt(n));  
+    //Initialise pointer to zero
+   Data *temp_data_pt = 0;
+   //If desired
+   //create a new Data object containing only the value that is to be hijacked
+   if(return_data)
+     {temp_data_pt = new HijackedData(i,this->external_data_pt(n));}
    
    //Mark the value as hijacked
    hijack_global_eqn(this->external_data_pt(n)->eqn_number_pt(i));
@@ -185,13 +198,19 @@ public:
   }
 
  /// \short Hijack the i-th value stored at node n.
- /// Return a custom-made (copied) data object that contains only 
+ /// Optionally return a custom-made (copied) data object that contains only 
  /// the hijacked value. Once again, the calling program must
  /// clean up the allocated Data object.
- Data* hijack_nodal_value(const unsigned &n, const unsigned &i)
-  {  
-   //Create a new Data object containing only the value that is to be hijacked
-   Data* temp_data_pt = new HijackedData(i,this->node_pt(n));  
+ /// The default is that the data object is returned
+  Data* hijack_nodal_value(const unsigned &n, const unsigned &i,
+			   const bool &return_data=true)
+  {
+    //Initialise pointer to zero
+   Data *temp_data_pt = 0;
+   //If desired
+   //create a new Data object containing only the value that is to be hijacked
+   if(return_data)
+     {temp_data_pt = new HijackedData(i,this->node_pt(n));}
    
    //Mark the value as hijacked
    hijack_global_eqn(this->node_pt(n)->eqn_number_pt(i));
@@ -201,11 +220,13 @@ public:
   }
  
  /// \short Hijack the i-th positional value stored at node n.
- /// Return a custom-made (copied) data object that contains only 
+ /// Optionaly return a custom-made (copied) data object that contains only 
  /// the hijacked value. Again, responsibility for the memory allocated
  /// lies with the calling function.
+ /// The default is that the data object is returned
  Data* hijack_nodal_position_value(const unsigned &n, 
-                                   const unsigned &i)
+                                   const unsigned &i,
+				   const bool &return_data=true)
   {
    //Can we do the casting?
    SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(this->node_pt(n));
@@ -219,10 +240,14 @@ public:
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
-  
-   //Create a new Data object containing only the value that is to be hijacked
-   Data* temp_data_pt = 
-    new HijackedData(i,solid_node_pt->variable_position_pt());  
+
+    //Initialise pointer to zero
+   Data *temp_data_pt = 0;
+   //If desired
+   //create a new Data object containing only the value that is to be hijacked
+   if(return_data)
+    {temp_data_pt = 
+	new HijackedData(i,solid_node_pt->variable_position_pt());}
    
    //Mark the value as hijacked
    hijack_global_eqn(solid_node_pt->variable_position_pt()->eqn_number_pt(i));
@@ -233,9 +258,11 @@ public:
 
  /// \short Hijack the i-th value stored at the spine that affects
  /// local node n.
- /// Return a custom-made (copied) data object that contains only 
+ /// Optionally return a custom-made (copied) data object that contains only 
  /// the hijacked value. Deletion must be handled at the higher level
- Data* hijack_nodal_spine_value(const unsigned &n, const unsigned &i)
+ /// The default is that the data object is returned
+  Data* hijack_nodal_spine_value(const unsigned &n, const unsigned &i,
+				 const bool &return_data=true)
   {
    //Can we actually do this casting
    SpineNode* spine_node_pt = dynamic_cast<SpineNode*>(this->node_pt(n));
@@ -249,10 +276,16 @@ public:
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
-  
-   //Create a new Data object containing only the value that is to be hijacked
-   Data* temp_data_pt = new HijackedData(i,spine_node_pt->
-                                         spine_pt()->spine_height_pt());  
+
+    //Initialise pointer to zero
+   Data *temp_data_pt = 0;
+   //If desired
+   //create a new Data object containing only the value that is to be hijacked
+   if(return_data)
+    {
+     temp_data_pt = new HijackedData(i,spine_node_pt->
+				     spine_pt()->spine_height_pt());
+    }
       
    //Mark the data as hijacked
    hijack_global_eqn(spine_node_pt->spine_pt()->
