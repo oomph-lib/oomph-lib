@@ -38,6 +38,7 @@ run_command3 += "-D CMAKE_BUILD_TYPE:STRING=NONE "
 run_command3 += "-D CMAKE_VERBOSE_MAKEFILE:BOOL=OFF "
 run_command3 += "-D Trilinos_ENABLE_TESTS:BOOL=OFF "
 run_command3 += "-D Trilinos_ENABLE_EXAMPLES:BOOL=OFF "
+run_command3 += "-D BUILD_SHARED_LIBS=ON "
 if WANT_MPI
 run_command3 += "-D TPL_ENABLE_MPI:BOOL=ON \\" 
 else
