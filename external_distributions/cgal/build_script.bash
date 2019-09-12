@@ -38,7 +38,7 @@ if [ `uname` == "Darwin" ]
 then
     gmp_actual_library=$2/libgmp.dylib     # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/gmp/gmp_default_installation/lib/libgmp.dylib
 else
-    gmp_actual_library=$2/libgmp.so     # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/gmp/gmp_default_installation/lib/libgmp.so
+gmp_actual_library=$2/libgmp.so     # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/gmp/gmp_default_installation/lib/libgmp.so
 fi
 mpfr_include=$3                     # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/mpfr/mpfr_default_installation/include
 mpfr_lib=$4                         # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/mpfr/mpfr_default_installation/lib
@@ -46,10 +46,10 @@ if [ `uname` == "Darwin" ]
 then
     mpfr_actual_library=$4/libmpfr.dylib  # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/mpfr/mpfr_default_installation/lib/libmpfr.dylib
 else
-    mpfr_actual_library=$4/libmpfr.so   # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/mpfr/mpfr_default_installation/lib/libmpfr.so
+mpfr_actual_library=$4/libmpfr.so   # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/mpfr/mpfr_default_installation/lib/libmpfr.so
 fi
 boost_include=$5                    # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/boost/boost_default_installation/include
-# boost_lib=/home/mheil/version_for_merging_in_louis_stuff/external_distributions/boost/boost_default_installation/lib
+                                    # boost_lib=/home/mheil/version_for_merging_in_louis_stuff/external_distributions/boost/boost_default_installation/lib
 
 
 
@@ -88,17 +88,12 @@ include_dir=$install_dir/include
 echo "include dir: " $include_dir
 
 
-# Check if installed version of cgal already exists
-if [ -e $include_dir ]; then
-   printf "Was about to build cgal but it already appears to have been \n"
-   printf "installed because the directory:\n\n"
-   printf "      " $include_dir" \n\n"
-   printf "already exists. I'm not installing cgal again.\n\n\n"
-   exit
+if [ -e $install_dir ]; then
+    echo "cgal install dir already exists -- deleting it!"
+    rm -rf $install_dir
 else
     echo "cgal install dir doesn't exist yet; will be created during installation"
 fi
-
 
 dir=`basename $tar_file .tar.xz`
 echo "dir: " $dir

@@ -265,23 +265,6 @@ public:
    position(zeta,r);
   }
 
- 
- /// \short Parametrised position on object: r(zeta). Evaluated at
- /// the continuous time value, t. 
- virtual void position(const double& t,
-		       const Vector<double>& zeta, 
-                       Vector<double>& r) const
- {
-  std::ostringstream error_message;
-  error_message << "GeomObject::position() is a broken virtual function.\n"
-		<< "Please implement it for any GeomObject whose shape\n"
-		<< "is time-dependent and will be used in the extrusion\n"
-		<< "of a mesh (in the time direction).\n";
-  throw OomphLibError(error_message.str(),
-		      OOMPH_CURRENT_FUNCTION,
-		      OOMPH_EXCEPTION_LOCATION);
- }
-
 
  /// \short j-th time-derivative on object at current time: 
  /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.

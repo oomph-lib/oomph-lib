@@ -1116,19 +1116,6 @@ public:
  /// \short Compute norm of solution -- broken virtual can be overloaded
  /// by element writer to implement whatever norm is desired for
  /// the specific element
- virtual void compute_norm(Vector<double>& norm)
- {
-  std::string error_message="compute_norm(...) undefined for this element\n";
-  throw OomphLibError(error_message,
-		      OOMPH_CURRENT_FUNCTION,
-		      OOMPH_EXCEPTION_LOCATION);
-
- }
-
-
- /// \short Compute norm of solution -- broken virtual can be overloaded
- /// by element writer to implement whatever norm is desired for
- /// the specific element
  virtual void compute_norm(double& norm)
   {
    std::string error_message = "compute_norm undefined for this element \n";
@@ -1852,12 +1839,12 @@ public:
  /// \short Global coordinates as function of local coordinates.
  /// Either via FE representation or via macro-element (if Macro_elem_pt!=0)
  void get_x(const Vector<double> &s, Vector<double> &x) const
- {
-  //If there is no macro element then return interpolated x
-  if(Macro_elem_pt==0) {interpolated_x(s,x);}
-  //Otherwise call the macro element representation
-  else {get_x_from_macro_element(s,x);}
- }
+  {
+   //If there is no macro element then return interpolated x
+   if(Macro_elem_pt==0) {interpolated_x(s,x);}
+   //Otherwise call the macro element representation
+   else {get_x_from_macro_element(s,x);}
+  }
 
 
  /// \short Global coordinates as function of local coordinates
@@ -2883,21 +2870,6 @@ public:
     OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
- 
- /// \short Write values of the i-th scalar field at the plot points. Broken
- /// virtual. Needs to be implemented for each new specific element type.
- virtual void scalar_value_fct_paraview(std::ofstream& file_out,
- 					const unsigned& i,
- 					const unsigned& nplot,
-					const double& time,
- 					FiniteElement::UnsteadyExactSolutionFctPt
-					exact_soln_pt) const
-  {
-   throw OomphLibError(
-    "This function hasn't been implemented for this element",
-    OOMPH_CURRENT_FUNCTION,
-    OOMPH_EXCEPTION_LOCATION);
-  }
 
  /// \short Name of the i-th scalar field. Default implementation
  /// returns V1 for the first one, V2 for the second etc. Can (should!) be
@@ -3029,61 +3001,6 @@ public:
   }
 
 
-
-
- /// Calculate the norm of the error and that of the exact solution. 
- virtual void compute_error(FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                            double& error, double& norm)
- {
-  std::string error_message="compute_error undefined for this element \n";
-  throw OomphLibError(error_message,
-		      OOMPH_CURRENT_FUNCTION,
-		      OOMPH_EXCEPTION_LOCATION);
- }
- 
- /// Calculate the norm of the error and that of the exact solution. 
- virtual void compute_error(FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                            const double& time, double& error, double& norm)
- {
-  std::string error_message="time-dependent compute_error ";
-  error_message+="undefined for this element \n";
-  throw OomphLibError(error_message,
-		      OOMPH_CURRENT_FUNCTION,
-		      OOMPH_EXCEPTION_LOCATION);
- }
- 
- /// \short Given the exact solution \f$ {\bf f}({\bf x}) \f$ this function
- /// calculates the norm of the error and that of the exact solution. 
- /// Version with vectors of norms and errors so that different variables'
- /// norms and errors can be returned individually
- virtual void compute_error(FiniteElement::SteadyExactSolutionFctPt 
-                            exact_soln_pt,
-                            Vector<double>& error,
-			    Vector<double>& norm)
- {
-  std::string error_message="compute_error undefined for this element \n";
-  throw OomphLibError(error_message,
-		      OOMPH_CURRENT_FUNCTION,
-		      OOMPH_EXCEPTION_LOCATION);
- }
- 
- /// \short Given the exact solution \f$ {\bf f}({\bf x}) \f$ this function
- /// calculates the norm of the error and that of the exact solution. 
- /// Version with vectors of norms and errors so that different variables'
- /// norms and errors can be returned individually
- virtual void compute_error(FiniteElement::UnsteadyExactSolutionFctPt 
-                            exact_soln_pt,
-                            const double& time,
-                            Vector<double>& error,
-                            Vector<double>& norm)
- {
-  std::string error_message="time-dependent compute_error ";
-  error_message+="undefined for this element \n";
-  throw OomphLibError(error_message,
-		      OOMPH_CURRENT_FUNCTION,
-		      OOMPH_EXCEPTION_LOCATION);
- }
- 
 
  /// \short Plot the error when compared 
  /// against a given exact solution \f$ {\bf f}({\bf x}) \f$.

@@ -4168,10 +4168,8 @@ void FiniteElement::check_J_eulerian_at_knots(bool& passed) const
   //Find the number of position types
   const unsigned n_position_type = nnodal_position_type();
 
-  // DRAIG: Unused variable
-  //const unsigned n_dim_node = nodal_dimension();
-  
   //Find the dimension of the node and element
+  const unsigned n_dim_node = nodal_dimension();
   const unsigned n_dim_element = dim();
 
   //Set up dummy memory for the shape functions

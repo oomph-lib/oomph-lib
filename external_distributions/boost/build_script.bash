@@ -47,22 +47,19 @@ echo "lib dir: " $lib_dir
 include_dir=$BOOST_INCLUDE 
 echo "include dir: " $include_dir
 
-# Check if installed version of boost already exists
-if [ -e $include_dir ]; then
-   printf "Was about to build boost but it already appears to have been \n"
-   printf "installed because the directory:\n\n"
-   printf "      " $include_dir" \n\n"
-   printf "already exists. I'm not installing boost again.\n\n\n"
-   exit
+if [ -e $install_dir ]; then
+    echo "boost install dir already exists -- deleting it!"
+    rm -rf $install_dir
 else
     echo "boost install dir doesn't exist yet; will be created during installation"
 fi
+
 
 # Get ready for new install
 tar xf $tar_file
 cd $dir
 ./bootstrap.sh --prefix=$install_dir --libdir=$libdir --includedir=$include_dir --without-libraries=python
-./b2 install link=static --toolset=darwin --prefix=$install_dir --libdir=$libdir --includedir=$include_dir
+./b2 install --prefix=$install_dir --libdir=$libdir --includedir=$include_dir
 
 
 

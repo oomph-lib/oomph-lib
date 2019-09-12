@@ -166,49 +166,6 @@ class LinearSolver : public DistributableLinearAlgebraObject
     OOMPH_EXCEPTION_LOCATION);
   }
  
- /// \short Solver: Takes pointer to problem and returns the results vector
- /// which contains the solution of the linear system defined by the problem's
- /// fully assembled Jacobian and residual vector (broken virtual).
- virtual void solve_transpose(Problem* const &problem_pt, DoubleVector &result)
- {
-  // Create an output stream
-  std::ostringstream error_message_stream;
-
-  // Create the error message
-  error_message_stream << "The function to solve the transposed system has "
-		       << "not yet been\nimplemented for this solver."
-		       << std::endl;
-
-  // Throw the error message
-  throw OomphLibError(error_message_stream.str(),
-		      OOMPH_CURRENT_FUNCTION,
-		      OOMPH_EXCEPTION_LOCATION);
- } // End of solve_transpose
- 
- /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
- /// vector and returns the solution of the linear system. 
- virtual void solve_transpose(DoubleMatrixBase* const &matrix_pt,
-			      const DoubleVector &rhs,
-			      DoubleVector &result)
- {
-  throw OomphLibError(
-   "DoubleVector based solve function not implemented for this solver",
-   OOMPH_CURRENT_FUNCTION,
-   OOMPH_EXCEPTION_LOCATION);
- }
-
- /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
- /// vector and returns the solution of the linear system. 
- virtual void solve_transpose(DoubleMatrixBase* const &matrix_pt,
-			      const Vector<double> &rhs,
-			      Vector<double> &result)
- {
-  throw OomphLibError(
-   "Vector<double> based solve function not implemented for this solver",
-   OOMPH_CURRENT_FUNCTION,
-   OOMPH_EXCEPTION_LOCATION);
- }
- 
  /// \short Resolve the system defined by the last assembled jacobian
  /// and the rhs vector. Solution is returned in the vector result.
  /// (broken virtual)
@@ -219,25 +176,6 @@ class LinearSolver : public DistributableLinearAlgebraObject
     OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
-
- /// \short Solver: Resolve the system defined by the last assembled jacobian
- /// and the rhs vector. Solution is returned in the vector result.
- /// (broken virtual)
- virtual void resolve_transpose(const DoubleVector &rhs, DoubleVector &result)
- {
-  // Create an output stream
-  std::ostringstream error_message_stream;
-
-  // Create the error message
-  error_message_stream << "The function to resolve the transposed system has "
-		       << "not yet been\nimplemented for this solver."
-		       << std::endl;
-
-  // Throw the error message
-  throw OomphLibError(error_message_stream.str(),
-		      OOMPH_CURRENT_FUNCTION,
-		      OOMPH_EXCEPTION_LOCATION);
- } // End of resolve_transpose
 
  /// \short Empty virtual function that can be overloaded in specific
  /// linear solvers to clean up any memory that may have been
@@ -359,14 +297,12 @@ class DenseLU : public LinearSolver
 
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
  /// vector and returns the solution of the linear system.
- void solve(DoubleMatrixBase* const &matrix_pt,
-	    const DoubleVector &rhs,
+ void solve(DoubleMatrixBase* const &matrix_pt,const DoubleVector &rhs,
             DoubleVector &result);
 
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
  /// vector and returns the solution of the linear system.
- void solve(DoubleMatrixBase* const &matrix_pt,
-	    const Vector<double> &rhs,
+ void solve(DoubleMatrixBase* const &matrix_pt,const Vector<double> &rhs,
             Vector<double> &result);
 
  ///  \short returns the time taken to assemble the jacobian matrix and 
@@ -583,28 +519,11 @@ class SuperLUSolver : public LinearSolver
 /*                     Vector<double> &result) */
 /*   {LinearSolver::solve(matrix_pt,rhs,result);} */
 
- /// \short Solver: Takes pointer to problem and returns the results Vector
- /// which contains the solution of the linear system defined by
- /// the problem's fully assembled Jacobian and residual Vector.
- void solve_transpose(Problem* const &problem_pt, DoubleVector &result);
-
- /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
- /// vector and returns the solution of the linear system.
- /// The function returns the global result Vector.
- /// Note: if Delete_matrix_data is true the function 
- /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
- void solve_transpose(DoubleMatrixBase* const &matrix_pt,
-		      const DoubleVector &rhs,
-		      DoubleVector &result);
  
  /// \short Resolve the system defined by the last assembled jacobian
  /// and the specified rhs vector if resolve has been enabled.
  /// Note: returns the global result Vector.
  void resolve(const DoubleVector &rhs, DoubleVector &result);
- 
- /// \short Resolve the (transposed) system defined by the last assembled
- /// Jacobian and the specified rhs vector if resolve has been enabled.
- void resolve_transpose(const DoubleVector &rhs, DoubleVector &result);
 
  /// Enable documentation of solver statistics
  void enable_doc_stats() {Doc_stats = true;}
@@ -635,11 +554,6 @@ class SuperLUSolver : public LinearSolver
  /// Note: returns the global result Vector.
  void backsub(const DoubleVector &rhs,
               DoubleVector &result);
- 
- /// \short Do the back-substitution for transposed system of the SuperLU solver
- /// Note: Returns the global result Vector.
- void backsub_transpose(const DoubleVector& rhs,
-			DoubleVector& result);
  
  /// Clean up the memory allocated by the solver
  void clean_up_memory();
@@ -730,10 +644,6 @@ class SuperLUSolver : public LinearSolver
  /// backsub method for SuperLU (serial)
  void backsub_serial(const DoubleVector &rhs,
                      DoubleVector &result);
- 
- /// backsub method for SuperLU (serial)
- void backsub_transpose_serial(const DoubleVector &rhs,
-			       DoubleVector &result);
 
 #ifdef OOMPH_HAS_MPI
   /// factorise method for SuperLU Dist
@@ -742,10 +652,6 @@ class SuperLUSolver : public LinearSolver
  /// backsub method for SuperLU Dist
  void backsub_distributed(const DoubleVector &rhs,
               DoubleVector &result);
- 
- /// backsub method for SuperLU Dist
- void backsub_transpose_distributed(const DoubleVector &rhs,
-				    DoubleVector &result);
 #endif
 
  // SuperLUSolver member data
@@ -787,16 +693,6 @@ class SuperLUSolver : public LinearSolver
  /// Use compressed row version?
  bool Serial_compressed_row_flag;
 
-public:
-
- /// How much memory do the LU factors take up? In bytes
- double get_memory_usage_for_lu_factors();
-  
- /// How much memory was allocated by SuperLU? In bytes
- double get_total_needed_memory();
- 
-private:
- 
 #ifdef OOMPH_HAS_MPI
 
  // SuperLU Dist member data

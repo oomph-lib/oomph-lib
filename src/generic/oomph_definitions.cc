@@ -89,21 +89,6 @@ namespace TerminateHelper
   (*Error_message_stream_pt) << (*Exception_stringstream_pt).str();
  }
 
- /// \short Clean up function that deletes anything dynamically allocated
- /// in this namespace
- void clean_up_memory()
- {
-  // If it's a null pointer
-  if (Exception_stringstream_pt!=0)
-  {
-   // Delete it
-   delete Exception_stringstream_pt;
-
-   // Make it a null pointer
-   Exception_stringstream_pt=0;
-  }
- } // End of clean_up_memory
-
  /// Stream to output error messages
  std::ostream* Error_message_stream_pt=&std::cerr;
 

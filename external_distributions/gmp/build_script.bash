@@ -45,14 +45,9 @@ dir=`basename $tar_file .tar.xz`
 # Get ready for new install
 install_dir=$GMP_DIR 
 echo "install dir: " $install_dir
-
-# Check if installed version of gmp already exists
-if [ -e $install_dir/include ]; then
-   printf "Was about to build gmp but it already appears to have been \n"
-   printf "installed because the directory:\n\n"
-   printf "      " $install_dir"/include \n\n"
-   printf "already exists. I'm not installing gmp again.\n\n\n"
-   exit
+if [ -e $install_dir ]; then
+    echo "gmp install dir already exists -- deleting it!"
+    rm -rf $install_dir
 else
     echo "gmp install dir doesn't exist yet; will be created during installation"
 fi

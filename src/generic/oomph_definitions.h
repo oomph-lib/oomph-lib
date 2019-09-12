@@ -128,10 +128,6 @@ namespace TerminateHelper
  /// Function to spawn messages from uncaught errors
  extern void spawn_errors_from_uncaught_errors();
 
- /// \short Clean up function that deletes anything dynamically allocated
- /// in this namespace
- extern void clean_up_memory();
-
  /// Stream to output error messages
  extern std::ostream* Error_message_stream_pt;
 

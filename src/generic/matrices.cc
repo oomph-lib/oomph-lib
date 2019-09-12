@@ -134,92 +134,6 @@ void DoubleMatrixBase::solve(const Vector<double> &rhs,
  Linear_solver_pt->solve(this,rhs,soln);
 }
 
-//============================================================================
-/// Complete LU solve (overwrites RHS with solution). This is the
-/// generic version which should not need to be over-written.
-//============================================================================
-void DoubleMatrixBase::solve_transpose(DoubleVector &rhs)
-{
-#ifdef PARANOID
- if(Linear_solver_pt==0)
-  {
-   throw OomphLibError("Linear_solver_pt not set in matrix",
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
- // Copy rhs vector into local storage so it doesn't get overwritten
- // if the linear solver decides to initialise the solution vector, say,
- // which it's quite entitled to do!
- DoubleVector actual_rhs(rhs);
-
- //Use the linear algebra interface to the linear solver
- Linear_solver_pt->solve_transpose(this,actual_rhs,rhs);
-}
-
-//============================================================================
-/// Complete LU solve (Nothing gets overwritten!). This generic
-/// version should never need to be overwritten
-//============================================================================
-void DoubleMatrixBase::solve_transpose(const DoubleVector &rhs, 
-                             DoubleVector &soln)
-{
-#ifdef PARANOID
- if(Linear_solver_pt==0)
-  {
-   throw OomphLibError("Linear_solver_pt not set in matrix",
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
- //Use the linear algebra interface to the linear solver
- Linear_solver_pt->solve_transpose(this,rhs,soln);
-}
-
-//============================================================================
-/// Complete LU solve (overwrites RHS with solution). This is the
-/// generic version which should not need to be over-written.
-//============================================================================
-void DoubleMatrixBase::solve_transpose(Vector<double> &rhs)
-{
-#ifdef PARANOID
- if(Linear_solver_pt==0)
-  {
-   throw OomphLibError("Linear_solver_pt not set in matrix",
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
- // Copy rhs vector into local storage so it doesn't get overwritten
- // if the linear solver decides to initialise the solution vector, say,
- // which it's quite entitled to do!
- Vector<double> actual_rhs(rhs);
-
- //Use the linear algebra interface to the linear solver
- Linear_solver_pt->solve_transpose(this,actual_rhs,rhs);
-}
-
-//============================================================================
-/// Complete LU solve (Nothing gets overwritten!). This generic
-/// version should never need to be overwritten
-//============================================================================
-void DoubleMatrixBase::solve_transpose(const Vector<double> &rhs,
-                             Vector<double> &soln)
-{
-#ifdef PARANOID
- if(Linear_solver_pt==0)
-  {
-   throw OomphLibError("Linear_solver_pt not set in matrix",
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
- //Use the linear algebra interface to the linear solver
- Linear_solver_pt->solve_transpose(this,rhs,soln);
-}
-
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -1633,7 +1547,8 @@ void CRDoubleMatrix::build(const LinearAlgebraDistribution* distribution_pt)
     //-----------------------------------------------------------------------
     // Now that the entries of the i-th row have been sorted we can read them
     // back into value_pt and column_index_pt:
-    //-----------------------------------------------------------------------    
+    //-----------------------------------------------------------------------
+    
     // Create a boolean variable to indicate whether or not the i-th entry of
     // Index_of_diagonal_entries has been set
     bool is_ith_entry_set=false;
@@ -1828,56 +1743,6 @@ void CRDoubleMatrix::build_without_copy(const unsigned& ncol,
  Built = true;
 }
 
-//=============================================================================
-/// \short Extract and return the i_col-th column of this matrix 
-//=============================================================================
-void CRDoubleMatrix::extract_matrix_column(const unsigned long& i_col,
-					   DoubleVector& column)
-{
- // If the DoubleVector isn't built
- if (!column.built())
- {
-  // Grab this LinearAlgebraDistribution associated with this matrix
-  LinearAlgebraDistribution dist=*(this->distribution_pt());
-  
-  // Now build the vector
-  column.build(&dist,0.0);
- }
- // If it's already built
- else
- {
-  // Reinitialise the values
-  column.initialise(0.0);
- }
-
- // How many rows in this matrix?
- unsigned n_row=this->nrow();
-
- // Form a pointer to the row indices  
- const int* row_start=CR_matrix.row_start();
- 
- // Form a pointer to the column indices 
- const int* column_index=CR_matrix.column_index();
- 
- // Form a pointer to the values
- const double* value=CR_matrix.value();
-   
- // Loop over the rows of the input vector
- for (unsigned long i=0;i<n_row;i++)
- {
-  // Loop over the columns of the i-th row
-  for (int j=row_start[i];j<row_start[i+1];j++)
-  {
-   // Check if the k-th non-zero in the i-th row is in the i_col-th column
-   if (column_index[j]==i_col)
-   {
-    // Copy the value into the vector
-    column[i]=value[j];
-   }
-  } // for (int j=row_start[i];j<row_start[i+1];j++)
- } // for (unsigned long i=0;i<n_row;i++)
-} // End of extract_matrix_column
- 
 //=============================================================================
 /// Do LU decomposition
 //=============================================================================
@@ -3517,7 +3382,8 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
   // Build the matrix (note: the value of n_cols for the
   // transposed matrix is n_rows for the original matrix)
   result->build(n_rows,value_t,column_index_t,row_start_t);
- } // End of get_matrix_transpose
+  
+ } // End of the function 
 
 
 //=============================================================================
@@ -5244,155 +5110,6 @@ namespace CRDoubleMatrixHelpers
    }
  }
 
- 
- //============================================================================
- /// \short Concatenate DoubleVectors into a CRDoubleMatrix matrix. Optional
- /// tolerance argument ignores all entries below the input tolerance value.
- /// DRAIG: Not optimised for distributed matrices!
- //============================================================================
- void combine_vectors_into_matrix(const Vector<DoubleVector>& matrix_columns,
-				  CRDoubleMatrix& result_matrix,
-				  const double& tolerance)
- {
-  // The number of columns
-  unsigned n_col=matrix_columns.size();
-
-  // Get the size of the first column vector
-  unsigned n_row=matrix_columns[0].nrow();
-  
-  // PARANOID checks involving only the in matrices.
-#ifdef PARANOID
-  // Loop over the columns of the matrix
-  for (unsigned j=1;j<n_col;j++)
-  {
-   // Make sure the column vectors all have the same size
-   if (matrix_columns[j].nrow()!=n_row)
-   {
-    // Create an output stream
-    std::ostringstream error_message_stream;
-
-    // Create an error message
-    error_message_stream << "Cannot concatenate the DoubleVectors together!\n"
-			 << "Column 0 has " << n_row << " rows but column "
-			 << j << " has " << matrix_columns[j].nrow()
-			 << " rows." << std::endl;
-    
-    // Throw the error message
-    throw OomphLibError(error_message_stream.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  } // for (unsigned j=1;j<n_col;j++)
-#endif
-  
-  // Grab the communicator pointer from the first column 
-  const OomphCommunicator* const comm_pt=
-   matrix_columns[0].distribution_pt()->communicator_pt();
-       
-#ifdef PARANOID
-  // Sanity check: Make sure all the communicators the same
-  // Loop over the columns of the matrix
-  for (unsigned j=1;j<n_col;j++)
-  {
-   // Grab the communicator associated with the j-th column
-   const OomphCommunicator another_communicator=
-    matrix_columns[j].distribution_pt()->communicator_pt();
-
-   // Do the communicators match?
-   if (another_communicator!=*comm_pt)
-   {
-    // Create an output stream
-    std::ostringstream error_message_stream;
-
-    // Create an error message
-    error_message_stream << "Cannot concatenate the DoubleVectors together!\n"
-			 << "Column 0 has a different OomphCommunicator to "
-			 << "column " << j << std::endl;
-    
-    // Throw the error message
-    throw OomphLibError(error_message_stream.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  } // for (unsigned j=1;j<n_col;j++)
-#endif
-
-  // Counter for the number of nonzeros in the matrix
-  unsigned n_matrix_nz=0;
-  
-  // Loop over the column of the matrix
-  for (unsigned j=0;j<n_col;j++)
-  {
-   // Loop over the rows of the matrix
-   for (unsigned i=0;i<n_col;i++)
-   {
-    // If the (i,j)-th value exceeds the user-defined tolerance
-    if (std::fabs(matrix_columns[j][i])>tolerance)
-    {
-     // Increment the counter
-     n_matrix_nz++;
-    }
-   } // for (unsigned j=1;j<n_col;j++)
-  } // for (unsigned j=1;j<n_col;j++)
-
-  // Storage for the indices associated with the first nonzero in each row
-  Vector<int> res_row_start;
-
-  // Storage for the column indices associated with the nonzeros
-  Vector<int> res_column_indices;
-
-  // Storage for the nonzero values
-  Vector<double> res_values;
-
-  // Reserve space for the row indices
-  res_row_start.reserve(n_row+1);
-
-  // Reserve space for the column indices
-  res_column_indices.reserve(n_matrix_nz);
-
-  // Reserve space for the values
-  res_values.reserve(n_matrix_nz);
-
-  // Running sum for the number of nonzeros
-  unsigned nnz_counter=0;
-  
-  // Loop over the rows
-  for (unsigned i=0;i<n_row;i++)
-  {
-   // The row start is the nnz at the start of the row.
-   res_row_start.push_back(nnz_counter);
-   
-   // Loop over the columns
-   for (unsigned j=0;j<n_row;j++)
-   {
-    // If the (i,j)-th value exceeds the user-defined tolerance
-    if (std::fabs(matrix_columns[j][i])>tolerance)
-    {
-     // Store the column index associated with this nonzero
-     res_column_indices.push_back(j);
-      
-     // Put the nonzero value into storage
-     res_values.push_back(matrix_columns[j][i]);
-     
-     // Update the running sum of nnz per row
-     nnz_counter++;
-    }
-   } // for (unsigned j=0;j<n_row;j++)
-  } // for (unsigned i=0;i<n_row;i++)
-   
-  // Fill in the last row start
-  res_row_start.push_back(n_matrix_nz);
-
-  // Build a LinearAlgebraDistribution for the matrix
-  LinearAlgebraDistribution* dist_pt=
-   new LinearAlgebraDistribution(comm_pt,n_row,false);
-  
-  // Build the matrix
-  result_matrix.build(dist_pt,n_col,res_values,
-		      res_column_indices,res_row_start);
- } // End of combine_vectors_into_matrix
-
- 
  //============================================================================
  /// \short Concatenate CRDoubleMatrix matrices.
  /// 

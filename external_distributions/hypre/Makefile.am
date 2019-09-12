@@ -2,7 +2,7 @@ EXTRA_DIST = \
 build_scripts
 
 #makefile variable to hold the configure command (part 1)
-run_command1 = " ./configure --enable-shared "
+run_command1 = " ./configure "
 if WANT_MPI
 run_command1 += " --with-MPI  \\" 
 else

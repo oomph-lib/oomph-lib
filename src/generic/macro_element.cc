@@ -32,157 +32,70 @@
 
 namespace oomph
 {
- //=================================================================
- /// \short Get global position r(S) at discrete time level t.
- /// t=0: Present time; t>0: previous timestep.
- //=================================================================
- void QMacroElement<2>::macro_map(const double& t, 
-				  const Vector<double>& s, 
-				  Vector<double>& r)
- {
-  using namespace QuadTreeNames;
 
-  Vector<double> bound_N(2);
-  Vector<double> bound_S(2);
-  Vector<double> bound_W(2);
-  Vector<double> bound_E(2);
+//=================================================================
+/// \short Get global position r(S) at discrete time level t.
+/// t=0: Present time; t>0: previous timestep.
+//=================================================================
+void QMacroElement<2>::macro_map(const unsigned& t, 
+                                 const Vector<double>& S, 
+                                 Vector<double>& r)
+{
+ using namespace QuadTreeNames;
 
-  Vector<double> diff_N(2);
-  Vector<double> diff_S(2);
-  Vector<double> diff_W(2);
-  Vector<double> diff_E(2);
+ Vector<double> bound_N(2);
+ Vector<double> bound_S(2);
+ Vector<double> bound_W(2);
+ Vector<double> bound_E(2);
 
-  Vector<double> f_rect(2);
+ Vector<double> diff_N(2);
+ Vector<double> diff_S(2);
+ Vector<double> diff_W(2);
+ Vector<double> diff_E(2);
 
-  Vector<double> corner_SE(2);
-  Vector<double> corner_SW(2);
-  Vector<double> corner_NE(2);
-  Vector<double> corner_NW(2);
+ Vector<double> f_rect(2);
 
-  Vector<double> edge_N(2);
-  Vector<double> edge_S(2);
+ Vector<double> corner_SE(2);
+ Vector<double> corner_SW(2);
+ Vector<double> corner_NE(2);
+ Vector<double> corner_NW(2);
+
+ Vector<double> edge_N(2);
+ Vector<double> edge_S(2);
   
-  Vector<double> zeta(1);
+ Vector<double> zeta(1);
 
-  //Determine Vectors to corners
-  zeta[0]=1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::S,zeta,corner_SE);
-  zeta[0]=-1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::S,zeta,corner_SW);
-  zeta[0]=1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::N,zeta,corner_NE);
-  zeta[0]=-1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number, 
-				    QuadTreeNames::N,zeta,corner_NW);
-
-
-  // Get the position on the N/S/W/E edges
-  zeta[0]=s[0];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::N,zeta,bound_N);
-  zeta[0]=s[0];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::S,zeta,bound_S);
-  zeta[0]=s[1];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::W,zeta,bound_W);
-  zeta[0]=s[1];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::E,zeta,bound_E);
+ //Determine Vectors to corners
+ zeta[0]=1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::S,zeta,corner_SE);
+ zeta[0]=-1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::S,zeta,corner_SW);
+ zeta[0]=1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::N,zeta,corner_NE);
+ zeta[0]=-1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number, 
+                                   QuadTreeNames::N,zeta,corner_NW);
 
 
-  for(int i=0;i<2;i++)
-  {
-
-   // Position on the straight S/W edges of the rectangle formed
-   // by the corner points
-   edge_S[i]=corner_SW[i]+(corner_SE[i]-corner_SW[i])*0.5*(s[0]+1.0);
-   edge_N[i]=corner_NW[i]+(corner_NE[i]-corner_NW[i])*0.5*(s[0]+1.0);
-
-   //Position inside rectangle
-   f_rect[i]=edge_S[i]+(edge_N[i]-edge_S[i])*0.5*(s[1]+1.0);
-
-   //Get difference between curved edge and point in rectangle
-   diff_N[i]=bound_N[i]-f_rect[i];
-   diff_S[i]=bound_S[i]-f_rect[i];
-   diff_E[i]=bound_E[i]-f_rect[i];
-   diff_W[i]=bound_W[i]-f_rect[i];
-
-   //Map it...
-   r[i]=f_rect[i] +
-    diff_S[i]*(1.0-0.5*(s[1]+1.0)) +
-    diff_N[i]*0.5*(s[1]+1.0) +
-    diff_W[i]*(1.0-0.5*(s[0]+1.0)) +
-    diff_E[i]*0.5*(s[0]+1.0);
-  }
- }
- 
- //=================================================================
- /// \short Get global position r(S) at discrete time level t.
- /// t=0: Present time; t>0: previous timestep.
- //=================================================================
- void QMacroElement<2>::macro_map(const unsigned& t, 
-				  const Vector<double>& S, 
-				  Vector<double>& r)
- {
-  using namespace QuadTreeNames;
-
-  Vector<double> bound_N(2);
-  Vector<double> bound_S(2);
-  Vector<double> bound_W(2);
-  Vector<double> bound_E(2);
-
-  Vector<double> diff_N(2);
-  Vector<double> diff_S(2);
-  Vector<double> diff_W(2);
-  Vector<double> diff_E(2);
-
-  Vector<double> f_rect(2);
-
-  Vector<double> corner_SE(2);
-  Vector<double> corner_SW(2);
-  Vector<double> corner_NE(2);
-  Vector<double> corner_NW(2);
-
-  Vector<double> edge_N(2);
-  Vector<double> edge_S(2);
-  
-  Vector<double> zeta(1);
-
-  //Determine Vectors to corners
-  zeta[0]=1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::S,zeta,corner_SE);
-  zeta[0]=-1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::S,zeta,corner_SW);
-  zeta[0]=1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::N,zeta,corner_NE);
-  zeta[0]=-1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number, 
-				    QuadTreeNames::N,zeta,corner_NW);
+ // Get the position on the N/S/W/E edges
+ zeta[0]=S[0];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::N,zeta,bound_N);
+ zeta[0]=S[0];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::S,zeta,bound_S);
+ zeta[0]=S[1];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::W,zeta,bound_W);
+ zeta[0]=S[1];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::E,zeta,bound_E);
 
 
-  // Get the position on the N/S/W/E edges
-  zeta[0]=S[0];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::N,zeta,bound_N);
-  zeta[0]=S[0];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::S,zeta,bound_S);
-  zeta[0]=S[1];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::W,zeta,bound_W);
-  zeta[0]=S[1];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::E,zeta,bound_E);
-
-
-  for(int i=0;i<2;i++)
+ for(int i=0;i<2;i++)
   {
 
    // Position on the straight S/W edges of the rectangle formed
@@ -206,32 +119,32 @@ namespace oomph
     diff_W[i]*(1.0-0.5*(S[0]+1.0)) +
     diff_E[i]*0.5*(S[0]+1.0);
   }
- }
+}
 
 
 //=================================================================
 /// \short Output all macro element boundaries as tecplot zones
 //=================================================================
- void QMacroElement<2>::output_macro_element_boundaries(std::ostream &outfile,
-							const unsigned& nplot)
- {
-  using namespace QuadTreeNames;
+void QMacroElement<2>::output_macro_element_boundaries(std::ostream &outfile,
+                                                       const unsigned& nplot)
+{
+ using namespace QuadTreeNames;
 
-  Vector<double> s(1);
-  Vector<double> f(2);
-  // Dump at present time
-  unsigned t=0;
-  for (unsigned idirect=N;idirect<=W;idirect++)
+ Vector<double> s(1);
+ Vector<double> f(2);
+ // Dump at present time
+ unsigned t=0;
+ for (unsigned idirect=N;idirect<=W;idirect++)
   {     
    outfile << "ZONE I=" << nplot << std::endl;
    for (unsigned j=0;j<nplot;j++)
-   {
-    s[0]=-1.0+2.0*double(j)/double(nplot-1);
-    Domain_pt->macro_element_boundary(t,Macro_element_number,idirect,s,f);
-    outfile << f[0] << " " << f[1]<<  std::endl;
-   }
+    {
+     s[0]=-1.0+2.0*double(j)/double(nplot-1);
+     Domain_pt->macro_element_boundary(t,Macro_element_number,idirect,s,f);
+     outfile << f[0] << " " << f[1]<<  std::endl;
+    }
   }
- }
+}
  
 
 
@@ -240,197 +153,197 @@ namespace oomph
 /// \short Assembles the jacobian of the mapping from the macro coordinates to 
  /// the global coordinates
 //=============================================================================
- void QMacroElement<2>::assemble_macro_to_eulerian_jacobian
- (const unsigned& t,const Vector<double>& S,DenseMatrix<double>& jacobian)
- {
-  using namespace QuadTreeNames;
+void QMacroElement<2>::assemble_macro_to_eulerian_jacobian
+(const unsigned& t,const Vector<double>& S,DenseMatrix<double>& jacobian)
+{
+ using namespace QuadTreeNames;
 
-  Vector<double> bound_N(2);
-  Vector<double> bound_S(2);
-  Vector<double> bound_W(2);
-  Vector<double> bound_E(2);
+ Vector<double> bound_N(2);
+ Vector<double> bound_S(2);
+ Vector<double> bound_W(2);
+ Vector<double> bound_E(2);
 
-  Vector<double> dbound_N(2);
-  Vector<double> dbound_S(2);
-  Vector<double> dbound_E(2);
-  Vector<double> dbound_W(2);
+ Vector<double> dbound_N(2);
+ Vector<double> dbound_S(2);
+ Vector<double> dbound_E(2);
+ Vector<double> dbound_W(2);
 
-  Vector<double> corner_SE(2);
-  Vector<double> corner_SW(2);
-  Vector<double> corner_NE(2);
-  Vector<double> corner_NW(2);
+ Vector<double> corner_SE(2);
+ Vector<double> corner_SW(2);
+ Vector<double> corner_NE(2);
+ Vector<double> corner_NW(2);
   
-  Vector<double> zeta(1);
+ Vector<double> zeta(1);
 
 
-  //Determine Vectors to corners
-  zeta[0]=1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::S,zeta,corner_SE);
-  zeta[0]=-1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::S,zeta,corner_SW);
-  zeta[0]=1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::N,zeta,corner_NE);
-  zeta[0]=-1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number, 
-				    QuadTreeNames::N,zeta,corner_NW);
+ //Determine Vectors to corners
+ zeta[0]=1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::S,zeta,corner_SE);
+ zeta[0]=-1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::S,zeta,corner_SW);
+ zeta[0]=1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::N,zeta,corner_NE);
+ zeta[0]=-1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number, 
+                                   QuadTreeNames::N,zeta,corner_NW);
 
 
-  // Get the position and first derivativeson the N/S/W/E edges
-  zeta[0]=S[0];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::N,zeta,bound_N);
-  Domain_pt->dmacro_element_boundary(t,Macro_element_number,
-				     QuadTreeNames::N,zeta,dbound_N);
-  zeta[0]=S[0];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::S,zeta,bound_S);
-  Domain_pt->dmacro_element_boundary(t,Macro_element_number,
-				     QuadTreeNames::S,zeta,dbound_S);
-  zeta[0]=S[1];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::W,zeta,bound_W);
-  Domain_pt->dmacro_element_boundary(t,Macro_element_number,
-				     QuadTreeNames::W,zeta,dbound_W);
-  zeta[0]=S[1];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::E,zeta,bound_E);
-  Domain_pt->dmacro_element_boundary(t,Macro_element_number,
-				     QuadTreeNames::E,zeta,dbound_E);
+ // Get the position and first derivativeson the N/S/W/E edges
+ zeta[0]=S[0];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::N,zeta,bound_N);
+ Domain_pt->dmacro_element_boundary(t,Macro_element_number,
+                                    QuadTreeNames::N,zeta,dbound_N);
+ zeta[0]=S[0];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::S,zeta,bound_S);
+ Domain_pt->dmacro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::S,zeta,dbound_S);
+ zeta[0]=S[1];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::W,zeta,bound_W);
+ Domain_pt->dmacro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::W,zeta,dbound_W);
+ zeta[0]=S[1];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::E,zeta,bound_E);
+ Domain_pt->dmacro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::E,zeta,dbound_E);
 
 
-  // dr0/dm0
-  jacobian(0,0) = 
-   0.25*(corner_SW[0] - corner_SE[0] + corner_NW[0] - corner_NE[0] 
-	 - corner_NE[0]*S[1] + corner_NW[0]*S[1] + corner_SE[0]*S[1] 
-	 - corner_SW[0]*S[1])+0.5*(dbound_S[0] + dbound_N[0] - bound_W[0] 
-				   + bound_E[0] - dbound_S[0]*S[1] 
-				   + dbound_N[0]*S[1]);
-  // dr1/dm0
-  jacobian(0,1) = 
-   0.25*(corner_SW[1] - corner_SE[1] + corner_NW[1] - corner_NE[1] 
-	 - corner_NE[1]*S[1] + corner_NW[1]*S[1] + corner_SE[1]*S[1] 
-	 - corner_SW[1]*S[1])+0.5*(dbound_S[1] + dbound_N[1] - bound_W[1] 
-				   + bound_E[1] - dbound_S[1]*S[1] 
-				   + dbound_N[1]*S[1]);
-  // dr0/dm1
-  jacobian(1,0) = 
-   0.25*(corner_SW[0] + corner_SE[0] - corner_NW[0] - corner_NE[0] 
-	 + corner_SE[0]*S[0] - corner_SW[0]*S[0] - corner_NE[0]*S[0] 
-	 + corner_NW[0]*S[0])+0.5*(-bound_S[0] + bound_N[0] + dbound_W[0] 
-				   + dbound_E[0] - dbound_W[0]*S[0] 
-				   + dbound_E[0]*S[0]);
-  // dr1/dm1
-  jacobian(1,1) = 
-   0.25*(corner_SW[1] + corner_SE[1] - corner_NW[1] - corner_NE[1] 
-	 + corner_SE[1]*S[0] - corner_SW[1]*S[0] - corner_NE[1]*S[0] 
-	 + corner_NW[1]*S[0])+0.5*(-bound_S[1] + bound_N[1] + dbound_W[1] 
-				   + dbound_E[1] - dbound_W[1]*S[0] 
-				   + dbound_E[1]*S[0]);
- }
+ // dr0/dm0
+ jacobian(0,0) = 
+  0.25*(corner_SW[0] - corner_SE[0] + corner_NW[0] - corner_NE[0] 
+        - corner_NE[0]*S[1] + corner_NW[0]*S[1] + corner_SE[0]*S[1] 
+        - corner_SW[0]*S[1])+0.5*(dbound_S[0] + dbound_N[0] - bound_W[0] 
+                                  + bound_E[0] - dbound_S[0]*S[1] 
+                                  + dbound_N[0]*S[1]);
+ // dr1/dm0
+ jacobian(0,1) = 
+  0.25*(corner_SW[1] - corner_SE[1] + corner_NW[1] - corner_NE[1] 
+        - corner_NE[1]*S[1] + corner_NW[1]*S[1] + corner_SE[1]*S[1] 
+        - corner_SW[1]*S[1])+0.5*(dbound_S[1] + dbound_N[1] - bound_W[1] 
+                                  + bound_E[1] - dbound_S[1]*S[1] 
+                                  + dbound_N[1]*S[1]);
+ // dr0/dm1
+ jacobian(1,0) = 
+  0.25*(corner_SW[0] + corner_SE[0] - corner_NW[0] - corner_NE[0] 
+        + corner_SE[0]*S[0] - corner_SW[0]*S[0] - corner_NE[0]*S[0] 
+        + corner_NW[0]*S[0])+0.5*(-bound_S[0] + bound_N[0] + dbound_W[0] 
+                                  + dbound_E[0] - dbound_W[0]*S[0] 
+                                  + dbound_E[0]*S[0]);
+ // dr1/dm1
+ jacobian(1,1) = 
+  0.25*(corner_SW[1] + corner_SE[1] - corner_NW[1] - corner_NE[1] 
+        + corner_SE[1]*S[0] - corner_SW[1]*S[0] - corner_NE[1]*S[0] 
+        + corner_NW[1]*S[0])+0.5*(-bound_S[1] + bound_N[1] + dbound_W[1] 
+                                  + dbound_E[1] - dbound_W[1]*S[0] 
+                                  + dbound_E[1]*S[0]);
+}
 
 
 //=============================================================================
 /// \short Assembles the second derivative jacobian of the mapping from the
 /// macro coordinates to global coordinates x 
 //=============================================================================
- void QMacroElement<2>::assemble_macro_to_eulerian_jacobian2
- (const unsigned& t,const Vector<double>& S,DenseMatrix<double>& jacobian2)
- {
-  using namespace QuadTreeNames;
+void QMacroElement<2>::assemble_macro_to_eulerian_jacobian2
+(const unsigned& t,const Vector<double>& S,DenseMatrix<double>& jacobian2)
+{
+ using namespace QuadTreeNames;
 
-  Vector<double> bound_N(2);
-  Vector<double> bound_S(2);
-  Vector<double> bound_W(2);
-  Vector<double> bound_E(2);
+ Vector<double> bound_N(2);
+ Vector<double> bound_S(2);
+ Vector<double> bound_W(2);
+ Vector<double> bound_E(2);
 
-  Vector<double> dbound_N(2);
-  Vector<double> dbound_S(2);
-  Vector<double> dbound_E(2);
-  Vector<double> dbound_W(2);
+ Vector<double> dbound_N(2);
+ Vector<double> dbound_S(2);
+ Vector<double> dbound_E(2);
+ Vector<double> dbound_W(2);
 
-  Vector<double> d2bound_N(2);
-  Vector<double> d2bound_S(2);
-  Vector<double> d2bound_E(2);
-  Vector<double> d2bound_W(2);
+ Vector<double> d2bound_N(2);
+ Vector<double> d2bound_S(2);
+ Vector<double> d2bound_E(2);
+ Vector<double> d2bound_W(2);
 
-  Vector<double> corner_SE(2);
-  Vector<double> corner_SW(2);
-  Vector<double> corner_NE(2);
-  Vector<double> corner_NW(2);
+ Vector<double> corner_SE(2);
+ Vector<double> corner_SW(2);
+ Vector<double> corner_NE(2);
+ Vector<double> corner_NW(2);
   
-  Vector<double> zeta(1);
+ Vector<double> zeta(1);
 
 
-  //Determine Vectors to corners
-  zeta[0]=1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::S,zeta,corner_SE);
-  zeta[0]=-1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::S,zeta,corner_SW);
-  zeta[0]=1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::N,zeta,corner_NE);
-  zeta[0]=-1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number, 
-				    QuadTreeNames::N,zeta,corner_NW);
+ //Determine Vectors to corners
+ zeta[0]=1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::S,zeta,corner_SE);
+ zeta[0]=-1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::S,zeta,corner_SW);
+ zeta[0]=1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::N,zeta,corner_NE);
+ zeta[0]=-1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number, 
+                                   QuadTreeNames::N,zeta,corner_NW);
 
 
-  // Get the position and first derivativeson the N/S/W/E edges
-  zeta[0]=S[0];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::N,zeta,bound_N);
-  Domain_pt->dmacro_element_boundary(t,Macro_element_number,
-				     QuadTreeNames::N,zeta,dbound_N);
-  Domain_pt->d2macro_element_boundary(t,Macro_element_number,
-				      QuadTreeNames::N,zeta,d2bound_N);
-  zeta[0]=S[0];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::S,zeta,bound_S);
-  Domain_pt->dmacro_element_boundary(t,Macro_element_number,
-				     QuadTreeNames::S,zeta,dbound_S);
-  Domain_pt->d2macro_element_boundary(t,Macro_element_number,
-				      QuadTreeNames::S,zeta,d2bound_S);
-  zeta[0]=S[1];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::W,zeta,bound_W);
-  Domain_pt->dmacro_element_boundary(t,Macro_element_number,
-				     QuadTreeNames::W,zeta,dbound_W);
-  Domain_pt->d2macro_element_boundary(t,Macro_element_number,
-				      QuadTreeNames::W,zeta,d2bound_W);
-  zeta[0]=S[1];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    QuadTreeNames::E,zeta,bound_E);
-  Domain_pt->dmacro_element_boundary(t,Macro_element_number,
-				     QuadTreeNames::E,zeta,dbound_E);
-  Domain_pt->d2macro_element_boundary(t,Macro_element_number,
-				      QuadTreeNames::E,zeta,d2bound_E);
+ // Get the position and first derivativeson the N/S/W/E edges
+ zeta[0]=S[0];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::N,zeta,bound_N);
+ Domain_pt->dmacro_element_boundary(t,Macro_element_number,
+                                    QuadTreeNames::N,zeta,dbound_N);
+ Domain_pt->d2macro_element_boundary(t,Macro_element_number,
+                                    QuadTreeNames::N,zeta,d2bound_N);
+ zeta[0]=S[0];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::S,zeta,bound_S);
+ Domain_pt->dmacro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::S,zeta,dbound_S);
+ Domain_pt->d2macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::S,zeta,d2bound_S);
+ zeta[0]=S[1];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::W,zeta,bound_W);
+ Domain_pt->dmacro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::W,zeta,dbound_W);
+ Domain_pt->d2macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::W,zeta,d2bound_W);
+ zeta[0]=S[1];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::E,zeta,bound_E);
+ Domain_pt->dmacro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::E,zeta,dbound_E);
+ Domain_pt->d2macro_element_boundary(t,Macro_element_number,
+                                   QuadTreeNames::E,zeta,d2bound_E);
 
 
-  // d2x0/dm0^2
-  jacobian2(0,0) = 0.5*(d2bound_S[0] + d2bound_N[0] - d2bound_S[0]*S[1] + 
-			d2bound_N[0]*S[1]);
-  // d2x0/dm1^2
-  jacobian2(1,0) = 0.5*(d2bound_W[0] + d2bound_E[0] - d2bound_W[0]*S[0] + 
-			d2bound_E[0]*S[0]);
-  // d2x0/dm0dm1
-  jacobian2(2,0) = 0.25*(-corner_NE[0] + corner_NW[0] + corner_SE[0] - 
-			 corner_SW[0]) +0.5*(-dbound_W[0] + dbound_E[0] - 
-					     dbound_S[0] + dbound_N[0]);
-  // d2x1/dm0^2
-  jacobian2(0,1) = 0.5*(d2bound_S[1] + d2bound_N[1] - d2bound_S[1]*S[1] + 
-			d2bound_N[1]*S[1]);
-  // d2x1/dm1^2
-  jacobian2(1,1) = 0.5*(d2bound_W[1] + d2bound_E[1] - d2bound_W[1]*S[0] + 
-			d2bound_E[1]*S[0]);
-  // d2x1/dm0dm1
-  jacobian2(2,1) = 0.25*(-corner_NE[1] + corner_NW[1] + corner_SE[1] - 
-			 corner_SW[1]) + 0.5*(-dbound_W[1] + dbound_E[1] - 
-					      dbound_S[1] + dbound_N[1]);
- }
+ // d2x0/dm0^2
+ jacobian2(0,0) = 0.5*(d2bound_S[0] + d2bound_N[0] - d2bound_S[0]*S[1] + 
+                       d2bound_N[0]*S[1]);
+ // d2x0/dm1^2
+ jacobian2(1,0) = 0.5*(d2bound_W[0] + d2bound_E[0] - d2bound_W[0]*S[0] + 
+                       d2bound_E[0]*S[0]);
+ // d2x0/dm0dm1
+ jacobian2(2,0) = 0.25*(-corner_NE[0] + corner_NW[0] + corner_SE[0] - 
+                        corner_SW[0]) +0.5*(-dbound_W[0] + dbound_E[0] - 
+                                            dbound_S[0] + dbound_N[0]);
+ // d2x1/dm0^2
+ jacobian2(0,1) = 0.5*(d2bound_S[1] + d2bound_N[1] - d2bound_S[1]*S[1] + 
+                       d2bound_N[1]*S[1]);
+ // d2x1/dm1^2
+ jacobian2(1,1) = 0.5*(d2bound_W[1] + d2bound_E[1] - d2bound_W[1]*S[0] + 
+                       d2bound_E[1]*S[0]);
+ // d2x1/dm0dm1
+ jacobian2(2,1) = 0.25*(-corner_NE[1] + corner_NW[1] + corner_SE[1] - 
+                        corner_SW[1]) + 0.5*(-dbound_W[1] + dbound_E[1] - 
+                                             dbound_S[1] + dbound_N[1]);
+}
 
 
 
@@ -447,136 +360,136 @@ namespace oomph
 /// \short Get global position r(S) at discrete time level t.
 /// t=0: Present time; t>0: previous timestep.
 //=================================================================
- void QMacroElement<3>::macro_map(const unsigned& t, 
-				  const Vector<double>& S, 
-				  Vector<double>& r)
- {
-  //get the eight corners
-  Vector<double> corner_LDB(3);
-  Vector<double> corner_RDB(3);
-  Vector<double> corner_LUB(3);
-  Vector<double> corner_RUB(3);
-  Vector<double> corner_LDF(3);
-  Vector<double> corner_RDF(3);
-  Vector<double> corner_LUF(3);
-  Vector<double> corner_RUF(3);
+void QMacroElement<3>::macro_map(const unsigned& t, 
+                                 const Vector<double>& S, 
+                                 Vector<double>& r)
+{
+ //get the eight corners
+ Vector<double> corner_LDB(3);
+ Vector<double> corner_RDB(3);
+ Vector<double> corner_LUB(3);
+ Vector<double> corner_RUB(3);
+ Vector<double> corner_LDF(3);
+ Vector<double> corner_RDF(3);
+ Vector<double> corner_LUF(3);
+ Vector<double> corner_RUF(3);
 
-  Vector<double> zeta(2);
-  zeta[0]=-1.0;
-  zeta[1]=-1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::B,zeta,corner_LDB);
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::U,zeta,corner_LUB);
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::F,zeta,corner_LDF);
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::R,zeta,corner_RDB);
-  zeta[0]=1.0;
-  zeta[1]=1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::B,zeta,corner_RUB);
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::D,zeta,corner_RDF);
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::L,zeta,corner_LUF);
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::R,zeta,corner_RUF);
-
-
-  //get the position of the 4 corners of the center slice
-  Vector<double> corner_LD(3);
-  Vector<double> corner_RD(3);
-  Vector<double> corner_LU(3);
-  Vector<double> corner_RU(3);
-
-  zeta[0]=-1.0;
-  zeta[1]=S[2];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::D,zeta,corner_LD);
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::U,zeta,corner_LU);
-  zeta[0]=1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::D,zeta,corner_RD);
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::U,zeta,corner_RU);
-
-  //get position on the B,F faces;
-  Vector<double> face_B(3);
-  Vector<double> face_F(3);
-
-  zeta[0]=S[0];
-  zeta[1]=S[1];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::B,zeta,face_B);
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::F,zeta,face_F);
+ Vector<double> zeta(2);
+ zeta[0]=-1.0;
+ zeta[1]=-1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::B,zeta,corner_LDB);
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::U,zeta,corner_LUB);
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::F,zeta,corner_LDF);
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::R,zeta,corner_RDB);
+ zeta[0]=1.0;
+ zeta[1]=1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::B,zeta,corner_RUB);
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::D,zeta,corner_RDF);
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::L,zeta,corner_LUF);
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::R,zeta,corner_RUF);
 
 
-  //get position on the edges of the middle slice
-  Vector<double> edge_mid_L(3);
-  Vector<double> edge_mid_R(3);
-  Vector<double> edge_mid_D(3);
-  Vector<double> edge_mid_U(3); 
-  zeta[0]=S[0];
-  zeta[1]=S[2];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::U,zeta,edge_mid_U);
+ //get the position of the 4 corners of the center slice
+ Vector<double> corner_LD(3);
+ Vector<double> corner_RD(3);
+ Vector<double> corner_LU(3);
+ Vector<double> corner_RU(3);
 
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::D,zeta,edge_mid_D);
-  zeta[0]=S[1];
-  zeta[1]=S[2];
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::L,zeta,edge_mid_L);
+ zeta[0]=-1.0;
+ zeta[1]=S[2];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::D,zeta,corner_LD);
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::U,zeta,corner_LU);
+ zeta[0]=1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::D,zeta,corner_RD);
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::U,zeta,corner_RU);
 
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::R,zeta,edge_mid_R);
+ //get position on the B,F faces;
+ Vector<double> face_B(3);
+ Vector<double> face_F(3);
+
+ zeta[0]=S[0];
+ zeta[1]=S[1];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::B,zeta,face_B);
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::F,zeta,face_F);
+
+
+ //get position on the edges of the middle slice
+ Vector<double> edge_mid_L(3);
+ Vector<double> edge_mid_R(3);
+ Vector<double> edge_mid_D(3);
+ Vector<double> edge_mid_U(3); 
+ zeta[0]=S[0];
+ zeta[1]=S[2];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::U,zeta,edge_mid_U);
+
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::D,zeta,edge_mid_D);
+ zeta[0]=S[1];
+ zeta[1]=S[2];
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::L,zeta,edge_mid_L);
+
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::R,zeta,edge_mid_R);
 
 //get position on the edges of the back slice
-  Vector<double> edge_back_L(3);
-  Vector<double> edge_back_R(3);
-  Vector<double> edge_back_D(3);
-  Vector<double> edge_back_U(3); 
-  zeta[0]=S[0];
-  zeta[1]=-1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::U,zeta,edge_back_U);
+ Vector<double> edge_back_L(3);
+ Vector<double> edge_back_R(3);
+ Vector<double> edge_back_D(3);
+ Vector<double> edge_back_U(3); 
+ zeta[0]=S[0];
+ zeta[1]=-1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::U,zeta,edge_back_U);
 
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::D,zeta,edge_back_D);
-  zeta[0]=S[1];
-  zeta[1]=-1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::L,zeta,edge_back_L);
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::D,zeta,edge_back_D);
+ zeta[0]=S[1];
+ zeta[1]=-1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::L,zeta,edge_back_L);
 
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::R,zeta,edge_back_R);
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::R,zeta,edge_back_R);
 
-  //get position on the edges of the front slice
-  Vector<double> edge_front_L(3);
-  Vector<double> edge_front_R(3);
-  Vector<double> edge_front_D(3);
-  Vector<double> edge_front_U(3); 
-  zeta[0]=S[0];
-  zeta[1]=1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::U,zeta,edge_front_U);
+ //get position on the edges of the front slice
+ Vector<double> edge_front_L(3);
+ Vector<double> edge_front_R(3);
+ Vector<double> edge_front_D(3);
+ Vector<double> edge_front_U(3); 
+ zeta[0]=S[0];
+ zeta[1]=1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::U,zeta,edge_front_U);
 
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::D,zeta,edge_front_D);
-  zeta[0]=S[1];
-  zeta[1]=1.0;
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::L,zeta,edge_front_L);
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::D,zeta,edge_front_D);
+ zeta[0]=S[1];
+ zeta[1]=1.0;
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::L,zeta,edge_front_L);
 
-  Domain_pt->macro_element_boundary(t,Macro_element_number,
-				    OcTreeNames::R,zeta,edge_front_R);
+ Domain_pt->macro_element_boundary(t,Macro_element_number,
+                                   OcTreeNames::R,zeta,edge_front_R);
 
 
 
-  for(unsigned i=0;i<3;i++)
+ for(unsigned i=0;i<3;i++)
   {
 
    // Position on the middle slice
@@ -660,7 +573,7 @@ namespace oomph
    r[i]=slice_mid+0.5*(1+S[2])*diff_front+0.5*(1-S[2])*diff_back;
   }
 
- }
+}
 
 
 
@@ -668,29 +581,29 @@ namespace oomph
 //=================================================================
 /// \short Output all macro element boundaries as tecplot zones
 //=================================================================
- void QMacroElement<3>::output_macro_element_boundaries(std::ostream &outfile, 
-							const unsigned& nplot)
- {
-  using namespace OcTreeNames;
+void QMacroElement<3>::output_macro_element_boundaries(std::ostream &outfile, 
+                                                       const unsigned& nplot)
+{
+ using namespace OcTreeNames;
  
-  Vector<double> s(2);
-  Vector<double> f(3);
-  // Dump at present time
-  unsigned t=0;
-  for (unsigned idirect=L;idirect<=F;idirect++)
+ Vector<double> s(2);
+ Vector<double> f(3);
+ // Dump at present time
+ unsigned t=0;
+ for (unsigned idirect=L;idirect<=F;idirect++)
   {     
    outfile << "ZONE I=" << nplot << ", J=" << nplot << std::endl;
    for (unsigned i=0;i<nplot;i++)
-   {
-    s[1]=-1.0+2.0*double(i)/double(nplot-1);
-    for (unsigned j=0;j<nplot;j++)
     {
-     s[0]=-1.0+2.0*double(j)/double(nplot-1);
-     Domain_pt->macro_element_boundary(t,Macro_element_number,idirect,s,f);
-     outfile << f[0] << " " << f[1] << " " << f[2] << std::endl;
+     s[1]=-1.0+2.0*double(i)/double(nplot-1);
+     for (unsigned j=0;j<nplot;j++)
+      {
+       s[0]=-1.0+2.0*double(j)/double(nplot-1);
+       Domain_pt->macro_element_boundary(t,Macro_element_number,idirect,s,f);
+       outfile << f[0] << " " << f[1] << " " << f[2] << std::endl;
+      }
     }
-   }
   }
- }
+}
 
 }
