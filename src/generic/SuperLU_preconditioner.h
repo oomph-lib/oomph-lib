@@ -108,6 +108,14 @@ class SuperLUPreconditioner : public Preconditioner
     Solver.resolve(r, z);
    }
   
+  /// \short Function applies SuperLU to vector r for (exact) preconditioning
+  /// (of the transposed matrix system) this requires a call to setup(...)
+  /// first. 
+  void preconditioner_solve_transpose(const DoubleVector&r,DoubleVector &z)
+  {
+   Solver.resolve_transpose(r,z);
+  }
+  
 
   /// \short Clean up memory -- forward the call to the version in
   /// SuperLU in its LinearSolver incarnation.
@@ -115,6 +123,60 @@ class SuperLUPreconditioner : public Preconditioner
    {
     Solver.clean_up_memory();
    }
+
+  
+  /// Get the amount of memory used to store the LU factors inside SuperLU
+  double get_memory_usage_for_lu_factors()
+  {
+   // Return the appropriate result
+   return Solver.get_memory_usage_for_lu_factors();
+  } // End of get_memory_usage_for_lu_factors
+
+  
+  /// \short Get the total memory needed by SuperLU to store AND calculate
+  /// the LU factors
+  double get_total_memory_needed_for_superlu()
+  {
+   // Return the appropriate result
+   return Solver.get_total_needed_memory();
+  } // End of get_memory_usage_for_superlu
+  
+  
+  /// \short Get the amount of memory taken up by SuperLU. The first entry
+  /// of the returned result contains the memory used to store the LU
+  /// factors and the second entry contains the total memory used to
+  /// store AND calculate the LU factors
+  Vector<double> get_memory_usage_for_superlu()
+  {
+   // Allocate storage for the memory statistics
+   Vector<double> memory_usage(2,0.0);
+   
+   // The first entry contains the memory used to store the LU factors
+   memory_usage[0]=Solver.get_memory_usage_for_lu_factors();
+   
+   // The second entry contains the total memory used to both calculate
+   // and store the LU factors
+   memory_usage[1]=Solver.get_total_needed_memory();
+
+   // Now return the calculated result
+   return memory_usage;
+  } // End of get_memory_usage_for_superlu
+
+  
+  /// Enable documentation of solver statistics
+  void enable_doc_stats()
+  {
+   // Enable the documentation of statistics inside SuperLU
+   Solver.enable_doc_stats();
+  } // End of enable_doc_stats
+
+  /// Enable documentation of solver statistics
+  void disable_doc_stats()
+  {
+   // Disable the documentation of statistics inside SuperLU
+   Solver.disable_doc_stats();
+  } // End of disable_doc_stats
+ 
 
   private:
 

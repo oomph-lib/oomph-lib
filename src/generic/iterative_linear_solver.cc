@@ -359,7 +359,7 @@ namespace oomph
 
     if(Doc_time)
     {
-     oomph_info << "Time for setup of preconditioner  [sec]: "
+     oomph_info << "Time for setup of preconditioner [sec]: "
 		<< Preconditioner_setup_time << std::endl;
     }
    }
@@ -796,7 +796,7 @@ namespace oomph
 
     if(Doc_time)
     {
-     oomph_info << "Time for setup of preconditioner  [sec]: "
+     oomph_info << "Time for setup of preconditioner [sec]: "
 		<< Preconditioner_setup_time << std::endl;
     }
    }
@@ -2389,7 +2389,7 @@ namespace oomph
 
     if(Doc_time)
     {
-     oomph_info << "Time for setup of preconditioner  [sec]: "
+     oomph_info << "Time for setup of preconditioner [sec]: "
 		<< Preconditioner_setup_time << std::endl;
     }
    }
@@ -2436,7 +2436,7 @@ namespace oomph
   {
    if (!Output_file_stream.is_open())
    {
-    oomph_info <<  0 << " " << resid << std::endl;
+    oomph_info << 0 << " " << resid << std::endl;
    }
    else
    {
@@ -2558,17 +2558,19 @@ namespace oomph
     //
     for (unsigned k = 0; k < iter_restart; k++)
     {
-     apply_plane_rotation(H[iter_restart][k], H[iter_restart][k+1], cs[k],
-                          sn[k]);
+     apply_plane_rotation(H[iter_restart][k],H[iter_restart][k+1],cs[k],sn[k]);
     }
     generate_plane_rotation(H[iter_restart][iter_restart],
 			    H[iter_restart][iter_restart+1],
 			    cs[iter_restart],
 			    sn[iter_restart]);
     apply_plane_rotation(H[iter_restart][iter_restart],
-			 H[iter_restart][iter_restart+1], cs[iter_restart],
+			 H[iter_restart][iter_restart+1],
+			 cs[iter_restart],
 			 sn[iter_restart]);
-    apply_plane_rotation(s[iter_restart],s[iter_restart+1],cs[iter_restart],
+    apply_plane_rotation(s[iter_restart],
+			 s[iter_restart+1],
+			 cs[iter_restart],
 			 sn[iter_restart]);
 
     // compute current residual
@@ -2581,13 +2583,27 @@ namespace oomph
     // stream open)
     if (Doc_convergence_history)
     {
+     // DRAIG: This uses the intuitive way to compute the normalised residual
+     // norm. This is doc-ed more as a sanity check than anything else...
+     double resid_alt=0.0;
+     {
+      DoubleVector solution_alt(solution);
+      update(iter_restart,H,s,v,solution_alt);
+      DoubleVector temp_alt(this->distribution_pt(),0.0);
+      matrix_pt->multiply(solution_alt,temp_alt);
+      temp_alt*=-1.0;
+      temp_alt+=rhs;
+      resid_alt=temp_alt.norm()/normb;
+     }
+    
      if (!Output_file_stream.is_open())
      {
-      oomph_info << iter << " "<< resid << std::endl;
+      oomph_info << iter << " " << resid << " " << resid_alt << std::endl;
      }
      else
      {
-      Output_file_stream << iter << " " << resid <<std::endl;
+      Output_file_stream << iter << " " << resid << " " << resid_alt
+			 << std::endl;
      }
     }
 
@@ -2681,6 +2697,15 @@ namespace oomph
    }
   }
 
+  // DRAIG: Delete...
+  {
+   DoubleVector temp(this->distribution_pt(),0.0);
+   matrix_pt->multiply(solution,temp);
+   temp*=-1.0;
+   temp+=rhs;
+   resid=temp.norm()/normb;
+  }
+  
 
   // otherwise GMRES failed convergence
   oomph_info << std::endl;

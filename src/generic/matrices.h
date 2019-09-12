@@ -74,98 +74,98 @@ namespace oomph
 /// The pattern is used to force the inlining of the round bracket access 
 /// functions by ensuring that they are NOT virtual functions. 
 //=================================================================
-template<class T, class MATRIX_TYPE>
-class Matrix
-{
+ template<class T, class MATRIX_TYPE>
+ class Matrix
+ {
 
-  protected:
+ protected:
 
- /// \short Range check to catch when an index is out of bounds, if so, it
- /// issues a warning message and dies by throwing an \c OomphLibError
- void range_check(const unsigned long& i, const unsigned long& j) const
+  /// \short Range check to catch when an index is out of bounds, if so, it
+  /// issues a warning message and dies by throwing an \c OomphLibError
+  void range_check(const unsigned long& i, const unsigned long& j) const
   {
    if (i>=nrow())
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: i=" << i << " is not in the range (0," 
-                   << nrow()-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: i=" << i << " is not in the range (0," 
+		  << nrow()-1 << ")." << std::endl;
    
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
    else if (j>=ncol())
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: j=" << j << " is not in the range (0," 
-                   << ncol()-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: j=" << j << " is not in the range (0," 
+		  << ncol()-1 << ")." << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
   }
 
 
-  public: 
+ public: 
 
- /// (Empty) constructor
- Matrix() {}
+  /// (Empty) constructor
+  Matrix() {}
 
- /// Broken copy constructor
- Matrix(const Matrix& matrix) 
+  /// Broken copy constructor
+  Matrix(const Matrix& matrix) 
   {
    BrokenCopy::broken_copy("Matrix");
   } 
  
- /// Broken assignment operator
- void operator=(const Matrix&) 
+  /// Broken assignment operator
+  void operator=(const Matrix&) 
   {
    BrokenCopy::broken_assign("Matrix");
   }
 
- /// Virtual (empty) destructor
- virtual ~Matrix(){}
+  /// Virtual (empty) destructor
+  virtual ~Matrix(){}
 
- /// Return the number of rows of the matrix
- virtual unsigned long nrow() const=0;
+  /// Return the number of rows of the matrix
+  virtual unsigned long nrow() const=0;
  
- /// Return the number of columns of the matrix
- virtual unsigned long ncol() const=0;
+  /// Return the number of columns of the matrix
+  virtual unsigned long ncol() const=0;
 
- /// \short Round brackets to give access as a(i,j) for read only
- /// (we're not providing a general interface for component-wise write
- /// access since not all matrix formats allow efficient direct access!)
- /// The function uses the  MATRIX_TYPE template parameter to call the
- /// get_entry() function which must be defined in all derived classes
- /// that are to be fully instantiated.
- inline T operator()(const unsigned long &i, 
-                     const unsigned long &j) const
+  /// \short Round brackets to give access as a(i,j) for read only
+  /// (we're not providing a general interface for component-wise write
+  /// access since not all matrix formats allow efficient direct access!)
+  /// The function uses the  MATRIX_TYPE template parameter to call the
+  /// get_entry() function which must be defined in all derived classes
+  /// that are to be fully instantiated.
+  inline T operator()(const unsigned long &i, 
+		      const unsigned long &j) const
   {
    return static_cast<MATRIX_TYPE const *>(this)->get_entry(i,j);
   }
  
- /// \short  Round brackets to give access as a(i,j) for read-write 
- /// access.
- /// The function uses the MATRIX_TYPE template parameter to call the
- /// entry() function which must be defined in all derived classes
- /// that are to be fully instantiated. If the particular Matrix does
- /// not allow write access, the function should break with an error
- /// message.
- inline T& operator()(const unsigned long &i, 
-                      const unsigned long &j)
+  /// \short  Round brackets to give access as a(i,j) for read-write 
+  /// access.
+  /// The function uses the MATRIX_TYPE template parameter to call the
+  /// entry() function which must be defined in all derived classes
+  /// that are to be fully instantiated. If the particular Matrix does
+  /// not allow write access, the function should break with an error
+  /// message.
+  inline T& operator()(const unsigned long &i, 
+		       const unsigned long &j)
   {
    return static_cast<MATRIX_TYPE*>(this)->entry(i,j);
   }
  
- /// \short Output function to print a matrix row-by-row, in the form 
- /// a(0,0) a(0,1) ... 
- /// a(1,0) a(1,1) ... 
- /// ... 
- /// to the stream outfile.
- /// Broken virtual since it might not be sensible to implement this for 
- /// some sparse matrices.
- virtual void output(std::ostream &outfile) const
+  /// \short Output function to print a matrix row-by-row, in the form 
+  /// a(0,0) a(0,1) ... 
+  /// a(1,0) a(1,1) ... 
+  /// ... 
+  /// to the stream outfile.
+  /// Broken virtual since it might not be sensible to implement this for 
+  /// some sparse matrices.
+  virtual void output(std::ostream &outfile) const
   {
    throw OomphLibError(
     "Output function is not implemented for this matrix class",
@@ -173,77 +173,77 @@ class Matrix
     OOMPH_EXCEPTION_LOCATION);
   }
 
- /// \short Output the "bottom right" entry regardless of it being
- /// zero or not (this allows automatic detection of matrix size in
- /// e.g. matlab, python).
- /// This functionality was moved from the function 
- /// sparse_indexed_output(...) because at the moment, generalisation of
- /// this functionality does not work in parallel. CRDoubleMatrix has an
- /// nrow() function but it should it should use nrow_local() - which is the
- /// N variable in the underlaying CRMatrix.
- virtual void output_bottom_right_zero_helper(std::ostream &outfile) const=0;
+  /// \short Output the "bottom right" entry regardless of it being
+  /// zero or not (this allows automatic detection of matrix size in
+  /// e.g. matlab, python).
+  /// This functionality was moved from the function 
+  /// sparse_indexed_output(...) because at the moment, generalisation of
+  /// this functionality does not work in parallel. CRDoubleMatrix has an
+  /// nrow() function but it should it should use nrow_local() - which is the
+  /// N variable in the underlaying CRMatrix.
+  virtual void output_bottom_right_zero_helper(std::ostream &outfile) const=0;
  
- /// \short Indexed output function to print a matrix to the stream outfile
- /// as i,j,a(i,j) for a(i,j)!=0 only.
- virtual void sparse_indexed_output_helper(std::ostream &outfile) const=0;
+  /// \short Indexed output function to print a matrix to the stream outfile
+  /// as i,j,a(i,j) for a(i,j)!=0 only.
+  virtual void sparse_indexed_output_helper(std::ostream &outfile) const=0;
  
 
- /// \short Indexed output function to print a matrix to the stream outfile
- /// as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if
- /// precision=0 then nothing is changed). If optional boolean flag is set
- /// to true we also output the "bottom right" entry regardless of it being
- /// zero or not (this allows automatic detection of matrix size in
- /// e.g. matlab, python).
- void sparse_indexed_output(std::ostream &outfile,
-                            const unsigned &precision=0,
-                            const bool& output_bottom_right_zero=false) const
- {
-  // Implemented as a wrapper around "sparse_indexed_output(std::ostream)"
-  // so that only one output helper function is needed in derived classes.
+  /// \short Indexed output function to print a matrix to the stream outfile
+  /// as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if
+  /// precision=0 then nothing is changed). If optional boolean flag is set
+  /// to true we also output the "bottom right" entry regardless of it being
+  /// zero or not (this allows automatic detection of matrix size in
+  /// e.g. matlab, python).
+  void sparse_indexed_output(std::ostream &outfile,
+			     const unsigned &precision=0,
+			     const bool& output_bottom_right_zero=false) const
+  {
+   // Implemented as a wrapper around "sparse_indexed_output(std::ostream)"
+   // so that only one output helper function is needed in derived classes.
 
-  // We can't have separate functions for only "output_bottom_right_zero"
-  // because people often write false as "0" and then C++ would pick the
-  // wrong function.
+   // We can't have separate functions for only "output_bottom_right_zero"
+   // because people often write false as "0" and then C++ would pick the
+   // wrong function.
 
-  // If requested set the new precision and store the previous value.
-  unsigned old_precision = 0;
-  if(precision != 0)
+   // If requested set the new precision and store the previous value.
+   unsigned old_precision = 0;
+   if(precision != 0)
    {
     old_precision = outfile.precision();
     outfile.precision(precision);
    }
 
-  // Output as normal using the helper function defined in each matrix class
-  sparse_indexed_output_helper(outfile);
+   // Output as normal using the helper function defined in each matrix class
+   sparse_indexed_output_helper(outfile);
 
-  // If requested and there is no output for the last entry then output a
-  // zero entry.
-  if(output_bottom_right_zero && ncol() > 0 && nrow() > 0)
+   // If requested and there is no output for the last entry then output a
+   // zero entry.
+   if(output_bottom_right_zero && ncol() > 0 && nrow() > 0)
    {
-     // Output as normal using the helper function defined 
-     // in each matrix class
-     output_bottom_right_zero_helper(outfile);
+    // Output as normal using the helper function defined 
+    // in each matrix class
+    output_bottom_right_zero_helper(outfile);
    }
 
-  // Restore the old value of the precision if we changed it
-  if(precision != 0)
+   // Restore the old value of the precision if we changed it
+   if(precision != 0)
    {
     outfile.precision(old_precision);
    }
- }
+  }
 
- /// \short Indexed output function to print a matrix to the file named
- /// filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If
- /// optional boolean flag is set to true we also output the "bottom right"
- /// entry regardless of it being zero or not (this allows automatic
- /// detection of matrix size in e.g. matlab, python).
- void sparse_indexed_output(std::string filename,
-                            const unsigned &precision=0,
-                            const bool& output_bottom_right_zero=false) const
- {
-  // Implemented as a wrapper around "sparse_indexed_output(std::ostream)"
-  // so that only one output function needs to be written in matrix
-  // subclasses.
+  /// \short Indexed output function to print a matrix to the file named
+  /// filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If
+  /// optional boolean flag is set to true we also output the "bottom right"
+  /// entry regardless of it being zero or not (this allows automatic
+  /// detection of matrix size in e.g. matlab, python).
+  void sparse_indexed_output(std::string filename,
+			     const unsigned &precision=0,
+			     const bool& output_bottom_right_zero=false) const
+  {
+   // Implemented as a wrapper around "sparse_indexed_output(std::ostream)"
+   // so that only one output function needs to be written in matrix
+   // subclasses.
 
    // Open file
    std::ofstream some_file(filename.c_str());
@@ -256,7 +256,7 @@ class Matrix
   }
 
 
-};
+ };
 
 
 /////////////////////////////////////////////////////////////////////
@@ -272,76 +272,94 @@ class Matrix
 /// abstract interfaces for solving, LU decomposition and 
 /// multiplication by vectors.
 //=============================================================================
-class DoubleMatrixBase
-{
-  protected:
+ class DoubleMatrixBase
+ {
+ protected:
 
- //Pointer to a linear solver
- LinearSolver* Linear_solver_pt;
+  //Pointer to a linear solver
+  LinearSolver* Linear_solver_pt;
 
- //Pointer to a default linear solver
- LinearSolver* Default_linear_solver_pt;
+  //Pointer to a default linear solver
+  LinearSolver* Default_linear_solver_pt;
 
-  public:
+ public:
 
- /// (Empty) constructor. 
- DoubleMatrixBase() : Linear_solver_pt(0), Default_linear_solver_pt(0) {}
+  /// (Empty) constructor. 
+  DoubleMatrixBase() : Linear_solver_pt(0), Default_linear_solver_pt(0) {}
 
- /// Broken copy constructor
- DoubleMatrixBase(const DoubleMatrixBase& matrix) 
+  /// Broken copy constructor
+  DoubleMatrixBase(const DoubleMatrixBase& matrix) 
   {
    BrokenCopy::broken_copy("DoubleMatrixBase");
   } 
  
- /// Broken assignment operator
- void operator=(const DoubleMatrixBase&) 
+  /// Broken assignment operator
+  void operator=(const DoubleMatrixBase&) 
   {
    BrokenCopy::broken_assign("DoubleMatrixBase");
   }
 
   /// Return the number of rows of the matrix
- virtual unsigned long nrow() const=0;
+  virtual unsigned long nrow() const=0;
  
- /// Return the number of columns of the matrix
- virtual unsigned long ncol() const=0;
+  /// Return the number of columns of the matrix
+  virtual unsigned long ncol() const=0;
 
- /// virtual (empty) destructor
- virtual ~DoubleMatrixBase() { }
+  /// virtual (empty) destructor
+  virtual ~DoubleMatrixBase() { }
 
- /// \short Round brackets to give access as a(i,j) for read only
- /// (we're not providing a general interface for component-wise write
- /// access since not all matrix formats allow efficient direct access!)
- virtual double operator()(const unsigned long &i, 
-                           const unsigned long &j) const=0;
+  /// \short Round brackets to give access as a(i,j) for read only
+  /// (we're not providing a general interface for component-wise write
+  /// access since not all matrix formats allow efficient direct access!)
+  virtual double operator()(const unsigned long &i, 
+			    const unsigned long &j) const=0;
 
  
- /// Return a pointer to the linear solver object
- LinearSolver* &linear_solver_pt() {return Linear_solver_pt;}
+  /// Return a pointer to the linear solver object
+  LinearSolver* &linear_solver_pt() {return Linear_solver_pt;}
 
- /// Return a pointer to the linear solver object (const version)
- LinearSolver* const &linear_solver_pt() const {return Linear_solver_pt;}
+  /// Return a pointer to the linear solver object (const version)
+  LinearSolver* const &linear_solver_pt() const {return Linear_solver_pt;}
 
- /// \short Complete LU solve (replaces matrix by its LU decomposition
- /// and overwrites RHS with solution). The default should not need
- /// to be over-written
- void solve(DoubleVector &rhs);
+  /// \short Complete LU solve (replaces matrix by its LU decomposition
+  /// and overwrites RHS with solution). The default should not need
+  /// to be over-written
+  void solve(DoubleVector &rhs);
 
- /// \short Complete LU solve (Nothing gets overwritten!). The default should
- /// not need to be overwritten
- void solve(const DoubleVector &rhs, DoubleVector &soln);
+  /// \short Complete LU solve (Nothing gets overwritten!). The default should
+  /// not need to be overwritten
+  void solve(const DoubleVector &rhs, DoubleVector &soln);
 
- /// \short Complete LU solve (replaces matrix by its LU decomposition
- /// and overwrites RHS with solution). The default should not need
- /// to be over-written
- void solve(Vector<double> &rhs);
+  /// \short Complete LU solve (replaces matrix by its LU decomposition
+  /// and overwrites RHS with solution). The default should not need
+  /// to be over-written
+  void solve(Vector<double> &rhs);
 
- /// \short Complete LU solve (Nothing gets overwritten!). The default should
- /// not need to be overwritten
- void solve(const Vector<double> &rhs, Vector<double> &soln);
+  /// \short Complete LU solve (Nothing gets overwritten!). The default should
+  /// not need to be overwritten
+  void solve(const Vector<double> &rhs, Vector<double> &soln);
 
- /// \short Find the residual, i.e. r=b-Ax the residual
- virtual void residual(const DoubleVector &x, const DoubleVector &b, 
-                       DoubleVector &residual_)
+  /// \short Complete LU solve (replaces matrix by its LU decomposition
+  /// and overwrites RHS with solution). The default should not need
+  /// to be over-written
+  void solve_transpose(DoubleVector &rhs);
+
+  /// \short Complete LU solve (Nothing gets overwritten!). The default should
+  /// not need to be overwritten
+  void solve_transpose(const DoubleVector &rhs, DoubleVector &soln);
+
+  /// \short Complete LU solve (replaces matrix by its LU decomposition
+  /// and overwrites RHS with solution). The default should not need
+  /// to be over-written
+  void solve_transpose(Vector<double> &rhs);
+
+  /// \short Complete LU solve (Nothing gets overwritten!). The default should
+  /// not need to be overwritten
+  void solve_transpose(const Vector<double> &rhs, Vector<double> &soln);
+  
+  /// \short Find the residual, i.e. r=b-Ax the residual
+  virtual void residual(const DoubleVector &x, const DoubleVector &b, 
+			DoubleVector &residual_)
   {
    // compute residual = Ax
    this->multiply(x,residual_);
@@ -350,41 +368,41 @@ class DoubleMatrixBase
    unsigned nrow_local = residual_.nrow_local();
    double* residual_pt = residual_.values_pt();
    for (unsigned i = 0; i < nrow_local; i++)
-    {
-     residual_pt[i] = -residual_pt[i];
-    }
+   {
+    residual_pt[i] = -residual_pt[i];
+   }
 
    // set residual = b + residuals
    residual_ += b;
   }
  
- /// \short Find the maximum residual r=b-Ax -- generic version, can be 
- /// overloaded for specific derived classes where the
- /// max. can be determined "on the fly"
- virtual double max_residual(const DoubleVector &x, 
-                             const DoubleVector &rhs)
+  /// \short Find the maximum residual r=b-Ax -- generic version, can be 
+  /// overloaded for specific derived classes where the
+  /// max. can be determined "on the fly"
+  virtual double max_residual(const DoubleVector &x, 
+			      const DoubleVector &rhs)
   {
    DoubleVector res;
    residual(x,rhs,res);
    return res.max();
   }
 
- /// \short Multiply the matrix by the vector x: soln=Ax.
- virtual void multiply(const DoubleVector &x, DoubleVector &soln)const=0;
+  /// \short Multiply the matrix by the vector x: soln=Ax.
+  virtual void multiply(const DoubleVector &x, DoubleVector &soln)const=0;
 
- /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
- virtual void multiply_transpose(const DoubleVector &x,
-                                 DoubleVector &soln)const=0;
+  /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
+  virtual void multiply_transpose(const DoubleVector &x,
+				  DoubleVector &soln)const=0;
 
- /// \short For every row, find the maximum absolute value of the
- /// entries in this row. Set all values that are less than alpha times
- /// this maximum to zero and return the resulting matrix in
- /// reduced_matrix. Note: Diagonal entries are retained regardless
- /// of their size. 
- //virtual void matrix_reduction(const double &alpha,
- //                              DoubleMatrixBase& reduced_matrix)=0;
+  /// \short For every row, find the maximum absolute value of the
+  /// entries in this row. Set all values that are less than alpha times
+  /// this maximum to zero and return the resulting matrix in
+  /// reduced_matrix. Note: Diagonal entries are retained regardless
+  /// of their size. 
+  //virtual void matrix_reduction(const double &alpha,
+  //                              DoubleMatrixBase& reduced_matrix)=0;
 
-};
+ };
 
 
 
@@ -401,28 +419,28 @@ class DoubleMatrixBase
 /// used here to pass the specific class to the base class so that
 /// round bracket access can be inlined.
 //======================================================================
-template <class T>
-class DenseMatrix : public Matrix<T, DenseMatrix<T> >
-{
+ template <class T>
+ class DenseMatrix : public Matrix<T, DenseMatrix<T> >
+ {
 
-  protected:
+ protected:
 
- /// Internal representation of matrix as a pointer to data
- T* Matrixdata;
+  /// Internal representation of matrix as a pointer to data
+  T* Matrixdata;
 
- /// Number of rows
- unsigned long N;
+  /// Number of rows
+  unsigned long N;
  
- /// Number of columns
- unsigned long M;
+  /// Number of columns
+  unsigned long M;
  
-  public:
+ public:
 
- /// Empty constructor, simply assign the lengths N and M to 0
- DenseMatrix() : Matrixdata(0), N(0), M(0) {}
+  /// Empty constructor, simply assign the lengths N and M to 0
+  DenseMatrix() : Matrixdata(0), N(0), M(0) {}
 
- /// Copy constructor: Deep copy!
- DenseMatrix(const DenseMatrix& source_matrix) 
+  /// Copy constructor: Deep copy!
+  DenseMatrix(const DenseMatrix& source_matrix) 
   {
    // Set row and column lengths
    N=source_matrix.nrow();
@@ -431,43 +449,43 @@ class DenseMatrix : public Matrix<T, DenseMatrix<T> >
    Matrixdata = new T[N*M];
    // Copy the data across from the other matrix
    for(unsigned long i=0;i<N;i++)
+   {
+    for(unsigned long j=0;j<M;j++)
     {
-     for(unsigned long j=0;j<M;j++)
-      {
-       Matrixdata[M*i+j] = source_matrix(i,j);
-      }
+     Matrixdata[M*i+j] = source_matrix(i,j);
     }
+   }
   }
 
- /// Copy assignment 
- DenseMatrix& operator=(const DenseMatrix& source_matrix) 
+  /// Copy assignment 
+  DenseMatrix& operator=(const DenseMatrix& source_matrix) 
   {
    // Don't create a new matrix if the assignment is the identity
    if (this != & source_matrix)
+   {
+    // Check row and column length
+    unsigned long n=source_matrix.nrow();
+    unsigned long m=source_matrix.ncol();
+    if ( (N!=n) || (M!=m) )
     {
-     // Check row and column length
-     unsigned long n=source_matrix.nrow();
-     unsigned long m=source_matrix.ncol();
-     if ( (N!=n) || (M!=m) )
-      {
-       resize(n,m);
-      }
-     // Copy entries across from the other matrix
-     for (unsigned long i=0;i<N;i++)
-      {
-       for (unsigned long j=0;j<M;j++)
-        {
-         (*this)(i,j) = source_matrix(i,j);
-        }
-      }
+     resize(n,m);
     }
+    // Copy entries across from the other matrix
+    for (unsigned long i=0;i<N;i++)
+    {
+     for (unsigned long j=0;j<M;j++)
+     {
+      (*this)(i,j) = source_matrix(i,j);
+     }
+    }
+   }
    // Return reference to object itself (i.e. de-reference this pointer)
    return *this;
   }
  
- /// \short The access function that will be called by the read-write
- /// round-bracket operator.
- inline T& entry(const unsigned long &i, const unsigned long &j) 
+  /// \short The access function that will be called by the read-write
+  /// round-bracket operator.
+  inline T& entry(const unsigned long &i, const unsigned long &j) 
   {
 #ifdef RANGE_CHECKING
    this->range_check(i,j);
@@ -475,10 +493,10 @@ class DenseMatrix : public Matrix<T, DenseMatrix<T> >
    return Matrixdata[M*i+j];
   }
 
- /// \short The access function the will be called by the read-only 
- /// (const version) round-bracket operator.
- inline T get_entry(const unsigned long &i, 
-                    const unsigned long &j) const
+  /// \short The access function the will be called by the read-only 
+  /// (const version) round-bracket operator.
+  inline T get_entry(const unsigned long &i, 
+		     const unsigned long &j) const
   {
 #ifdef RANGE_CHECKING
    this->range_check(i,j);
@@ -486,67 +504,67 @@ class DenseMatrix : public Matrix<T, DenseMatrix<T> >
    return Matrixdata[M*i+j];
   }
 
- /// Constructor to build a square n by n matrix
- DenseMatrix(const unsigned long &n);
+  /// Constructor to build a square n by n matrix
+  DenseMatrix(const unsigned long &n);
  
- /// Constructor to build a matrix with n rows and m columns
- DenseMatrix(const unsigned long &n, const unsigned long &m);
+  /// Constructor to build a matrix with n rows and m columns
+  DenseMatrix(const unsigned long &n, const unsigned long &m);
  
- /// \short Constructor to build a matrix with n rows and m columns,
- /// with initial value initial_val
- DenseMatrix(const unsigned long &n, const unsigned long &m,
-             const T &initial_val);
+  /// \short Constructor to build a matrix with n rows and m columns,
+  /// with initial value initial_val
+  DenseMatrix(const unsigned long &n, const unsigned long &m,
+	      const T &initial_val);
  
- /// Destructor, clean up the matrix data
- virtual ~DenseMatrix() {delete[] Matrixdata; Matrixdata=0;}
+  /// Destructor, clean up the matrix data
+  virtual ~DenseMatrix() {delete[] Matrixdata; Matrixdata=0;}
  
- /// Return the number of rows of the matrix
- inline unsigned long nrow() const {return N;} 
+  /// Return the number of rows of the matrix
+  inline unsigned long nrow() const {return N;} 
 
- /// Return the number of columns of the matrix
- inline  unsigned long ncol() const {return M;}
+  /// Return the number of columns of the matrix
+  inline  unsigned long ncol() const {return M;}
  
- /// Resize to a square nxn matrix;
- /// any values already present will be transfered
- void resize(const unsigned long &n) {resize(n,n);}
+  /// Resize to a square nxn matrix;
+  /// any values already present will be transfered
+  void resize(const unsigned long &n) {resize(n,n);}
  
- /// \short Resize to a non-square n x m matrix;
- /// any values already present will be transfered
- void resize(const unsigned long &n, const unsigned long &m);
+  /// \short Resize to a non-square n x m matrix;
+  /// any values already present will be transfered
+  void resize(const unsigned long &n, const unsigned long &m);
  
- /// \short Resize to a non-square n x m matrix and initialize the 
- /// new values to initial_value.
- void resize(const unsigned long &n, const unsigned long &m, 
-             const T& initial_value);
+  /// \short Resize to a non-square n x m matrix and initialize the 
+  /// new values to initial_value.
+  void resize(const unsigned long &n, const unsigned long &m, 
+	      const T& initial_value);
  
- /// \short Initialize all values in the matrix to val.
- void initialise(const T& val)
+  /// \short Initialize all values in the matrix to val.
+  void initialise(const T& val)
   {for(unsigned long i=0;i<(N*M);++i) {Matrixdata[i] = val;}}
  
- /// Output function to print a matrix row-by-row to the stream outfile
- void output(std::ostream &outfile) const;
+  /// Output function to print a matrix row-by-row to the stream outfile
+  void output(std::ostream &outfile) const;
  
- /// Output function to print a matrix row-by-row to a file. Specify filename.
- void output(std::string filename) const;
+  /// Output function to print a matrix row-by-row to a file. Specify filename.
+  void output(std::string filename) const;
 
- /// \short Indexed output function to print a matrix to the 
- /// stream outfile as i,j,a(i,j)
- void indexed_output(std::ostream &outfile) const;
+  /// \short Indexed output function to print a matrix to the 
+  /// stream outfile as i,j,a(i,j)
+  void indexed_output(std::ostream &outfile) const;
 
- /// \short Indexed output function to print a matrix to a
- /// file as i,j,a(i,j). Specify filename.
- void indexed_output(std::string filename) const;
+  /// \short Indexed output function to print a matrix to a
+  /// file as i,j,a(i,j). Specify filename.
+  void indexed_output(std::string filename) const;
 
- /// \short Output the "bottom right" entry regardless of it being
- /// zero or not (this allows automatic detection of matrix size in
- /// e.g. matlab, python).
- void output_bottom_right_zero_helper(std::ostream &outfile) const;
+  /// \short Output the "bottom right" entry regardless of it being
+  /// zero or not (this allows automatic detection of matrix size in
+  /// e.g. matlab, python).
+  void output_bottom_right_zero_helper(std::ostream &outfile) const;
 
- /// \short Indexed output function to print a matrix to the 
- /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
- void sparse_indexed_output_helper(std::ostream &outfile) const;
+  /// \short Indexed output function to print a matrix to the 
+  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
+  void sparse_indexed_output_helper(std::ostream &outfile) const;
 
-};
+ };
 
 
 ///////////////////////////////////////////////////////////////////
@@ -561,10 +579,10 @@ class DenseMatrix : public Matrix<T, DenseMatrix<T> >
 /// template parameter for use in the curious recursive template 
 /// pattern is included and passed directly to the base Matrix class.
 //=================================================================
-template <class T, class MATRIX_TYPE>
-class SparseMatrix : public Matrix<T,MATRIX_TYPE>
+ template <class T, class MATRIX_TYPE>
+ class SparseMatrix : public Matrix<T,MATRIX_TYPE>
  {
-   protected:
+ protected:
 
   /// Internal representation of the matrix values, a pointer
   T* Value;
@@ -581,35 +599,35 @@ class SparseMatrix : public Matrix<T,MATRIX_TYPE>
   /// Dummy zero
   static T Zero;
   
-   public:
+ public:
   
   /// Default constructor
   SparseMatrix() : Value(0), N(0), M(0), Nnz(0) {}
   
   /// Copy constructor
   SparseMatrix(const SparseMatrix& source_matrix)
-   {
-    // Number of nonzero entries
-    Nnz=source_matrix.nnz();
+  {
+   // Number of nonzero entries
+   Nnz=source_matrix.nnz();
     
-    // Number of rows
-    N=source_matrix.nrow();
+   // Number of rows
+   N=source_matrix.nrow();
     
-    // Number of columns
-    M=source_matrix.ncol();
+   // Number of columns
+   M=source_matrix.ncol();
     
-    // Values stored in C-style array
-    Value = new T[Nnz];
+   // Values stored in C-style array
+   Value = new T[Nnz];
     
-    // Assign the values
-    for (unsigned long i=0;i<Nnz;i++) {Value[i]=source_matrix.value()[i];}
-   }
+   // Assign the values
+   for (unsigned long i=0;i<Nnz;i++) {Value[i]=source_matrix.value()[i];}
+  }
  
   /// Broken assignment operator
   void operator=(const SparseMatrix&) 
-   {
-    BrokenCopy::broken_assign("SparseMatrix");
-   }
+  {
+   BrokenCopy::broken_assign("SparseMatrix");
+  }
   
   /// Destructor, delete the memory associated with the values
   virtual ~SparseMatrix() {delete[] Value; Value=0;}
@@ -634,29 +652,29 @@ class SparseMatrix : public Matrix<T,MATRIX_TYPE>
   /// e.g. matlab, python). 
   virtual void output_bottom_right_zero_helper(std::ostream &outfile) const
   {
-    std::string error_message = 
-     "SparseMatrix::output_bottom_right_zero_helper() is a virtual function.\n";
-    error_message +=
-     "It must be overloaded for specific sparse matrix storage formats\n";
+   std::string error_message = 
+    "SparseMatrix::output_bottom_right_zero_helper() is a virtual function.\n";
+   error_message +=
+    "It must be overloaded for specific sparse matrix storage formats\n";
     
-    throw OomphLibError(error_message,
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
+   throw OomphLibError(error_message,
+		       OOMPH_CURRENT_FUNCTION,
+		       OOMPH_EXCEPTION_LOCATION);
   }
 
   /// \short Indexed output function to print a matrix to the
   /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
   virtual void sparse_indexed_output_helper(std::ostream &outfile) const
-   {
-    std::string error_message = 
-     "SparseMatrix::sparse_indexed_output_helper() is a virtual function.\n";
-    error_message +=
-     "It must be overloaded for specific sparse matrix storage formats\n";
+  {
+   std::string error_message = 
+    "SparseMatrix::sparse_indexed_output_helper() is a virtual function.\n";
+   error_message +=
+    "It must be overloaded for specific sparse matrix storage formats\n";
     
-    throw OomphLibError(error_message,
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
+   throw OomphLibError(error_message,
+		       OOMPH_CURRENT_FUNCTION,
+		       OOMPH_EXCEPTION_LOCATION);
+  }
   
  };
 
@@ -671,40 +689,40 @@ class SparseMatrix : public Matrix<T,MATRIX_TYPE>
 /// class that is should use the access functions provided in the
 /// CRMatrix class.
 //=====================================================================
-template<class T>
-class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
-{
+ template<class T>
+ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
+ {
 
-  public:
+ public:
 
 
- /// Default constructor
- CRMatrix() : SparseMatrix<T, CRMatrix<T> >()
+  /// Default constructor
+  CRMatrix() : SparseMatrix<T, CRMatrix<T> >()
   {
    Column_index=0;
    Row_start=0;
   }
 
 
- /// \short Constructor: Pass vector of values, vector of column indices,
- /// vector of row starts and number of rows and columns
- /// Number of nonzero entries is read
- /// off from value, so make sure the vector has been shrunk
- /// to its correct length.
- CRMatrix(const Vector<T>& value, const Vector<int>& column_index_,
-          const Vector<int>& row_start_, 
-          const unsigned long &n,
-          const unsigned long &m) :
-  SparseMatrix<T, CRMatrix<T> >()
+  /// \short Constructor: Pass vector of values, vector of column indices,
+  /// vector of row starts and number of rows and columns
+  /// Number of nonzero entries is read
+  /// off from value, so make sure the vector has been shrunk
+  /// to its correct length.
+  CRMatrix(const Vector<T>& value, const Vector<int>& column_index_,
+	   const Vector<int>& row_start_, 
+	   const unsigned long &n,
+	   const unsigned long &m) :
+   SparseMatrix<T, CRMatrix<T> >()
   {
    Column_index=0;
    Row_start=0;
    build(value,column_index_,row_start_,n,m);
   }
  
- /// \short Copy constructor
- CRMatrix(const CRMatrix& source_matrix) : 
-  SparseMatrix<T, CRMatrix<T> >(source_matrix)
+  /// \short Copy constructor
+  CRMatrix(const CRMatrix& source_matrix) : 
+   SparseMatrix<T, CRMatrix<T> >(source_matrix)
   {
    //NNz, N and M are set the the copy constructor of the SparseMatrix
    //called above
@@ -713,35 +731,35 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
  
    // Assign:
    for (unsigned long i=0;i<this->Nnz;i++)
-    {
-     Column_index[i]=source_matrix.column_index()[i];
-    }
+   {
+    Column_index[i]=source_matrix.column_index()[i];
+   }
    
    // Row start:
    Row_start = new int[this->N+1];
    
    // Assign:
    for (unsigned long i=0;i<=this->N;i++)
-    {
-     Row_start[i]=source_matrix.row_start()[i];
-    }
+   {
+    Row_start[i]=source_matrix.row_start()[i];
+   }
   }
 
   /// Broken assignment operator
- void operator=(const CRMatrix&) 
+  void operator=(const CRMatrix&) 
   {
    BrokenCopy::broken_assign("CRMatrix");
   }
 
- /// Destructor, delete any allocated memory
- virtual ~CRMatrix()
+  /// Destructor, delete any allocated memory
+  virtual ~CRMatrix()
   {
    delete[] Column_index; Column_index = 0;
    delete[] Row_start; Row_start = 0;
   }
  
- /// \short Access function that will be called by the read-only round-bracket
- /// operator (const)
+  /// \short Access function that will be called by the read-only round-bracket
+  /// operator (const)
   T get_entry(const unsigned long &i, 
               const unsigned long &j) const
   {
@@ -749,17 +767,17 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
    this->range_check(i,j);
 #endif   
    for (long k=Row_start[i];k<Row_start[i+1];k++)
+   {
+    if (unsigned(Column_index[k])==j)
     {
-     if (unsigned(Column_index[k])==j)
-      {
-       return this->Value[k];
-      }
+     return this->Value[k];
     }
+   }
    return this->Zero;
   }
 
- /// The read-write access function is deliberately broken
- T& entry(const unsigned long &i, const unsigned long &j)
+  /// The read-write access function is deliberately broken
+  T& entry(const unsigned long &i, const unsigned long &j)
   {
    std::string error_string =
     "Non-const access not provided for the CRMatrix<T> class\n";
@@ -779,137 +797,137 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
    return dummy;
   }
 
- /// Access to C-style row_start array
- int* row_start() {return Row_start;}
+  /// Access to C-style row_start array
+  int* row_start() {return Row_start;}
 
- /// Access to C-style row_start array (const version)
- const int* row_start() const {return Row_start;}
+  /// Access to C-style row_start array (const version)
+  const int* row_start() const {return Row_start;}
 
- /// Access to C-style column index array
- int* column_index() {return Column_index;}
+  /// Access to C-style column index array
+  int* column_index() {return Column_index;}
 
- /// Access to C-style column index array (const version)
- const int* column_index() const {return Column_index;}
+  /// Access to C-style column index array (const version)
+  const int* column_index() const {return Column_index;}
 
- /// \short Output the "bottom right" entry regardless of it being
- /// zero or not (this allows automatic detection of matrix size in
- /// e.g. matlab, python).
- void output_bottom_right_zero_helper(std::ostream &outfile) const
- {
-    int last_row_local = this->N-1;
-    int last_col = this->M-1;
-
-    // Use this strange thingy because of the CRTP discussed above.
-    T last_value = this->operator()(last_row_local, last_col);
-    
-    if(last_value == T(0))
-     {
-      outfile << last_row_local << " " << last_col << " " << T(0)
-              << std::endl;
-     }
- }
-
- /// \short Indexed output function to print a matrix to the
- /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
- void sparse_indexed_output_helper(std::ostream &outfile) const
+  /// \short Output the "bottom right" entry regardless of it being
+  /// zero or not (this allows automatic detection of matrix size in
+  /// e.g. matlab, python).
+  void output_bottom_right_zero_helper(std::ostream &outfile) const
   {
-   for (unsigned long i=0;i<this->N;i++)
-    {
-     for (long j=Row_start[i];j<Row_start[i+1];j++)
-      {
-       outfile << i << " " << Column_index[j] << " " << this->Value[j]
-               << std::endl;
-      }
-    }
+   int last_row_local = this->N-1;
+   int last_col = this->M-1;
+
+   // Use this strange thingy because of the CRTP discussed above.
+   T last_value = this->operator()(last_row_local, last_col);
+    
+   if(last_value == T(0))
+   {
+    outfile << last_row_local << " " << last_col << " " << T(0)
+	    << std::endl;
+   }
   }
 
- /// Wipe matrix data and set all values to 0.
- void clean_up_memory();
+  /// \short Indexed output function to print a matrix to the
+  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
+  void sparse_indexed_output_helper(std::ostream &outfile) const
+  {
+   for (unsigned long i=0;i<this->N;i++)
+   {
+    for (long j=Row_start[i];j<Row_start[i+1];j++)
+    {
+     outfile << i << " " << Column_index[j] << " " << this->Value[j]
+	     << std::endl;
+    }
+   }
+  }
 
- /// \short Build matrix from compressed representation. Number of nonzero 
- /// entries is read off from value, so make sure the vector has been shrunk
- /// to its correct length. This matrix forms the storage for CRDoubleMatrices
- /// which are distributable. The argument n should be the number of local
- /// rows. The argument m is the number of columns
- void build(const Vector<T>& value, const Vector<int>& column_index,
-            const Vector<int>& row_start, 
-            const unsigned long &n,
-            const unsigned long &m);
+  /// Wipe matrix data and set all values to 0.
+  void clean_up_memory();
+
+  /// \short Build matrix from compressed representation. Number of nonzero 
+  /// entries is read off from value, so make sure the vector has been shrunk
+  /// to its correct length. This matrix forms the storage for CRDoubleMatrices
+  /// which are distributable. The argument n should be the number of local
+  /// rows. The argument m is the number of columns
+  void build(const Vector<T>& value, const Vector<int>& column_index,
+	     const Vector<int>& row_start, 
+	     const unsigned long &n,
+	     const unsigned long &m);
 
 
- /// \short Function to build matrix from pointers to arrays 
- /// which hold the row starts, column indices and non-zero values.
- /// The final two arguments are the number of rows and columns.
- /// Note that, as the name suggests, this function does not
- /// make a copy of the data pointed to by the first three arguments!
- void build_without_copy(T* value,
-                         int* column_index,
-                         int* row_start,
-                         const unsigned long& nnz,
-                         const unsigned long& n,
-                         const unsigned long& m);
+  /// \short Function to build matrix from pointers to arrays 
+  /// which hold the row starts, column indices and non-zero values.
+  /// The final two arguments are the number of rows and columns.
+  /// Note that, as the name suggests, this function does not
+  /// make a copy of the data pointed to by the first three arguments!
+  void build_without_copy(T* value,
+			  int* column_index,
+			  int* row_start,
+			  const unsigned long& nnz,
+			  const unsigned long& n,
+			  const unsigned long& m);
  
  
-  protected:
+ protected:
 
- /// Column index
- int* Column_index;
+  /// Column index
+  int* Column_index;
 
- /// Start index for row
- int* Row_start;
+  /// Start index for row
+  int* Row_start;
  
-};
+ };
 
 
 //Forward definition for the superlu solver
-class SuperLUSolver;
+ class SuperLUSolver;
 
 
 //=============================================================================
 /// \short A class for compressed row matrices. This is a distributable 
 /// object.
 //=============================================================================
-class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
-                       public DoubleMatrixBase,
-                       public DistributableLinearAlgebraObject
-{
+ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
+			public DoubleMatrixBase,
+			public DistributableLinearAlgebraObject
+ {
  
-  public:
+ public:
 
- /// Default constructor
- CRDoubleMatrix();
+  /// Default constructor
+  CRDoubleMatrix();
 
- /// \short Constructor: vector of values, vector of column indices,
- /// vector of row starts and number of rows and columns.
- CRDoubleMatrix(const LinearAlgebraDistribution* distribution_pt,
-                const unsigned& ncol,
-                const Vector<double>& value, 
-                const Vector<int>& column_index,
-                const Vector<int>& row_start);
+  /// \short Constructor: vector of values, vector of column indices,
+  /// vector of row starts and number of rows and columns.
+  CRDoubleMatrix(const LinearAlgebraDistribution* distribution_pt,
+		 const unsigned& ncol,
+		 const Vector<double>& value, 
+		 const Vector<int>& column_index,
+		 const Vector<int>& row_start);
 
- /// \short Constructor: just stores the distribution but does not build the
- /// matrix
- CRDoubleMatrix(const LinearAlgebraDistribution* distribution_pt);
+  /// \short Constructor: just stores the distribution but does not build the
+  /// matrix
+  CRDoubleMatrix(const LinearAlgebraDistribution* distribution_pt);
  
- /// Copy constructor
- CRDoubleMatrix(const CRDoubleMatrix& matrix); 
+  /// Copy constructor
+  CRDoubleMatrix(const CRDoubleMatrix& matrix); 
 
- /// Broken assignment operator
- void operator=(const CRDoubleMatrix&) 
+  /// Broken assignment operator
+  void operator=(const CRDoubleMatrix&) 
   {
    BrokenCopy::broken_assign("CRDoubleMatrix");
   }
 
- /// Destructor
- virtual ~CRDoubleMatrix();
+  /// Destructor
+  virtual ~CRDoubleMatrix();
  
- /// \short Access function: returns the vector Index_of_diagonal_entries.
- /// The i-th entry of the vector contains the index of the last entry
- /// below or on the diagonal. If there are no entries below or on the
- /// diagonal then the corresponding entry is -1. If, however, there are
- /// no entries in the row then the entry is irrelevant and is kept
- /// as the initialised value; 0. 
- const Vector<int> get_index_of_diagonal_entries() const
+  /// \short Access function: returns the vector Index_of_diagonal_entries.
+  /// The i-th entry of the vector contains the index of the last entry
+  /// below or on the diagonal. If there are no entries below or on the
+  /// diagonal then the corresponding entry is -1. If, however, there are
+  /// no entries in the row then the entry is irrelevant and is kept
+  /// as the initialised value; 0. 
+  const Vector<int> get_index_of_diagonal_entries() const
   {
    // Check to see if the vector has been set up
    if (Index_of_diagonal_entries.size()==0)
@@ -928,89 +946,89 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
    return Index_of_diagonal_entries;
   } // End of index_of_diagonal_entries
  
- /// \short Create a struct to provide a comparison function for std::sort
- struct CRDoubleMatrixComparisonHelper
- {
-  // Define the comparison operator
-  bool operator() (const std::pair<int,double>& pair_1,
-		   const std::pair<int,double>& pair_2)
+  /// \short Create a struct to provide a comparison function for std::sort
+  struct CRDoubleMatrixComparisonHelper
+  {
+   // Define the comparison operator
+   bool operator() (const std::pair<int,double>& pair_1,
+		    const std::pair<int,double>& pair_2)
    {
     // If the first argument of pair_1 is less than the first argument of
     // pair_2 then return TRUE otherwise return FALSE
     return (pair_1.first < pair_2.first);
    }
- } Comparison_struct;
+  } Comparison_struct;
  
- /// \short Runs through the column index vector and checks if the entries
- /// follow the regular lexicographical ordering of matrix entries, i.e.
- /// it will check (at the i-th row of the matrix) if the entries in the
- /// column index vector associated with this row are in increasing order
- bool entries_are_sorted(const bool& doc_unordered_entries=false) const;
+  /// \short Runs through the column index vector and checks if the entries
+  /// follow the regular lexicographical ordering of matrix entries, i.e.
+  /// it will check (at the i-th row of the matrix) if the entries in the
+  /// column index vector associated with this row are in increasing order
+  bool entries_are_sorted(const bool& doc_unordered_entries=false) const;
 
- /// \short Sorts the entries associated with each row of the matrix in the
- /// column index vector and the value vector into ascending order and sets
- /// up the Index_of_diagonal_entries vector
- void sort_entries();
+  /// \short Sorts the entries associated with each row of the matrix in the
+  /// column index vector and the value vector into ascending order and sets
+  /// up the Index_of_diagonal_entries vector
+  void sort_entries();
  
- /// \short build method: vector of values, vector of column indices,
- /// vector of row starts and number of rows and columns.
- void build(const LinearAlgebraDistribution* distribution_pt,
-              const unsigned& ncol,
-              const Vector<double>& value, 
-              const Vector<int>& column_index,
-              const Vector<int>& row_start);
+  /// \short build method: vector of values, vector of column indices,
+  /// vector of row starts and number of rows and columns.
+  void build(const LinearAlgebraDistribution* distribution_pt,
+	     const unsigned& ncol,
+	     const Vector<double>& value, 
+	     const Vector<int>& column_index,
+	     const Vector<int>& row_start);
  
- /// rebuild the matrix - assembles an empty matrix will a defined distribution
- void build(const LinearAlgebraDistribution* distribution_pt);
+  /// rebuild the matrix - assembles an empty matrix will a defined distribution
+  void build(const LinearAlgebraDistribution* distribution_pt);
 
- /// \short keeps the existing distribution and just matrix that is stored
- void build(const unsigned& ncol,
-	    const Vector<double>& value,
-	    const Vector<int>& column_index,
-	    const Vector<int>& row_start);
+  /// \short keeps the existing distribution and just matrix that is stored
+  void build(const unsigned& ncol,
+	     const Vector<double>& value,
+	     const Vector<int>& column_index,
+	     const Vector<int>& row_start);
  
- /// \short keeps the existing distribution and just matrix that is stored
- /// without copying the matrix data
- void build_without_copy(const unsigned& ncol,
-			 const unsigned& nnz,
-			 double* value,
-			 int* column_index,
-			 int* row_start);
+  /// \short keeps the existing distribution and just matrix that is stored
+  /// without copying the matrix data
+  void build_without_copy(const unsigned& ncol,
+			  const unsigned& nnz,
+			  double* value,
+			  int* column_index,
+			  int* row_start);
 
- /// The contents of the matrix are redistributed to match the new
- /// distribution. In a non-MPI build this method does nothing. 
- /// \b NOTE 1: The current distribution and the new distribution must have
- /// the same number of global rows.
- /// \b NOTE 2: The current distribution and the new distribution must have
- /// the same Communicator.
- void redistribute(const LinearAlgebraDistribution* const& dist_pt);
+  /// The contents of the matrix are redistributed to match the new
+  /// distribution. In a non-MPI build this method does nothing. 
+  /// \b NOTE 1: The current distribution and the new distribution must have
+  /// the same number of global rows.
+  /// \b NOTE 2: The current distribution and the new distribution must have
+  /// the same Communicator.
+  void redistribute(const LinearAlgebraDistribution* const& dist_pt);
 
- /// \short clear
- void clear();
+  /// \short clear
+  void clear();
 
- /// Return the number of rows of the matrix
- inline unsigned long nrow() const
+  /// Return the number of rows of the matrix
+  inline unsigned long nrow() const
   {
-    return DistributableLinearAlgebraObject::nrow();
+   return DistributableLinearAlgebraObject::nrow();
   }
  
- /// Return the number of columns of the matrix
- inline unsigned long ncol() const
+  /// Return the number of columns of the matrix
+  inline unsigned long ncol() const
   {
    return CR_matrix.ncol();
   }
 
- /// \short Output the "bottom right" entry regardless of it being
- /// zero or not (this allows automatic detection of matrix size in
- /// e.g. matlab, python).
- void output_bottom_right_zero_helper(std::ostream &outfile) const
+  /// \short Output the "bottom right" entry regardless of it being
+  /// zero or not (this allows automatic detection of matrix size in
+  /// e.g. matlab, python).
+  void output_bottom_right_zero_helper(std::ostream &outfile) const
   {
    CR_matrix.output_bottom_right_zero_helper(outfile);
   }
 
- /// \short Indexed output function to print a matrix to the 
- /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
- void sparse_indexed_output_helper(std::ostream &outfile) const
+  /// \short Indexed output function to print a matrix to the 
+  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
+  void sparse_indexed_output_helper(std::ostream &outfile) const
   {
    CR_matrix.sparse_indexed_output_helper(outfile);
   }
@@ -1019,203 +1037,206 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
   /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
   /// This uses acual global row numbers.
   void sparse_indexed_output_with_offset(std::string filename)
-   {
+  {
     
-    // Get offset
-    unsigned first_row=distribution_pt()->first_row();
+   // Get offset
+   unsigned first_row=distribution_pt()->first_row();
 
-    // Open file
-    std::ofstream some_file;
-    some_file.open(filename.c_str());
-    unsigned n=nrow_local();
-    for (unsigned long i=0;i<n;i++)
-     {
-      for (long j=row_start()[i];j<row_start()[i+1];j++)
-       {
-        some_file << first_row+i << " " << column_index()[j] << " "
-                  << value()[j]
-                  << std::endl;
-       }
-     }
-    some_file.close();
+   // Open file
+   std::ofstream some_file;
+   some_file.open(filename.c_str());
+   unsigned n=nrow_local();
+   for (unsigned long i=0;i<n;i++)
+   {
+    for (long j=row_start()[i];j<row_start()[i+1];j++)
+    {
+     some_file << first_row+i << " " << column_index()[j] << " "
+	       << value()[j]
+	       << std::endl;
+    }
    }
+   some_file.close();
+  }
 
- /// Overload the round-bracket access operator for read-only access. In a 
- /// distributed matrix i refers to the local row index. 
- inline double operator()(const unsigned long &i, 
-                                 const unsigned long &j) const 
- {return CR_matrix.get_entry(i,j);}
+  /// Overload the round-bracket access operator for read-only access. In a 
+  /// distributed matrix i refers to the local row index. 
+  inline double operator()(const unsigned long &i, 
+			   const unsigned long &j) const 
+  {return CR_matrix.get_entry(i,j);}
  
- /// Access to C-style row_start array
- int* row_start() {return CR_matrix.row_start();}
+  /// Access to C-style row_start array
+  int* row_start() {return CR_matrix.row_start();}
  
- /// Access to C-style row_start array (const version)
- const int* row_start() const {return CR_matrix.row_start();}
+  /// Access to C-style row_start array (const version)
+  const int* row_start() const {return CR_matrix.row_start();}
  
- /// Access to C-style column index array
- int* column_index() {return CR_matrix.column_index();}
+  /// Access to C-style column index array
+  int* column_index() {return CR_matrix.column_index();}
  
- /// Access to C-style column index array (const version)
- const int* column_index() const {return CR_matrix.column_index();}
+  /// Access to C-style column index array (const version)
+  const int* column_index() const {return CR_matrix.column_index();}
  
- /// Access to C-style value array
- double* value() {return CR_matrix.value();}
+  /// Access to C-style value array
+  double* value() {return CR_matrix.value();}
  
- /// Access to C-style value array (const version)
- const double* value() const {return CR_matrix.value();}
+  /// Access to C-style value array (const version)
+  const double* value() const {return CR_matrix.value();}
 
- /// Return the number of nonzero entries (the local nnz)
- inline unsigned long nnz() const {return CR_matrix.nnz();}
+  /// Return the number of nonzero entries (the local nnz)
+  inline unsigned long nnz() const {return CR_matrix.nnz();}
  
- /// \short LU decomposition using SuperLU if matrix is not distributed or
- /// distributed onto a single processor.
- virtual void ludecompose();
+  /// \short Extract and return the i-th column of this matrix 
+  void extract_matrix_column(const unsigned long& i,DoubleVector& column);
+ 
+  /// \short LU decomposition using SuperLU if matrix is not distributed or
+  /// distributed onto a single processor.
+  virtual void ludecompose();
 
- /// \short LU back solve for given RHS
- virtual void lubksub(DoubleVector &rhs);
+  /// \short LU back solve for given RHS
+  virtual void lubksub(DoubleVector &rhs);
 
- /// \short Multiply the matrix by the vector x: soln=Ax
- void multiply(const DoubleVector& x, DoubleVector& soln) const;  
+  /// \short Multiply the matrix by the vector x: soln=Ax
+  void multiply(const DoubleVector& x, DoubleVector& soln) const;  
 
- /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
- void multiply_transpose(const DoubleVector& x,
-                         DoubleVector& soln) const;
+  /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
+  void multiply_transpose(const DoubleVector& x,
+			  DoubleVector& soln) const;
 
- /// \short Function to multiply this matrix by the CRDoubleMatrix matrix_in.
- /// In a serial matrix, there are 4 methods available: 
- /// Method 1: First runs through this matrix and matrix_in to find the storage
- ///           requirements for result - arrays of the correct size are 
- ///           then allocated before performing the calculation.
- ///           Minimises memory requirements but more costly. 
- /// Method 2: Grows storage for values and column indices of result 'on the
- ///           fly' using an array of maps. Faster but more memory
- ///           intensive. 
- /// Method 3: Grows storage for values and column indices of result 'on the
- ///           fly' using a vector of vectors. Not particularly impressive
- ///           on the platforms we tried... 
- /// Method 4: Trilinos Epetra Matrix Matrix multiply.
- /// Method 5: Trilinox Epetra Matrix Matrix Mulitply (ml based) 
- /// If Trilinos is installed then Method 4 is employed by default, otherwise
- /// Method 2 is employed by default. 
- /// In a distributed matrix, only Trilinos Epetra Matrix Matrix multiply
- /// is available.
- void multiply(const CRDoubleMatrix& matrix_in, CRDoubleMatrix& result) const;
+  /// \short Function to multiply this matrix by the CRDoubleMatrix matrix_in.
+  /// In a serial matrix, there are 4 methods available: 
+  /// Method 1: First runs through this matrix and matrix_in to find the storage
+  ///           requirements for result - arrays of the correct size are 
+  ///           then allocated before performing the calculation.
+  ///           Minimises memory requirements but more costly. 
+  /// Method 2: Grows storage for values and column indices of result 'on the
+  ///           fly' using an array of maps. Faster but more memory
+  ///           intensive. 
+  /// Method 3: Grows storage for values and column indices of result 'on the
+  ///           fly' using a vector of vectors. Not particularly impressive
+  ///           on the platforms we tried... 
+  /// Method 4: Trilinos Epetra Matrix Matrix multiply.
+  /// Method 5: Trilinox Epetra Matrix Matrix Mulitply (ml based) 
+  /// If Trilinos is installed then Method 4 is employed by default, otherwise
+  /// Method 2 is employed by default. 
+  /// In a distributed matrix, only Trilinos Epetra Matrix Matrix multiply
+  /// is available.
+  void multiply(const CRDoubleMatrix& matrix_in, CRDoubleMatrix& result) const;
    
- /// \short For every row, find the maximum absolute value of the
- /// entries in this row. Set all values that are less than alpha times
- /// this maximum to zero and return the resulting matrix in
- /// reduced_matrix. Note: Diagonal entries are retained regardless
- /// of their size. 
- void matrix_reduction(const double &alpha,
-                       CRDoubleMatrix& reduced_matrix);
+  /// \short For every row, find the maximum absolute value of the
+  /// entries in this row. Set all values that are less than alpha times
+  /// this maximum to zero and return the resulting matrix in
+  /// reduced_matrix. Note: Diagonal entries are retained regardless
+  /// of their size. 
+  void matrix_reduction(const double &alpha,
+			CRDoubleMatrix& reduced_matrix);
 
- /// \short Access function to Serial_matrix_matrix_multiply_method, the flag
- /// which determines the matrix matrix multiplication method used for serial 
- /// matrices.
- /// Method 1: First runs through this matrix and matrix_in to find the storage
- ///           requirements for result - arrays of the correct size are 
- ///           then allocated before performing the calculation.
- ///           Minimises memory requirements but more costly. 
- /// Method 2: Grows storage for values and column indices of result 'on the
- ///           fly' using an array of maps. Faster but more memory
- ///           intensive. 
- /// Method 3: Grows storage for values and column indices of result 'on the
- ///           fly' using a vector of vectors. Not particularly impressive
- ///           on the platforms we tried... 
- /// Method 4: Trilinos Epetra Matrix Matrix multiply.
- /// Method 5: Trilinos Epetra Matrix Matrix multiply (ML based).
- unsigned& serial_matrix_matrix_multiply_method() 
+  /// \short Access function to Serial_matrix_matrix_multiply_method, the flag
+  /// which determines the matrix matrix multiplication method used for serial 
+  /// matrices.
+  /// Method 1: First runs through this matrix and matrix_in to find the storage
+  ///           requirements for result - arrays of the correct size are 
+  ///           then allocated before performing the calculation.
+  ///           Minimises memory requirements but more costly. 
+  /// Method 2: Grows storage for values and column indices of result 'on the
+  ///           fly' using an array of maps. Faster but more memory
+  ///           intensive. 
+  /// Method 3: Grows storage for values and column indices of result 'on the
+  ///           fly' using a vector of vectors. Not particularly impressive
+  ///           on the platforms we tried... 
+  /// Method 4: Trilinos Epetra Matrix Matrix multiply.
+  /// Method 5: Trilinos Epetra Matrix Matrix multiply (ML based).
+  unsigned& serial_matrix_matrix_multiply_method() 
   { 
    return Serial_matrix_matrix_multiply_method; 
   }
 
- /// \short Read only access function (const version) to 
- /// Serial_matrix_matrix_multiply_method, the flag
- /// which determines the matrix matrix multiplication method used for serial 
- /// matrices.
- /// Method 1: First runs through this matrix and matrix_in to find the storage
- ///           requirements for result - arrays of the correct size are 
- ///           then allocated before performing the calculation.
- ///           Minimises memory requirements but more costly. 
- /// Method 2: Grows storage for values and column indices of result 'on the
- ///           fly' using an array of maps. Faster but more memory
- ///           intensive. 
- /// Method 3: Grows storage for values and column indices of result 'on the
- ///           fly' using a vector of vectors. Not particularly impressive
- ///           on the platforms we tried... 
- /// Method 4: Trilinos Epetra Matrix Matrix multiply.
- /// Method 5: Trilinos Epetra Matrix Matrix multiply (ML based).
- const unsigned& serial_matrix_matrix_multiply_method() const
+  /// \short Read only access function (const version) to 
+  /// Serial_matrix_matrix_multiply_method, the flag
+  /// which determines the matrix matrix multiplication method used for serial 
+  /// matrices.
+  /// Method 1: First runs through this matrix and matrix_in to find the storage
+  ///           requirements for result - arrays of the correct size are 
+  ///           then allocated before performing the calculation.
+  ///           Minimises memory requirements but more costly. 
+  /// Method 2: Grows storage for values and column indices of result 'on the
+  ///           fly' using an array of maps. Faster but more memory
+  ///           intensive. 
+  /// Method 3: Grows storage for values and column indices of result 'on the
+  ///           fly' using a vector of vectors. Not particularly impressive
+  ///           on the platforms we tried... 
+  /// Method 4: Trilinos Epetra Matrix Matrix multiply.
+  /// Method 5: Trilinos Epetra Matrix Matrix multiply (ML based).
+  const unsigned& serial_matrix_matrix_multiply_method() const
   { 
    return Serial_matrix_matrix_multiply_method; 
   }
 
- /// \short Access function to Distributed_matrix_matrix_multiply_method, the 
- /// flag which determines the matrix matrix multiplication method used for 
- /// distributed matrices.
- /// Method 1: Trilinos Epetra Matrix Matrix multiply.
- /// Method 2: Trilinos Epetra Matrix Matrix multiply (ML based).
- unsigned& distributed_matrix_matrix_multiply_method() 
+  /// \short Access function to Distributed_matrix_matrix_multiply_method, the 
+  /// flag which determines the matrix matrix multiplication method used for 
+  /// distributed matrices.
+  /// Method 1: Trilinos Epetra Matrix Matrix multiply.
+  /// Method 2: Trilinos Epetra Matrix Matrix multiply (ML based).
+  unsigned& distributed_matrix_matrix_multiply_method() 
   { 
    return Distributed_matrix_matrix_multiply_method; 
   }
 
- /// \short Read only access function (const version) to 
- /// Distributed_matrix_matrix_multiply_method, the 
- /// flag which determines the matrix matrix multiplication method used for 
- /// distributed matrices.
- /// Method 1: Trilinos Epetra Matrix Matrix multiply.
- /// Method 2: Trilinos Epetra Matrix Matrix multiply (ML based).
- const unsigned& distributed_matrix_matrix_multiply_method() const
+  /// \short Read only access function (const version) to 
+  /// Distributed_matrix_matrix_multiply_method, the 
+  /// flag which determines the matrix matrix multiplication method used for 
+  /// distributed matrices.
+  /// Method 1: Trilinos Epetra Matrix Matrix multiply.
+  /// Method 2: Trilinos Epetra Matrix Matrix multiply (ML based).
+  const unsigned& distributed_matrix_matrix_multiply_method() const
   { 
    return Distributed_matrix_matrix_multiply_method; 
   }
 
- /// \short access function to the Built flag - indicates whether the matrix
- /// has been build - i.e. the distribution has been defined and the matrix
- /// assembled.
- bool built() const { return Built; } 
+  /// \short access function to the Built flag - indicates whether the matrix
+  /// has been build - i.e. the distribution has been defined and the matrix
+  /// assembled.
+  bool built() const { return Built; } 
 
- /// \short if this matrix is distributed then a the equivalent global matrix 
- /// is built using new and returned. The calling method is responsible for the 
- /// destruction of the new matrix.
- CRDoubleMatrix* global_matrix() const;
+  /// \short if this matrix is distributed then a the equivalent global matrix 
+  /// is built using new and returned. The calling method is responsible for the 
+  /// destruction of the new matrix.
+  CRDoubleMatrix* global_matrix() const;
 
- /// \short Returns the transpose of this matrix
- void get_matrix_transpose(CRDoubleMatrix* result) const;
+  /// \short Returns the transpose of this matrix
+  void get_matrix_transpose(CRDoubleMatrix* result) const;
    
- /// \short returns the inf-norm of this matrix
- double inf_norm() const;
+  /// \short returns the inf-norm of this matrix
+  double inf_norm() const;
 
- /// \short returns a Vector of diagonal entries of this matrix.
- /// This only works with square matrices. This condition may be relaxed
- /// in the future if need be.
- Vector<double> diagonal_entries() const;
+  /// \short returns a Vector of diagonal entries of this matrix.
+  /// This only works with square matrices. This condition may be relaxed
+  /// in the future if need be.
+  Vector<double> diagonal_entries() const;
 
- /// \short element-wise addition of this matrix with matrix_in.
- void add(const CRDoubleMatrix &matrix_in, CRDoubleMatrix &result_matrix) const;
+  /// \short element-wise addition of this matrix with matrix_in.
+  void add(const CRDoubleMatrix &matrix_in, CRDoubleMatrix &result_matrix) const;
 
  private:
 
- /// \short Vector whose i'th entry contains the index of the last entry below
- /// or on the diagonal of the i'th row of the matrix
- Vector<int> Index_of_diagonal_entries;
+  /// \short Vector whose i'th entry contains the index of the last entry below
+  /// or on the diagonal of the i'th row of the matrix
+  Vector<int> Index_of_diagonal_entries;
  
- /// \short Flag to determine which matrix-matrix multiplication method is used
- /// (for serial (or global) matrices)
- unsigned Serial_matrix_matrix_multiply_method;
+  /// \short Flag to determine which matrix-matrix multiplication method is used
+  /// (for serial (or global) matrices)
+  unsigned Serial_matrix_matrix_multiply_method;
 
- /// \short Flag to determine which matrix-matrix multiplication method is used
- /// (for distributed matrices) 
- unsigned Distributed_matrix_matrix_multiply_method;
+  /// \short Flag to determine which matrix-matrix multiplication method is used
+  /// (for distributed matrices) 
+  unsigned Distributed_matrix_matrix_multiply_method;
 
- /// Storage for the Matrix in CR Format
- CRMatrix<double> CR_matrix;
+  /// Storage for the Matrix in CR Format
+  CRMatrix<double> CR_matrix;
 
- /// \short Flag to indicate whether the matrix has been built - i.e. the 
- /// distribution has been setup AND the matrix has been assembled. 
- bool Built;
-};
+  /// \short Flag to indicate whether the matrix has been built - i.e. the 
+  /// distribution has been setup AND the matrix has been assembled. 
+  bool Built;
+ };
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1224,102 +1245,102 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
 
 
 //Forward definition of the DenseLU class
-class DenseLU;
+ class DenseLU;
 
 //=================================================================
 /// \short Class of matrices containing doubles, and stored as a 
 /// DenseMatrix<double>, but with solving functionality inherited
 /// from the abstract DoubleMatrix class. 
 //=================================================================
-class DenseDoubleMatrix : public DoubleMatrixBase,
-                          public DenseMatrix<double>
-{
+ class DenseDoubleMatrix : public DoubleMatrixBase,
+			   public DenseMatrix<double>
+ {
 
-  public:
+ public:
 
- /// Constructor, set the default linear solver
- DenseDoubleMatrix();
+  /// Constructor, set the default linear solver
+  DenseDoubleMatrix();
  
- /// Constructor to build a square n by n matrix.
- DenseDoubleMatrix(const unsigned long &n);
+  /// Constructor to build a square n by n matrix.
+  DenseDoubleMatrix(const unsigned long &n);
  
- /// Constructor to build a matrix with n rows and m columns.
- DenseDoubleMatrix(const unsigned long &n, const unsigned long &m);
+  /// Constructor to build a matrix with n rows and m columns.
+  DenseDoubleMatrix(const unsigned long &n, const unsigned long &m);
 
- /// \short Constructor to build a matrix with n rows and m columns,
- /// with initial value initial_val
- DenseDoubleMatrix(const unsigned long &n, const unsigned long &m,
-                   const double &initial_val);
+  /// \short Constructor to build a matrix with n rows and m columns,
+  /// with initial value initial_val
+  DenseDoubleMatrix(const unsigned long &n, const unsigned long &m,
+		    const double &initial_val);
 
- /// Broken copy constructor
- DenseDoubleMatrix(const DenseDoubleMatrix& matrix) : 
-  DoubleMatrixBase(), DenseMatrix<double>()
+  /// Broken copy constructor
+  DenseDoubleMatrix(const DenseDoubleMatrix& matrix) : 
+   DoubleMatrixBase(), DenseMatrix<double>()
   {
    BrokenCopy::broken_copy("DenseDoubleMatrix");
   } 
  
- /// Broken assignment operator
- void operator=(const DenseDoubleMatrix&) 
+  /// Broken assignment operator
+  void operator=(const DenseDoubleMatrix&) 
   {
    BrokenCopy::broken_assign("DenseDoubleMatrix");
   }
 
  
- /// Return the number of rows of the matrix
- inline unsigned long nrow() const {return DenseMatrix<double>::nrow();}
+  /// Return the number of rows of the matrix
+  inline unsigned long nrow() const {return DenseMatrix<double>::nrow();}
  
- /// Return the number of columns of the matrix
- inline unsigned long ncol() const {return DenseMatrix<double>::ncol();}
+  /// Return the number of columns of the matrix
+  inline unsigned long ncol() const {return DenseMatrix<double>::ncol();}
 
- /// \short Overload the const version of the round-bracket access operator
- /// for read-only access.
- inline double operator()(const unsigned long &i, 
-                                 const unsigned long &j) 
-  const {return DenseMatrix<double>::get_entry(i,j);}
+  /// \short Overload the const version of the round-bracket access operator
+  /// for read-only access.
+  inline double operator()(const unsigned long &i, 
+			   const unsigned long &j) 
+   const {return DenseMatrix<double>::get_entry(i,j);}
    
- /// \short Overload the non-const version of the round-bracket access
- /// operator for read-write access
- inline double& operator()(const unsigned long &i, const unsigned long &j) 
+  /// \short Overload the non-const version of the round-bracket access
+  /// operator for read-write access
+  inline double& operator()(const unsigned long &i, const unsigned long &j) 
   {return DenseMatrix<double>::entry(i,j);}
  
- /// Destructor
- virtual ~DenseDoubleMatrix(); 
+  /// Destructor
+  virtual ~DenseDoubleMatrix(); 
  
- /// \short LU decomposition using DenseLU (default linea solver)
- virtual void ludecompose();
+  /// \short LU decomposition using DenseLU (default linea solver)
+  virtual void ludecompose();
 
- /// \short LU backsubstitution
- virtual void lubksub(DoubleVector &rhs);
+  /// \short LU backsubstitution
+  virtual void lubksub(DoubleVector &rhs);
 
- /// \short LU backsubstitution
- virtual void lubksub(Vector<double> &rhs);
+  /// \short LU backsubstitution
+  virtual void lubksub(Vector<double> &rhs);
  
- /// \short Determine eigenvalues and eigenvectors, using
- /// Jacobi rotations. Only for symmetric matrices. Nothing gets overwritten!
- /// - \c eigen_vect(i,j) = j-th component of i-th eigenvector.
- /// - \c eigen_val(i) is the i-th eigenvalue; same ordering as in eigenvectors
- void eigenvalues_by_jacobi(Vector<double> & eigen_val,
-                            DenseMatrix<double> &eigen_vect) const;
+  /// \short Determine eigenvalues and eigenvectors, using
+  /// Jacobi rotations. Only for symmetric matrices. Nothing gets overwritten!
+  /// - \c eigen_vect(i,j) = j-th component of i-th eigenvector.
+  /// - \c eigen_val(i) is the i-th eigenvalue; same ordering as in eigenvectors
+  void eigenvalues_by_jacobi(Vector<double> & eigen_val,
+			     DenseMatrix<double> &eigen_vect) const;
  
- /// \short Multiply the matrix by the vector x: soln=Ax 
- void multiply(const DoubleVector &x, DoubleVector &soln) const;
+  /// \short Multiply the matrix by the vector x: soln=Ax 
+  void multiply(const DoubleVector &x, DoubleVector &soln) const;
  
- /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
- void multiply_transpose(const DoubleVector &x,
-                         DoubleVector &soln) const;
+  /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
+  void multiply_transpose(const DoubleVector &x,
+			  DoubleVector &soln) const;
 
- /// \short For every row, find the maximum absolute value of the
- /// entries in this row. Set all values that are less than alpha times
- /// this maximum to zero and return the resulting matrix in
- /// reduced_matrix. Note: Diagonal entries are retained regardless
- /// of their size. 
- void matrix_reduction(const double &alpha,
+  /// \short For every row, find the maximum absolute value of the
+  /// entries in this row. Set all values that are less than alpha times
+  /// this maximum to zero and return the resulting matrix in
+  /// reduced_matrix. Note: Diagonal entries are retained regardless
+  /// of their size. 
+  void matrix_reduction(const double &alpha,
                         DenseDoubleMatrix& reduced_matrix);
 
- /// Function to multiply this matrix by a DenseDoubleMatrix matrix_in
- void multiply(const DenseDoubleMatrix& matrix_in,
-               DenseDoubleMatrix& result);
-};
+  /// Function to multiply this matrix by a DenseDoubleMatrix matrix_in
+  void multiply(const DenseDoubleMatrix& matrix_in,
+		DenseDoubleMatrix& result);
+ };
 
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
@@ -1333,70 +1354,70 @@ class DenseDoubleMatrix : public DoubleMatrixBase,
 //=================================================================
 ///A Rank 3 Tensor class 
 //=================================================================
-template <class T>
-class RankThreeTensor
-{
+ template <class T>
+ class RankThreeTensor
+ {
 
-  private:
+ private:
 
- /// Private internal representation  as pointer to data
- T* Tensordata;
+  /// Private internal representation  as pointer to data
+  T* Tensordata;
  
- /// 1st Tensor dimension
- unsigned N;
+  /// 1st Tensor dimension
+  unsigned N;
 
- /// 2nd Tensor dimension
- unsigned M;
+  /// 2nd Tensor dimension
+  unsigned M;
 
- /// 3rd Tensor dimension
- unsigned P;
+  /// 3rd Tensor dimension
+  unsigned P;
 
- /// \short Range check to catch when an index is out of bounds, if so, it
- /// issues a warning message and dies by throwing an \c OomphLibError
- void range_check(const unsigned long& i, 
-                  const unsigned long& j,
-                  const unsigned long& k) const
+  /// \short Range check to catch when an index is out of bounds, if so, it
+  /// issues a warning message and dies by throwing an \c OomphLibError
+  void range_check(const unsigned long& i, 
+		   const unsigned long& j,
+		   const unsigned long& k) const
   {
    if (i>=N)
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: i=" << i << " is not in the range (0," 
-                   << N-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: i=" << i << " is not in the range (0," 
+		  << N-1 << ")." << std::endl;
    
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
    else if (j>=M)
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: j=" << j << " is not in the range (0," 
-                   << M-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: j=" << j << " is not in the range (0," 
+		  << M-1 << ")." << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
    else if (k>=P)
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: k=" << k << " is not in the range (0," 
-                   << P-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: k=" << k << " is not in the range (0," 
+		  << P-1 << ")." << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
   }
 
 
-  public:
+ public:
 
- /// Empty constructor
- RankThreeTensor(): Tensordata(0), N(0), M(0), P(0) {}
+  /// Empty constructor
+  RankThreeTensor(): Tensordata(0), N(0), M(0), P(0) {}
 
- /// Copy constructor: Deep copy
- RankThreeTensor(const RankThreeTensor& source_tensor)
+  /// Copy constructor: Deep copy
+  RankThreeTensor(const RankThreeTensor& source_tensor)
   {
    // Set row and column lengths
    N=source_tensor.nindex1();
@@ -1406,49 +1427,49 @@ class RankThreeTensor
    Tensordata = new T[N*M*P];
    // Copy the data across from the other matrix
    for(unsigned i=0;i<N;i++)
+   {
+    for(unsigned j=0;j<M;j++)
     {
-     for(unsigned j=0;j<M;j++)
-      {
-       for(unsigned k=0;k<P;k++)
-        {
-         Tensordata[P*(M*i + j) +k] = source_tensor(i,j,k);
-        }
-      }
+     for(unsigned k=0;k<P;k++)
+     {
+      Tensordata[P*(M*i + j) +k] = source_tensor(i,j,k);
+     }
     }
+   }
   }
 
- /// Copy assignement 
- RankThreeTensor& operator=(const RankThreeTensor& source_tensor) 
+  /// Copy assignement 
+  RankThreeTensor& operator=(const RankThreeTensor& source_tensor) 
   {
    // Don't create a new matrix if the assignement is the identity
    if (this != & source_tensor)
-    {
-     // Check row and column length
-     unsigned long n=source_tensor.nindex1();
-     unsigned long m=source_tensor.nindex2();
-     unsigned long p=source_tensor.nindex3();
-     //Resie the tensor to be the same size as the old tensor
-     if ( (N!=n) || (M!=m) || (P!=p) ) {resize(n,m,p);}
+   {
+    // Check row and column length
+    unsigned long n=source_tensor.nindex1();
+    unsigned long m=source_tensor.nindex2();
+    unsigned long p=source_tensor.nindex3();
+    //Resie the tensor to be the same size as the old tensor
+    if ( (N!=n) || (M!=m) || (P!=p) ) {resize(n,m,p);}
      
-     // Copy entries across from the other matrix
-     for (unsigned long i=0;i<N;i++)
+    // Copy entries across from the other matrix
+    for (unsigned long i=0;i<N;i++)
+    {
+     for (unsigned long j=0;j<M;j++)
+     {
+      for(unsigned long k=0;k<P;k++)
       {
-       for (unsigned long j=0;j<M;j++)
-        {
-         for(unsigned long k=0;k<P;k++)
-          {
-           (*this)(i,j,k) = source_tensor(i,j,k);
-          }
-        }
+       (*this)(i,j,k) = source_tensor(i,j,k);
       }
+     }
     }
+   }
    // Return reference to object itself (i.e. de-reference this pointer)
    return *this;
   }
 
 
- /// One parameter constructor produces a cubic nxnxn tensor
- RankThreeTensor(const unsigned long &n) 
+  /// One parameter constructor produces a cubic nxnxn tensor
+  RankThreeTensor(const unsigned long &n) 
   {
    // Set row and column lengths
    N=n; M=n; P=n;
@@ -1460,9 +1481,9 @@ class RankThreeTensor
 #endif
   }
 
- /// Three parameter constructor, general non-square tensor
- RankThreeTensor(const unsigned long &n_index1, const unsigned long &n_index2,
-                 const unsigned long &n_index3)
+  /// Three parameter constructor, general non-square tensor
+  RankThreeTensor(const unsigned long &n_index1, const unsigned long &n_index2,
+		  const unsigned long &n_index3)
   {
    // Set row and column lengths
    N=n_index1; M=n_index2; P=n_index3;
@@ -1475,9 +1496,9 @@ class RankThreeTensor
   }
 
 
- /// Three parameter constructor, general non-square tensor
- RankThreeTensor(const unsigned long &n_index1, const unsigned long &n_index2,
-                 const unsigned long &n_index3, const T &initial_val)
+  /// Three parameter constructor, general non-square tensor
+  RankThreeTensor(const unsigned long &n_index1, const unsigned long &n_index2,
+		  const unsigned long &n_index3, const T &initial_val)
   {
    // Set row and column lengths
    N=n_index1; M=n_index2; P=n_index3;
@@ -1487,15 +1508,15 @@ class RankThreeTensor
    initialise(initial_val);
   }
 
- /// Destructor: delete the pointers
- virtual ~RankThreeTensor() {delete[] Tensordata; Tensordata = 0;}
+  /// Destructor: delete the pointers
+  virtual ~RankThreeTensor() {delete[] Tensordata; Tensordata = 0;}
 
- /// Resize to a square nxnxn tensor
- void resize(const unsigned long &n) {resize(n,n,n);}
+  /// Resize to a square nxnxn tensor
+  void resize(const unsigned long &n) {resize(n,n,n);}
  
- /// Resize to a general tensor
- void resize(const unsigned long &n_index1, const unsigned long &n_index2,
-             const unsigned long &n_index3)
+  /// Resize to a general tensor
+  void resize(const unsigned long &n_index1, const unsigned long &n_index2,
+	      const unsigned long &n_index3)
   {
    //If the sizes have not changed do nothing
    if((n_index1==N) && (n_index2==M) && (n_index3==P)) {return;}
@@ -1518,26 +1539,26 @@ class RankThreeTensor
    // If matrix has values, transfer them to new matrix
    // Loop over rows
    for (unsigned long i=0;i<n_copy;i++)
+   {
+    // Loop over columns
+    for (unsigned long j=0;j<m_copy;j++)
     {
      // Loop over columns
-     for (unsigned long j=0;j<m_copy;j++)
-      {
-       // Loop over columns
-       for (unsigned long k=0;k<p_copy;k++)
-        {
-         // Transfer values from temp_tensor
-         Tensordata[M*P*i + P*j + k] = 
-          temp_tensor[m_old*p_old*i + p_old*j + k];
-        }
-      }
+     for (unsigned long k=0;k<p_copy;k++)
+     {
+      // Transfer values from temp_tensor
+      Tensordata[M*P*i + P*j + k] = 
+       temp_tensor[m_old*p_old*i + p_old*j + k];
+     }
     }
+   }
    // Now kill storage for old tensor
    delete[] temp_tensor;
   }
 
- /// Resize to a general tensor
- void resize(const unsigned long &n_index1, const unsigned long &n_index2,
-             const unsigned long &n_index3, const T &initial_value)
+  /// Resize to a general tensor
+  void resize(const unsigned long &n_index1, const unsigned long &n_index2,
+	      const unsigned long &n_index3, const T &initial_value)
   {
    //If the sizes have not changed do nothing
    if((n_index1==N) && (n_index2==M) && (n_index3==P)) {return;}
@@ -1560,39 +1581,39 @@ class RankThreeTensor
    // If matrix has values, transfer them to new matrix
    // Loop over rows
    for (unsigned long i=0;i<n_copy;i++)
+   {
+    // Loop over columns
+    for (unsigned long j=0;j<m_copy;j++)
     {
      // Loop over columns
-     for (unsigned long j=0;j<m_copy;j++)
-      {
-       // Loop over columns
-       for (unsigned long k=0;k<p_copy;k++)
-        {
-         // Transfer values from temp_tensor
-         Tensordata[M*P*i + P*j + k] = 
-          temp_tensor[m_old*p_old*i + p_old*j + k];
-        }
-      }
+     for (unsigned long k=0;k<p_copy;k++)
+     {
+      // Transfer values from temp_tensor
+      Tensordata[M*P*i + P*j + k] = 
+       temp_tensor[m_old*p_old*i + p_old*j + k];
+     }
     }
+   }
    // Now kill storage for old tensor
    delete[] temp_tensor;
   }
 
- /// \short Initialise all values in the tensor to val
- void initialise(const T &val)
+  /// \short Initialise all values in the tensor to val
+  void initialise(const T &val)
   {for(unsigned long i=0;i<(N*M*P);++i) {Tensordata[i] = val;}}
 
- /// Return the range of index 1 of the tensor
- unsigned long nindex1() const {return N;}
+  /// Return the range of index 1 of the tensor
+  unsigned long nindex1() const {return N;}
  
- /// Return the range of index 2 of the tensor
- unsigned long nindex2() const {return M;}
+  /// Return the range of index 2 of the tensor
+  unsigned long nindex2() const {return M;}
 
- /// Return the range of index 3 of the tensor
- unsigned long nindex3() const {return P;}
+  /// Return the range of index 3 of the tensor
+  unsigned long nindex3() const {return P;}
 
- /// Overload the round brackets to give access as a(i,j,k)
- inline T &operator()(const unsigned long &i, const unsigned long &j,
-                      const unsigned long &k) 
+  /// Overload the round brackets to give access as a(i,j,k)
+  inline T &operator()(const unsigned long &i, const unsigned long &j,
+		       const unsigned long &k) 
   {
 #ifdef RANGE_CHECKING
    this->range_check(i,j,k);
@@ -1600,9 +1621,9 @@ class RankThreeTensor
    return Tensordata[P*(M*i + j) + k];
   }
 
- /// Overload a const version for read-only access as a(i,j,k)
- inline T operator()(const unsigned long &i, const unsigned long &j,
-                            const unsigned long &k) const
+  /// Overload a const version for read-only access as a(i,j,k)
+  inline T operator()(const unsigned long &i, const unsigned long &j,
+		      const unsigned long &k) const
   {
 #ifdef RANGE_CHECKING
    this->range_check(i,j,k);
@@ -1610,7 +1631,7 @@ class RankThreeTensor
    return Tensordata[P*(M*i + j) + k];
   }
  
-};  
+ };  
 
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
@@ -1621,82 +1642,82 @@ class RankThreeTensor
 //=================================================================
 ///A Rank 4 Tensor class 
 //=================================================================
-template <class T>
-class RankFourTensor
-{
+ template <class T>
+ class RankFourTensor
+ {
 
-  private:
+ private:
 
- /// Private internal representation  as pointer to data
- T* Tensordata;
+  /// Private internal representation  as pointer to data
+  T* Tensordata;
  
- /// 1st Tensor dimension
- unsigned N;
+  /// 1st Tensor dimension
+  unsigned N;
 
- /// 2nd Tensor dimension
- unsigned M;
+  /// 2nd Tensor dimension
+  unsigned M;
 
- /// 3rd Tensor dimension
- unsigned P;
+  /// 3rd Tensor dimension
+  unsigned P;
  
- /// 4th Tensor dimension
- unsigned Q;
+  /// 4th Tensor dimension
+  unsigned Q;
  
- /// \short Range check to catch when an index is out of bounds, if so, it
- /// issues a warning message and dies by throwing an \c OomphLibError
- void range_check(const unsigned long& i, 
-                  const unsigned long& j,
-                  const unsigned long& k,
-                  const unsigned long& l) const
+  /// \short Range check to catch when an index is out of bounds, if so, it
+  /// issues a warning message and dies by throwing an \c OomphLibError
+  void range_check(const unsigned long& i, 
+		   const unsigned long& j,
+		   const unsigned long& k,
+		   const unsigned long& l) const
   {
    if (i>=N)
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: i=" << i << " is not in the range (0," 
-                   << N-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: i=" << i << " is not in the range (0," 
+		  << N-1 << ")." << std::endl;
    
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
    else if (j>=M)
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: j=" << j << " is not in the range (0," 
-                   << M-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: j=" << j << " is not in the range (0," 
+		  << M-1 << ")." << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
    else if (k>=P)
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: k=" << k << " is not in the range (0," 
-                   << P-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: k=" << k << " is not in the range (0," 
+		  << P-1 << ")." << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
    else if (l>=Q)
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: l=" << l << " is not in the range (0," 
-                   << Q-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: l=" << l << " is not in the range (0," 
+		  << Q-1 << ")." << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
   }
-  public:
+ public:
 
- /// Empty constructor
- RankFourTensor(): Tensordata(0), N(0), M(0), P(0), Q(0) {}
+  /// Empty constructor
+  RankFourTensor(): Tensordata(0), N(0), M(0), P(0), Q(0) {}
 
- /// Copy constructor: Deep copy
- RankFourTensor(const RankFourTensor& source_tensor)
+  /// Copy constructor: Deep copy
+  RankFourTensor(const RankFourTensor& source_tensor)
   {
    // Set row and column lengths
    N=source_tensor.nindex1();
@@ -1709,56 +1730,56 @@ class RankFourTensor
 
    // Copy the data across from the other matrix
    for(unsigned i=0;i<N;i++)
+   {
+    for(unsigned j=0;j<M;j++)
     {
-     for(unsigned j=0;j<M;j++)
+     for(unsigned k=0;k<P;k++)
+     {
+      for(unsigned l=0;l<Q;l++)
       {
-       for(unsigned k=0;k<P;k++)
-        {
-         for(unsigned l=0;l<Q;l++)
-          {
-         Tensordata[Q*(P*(M*i + j) +k)+l] = source_tensor(i,j,k,l);
-          }
-        }
+       Tensordata[Q*(P*(M*i + j) +k)+l] = source_tensor(i,j,k,l);
       }
+     }
     }
+   }
   }
  
- /// Copy assignement 
- RankFourTensor& operator=(const RankFourTensor& source_tensor) 
+  /// Copy assignement 
+  RankFourTensor& operator=(const RankFourTensor& source_tensor) 
   {
    // Don't create a new matrix if the assignement is the identity
    if (this != & source_tensor)
-    {
-     // Check row and column length
-     unsigned long n=source_tensor.nindex1();
-     unsigned long m=source_tensor.nindex2();
-     unsigned long p=source_tensor.nindex3();
-     unsigned long q=source_tensor.nindex4();
-     //Resize the tensor to be the same size as the old tensor
-     if ( (N!=n) || (M!=m) || (P!=p) || (Q!=q) ) {resize(n,m,p,q);}
+   {
+    // Check row and column length
+    unsigned long n=source_tensor.nindex1();
+    unsigned long m=source_tensor.nindex2();
+    unsigned long p=source_tensor.nindex3();
+    unsigned long q=source_tensor.nindex4();
+    //Resize the tensor to be the same size as the old tensor
+    if ( (N!=n) || (M!=m) || (P!=p) || (Q!=q) ) {resize(n,m,p,q);}
      
-     // Copy entries across from the other matrix
-     for (unsigned long i=0;i<N;i++)
+    // Copy entries across from the other matrix
+    for (unsigned long i=0;i<N;i++)
+    {
+     for (unsigned long j=0;j<M;j++)
+     {
+      for(unsigned long k=0;k<P;k++)
       {
-       for (unsigned long j=0;j<M;j++)
-        {
-         for(unsigned long k=0;k<P;k++)
-          {
-           for(unsigned long l=0;l<Q;l++)
-            {
-             (*this)(i,j,k,l) = source_tensor(i,j,k,l);
-            }
-          }
-        }
+       for(unsigned long l=0;l<Q;l++)
+       {
+	(*this)(i,j,k,l) = source_tensor(i,j,k,l);
+       }
       }
+     }
     }
+   }
    // Return reference to object itself (i.e. de-reference this pointer)
    return *this;
   }
 
 
- /// One parameter constructor produces a  nxnxnxn tensor
- RankFourTensor(const unsigned long &n) 
+  /// One parameter constructor produces a  nxnxnxn tensor
+  RankFourTensor(const unsigned long &n) 
   {
    // Set row and column lengths
    N=n; M=n; P=n; Q=n;
@@ -1770,9 +1791,9 @@ class RankFourTensor
 #endif
   }
  
- /// Four parameter constructor, general non-square tensor
- RankFourTensor(const unsigned long &n_index1, const unsigned long &n_index2,
-                const unsigned long &n_index3, const unsigned long &n_index4)
+  /// Four parameter constructor, general non-square tensor
+  RankFourTensor(const unsigned long &n_index1, const unsigned long &n_index2,
+		 const unsigned long &n_index3, const unsigned long &n_index4)
   {
    // Set row and column lengths
    N=n_index1; M=n_index2; P=n_index3; Q=n_index4;
@@ -1785,10 +1806,10 @@ class RankFourTensor
   }
 
 
- /// Four parameter constructor, general non-square tensor
- RankFourTensor(const unsigned long &n_index1, const unsigned long &n_index2,
-                const unsigned long &n_index3, const unsigned long &n_index4, 
-                const T &initial_val)
+  /// Four parameter constructor, general non-square tensor
+  RankFourTensor(const unsigned long &n_index1, const unsigned long &n_index2,
+		 const unsigned long &n_index3, const unsigned long &n_index4, 
+		 const T &initial_val)
   {
    // Set row and column lengths
    N=n_index1; M=n_index2; P=n_index3; Q=n_index4;
@@ -1798,19 +1819,19 @@ class RankFourTensor
    initialise(initial_val);
   }
 
- /// Destructor: delete the pointers
- virtual ~RankFourTensor() {delete[] Tensordata; Tensordata = 0;}
+  /// Destructor: delete the pointers
+  virtual ~RankFourTensor() {delete[] Tensordata; Tensordata = 0;}
 
- /// Resize to a square nxnxnxn tensor
- void resize(const unsigned long &n) {resize(n,n,n,n);}
+  /// Resize to a square nxnxnxn tensor
+  void resize(const unsigned long &n) {resize(n,n,n,n);}
  
- /// Resize to a general tensor
- void resize(const unsigned long &n_index1, const unsigned long &n_index2,
-             const unsigned long &n_index3, const unsigned long &n_index4)
+  /// Resize to a general tensor
+  void resize(const unsigned long &n_index1, const unsigned long &n_index2,
+	      const unsigned long &n_index3, const unsigned long &n_index4)
   {
    //If the sizes have not changed do nothing
    if((n_index1==N) && (n_index2==M) && (n_index3==P) && (n_index4==Q)) 
-    {return;}
+   {return;}
    // Store old sizes
    unsigned long n_old=N, m_old=M, p_old=P, q_old=Q;
    // Reassign the sizes
@@ -1831,35 +1852,35 @@ class RankFourTensor
    // If matrix has values, transfer them to new matrix
    // Loop over rows
    for (unsigned long i=0;i<n_copy;i++)
+   {
+    // Loop over columns
+    for (unsigned long j=0;j<m_copy;j++)
     {
      // Loop over columns
-     for (unsigned long j=0;j<m_copy;j++)
+     for (unsigned long k=0;k<p_copy;k++)
+     {
+      // Loop over columns
+      for (unsigned long l=0;l<q_copy;l++)
       {
-       // Loop over columns
-       for (unsigned long k=0;k<p_copy;k++)
-        {
-         // Loop over columns
-         for (unsigned long l=0;l<q_copy;l++)
-          {
-           // Transfer values from temp_tensor
-           Tensordata[Q*(M*P*i + P*j + k) +l] = 
-            temp_tensor[q_old*(m_old*p_old*i + p_old*j + k)+ l];
-          }
-        }
+       // Transfer values from temp_tensor
+       Tensordata[Q*(M*P*i + P*j + k) +l] = 
+	temp_tensor[q_old*(m_old*p_old*i + p_old*j + k)+ l];
       }
+     }
     }
+   }
    // Now kill storage for old tensor
    delete[] temp_tensor;
   }
 
- /// Resize to a general tensor
- void resize(const unsigned long &n_index1, const unsigned long &n_index2,
-             const unsigned long &n_index3, const unsigned long &n_index4,
-             const T &initial_value)
+  /// Resize to a general tensor
+  void resize(const unsigned long &n_index1, const unsigned long &n_index2,
+	      const unsigned long &n_index3, const unsigned long &n_index4,
+	      const T &initial_value)
   {
    //If the sizes have not changed do nothing
    if((n_index1==N) && (n_index2==M) && (n_index3==P) && (n_index4==Q))
-    {return;}
+   {return;}
    // Store old sizes
    unsigned long n_old=N, m_old=M, p_old=P, q_old=Q;
    // Reassign the sizes
@@ -1880,46 +1901,46 @@ class RankFourTensor
    // If matrix has values, transfer them to new matrix
    // Loop over rows
    for (unsigned long i=0;i<n_copy;i++)
+   {
+    // Loop over columns
+    for (unsigned long j=0;j<m_copy;j++)
     {
      // Loop over columns
-     for (unsigned long j=0;j<m_copy;j++)
+     for (unsigned long k=0;k<p_copy;k++)
+     {
+      // Loop over columns
+      for (unsigned long l=0;l<q_copy;l++)
       {
-       // Loop over columns
-       for (unsigned long k=0;k<p_copy;k++)
-        {
-         // Loop over columns
-         for (unsigned long l=0;l<q_copy;l++)
-          {
-           // Transfer values from temp_tensor
-           Tensordata[Q*(M*P*i + P*j + k) +l] = 
-            temp_tensor[q_old*(m_old*p_old*i + p_old*j + k)+ l];
-          }
-        }
+       // Transfer values from temp_tensor
+       Tensordata[Q*(M*P*i + P*j + k) +l] = 
+	temp_tensor[q_old*(m_old*p_old*i + p_old*j + k)+ l];
       }
+     }
     }
+   }
    // Now kill storage for old tensor
    delete[] temp_tensor;
   }
  
- /// \short Initialise all values in the tensor to val
- void initialise(const T &val)
+  /// \short Initialise all values in the tensor to val
+  void initialise(const T &val)
   {for(unsigned long i=0;i<(N*M*P*Q);++i) {Tensordata[i] = val;}}
  
- /// Return the range of index 1 of the tensor
- unsigned long nindex1() const {return N;}
+  /// Return the range of index 1 of the tensor
+  unsigned long nindex1() const {return N;}
 
- /// Return the range of index 2 of the tensor
- unsigned long nindex2() const {return M;}
+  /// Return the range of index 2 of the tensor
+  unsigned long nindex2() const {return M;}
 
- /// Return the range of index 3 of the tensor
- unsigned long nindex3() const {return P;}
+  /// Return the range of index 3 of the tensor
+  unsigned long nindex3() const {return P;}
 
- /// Return the range of index 4 of the tensor
- unsigned long nindex4() const {return Q;}
+  /// Return the range of index 4 of the tensor
+  unsigned long nindex4() const {return Q;}
  
- /// Overload the round brackets to give access as a(i,j,k,l)
- inline T &operator()(const unsigned long &i, const unsigned long &j,
-                      const unsigned long &k, const unsigned long &l) 
+  /// Overload the round brackets to give access as a(i,j,k,l)
+  inline T &operator()(const unsigned long &i, const unsigned long &j,
+		       const unsigned long &k, const unsigned long &l) 
   {
 #ifdef RANGE_CHECKING
    this->range_check(i,j,k,l);
@@ -1927,11 +1948,11 @@ class RankFourTensor
    return Tensordata[Q*(P*(M*i + j) + k)+l];
   }
  
- /// Overload a const version for read-only access as a(i,j,k,l)
- inline T operator()(const unsigned long &i, 
-                            const unsigned long &j,
-                            const unsigned long &k, 
-                            const unsigned long &l) const
+  /// Overload a const version for read-only access as a(i,j,k,l)
+  inline T operator()(const unsigned long &i, 
+		      const unsigned long &j,
+		      const unsigned long &k, 
+		      const unsigned long &l) const
   {
 #ifdef RANGE_CHECKING
    this->range_check(i,j,k,l);
@@ -1939,29 +1960,29 @@ class RankFourTensor
    return Tensordata[Q*(P*(M*i + j) + k)+l];
   }
  
- /// \short Direct access to internal storage of data in flat-packed C-style 
- /// column-major format. WARNING: Only for experienced users. Only
- /// use this if raw speed is of the essence, as in the solid mechanics 
- /// problems.
- inline T& raw_direct_access(const unsigned long &i)
+  /// \short Direct access to internal storage of data in flat-packed C-style 
+  /// column-major format. WARNING: Only for experienced users. Only
+  /// use this if raw speed is of the essence, as in the solid mechanics 
+  /// problems.
+  inline T& raw_direct_access(const unsigned long &i)
   {return Tensordata[i];}
 
- /// \short Direct access to internal storage of data in flat-packed C-style 
- /// column-major format. WARNING: Only for experienced users. Only
- /// use this if raw speed is of the essence, as in the solid mechanics 
- /// problems.
- inline const T &raw_direct_access(const unsigned long &i) const
+  /// \short Direct access to internal storage of data in flat-packed C-style 
+  /// column-major format. WARNING: Only for experienced users. Only
+  /// use this if raw speed is of the essence, as in the solid mechanics 
+  /// problems.
+  inline const T &raw_direct_access(const unsigned long &i) const
   {return Tensordata[i];}
 
- /// \short Caculate the offset in flat-packed C-style, column-major format,
- /// required for a given i,j. WARNING: Only for experienced users. Only
- /// use this if raw speed is of the essence, as in the solid mechanics 
- /// problems.
- unsigned offset(const unsigned long &i,
-                 const unsigned long &j) const
+  /// \short Caculate the offset in flat-packed C-style, column-major format,
+  /// required for a given i,j. WARNING: Only for experienced users. Only
+  /// use this if raw speed is of the essence, as in the solid mechanics 
+  /// problems.
+  unsigned offset(const unsigned long &i,
+		  const unsigned long &j) const
   {return (Q*(P*(M*i + j) + 0) + 0);}
 
-};  
+ };  
 
 
 //////////////////////////////////////////////////////////////////
@@ -1972,97 +1993,97 @@ class RankFourTensor
 //=================================================================
 ///A Rank 5 Tensor class 
 //=================================================================
-template <class T>
-class RankFiveTensor
-{
+ template <class T>
+ class RankFiveTensor
+ {
 
-  private:
+ private:
 
- /// Private internal representation  as pointer to data
- T* Tensordata;
+  /// Private internal representation  as pointer to data
+  T* Tensordata;
  
- /// 1st Tensor dimension
- unsigned N;
+  /// 1st Tensor dimension
+  unsigned N;
  
- /// 2nd Tensor dimension
- unsigned M;
+  /// 2nd Tensor dimension
+  unsigned M;
  
- /// 3rd Tensor dimension
- unsigned P;
+  /// 3rd Tensor dimension
+  unsigned P;
  
- /// 4th Tensor dimension
- unsigned Q;
+  /// 4th Tensor dimension
+  unsigned Q;
  
- /// 5th Tensor dimension
- unsigned R;
+  /// 5th Tensor dimension
+  unsigned R;
  
- /// \short Range check to catch when an index is out of bounds, if so, it
- /// issues a warning message and dies by throwing an \c OomphLibError
- void range_check(const unsigned long& i, 
-                  const unsigned long& j,
-                  const unsigned long& k,
-                  const unsigned long& l,
-                  const unsigned long& m) const
+  /// \short Range check to catch when an index is out of bounds, if so, it
+  /// issues a warning message and dies by throwing an \c OomphLibError
+  void range_check(const unsigned long& i, 
+		   const unsigned long& j,
+		   const unsigned long& k,
+		   const unsigned long& l,
+		   const unsigned long& m) const
   {
    if (i>=N)
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: i=" << i << " is not in the range (0," 
-                   << N-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: i=" << i << " is not in the range (0," 
+		  << N-1 << ")." << std::endl;
      
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
    else if (j>=M)
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: j=" << j << " is not in the range (0," 
-                   << M-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: j=" << j << " is not in the range (0," 
+		  << M-1 << ")." << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
    else if (k>=P)
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: k=" << k << " is not in the range (0," 
-                   << P-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: k=" << k << " is not in the range (0," 
+		  << P-1 << ")." << std::endl;
 
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
    else if (l>=Q)
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: l=" << l << " is not in the range (0," 
-                   << Q-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: l=" << l << " is not in the range (0," 
+		  << Q-1 << ")." << std::endl;
      
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
    else if (m>=R)
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: m=" << m << " is not in the range (0," 
-                   << R-1 << ")." << std::endl;
+   {
+    std::ostringstream error_message;
+    error_message << "Range Error: m=" << m << " is not in the range (0," 
+		  << R-1 << ")." << std::endl;
      
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    throw OomphLibError(error_message.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
   }
 
-  public:
+ public:
 
- /// Empty constructor
- RankFiveTensor(): Tensordata(0), N(0), M(0), P(0), Q(0), R(0) {}
+  /// Empty constructor
+  RankFiveTensor(): Tensordata(0), N(0), M(0), P(0), Q(0), R(0) {}
  
- /// Copy constructor: Deep copy
- RankFiveTensor(const RankFiveTensor& source_tensor)
+  /// Copy constructor: Deep copy
+  RankFiveTensor(const RankFiveTensor& source_tensor)
   {
    // Set row and column lengths
    N=source_tensor.nindex1();
@@ -2076,63 +2097,63 @@ class RankFiveTensor
    
    // Copy the data across from the other matrix
    for(unsigned i=0;i<N;i++)
+   {
+    for(unsigned j=0;j<M;j++)
     {
-     for(unsigned j=0;j<M;j++)
+     for(unsigned k=0;k<P;k++)
+     {
+      for(unsigned l=0;l<Q;l++)
       {
-       for(unsigned k=0;k<P;k++)
-        {
-         for(unsigned l=0;l<Q;l++)
-          {
-           for(unsigned m=0;m<R;m++)
-            {
-             Tensordata[R*(Q*(P*(M*i + j) +k)+l)+m] = source_tensor(i,j,k,l,m);
-            }
-          }
-        }
+       for(unsigned m=0;m<R;m++)
+       {
+	Tensordata[R*(Q*(P*(M*i + j) +k)+l)+m] = source_tensor(i,j,k,l,m);
+       }
       }
+     }
     }
+   }
   }
  
- /// Copy assignement 
- RankFiveTensor& operator=(const RankFiveTensor& source_tensor) 
+  /// Copy assignement 
+  RankFiveTensor& operator=(const RankFiveTensor& source_tensor) 
   {
    // Don't create a new matrix if the assignement is the identity
    if (this != & source_tensor)
-    {
-     // Check row and column length
-     unsigned long n=source_tensor.nindex1();
-     unsigned long m=source_tensor.nindex2();
-     unsigned long p=source_tensor.nindex3();
-     unsigned long q=source_tensor.nindex4();
-     unsigned long r=source_tensor.nindex5();
-     //Resize the tensor to be the same size as the old tensor
-     if ( (N!=n) || (M!=m) || (P!=p) || (Q!=q)|| (R!=r) ) {resize(n,m,p,q,r);}
+   {
+    // Check row and column length
+    unsigned long n=source_tensor.nindex1();
+    unsigned long m=source_tensor.nindex2();
+    unsigned long p=source_tensor.nindex3();
+    unsigned long q=source_tensor.nindex4();
+    unsigned long r=source_tensor.nindex5();
+    //Resize the tensor to be the same size as the old tensor
+    if ( (N!=n) || (M!=m) || (P!=p) || (Q!=q)|| (R!=r) ) {resize(n,m,p,q,r);}
      
-     // Copy entries across from the other matrix
-     for (unsigned long i=0;i<N;i++)
+    // Copy entries across from the other matrix
+    for (unsigned long i=0;i<N;i++)
+    {
+     for (unsigned long j=0;j<M;j++)
+     {
+      for(unsigned long k=0;k<P;k++)
       {
-       for (unsigned long j=0;j<M;j++)
-        {
-         for(unsigned long k=0;k<P;k++)
-          {
-           for(unsigned long l=0;l<Q;l++)
-            {
-             for(unsigned long m=0;m<R;m++)
-              {
-               (*this)(i,j,k,l,m) = source_tensor(i,j,k,l,m);
-              }
-            }
-          }
-        }
+       for(unsigned long l=0;l<Q;l++)
+       {
+	for(unsigned long m=0;m<R;m++)
+	{
+	 (*this)(i,j,k,l,m) = source_tensor(i,j,k,l,m);
+	}
+       }
       }
+     }
     }
+   }
    // Return reference to object itself (i.e. de-reference this pointer)
    return *this;
   }
  
  
- /// One parameter constructor produces a  nxnxnxnxn tensor
- RankFiveTensor(const unsigned long &n) 
+  /// One parameter constructor produces a  nxnxnxnxn tensor
+  RankFiveTensor(const unsigned long &n) 
   {
    // Set row and column lengths
    N=n; M=n; P=n; Q=n; R=n;
@@ -2144,10 +2165,10 @@ class RankFiveTensor
 #endif
   }
  
- /// Four parameter constructor, general non-square tensor
- RankFiveTensor(const unsigned long &n_index1, const unsigned long &n_index2,
-                const unsigned long &n_index3, const unsigned long &n_index4,
-                const unsigned long &n_index5)
+  /// Four parameter constructor, general non-square tensor
+  RankFiveTensor(const unsigned long &n_index1, const unsigned long &n_index2,
+		 const unsigned long &n_index3, const unsigned long &n_index4,
+		 const unsigned long &n_index5)
   {
    // Set row and column lengths
    N=n_index1; M=n_index2; P=n_index3; Q=n_index4; R=n_index5;
@@ -2160,10 +2181,10 @@ class RankFiveTensor
   }
  
 
- /// Four parameter constructor, general non-square tensor
- RankFiveTensor(const unsigned long &n_index1, const unsigned long &n_index2,
-                const unsigned long &n_index3, const unsigned long &n_index4, 
-                const unsigned long &n_index5, const T &initial_val)
+  /// Four parameter constructor, general non-square tensor
+  RankFiveTensor(const unsigned long &n_index1, const unsigned long &n_index2,
+		 const unsigned long &n_index3, const unsigned long &n_index4, 
+		 const unsigned long &n_index5, const T &initial_val)
   {
    // Set row and column lengths
    N=n_index1; M=n_index2; P=n_index3; Q=n_index4; R=n_index5;
@@ -2173,21 +2194,21 @@ class RankFiveTensor
    initialise(initial_val);
   }
  
- /// Destructor: delete the pointers
- virtual ~RankFiveTensor() {delete[] Tensordata; Tensordata = 0;}
+  /// Destructor: delete the pointers
+  virtual ~RankFiveTensor() {delete[] Tensordata; Tensordata = 0;}
  
- /// Resize to a square nxnxnxn tensor
- void resize(const unsigned long &n) {resize(n,n,n,n,n);}
+  /// Resize to a square nxnxnxn tensor
+  void resize(const unsigned long &n) {resize(n,n,n,n,n);}
  
- /// Resize to a general tensor
- void resize(const unsigned long &n_index1, const unsigned long &n_index2,
-             const unsigned long &n_index3, const unsigned long &n_index4,
-             const unsigned long &n_index5)
+  /// Resize to a general tensor
+  void resize(const unsigned long &n_index1, const unsigned long &n_index2,
+	      const unsigned long &n_index3, const unsigned long &n_index4,
+	      const unsigned long &n_index5)
   {
    //If the sizes have not changed do nothing
    if((n_index1==N) && (n_index2==M) && (n_index3==P) && (n_index4==Q) && 
       (n_index5==R)) 
-    {return;}
+   {return;}
    // Store old sizes
    unsigned long n_old=N, m_old=M, p_old=P, q_old=Q, r_old=R;
    // Reassign the sizes
@@ -2209,40 +2230,40 @@ class RankFiveTensor
    // If matrix has values, transfer them to new matrix
    // Loop over rows
    for (unsigned long i=0;i<n_copy;i++)
+   {
+    // Loop over columns
+    for (unsigned long j=0;j<m_copy;j++)
     {
      // Loop over columns
-     for (unsigned long j=0;j<m_copy;j++)
+     for (unsigned long k=0;k<p_copy;k++)
+     {
+      // Loop over columns
+      for (unsigned long l=0;l<q_copy;l++)
       {
        // Loop over columns
-       for (unsigned long k=0;k<p_copy;k++)
-        {
-         // Loop over columns
-         for (unsigned long l=0;l<q_copy;l++)
-          {
-           // Loop over columns
-           for (unsigned long m=0;m<r_copy;m++)
-            {
-             // Transfer values from temp_tensor
-             Tensordata[R*(Q*(M*P*i + P*j + k) +l) +m] = 
-              temp_tensor[r_old*(q_old*(m_old*p_old*i + p_old*j + k)+ l)+ m];
-            }
-          }
-        }
+       for (unsigned long m=0;m<r_copy;m++)
+       {
+	// Transfer values from temp_tensor
+	Tensordata[R*(Q*(M*P*i + P*j + k) +l) +m] = 
+	 temp_tensor[r_old*(q_old*(m_old*p_old*i + p_old*j + k)+ l)+ m];
+       }
       }
+     }
     }
+   }
    // Now kill storage for old tensor
    delete[] temp_tensor;
   }
 
- /// Resize to a general tensor
- void resize(const unsigned long &n_index1, const unsigned long &n_index2,
-             const unsigned long &n_index3, const unsigned long &n_index4,
-             const unsigned long &n_index5, const T &initial_value)
+  /// Resize to a general tensor
+  void resize(const unsigned long &n_index1, const unsigned long &n_index2,
+	      const unsigned long &n_index3, const unsigned long &n_index4,
+	      const unsigned long &n_index5, const T &initial_value)
   {
    //If the sizes have not changed do nothing
    if((n_index1==N) && (n_index2==M) && (n_index3==P) && (n_index4==Q) &&
       (n_index5==R))
-    {return;}
+   {return;}
    // Store old sizes
    unsigned long n_old=N, m_old=M, p_old=P, q_old=Q, r_old=R;
    // Reassign the sizes
@@ -2264,54 +2285,54 @@ class RankFiveTensor
    // If matrix has values, transfer them to new matrix
    // Loop over rows
    for (unsigned long i=0;i<n_copy;i++)
+   {
+    // Loop over columns
+    for (unsigned long j=0;j<m_copy;j++)
     {
      // Loop over columns
-     for (unsigned long j=0;j<m_copy;j++)
+     for (unsigned long k=0;k<p_copy;k++)
+     {
+      // Loop over columns
+      for (unsigned long l=0;l<q_copy;l++)
       {
        // Loop over columns
-       for (unsigned long k=0;k<p_copy;k++)
-        {
-         // Loop over columns
-         for (unsigned long l=0;l<q_copy;l++)
-          {
-           // Loop over columns
-           for (unsigned long m=0;m<r_copy;m++)
-            {
-             // Transfer values from temp_tensor
-             Tensordata[R*(Q*(M*P*i + P*j + k) +l) + m] = 
-            temp_tensor[r_old*(q_old*(m_old*p_old*i + p_old*j + k)+ l) +m];
-            }
-          }
-        }
+       for (unsigned long m=0;m<r_copy;m++)
+       {
+	// Transfer values from temp_tensor
+	Tensordata[R*(Q*(M*P*i + P*j + k) +l) + m] = 
+	 temp_tensor[r_old*(q_old*(m_old*p_old*i + p_old*j + k)+ l) +m];
+       }
       }
+     }
     }
+   }
    // Now kill storage for old tensor
    delete[] temp_tensor;
   }
  
- /// \short Initialise all values in the tensor to val
- void initialise(const T &val)
+  /// \short Initialise all values in the tensor to val
+  void initialise(const T &val)
   {for(unsigned long i=0;i<(N*M*P*Q*R);++i) {Tensordata[i] = val;}}
  
- /// Return the range of index 1 of the tensor
- unsigned long nindex1() const {return N;}
+  /// Return the range of index 1 of the tensor
+  unsigned long nindex1() const {return N;}
 
- /// Return the range of index 2 of the tensor
- unsigned long nindex2() const {return M;}
+  /// Return the range of index 2 of the tensor
+  unsigned long nindex2() const {return M;}
 
- /// Return the range of index 3 of the tensor
- unsigned long nindex3() const {return P;}
+  /// Return the range of index 3 of the tensor
+  unsigned long nindex3() const {return P;}
 
- /// Return the range of index 4 of the tensor
- unsigned long nindex4() const {return Q;}
+  /// Return the range of index 4 of the tensor
+  unsigned long nindex4() const {return Q;}
  
- /// Return the range of index 5 of the tensor
- unsigned long nindex5() const {return R;}
+  /// Return the range of index 5 of the tensor
+  unsigned long nindex5() const {return R;}
 
- /// Overload the round brackets to give access as a(i,j,k,l,m)
- inline T &operator()(const unsigned long &i, const unsigned long &j,
-                      const unsigned long &k, const unsigned long &l,
-                      const unsigned long &m) 
+  /// Overload the round brackets to give access as a(i,j,k,l,m)
+  inline T &operator()(const unsigned long &i, const unsigned long &j,
+		       const unsigned long &k, const unsigned long &l,
+		       const unsigned long &m) 
   {
 #ifdef RANGE_CHECKING
    this->range_check(i,j,k,l,m);
@@ -2319,12 +2340,12 @@ class RankFiveTensor
    return Tensordata[R*(Q*(P*(M*i + j) + k) +l) +m];
   }
  
- /// Overload a const version for read-only access as a(i,j,k,l,m)
- inline T operator()(const unsigned long &i, 
-                            const unsigned long &j,
-                            const unsigned long &k, 
-                            const unsigned long &l,
-                            const unsigned long &m) const
+  /// Overload a const version for read-only access as a(i,j,k,l,m)
+  inline T operator()(const unsigned long &i, 
+		      const unsigned long &j,
+		      const unsigned long &k, 
+		      const unsigned long &l,
+		      const unsigned long &m) const
   {
 #ifdef RANGE_CHECKING
    this->range_check(i,j,k,l,m);
@@ -2332,32 +2353,32 @@ class RankFiveTensor
    return Tensordata[R*(Q*(P*(M*i + j) + k) +l) +m];
   }
  
- /// \short Direct access to internal storage of data in flat-packed C-style 
- /// column-major format. WARNING: Only for experienced users. Only
- /// use this if raw speed is of the essence, as in the solid mechanics 
- /// problems.
- inline T &raw_direct_access(const unsigned long &i)
+  /// \short Direct access to internal storage of data in flat-packed C-style 
+  /// column-major format. WARNING: Only for experienced users. Only
+  /// use this if raw speed is of the essence, as in the solid mechanics 
+  /// problems.
+  inline T &raw_direct_access(const unsigned long &i)
   {return Tensordata[i];}
 
 
- /// \short Direct access to internal storage of data in flat-packed C-style 
- /// column-major format. WARNING: Only for experienced users. Only
- /// use this if raw speed is of the essence, as in the solid mechanics 
- /// problems.
- inline const T &raw_direct_access(const unsigned long &i) const
+  /// \short Direct access to internal storage of data in flat-packed C-style 
+  /// column-major format. WARNING: Only for experienced users. Only
+  /// use this if raw speed is of the essence, as in the solid mechanics 
+  /// problems.
+  inline const T &raw_direct_access(const unsigned long &i) const
   {return Tensordata[i];}
 
- /// \short Caculate the offset in flat-packed Cy-style, column-major format,
- /// required for a given i,j,k. WARNING: Only for experienced users. Only
- /// use this if raw speed is of the essence, as in the solid mechanics 
- /// problems.
- unsigned offset(const unsigned long &i,
-                 const unsigned long &j,
-                 const unsigned long &k) const
+  /// \short Caculate the offset in flat-packed Cy-style, column-major format,
+  /// required for a given i,j,k. WARNING: Only for experienced users. Only
+  /// use this if raw speed is of the essence, as in the solid mechanics 
+  /// problems.
+  unsigned offset(const unsigned long &i,
+		  const unsigned long &j,
+		  const unsigned long &k) const
   {return (R*(Q*(P*(M*i + j) + k) + 0 ) + 0);}
 
 
-};  
+ };  
 
 
 
@@ -2373,29 +2394,29 @@ class RankFiveTensor
 /// class can use the specific access functions in the round-bracket
 /// operator.
 //=======================================================================
-template<class T>
-class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
-{
+ template<class T>
+ class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
+ {
 
-  public:
+ public:
 
- /// Default constructor
- CCMatrix() : SparseMatrix<T, CCMatrix<T> >()
+  /// Default constructor
+  CCMatrix() : SparseMatrix<T, CCMatrix<T> >()
   {
    Row_index=0;
    Column_start=0;
   }
 
 
- /// \short Constructor: Pass vector of values, vector of row indices,
- /// vector of column starts and number of rows (can be suppressed
- /// for square matrices). Number of nonzero entries is read
- /// off from value, so make sure the vector has been shrunk
- /// to its correct length.
- CCMatrix(const Vector<T>& value, const Vector<int>& row_index_,
-          const Vector<int>& column_start_,
-          const unsigned long &n,
-          const unsigned long &m) : SparseMatrix<T, CCMatrix<T> >()
+  /// \short Constructor: Pass vector of values, vector of row indices,
+  /// vector of column starts and number of rows (can be suppressed
+  /// for square matrices). Number of nonzero entries is read
+  /// off from value, so make sure the vector has been shrunk
+  /// to its correct length.
+  CCMatrix(const Vector<T>& value, const Vector<int>& row_index_,
+	   const Vector<int>& column_start_,
+	   const unsigned long &n,
+	   const unsigned long &m) : SparseMatrix<T, CCMatrix<T> >()
   {
    Row_index=0;
    Column_start=0;
@@ -2403,9 +2424,9 @@ class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
   }
 
  
- /// \short Copy constructor
- CCMatrix(const CCMatrix& source_matrix) : 
-  SparseMatrix<T, CCMatrix<T> >(source_matrix)
+  /// \short Copy constructor
+  CCMatrix(const CCMatrix& source_matrix) : 
+   SparseMatrix<T, CCMatrix<T> >(source_matrix)
   {
    //NNz, N and M are set the the copy constructor of the SparseMatrix
    //called above
@@ -2415,54 +2436,54 @@ class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
    
    // Assign:
    for (unsigned long i=0;i<this->Nnz;i++)
-    {
-     Row_index[i]=source_matrix.row_index()[i];
-    }
+   {
+    Row_index[i]=source_matrix.row_index()[i];
+   }
    
    // Column start:
    Column_start = new int[this->M+1];
    
    // Assign:
    for (unsigned long i=0;i<=this->M;i++)
-    {
-     Column_start[i]=source_matrix.column_start()[i];
-    }
+   {
+    Column_start[i]=source_matrix.column_start()[i];
+   }
   }
 
- /// Broken assignment operator
- void operator=(const CCMatrix&) 
+  /// Broken assignment operator
+  void operator=(const CCMatrix&) 
   {
    BrokenCopy::broken_assign("CCMatrix");
   }
 
  
- /// Destructor, delete any allocated memory
- virtual ~CCMatrix()
+  /// Destructor, delete any allocated memory
+  virtual ~CCMatrix()
   {
    delete[] Row_index; Row_index = 0;
    delete[] Column_start; Column_start = 0;
   }
  
- /// \short Access function that will be called by the read-only round-bracket
- /// operator (const)
- T get_entry(const unsigned long &i, const unsigned long &j) const
+  /// \short Access function that will be called by the read-only round-bracket
+  /// operator (const)
+  T get_entry(const unsigned long &i, const unsigned long &j) const
   {
 #ifdef RANGE_CHECKING
    this->range_check(i,j);
 #endif   
    for (long k=Column_start[j];k<Column_start[j+1];k++)
+   {
+    if (unsigned(Row_index[k])==i)
     {
-     if (unsigned(Row_index[k])==i)
-      {
-       return this->Value[k];
-      }
+     return this->Value[k];
     }
+   }
    return this->Zero;
   }
 
- /// Read-write access is not permitted for these matrices and is
- /// deliberately broken.
- T& entry(const unsigned long &i, const unsigned long &j)
+  /// Read-write access is not permitted for these matrices and is
+  /// deliberately broken.
+  T& entry(const unsigned long &i, const unsigned long &j)
   {
    std::string error_string =
     "Non-const access not provided for the CCMatrix<T> class\n";
@@ -2482,85 +2503,85 @@ class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
    return dummy;
   }
  
- /// Access to C-style column_start array
- int* column_start() {return Column_start;}
+  /// Access to C-style column_start array
+  int* column_start() {return Column_start;}
 
- /// Access to C-style column_start array (const version)
- const int* column_start() const {return Column_start;}
+  /// Access to C-style column_start array (const version)
+  const int* column_start() const {return Column_start;}
 
- /// Access to C-style row index array
- int* row_index() {return Row_index;}
+  /// Access to C-style row index array
+  int* row_index() {return Row_index;}
 
- /// Access to C-style row index array (const version)
- const int* row_index() const {return Row_index;}
+  /// Access to C-style row index array (const version)
+  const int* row_index() const {return Row_index;}
 
- /// \short Output the "bottom right" entry regardless of it being
- /// zero or not (this allows automatic detection of matrix size in
- /// e.g. matlab, python).
- void output_bottom_right_zero_helper(std::ostream &outfile) const
+  /// \short Output the "bottom right" entry regardless of it being
+  /// zero or not (this allows automatic detection of matrix size in
+  /// e.g. matlab, python).
+  void output_bottom_right_zero_helper(std::ostream &outfile) const
   {
-    int last_row = this->N-1;
-    int last_col_local = this->M-1;
+   int last_row = this->N-1;
+   int last_col_local = this->M-1;
 
-    // Use this strange thingy because of the CRTP discussed above.
-    T last_value = this->operator()(last_row, last_col_local);
+   // Use this strange thingy because of the CRTP discussed above.
+   T last_value = this->operator()(last_row, last_col_local);
     
-    if(last_value == T(0))
-     {
-      outfile << last_row << " " << last_col_local << " " << T(0)
-              << std::endl;
-     }
+   if(last_value == T(0))
+   {
+    outfile << last_row << " " << last_col_local << " " << T(0)
+	    << std::endl;
+   }
   }
 
- /// \short Indexed output function to print a matrix to the
- /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
- void sparse_indexed_output_helper(std::ostream &outfile) const
+  /// \short Indexed output function to print a matrix to the
+  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
+  void sparse_indexed_output_helper(std::ostream &outfile) const
   {
    for (unsigned long j=0;j<this->N;j++)
+   {
+    for (long k=Column_start[j];k<Column_start[j+1];k++)
     {
-     for (long k=Column_start[j];k<Column_start[j+1];k++)
-      {
-       outfile << Row_index[k] <<  " " << j
-               <<  " " << this->Value[k] << std::endl;
-      }
+     outfile << Row_index[k] <<  " " << j
+	     <<  " " << this->Value[k] << std::endl;
     }
+   }
   }
 
- /// Wipe matrix data and set all values to 0.
- void clean_up_memory();
+  /// Wipe matrix data and set all values to 0.
+  void clean_up_memory();
 
 
- /// \short Build matrix from compressed representation.
- /// Number of nonzero entries is read
- /// off from value, so make sure the vector has been shrunk
- /// to its correct length. 
- void build(const Vector<T>& value, const Vector<int>& row_index,
-            const Vector<int>& column_start, 
-            const unsigned long &n,
-            const unsigned long &m);
+  /// \short Build matrix from compressed representation.
+  /// Number of nonzero entries is read
+  /// off from value, so make sure the vector has been shrunk
+  /// to its correct length. 
+  void build(const Vector<T>& value, const Vector<int>& row_index,
+	     const Vector<int>& column_start, 
+	     const unsigned long &n,
+	     const unsigned long &m);
 
- /// \short Function to build matrix from pointers to arrays 
- /// which hold the column starts, row indices and non-zero values.
- /// The final parameters specifies the number of rows and columns.
- /// Note that, as the name suggests, this function does not
- /// make a copy of the data pointed to by the first three arguments!
- void build_without_copy(T* value,
-                         int* row_index,
-                         int* column_start,
-                         const unsigned long &nnz,
-                         const unsigned long &n,
-                         const unsigned long &m);
+  /// \short Function to build matrix from pointers to arrays 
+  /// which hold the column starts, row indices and non-zero values.
+  /// The final parameters specifies the number of rows and columns.
+  /// Note that, as the name suggests, this function does not
+  /// make a copy of the data pointed to by the first three arguments!
+  void build_without_copy(T* value,
+			  int* row_index,
+			  int* column_start,
+			  const unsigned long &nnz,
+			  const unsigned long &n,
+			  const unsigned long &m);
 
 
-  protected:
+ protected:
 
- /// Row index
- int* Row_index;
+  /// Row index
+  int* Row_index;
 
- /// Start index for column
- int* Column_start;
+  /// Start index for column
+  int* Column_start;
  
-};
+ };
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -2570,115 +2591,115 @@ class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
 //=================================================================
 /// \short A class for compressed column matrices that store doubles
 //=================================================================
-class CCDoubleMatrix : public DoubleMatrixBase,
-                       public CCMatrix<double>
-{
+ class CCDoubleMatrix : public DoubleMatrixBase,
+			public CCMatrix<double>
+ {
  
-  public:
+ public:
 
- /// Default constructor
- CCDoubleMatrix();
+  /// Default constructor
+  CCDoubleMatrix();
   
- /// \short Constructor: Pass vector of values, vector of row indices,
- /// vector of column starts and number of rows (can be suppressed
- /// for square matrices). Number of nonzero entries is read
- /// off from value, so make sure the vector has been shrunk
- /// to its correct length.
- CCDoubleMatrix(const Vector<double>& value,
-                const Vector<int>& row_index_,
-                const Vector<int>& column_start_,
-                const unsigned long &n,
-                const unsigned long &m);
+  /// \short Constructor: Pass vector of values, vector of row indices,
+  /// vector of column starts and number of rows (can be suppressed
+  /// for square matrices). Number of nonzero entries is read
+  /// off from value, so make sure the vector has been shrunk
+  /// to its correct length.
+  CCDoubleMatrix(const Vector<double>& value,
+		 const Vector<int>& row_index_,
+		 const Vector<int>& column_start_,
+		 const unsigned long &n,
+		 const unsigned long &m);
  
- /// Broken copy constructor
- CCDoubleMatrix(const CCDoubleMatrix& matrix) : DoubleMatrixBase(),
-  CCMatrix<double>()
+  /// Broken copy constructor
+  CCDoubleMatrix(const CCDoubleMatrix& matrix) : DoubleMatrixBase(),
+						 CCMatrix<double>()
   {
    BrokenCopy::broken_copy("CCDoubleMatrix");
   } 
  
- /// Broken assignment operator
- void operator=(const CCDoubleMatrix&) 
+  /// Broken assignment operator
+  void operator=(const CCDoubleMatrix&) 
   {
    BrokenCopy::broken_assign("CCDoubleMatrix");
   }
 
- /// Destructor: Kill the LU factors if they have been setup.
- virtual ~CCDoubleMatrix();
+  /// Destructor: Kill the LU factors if they have been setup.
+  virtual ~CCDoubleMatrix();
 
   /// Return the number of rows of the matrix
- inline unsigned long nrow() const {return CCMatrix<double>::nrow();}
+  inline unsigned long nrow() const {return CCMatrix<double>::nrow();}
  
- /// Return the number of columns of the matrix
- inline unsigned long ncol() const {return CCMatrix<double>::ncol();}
+  /// Return the number of columns of the matrix
+  inline unsigned long ncol() const {return CCMatrix<double>::ncol();}
 
- /// \short Overload the round-bracket access operator to provide
- /// read-only (const) access to the data
- inline double operator()(const unsigned long &i, 
-                                 const unsigned long &j) 
-  const {return CCMatrix<double>::get_entry(i,j);}
+  /// \short Overload the round-bracket access operator to provide
+  /// read-only (const) access to the data
+  inline double operator()(const unsigned long &i, 
+			   const unsigned long &j) 
+   const {return CCMatrix<double>::get_entry(i,j);}
  
- /// \short LU decomposition using SuperLU
- virtual void ludecompose();
+  /// \short LU decomposition using SuperLU
+  virtual void ludecompose();
 
- /// \short LU back solve for given RHS
- virtual void lubksub(DoubleVector &rhs);
+  /// \short LU back solve for given RHS
+  virtual void lubksub(DoubleVector &rhs);
 
- /// \short Multiply the matrix by the vector x: soln=Ax
- void multiply(const DoubleVector &x, DoubleVector &soln) const;
+  /// \short Multiply the matrix by the vector x: soln=Ax
+  void multiply(const DoubleVector &x, DoubleVector &soln) const;
 
- /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
- void multiply_transpose(const DoubleVector &x,
-                         DoubleVector &soln) const;
+  /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
+  void multiply_transpose(const DoubleVector &x,
+			  DoubleVector &soln) const;
 
 
- /// \short Function to multiply this matrix by the CCDoubleMatrix matrix_in
- /// The multiplication method used can be selected using the flag
- /// Matrix_matrix_multiply_method. By default Method 2 is used.
- /// Method 1: First runs through this matrix and matrix_in to find the storage
- ///           requirements for result - arrays of the correct size are 
- ///           then allocated before performing the calculation.
- ///           Minimises memory requirements but more costly.
- /// Method 2: Grows storage for values and column indices of result 'on the
- ///           fly' using an array of maps. Faster but more memory
- ///           intensive.
- /// Method 3: Grows storage for values and column indices of result 'on the
- ///           fly' using a vector of vectors. Not particularly impressive
- ///           on the platforms we tried...
- void multiply(const CCDoubleMatrix& matrix_in, CCDoubleMatrix& result);
+  /// \short Function to multiply this matrix by the CCDoubleMatrix matrix_in
+  /// The multiplication method used can be selected using the flag
+  /// Matrix_matrix_multiply_method. By default Method 2 is used.
+  /// Method 1: First runs through this matrix and matrix_in to find the storage
+  ///           requirements for result - arrays of the correct size are 
+  ///           then allocated before performing the calculation.
+  ///           Minimises memory requirements but more costly.
+  /// Method 2: Grows storage for values and column indices of result 'on the
+  ///           fly' using an array of maps. Faster but more memory
+  ///           intensive.
+  /// Method 3: Grows storage for values and column indices of result 'on the
+  ///           fly' using a vector of vectors. Not particularly impressive
+  ///           on the platforms we tried...
+  void multiply(const CCDoubleMatrix& matrix_in, CCDoubleMatrix& result);
   
   
- /// \short For every row, find the maximum absolute value of the
- /// entries in this row. Set all values that are less than alpha times
- /// this maximum to zero and return the resulting matrix in
- /// reduced_matrix. Note: Diagonal entries are retained regardless
- /// of their size. 
- void matrix_reduction(const double &alpha,
-                       CCDoubleMatrix& reduced_matrix);
+  /// \short For every row, find the maximum absolute value of the
+  /// entries in this row. Set all values that are less than alpha times
+  /// this maximum to zero and return the resulting matrix in
+  /// reduced_matrix. Note: Diagonal entries are retained regardless
+  /// of their size. 
+  void matrix_reduction(const double &alpha,
+			CCDoubleMatrix& reduced_matrix);
  
- /// \short Access function to Matrix_matrix_multiply_method, the flag
- /// which determines the matrix matrix multiplication method used.
- /// Method 1: First runs through this matrix and matrix_in to find the storage
- ///           requirements for result - arrays of the correct size are 
- ///           then allocated before performing the calculation.
- ///           Minimises memory requirements but more costly.
- /// Method 2: Grows storage for values and column indices of result 'on the
- ///           fly' using an array of maps. Faster but more memory
- ///           intensive.
- /// Method 3: Grows storage for values and column indices of result 'on the
- ///           fly' using a vector of vectors. Not particularly impressive
- ///           on the platforms we tried...
- unsigned& matrix_matrix_multiply_method() 
+  /// \short Access function to Matrix_matrix_multiply_method, the flag
+  /// which determines the matrix matrix multiplication method used.
+  /// Method 1: First runs through this matrix and matrix_in to find the storage
+  ///           requirements for result - arrays of the correct size are 
+  ///           then allocated before performing the calculation.
+  ///           Minimises memory requirements but more costly.
+  /// Method 2: Grows storage for values and column indices of result 'on the
+  ///           fly' using an array of maps. Faster but more memory
+  ///           intensive.
+  /// Method 3: Grows storage for values and column indices of result 'on the
+  ///           fly' using a vector of vectors. Not particularly impressive
+  ///           on the platforms we tried...
+  unsigned& matrix_matrix_multiply_method() 
   { 
    return Matrix_matrix_multiply_method; 
   }
  
-  private:
+ private:
  
- /// Flag to determine which matrix-matrix multiplication method is used.
- unsigned Matrix_matrix_multiply_method;
+  /// Flag to determine which matrix-matrix multiplication method is used.
+  unsigned Matrix_matrix_multiply_method;
 
-};
+ };
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -2689,95 +2710,95 @@ class CCDoubleMatrix : public DoubleMatrixBase,
 //============================================================================
 /// Constructor to build a square n by n matrix
 //============================================================================
-template<class T>
-DenseMatrix<T>::DenseMatrix(const unsigned long &n)
-{
- // Set row and column lengths
- N=n; M=n;
- // Assign space for the n rows
- Matrixdata = new T[n*n];
- //Initialise to zero if required
+ template<class T>
+ DenseMatrix<T>::DenseMatrix(const unsigned long &n)
+ {
+  // Set row and column lengths
+  N=n; M=n;
+  // Assign space for the n rows
+  Matrixdata = new T[n*n];
+  //Initialise to zero if required
 #ifdef OOMPH_INITIALISE_DENSE_MATRICES
- initialise(T(0));
+  initialise(T(0));
 #endif
-}
+ }
 
 
 //============================================================================
 /// Constructor to build a matrix with n rows and m columns
 //============================================================================
-template<class T>
-DenseMatrix<T>::DenseMatrix(const unsigned long &n, 
-                            const unsigned long &m)
-{
- // Set row and column lengths
- N=n; M=m;
- // Assign space for the n rows
- Matrixdata = new T[n*m];
+ template<class T>
+ DenseMatrix<T>::DenseMatrix(const unsigned long &n, 
+			     const unsigned long &m)
+ {
+  // Set row and column lengths
+  N=n; M=m;
+  // Assign space for the n rows
+  Matrixdata = new T[n*m];
 #ifdef OOMPH_INITIALISE_DENSE_MATRICES
- initialise(T(0));
+  initialise(T(0));
 #endif
-}
+ }
 
 //============================================================================
 /// \short Constructor to build a matrix with n rows and m columns,
 /// with initial value initial_val
 //============================================================================
-template<class T>
-DenseMatrix<T>::DenseMatrix(const unsigned long &n, const unsigned long &m,
-                            const T &initial_val)
-{
- // Set row and column lengths
- N=n; M=m;
- // Assign space for the n rows
- Matrixdata = new T[n*m];
- initialise(initial_val);
-}
+ template<class T>
+ DenseMatrix<T>::DenseMatrix(const unsigned long &n, const unsigned long &m,
+			     const T &initial_val)
+ {
+  // Set row and column lengths
+  N=n; M=m;
+  // Assign space for the n rows
+  Matrixdata = new T[n*m];
+  initialise(initial_val);
+ }
 
 
 //============================================================================
 /// \short Resize to a non-square n_row x m_col matrix,
 /// where any values already present will be transfered.
 //============================================================================
-template<class T>
-void DenseMatrix<T>::resize(const unsigned long &n,
-                            const unsigned long &m)
-{
- //If the sizes are the same, do nothing
- if((n==N) && (m==M)) {return;}
- // Store old sizes
- unsigned long n_old=N, m_old=M;
- // Reassign the sizes
- N=n; M=m;
- // Store double pointer to old matrix data
- T* temp_matrix = Matrixdata;
+ template<class T>
+ void DenseMatrix<T>::resize(const unsigned long &n,
+			     const unsigned long &m)
+ {
+  //If the sizes are the same, do nothing
+  if((n==N) && (m==M)) {return;}
+  // Store old sizes
+  unsigned long n_old=N, m_old=M;
+  // Reassign the sizes
+  N=n; M=m;
+  // Store double pointer to old matrix data
+  T* temp_matrix = Matrixdata;
 
- // Re-create Matrixdata in new size
- Matrixdata = new T[n*m];
- //Initialise to zero
+  // Re-create Matrixdata in new size
+  Matrixdata = new T[n*m];
+  //Initialise to zero
 #ifdef OOMPH_INITIALISE_DENSE_MATRICES 
- initialise(T(0));
+  initialise(T(0));
 #endif
 
- // Transfer previously existing values
- unsigned long n_copy, m_copy;
- n_copy = std::min(n_old,n); m_copy = std::min(m_old,m);
+  // Transfer previously existing values
+  unsigned long n_copy, m_copy;
+  n_copy = std::min(n_old,n); m_copy = std::min(m_old,m);
 
- // If matrix has values, transfer them to new matrix
- // Loop over rows
- for(unsigned long i=0;i<n_copy;i++)
+  // If matrix has values, transfer them to new matrix
+  // Loop over rows
+  for(unsigned long i=0;i<n_copy;i++)
   {
    // Loop over columns
    for (unsigned long j=0;j<m_copy;j++)
-    {
-     // Transfer values from temp_matrix
-     Matrixdata[m*i+j] = temp_matrix[m_old*i+j];
-    }
+   {
+    // Transfer values from temp_matrix
+    Matrixdata[m*i+j] = temp_matrix[m_old*i+j];
+   }
   }
  
- // Now kill storage for old matrix
- delete[] temp_matrix;
-}
+  // Now kill storage for old matrix
+  delete[] temp_matrix;
+ }
 
 
 
@@ -2785,98 +2806,98 @@ void DenseMatrix<T>::resize(const unsigned long &n,
 /// \short Resize to a non-square n_row x m_col matrix and initialize the 
 /// new entries to specified value.
 //============================================================================
-template<class T>
-void DenseMatrix<T>::resize(const unsigned long &n,
-                            const unsigned long &m, 
-                            const T &initial_value)
-{
- //If the size is not changed, just return
- if((n==N) && (m==M)) {return;}
- // Store old sizes
- unsigned long n_old=N, m_old=M;
- // Reassign the sizes
- N=n; M=m;
- // Store double pointer to old matrix data
- T* temp_matrix = Matrixdata;
- // Re-create Matrixdata in new size
- Matrixdata = new T[n*m];
- // Assign initial value (will use the newly allocated data)
- initialise(initial_value);
+ template<class T>
+ void DenseMatrix<T>::resize(const unsigned long &n,
+			     const unsigned long &m, 
+			     const T &initial_value)
+ {
+  //If the size is not changed, just return
+  if((n==N) && (m==M)) {return;}
+  // Store old sizes
+  unsigned long n_old=N, m_old=M;
+  // Reassign the sizes
+  N=n; M=m;
+  // Store double pointer to old matrix data
+  T* temp_matrix = Matrixdata;
+  // Re-create Matrixdata in new size
+  Matrixdata = new T[n*m];
+  // Assign initial value (will use the newly allocated data)
+  initialise(initial_value);
  
- // Transfering values
- unsigned long n_copy, m_copy;
- n_copy = std::min(n_old,n); m_copy = std::min(m_old,m);
- // If matrix has values, transfer them to temp_matrix
- // Loop over rows
- for (unsigned long i=0;i<n_copy;i++)
+  // Transfering values
+  unsigned long n_copy, m_copy;
+  n_copy = std::min(n_old,n); m_copy = std::min(m_old,m);
+  // If matrix has values, transfer them to temp_matrix
+  // Loop over rows
+  for (unsigned long i=0;i<n_copy;i++)
   {
    // Loop over columns
    for (unsigned long j=0;j<m_copy;j++)
-    {
-     // Transfer values to temp_matrix
-     Matrixdata[m*i+j] = temp_matrix[m_old*i+j];
-    }
+   {
+    // Transfer values to temp_matrix
+    Matrixdata[m*i+j] = temp_matrix[m_old*i+j];
+   }
   }
 
- // Now kill storage for old matrix
- delete[] temp_matrix;
-}
+  // Now kill storage for old matrix
+  delete[] temp_matrix;
+ }
 
 
 
 //============================================================================
 /// Output function to print a matrix row-by-row to the stream outfile
 //============================================================================
-template<class T>
-void DenseMatrix<T>::output(std::ostream &outfile) const
-{
- //Loop over the rows
- for(unsigned i=0;i<N;i++)
+ template<class T>
+ void DenseMatrix<T>::output(std::ostream &outfile) const
+ {
+  //Loop over the rows
+  for(unsigned i=0;i<N;i++)
   {
    //Loop over the columne
    for(unsigned j=0;j<M;j++)
-    {
-     outfile << (*this)(i,j) << " ";
-    }
+   {
+    outfile << (*this)(i,j) << " ";
+   }
    //Put in a newline
    outfile << std::endl;
   }
-}
+ }
 
 
 
 //============================================================================
 /// Output function to print a matrix row-by-row to a file. Specify filename.
 //============================================================================
-template<class T>
-void DenseMatrix<T>::output(std::string filename) const
-{
- // Open file
- std::ofstream some_file;
- some_file.open(filename.c_str());
+ template<class T>
+ void DenseMatrix<T>::output(std::string filename) const
+ {
+  // Open file
+  std::ofstream some_file;
+  some_file.open(filename.c_str());
    
- output(some_file);
- some_file.close();
-}
+  output(some_file);
+  some_file.close();
+ }
 
 
 
 //============================================================================
 /// Indexed output as i,j,a(i,j)
 //============================================================================
-template<class T>
-void DenseMatrix<T>::indexed_output(std::ostream &outfile) const
-{
- //Loop over the rows
- for(unsigned i=0;i<N;i++)
+ template<class T>
+ void DenseMatrix<T>::indexed_output(std::ostream &outfile) const
+ {
+  //Loop over the rows
+  for(unsigned i=0;i<N;i++)
   {
    //Loop over the columns
    for(unsigned j=0;j<M;j++)
-    {
-     outfile << i << " " << j << " " << (*this)(i,j) << std::endl;
-    }
+   {
+    outfile << i << " " << j << " " << (*this)(i,j) << std::endl;
+   }
   }
-}
+ }
 
 
 
@@ -2884,15 +2905,15 @@ void DenseMatrix<T>::indexed_output(std::ostream &outfile) const
 /// \short Indexed output function to print a matrix to a
 /// file as i,j,a(i,j). Specify filename.
 //============================================================================
-template<class T>
-void DenseMatrix<T>::indexed_output(std::string filename) const
-{
- // Open file
- std::ofstream some_file;
- some_file.open(filename.c_str());
- indexed_output(some_file);
- some_file.close();
-}
+ template<class T>
+ void DenseMatrix<T>::indexed_output(std::string filename) const
+ {
+  // Open file
+  std::ofstream some_file;
+  some_file.open(filename.c_str());
+  indexed_output(some_file);
+  some_file.close();
+ }
 
 
 //============================================================================
@@ -2900,9 +2921,9 @@ void DenseMatrix<T>::indexed_output(std::string filename) const
 /// zero or not (this allows automatic detection of matrix size in
 /// e.g. matlab, python). 
 //============================================================================
-template<class T>
-void DenseMatrix<T>::output_bottom_right_zero_helper(std::ostream &outfile) const
-{
+ template<class T>
+ void DenseMatrix<T>::output_bottom_right_zero_helper(std::ostream &outfile) const
+ {
   int last_row = this->N-1;
   int last_col = this->M-1;
 
@@ -2910,31 +2931,31 @@ void DenseMatrix<T>::output_bottom_right_zero_helper(std::ostream &outfile) cons
   T last_value = this->operator()(last_row, last_col);
   
   if(last_value == T(0))
-   {
-    outfile << last_row << " " << last_col << " " << T(0)
-            << std::endl;
-   }
-}
+  {
+   outfile << last_row << " " << last_col << " " << T(0)
+	   << std::endl;
+  }
+ }
 
 //============================================================================
 /// Sparse indexed output as i,j,a(i,j) for a(i,j)!=0 only.
 //============================================================================
-template<class T>
-void DenseMatrix<T>::sparse_indexed_output_helper(std::ostream &outfile) const
-{
- //Loop over the rows
- for(unsigned i=0;i<N;i++)
+ template<class T>
+ void DenseMatrix<T>::sparse_indexed_output_helper(std::ostream &outfile) const
+ {
+  //Loop over the rows
+  for(unsigned i=0;i<N;i++)
   {
    //Loop over the column
    for(unsigned j=0;j<M;j++)
+   {
+    if ((*this)(i,j)!=T(0))
     {
-     if ((*this)(i,j)!=T(0))
-      {
-       outfile << i << " " << j << " " << (*this)(i,j) << std::endl;
-      }
+     outfile << i << " " << j << " " << (*this)(i,j) << std::endl;
     }
+   }
   }
-}
+ }
 
 
 
@@ -2946,29 +2967,29 @@ void DenseMatrix<T>::sparse_indexed_output_helper(std::ostream &outfile) const
 //=============================================================================
 /// Wipe matrix data and set all values to 0.
 //=============================================================================
-template<class T>
-void CCMatrix<T>::clean_up_memory()
-{
- // delete any previously allocated  storage
- if (this->Value!=0)
+ template<class T>
+ void CCMatrix<T>::clean_up_memory()
  {
-  delete[] this->Value;
-  this->Value=0;
+  // delete any previously allocated  storage
+  if (this->Value!=0)
+  {
+   delete[] this->Value;
+   this->Value=0;
+  }
+  if (this->Row_index!=0)
+  {
+   delete[] this->Row_index;
+   this->Row_index=0;
+  }
+  if (this->Column_start!=0)
+  {
+   delete[] this->Column_start;
+   this->Column_start=0;
+  }
+  this->Nnz=0;
+  this->N=0;
+  this->M=0;
  }
- if (this->Row_index!=0)
- {
-  delete[] this->Row_index;
-  this->Row_index=0;
- }
- if (this->Column_start!=0)
- {
-  delete[] this->Column_start;
-  this->Column_start=0;
- }
- this->Nnz=0;
- this->N=0;
- this->M=0;
-}
 
 
 
@@ -2977,38 +2998,38 @@ void CCMatrix<T>::clean_up_memory()
 /// Note that, as the name suggests, this function does not
 /// make a copy of the data pointed to by the first three arguments!
 //=============================================================================
-template<class T>
-void CCMatrix<T>::build_without_copy(T* value,
-                                     int* row_index,
-                                     int* column_start,
-                                     const unsigned long& nnz,
-                                     const unsigned long& n,
-                                     const unsigned long& m)
-{
- // Number of nonzero entries
- this->Nnz=nnz;
+ template<class T>
+ void CCMatrix<T>::build_without_copy(T* value,
+				      int* row_index,
+				      int* column_start,
+				      const unsigned long& nnz,
+				      const unsigned long& n,
+				      const unsigned long& m)
+ {
+  // Number of nonzero entries
+  this->Nnz=nnz;
 
- // Number of rows
- this->N=n;
+  // Number of rows
+  this->N=n;
 
- // Number of columns
- this->M=m;
+  // Number of columns
+  this->M=m;
 
- // delete any previously allocated  storage
- if(this->Value!=0) {delete[] this->Value;}
- if(this->Row_index!=0) {delete[] this->Row_index;}
- if(this->Column_start!=0) {delete[] this->Column_start;}
+  // delete any previously allocated  storage
+  if(this->Value!=0) {delete[] this->Value;}
+  if(this->Row_index!=0) {delete[] this->Row_index;}
+  if(this->Column_start!=0) {delete[] this->Column_start;}
 
- // set Value
- this->Value = value;
+  // set Value
+  this->Value = value;
 
- // set Row_index
- this->Row_index = row_index;
+  // set Row_index
+  this->Row_index = row_index;
 
- // set Column_start
- this->Column_start = column_start;
+  // set Column_start
+  this->Column_start = column_start;
 
-}
+ }
 
 
 //===================================================================
@@ -3017,16 +3038,16 @@ void CCMatrix<T>::build_without_copy(T* value,
 /// off from value, so make sure the vector has been shrunk
 /// to its correct length. 
 //===================================================================
-template<class T>
-void CCMatrix<T>::build(const Vector<T>& value, 
-                        const Vector<int>& row_index_,
-                        const Vector<int>& column_start_, 
-                        const unsigned long &n,
-                        const unsigned long &m)
-{
+ template<class T>
+ void CCMatrix<T>::build(const Vector<T>& value, 
+			 const Vector<int>& row_index_,
+			 const Vector<int>& column_start_, 
+			 const unsigned long &n,
+			 const unsigned long &m)
+ {
  
 #ifdef PARANOID
- if (value.size()!=row_index_.size())
+  if (value.size()!=row_index_.size())
   {
    std::ostringstream error_message;
    error_message 
@@ -3040,44 +3061,44 @@ void CCMatrix<T>::build(const Vector<T>& value,
   }
 #endif
  
- // Number of nonzero entries
- this->Nnz = value.size();
+  // Number of nonzero entries
+  this->Nnz = value.size();
  
- //Number of rows
- this->N = n;
+  //Number of rows
+  this->N = n;
 
- // Number of columns
- this->M = m;
+  // Number of columns
+  this->M = m;
  
- //We need to delete any previously allocated  storage
- if(this->Value!=0) {delete[] this->Value;}
- if(this->Row_index!=0) {delete[] this->Row_index;}
- if(this->Column_start!=0) {delete[] this->Column_start;}
+  //We need to delete any previously allocated  storage
+  if(this->Value!=0) {delete[] this->Value;}
+  if(this->Row_index!=0) {delete[] this->Row_index;}
+  if(this->Column_start!=0) {delete[] this->Column_start;}
 
- // Values stored in C-style array
- this->Value = new T[this->Nnz];
+  // Values stored in C-style array
+  this->Value = new T[this->Nnz];
  
- // Row indices stored in C-style array
- this->Row_index = new int[this->Nnz];
+  // Row indices stored in C-style array
+  this->Row_index = new int[this->Nnz];
  
- // Assign:
- for (unsigned long i=0;i<this->Nnz;i++)
+  // Assign:
+  for (unsigned long i=0;i<this->Nnz;i++)
   {
    this->Value[i]=value[i];
    this->Row_index[i]=row_index_[i];
   }
  
- // Column start:
- //Find the size and aollcate
- unsigned long n_column_start = column_start_.size();
- this->Column_start = new int[n_column_start];
+  // Column start:
+  //Find the size and aollcate
+  unsigned long n_column_start = column_start_.size();
+  this->Column_start = new int[n_column_start];
  
- // Assign:
- for (unsigned long i=0;i<n_column_start;i++)
+  // Assign:
+  for (unsigned long i=0;i<n_column_start;i++)
   {
    this->Column_start[i]=column_start_[i];
   }
-}
+ }
 
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
@@ -3088,29 +3109,29 @@ void CCMatrix<T>::build(const Vector<T>& value,
 //=============================================================================
 /// Wipe matrix data and set all values to 0.
 //=============================================================================
-template<class T>
-void CRMatrix<T>::clean_up_memory()
-{
- // delete any previously allocated  storage
- if (this->Value!=0)
+ template<class T>
+ void CRMatrix<T>::clean_up_memory()
  {
-  delete[] this->Value;
-  this->Value=0;
+  // delete any previously allocated  storage
+  if (this->Value!=0)
+  {
+   delete[] this->Value;
+   this->Value=0;
+  }
+  if (this->Column_index!=0)
+  {
+   delete[] this->Column_index;
+   this->Column_index=0;
+  }
+  if (this->Row_start!=0)
+  {
+   delete[] this->Row_start;
+   this->Row_start=0;
+  }
+  this->Nnz=0;
+  this->N=0;
+  this->M=0;
  }
- if (this->Column_index!=0)
- {
-  delete[] this->Column_index;
-  this->Column_index=0;
- }
- if (this->Row_start!=0)
- {
-  delete[] this->Row_start;
-  this->Row_start=0;
- }
- this->Nnz=0;
- this->N=0;
- this->M=0;
-}
 
 
 
@@ -3120,37 +3141,37 @@ void CRMatrix<T>::clean_up_memory()
 /// Note that, as the name suggests, this function does not
 /// make a copy of the data pointed to by the first three arguments!
 //=============================================================================
-template<class T>
-void CRMatrix<T>::build_without_copy(T* value,
-                                     int* column_index_,
-                                     int* row_start_,
-                                     const unsigned long& nnz,
-                                     const unsigned long& n,
-                                     const unsigned long& m)
-{
- // Number of nonzero entries
- this->Nnz = nnz;
+ template<class T>
+ void CRMatrix<T>::build_without_copy(T* value,
+				      int* column_index_,
+				      int* row_start_,
+				      const unsigned long& nnz,
+				      const unsigned long& n,
+				      const unsigned long& m)
+ {
+  // Number of nonzero entries
+  this->Nnz = nnz;
  
- // Number of rows
- this->N = n;
+  // Number of rows
+  this->N = n;
  
- // Number of columns
- this->M = m;
+  // Number of columns
+  this->M = m;
 
- // delete any previously allocated  storage
- if(this->Value!=0) {delete[] this->Value;}
- if(this->Column_index!=0) {delete[] this->Column_index;}
- if(this->Row_start!=0) {delete[] this->Row_start;}
+  // delete any previously allocated  storage
+  if(this->Value!=0) {delete[] this->Value;}
+  if(this->Column_index!=0) {delete[] this->Column_index;}
+  if(this->Row_start!=0) {delete[] this->Row_start;}
 
- // set Value
- this->Value = value;
+  // set Value
+  this->Value = value;
 
- // set Column_index
- this->Column_index = column_index_;
+  // set Column_index
+  this->Column_index = column_index_;
 
- // set Row_start
- this->Row_start = row_start_;
-}
+  // set Row_start
+  this->Row_start = row_start_;
+ }
 
 
 
@@ -3162,169 +3183,169 @@ void CRMatrix<T>::build_without_copy(T* value,
 /// parameter specifies the number of columns. If it is not specified
 /// the matrix is assumed to be quadratic.
 //=================================================================
-template<class T>
-void CRMatrix<T>::build(const Vector<T>& value, 
-                        const Vector<int>& column_index_,
-                        const Vector<int>& row_start_,
-                        const unsigned long &n,
-                        const unsigned long &m)
-{
+ template<class T>
+ void CRMatrix<T>::build(const Vector<T>& value, 
+			 const Vector<int>& column_index_,
+			 const Vector<int>& row_start_,
+			 const unsigned long &n,
+			 const unsigned long &m)
+ {
 #ifdef PARANOID
-    if(value.size() != column_index_.size())
-      {
-	std::ostringstream error_message;
-	error_message << "Must have the same number of values and column indices,"
-		      << "we have " << value.size() << " values and "
-		      << column_index_.size() << " column inidicies."
-		      << std::endl;
-	throw OomphLibError(error_message.str(),
-                            OOMPH_CURRENT_FUNCTION,
-			    OOMPH_EXCEPTION_LOCATION);
-      }
+  if(value.size() != column_index_.size())
+  {
+   std::ostringstream error_message;
+   error_message << "Must have the same number of values and column indices,"
+		 << "we have " << value.size() << " values and "
+		 << column_index_.size() << " column inidicies."
+		 << std::endl;
+   throw OomphLibError(error_message.str(),
+		       OOMPH_CURRENT_FUNCTION,
+		       OOMPH_EXCEPTION_LOCATION);
+  }
 #endif
- // Number of nonzero entries
- this->Nnz = value.size();
+  // Number of nonzero entries
+  this->Nnz = value.size();
  
- // Number of rows
- this->N = n;
+  // Number of rows
+  this->N = n;
  
- // Number of columns
- this->M = m;
+  // Number of columns
+  this->M = m;
  
- //We need to delete any previously allocated  storage
- if(this->Value!=0) {delete[] this->Value;}
- if(this->Column_index!=0) {delete[] this->Column_index;}
- if(this->Row_start!=0) {delete[] this->Row_start;}
+  //We need to delete any previously allocated  storage
+  if(this->Value!=0) {delete[] this->Value;}
+  if(this->Column_index!=0) {delete[] this->Column_index;}
+  if(this->Row_start!=0) {delete[] this->Row_start;}
 
- // Values stored in C-style array
- this->Value = new T[this->Nnz];
+  // Values stored in C-style array
+  this->Value = new T[this->Nnz];
  
- // Column indices stored in C-style array
- this->Column_index = new int[this->Nnz];
+  // Column indices stored in C-style array
+  this->Column_index = new int[this->Nnz];
  
- // Assign:
- for (unsigned long i=0;i<this->Nnz;i++)
+  // Assign:
+  for (unsigned long i=0;i<this->Nnz;i++)
   {
    this->Value[i]=value[i];
    this->Column_index[i]=column_index_[i];
   }
  
- // Row start:
- // Find the size and allocate
- unsigned long n_row_start = row_start_.size();
- this->Row_start = new int[n_row_start];
+  // Row start:
+  // Find the size and allocate
+  unsigned long n_row_start = row_start_.size();
+  this->Row_start = new int[n_row_start];
  
- // Assign:
- for (unsigned long i=0;i<n_row_start;i++)
+  // Assign:
+  for (unsigned long i=0;i<n_row_start;i++)
   {
    this->Row_start[i]=row_start_[i];
   } 
-}
+ }
 
 
 //=================================================================
 /// \short Dummy zero
 //=================================================================
-template<class T,class MATRIX_TYPE>
+ template<class T,class MATRIX_TYPE>
  T SparseMatrix<T,MATRIX_TYPE>::Zero=T(0);
 
 
-namespace RRR
-{
+ namespace RRR
+ {
   extern std::string RayStr;
   extern bool RayBool;
-}
+ }
 
- //=================================================================
- /// Namespace for helper functions for CRDoubleMatrices
- //=================================================================
+//=================================================================
+/// Namespace for helper functions for CRDoubleMatrices
+//=================================================================
  namespace CRDoubleMatrixHelpers
-{
+ {
   /// Create a deep copy of the matrix pointed to by in_matrix_pt
   inline void deep_copy(const CRDoubleMatrix* const in_matrix_pt,
-      CRDoubleMatrix& out_matrix)
+			CRDoubleMatrix& out_matrix)
   {
 #ifdef PARANOID
-    // Is the out matrix built? We need an empty out matrix!
-    if(out_matrix.built())
-    {
-      std::ostringstream err_msg;
-      err_msg << "The result matrix has been built.\n"
-        << "Please clear the matrix.\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
+   // Is the out matrix built? We need an empty out matrix!
+   if(out_matrix.built())
+   {
+    std::ostringstream err_msg;
+    err_msg << "The result matrix has been built.\n"
+	    << "Please clear the matrix.\n";
+    throw OomphLibError(err_msg.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
 
-    // Check that the in matrix pointer is not null.
-    if(in_matrix_pt == 0)
-    {
-      std::ostringstream err_msg;
-      err_msg << "The in_matrix_pt is null.\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
+   // Check that the in matrix pointer is not null.
+   if(in_matrix_pt == 0)
+   {
+    std::ostringstream err_msg;
+    err_msg << "The in_matrix_pt is null.\n";
+    throw OomphLibError(err_msg.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
 
-    // Check that the in matrix is built.
-    if(!in_matrix_pt->built())
-    {
-      std::ostringstream err_msg;
-      err_msg << "The in_matrix_pt is null.\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
+   // Check that the in matrix is built.
+   if(!in_matrix_pt->built())
+   {
+    std::ostringstream err_msg;
+    err_msg << "The in_matrix_pt is null.\n";
+    throw OomphLibError(err_msg.str(),
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
 
-    // First set the matrix matrix multiply methods (for both serial and
-    // distributed)
-    out_matrix.serial_matrix_matrix_multiply_method() = 
-      in_matrix_pt->serial_matrix_matrix_multiply_method();
+   // First set the matrix matrix multiply methods (for both serial and
+   // distributed)
+   out_matrix.serial_matrix_matrix_multiply_method() = 
+    in_matrix_pt->serial_matrix_matrix_multiply_method();
 
-    out_matrix.distributed_matrix_matrix_multiply_method()
-      = in_matrix_pt->distributed_matrix_matrix_multiply_method();
+   out_matrix.distributed_matrix_matrix_multiply_method()
+    = in_matrix_pt->distributed_matrix_matrix_multiply_method();
    
     
-    // The local nrow and nnz of the in matrix
-    const unsigned in_nrow_local = in_matrix_pt->nrow_local();
-    const unsigned long in_nnz = in_matrix_pt->nnz();
+   // The local nrow and nnz of the in matrix
+   const unsigned in_nrow_local = in_matrix_pt->nrow_local();
+   const unsigned long in_nnz = in_matrix_pt->nnz();
 
-    // Storage for the values, column indices and row start
-    double* out_values = new double[in_nnz];
-    int* out_column_indices = new int[in_nnz];
-    int* out_row_start = new int[in_nrow_local + 1];
+   // Storage for the values, column indices and row start
+   double* out_values = new double[in_nnz];
+   int* out_column_indices = new int[in_nnz];
+   int* out_row_start = new int[in_nrow_local + 1];
 
-    // The data to copy over
-    const double* const in_values = in_matrix_pt->value();
-    const int* const in_column_indices = in_matrix_pt->column_index();
-    const int* const in_row_start = in_matrix_pt->row_start();
+   // The data to copy over
+   const double* const in_values = in_matrix_pt->value();
+   const int* const in_column_indices = in_matrix_pt->column_index();
+   const int* const in_row_start = in_matrix_pt->row_start();
 
-    // Copy the data
-    std::copy(in_values, 
-        in_values+in_nnz, 
-        out_values);
+   // Copy the data
+   std::copy(in_values, 
+	     in_values+in_nnz, 
+	     out_values);
 
-    std::copy(in_column_indices, 
-        in_column_indices+in_nnz, 
-        out_column_indices);
+   std::copy(in_column_indices, 
+	     in_column_indices+in_nnz, 
+	     out_column_indices);
 
-    std::copy(in_row_start,
-        in_row_start+(in_nrow_local + 1),
-        out_row_start);
+   std::copy(in_row_start,
+	     in_row_start+(in_nrow_local + 1),
+	     out_row_start);
 
-    // Build the matrix
-    out_matrix.build(in_matrix_pt->distribution_pt());
+   // Build the matrix
+   out_matrix.build(in_matrix_pt->distribution_pt());
 
-    out_matrix.build_without_copy(in_matrix_pt->ncol(),
-        in_nnz,
-        out_values,
-        out_column_indices,
-        out_row_start);
+   out_matrix.build_without_copy(in_matrix_pt->ncol(),
+				 in_nnz,
+				 out_values,
+				 out_column_indices,
+				 out_row_start);
 
-    // The only thing we haven't copied over is the default linear solver
-    // pointer, but I cannot figure out how to copy over a solver since
-    // I do not know what it is.
+   // The only thing we haven't copied over is the default linear solver
+   // pointer, but I cannot figure out how to copy over a solver since
+   // I do not know what it is.
   } // EoFunc deep_copy
 
   /// \short Builds a uniformly distributed matrix.
@@ -3334,11 +3355,11 @@ namespace RRR
   /// testing or small problems only.
   /// The resulting matrix (mat_out) must not have been built.
   void create_uniformly_distributed_matrix(
-      const unsigned &nrow, const unsigned &ncol,
-      const OomphCommunicator* const comm_pt,
-      const Vector<double> &values, 
-      const Vector<int> &column_indicies, const Vector<int> &row_start,
-      CRDoubleMatrix &mat_out);
+   const unsigned &nrow, const unsigned &ncol,
+   const OomphCommunicator* const comm_pt,
+   const Vector<double> &values, 
+   const Vector<int> &column_indicies, const Vector<int> &row_start,
+   CRDoubleMatrix &mat_out);
 
 
   /// \short Calculates the infinity (maximum) norm of a DenseMartrix of 
@@ -3365,8 +3386,14 @@ namespace RRR
   /// large matrix. Therefore the dimensions of the sub matrices has to 
   /// "make sense", there is a paranoid check for this.
   double gershgorin_eigenvalue_estimate(
-      const DenseMatrix<CRDoubleMatrix*> &matrix_pt);
-
+   const DenseMatrix<CRDoubleMatrix*> &matrix_pt);
+ 
+  /// \short Concatenate DoubleVectors into a CRDoubleMatrix matrix. Optional
+  /// tolerance argument ignores all entries below the input tolerance value
+  void combine_vectors_into_matrix(const Vector<DoubleVector>& matrix_columns,
+				   CRDoubleMatrix& result_matrix,
+				   const double& tolerance=0.0);
+ 
   /// \short Concatenate CRDoubleMatrix matrices. 
   /// The in matrices are concatenated such that the block structure of the
   /// in matrices are preserved in the result matrix. Communication between 
@@ -3394,7 +3421,7 @@ namespace RRR
   /// NOTE: ALL the matrices pointed to by matrix_pt has to be built. This is
   /// not the case with concatenate_without_communication(...)
   void concatenate(const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
-      CRDoubleMatrix &result_matrix);
+		   CRDoubleMatrix &result_matrix);
 
   /// \short Concatenate CRDoubleMatrix matrices.
   /// 
@@ -3446,22 +3473,21 @@ namespace RRR
   /// All block preconditioner distributions are concatenations of the 
   /// distributions of the individual blocks.
   void concatenate_without_communication(
-      const Vector<LinearAlgebraDistribution*> &row_distribution_pt,
-      const Vector<LinearAlgebraDistribution*> &col_distribution_pt,
-      const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
-      CRDoubleMatrix &result_matrix);
+   const Vector<LinearAlgebraDistribution*> &row_distribution_pt,
+   const Vector<LinearAlgebraDistribution*> &col_distribution_pt,
+   const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
+   CRDoubleMatrix &result_matrix);
 
   /// \short Concatenate CRDoubleMatrix matrices.
   /// This calls the other concatenate_without_communication(...) function,
   /// passing block_distribution_pt as both the row_distribution_pt and
   /// col_distribution_pt. This should only be called for block square matrices.
   void concatenate_without_communication(
-      const Vector<LinearAlgebraDistribution*> &block_distribution_pt,
-      const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
-      CRDoubleMatrix &result_matrix);
+   const Vector<LinearAlgebraDistribution*> &block_distribution_pt,
+   const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
+   CRDoubleMatrix &result_matrix);
 
-} // CRDoubleMatrixHelpers
-
+ } // CRDoubleMatrixHelpers
 }
 #endif
 

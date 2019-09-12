@@ -271,6 +271,7 @@ void Mesh::add_boundary_node(const unsigned &b, Node* const &node_pt)
 
 }
 
+
 //=======================================================
 /// Update nodal positions in response to changes in the domain shape.
 /// Uses the FiniteElement::get_x(...) function for FiniteElements
@@ -289,6 +290,9 @@ void Mesh::add_boundary_node(const unsigned &b, Node* const &node_pt)
 //========================================================
 void Mesh::node_update(const bool& update_all_solid_nodes)
 {
+ // Get the current time
+ double t_start=TimingHelpers::timer();
+
 #ifdef PARANOID
 #ifdef OOMPH_HAS_MPI
  //Paranoid check to throw an error if node update is called for elements
@@ -352,69 +356,91 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
 
  // NB: This repeats nodes a lot - surely it would be
  // quicker to modify it so that it only does each node once,
- // particularly in the update_all_solid_nodes=true case?
+ // particularly in the update_all_solid_nodes=true case?  
+ // Create a map to indicate whether or not we've updated a node already
+ std::map<Node*,bool> has_node_been_updated;
+
+ // How many nodes are there?
+ unsigned n_node=nnode();
+ 
+ // Loop over all Nodes
+ for (unsigned n=0;n<n_node;n++)
+ {
+  // Get pointer to node
+  Node* nod_pt=node_pt(n);
+    
+  // Initialise the boolean value associated with this node
+  has_node_been_updated[nod_pt]=false;
+ }
 
  // Loop over all elements
  unsigned nel=nelement();
  for (unsigned e=0;e<nel;e++)
+ {
+  // Try to cast to FiniteElement
+  FiniteElement* el_pt = dynamic_cast<FiniteElement*>(element_pt(e));
+
+  // If it's a finite element we can proceed: FiniteElements have
+  // nodes and a get_x() function
+  if (el_pt!=0)
   {
-   // Try to cast to FiniteElement
-   FiniteElement* el_pt = dynamic_cast<FiniteElement*>(element_pt(e));
+   // Find out dimension of element = number of local coordinates
+   unsigned ndim_el=el_pt->dim();
+   s.resize(ndim_el);
 
-   // If it's a finite element we can proceed: FiniteElements have
-   // nodes and a get_x() function
-   if (el_pt!=0)
+   //Loop over nodal points
+   unsigned n_node=el_pt->nnode();
+   for (unsigned j=0;j<n_node;j++)
+   {
+    // Get pointer to node
+    Node* nod_pt=el_pt->node_pt(j);
+
+    // Get spatial dimension of node
+    unsigned ndim_node=nod_pt->ndim();
+    r.resize(ndim_node);
+
+    // For non-hanging nodes
+    if (!(nod_pt->is_hanging()))
     {
-     // Find out dimension of element = number of local coordinates
-     unsigned ndim_el=el_pt->dim();
-     s.resize(ndim_el);
+     // If we've not dealt with this Node yet
+     if (!has_node_been_updated[nod_pt])
+     {
+      //Get the position of the node
+      el_pt->local_coordinate_of_node(j,s);
 
-     //Loop over nodal points
-     unsigned n_node=el_pt->nnode();
-     for (unsigned j=0;j<n_node;j++)
+      // Get new position
+      el_pt->get_x(s,r);
+
+      // Try to cast to SolidNode
+      SolidNode* solid_node_pt=dynamic_cast<SolidNode*>(nod_pt);
+
+      // Loop over coordinate directions
+      for (unsigned i=0;i<ndim_node;i++)
       {
-
-       // Get pointer to node
-       Node* nod_pt=el_pt->node_pt(j);
-
-       // Get spatial dimension of node
-       unsigned ndim_node=nod_pt->ndim();
-       r.resize(ndim_node);
-
-       // For non-hanging nodes
-       if (!(nod_pt->is_hanging()))
-        {
-         //Get the position of the node
-         el_pt->local_coordinate_of_node(j,s);
-
-         // Get new position
-         el_pt->get_x(s,r);
-
-         // Try to cast to SolidNode
-         SolidNode* solid_node_pt=dynamic_cast<SolidNode*>(nod_pt);
-
-         // Loop over coordinate directions
-         for (unsigned i=0;i<ndim_node;i++)
-          {
-           // It's a SolidNode:
-           if (solid_node_pt!=0)
-            {
-             // only do it if explicitly requested!
-             if (update_all_solid_nodes)
-              {
-               solid_node_pt->x(i) = r[i];
-              }
-            }
-           // Not a SolidNode: Definitely update
-           else
-            {
-             nod_pt->x(i) = r[i];
-            }
-          }
-        }
+       // It's a SolidNode:
+       if (solid_node_pt!=0)
+       {
+	// only do it if explicitly requested!
+	if (update_all_solid_nodes)
+	{
+	 solid_node_pt->x(i) = r[i];
+	}
+       }
+       // Not a SolidNode: Definitely update
+       else
+       {
+	nod_pt->x(i) = r[i];
+       }
       }
-    }
-  }
+
+      // Indicate that we're done with this node, regardless of whether or
+      // not it even needed updating
+      has_node_been_updated[nod_pt]=true;
+     } // if (!has_node_been_updated[nod_pt])
+    } // if (!(nod_pt->is_hanging()))
+   } // for (unsigned j=0;j<n_node;j++)
+  } // if (el_pt!=0)
+ } // for (unsigned e=0;e<nel;e++)
 
  // Now update the external halo nodes before we adjust the positions of the
  // hanging nodes incase any are masters of local nodes
@@ -436,7 +462,6 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
 
  // Now loop over hanging nodes and adjust their position
  // in line with their hanging node constraints
- unsigned long n_node = nnode();
  for(unsigned long n=0;n<n_node;n++)
   {
    Node* nod_pt = Node_pt[n];
@@ -473,6 +498,9 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
    Node_pt[n]->perform_auxiliary_node_update_fct();
   }
 
+ // Tell the user how long it's taken
+ oomph_info << "Time taken to update nodal positions [sec]: "
+	    << TimingHelpers::timer()-t_start << std::endl;
 }
 
 
@@ -482,15 +510,22 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
 //========================================================
  void Mesh::reorder_nodes(const bool& use_old_ordering)
  {
+  // Create storage for the reordered nodes
   Vector<Node*> reordering;
-  get_node_reordering(reordering, use_old_ordering);
 
-  unsigned n_node = nnode();
-  for(unsigned i=0; i<n_node; i++)
-   {
-    node_pt(i) = reordering[i];
-   }
- }
+  // Get the reordered nodes (without altering the mesh's node vector)
+  get_node_reordering(reordering,use_old_ordering);
+
+  // Get the number of nodes in the mesh
+  unsigned n_node=nnode();
+
+  // Loop over all of the nodes
+  for (unsigned i=0;i<n_node;i++)
+  {
+   // Replace the Mesh's i-th node pointer with the reordered node pointer
+   node_pt(i)=reordering[i];
+  }
+ } // End of reorder_nodes
 
 //=======================================================
 /// Get a vector of the nodes in the order in which they are encountered
@@ -500,86 +535,113 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
  void Mesh::get_node_reordering(Vector<Node*> &reordering,
                                 const bool& use_old_ordering) const
  {
-  if(use_old_ordering)
+  // If the user wants to use the original order
+  if (use_old_ordering)
+  {
+   // Setup map to check if nodes have been done yet
+   std::map<Node*,bool> done;
+
+   // Loop over all nodes
+   unsigned nnod=nnode();
+
+   // Initialise the vector
+   reordering.assign(nnod,0);
+
+   // Return immediately if there are no nodes: Note assumption:
+   // Either all the elements' nodes stored here or none. If only a subset
+   // is stored in the Node_pt vector we'll get a range checking error below
+   // (only if run with range checking, of course).
+   if (nnod==0)
    {
-    // Setup map to check if nodes have been done yet
-    std::map<Node*,bool> done;
+    // Return immediately
+    return;
+   }
+    
+   // Loop over the nodes in the mesh
+   for (unsigned j=0;j<nnod;j++)
+   {
+    // Indicate whether or not the node has been swapped
+    done[node_pt(j)]=false;
+   }
+    
+   // Initialise counter for number of nodes
+   unsigned long count=0;
 
-    // Loop over all nodes
-    unsigned nnod=nnode();
+   // Get the number of elements in the mesh
+   unsigned nel=nelement();
+    
+   // Loop over all elements
+   for (unsigned e=0;e<nel;e++)
+   {
+    // Make sure the e-th element is a FiniteElement (or derived) class object
+    FiniteElement* el_pt=checked_dynamic_cast<FiniteElement*>(element_pt(e));
 
-    // Initialise the vector
-    reordering.assign(nnod,0);
-
-    // Return immediately if there are no nodes: Note assumption:
-    // Either all the elements' nodes stored here or none.
-    // If only a subset is stored in the Node_pt vector we'll get
-    // a range checking error below (only if run with range, checking,
-    // of course).
-    if (nnod==0) return;
+    // Get the number of nodes in this element
+    unsigned nnod=el_pt->nnode();
+     
+    // Loop over nodes in element
     for (unsigned j=0;j<nnod;j++)
+    {
+     // Get a pointer to the j-th node in the element
+     Node* nod_pt=el_pt->node_pt(j);
+      
+     // Has node been done yet?
+     if (!done[nod_pt])
      {
-      done[node_pt(j)]=false;
+      // Insert into node vector. NOTE: If you get a seg fault/range checking
+      // error here then you probably haven't added all the elements' nodes
+      // to the Node_pt vector -- this is most likely to arise in the case of
+      // meshes of face elements (though they usually don't store the nodes
+      // at all so if you have any problems here there's something unusual/not
+      // quite right in any case... For this reason we don't range check here
+      // by default (not even under paranoia) but force you turn on proper
+      // (costly) range checking to track this down...
+      reordering[count]=nod_pt;
+
+      // Indicate that the node has been done
+      done[nod_pt]=true;
+       
+      // Increase counter
+      count++;
      }
+    } // for (unsigned j=0;j<nnod;j++)
+   } // for (unsigned e=0;e<nel;e++)
 
-    // Initialise counter for number of nodes
-    unsigned long count=0;
-
-    // Loop over all elements
-    unsigned nel=nelement();
-    for (unsigned e=0;e<nel;e++)
-     {
-      // Loop over nodes in element
-      FiniteElement* el_pt = checked_dynamic_cast<FiniteElement*>(element_pt(e));
-      unsigned nnod=el_pt->nnode();
-      for (unsigned j=0;j<nnod;j++)
-       {
-        Node* nod_pt=el_pt->node_pt(j);
-        // Has node been done yet?
-        if (!done[nod_pt])
-         {
-          // Insert into node vector. NOTE: If you get a seg fault/range checking
-          // error here then you probably haven't added all the elements' nodes
-          // to the Node_pt vector -- this is most likely to arise in the
-          // case of meshes of face elements (though they usually don't
-          // store the nodes at all so if you have any problems here there's
-          // something unusual/not quite right in any case... For this
-          // reason we don't range check here by default (not even under
-          // paranoia) but force you turn on proper (costly) range checking
-          // to track this down...
-          reordering[count]=nod_pt;
-          done[nod_pt]=true;
-          // Increase counter
-          count++;
-         }
-       }
-     }
-
-    // Sanity check
-    if (count!=nnod)
-     {
-      throw OomphLibError(
-                          "Trouble: Number of nodes hasn't stayed constant during reordering!\n",
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-
-   }
-  else
+   // Sanity check
+   if (count!=nnod)
    {
-    // Copy node vector out
-    unsigned n_node = nnode();
-    reordering.resize(n_node);
-    for(unsigned i=0; i<n_node; i++)
-     {
-      reordering[i] = node_pt(i);
-     }
+    // Create an error message
+    std::string error_message="Trouble: Number of nodes hasn't stayed ";
 
-    // and sort it
-    std::sort(reordering.begin(), reordering.end(),
-              &NodeOrdering::node_global_position_comparison); 
+    // Finish off the message
+    error_message+="constant during reordering!\n";
+     
+    // Throw an error
+    throw OomphLibError(error_message,
+			OOMPH_CURRENT_FUNCTION,
+			OOMPH_EXCEPTION_LOCATION);
    }
- }
+  }
+  else
+  {
+   // Copy node vector out
+   unsigned n_node=nnode();
+
+   // Resize the node ordering vector
+   reordering.resize(n_node);
+
+   // Loop over the nodes
+   for (unsigned i=0;i<n_node;i++)
+   {
+    // Assign the i-th node pointer entry
+    reordering[i]=node_pt(i);
+   }
+
+   // Now sort the nodes lexicographically
+   std::sort(reordering.begin(),reordering.end(),
+	     &NodeOrdering::node_global_position_comparison); 
+  } // if (use_old_ordering)
+ } // End of get_node_reordering
 
 
 //========================================================

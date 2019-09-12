@@ -40,7 +40,6 @@
 #endif
 
 
-
 /* ================================================= */
 /* Struct for the lu factors  */
 /* ================================================= */
@@ -57,6 +56,62 @@ typedef struct
  int_t colequ;  
  double anorm;
 } superlu_dist_data;
+
+
+/* ================================================= */
+/* Can't think of any other way to store the memory  */
+/* stats... (PM)                                     */
+/* ================================================= */
+struct MemoryStatisticsStorage
+{
+ // Storage for the memory stats
+ mem_usage_t Memory_usage;
+
+ // Boolean
+ int Memory_usage_has_been_recorded;
+} symbolic_memory_statistics_storage;
+
+/* ========================================================================= */
+/* Helper to record memory usage*/
+/* ========================================================================= */
+double get_lu_factor_memory_usage_in_bytes_dist()
+{
+ // If the LU decomposition has been stored
+ if (symbolic_memory_statistics_storage.Memory_usage_has_been_recorded==1)
+ {
+  return symbolic_memory_statistics_storage.Memory_usage.for_lu;
+ }
+ else
+ {
+  return 0.0;
+ }
+} // End of get_lu_factor_memory_usage_in_bytes
+
+/* ========================================================================= */
+/* Helper to record memory usage*/
+/* ========================================================================= */
+double get_total_memory_usage_in_bytes_dist()
+{
+ // If the LU decomposition has been stored
+ if (symbolic_memory_statistics_storage.Memory_usage_has_been_recorded==1)
+ {
+  return symbolic_memory_statistics_storage.Memory_usage.total;
+ }
+ else
+ {
+  return 0.0;
+ }
+} // End of get_total_memory_usage_in_bytes
+
+/* ========================================================================= */
+/* Helper to record memory usage*/
+/* ========================================================================= */
+void get_memory_usage_in_bytes_dist(double* lu_factor_memory,
+				    double* total_memory)
+{ 
+ (*lu_factor_memory)=symbolic_memory_statistics_storage.Memory_usage.for_lu;
+ (*total_memory)=symbolic_memory_statistics_storage.Memory_usage.total;
+}
 
 //=============================================================================
 // helper method - just calls the superlu method dCompRow_to_CompCol to convert
@@ -148,7 +203,7 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
  double amax, t, colcnd, rowcnd, anorm;
  char equed[1], norm[1];
  int ldx;  /* LDA for matrix X (local). */
- static mem_usage_t symb_mem_usage;
+ //static mem_usage_t symb_mem_usage;
  fact_t Fact;
  int_t Equil, factored, notran, permc_spec;
 
@@ -694,7 +749,8 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
        if ( iinfo < 0 ) 
         {
          /* Successful return */
-         QuerySpace_dist(n, -iinfo, Glu_freeable, &symb_mem_usage);
+         QuerySpace_dist(n, -iinfo, Glu_freeable,
+			 &symbolic_memory_statistics_storage.Memory_usage);
         } 
        else 
         {
@@ -1216,7 +1272,7 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
  char equed[1], norm[1];
  int ldx;  /* LDA for matrix X (local). */
  int iam;
- static mem_usage_t  num_mem_usage, symb_mem_usage;
+ //static mem_usage_t  num_mem_usage, symb_mem_usage;
  fact_t Fact;
  
 
@@ -1760,7 +1816,8 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
        
        if ( iinfo < 0 ) 
         {
-         QuerySpace_dist(n, -iinfo, Glu_freeable, &symb_mem_usage);
+         QuerySpace_dist(n, -iinfo, Glu_freeable,
+			 &symbolic_memory_statistics_storage.Memory_usage);
         }
        else 
         {

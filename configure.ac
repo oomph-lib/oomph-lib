@@ -10,7 +10,7 @@
 # meaninful revision number for either reason we use 0000 instead.
 define([svnversion], esyscmd([sh -c "bin/run_svnversion_if_it_exists.bash|tr -d '\n'"]))dnl
 AC_INIT([oomph-lib],[1.0.svnversion],[oomph-lib@maths.manchester.ac.uk])
- 
+
 # config header file
 AC_CONFIG_HEADERS(config.h)
 
@@ -59,16 +59,16 @@ if test -z $ac_cv_prog_f77_v; then
  echo "Either the Fortran compiler has not been found or it doesn't work"
  echo "If your Fortran compiler is in a non-standard location"
  echo "please specify by setting the variable F77=/path/to/fortran_compiler"
- echo "in your configuration file or as an environment variable." 
+ echo "in your configuration file or as an environment variable."
  echo "The value of F77 found used here was $F77"
  echo "===================================================================="
  exit
-fi 
+fi
 
 # Defined the no-optimisation environment flag for use in oomph_flapack
 AC_ARG_VAR([FFLAGS_NO_OPT],[Fortran compiler flags without optimisation])
 
-# Set additional flags for C++ compilation: 
+# Set additional flags for C++ compilation:
 #------------------------------------------
 # cfortran stuff:
 case "$G77" in
@@ -83,7 +83,7 @@ case "$G77" in
 int main() {if(__GNUC__ > 3) {std::cout << "yes";}else{std::cout << "no";}}
 EOF
 
-  $CXX version_test.cc  
+  $CXX version_test.cc
   gcc_version4=`./a.out`
   rm ./a.out version_test.cc
   if test "$gcc_version4" = yes; then
@@ -124,7 +124,7 @@ esac
 #  echo "Fortran compiler not found. ";
 #  echo "If your Fortran compiler is in a non-standard location"
 #  echo "please specify by setting the variable F77=/path/to/fortran_compiler"
-#  echo "in your configuration file or as an environment variable." 
+#  echo "in your configuration file or as an environment variable."
 #  echo "==================================================";
 #  exit
 #  ;;
@@ -142,16 +142,16 @@ accumulated_cpp_flags=''
 
 
 #...........................................................................
-# Start of commands suggested by autoscan. 
+# Start of commands suggested by autoscan.
 #
 # Andrew: Will need to re-run autoscan on the
 # full set of sources *and* decide on what to do if headers are not found.
 # This is where the real work starts on making the code portable, I suppose.
-# At the moment we simply bail out... 
+# At the moment we simply bail out...
 
 
 # Checks for header files.
-# 
+#
 # Note: old version was
 #
 #   AC_CHECK_HEADERS([limits.h stdlib.h string.h sys/time.h malloc.h],
@@ -179,7 +179,7 @@ AC_CHECK_HEADER(execinfo.h,[have_execinfo=true;
 # the OS name "Darwin")
 AM_CONDITIONAL(HAVE_DARWIN, test $(uname) == "Darwin")
 
-# Pass result of test to automake (makefiles can now check for 
+# Pass result of test to automake (makefiles can now check for
 # status of HAVE_STACKTRACE in any Makefile.am:
 AM_CONDITIONAL(HAVE_STACKTRACE, test x$have_execinfo = xtrue)
 
@@ -197,7 +197,7 @@ AC_CHECK_HEADER(unistd.h,[have_unistdh=true;
                            [have_unistdh=false;
                             echo "Didn't find unistd.h -- cannot do memory monitoring";])
 
-# Pass result of test to automake (makefiles can now check for 
+# Pass result of test to automake (makefiles can now check for
 # status of HAVE_UNISTDH in any Makefile.am:
 AM_CONDITIONAL(HAVE_UNISTDH, test x$have_unistdh = xtrue)
 
@@ -218,7 +218,7 @@ AC_CHECK_HEADER(fpu_control.h,[have_fpucontrolh=true;
                            [have_fpucontrolh=false;
                             echo "Didn't find fpu_control.h -- using an empty replacement for triangle which may struggle... Keep an eye on it!";])
 
-# Pass result of test to automake (makefiles can now check for 
+# Pass result of test to automake (makefiles can now check for
 # status of HAVE_FPUCONTROLH in any Makefile.am:
 AM_CONDITIONAL(HAVE_FPUCONTROLH, test x$have_fpucontrolh = xtrue)
 
@@ -240,7 +240,7 @@ AC_CHECK_HEADER(malloc.h,[have_malloch=true;
                             echo "Didn't find malloc.h -- using an empty replacement metis... Keep an eye on it!";])
 
 
-# Pass result of test to automake (makefiles can now check for 
+# Pass result of test to automake (makefiles can now check for
 # status of HAVE_MALLOCH in any Makefile.am:
 AM_CONDITIONAL(HAVE_MALLOCH, test x$have_malloch = xtrue)
 
@@ -269,13 +269,13 @@ AC_C_INLINE
 # If size_t is not defined, define size_t to be unsigned
 AC_TYPE_SIZE_T
 
-#If pid_t is not defined, define pid_t to be int. 
+#If pid_t is not defined, define pid_t to be int.
 AC_TYPE_PID_T
 
-# Hmm, including this produces warnings during ./configure because 
+# Hmm, including this produces warnings during ./configure because
 # RANLIB is made obsolete by LIBTOOL. You can either keep in here (in which
-# case autoscan doesn't complain) or comment it out (in which case 
-# you should ignore the warnings in autoscan). 
+# case autoscan doesn't complain) or comment it out (in which case
+# you should ignore the warnings in autoscan).
 #AC_PROG_RANLIB
 
 # Only needed by matlab part of superlu -- ignore when
@@ -304,16 +304,16 @@ AC_FUNC_MALLOC
 
 # Cray hack: Static C++ libraries
 #--------------------------------
-AC_ARG_ENABLE(static-cxx-libs, 
+AC_ARG_ENABLE(static-cxx-libs,
               [  --enable-static-cxx-libs Pass -all-static to CXX when used as linker (needed when using gnu complier on Crays)],
         [want_static_cxx_libs=true],
-        [want_static_cxx_libs=false])       
+        [want_static_cxx_libs=false])
 
-if test x$want_static_cxx_libs = xtrue; then 
-        AC_SUBST([CXXLD], ['$(CXX) -all-static']) 
+if test x$want_static_cxx_libs = xtrue; then
+        AC_SUBST([CXXLD], ['$(CXX) -all-static'])
         echo "Using -all-static flag for CXX linker"
-else 
-        AC_SUBST([CXXLD], ['$(CXX)']) 
+else
+        AC_SUBST([CXXLD], ['$(CXX)'])
         echo "Not using -all-static flag for CXX linker"
 fi
 
@@ -333,22 +333,22 @@ fi
 # accomodate up to three digits for each part version id
 libtool_version=`$LIBTOOL_COMMAND --version | \
    head -n 1 | $AWK  '{ print $NF}' | $AWK 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-   
+
 # Need at least version 242 --> 2004002
-if test "$libtool_version" -ge 2004002; then 
+if test "$libtool_version" -ge 2004002; then
   echo "Congratulations!"
-  echo "I have located a (sufficiently) up-to-date version of libtool ( " 
-  echo $libtool_version" ) and can build cgal and associated libraries."  
-  have_up_to_date_libtool=true    
+  echo "I have located a (sufficiently) up-to-date version of libtool ( "
+  echo $libtool_version" ) and can build cgal and associated libraries."
+  have_up_to_date_libtool=true
 else
   echo " "; \
   echo "==============================================================="; \
-  echo "Trouble: Your version of libtool is: " `$LIBTOOL_COMMAND --version | head -n 1 | $AWK  '{ print $NF}'` 
+  echo "Trouble: Your version of libtool is: " `$LIBTOOL_COMMAND --version | head -n 1 | $AWK  '{ print $NF}'`
   echo "Please upgrade to version 2.4.2 or higher."
   echo "I cannot/will not build cgal and associated libraries."
   echo "==============================================================="; \
   echo " "; \
-  have_up_to_date_libtool=false    
+  have_up_to_date_libtool=false
 fi
 AM_CONDITIONAL(HAVE_UP_TO_DATE_LIBTOOL, test x$have_up_to_date_libtool = xtrue)
 
@@ -384,22 +384,22 @@ cmake_version=`cmake --version | \
 # Need at least version 2.8.11 --> 2008011
 if test "$cmake_version" -ge 2008011; then
   echo "Congratulations!"
-  echo "I have located a (sufficiently) up-to-date version of cmake ( " 
-  echo $cmake_version" ) and can build cgal and associated libraries."  
-  have_up_to_date_cmake=true    
+  echo "I have located a (sufficiently) up-to-date version of cmake ( "
+  echo $cmake_version" ) and can build cgal and associated libraries."
+  have_up_to_date_cmake=true
 else
   echo " "; \
   echo "==============================================================="; \
-  echo "Trouble: Your version of cmake is: " `cmake --version | head -n 1 | $AWK  '{ print $NF}'` 
+  echo "Trouble: Your version of cmake is: " `cmake --version | head -n 1 | $AWK  '{ print $NF}'`
   echo "Please upgrade to version 2.8.1 or higher."
   echo "I cannot/will not build cgal and associated libraries."
   echo "==============================================================="; \
   echo " "; \
-  have_up_to_date_cmake=false    
+  have_up_to_date_cmake=false
 fi
 
 
-fi 
+fi
 AM_CONDITIONAL(HAVE_UP_TO_DATE_CMAKE, test x$have_up_to_date_cmake = xtrue)
 
 
@@ -452,7 +452,7 @@ else \
     echo " "; \
     echo "==============================================================="; \
     echo " "; \
-    have_doxygen=false    
+    have_doxygen=false
   fi
 fi
 AM_CONDITIONAL(HAVE_DOXYGEN, test x$have_doxygen = xtrue)
@@ -585,7 +585,7 @@ AM_CONDITIONAL(HAVE_PYTHON, test x$have_python = xtrue)
 # Do we have validata?
 #---------------------
 AC_CHECK_FILES(demo_drivers/poisson/two_d_poisson_flux_bc_adapt/validata/results.dat.gz,
-               echo "Found validata"; have_validata=true, 
+               echo "Found validata"; have_validata=true,
                echo "Not found validata"; have_validata=false)
 
 if test x$have_validata = xfalse; then \
@@ -629,7 +629,7 @@ AM_CONDITIONAL(COMPARE_AGAINST_VALIDATA, test x$compare_against_validata = xtrue
 # Do we have the sources for the HSL frontal solver in external_src?
 #-------------------------------------------------------------------
 AC_CHECK_FILES(external_src/oomph_hsl/frontal.f,
-               echo "Found external_src/oomph_hsl/frontal.f"; have_hsl_sources=true, 
+               echo "Found external_src/oomph_hsl/frontal.f"; have_hsl_sources=true,
                echo "Not found external_src/oomph_hsl/frontal.f"; have_hsl_sources=false)
 
 
@@ -638,7 +638,7 @@ AC_CHECK_FILES(external_src/oomph_hsl/frontal.f,
 if test x$have_hsl_sources = xfalse; then \
 
   AC_CHECK_FILES(private/external_src/hsl/frontal.f,
-                 echo "Found private/external_src/hsl/frontal.f"; have_hsl_sources_in_private_external_src=true, 
+                 echo "Found private/external_src/hsl/frontal.f"; have_hsl_sources_in_private_external_src=true,
                  echo "Not found private/external_src/hsl/frontal.f"; have_hsl_sources_in_private_external_src=false)
 
   if test x$have_hsl_sources_in_private_external_src = xtrue; then \
@@ -659,7 +659,7 @@ AM_CONDITIONAL(HAVE_HSL_SOURCES, test x$have_hsl_sources = xtrue)
 # Do we have the sources for the ARPACK Arnoldi solver?
 #---------------------------------------------------
 AC_CHECK_FILES(external_src/oomph_arpack/all_arpack_sources.f,
-               echo "Found external_src/oomph_arpack/all_arpack_sources.f"; have_arpack_sources=true, 
+               echo "Found external_src/oomph_arpack/all_arpack_sources.f"; have_arpack_sources=true,
                echo "Not found external_src/oomph_arpack/all_arpack_sources.f"; have_arpack_sources=false)
 
 #If we don't have them check if they are private/external_src and make sym link
@@ -667,7 +667,7 @@ AC_CHECK_FILES(external_src/oomph_arpack/all_arpack_sources.f,
 if test x$have_arpack_sources = xfalse; then \
 
   AC_CHECK_FILES(private/external_src/arpack/all_arpack_sources.f,
-                 echo "Found private/external_src/arpack/all_arpack_sources.f"; have_arpack_sources_in_private_external_src=true, 
+                 echo "Found private/external_src/arpack/all_arpack_sources.f"; have_arpack_sources_in_private_external_src=true,
                  echo "Not found private/external_src/arpack/all_arpack_sources.f"; have_arpack_sources_in_private_external_src=false)
 
   if test x$have_arpack_sources_in_private_external_src = xtrue; then \
@@ -697,19 +697,19 @@ AC_ARG_ENABLE(dummy2,[Oomph-lib options:  ])
 
 
 
-# Is MPI build required? 
+# Is MPI build required?
 # If yes, run configure as './configure --enable-MPI'
 AC_ARG_ENABLE(MPI,
               [  --enable-MPI Build oomph-lib MPI routines],
               [want_mpi=true],
               [want_mpi=false])
-# Pass result of test to automake (makefiles can now check for 
+# Pass result of test to automake (makefiles can now check for
 # status of WANT_MPI in any Makefile.am, like this:
 #
 #   # WANT_MPI flag is set by autoconf
 #   #---------------------------------
 #   if WANT_MPI
-#     SUBDIRS = $(non_mpi_sub_dirs) $(mpi_sub_dirs) 
+#     SUBDIRS = $(non_mpi_sub_dirs) $(mpi_sub_dirs)
 #   else
 #     SUBDIRS = $(non_mpi_sub_dirs)
 #   endif
@@ -731,9 +731,9 @@ AC_ARG_WITH(gmsh-self-tests,
 [  --with-gmsh-self-tests[=GMSH_RUN_COMMAND] run gmsh self-tests.  Requires
                           specification of the string required to run gmsh
                           from the command line. GMSH_RUN_COMMAND. E.g. if
-                          gmsh on your machine needs to be run with 
+                          gmsh on your machine needs to be run with
 
-                             /usr/bin/gmsh 
+                             /usr/bin/gmsh
 
                           then set GMSH_RUN_COMMAND to "/usr/bin/gmsh"],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
@@ -750,7 +750,7 @@ AC_SUBST(GMSH_RUN_COMMAND)
 AC_ARG_WITH(mpi-self-tests,
 [  --with-mpi-self-tests[=MPI_RUN_COMMAND] run mpi self-tests on two processors
                           using MPI_RUN_COMMAND. E.g. if a parallel executable
-                          on your machine needs to be run with 
+                          on your machine needs to be run with
 
                              mpirun -np 2 a.out
 
@@ -767,7 +767,7 @@ AC_SUBST(MPI_RUN_COMMAND)
 AC_ARG_WITH(mpi-self-tests-variablenp,
 [  --with-mpi-self-tests-variablenp[=MPI_VARIABLENP_RUN_COMMAND] run mpi self-tests on multiple processors
                           using MPI_VARIABLENP_RUN_COMMAND. E.g. if a parallel executable
-                          on your machine needs to be run with 
+                          on your machine needs to be run with
 
                              mpirun -np 2 a.out
 
@@ -784,7 +784,7 @@ AC_SUBST(MPI_VARIABLENP_RUN_COMMAND)
 #   # WANT_MPI_VARIABLENP flag is set by autoconf
 #   #---------------------------------
 #   if WANT_MPI_VARIABLENP
-#     SUBDIRS = $(non_mpi_variablenp_sub_dirs) $(mpi_variablenp_sub_dirs) 
+#     SUBDIRS = $(non_mpi_variablenp_sub_dirs) $(mpi_variablenp_sub_dirs)
 #   else
 #     SUBDIRS = $(non_mpi_variablenp_sub_dirs)
 #   endif
@@ -793,9 +793,9 @@ AM_CONDITIONAL(WANT_MPI_VARIABLENP, test x$run_mpi_self_tests_variablenp = xtrue
 
 # Do we need multiple teuchos sub-libraries
 AC_ARG_ENABLE(multiple_teuchos_libraries,
-              [  --enable-multiple_teuchos_libraries Assume that the 
+              [  --enable-multiple_teuchos_libraries Assume that the
                                                      version of trilinos
-                                                     provides multiple 
+                                                     provides multiple
                                                      teuchos (sub-)libraries],
               [multiple_teuchos_libs_requested=true],
               [multiple_teuchos_libs_requested=false])
@@ -811,7 +811,7 @@ AC_ARG_ENABLE(suppress-doc,
 #If the doc directory does not exist, then you can't have it
 AC_CHECK_FILE(doc,[],[want_doc=false])
 
-# Pass result of test to automake (makefiles can now check for 
+# Pass result of test to automake (makefiles can now check for
 # status of WANT_DOC in any Makefile.am
 AM_CONDITIONAL(WANT_DOC, test x$want_doc = xtrue)
 
@@ -822,7 +822,7 @@ AC_ARG_ENABLE(suppress-extended-self_tests,
               [  --enable-suppress-extended-self-tests Suppress build/running of oomph-lib's extended self tests for all libraries],
               [want_extended_self_tests=false],
               [want_extended_self_tests=true])
-# Pass result of test to automake (makefiles can now check for 
+# Pass result of test to automake (makefiles can now check for
 # status of WANT_DOC in any Makefile.am
 AM_CONDITIONAL(WANT_EXTENDED_SELF_TESTS, test x$want_extended_self_tests = xtrue)
 
@@ -835,7 +835,7 @@ AC_ARG_ENABLE(suppress-demo,
               [  --enable-suppress-demo Suppress build/check of oomph-lib's demo codes],
               [want_demo=false],
               [want_demo=true])
-# Pass result of test to automake (makefiles can now check for 
+# Pass result of test to automake (makefiles can now check for
 # status of WANT_DEMO in any Makefile.am
 AM_CONDITIONAL(WANT_DEMO, test x$want_demo = xtrue)
 
@@ -847,7 +847,7 @@ AC_ARG_ENABLE(suppress-user-src,
               [  --enable-suppress-user-src Suppress build/check of user sources/libraries],
               [want_user_src=false],
               [want_user_src=true])
-# Pass result of test to automake (makefiles can now check for 
+# Pass result of test to automake (makefiles can now check for
 # status of WANT_USER_SRC in any Makefile.am
 AM_CONDITIONAL(WANT_USER_SRC, test x$want_user_src = xtrue)
 
@@ -859,7 +859,7 @@ AC_ARG_ENABLE(symbolic-links-for-headers,
               [  --enable-symbolic-links-for-headers Use symbolic links for header files; useful during development],
               [want_sym_link=true],
               [want_sym_link=false])
-# Pass result of test to automake (makefiles can now check for 
+# Pass result of test to automake (makefiles can now check for
 # status of SYMBOLIC_LINKS_FOR_HEADERS in any Makefile.am
 AM_CONDITIONAL(SYMBOLIC_LINKS_FOR_HEADERS, test x$want_sym_link = xtrue)
 
@@ -884,7 +884,7 @@ AC_ARG_ENABLE(use-gfortran-libraries-for-oomph-flapack,
               [use_gfortran_libraries_for_oomph_flapack=true],
               [use_gfortran_libraries_for_oomph_flapack=false])
 
-# Pass result of test to automake (makefiles can now check for 
+# Pass result of test to automake (makefiles can now check for
 # status of ADD_LGFORTRAN_TO_OOMPH_LAPACK in any Makefile.am
 AM_CONDITIONAL(ADD_LGFORTRAN_TO_OOMPH_LAPACK, test x$use_gfortran_libraries_for_oomph_flapack = xtrue)
 
@@ -909,7 +909,7 @@ if  test x$have_up_to_date_cmake = xfalse; then
     want_cgal_build=false
 fi
 
-# Pass result of test to automake (makefiles can now check for 
+# Pass result of test to automake (makefiles can now check for
 # status of WANT_CGAL in any Makefile.am)
 AM_CONDITIONAL(WANT_CGAL_BUILD, test x$want_cgal_build = xtrue)
 
@@ -926,28 +926,28 @@ AC_ARG_WITH(cgal-permanent-installation-dir,
 ])
 AC_SUBST(CGAL_PERMANENT_INSTALLATION_DIR)
 
-# Pass result of test to automake (makefiles can now check for 
+# Pass result of test to automake (makefiles can now check for
 # status of CGAL_PERMANENT_INSTALLATION_DIR_SPECIFIED in any Makefile.am)
 AM_CONDITIONAL(CGAL_PERMANENT_INSTALLATION_DIR_SPECIFIED, test x$install_cgal_in_permanent_dir = xtrue)
 
 if  test x$have_up_to_date_libtool = xtrue; then
 if  test x$have_up_to_date_cmake = xtrue; then
 if test x$install_cgal_in_permanent_dir = xtrue; then
-if test -e $CGAL_PERMANENT_INSTALLATION_DIR; then 
+if test -e $CGAL_PERMANENT_INSTALLATION_DIR; then
    echo "Permanent install directory for CGAL and associated third party"
    echo "distributions"
-   echo " " 
+   echo " "
    echo "   "$CGAL_PERMANENT_INSTALLATION_DIR
-   echo " " 
+   echo " "
    echo "already exists."
 else
    mkdir $CGAL_PERMANENT_INSTALLATION_DIR
    echo " "
    echo "Created permanent install directory for CGAL and associated"
    echo "third party distributions:"
-   echo " " 
+   echo " "
    echo "   "$CGAL_PERMANENT_INSTALLATION_DIR
-   echo " " 
+   echo " "
 fi
 fi
 fi
@@ -1076,9 +1076,9 @@ check_for_blas=false
 
 AC_ARG_WITH(blas,
 [  --with-blas[=ABSOLUTE_PATH] use blas library specified via ABSOLUTE PATH
-                               e.g. /usr/local/lib/blas.a 
-                               or specify "auto" (without quotation marks!) 
-                               if the library is specified automatically 
+                               e.g. /usr/local/lib/blas.a
+                               or specify "auto" (without quotation marks!)
+                               if the library is specified automatically
                                by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_blas=true
@@ -1113,7 +1113,7 @@ else \
     fi; \
 fi; \
 else \
-    echo "No blas library specified"; \ 
+    echo "No blas library specified"; \
 fi
 
 
@@ -1140,9 +1140,9 @@ check_for_lapack=false
 
 AC_ARG_WITH(lapack,
 [  --with-lapack[=ABSOLUTE_PATH] use lapack library specified via ABSOLUTE PATH
-                               e.g. /usr/local/lib/lapack.a 
-                               or specify "auto" (without quotation marks!) 
-                               if the library is specified automatically 
+                               e.g. /usr/local/lib/lapack.a
+                               or specify "auto" (without quotation marks!)
+                               if the library is specified automatically
                                by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_lapack=true
@@ -1177,7 +1177,7 @@ else \
     fi \
 fi; \
 else \
-    echo "No lapack library specified"; \ 
+    echo "No lapack library specified"; \
 fi
 
 
@@ -1193,28 +1193,28 @@ AM_CONDITIONAL(ALREADY_HAVE_LAPACK, test x$have_lapack = xtrue)
 
 #----------------------------------------------------------------
 # Allow suppression of oomph-lib's triangle build (there are some subtle
-# comiler problems on some machines; if they exist we'd rather bin 
+# comiler problems on some machines; if they exist we'd rather bin
 # the third-party code rather than endangering the entire oomph-lib
 # build
 #----------------------------------------------------------------
 have_triangle_lib=false
-AC_ARG_ENABLE(suppress-triangle, 
+AC_ARG_ENABLE(suppress-triangle,
               [  --enable-suppress-triangle Supress build/use of
                                  oomph-lib's own copy of the triangle library. ],
         [suppress_triangle=true],
-        [suppress_triangle=false])       
+        [suppress_triangle=false])
 
-if test x$suppress_triangle = xtrue; then 
+if test x$suppress_triangle = xtrue; then
         echo "Suppressing build of oomph-lib's own copy of the triangle library."
         echo "This disables a lot of useful functionality but may be"
-        echo "necessary where the compiler struggles to compile the"    
+        echo "necessary where the compiler struggles to compile the"
         echo "triangle sources. In that case, triangle should be "
         echo "installed separately (by whatever method it takes) "
         echo "and included in the linker path (similar to the way we handle "
         echo "blas and lapack, say), but this hasn't been implemented"
         echo "in our build machinery. Please contact the developers if you"
-        echo "need this..."      
-else 
+        echo "need this..."
+else
         echo "Building/using oomph-lib's own copy of the triangle library"
 fi
 
@@ -1222,7 +1222,7 @@ fi
 AM_CONDITIONAL(SUPPRESS_TRIANGLE_LIB, test x$suppress_triangle = xtrue)
 
 
-# Add flag 
+# Add flag
 if test x$suppress_triangle = xfalse; then \
     accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DOOMPH_HAS_TRIANGLE_LIB"`; \
 fi;
@@ -1234,28 +1234,28 @@ fi;
 
 #----------------------------------------------------------------
 # Allow suppression of oomph-lib's tetgen build (there may be subtle
-# comiler problems on some machines; if they exist we'd rather bin 
+# comiler problems on some machines; if they exist we'd rather bin
 # the third-party code rather than endangering the entire oomph-lib
 # build
 #----------------------------------------------------------------
 have_tetgen_lib=false
-AC_ARG_ENABLE(suppress-tetgen, 
+AC_ARG_ENABLE(suppress-tetgen,
               [  --enable-suppress-tetgen Supress build/use of
                                  oomph-lib's own copy of the tetgen library. ],
         [suppress_tetgen=true],
-        [suppress_tetgen=false])       
+        [suppress_tetgen=false])
 
-if test x$suppress_tetgen = xtrue; then 
+if test x$suppress_tetgen = xtrue; then
         echo "Suppressing build of oomph-lib's own copy of the tetgen library."
         echo "This disables a lot of useful functionality but may be"
-        echo "necessary where the compiler struggles to compile the"    
+        echo "necessary where the compiler struggles to compile the"
         echo "tetgen sources. In that case, tetgen should be "
         echo "installed separately (by whatever method it takes) "
         echo "and included in the linker path (similar to the way we handle "
         echo "blas and lapack, say), but this hasn't been implemented"
         echo "in our build machinery. Please contact the developers if you"
-        echo "need this..."      
-else 
+        echo "need this..."
+else
         echo "Building/using oomph-lib's own copy of the tetgen library"
 fi
 
@@ -1263,7 +1263,7 @@ fi
 AM_CONDITIONAL(SUPPRESS_TETGEN_LIB, test x$suppress_tetgen = xtrue)
 
 
-# Add flag 
+# Add flag
 if test x$suppress_tetgen = xfalse; then \
     accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DOOMPH_HAS_TETGEN_LIB"`; \
 fi;
@@ -1275,17 +1275,17 @@ fi;
 # (e.g. for Hector)
 #----------------------------------------------------------------
 have_metis=false
-AC_ARG_ENABLE(suppress-oomph-metis, 
+AC_ARG_ENABLE(suppress-oomph-metis,
               [  --enable-suppress-oomph-metis Supress building of oomph-lib's
                                  own copy of metis. The library
                                  is then assumed to be provided automatically
                                  by the compiler/linker.],
         [have_metis=true],
-        [have_metis=false])       
+        [have_metis=false])
 
-if test x$have_metis = xtrue; then 
+if test x$have_metis = xtrue; then
         echo "Assuming that metis is provided automatically by compiler/linker"
-else 
+else
         echo "Building/using oomph-lib's own copy of metis"
 fi
 
@@ -1299,17 +1299,17 @@ AM_CONDITIONAL(ALREADY_HAVE_METIS, test x$have_metis = xtrue)
 # (e.g. for Hector)
 #----------------------------------------------------------------
 have_parmetis=false
-AC_ARG_ENABLE(suppress-oomph-parmetis, 
+AC_ARG_ENABLE(suppress-oomph-parmetis,
               [  --enable-suppress-oomph-parmetis Supress building of oomph-lib's
                                  own copy of parmetis. The library
                                  is then assumed to be provided automatically
                                  by the compiler/linker.],
         [have_parmetis=true],
-        [have_parmetis=false])       
+        [have_parmetis=false])
 
-if test x$have_parmetis = xtrue; then 
+if test x$have_parmetis = xtrue; then
         echo "Assuming that parmetis is provided automatically by compiler/linker"
-else 
+else
         echo "Building/using oomph-lib's own copy of parmetis"
 fi
 
@@ -1322,17 +1322,17 @@ AM_CONDITIONAL(ALREADY_HAVE_PARMETIS, test x$have_parmetis = xtrue)
 # (e.g. for Hector)
 #----------------------------------------------------------------
 have_superlu=false
-AC_ARG_ENABLE(suppress-oomph-superlu, 
+AC_ARG_ENABLE(suppress-oomph-superlu,
               [  --enable-suppress-oomph-superlu Supress building of oomph-lib's
                                  own copy of serial SuperLU. The library
                                  is then assumed to be provided automatically
                                  by the compiler/linker.],
         [have_superlu=true],
-        [have_superlu=false])       
+        [have_superlu=false])
 
-if test x$have_superlu = xtrue; then 
+if test x$have_superlu = xtrue; then
         echo "Assuming that SuperLU is provided automatically by compiler/linker"
-else 
+else
         echo "Building/using oomph-lib's own copy of SuperLU"
         accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DUSING_OOMPH_SUPERLU"`; \
 fi
@@ -1345,17 +1345,17 @@ AM_CONDITIONAL(ALREADY_HAVE_SUPERLU, test x$have_superlu = xtrue)
 # (e.g. for Hector)
 #----------------------------------------------------------------
 have_superlu_dist=false
-AC_ARG_ENABLE(suppress-oomph-superlu_dist, 
+AC_ARG_ENABLE(suppress-oomph-superlu_dist,
               [  --enable-suppress-oomph-superlu_dist Supress building of oomph-lib's
                                  own copy of serial SuperLU_dist. The library
                                  is then assumed to be provided automatically
                                  by the compiler/linker.],
         [have_superlu_dist=true],
-        [have_superlu_dist=false])       
+        [have_superlu_dist=false])
 
-if test x$have_superlu_dist = xtrue; then 
+if test x$have_superlu_dist = xtrue; then
         echo "Assuming that SuperLU_dist is provided automatically by compiler/linker"
-else 
+else
         echo "Building/using oomph-lib's own copy of SuperLU_dist"
         accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DUSING_OOMPH_SUPERLU_DIST"`; \
 fi
@@ -1375,7 +1375,7 @@ AM_CONDITIONAL(ALREADY_HAVE_SUPERLU_DIST, test x$have_superlu_dist = xtrue)
 #---------------------------------------------------
 # Potential location of HYPRE libraries.
 #
-# If the HYPRE is available on 
+# If the HYPRE is available on
 # your machine, specify the library directory
 # i.e. the one above the lib and include directories
 # with --with-hypre
@@ -1389,8 +1389,8 @@ AC_ARG_WITH(hypre,
 [  --with-hypre[=DIR] use hypre library in directory DIR
                           i.e. library is in DIR/lib
                           and include files are in DIR/include
-                          or specify "auto" (without quotation marks!) 
-                          if the library is specified automatically 
+                          or specify "auto" (without quotation marks!)
+                          if the library is specified automatically
                           by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_hypre=true
@@ -1444,12 +1444,12 @@ else \
     fi; \
 fi; \
 else \
-    echo "No hypre library directory specified"; \ 
+    echo "No hypre library directory specified"; \
 
     # Will hypre library be built?
     #-----------------------------
     AC_CHECK_FILES(external_distributions/hypre/hypre-2.0.0.tar.gz,
-                   echo "Found hypre-2.0.0.tar.gz --> will build hypre library"; will_have_hypre=true, 
+                   echo "Found hypre-2.0.0.tar.gz --> will build hypre library"; will_have_hypre=true,
                    echo "Not found hypre-2.0.0.tar.gz --> will not build hypre library"; will_have_hypre=false)
 
    if test x$will_have_hypre = xtrue; then \
@@ -1462,11 +1462,11 @@ fi
 
 
 
-# Do we have the hypre libraries? If so add them to the 
+# Do we have the hypre libraries? If so add them to the
 #------------------------------------------------------
 # external distributions; if not wipe the variables
 #--------------------------------------------------
-if test x$have_hypre = xfalse; then 
+if test x$have_hypre = xfalse; then
   HYPRE_LIB='' ; \
   HYPRE_INCLUDE='' ;\
 else \
@@ -1476,9 +1476,9 @@ else \
     external_dist_libraries_include=`echo $external_dist_libraries_include " -DOOMPH_HAS_HYPRE"` ; \
   else \
     external_dist_libraries=`echo $external_dist_libraries " -lHYPRE"` ; \
-    external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$HYPRE_LIB` ; \
+    external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$HYPRE_LIB -Wl,-rpath,$HYPRE_LIB` ; \
     external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$HYPRE_INCLUDE -DOOMPH_HAS_HYPRE` ; \
-  fi 
+  fi
 fi
 
 
@@ -1499,7 +1499,7 @@ AC_SUBST(HYPRE_INCLUDE)
 #---------------------------------------------------
 # Potential location of the TRILINOS libraries.
 #
-# If the TRILINOS is available on 
+# If the TRILINOS is available on
 # your machine, specify the library directory
 # i.e. the one above the lib and include directories
 # with --with-trilinos
@@ -1513,8 +1513,8 @@ AC_ARG_WITH(trilinos,
 [  --with-trilinos[=DIR] use trilinos library in directory DIR
                           i.e. library is in DIR/lib
                           and include files are in DIR/include
-                          or specify "auto" (without quotation marks!) 
-                          if the library is specified automatically 
+                          or specify "auto" (without quotation marks!)
+                          if the library is specified automatically
                           by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_trilinos=true
@@ -1523,7 +1523,6 @@ AC_ARG_WITH(trilinos,
     TRILINOS_INCLUDE="$withval/include"
   fi
 ])
-
 
 # Do they exist?
 have_trilinos=false
@@ -1571,7 +1570,7 @@ echo ""; \
 echo "========================================================================"; \
 echo "NOTE: We're going to link against an existing trilinos installation."; \
 echo "      Unfortunately different versions of that library require"; \
-echo "      explicit linkinig against different sets of (sub-)libraries."; \
+echo "      explicit linking against different sets of (sub-)libraries."; \
 echo "      We're currently assuming that you use a version that"; \
 echo "      needs just -lteuchos. If you have linking problems"; \
 echo "      that indicate missing teuchos functions, try to re-install"; \
@@ -1585,40 +1584,86 @@ echo "========================================================================";
 echo ""; \
 echo ""; \
 echo ""; \
+
 else \
-    echo "No trilinos library directory specified"; \ 
+    echo "No trilinos library directory specified"; \
 
-    # Will trilinos library be built?
-    #--------------------------------
-    will_have_trilinos=false;
-AC_CHECK_FILES([external_distributions/trilinos/trilinos-9.0.2.tar.gz  external_distributions/trilinos/trilinos-10.8.5-Source.tar.gz external_distributions/trilinos/trilinos-11.4.3-Source.tar.gz external_distributions/trilinos/trilinos-11.8.1-Source.tar.gz], will_have_trilinos=true, )
-    
-   if test x$will_have_trilinos = xtrue; then \
-    echo "Trilinos distribution .tar.gz file found ... will build trilinos"; \
-    have_trilinos=true; \
-    TRILINOS_DIR="`pwd`/external_distributions/trilinos/trilinos_default_installation"
-    TRILINOS_LIB="`pwd`/external_distributions/trilinos/trilinos_default_installation/lib"
-    TRILINOS_INCLUDE="`pwd`/external_distributions/trilinos/trilinos_default_installation/include"
+    TRILINOS_DEFAULT_DIR="`pwd`/external_distributions/trilinos/trilinos_default_installation"
+    TRILINOS_DEFAULT_LIB="`pwd`/external_distributions/trilinos/trilinos_default_installation/lib"
+    TRILINOS_DEFAULT_INCLUDE="`pwd`/external_distributions/trilinos/trilinos_default_installation/include"
 
-    tar_file_needs_single_teuchos_library=false;
-    AC_CHECK_FILES([external_distributions/trilinos/trilinos-9.0.2.tar.gz  external_distributions/trilinos/trilinos-10.8.5-Source.tar.gz], tar_file_needs_single_teuchos_library=true, )
+    # Does the default library folder exist?
+    #---------------------------------------
+    if test -d $TRILINOS_DEFAULT_LIB; then \
+       have_trilinos=true; \
+       echo "Found the trilinos libraries in default location: "; \
+       echo " "; \
+       echo "   "  $TRILINOS_DEFAULT_LIB ; \
+       echo " "; \
+       TRILINOS_DIR=$TRILINOS_DEFAULT_DIR; \
+       TRILINOS_LIB=$TRILINOS_DEFAULT_LIB; \
+       TRILINOS_INCLUDE=$TRILINOS_DEFAULT_INCLUDE; \
 
-    if test x$tar_file_needs_single_teuchos_library = xtrue; then \
-         echo "We believe that this version of the trilinos library needs single teuchos library"; \
+       if test -d $TRILINOS_INCLUDE; then \
+          have_trilinos=true; \
+ 	  echo "Found the trilinos include files in"; \
+ 	  echo " "; \
+ 	  echo "   "  $TRILINOS_INCLUDE ; \
+ 	  echo " "; \
+       else \
+          have_trilinos=false; \
+          echo "Did NOT find the trilinos include files in"; \
+          echo " "; \
+          echo "   "  $TRILINOS_INCLUDE ; \
+          echo " "; \
+       fi; \
+
     else \
-         echo "We believe that this version of the trilinos library needs multiple teuchos libraries"; \
+
+       # Will trilinos library be built?
+       #--------------------------------
+       will_have_trilinos=false;
+       AC_CHECK_FILES([external_distributions/trilinos/trilinos-9.0.2.tar.gz  external_distributions/trilinos/trilinos-10.8.5-Source.tar.gz external_distributions/trilinos/trilinos-11.4.3-Source.tar.gz external_distributions/trilinos/trilinos-11.8.1-Source.tar.gz], will_have_trilinos=true, )
+
+       if test x$will_have_trilinos = xtrue; then \
+           echo "Trilinos distribution .tar.gz file found ... will build trilinos"; \
+           have_trilinos=true; \
+           TRILINOS_DIR="`pwd`/external_distributions/trilinos/trilinos_default_installation"
+           TRILINOS_LIB="`pwd`/external_distributions/trilinos/trilinos_default_installation/lib"
+           TRILINOS_INCLUDE="`pwd`/external_distributions/trilinos/trilinos_default_installation/include"
+
+           tar_file_needs_single_teuchos_library=false;
+           AC_CHECK_FILES([external_distributions/trilinos/trilinos-9.0.2.tar.gz  external_distributions/trilinos/trilinos-10.8.5-Source.tar.gz], tar_file_needs_single_teuchos_library=true, )
+
+           if test x$tar_file_needs_single_teuchos_library = xtrue; then \
+                echo "We believe that this version of the trilinos library needs single teuchos library"; \
+           else \
+                echo "We believe that this version of the trilinos library needs multiple teuchos libraries"; \
+           fi; \
+       else \
+           echo "Trilinos distribution .tar.gz file not found ... can't build trilinos"; \
+       fi; \
     fi; \
-
-   else
-    echo "Trilinos distribution .tar.gz file not found ... can't build trilinos";
-   fi;
-
 fi
 
 
 # Using multiple techos libraries?
 #---------------------------------
 use_single_teuchos_library=true;
+
+# PM: Do we have a single Teuchos library? Placed here because if we
+# find that the library has *already been installed* in the default
+# location then we need to check what version it is.
+version_file=$TRILINOS_INCLUDE/Trilinos_version.h;
+if test x$have_trilinos = xtrue; then \
+    trilinos_version_number=`grep TRILINOS_MAJOR_MINOR_VERSION $version_file | awk -F' ' '{print $3}'`; \
+    echo "Library has already been built; the version number is: "$trilinos_version_number; \
+    if test "$trilinos_version_number" -gt 100805; then \
+        multiple_teuchos_libs_requested=true; \
+	echo "The version number is greater than 10.8.5. Therefore requesting multiple teuchos libraries!";
+    fi
+fi
+
 if test x$multiple_teuchos_libs_requested = xtrue; then \
     echo "Requested multiple teuchos libraries via config flag"; \
     use_single_teuchos_library=false; \
@@ -1645,7 +1690,7 @@ fi;
 #---------------------------------------------------------
 # external distributions; if not wipe the variables
 #--------------------------------------------------
-if test x$have_trilinos = xfalse; then 
+if test x$have_trilinos = xfalse; then
   TRILINOS_LIB='' ; \
   TRILINOS_INCLUDE='' ;\
 else \
@@ -1661,7 +1706,7 @@ else \
        echo "Actually building with multiple teuchos libraries"; \
        external_dist_libraries=`echo $external_dist_libraries " -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchosremainder -lteuchosnumerics -lteuchoscomm -lteuchosparameterlist -lteuchoscore "` ; \
     fi
-    external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$TRILINOS_LIB` ; \
+    external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$TRILINOS_LIB -Wl,-rpath,$TRILINOS_LIB` ; \
     external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$TRILINOS_INCLUDE -DOOMPH_HAS_TRILINOS` ; \
   fi
 fi
@@ -1714,7 +1759,7 @@ else \
     echo " "; \
     echo "   "  $HLIB_LIB ; \
     echo " "; \
-fi; \  
+fi; \
 if test -d $HLIB_INCLUDE; then \
     have_hlib=true; \
           echo "Found the hlib include files in"; \
@@ -1729,14 +1774,14 @@ else \
      echo " "; \
 fi; \
 else \
-    echo "No hlib library directory specified"; \ 
+    echo "No hlib library directory specified"; \
 
 dnl dnl Not building hlib for people at the moment, probably not worth it
 dnl     # Will hlib library be built?
 dnl     #--------------------------------
 dnl will_have_hlib=false;
 dnl     AC_CHECK_FILES([external_distributions/hlib/HLib-1.3p20.tar.gz], will_have_hlib=true, )
-    
+
 dnl    if test x$will_have_hlib = xtrue; then \
 dnl     echo "Hlib distribution .tar.gz file found ... will build hlib"; \
 dnl     have_hlib=true; \
@@ -1754,7 +1799,7 @@ fi
 # Do we have the hlib libraries? If so add them to the external
 # distributions; if not wipe the variables
 #--------------------------------------------------
-if test x$have_hlib = xfalse; then 
+if test x$have_hlib = xfalse; then
   HLIB_LIB='' ; \
   HLIB_INCLUDE='' ;\
 else \
@@ -1777,7 +1822,7 @@ AC_SUBST(HLIB_INCLUDE)
 # Will mumps and scalapack be built?
 #-----------------------------------
 
-will_build_mumps_and_scalapack=false; 
+will_build_mumps_and_scalapack=false;
 
 mpi_include_dir=
 
@@ -1807,9 +1852,9 @@ fi;
 
 
 AC_CHECK_FILES($mpi_include_dir/mpi.h,
-                echo "Found mpi.h for scalapack build"; 
-                found_mpi_h_file=true, 
-                echo "Not found mpi.h for scalapack build"; 
+                echo "Found mpi.h for scalapack build";
+                found_mpi_h_file=true,
+                echo "Not found mpi.h for scalapack build";
                 found_mpi_h_file=false)
 
 
@@ -1819,15 +1864,15 @@ fi;
 
 
 AC_CHECK_FILES(external_distributions/mumps_and_scalapack/MUMPS_4.10.0.tar.gz,
-                echo "Found MUMPS_4.10.0.tar.gz"; 
-                found_mumps_tar_file=true, 
-                echo "Not found MUMPS_4.10.0.tar.gz"; 
+                echo "Found MUMPS_4.10.0.tar.gz";
+                found_mumps_tar_file=true,
+                echo "Not found MUMPS_4.10.0.tar.gz";
                 found_mumps_tar_file=false)
 
 AC_CHECK_FILES(external_distributions/mumps_and_scalapack/scalapack_installer.tgz,
-                echo "Found scalapack_installer.tgz"; 
-                found_scalapack_tar_file=true, 
-                echo "Not found scalapack_installer.tgz"; 
+                echo "Found scalapack_installer.tgz";
+                found_scalapack_tar_file=true,
+                echo "Not found scalapack_installer.tgz";
                 found_scalapack_tar_file=false)
 
 
@@ -1918,7 +1963,7 @@ else \
     echo " "; \
 fi; \
 else \
-    echo "No scalapack library specified"; \ 
+    echo "No scalapack library specified"; \
     if test x$will_build_mumps_and_scalapack = xtrue; then \
         echo "...but building it from source"; \
         SCALAPACK_LIB=$MUMPS_AND_SCALAPACK_LIB/libscalapack.a ; \
@@ -1983,7 +2028,7 @@ else \
     echo " "; \
 fi; \
 else \
-    echo "No blacs library specified"; \ 
+    echo "No blacs library specified"; \
     if test x$will_build_mumps_and_scalapack = xtrue; then \
         echo "...but building it from source"; \
         BLACS_LIB=$MUMPS_AND_SCALAPACK_LIB ; \
@@ -2005,7 +2050,7 @@ AM_CONDITIONAL(ALREADY_HAVE_BLACS, test x$have_blacs = xtrue)
 
 
 #---------------------------------------------------
-# Potential location for the pord library 
+# Potential location for the pord library
 #
 # If the complete pord library is available on
 # your machine, specify the absolute path to the
@@ -2043,7 +2088,7 @@ else \
     echo " "; \
 fi; \
 else \
-    echo "No pord library specified"; \ 
+    echo "No pord library specified"; \
     if test x$will_build_mumps_and_scalapack = xtrue; then \
         echo "...but building it from source"; \
         PORD_LIB=$MUMPS_AND_SCALAPACK_LIB/libpord.a ; \
@@ -2066,7 +2111,7 @@ AM_CONDITIONAL(ALREADY_HAVE_PORD, test x$have_pord = xtrue)
 #---------------------------------------------------
 # Potential location of the MUMPS libraries.
 #
-# If the MUMPS is available on 
+# If the MUMPS is available on
 # your machine, specify the library directory
 # i.e. the one above the lib and include directories
 # with --with-mumps
@@ -2080,8 +2125,8 @@ AC_ARG_WITH(mumps,
 [  --with-mumps[=DIR] use mumps library in directory DIR
                           i.e. library is in DIR/lib
                           and include files are in DIR/include
-                          or specify "auto" (without quotation marks!) 
-                          if the library is specified automatically 
+                          or specify "auto" (without quotation marks!)
+                          if the library is specified automatically
                           by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_mumps=true
@@ -2134,7 +2179,7 @@ else \
     fi; \
 fi; \
 else \
-    echo "No mumps library directory specified"; \ 
+    echo "No mumps library directory specified"; \
     if test x$will_build_mumps_and_scalapack = xtrue; then \
         echo "...but building it from source"; \
         MUMPS_DIR=$MUMPS_AND_SCALAPACK_DIR ; \
@@ -2153,7 +2198,7 @@ fi
 #--------------------------------------------------
 # Note: for some reason we can't use -isystem (rather than -I) to include
 # MUMPS libraries without showing warnings.
-if test x$have_mumps = xfalse; then 
+if test x$have_mumps = xfalse; then
   MUMPS_LIB='' ; \
   MUMPS_INCLUDE='' ;\
 else \
@@ -2188,7 +2233,7 @@ AC_SUBST(MUMPS_INCLUDE)
 #---------------------------------------------------
 # Potential location for the boost libraries.
 #
-# If the BOOST is available on 
+# If the BOOST is available on
 # your machine, specify the library directory
 # i.e. the one above the lib and include directories
 # with --with-boost
@@ -2202,8 +2247,8 @@ AC_ARG_WITH(boost,
 [  --with-boost[=DIR]  use boost library in directory DIR
                           i.e. library is in DIR/lib
                           and include files are in DIR/include
-                          or specify "auto" (without quotation marks!) 
-                          if the library is specified automatically 
+                          or specify "auto" (without quotation marks!)
+                          if the library is specified automatically
                           by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_boost=true
@@ -2257,14 +2302,14 @@ else \
     fi; \
 fi; \
 else \
-   echo "No boost library directory specified"; \ 
+   echo "No boost library directory specified"; \
 
-   # Will boost library be built? 
+   # Will boost library be built?
    #-----------------------------
    if test x$want_cgal_build = xtrue; then  \
       echo "Building boost within oomph-lib as part of cgal build process"; \
       will_have_boost=true; \
-   else \ 
+   else \
       echo "Not building boost within oomph-lib as part of cgal build process"; \
       will_have_boost=false; \
    fi; \
@@ -2288,11 +2333,11 @@ fi
 
 
 
-# Do we have the boost libraries? If so add them to the 
+# Do we have the boost libraries? If so add them to the
 #------------------------------------------------------
 # external distributions; if not wipe the variables
 #--------------------------------------------------
-if test x$have_boost = xfalse; then 
+if test x$have_boost = xfalse; then
   BOOST_LIB='' ; \
   BOOST_INCLUDE='' ;\
 else \
@@ -2304,7 +2349,7 @@ else \
     external_dist_libraries=`echo $external_dist_libraries " -lpthread -lboost_thread -lboost_system "` ; \
     external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$BOOST_LIB -Wl,-rpath,$BOOST_LIB ` ; \
     external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$BOOST_INCLUDE -DOOMPH_HAS_BOOST` ; \
-  fi 
+  fi
 fi
 
 
@@ -2328,7 +2373,7 @@ AC_SUBST(BOOST_DIR)
 #---------------------------------------------------
 # Potential location for the gmp libraries.
 #
-# If the GMP is available on 
+# If the GMP is available on
 # your machine, specify the library directory
 # i.e. the one above the lib and include directories
 # with --with-gmp
@@ -2342,8 +2387,8 @@ AC_ARG_WITH(gmp,
 [  --with-gmp[=DIR]  use gmp library in directory DIR
                           i.e. library is in DIR/lib
                           and include files are in DIR/include
-                          or specify "auto" (without quotation marks!) 
-                          if the library is specified automatically 
+                          or specify "auto" (without quotation marks!)
+                          if the library is specified automatically
                           by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_gmp=true
@@ -2397,14 +2442,14 @@ else \
     fi; \
 fi; \
 else \
-   echo "No gmp library directory specified"; \ 
+   echo "No gmp library directory specified"; \
 
    # Will gmp library be built?
    #---------------------------
    if test x$want_cgal_build = xtrue; then  \
       echo "Building gmp within oomph-lib as part of cgal build process"; \
       will_have_gmp=true; \
-   else \ 
+   else \
       echo "Not building gmp within oomph-lib as part of cgal build process"; \
       will_have_gmp=false; \
    fi; \
@@ -2427,11 +2472,11 @@ fi
 
 
 
-# Do we have the gmp libraries? If so add them to the 
+# Do we have the gmp libraries? If so add them to the
 #------------------------------------------------------
 # external distributions; if not wipe the variables
 #--------------------------------------------------
-if test x$have_gmp = xfalse; then 
+if test x$have_gmp = xfalse; then
   GMP_LIB='' ; \
   GMP_INCLUDE='' ;\
 else \
@@ -2443,7 +2488,7 @@ else \
     external_dist_libraries=`echo $external_dist_libraries " -lgmp"` ; \
     external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$GMP_LIB` ; \
     external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$GMP_INCLUDE -DOOMPH_HAS_GMP` ; \
-  fi 
+  fi
 fi
 
 #Tell everybody about it...
@@ -2463,7 +2508,7 @@ AC_SUBST(GMP_DIR)
 #---------------------------------------------------
 # Potential location for the mpfr libraries.
 #
-# If the MPFR is available on 
+# If the MPFR is available on
 # your machine, specify the library directory
 # i.e. the one above the lib and include directories
 # with --with-mpfr
@@ -2477,8 +2522,8 @@ AC_ARG_WITH(mpfr,
 [  --with-mpfr[=DIR]  use mpfr library in directory DIR
                           i.e. library is in DIR/lib
                           and include files are in DIR/include
-                          or specify "auto" (without quotation marks!) 
-                          if the library is specified automatically 
+                          or specify "auto" (without quotation marks!)
+                          if the library is specified automatically
                           by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_mpfr=true
@@ -2532,14 +2577,14 @@ else \
     fi; \
 fi; \
 else \
-   echo "No mpfr library directory specified"; \ 
+   echo "No mpfr library directory specified"; \
 
    # Will mpfr library be built?
    #----------------------------
    if test x$want_cgal_build = xtrue; then  \
       echo "Building mpfr within oomph-lib as part of cgal build process"; \
       will_have_mpfr=true; \
-   else \ 
+   else \
       echo "Not building mpfr within oomph-lib as part of cgal build process"; \
       will_have_mpfr=false; \
    fi; \
@@ -2562,11 +2607,11 @@ fi
 
 
 
-# Do we have the mpfr libraries? If so add them to the 
+# Do we have the mpfr libraries? If so add them to the
 #------------------------------------------------------
 # external distributions; if not wipe the variables
 #--------------------------------------------------
-if test x$have_mpfr = xfalse; then 
+if test x$have_mpfr = xfalse; then
   MPFR_LIB='' ; \
   MPFR_INCLUDE='' ;\
 else \
@@ -2578,7 +2623,7 @@ else \
     external_dist_libraries=`echo $external_dist_libraries " -lmpfr"` ; \
     external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$MPFR_LIB` ; \
     external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$MPFR_INCLUDE -DOOMPH_HAS_MPFR` ; \
-  fi 
+  fi
 fi
 
 
@@ -2600,7 +2645,7 @@ AC_SUBST(MPFR_DIR)
 #---------------------------------------------------
 # Potential location for the cgal libraries.
 #
-# If the CGAL is available on 
+# If the CGAL is available on
 # your machine, specify the library directory
 # i.e. the one above the lib and include directories
 # with --with-cgal
@@ -2614,8 +2659,8 @@ AC_ARG_WITH(cgal,
 [  --with-cgal[=DIR]  use cgal library in directory DIR
                           i.e. library is in DIR/lib
                           and include files are in DIR/include
-                          or specify "auto" (without quotation marks!) 
-                          if the library is specified automatically 
+                          or specify "auto" (without quotation marks!)
+                          if the library is specified automatically
                           by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_cgal=true
@@ -2669,14 +2714,14 @@ else \
     fi; \
 fi; \
 else \
-   echo "No cgal library directory specified"; \ 
+   echo "No cgal library directory specified"; \
 
    # Will cgal library be built?
    #----------------------------
    if test x$want_cgal_build = xtrue; then  \
       echo "Building cgal within oomph-lib as part of cgal build process"; \
       will_have_cgal=true; \
-   else \ 
+   else \
       echo "Not building cgal within oomph-lib as part of cgal build process"; \
       will_have_cgal=false; \
    fi; \
@@ -2699,11 +2744,11 @@ fi
 
 
 
-# Do we have the cgal libraries? If so add them to the 
+# Do we have the cgal libraries? If so add them to the
 #------------------------------------------------------
 # external distributions; if not wipe the variables
 #--------------------------------------------------
-if test x$have_cgal = xfalse; then 
+if test x$have_cgal = xfalse; then
   CGAL_LIB='' ; \
   CGAL_INCLUDE='' ;\
 else \
@@ -2716,7 +2761,7 @@ else \
     # external_dist_libraries=`echo $external_dist_libraries " -lCGAL_Core -lCGAL_ImageIO -lCGAL "` ; \
     external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$CGAL_LIB -Wl,-rpath,$CGAL_LIB` ; \
     external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$CGAL_INCLUDE -DOOMPH_HAS_CGAL` ; \
-  fi 
+  fi
 fi
 
 
@@ -2739,7 +2784,7 @@ AC_SUBST(CGAL_DIR)
 if test x$want_cgal_build = xtrue; then  \
 
     if test x$check_for_cgal = xfalse; then \
-      echo "We're building cgal and associated third party distributions" ; \  
+      echo "We're building cgal and associated third party distributions" ; \
     fi
 
 else \
@@ -2783,7 +2828,7 @@ fi;
 
 
 
-# Make external libraries with their own distributions available to 
+# Make external libraries with their own distributions available to
 #------------------------------------------------------------------
 # all Makfile.am-s. Note that by adding to AM_LDFLAGS and AM_CPPFLAGS
 #--------------------------------------------------------------------
@@ -2798,8 +2843,8 @@ AM_CPPFLAGS=`echo $external_dist_libraries_include  $accumulated_cpp_flags`
 AC_SUBST(AM_CPPFLAGS)
 
 
-# Define "external" libraries 
-#---------------------------- 
+# Define "external" libraries
+#----------------------------
 # These are the third-party libraries distributed with oomph-lib.
 # They are only used if the user hasn't specified his/her own
 # local version of these.
@@ -2808,7 +2853,7 @@ external_libs='-loomph_hsl -loomph_arpack -loomph_crbond_bessel'
 # Triangle?
 if test x$suppress_triangle = xfalse; then \
   external_libs=`echo $external_libs " -loomph_triangle "`
-else 
+else
   echo "Omitting specification of triangle library as we haven't built"
   echo "it locally. Could/should provide option to link against external"
   echo "version..."
@@ -2817,7 +2862,7 @@ fi
 # Tetgen?
 if test x$suppress_tetgen = xfalse; then \
   external_libs=`echo $external_libs " -loomph_tetgen "`
-else 
+else
   echo "Omitting specification of tetgen library as we haven't built"
   echo "it locally. Could/should provide option to link against external"
   echo "version..."
@@ -2825,9 +2870,9 @@ fi
 
 
 # SuperLU?
-if test x$have_superlu = xfalse; then  
+if test x$have_superlu = xfalse; then
   external_libs=`echo $external_libs " -loomph_superlu_4.3"`
-else 
+else
   echo "Omitting specification of superlu library -- assumed to be"
   echo "provided automatically by compiler/linker..."
 fi
@@ -2838,17 +2883,17 @@ fi
 if test x$want_mpi = xtrue; then
 
   # parmetis?
-  if test x$have_parmetis = xfalse; then  
+  if test x$have_parmetis = xfalse; then
     external_libs=`echo $external_libs " -loomph_parmetis_3.1.1"`
-  else 
+  else
     echo "Omitting specification of parmetis library -- assumed to be"
     echo "provided automatically by compiler/linker..."
   fi
 
   # SuperLU_dist?
-  if test x$have_superlu_dist = xfalse; then  
+  if test x$have_superlu_dist = xfalse; then
     external_libs=`echo $external_libs " -loomph_superlu_dist_3.0"`
-  else 
+  else
     echo "Omitting specification of superlu_dist library -- assumed to be"
     echo "provided automatically by compiler/linker..."
   fi
@@ -2856,50 +2901,50 @@ fi
 
 
 #Note: serial metis has to go last
-if test x$have_metis = xfalse; then  
+if test x$have_metis = xfalse; then
   external_libs=`echo $external_libs " -loomph_metis_from_parmetis_3.1.1"`
-else 
+else
   echo "Omitting specification of metis library -- assumed to be"
   echo "provided automatically by compiler/linker..."
 fi
 
 
 # Pord?
-if test x$have_pord = xtrue; then  
+if test x$have_pord = xtrue; then
   external_libs=`echo " $PORD_LIB " $external_libs `
 fi
 
 
 
 # Blacs?
-if test x$have_blacs = xtrue; then  
+if test x$have_blacs = xtrue; then
   external_libs=`echo  " $BLACS_LIB/blacs.a $BLACS_LIB/blacsF77.a  $BLACS_LIB/blacs_copy.a" $external_libs`
 fi
 
 
 # Scalapack?
-if test x$have_scalapack = xtrue; then  
+if test x$have_scalapack = xtrue; then
   external_libs=`echo " $SCALAPACK_LIB " $external_libs `
 fi
 
 
 # Lapack?
-if test x$have_lapack = xfalse; then  
+if test x$have_lapack = xfalse; then
   external_libs=`echo $external_libs " -loomph_lapack -loomph_flapack"`
-else 
-  if test "$LAPACK_LIB" != "auto"; then 
+else
+  if test "$LAPACK_LIB" != "auto"; then
       external_libs=`echo $external_libs " $LAPACK_LIB"`
   else
       echo "Omitting specification of lapack library -- assumed to be"
       echo "provided automatically by compiler/linker..."
-  fi  
+  fi
 fi
 
 
 # Blas?
-if test x$have_blas = xfalse; then  
+if test x$have_blas = xfalse; then
   external_libs=`echo $external_libs " -loomph_blas"`
-else 
+else
   if test "$BLAS_LIB" != "auto"; then
       external_libs=`echo $external_libs " $BLAS_LIB"`
   else
@@ -2910,17 +2955,17 @@ fi
 
 
 
-echo " " 
+echo " "
 echo "/////////////////////////////////////////////////////////////////////////////////"
 echo " "
 echo "external_dist_libraries        : $external_dist_libraries"
 echo "external_dist_libraries_lib    : $external_dist_libraries_lib"
 echo "external_dist_libraries_include: $external_dist_libraries_include"
-echo " " 
+echo " "
 echo "/////////////////////////////////////////////////////////////////////////////////"
 echo " "
 
-# Now add the third-party external libraries that are shared by all 
+# Now add the third-party external libraries that are shared by all
 #------------------------------------------------------------------
 # Makefile.am-s
 #--------------
@@ -2940,19 +2985,19 @@ AC_OUTPUT()
 #-----------------------------------------------------------------
 # This macro adjusts config.h to oomph-lib-config.h
 # in which all macros are package specific to avoid clashes
-# with those declared by other third-party libraries. 
+# with those declared by other third-party libraries.
 #
 # Downloaded and adjusted from
 #
 #  http://autoconf-archive.cryp.to/ac_create_prefix_config_h.html
 #
-# Changes: 
+# Changes:
 #  (1) ac_prefix_conf_INP wasn't set correctly. Commented the
-#      the relevant bit of code out and hard-coded the 
+#      the relevant bit of code out and hard-coded the
 #      name as config.h
-#  (2) In the AC_MSG_ERROR macro rather than referring to the variable 
-#      $ac_prefix_conf_INP the non-existent (and therefore empty) 
-#      variable $ac_prefix_conf_IN was referred to. Therefore no 
+#  (2) In the AC_MSG_ERROR macro rather than referring to the variable
+#      $ac_prefix_conf_INP the non-existent (and therefore empty)
+#      variable $ac_prefix_conf_IN was referred to. Therefore no
 #      meaningful error message was produced.
 #-----------------------------------------------------------------
 AC_DEFUN([AC_CREATE_PREFIX_CONFIG_H],
@@ -3007,7 +3052,7 @@ changequote([, ])dnl
   fi
   rm -f conftest.*
 fi])
-    
+
 
 
 AC_CREATE_PREFIX_CONFIG_H

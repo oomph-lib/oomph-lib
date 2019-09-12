@@ -39,10 +39,15 @@ rm .tmp_flag_converter.txt
 
 install_dir=$MPFR_DIR 
 echo "install dir: " $install_dir
+include_dir=$install_dir/include
 
-if [ -e $install_dir ]; then
-    echo "mpfr install dir already exists -- deleting it!"
-    rm -rf $install_dir
+# Check if installed version of mpfr already exists
+if [ -e $include_dir ]; then
+   printf "Was about to build mpfr but it already appears to have been \n"
+   printf "installed because the directory:\n\n"
+   printf "      " $include_dir" \n\n"
+   printf "already exists. I'm not installing mpfr again.\n\n\n"
+   exit
 else
     echo "mpfr install dir doesn't exist yet; will be created during installation"
 fi

@@ -41,17 +41,12 @@
 //===============================================================
 // WARNING: THIS IS WORK IN PROGRESS -- ONLY USED IN 2D SO FAR
 //===============================================================
-
-
-
-
 //===========================================================================
 /// Namespace with helper functions for (2D) vorticity (and derivatives)
 /// recovery
 //===========================================================================
 namespace VorticityRecoveryHelpers
 {
-
  //========================================================================
  /// \short Class to indicate which derivatives of the vorticity/
  /// velocity we want to recover. We choose to immediately instantiate
@@ -214,8 +209,6 @@ namespace VorticityRecoveryHelpers
   /// derivatives of the velocity
   int Maximum_order_of_velocity_derivative;
  } Recovery_helper;
-
-
 } // End of VorticityRecoveryHelpers
 
 

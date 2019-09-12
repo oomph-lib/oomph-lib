@@ -43,6 +43,9 @@
 #include "../generic/fsi.h"
 #include "../generic/projection.h"
 
+#include <algorithm>
+#include <iterator>
+
 namespace oomph
 {
 
@@ -895,6 +898,9 @@ public:
  /// \short Compute the vorticity vector at local coordinate s
  void get_vorticity(const Vector<double>& s, Vector<double>& vorticity) const;
 
+ /// \short Compute the vorticity vector at local coordinate s
+ void get_vorticity(const Vector<double>& s, double& vorticity) const;
+
  /// \short Get integral of kinetic energy over element
  double kin_energy() const;
 
@@ -995,6 +1001,67 @@ public:
    }
  }
  
+ 
+ /// \short Write values of the i-th scalar field at the plot points. Needs 
+ /// to be implemented for each new specific element type.
+ void scalar_value_fct_paraview(std::ofstream& file_out,
+				const unsigned& i,
+				const unsigned& nplot,
+				const double& time,
+				FiniteElement::UnsteadyExactSolutionFctPt
+				exact_soln_pt) const
+ {
+#ifdef PARANOID
+  if (i>DIM)
+  {
+   // Create an output stream
+   std::stringstream error_stream;
+
+   // Create the error message
+   error_stream << "These Navier Stokes elements only store " << DIM+1
+		<< " fields, but i is currently " << i << std::endl;
+
+   // Throw the error message
+   throw OomphLibError(error_stream.str(),
+		       OOMPH_CURRENT_FUNCTION,
+		       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+     
+  // Vector of local coordinates
+  Vector<double> s(DIM+1,0.0);
+  
+  // Storage for the spatial coordinates
+  Vector<double> spatial_coordinates(DIM,0.0);
+
+  // How many plot points do we have in total?
+  unsigned num_plot_points=nplot_points_paraview(nplot);
+  
+  // Loop over plot points
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+   // Get the local coordinates of the iplot-th plot point
+   get_s_plot(iplot,nplot,s);
+
+   // Loop over the spatial coordinates
+   for (unsigned j=0;j<DIM;j++)
+   {
+    // Assign the i-th spatial coordinate
+    spatial_coordinates[j]=interpolated_x(s,j);
+   }
+        
+   // Exact solution vector (here it's simply a scalar)
+   Vector<double> exact_soln(DIM+1,0.0);
+  
+   // Get the exact solution at this point
+   (*exact_soln_pt)(time,spatial_coordinates,exact_soln);
+   
+   // Output the interpolated solution value
+   file_out << exact_soln[i] << std::endl;
+  } // for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+ } // End of scalar_value_fct_paraview
+
+ 
  /// \short Name of the i-th scalar field. Default implementation
  /// returns V1 for the first one, V2 for the second etc. Can (should!) be
  /// overloaded with more meaningful names in specific elements.
@@ -1090,8 +1157,8 @@ public:
                  const double& time,
                  FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
 
-   /// \short Compute norm of solution: square of the L2 norm of the velocities
-   void compute_norm(double& norm);
+ /// \short Compute norm of solution: square of the L2 norm of the velocities
+ void compute_norm(double& norm);
 
  /// \short Validate against exact solution at given time
  /// Solution is provided via function pointer.
@@ -1108,6 +1175,18 @@ public:
  /// and L2 norm of velocity solution over element
  void compute_error(std::ostream &outfile,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+                    double& error, double& norm);
+
+ /// \short Validate against exact solution. Solution is provided via
+ /// function pointer. Compute L2 error and L2 norm of velocity solution
+ /// over element.
+ void compute_error(FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+                    const double& time, double& error, double& norm);
+ 
+ /// \short Validate against exact solution. Solution is provided via
+ /// function pointer. Compute L2 error and L2 norm of velocity solution
+ /// over element.
+ void compute_error(FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                     double& error, double& norm);
 
  /// Compute the element's residual Vector
@@ -2221,6 +2300,17 @@ class QTaylorHoodElement : public virtual QElement<DIM,3>,
  /// Return number of pressure values
  unsigned npres_nst() const 
   {return static_cast<unsigned>(pow(2.0,static_cast<int>(DIM)));}
+
+ /// \short Helper function which indicates whether or not the provided
+ /// node is a pressure node
+ bool is_pressure_node(const unsigned& n) const
+ {
+  // The number of pressure nodes
+  unsigned n_p=npres_nst();
+   
+  // See if the value n is in the array Pconv
+  return std::find(this->Pconv,this->Pconv+n_p,n)!=this->Pconv+n_p;
+ } // End of is_pressure_node
 
  /// Pin p_dof-th pressure dof and set it to value specified by p_value.
  void fix_pressure(const unsigned &p_dof, const double &p_value)

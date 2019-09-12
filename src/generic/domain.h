@@ -92,21 +92,53 @@ public:
    BrokenCopy::broken_assign("Domain");
   }
  
- /// Virtual destructor: Empty
- virtual ~Domain(){};
+ /// \short Destructor: Strictly speaking, whoever creates an object
+ /// dynamically should be responsible for the cleanup of said object
+ /// but it makes sense here for the Domain to generically kill any
+ /// MacroElements left over in the MacroElement container (if it hasn't
+ /// already been done in the derived class) to avoid memory leaks.
+ virtual ~Domain()
+ {
+  // If the container isn't empty
+  if (Macro_element_pt.size()>0)
+  {
+   // How many macro elements are there?
+   unsigned n_macro_element=Macro_element_pt.size();
+    
+   // Loop over the macro elements
+   for (unsigned i=0;i<n_macro_element;i++)
+   {
+    // They might have already deleted (some or all of) the macro elements
+    // so skip them if they've already been made null pointers
+    if (Macro_element_pt[i]!=0)
+    {
+     // Delete the i-th macro element
+     delete Macro_element_pt[i];
+
+     // Make it a null pointer
+     Macro_element_pt[i]=0;
+    }
+   } // for (unsigned i=0;i<n_macro_element;i++)
+
+   // Now clear the storage. NOTE: We can't just call this function
+   // as this would only delete the pointers to the macro elements,
+   // not the macro elements themselves!
+   Macro_element_pt.clear();
+  } // if (Macro_element_pt[i].size()>0)
+ } // End of ~Domain
 
 
  /// \short Access to i-th macro element
  MacroElement* macro_element_pt(const unsigned& i)
   {
-   return  Macro_element_pt[i];
+   return Macro_element_pt[i];
   }
 
 
  /// Number of macro elements in domain
  unsigned nmacro_element()
   {
-   return  Macro_element_pt.size();
+   return Macro_element_pt.size();
   }
 
  /// Output macro elements
@@ -137,6 +169,21 @@ public:
                                      const unsigned& i_direct,
                                      const Vector<double>& s,
                                      Vector<double>& f)=0;
+
+  
+  /// \short Vector representation of the i_macro-th macro element
+  /// boundary i_direct (e.g. N/S/W/E in 2D) at continuous time, t
+  virtual void macro_element_boundary(const double& t,
+				      const unsigned& i_macro,
+				      const unsigned& i_direct,
+				      const Vector<double>& s,
+				      Vector<double>& f)
+  {
+   // Throw an error
+   throw OomphLibError("Domain::macro_element_boundary() is broken virtual.",
+		       OOMPH_CURRENT_FUNCTION,
+		       OOMPH_EXCEPTION_LOCATION);
+  } // End of macro_element_boundary
 
 
  /// \short Vector representation of the  i_macro-th macro element
@@ -190,6 +237,22 @@ public:
                        OOMPH_EXCEPTION_LOCATION);
   }
 
+ 
+  /// \short Vector representation of the  i_macro-th macro element boundary
+  /// derivatives i_direct (e.g. N/S/W/E in 2D) at continuous time level t. 
+  /// Broken virtual.
+  virtual void dmacro_element_boundary(const double& t,
+				       const unsigned& i_macro,
+				       const unsigned& i_direct,
+				       const Vector<double>& s,
+				       Vector<double>& f)
+  {
+   throw OomphLibError("Domain::dmacro_element_boundary() is broken virtual.",
+		       OOMPH_CURRENT_FUNCTION,
+		       OOMPH_EXCEPTION_LOCATION);
+  }
+
+
  /// \short Vector representation of the  i_macro-th macro element
  /// boundary derivatives i_direct (e.g. N/S/W/E in 2D) at current time: f(s). 
  void dmacro_element_boundary(const unsigned& i_macro,
@@ -215,6 +278,20 @@ public:
    throw OomphLibError("Domain::d2macro_element_boundary() is broken virtual.",
                        OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
+  }
+
+  /// \short Vector representation of the i_macro-th macro element boundary
+  /// seocond derivatives i_direct (e.g. N/S/W/E in 2D) at continuous time
+  /// level t. Broken virtual.
+  virtual void d2macro_element_boundary(const double& t,
+					const unsigned& i_macro,
+					const unsigned& i_direct,
+					const Vector<double>& s,
+					Vector<double>& f)
+  {
+   throw OomphLibError("Domain::d2macro_element_boundary() is broken virtual.",
+		       OOMPH_CURRENT_FUNCTION,
+		       OOMPH_EXCEPTION_LOCATION);
   }
 
  /// \short Vector representation of the  i_macro-th macro element
