@@ -308,16 +308,28 @@ fi
 
 # Set up configure options
 #============================================================================
+# PM: When building shared third-party libraries, we need to ensure that we
+# can access their code irregardless of the load address. Such code is
+# referred to as position independent code (PIC). To make sure the code is
+# compiled as such we need to provide the -fPIC and -DPIC flags to our
+# compiler options but we shouldn't expect the user to add them themselves
+# Update the config file (if necessary) to include the -fPIC flag
+InsertExtraFlags "$configure_options_file" "-fPIC"
+
+# ...and don't forget to include the -DPIC linker flag which ensures that
+# we include code in #ifdef PIC /*...*/ #endif statements.
+InsertExtraFlags "$configure_options_file" "-DPIC"
 
 # Read the options from the files and convert them into a single one-line string
 new_configure_options=$(ProcessOptionsFile < "$configure_options_file")
 old_configure_options=$(ProcessOptionsFile < config/configure_options/current)
 
 # If configure options have changed then we need to reconfigure
-if [[ "$new_configure_options" != "$old_configure_options" || "$generate_config_files" == "true" ]]; then
+if [[ "$new_configure_options" != "$old_configure_options" ||
+	  "$generate_config_files" == "true" ]]; then
 
     # Slight problem here: if we change the options and add a new
-    # driver at the same time then configure will end up being rerun twice.
+    # driver at the same time then configure will end up being re-run twice.
     # Don't think there's anything we can do about it
 
     echo "Using configure options:"

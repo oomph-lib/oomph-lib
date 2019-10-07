@@ -46,8 +46,8 @@ dir=`basename $tar_file .tar.xz`
 install_dir=$GMP_DIR 
 echo "install dir: " $install_dir
 if [ -e $install_dir ]; then
-    echo "gmp install dir already exists -- deleting it!"
-    rm -rf $install_dir
+    echo "gmp install dir already exists -- not doing anything!"
+    exit
 else
     echo "gmp install dir doesn't exist yet; will be created during installation"
 fi

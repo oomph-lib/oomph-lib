@@ -14,11 +14,9 @@ install:
 
 clean:
 	rm -rf boost_1_65_1
-	rm -rf boost_default_installation
 
 clean-local:
 	rm -rf boost_1_65_1
-	rm -rf boost_default_installation
 
 distclean-local:
 	rm -rf boost_1_65_1

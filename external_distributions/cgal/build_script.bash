@@ -28,30 +28,49 @@ else
     exit 1
 fi
 
+install_dir=$CGAL_PERMANENT_INSTALL_DIRECTORY/"cgal_default_installation"
+echo "install dir: " $install_dir
+lib_dir=$install_dir/lib
+echo "lib dir: " $lib_dir
+include_dir=$install_dir/include
+echo "include dir: " $include_dir
+
+if [ -e $install_dir ]; then
+    echo "cgal install dir already exists -- not doing anything!"
+    exit
+else
+    echo "cgal install dir doesn't exist yet; will be created during installation"
+fi
 
 # update this if we move to a new version
 tar_file=CGAL-4.11.tar.xz
 
-gmp_include=$1                      # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/gmp/gmp_default_installation/include
-gmp_lib=$2                          # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/gmp/gmp_default_installation/lib
+dir=`basename $tar_file .tar.xz`
+echo "dir: " $dir
+if [ -e $dir ]; then
+    if [ ! -d $dir ]; then
+        echo "Directory " $dir " is not a directory"
+        exit
+    fi
+fi
+
+gmp_include=$1                     
+gmp_lib=$2                          
 if [ `uname` == "Darwin" ]
 then
-    gmp_actual_library=$2/libgmp.dylib     # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/gmp/gmp_default_installation/lib/libgmp.dylib
+    gmp_actual_library=$2/libgmp.dylib    
 else
-gmp_actual_library=$2/libgmp.so     # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/gmp/gmp_default_installation/lib/libgmp.so
+    gmp_actual_library=$2/libgmp.so     
 fi
-mpfr_include=$3                     # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/mpfr/mpfr_default_installation/include
-mpfr_lib=$4                         # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/mpfr/mpfr_default_installation/lib
+mpfr_include=$3                    
+mpfr_lib=$4                         
 if [ `uname` == "Darwin" ]
 then
-    mpfr_actual_library=$4/libmpfr.dylib  # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/mpfr/mpfr_default_installation/lib/libmpfr.dylib
+    mpfr_actual_library=$4/libmpfr.dylib 
 else
-mpfr_actual_library=$4/libmpfr.so   # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/mpfr/mpfr_default_installation/lib/libmpfr.so
+    mpfr_actual_library=$4/libmpfr.so   
 fi
-boost_include=$5                    # /home/mheil/version_for_merging_in_louis_stuff/external_distributions/boost/boost_default_installation/include
-                                    # boost_lib=/home/mheil/version_for_merging_in_louis_stuff/external_distributions/boost/boost_default_installation/lib
-
-
+boost_include=$5                    
 
 if [ ! -e $gmp_actual_library ]; then
     echo " "
@@ -78,36 +97,6 @@ else
     echo "    "$mpfr_actual_library 
     echo " "
 fi
-
-
-install_dir=$CGAL_PERMANENT_INSTALL_DIRECTORY/"cgal_default_installation"
-echo "install dir: " $install_dir
-lib_dir=$install_dir/lib
-echo "lib dir: " $lib_dir
-include_dir=$install_dir/include
-echo "include dir: " $include_dir
-
-
-if [ -e $install_dir ]; then
-    echo "cgal install dir already exists -- deleting it!"
-    rm -rf $install_dir
-else
-    echo "cgal install dir doesn't exist yet; will be created during installation"
-fi
-
-dir=`basename $tar_file .tar.xz`
-echo "dir: " $dir
-if [ -e $dir ]; then
-    if [ ! -d $dir ]; then
-        echo "Directory " $dir " is not a directory"
-        exit
-    fi
-fi
-#ls -l
-#echo "About to delete: "$dir
-#rm -rf $dir
-#ls -l
-#pwd
 
 # Get ready for new install
 tar xf $tar_file

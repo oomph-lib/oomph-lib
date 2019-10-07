@@ -48,8 +48,8 @@ include_dir=$BOOST_INCLUDE
 echo "include dir: " $include_dir
 
 if [ -e $install_dir ]; then
-    echo "boost install dir already exists -- deleting it!"
-    rm -rf $install_dir
+    echo "boost install dir already exists -- not doing anything!"
+    exit
 else
     echo "boost install dir doesn't exist yet; will be created during installation"
 fi

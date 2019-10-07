@@ -41,8 +41,8 @@ install_dir=$MPFR_DIR
 echo "install dir: " $install_dir
 
 if [ -e $install_dir ]; then
-    echo "mpfr install dir already exists -- deleting it!"
-    rm -rf $install_dir
+    echo "mpfr install dir already exists -- not doing anything!"
+    exit
 else
     echo "mpfr install dir doesn't exist yet; will be created during installation"
 fi
@@ -62,7 +62,9 @@ ls -l
 # Get ready for new install
 tar xf $tar_file
 cd $dir
-./configure --prefix=$install_dir --with-gmp-include=$gmp_include --with-gmp-lib=$gmp_lib; make; make install
+./configure --prefix=$install_dir --with-gmp-include=$gmp_include --with-gmp-lib=$gmp_lib;
+make;
+make install
 
 
 

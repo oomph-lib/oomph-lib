@@ -14,11 +14,9 @@ install:
 
 clean:
 	rm -rf gmp-6.1.2
-	rm -rf gmp_default_installation
 
 clean-local:
 	rm -rf gmp-6.1.2
-	rm -rf gmp_default_installation
 
 distclean-local:
 	rm -rf gmp-6.1.2

@@ -13,11 +13,9 @@ install:
 
 clean: 
 	rm -rf CGAL-4.11
-	rm -rf cgal_default_installation
 
 clean-local:
 	rm -rf CGAL-4.11
-	rm -rf cgal_default_installation
 
 distclean-local:
 	rm -rf CGAL-4.11

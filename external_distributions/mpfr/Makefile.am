@@ -14,11 +14,9 @@ install:
 
 clean:
 	rm -rf mpfr-3.1.6
-	rm -rf mpfr_default_installation
 
 clean-local:
 	rm -rf mpfr-3.1.6
-	rm -rf mpfr_default_installation
 
 distclean-local:
 	rm -rf mpfr-3.1.6

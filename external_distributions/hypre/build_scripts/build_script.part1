@@ -11,7 +11,6 @@ set -o errexit
 # Default for install directory
 INSTALL_DIRECTORY=`pwd`/hypre_default_installation
 
-
 echo " "
 echo " " 
 echo "CHECKING IF HYPRE HAS TO BE INSTALLED"
@@ -20,39 +19,28 @@ echo " "
 
 # Check if tar file exists
 if [ -e  hypre-2.0.0.tar.gz ]; then
-
    printf "File hypre-2.0.0.tar.gz exists in directory \n \n   `pwd` \n"
-
 else
-
    printf "File hypre-2.0.0.tar.gz does not exist in directory \n \n    `pwd` \n"
    printf "\n \n --> I am not building hypre. \n \n \n"
    exit
-
 fi
-
 
 # Check if installed version of hypre already exists
 if [ -e $INSTALL_DIRECTORY/include ]; then
-
    printf "\n...but hypre already appears to have been installed \n"
    printf "because the directory  \n\n"
    printf "      " $INSTALL_DIRECTORY"/include \n\n"
    printf "already exists. I'm not installing hypre again.\n\n\n"
    exit
-
 else
-
   printf "\n\n ---> Installing hypre in \n\n     " $INSTALL_DIRECTORY " \n\n\n"
-
 fi
-
 
 # Unpack hypre
 tar xvfz hypre-2.0.0.tar.gz
 
 # Go to it source directory
 cd  hypre-2.0.0/src
-
 
 # Configure it

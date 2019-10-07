@@ -32,7 +32,6 @@ mpi_include=$(MPI_INCLUDE_DIRECTORY)
 
 all:
 
-
 	echo "#! /bin/bash" > build_script.bash
 	echo " " >> build_script.bash
 	echo "# WARNING: THIS IS AN AUTOMATICALLY GENERATED FILE" >> build_script.bash
@@ -201,4 +200,10 @@ clean-local:
 	rm -f build_script.bash
 	rm -rf mumps
 	rm -rf scalapack
+
+distclean-local:
+	rm -f build_script.bash
+	rm -rf mumps
+	rm -rf scalapack
+	rm -rf mumps_and_scalapack_default_installation
 

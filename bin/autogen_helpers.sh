@@ -56,6 +56,45 @@ YesNoRead()
     return $bool
 }
 
+# Takes the configure options file and edits the FLAGS to include the
+# -fPIC flag and, for the CXXFLAGS and CFLAGS, the -DPIC flag 
+InsertExtraFlags()
+{
+    # Read in the first argument: the configure options file
+    configure_options_file="$1";
+
+    # Temporary file to store the intermediate line-by-line edits when
+    # using sed. NOTE (PM): sed can normally edit "in-place" by using the
+    # "-i" flag but the syntax is slightly different on a Mac (and so might
+    # be slightly different on other platforms too). To avoid any problems
+    # I simply direct the output to a temporary file and use that file to
+    # update the original one.
+    temp_file=$(mktemp);
+
+    # Read in the second argument: the additional configure flags
+    extra_flags="$2";
+
+    # Which flags are we going to update?
+    flag_string=("CXXFLAGS=" "CFLAGS=" "FFLAGS=" "FFLAGS_NO_OPT=")
+
+    # Loop over the flags
+    for i in ${flag_string[@]}
+    do
+	# Get the line (and line number) associated with this flag
+	configure_options=`cat $configure_options_file | grep -n "$i"`
+
+	# If we've already 
+	if [[ $configure_options != *"$extra_flags"* ]]
+	then
+	    flag_line_num=`echo "$configure_options" | cut -d":" -f1`
+	    flag_opts=`echo "$configure_options" | cut -d":" -f2 | sed 's/"/ '$extra_flags'"/2'`
+	    sed -e "$flag_line_num"'s/.*/'"$flag_opts"'/' \
+		$configure_options_file > $temp_file \
+		&& mv $temp_file $configure_options_file
+	fi
+    done
+}
+
 
 # This little function takes the input, removes anything following a #
 # deletes blanks lines and then replaces all newlines by spaces.

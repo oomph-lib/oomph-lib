@@ -51,3 +51,8 @@ clean-local:
 	rm -f build_script.bash
 	rm -rf hypre-2.0.0
 
+distclean-local:
+	rm -f build_script.bash
+	rm -rf hypre-2.0.0
+	rm -rf hypre_default_installation
+
