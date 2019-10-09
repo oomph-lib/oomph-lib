@@ -61,7 +61,13 @@ YesNoRead()
 InsertExtraFlags()
 {
     # Read in the first argument: the configure options file
-    configure_options_file="$1";
+    temp_configure_options_file="$1";
+    
+    # The folder of the configure options
+    config_opts_dir=`dirname "$temp_configure_options_file"`;
+
+    # The folder of the configure options
+    config_opts_base=`basename "$temp_configure_options_file"`;
 
     # Temporary file to store the intermediate line-by-line edits when
     # using sed. NOTE (PM): sed can normally edit "in-place" by using the
@@ -69,8 +75,8 @@ InsertExtraFlags()
     # be slightly different on other platforms too). To avoid any problems
     # I simply direct the output to a temporary file and use that file to
     # update the original one.
-    temp_file=$(mktemp);
-
+    temp_file="$config_opts_dir/.$config_opts_base"_"$RANDOM";
+    
     # Read in the second argument: the additional configure flags
     extra_flags="$2";
 
@@ -81,16 +87,16 @@ InsertExtraFlags()
     for i in ${flag_string[@]}
     do
 	# Get the line (and line number) associated with this flag
-	configure_options=`cat $configure_options_file | grep -n "$i"`
+	configure_options=`cat $temp_configure_options_file | grep -n "$i"`
 
-	# If we've already 
+	# If we've already included these flags
 	if [[ $configure_options != *"$extra_flags"* ]]
 	then
 	    flag_line_num=`echo "$configure_options" | cut -d":" -f1`
 	    flag_opts=`echo "$configure_options" | cut -d":" -f2 | sed 's/"/ '$extra_flags'"/2'`
 	    sed -e "$flag_line_num"'s/.*/'"$flag_opts"'/' \
-		$configure_options_file > $temp_file \
-		&& mv $temp_file $configure_options_file
+		$temp_configure_options_file > $temp_file \
+		&& mv $temp_file $temp_configure_options_file
 	fi
     done
 }

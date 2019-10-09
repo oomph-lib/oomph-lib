@@ -308,36 +308,58 @@ fi
 
 # Set up configure options
 #============================================================================
+# The folder of the configure options
+configure_options_dirname=`dirname "$configure_options_file"`;
+
+# The folder of the configure options
+configure_options_basename=`basename "$configure_options_file"`;
+
+# Temporary file to store flags
+temporary_configure_options_file="$configure_options_dirname/.$configure_options_basename.$RANDOM";
+
+# If the filename is taken then loop until we create one that isn't
+while [ -f $temporary_configure_options_file ]
+do
+    # Make a new filename
+    temporary_configure_options_file="$configure_options_folder/.$configure_options_basename.$RANDOM";
+done
+
+# Make a temporary copy
+cp "$configure_options_file" "$temporary_configure_options_file"
+
+# The additional flags needed to link against shared libraries. 
 # PM: When building shared third-party libraries, we need to ensure that we
 # can access their code irregardless of the load address. Such code is
 # referred to as position independent code (PIC). To make sure the code is
 # compiled as such we need to provide the -fPIC and -DPIC flags to our
 # compiler options but we shouldn't expect the user to add them themselves
-# Update the config file (if necessary) to include the -fPIC flag
-InsertExtraFlags "$configure_options_file" "-fPIC"
-
-# ...and don't forget to include the -DPIC linker flag which ensures that
+# Update the config file (if necessary) to include the -fPIC flag, and
+# don't forget to include the -DPIC linker flag which ensures that
 # we include code in #ifdef PIC /*...*/ #endif statements.
-InsertExtraFlags "$configure_options_file" "-DPIC"
+extra_flags_for_linking_against_shared_libraries="-fPIC -DPIC"
+
+# Loop over the flags to include
+for i_flag in $extra_flags_for_linking_against_shared_libraries
+do
+    # Insert the i-th flag in the set of flags to include
+    InsertExtraFlags "$temporary_configure_options_file" "$i_flag"
+done
 
 # Read the options from the files and convert them into a single one-line string
-new_configure_options=$(ProcessOptionsFile < "$configure_options_file")
+new_configure_options=$(ProcessOptionsFile < "$temporary_configure_options_file")
 old_configure_options=$(ProcessOptionsFile < config/configure_options/current)
 
 # If configure options have changed then we need to reconfigure
 if [[ "$new_configure_options" != "$old_configure_options" ||
 	  "$generate_config_files" == "true" ]]; then
 
-    # Slight problem here: if we change the options and add a new
-    # driver at the same time then configure will end up being re-run twice.
-    # Don't think there's anything we can do about it
-
-    echo "Using configure options:"
-    cat "$configure_options_file" | ProcessOptionsFile
-    echo
-
     # Check that the options are in the correct order
-    configure_options_are_ok="$(CheckOptions $configure_options_file)"
+    configure_options_are_ok="$(CheckOptions $temporary_configure_options_file)"
+    
+    # Kill the temporary file
+    rm -f "$temporary_configure_options_file"
+    
+    # Check if the options are okay
     if test "$configure_options_are_ok" != ""; then
 
         echo 1>&2
@@ -351,9 +373,17 @@ if [[ "$new_configure_options" != "$old_configure_options" ||
         # Failed
         exit 4
     fi
+        
+    # Slight problem here: if we change the options and add a new
+    # driver at the same time then configure will end up being re-run twice.
+    # Don't think there's anything we can do about it
+
+    echo "Using configure options:"
+    echo "$new_configure_options"
 
     # Update current options, unless the files are the same
-    if [[ "$(AbsPath $configure_options_file)" != "$(AbsPath config/configure_options/current)" ]]; then
+    if [[ "$(AbsPath $configure_options_file)" != "$(AbsPath config/configure_options/current)" ]];
+    then
         cp "$configure_options_file" "config/configure_options/current"
     fi
 
@@ -370,9 +400,14 @@ if [[ "$new_configure_options" != "$old_configure_options" ||
     set +e
     ./bin/check_mpi_command.sh Makefile
     set -e
-
 fi
 
+# If the temporary file still exists
+if [ -f "$temporary_configure_options_file" ]
+then  
+    # Kill it
+    rm -f "$temporary_configure_options_file"
+fi
 
 # make is smart enough to automatically rerun automake, configure etc. if
 # they are needed for other reasons (e.g if we have added new dirs to one
