@@ -328,8 +328,8 @@ template<class ELEMENT>
 RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
  UnsteadyHeatEquations<2>::UnsteadyHeatSourceFctPt source_fct_pt)
  : Source_fct_pt(source_fct_pt)
-{ 
-
+{
+ 
  // Setup labels for output
  //------------------------
 

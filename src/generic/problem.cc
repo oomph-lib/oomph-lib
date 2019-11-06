@@ -127,7 +127,8 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
 #endif
   Shut_up_in_newton_solve(false),
   Always_take_one_newton_step(false),
-  Timestep_reduction_factor_after_nonconvergence(0.5)
+  Timestep_reduction_factor_after_nonconvergence(0.5),
+  Keep_temporal_error_below_tolerance(true)
  {
   Use_predictor_values_as_initial_guess = false;
 
@@ -10953,6 +10954,10 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 /// halve the time step and try again, until the time step falls below the
 /// specified minimum value. The routine returns the value an estimate
 /// of the next value of dt that should be taken.
+/// Timestep is also rejected if the  error estimate post-solve
+/// (computed by global_temporal_error_norm()) exceeds epsilon.
+/// This behaviour can be over-ruled by setting the protected
+/// boolean Problem::Keep_temporal_error_below_tolerance to false.
 //========================================================================
 double Problem::
 adaptive_unsteady_newton_solve(const double &dt_desired,
@@ -10975,20 +10980,21 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
  double time_current = time_pt()->time();
 
  //Flag to detect whether the timestep has been rejected or not
- bool REJECT_TIMESTEP=0;
+ bool reject_timestep=0;
+ 
  //Flag to detect whether any of the timesteppers are adaptive
- unsigned ADAPTIVE_FLAG=0;
- //The value of the actual timestep, by default the same as desired timestep
- double dt_actual=dt_desired;
+ unsigned adaptive_flag=0;
 
- //Determine the number of timesteppers
- unsigned n_time_steppers = ntime_stepper();
+//The value of the actual timestep, by default the same as desired timestep
+ double dt_actual=dt_desired;
+ 
  //Find out whether any of the timesteppers are adaptive
+ unsigned n_time_steppers = ntime_stepper();
  for(unsigned i=0;i<n_time_steppers;i++)
   {
    if(time_stepper_pt(i)->adaptive_flag())
     {
-     ADAPTIVE_FLAG=1;
+     adaptive_flag=1;
      break;
     }
   }
@@ -11002,7 +11008,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
   {
    // Initially we assume that this step will succeed and that this dt
    // value is ok.
-   REJECT_TIMESTEP=0;
+   reject_timestep=0;
    double dt_rescaling_factor = 1.0;
 
    //Set the new time and value of dt
@@ -11054,7 +11060,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
       {
        //Reject the timestep, if we have an exception
        oomph_info << "TIMESTEP REJECTED" << std::endl;
-       REJECT_TIMESTEP=1;
+       reject_timestep=1;
          
        // Half the time step
        dt_rescaling_factor = Timestep_reduction_factor_after_nonconvergence;
@@ -11073,7 +11079,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 
    // If we have an adapative timestepper (and we haven't already failed)
    // then calculate the error estimate and rescaling factor.
-   if(ADAPTIVE_FLAG && !REJECT_TIMESTEP)
+   if(adaptive_flag && !reject_timestep)
     {
      //Once timestep has been accepted can do fancy error processing
      //Set the error weights
@@ -11096,6 +11102,34 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
      oomph_info << "Timestep scaling factor is  " 
                 << dt_rescaling_factor << std::endl;
      oomph_info << "Estimated timestepping error is " << error << std::endl;
+
+
+     // Do we have to do it again?
+     if (error>epsilon)
+       {
+	 oomph_info
+	   << "Estimated timestepping error "
+	   << error << " exceeds tolerance "
+	   << epsilon << " ";
+	 if (Keep_temporal_error_below_tolerance)
+	   {
+            oomph_info << " --> rejecting timestep." 
+                       << std::endl;
+            reject_timestep=1;
+	   }
+	 else
+          {
+           oomph_info << " ...but we're not rejecting the timestep"
+                      << std::endl;
+	   }
+         oomph_info
+          << "Note: This behaviour can be adjusted by changing the protected "
+          << "boolean" << std::endl << std::endl
+          << "    Problem::Keep_temporal_error_below_tolerance"
+          << std::endl;
+       }
+     
+
     } //End of if adaptive flag
 
 
@@ -11118,7 +11152,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
     }
    // If we have already rejected the timestep then don't do this check
    // because DTSF will definitely be too small.
-   else if((!REJECT_TIMESTEP) && (dt_rescaling_factor <= DTSF_min_decrease))
+   else if((!reject_timestep) && (dt_rescaling_factor <= DTSF_min_decrease))
     {
      // Handle this special case where we want to continue anyway (usually
      // Minimum_dt_but_still_proceed = -1 so this has no effect).
@@ -11144,7 +11178,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
                   << " which is less than the minimum scaling factor " 
                   << DTSF_min_decrease << std::endl;
        oomph_info << "TIMESTEP REJECTED" << std::endl;
-       REJECT_TIMESTEP=1;
+       reject_timestep=1;
       }
 
     }
@@ -11176,7 +11210,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 
 
    // If we are rejecting this attempt then revert the dofs etc.
-   if(REJECT_TIMESTEP)
+   if(reject_timestep)
     {
      //Reset the time
      time_pt()->time() = time_current;
@@ -11200,7 +11234,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 
   }
  //Keep this loop going until we accept the timestep
- while(REJECT_TIMESTEP);
+ while(reject_timestep);
 
  // Once the timestep has been accepted, return the time step that should be
  // used next time.

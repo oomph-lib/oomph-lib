@@ -2080,6 +2080,13 @@ public:
  /// to 1/2; can be over-written by user in derived problem.
  double Timestep_reduction_factor_after_nonconvergence;
 
+
+ /// \short Boolean to decide if a timestep is to be rejected if the
+ /// error estimate post-solve (computed by global_temporal_error_norm())
+ /// exceeds the tolerance required in the call to
+ /// adaptive_unsteady_newton_solve(...). Defaults to true.
+ bool Keep_temporal_error_below_tolerance;
+
  /// \short Perform a basic arc-length continuation step using Newton's
  /// method. Returns number of Newton steps taken.
  unsigned newton_solve_continuation(double* const &parameter_pt);

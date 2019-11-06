@@ -89,15 +89,31 @@ InsertExtraFlags()
 	# Get the line (and line number) associated with this flag
 	configure_options=`cat $temp_configure_options_file | grep -n "$i"`
 
-	# If we've already included these flags
-	if [[ $configure_options != *"$extra_flags"* ]]
-	then
-	    flag_line_num=`echo "$configure_options" | cut -d":" -f1`
-	    flag_opts=`echo "$configure_options" | cut -d":" -f2 | sed 's/"/ '$extra_flags'"/2'`
-	    sed -e "$flag_line_num"'s/.*/'"$flag_opts"'/' \
-		$temp_configure_options_file > $temp_file \
-		&& mv $temp_file $temp_configure_options_file
-	fi
+	# Loop over the lines found
+	while read -r configure_options_line
+	do
+	    # If we have NOT already included these flags
+	    if [[ $configure_options_line != *"$extra_flags"* ]]
+	    then
+		# Make sure the line doesn't start with a # character (we don't
+		# want to use commented out lines!)
+		if [[ $configure_options_line != "#"* ]]
+		then
+		    # Get the line number associated with this flag
+		    flag_line_num=`echo "$configure_options_line" | cut -d":" -f1`
+		    
+		    # Extract the line containing this flag from the file and
+		    # create a string with the *second* instance of quotation marks
+		    # with the flag and closing speech marks
+		    flag_opts=`echo "$configure_options_line" | cut -d":" -f2 | sed 's/"/ '$extra_flags'"/2'`
+
+		    # Now replace the flags with the updated flags 
+		    sed -e "$flag_line_num"'s/.*/'"$flag_opts"'/' \
+			$temp_configure_options_file > $temp_file \
+			&& mv $temp_file $temp_configure_options_file
+		fi
+	    fi
+	done <<< "$configure_options"
     done
 }
 
