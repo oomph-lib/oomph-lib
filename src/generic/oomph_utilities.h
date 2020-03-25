@@ -518,16 +518,16 @@ class DocInfo
 public:
 
  /// \short Constructor. Default settings: Current directory, step `0',
- /// label="", full documentation enabled and output directory is not required
+ /// label="", full documentation enabled and output directory is required
  /// to exist when set_directory() is called.
  DocInfo() : Directory("."), Doc_flag(true), Number(0),
-             Label(""), Directory_must_exist(false)
+             Label(""), Directory_must_exist(true)
  {}
 
  /// \short Constructor with specific directory.
  DocInfo(const std::string& directory) :
   Directory(directory), Doc_flag(true), Number(0),
-  Label(""), Directory_must_exist(false)
+  Label(""), Directory_must_exist(true)
  {}
 
  /// Output directory
@@ -722,11 +722,11 @@ namespace CommandLineArgs
  /// \short Parse command line, check for recognised flags and assign 
  /// associated values
  extern void parse_and_assign(int argc, char *argv[], 
-                              const bool& throw_on_unrecognised_args=false);
+                              const bool& throw_on_unrecognised_args=true);
 
  /// \short Parse previously specified command line, check for 
  /// recognised flags and assign associated values
- extern void parse_and_assign(const bool& throw_on_unrecognised_args=false);
+ extern void parse_and_assign(const bool& throw_on_unrecognised_args=true);
 
 }
 

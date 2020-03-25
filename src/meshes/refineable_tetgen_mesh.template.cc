@@ -134,7 +134,8 @@ void RefineableTetgenMesh<ELEMENT>::adapt(const Vector<double>& elem_error)
         this->Internal_surface_pt,
         max_size,
         this->Time_stepper_pt,
-        this->Use_attributes);
+        this->Use_attributes,
+	this->Corner_elements_must_be_split);
      }
     
 

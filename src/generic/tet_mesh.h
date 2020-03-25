@@ -2008,8 +2008,11 @@ void TetMeshBase::split_elements_in_corners(TimeStepper* time_stepper_pt)
 
  // Vector for retained or newly built elements
  unsigned nel=this->nelement();
- Vector<FiniteElement*> new_el_pt;
- new_el_pt.reserve(nel);
+ Vector<FiniteElement*> new_or_retained_el_pt;
+ new_or_retained_el_pt.reserve(nel);
+
+ // Map which returns the 4 newly created elements for each old corner element
+ std::map<FiniteElement*, Vector<FiniteElement*> > old_to_new_corner_element_map;
  
  // Now loop over all elements
  for (unsigned e=0;e<nel;e++)
@@ -2026,12 +2029,12 @@ void TetMeshBase::split_elements_in_corners(TimeStepper* time_stepper_pt)
    if (it==elements_to_be_split.end())
     {
      // Carry it across
-     new_el_pt.push_back(el_pt);
+     new_or_retained_el_pt.push_back(el_pt);
     }
    // It's in the set of elements to be split
    else
     {
-          // Storage for new nodes -- Note: All new nodes are interior and 
+     // Storage for new nodes -- Note: All new nodes are interior and 
      // therefore cannot be boundary nodes!
      Node* node0_pt=0;
      Node* node1_pt=0;
@@ -2069,6 +2072,7 @@ void TetMeshBase::split_elements_in_corners(TimeStepper* time_stepper_pt)
        node5_pt = el1_pt->construct_node(11,time_stepper_pt);
        node6_pt = el1_pt->construct_node(13,time_stepper_pt);
        node9_pt = el1_pt->construct_node(12,time_stepper_pt);
+       
        //Copy others over
        el1_pt->node_pt(10) = el_pt->node_pt(10);
       }
@@ -2145,7 +2149,7 @@ void TetMeshBase::split_elements_in_corners(TimeStepper* time_stepper_pt)
        el3_pt->node_pt(6)=node4_pt;
       }
      
-      //Copy and constuct other nodes for enriched elements
+     //Copy and constuct other nodes for enriched elements
      if(nnode==15)
       {
        el3_pt->node_pt(10) = node6_pt;
@@ -2189,11 +2193,22 @@ void TetMeshBase::split_elements_in_corners(TimeStepper* time_stepper_pt)
 
 
      // Add new elements and nodes
-     new_el_pt.push_back(el1_pt);
-     new_el_pt.push_back(el2_pt);
-     new_el_pt.push_back(el3_pt);
-     new_el_pt.push_back(el4_pt);
-       
+     new_or_retained_el_pt.push_back(el1_pt);
+     new_or_retained_el_pt.push_back(el2_pt);
+     new_or_retained_el_pt.push_back(el3_pt);
+     new_or_retained_el_pt.push_back(el4_pt);
+     
+     // create a vector of the newly created elements
+     Vector<FiniteElement*> temp_vec(4);
+     temp_vec[0] = el1_pt;
+     temp_vec[1] = el2_pt;
+     temp_vec[2] = el3_pt;
+     temp_vec[3] = el4_pt;
+
+     // add the vector to the map
+     old_to_new_corner_element_map.insert(
+       std::pair<FiniteElement*, Vector<FiniteElement*> >(el_pt,temp_vec));
+     
      if(nnode!=15)
       {
        this->add_node_pt(node0_pt);
@@ -2343,15 +2358,7 @@ void TetMeshBase::split_elements_in_corners(TimeStepper* time_stepper_pt)
        this->add_node_pt(temp_nod_pt);
       }
 
-//      std::ofstream junk("junk.dat");
-//      el_pt->output(junk);
-//      el1_pt->output(junk);
-//      el2_pt->output(junk);
-//      el3_pt->output(junk);
-//      el4_pt->output(junk);
-//      junk.close();
- 
-     // Kill old element
+     // Kill the old element
      delete el_pt;
        
     }
@@ -2361,24 +2368,156 @@ void TetMeshBase::split_elements_in_corners(TimeStepper* time_stepper_pt)
  Element_pt.clear();
    
  // Copy across
- nel=new_el_pt.size();
+ nel=new_or_retained_el_pt.size();
  Element_pt.resize(nel);
  for (unsigned e=0;e<nel;e++)
-  {
-   Element_pt[e]=new_el_pt[e];
-  }
+ {
+   Element_pt[e]=new_or_retained_el_pt[e];
+ }
 
  // Setup boundary lookup scheme again
  setup_boundary_element_info();
+
+ // -------------------------------------------------------------------------
+ // The various boundary/region lookups now need updating to account for the
+ // newly added/removed elements. This will be done in two stages:
+ // Step 1: Add the new elements to the vector of elements in the same region
+ //         as the original corner element, and then delete the originals.
+ //         Updating this lookup makes things easier in the following step. 
+ // Step 2: Regenerate the two more specific lookups: One which gives the
+ //         elements on a given boundary in a given region, and the other
+ //         which maps elements on a given boundary in a given region to the
+ //         element's face index on that boundary.
+ //
+ // N.B. the lookup Triangular_facet_vertex_boundary_coordinate is setup in
+ // the call to setup_boundary_element_info() above so doesn't need additional
+ // work. 
+
+ // if we have no regions then we have no lookups to update so we're done here
+ if(Region_attribute.size() == 0)
+ {
+   return;
+ }
+ // if we haven't had to split any corner elements then don't need to fiddle
+ // with the lookups
+ if(old_to_new_corner_element_map.size() == 0)
+ {
+   oomph_info << "\nNo corner elements need splitting\n\n";
+   return;
+ }
+    
+ // ------------------------------------------
+ // Step 1: update the region element lookup
+
+ // loop over the map of old corner elements which have been split
+ for(std::map<FiniteElement*, Vector<FiniteElement*> >::iterator map_it =
+       old_to_new_corner_element_map.begin();
+     map_it != old_to_new_corner_element_map.end(); map_it++)
+ {
+   // extract the old and new elements from the map
+   FiniteElement* original_el_pt = map_it->first;
+   Vector<FiniteElement*> new_el_pt = map_it->second;
    
-}
+   unsigned original_region_index = 0;
 
+   // flag for paranoia, if for some reason we don't find the original corner
+   // element in any of the regions
+   bool found = false;
 
+   Vector<FiniteElement*>::iterator region_element_it;
+ 
+   // loop over the regions and look for this original corner element to find
+   // out which region it used to be in, so we can add the new elements to
+   // the same region.
+   for(unsigned region_index=0;
+       region_index<Region_element_pt.size(); region_index++)
+   {
+     // for each region, search the vector of elements in this region for the
+     // original corner element
+     region_element_it = std::find(Region_element_pt[region_index].begin(),
+				   Region_element_pt[region_index].end(),
+				   original_el_pt);
 
+     // if the iterator hasn't reached the end then we've found it
+     if(region_element_it != Region_element_pt[region_index].end())
+     {
+       // save the region index we're at
+       original_region_index = region_index;
 
+       // update the paranoid flag
+       found = true;
+     
+       // regions can't overlap, so once we've found one we're done
+       break;
+     }
+   }
 
+#ifdef PARANOID
+   if(!found)
+   {
+     std::ostringstream error_message;
+     error_message
+       << "The corner element being split does not appear to be in any "
+       << "region, so something has gone wrong with the region lookup scheme\n";
+       
+     throw OomphLibError(error_message.str(),
+			 OOMPH_CURRENT_FUNCTION,
+			 OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+   
+   // Now update the basic region lookup. The iterator will still point to the
+   // original corner element in the lookup, so we can delete this easily
+   Region_element_pt[original_region_index].erase(region_element_it);
+   for(unsigned i=0; i<4; i++)
+   {
+     Region_element_pt[original_region_index].push_back(new_el_pt[i]);
+   }
+ }
+ // ------------------------------------------
+ // Step 2: Clear and regenerate lookups
 
+ Face_index_region_at_boundary.clear();
+ Boundary_region_element_pt.clear();
 
+ Face_index_region_at_boundary.resize(nboundary());
+ Boundary_region_element_pt.resize(nboundary());
+	
+ for(unsigned b=0; b<nboundary(); b++)
+ {	
+   // Loop over elements next to that boundary
+   unsigned nel = this->nboundary_element(b);
+   for (unsigned e=0; e<nel; e++)
+   {
+     FiniteElement* el_pt = boundary_element_pt(b,e);
+
+     // now search for it in each region	  
+     for(unsigned r_index=0; r_index<Region_attribute.size(); r_index++)
+     {
+       unsigned region_id = static_cast<unsigned>(
+	 Region_attribute[r_index]);
+	    
+       Vector<FiniteElement*>::iterator it =
+	 std::find(Region_element_pt[r_index].begin(),
+		   Region_element_pt[r_index].end(), el_pt);
+
+       // if we find this element in the current region, then update our
+       // lookups
+       if(it != Region_element_pt[r_index].end())
+       {	      
+	 Boundary_region_element_pt[b][region_id].push_back(el_pt);
+
+	 unsigned face_index = face_index_at_boundary(b,e);
+	 Face_index_region_at_boundary[b][region_id].push_back(face_index);
+       }
+     }	  
+   }
+ }   
+
+ oomph_info << "\nNumber of outer corner elements split: "
+	    << old_to_new_corner_element_map.size() << "\n\n";
+
+} // end split_elements_in_corners()
 }
 
 #endif

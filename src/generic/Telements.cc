@@ -55,25 +55,9 @@ TGauss<3,NNODE_1D> TElement<3,NNODE_1D>::Default_integration_scheme;
 /// The output function for general 1D TElements
 //=======================================================================
 template <unsigned NNODE_1D>
-void TElement<1,NNODE_1D>::output(std::ostream &outfile)
+void TElement<1,NNODE_1D>::output(std::ostream &outfile) 
 {
- //Tecplot header info 
- outfile << "ZONE I=" << NNODE_1D << std::endl;
-
- //Find the dimension of the node
- unsigned n_dim = this->nodal_dimension();
-
- //Loop over element nodes
- for(unsigned l=0;l<NNODE_1D;l++)
-  {
-   //Loop over the dimensions and output the position
-   for(unsigned i=0;i<n_dim;i++)
-    {
-     outfile << node_pt(l)->x(i) << " ";
-    }
-   outfile << std::endl;
-  }
-  outfile << std::endl;
+  output(outfile, NNODE_1D);
 }
 
 //=======================================================================
@@ -114,27 +98,7 @@ void TElement<1,NNODE_1D>::output(std::ostream &outfile,
 template <unsigned NNODE_1D>
 void TElement<1,NNODE_1D>::output(FILE* file_pt)
 {
-
- //Tecplot header info 
- fprintf(file_pt,"ZONE I=%i\n",NNODE_1D);
-
- //Find the dimension of the nodes
- unsigned n_dim = this->nodal_dimension();
-
- //Loop over element nodes
- for(unsigned l=0;l<NNODE_1D;l++)
-  {
-   //Loop over the dimensions and output the position
-   for(unsigned i=0;i<n_dim;i++)
-    {
-     //outfile << Node_pt[l]->x(i) << " ";
-     fprintf(file_pt,"%g ",node_pt(l)->x(i));
-    }
-   //outfile << std::endl;
-   fprintf(file_pt,"\n");
-  }
- //outfile << std::endl;
- fprintf(file_pt,"\n");
+  output(file_pt, NNODE_1D);
 }
 
 //=======================================================================
@@ -537,30 +501,8 @@ namespace TElement2BulkCoordinateDerivatives
 template<unsigned NNODE_1D>
 void TElement<2,NNODE_1D>::output(std::ostream &outfile) 
 {
- unsigned n_node = nnode();
- outfile << "ZONE N=" << n_node << ", F=FEPOINT, ET=TRIANGLE" << std::endl;
-
- //Find the dimensions of the nodes
- unsigned n_dim = this->nodal_dimension();
- 
- //Loop over local nodes
- for (unsigned n=0;n<n_node;++n)
-  {
-   //Loop over the dimensions and output the position
-   for(unsigned i=0;i<n_dim;i++)
-    {
-     outfile << node_pt(n)->x(i) << " ";
-    }
-   outfile << std::endl;
-  }
- 
- //Output local node connectivity list (for tecplot)
- for (unsigned n=0;n<n_node;++n)
-  {
-   outfile << n+1 << " ";
-  }
- outfile << std::endl;
- 
+  // QUEHACERES want to perform same output, but at each node
+  output(outfile, NNODE_1D); 
 }
 
 
@@ -606,34 +548,7 @@ void TElement<2,NNODE_1D>::output(std::ostream &outfile,const unsigned &nplot)
 template<unsigned NNODE_1D>
 void TElement<2,NNODE_1D>::output(FILE* file_pt)
 {
- unsigned n_node = nnode();
- fprintf(file_pt,"ZONE N=%i, F=FEPOINT, ET=TRIANGLE\n",n_node);
- //outfile << "ZONE N=" << n_node << ", F=FEPOINT, ET=TRIANGLE" << std::endl;
-
- //Find the dimension of the nodes
- unsigned n_dim = this->nodal_dimension();
-    
- //Loop over local nodes
- for (unsigned n=0;n<n_node;++n)
-  {
-   //Loop over the dimensions and output the position
-   for(unsigned i=0;i<n_dim;i++)
-    {
-     fprintf(file_pt,"%g ", node_pt(n)->x(i));
-     //outfile << node_pt(n)->x(i) << " ";
-    }
-   fprintf(file_pt,"\n");
-   //outfile << std::endl;
-  }
- 
- //Output local node connectivity list (for tecplot)
- for (unsigned n=0;n<n_node;++n)
-  {
-   fprintf(file_pt,"%i ",n+1);
-   //outfile << n+1 << " ";
-  }
- fprintf(file_pt,"\n");
- //outfile << std::endl;
+  output(file_pt, NNODE_1D);
 }
 
 
@@ -688,26 +603,7 @@ void TElement<2,NNODE_1D>::output(FILE* file_pt,const unsigned &nplot)
 template<unsigned NNODE_1D>
 void TElement<3,NNODE_1D>::output(std::ostream &outfile) 
 {
- unsigned n_node = nnode();
- outfile << "ZONE N=" << n_node << ", F=FEPOINT, ET=TETRAHEDRON" << std::endl;
-
- //Find the dimension of the nodes
- unsigned n_dim = this->nodal_dimension();
-     
- //Loop over local nodes
- for (unsigned n=0;n<n_node;++n)
-  {
-   //Loop over the dimensions and output the position
-   for(unsigned i=0;i<n_dim;i++)
-    {
-     outfile << node_pt(n)->x(i) << " ";
-    }
-   outfile << std::endl;
-  }
- 
- // Write tecplot footer (e.g. FE connectivity lists)
- write_tecplot_zone_footer(outfile,NNODE_1D);
-   
+  output(outfile, NNODE_1D);   
 }
 
 
@@ -754,34 +650,7 @@ void TElement<3,NNODE_1D>::output(std::ostream &outfile,const unsigned &nplot)
 template<unsigned NNODE_1D>
 void TElement<3,NNODE_1D>::output(FILE* file_pt)
 {
- unsigned n_node = nnode();
- fprintf(file_pt,"ZONE N=%i, F=FEPOINT, ET=TETRAHEDRON\n",n_node);
- //outfile << "ZONE N=" << n_node << ", F=FEPOINT, ET=TRIANGLE" << std::endl;
- 
- //Find the dimension of the nodes
- unsigned n_dim = this->nodal_dimension();
- 
- //Loop over local nodes
- for (unsigned n=0;n<n_node;++n)
-  {
-   //Loop over the dimensions and output the position
-   for(unsigned i=0;i<n_dim;i++)
-    {
-     fprintf(file_pt,"%g ", node_pt(n)->x(i));
-     //outfile << node_pt(n)->x(i) << " ";
-    }
-   fprintf(file_pt,"\n");
-   //outfile << std::endl;
-  }
- 
- //Output local node connectivity list (for tecplot)
- for (unsigned n=0;n<n_node;++n)
-  {
-   fprintf(file_pt,"%i ",n+1);
-   //outfile << n+1 << " ";
-  }
- fprintf(file_pt,"\n");
- //outfile << std::endl;
+  output(file_pt, NNODE_1D);
 }
 
 

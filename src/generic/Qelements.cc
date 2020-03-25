@@ -168,30 +168,7 @@ void QElement<1,NNODE_1D>::d2shape_local(const Vector<double> &s, Shape &psi,
 template <unsigned NNODE_1D>
 void QElement<1,NNODE_1D>::output(std::ostream &outfile)
 {
- //Tecplot header info 
- outfile << "ZONE I=" << NNODE_1D << std::endl;
-
- //Find the dimension of the node
- unsigned n_dim = this->nodal_dimension();
-
- //Loop over element nodes
- for(unsigned l=0;l<NNODE_1D;l++)
-  {
-   //Loop over the dimensions and output the position
-   for(unsigned i=0;i<n_dim;i++)
-    {
-     outfile << node_pt(l)->x(i) << " ";
-    }
-   //Find out how many data values at the node
-   unsigned initial_nvalue = node_pt(l)->nvalue();
-   //Lopp over the data and output whether pinned or not
-   for(unsigned i=0;i<initial_nvalue;i++)
-    {
-     outfile << node_pt(l)->is_pinned(i) << " ";
-    }
-   outfile << std::endl;
-  }
-  outfile << std::endl;
+  output(outfile, NNODE_1D);
 }
 
 //=======================================================================
@@ -232,35 +209,7 @@ void QElement<1,NNODE_1D>::output(std::ostream &outfile,
 template <unsigned NNODE_1D>
 void QElement<1,NNODE_1D>::output(FILE* file_pt)
 {
-
- //Tecplot header info 
- fprintf(file_pt,"ZONE I=%i\n",NNODE_1D);
-
- //Find the dimension of the nodes
- unsigned n_dim = this->nodal_dimension();
-
- //Loop over element nodes
- for(unsigned l=0;l<NNODE_1D;l++)
-  {
-   //Loop over the dimensions and output the position
-   for(unsigned i=0;i<n_dim;i++)
-    {
-     //outfile << Node_pt[l]->x(i) << " ";
-     fprintf(file_pt,"%g ",node_pt(l)->x(i));
-    }
-   //Find out how many data values at the node
-   unsigned initial_nvalue = node_pt(l)->nvalue();
-   //Lopp over the data and output whether pinned or not
-   for(unsigned i=0;i<initial_nvalue;i++)
-    {
-     //outfile << Node_pt[l]->is_pinned(i) << " ";
-     fprintf(file_pt,"%i ",node_pt(l)->is_pinned(i));
-    }
-   //outfile << std::endl;
-   fprintf(file_pt,"\n");
-  }
- //outfile << std::endl;
- fprintf(file_pt,"\n");
+  output(file_pt, NNODE_1D);
 }
 
 //=======================================================================
@@ -478,37 +427,7 @@ void QElement<2,NNODE_1D>::d2shape_local(const Vector<double> &s, Shape &psi,
 template <unsigned NNODE_1D>
 void QElement<2,NNODE_1D>::output(std::ostream &outfile)
 {
- //Find the dimension of the nodes
- unsigned n_dim = this->nodal_dimension();
- //Node number
- unsigned l=0;
-
- //Tecplot header info 
- outfile << "ZONE I=" << NNODE_1D << ", J=" << NNODE_1D << std::endl;
- //Loop over element nodes
- for(unsigned l2=0;l2<NNODE_1D;l2++)
-  {
-   for(unsigned l1=0;l1<NNODE_1D;l1++)
-    {
-     //Loop over the dimensions and output the position
-     for(unsigned i=0;i<n_dim;i++)
-      {
-       outfile << node_pt(l)->x(i) << " ";
-      }
-     //Find out how many data values at the node
-     unsigned initial_nvalue = node_pt(l)->nvalue();
-     //Loop over the data and output whether pinned or not
-     for(unsigned i=0;i<initial_nvalue;i++)
-      {
-       outfile << node_pt(l)->is_pinned(i) << " ";
-      }
-     outfile << std::endl;
-
-     //Increase the node number
-     ++l;
-    }
-  }
-  outfile << std::endl;
+  output(outfile, NNODE_1D);
 }
 
 //=======================================================================
@@ -555,42 +474,7 @@ void QElement<2,NNODE_1D>::output(std::ostream &outfile,
 template <unsigned NNODE_1D>
 void QElement<2,NNODE_1D>::output(FILE* file_pt)
 {
- //Tecplot header info 
- //outfile << "ZONE I=" << NNODE_1D << ", J=" << NNODE_1D << std::endl;
- fprintf(file_pt,"ZONE I=%i, J=%i\n",NNODE_1D,NNODE_1D);
-
- //Find the dimensions of the nodes
- unsigned n_dim = this->nodal_dimension();
- //Node number
- unsigned l=0;
-
- //Loop over element nodes
- for(unsigned l2=0;l2<NNODE_1D;l2++)
-  {
-   for(unsigned l1=0;l1<NNODE_1D;l1++)
-    {
-     //Loop over the dimensions and output the position
-     for(unsigned i=0;i<n_dim;i++)
-      {
-       //outfile << Node_pt[l]->x(i) << " ";
-       fprintf(file_pt,"%g ",node_pt(l)->x(i));
-      }
-     //Find out how many data values at the node
-     unsigned initial_nvalue = node_pt(l)->nvalue();
-     //Loop over the data and output whether pinned or not
-     for(unsigned i=0;i<initial_nvalue;i++)
-      {
-       //outfile << Node_pt[l]->is_pinned(i) << " ";
-       fprintf(file_pt,"%i ",node_pt(l)->is_pinned(i));
-      }
-     //outfile << std::endl;
-     fprintf(file_pt,"\n");
-     //Increase the node number
-     ++l;
-    }
-  }
- //outfile << std::endl;
- fprintf(file_pt,"\n");
+  output(file_pt, NNODE_1D);
 }
 
 //=======================================================================
@@ -837,41 +721,7 @@ void QElement<3,NNODE_1D>::d2shape_local(const Vector<double> &s, Shape &psi,
 template <unsigned NNODE_1D>
 void QElement<3,NNODE_1D>::output(std::ostream &outfile)
 {
- //Find the dimension of the nodes
- unsigned n_dim = this->nodal_dimension();
- //The node number
- unsigned l=0;
-
- //Tecplot header info 
- outfile << "ZONE I=" << NNODE_1D << ", J=" << NNODE_1D 
-         << ", K=" << NNODE_1D<< std::endl;
- //Loop over element nodes
- for(unsigned l3=0;l3<NNODE_1D;l3++)
-  {
-   for(unsigned l2=0;l2<NNODE_1D;l2++)
-    {
-     for(unsigned l1=0;l1<NNODE_1D;l1++)
-      {
-
-       //Loop over the dimensions and output the position
-       for(unsigned i=0;i<n_dim;i++)
-        {
-         outfile << node_pt(l)->x(i) << " ";
-        }
-       //Find out how many data values at the node
-       unsigned initial_nvalue = node_pt(l)->nvalue();
-       //Loop over the data and output whether pinned or not
-       for(unsigned i=0;i<initial_nvalue;i++)
-        {
-         outfile << node_pt(l)->is_pinned(i) << " ";
-        }
-       outfile << std::endl;
-       //Increase the node number
-       ++l;
-      }
-    }
-  }
- outfile << std::endl;
+  output(outfile, NNODE_1D);
 }
 
 //=======================================================================
@@ -923,44 +773,7 @@ void QElement<3,NNODE_1D>::output(std::ostream &outfile,
 template <unsigned NNODE_1D>
 void QElement<3,NNODE_1D>::output(FILE* file_pt)
 {
- //Find the dimension of the nodes
- unsigned n_dim = this->nodal_dimension();
- //The node number
- unsigned l=0;
-
- //Tecplot header info 
- fprintf(file_pt,"ZONE I=%i, J=%i, K=%i\n",
-         NNODE_1D,NNODE_1D,NNODE_1D);
-
- //Loop over element nodes
- for(unsigned l3=0;l3<NNODE_1D;l3++)
-  {
-   for(unsigned l2=0;l2<NNODE_1D;l2++)
-    {
-     for(unsigned l1=0;l1<NNODE_1D;l1++)
-      {
-       //Loop over the dimensions and output the position
-       for(unsigned i=0;i<n_dim;i++)
-        {
-         fprintf(file_pt,"%g ",node_pt(l)->x(i));
-        }
-
-       //Find out how many data values at the node
-       unsigned initial_nvalue = node_pt(l)->nvalue();
-
-       //Loop over the data and output whether pinned or not
-       for(unsigned i=0;i<initial_nvalue;i++)
-        {
-         fprintf(file_pt,"%i ",node_pt(l)->is_pinned(i));
-        }
-       fprintf(file_pt,"\n");
-       //Increase the node number
-       ++l;
-      }
-    }
-  }
- fprintf(file_pt,"\n");
-
+  output(file_pt, NNODE_1D);
 }
 
 //=======================================================================

@@ -65,13 +65,15 @@ template<class ELEMENT>
     TetMeshFacetedClosedSurface* const &outer_boundary_pt,
     Vector<TetMeshFacetedSurface*>& internal_closed_surface_pt,
     const double &element_volume,
-    TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper,
-    const bool &use_attributes=false) :
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+    const bool &use_attributes = false,
+    const bool& split_corner_elements = false) :
     TetgenMesh<ELEMENT>(outer_boundary_pt,
                         internal_closed_surface_pt,
                         element_volume,
+			split_corner_elements,
                         time_stepper_pt,
-                        use_attributes)
+                        use_attributes), Corner_elements_must_be_split(split_corner_elements)
     {
      // Initialise the data associated with adaptation
      initialise_adaptation_data();
@@ -294,7 +296,10 @@ template<class ELEMENT>
    /// Disable projection of solution onto new mesh during adaptation
    bool Projection_is_disabled;
 
-
+   /// \short Corner elements which have all of their nodes on the outer
+   /// boundary are to be split into elements which have some non-boundary
+   /// nodes
+   bool Corner_elements_must_be_split;
   }; 
 
 /////////////////////////////////////////////////////////////////////////////

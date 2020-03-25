@@ -158,7 +158,7 @@ public:
  TetgenMesh(const std::string& node_file_name,
             const std::string& element_file_name,
             const std::string& face_file_name,
-            const bool& split_corner_elements,
+	    const bool& split_corner_elements,
             TimeStepper* time_stepper_pt=
             &Mesh::Default_TimeStepper,
             const bool &use_attributes=false)
@@ -167,25 +167,6 @@ public:
    // Mesh can only be built with 3D Telements.
    MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(3);
    
-   //Throw an error if you try to split corner elements
-   //and use attributes
-   if(split_corner_elements && use_attributes)
-    {
-     std::ostringstream error_stream;
-     error_stream <<
-      "Using region attributes and split_corner_elements simultaneously\n"
-                  << 
-      "is not guaranteed to work. The elements adjacent to boundaries\n"
-                  << 
-      "accessed by region will not be set up correctly.\n"
-                  << 
-      "\n Please fix this!\n\n";
-     
-     throw OomphLibError(error_stream.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
    //Store the attributes
    Use_attributes = use_attributes;
 
@@ -193,7 +174,7 @@ public:
    Time_stepper_pt = time_stepper_pt;
 
    // We do not have a tetgenio representation
-   this->Tetgenio_exists = false;;
+   this->Tetgenio_exists = false;
    this->Tetgenio_pt = 0;
 
    // Build scaffold
@@ -240,26 +221,7 @@ public:
   {
    // Mesh can only be built with 3D Telements.
    MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(3);
-   
-   //Throw an error if you try to split corner elements
-   //and use attributes
-   if(split_corner_elements && use_attributes)
-    {
-     std::ostringstream error_stream;
-     error_stream <<
-      "Using region attributes and split_corner_elements simultaneously\n"
-                  << 
-      "is not guaranteed to work. The elements adjacent to boundaries\n"
-                  << 
-      "accessed by region will not be set up correctly.\n"
-                  << 
-      "\n Please fix this!\n\n";
-     
-     throw OomphLibError(error_stream.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-   
+      
    //Store the attributes
    Use_attributes = use_attributes;
 
@@ -302,10 +264,11 @@ public:
   /// Also specify target size for uniform element size.
   TetgenMesh(TetMeshFacetedClosedSurface* const &outer_boundary_pt,
              Vector<TetMeshFacetedSurface*>& internal_surface_pt,
-             const double &element_volume,
+             const double &element_volume,	     
              TimeStepper* time_stepper_pt=
              &Mesh::Default_TimeStepper,
-             const bool &use_attributes=false) 
+             const bool &use_attributes=false,
+	     const bool& split_corner_elements = false) 
    {
     // Mesh can only be built with 3D Telements.
     MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(3);
@@ -447,6 +410,12 @@ public:
     delete Tmp_mesh_pt;
     Tmp_mesh_pt=0;
 
+    // Split corner elements
+    if (split_corner_elements)
+    {
+      split_elements_in_corners<ELEMENT>();
+    }
+    
     // Setup boundary coordinates 
     unsigned nb=nboundary();
     for (unsigned b=0;b<nb;b++)
