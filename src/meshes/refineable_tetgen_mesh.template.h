@@ -70,10 +70,10 @@ template<class ELEMENT>
     const bool& split_corner_elements = false) :
     TetgenMesh<ELEMENT>(outer_boundary_pt,
                         internal_closed_surface_pt,
-                        element_volume,
-			split_corner_elements,
+                        element_volume,			
                         time_stepper_pt,
-                        use_attributes), Corner_elements_must_be_split(split_corner_elements)
+                        use_attributes,
+			split_corner_elements), Corner_elements_must_be_split(split_corner_elements)
     {
      // Initialise the data associated with adaptation
      initialise_adaptation_data();
