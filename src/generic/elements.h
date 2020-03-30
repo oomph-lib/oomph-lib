@@ -2883,14 +2883,20 @@ public:
  /// nodes in a format suitable for post-processing.
  virtual void output(std::ostream &outfile)
   {
-   outfile << "Output function undefined" << std::endl;
+    throw OomphLibError(
+    "Output function function hasn't been implemented for this element",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
   }
 
  /// \short Output the element data --- pass (some measure of) 
  /// the number of plot points per element
  virtual void output(std::ostream &outfile, const unsigned &n_plot)
   {
-   outfile << "Output function undefined" << std::endl;
+   throw OomphLibError(
+    "Output function function hasn't been implemented for this element",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
   }
 
  /// \short Output the element data at time step t. This is const because
@@ -2900,7 +2906,10 @@ public:
                      std::ostream &outfile, 
                      const unsigned &n_plot) const
  {
-  outfile << "Output function undefined" << std::endl;
+  throw OomphLibError(
+    "Output function function hasn't been implemented for this element",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
  }
 
  /// \short Output the element data --- typically the values at the 
@@ -2908,7 +2917,10 @@ public:
  /// (C style output)
  virtual void output(FILE* file_pt)
   {
-   fprintf(file_pt,"C_style output function undefined\n");
+   throw OomphLibError(
+    "C-style otput function function hasn't been implemented for this element",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
   }
 
  /// \short Output the element data --- pass (some measure of) 
@@ -2916,14 +2928,20 @@ public:
  /// (C style output)
  virtual void output(FILE* file_pt, const unsigned &n_plot)
   {
-   fprintf(file_pt,"C_style output function undefined\n");
+   throw OomphLibError(
+    "C-style output function function hasn't been implemented for this element",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
   }
 
  /// Output an exact solution over the element.
  virtual void output_fct(std::ostream &outfile, const unsigned &n_plot,
                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
-   outfile << "Output function undefined for exact solution \n";
+   throw OomphLibError(
+    "Output function function hasn't been implemented for exact solution",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
   }
 
 
@@ -2932,7 +2950,10 @@ public:
                          const double& time, 
                          FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt) 
   {
-   outfile << "Output function undefined for exact solution \n";
+   throw OomphLibError(
+    "Output function function hasn't been implemented for exact solution",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
   }
 
  /// Output a time-dependent exact solution over the element.
@@ -2940,7 +2961,10 @@ public:
                          const double& time, 
                          const SolutionFunctorBase& exact_soln) const
  {
-  outfile << "Output function undefined for exact solution \n";
+  throw OomphLibError(
+    "Output function function hasn't been implemented for exact solution",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
  }
 
 
