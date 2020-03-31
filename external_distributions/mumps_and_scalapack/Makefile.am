@@ -114,7 +114,7 @@ all:
 	echo "fi" >> build_script.bash
 	echo "cp  "$(scalapack_tar_file)" scalapack" >> build_script.bash
 	echo "cd scalapack" >> build_script.bash
-	echo "tar xvfz "$(scalapack_tar_file) >> build_script.bash
+	echo "tar xfz "$(scalapack_tar_file) >> build_script.bash
 	echo "cd  scalapack_installer_0.94" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "#Install with blacs (downloaded on the fly)" >> build_script.bash
@@ -168,7 +168,7 @@ all:
 	echo "cp "$(mumps_tar_file)" mumps" >> build_script.bash
 	echo "cp build_scripts/Makefile.inc.template mumps" >> build_script.bash
 	echo "cd mumps" >> build_script.bash
-	echo "tar xvfz "$(mumps_tar_file) >> build_script.bash
+	echo "tar xfz "$(mumps_tar_file) >> build_script.bash
 	echo "" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "# Update Makefile" >> build_script.bash

@@ -8,12 +8,18 @@ oomph_abs_top_srcdir=`cd $(top_builddir); pwd`
 
 #makefile variable to hold the configure command (part 1)
 run_command1 = " ./configure "
+# By default, build Trilinos as static
+if WANT_DYNAMIC_BUILD_OF_TRILINOS
+run_command1 += " --enable-shared " 
+else
+run_command1 += " --disable-shared " 
+endif
+
 if WANT_MPI
 run_command1 += " --enable-mpi  \\" 
 else
 run_command1 += " --disable-mpi  \\"  
 endif
-
 #makefile variable to hold the configure command (part 2)
 run_command2 = " "
 if ALREADY_HAVE_BLAS
@@ -38,7 +44,11 @@ run_command3 += "-D CMAKE_BUILD_TYPE:STRING=NONE "
 run_command3 += "-D CMAKE_VERBOSE_MAKEFILE:BOOL=OFF "
 run_command3 += "-D Trilinos_ENABLE_TESTS:BOOL=OFF "
 run_command3 += "-D Trilinos_ENABLE_EXAMPLES:BOOL=OFF "
+if WANT_DYNAMIC_BUILD_OF_TRILINOS
 run_command3 += "-D BUILD_SHARED_LIBS=ON "
+else
+run_command3 += "-D BUILD_SHARED_LIBS=OFF "
+endif
 if WANT_MPI
 run_command3 += "-D TPL_ENABLE_MPI:BOOL=ON \\" 
 else
@@ -72,6 +82,11 @@ if HAVE_CMAKE
 else
 	echo "CMAKE_INSTALLED=0" >> build_script.bash
 endif
+if ALREADY_HAVE_BUILT_TRILINOS                                                                 
+	echo "ALREADY_HAVE_BUILT_TRILINOS=1" >> build_script.bash
+else
+	echo "ALREADY_HAVE_BUILT_TRILINOS=0" >> build_script.bash
+endif 
 	cat $(srcdir)/build_scripts/build_script.part1 >> build_script.bash
 	echo " " >> build_script.bash
 	echo $(run_command1) >> build_script.bash

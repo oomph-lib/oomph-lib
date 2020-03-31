@@ -29,6 +29,11 @@ all:
 	echo "# WARNING: THIS IS AN AUTOMATICALLY GENERATED FILE" >> build_script.bash
 	echo "#          DO NOT EDIT!" >> build_script.bash
 	echo " " >> build_script.bash
+if ALREADY_HAVE_BUILT_HYPRE                                                                 
+	echo "ALREADY_HAVE_BUILT_HYPRE=1" >> build_script.bash
+else
+	echo "ALREADY_HAVE_BUILT_HYPRE=0" >> build_script.bash
+endif	
 	cat $(srcdir)/build_scripts/build_script.part1 >> build_script.bash
 	echo " " >> build_script.bash
 	echo $(run_command1) >> build_script.bash

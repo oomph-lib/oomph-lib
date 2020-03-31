@@ -791,6 +791,20 @@ AC_SUBST(MPI_VARIABLENP_RUN_COMMAND)
 AM_CONDITIONAL(WANT_MPI_VARIABLENP, test x$run_mpi_self_tests_variablenp = xtrue)
 
 
+# Do we want to build Trilinos dynamically?
+ AC_ARG_ENABLE(dynamic_linking_for_trilinos,
+               [  --enable-dynamic-linking-for-trilinos Build trilinos as a
+ 		   					shared library instead
+							of a static library],
+               [dynamic_linking_for_trilinos_requested=true],
+               [dynamic_linking_for_trilinos_requested=false])
+  
+
+# Pass result of test to automake (makefiles can now check for
+# status of WANT_DYNAMIC_BUILD_OF_TRILINOS in any Makefile.am)
+AM_CONDITIONAL(WANT_DYNAMIC_BUILD_OF_TRILINOS, test x$dynamic_linking_for_trilinos_requested = xtrue)
+
+
 # Do we need multiple teuchos sub-libraries
 AC_ARG_ENABLE(multiple_teuchos_libraries,
               [  --enable-multiple_teuchos_libraries Assume that the
@@ -1400,7 +1414,8 @@ AC_ARG_WITH(hypre,
   fi
 ])
 
-
+# Has it already been built?
+hypre_has_already_been_built=false;
 
 # Do they exist?
 have_hypre=false
@@ -1443,6 +1458,7 @@ else \
       echo " "; \
     fi; \
 fi; \
+hypre_has_already_been_built=$have_hypre; \
 else \
     echo "No hypre library directory specified"; \
 
@@ -1481,7 +1497,9 @@ else \
   fi
 fi
 
-
+# Indicate that Trilinos has already been built (so we don't bother trying# to install        
+# it again if there's a tar file available!)                                                  
+AM_CONDITIONAL(ALREADY_HAVE_BUILT_HYPRE, test x$hypre_has_already_been_built = xtrue)  
 
 #Tell everybody about it...
 AM_CONDITIONAL(OOMPH_HAS_HYPRE, test x$have_hypre = xtrue)
@@ -1524,11 +1542,15 @@ AC_ARG_WITH(trilinos,
   fi
 ])
 
+# Has Trilinos already been built? Assume it hasn't...
+trilinos_has_already_been_built=false;
+
 # Do they exist?
 have_trilinos=false
 if test x$check_for_trilinos = xtrue; then \
 if test -d $TRILINOS_LIB; then \
     have_trilinos=true; \
+    trilinos_has_already_been_built=true; \
     echo "Found the trilinos libraries in"; \
     echo " "; \
     echo "   "  $TRILINOS_LIB ; \
@@ -1536,10 +1558,12 @@ if test -d $TRILINOS_LIB; then \
 else \
    if test "$TRILINOS_DIR" == "auto"; then \
        have_trilinos=true; \
+       trilinos_has_already_been_built=true; \
        echo "Will assume that trilinos library is specified automatically by"; \
        echo "compiler/linker."; \
    else \
        have_trilinos=false; \
+       trilinos_has_already_been_built=false; \
        echo "Did NOT find the trilinos libraries in"; \
        echo " "; \
        echo "   "  $TRILINOS_LIB ; \
@@ -1548,17 +1572,20 @@ else \
 fi; \
 if test -d $TRILINOS_INCLUDE; then \
     have_trilinos=true; \
-          echo "Found the trilinos include files in"; \
+    trilinos_has_already_been_built=true; \
+    echo "Found the trilinos include files in"; \
     echo " "; \
     echo "   "  $TRILINOS_INCLUDE ; \
     echo " "; \
 else \
    if test "$TRILINOS_DIR" == "auto"; then \
        have_trilinos=true; \
+       trilinos_has_already_been_built=true; \
        echo "Will assume that trilinos library is specified automatically by"; \
        echo "compiler/linker."; \
     else \
        have_trilinos=false; \
+       trilinos_has_already_been_built=false; \
        echo "Did NOT find the trilinos include files in"; \
        echo " "; \
        echo "   "  $TRILINOS_INCLUDE ; \
@@ -1568,23 +1595,27 @@ fi; \
 echo ""; \
 echo ""; \
 echo "========================================================================"; \
+echo ""; \
 echo "NOTE: We're going to link against an existing trilinos installation."; \
 echo "      Unfortunately different versions of that library require"; \
 echo "      explicit linking against different sets of (sub-)libraries."; \
-echo "      We're currently assuming that you use a version that"; \
-echo "      needs just -lteuchos. If you have linking problems"; \
-echo "      that indicate missing teuchos functions, try to re-install"; \
-echo "      oomph-lib with the"; \
+echo "      If your version of Trilinos is greater than 10.8.5 then we're"; \
+echo "      going to assume that you have multiple teuchos libraries, not just"; \
+echo "      a single teuchos library, i.e. -lteuchos. This is the earliest";
+echo "      version that we know of that has multiple teuchos libraries. If "; \
+echo "      your version of Trilinos is older than that but still has multiple"; \
+echo "      teuchos then you may still have linking problems that indicate"; \
+echo "      missing teuchos functions. In this case, try to re-install oomph-lib"; \
+echo "      with the"; \
 echo ""; \
-echo "            --need_multiple_teuchos_libraries "; \
+echo "                   --enable_multiple_teuchos_libraries "; \
 echo ""; \
-echo "      configuration flag (or omit it if you've specified it already)"; \
+echo "      configuration flag."; \
 echo ""; \
 echo "========================================================================"; \
 echo ""; \
 echo ""; \
 echo ""; \
-
 else \
     echo "No trilinos library directory specified"; \
 
@@ -1596,6 +1627,7 @@ else \
     #---------------------------------------
     if test -d $TRILINOS_DEFAULT_LIB; then \
        have_trilinos=true; \
+       trilinos_has_already_been_built=true; \
        echo "Found the trilinos libraries in default location: "; \
        echo " "; \
        echo "   "  $TRILINOS_DEFAULT_LIB ; \
@@ -1606,12 +1638,14 @@ else \
 
        if test -d $TRILINOS_INCLUDE; then \
           have_trilinos=true; \
+	  trilinos_has_already_been_built=true; \
  	  echo "Found the trilinos include files in"; \
  	  echo " "; \
  	  echo "   "  $TRILINOS_INCLUDE ; \
  	  echo " "; \
        else \
           have_trilinos=false; \
+	  trilinos_has_already_been_built=true; \
           echo "Did NOT find the trilinos include files in"; \
           echo " "; \
           echo "   "  $TRILINOS_INCLUDE ; \
@@ -1656,14 +1690,24 @@ use_single_teuchos_library=true;
 # location then we need to check what version it is.
 version_file=$TRILINOS_INCLUDE/Trilinos_version.h;
 if test x$have_trilinos = xtrue; then \
-    trilinos_version_number=`grep TRILINOS_MAJOR_MINOR_VERSION $version_file | awk -F' ' '{print $3}'`; \
-    echo "Library has already been built; the version number is: "$trilinos_version_number; \
+  if test -e $TRILINOS_INCLUDE; then \
+       trilinos_version_number=`grep TRILINOS_MAJOR_MINOR_VERSION $version_file | awk -F' ' '{print $3}'`; \
+    else \
+       # If we're here then we don't have Trilinos unpacked yet however I can sneak into the tar
+       # file without unpacking it (using zgrep) to get the version number...
+       echo "I don't know what your Trilinos tar file is explicitly but I'm going to assume you only have one of them!"; \
+       trilinos_directory_check="`pwd`/external_distributions/trilinos/"; \
+       trilinos_version_number=`zgrep -a Trilinos_MAJOR_MINOR_VERSION "$trilinos_directory_check"trilinos*.tar.gz | sed 's/)//g' | cut -d' ' -f 2`; \
+       echo "I managed to search through your tarred file and I found the version number."; \
+    fi; \
+    echo "Library version number is: "$trilinos_version_number; \
     if test "$trilinos_version_number" -gt 100805; then \
         multiple_teuchos_libs_requested=true; \
-	echo "The version number is greater than 10.8.5. Therefore requesting multiple teuchos libraries!";
-    fi
-fi
+	echo "The version number is greater than 10.8.5. Therefore requesting multiple teuchos libraries!"; \
+    fi; \
+fi;
 
+# If the user asked to make sure we assume multiple teuches libraries
 if test x$multiple_teuchos_libs_requested = xtrue; then \
     echo "Requested multiple teuchos libraries via config flag"; \
     use_single_teuchos_library=false; \
@@ -1673,7 +1717,7 @@ if test x$multiple_teuchos_libs_requested = xtrue; then \
         fi; \
     fi; \
 else \
-    echo "Not requested single teuchos library via config flag"; \
+    echo "Not requested multiple teuchos library via config flag"; \
     if test x$will_have_trilinos = xtrue; then \
       if test x$tar_file_needs_single_teuchos_library = xtrue; then \
          echo "Building with single teuchos library"; \
@@ -1691,30 +1735,38 @@ fi;
 # external distributions; if not wipe the variables
 #--------------------------------------------------
 if test x$have_trilinos = xfalse; then
-  TRILINOS_LIB='' ; \
-  TRILINOS_INCLUDE='' ;\
+   TRILINOS_LIB='' ; \
+   TRILINOS_INCLUDE='' ;\
 else \
-  if test "$TRILINOS_DIR" == "auto"; then \
-    TRILINOS_LIB='' ; \
-    TRILINOS_INCLUDE='' ;\
-    external_dist_libraries_include=`echo $external_dist_libraries_include " -DOOMPH_HAS_TRILINOS"` ; \
-  else \
-    if test x$use_single_teuchos_library = xtrue; then \
-       echo "Actually building with single teuchos library"; \
-       external_dist_libraries=`echo $external_dist_libraries " -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos"` ; \
-    else \
-       echo "Actually building with multiple teuchos libraries"; \
-       external_dist_libraries=`echo $external_dist_libraries " -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchosremainder -lteuchosnumerics -lteuchoscomm -lteuchosparameterlist -lteuchoscore "` ; \
-    fi
-    external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$TRILINOS_LIB -Wl,-rpath,$TRILINOS_LIB` ; \
-    external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$TRILINOS_INCLUDE -DOOMPH_HAS_TRILINOS` ; \
+   if test "$TRILINOS_DIR" == "auto"; then \
+     TRILINOS_LIB='' ; \
+     TRILINOS_INCLUDE='' ;\
+     external_dist_libraries_include=`echo $external_dist_libraries_include " -DOOMPH_HAS_TRILINOS"` ; \
+   else \
+     if test x$use_single_teuchos_library = xtrue; then \
+        echo "Actually building with single teuchos library"; \
+        external_dist_libraries=`echo $external_dist_libraries " -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos"` ; \
+     else \
+        echo "Actually building with multiple teuchos libraries"; \
+        external_dist_libraries=`echo $external_dist_libraries " -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchosremainder -lteuchosnumerics -lteuchoscomm -lteuchosparameterlist -lteuchoscore "` ; \
+     fi
+     external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$TRILINOS_LIB` ; \
+     if test x$dynamic_linking_for_trilinos_requested = xtrue; then \
+        external_dist_libraries_lib=`echo $external_dist_libraries_lib -Wl,-rpath,$TRILINOS_LIB` ; \
+     fi; \
+     external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$TRILINOS_INCLUDE -DOOMPH_HAS_TRILINOS` ; \
   fi
 fi
 
-#Tell everybody about it...
+# Indicate that Trilinos has already been built (so we don't bother trying# to install 
+# it again if there's a tar file available!)
+AM_CONDITIONAL(ALREADY_HAVE_BUILT_TRILINOS, test x$trilinos_has_already_been_built = xtrue)
+
+# Indicate that this build of oomph-lib will have Trilinos installed (which means it
+# already has access to a built version or it will get built through the autogen process)
 AM_CONDITIONAL(OOMPH_HAS_TRILINOS, test x$have_trilinos = xtrue)
 
-# Make thes variables available to all Makefile.am-s
+# Make these variables available to all Makefile.am-s
 AC_SUBST(TRILINOS_LIB)
 AC_SUBST(TRILINOS_INCLUDE)
 

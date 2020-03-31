@@ -85,8 +85,11 @@ else
 
 fi
 
+# PM: Untar quietly otherwise we risk killing the buffer in the autogen
+# process (which will cause a "write error") which will cause autogen
+# to crash because it thinks it's encountered a genuine installation error
 # Unpack trilinos
-tar xvfz ${TRILINOS_STEM}.tar.gz
+tar xfz ${TRILINOS_STEM}.tar.gz
 #Change into the directory
 cd ${TRILINOS_STEM}
 

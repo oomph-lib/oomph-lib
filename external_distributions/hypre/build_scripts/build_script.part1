@@ -26,8 +26,13 @@ else
    exit
 fi
 
-# Check if installed version of hypre already exists
-if [ -e $INSTALL_DIRECTORY/include ]; then
+# Check if an installed version of trilinos already exists
+if [ $ALREADY_HAVE_BUILT_HYPRE == 1 ]; then
+   printf "\n ...however, it looks like the automake process already found a\n"
+   printf " pre-existing version of Hypre so I'm not going to bother trying\n"
+   printf " to build (if you do have a tar file to build).\n\n"
+   exit     
+elif [ -e $INSTALL_DIRECTORY/include ]; then
    printf "\n...but hypre already appears to have been installed \n"
    printf "because the directory  \n\n"
    printf "      " $INSTALL_DIRECTORY"/include \n\n"
@@ -37,8 +42,10 @@ else
   printf "\n\n ---> Installing hypre in \n\n     " $INSTALL_DIRECTORY " \n\n\n"
 fi
 
-# Unpack hypre
-tar xvfz hypre-2.0.0.tar.gz
+# PM: Unpack hypre, but now do it quietly! (No -v flag!) Otherwise it can kill
+# the buffer which results in a "write error" causing the autogen process to die
+# because it thinks its encountered an actual error
+tar xfz hypre-2.0.0.tar.gz
 
 # Go to it source directory
 cd  hypre-2.0.0/src
