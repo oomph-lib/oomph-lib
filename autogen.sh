@@ -199,8 +199,7 @@ while [[ $accept_configure_options != "true" ]]; do
 
     echo
     echo "Enter the Desired configuration file [1-"$count"]"
-    echo "Enter 0 to specify the options on the command line"
-
+    
     # Read in the Desired File and validate it
     file_number=$(OptionRead)
 	if ! [[ $file_number =~ ^[0-9]+$ ]]; then
@@ -208,27 +207,16 @@ while [[ $accept_configure_options != "true" ]]; do
 		continue
 	fi
 
-    if (( $file_number > $count )) || (( $file_number < 0 )); then
+    if (( $file_number > $count )) || (( $file_number < 1 )); then
         # Error and go to start of loop
         echo "File number out of range, trying again." 1>&2
         continue
     fi
 
-    # If options are to be read from the command line then store the
-    # options in the file config/configure_options/current
-    if [[ "$file_number" == "0" ]]; then
-        echo 
-        echo "Enter options"
-        configure_options=$(OptionRead)
-        echo $configure_options > "config/configure_options/new_options_file"
-        configure_options_file="config/configure_options/new_options_file"
-
-    # Otherwise copy the desired options file to config/configure_options/current
-    else 
-        # Use cut to extract the nth entry in the list
-        configure_options_file="$(echo $configure_option_files | cut -d \  -f $file_number)"
-    fi
-
+    # Copy the desired options file to config/configure_options/current   
+    # Use cut to extract the nth entry in the list
+    configure_options_file="$(echo $configure_option_files | cut -d \  -f $file_number)"
+    
     # Check that the options are in the correct order
     configure_options_are_ok="$(CheckOptions $configure_options_file)"
     if test "$configure_options_are_ok" != ""; then
