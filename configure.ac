@@ -353,6 +353,11 @@ fi
 AM_CONDITIONAL(HAVE_UP_TO_DATE_LIBTOOL, test x$have_up_to_date_libtool = xtrue)
 
 
+# Do we have libtool at all?
+AC_CHECK_PROG(have_libtool,$LIBTOOL_COMMAND,true,false)
+AM_CONDITIONAL(HAVE_LIBTOOL, test x$have_libtool = xtrue)
+
+
 # Do we have cmake installed?
 #-----------------------------
 AC_CHECK_PROG(have_cmake,cmake,true,false)

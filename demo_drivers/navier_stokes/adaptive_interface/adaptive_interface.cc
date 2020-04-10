@@ -1174,7 +1174,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
  std::ofstream filenamee("input.dat");
  Bulk_mesh_pt->output(filenamee,5);
  Surface_mesh_pt->output(filenamee,5);
- Point_mesh_pt->output(filenamee,5);
+ //Point_mesh_pt->output(filenamee,5);
  filenamee.close();
 
  //Solve the initial value problem
@@ -1183,7 +1183,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
  std::ofstream filename("first.dat"); 
  Bulk_mesh_pt->output(filename,5); 
  Surface_mesh_pt->output(filename,5); 
- Point_mesh_pt->output(filename,5);
+ //Point_mesh_pt->output(filename,5);
  filename.close();
 
  //Initialise the value of the arc-length
@@ -1236,7 +1236,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
    filename.open(file);
    Bulk_mesh_pt->output(filename,5);
    Surface_mesh_pt->output(filename,5);
-   Point_mesh_pt->output(filename,5);
+   //Point_mesh_pt->output(filename,5);
    filename.close();
 
    //Now reset the values of the lagrange multipliers and the xi's

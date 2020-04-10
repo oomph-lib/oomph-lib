@@ -1,6 +1,5 @@
 #! /bin/bash
 
-# TODO:    automatic hypre/trilinos pull source + install?
 
 set -o errexit
 set -o nounset
@@ -282,12 +281,14 @@ EOF
 # included in configure.ac and tell the user. The fact that we have
 # modified a file included in configure.ac will cause make to rerun
 # autoconf and configure.
+we_will_need_libtool_for_dealing_with_added_directories=false
 touch "$confdir/makefile_list"
 if ! diff -q "$confdir/new_makefile_list" "$confdir/makefile_list" > /dev/null 2>&1; 
 then
     echo "New/removed directories detected and $confdir/makefile_list updated,"
     echo "./configure will be rerun automatically by make."
     mv "$confdir/new_makefile_list" "$confdir/makefile_list"
+    we_will_need_libtool_for_dealing_with_added_directories=true
 fi
 
 
@@ -327,16 +328,30 @@ done
 # Make a temporary copy
 cp "$configure_options_file" "$temporary_configure_options_file"
 
-# The additional flags needed to link against shared libraries. 
-# PM: When building shared third-party libraries, we need to ensure that we
-# can access their code irregardless of the load address. Such code is
-# referred to as position independent code (PIC). To make sure the code is
-# compiled as such we need to provide the -fPIC and -DPIC flags to our
-# compiler options but we shouldn't expect the user to add them themselves
-# Update the config file (if necessary) to include the -fPIC flag, and
-# don't forget to include the -DPIC linker flag which ensures that
-# we include code in #ifdef PIC /*...*/ #endif statements.
-extra_flags_for_linking_against_shared_libraries="-fPIC -DPIC"
+
+echo "About to check linking type for trilinos..."
+link_type=`bin/check_for_dynamic_linking_flag.bash $temporary_configure_options_file`
+echo "...back from checking linking type for trilinos: "$link_type
+
+extra_flags_for_linking_against_shared_libraries=""
+if [ "$link_type" == "dynamic" ]; then
+    echo "doing dynamic linking for trilinos"
+    # The additional flags needed to link against shared libraries. 
+    # PM: When building shared third-party libraries, we need to ensure that we
+    # can access their code irregardless of the load address. Such code is
+    # referred to as position independent code (PIC). To make sure the code is
+    # compiled as such we need to provide the -fPIC and -DPIC flags to our
+    # compiler options but we shouldn't expect the user to add them themselves
+    # Update the config file (if necessary) to include the -fPIC flag, and
+    # don't forget to include the -DPIC linker flag which ensures that
+    # we include code in #ifdef PIC /*...*/ #endif statements.
+    extra_flags_for_linking_against_shared_libraries="-fPIC -DPIC"
+else
+    echo "doing static linking for trilinos"
+    extra_flags_for_linking_against_shared_libraries=""
+fi
+echo "Extra flags: "$extra_flags_for_linking_against_shared_libraries
+
 
 # Loop over the flags to include
 for i_flag in $extra_flags_for_linking_against_shared_libraries
@@ -410,9 +425,16 @@ then
 fi
 
 # make is smart enough to automatically rerun automake, configure etc. if
-# they are needed for other reasons (e.g if we have added new dirs to one
-# of the dir lists or modified a Makefile.am).
-
+# they are needed for other reasons e.g if we have added new dirs to one
+# of the dir lists or modified a Makefile.am but we need libtool for the
+# latter so check now
+if [[ $we_will_need_libtool_for_dealing_with_added_directories == "true" ]]; then
+    echo "Need libtool because we're reconfiguring oomph-lib. Checking that"
+    echo "libtool is available."
+    make check_if_we_have_have_libtool_installed_and_say_that_we_cant_reconfigure_if_not
+else
+    echo "No need to check for libtool because we're not reconfiguring oomph-lib."
+fi
 
 
 # Build!

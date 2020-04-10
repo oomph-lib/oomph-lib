@@ -294,7 +294,11 @@ void ElasticRingProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  sprintf(filename,"%s/ring%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
- mesh_pt()->output(some_file,npts);
+ for(unsigned i=0;i<Nbeam_element;i++)
+  {
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
+   el_pt->output(some_file,npts);
+  }
  some_file.close();
 
  // Local coordinates of plot points at left and right end of domain

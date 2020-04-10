@@ -320,7 +320,11 @@ void FluxPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
- mesh_pt()->output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u); 
+ for(unsigned e=0;e<Npoisson_elements;e++)
+  {
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
+   el_pt->output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u); 
+  }
  some_file.close();
 
  // Can't use black-box error computatation routines because

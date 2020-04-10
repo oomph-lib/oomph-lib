@@ -19,7 +19,7 @@ clean-local:
 
 distclean-local:
 	rm -rf CGAL-4.11
-	rm -rf cgal_default_installatio
+	rm -rf cgal_default_installation
 
 EXTRA_DIST = \
 CGAL-4.11.tar.xz \

@@ -858,7 +858,13 @@ void ThreeDimBethertonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  sprintf(filename,"%s/soln%i.dat",
          doc_info.directory().c_str(),doc_info.number());
  some_file.open(filename);
- mesh_pt()->output(some_file,npts);
+ unsigned n_bulk = mesh_pt()->nbulk();
+ for(unsigned e=0;e<n_bulk;e++)
+  {
+   Hijacked<ELEMENT>* el_pt = 
+    dynamic_cast<Hijacked<ELEMENT>* >(mesh_pt()->bulk_element_pt(e));
+   el_pt->output(some_file,npts);
+  }
  some_file.close();
 }
 

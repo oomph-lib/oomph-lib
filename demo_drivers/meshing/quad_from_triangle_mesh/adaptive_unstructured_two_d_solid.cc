@@ -262,9 +262,8 @@ UnstructuredSolidProblem<ELEMENT,MESH>::UnstructuredSolidProblem() :
  Solid_mesh_pt->min_permitted_error()=0.0001;
  Solid_mesh_pt->max_permitted_error()=0.001;
  
- // Output boundary and mesh
+ // Output boundaries
  this->Solid_mesh_pt->output_boundaries("boundaries.dat");
- this->Solid_mesh_pt->output("mesh.dat");
  
  // Make the traction mesh
  Traction_mesh_pt=new SolidMesh;

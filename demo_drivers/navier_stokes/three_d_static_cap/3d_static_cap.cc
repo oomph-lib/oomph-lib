@@ -718,7 +718,12 @@ void FreeSurfaceRotationProblem<ELEMENT>::doc_solution()
  sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
- Bulk_mesh_pt->output(some_file,npts);
+ unsigned n_element = Bulk_mesh_pt->nbulk();
+ for(unsigned i=0;i<n_element;i++)
+  {
+   ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
+   el_pt->output(some_file,npts);
+  }
  some_file.close();
 
  std::cout << "Pext " << Pext_pt->value(0) << std::endl;

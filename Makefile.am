@@ -128,3 +128,28 @@ do-we-have-mpi:
 
 
 
+# Check if we have libtool installed (needed for updating
+# distribution when new directories are added etc.)
+check_if_we_have_have_libtool_installed_and_say_that_we_cant_reconfigure_if_not:
+	@if $(have_libtool); then \
+            echo "Have libtool so can reconfigure oomph-lib"; \
+            echo "e.g. after adding new directories."; \
+            exit 0; \
+        else \
+            echo " "; \
+            echo " "; \
+            echo "==================================================="; \
+            echo " "; \
+            echo " "; \
+            echo " "; \
+            echo "Don't have libtool so we can't reconfigure oomph-lib"; \
+            echo "e.g. after adding new directories. Please install it"; \
+            echo "and re-run autogen.sh!"; \
+            echo " "; \
+            echo " "; \
+            echo " "; \
+            echo "==================================================="; \
+            echo " "; \
+            echo " "; \
+            exit 1; \
+        fi;

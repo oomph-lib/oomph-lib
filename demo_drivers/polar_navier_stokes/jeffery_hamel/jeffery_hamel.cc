@@ -741,8 +741,14 @@ void PolarNSProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
          doc_info.number());
  some_file.open(filename);
  header( some_file );
- mesh_pt()->output(some_file,npts);
+ unsigned n_fluid = mesh_pt()->fluid_elt_length();
+ for(unsigned e=0;e<n_fluid;e++)
+  {
+   ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
+   el_pt->output(some_file,npts);
+  }
  some_file.close();
+
 } // end_of_doc_solution
 
 template<class ELEMENT>

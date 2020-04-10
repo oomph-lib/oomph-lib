@@ -2115,7 +2115,13 @@ void AirwayReopeningProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
- Bulk_mesh_pt->output(some_file,npts);
+ unsigned n_bulk=Bulk_mesh_pt->nbulk();
+ for(unsigned i=0;i<n_bulk;i++)
+  {
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->
+                                           bulk_element_pt(i));
+   el_pt->output(some_file,npts);
+  }
  some_file.close();
 
 }

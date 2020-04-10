@@ -480,7 +480,7 @@ void CapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
  Surface_mesh_pt->output(some_file,npts);
- Point_mesh_pt->output(some_file,npts);
+ //Point_mesh_pt->output(some_file,npts);
  some_file.close();
 
  // Number of spines

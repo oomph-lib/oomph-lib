@@ -198,9 +198,24 @@ while [[ $accept_configure_options != "true" ]]; do
     done
 
     echo
-    echo "Enter the Desired configuration file [1-"$count"]"
-    
-    # Read in the Desired File and validate it
+    echo "If you can't find what you want, exit this script (with control-C)"
+    echo "and specify your own options by editing the file "
+    echo " "
+    echo "      config/configure_options/current"
+    echo " " 
+    echo "Have a look at config/configure_options/gcc_symlinks, or any"
+    echo "other files in that directory for inspiration and instructions."
+    echo "If you do so, make sure you make a copy of this file as it's"
+    echo "overwritten next time you choose one of the existing options."
+    echo "A better strategy is therefore to encode your configure options"
+    echo "in a distinctly-named file, e.g. joe_cool_configure_options"
+    echo "and to place this into the config/configure_options/ directory."
+    echo "It will then be picked up next time you run autogen.sh and will"
+    echo "appear as one of the enumerated options in the above list."
+    echo "Clever, isn't it?"
+    echo " "
+    echo "Enter the desired configuration file [1-"$count"]"
+    # Read in the desired File and validate it
     file_number=$(OptionRead)
 	if ! [[ $file_number =~ ^[0-9]+$ ]]; then
 		echo "File number not readable as an integer" 1>&2

@@ -367,7 +367,11 @@ void YoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
- mesh_pt()->output(some_file,npts);
+ for(unsigned i=0;i<N_bulk_elements;i++)
+  {
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
+   el_pt->output(some_file,npts);
+  }
  some_file.close();
 
  // Output contact angle 

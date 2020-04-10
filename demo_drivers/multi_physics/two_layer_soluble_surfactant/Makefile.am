@@ -11,7 +11,7 @@ two_layer_soluble_surfactant #refineable_two_layer_soluble_surfactant
 
 # Sources for executable
 two_layer_soluble_surfactant_SOURCES = double_buoyant_navier_stokes_elements.h \
-two_layer_soluble_surfactant.cc 
+two_layer_soluble_surfactant.cc soluble_surfactant_transport_equations.h
 
 
 # Required libraries:

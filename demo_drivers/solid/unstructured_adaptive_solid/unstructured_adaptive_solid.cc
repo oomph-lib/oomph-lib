@@ -240,9 +240,8 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem() :
  Solid_mesh_pt->max_element_size()=0.2;
  Solid_mesh_pt->min_element_size()=0.001; 
    
- // Output boundary and mesh
+ // Output mesh boundaries
  this->Solid_mesh_pt->output_boundaries("boundaries.dat");
- this->Solid_mesh_pt->output("mesh.dat");
 
  // Make the traction mesh
  Traction_mesh_pt=new SolidMesh;
