@@ -6,19 +6,22 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
-#echo "Checking if temporary configure file:"
-#echo " "
-#echo "    " $1
-#echo " " 
-#echo "requests the dynamic linking for trilinos via specification "
-#echo "of --enable-dynamic-linking-for-trilinos flag."
-#echo " " 
+print_it=0
+if [ "$print_it" == "1" ]; then
+    echo "Checking if temporary configure file:"
+    echo " "
+    echo "    " $1
+    echo " " 
+    echo "requests the dynamic linking for trilinos via specification "
+    echo "of --enable-dynamic-linking-for-trilinos flag."
+    echo " "
+fi
 
 # Check if flag specifying dynamic linking appears in config options
 # (starting at beginning of line: ^). Input argument = temporary
 # configure options file. (For some reason this test doesn't work if
 # run directly in non-interactive_autogen.sh)
-count_match=`grep -c -m 1 '^\-\-enable-dynamic-linking-for-trilinos flag' $1`
+count_match=`grep -c -m 1 '^\-\-enable-dynamic-linking-for-trilinos' $1`
 
 #echo $count_match
 
