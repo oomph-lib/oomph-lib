@@ -396,3 +396,19 @@ if [ -e external_distributions/cgal_configure_flags.txt ]; then
     echo "==================================================================="
 fi
 fi
+
+
+echo " "
+echo "To avoid the costly rebuild of various external distributions"
+echo "that were installed locally during the oomph-lib build, you may want"
+echo "to run the script"
+echo " " 
+echo "   bin/move_external_libraries_and_distributions_to_permanent_location.bash"
+echo " " 
+echo "to move them to a permanent location (e.g. /home/joe_cool/local, to be"
+echo "specified as the argument to this script). Note that for safety, this"
+echo "directory is supposed to be empty, so we don't accidentally overwrite"
+echo "existing installations. There's obviously no point doing this if you've"
+echo "already specified permanently installed libraries in the configure options"
+echo "(though if you do, a couple of libraries will be rebuilt and then installed)."
+echo " " 

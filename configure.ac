@@ -1881,6 +1881,12 @@ AC_SUBST(HLIB_INCLUDE)
 
 will_build_mumps_and_scalapack=false;
 
+# Initialise test if all the specified libraries are available;
+# gets switched to true when the first one (for scalapack) passes;
+# then reset to false if/when any of the subsequent ones fail
+all_specifiable_mumps_etc_libraries_available=false;
+
+
 mpi_include_dir=
 
 # Specify the mpi include directory that contains mpi.h
@@ -1950,7 +1956,7 @@ fi \
 fi;
 
 if test x$found_mpi_h_file = xfalse; then \
-        echo "Not doing mumps/scalapack build"; \
+        echo "Not doing mumps/scalapack build because location of mpi.h file not specified"; \
         will_build_mumps_and_scalapack=false; \
 else \
         if test x$found_mumps_tar_file = xtrue; then \
@@ -1972,8 +1978,6 @@ fi;
 # Make thes variables available to all Makefile.am-s
 AC_SUBST(MUMPS_AND_SCALAPACK_LIB)
 AC_SUBST(MUMPS_AND_SCALAPACK_INCLUDE)
-
-AM_CONDITIONAL(WILL_BUILD_MUMPS_AND_SCALAPACK, test x$will_build_mumps_and_scalapack = xtrue)
 
 #................................................................
 #................................................................
@@ -2012,12 +2016,15 @@ if test -e $SCALAPACK_LIB; then \
     echo " "; \
     # Make the variable available to all Makefile.am-s
     AC_SUBST(SCALAPACK_LIB)
+    # This switches it to true because this test goes first!
+    all_specifiable_mumps_etc_libraries_available=true;
 else \
     have_scalapack=false; \
     echo "Did NOT find the scalapack library"; \
     echo " "; \
     echo "   "  $SCALAPACK_LIB ; \
     echo " "; \
+    all_specifiable_mumps_etc_libraries_available=false; \
 fi; \
 else \
     echo "No scalapack library specified"; \
@@ -2027,7 +2034,8 @@ else \
         echo "after which it will be: " $SCALAPACK_LIB ; \
         AC_SUBST(SCALAPACK_LIB) \
         have_scalapack=true; \
-    fi
+    fi; \
+    all_specifiable_mumps_etc_libraries_available=false; \     
 fi
 
 
@@ -2083,6 +2091,7 @@ else \
     echo " "; \
     echo "   "  $BLACS_LIB ; \
     echo " "; \
+    all_specifiable_mumps_etc_libraries_available=false; \
 fi; \
 else \
     echo "No blacs library specified"; \
@@ -2092,7 +2101,8 @@ else \
         echo "after which it will be: " $BLACS_LIB ; \
         AC_SUBST(BLACS_LIB) \
         have_blacs=true; \
-    fi
+    fi; \
+    all_specifiable_mumps_etc_libraries_available=false; \      
 fi
 
 
@@ -2143,6 +2153,7 @@ else \
     echo " "; \
     echo "   "  $PORD_LIB ; \
     echo " "; \
+    all_specifiable_mumps_etc_libraries_available=false; \
 fi; \
 else \
     echo "No pord library specified"; \
@@ -2152,7 +2163,8 @@ else \
         echo "after which it will be: " $PORD_LIB ; \
         AC_SUBST(PORD_LIB) \
         have_pord=true; \
-    fi
+    fi; \
+    all_specifiable_mumps_etc_libraries_available=false; \     
 fi
 
 
@@ -2214,6 +2226,7 @@ else \
       echo " "; \
       echo "   "  $MUMPS_LIB ; \
       echo " "; \
+      all_specifiable_mumps_etc_libraries_available=false; \
    fi; \
 fi; \
 if test -d $MUMPS_INCLUDE; then \
@@ -2233,6 +2246,7 @@ else \
        echo " "; \
        echo "   "  $MUMPS_INCLUDE ; \
        echo " "; \
+      all_specifiable_mumps_etc_libraries_available=false; \
     fi; \
 fi; \
 else \
@@ -2244,9 +2258,34 @@ else \
         MUMPS_INCLUDE=$MUMPS_AND_SCALAPACK_INCLUDE ; \
         echo "after which it will be: " $MUMPS_DIR ; \
         have_mumps=true; \
-    fi
+    fi; \
+    all_specifiable_mumps_etc_libraries_available=false; \  
 fi
 
+
+
+
+if test x$all_specifiable_mumps_etc_libraries_available = xfalse; then \
+   if test x$will_build_mumps_and_scalapack = xfalse; then \
+      echo " "; \
+      echo "====================================================================";\
+      echo "Trouble: I don't have the tar files needed to build mumps";\
+      echo "         and the associated libraries, but you haven't (correctly? ";\
+      echo "         specified all the required library locations with the";\
+      echo " " ;\
+      echo "            --with-scalapack";\
+      echo "            --with-blacs";\
+      echo "            --with-pord";\
+      echo "            --with-mumps";\
+      echo " ";\
+      echo "         flags in the configure options file.";\
+      echo "         To stop stuff from breaking, I'll tell oomph-lib that";\
+      echo "         we don't have mumps at all (though the existing";\
+      echo "         will still be listed (but this should be harmless).";\
+      echo "=====================================================================";\
+      have_mumps=false;
+   fi; \ 
+fi
 
 
 # Do we have the mumps libraries? If so add them to the
@@ -2274,9 +2313,27 @@ fi
 #Tell everybody about it...
 AM_CONDITIONAL(OOMPH_HAS_MUMPS, test x$have_mumps = xtrue)
 
-# Make thes variables available to all Makefile.am-s
+# Make these variables available to all Makefile.am-s
 AC_SUBST(MUMPS_LIB)
 AC_SUBST(MUMPS_INCLUDE)
+
+
+
+# If we have mumps and associated libraries available (pre-installed; don't rebuild even
+# if we have the tar files!
+echo "all_specifiable_mumps_etc_libraries_available " $all_specifiable_mumps_etc_libraries_available
+if test x$all_specifiable_mumps_etc_libraries_available = xfalse; then \
+   echo "Possibly rebuilding mumps etc. libraries (if there's a tar file)"; \
+else \   
+   echo "Already have mumps etc libraries built elsewhere so not doing it again"; \
+   will_build_mumps_and_scalapack=false; \
+fi
+
+AM_CONDITIONAL(WILL_BUILD_MUMPS_AND_SCALAPACK, test x$will_build_mumps_and_scalapack = xtrue)
+
+# Make variable available to all Makefile.am-s
+AC_SUBST(WILL_BUILD_MUMPS_AND_SCALAPACK)
+
 
 #................................................................
 

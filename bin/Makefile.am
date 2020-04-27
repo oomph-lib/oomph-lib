@@ -48,7 +48,9 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py \
            run_selected_self_tests_based_on_string.bash \
            wrapper_for_validate.sh meld_against_files_in_different_dir.bash \
            docs_spelling.bash  docs_spelling_dict.aspell.en.pws \
-           check_for_dynamic_linking_flag.bash
+           check_for_dynamic_linking_flag.bash \
+           get_external_distribution_tar_files.bash \
+           move_external_libraries_and_distributions_to_permanent_location.bash
 
 fig2poly:
 	(cd ../demo_drivers/meshing/mesh_from_xfig_triangle; make install)

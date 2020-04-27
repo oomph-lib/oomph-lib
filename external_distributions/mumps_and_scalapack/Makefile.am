@@ -31,12 +31,19 @@ INSTALL_DIRECTORY=`pwd`/mumps_and_scalapack_default_installation
 mpi_include=$(MPI_INCLUDE_DIRECTORY)
 
 all:
-
 	echo "#! /bin/bash" > build_script.bash
 	echo " " >> build_script.bash
 	echo "# WARNING: THIS IS AN AUTOMATICALLY GENERATED FILE" >> build_script.bash
 	echo "#          DO NOT EDIT!" >> build_script.bash
 	echo " " >> build_script.bash
+if WILL_BUILD_MUMPS_AND_SCALAPACK
+	echo "printf \"About to build mumps etc. from within build script.\n\"" >> build_script.bash
+else
+	echo "printf \"Bailing out of build from script because we already have mumps\n\"" >> build_script.bash
+	echo "printf \"and associated libraries installed elsewhere.\n\"" >> build_script.bash
+	echo "exit" >> build_script.bash
+endif
+	echo " "
 	echo "if [ -e ${INSTALL_DIRECTORY}/include ]; then" >> build_script.bash
 	echo " printf \"Scalapack and MUMPS already appear to have been installed\n\" " >> build_script.bash
 	echo " printf \"because the directory \n\n\" " >> build_script.bash

@@ -19,6 +19,14 @@ echo "CHECKING IF TRILINOS HAS TO BE INSTALLED"
 echo "========================================="
 echo " " 
 
+if [ $ALREADY_HAVE_BUILT_TRILINOS == 1 ]; then
+   printf "\n It looks like the automake process already found a\n"
+   printf " pre-existing version of trilinos so I'm not going to bother trying\n"
+   printf " to build (even if you do have a tar file to build).\n\n"
+   exit
+fi   
+
+
 #Find any trilinos tarball
 COUNTER=0
 for TRILINOS_FILE in trilinos*.tar.gz
