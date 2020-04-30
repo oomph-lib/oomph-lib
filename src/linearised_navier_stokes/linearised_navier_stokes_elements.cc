@@ -407,7 +407,7 @@ namespace oomph
   const std::complex<double> eigenvalue(eval_real,eval_imag);
   
   // Integers used to store the local equation and unknown numbers
-  int local_eqn = 0, local_unknown = 0;
+  int local_eqn = 0;
 
   // Loop over the integration points
   for(unsigned ipt=0;ipt<n_intpt;ipt++)

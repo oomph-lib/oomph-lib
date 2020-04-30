@@ -2419,11 +2419,13 @@ void TetMeshBase::split_elements_in_corners(TimeStepper* time_stepper_pt)
    Vector<FiniteElement*> new_el_pt = map_it->second;
    
    unsigned original_region_index = 0;
-
+   
+#ifdef PARANOID
    // flag for paranoia, if for some reason we don't find the original corner
    // element in any of the regions
    bool found = false;
-
+#endif
+   
    Vector<FiniteElement*>::iterator region_element_it;
  
    // loop over the regions and look for this original corner element to find
@@ -2444,9 +2446,11 @@ void TetMeshBase::split_elements_in_corners(TimeStepper* time_stepper_pt)
        // save the region index we're at
        original_region_index = region_index;
 
+#ifdef PARANOID
        // update the paranoid flag
        found = true;
-     
+#endif
+       
        // regions can't overlap, so once we've found one we're done
        break;
      }

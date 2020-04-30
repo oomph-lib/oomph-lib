@@ -1739,8 +1739,9 @@ template<class BASE_ELEMENT, class PERTURBED_ELEMENT>
 FlowAroundCylinderProblem<BASE_ELEMENT,PERTURBED_ELEMENT>::
 FlowAroundCylinderProblem(
  GeomObject* cylinder_pt, const double &length, const double &height) :
- Domain_height(height), Domain_length(length), Cylinder_pt(cylinder_pt),
- Eigenproblem_flag(false)
+ Eigenproblem_flag(false), Domain_height(height), Domain_length(length),
+ Cylinder_pt(cylinder_pt)
+ 
 
 {
  //this->linear_solver_pt() = new HSL_MA42;
