@@ -26,11 +26,13 @@
 # Ctags files
 tags
 TAGS
+.tags
 
 # Build files
 Makefile
 Makefile.in
 *.deps/
+.libs/
 make_check_output
 
 # Other version control systems
@@ -118,6 +120,7 @@ compile
 bin/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
 bin/txt2h.sh
 bin/minimal_mpi_test
+bin/fig2poly
 external_distributions/hypre/build_script.bash
 external_distributions/trilinos/build_script.bash
 
@@ -651,6 +654,8 @@ src/meshes/xda_tet_mesh.h
 src/meshes/mesh_clean.aux
 src/meshes/mesh_instructions.aux
 src/meshes/mesh_names.aux
+src/meshes/gmsh_tet_mesh.h
+src/meshes/refineable_tetgen_mesh.h
 src/multi_physics/multi_physics.h
 src/navier_stokes/navier_stokes.h
 src/poisson/poisson.h
@@ -665,6 +670,8 @@ src/steady_axisym_advection_diffusion/steady_axisym_advection_diffusion.h
 src/time_harmonic_fourier_decomposed_linear_elasticity/time_harmonic_fourier_decomposed_linear_elasticity.h
 src/time_harmonic_linear_elasticity/time_harmonic_linear_elasticity.h
 src/linearised_axisym_navier_stokes/linearised_axisym_navier_stokes.h
+src/linearised_navier_stokes/linearised_navier_stokes.h
+src/pml_time_harmonic_linear_elasticity/pml_time_harmonic_linear_elasticity.h
 src/unsteady_heat/unsteady_heat.h
 src/womersley/womersley.h
 src/young_laplace/young_laplace.h
