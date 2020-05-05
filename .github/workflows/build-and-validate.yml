@@ -1,0 +1,17 @@
+name: Build and validate
+
+on: push
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install requirements
+      run: sudo apt-get install make automake libtool autoconf doxygen gfortran g++ 
+    - name: Build
+      run: ./non_interactive_autogen.sh
+    - name: Validate
+      run: ./validate.sh
