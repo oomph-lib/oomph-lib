@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install requirements
-      run: sudo apt-get install make automake libtool autoconf doxygen gfortran g++ 
+      run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++ 
     - name: Build
       run: ./non_interactive_autogen.sh
     - name: Validate
