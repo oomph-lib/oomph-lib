@@ -12,6 +12,6 @@ jobs:
     - name: Install requirements
       run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++ 
     - name: Build
-      run: ./non_interactive_autogen.sh
+      run: ./non_interactive_autogen.sh -s
     - name: Validate
-      run: make check -k
+      run: make check -k -s
