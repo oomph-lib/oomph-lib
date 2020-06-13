@@ -1,0 +1,29 @@
+name: Build and publish docs
+
+on:
+  push:
+    branches:
+      - 2-add-github-action-for-building-and-deploying-docs
+
+jobs:
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+    - name: Install requirements
+      run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++ texlive texlive-latex-extra texlive-font-utils
+    - name: Pick configuration
+      run: cp config/configure_options/gcc_symlinks_debug_paranoid_with_doc config/configure_options/current
+    - name: Build
+      run: ./non_interactive_autogen.sh -s
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages # The branch the action should deploy to.
+        FOLDER: doc # The folder the action should deploy.
