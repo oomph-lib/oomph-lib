@@ -98,9 +98,13 @@
 # We also specify the location of externally installed
 # blas and lapack libraries.
 #
-#--enable-suppress-doc
+
+# Suppress everything we can
+--enable-suppress-demo
+--enable-suppress-cgal-build
 --enable-symbolic-links-for-headers
-CXXFLAGS="-g -DPARANOID -Wall"
-CFLAGS="-g -Wall" 
-FFLAGS="-g -Wall" 
-FFLAGS_NO_OPT="-O0"
+# Slight hack to suppress compilation by just printing versions
+CXXFLAGS="-g -DPARANOID -Wall --version"
+CFLAGS="-g -Wall --version" 
+FFLAGS="-g -Wall --version" 
+FFLAGS_NO_OPT="-O0 --version"

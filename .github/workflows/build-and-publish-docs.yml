@@ -18,12 +18,14 @@ jobs:
     - name: Install requirements
       run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++ texlive texlive-latex-extra texlive-font-utils
     - name: Pick configuration
-      run: cp config/configure_options/gcc_symlinks_debug_paranoid_with_doc config/configure_options/current
-    - name: Build
+      run: cp config/configure_options/build_web_version config/configure_options/current
+    - name: Configure
       run: ./non_interactive_autogen.sh -s
+    - name: Add .nojekyll
+      run: touch .nojekyll
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: doc # The folder the action should deploy.
+        FOLDER: . # The folder the action should deploy.
