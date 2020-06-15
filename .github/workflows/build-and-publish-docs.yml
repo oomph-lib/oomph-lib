@@ -20,7 +20,9 @@ jobs:
     - name: Pick configuration
       run: cp config/configure_options/build_web_version config/configure_options/current
     - name: Configure
-      run: ./non_interactive_autogen.sh -s
+      run: ./non_interactive_autogen.sh -sn
+    - name: Build
+      run: make -C doc
     - name: Add .nojekyll
       run: touch .nojekyll
     - name: Deploy
@@ -29,3 +31,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages # The branch the action should deploy to.
         FOLDER: . # The folder the action should deploy.
+        CLEAN: true

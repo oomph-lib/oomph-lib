@@ -98,12 +98,8 @@
 # We also specify the location of externally installed
 # blas and lapack libraries.
 #
-
-# Suppress everything we can
---enable-suppress-demo
---enable-suppress-cgal-build
+#--enable-suppress-doc
 --enable-symbolic-links-for-headers
-# Slight hack to suppress compilation by just printing versions
 CXXFLAGS="-g -DPARANOID -Wall"
 CFLAGS="-g -Wall" 
 FFLAGS="-g -Wall" 

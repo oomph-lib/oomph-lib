@@ -27,6 +27,7 @@ make_options=""
 extra_configure_options=""
 generate_config_files="false"
 only_generate_config_files="false"
+no_build="false"
 configure_options_file="config/configure_options/current"
 
 # If "current" configure options does not exist then use "default".
@@ -38,7 +39,7 @@ fi
 run_self_tests=0
 
 # Parse command line arguments
-while getopts ":hrd:c:b:j:skoS" opt; do
+while getopts ":hrd:c:b:j:skonS" opt; do
     case $opt in
 
         S) 
@@ -68,6 +69,11 @@ while getopts ":hrd:c:b:j:skoS" opt; do
             only_generate_config_files="true"
             generate_config_files="true"
             echo "Regenerating the config files only"
+            ;;
+
+        n)
+            no_build="true"
+            echo "Not building, but doing everything else"
             ;;
 
         # flags for make
@@ -436,6 +442,10 @@ else
     echo "No need to check for libtool because we're not reconfiguring oomph-lib."
 fi
 
+if [[ $no_build == "true" ]]; then
+    # Done, exit with success code
+    exit 0
+fi
 
 # Build!
 # ============================================================
