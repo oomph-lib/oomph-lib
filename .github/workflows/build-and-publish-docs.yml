@@ -21,7 +21,9 @@ jobs:
       run: cp config/configure_options/build_web_version config/configure_options/current
     - name: Configure
       run: ./non_interactive_autogen.sh -sn
-    - name: Build
+    - name: Build bin
+      run: make -C bin
+    - name: Build doc
       run: make -C doc
     - name: Add .nojekyll
       run: touch .nojekyll
