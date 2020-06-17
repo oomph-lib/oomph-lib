@@ -27,6 +27,8 @@ jobs:
       run: make -C doc
     - name: Add .nojekyll
       run: touch .nojekyll
+    - name: Swap gitgnores
+      run: rm -f .gitignore && mv gh-pages.gitignore .gitignore
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
