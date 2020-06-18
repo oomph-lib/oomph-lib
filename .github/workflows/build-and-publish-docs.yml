@@ -25,13 +25,12 @@ jobs:
       run: make -C bin
     - name: Build doc
       run: make -C doc
-    - name: Add .nojekyll
-      run: touch .nojekyll
-    - name: Swap gitgnores
-      run: rm -f .gitignore && mv gh-pages.gitignore .gitignore
+    - name: Run website install script
+      run: ./bin/website_install.sh
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: . # The folder the action should deploy.
+        FOLDER: build/website # The folder the action should deploy.
+        CLEAN: true
