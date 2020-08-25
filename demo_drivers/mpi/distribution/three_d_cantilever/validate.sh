@@ -69,7 +69,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../../bin/fpdiff.py ../validata/three_d_cantilever_results.dat.gz  \
-         three_d_cantilever_results.dat 0.2 4.0e-7 >> validation.log
+         three_d_cantilever_results.dat 0.2 5.0e-7 >> validation.log
 fi
 
 mkdir RESLT_three_d_cantilever_adapt

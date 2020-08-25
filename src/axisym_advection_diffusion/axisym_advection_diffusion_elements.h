@@ -785,430 +785,431 @@ public virtual  QElement<1,NNODE_1D>
 /// The element geometry is obtained from the FaceGeometry<ELEMENT> 
 /// policy class.
 //======================================================================
-template <class ELEMENT>
-class AxisymAdvectionDiffusionFluxElement : 
-public virtual FaceGeometry<ELEMENT>, 
- public virtual FaceElement
-{
+///AT THE MOMENT THESE ARE IN SPHERICAL POLARS --- NOT CONSISTENT
+
+// template <class ELEMENT>
+// class AxisymAdvectionDiffusionFluxElement : 
+// public virtual FaceGeometry<ELEMENT>, 
+//  public virtual FaceElement
+// {
  
-public:
+// public:
 
 
- /// \short Function pointer to the prescribed-beta function fct(x,beta(x)) -- 
- /// x is a Vector! 
- typedef void (*AxisymAdvectionDiffusionPrescribedBetaFctPt)(
-  const Vector<double>& x, 
-  double& beta);
+//  /// \short Function pointer to the prescribed-beta function fct(x,beta(x)) -- 
+//  /// x is a Vector! 
+//  typedef void (*AxisymAdvectionDiffusionPrescribedBetaFctPt)(
+//   const Vector<double>& x, 
+//   double& beta);
  
- /// \short Function pointer to the prescribed-alpha function fct(x,alpha(x)) -- 
- /// x is a Vector! 
- typedef void (*AxisymAdvectionDiffusionPrescribedAlphaFctPt)(
-  const Vector<double>& x, 
-  double& alpha);
- 
- 
- /// \short Constructor, takes the pointer to the "bulk" element
- /// and the index of the face to be created
- AxisymAdvectionDiffusionFluxElement(FiniteElement* const &bulk_el_pt, 
-                                        const int &face_index);
+//  /// \short Function pointer to the prescribed-alpha function fct(x,alpha(x)) -- 
+//  /// x is a Vector! 
+//  typedef void (*AxisymAdvectionDiffusionPrescribedAlphaFctPt)(
+//   const Vector<double>& x, 
+//   double& alpha);
  
  
- /// Broken empty constructor
- AxisymAdvectionDiffusionFluxElement()
-  {
-   throw OomphLibError(
-    "Don't call empty constructor for AxisymAdvectionDiffusionFluxElement",
-    OOMPH_CURRENT_FUNCTION,
-    OOMPH_EXCEPTION_LOCATION);
-  }
-
- /// Broken copy constructor
- AxisymAdvectionDiffusionFluxElement(
-  const AxisymAdvectionDiffusionFluxElement& dummy) 
-  { 
-   BrokenCopy::broken_copy("AxisymAdvectionDiffusionFluxElement");
-  } 
- 
- /// Broken assignment operator
- /*void operator=(const AxisymAdvectionDiffusionFluxElement&) 
-  {
-   BrokenCopy::broken_assign("AxisymAdvectionDiffusionFluxElement");
-   }*/
-
- /// Access function for the prescribed-beta function pointer
- AxisymAdvectionDiffusionPrescribedBetaFctPt& beta_fct_pt() 
-  {
-   return Beta_fct_pt;
-  }
-
- /// Access function for the prescribed-alpha function pointer
- AxisymAdvectionDiffusionPrescribedAlphaFctPt& alpha_fct_pt() 
-  {
-   return Alpha_fct_pt;
-  }
-
-
- /// Add the element's contribution to its residual vector
- inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
-  {
-   //Call the generic residuals function with flag set to 0
-   //using a dummy matrix
-   fill_in_generic_residual_contribution_axi_adv_diff_flux(
-    residuals,
-    GeneralisedElement::Dummy_matrix,0);
-  }
-
-
- /// \short Add the element's contribution to its residual vector and 
- /// its Jacobian matrix
- inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                              DenseMatrix<double> &jacobian)
-  {
-   //Call the generic routine with the flag set to 1
-   fill_in_generic_residual_contribution_axi_adv_diff_flux(residuals,
-                                                       jacobian,
-                                                       1);
-  }
- 
- /// \short Specify the value of nodal zeta from the face geometry
- /// The "global" intrinsic coordinate of the element when
- /// viewed as part of a geometric object should be given by
- /// the FaceElement representation, by default (needed to break
- /// indeterminacy if bulk element is SolidElement)
- double zeta_nodal(const unsigned &n, const unsigned &k,           
-                   const unsigned &i) const 
- {return FaceElement::zeta_nodal(n,k,i);}     
-
-
-
- /// \short Output function -- forward to broken version in FiniteElement
- /// until somebody decides what exactly they want to plot here...
- void output(std::ostream &outfile) 
-  {
-   FiniteElement::output(outfile);
-  }
-
- /// \short Output function -- forward to broken version in FiniteElement
- /// until somebody decides what exactly they want to plot here...
- void output(std::ostream &outfile, const unsigned &nplot)
-  {
-   FiniteElement::output(outfile,nplot);
-  }
-
-
-protected:
-
- /// \short Function to compute the shape and test functions and to return 
- /// the Jacobian of mapping between local and global (Eulerian)
- /// coordinates
- inline double shape_and_test(const Vector<double> &s, 
-                              Shape &psi, 
-                              Shape &test) const
-  {
-   //Find number of nodes
-   unsigned n_node = nnode();
-
-   //Get the shape functions
-   shape(s,psi);
-
-   //Set the test functions to be the same as the shape functions
-   for(unsigned i=0;i<n_node;i++) 
-    {
-     test[i] = psi[i];
-    }
-
-   //Return the value of the jacobian
-   return J_eulerian(s);
-  }
-
-
- /// \short Function to compute the shape and test functions and to return 
- /// the Jacobian of mapping between local and global (Eulerian)
- /// coordinates
- inline double shape_and_test_at_knot(const unsigned &ipt,
-                                      Shape &psi, 
-                                      Shape &test) const
-  {
-   //Find number of nodes
-   unsigned n_node = nnode();
-
-   //Get the shape functions
-   shape_at_knot(ipt,psi);
-
-   //Set the test functions to be the same as the shape functions
-   for(unsigned i=0;i<n_node;i++) 
-    {
-     test[i] = psi[i];
-    }
-
-   //Return the value of the jacobian
-   return J_eulerian_at_knot(ipt);
-  }
-
- /// \short Function to calculate the prescribed beta at a given spatial
- /// position
- void get_beta(const Vector<double>& x, double& beta)
-  {
-   //If the function pointer is zero return zero
-   if(Beta_fct_pt == 0)
-    {
-     beta = 0.0;
-    }
-   //Otherwise call the function
-   else
-    {
-     (*Beta_fct_pt)(x,beta);
-    }
-  }
-
- /// \short Function to calculate the prescribed alpha at a given spatial
- /// position
- void get_alpha(const Vector<double>& x, double& alpha)
-  {
-   //If the function pointer is zero return zero
-   if(Alpha_fct_pt == 0)
-    {
-     alpha = 0.0;
-    }
-   //Otherwise call the function
-   else
-    {
-     (*Alpha_fct_pt)(x,alpha);
-    }
-  }
-
-private:
-
-
- /// \short Add the element's contribution to its residual vector.
- /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
- void fill_in_generic_residual_contribution_axi_adv_diff_flux(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
-  unsigned flag);
+//  /// \short Constructor, takes the pointer to the "bulk" element
+//  /// and the index of the face to be created
+//  AxisymAdvectionDiffusionFluxElement(FiniteElement* const &bulk_el_pt, 
+//                                         const int &face_index);
  
  
- /// Function pointer to the (global) prescribed-beta function
- AxisymAdvectionDiffusionPrescribedBetaFctPt Beta_fct_pt;
+//  /// Broken empty constructor
+//  AxisymAdvectionDiffusionFluxElement()
+//   {
+//    throw OomphLibError(
+//     "Don't call empty constructor for AxisymAdvectionDiffusionFluxElement",
+//     OOMPH_CURRENT_FUNCTION,
+//     OOMPH_EXCEPTION_LOCATION);
+//   }
 
- /// Function pointer to the (global) prescribed-alpha function
- AxisymAdvectionDiffusionPrescribedAlphaFctPt Alpha_fct_pt;
-
- /// The index at which the unknown is stored at the nodes
- unsigned U_index_adv_diff;
-
-
-};//End class AxisymAdvectionDiffusionFluxElement
-
-
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-
-
-//===========================================================================
-/// \short Constructor, takes the pointer to the "bulk" element and the index
-/// of the face to be created 
-//===========================================================================
-template<class ELEMENT>
-AxisymAdvectionDiffusionFluxElement<ELEMENT>::
-AxisymAdvectionDiffusionFluxElement(FiniteElement* const &bulk_el_pt, 
-                                          const int &face_index) : 
-FaceGeometry<ELEMENT>(), FaceElement()
-
-{ 
- //Let the bulk element build the FaceElement, i.e. setup the pointers 
- //to its nodes (by referring to the appropriate nodes in the bulk
- //element), etc.
- bulk_el_pt->build_face_element(face_index,this);
+//  /// Broken copy constructor
+//  AxisymAdvectionDiffusionFluxElement(
+//   const AxisymAdvectionDiffusionFluxElement& dummy) 
+//   { 
+//    BrokenCopy::broken_copy("AxisymAdvectionDiffusionFluxElement");
+//   } 
  
-#ifdef PARANOID
- {
-  //Check that the element is not a refineable 3d element
-  ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(bulk_el_pt);
-  //If it's three-d
-  if(elem_pt->dim()==3)
-   {
-    //Is it refineable
-    RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(elem_pt);
-    if(ref_el_pt!=0)
-     {
-      if (this->has_hanging_nodes())
-       {
-        throw OomphLibError(
-         "This flux element will not work correctly if nodes are hanging\n",
-         OOMPH_CURRENT_FUNCTION,
-         OOMPH_EXCEPTION_LOCATION);
-       }
-     }
-   }
- }
-#endif
- 
- //Initialise the prescribed-beta function pointer to zero
- Beta_fct_pt = 0;
- 
- //Set up U_index_adv_diff. Initialise to zero, which probably won't change
- //in most cases, oh well, the price we pay for generality
- U_index_adv_diff = 0;
- 
- //Cast to the appropriate AdvectionDiffusionEquation so that we can
- //find the index at which the variable is stored
- //We assume that the dimension of the full problem is the same
- //as the dimension of the node, if this is not the case you will have
- //to write custom elements, sorry
- AxisymAdvectionDiffusionEquations* eqn_pt =   
- dynamic_cast<AxisymAdvectionDiffusionEquations*>(bulk_el_pt);
+//  /// Broken assignment operator
+//  /*void operator=(const AxisymAdvectionDiffusionFluxElement&) 
+//   {
+//    BrokenCopy::broken_assign("AxisymAdvectionDiffusionFluxElement");
+//    }*/
 
- //If the cast has failed die
- if(eqn_pt==0)
-  {
-     std::string error_string =
-      "Bulk element must inherit from AxisymAdvectionDiffusionEquations.";
-     error_string += 
-      "Nodes are two dimensional, but cannot cast the bulk element to\n";
-     error_string += "AxisymAdvectionDiffusionEquations<2>\n.";
-     error_string += 
-      "If you desire this functionality, you must implement it yourself\n";
+//  /// Access function for the prescribed-beta function pointer
+//  AxisymAdvectionDiffusionPrescribedBetaFctPt& beta_fct_pt() 
+//   {
+//    return Beta_fct_pt;
+//   }
+
+//  /// Access function for the prescribed-alpha function pointer
+//  AxisymAdvectionDiffusionPrescribedAlphaFctPt& alpha_fct_pt() 
+//   {
+//    return Alpha_fct_pt;
+//   }
+
+
+//  /// Add the element's contribution to its residual vector
+//  inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+//   {
+//    //Call the generic residuals function with flag set to 0
+//    //using a dummy matrix
+//    fill_in_generic_residual_contribution_axi_adv_diff_flux(
+//     residuals,
+//     GeneralisedElement::Dummy_matrix,0);
+//   }
+
+
+//  /// \short Add the element's contribution to its residual vector and 
+//  /// its Jacobian matrix
+//  inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+//                                               DenseMatrix<double> &jacobian)
+//   {
+//    //Call the generic routine with the flag set to 1
+//    fill_in_generic_residual_contribution_axi_adv_diff_flux(residuals,
+//                                                        jacobian,
+//                                                        1);
+//   }
+ 
+//  /// \short Specify the value of nodal zeta from the face geometry
+//  /// The "global" intrinsic coordinate of the element when
+//  /// viewed as part of a geometric object should be given by
+//  /// the FaceElement representation, by default (needed to break
+//  /// indeterminacy if bulk element is SolidElement)
+//  double zeta_nodal(const unsigned &n, const unsigned &k,           
+//                    const unsigned &i) const 
+//  {return FaceElement::zeta_nodal(n,k,i);}     
+
+
+
+//  /// \short Output function -- forward to broken version in FiniteElement
+//  /// until somebody decides what exactly they want to plot here...
+//  void output(std::ostream &outfile) 
+//   {
+//    FiniteElement::output(outfile);
+//   }
+
+//  /// \short Output function -- forward to broken version in FiniteElement
+//  /// until somebody decides what exactly they want to plot here...
+//  void output(std::ostream &outfile, const unsigned &nplot)
+//   {
+//    FiniteElement::output(outfile,nplot);
+//   }
+
+
+// protected:
+
+//  /// \short Function to compute the shape and test functions and to return 
+//  /// the Jacobian of mapping between local and global (Eulerian)
+//  /// coordinates
+//  inline double shape_and_test(const Vector<double> &s, 
+//                               Shape &psi, 
+//                               Shape &test) const
+//   {
+//    //Find number of nodes
+//    unsigned n_node = nnode();
+
+//    //Get the shape functions
+//    shape(s,psi);
+
+//    //Set the test functions to be the same as the shape functions
+//    for(unsigned i=0;i<n_node;i++) 
+//     {
+//      test[i] = psi[i];
+//     }
+
+//    //Return the value of the jacobian
+//    return J_eulerian(s);
+//   }
+
+
+//  /// \short Function to compute the shape and test functions and to return 
+//  /// the Jacobian of mapping between local and global (Eulerian)
+//  /// coordinates
+//  inline double shape_and_test_at_knot(const unsigned &ipt,
+//                                       Shape &psi, 
+//                                       Shape &test) const
+//   {
+//    //Find number of nodes
+//    unsigned n_node = nnode();
+
+//    //Get the shape functions
+//    shape_at_knot(ipt,psi);
+
+//    //Set the test functions to be the same as the shape functions
+//    for(unsigned i=0;i<n_node;i++) 
+//     {
+//      test[i] = psi[i];
+//     }
+
+//    //Return the value of the jacobian
+//    return J_eulerian_at_knot(ipt);
+//   }
+
+//  /// \short Function to calculate the prescribed beta at a given spatial
+//  /// position
+//  void get_beta(const Vector<double>& x, double& beta)
+//   {
+//    //If the function pointer is zero return zero
+//    if(Beta_fct_pt == 0)
+//     {
+//      beta = 0.0;
+//     }
+//    //Otherwise call the function
+//    else
+//     {
+//      (*Beta_fct_pt)(x,beta);
+//     }
+//   }
+
+//  /// \short Function to calculate the prescribed alpha at a given spatial
+//  /// position
+//  void get_alpha(const Vector<double>& x, double& alpha)
+//   {
+//    //If the function pointer is zero return zero
+//    if(Alpha_fct_pt == 0)
+//     {
+//      alpha = 0.0;
+//     }
+//    //Otherwise call the function
+//    else
+//     {
+//      (*Alpha_fct_pt)(x,alpha);
+//     }
+//   }
+
+// private:
+
+
+//  /// \short Add the element's contribution to its residual vector.
+//  /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
+//  void fill_in_generic_residual_contribution_axi_adv_diff_flux(
+//   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
+//   unsigned flag);
+ 
+ 
+//  /// Function pointer to the (global) prescribed-beta function
+//  AxisymAdvectionDiffusionPrescribedBetaFctPt Beta_fct_pt;
+
+//  /// Function pointer to the (global) prescribed-alpha function
+//  AxisymAdvectionDiffusionPrescribedAlphaFctPt Alpha_fct_pt;
+
+//  /// The index at which the unknown is stored at the nodes
+//  unsigned U_index_adv_diff;
+
+
+// };//End class AxisymAdvectionDiffusionFluxElement
+
+
+// ///////////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////////
+
+
+// //===========================================================================
+// /// \short Constructor, takes the pointer to the "bulk" element and the index
+// /// of the face to be created 
+// //===========================================================================
+// template<class ELEMENT>
+// AxisymAdvectionDiffusionFluxElement<ELEMENT>::
+// AxisymAdvectionDiffusionFluxElement(FiniteElement* const &bulk_el_pt, 
+//                                           const int &face_index) : 
+// FaceGeometry<ELEMENT>(), FaceElement()
+
+// { 
+//  //Let the bulk element build the FaceElement, i.e. setup the pointers 
+//  //to its nodes (by referring to the appropriate nodes in the bulk
+//  //element), etc.
+//  bulk_el_pt->build_face_element(face_index,this);
+ 
+// #ifdef PARANOID
+//  {
+//   //Check that the element is not a refineable 3d element
+//   ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(bulk_el_pt);
+//   //If it's three-d
+//   if(elem_pt->dim()==3)
+//    {
+//     //Is it refineable
+//     RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(elem_pt);
+//     if(ref_el_pt!=0)
+//      {
+//       if (this->has_hanging_nodes())
+//        {
+//         throw OomphLibError(
+//          "This flux element will not work correctly if nodes are hanging\n",
+//          OOMPH_CURRENT_FUNCTION,
+//          OOMPH_EXCEPTION_LOCATION);
+//        }
+//      }
+//    }
+//  }
+// #endif
+ 
+//  //Initialise the prescribed-beta function pointer to zero
+//  Beta_fct_pt = 0;
+ 
+//  //Set up U_index_adv_diff. Initialise to zero, which probably won't change
+//  //in most cases, oh well, the price we pay for generality
+//  U_index_adv_diff = 0;
+ 
+//  //Cast to the appropriate AdvectionDiffusionEquation so that we can
+//  //find the index at which the variable is stored
+//  //We assume that the dimension of the full problem is the same
+//  //as the dimension of the node, if this is not the case you will have
+//  //to write custom elements, sorry
+//  AxisymAdvectionDiffusionEquations* eqn_pt =   
+//  dynamic_cast<AxisymAdvectionDiffusionEquations*>(bulk_el_pt);
+
+//  //If the cast has failed die
+//  if(eqn_pt==0)
+//   {
+//      std::string error_string =
+//       "Bulk element must inherit from AxisymAdvectionDiffusionEquations.";
+//      error_string += 
+//       "Nodes are two dimensional, but cannot cast the bulk element to\n";
+//      error_string += "AxisymAdvectionDiffusionEquations<2>\n.";
+//      error_string += 
+//       "If you desire this functionality, you must implement it yourself\n";
      
-     throw OomphLibError(
-      error_string,
-      OOMPH_CURRENT_FUNCTION,
-      OOMPH_EXCEPTION_LOCATION);
-  }
- else
-  {
-   //Read the index from the (cast) bulk element.
-   U_index_adv_diff = eqn_pt->u_index_axi_adv_diff();
-  }
+//      throw OomphLibError(
+//       error_string,
+//       OOMPH_CURRENT_FUNCTION,
+//       OOMPH_EXCEPTION_LOCATION);
+//   }
+//  else
+//   {
+//    //Read the index from the (cast) bulk element.
+//    U_index_adv_diff = eqn_pt->u_index_axi_adv_diff();
+//   }
 
 
-}
+// }
 
 
-//===========================================================================
-/// \short Compute the element's residual vector and the (zero) Jacobian 
-/// matrix for the Robin boundary condition:
-/// \f[ 
-/// \Delta u \cdot \mathbf{n} + \alpha (\mathbf{x}) = \beta (\mathbf{x})
-/// \f] 
-//===========================================================================
-template<class ELEMENT>
-void AxisymAdvectionDiffusionFluxElement<ELEMENT>::
-fill_in_generic_residual_contribution_axi_adv_diff_flux(
- Vector<double> &residuals, 
- DenseMatrix<double> &jacobian, 
- unsigned flag)
-{
- //Find out how many nodes there are
- const unsigned n_node = nnode();
+// //===========================================================================
+// /// \short Compute the element's residual vector and the (zero) Jacobian 
+// /// matrix for the Robin boundary condition:
+// /// \f[ 
+// /// \Delta u \cdot \mathbf{n} + \alpha (\mathbf{x}) = \beta (\mathbf{x})
+// /// \f] 
+// //===========================================================================
+// template<class ELEMENT>
+// void AxisymAdvectionDiffusionFluxElement<ELEMENT>::
+// fill_in_generic_residual_contribution_axi_adv_diff_flux(
+//  Vector<double> &residuals, 
+//  DenseMatrix<double> &jacobian, 
+//  unsigned flag)
+// {
+//  //Find out how many nodes there are
+//  const unsigned n_node = nnode();
 
- // Locally cache the index at which the variable is stored
- const unsigned u_index_axi_adv_diff = U_index_adv_diff;
+//  // Locally cache the index at which the variable is stored
+//  const unsigned u_index_axi_adv_diff = U_index_adv_diff;
   
- //Set up memory for the shape and test functions
- Shape psif(n_node), testf(n_node);
+//  //Set up memory for the shape and test functions
+//  Shape psif(n_node), testf(n_node);
  
- //Set the value of n_intpt
- const unsigned n_intpt = integral_pt()->nweight();
+//  //Set the value of n_intpt
+//  const unsigned n_intpt = integral_pt()->nweight();
  
- //Set the Vector to hold local coordinates
- Vector<double> s(1);
+//  //Set the Vector to hold local coordinates
+//  Vector<double> s(1);
  
- //Integers used to store the local equation number and local unknown
- //indices for the residuals and jacobians
- int local_eqn=0, local_unknown=0;
+//  //Integers used to store the local equation number and local unknown
+//  //indices for the residuals and jacobians
+//  int local_eqn=0, local_unknown=0;
 
- //Loop over the integration points
- //--------------------------------
- for(unsigned ipt=0;ipt<n_intpt;ipt++)
-  {
+//  //Loop over the integration points
+//  //--------------------------------
+//  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+//   {
 
-   //Assign values of s
-   for(unsigned i=0;i<1;i++) 
-    {
-     s[i] = integral_pt()->knot(ipt,i);
-    }
+//    //Assign values of s
+//    for(unsigned i=0;i<1;i++) 
+//     {
+//      s[i] = integral_pt()->knot(ipt,i);
+//     }
    
-   //Get the integral weight
-   double w = integral_pt()->weight(ipt);
+//    //Get the integral weight
+//    double w = integral_pt()->weight(ipt);
    
-   //Find the shape and test functions and return the Jacobian
-   //of the mapping
-   double J = shape_and_test(s,psif,testf);
+//    //Find the shape and test functions and return the Jacobian
+//    //of the mapping
+//    double J = shape_and_test(s,psif,testf);
 
-   //Premultiply the weights and the Jacobian
-   double W = w*J;
+//    //Premultiply the weights and the Jacobian
+//    double W = w*J;
 
-   //Calculate local values of the solution and its derivatives
-   //Allocate
-   double interpolated_u=0.0;
-   Vector<double> interpolated_x(2,0.0);
+//    //Calculate local values of the solution and its derivatives
+//    //Allocate
+//    double interpolated_u=0.0;
+//    Vector<double> interpolated_x(2,0.0);
       
-   //Calculate position
-   for(unsigned l=0;l<n_node;l++) 
-    {
-     //Get the value at the node
-     double u_value = raw_nodal_value(l,u_index_axi_adv_diff);
-     interpolated_u += u_value*psif(l);
-     //Loop over coordinate direction
-     for(unsigned i=0;i<2;i++)
-      {
-       interpolated_x[i] += nodal_position(l,i)*psif(l);
-      }
-    }
+//    //Calculate position
+//    for(unsigned l=0;l<n_node;l++) 
+//     {
+//      //Get the value at the node
+//      double u_value = raw_nodal_value(l,u_index_axi_adv_diff);
+//      interpolated_u += u_value*psif(l);
+//      //Loop over coordinate direction
+//      for(unsigned i=0;i<2;i++)
+//       {
+//        interpolated_x[i] += nodal_position(l,i)*psif(l);
+//       }
+//     }
    
-   //Get the imposed beta (beta=flux when alpha=0.0)
-   double beta;
-   get_beta(interpolated_x,beta);
+//    //Get the imposed beta (beta=flux when alpha=0.0)
+//    double beta;
+//    get_beta(interpolated_x,beta);
 
-   //Get the imposed alpha
-   double alpha;
-   get_alpha(interpolated_x,alpha);
+//    //Get the imposed alpha
+//    double alpha;
+//    get_alpha(interpolated_x,alpha);
 
-   //calculate the area weighting dS = r^{2} sin theta dr dtheta
-   // r = x[0] and theta = x[1]
-   double dS = interpolated_x[0]*interpolated_x[0]*sin(interpolated_x[1]);
+//    //calculate the area weighting dS = r^{2} sin theta dr dtheta
+//    // r = x[0] and theta = x[1]
+//    double dS = interpolated_x[0]*interpolated_x[0]*sin(interpolated_x[1]);
 
-   //Now add to the appropriate equations
+//    //Now add to the appropriate equations
    
-   //Loop over the test functions
-   for(unsigned l=0;l<n_node;l++)
-    {
-     //Set the local equation number
-     local_eqn = nodal_local_eqn(l,u_index_axi_adv_diff);
-     /*IF it's not a boundary condition*/
-     if(local_eqn >= 0)
-      {
-       //Add the prescribed beta terms
-       residuals[local_eqn] -= dS*(beta - alpha*interpolated_u)*testf(l)*W;
+//    //Loop over the test functions
+//    for(unsigned l=0;l<n_node;l++)
+//     {
+//      //Set the local equation number
+//      local_eqn = nodal_local_eqn(l,u_index_axi_adv_diff);
+//      /*IF it's not a boundary condition*/
+//      if(local_eqn >= 0)
+//       {
+//        //Add the prescribed beta terms
+//        residuals[local_eqn] -= dS*(beta - alpha*interpolated_u)*testf(l)*W;
             
-       //Calculate the Jacobian
-       //----------------------
-       if ( (flag) && (alpha!=0.0) )
-        {
-         //Loop over the velocity shape functions again
-         for(unsigned l2=0;l2<n_node;l2++)
-          {
-           //Set the number of the unknown
-           local_unknown = nodal_local_eqn(l2,u_index_axi_adv_diff);
+//        //Calculate the Jacobian
+//        //----------------------
+//        if ( (flag) && (alpha!=0.0) )
+//         {
+//          //Loop over the velocity shape functions again
+//          for(unsigned l2=0;l2<n_node;l2++)
+//           {
+//            //Set the number of the unknown
+//            local_unknown = nodal_local_eqn(l2,u_index_axi_adv_diff);
            
-           //If at a non-zero degree of freedom add in the entry
-           if(local_unknown >= 0)
-            {
-             jacobian(local_eqn,local_unknown) +=
-              dS*alpha*psif[l2]*testf[l]*W;
-            }
-          }
-        }
+//            //If at a non-zero degree of freedom add in the entry
+//            if(local_unknown >= 0)
+//             {
+//              jacobian(local_eqn,local_unknown) +=
+//               dS*alpha*psif[l2]*testf[l]*W;
+//             }
+//           }
+//         }
        
-      }
-    } //end loop over test functions
+//       }
+//     } //end loop over test functions
 
-  } //end loop over integration points
+//   } //end loop over integration points
 
-}//end fill_in_generic_residual_contribution_adv_diff_flux
+// }//end fill_in_generic_residual_contribution_adv_diff_flux
 
-
-} //End AxisymAdvectionDiffusionFluxElement class
-
+// } //End AxisymAdvectionDiffusionFluxElement class
+}
 #endif

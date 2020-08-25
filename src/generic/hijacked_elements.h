@@ -215,7 +215,7 @@ public:
    //Mark the value as hijacked
    hijack_global_eqn(this->node_pt(n)->eqn_number_pt(i));
    
-   //Return the pointer to the data
+   //Return the pointer to the data, which may be null
    return temp_data_pt;
   }
  

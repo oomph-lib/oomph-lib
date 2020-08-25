@@ -379,7 +379,7 @@ public:
 
      // Loop over the elements to set up element-specific 
      // and re-enable ALE
-     unsigned n_element = Bulk_mesh_pt->nelement;
+     unsigned n_element = Bulk_mesh_pt->nelement();
      for(unsigned i=0;i<n_element;i++)
       {
        // Upcast from GeneralsedElement to the present element
@@ -404,7 +404,7 @@ public:
  /// Remember to update the nodes if the surface is not pinned
  void actions_before_newton_convergence_check()
   {
-   if(!Surface_pinned) {mesh_pt()->node_update();}
+   if(!Surface_pinned) {Bulk_mesh_pt->node_update();}
 
    // This driver code cannot be allowed to use the analytical form of
    // get_dresidual_dnodal_coordinates(...) that is implemented in the
@@ -412,11 +412,11 @@ public:
    // contributions from external data which is not taken into account
    // by that routine. We therefore force the bulk elements to use the
    // fully-finite differenced version.
-   const unsigned n_element = mesh_pt()->nelement();
+   const unsigned n_element = Bulk_mesh_pt->nelement();
    for(unsigned e=0;e<n_element;e++)
     {
      ElementWithMovingNodes* el_pt =
-      dynamic_cast<ElementWithMovingNodes*>(mesh_pt()->element_pt(e));
+      dynamic_cast<ElementWithMovingNodes*>(Bulk_mesh_pt->element_pt(e));
      el_pt->evaluate_shape_derivs_by_direct_fd();
     }
   }
@@ -431,7 +431,7 @@ public:
                    const double &pvalue)
   {
    //Cast to specific element and fix pressure
-   dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->
+   dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))->
     fix_pressure(pdof,pvalue);
   } // end_of_fix_pressure
 
@@ -440,7 +440,7 @@ public:
  void unfix_pressure(const unsigned &e, const unsigned &pdof)
   {
    //Cast to specific element and fix pressure
-   dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->
+   dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))->
     unfix_pressure(pdof);
   } // end_of_unfix_pressure
 

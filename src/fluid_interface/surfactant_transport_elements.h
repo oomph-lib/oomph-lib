@@ -86,7 +86,7 @@ protected:
 
  ///Return the derivative of sigma with respect to C
  ///For use in computing the Jacobian
- double dsigma_dC(const Vector<double> &s)
+ virtual double dsigma_dC(const Vector<double> &s)
  {return -this->beta();}
   
   /// \short Overload the Helper function to calculate the residuals and 

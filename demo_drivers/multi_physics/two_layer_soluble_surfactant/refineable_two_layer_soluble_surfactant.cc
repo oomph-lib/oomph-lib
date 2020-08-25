@@ -1,4 +1,4 @@
-///LIC// ====================================================================
+//LIC// ====================================================================
 //LIC// This file forms part of oomph-lib, the object-oriented, 
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
@@ -43,7 +43,7 @@
 
 //N.B. This all requires more careful validation
 //Simple checks that pass are that mass of surfactant is conserved, for
-//a suitable small timestep; and that the steady solution matches the
+//a suitably small timestep; and that the steady solution matches the
 //analytic expression.
 
 //Oomph-lib headers, 
@@ -260,6 +260,160 @@ namespace Global_Physical_Variables
 } //end of oomph namespace
 
 
+//==start_of_specific_element_class=============================
+///Element class used to insist that the vertical positions of
+///the periodic nodes coincide.
+///These are essentially point elements that are created
+///from existing periodic nodes.
+//=============================================================
+class SlavePositionPointElement : public virtual SolidPointElement, public virtual SolidFaceElement
+{
+  //Slave node
+  Node* Slave_node_pt;
+
+  //Face ID
+  unsigned Id;
+  
+  /// \short Fill in the residuals for the volume constraint
+ void fill_in_generic_contribution_to_residuals_match_position(
+  Vector<double> &residuals,
+  DenseMatrix<double> &jacobian,
+  unsigned flag)
+  {
+    //Cache the node
+    Node* const nod_pt = this->node_pt(0);
+    
+    //Read out the index at which the Lagrange multiplier is stored
+    const unsigned lm_index = dynamic_cast<BoundaryNodeBase*>(nod_pt)
+      ->index_of_first_value_assigned_by_face_element(Id);
+    
+    //Read out the Lagrange multiplier
+    const double lambda = nod_pt->value(lm_index);
+    
+    int local_eqn = 0;
+    
+    //HARD-CODED DIRECTION THAT HAS TO MATCH IS Y (1)
+    //If the master is pinned then we don't bother to do anything
+    //Loop over the number of coordinate directions
+    //Let's get the Lagrange multiplier
+    local_eqn = this->nodal_local_eqn(0,lm_index);
+    
+    //If it's not a boundary condition (i.e. not pinned)
+    //then add the lagrange multiplier
+	if(local_eqn >=0)
+	  {
+	    residuals[local_eqn] = nod_pt->x(1) - Slave_node_pt->x(1); 
+	    //Jacobian terms
+	    if(flag)
+	      {
+		int local_unknown = this->position_local_eqn(0,0,1);
+		//The entry in the jacobian is one
+		if(local_unknown >= 0)
+		  {
+		    jacobian(local_eqn,local_unknown) = 1.0;
+		  }
+		
+		//The off diagonal term is minus one, but
+		//we need to work out the corresponding external equation numbers
+		//There is only one external datum so the first entry is the required number
+		local_unknown = this->external_local_eqn(0,1);
+		if(local_unknown >= 0)
+		  {
+		    jacobian(local_eqn,local_unknown) = -1.0;
+		  }
+	      } //End of Jacobian calculation
+	  }
+	//End of Lagrange multiplier eqn
+	
+	//Add Lagrange multipier contribution to solid mechanics
+	
+	//Get the local equation for the master node
+	local_eqn = this->position_local_eqn(0,0,1);
+	if(local_eqn >=0)
+	  {
+	    residuals[local_eqn] = lambda;
+	    
+	    if(flag)
+	      {
+		int local_unknown = this->nodal_local_eqn(0,lm_index);
+		if(local_unknown >= 0)
+		  {
+		    jacobian(local_eqn,local_unknown) = 1.0;
+		  }
+	      }
+	  }
+	
+	//Get the local equation for the slave node
+	local_eqn = this->external_local_eqn(0,1);
+	if(local_eqn >=0)
+	  {
+	    residuals[local_eqn] = -lambda;
+	    
+	    if(flag)
+	      {
+		int local_unknown = this->nodal_local_eqn(0,lm_index);
+		if(local_unknown >= 0)
+		  {
+		    jacobian(local_eqn,local_unknown) = -1.0;
+		  }
+	      }
+	  }
+    
+  }
+
+  
+public:
+
+  //Constructor: Make this from a single Node
+  SlavePositionPointElement(Node* const &node_pt, Node *const &slave_node_pt, const unsigned &id=0) :
+    Slave_node_pt(slave_node_pt), Id(id)
+  {
+    //There is only one node
+    this->set_n_node(1);
+    //The node must be the master
+    this->node_pt(0) = node_pt;
+    //THIS IS REALLY IMPORTANT.
+    //IF YOU MISS IT THEN LOCAL EQUATION NUMBERING GOES WRONG
+    this->set_nodal_dimension(node_pt->ndim());
+    //Set the slave node's variable position as external data
+    SolidNode* solid_nod_pt = static_cast<SolidNode*>(Slave_node_pt);
+    this->add_external_data(solid_nod_pt->variable_position_pt());
+    //There is one extra value (the Lagrange multiplier for each node)
+    Vector<unsigned> n_additional_values(1,1);
+    //We also need to add the lagrange multiplier
+    this->add_additional_values(n_additional_values,id);
+   }
+
+  //Broken copy constructore
+  SlavePositionPointElement(const SlavePositionPointElement&)
+  {
+    BrokenCopy::broken_copy("SlavePositionPointElement");
+  }
+
+  //Empty Destructor
+  ~SlavePositionPointElement() {}
+  
+ /// \short Fill in the residuals for the volume constraint
+ void fill_in_contribution_to_residuals( Vector<double> &residuals)
+ {
+  this->fill_in_generic_contribution_to_residuals_match_position(
+   residuals,GeneralisedElement::Dummy_matrix,0);
+ }
+  
+ /// \short Fill in the residuals and jacobian for the volume constraint
+ void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+                                       DenseMatrix<double> &jacobian)
+ {
+  //No contribution to jacobian; see comment in that function
+  this->fill_in_generic_contribution_to_residuals_match_position(
+   residuals,jacobian,1);
+ }
+    
+  
+};
+
+
+
 //==start_of_specific_mesh_class==========================================
 /// Two layer mesh which employs a pseudo-solid node-update strategy.
 /// This class is essentially a wrapper to an 
@@ -275,7 +429,22 @@ class ElasticRefineableTwoLayerMesh :
 
  //Number of elements in the upper layer
  unsigned Nupper;
- 
+
+  //Need to store the tree roots in the upper and lower layers, because the numbers
+  //of elements will (of course) change
+
+  //Pointers to upper layer tree roots
+  Vector<TreeRoot*> Upper_tree_root_pt;
+
+  //Pointers to lower later tree roots
+  Vector<TreeRoot*> Lower_tree_root_pt;
+
+  //Pointers to the elements in the upper layer
+  Vector<FiniteElement*> Upper_element_pt;
+
+  //Pointers to the elements in the lower layer
+  Vector<FiniteElement*> Lower_element_pt;
+  
 public:
 
  /// \short Constructor: Pass number of elements in x-direction, number of
@@ -307,6 +476,8 @@ public:
    // Set the number of boundaries to 5
    this->set_nboundary(5);
 
+   //Set the boundary coordinate to be the Lagrangian x coordinate the new boundary
+   Vector<double> zeta(1);
    // Loop over horizontal elements
    for(unsigned e=0;e<nx;e++)
     {
@@ -323,26 +494,139 @@ public:
        Node* nod_pt = el_pt->node_pt(n_node-3+n);
        this->convert_to_boundary_node(nod_pt);
        this->add_boundary_node(4,nod_pt);
+
+       //Boundary coordinate is the origin x coordinate
+       zeta[0] = nod_pt->x(0);
+       nod_pt->set_coordinates_on_boundary(4,zeta);
       }
     } // End of loop over horizontal elements
-
+   this->Boundary_coordinate_exists[4] = true;
+   
    // Set up the boundary element information
    this->setup_boundary_element_info();
 
    Nlower = nx*ny1; Nupper = nx*ny2;
 
+   //The default position is that the interface will be located half-way between the
+   //boundaries, now we need to rescale.
+   double half_height = 0.5*(h1+h2);
+   //Loop over all nodes
+   unsigned n_node = this->nnode();
+   for(unsigned n=0;n<n_node;++n)
+     {
+       SolidNode* nod_pt = this->node_pt(n);
+       double y = nod_pt->x(1);
+       if(y < half_height) {nod_pt->x(1) = h1*y/half_height;}
+       else {nod_pt->x(1) = h1 + h2*((y-half_height)/half_height);}
+     }
+
+   //Reset the Lagrangian coordinates
+   this->set_lagrangian_nodal_coordinates();
+
+   
+   //Set the upper and lower tree roots
+   this->Lower_tree_root_pt.resize(Nlower);
+   for(unsigned e=0;e<Nlower;e++)
+     {
+       this->Lower_tree_root_pt[e] =
+	 dynamic_cast<ELEMENT*>(this->element_pt(e))->
+	 tree_pt()->root_pt();
+     }
+   this->Upper_tree_root_pt.resize(Nupper);
+   for(unsigned e=0;e<Nupper;e++)
+     {
+       this->Upper_tree_root_pt[e] =
+	 dynamic_cast<ELEMENT*>(this->element_pt(Nlower+e))->
+	 tree_pt()->root_pt();
+     }
+      
+   
+   //Sort out periodicity for the adaptive mesh
+   if(periodic_in_x)
+     {
+       // Now establish the new neighbours (created by "wrapping around"
+       // the domain) in the TreeForst representation of the mesh
+       unsigned ny = ny1+ny2;
+       // Get pointers to tree roots associated with elements on the 
+       // left and right boundaries
+       Vector<TreeRoot*> left_root_pt(ny);
+       Vector<TreeRoot*> right_root_pt(ny);
+       for(unsigned i=0;i<ny;i++) 
+	 {
+	   left_root_pt[i] = 
+	     dynamic_cast<ELEMENT*>(this->element_pt(i*nx))->
+	     tree_pt()->root_pt();
+	   right_root_pt[i] = 
+	     dynamic_cast<ELEMENT*>(this->element_pt(nx-1+i*nx))->
+	     tree_pt()->root_pt();
+	 }
+       
+       // Switch on QuadTreeNames for enumeration of directions
+       using namespace QuadTreeNames;
+       
+       //Set the neighbour and periodicity
+       for(unsigned i=0;i<ny;i++) 
+	 {
+	   // The western neighbours of the elements on the left
+	   // boundary are those on the right
+	   left_root_pt[i]->neighbour_pt(W) = right_root_pt[i];
+	   left_root_pt[i]->set_neighbour_periodic(W); 
+	   
+	   // The eastern neighbours of the elements on the right
+	   // boundary are those on the left
+	   right_root_pt[i]->neighbour_pt(E) = left_root_pt[i];
+	   right_root_pt[i]->set_neighbour_periodic(E);     
+	 } // done
+     }
+
+   this->setup_upper_and_lower_elements();
+   
   }
 
+  //Set pointers to upper and lower elements
+  void setup_upper_and_lower_elements()
+  {
+    unsigned Nupper_root = Upper_tree_root_pt.size();
+    Vector<Tree*> upper_leaves_pt;
+    for(unsigned i=0;i<Nupper_root;++i)
+      {
+       Upper_tree_root_pt[i]->stick_leaves_into_vector(upper_leaves_pt);
+      }
+
+    Nupper = upper_leaves_pt.size();
+    Upper_element_pt.resize(Nupper);
+    
+    for(unsigned i=0;i<Nupper;++i)
+      {
+	Upper_element_pt[i] = upper_leaves_pt[i]->object_pt();
+      }
+	
+    unsigned Nlower_root = Lower_tree_root_pt.size();
+    Vector<Tree*> lower_leaves_pt;
+    for(unsigned i=0;i<Nlower_root;++i)
+      {
+       Lower_tree_root_pt[i]->stick_leaves_into_vector(lower_leaves_pt);
+      }
+
+    Nlower = lower_leaves_pt.size();
+    Lower_element_pt.resize(Nlower);
+    
+    for(unsigned i=0;i<Nlower;++i)
+      {
+	Lower_element_pt[i] = lower_leaves_pt[i]->object_pt();
+      }
+  }
+  
  //Return the numbers
  unsigned nlower() const {return(Nlower);} 
 
  unsigned nupper() const {return(Nupper);} 
 
  FiniteElement* lower_layer_element_pt(const unsigned &e) const
-  {return this->finite_element_pt(e);}
+  {return this->Lower_element_pt[e];}
 
  FiniteElement* upper_layer_element_pt(const unsigned &e) const
-  {return this->finite_element_pt(Nlower+e);}
+  {return this->Upper_element_pt[e];}
 
  
 }; // End of specific mesh class
@@ -396,39 +680,23 @@ public:
       {
        // Upcast from GeneralsedElement to the present element
        ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
-
        el_pt->enable_ALE();
-
-       //For testing this is where you can pin the pressures
-       //unsigned n_internal = el_pt->ninternal_data();
-       //for(unsigned i=0;i<n_internal;++i)
-       // {
-       //  el_pt->internal_data_pt(i)->pin_all();
-       // }
       }
 
-     //Pin the velocities 
-     /*unsigned n_node = Bulk_mesh_pt->nnode();
-     for(unsigned n=0;n<n_node;++n)
-      {
-       Bulk_mesh_pt->node_pt(n)->pin(0);
-       Bulk_mesh_pt->node_pt(n)->pin(1);
-       }*/
-
-     
-     
-     //Unpin the interfacial surfactant concentrations
+     //Unpin the interfacial surfactant concentrations and Lagrange multipliers
      unsigned n_interface = Surface_mesh_pt->nelement();
      for(unsigned i=0;i<n_interface;i++)
       {
        FiniteElement *el_pt = Surface_mesh_pt->finite_element_pt(i);
        
-       //Need to unpin the values of concentration and micelle
+       //Need to unpin the values of surfactant concentration and Lagrange multiplier
        unsigned n_el_node = el_pt->nnode();
        for(unsigned n=0;n<n_el_node;++n)
         {
-         el_pt->node_pt(n)->unpin(4);
-        }
+	  Node* nod_pt = el_pt->node_pt(n);
+	  nod_pt->unpin(4);
+	  nod_pt->unpin(5);
+	}
       }
 
      
@@ -447,6 +715,33 @@ public:
               el_pt->node_pt(n)->unpin(3); //Micelle Concentration
 	    }
 	   }
+
+      //We also need to unpin the Lagrange multipliers for periodicity
+      //We must not clash with the lagrange multiplier used to drive
+      //the interface so we pin that at the left-hand-side
+      {
+	unsigned b=3;
+	unsigned n_boundary_node = this->Bulk_mesh_pt->nboundary_node(b);
+	for(unsigned n=0;n<n_boundary_node;++n)
+	  {
+	    Node* nod_pt = this->Bulk_mesh_pt->boundary_node_pt(b,n);
+	    //If we are not on the top or bottom boundary unpin
+	    if((!(nod_pt->is_on_boundary(0))) &&
+	       (!(nod_pt->is_on_boundary(2))) && 
+               (!(nod_pt->is_on_boundary(4))))
+	      {
+		unsigned lm_index = dynamic_cast<BoundaryNodeBase*>(nod_pt)
+		  ->index_of_first_value_assigned_by_face_element(
+								  Periodic_index);
+		nod_pt->unpin(lm_index);
+		
+	      }
+	    
+	  }
+      }
+
+
+      
       
      //Reassign the equation number
      std::cout << "Surface unpinned to give " 
@@ -456,10 +751,10 @@ public:
 
 
  /// \short Update the problem specs before solve (empty)
- void actions_before_newton_solve() {}
+  void actions_before_newton_solve() {}
 
  /// Update the problem after solve (empty)
- void actions_after_newton_solve(){}
+  void actions_after_newton_solve(){}
 
  /// Remember to update the nodes if the surface is not pinned
  void actions_before_newton_convergence_check() {}
@@ -467,16 +762,250 @@ public:
  /// \short Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep() 
-  {set_boundary_conditions(time_pt()->time());
-   Bulk_mesh_pt->set_lagrangian_nodal_coordinates();}
+  {
+    set_boundary_conditions(time_pt()->time());
+    Bulk_mesh_pt->set_lagrangian_nodal_coordinates();
+   //Also set lagrange multipliers to zero
+    unsigned n_boundary_node = Bulk_mesh_pt->nboundary_node(4);
+    for(unsigned n=0;n<n_boundary_node;++n)
+      {
+	Bulk_mesh_pt->boundary_node_pt(4,n)->set_value(5,0.0);
+      }
 
+    //Lagrange multipliers associated with the periodicity constraint
+    n_boundary_node = this->Bulk_mesh_pt->nboundary_node(3);
+    for(unsigned n=0;n<n_boundary_node;++n)
+      {
+	Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(3,n);
+	if(!(nod_pt->is_on_boundary(0)) &&
+	   !(nod_pt->is_on_boundary(2)) &&
+	   !(nod_pt->is_on_boundary(4)))
+	  {
+	    unsigned lm_index = dynamic_cast<BoundaryNodeBase*>(nod_pt)
+	      ->index_of_first_value_assigned_by_face_element(
+							      Periodic_index);
+	    nod_pt->set_value(lm_index,0.0);
+	  }
+      }
+	 
+  }
+  
  
  /// Strip off the interface elements before adapting the bulk mesh
- void actions_before_adapt();
+ void actions_before_adapt()
+   {
+     //Unfix the pressure to avoid double fixing
+     this->unfix_pressure(0,0);
+     
+     if(Control_Parameters::Periodic_BCs)
+       {
+	 //Delete  the slave elements and wipe the mesh
+	 this->delete_slave_position_elements();
+       }
+     
+     //Backup the surface mesh
+     Backed_up_surface_mesh_pt =
+       new BackupMeshForProjection<QElement<1,3> >(Surface_mesh_pt,4,0); 
+     
+     // Delete the interface elements and wipe the surface mesh
+     delete_interface_elements();
+    
+     // Rebuild the Problem's global mesh from its various sub-meshes
+     rebuild_global_mesh();
+   }
 
  /// Rebuild the mesh of interface elements after adapting the bulk mesh
- void actions_after_adapt();
+ void actions_after_adapt()
+  {
+    //Need to update the pointers to upper and lower elements
+    this->Bulk_mesh_pt->setup_upper_and_lower_elements();
+    
+    // Create the interface elements
+    this->create_interface_elements();
+    
+    //Now we need to make sure that we set up the correct insoluble surfactant
+    //concentration
+    //We do this by interpolating from the previous mesh
+    
+    // Now project from backup of original contact mesh to new one
+    Backed_up_surface_mesh_pt->project_onto_new_mesh(
+						     Surface_mesh_pt);   
+    //Now delete the backed up mesh
+    delete Backed_up_surface_mesh_pt;
+    Backed_up_surface_mesh_pt=0;
+    
+    if(Control_Parameters::Periodic_BCs)
+      {
+	//Create the slave position elements
+	this->create_slave_position_elements();
+      }
+    
+    // Rebuild the Problem's global mesh from its various sub-meshes
+    this->rebuild_global_mesh();
+    
+    // Pin horizontal displacement of all nodes
+    const unsigned n_node = Bulk_mesh_pt->nnode();
+    for(unsigned n=0;n<n_node;n++) {Bulk_mesh_pt->node_pt(n)->pin_position(0); }
+    
+    // Determine number of bulk elements in lower/upper fluids
+    const unsigned n_lower = Bulk_mesh_pt->nlower();
+    const unsigned n_upper = Bulk_mesh_pt->nupper();
+    
+    // Loop over bulk elements in upper fluid 
+    for(unsigned e=0;e<n_upper;e++)
+      {
+     // Upcast from GeneralisedElement to the present element
+     ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->
+                                             upper_layer_element_pt(e));
 
+     
+     //Need to pin the values of concentration and micelle up here
+     unsigned n_el_node = el_pt->nnode();
+     for(unsigned n=0;n<n_el_node;++n)
+       {
+	 Node* const nod_pt = el_pt->node_pt(n);
+	 if(nod_pt->is_on_boundary(4) == false)
+	   {
+	     //Set all the history values to zero as well
+	     unsigned nprev_values = nod_pt->time_stepper_pt()->nprev_values();
+	     for(unsigned t=0;t<=nprev_values;++t)
+	       {
+		 nod_pt->set_value(t,2,0.0);
+		 nod_pt->set_value(t,3,0.0);
+	       }
+	     
+	     nod_pt->pin(2);
+	     nod_pt->pin(3);
+	   }
+       }
+      } // End of loop over bulk elements in upper fluid
+    
+    
+    // Loop over bulk elements in lower fluid and unpin
+    for(unsigned e=0;e<n_lower;e++)
+      {
+	// Upcast from GeneralisedElement to the present element
+	ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->
+						lower_layer_element_pt(e));
+	
+	
+	//No need to pin the values of concentration and micelle down here
+	//But don't unpin if they are hanging
+	unsigned n_el_node = el_pt->nnode();
+	for(unsigned n=0;n<n_el_node;++n)
+	  {
+	    Node* const nod_pt = el_pt->node_pt(n);
+	    if(!(nod_pt->is_constrained(2))) {nod_pt->unpin(2);}
+	    if(!(nod_pt->is_constrained(3))) {nod_pt->unpin(3);}
+	  }
+      }
+   
+   // Set the boundary conditions for this problem: All nodes are
+   // free by default -- only need to pin the ones that have Dirichlet 
+   // conditions here
+   
+   //Loop over the boundaries
+   unsigned num_bound = Bulk_mesh_pt->nboundary();
+   for(unsigned ibound=0;ibound<num_bound;ibound++)
+    {
+     //If we are on the side-walls, the concentrations
+     //satisfy natural boundary conditions, so we only pin the
+     //v-velocity for now if not periodic
+     if(!Control_Parameters::Periodic_BCs)
+      {
+       if((ibound==1) || (ibound==3))
+        {
+         //Loop over the number of nodes on the boundary
+         unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
+         for(unsigned inod=0;inod<num_nod;inod++)
+          {
+           //Cast to a solid node, so that we can impose boundary conditions
+           SolidNode* nod_pt = static_cast<SolidNode*>(
+            Bulk_mesh_pt->boundary_node_pt(ibound,inod));
+           nod_pt->pin(1);
+           //Also pin the horizontal displacement of the nodes
+           nod_pt->pin_position(0);
+          }
+        }
+      }
+     
+     //If we on the top or bottom wall, velocity is pinned
+     //as is the nodal position
+     if((ibound==0) || (ibound==2))
+      {
+       //Loop over the number of nodes on the boundary
+       unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
+       for(unsigned inod=0;inod<num_nod;inod++)
+	{
+         SolidNode* nod_pt = static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(ibound,inod));
+         nod_pt->pin(0);
+         nod_pt->pin(1);
+         nod_pt->pin_position(0);
+         nod_pt->pin_position(1);
+	}
+      }
+    }
+   
+   // Now set the pressure in the first element at 'node' 0 to 0.0
+   fix_pressure(0,0,0.0);
+
+   // Reset the boundary conditions
+   set_boundary_conditions(this->time_pt()->time());
+  }
+
+  ///Create the elements that slave the position
+  void create_slave_position_elements()
+  {
+    //We know that boundary 1 is made periodic from boundary 3
+    //We also know that the nodes have already been made periodic so we simply need
+    //to create the slave elements to match the vertical positions
+    const unsigned n_boundary_node = this->Bulk_mesh_pt->nboundary_node(1);
+    for(unsigned n=0;n<n_boundary_node;++n)
+      {
+	//Cache the boundary node
+	Node* nod_pt = this->Bulk_mesh_pt->boundary_node_pt(1,n);
+	//Cache the master node
+	Node* master_node_pt = nod_pt->copied_node_pt();
+	//If there is no master node, then the node has no
+	//counterpart on the other side and is therefore
+	//not a degree of freedom and does not need to be
+	//slaved
+	if(master_node_pt!=0)
+	  {
+	    
+	    //Only create slaves for nodes that are not on the interface
+	    if(!(master_node_pt->is_on_boundary(0)) &&
+	       !(master_node_pt->is_on_boundary(2)) &&
+	       !(master_node_pt->is_on_boundary(4)))
+	      {
+		//Create the slave node with a position ID
+		this->Slave_position_mesh_pt->
+		  add_element_pt(new SlavePositionPointElement(master_node_pt,
+							       nod_pt,Periodic_index));
+	      }
+	  }
+      }
+  }
+
+
+
+ /// Delete the 1d interface elements
+ void delete_slave_position_elements()
+  {
+    // Determine number of interface elements
+    const unsigned n_slave_element = Slave_position_mesh_pt->nelement();
+    
+    // Loop over interface elements and delete
+    for(unsigned e=0;e<n_slave_element;e++)
+      {
+	delete Slave_position_mesh_pt->element_pt(e);
+      }
+    
+    // Wipe the mesh
+    Slave_position_mesh_pt->flush_element_and_node_storage();
+  }
+
+  
  /// Create the 1d interface elements
  void create_interface_elements()
   {
@@ -514,7 +1043,7 @@ public:
 //Otherwise it's on the upper side
      else
       {
-       //Hijack all nodes of all elements
+	//Hijack all nodes of all elements
        unsigned n_max_node = n_node_1d;
        for(unsigned n=0;n<n_max_node;++n)
         {
@@ -523,7 +1052,7 @@ public:
         }
       }
     }
-
+   
  // --------------------------------------------------------
  // Complete the setup to make the elements fully functional
  // --------------------------------------------------------
@@ -538,7 +1067,6 @@ public:
    INTERFACE_ELEMENT* el_pt = 
     dynamic_cast<INTERFACE_ELEMENT*>
     (Surface_mesh_pt->element_pt(e));
-
 
    // Set the Biot number
    el_pt->bi_pt() = &Global_Physical_Variables::Biot;
@@ -575,20 +1103,19 @@ public:
  /// Delete the 1d interface elements
  void delete_interface_elements()
   {
-
- // Determine number of interface elements
- const unsigned n_interface_element = Surface_mesh_pt->nelement();
- 
- // Loop over interface elements and delete
- for(unsigned e=0;e<n_interface_element;e++)
-  {
-   delete Surface_mesh_pt->element_pt(e);
+    // Determine number of interface elements
+    const unsigned n_interface_element = Surface_mesh_pt->nelement();
+    
+    // Loop over interface elements and delete
+    for(unsigned e=0;e<n_interface_element;e++)
+      {
+	delete Surface_mesh_pt->element_pt(e);
+      }
+    
+    // Wipe the mesh
+    Surface_mesh_pt->flush_element_and_node_storage();
   }
- 
- // Wipe the mesh
- Surface_mesh_pt->flush_element_and_node_storage();
-  }
-
+  
  
  ///Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
@@ -622,13 +1149,18 @@ void deform_interface(const double &epsilon,
    // Determine eulerian position of node
    const double current_x_pos = Bulk_mesh_pt->node_pt(n)->x(0);
    const double current_y_pos = Bulk_mesh_pt->node_pt(n)->x(1);
+
+   double y_scale = current_y_pos/Global_Physical_Variables::H0;
+   if(current_y_pos > Global_Physical_Variables::H0)
+    {
+     y_scale = (1.0 - current_y_pos)/(1.0 - Global_Physical_Variables::H0);
+    }
    
    // Determine new vertical position of node, *NEED TO THINK*
    const double new_y_pos = current_y_pos
-    + (1.0-fabs(1.0-current_y_pos))*epsilon
+     + y_scale*epsilon
     *(cos(n_periods*MathematicalConstants::Pi*
-          (current_x_pos - Global_Physical_Variables::L)/
-          Global_Physical_Variables::L));
+          (current_x_pos - Global_Physical_Variables::L)/Global_Physical_Variables::L));
    
    // Set new position
    Bulk_mesh_pt->node_pt(n)->x(1) = new_y_pos;
@@ -653,6 +1185,9 @@ void deform_interface(const double &epsilon,
  /// Storage to the mesh of Surface interface elements
  Mesh* Surface_mesh_pt;
 
+ /// Storage for the back up the surface mesh
+ BackupMeshForProjection<QElement<1,3> >* Backed_up_surface_mesh_pt;
+  
  /// Storage to point elements if needed for non-periodic domains
  Mesh* Point_mesh_pt;
 
@@ -662,9 +1197,85 @@ void deform_interface(const double &epsilon,
  /// Storage for any traction elements applied to the outlet
  Mesh* Outlet_traction_mesh_pt;
 
+ /// Storage for elements that constraint the vertical positions
+ /// of the periodic nodes on the boundaries
+ Mesh* Slave_position_mesh_pt;
+ 
  /// Pointer to the constitutive law used to determine the mesh deformation
  ConstitutiveLaw* Constitutive_law_pt;
- 
+
+
+  //Calculate the minimum and maximum interface heights
+  void interface_min_max(double &min, double &max)
+  {
+    //Loop over the interface and add each elemental contribution
+    const unsigned n_interface  = Surface_mesh_pt->nelement();
+    if(n_interface > 0)
+      {
+	//Set the initial values to the first nodal position
+	max = Surface_mesh_pt->finite_element_pt(0)->node_pt(0)->x(1);
+	min = max;
+
+	//Loop over all elements and find the max
+	for(unsigned i=0;i<n_interface;i++)
+	  {
+	    // Upcast from GeneralsedElement to the present element
+	    INTERFACE_ELEMENT *el_pt =
+	      dynamic_cast<INTERFACE_ELEMENT*>(
+					       Surface_mesh_pt->element_pt(i));
+
+	    const unsigned n_node = el_pt->nnode();
+	    if(n_node != 3)
+	      {
+		std::cout << "Can't do max and min for elements that are not quadratic\n";
+		return;
+	      }
+
+
+	    //Read out the y values from the nodes
+	    Vector<double> y(3);
+	    for(unsigned n=0;n<3;++n)
+	      {
+		y[n] = el_pt->node_pt(n)->x(1);
+	      }
+
+	    double local_max = y[0];
+	    double local_min = y[0];
+	    //Find maximum and minimum nodes
+	    for(unsigned n=1;n<3;++n)
+	      {
+		if(y[n] > local_max) {local_max = y[n];}
+		if(y[n] < local_min) {local_min = y[n];}
+	      }
+
+	    //If we have a linear case then we are done
+	    //Check that it's not a degenerate (linear) case
+	    if(std::abs(y[0] - 2*y[1] + y[2]) > 1.0e-10)
+	      {
+		//Calculate extreme value of the local coordinate based on known
+		//quadratic basis functions (This shoudl really be inside the element class)
+		Vector<double> extreme_s(1,0.5*(y[0] - y[2])/(y[0] - 2.0*y[1] + y[2]));
+
+		//Find the extreme height if the local coordinate is within the
+		//rane of the element
+		if(std::abs(extreme_s[0]) <= 1.0)
+		  {
+		    double extreme_h = el_pt->interpolated_x(extreme_s,1);
+		    //Check whether the extreme value is greater than any of the nodes.
+		    if(extreme_h > local_max) {local_max = extreme_h;}
+		    if(extreme_h < local_min) {local_min = extreme_h;}
+		  }
+		  }
+
+	    //Now check whether local max and min are global
+	    if(local_max > max) {max = local_max;}
+	    if(local_min < min) {min = local_min;}
+	  }
+      }
+  }
+    
+
+  
  //Return the l2 norm of height difference between the interface
  //and its undeformed value
  double l2_norm_of_height(const double &h0)
@@ -724,6 +1335,26 @@ void deform_interface(const double &epsilon,
   }
 
 
+
+  //Return the areas of the upper and lower fluid
+ void compute_areas(double &lower_area,
+		    double &upper_area)
+  {
+    // Loop over bulk elements in lower fluid and add each elemental
+    // contribution
+    const unsigned n_lower = Bulk_mesh_pt->nlower();
+    for(unsigned e=0;e<n_lower;e++)
+      {
+	lower_area += Bulk_mesh_pt->lower_layer_element_pt(e)->size();
+      }
+    const unsigned n_upper = Bulk_mesh_pt->nupper();
+    for(unsigned e=0;e<n_upper;e++)
+      {
+	upper_area += Bulk_mesh_pt->upper_layer_element_pt(e)->size();
+      }
+  }
+
+
  
 private:
  
@@ -732,6 +1363,14 @@ private:
 
  /// Boolean to indicate whether the surface is pinned
  bool Surface_pinned;
+
+  /// Node used to monitor the interface height
+  Node* Monitor_node_pt;
+
+  /// Integer used to specify the Face ID of the Lagrange multipliers
+  /// Used to enforce periodicity
+  unsigned Periodic_index;
+  
   
 }; // end of problem class
 
@@ -740,15 +1379,17 @@ private:
 //========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 SurfactantProblem<ELEMENT,INTERFACE_ELEMENT>::
-SurfactantProblem(const bool &pin) : Surface_pinned(pin)
+SurfactantProblem(const bool &pin) : Surface_pinned(pin), Periodic_index(50)
 {
  //Allocate an (adaptive) timestepper
   add_time_stepper_pt(new BDF<2>(true));
-
+ //Don't worry if the estimated error is above the tolerance
+  Keep_temporal_error_below_tolerance = false;
+  
  // Set output directory
  Doc_info.set_directory("RESLT");
  
- // # of elements in x-direction
+ // # of elements in x-direction (Coarse)
  unsigned n_x=20;//100;
 
  // # of elements in y-direction
@@ -769,7 +1410,6 @@ SurfactantProblem(const bool &pin) : Surface_pinned(pin)
                                   Control_Parameters::Periodic_BCs,
                                   time_stepper_pt());
 
-
  // Create and set the error estimator for spatial adaptivity
  Bulk_mesh_pt->spatial_error_estimator_pt() = new Z2ErrorEstimator;
 
@@ -777,100 +1417,10 @@ SurfactantProblem(const bool &pin) : Surface_pinned(pin)
  Bulk_mesh_pt->max_refinement_level() = 4;
  
 
- //Create the surface mesh that will contain the interface elements
- //First create storage, but with no elements or nodes
- Surface_mesh_pt = new Mesh;
- //Make point elements at the end to compensate for
- //the unbalanced line tension terms 
- //if we DON'T have periodic boundaryc conditions
- if(!Control_Parameters::Periodic_BCs)
-   {
-     Point_mesh_pt = new Mesh;
-   }
-
- create_interface_elements();
-
-
- // Add the two sub-meshes to the problem
- add_sub_mesh(Bulk_mesh_pt);
- add_sub_mesh(Surface_mesh_pt);
- if(!Control_Parameters::Periodic_BCs)
-   {
-     add_sub_mesh(Point_mesh_pt);
-     add_sub_mesh(Inlet_traction_mesh_pt);
-     add_sub_mesh(Outlet_traction_mesh_pt);
-   }
- 
- // Combine all sub-meshes into a single mesh
- build_global_mesh();
-
- 
- //Pin the heights of all the spines if the surface is pinned
- if(Surface_pinned)
-  {
-   unsigned n_node = Bulk_mesh_pt->nnode();
-   for(unsigned n=0;n<n_node;n++)
-    {
-     Bulk_mesh_pt->node_pt(n)->pin_position(1);
-    }
-  }
-
- // Set the boundary conditions for this problem: All nodes are
- // free by default -- only need to pin the ones that have Dirichlet 
- // conditions here
- 
- //Loop over the boundaries
- unsigned num_bound = Bulk_mesh_pt->nboundary();
- for(unsigned ibound=0;ibound<num_bound;ibound++)
-  {
-   //If we are on the side-walls, the concentrations
-   //satisfy natural boundary conditions, so we only pin the
-   //v-velocity for now if not periodic
-    if(!Control_Parameters::Periodic_BCs)
-      {
-	if((ibound==1) || (ibound==3))
-	  {
-	    //Loop over the number of nodes on the boundary
-	    unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
-	    for(unsigned inod=0;inod<num_nod;inod++)
-	      {
-		Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(1);
-		/*if((ibound==4) || (ibound==5))
-		  {
-		  Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(0);
-		  }*/
-	      }
-	  }
-      }
-
-   //If we on the top or bottom wall, velocity is pinned
-   //as is the nodal position
-   if((ibound==0) || (ibound==2))
-    {
-      //Loop over the number of nodes on the boundary
-      unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
-      for(unsigned inod=0;inod<num_nod;inod++)
-	{
-         SolidNode* nod_pt = static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(ibound,inod));
-	  nod_pt->pin(0);
-	  nod_pt->pin(1);
-          nod_pt->pin_position(0);
-          nod_pt->pin_position(1);
-	}
-    }
-  }
-
- 
- //Pin the zero-th pressure dof in element 0 and set its value to
- //zero:
- fix_pressure(0,0,0.0);
-
  // Define a constitutive law for the solid equations: generalised Hookean
  Constitutive_law_pt = new GeneralisedHookean(&Global_Physical_Variables::Nu);
  
  // Complete the build of all elements so they are fully functional 
-
-
  
  // Determine number of bulk elements in lower/upper fluids
  const unsigned n_lower = Bulk_mesh_pt->nlower();
@@ -910,7 +1460,7 @@ SurfactantProblem(const bool &pin) : Surface_pinned(pin)
    el_pt->g_pt() = &Global_Physical_Variables::Direction_of_gravity;
 
    // Set the constitutive law
-   //el_pt->constitutive_law_pt() = this->Constitutive_law_pt;
+   el_pt->constitutive_law_pt() = this->Constitutive_law_pt;
    
   } // End of loop over bulk elements in lower fluid
 
@@ -953,20 +1503,144 @@ SurfactantProblem(const bool &pin) : Surface_pinned(pin)
    el_pt->g_pt() = &Global_Physical_Variables::Direction_of_gravity;
 
    // Set the constitutive law
-   //el_pt->constitutive_law_pt() = Constitutive_law_pt;
+   el_pt->constitutive_law_pt() = Constitutive_law_pt;
 
    
    //Need to pin the values of concentration and micelle up here
    unsigned n_el_node = el_pt->nnode();
    for(unsigned n=0;n<n_el_node;++n)
      {
-       //el_pt->node_pt(n)->set_value(2,0.0);
-       //el_pt->node_pt(n)->set_value(3,0.0);
+       el_pt->node_pt(n)->set_value(2,0.0);
+       el_pt->node_pt(n)->set_value(3,0.0);
        el_pt->node_pt(n)->pin(2);
        el_pt->node_pt(n)->pin(3);
      }
    
   } // End of loop over bulk elements in upper fluid
+
+ 
+ //Create the surface mesh that will contain the interface elements
+ //First create storage, but with no elements or nodes
+ Surface_mesh_pt = new Mesh;
+ //Make point elements at the end to compensate for
+ //the unbalanced line tension terms 
+ //if we DON'T have periodic boundaryc conditions
+ if(!Control_Parameters::Periodic_BCs)
+   {
+     Point_mesh_pt = new Mesh;
+   }
+
+
+ //Must be done *after* the physical parameters have been set
+ //because we are using the viscosity ratio pointer to determine
+ //upper or lower elements
+ create_interface_elements();
+ //Setup the monitor node
+  {
+    unsigned n_surface_element = Surface_mesh_pt->nelement();
+    
+    Monitor_node_pt = Surface_mesh_pt->finite_element_pt(n_surface_element/2)->node_pt(1);
+  }
+ 
+  if(Control_Parameters::Periodic_BCs)
+   {
+     Slave_position_mesh_pt = new Mesh;
+     //Create the slave elements that ensure that the positions match
+     create_slave_position_elements();
+   }
+  
+ // Add the two sub-meshes to the problem
+ add_sub_mesh(Bulk_mesh_pt);
+ add_sub_mesh(Surface_mesh_pt);
+ if(!Control_Parameters::Periodic_BCs)
+   {
+     add_sub_mesh(Point_mesh_pt);
+     add_sub_mesh(Inlet_traction_mesh_pt);
+     add_sub_mesh(Outlet_traction_mesh_pt);
+   }
+ else
+   {
+     add_sub_mesh(Slave_position_mesh_pt);
+     }
+ 
+ // Combine all sub-meshes into a single mesh
+ build_global_mesh();
+
+ 
+ //Pin the positions of all nodes and the Lagrange multipliers if the surface is pinned
+ if(Surface_pinned)
+  {
+   unsigned n_node = Bulk_mesh_pt->nnode();
+   for(unsigned n=0;n<n_node;n++)
+     {
+       SolidNode* nod_pt = Bulk_mesh_pt->node_pt(n);
+       nod_pt->pin_position(0);
+       nod_pt->pin_position(1);
+       //Don't forget to pin the Lagrange multipliers as well
+       if(nod_pt->is_on_boundary(4))
+	 {
+	   //Lagrange multiplier is always value 5
+	   unsigned lagrange_multiplier_index = 5;
+	   nod_pt->pin(lagrange_multiplier_index);
+	 }
+     }
+  }
+
+ // Set the boundary conditions for this problem: All nodes are
+ // free by default -- only need to pin the ones that have Dirichlet 
+ // conditions here
+ 
+ //Loop over the boundaries
+ unsigned num_bound = Bulk_mesh_pt->nboundary();
+ for(unsigned ibound=0;ibound<num_bound;ibound++)
+  {
+   //If we are on the side-walls, the concentrations
+   //satisfy natural boundary conditions, so we only pin the
+   //v-velocity for now if not periodic
+    if(!Control_Parameters::Periodic_BCs)
+      {
+	if((ibound==1) || (ibound==3))
+	  {
+	    //Loop over the number of nodes on the boundary
+	    unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
+	    for(unsigned inod=0;inod<num_nod;inod++)
+	      {
+               //Cast to a solid node, so that we can impose boundary conditions
+               SolidNode* nod_pt = static_cast<SolidNode*>(
+                Bulk_mesh_pt->boundary_node_pt(ibound,inod));
+		nod_pt->pin(1);
+                //Also pin the horizontal displacement of the nodes
+                nod_pt->pin_position(0);
+                
+		/*if((ibound==4) || (ibound==5))
+		  {
+		  Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(0);
+		  }*/
+	      }
+	  }
+      }
+
+   //If we on the top or bottom wall, velocity is pinned
+   //as is the nodal position
+   if((ibound==0) || (ibound==2))
+    {
+      //Loop over the number of nodes on the boundary
+      unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
+      for(unsigned inod=0;inod<num_nod;inod++)
+	{
+         SolidNode* nod_pt = static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(ibound,inod));
+	  nod_pt->pin(0);
+	  nod_pt->pin(1);
+          nod_pt->pin_position(0);
+          nod_pt->pin_position(1);
+	}
+    }
+  }
+
+ 
+ //Pin the zero-th pressure dof in element 0 and set its value to
+ //zero:
+ fix_pressure(0,0,0.0);
 
 
   // Loop over the interface elements to set up element-specific 
@@ -979,13 +1653,13 @@ SurfactantProblem(const bool &pin) : Surface_pinned(pin)
    INTERFACE_ELEMENT *el_pt = dynamic_cast<INTERFACE_ELEMENT*>(
     Surface_mesh_pt->element_pt(i));
    
-   //Need to unpin the values of concentration and micelle
+   //Need to unpin the values of concentration and micelle on the interface
    unsigned n_el_node = el_pt->nnode();
    for(unsigned n=0;n<n_el_node;++n)
      {
        el_pt->node_pt(n)->unpin(2); //unpin
        el_pt->node_pt(n)->unpin(3); //unpin
-       //el_pt->node_pt(n)->pin(4);
+       el_pt->node_pt(n)->pin(4); //Pin Lagrange Multiplier initially
      }
 
   }
@@ -995,11 +1669,36 @@ SurfactantProblem(const bool &pin) : Surface_pinned(pin)
  unsigned n_node = Bulk_mesh_pt->nnode();
  for(unsigned n=0;n<n_node;++n)
    {
+    SolidNode* nod_pt = static_cast<SolidNode*>(Bulk_mesh_pt->node_pt(n));
     //Pin x position
-     Bulk_mesh_pt->node_pt(n)->pin_position(0);
-     Bulk_mesh_pt->node_pt(n)->pin(2);
-     Bulk_mesh_pt->node_pt(n)->pin(3);
+     nod_pt->pin_position(0);
+     nod_pt->pin_position(1);
+     nod_pt->pin(2);
+     nod_pt->pin(3);
+     double y = nod_pt->x(1);
+     nod_pt->set_value(0,y);
+     nod_pt->set_value(1,0.0);
+   }
+
+ //We initialise need to pin the lagrange multipliers
+ //associated with periodic boundary conditions on the side boundary
+ {
+   unsigned b=3;
+   unsigned n_boundary_node = this->Bulk_mesh_pt->nboundary_node(b);
+   for(unsigned n=0;n<n_boundary_node;++n)
+     {
+       Node* nod_pt = this->Bulk_mesh_pt->boundary_node_pt(b,n);
+       if(!(nod_pt->is_on_boundary(0)) &&
+	  !(nod_pt->is_on_boundary(2)) &&
+	  !(nod_pt->is_on_boundary(4)))
+	 {
+	   //Pin all
+	   nod_pt->pin(dynamic_cast<BoundaryNodeBase*>(nod_pt)
+		       ->index_of_first_value_assigned_by_face_element(
+								       Periodic_index));
+	 }
      }
+ }
 
  
  //Pin one surface concentration at the surface, if only
@@ -1008,7 +1707,7 @@ SurfactantProblem(const bool &pin) : Surface_pinned(pin)
   
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << endl; 
-
+    
 } // end of constructor
 
 
@@ -1042,13 +1741,10 @@ void SurfactantProblem<ELEMENT,INTERFACE_ELEMENT>::set_boundary_conditions(
 	    nod_pt->set_value(2,C_init); 
 	    nod_pt->set_value(3,M_init);
 	    
-	    //Set the velocity
+	    //Set the velocityq
 	    /*double y = nod_pt->x(1);
-	      nod_pt->set_value(0,0.5*y);
-	      nod_pt->set_value(1,0.0);
-	      std::cout << nod_pt->x(0) << " "
-	      << nod_pt->x(1) << " " <<
-		 nod_pt->eqn_number(0) << "\n";*/
+	      nod_pt->set_value(0,y);
+	      nod_pt->set_value(1,0.0);*/
 	  }
       }
   
@@ -1062,7 +1758,7 @@ void SurfactantProblem<ELEMENT,INTERFACE_ELEMENT>::set_boundary_conditions(
 	   Surface_mesh_pt->finite_element_pt(e)->node_pt(n)->set_value(4,Gamma_init);
 	 }
      }
-  }
+  } //End of initial conditions
 
  // Loop over the boundaries
  unsigned num_bound = Bulk_mesh_pt->nboundary();
@@ -1138,22 +1834,28 @@ void SurfactantProblem<ELEMENT,INTERFACE_ELEMENT>::doc_solution(
   }
  some_file.close();
 
- unsigned n_surface_element = Surface_mesh_pt->nelement();
- 
- Node* monitor_node_pt = Surface_mesh_pt->finite_element_pt(n_surface_element/2)->node_pt(1);
-
  //Let's get the mases
  double surface=0.0, bulk=0.0, micelle=0.0;
  this->compute_integrated_concentrations(surface,bulk,micelle);
+
+ //double upper_area = 0.0, lower_area = 0.0;
+ //this->compute_areas(lower_area,upper_area);
+
+ //Compute the max and min
+ double max = 0.0; double min = 0.0;
+ this->interface_min_max(min,max);
  
  trace << time_pt()->time() << " " 
-       << monitor_node_pt->x(1) << " " 
-       << monitor_node_pt->value(2) << " "
-       << monitor_node_pt->value(3) << " "
-       << monitor_node_pt->value(4) << " "
+       << this->Monitor_node_pt->x(1) << " " 
+       << this->Monitor_node_pt->value(2) << " "
+       << this->Monitor_node_pt->value(3) << " "
+       << this->Monitor_node_pt->value(4) << " "
        << std::sqrt(this->l2_norm_of_height(Global_Physical_Variables::H0)/(2.0*Global_Physical_Variables::L)) << " "
        << surface << " " << bulk << " " << micelle << " "
-       << surface + (bulk + micelle)/(Global_Physical_Variables::Beta_b) << std::endl;
+       << surface + (bulk + micelle)/(Global_Physical_Variables::Beta_b)
+       << " " << min << " " << max << " " 
+   //<< " " << upper_area << " " << lower_area << " " << upper_area + lower_area 
+       << std::endl;
 
 
  Doc_info.number()++;
@@ -1226,12 +1928,10 @@ int main(int argc, char **argv)
  
  
  //Construct our problem
-/* SurfactantProblem<SpineElement<Hijacked<DoubleBuoyantQCrouzeixRaviartElement<2> > >,
-		   SpineLineMarangoniSurfactantFluidInterfaceElement<DoubleBuoyantQCrouzeixRaviartElement<2> > > 
-                   problem;*/
-
- SurfactantProblem<Hijacked<DoubleBuoyantQCrouzeixRaviartElement<2> >,
-		   ElasticLineSolubleSurfactantTransportInterfaceElement<DoubleBuoyantQCrouzeixRaviartElement<2> > > 
+ SurfactantProblem<Hijacked<
+                    RefineablePseudoSolidNodeUpdateElement<RefineableDoubleBuoyantQCrouzeixRaviartElement<2>, RefineableQPVDElement<2,3> > >,
+		   ElasticLineSolubleSurfactantTransportInterfaceElement<
+                    RefineablePseudoSolidNodeUpdateElement<RefineableDoubleBuoyantQCrouzeixRaviartElement<2>, RefineableQPVDElement<2,3> > > > 
                    problem;
 
  
@@ -1259,18 +1959,28 @@ int main(int argc, char **argv)
  //Set the number of timesteps to our default value
  unsigned n_steps = 1000;
 
+ //Set the freqency of refinement
+ unsigned refine_after_n_steps = 5;
+ 
  //If we have a command line argument, perform fewer steps 
  //(used for self-test runs)
- if(argc > 1) {n_steps = 5;}
-
+ if(argc > 1) {n_steps = 5; refine_after_n_steps=3;}
+ 
  //Perform n_steps timesteps
  for(unsigned i=0;i<n_steps;++i)
   {
-   // problem.unsteady_newton_solve(dt);
-   double dt_next = problem.adaptive_unsteady_newton_solve(dt,1.0e-5);
+   double dt_next = dt;
+   //Spatial adapt every 5 steps with a fixed timestep
+   if((i>0) && (i%refine_after_n_steps==0))
+    {
+      problem.unsteady_newton_solve(dt,1,false);
+    }
+    else
+    {
+     //Unsteady timestep (for fixed mesh)
+      dt_next = problem.adaptive_unsteady_newton_solve(dt,1.0e-5);
+    }
    dt = dt_next;
-   //Limit timestep
-   //if(dt > 1.0) {dt = 1.0;}
    problem.doc_solution(trace);
   }
 

@@ -146,7 +146,7 @@ namespace Global_Physical_Variables
  double Biot = 0.1; 
   
   /// \short The ratio of adsorption-desorption times
-  double K_b = 3.0;
+  double K_b = 3.0; // 5.0; 
 
   // \short ratio of equilibrium concentrations
   double Beta_b = 1.0;
@@ -440,6 +440,75 @@ void deform_interface(const double &epsilon,
  /// Storage for any traction elements applied to the outlet
  Mesh* Outlet_traction_mesh_pt;
 
+  void interface_min_max(double &min, double &max)
+  {
+    //Loop over the interface and add each elemental contribution
+    const unsigned n_interface  = Surface_mesh_pt->nelement();
+    if(n_interface > 0)
+      {
+	//Set the initial values to the first nodal position
+	max = Surface_mesh_pt->finite_element_pt(0)->node_pt(0)->x(1);
+	min = max;
+
+	//Loop over all elements and find the max
+	for(unsigned i=0;i<n_interface;i++)
+	  {
+	    // Upcast from GeneralsedElement to the present element
+	    INTERFACE_ELEMENT *el_pt =
+	      dynamic_cast<INTERFACE_ELEMENT*>(
+					       Surface_mesh_pt->element_pt(i));
+
+	    const unsigned n_node = el_pt->nnode();
+	    if(n_node != 3)
+	      {
+		std::cout << "Can't do max and min for elements that are not quadratic\n";
+		return;
+	      }
+
+
+	    //Read out the y values from the nodes
+	    Vector<double> y(3);
+	    for(unsigned n=0;n<3;++n)
+	      {
+		y[n] = el_pt->node_pt(n)->x(1);
+	      }
+
+	    double local_max = y[0];
+	    double local_min = y[0];
+	    //Find maximum and minimum nodes
+	    for(unsigned n=1;n<3;++n)
+	      {
+		if(y[n] > local_max) {local_max = y[n];}
+		if(y[n] < local_min) {local_min = y[n];}
+	      }
+
+	    //If we have a linear case then we are done
+	    //Check that it's not a degenerate (linear) case
+	    if(std::abs(y[0] - 2*y[1] + y[2]) > 1.0e-10)
+	      {
+		//Calculate extreme value of the local coordinate based on known
+		//quadratic basis functions (This shoudl really be inside the element class)
+		Vector<double> extreme_s(1,0.5*(y[0] - y[2])/(y[0] - 2.0*y[1] + y[2]));
+
+		//Find the extreme height if the local coordinate is within the
+		//rane of the element
+		if(std::abs(extreme_s[0]) <= 1.0)
+		  {
+		    double extreme_h = el_pt->interpolated_x(extreme_s,1);
+		    //Check whether the extreme value is greater than any of the nodes.
+		    if(extreme_h > local_max) {local_max = extreme_h;}
+		    if(extreme_h < local_min) {local_min = extreme_h;}
+		  }
+		  }
+
+	    //Now check whether local max and min are global
+	    if(local_max > max) {max = local_max;}
+	    if(local_min < min) {min = local_min;}
+	  }
+      }
+  }
+    
+    
  //Return the l2 norm of height difference between the interface
  //and its undeformed value
  double l2_norm_of_height(const double &h0)
@@ -1079,6 +1148,10 @@ void SurfactantProblem<ELEMENT,INTERFACE_ELEMENT>::doc_solution(
  //Let's get the mases
  double surface=0.0, bulk=0.0, micelle=0.0;
  this->compute_integrated_concentrations(surface,bulk,micelle);
+
+ //Compute the max and min
+ double max = 0.0; double min =0.0;
+ this->interface_min_max(min,max);
  
  trace << time_pt()->time() << " " 
        << monitor_node_pt->x(1) << " " 
@@ -1087,7 +1160,9 @@ void SurfactantProblem<ELEMENT,INTERFACE_ELEMENT>::doc_solution(
        << monitor_node_pt->value(4) << " "
        << std::sqrt(this->l2_norm_of_height(Global_Physical_Variables::H0)/(2.0*Global_Physical_Variables::L)) << " "
        << surface << " " << bulk << " " << micelle << " "
-       << surface + (bulk + micelle)/(Global_Physical_Variables::Beta_b) << std::endl;
+       << surface + (bulk + micelle)/(Global_Physical_Variables::Beta_b) << " "
+       << min << " " << max << " "
+       << std::endl;
 
 
  Doc_info.number()++;
@@ -1158,12 +1233,7 @@ int main(int argc, char **argv)
  Global_Physical_Variables::Wall_normal[0] = -1.0;
  Global_Physical_Variables::Wall_normal[1] = 0.0;
  
- 
- //Construct our problem
-/* SurfactantProblem<SpineElement<Hijacked<DoubleBuoyantQCrouzeixRaviartElement<2> > >,
-		   SpineLineMarangoniSurfactantFluidInterfaceElement<DoubleBuoyantQCrouzeixRaviartElement<2> > > 
-                   problem;*/
-
+ //Construct the problem
 SurfactantProblem<SpineElement<Hijacked<DoubleBuoyantQCrouzeixRaviartElement<2> > >,
 		   SpineLineSolubleSurfactantTransportInterfaceElement<DoubleBuoyantQCrouzeixRaviartElement<2> > > 
                    problem;

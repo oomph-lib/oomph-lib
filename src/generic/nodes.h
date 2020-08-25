@@ -659,7 +659,6 @@ class Data
   };
 
    
-   
 //Nodes are required in the HangInfo class, so we need a forward reference
 class Node;
 
@@ -1895,7 +1894,7 @@ class BoundaryNodeBase
  void make_nodes_periodic(Node* const &node_pt,
                           Vector<Node*> const &periodic_copies_pt);
 
- public:
+public:
 
  /// \short Member function that allocates storage for a given
  /// number of additional degrees of freedom, n_additional_value,
@@ -2121,7 +2120,8 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
    //We won't ever need to worry about updating position pointers
    //because periodic solid problems are handled using lagrange multipliers.
 
-   // Cast Copied_node_pt to BoundaryNode
+   // Cast Copied_node_pt to BoundaryNode to copy over the
+   // Face index pointer
    BoundaryNode<NODE_TYPE>* cast_copied_node_pt = 
     dynamic_cast<BoundaryNode<NODE_TYPE>*>(Copied_node_pt);
 
@@ -2148,16 +2148,16 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
  /// data is deleted
  void clear_additional_copied_pointers()
  {
-  //Only worry about the face index if it has been assigned
-  if(this->index_of_first_value_assigned_by_face_element_pt()!=0)
+   //Only worry about the face index if it has been assigned
+   //which it will have been
+   if(this->index_of_first_value_assigned_by_face_element_pt()!=0)
    {
-    // Allocate storage for the index of first value assigned by face element
-    this->index_of_first_value_assigned_by_face_element_pt() =
+     // Allocate new storage for the index of first value assigned by face element
+     // The other storage will be deleted
+     this->index_of_first_value_assigned_by_face_element_pt() =
      new std::map<unsigned,unsigned>;
     
-    // Cast copied_node_pt to BoundaryNode 
-    // This will never work because when this is called the node is
-    // no longer a boundary node
+    // Cast copied_node_pt to BoundaryNode so that we can reset the index
     BoundaryNode<NODE_TYPE>* cast_copied_node_pt =
      dynamic_cast<BoundaryNode<NODE_TYPE>*>(Copied_node_pt);
     
@@ -2315,6 +2315,8 @@ public:
      //We can only do this if the node is a boundary node
      if(cast_node_pt!=0)
       {
+	//This is required to clear out any pointers to the additional
+	//data assigned by face elements 
        cast_node_pt->clear_additional_copied_pointers();
       }
      //Otherwise there is a problem if it's not Hijacked Data
@@ -2342,6 +2344,8 @@ public:
      Copied_node_pt=0;
      this->Value=0;
      this->Eqn_number=0;
+     //Remove the information about the boundary node storage scheme
+     this->Index_of_first_value_assigned_by_face_element_pt=0;
     }
   }
 
@@ -2671,6 +2675,36 @@ public:
  
  
 };
+
+
+ /// \short Make the node periodic
+template<>
+inline void BoundaryNode<SolidNode>::make_periodic(Node* const &node_pt)
+  {
+#ifdef PARANOID
+    std::ostringstream warn_message;
+    warn_message << "You are trying to make a Solid Node Periodic.\n"
+		 << "This action will reset pointers to stored values and "
+		 << "equation numbers,\n"
+                 << "meaning that all values will be shared by this Node and "
+		 << "its master.\n"
+                 << "Unfortunately, this does not ensure that the variable "
+		 << "nodal coordinates coincide.\n"
+                 << "For matching nodal coordinates the options are:\n"
+		 << "(i) Introduce Lagrange multipliers,\n"
+		 << "(ii) Pin one side and treat the data as enslaved,\n"
+		 << "(iii) Hijack the nodal coordinates on one side "
+		 << "and specify an alternative equation.\n\n"
+                 << "If you plan to use refineability, then the easiest\n"
+                 << "option is to use Lagrange multipliers.\n"
+		 << std::endl;
+    OomphLibWarning(warn_message.str(),
+		    OOMPH_CURRENT_FUNCTION,
+		    OOMPH_EXCEPTION_LOCATION);
+#endif
+   
+    BoundaryNodeBase::make_node_periodic(this,node_pt);
+   }
 
 
 

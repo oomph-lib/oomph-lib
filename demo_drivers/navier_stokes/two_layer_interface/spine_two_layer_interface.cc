@@ -297,7 +297,7 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y1,
     (Surface_mesh_pt->element_pt(e));
 
    // Set the Strouhal number
-   el_pt->ca_pt() = &Global_Physical_Variables::St;
+   el_pt->st_pt() = &Global_Physical_Variables::St;
 
    // Set the Capillary number
    el_pt->ca_pt() = &Global_Physical_Variables::Ca;
