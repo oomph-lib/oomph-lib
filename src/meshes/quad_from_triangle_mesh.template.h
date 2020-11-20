@@ -42,6 +42,10 @@
 #include <string.h>
 #include <iomanip>
 
+#ifdef OOMPH_HAS_FPUCONTROLH
+#include <fpu_control.h>
+#endif
+
 // The mesh
 #include "../generic/problem.h"
 #include "../generic/quad_mesh.h"
@@ -466,6 +470,12 @@ namespace oomph
     
     // Build the mesh using triangulate function
     triangulate(triswitches,&triangulate_io,&triangulate_out,0);
+    
+#ifdef OOMPH_HAS_FPUCONTROLH
+    // Reset flags that are tweaked by triangle; can cause nasty crashes
+    fpu_control_t cw = (_FPU_DEFAULT & ~_FPU_EXTENDED) | _FPU_DOUBLE;
+    _FPU_SETCW(cw);
+#endif
     
     // Build scaffold
     TriangleScaffoldMesh* tmp_mesh_pt=new TriangleScaffoldMesh(triangulate_out);

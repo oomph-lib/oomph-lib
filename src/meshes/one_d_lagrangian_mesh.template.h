@@ -58,9 +58,6 @@ private:
  /// Set the default gradients of the elements
  void assign_default_element_gradients();
 
- /// Assign the undeformed Eulerian positions to the nodes
- void assign_undeformed_positions();
-
 public:
 
  /// \short Constructor: Pass number of elements, length,
@@ -82,6 +79,11 @@ public:
                     GeomObject* undef_eulerian_posn_pt, 
                     TimeStepper* time_stepper_pt=
                     &Mesh::Default_TimeStepper);
+
+ 
+ /// Assign the undeformed Eulerian positions to the nodes
+ void assign_undeformed_positions();
+
 
 };
 

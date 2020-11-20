@@ -40,6 +40,11 @@
 #include <mpi.h>
 #endif
 
+#ifdef OOMPH_HAS_FPUCONTROLH
+#include <fpu_control.h>
+#endif
+
+
 //Standards
 #include<float.h>
 #include <iostream>
@@ -58,7 +63,16 @@ namespace oomph
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-// Interface to triangulate function
+ // Interface to triangulate function
+ //
+ // NOTE: POSTFIX ANY CALLS TO THIS FUNCTION BY
+ //--------------------------------------------
+ //  #ifdef OOMPH_HAS_FPUCONTROLH
+ //      // Reset flags that are tweaked by triangle; can cause nasty crashes
+ //      fpu_control_t cw = (_FPU_DEFAULT & ~_FPU_EXTENDED) | _FPU_DOUBLE;
+ //     _FPU_SETCW(cw);
+ //   #endif
+ //
  extern "C" {
   void triangulate(char *triswitches, struct oomph::TriangulateIO *in,
 		   struct oomph::TriangulateIO *out, 
@@ -752,6 +766,12 @@ namespace oomph
     // Build the triangulateio out object
     triangulate(triswitches,&triangle_in,&Triangulateio,0);
     
+#ifdef OOMPH_HAS_FPUCONTROLH
+    // Reset flags that are tweaked by triangle; can cause nasty crashes
+    fpu_control_t cw = (_FPU_DEFAULT & ~_FPU_EXTENDED) | _FPU_DOUBLE;
+    _FPU_SETCW(cw);
+#endif
+    
     // Build scaffold
     this->Tmp_mesh_pt=new TriangleScaffoldMesh(Triangulateio);
     
@@ -1237,6 +1257,12 @@ namespace oomph
     
     // Build the mesh using triangulate function
     triangulate(triswitches, &triangulate_io, &Triangulateio, 0);
+    
+#ifdef OOMPH_HAS_FPUCONTROLH
+    // Reset flags that are tweaked by triangle; can cause nasty crashes
+    fpu_control_t cw = (_FPU_DEFAULT & ~_FPU_EXTENDED) | _FPU_DOUBLE;
+    _FPU_SETCW(cw);
+#endif
     
     // Build scaffold
     this->Tmp_mesh_pt= new TriangleScaffoldMesh(Triangulateio);
@@ -2255,6 +2281,12 @@ namespace oomph
     // Build triangulateio refined object
     triangulate(triswitches,&triangle_refine,&this->Triangulateio,0);
 
+#ifdef OOMPH_HAS_FPUCONTROLH
+    // Reset flags that are tweaked by triangle; can cause nasty crashes
+    fpu_control_t cw = (_FPU_DEFAULT & ~_FPU_EXTENDED) | _FPU_DOUBLE;
+    _FPU_SETCW(cw);
+#endif
+    
     // Build scaffold
     this->Tmp_mesh_pt=new TriangleScaffoldMesh(this->Triangulateio);
 

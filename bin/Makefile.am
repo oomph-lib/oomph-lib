@@ -50,7 +50,8 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py \
            docs_spelling.bash  docs_spelling_dict.aspell.en.pws \
            check_for_dynamic_linking_flag.bash \
            get_external_distribution_tar_files.bash \
-           move_external_libraries_and_distributions_to_permanent_location.bash
+           emacs_files_that_contain_string.bash \
+           move_external_libraries_and_distributions_to_permanent_location.bash 
 
 fig2poly:
 	(cd ../demo_drivers/meshing/mesh_from_xfig_triangle; make install)
