@@ -725,9 +725,13 @@ namespace oomph
 
  /// Proportion of the arc-length to taken by the parameter
  double Desired_proportion_of_arc_length;
-
+ 
  /// \short Value of the scaling parameter required so that the parameter
- /// occupies the desired proportion of the arc length
+ /// occupies the desired proportion of the arc length. NOTE: If you wish
+ /// to change this then make sure to set the value of Scale_arc_length
+ /// to false to ensure the value of this isn't overwritten during the
+ /// arc-length process. Instead of changing this variable, it's better
+ /// to actually update the Desired_proportion_of_arc_length value.
  double Theta_squared;
 
  /// Storage for the sign of the global Jacobian
@@ -2079,13 +2083,6 @@ public:
  /// to converge, reduce timestep by this factor and try again; defaults
  /// to 1/2; can be over-written by user in derived problem.
  double Timestep_reduction_factor_after_nonconvergence;
-
-
- /// \short Boolean to decide if a timestep is to be rejected if the
- /// error estimate post-solve (computed by global_temporal_error_norm())
- /// exceeds the tolerance required in the call to
- /// adaptive_unsteady_newton_solve(...). Defaults to true.
- bool Keep_temporal_error_below_tolerance;
 
  /// \short Perform a basic arc-length continuation step using Newton's
  /// method. Returns number of Newton steps taken.

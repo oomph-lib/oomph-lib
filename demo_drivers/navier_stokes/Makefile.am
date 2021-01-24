@@ -32,7 +32,9 @@ unstructured_three_d_fluid \
 flux_control \
 schur_complement_preconditioner \
 lagrange_enforced_flow_preconditioner \
-vorticity_smoother
+vorticity_smoother \
+flow_past_oscillating_cylinder \
+space_time_flow_past_oscillating_cylinder
 
 if SUPPRESS_TRIANGLE_LIB
 else

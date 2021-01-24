@@ -49,7 +49,8 @@ sum_of_matrices.cc \
 implicit_midpoint_rule.cc \
 preconditioner_array.cc general_purpose_block_preconditioners.cc pml_meshes.cc \
 unstructured_two_d_mesh_geometry_base.cc sample_point_container.cc \
-sample_point_parameters.cc geometric_multigrid.cc
+sample_point_parameters.cc geometric_multigrid.cc \
+extruded_macro_element.cc extruded_domain.cc
 
 if OOMPH_HAS_MUMPS
 sources+=mumps_fortran_solver.F mumps_solver.cc
@@ -115,7 +116,7 @@ generalised_newtonian_constitutive_models.h \
 unstructured_two_d_mesh_geometry_base.h \
 geometric_multigrid.h sample_point_container.h \
 sample_point_parameters.h sparse_vector.h \
-geom_obj_with_boundary.h
+geom_obj_with_boundary.h extruded_macro_element.h extruded_domain.h
 
 if OOMPH_HAS_MUMPS
 headers+=mumps_solver.h
@@ -123,7 +124,7 @@ endif
 
 if HAVE_STACKTRACE
 headers += stacktrace.h
-endif 
+endif
 
 # Template-only files: Need to be included in include directory
 # but should not be listed in combined header file
@@ -161,7 +162,7 @@ endif
 # be included into the include directory
 extra_headers = cfortran.h frontal.h arpack.h lapack_qz.h mumps.h
 
-# Define name of library 
+# Define name of library
 libname = generic
 
 # Combine headers and sources
@@ -173,7 +174,7 @@ headers_and_sources = $(headers) $(extra_headers) $(sources)
 lib_LTLIBRARIES = libgeneric.la
 
 
-# Sources that the library depends on: 
+# Sources that the library depends on:
 #-------------------------------------
 libgeneric_la_SOURCES = $(headers_and_sources)
 
@@ -183,7 +184,7 @@ libgeneric_la_SOURCES = $(headers_and_sources)
 # Headers that are to be included in the $(includedir) directory:
 # This is the combined header which contains "#include<...>" commands
 # for the real headers in the subdirectory below $(includedir)
-include_HEADERS = $(libname).h 
+include_HEADERS = $(libname).h
 
 #Here's the subdirectory where the actual header files are placed
 library_includedir=$(includedir)/generic
@@ -191,10 +192,10 @@ library_includedir=$(includedir)/generic
 #These are the header files that are to be placed in subdirectory
 library_include_HEADERS=$(headers) $(templates)
 
-# Required libraries 
+# Required libraries
 #-------------------
 # Include path for library headers -- need to refer to include files
-# in src as they will not have been installed yet! 
+# in src as they will not have been installed yet!
 AM_CPPFLAGS += -I$(top_srcdir)/external_src -I$(top_srcdir)/external_src/oomph_tetgen
 
 
@@ -215,19 +216,19 @@ dummy_$(libname).h:  $(headers)
 # Extra hook for install: Optionally replace headers by symbolic links
 #---------------------------------------------------------------------
 if SYMBOLIC_LINKS_FOR_HEADERS
-install-data-hook: 
+install-data-hook:
 	(cd $(library_includedir) && rm -f $(headers) $(templates) )
 	(echo "$(headers) $(templates)" > include_files.list )
 	($(top_srcdir)/bin/change_headers_to_links.sh `pwd`)
 	($(LN_S) `cat include_files.list.aux` $(library_includedir) )
-	(rm -r include_files.list.aux include_files.list ) 
+	(rm -r include_files.list.aux include_files.list )
 else
-install-data-hook: 
+install-data-hook:
 endif
 
 
 # Cleanup: Kill automatically generated combined header file
-clean-local: 
+clean-local:
 	rm -f $(libname).h *~
 distclean-local:
 	rm -f $(libname).h *~

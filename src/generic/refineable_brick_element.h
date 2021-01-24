@@ -117,13 +117,15 @@ public:
  /// a position corresponding to the local fractional position within the
  /// present element, s_fraction, return
  /// a pointer to that node. If not, return NULL (0).
- virtual Node* node_created_by_neighbour(const Vector<double> &s_fraction);
+ virtual Node* node_created_by_neighbour(const Vector<double>& s_fraction,
+					 bool& is_periodic);
 
  /// \short If a neighbouring element has already created a node at
  /// a position corresponding to the local fractional position within the
  /// present element, s_fraction, return
  /// a pointer to that node. If not, return NULL (0).
- virtual Node* node_created_by_son_of_neighbour(const Vector<double> &s_fraction)
+ virtual Node* node_created_by_son_of_neighbour(const Vector<double> &s_fraction,
+						bool& is_periodic)
   {
    // It is impossible for this situation to arise in meshes
    // containing elements of uniform p-order. This is here so

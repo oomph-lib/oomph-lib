@@ -282,10 +282,12 @@ public:
  // template argument.
  Node* get_node_at_local_coordinate(const Vector<double> &s) const;
  
- Node* node_created_by_neighbour(const Vector<double> &s_fraction);
+ Node* node_created_by_neighbour(const Vector<double> &s_fraction, 
+                                 bool &is_periodic);
  
- Node* node_created_by_son_of_neighbour(const Vector<double> &s_fraction);
- 
+ Node* node_created_by_son_of_neighbour(const Vector<double> &s_fraction, 
+                                        bool &is_periodic);
+  
  // Overload nodal positions -- these elements have GLL-spaced nodes.
  /// Get local coordinates of node j in the element; vector sets its own size
  void local_coordinate_of_node(const unsigned& n, Vector<double>& s) const;

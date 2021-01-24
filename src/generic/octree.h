@@ -41,9 +41,7 @@
 
 namespace oomph
 {
-
-
-
+ 
 //====================================================================
 // Namespace for OcTree directions
 //====================================================================
@@ -128,6 +126,9 @@ class OcTree : public virtual Tree
    return temp_oc_pt;
   }
 
+ /// Function that, given an edge, returns the two faces on which it
+ // lies between, i.e. the faces to which it is a common edge
+ static Vector<int> faces_of_common_edge(const int& edge);
  
 /// \short Find (pointer to) `greater-or-equal-sized face neighbour' in 
 /// given direction (L/R/U/D/F/B). 
@@ -175,9 +176,8 @@ class OcTree : public virtual Tree
                              Vector<double>& s_sw,
                              Vector<double>& s_ne, 
                              int& face,
-                             int& diff_level) const;
-
-
+                             int& diff_level,
+			     bool& in_neighbouring_tree) const;
 
 /// \short Find (pointer to) `greater-or-equal-sized true edge neighbour' in 
 /// the given direction (LB,RB,DB,UB [the back edges],
@@ -237,7 +237,7 @@ class OcTree : public virtual Tree
  OcTree* gteq_true_edge_neighbour(const int& direction,
                                   const unsigned& i_root_edge_neighbour,
                                   unsigned& nroot_edge_neighbour,
-                                  Vector<unsigned> &translate_s,
+                                  Vector<unsigned>& translate_s,
                                   Vector<double>& s_lo,
                                   Vector<double>& s_hi, 
                                   int& edge,
@@ -370,10 +370,9 @@ class OcTree : public virtual Tree
  /// Default constructor (empty and broken)
  OcTree() 
   {
-   throw OomphLibError(
-    "Don't call empty constructor for OcTree!",
-    OOMPH_CURRENT_FUNCTION,
-    OOMPH_EXCEPTION_LOCATION);
+   throw OomphLibError("Don't call empty constructor for OcTree!",
+		       OOMPH_CURRENT_FUNCTION,
+		       OOMPH_EXCEPTION_LOCATION);
   }
 
  /// \short Constructor for empty (root) tree: 
@@ -395,7 +394,6 @@ class OcTree : public virtual Tree
         Tree* const &father_pt, const int& son_type) :
   Tree(object_pt,father_pt,son_type) {}
 
- 
  /// Bool indicating that static member data has been setup
  static bool Static_data_has_been_setup;
 
@@ -426,7 +424,8 @@ class OcTree : public virtual Tree
  OcTree* gteq_face_neighbour(const int& direction, 
                              double& s_difflo, 
                              double& s_diffhi,
-                             int& diff_level ,
+                             int& diff_level,
+			     bool& in_neighbouring_tree,
                              int max_level, 
                              OcTreeRoot* orig_root_pt) const;
 
@@ -469,7 +468,7 @@ class OcTree : public virtual Tree
                              const unsigned& i_root_edge_neighbour,
                              unsigned& nroot_edge_neighbour,
                              double& s_diff, 
-                             int& diff_level ,
+                             int& diff_level,
                              int max_level, 
                              OcTreeRoot* orig_root_pt) const;
  
@@ -652,7 +651,6 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
-   
   }
 
 
@@ -726,7 +724,6 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
  void add_edge_neighbour_pt(TreeRoot* oc_tree_root_pt,
                             const unsigned& edge_direction)
   {
-
 #ifdef PARANOID
    using namespace OcTreeNames;
    if ((edge_direction!=LB)&&(edge_direction!=RB)&&(edge_direction!=DB)&&
@@ -744,15 +741,15 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
-
+   
    Vector<TreeRoot*>::iterator it=
     find(Edge_neighbour_pt[edge_direction].begin(),
          Edge_neighbour_pt[edge_direction].end(),
          oc_tree_root_pt);
    if (it==Edge_neighbour_pt[edge_direction].end())
-    {
-     Edge_neighbour_pt[edge_direction].push_back(oc_tree_root_pt);
-    }
+   {
+    Edge_neighbour_pt[edge_direction].push_back(oc_tree_root_pt);
+   }
   }
 
 
@@ -976,12 +973,10 @@ class OcTreeForest : public TreeForest
     Trees_pt[i])->edge_neighbour_pt(direction);
   }
  
-
-private:
-
-
  /// Construct the rotation schemes
  void construct_up_right_equivalents();
+ 
+private:
  
  /// Construct the neighbour scheme
  void find_neighbours();

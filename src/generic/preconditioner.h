@@ -61,7 +61,8 @@ namespace oomph
  public:
 
   /// Constructor
-  Preconditioner() : Matrix_pt(0), Comm_pt(0), Setup_time(0){};
+  Preconditioner() : Silent_preconditioner_setup(false), Stream_pt(0),
+		     Matrix_pt(0), Comm_pt(0), Setup_time(0){};
 
   /// Broken copy constructor
   Preconditioner(const Preconditioner&)
@@ -81,8 +82,19 @@ namespace oomph
   /// \short Apply the preconditioner. Pure virtual generic interface
   /// function. This method should apply the preconditioner operator to the
   /// vector r and return the vector z.
-  virtual void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
-  = 0;
+  virtual void preconditioner_solve(const DoubleVector &r, DoubleVector &z)=0;
+
+  /// \short Apply the preconditioner. Pure virtual generic interface
+  /// function. This method should apply the preconditioner operator to the
+  /// vector r and return the vector z. (broken virtual)
+  virtual void preconditioner_solve_transpose(const DoubleVector &r,
+					      DoubleVector &z)
+  {
+   // Throw an error
+   throw OomphLibError("This function hasn't been implemented yet!",
+		       OOMPH_CURRENT_FUNCTION,
+		       OOMPH_EXCEPTION_LOCATION);
+  }
 
   /// \short Setup the preconditioner: store the matrix pointer and the
   /// communicator pointer then call preconditioner specific setup()
@@ -118,6 +130,22 @@ namespace oomph
    ObsoleteCode::obsolete();
    setup(matrix_pt);
   }
+
+  /// Set up the block preconditioner quietly!
+  void enable_silent_preconditioner_setup()
+  {
+   // Set the appropriate (silencing) boolean to true
+   Silent_preconditioner_setup=true;
+  } // End of enable_silent_preconditioner_setup
+
+  
+  /// Be verbose in the block preconditioner setup 
+  void disable_silent_preconditioner_setup()
+  {
+   // Set the appropriate (silencing) boolean to false
+   Silent_preconditioner_setup=false;
+  } // End of disable_silent_preconditioner_setup
+
 
   /// \short Setup the preconditioner. Pure virtual generic interface
   /// function.
@@ -194,6 +222,14 @@ namespace oomph
    const Vector<unsigned>& doftype_in_master_preconditioner_coarse,
    const Vector<Vector<unsigned> > & doftype_coarsen_map_coarse) {}
 
+ protected:  
+
+  /// Boolean to indicate whether or not the build should be done silently
+  bool Silent_preconditioner_setup;
+  
+  /// Pointer to the output stream -- defaults to std::cout
+  std::ostream* Stream_pt;
+  
  private:
 
   /// Storage for a pointer to the matrix.
@@ -289,6 +325,16 @@ namespace oomph
 
    // apply
    z=r;
+  }
+  
+  
+  /// \short Apply the preconditioner. This method should apply the
+  /// preconditioner operator to the vector r and return the vector z.
+  void preconditioner_solve_transpose(const DoubleVector& r, DoubleVector &z)
+  {
+   // Applying the preconditioner to the transposed system is exactly the
+   // same as applying the preconditioner to the original system
+   preconditioner_solve(r,z);
   }
  };
 }
