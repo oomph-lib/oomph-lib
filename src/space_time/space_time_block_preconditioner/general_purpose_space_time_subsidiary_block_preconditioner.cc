@@ -30,23 +30,8 @@
 // Header file
 #include "general_purpose_space_time_subsidiary_block_preconditioner.h"
 
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
 #ifdef OOMPH_HAS_HYPRE
-//======start_of_HypreSubsidiaryPreconditionerHelper_namespace==============
-/// Helper method for the block diagonal F block preconditioner to allow
-/// hypre to be used as a subsidiary block preconditioner
-//==========================================================================
-namespace HypreSubsidiaryPreconditionerHelper
-{
-  /// Assign the Hypre preconditioner pointer
-  Preconditioner* set_hypre_preconditioner()
-  {
-    return new HyprePreconditioner;
-  }
-} // End of HypreSubsidiaryPreconditionerHelper
+#include "../../generic/hypre_solver.h"
 #endif
 
 ////////////////////////////////////////////////////////////////////////
@@ -55,6 +40,25 @@ namespace HypreSubsidiaryPreconditionerHelper
 
 namespace oomph
 {
+#ifdef OOMPH_HAS_HYPRE
+  //======start_of_HypreSubsidiaryPreconditionerHelper_namespace==============
+  /// Helper method for the block diagonal F block preconditioner to allow
+  /// hypre to be used as a subsidiary block preconditioner
+  //==========================================================================
+  namespace HypreSubsidiaryPreconditionerHelper
+  {
+    /// Assign the Hypre preconditioner pointer
+    Preconditioner* set_hypre_preconditioner()
+    {
+      return new HyprePreconditioner;
+    }
+  } // End of HypreSubsidiaryPreconditionerHelper
+#endif
+
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+
   //============================================================================
   /// Setup for the block triangular preconditioner
   //============================================================================
