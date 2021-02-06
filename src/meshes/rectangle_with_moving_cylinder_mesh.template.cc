@@ -39,7 +39,7 @@ namespace oomph
   //=============================================================================
   /// Rectangular domain with circular whole
   //=============================================================================
-  void RectangleWithHoleDomain::
+  void RectangleWithHoleAndAnnularRegionDomain::
   project_point_on_cylinder_to_annular_boundary(const unsigned& time,
       const Vector<double>& xi,
       Vector<double>& r)
@@ -84,7 +84,7 @@ namespace oomph
   /// (associated with a point on the cylinder), returns the corresponding
   /// point on the outer boundary of the annular region (where the inner
   /// boundary is prescribed by the boundary of the cylinder)
-  void RectangleWithHoleDomain::
+  void RectangleWithHoleAndAnnularRegionDomain::
   project_point_on_cylinder_to_annular_boundary(const double& time,
       const Vector<double>& xi,
       Vector<double>& r)
@@ -128,7 +128,7 @@ namespace oomph
   /// \short Parametrisation of macro element boundaries: f(s) is the position
   /// vector to macro-element m's boundary in the specified direction [N/S/E/W]
   /// at the specified discrete time level (time=0: present; time>0: previous)
-  void RectangleWithHoleDomain::macro_element_boundary(const double& time,
+  void RectangleWithHoleAndAnnularRegionDomain::macro_element_boundary(const double& time,
       const unsigned& m,
       const unsigned& direction,
       const Vector<double>& s,
@@ -494,7 +494,7 @@ namespace oomph
   /// \short Parametrisation of macro element boundaries: f(s) is the position
   /// vector to macro-element m's boundary in the specified direction [N/S/E/W]
   /// at the specified discrete time level (time=0: present; time>0: previous)
-  void RectangleWithHoleDomain::macro_element_boundary(const unsigned& time,
+  void RectangleWithHoleAndAnnularRegionDomain::macro_element_boundary(const unsigned& time,
       const unsigned& m,
       const unsigned& direction,
       const Vector<double>& s,
@@ -504,7 +504,7 @@ namespace oomph
     // Warn about time argument being moved to the front
     OomphLibWarning(
       "Order of function arguments has changed between versions 0.8 and 0.85",
-      "RectangleWithHoleDomain::macro_element_boundary(...)",
+      "RectangleWithHoleAndAnnularRegionDomain::macro_element_boundary(...)",
       OOMPH_EXCEPTION_LOCATION);
 #endif
 
@@ -865,16 +865,16 @@ namespace oomph
   /// in anticlockwise direction. Timestepper defaults to Steady
   /// default timestepper.
   template<class ELEMENT>
-  RectangleWithHoleMesh<ELEMENT>::
-  RectangleWithHoleMesh(GeomObject* cylinder_pt,
-                        const double& annular_region_radius,
-                        const double& length,
-                        TimeStepper* time_stepper_pt)
+  RectangleWithHoleAndAnnularRegionMesh<ELEMENT>::
+  RectangleWithHoleAndAnnularRegionMesh(GeomObject* cylinder_pt,
+                                        const double& annular_region_radius,
+                                        const double& length,
+                                        TimeStepper* time_stepper_pt)
   {
     // Create the domain
-    Domain_pt=new RectangleWithHoleDomain(cylinder_pt,
-                                          annular_region_radius,
-                                          length);
+    Domain_pt=new RectangleWithHoleAndAnnularRegionDomain(cylinder_pt,
+        annular_region_radius,
+        length);
 
     // Initialise the node counter
     unsigned long node_count=0;
@@ -1339,7 +1339,7 @@ namespace oomph
                       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
-  } // End of RectangleWithHoleMesh
+  } // End of RectangleWithHoleAndAnnularRegionMesh
 
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
@@ -1370,7 +1370,7 @@ namespace oomph
     Vector<Mesh*> all_temp_mesh_pt;
 
     // Build central mesh
-    Central_mesh_pt=new RefineableRectangleWithHoleMesh<ELEMENT>(
+    Central_mesh_pt=new RefineableRectangleWithHoleAndAnnularRegionMesh<ELEMENT>(
       cylinder_pt,annular_region_radius,length_of_central_box,time_stepper_pt);
 
     // Add this mesh to the list of temproary meshes

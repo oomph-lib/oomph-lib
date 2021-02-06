@@ -48,12 +48,12 @@ namespace oomph
 {
   //=============================================================================
   /// Rectangular domain with circular whole
-  /// DRAIG: This looks like a redefinition of the RectangleWithHoleDomain in
+  /// DRAIG: This looks like a redefinition of the RectangleWithHoleAndAnnularRegionDomain in
   /// src/meshes but it creates 8 macro-elements instead of 4 macro-elements
   /// and creates an annular region around the cylinder. It's probably a good
   /// idea to rename this class to avoid ambiguity and a name clash...
   //=============================================================================
-  class RectangleWithHoleDomain : public Domain
+  class RectangleWithHoleAndAnnularRegionDomain : public Domain
   {
   public:
     /// Constructor. Pass pointer to geometric object that
@@ -61,9 +61,9 @@ namespace oomph
     /// The GeomObject must be parametrised such that
     /// \f$\zeta \in [0,2\pi]\f$ sweeps around the circumference
     /// in anticlockwise direction.
-    RectangleWithHoleDomain(GeomObject* cylinder_pt,
-                            const double& annular_region_radius,
-                            const double& length) :
+    RectangleWithHoleAndAnnularRegionDomain(GeomObject* cylinder_pt,
+                                            const double& annular_region_radius,
+                                            const double& length) :
       Cylinder_pt(cylinder_pt),
       Annular_region_radius(annular_region_radius)
     {
@@ -114,11 +114,11 @@ namespace oomph
         // Create the i-th macro element
         Macro_element_pt[i]=new QMacroElement<2>(this,i);
       }
-    } // End of RectangleWithHoleDomain
+    } // End of RectangleWithHoleAndAnnularRegionDomain
 
 
     /// Destructor: Empty; macro elements are deleted in base class destructor
-    ~RectangleWithHoleDomain() {}
+    ~RectangleWithHoleAndAnnularRegionDomain() {}
 
 
     /// \short Helper function that, given the Lagrangian coordinate, xi,
@@ -216,7 +216,7 @@ namespace oomph
   /// Domain-based mesh for rectangular mesh with circular hole
   //=============================================================================
   template<class ELEMENT>
-  class RectangleWithHoleMesh : public virtual Mesh
+  class RectangleWithHoleAndAnnularRegionMesh : public virtual Mesh
   {
   public:
     /// Constructor: Pass pointer to geometric object that
@@ -225,15 +225,15 @@ namespace oomph
     /// \f$\zeta \in [0,2\pi]\f$ sweeps around the circumference
     /// in anticlockwise direction. Timestepper defaults to Steady
     /// default timestepper.
-    RectangleWithHoleMesh(GeomObject* cylinder_pt,
-                          const double& annular_region_radius,
-                          const double& length,
-                          TimeStepper* time_stepper_pt=
-                            &Mesh::Default_TimeStepper);
+    RectangleWithHoleAndAnnularRegionMesh(GeomObject* cylinder_pt,
+                                          const double& annular_region_radius,
+                                          const double& length,
+                                          TimeStepper* time_stepper_pt=
+                                            &Mesh::Default_TimeStepper);
 
     /// \short Destructor: We made the Domain object so we have a responsibility
     /// for deleting it!
-    ~RectangleWithHoleMesh()
+    ~RectangleWithHoleAndAnnularRegionMesh()
     {
       // If it's a non-null pointer (don't know why it shouldn't be but still...)
       if (Domain_pt!=0)
@@ -244,10 +244,10 @@ namespace oomph
         // Make it a null pointer
         Domain_pt=0;
       }
-    } // End of ~RectangleWithHoleMesh
+    } // End of ~RectangleWithHoleAndAnnularRegionMesh
 
     /// Access function to the domain
-    RectangleWithHoleDomain* domain_pt()
+    RectangleWithHoleAndAnnularRegionDomain* domain_pt()
     {
       // Return a pointer to the Domain object defining the domain
       return Domain_pt;
@@ -256,7 +256,7 @@ namespace oomph
   protected:
 
     /// Pointer to the domain
-    RectangleWithHoleDomain* Domain_pt;
+    RectangleWithHoleAndAnnularRegionDomain* Domain_pt;
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -264,13 +264,13 @@ namespace oomph
   ////////////////////////////////////////////////////////////////////////
 
   //=============================================================================
-  /// Refineable version of RectangleWithHoleMesh. Applies one uniform
+  /// Refineable version of RectangleWithHoleAndAnnularRegionMesh. Applies one uniform
   /// refinement immediately to avoid problems with the automatic
   /// applications of boundary conditions in subsequent refinements
   //=============================================================================
   template<class ELEMENT>
-  class RefineableRectangleWithHoleMesh :
-    public RectangleWithHoleMesh<ELEMENT>,
+  class RefineableRectangleWithHoleAndAnnularRegionMesh :
+    public RectangleWithHoleAndAnnularRegionMesh<ELEMENT>,
     public RefineableQuadMesh<ELEMENT>
   {
   public:
@@ -281,15 +281,15 @@ namespace oomph
     /// \f$\zeta \in [0,2\pi]\f$ sweeps around the circumference
     /// in anticlockwise direction. Timestepper defaults to Steady
     /// default timestepper.
-    RefineableRectangleWithHoleMesh(GeomObject* cylinder_pt,
-                                    const double& annular_region_radius,
-                                    const double& length,
-                                    TimeStepper* time_stepper_pt=
-                                      &Mesh::Default_TimeStepper) :
-      RectangleWithHoleMesh<ELEMENT>(cylinder_pt,
-                                     annular_region_radius,
-                                     length,
-                                     time_stepper_pt)
+    RefineableRectangleWithHoleAndAnnularRegionMesh(GeomObject* cylinder_pt,
+        const double& annular_region_radius,
+        const double& length,
+        TimeStepper* time_stepper_pt=
+          &Mesh::Default_TimeStepper) :
+      RectangleWithHoleAndAnnularRegionMesh<ELEMENT>(cylinder_pt,
+          annular_region_radius,
+          length,
+          time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
       // Cylinder...<...>. Need to set up adaptive information.
@@ -309,10 +309,10 @@ namespace oomph
 
       // Setup quadtree forest for mesh refinement
       this->setup_quadtree_forest();
-    } // End of RefineableRectangleWithHoleMesh
+    } // End of RefineableRectangleWithHoleAndAnnularRegionMesh
 
     /// \short Destructor: Empty
-    virtual ~RefineableRectangleWithHoleMesh() {}
+    virtual ~RefineableRectangleWithHoleAndAnnularRegionMesh() {}
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -358,7 +358,7 @@ namespace oomph
     /// We have to store it because we can't delete it in the constructor as it
     /// would delete the Domain pointer which might be needed after the whole
     /// mesh has been constructed (e.g. for the mesh extrusion machinery)...
-    RefineableRectangleWithHoleMesh<ELEMENT>* Central_mesh_pt;
+    RefineableRectangleWithHoleAndAnnularRegionMesh<ELEMENT>* Central_mesh_pt;
 
     // Make the problem as coarse as possible
     bool Coarse_problem;
