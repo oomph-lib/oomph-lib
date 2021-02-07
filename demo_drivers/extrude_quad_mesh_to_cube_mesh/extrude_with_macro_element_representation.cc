@@ -404,8 +404,8 @@ create_extruded_mesh()
                             time_pt());
 
   // Build central mesh
-  RefineableRectangleWithHoleMesh<TWO_D_ELEMENT>* two_d_mesh_pt=
-    new RefineableRectangleWithHoleMesh<TWO_D_ELEMENT>(
+  RefineableRectangleWithHoleAndAnnularRegionMesh<TWO_D_ELEMENT>* two_d_mesh_pt=
+    new RefineableRectangleWithHoleAndAnnularRegionMesh<TWO_D_ELEMENT>(
     GlobalParameters::Cylinder_pt,
     GlobalParameters::Annular_region_radius,
     GlobalParameters::Length_of_box,
