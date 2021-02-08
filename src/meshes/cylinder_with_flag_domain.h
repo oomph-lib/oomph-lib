@@ -66,11 +66,9 @@ public:
                         const double &a);
  
  
- /// \short Destructor: Kill macro elements
- ~CylinderWithFlagDomain()
-  {
-   for (unsigned i=0;i<31;i++){delete Macro_element_pt[i];}
-  }
+ /// \short Destructor: Emtpy because clean up happens in base class
+ /// as a service to the user!
+ ~CylinderWithFlagDomain(){}
  
 
  /// \short Parametrisation of macro element boundaries: f(s) is the position

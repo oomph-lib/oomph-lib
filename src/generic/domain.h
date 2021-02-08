@@ -99,32 +99,29 @@ namespace oomph
     /// already been done in the derived class) to avoid memory leaks.
     virtual ~Domain()
     {
-      // If the container isn't empty
-      if (Macro_element_pt.size()>0)
+     // How many macro elements are there?
+     unsigned n_macro_element=Macro_element_pt.size();
+     
+     // Loop over the macro elements
+     for (unsigned i=0; i<n_macro_element; i++)
       {
-        // How many macro elements are there?
-        unsigned n_macro_element=Macro_element_pt.size();
-
-        // Loop over the macro elements
-        for (unsigned i=0; i<n_macro_element; i++)
+       // They might have already deleted (some or all of) the macro elements
+       // so skip them if they've already been made null pointers
+       if (Macro_element_pt[i]!=0)
         {
-          // They might have already deleted (some or all of) the macro elements
-          // so skip them if they've already been made null pointers
-          if (Macro_element_pt[i]!=0)
-          {
-            // Delete the i-th macro element
-            delete Macro_element_pt[i];
+         // Delete the i-th macro element
+         delete Macro_element_pt[i];
+         
+         // Make it a null pointer
+         Macro_element_pt[i]=0;
+        }
+      } // for (unsigned i=0;i<n_macro_element;i++)
+     
+     // Now clear the storage. NOTE: We can't just call this function
+     // as this would only delete the pointers to the macro elements,
+     // not the macro elements themselves!
+     Macro_element_pt.clear();
 
-            // Make it a null pointer
-            Macro_element_pt[i]=0;
-          }
-        } // for (unsigned i=0;i<n_macro_element;i++)
-
-        // Now clear the storage. NOTE: We can't just call this function
-        // as this would only delete the pointers to the macro elements,
-        // not the macro elements themselves!
-        Macro_element_pt.clear();
-      } // if (Macro_element_pt[i].size()>0)
     } // End of ~Domain
 
 

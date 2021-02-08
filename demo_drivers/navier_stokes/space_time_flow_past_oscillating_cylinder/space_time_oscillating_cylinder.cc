@@ -2025,7 +2025,7 @@ void NavierStokesProblem<ELEMENT>::doc_solution(const bool& doc_spacetime_soln)
   filename_as_string+=".dat";
 
   // Open a file with the constructed filename
-  some_file.open(filename_as_string);
+  some_file.open(filename_as_string.c_str());
 
   // Set the precision of the outputted data
   some_file.precision(20);
