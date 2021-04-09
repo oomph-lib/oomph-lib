@@ -78,14 +78,8 @@ public:
   }
 
 
- /// Destructor: Kill macro elements
- ~EighthSphereDomain()
-  {
-   for (unsigned i=0;i<4;i++)
-    {
-     delete Macro_element_pt[i];
-    }
-  }
+ /// Destructor: Empty; cleanup done in base class
+ ~EighthSphereDomain() {}
  
 
  /// \short Vector representation of the  imacro-th macro element

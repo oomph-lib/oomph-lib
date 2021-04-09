@@ -1305,13 +1305,13 @@ namespace oomph
    
    // Just scale them, because the Direction_to_vector
    // doesn't really gives s_lo;
-   for (int i=0;i<n_dim;i++)
+   for (unsigned i=0;i<n_dim;i++)
    {
     s_lo[i]=(s_lo[i]+1)/2-1;
    }
 
    // setup s_hi (Actually s_hi[i]=s_lo[i]+1)
-   for (int i=0;i<n_dim;i++)
+   for (unsigned i=0;i<n_dim;i++)
    {
     s_hi[i]=s_lo[i]+1;
    }

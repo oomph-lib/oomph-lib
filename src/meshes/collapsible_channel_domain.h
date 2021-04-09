@@ -85,13 +85,8 @@ class CollapsibleChannelDomain : public Domain
   }
  
 
- /// Destructor
- ~CollapsibleChannelDomain()
- {
-  // Kill macro elements
-  unsigned nelem=(Nup+Ncollapsible+Ndown)*Ny;
-  for (unsigned i=0;i<nelem;i++) delete Macro_element_pt[i];
- } 
+ /// Destructor: emtpy; cleanup done in base class
+ ~CollapsibleChannelDomain() {} 
 
 
  /// Number of vertical columns of macro elements the upstream section

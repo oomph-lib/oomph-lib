@@ -111,14 +111,8 @@ public:
   }
  
  
- /// Destructor: Kill all macro elements
- ~FullCircleDomain()
-  {
-   for(unsigned i=0;i<5;i++)
-    {
-     delete Macro_element_pt[i];
-    }
-  }
+ /// Destructor: Empty; cleanup done in base class
+ ~FullCircleDomain(){}
 
 
  /// \short Vector representation of the  i_macro-th macro element

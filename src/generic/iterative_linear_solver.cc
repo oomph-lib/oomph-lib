@@ -2922,10 +2922,10 @@ namespace oomph
 #ifdef PARANOID
     // PARANOID check that if the matrix is distributable then it should not be
     // then it should not be distributed
-    if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)!=0)
+    if (dynamic_cast<DistributableLinearAlgebraObject*>(input_matrix_pt)!=0)
     {
       if (dynamic_cast<DistributableLinearAlgebraObject*>
-          (matrix_pt)->distributed())
+          (input_matrix_pt)->distributed())
       {
         std::ostringstream error_message_stream;
         error_message_stream
@@ -2959,7 +2959,7 @@ namespace oomph
     // of the rhs
     if (lhs.built())
     {
-      if (!(*rhs.distribution_pt()==*solution.distribution_pt()))
+      if (!(*rhs.distribution_pt()==*lhs.distribution_pt()))
       {
         std::ostringstream error_message_stream;
         error_message_stream

@@ -248,11 +248,8 @@ public:
 
 
 
- /// Destructor: Kill macro elements, why isn't this generic?
- ~RectangleWithHoleDomain()
- {
-  for (unsigned i=0;i<9;i++){delete Macro_element_pt[i];}
- }
+ /// Destructor: Empty; cleanup done in base class
+ ~RectangleWithHoleDomain(){}
 
 
  /// \short Helper function to interpolate linearly between the

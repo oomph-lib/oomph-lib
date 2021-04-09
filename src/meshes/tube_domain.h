@@ -116,15 +116,8 @@ public:
   }
  
  
- /// Destructor: Kill all macro elements
- ~TubeDomain()
-  {
-   for (unsigned i=0;i<5*Nlayer;i++)
-    {
-     delete Macro_element_pt[i];
-    }
-  }
-
+ /// Destructor: Empty; cleanup done in base class
+ ~TubeDomain() {}
 
  /// \short Vector representation of the  i_macro-th macro element
  /// boundary i_direct (L/R/D/U/B/F) at time level t 

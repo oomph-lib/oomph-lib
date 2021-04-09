@@ -92,11 +92,9 @@ public:
   }
  
 
- /// Destructor for FishDomain: Kill macro elements
- virtual ~FishDomain()
- {
-  for (unsigned i=0;i<4;i++) delete Macro_element_pt[i];
- } 
+ /// Destructor for FishDomain: Empty; cleanup done in base class
+ virtual ~FishDomain() {}
+
 
  /// x-position of fin tip
  double& x_fin() {return X_fin;}

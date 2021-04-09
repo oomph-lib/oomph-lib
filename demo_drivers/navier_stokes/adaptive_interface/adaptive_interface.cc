@@ -189,12 +189,8 @@ public:
     {Macro_element_pt[i]= new QMacroElement<2>(this,i);}
   }
 
- // Destructor: Kill macro elements, why isn't this generic?
- ~CylinderAndInterfaceDomain()
- {
-  for (unsigned i=0;i<6;i++) {delete Macro_element_pt[i];}
- }
-
+ // Destructor: Empty; cleanup done in base class
+ ~CylinderAndInterfaceDomain() {}
 
  //Private little interpolation problem
  void linear_interpolate(double Left[2], double Right[2],

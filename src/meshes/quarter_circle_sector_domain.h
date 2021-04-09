@@ -90,14 +90,8 @@ public:
   }
 
  
- /// Destructor: Kill macro elements
- ~QuarterCircleSectorDomain()
-  {
-   for (unsigned i=0;i<3;i++)
-    {
-     delete Macro_element_pt[i];
-    }
-  }
+ /// Destructor: empty; cleanup done in base class
+ ~QuarterCircleSectorDomain() {}
  
  /// \short Typedef for function pointer for function that squashes
  /// the outer two macro elements towards 

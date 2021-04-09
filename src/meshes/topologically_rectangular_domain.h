@@ -99,12 +99,8 @@ public:
   }
 
 
- /// Destructor - deletes the underlying macro element
- ~TopologicallyRectangularDomain()
-  {
-   delete Macro_element_pt[0];
-   Macro_element_pt[0] = 0;
-  }
+ /// Destructor - empty; clean up done in base class
+ ~TopologicallyRectangularDomain(){}
 
 
  /// \short allows the boundary derivate function pointers to be set. To 

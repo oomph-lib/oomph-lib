@@ -1150,7 +1150,8 @@ namespace oomph
     double factorise_time=t_factorise_end-t_factorise_start;
 
     // Try and upcast the matrix to a CRDoubleMatrix
-    CRDoubleMatrix* cr_pt=dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+    //CRDoubleMatrix*
+    cr_pt=dynamic_cast<CRDoubleMatrix*>(matrix_pt);
 
     // If the input matrix is a CRDoubleMatrix
     if (cr_pt!=0)
@@ -1616,7 +1617,8 @@ namespace oomph
     double factorise_time=t_factorise_end-t_factorise_start;
 
     // Try and upcast the matrix to a CRDoubleMatrix
-    CRDoubleMatrix* cr_pt=dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+    //CRDoubleMatrix*
+    cr_pt=dynamic_cast<CRDoubleMatrix*>(matrix_pt);
 
     // If the input matrix is a CRDoubleMatrix
     if (cr_pt!=0)

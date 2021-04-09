@@ -88,17 +88,10 @@ public:
     {
      Macro_element_pt[i]= new QMacroElement<2>(this,i);
     }
- 
   }
 
-
- /// Destructor: Kill macro elements
- ~ChannelWithLeafletDomain()
-  {
-   unsigned nmacro = (Ny1+Ny2)*(Nleft+Nright);
-   for (unsigned i=0;i<nmacro;i++){delete Macro_element_pt[i];}
-  }
-
+ /// Destructor: Empty; cleanup done in base class
+ ~ChannelWithLeafletDomain() {}
 
  /// Total height of domain (width of channel)
  double htot(){return Htot;}

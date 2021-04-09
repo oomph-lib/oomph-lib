@@ -78,15 +78,8 @@ public:
   }
  
  
- /// Destructor: Kill all macro elements
- ~AnnularDomain()
-  {
-   unsigned n=nmacro_element();
-   for(unsigned i=0;i<n;i++)
-    {
-     delete Macro_element_pt[i];
-    }
-  }
+ /// Destructor: Empty; cleanup done in base class
+ ~AnnularDomain(){}
 
 
  /// \short Vector representation of the  i_macro-th macro element

@@ -356,11 +356,8 @@ namespace oomph
     }
 
 
-    /// Destructor: Kill macro elements
-    ~WarpedCubeDomain()
-    {
-      delete Macro_element_pt[0];
-    }
+    /// Destructor (empty; clean up handled in base class)
+    ~WarpedCubeDomain(){}
 
 
     /// Warp the unit cube

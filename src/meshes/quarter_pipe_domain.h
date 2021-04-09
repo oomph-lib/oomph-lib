@@ -88,14 +88,10 @@ public:
     BrokenCopy::broken_assign("QuarterPipeDomain");
    }
   
-  /// Destructor: Cleanup
+  /// Destructor: 
   ~QuarterPipeDomain()
    {
-    unsigned n=Nr*Ntheta*Nz;
-    for (unsigned i=0;i<n;i++)
-     {
-      delete Macro_element_pt[i];
-     }
+    // Note: macro elements are cleaned up in base class...
     delete Outer_boundary_cross_section_pt;
     delete Inner_boundary_cross_section_pt;
    }

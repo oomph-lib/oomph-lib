@@ -195,13 +195,8 @@ public:
 
 
 
- /// Destructor: Kill macro elements, why isn't this generic?
- ~HalfRectangleWithHoleDomain()
- {
-  unsigned n_macro = Macro_element_pt.size();
-  for (unsigned i=0;i<n_macro;i++){delete Macro_element_pt[i];}
- }
-
+ /// Destructor: Empty; cleanup done in base class
+ ~HalfRectangleWithHoleDomain() {}
 
  /// \short Helper function to interpolate linearly between the
  /// "right" and "left" points; \f$ s \in [-1,1] \f$
