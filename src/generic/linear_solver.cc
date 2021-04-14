@@ -1022,6 +1022,10 @@ namespace oomph
     // Initialise timer
     double t_start = TimingHelpers::timer();
 
+    //Pointer used in various places
+    CRDoubleMatrix* cr_pt=0;
+
+    
 #ifdef PARANOID
     // check that the rhs vector is setup
     if (!rhs.built())
@@ -1048,7 +1052,7 @@ namespace oomph
     // check that the matrix has some entries, and so has a values_pt that
     // makes sense (only for CR because CC is never used I think dense
     // matrices will be safe since they don't use a values pointer).
-    CRDoubleMatrix* cr_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+    cr_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
     if (cr_pt != 0)
     {
       if (cr_pt->nnz() == 0)
@@ -1489,6 +1493,9 @@ namespace oomph
     // Initialise timer
     double t_start = TimingHelpers::timer();
 
+    // Pointer used in various places
+    CRDoubleMatrix* cr_pt = 0;
+    
 #ifdef PARANOID
     // check that the rhs vector is setup
     if (!rhs.built())
@@ -1515,7 +1522,7 @@ namespace oomph
     // check that the matrix has some entries, and so has a values_pt that
     // makes sense (only for CR because CC is never used I think dense
     // matrices will be safe since they don't use a values pointer).
-    CRDoubleMatrix* cr_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+    cr_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
     if (cr_pt != 0)
     {
       if (cr_pt->nnz() == 0)
