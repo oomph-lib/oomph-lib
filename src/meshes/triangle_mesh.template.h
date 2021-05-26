@@ -1214,13 +1214,13 @@ namespace oomph
     // Convert TriangleMeshPolyLine and TriangleMeshClosedCurvePolyLine
     // to a triangulateio object
     UnstructuredTwoDMeshGeometryBase::build_triangulateio(outer_boundary_pt,
-							  internal_polygon_pt,
-							  open_polylines_pt,
-							  extra_holes_coordinates,
-							  regions_coordinates,
-							  regions_areas,
-							  triangulate_io);
- 
+                                                          internal_polygon_pt,
+                                                          open_polylines_pt,
+                                                          extra_holes_coordinates,
+                                                          regions_coordinates,
+                                                          regions_areas,
+                                                          triangulate_io);
+    
     // Initialize TriangulateIO structure
     TriangleHelper::initialise_triangulateio(Triangulateio);
 
