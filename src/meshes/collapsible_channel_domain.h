@@ -61,7 +61,8 @@ class CollapsibleChannelDomain : public Domain
                            const double& ly, 
                            GeomObject* wall_pt) :  
   BL_squash_fct_pt(&default_BL_squash_fct),
-  Axial_spacing_fct_pt(&default_axial_spacing_fct)
+   Axial_spacing_fct_pt(&default_axial_spacing_fct),
+   Rotate_domain(false)
   {
    Nup=nup;
    Ncollapsible=ncollapsible;
@@ -210,6 +211,19 @@ void macro_element_boundary(const unsigned& t,
                             Vector<double>& r);
 
 
+/// Rotate the domain (for axisymmetric problems)
+void enable_rotate_domain()
+{
+ Rotate_domain=true;
+}
+
+/// Undo rotation of the domain (for axisymmetric problems)
+void disable_rotate_domain()
+{
+ Rotate_domain=false;
+}
+
+
  private :
 
   /// \short Northern boundary of the macro element imacro in the 
@@ -311,6 +325,10 @@ void macro_element_boundary(const unsigned& t,
   
   ///Pointer to the geometric object that parametrises the collapsible wall
   GeomObject* Wall_pt;
+
+  /// Rotate domain (for axisymmetric problems, say)
+  bool Rotate_domain;
+  
 };
 
 
@@ -464,8 +482,18 @@ void CollapsibleChannelDomain::macro_element_boundary(const unsigned& t,
       OOMPH_EXCEPTION_LOCATION);
     }
   }
+
+ // Rotate?
+ if (Rotate_domain)
+  {
+   double radius=r[1];
+   double z=r[0];
+   
+   r[0]=radius;
+   r[1]=-z;
+  }
  
-};
+}
 
 
 
