@@ -1030,7 +1030,7 @@ namespace oomph
     /// \short Any actions that are to be performed before
     /// the residual is checked in the Newton method, e.g. update
     /// any boundary conditions that depend upon
-    /// variables of the problem; update any `slave' variables; or
+    /// variables of the problem; update any `dependent' variables; or
     /// perform an update of the nodal positions in SpineMeshes etc.
     /// CAREFUL: This
     /// step should (and if the FD-based LinearSolver FD_LU is used, must)

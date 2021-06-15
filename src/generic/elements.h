@@ -450,12 +450,12 @@ namespace oomph
     }
 
     /// \short Function that is called before the finite differencing of
-    /// any internal data. This may be overloaded to update any slaved
+    /// any internal data. This may be overloaded to update any dependent
     /// data before finite differencing takes place.
     virtual inline void update_before_internal_fd() { }
 
     /// \short Function that is call after the finite differencing of
-    /// the internal data. This may be overloaded to reset any slaved
+    /// the internal data. This may be overloaded to reset any dependent
     /// variables that may have changed during the finite differencing.
     virtual inline void reset_after_internal_fd() { }
 
@@ -472,12 +472,12 @@ namespace oomph
 
 
     /// \short Function that is called before the finite differencing of
-    /// any external data. This may be overloaded to update any slaved
+    /// any external data. This may be overloaded to update any dependent
     /// data before finite differencing takes place.
     virtual inline void update_before_external_fd() { }
 
     /// \short Function that is call after the finite differencing of
-    /// the external data. This may be overloaded to reset any slaved
+    /// the external data. This may be overloaded to reset any dependent
     /// variables that may have changed during the finite differencing.
     virtual inline void reset_after_external_fd() { }
 
@@ -1685,12 +1685,12 @@ namespace oomph
     }
 
     /// \short Function that is called before the finite differencing of
-    /// any nodal data. This may be overloaded to update any slaved
+    /// any nodal data. This may be overloaded to update any dependent
     /// data before finite differencing takes place.
     virtual inline void update_before_nodal_fd() { }
 
     /// \short Function that is call after the finite differencing of
-    /// the nodal data. This may be overloaded to reset any slaved
+    /// the nodal data. This may be overloaded to reset any dependent
     /// variables that may have changed during the finite differencing.
     virtual inline void reset_after_nodal_fd() { }
 
@@ -4112,12 +4112,12 @@ namespace oomph
     }
 
     /// \short Function that is called before the finite differencing of
-    /// any solid position data. This may be overloaded to update any slaved
+    /// any solid position data. This may be overloaded to update any dependent
     /// data before finite differencing takes place.
     virtual inline void update_before_solid_position_fd() { }
 
     /// \short Function that is call after the finite differencing of
-    /// the solid position data. This may be overloaded to reset any slaved
+    /// the solid position data. This may be overloaded to reset any dependent
     /// variables that may have changed during the finite differencing.
     virtual inline void reset_after_solid_position_fd() { }
 

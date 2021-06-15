@@ -1388,8 +1388,8 @@ namespace oomph
          unsigned nel=mesh_pt[i_mesh]->nelement();
          for (unsigned e=0;e<nel;e++)
           {
-           mesh_pt[i_mesh]->finite_element_pt(e)->
-            FiniteElement::output(outfile);
+           mesh_pt[i_mesh]->finite_element_pt(e)->output(outfile);
+            //FiniteElement::output(outfile);
           }
          outfile.close();
        
@@ -1399,8 +1399,8 @@ namespace oomph
          nel=external_mesh_pt->nelement();
          for (unsigned e=0;e<nel;e++)
           {
-           external_mesh_pt->finite_element_pt(e)->
-            FiniteElement::output(outfile);
+           external_mesh_pt->finite_element_pt(e)->output(outfile);
+            //FiniteElement::output(outfile);
           }
          outfile.close();
        

@@ -653,7 +653,7 @@ assign_external_interaction_data_local_eqn_numbers(
      //Increment the value
      *value_pt += fd_step;
      
-     //Now update any slaved variables
+     //Now update any dependent variables
      update_in_external_interaction_field_fd(i);
      
      //Calculate the new residuals
@@ -669,13 +669,13 @@ assign_external_interaction_data_local_eqn_numbers(
      // Reset the variables 
      *value_pt = old_var;
 
-     // Reset any slaved variables
+     // Reset any dependent variables
      reset_in_external_interaction_field_fd(i);
     }
    } //End of loop over external interaction data
 
   //End of finite difference loop
-  //Final reset of any slaved data
+  //Final reset of any dependent data
   reset_after_external_interaction_field_fd();
  }
 
@@ -734,7 +734,7 @@ assign_external_interaction_data_local_eqn_numbers(
      //Increment the value
      *value_pt += fd_step;
      
-     //Now update any slaved variables
+     //Now update any dependent variables
      update_in_external_interaction_geometric_fd(i);
      
      //Calculate the new residuals
@@ -750,13 +750,13 @@ assign_external_interaction_data_local_eqn_numbers(
      // Reset the variables 
      *value_pt = old_var;
 
-     // Reset any slaved variables
+     // Reset any dependent variables
      reset_in_external_interaction_geometric_fd(i);
     }
    } //End of loop over external interaction data
 
   //End of finite difference loop
-  //Final reset of any slaved data
+  //Final reset of any dependent data
   reset_after_external_interaction_geometric_fd();
  }
 

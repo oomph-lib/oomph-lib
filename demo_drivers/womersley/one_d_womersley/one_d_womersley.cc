@@ -1562,14 +1562,20 @@ int main(int argc, char *argv[])
  double period=0.45;
  bool validation_run=false;
 
+ //Set Trilinos default value
+#ifdef OOMPH_HAS_TRILINOS 
+ unsigned f_ml_settings=1;
+#endif
+ 
  // Set Hypre default values
 #ifdef OOMPH_HAS_HYPRE
- unsigned f_ml_settings=1;
  unsigned f_bamg_smoother=1;
  double f_bamg_damping=1.0;
  double f_bamg_strength=0.25;
 #endif
 
+
+ 
  // Parse command line
  int arg_index = 0;
  unsigned print_help = 0;
@@ -1622,7 +1628,9 @@ int main(int argc, char *argv[])
     {
      arg_index++;
      f_bamg_strength = atof(argv[arg_index++]);
-    }  
+    }
+#endif
+#ifdef OOMPH_HAS_TRILINOS
    else if ( strcmp(argv[arg_index], "-f_ml_settings") == 0 )
     {
      arg_index++;

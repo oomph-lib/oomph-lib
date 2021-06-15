@@ -9205,7 +9205,7 @@ void Mesh::delete_all_external_storage()
 
          //Check if any master is in the external halo storage
          //External haloed nodes don't get deleted, so we don't need to
-         //(and shouldn't) un-hang their slaves
+         //(and shouldn't) un-hang their dependents
          bool found_a_master_in_external_halo_storage = false;
          for(unsigned m=0; m<hang_pt->nmaster(); m++)
           {

@@ -801,7 +801,7 @@ PerturbedStateProblem(const unsigned &n_r, const unsigned &n_z1,
   } // End of loop over mesh boundaries
  
  // Pin all perturbations to the nodal positions (since these are
- // enslaved variables and therefore not dofs)
+ // dependent variables and therefore not dofs)
  const unsigned n_node = Bulk_mesh_pt->nnode();
  for(unsigned n=0;n<n_node;n++)
   {

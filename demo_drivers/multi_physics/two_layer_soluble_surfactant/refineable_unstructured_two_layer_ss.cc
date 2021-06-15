@@ -82,7 +82,7 @@ namespace Global_Physical_Variables
 {
   /// Geometry
   //----------------
-  double L = 28.0;
+  double L = 1.0;
 
   ///Fluid property Ratios
   //----------------------------
@@ -95,7 +95,7 @@ namespace Global_Physical_Variables
   //Vecosity ratio;
   /// \short Ratio of viscosity in upper fluid to viscosity in lower
   /// fluid. Reynolds number etc. is based on viscosity in lower fluid.
-  double M = 0.5;
+  double M = 17.0;
 
   //Dimensionless position of interface (relative to a total domain height of 1)
   double H0 = 0.2;
@@ -116,7 +116,7 @@ namespace Global_Physical_Variables
   
   /// \short Capillary number (of which the results are independent
   /// for a pinned surface)
-  double Ca = 0.001;
+  double Ca = 1.0;
   
   /// In our non-dimensionalisation, we have a
   /// Reynolds number/ Froude number squared in
@@ -128,34 +128,34 @@ namespace Global_Physical_Variables
   //--------------------------
   
   /// \short Marangoni number
-  double Ma = 10.0;
+  double Ma = 8.0;
 
   /// \short Surface Elasticity number (Capillary number x Marangoni number)
   double Beta_s =Ca*Ma;
 
   /// \short Surface Peclet number
-  double Pe_s = 10.0;
+  double Pe_s = 1.0e8; //10.0;
   
   /// \short Bulk Peclet number
-  double Pe_b = 10.0;
+  double Pe_b = 100.0;
   
   /// \short Micelle Pelect number
-  double Pe_m = 10.0;
+  double Pe_m = 100.0;
 
   /// Solubility Parameters
   //-------------------------
  
   /// \short Biot number
- double Biot = 0.1; 
+ double Biot = 1.0; 
   
   /// \short The ratio of adsorption-desorption times
-  double K_b = 3.0;
+  double K_b = 1.0;
 
   // \short ratio of equilibrium concentrations
   double Beta_b = 1.0;
 
   // \short Reaction rate between bulk and micelle 
- double K_m = 1.0;
+ double K_m = 0.0;
 
  /// Power of the concentration in bulk -> micelle flux expression
  double N = 10.0;
@@ -266,11 +266,10 @@ namespace Global_Physical_Variables
 ///These are essentially point elements that are created
 ///from existing periodic nodes.
 //=============================================================
-class DependentPositionPointElement :
- public virtual SolidPointElement, public virtual SolidFaceElement
+class SlavePositionPointElement : public virtual SolidPointElement, public virtual SolidFaceElement
 {
-  //Dependent node
-  Node* Dependent_node_pt;
+  //Slave node
+  Node* Slave_node_pt;
 
   //Face ID
   unsigned Id;
@@ -303,7 +302,7 @@ class DependentPositionPointElement :
     //then add the lagrange multiplier
 	if(local_eqn >=0)
 	  {
-	    residuals[local_eqn] = nod_pt->x(1) - Dependent_node_pt->x(1); 
+	    residuals[local_eqn] = nod_pt->x(1) - Slave_node_pt->x(1); 
 	    //Jacobian terms
 	    if(flag)
 	      {
@@ -344,7 +343,7 @@ class DependentPositionPointElement :
 	      }
 	  }
 	
-	//Get the local equation for the dependent node
+	//Get the local equation for the slave node
 	local_eqn = this->external_local_eqn(0,1);
 	if(local_eqn >=0)
 	  {
@@ -366,35 +365,33 @@ class DependentPositionPointElement :
 public:
 
   //Constructor: Make this from a single Node
-  DependentPositionPointElement(Node* const &node_pt,
-                            Node *const &dependent_node_pt,
-                            const unsigned &id=0) :
-    Dependent_node_pt(dependent_node_pt), Id(id)
+  SlavePositionPointElement(Node* const &node_pt, Node *const &slave_node_pt, const unsigned &id=0) :
+    Slave_node_pt(slave_node_pt), Id(id)
   {
-   //There is only one node
-   this->set_n_node(1);
-   //The node must be the master
-   this->node_pt(0) = node_pt;
-   //THIS IS REALLY IMPORTANT.
-   //IF YOU MISS IT THEN LOCAL EQUATION NUMBERING GOES WRONG
-   this->set_nodal_dimension(node_pt->ndim());
-   //Set the dependent node's variable position as external data
-   SolidNode* solid_nod_pt = static_cast<SolidNode*>(Dependent_node_pt);
-   this->add_external_data(solid_nod_pt->variable_position_pt());
-   //There is one extra value (the Lagrange multiplier for each node)
-   Vector<unsigned> n_additional_values(1,1);
-   //We also need to add the lagrange multiplier
-   this->add_additional_values(n_additional_values,id);
-  }
+    //There is only one node
+    this->set_n_node(1);
+    //The node must be the master
+    this->node_pt(0) = node_pt;
+    //THIS IS REALLY IMPORTANT.
+    //IF YOU MISS IT THEN LOCAL EQUATION NUMBERING GOES WRONG
+    this->set_nodal_dimension(node_pt->ndim());
+    //Set the slave node's variable position as external data
+    SolidNode* solid_nod_pt = static_cast<SolidNode*>(Slave_node_pt);
+    this->add_external_data(solid_nod_pt->variable_position_pt());
+    //There is one extra value (the Lagrange multiplier for each node)
+    Vector<unsigned> n_additional_values(1,1);
+    //We also need to add the lagrange multiplier
+    this->add_additional_values(n_additional_values,id);
+   }
 
   //Broken copy constructore
-  DependentPositionPointElement(const DependentPositionPointElement&)
+  SlavePositionPointElement(const SlavePositionPointElement&)
   {
-    BrokenCopy::broken_copy("DependentPositionPointElement");
+    BrokenCopy::broken_copy("SlavePositionPointElement");
   }
 
   //Empty Destructor
-  ~DependentPositionPointElement() {}
+  ~SlavePositionPointElement() {}
   
  /// \short Fill in the residuals for the volume constraint
  void fill_in_contribution_to_residuals( Vector<double> &residuals)
@@ -715,7 +712,8 @@ public:
 	  for(unsigned n=0;n<n_node;++n)
 	    {
 	      el_pt->node_pt(n)->unpin(2); //Bulk Concentration
-              el_pt->node_pt(n)->unpin(3); //Micelle Concentration
+	      el_pt->node_pt(n)->pin(3);
+              //el_pt->node_pt(n)->unpin(3); //Micelle Concentration
 	    }
 	   }
 
@@ -802,8 +800,8 @@ public:
      
      if(Control_Parameters::Periodic_BCs)
        {
-	 //Delete  the dependent elements and wipe the mesh
-	 this->delete_dependent_position_elements();
+	 //Delete  the slave elements and wipe the mesh
+	 this->delete_slave_position_elements();
        }
      
      //Backup the surface mesh
@@ -839,8 +837,8 @@ public:
     
     if(Control_Parameters::Periodic_BCs)
       {
-	//Create the dependent position elements
-	this->create_dependent_position_elements();
+	//Create the slave position elements
+	this->create_slave_position_elements();
       }
     
     // Rebuild the Problem's global mesh from its various sub-meshes
@@ -899,7 +897,8 @@ public:
 	  {
 	    Node* const nod_pt = el_pt->node_pt(n);
 	    if(!(nod_pt->is_constrained(2))) {nod_pt->unpin(2);}
-	    if(!(nod_pt->is_constrained(3))) {nod_pt->unpin(3);}
+	    if(!(nod_pt->is_constrained(3))) {nod_pt->pin(3);}
+	      //{nod_pt->unpin(3);}
 	  }
       }
    
@@ -956,13 +955,12 @@ public:
    set_boundary_conditions(this->time_pt()->time());
   }
 
-  ///Create the elements that make the position consistent on both sides
-  void create_dependent_position_elements()
+  ///Create the elements that slave the position
+  void create_slave_position_elements()
   {
     //We know that boundary 1 is made periodic from boundary 3
-    //We also know that the nodes have already been made
-    //periodic so we simply need
-    //to create the dependent elements to match the vertical positions
+    //We also know that the nodes have already been made periodic so we simply need
+    //to create the slave elements to match the vertical positions
     const unsigned n_boundary_node = this->Bulk_mesh_pt->nboundary_node(1);
     for(unsigned n=0;n<n_boundary_node;++n)
       {
@@ -973,20 +971,19 @@ public:
 	//If there is no master node, then the node has no
 	//counterpart on the other side and is therefore
 	//not a degree of freedom and does not need to be
-	//made dependent
+	//slaved
 	if(master_node_pt!=0)
 	  {
 	    
-	    //Only create dependent for nodes that are not on the interface
+	    //Only create slaves for nodes that are not on the interface
 	    if(!(master_node_pt->is_on_boundary(0)) &&
 	       !(master_node_pt->is_on_boundary(2)) &&
 	       !(master_node_pt->is_on_boundary(4)))
 	      {
-		//Create the dependent node with a position ID
-		this->Dependent_position_mesh_pt->
-		  add_element_pt(new DependentPositionPointElement(
-                                  master_node_pt,
-                                  nod_pt,Periodic_index));
+		//Create the slave node with a position ID
+		this->Slave_position_mesh_pt->
+		  add_element_pt(new SlavePositionPointElement(master_node_pt,
+							       nod_pt,Periodic_index));
 	      }
 	  }
       }
@@ -995,19 +992,19 @@ public:
 
 
  /// Delete the 1d interface elements
- void delete_dependent_position_elements()
+ void delete_slave_position_elements()
   {
     // Determine number of interface elements
-    const unsigned n_dependent_element = Dependent_position_mesh_pt->nelement();
+    const unsigned n_slave_element = Slave_position_mesh_pt->nelement();
     
     // Loop over interface elements and delete
-    for(unsigned e=0;e<n_dependent_element;e++)
+    for(unsigned e=0;e<n_slave_element;e++)
       {
-	delete Dependent_position_mesh_pt->element_pt(e);
+	delete Slave_position_mesh_pt->element_pt(e);
       }
     
     // Wipe the mesh
-    Dependent_position_mesh_pt->flush_element_and_node_storage();
+    Slave_position_mesh_pt->flush_element_and_node_storage();
   }
 
   
@@ -1204,7 +1201,7 @@ void deform_interface(const double &epsilon,
 
  /// Storage for elements that constraint the vertical positions
  /// of the periodic nodes on the boundaries
- Mesh* Dependent_position_mesh_pt;
+ Mesh* Slave_position_mesh_pt;
  
  /// Pointer to the constitutive law used to determine the mesh deformation
  ConstitutiveLaw* Constitutive_law_pt;
@@ -1395,12 +1392,12 @@ SurfactantProblem(const bool &pin) : Surface_pinned(pin), Periodic_index(50)
  Doc_info.set_directory("RESLT");
  
  // # of elements in x-direction (Coarse)
- unsigned n_x=20;//100;
+ unsigned n_x=40;//100;
 
  // # of elements in y-direction
- unsigned n_y1=4;//8;
+ unsigned n_y1=8; //4;//8;
 
- unsigned n_y2=4;//8;
+ unsigned n_y2=16; //4;//8;
 
  //Domain length in x direction
  double lx = 2.0*Global_Physical_Variables::L;
@@ -1420,6 +1417,10 @@ SurfactantProblem(const bool &pin) : Surface_pinned(pin), Periodic_index(50)
 
  // Set the maximum refinement level for the mesh to 4
  Bulk_mesh_pt->max_refinement_level() = 4;
+
+ // Set error targets for refinement
+ Bulk_mesh_pt->max_permitted_error() = 1.0e-3;
+ Bulk_mesh_pt->min_permitted_error() = 1.0e-5;
  
 
  // Define a constitutive law for the solid equations: generalised Hookean
@@ -1549,9 +1550,9 @@ SurfactantProblem(const bool &pin) : Surface_pinned(pin), Periodic_index(50)
  
   if(Control_Parameters::Periodic_BCs)
    {
-     Dependent_position_mesh_pt = new Mesh;
-     //Create the dependent elements that ensure that the positions match
-     create_dependent_position_elements();
+     Slave_position_mesh_pt = new Mesh;
+     //Create the slave elements that ensure that the positions match
+     create_slave_position_elements();
    }
   
  // Add the two sub-meshes to the problem
@@ -1565,7 +1566,7 @@ SurfactantProblem(const bool &pin) : Surface_pinned(pin), Periodic_index(50)
    }
  else
    {
-     add_sub_mesh(Dependent_position_mesh_pt);
+     add_sub_mesh(Slave_position_mesh_pt);
      }
  
  // Combine all sub-meshes into a single mesh
@@ -1663,7 +1664,8 @@ SurfactantProblem(const bool &pin) : Surface_pinned(pin), Periodic_index(50)
    for(unsigned n=0;n<n_el_node;++n)
      {
        el_pt->node_pt(n)->unpin(2); //unpin
-       el_pt->node_pt(n)->unpin(3); //unpin
+       //el_pt->node_pt(n)->unpin(3); //unpin
+       el_pt->node_pt(n)->pin(3); //pin micelle concentration
        el_pt->node_pt(n)->pin(4); //Pin Lagrange Multiplier initially
      }
 
@@ -1744,7 +1746,8 @@ void SurfactantProblem<ELEMENT,INTERFACE_ELEMENT>::set_boundary_conditions(
 	    //Be careful about upper and lower layers
 	    //If these are not set 
 	    nod_pt->set_value(2,C_init); 
-	    nod_pt->set_value(3,M_init);
+	    //nod_pt->set_value(3,M_init);
+	    nod_pt->set_value(3,0.0);
 	    
 	    //Set the velocityq
 	    /*double y = nod_pt->x(1);
@@ -1953,7 +1956,7 @@ int main(int argc, char **argv)
  problem.unpin_surface();
 
  //Set the timestep
- double dt = 0.1;
+ double dt = 0.01; //0.1;
 
  //Initialise the value of the timestep and set initial values 
  //of previous time levels assuming an impulsive start.
@@ -1965,7 +1968,7 @@ int main(int argc, char **argv)
  unsigned n_steps = 1000;
 
  //Set the freqency of refinement
- unsigned refine_after_n_steps = 5;
+ unsigned refine_after_n_steps = 3;
  
  //If we have a command line argument, perform fewer steps 
  //(used for self-test runs)
@@ -1983,7 +1986,7 @@ int main(int argc, char **argv)
     else
     {
      //Unsteady timestep (for fixed mesh)
-      dt_next = problem.adaptive_unsteady_newton_solve(dt,1.0e-5);
+      dt_next = problem.adaptive_unsteady_newton_solve(dt,1.0e-6);
     }
    dt = dt_next;
    problem.doc_solution(trace);

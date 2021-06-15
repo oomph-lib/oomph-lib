@@ -33,6 +33,11 @@
 namespace oomph
 {
 
+//Specify the number of reagents
+ template<unsigned NREAGENT, unsigned DIM>
+ const unsigned AdvectionDiffusionReactionEquations<NREAGENT,DIM>::N_reagent
+ = NREAGENT;
+ 
 ///2D Advection Diffusion elements
 
 
@@ -168,7 +173,7 @@ fill_in_generic_residual_contribution_adv_diff_react(
    //Get reaction terms
    Vector<double> R(NREAGENT);
    get_reaction_adv_diff_react(ipt,interpolated_c,R);
-
+   
    //If we are getting the jacobian the get the derivative terms
    DenseMatrix<double> dRdC(NREAGENT);
    if(flag)
@@ -265,6 +270,63 @@ fill_in_generic_residual_contribution_adv_diff_react(
   } // End of loop over integration points
 } 
 
+
+
+ 
+//=======================================================================
+/// Compute norm of the solution: sum of squares of L2 norms for reagents
+//=======================================================================
+template <unsigned NREAGENT, unsigned DIM>
+void AdvectionDiffusionReactionEquations<NREAGENT,DIM>::compute_norm(
+ double& norm)
+{
+ 
+ // Initialise
+ norm=0.0;
+ 
+ //Vector of local coordinates
+ Vector<double> s(DIM);
+ 
+ // Solution
+ double c=0.0;
+ 
+ //Find out how many nodes there are in the element
+ unsigned n_node = this->nnode();
+ 
+ Shape psi(n_node);
+ 
+ //Set the value of n_intpt
+ unsigned n_intpt = this->integral_pt()->nweight();
+ 
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   
+   //Assign values of s
+   for(unsigned i=0;i<DIM;i++)
+    {
+     s[i] = this->integral_pt()->knot(ipt,i);
+    }
+   
+   //Get the integral weight
+   double w = this->integral_pt()->weight(ipt);
+   
+   // Get jacobian of mapping
+   double J=this->J_eulerian(s);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+
+   //Loop over all reagents
+   for(unsigned r=0;r<NREAGENT;++r)
+    {
+     // Get FE function value
+     c=this->interpolated_c_adv_diff_react(s,r);
+     // Add to  norm
+     norm+=c*c*W;
+    }
+  }
+}
 
 
 

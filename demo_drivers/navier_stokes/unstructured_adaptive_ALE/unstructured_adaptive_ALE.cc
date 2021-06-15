@@ -549,7 +549,7 @@ public:
     }
   }
  
- /// \short Re-apply the no slip condition (imposed indirectly via enslaved
+ /// \short Re-apply the no slip condition (imposed indirectly via dependent
  /// velocities)
  void actions_before_newton_convergence_check()
   {

@@ -2692,7 +2692,7 @@ inline void BoundaryNode<SolidNode>::make_periodic(Node* const &node_pt)
 		 << "nodal coordinates coincide.\n"
                  << "For matching nodal coordinates the options are:\n"
 		 << "(i) Introduce Lagrange multipliers,\n"
-		 << "(ii) Pin one side and treat the data as enslaved,\n"
+		 << "(ii) Pin one side and treat the data as dependent,\n"
 		 << "(iii) Hijack the nodal coordinates on one side "
 		 << "and specify an alternative equation.\n\n"
                  << "If you plan to use refineability, then the easiest\n"

@@ -430,13 +430,13 @@ class ElementWithExternalElement: public virtual FiniteElement
    
    /// \short Function that is called before the finite differencing of
    /// any external interaction data associated with external fields. 
-   /// This may be overloaded to update any slaved
+   /// This may be overloaded to update any dependent
    /// data before finite differencing takes place.
    virtual inline void update_before_external_interaction_field_fd() { }
    
    /// \short Function that is call after the finite differencing of
    /// the external interaction data associated with external fields
-   /// This may be overloaded to reset any slaved
+   /// This may be overloaded to reset any dependent
    /// variables that may have changed during the finite differencing.
    virtual inline void reset_after_external_interaction_field_fd() { }
    
@@ -457,13 +457,13 @@ class ElementWithExternalElement: public virtual FiniteElement
 
     /// \short Function that is called before the finite differencing of
    /// any external interaction data associated with external geometry. 
-   /// This may be overloaded to update any slaved
+   /// This may be overloaded to update any dependent
    /// data before finite differencing takes place.
    virtual inline void update_before_external_interaction_geometric_fd() { }
    
    /// \short Function that is call after the finite differencing of
    /// the external interaction data associated with external geometry.
-   /// This may be overloaded to reset any slaved
+   /// This may be overloaded to reset any dependent
    /// variables that may have changed during the finite differencing.
    virtual inline void reset_after_external_interaction_geometric_fd() { }
    

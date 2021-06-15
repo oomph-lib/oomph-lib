@@ -113,7 +113,7 @@ public:
  /// \short Update the problem specs before checking Newton
  /// convergence: Update the fluid mesh and re-set velocity
  ///  boundary conditions -- no slip velocity on the wall means
- /// that the velocity on the wall is enslaved.
+ /// that the velocity on the wall is dependent.
  void actions_before_newton_convergence_check() 
  {
   // Update the fluid mesh -- auxiliary update function for algebraic

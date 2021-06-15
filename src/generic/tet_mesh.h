@@ -78,6 +78,30 @@ class TetMeshVertex
 #endif
   }
 
+ //Constructor: Take coordinates from a node
+ TetMeshVertex(Node* const &node_pt)
+  {
+   const unsigned n_dim = node_pt->ndim();
+#ifdef PARANOID
+   if (n_dim!=3)
+    {
+     std::ostringstream error_stream;
+     error_stream 
+      << "TetMeshVertex should only be used in 3D!\n"
+      << "Your Node contains data for " 
+      << n_dim 
+      << "-dimensional coordinates." << std::endl;
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   //Copy over the positions from the node
+   X.resize(n_dim);
+   for(unsigned i=0;i<n_dim;++i) {X[i] = node_pt->x(i);}
+  }
+ 
 
  /// \short Set intrinisic coordinates in GeomObject
  void set_zeta_in_geom_object(const Vector<double>& zeta)
@@ -307,7 +331,7 @@ class TetMeshFacetedSurface
   TetMeshFacetedSurface(): Boundaries_can_be_split_in_tetgen(true), 
   Geom_object_with_boundaries_pt(0)
   {}
- 
+  
  /// Empty destructor
  virtual ~TetMeshFacetedSurface(){}
 
@@ -520,7 +544,6 @@ protected:
 };
 
 
-
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -625,6 +648,23 @@ class TetMeshFacetedClosedSurface : public virtual TetMeshFacetedSurface
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
+
+
+class TetMeshFacetedClosedSurfaceForRemesh :
+ public TetMeshFacetedClosedSurface 
+{
+  public:
+ 
+ //Constructor, which requires node, connectivity and boundary information
+ TetMeshFacetedClosedSurfaceForRemesh(
+  Vector<Node*> const &vertex_node_pt,
+  Vector<Vector<unsigned> > const &facet_connectivity,
+  Vector<unsigned> const &facet_boundary_id);
+
+ //Destructor
+ virtual ~TetMeshFacetedClosedSurfaceForRemesh();
+};
+ 
 
 
 
@@ -1110,11 +1150,13 @@ void TetMeshBase::setup_boundary_coordinates(
  TetMeshFacet* f_pt=0;
  std::map<unsigned,TetMeshFacet*>::iterator it=
   Tet_mesh_facet_pt.find(b);
- if (it!=Tet_mesh_facet_pt.end())
+  if (it!=Tet_mesh_facet_pt.end())
   {
    f_pt=(*it).second;
   }
 
+  //std::cout << "Debug " << b;  f_pt->output(std::cout);
+  
  // Number of vertices
  unsigned nv=0; 
  if (f_pt!=0)
@@ -1220,6 +1262,13 @@ void TetMeshBase::setup_boundary_coordinates(
      
      // Prepare storage for boundary coordinates
      Vector<double> zeta(2);
+     /*std::cout << upper_right_node_pt->x(0) << " "
+               << upper_right_node_pt->x(1) << " "
+               << upper_right_node_pt->x(2) << " L ";
+     std::cout << lower_left_node_pt->x(0) << " "
+               << lower_left_node_pt->x(1) << " "
+               << lower_left_node_pt->x(2) << "\n ";*/
+     
      
      // Unit vector connecting lower left and upper right nodes
      b0[0]=upper_right_node_pt->x(0)-lower_left_node_pt->x(0);
@@ -1231,6 +1280,9 @@ void TetMeshBase::setup_boundary_coordinates(
      b0[0]*=inv_length;
      b0[1]*=inv_length;
      b0[2]*=inv_length;
+
+     //std::cout << "B0 ";
+     //std::cout << b0[0] << " " << b0[1] << " " << b0[2] << "\n";
      
      // Get (outer) unit normal to first face element
      Vector<double> normal(3);
@@ -1283,6 +1335,10 @@ void TetMeshBase::setup_boundary_coordinates(
        normal[1]=-normal[1];
        normal[2]=-normal[2];
       }
+
+     //std::cout << "Normal ";
+     //std::cout << normal[0] << " " << normal[1] << " " << normal[2] << "\n";
+
      
      // Check that all elements have the same normal
      for(unsigned e=0;e<nel;e++)
@@ -1315,6 +1371,8 @@ void TetMeshBase::setup_boundary_coordinates(
        b1[1]=b0[2]*normal[0]-b0[0]*normal[2];
        b1[2]=b0[0]*normal[1]-b0[1]*normal[0];
        
+       //std::cout << "B1 ";
+       //std::cout << b1[0] << " " << b1[1] << " " << b1[2] << "\n";
        
        
        // Assign boundary coordinates: projection onto the axes
@@ -1328,6 +1386,12 @@ void TetMeshBase::setup_boundary_coordinates(
          delta[0]=nod_pt->x(0)-lower_left_node_pt->x(0);
          delta[1]=nod_pt->x(1)-lower_left_node_pt->x(1);
          delta[2]=nod_pt->x(2)-lower_left_node_pt->x(2);
+
+         /*std::cout << j << ": "
+                   << nod_pt->x(0) << " " << nod_pt->x(1)
+                   << "  " << nod_pt->x(2) << " Delta ";
+         std::cout << delta[0] << " " << delta[1] << " " << delta[2] << "\n";
+         */
          
          // Project
          zeta[0]=delta[0]*b0[0]+delta[1]*b0[1]+delta[2]*b0[2];
@@ -1378,7 +1442,7 @@ void TetMeshBase::setup_boundary_coordinates(
            nod_pt->set_coordinates_on_boundary(b,zeta);
           }
         }
-      }
+      } //End of if vertices are in the same plane
     }
   
    

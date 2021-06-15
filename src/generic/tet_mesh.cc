@@ -38,7 +38,52 @@
 namespace oomph
 {
 
+//=======================================================================
+///Constructor for a FacetedSurface created from a list of nodes
+///and connectivity information. This is used in remeshing
+//=======================================================================
+ TetMeshFacetedClosedSurfaceForRemesh::TetMeshFacetedClosedSurfaceForRemesh(
+  Vector<Node*> const &vertex_node_pt,
+  Vector<Vector<unsigned> > const &facet_connectivity,
+  Vector<unsigned> const &facet_boundary_id) : TetMeshFacetedClosedSurface()
+ {
+  //Create the vertices
+  unsigned n_vertex = vertex_node_pt.size();
+  Vertex_pt.resize(n_vertex);
+  for(unsigned v=0;v<n_vertex;++v)
+   {
+    Vertex_pt[v] = new TetMeshVertex(vertex_node_pt[v]);
+   }
+  
+  //Create the facets
+  unsigned n_facet = facet_connectivity.size();
+  Facet_pt.resize(n_facet);
+  for(unsigned f=0;f<n_facet;++f)
+   {
+    unsigned n_vertex_on_facet = facet_connectivity[f].size();
+    Facet_pt[f] = new TetMeshFacet(n_vertex_on_facet);
+    for(unsigned i=0;i<n_vertex_on_facet;++i)
+     {
+      Facet_pt[f]->set_vertex_pt(i,Vertex_pt[facet_connectivity[f][i]]);
+     }
+    //Add in the boundary id
+    Facet_pt[f]->set_one_based_boundary_id(facet_boundary_id[f]);
+   }
+ }
 
+ //=================================================================
+ ///Destructor. Delete allocated memory
+ //================================================================
+ TetMeshFacetedClosedSurfaceForRemesh::~TetMeshFacetedClosedSurfaceForRemesh()
+ {
+  //Delete the facets and the vertices
+  unsigned n_facet = this->nfacet();
+  for(unsigned f=0;f<n_facet;f++) {delete Facet_pt[f];}
+  unsigned n_vertex = this->nvertex();
+  for(unsigned v=0;v<n_vertex;v++) {delete Vertex_pt[v];}
+ }
+
+ 
 //================================================================ 
 /// Global static data that specifies the permitted 
 /// error in the setup of the boundary coordinates

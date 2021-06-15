@@ -1114,7 +1114,7 @@ describe_local_dofs(std::ostream& out,const std::string& current_string) const
           //Increment the value of the Internal data
           *value_pt += fd_step;
           
-          //Now update any slaved variables
+          //Now update any dependent variables
           update_in_internal_fd(i);
           
           //Calculate the new residuals
@@ -1131,7 +1131,7 @@ describe_local_dofs(std::ostream& out,const std::string& current_string) const
           //Reset the Internal data
           *value_pt = old_var;
           
-          //Reset any slaved variables
+          //Reset any dependent variables
           reset_in_internal_fd(i);
          }
        }
@@ -1139,7 +1139,7 @@ describe_local_dofs(std::ostream& out,const std::string& current_string) const
    }
 
   //End of finite difference loop
-  //Final reset of any slaved data
+  //Final reset of any dependent data
   reset_after_internal_fd();
  }
 
@@ -1207,7 +1207,7 @@ describe_local_dofs(std::ostream& out,const std::string& current_string) const
           //Increment the value of the External data
           *value_pt += fd_step;
           
-          //Now update any slaved variables
+          //Now update any dependent variables
           update_in_external_fd(i);
           
           //Calculate the new residuals
@@ -1224,7 +1224,7 @@ describe_local_dofs(std::ostream& out,const std::string& current_string) const
           //Reset the External data
           *value_pt = old_var;
           
-          //Reset any slaved variables
+          //Reset any dependent variables
           reset_in_external_fd(i);
          }
        }
@@ -1232,7 +1232,7 @@ describe_local_dofs(std::ostream& out,const std::string& current_string) const
    }
 
   //End of finite difference loop
-  //Final reset of any slaved data
+  //Final reset of any dependent data
   reset_after_external_fd();
  }
 
@@ -3626,7 +3626,7 @@ void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
         //Increment the value of the Nodal data
         *value_pt += fd_step;
 
-        //Now update any slaved variables
+        //Now update any dependent variables
         update_in_nodal_fd(i);
         
         //Calculate the new residuals
@@ -3643,14 +3643,14 @@ void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
         //Reset the Nodal data
         *value_pt = old_var;
 
-        //Reset any slaved variables
+        //Reset any dependent variables
         reset_in_nodal_fd(i);
        }
      }
    }
   
   //End of finite difference loop
-  //Final reset of any slaved data
+  //Final reset of any dependent data
   reset_after_nodal_fd();
  }
 
@@ -6895,7 +6895,7 @@ describe_solid_local_dofs(std::ostream& out,
           // Perform any auxialiary node updates
           node_pt(n)->perform_auxiliary_node_update_fct();
 
-          // Update any other slaved variables
+          // Update any other dependent variables
           update_in_solid_position_fd(n);
 
           //Calculate the new residuals
@@ -6935,7 +6935,7 @@ describe_solid_local_dofs(std::ostream& out,
           // Perform any auxialiary node updates
           node_pt(n)->perform_auxiliary_node_update_fct();
           
-          // Reset any other slaved variables
+          // Reset any other dependent variables
           reset_in_solid_position_fd(n);
          }
        }
@@ -6943,7 +6943,7 @@ describe_solid_local_dofs(std::ostream& out,
    }
 
   //End of finite difference loop
-  //Final reset of any slaved data
+  //Final reset of any dependent data
   reset_after_solid_position_fd();
  }
 

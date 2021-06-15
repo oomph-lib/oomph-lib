@@ -198,7 +198,13 @@ public:
  ///concentration variables are stored. 
  // We choose to store them after the fluid velocities.
  inline unsigned u_index_axi_adv_diff() const {return 3;}
-  
+
+
+ //Compute norm overload to NS version
+ void compute_norm(double &norm)
+  {AxisymmetricQCrouzeixRaviartElement::compute_norm(norm);}
+
+ 
  /// \short Validate against exact solution at given time
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error

@@ -112,8 +112,8 @@ public:
  /// time step, most others only contain one).
  virtual void actions_before_explicit_stage() {}
 
- /// \short Empty virtual function that should be overloaded to update and
- /// slaved data or boundary conditions that should be advanced after each
+ /// \short Empty virtual function that should be overloaded to update any
+ /// dependent data or boundary conditions that should be advanced after each
  /// stage of an explicit time step (Runge-Kutta steps contain multiple
  /// stages per time step, most others only contain one).
  virtual void actions_after_explicit_stage() {}

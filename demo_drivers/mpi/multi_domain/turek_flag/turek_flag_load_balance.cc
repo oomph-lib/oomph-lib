@@ -451,7 +451,7 @@ public:
  /// Update function (empty)
  void actions_before_newton_solve(){}
 
- /// \short Update the (enslaved) fluid node positions following the
+ /// \short Update the (dependent) fluid node positions following the
  /// update of the solid variables before performing Newton convergence
  /// check
  void actions_before_newton_convergence_check();
@@ -885,7 +885,7 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::build_mesh()
 }//end_of_build_mesh
 
 //====start_of_actions_before_newton_convergence_check===================
-/// Update the (enslaved) fluid node positions following the
+/// Update the (dependent) fluid node positions following the
 /// update of the solid variables
 //=======================================================================
 template <class FLUID_ELEMENT,class SOLID_ELEMENT> 

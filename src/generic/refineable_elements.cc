@@ -732,7 +732,7 @@ void RefineableElement::identify_field_data_for_interactions(
           //Increment the nodal value
           *value_pt += fd_step;
          
-          //Now update any slaved variables
+          //Now update any dependent variables
           update_in_nodal_fd(i);
 
           //Calculate the new residuals
@@ -767,7 +767,7 @@ void RefineableElement::identify_field_data_for_interactions(
           //Reset the nodal value
           *value_pt = old_var;
 
-          //Reset any slaved variables
+          //Reset any dependent variables
           reset_in_nodal_fd(i);
          }
        }
@@ -797,7 +797,7 @@ void RefineableElement::identify_field_data_for_interactions(
             //Increment the nodal value stored at the master node
             *value_pt += fd_step;
            
-            //Now update any slaved variables
+            //Now update any dependent variables
             update_in_nodal_fd(i);
 
             //Calculate the new residuals
@@ -832,7 +832,7 @@ void RefineableElement::identify_field_data_for_interactions(
              //Reset the value at the master node
              *value_pt = old_var;
              
-             //Reset any slaved variables
+             //Reset any dependent variables
              reset_in_nodal_fd(i);
            }
          } //End of loop over master nodes
@@ -841,7 +841,7 @@ void RefineableElement::identify_field_data_for_interactions(
    } //End of loop over nodes
 
   //End of finite difference loop
-  //Final reset of any slaved data
+  //Final reset of any dependent data
   reset_after_nodal_fd();
  }
 
@@ -1396,7 +1396,7 @@ void RefineableSolidElement::identify_geometric_data(std::set<Data*>&
             // Perform any auxialiary node updates
             local_node_pt->perform_auxiliary_node_update_fct();
          
-            // Update any other slaved variables
+            // Update any other dependent variables
             update_in_solid_position_fd(l);
           
    
@@ -1436,7 +1436,7 @@ void RefineableSolidElement::identify_geometric_data(std::set<Data*>&
             // Perform any auxialiary node updates
             local_node_pt->perform_auxiliary_node_update_fct();
 
-            // Reset any other slaved variables
+            // Reset any other dependent variables
             reset_in_solid_position_fd(l);
            }
          }
@@ -1480,7 +1480,7 @@ void RefineableSolidElement::identify_geometric_data(std::set<Data*>&
               // Perform any auxialiary node updates
               master_node_pt->perform_auxiliary_node_update_fct();
             
-              // Update any slaved variables
+              // Update any dependent variables
               update_in_solid_position_fd(l);
  
               //Calculate the new residuals
@@ -1520,7 +1520,7 @@ void RefineableSolidElement::identify_geometric_data(std::set<Data*>&
               // Perform any auxialiary node updates
               master_node_pt->perform_auxiliary_node_update_fct();
               
-              // Reset any other slaved variables
+              // Reset any other dependent variables
               reset_in_solid_position_fd(l);
              }
            }
@@ -1531,7 +1531,7 @@ void RefineableSolidElement::identify_geometric_data(std::set<Data*>&
    } //End of loop over nodes
 
   //End of finite difference loop
-  //Final reset of any slaved data
+  //Final reset of any dependent data
   reset_after_solid_position_fd();
  }
 

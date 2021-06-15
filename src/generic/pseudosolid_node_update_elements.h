@@ -391,7 +391,7 @@ template<class BASIC, class SOLID>
    }
 
   //End of finite difference loop
-  //Final reset of any slaved data
+  //Final reset of any dependent data
   this->reset_after_solid_position_fd();
  }
 
@@ -993,7 +993,7 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
    
    //End of finite difference loop
 
-   //Final reset of any slaved data
+   //Final reset of any dependent data
    this->reset_after_solid_position_fd();
   }
 

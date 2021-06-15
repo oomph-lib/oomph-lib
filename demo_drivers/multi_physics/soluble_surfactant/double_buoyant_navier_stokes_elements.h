@@ -208,7 +208,13 @@ public:
  // We choose to store them after the fluid velocities.
  inline unsigned c_index_adv_diff_react(const unsigned &i) const 
   {return DIM+i;}
-  
+
+
+  //Compute norm overload to NS version
+  void compute_norm(double &norm)
+  {QCrouzeixRaviartElement<DIM>::compute_norm(norm);}
+
+ 
  /// \short Validate against exact solution at given time
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error

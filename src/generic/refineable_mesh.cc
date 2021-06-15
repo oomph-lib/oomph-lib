@@ -771,7 +771,7 @@ void TreeBasedRefineableMeshBase::adapt(const Vector<double>& elemental_error)
     // Now (re-)classify halo and haloed nodes and synchronise hanging
     // nodes
     // This is required in cases where delete_all_external_storage()
-    // made slave nodes to external halo nodes nonhanging.
+    // made dependent nodes to external halo nodes nonhanging.
     if (this->is_mesh_distributed())
      {
       DocInfo doc_info;
@@ -4208,7 +4208,7 @@ void TreeBasedRefineableMeshBase::p_adapt(const Vector<double>& elemental_error)
     // Now (re-)classify halo and haloed nodes and synchronise hanging
     // nodes
     // This is required in cases where delete_all_external_storage()
-    // made slave nodes to external halo nodes nonhanging.
+    // made dependent nodes to external halo nodes nonhanging.
     if (this->is_mesh_distributed())
      {
       DocInfo doc_info;

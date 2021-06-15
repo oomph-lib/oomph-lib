@@ -3736,7 +3736,7 @@ namespace oomph
         bool exclude_this_edge = false;
         if (diff_level != 0)
         {
-          // h-type nonconformity (slave)
+          // h-type nonconformity (dependent)
           exclude_this_edge = true;
         }
         else if (neigh_pt->nsons() != 0)
@@ -3918,17 +3918,18 @@ namespace oomph
   /// integral matching condition
   /// \f[ \int_\Gamma (u_{\mbox{S}} - u_{\mbox{M}}) \psi \mbox{d} s = 0 \f]
   /// for all polynomials \f$\psi\f$ on \f$\Gamma\f$ of degree at most
-  /// p-2 (where p is the spectral-order of the slave element) and a
+  /// p-2 (where p is the spectral-order of the dependent element) and a
   /// vertex matching condition
   /// \f[ (u_{\mbox{S}} - u_{\mbox{M}})\big\vert_{\partial\Gamma} = 0.\f]
   ///
   /// The algorithm works as follows:
   ///  - First the element determines if its edge my_edge is on the
-  ///    master or slave side of the non-conformity. At h-type non-conformities
+  ///    master or dependent side of the non-conformity.
+  /// At h-type non-conformities
   ///    we choose long edges to be masters, and at p-type nonconformities the
   ///    edge with lower p-order is the master.
-  ///  - Mortaring is performed by the slave side.
-  ///  - If a vertex node of the mortar is shared between master and slave
+  ///  - Mortaring is performed by the dependent side.
+  ///  - If a vertex node of the mortar is shared between master and dependent
   ///    element then the vertex matching condition is enforced automatically.
   ///    Otherwise it must be imposed by constraining its value to that at on
   ///    the master side.
@@ -3936,22 +3937,23 @@ namespace oomph
   ///    functions \f$ \psi \f$ are chosen to be derivatives of Legendre
   ///    polynomials of degree p-1.
   ///  - The mortar mass matrix M is constructed. Its entries are the
-  ///    mortar test functions evaluated at the slave nodal positions, so it is
-  ///    diagonal.
+  ///    mortar test functions evaluated at the dependent nodal positions,
+  ///    so it is diagonal.
   ///  - The local projection matrix is constructed for the master element by
   ///    applying the discretised integral matching condition along the mortar
   ///    using the appropriate quadrature order.
   ///  - The global projection matrix is then assembled by subtracting
   ///    contributions from the mortar vertex nodes.
   ///  - The mortar system \f$ M\xi^s = P\hat{\xi^m} \f$ is constructed,
-  ///    where \f$ \xi^m \f$ and \f$ \xi^s \f$ are the nodal values at the master
-  ///    and slave nodes respectively.
+  ///    where \f$ \xi^m \f$ and \f$ \xi^s \f$ are the nodal values at
+  ///    the master and dependent nodes respectively.
   ///  - The conformity matrix \f$ C = M^{-1}P \f$ is computed. This is
   ///    straightforward since the mass matrix is diagonal.
-  ///  - Finally, the master nodes and weights for each slave node are read from
-  ///    the conformity matrix and stored in the slaves' hanging schemes.
+  ///  - Finally, the master nodes and weights for each dependent node
+  ///    are read from
+  ///    the conformity matrix and stored in the dependents' hanging schemes.
   ///
-  /// The positions of the slave nodes are set to be consistent with their
+  /// The positions of the dependent nodes are set to be consistent with their
   /// hanging schemes.
   //=================================================================
   template<unsigned INITIAL_NNODE_1D>
@@ -3973,14 +3975,14 @@ namespace oomph
              gteq_edge_neighbour(my_edge, translate_s, s_lo_neigh,
                                  s_hi_neigh,neigh_edge,diff_level,in_neighbouring_tree);
 
-    // Work out master/slave edges
+    // Work out master/dependent edges
     //----------------------------
 
     // Set up booleans
     //bool h_type_master = false;
-    bool h_type_slave  = false;
+    bool h_type_dependent  = false;
     //bool p_type_master = false;
-    bool p_type_slave  = false;
+    bool p_type_dependent  = false;
 
     // Neighbour exists and all nodes have been created
     if (neigh_pt!=0)
@@ -3988,8 +3990,8 @@ namespace oomph
       // Check if neighbour is bigger than me
       if (diff_level!=0)
       {
-        // Slave at h-type non-conformity
-        h_type_slave = true;
+        // Dependent at h-type non-conformity
+        h_type_dependent = true;
       }
       // Check if neighbour is the same size as me
       else if (neigh_pt->nsons()==0)
@@ -4010,8 +4012,8 @@ namespace oomph
         }
         else if (neigh_p_order<my_p_order)
         {
-          // Slave at p-type non-conformity
-          p_type_slave = true;
+          // Dependent at p-type non-conformity
+          p_type_dependent = true;
         }
         else
         {
@@ -4033,7 +4035,7 @@ namespace oomph
 
     // Now do the mortaring
     //---------------------
-    if (h_type_slave || p_type_slave)
+    if (h_type_dependent || p_type_dependent)
     {
       //Compute the active coordinate index along the this side of mortar
       unsigned active_coord_index;
@@ -4052,11 +4054,11 @@ namespace oomph
       neigh_obj_pt = dynamic_cast<PRefineableQElement<2,INITIAL_NNODE_1D>*>
                      (neigh_pt->object_pt());
 
-      // Create vector of master and slave nodes
+      // Create vector of master and dependent nodes
       //----------------------------------------
-      Vector<Node*> master_node_pt, slave_node_pt;
-      Vector<unsigned> master_node_number, slave_node_number;
-      Vector<Vector<double> > slave_node_s_fraction;
+      Vector<Node*> master_node_pt, dependent_node_pt;
+      Vector<unsigned> master_node_number, dependent_node_number;
+      Vector<Vector<double> > dependent_node_s_fraction;
 
       //Number of nodes in one dimension
       const unsigned my_n_p = this->ninterpolating_node_1d(value_id);
@@ -4179,29 +4181,29 @@ namespace oomph
                               OOMPH_EXCEPTION_LOCATION);
         }
 
-        // Add node to vector of slave element nodes
-        slave_node_number.push_back(local_node_number);
-        slave_node_pt.push_back(local_node_pt);
+        // Add node to vector of dependent element nodes
+        dependent_node_number.push_back(local_node_number);
+        dependent_node_pt.push_back(local_node_pt);
 
         // Store node's local fraction
-        slave_node_s_fraction.push_back(s_fraction);
+        dependent_node_s_fraction.push_back(s_fraction);
       }
 
-      // Store the number of slave and master nodes for use later
-      const unsigned n_slave_nodes = slave_node_pt.size();
+      // Store the number of dependent and master nodes for use later
+      const unsigned n_dependent_nodes = dependent_node_pt.size();
       const unsigned n_master_nodes = master_node_pt.size();
-      const unsigned slave_element_nnode_1d = my_n_p;
+      const unsigned dependent_element_nnode_1d = my_n_p;
       const unsigned master_element_nnode_1d = neigh_n_p;
 
       // Storage for master shapes
       Shape master_shapes(neigh_obj_pt->ninterpolating_node(value_id));
 
-      // Get master and slave nodal positions
+      // Get master and dependent nodal positions
       //-------------------------------------
-      Vector<double> slave_nodal_position;
-      Vector<double> slave_weight(slave_element_nnode_1d);
-      Orthpoly::gll_nodes(slave_element_nnode_1d,
-                          slave_nodal_position,slave_weight);
+      Vector<double> dependent_nodal_position;
+      Vector<double> dependent_weight(dependent_element_nnode_1d);
+      Orthpoly::gll_nodes(dependent_element_nnode_1d,
+                          dependent_nodal_position,dependent_weight);
       Vector<double> master_nodal_position;
       Vector<double> master_weight(master_element_nnode_1d);
       Orthpoly::gll_nodes(master_element_nnode_1d,
@@ -4210,12 +4212,12 @@ namespace oomph
       // Apply the vertex matching condition
       //------------------------------------
       // Vertiex matching is ensured automatically in cases where there is a node
-      // at each end of the mortar that is shared between the master and slave
+      // at each end of the mortar that is shared between the master and dependent
       // elements. Where this is not the case, the vertex matching condition must
       // be enforced by constraining the value of the unknown at the node on the
-      // slave side to be the same as the value at that location in the master.
+      // dependent side to be the same as the value at that location in the master.
 
-      // Store positions of the mortar vertex/non-vertex nodes in the slave element
+      // Store positions of the mortar vertex/non-vertex nodes in the dependent element
       const unsigned n_mortar_vertices = 2;
       Vector<unsigned> vertex_pos(n_mortar_vertices);
       vertex_pos[0] = 0;
@@ -4231,7 +4233,7 @@ namespace oomph
         bool node_is_shared=false;
         for (unsigned i=0; i<master_node_pt.size(); i++)
         {
-          if (slave_node_pt[vertex_pos[v]]==master_node_pt[i])
+          if (dependent_node_pt[vertex_pos[v]]==master_node_pt[i])
           {
             node_is_shared=true;
             break;
@@ -4243,23 +4245,23 @@ namespace oomph
         if (!node_is_shared)
         {
           // Calculate weights. These are just the master shapes evaluated at
-          // this slave node's position
+          // this dependent node's position
 
           // Work out this node's location in the master
           Vector<double> s_in_neigh(2);
           for (unsigned i=0; i<2; i++)
           {
             s_in_neigh[i] = s_lo_neigh[i] +
-                            slave_node_s_fraction[vertex_pos[v]][translate_s[i]]*
+                            dependent_node_s_fraction[vertex_pos[v]][translate_s[i]]*
                             (s_hi_neigh[i] - s_lo_neigh[i]);
           }
 
-          // Get master shapes at slave nodal positions
+          // Get master shapes at dependent nodal positions
           neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
 
           // Remove any existing hanging node info
           // (This may be a bit wasteful, but guarantees correctness)
-          slave_node_pt[vertex_pos[v]]->set_nonhanging();
+          dependent_node_pt[vertex_pos[v]]->set_nonhanging();
 
           // Set up hanging scheme for this node
           HangInfo* explicit_hang_pt = new HangInfo(n_master_nodes);
@@ -4269,59 +4271,59 @@ namespace oomph
           }
 
           // Make node hang
-          slave_node_pt[vertex_pos[v]]->set_hanging_pt(explicit_hang_pt,-1);
+          dependent_node_pt[vertex_pos[v]]->set_hanging_pt(explicit_hang_pt,-1);
         }
       }
 
-      // Check that there are actually slave nodes for which we still need to
+      // Check that there are actually dependent nodes for which we still need to
       // construct a hanging scheme. If not then there is nothing more to do.
-      if (n_slave_nodes-n_mortar_vertices > 0)
+      if (n_dependent_nodes-n_mortar_vertices > 0)
       {
 
         // Assemble mass matrix for mortar
         //--------------------------------
-        Vector<double> psi(n_slave_nodes-n_mortar_vertices);
-        Vector<double> diag_M(n_slave_nodes-n_mortar_vertices);
+        Vector<double> psi(n_dependent_nodes-n_mortar_vertices);
+        Vector<double> diag_M(n_dependent_nodes-n_mortar_vertices);
         Vector<Vector<double> > shared_node_M(n_mortar_vertices);
         for (unsigned i=0; i<shared_node_M.size(); i++)
-        {shared_node_M[i].resize(n_slave_nodes-n_mortar_vertices);}
+        {shared_node_M[i].resize(n_dependent_nodes-n_mortar_vertices);}
 
-        // Fill in part corresponding to slave nodal positions (unknown)
-        for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        // Fill in part corresponding to dependent nodal positions (unknown)
+        for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
         {
           // Use L'Hosptal's rule:
-          psi[i] = pow(-1.0,int((slave_element_nnode_1d-1)-i-1))
-                   *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
-                                          slave_nodal_position[non_vertex_pos[i]]);
+          psi[i] = pow(-1.0,int((dependent_element_nnode_1d-1)-i-1))
+                   *-Orthpoly::ddlegendre(dependent_element_nnode_1d-1,
+                                          dependent_nodal_position[non_vertex_pos[i]]);
           // Put in contribution
-          diag_M[i] = psi[i]*slave_weight[non_vertex_pos[i]];
+          diag_M[i] = psi[i]*dependent_weight[non_vertex_pos[i]];
         }
 
-        // Fill in part corresponding to slave element vertices (known)
+        // Fill in part corresponding to dependent element vertices (known)
         for (unsigned v=0; v<shared_node_M.size(); v++)
         {
-          for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+          for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
           {
             // Check if denominator is zero
-            if (std::fabs(slave_nodal_position[non_vertex_pos[i]]
-                          - slave_nodal_position[vertex_pos[v]]) >= 1.0e-8)
+            if (std::fabs(dependent_nodal_position[non_vertex_pos[i]]
+                          - dependent_nodal_position[vertex_pos[v]]) >= 1.0e-8)
             {
               // We're ok
-              psi[i] = pow(-1.0,int((slave_element_nnode_1d-1)-i-1))
-                       * Orthpoly::dlegendre(slave_element_nnode_1d-1,
-                                             slave_nodal_position[vertex_pos[v]])
-                       / (slave_nodal_position[non_vertex_pos[i]]
-                          - slave_nodal_position[vertex_pos[v]]);
+              psi[i] = pow(-1.0,int((dependent_element_nnode_1d-1)-i-1))
+                       * Orthpoly::dlegendre(dependent_element_nnode_1d-1,
+                                             dependent_nodal_position[vertex_pos[v]])
+                       / (dependent_nodal_position[non_vertex_pos[i]]
+                          - dependent_nodal_position[vertex_pos[v]]);
             }
             // Check if numerator is zero
-            else if (std::fabs(Orthpoly::dlegendre(slave_element_nnode_1d-1,
-                                                   slave_nodal_position[vertex_pos[v]]))
+            else if (std::fabs(Orthpoly::dlegendre(dependent_element_nnode_1d-1,
+                                                   dependent_nodal_position[vertex_pos[v]]))
                      < 1.0e-8)
             {
               // We can use l'hopital's rule
-              psi[i] = pow(-1.0,int((slave_element_nnode_1d-1)-i-1))
-                       *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
-                                              slave_nodal_position[non_vertex_pos[i]]);
+              psi[i] = pow(-1.0,int((dependent_element_nnode_1d-1)-i-1))
+                       *-Orthpoly::ddlegendre(dependent_element_nnode_1d-1,
+                                              dependent_nodal_position[non_vertex_pos[i]]);
             }
             else
             {
@@ -4333,7 +4335,7 @@ namespace oomph
                 OOMPH_EXCEPTION_LOCATION);
             }
             // Put in contribution
-            shared_node_M[v][i] = psi[i]*slave_weight[vertex_pos[v]];
+            shared_node_M[v][i] = psi[i]*dependent_weight[vertex_pos[v]];
           }
         }
 
@@ -4341,7 +4343,7 @@ namespace oomph
         //--------------------------------------------
 
         // Have only one local projection matrix because there is just one master
-        Vector<Vector<double> > P(n_slave_nodes-n_mortar_vertices);
+        Vector<Vector<double> > P(n_dependent_nodes-n_mortar_vertices);
         for (unsigned i=0; i<P.size(); i++) {P[i].resize(n_master_nodes,0.0);}
 
         //Storage for local coordinate
@@ -4349,18 +4351,18 @@ namespace oomph
 
         // Sum contributions from master element shapes (quadrature).
         // The order of quadrature must be high enough to evaluate a polynomial
-        // of order N_s + N_m - 3 exactly, where N_s = n_slave_nodes, N_m =
+        // of order N_s + N_m - 3 exactly, where N_s = n_dependent_nodes, N_m =
         // n_master_nodes.
         // (Use pointers for the quadrature knots and weights so that
         // data is not unnecessarily copied)
         //unsigned quadrature_order =
-        // std::max(slave_element_nnode_1d,master_element_nnode_1d);
+        // std::max(dependent_element_nnode_1d,master_element_nnode_1d);
         Vector<double> *quadrature_knot, *quadrature_weight;
-        if (slave_element_nnode_1d >= master_element_nnode_1d)
+        if (dependent_element_nnode_1d >= master_element_nnode_1d)
         {
-          // Use the same quadrature order as the slave element (me)
-          quadrature_knot = &slave_nodal_position;
-          quadrature_weight = &slave_weight;
+          // Use the same quadrature order as the dependent element (me)
+          quadrature_knot = &dependent_nodal_position;
+          quadrature_weight = &dependent_weight;
         }
         else
         {
@@ -4372,29 +4374,29 @@ namespace oomph
         // Quadrature loop
         for (unsigned q=0; q<(*quadrature_weight).size(); q++)
         {
-          // Evaluate mortar test functions at the quadrature knots in the slave
+          // Evaluate mortar test functions at the quadrature knots in the dependent
           //s[active_coord_index] = (*quadrature_knot)[q];
           Vector<double> s_on_mortar(1);
           s_on_mortar[0] = (*quadrature_knot)[q];
 
           // Get psi
-          for (unsigned k=0; k<n_slave_nodes-n_mortar_vertices; k++)
+          for (unsigned k=0; k<n_dependent_nodes-n_mortar_vertices; k++)
           {
             // Check if denominator is zero
-            if (std::fabs(slave_nodal_position[non_vertex_pos[k]]-s_on_mortar[0]) >= 1.0e-08)
+            if (std::fabs(dependent_nodal_position[non_vertex_pos[k]]-s_on_mortar[0]) >= 1.0e-08)
             {
               // We're ok
-              psi[k] = pow(-1.0,int((slave_element_nnode_1d-1)-k-1))
-                       * Orthpoly::dlegendre(slave_element_nnode_1d-1,s_on_mortar[0])
-                       / (slave_nodal_position[non_vertex_pos[k]]-s_on_mortar[0]);
+              psi[k] = pow(-1.0,int((dependent_element_nnode_1d-1)-k-1))
+                       * Orthpoly::dlegendre(dependent_element_nnode_1d-1,s_on_mortar[0])
+                       / (dependent_nodal_position[non_vertex_pos[k]]-s_on_mortar[0]);
             }
             // Check if numerator is zero
-            else if (std::fabs(Orthpoly::dlegendre(slave_element_nnode_1d-1,s_on_mortar[0]))
+            else if (std::fabs(Orthpoly::dlegendre(dependent_element_nnode_1d-1,s_on_mortar[0]))
                      < 1.0e-8)
             {
               // We can use l'Hopital's rule
-              psi[k] = pow(-1.0,int((slave_element_nnode_1d-1)-k-1))
-                       * -Orthpoly::ddlegendre(slave_element_nnode_1d-1,s_on_mortar[0]);
+              psi[k] = pow(-1.0,int((dependent_element_nnode_1d-1)-k-1))
+                       * -Orthpoly::ddlegendre(dependent_element_nnode_1d-1,s_on_mortar[0]);
             }
             else
             {
@@ -4407,13 +4409,13 @@ namespace oomph
             }
           }
 
-          // Convert coordinate on mortar to local fraction in slave element
+          // Convert coordinate on mortar to local fraction in dependent element
           Vector<double> s_fraction(2);
           for (unsigned i=0; i<2; i++)
           {
             s_fraction[i] = (i==active_coord_index)
                             ? 0.5*(s_on_mortar[0]+1.0)
-                            : slave_node_s_fraction[vertex_pos[0]][i];
+                            : dependent_node_s_fraction[vertex_pos[0]][i];
           }
 
           // Project active coordinate into master element
@@ -4428,7 +4430,7 @@ namespace oomph
           neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
 
           // Populate local projection matrix
-          for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+          for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
           {
             for (unsigned j=0; j<n_master_nodes; j++)
             {
@@ -4445,13 +4447,13 @@ namespace oomph
         // Assemble contributions from mortar vertex nodes
         for (unsigned v=0; v<n_mortar_vertices; v++)
         {
-          // Convert coordinate on mortar to local fraction in slave element
+          // Convert coordinate on mortar to local fraction in dependent element
           Vector<double> s_fraction(2);
           for (unsigned i=0; i<2; i++)
           {
             s_fraction[i] = (i==active_coord_index)
-                            ? 0.5*(slave_nodal_position[vertex_pos[v]]+1.0)
-                            : slave_node_s_fraction[vertex_pos[0]][i];
+                            ? 0.5*(dependent_nodal_position[vertex_pos[v]]+1.0)
+                            : dependent_node_s_fraction[vertex_pos[0]][i];
           }
 
           // Project active coordinate into master element
@@ -4462,10 +4464,10 @@ namespace oomph
                             (s_hi_neigh[i] - s_lo_neigh[i]);
           }
 
-          // Get master shapes at slave nodal positions
+          // Get master shapes at dependent nodal positions
           neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
 
-          for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+          for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
           {
             for (unsigned k=0; k<n_master_nodes; k++)
             {
@@ -4476,7 +4478,7 @@ namespace oomph
 
         // Solve mortar system
         //--------------------
-        for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
         {
           for (unsigned j=0; j<n_master_nodes; j++)
           {
@@ -4486,15 +4488,15 @@ namespace oomph
 
         // Create structures to hold the hanging info
         //-------------------------------------------
-        Vector<HangInfo*> hang_info_pt(n_slave_nodes);
-        for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        Vector<HangInfo*> hang_info_pt(n_dependent_nodes);
+        for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
         {
           hang_info_pt[i] = new HangInfo(n_master_nodes);
         }
 
         // Copy information to hanging nodes
         //----------------------------------
-        for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
         {
           for (unsigned j=0; j<n_master_nodes; j++)
           {
@@ -4504,7 +4506,7 @@ namespace oomph
 
         // Set pointers to hanging info
         //-----------------------------
-        for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
         {
           // Check that the node shoule actually hang.
           // That is, if the polynomial orders of the elements at a p-type
@@ -4514,7 +4516,7 @@ namespace oomph
           for (unsigned m=0; m<hang_info_pt[i]->nmaster(); m++)
           {
             // We can simply check if the hanging scheme lists itself as a master
-            if (hang_info_pt[i]->master_node_pt(m)==slave_node_pt[non_vertex_pos[i]])
+            if (hang_info_pt[i]->master_node_pt(m)==dependent_node_pt[non_vertex_pos[i]])
             {
               node_is_really_shared = true;
 
@@ -4535,24 +4537,24 @@ namespace oomph
           // Now we can make the node hang, if it isn't a shared node
           if (!node_is_really_shared)
           {
-            slave_node_pt[non_vertex_pos[i]]->set_hanging_pt(hang_info_pt[i],-1);
+            dependent_node_pt[non_vertex_pos[i]]->set_hanging_pt(hang_info_pt[i],-1);
           }
         }
 
-      } // End of case where there are still slave nodes
+      } // End of case where there are still dependent nodes
 
 #ifdef PARANOID
-      // Check all slave nodes, hanging or otherwise
-      for (unsigned i=0; i<n_slave_nodes; i++)
+      // Check all dependent nodes, hanging or otherwise
+      for (unsigned i=0; i<n_dependent_nodes; i++)
       {
         // Check that weights sum to 1 for those that hang
-        if (slave_node_pt[i]->is_hanging())
+        if (dependent_node_pt[i]->is_hanging())
         {
           // Check that weights sum to 1
           double weight_sum = 0.0;
-          for (unsigned m=0; m<slave_node_pt[i]->hanging_pt()->nmaster(); m++)
+          for (unsigned m=0; m<dependent_node_pt[i]->hanging_pt()->nmaster(); m++)
           {
-            weight_sum += slave_node_pt[i]->hanging_pt()->master_weight(m);
+            weight_sum += dependent_node_pt[i]->hanging_pt()->master_weight(m);
           }
 
           // Warn if not
@@ -4572,7 +4574,7 @@ namespace oomph
           bool is_master = false;
           for (unsigned n=0; n<n_master_nodes; n++)
           {
-            if (slave_node_pt[i]==master_node_pt[n])
+            if (dependent_node_pt[i]==master_node_pt[n])
             {
               // Node is a master
               is_master = true;
@@ -4585,7 +4587,7 @@ namespace oomph
             // Throw error
             std::ostringstream error_string;
             error_string
-                << "This node in the slave element is neither" << std::endl
+                << "This node in the dependent element is neither" << std::endl
                 << "hanging or shared with a master element." << std::endl;
 
             throw OomphLibError(
@@ -4597,24 +4599,24 @@ namespace oomph
       }
 #endif
 
-      // Finally, Loop over all slave nodes and fine-tune their positions
+      // Finally, Loop over all dependent nodes and fine-tune their positions
       //-----------------------------------------------------------------
       // Here we simply set the node's positions to be consistent
       // with the hanging scheme. This is not strictly necessary
       // because it is done in the mesh adaptation before the node
       // becomes non-hanging later on. We make no attempt to ensure
       // (strong) continuity in the position across the mortar.
-      for (unsigned i=0; i<n_slave_nodes; i++)
+      for (unsigned i=0; i<n_dependent_nodes; i++)
       {
         // Only fine-tune hanging nodes
-        if (slave_node_pt[i]->is_hanging())
+        if (dependent_node_pt[i]->is_hanging())
         {
           //If we are doing the position, then
           if (value_id==-1)
           {
-            // Get the local coordinate of this slave node
+            // Get the local coordinate of this dependent node
             Vector<double> s_local(2);
-            this->local_coordinate_of_node(slave_node_number[i],s_local);
+            this->local_coordinate_of_node(dependent_node_number[i],s_local);
 
             // Get the position from interpolation in this element via
             // the hanging scheme
@@ -4623,8 +4625,8 @@ namespace oomph
 
             // Fine adjust the coordinates (macro map will pick up boundary
             // accurately but will lead to different element edges)
-            slave_node_pt[i]->x(0)=x_in_neighb[0];
-            slave_node_pt[i]->x(1)=x_in_neighb[1];
+            dependent_node_pt[i]->x(0)=x_in_neighb[0];
+            dependent_node_pt[i]->x(1)=x_in_neighb[1];
           }
         }
       }
@@ -8067,14 +8069,14 @@ namespace oomph
                                  s_hi_neigh,neigh_face,diff_level,
                                  in_neighbouring_tree);
 
-    // Work out master/slave faces
+    // Work out master/dependent faces
     //----------------------------
 
     // Set up booleans
     //bool h_type_master = false;
-    bool h_type_slave  = false;
+    bool h_type_dependent  = false;
     //bool p_type_master = false;
-    bool p_type_slave  = false;
+    bool p_type_dependent  = false;
 
     // Neighbour exists
     if (neigh_pt!=0)
@@ -8082,8 +8084,8 @@ namespace oomph
       // Check if neighbour is bigger than me
       if (diff_level!=0)
       {
-        // Slave at h-type non-conformity
-        h_type_slave = true;
+        // Dependent at h-type non-conformity
+        h_type_dependent = true;
       }
       // Check if neighbour is the same size as me
       else if (neigh_pt->nsons()==0)
@@ -8104,8 +8106,8 @@ namespace oomph
         }
         else if (neigh_p_order<my_p_order)
         {
-          // Slave at p-type non-conformity
-          p_type_slave = true;
+          // Dependent at p-type non-conformity
+          p_type_dependent = true;
         }
         else
         {
@@ -8125,9 +8127,9 @@ namespace oomph
       // Face is on a boundary
     }
 
-    // Work out master/slave edges
+    // Work out master/dependent edges
     //----------------------------
-    if (h_type_slave || p_type_slave || true)
+    if (h_type_dependent || p_type_dependent || true)
     {
       // Get edges of face and the face that shares that edge
       Vector<unsigned> face_edge(4), face_edge_other_face(4);
@@ -8293,9 +8295,9 @@ namespace oomph
 
           // Set up booleans
           //bool h_type_edge_master = false;
-          //bool h_type_edge_slave  = false;
+          //bool h_type_edge_dependent  = false;
           //bool p_type_edge_master = false;
-          //bool p_type_edge_slave  = false;
+          //bool p_type_edge_dependent  = false;
 
           // Flag to check if we have a new edge master
           bool new_edge_master = false;
@@ -8306,8 +8308,8 @@ namespace oomph
             // Check if neighbour is bigger than my biggest neighbour
             if (tmp_edge_diff_level<edge_diff_level)
             {
-              // Slave at h-type non-conformity
-              //h_type_edge_slave = true;
+              // Dependent at h-type non-conformity
+              //h_type_edge_dependent = true;
               new_edge_master = true;
               // Update edge_diff_level and p-order
               edge_diff_level = tmp_edge_diff_level;
@@ -8334,8 +8336,8 @@ namespace oomph
               }
               else if (tmp_edge_neigh_p_order<edge_p_order)
               {
-                // Slave at p-type non-conformity
-                //p_type_edge_slave = true;
+                // Dependent at p-type non-conformity
+                //p_type_edge_dependent = true;
                 new_edge_master = true;
                 // Update edge_diff_level and p-order
                 edge_diff_level = tmp_edge_diff_level;
@@ -8372,7 +8374,7 @@ namespace oomph
             neigh_edge       = tmp_neigh_edge;
             edge_diff_level  = tmp_edge_diff_level;
 
-            // Set this edge as slave
+            // Set this edge as dependent
             my_edge_is_master = false;
           }
 
@@ -8431,11 +8433,11 @@ namespace oomph
           edge_neigh_obj_pt = dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
                               (edge_neigh_pt->object_pt());
 
-          // Create vector of master and slave nodes
+          // Create vector of master and dependent nodes
           //----------------------------------------
-          Vector<Node*> master_node_pt, slave_node_pt;
-          Vector<unsigned> master_node_number, slave_node_number;
-          Vector<Vector<double> > slave_node_s_fraction;
+          Vector<Node*> master_node_pt, dependent_node_pt;
+          Vector<unsigned> master_node_number, dependent_node_number;
+          Vector<Vector<double> > dependent_node_s_fraction;
 
           //Number of nodes in one dimension
           const unsigned my_n_p = this->ninterpolating_node_1d(value_id);
@@ -8728,29 +8730,29 @@ namespace oomph
                                   OOMPH_EXCEPTION_LOCATION);
             }
 
-            // Add node to vector of slave element nodes
-            slave_node_number.push_back(local_node_number);
-            slave_node_pt.push_back(local_node_pt);
+            // Add node to vector of dependent element nodes
+            dependent_node_number.push_back(local_node_number);
+            dependent_node_pt.push_back(local_node_pt);
 
             // Store node's local fraction
-            slave_node_s_fraction.push_back(s_fraction);
+            dependent_node_s_fraction.push_back(s_fraction);
           }
 
-          // Store the number of slave and master nodes for use later
-          const unsigned n_slave_nodes = slave_node_pt.size();
+          // Store the number of dependent and master nodes for use later
+          const unsigned n_dependent_nodes = dependent_node_pt.size();
           const unsigned n_master_nodes = master_node_pt.size();
-          const unsigned slave_element_nnode_1d = my_n_p;
+          const unsigned dependent_element_nnode_1d = my_n_p;
           const unsigned master_element_nnode_1d = neigh_n_p;
 
           // Storage for master shapes
           Shape master_shapes(edge_neigh_obj_pt->ninterpolating_node(value_id));
 
-          // Get master and slave nodal positions
+          // Get master and dependent nodal positions
           //-------------------------------------
-          Vector<double> slave_nodal_position;
-          Vector<double> slave_weight(slave_element_nnode_1d);
-          Orthpoly::gll_nodes(slave_element_nnode_1d,
-                              slave_nodal_position,slave_weight);
+          Vector<double> dependent_nodal_position;
+          Vector<double> dependent_weight(dependent_element_nnode_1d);
+          Orthpoly::gll_nodes(dependent_element_nnode_1d,
+                              dependent_nodal_position,dependent_weight);
           Vector<double> master_nodal_position;
           Vector<double> master_weight(master_element_nnode_1d);
           Orthpoly::gll_nodes(master_element_nnode_1d,
@@ -8759,12 +8761,12 @@ namespace oomph
           // Apply the (1D) vertex matching condition
           //-----------------------------------------
           // Vertiex matching is ensured automatically in cases where there is a node
-          // at each end of the mortar that is shared between the master and slave
+          // at each end of the mortar that is shared between the master and dependent
           // elements. Where this is not the case, the vertex matching condition must
           // be enforced by constraining the value of the unknown at the node on the
-          // slave side to be the same as the value at that location in the master.
+          // dependent side to be the same as the value at that location in the master.
 
-          // Store positions of the mortar vertex/non-vertex nodes in the slave
+          // Store positions of the mortar vertex/non-vertex nodes in the dependent
           // element
           const unsigned n_mortar_vertices = 2;
           Vector<unsigned> vertex_pos(n_mortar_vertices);
@@ -8777,7 +8779,7 @@ namespace oomph
           // If the node is on a master edge, we may be setting the
           // hanging info incorrectly. Hanging schemes (if they are
           // required) for such nodes are instead computed by the
-          // slave edge. We dont't want to overwrite them here!
+          // dependent edge. We dont't want to overwrite them here!
           std::vector<bool> mortar_vertex_on_master_edge(n_mortar_vertices);
           for (unsigned v=0; v<n_mortar_vertices; v++)
           {
@@ -8789,7 +8791,7 @@ namespace oomph
             {
               // Work out this node's location in the master
               s_in_neigh[i] = edge_s_lo_neigh[i] +
-                              slave_node_s_fraction[vertex_pos[v]][edge_translate_s[i]]*
+                              dependent_node_s_fraction[vertex_pos[v]][edge_translate_s[i]]*
                               (edge_s_hi_neigh[i] - edge_s_lo_neigh[i]);
 
               // Check if local coordinate in master element takes non-extreme value
@@ -8828,7 +8830,7 @@ namespace oomph
             bool node_is_shared=false;
             for (unsigned i=0; i<master_node_pt.size(); i++)
             {
-              if (slave_node_pt[vertex_pos[v]]==master_node_pt[i])
+              if (dependent_node_pt[vertex_pos[v]]==master_node_pt[i])
               {
                 node_is_shared=true;
                 break;
@@ -8840,23 +8842,23 @@ namespace oomph
             if (!node_is_shared)
             {
               // Calculate weights. These are just the master shapes evaluated at
-              // this slave node's position
+              // this dependent node's position
 
               // Work out this node's location in the master
               Vector<double> s_in_neigh(3);
               for (unsigned i=0; i<3; i++)
               {
                 s_in_neigh[i] = edge_s_lo_neigh[i] +
-                                slave_node_s_fraction[vertex_pos[v]][edge_translate_s[i]]*
+                                dependent_node_s_fraction[vertex_pos[v]][edge_translate_s[i]]*
                                 (edge_s_hi_neigh[i] - edge_s_lo_neigh[i]);
               }
 
-              // Get master shapes at slave nodal positions
+              // Get master shapes at dependent nodal positions
               edge_neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
 
               // Remove any existing hanging node info
               // (This may be a bit wasteful, but guarantees correctness)
-              slave_node_pt[vertex_pos[v]]->set_nonhanging();
+              dependent_node_pt[vertex_pos[v]]->set_nonhanging();
 
               // Don't include master nodes with zero weights
               Vector<unsigned> master_node_zero_weight;
@@ -8896,13 +8898,13 @@ namespace oomph
               // }
 
               // Make node hang
-              slave_node_pt[vertex_pos[v]]->set_hanging_pt(explicit_hang_pt,-1);
+              dependent_node_pt[vertex_pos[v]]->set_hanging_pt(explicit_hang_pt,-1);
 
               //// Print out hanging scheme
               //std::cout << "Hanging node: "
-              //          << slave_node_pt[vertex_pos[v]]->x(0) << "  "
-              //          << slave_node_pt[vertex_pos[v]]->x(1) << "  "
-              //          << slave_node_pt[vertex_pos[v]]->x(2) << "  "
+              //          << dependent_node_pt[vertex_pos[v]]->x(0) << "  "
+              //          << dependent_node_pt[vertex_pos[v]]->x(1) << "  "
+              //          << dependent_node_pt[vertex_pos[v]]->x(2) << "  "
               //          << std::endl;
               //for(unsigned m=0; m<explicit_hang_pt->nmaster(); m++)
               // {
@@ -8929,55 +8931,55 @@ namespace oomph
             }
           }
 
-          // Check that there are actually slave nodes for which we still need to
+          // Check that there are actually dependent nodes for which we still need to
           // construct a hanging scheme. If not then there is nothing more to do.
-          if (n_slave_nodes-n_mortar_vertices > 0)
+          if (n_dependent_nodes-n_mortar_vertices > 0)
           {
 
             // Assemble mass matrix for mortar
             //--------------------------------
-            Vector<double> psi(n_slave_nodes-n_mortar_vertices);
-            Vector<double> diag_M(n_slave_nodes-n_mortar_vertices);
+            Vector<double> psi(n_dependent_nodes-n_mortar_vertices);
+            Vector<double> diag_M(n_dependent_nodes-n_mortar_vertices);
             Vector<Vector<double> > shared_node_M(n_mortar_vertices);
             for (unsigned i=0; i<shared_node_M.size(); i++)
-            {shared_node_M[i].resize(n_slave_nodes-n_mortar_vertices);}
+            {shared_node_M[i].resize(n_dependent_nodes-n_mortar_vertices);}
 
-            // Fill in part corresponding to slave nodal positions (unknown)
-            for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+            // Fill in part corresponding to dependent nodal positions (unknown)
+            for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
             {
               // Use L'Hosptal's rule:
-              psi[i] = pow(-1.0,int((slave_element_nnode_1d-1)-i-1))
-                       *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
-                                              slave_nodal_position[non_vertex_pos[i]]);
+              psi[i] = pow(-1.0,int((dependent_element_nnode_1d-1)-i-1))
+                       *-Orthpoly::ddlegendre(dependent_element_nnode_1d-1,
+                                              dependent_nodal_position[non_vertex_pos[i]]);
               // Put in contribution
-              diag_M[i] = psi[i]*slave_weight[non_vertex_pos[i]];
+              diag_M[i] = psi[i]*dependent_weight[non_vertex_pos[i]];
             }
 
-            // Fill in part corresponding to slave element vertices (known)
+            // Fill in part corresponding to dependent element vertices (known)
             for (unsigned v=0; v<shared_node_M.size(); v++)
             {
-              for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+              for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
               {
                 // Check if denominator is zero
-                if (std::fabs(slave_nodal_position[non_vertex_pos[i]]
-                              - slave_nodal_position[vertex_pos[v]]) >= 1.0e-8)
+                if (std::fabs(dependent_nodal_position[non_vertex_pos[i]]
+                              - dependent_nodal_position[vertex_pos[v]]) >= 1.0e-8)
                 {
                   // We're ok
-                  psi[i] = pow(-1.0,int((slave_element_nnode_1d-1)-i-1))
-                           * Orthpoly::dlegendre(slave_element_nnode_1d-1,
-                                                 slave_nodal_position[vertex_pos[v]])
-                           / (slave_nodal_position[non_vertex_pos[i]]
-                              - slave_nodal_position[vertex_pos[v]]);
+                  psi[i] = pow(-1.0,int((dependent_element_nnode_1d-1)-i-1))
+                           * Orthpoly::dlegendre(dependent_element_nnode_1d-1,
+                                                 dependent_nodal_position[vertex_pos[v]])
+                           / (dependent_nodal_position[non_vertex_pos[i]]
+                              - dependent_nodal_position[vertex_pos[v]]);
                 }
                 // Check if numerator is zero
-                else if (std::fabs(Orthpoly::dlegendre(slave_element_nnode_1d-1,
-                                                       slave_nodal_position[vertex_pos[v]]))
+                else if (std::fabs(Orthpoly::dlegendre(dependent_element_nnode_1d-1,
+                                                       dependent_nodal_position[vertex_pos[v]]))
                          < 1.0e-8)
                 {
                   // We can use l'hopital's rule
-                  psi[i] = pow(-1.0,int((slave_element_nnode_1d-1)-i-1))
-                           *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
-                                                  slave_nodal_position[non_vertex_pos[i]]);
+                  psi[i] = pow(-1.0,int((dependent_element_nnode_1d-1)-i-1))
+                           *-Orthpoly::ddlegendre(dependent_element_nnode_1d-1,
+                                                  dependent_nodal_position[non_vertex_pos[i]]);
                 }
                 else
                 {
@@ -8989,7 +8991,7 @@ namespace oomph
                     OOMPH_EXCEPTION_LOCATION);
                 }
                 // Put in contribution
-                shared_node_M[v][i] = psi[i]*slave_weight[vertex_pos[v]];
+                shared_node_M[v][i] = psi[i]*dependent_weight[vertex_pos[v]];
               }
             }
 
@@ -8997,7 +8999,7 @@ namespace oomph
             //--------------------------------------------
 
             // Have only one local projection matrix because there is just one master
-            Vector<Vector<double> > P(n_slave_nodes-n_mortar_vertices);
+            Vector<Vector<double> > P(n_dependent_nodes-n_mortar_vertices);
             for (unsigned i=0; i<P.size(); i++) {P[i].resize(n_master_nodes,0.0);}
 
             //Storage for local coordinate
@@ -9005,18 +9007,18 @@ namespace oomph
 
             // Sum contributions from master element shapes (quadrature).
             // The order of quadrature must be high enough to evaluate a polynomial
-            // of order N_s + N_m - 3 exactly, where N_s = n_slave_nodes, N_m =
+            // of order N_s + N_m - 3 exactly, where N_s = n_dependent_nodes, N_m =
             // n_master_nodes.
             // (Use pointers for the quadrature knots and weights so that
             // data is not unnecessarily copied)
             //unsigned quadrature_order =
-            // std::max(slave_element_nnode_1d,master_element_nnode_1d);
+            // std::max(dependent_element_nnode_1d,master_element_nnode_1d);
             Vector<double> *quadrature_knot, *quadrature_weight;
-            if (slave_element_nnode_1d >= master_element_nnode_1d)
+            if (dependent_element_nnode_1d >= master_element_nnode_1d)
             {
-              // Use the same quadrature order as the slave element (me)
-              quadrature_knot = &slave_nodal_position;
-              quadrature_weight = &slave_weight;
+              // Use the same quadrature order as the dependent element (me)
+              quadrature_knot = &dependent_nodal_position;
+              quadrature_weight = &dependent_weight;
             }
             else
             {
@@ -9028,29 +9030,29 @@ namespace oomph
             // Quadrature loop
             for (unsigned q=0; q<(*quadrature_weight).size(); q++)
             {
-              // Evaluate mortar test functions at the quadrature knots in the slave
+              // Evaluate mortar test functions at the quadrature knots in the dependent
               //s[active_coord_index] = (*quadrature_knot)[q];
               Vector<double> s_on_mortar(1);
               s_on_mortar[0] = (*quadrature_knot)[q];
 
               // Get psi
-              for (unsigned k=0; k<n_slave_nodes-n_mortar_vertices; k++)
+              for (unsigned k=0; k<n_dependent_nodes-n_mortar_vertices; k++)
               {
                 // Check if denominator is zero
-                if (std::fabs(slave_nodal_position[non_vertex_pos[k]]-s_on_mortar[0]) >= 1.0e-08)
+                if (std::fabs(dependent_nodal_position[non_vertex_pos[k]]-s_on_mortar[0]) >= 1.0e-08)
                 {
                   // We're ok
-                  psi[k] = pow(-1.0,int((slave_element_nnode_1d-1)-k-1))
-                           * Orthpoly::dlegendre(slave_element_nnode_1d-1,s_on_mortar[0])
-                           / (slave_nodal_position[non_vertex_pos[k]]-s_on_mortar[0]);
+                  psi[k] = pow(-1.0,int((dependent_element_nnode_1d-1)-k-1))
+                           * Orthpoly::dlegendre(dependent_element_nnode_1d-1,s_on_mortar[0])
+                           / (dependent_nodal_position[non_vertex_pos[k]]-s_on_mortar[0]);
                 }
                 // Check if numerator is zero
-                else if (std::fabs(Orthpoly::dlegendre(slave_element_nnode_1d-1,s_on_mortar[0]))
+                else if (std::fabs(Orthpoly::dlegendre(dependent_element_nnode_1d-1,s_on_mortar[0]))
                          < 1.0e-8)
                 {
                   // We can use l'Hopital's rule
-                  psi[k] = pow(-1.0,int((slave_element_nnode_1d-1)-k-1))
-                           * -Orthpoly::ddlegendre(slave_element_nnode_1d-1,s_on_mortar[0]);
+                  psi[k] = pow(-1.0,int((dependent_element_nnode_1d-1)-k-1))
+                           * -Orthpoly::ddlegendre(dependent_element_nnode_1d-1,s_on_mortar[0]);
                 }
                 else
                 {
@@ -9063,13 +9065,13 @@ namespace oomph
                 }
               }
 
-              // Convert coordinate on mortar to local fraction in slave element
+              // Convert coordinate on mortar to local fraction in dependent element
               Vector<double> s_fraction(3);
               for (unsigned i=0; i<3; i++)
               {
                 s_fraction[i] = (i==active_coord_index)
                                 ? 0.5*(s_on_mortar[0]+1.0)
-                                : slave_node_s_fraction[vertex_pos[0]][i];
+                                : dependent_node_s_fraction[vertex_pos[0]][i];
               }
 
               // Project active coordinate into master element
@@ -9084,7 +9086,7 @@ namespace oomph
               edge_neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
 
               // Populate local projection matrix
-              for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+              for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
               {
                 for (unsigned j=0; j<n_master_nodes; j++)
                 {
@@ -9112,13 +9114,13 @@ namespace oomph
             // Assemble contributions from mortar vertex nodes
             for (unsigned v=0; v<n_mortar_vertices; v++)
             {
-              // Convert coordinate on mortar to local fraction in slave element
+              // Convert coordinate on mortar to local fraction in dependent element
               Vector<double> s_fraction(3);
               for (unsigned i=0; i<3; i++)
               {
                 s_fraction[i] = (i==active_coord_index)
-                                ? 0.5*(slave_nodal_position[vertex_pos[v]]+1.0)
-                                : slave_node_s_fraction[vertex_pos[0]][i];
+                                ? 0.5*(dependent_nodal_position[vertex_pos[v]]+1.0)
+                                : dependent_node_s_fraction[vertex_pos[0]][i];
               }
 
               // Project active coordinate into master element
@@ -9129,10 +9131,10 @@ namespace oomph
                                 (edge_s_hi_neigh[i] - edge_s_lo_neigh[i]);
               }
 
-              // Get master shapes at slave nodal positions
+              // Get master shapes at dependent nodal positions
               edge_neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
 
-              for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+              for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
               {
                 for (unsigned k=0; k<n_master_nodes; k++)
                 {
@@ -9155,7 +9157,7 @@ namespace oomph
 
             // Solve mortar system
             //--------------------
-            for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+            for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
             {
               for (unsigned j=0; j<n_master_nodes; j++)
               {
@@ -9177,8 +9179,8 @@ namespace oomph
 
             // Create and populate structures to hold the hanging info
             //--------------------------------------------------------
-            Vector<HangInfo*> hang_info_pt(n_slave_nodes);
-            for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+            Vector<HangInfo*> hang_info_pt(n_dependent_nodes);
+            for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
             {
               // Don't include master nodes with zero weights
               Vector<unsigned> master_node_zero_weight;
@@ -9213,15 +9215,15 @@ namespace oomph
 
             //// Create structures to hold the hanging info
             ////-------------------------------------------
-            //Vector<HangInfo*> hang_info_pt(n_slave_nodes);
-            //for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+            //Vector<HangInfo*> hang_info_pt(n_dependent_nodes);
+            //for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
             // {
             //  hang_info_pt[i] = new HangInfo(n_master_nodes);
             // }
             //
             //// Copy information to hanging nodes
             ////----------------------------------
-            //for(unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+            //for(unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
             // {
             //  for(unsigned j=0; j<n_master_nodes; j++)
             //   {
@@ -9231,7 +9233,7 @@ namespace oomph
 
             // Set pointers to hanging info
             //-----------------------------
-            for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+            for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
             {
               // Check that the node shoule actually hang.
               // That is, if the polynomial orders of the elements at a p-type
@@ -9241,7 +9243,7 @@ namespace oomph
               for (unsigned m=0; m<hang_info_pt[i]->nmaster(); m++)
               {
                 // We can simply check if the hanging scheme lists itself as a master
-                if (hang_info_pt[i]->master_node_pt(m)==slave_node_pt[non_vertex_pos[i]])
+                if (hang_info_pt[i]->master_node_pt(m)==dependent_node_pt[non_vertex_pos[i]])
                 {
                   node_is_really_shared = true;
 
@@ -9262,13 +9264,13 @@ namespace oomph
               // Now we can make the node hang, if it isn't a shared node
               if (!node_is_really_shared)
               {
-                slave_node_pt[non_vertex_pos[i]]->set_hanging_pt(hang_info_pt[i],-1);
+                dependent_node_pt[non_vertex_pos[i]]->set_hanging_pt(hang_info_pt[i],-1);
 
                 //// Print out hanging scheme
                 //std::cout << "Hanging node: "
-                //          << slave_node_pt[non_vertex_pos[i]]->x(0) << "  "
-                //          << slave_node_pt[non_vertex_pos[i]]->x(1) << "  "
-                //          << slave_node_pt[non_vertex_pos[i]]->x(2) << "  "
+                //          << dependent_node_pt[non_vertex_pos[i]]->x(0) << "  "
+                //          << dependent_node_pt[non_vertex_pos[i]]->x(1) << "  "
+                //          << dependent_node_pt[non_vertex_pos[i]]->x(2) << "  "
                 //          << std::endl;
                 //for(unsigned m=0; m<hang_info_pt[i]->nmaster(); m++)
                 // {
@@ -9282,17 +9284,17 @@ namespace oomph
               }
             }
 
-          } // End of case where there are still slave nodes
+          } // End of case where there are still dependent nodes
 
-        } // End of edge is slave
+        } // End of edge is dependent
 
       } //End of loop over face edges
 
-    } // End of if face is slave
+    } // End of if face is dependent
 
     // Now do the mortaring
     //---------------------
-    if (h_type_slave || p_type_slave)
+    if (h_type_dependent || p_type_dependent)
     {
       //Compute the active coordinate indices along the this side of mortar
       Vector<unsigned> active_coord_index(2);
@@ -9324,11 +9326,11 @@ namespace oomph
       neigh_obj_pt = dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
                      (neigh_pt->object_pt());
 
-      // Create vector of master and slave nodes
+      // Create vector of master and dependent nodes
       //----------------------------------------
-      Vector<Node*> master_node_pt, slave_node_pt;
-      Vector<unsigned> master_node_number, slave_node_number;
-      Vector<Vector<double> > slave_node_s_fraction;
+      Vector<Node*> master_node_pt, dependent_node_pt;
+      Vector<unsigned> master_node_number, dependent_node_number;
+      Vector<Vector<double> > dependent_node_s_fraction;
 
       //Number of nodes in one dimension
       const unsigned my_n_p = this->ninterpolating_node_1d(value_id);
@@ -9490,29 +9492,29 @@ namespace oomph
                                 OOMPH_EXCEPTION_LOCATION);
           }
 
-          // Add node to vector of slave element nodes
-          slave_node_number.push_back(local_node_number);
-          slave_node_pt.push_back(local_node_pt);
+          // Add node to vector of dependent element nodes
+          dependent_node_number.push_back(local_node_number);
+          dependent_node_pt.push_back(local_node_pt);
 
           // Store node's local fraction
-          slave_node_s_fraction.push_back(s_fraction);
+          dependent_node_s_fraction.push_back(s_fraction);
         }
       }
 
-      // Store the number of slave and master nodes for use later
-      const unsigned n_slave_nodes = slave_node_pt.size();
+      // Store the number of dependent and master nodes for use later
+      const unsigned n_dependent_nodes = dependent_node_pt.size();
       const unsigned n_master_nodes = master_node_pt.size();
-      const unsigned slave_element_nnode_1d = my_n_p;
+      const unsigned dependent_element_nnode_1d = my_n_p;
       const unsigned master_element_nnode_1d = neigh_n_p;
 
-      //// Print out slave and master node coords
-      //std::cout << "Slave nodes on face: " << OcTree::Direct_string[my_face] << std::endl;
-      //for(unsigned i=0; i<slave_node_pt.size(); i++)
+      //// Print out dependent and master node coords
+      //std::cout << "Dependent nodes on face: " << OcTree::Direct_string[my_face] << std::endl;
+      //for(unsigned i=0; i<dependent_node_pt.size(); i++)
       // {
       //  std::cout << i << ": "
-      //            << slave_node_pt[i]->x(0) << "  "
-      //            << slave_node_pt[i]->x(1) << "  "
-      //            << slave_node_pt[i]->x(2) << "  "
+      //            << dependent_node_pt[i]->x(0) << "  "
+      //            << dependent_node_pt[i]->x(1) << "  "
+      //            << dependent_node_pt[i]->x(2) << "  "
       //            << std::endl;
       // }
       //std::cout << "Master nodes on face: " << OcTree::Direct_string[my_face] << std::endl;
@@ -9528,13 +9530,13 @@ namespace oomph
       // Storage for master shapes
       Shape master_shapes(neigh_obj_pt->ninterpolating_node(value_id));
 
-      // Get master and slave nodal positions
+      // Get master and dependent nodal positions
       //-------------------------------------
       // Get in 1D
-      Vector<double> slave_nodal_position_1d;
-      Vector<double> slave_weight_1d(slave_element_nnode_1d);
-      Orthpoly::gll_nodes(slave_element_nnode_1d,
-                          slave_nodal_position_1d,slave_weight_1d);
+      Vector<double> dependent_nodal_position_1d;
+      Vector<double> dependent_weight_1d(dependent_element_nnode_1d);
+      Orthpoly::gll_nodes(dependent_element_nnode_1d,
+                          dependent_nodal_position_1d,dependent_weight_1d);
       Vector<double> master_nodal_position_1d;
       Vector<double> master_weight_1d(master_element_nnode_1d);
       Orthpoly::gll_nodes(master_element_nnode_1d,
@@ -9542,10 +9544,10 @@ namespace oomph
 
       // Storage for 2D
       Vector<Vector<double> >
-      slave_nodal_position(slave_element_nnode_1d*slave_element_nnode_1d);
-      for (unsigned i=0; i<slave_nodal_position.size(); i++)
-      {slave_nodal_position[i].resize(2);}
-      Vector<double> slave_weight(slave_element_nnode_1d*slave_element_nnode_1d);
+      dependent_nodal_position(dependent_element_nnode_1d*dependent_element_nnode_1d);
+      for (unsigned i=0; i<dependent_nodal_position.size(); i++)
+      {dependent_nodal_position[i].resize(2);}
+      Vector<double> dependent_weight(dependent_element_nnode_1d*dependent_element_nnode_1d);
       Vector<Vector<double> >
       master_nodal_position(master_element_nnode_1d*master_element_nnode_1d);
       for (unsigned i=0; i<master_nodal_position.size(); i++)
@@ -9553,15 +9555,15 @@ namespace oomph
       Vector<double> master_weight(master_element_nnode_1d*master_element_nnode_1d);
 
       // Fill in coordinates and weights in 2D
-      unsigned slave_index = 0;
-      for (unsigned i=0; i<slave_element_nnode_1d; i++)
+      unsigned dependent_index = 0;
+      for (unsigned i=0; i<dependent_element_nnode_1d; i++)
       {
-        for (unsigned j=0; j<slave_element_nnode_1d; j++)
+        for (unsigned j=0; j<dependent_element_nnode_1d; j++)
         {
-          slave_nodal_position[slave_index][0] = slave_nodal_position_1d[i];
-          slave_nodal_position[slave_index][1] = slave_nodal_position_1d[j];
-          slave_weight[slave_index] = slave_weight_1d[i]*slave_weight_1d[j];
-          slave_index++;
+          dependent_nodal_position[dependent_index][0] = dependent_nodal_position_1d[i];
+          dependent_nodal_position[dependent_index][1] = dependent_nodal_position_1d[j];
+          dependent_weight[dependent_index] = dependent_weight_1d[i]*dependent_weight_1d[j];
+          dependent_index++;
         }
       }
       unsigned master_index = 0;
@@ -9579,29 +9581,29 @@ namespace oomph
       // Apply the vertex matching condition
       //------------------------------------
       // Vertiex matching is ensured automatically in cases where there is a node
-      // at each end of the mortar that is shared between the master and slave
+      // at each end of the mortar that is shared between the master and dependent
       // elements. Where this is not the case, the vertex matching condition must
       // be enforced by constraining the value of the unknown at the node on the
-      // slave side to be the same as the value at that location in the master.
+      // dependent side to be the same as the value at that location in the master.
 
-      // Store positions of the mortar vertex/non-vertex nodes in the slave element
+      // Store positions of the mortar vertex/non-vertex nodes in the dependent element
       //const unsigned n_mortar_vertices = 4;
       //Vector<unsigned> vertex_pos(n_mortar_vertices);
       //vertex_pos[0] = 0;
       //vertex_pos[1] = my_n_p-1;
       //vertex_pos[2] = my_n_p*(my_n_p-1);
       //vertex_pos[3] = my_n_p*my_n_p-1;
-      Vector<unsigned> non_vertex_pos((slave_element_nnode_1d-2)*(slave_element_nnode_1d-2));
+      Vector<unsigned> non_vertex_pos((dependent_element_nnode_1d-2)*(dependent_element_nnode_1d-2));
       unsigned nvindex = 0;
-      for (unsigned i=1; i<slave_element_nnode_1d-1; i++)
+      for (unsigned i=1; i<dependent_element_nnode_1d-1; i++)
       {
-        for (unsigned j=1; j<slave_element_nnode_1d-1; j++)
+        for (unsigned j=1; j<dependent_element_nnode_1d-1; j++)
         {
-          non_vertex_pos[nvindex++] = i*slave_element_nnode_1d + j;
+          non_vertex_pos[nvindex++] = i*dependent_element_nnode_1d + j;
         }
       }
       Vector<unsigned> vertex_pos;
-      for (unsigned i=0; i<n_slave_nodes; i++)
+      for (unsigned i=0; i<n_dependent_nodes; i++)
       {
         // Check if node number is in the non-vertex storage
         bool node_is_vertex = true;
@@ -9623,21 +9625,21 @@ namespace oomph
       // Store number of mortar vertices
       const unsigned n_mortar_vertices = vertex_pos.size();
 
-      // Check that there are actually slave nodes for which we still need to
+      // Check that there are actually dependent nodes for which we still need to
       // construct a hanging scheme. If not then there is nothing more to do.
-      if (n_slave_nodes-n_mortar_vertices > 0)
+      if (n_dependent_nodes-n_mortar_vertices > 0)
       {
 
         // Assemble mass matrix for mortar
         //--------------------------------
-        Vector<double> psi(n_slave_nodes-n_mortar_vertices);
-        Vector<double> diag_M(n_slave_nodes-n_mortar_vertices);
+        Vector<double> psi(n_dependent_nodes-n_mortar_vertices);
+        Vector<double> diag_M(n_dependent_nodes-n_mortar_vertices);
         Vector<Vector<double> > shared_node_M(n_mortar_vertices);
         for (unsigned i=0; i<shared_node_M.size(); i++)
-        {shared_node_M[i].resize(n_slave_nodes-n_mortar_vertices);}
+        {shared_node_M[i].resize(n_dependent_nodes-n_mortar_vertices);}
 
-        // Fill in part corresponding to slave nodal positions (unknown)
-        for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        // Fill in part corresponding to dependent nodal positions (unknown)
+        for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
         {
           // Mortar test functions in 2D are just the cross product of the 1D test
           // functions
@@ -9646,14 +9648,14 @@ namespace oomph
           // Take product in each direction
           for (unsigned dir=0; dir<2; dir++)
           {
-            unsigned index1d = (dir==0) ? i : i % (slave_element_nnode_1d-2);
+            unsigned index1d = (dir==0) ? i : i % (dependent_element_nnode_1d-2);
             // Use L'Hosptal's rule:
-            psi[i] *= pow(-1.0,int((slave_element_nnode_1d-1)-index1d-1))
-                      *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
-                                             slave_nodal_position[non_vertex_pos[i]][dir]);
+            psi[i] *= pow(-1.0,int((dependent_element_nnode_1d-1)-index1d-1))
+                      *-Orthpoly::ddlegendre(dependent_element_nnode_1d-1,
+                                             dependent_nodal_position[non_vertex_pos[i]][dir]);
           }
           // Put in contribution
-          diag_M[i] = psi[i]*slave_weight[non_vertex_pos[i]];
+          diag_M[i] = psi[i]*dependent_weight[non_vertex_pos[i]];
         }
 
         //// Print out diag(M)
@@ -9664,10 +9666,10 @@ namespace oomph
         // }
         //std::cout << std::endl;
 
-        // Fill in part corresponding to slave element vertices (known)
+        // Fill in part corresponding to dependent element vertices (known)
         for (unsigned v=0; v<shared_node_M.size(); v++)
         {
-          for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+          for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
           {
             // Mortar test functions in 2D are just the cross product of the 1D test
             // functions
@@ -9676,28 +9678,28 @@ namespace oomph
             // Take product in each direction
             for (unsigned dir=0; dir<2; dir++)
             {
-              unsigned index1d = (dir==0) ? i : i % (slave_element_nnode_1d-2);
+              unsigned index1d = (dir==0) ? i : i % (dependent_element_nnode_1d-2);
               // Check if denominator is zero
-              if (std::fabs(slave_nodal_position[non_vertex_pos[i]][dir]
-                            - slave_nodal_position[vertex_pos[v]][dir]) >= 1.0e-8)
+              if (std::fabs(dependent_nodal_position[non_vertex_pos[i]][dir]
+                            - dependent_nodal_position[vertex_pos[v]][dir]) >= 1.0e-8)
               {
                 // We're ok
-                psi[i] *= pow(-1.0,int((slave_element_nnode_1d-1)-index1d-1))
-                          * Orthpoly::dlegendre(slave_element_nnode_1d-1,
-                                                slave_nodal_position[vertex_pos[v]][dir])
-                          / (slave_nodal_position[non_vertex_pos[i]][dir]
-                             - slave_nodal_position[vertex_pos[v]][dir]);
+                psi[i] *= pow(-1.0,int((dependent_element_nnode_1d-1)-index1d-1))
+                          * Orthpoly::dlegendre(dependent_element_nnode_1d-1,
+                                                dependent_nodal_position[vertex_pos[v]][dir])
+                          / (dependent_nodal_position[non_vertex_pos[i]][dir]
+                             - dependent_nodal_position[vertex_pos[v]][dir]);
               }
               // Check if numerator is zero
               else if (std::fabs(
-                         Orthpoly::dlegendre(slave_element_nnode_1d-1,
-                                             slave_nodal_position[vertex_pos[v]][dir]))
+                         Orthpoly::dlegendre(dependent_element_nnode_1d-1,
+                                             dependent_nodal_position[vertex_pos[v]][dir]))
                        < 1.0e-8)
               {
                 // We can use l'hopital's rule
-                psi[i] *= pow(-1.0,int((slave_element_nnode_1d-1)-index1d-1))
-                          *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
-                                                 slave_nodal_position[non_vertex_pos[i]][dir]);
+                psi[i] *= pow(-1.0,int((dependent_element_nnode_1d-1)-index1d-1))
+                          *-Orthpoly::ddlegendre(dependent_element_nnode_1d-1,
+                                                 dependent_nodal_position[non_vertex_pos[i]][dir]);
               }
               else
               {
@@ -9710,7 +9712,7 @@ namespace oomph
               }
             }
             // Put in contribution
-            shared_node_M[v][i] = psi[i]*slave_weight[vertex_pos[v]];
+            shared_node_M[v][i] = psi[i]*dependent_weight[vertex_pos[v]];
           }
         }
 
@@ -9729,7 +9731,7 @@ namespace oomph
         //--------------------------------------------
 
         // Have only one local projection matrix because there is just one master
-        Vector<Vector<double> > P(n_slave_nodes-n_mortar_vertices);
+        Vector<Vector<double> > P(n_dependent_nodes-n_mortar_vertices);
         for (unsigned i=0; i<P.size(); i++) {P[i].resize(n_master_nodes,0.0);}
 
         //Storage for local coordinate
@@ -9737,19 +9739,19 @@ namespace oomph
 
         // Sum contributions from master element shapes (quadrature).
         // The order of quadrature must be high enough to evaluate a polynomial
-        // of order N_s + N_m - 3 exactly, where N_s = n_slave_nodes, N_m =
+        // of order N_s + N_m - 3 exactly, where N_s = n_dependent_nodes, N_m =
         // n_master_nodes.
         // (Use pointers for the quadrature knots and weights so that
         // data is not unnecessarily copied)
         //unsigned quadrature_order =
-        // std::max(slave_element_nnode_1d,master_element_nnode_1d);
+        // std::max(dependent_element_nnode_1d,master_element_nnode_1d);
         Vector<Vector<double> > *quadrature_knot;
         Vector<double> *quadrature_weight;
-        if (slave_element_nnode_1d >= master_element_nnode_1d)
+        if (dependent_element_nnode_1d >= master_element_nnode_1d)
         {
-          // Use the same quadrature order as the slave element (me)
-          quadrature_knot = &slave_nodal_position;
-          quadrature_weight = &slave_weight;
+          // Use the same quadrature order as the dependent element (me)
+          quadrature_knot = &dependent_nodal_position;
+          quadrature_weight = &dependent_weight;
         }
         else
         {
@@ -9761,13 +9763,13 @@ namespace oomph
         // Quadrature loop
         for (unsigned q=0; q<(*quadrature_weight).size(); q++)
         {
-          // Evaluate mortar test functions at the quadrature knots in the slave
+          // Evaluate mortar test functions at the quadrature knots in the dependent
           Vector<double> s_on_mortar(2);
           for (unsigned i=0; i<2; i++)
           {s_on_mortar[i] = (*quadrature_knot)[q][i];}
 
           // Get psi
-          for (unsigned k=0; k<n_slave_nodes-n_mortar_vertices; k++)
+          for (unsigned k=0; k<n_dependent_nodes-n_mortar_vertices; k++)
           {
             // Mortar test functions in 2D are just the cross product of the 1D test
             // functions
@@ -9776,28 +9778,28 @@ namespace oomph
             // Take product in each direction
             for (unsigned dir=0; dir<2; dir++)
             {
-              unsigned index1d = (dir==0) ? k : k % (slave_element_nnode_1d-2);
+              unsigned index1d = (dir==0) ? k : k % (dependent_element_nnode_1d-2);
               // Check if denominator is zero
               if (std::fabs(
-                    slave_nodal_position[non_vertex_pos[k]][dir]-s_on_mortar[dir])
+                    dependent_nodal_position[non_vertex_pos[k]][dir]-s_on_mortar[dir])
                   >= 1.0e-08)
               {
                 // We're ok
-                psi[k] *= pow(-1.0,int((slave_element_nnode_1d-1)-index1d-1))
+                psi[k] *= pow(-1.0,int((dependent_element_nnode_1d-1)-index1d-1))
                           * Orthpoly::dlegendre(
-                            slave_element_nnode_1d-1,s_on_mortar[dir])
-                          / (slave_nodal_position[non_vertex_pos[k]][dir]-s_on_mortar[dir]);
+                            dependent_element_nnode_1d-1,s_on_mortar[dir])
+                          / (dependent_nodal_position[non_vertex_pos[k]][dir]-s_on_mortar[dir]);
               }
               // Check if numerator is zero
               else if (std::fabs(
                          Orthpoly::dlegendre(
-                           slave_element_nnode_1d-1,s_on_mortar[dir]))
+                           dependent_element_nnode_1d-1,s_on_mortar[dir]))
                        < 1.0e-8)
               {
                 // We can use l'Hopital's rule
-                psi[k] *= pow(-1.0,int((slave_element_nnode_1d-1)-index1d-1))
+                psi[k] *= pow(-1.0,int((dependent_element_nnode_1d-1)-index1d-1))
                           * -Orthpoly::ddlegendre(
-                            slave_element_nnode_1d-1,s_on_mortar[dir]);
+                            dependent_element_nnode_1d-1,s_on_mortar[dir]);
               }
               else
               {
@@ -9811,7 +9813,7 @@ namespace oomph
             }
           }
 
-          // Convert coordinate on mortar to local fraction in slave element
+          // Convert coordinate on mortar to local fraction in dependent element
           Vector<double> s_fraction(3);
           for (unsigned i=0; i<3; i++)
           {
@@ -9820,7 +9822,7 @@ namespace oomph
             else if (i==active_coord_index[1])
             {s_fraction[i] = 0.5*(s_on_mortar[1]+1.0);}
             else
-            {s_fraction[i] = slave_node_s_fraction[vertex_pos[0]][i];}
+            {s_fraction[i] = dependent_node_s_fraction[vertex_pos[0]][i];}
           }
 
           // Project active coordinate into master element
@@ -9835,7 +9837,7 @@ namespace oomph
           neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
 
           // Populate local projection matrix
-          for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+          for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
           {
             for (unsigned j=0; j<n_master_nodes; j++)
             {
@@ -9863,16 +9865,16 @@ namespace oomph
         // Assemble contributions from mortar vertex nodes
         for (unsigned v=0; v<n_mortar_vertices; v++)
         {
-          // Convert coordinate on mortar to local fraction in slave element
+          // Convert coordinate on mortar to local fraction in dependent element
           Vector<double> s_fraction(3);
           for (unsigned i=0; i<3; i++)
           {
             if (i==active_coord_index[0])
-            {s_fraction[i] = 0.5*(slave_nodal_position[vertex_pos[v]][0]+1.0);}
+            {s_fraction[i] = 0.5*(dependent_nodal_position[vertex_pos[v]][0]+1.0);}
             else if (i==active_coord_index[1])
-            {s_fraction[i] = 0.5*(slave_nodal_position[vertex_pos[v]][1]+1.0);}
+            {s_fraction[i] = 0.5*(dependent_nodal_position[vertex_pos[v]][1]+1.0);}
             else
-            {s_fraction[i] = slave_node_s_fraction[vertex_pos[0]][i];}
+            {s_fraction[i] = dependent_node_s_fraction[vertex_pos[0]][i];}
           }
 
           // Project active coordinate into master element
@@ -9883,10 +9885,10 @@ namespace oomph
                             (s_hi_neigh[i] - s_lo_neigh[i]);
           }
 
-          // Get master shapes at slave nodal positions
+          // Get master shapes at dependent nodal positions
           neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
 
-          for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+          for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
           {
             for (unsigned k=0; k<n_master_nodes; k++)
             {
@@ -9908,7 +9910,7 @@ namespace oomph
 
         // Solve mortar system
         //--------------------
-        for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
         {
           for (unsigned j=0; j<n_master_nodes; j++)
           {
@@ -9929,15 +9931,15 @@ namespace oomph
 
         // Create structures to hold the hanging info
         //-------------------------------------------
-        Vector<HangInfo*> hang_info_pt(n_slave_nodes);
-        for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        Vector<HangInfo*> hang_info_pt(n_dependent_nodes);
+        for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
         {
           hang_info_pt[i] = new HangInfo(n_master_nodes);
         }
 
         // Copy information to hanging nodes
         //----------------------------------
-        for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
         {
           for (unsigned j=0; j<n_master_nodes; j++)
           {
@@ -9947,7 +9949,7 @@ namespace oomph
 
         // Set pointers to hanging info
         //-----------------------------
-        for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        for (unsigned i=0; i<n_dependent_nodes-n_mortar_vertices; i++)
         {
           // Check that the node shoule actually hang.
           // That is, if the polynomial orders of the elements at a p-type
@@ -9957,7 +9959,7 @@ namespace oomph
           for (unsigned m=0; m<hang_info_pt[i]->nmaster(); m++)
           {
             // We can simply check if the hanging scheme lists itself as a master
-            if (hang_info_pt[i]->master_node_pt(m)==slave_node_pt[non_vertex_pos[i]])
+            if (hang_info_pt[i]->master_node_pt(m)==dependent_node_pt[non_vertex_pos[i]])
             {
               node_is_really_shared = true;
 
@@ -9978,29 +9980,29 @@ namespace oomph
           // Now we can make the node hang, if it isn't a shared node
           if (!node_is_really_shared)
           {
-            slave_node_pt[non_vertex_pos[i]]->set_hanging_pt(hang_info_pt[i],-1);
+            dependent_node_pt[non_vertex_pos[i]]->set_hanging_pt(hang_info_pt[i],-1);
           }
         }
 
-      } // End of case where there are still slave nodes
+      } // End of case where there are still dependent nodes
 
 #ifdef PARANOID
-      // Check all slave nodes, hanging or otherwise
-      for (unsigned i=0; i<n_slave_nodes; i++)
+      // Check all dependent nodes, hanging or otherwise
+      for (unsigned i=0; i<n_dependent_nodes; i++)
       {
         // Check that weights sum to 1 for those that hang
-        if (slave_node_pt[i]->is_hanging())
+        if (dependent_node_pt[i]->is_hanging())
         {
           // Check that weights sum to 1 and no zero weights
           double weight_sum = 0.0;
           bool zero_weight = false;
-          for (unsigned m=0; m<slave_node_pt[i]->hanging_pt()->nmaster(); m++)
+          for (unsigned m=0; m<dependent_node_pt[i]->hanging_pt()->nmaster(); m++)
           {
-            weight_sum += slave_node_pt[i]->hanging_pt()->master_weight(m);
-            if (std::fabs(slave_node_pt[i]->hanging_pt()->master_weight(m)) < 1.0e-14)
+            weight_sum += dependent_node_pt[i]->hanging_pt()->master_weight(m);
+            if (std::fabs(dependent_node_pt[i]->hanging_pt()->master_weight(m)) < 1.0e-14)
             {
               zero_weight = true;
-              oomph_info << "In the hanging scheme for slave node " << i << ", master node " << m << " has weight " << slave_node_pt[i]->hanging_pt()->master_weight(m) << " < 1.0e-14" << std::endl;
+              oomph_info << "In the hanging scheme for dependent node " << i << ", master node " << m << " has weight " << dependent_node_pt[i]->hanging_pt()->master_weight(m) << " < 1.0e-14" << std::endl;
             }
           }
 
@@ -10021,58 +10023,58 @@ namespace oomph
               OOMPH_EXCEPTION_LOCATION);
           }
 
-          // Also check that slave nodes do not have themselves as masters
-          //bool slave_should_not_be_hanging = false;
-          for (unsigned m=0; m<slave_node_pt[i]->hanging_pt()->nmaster(); m++)
+          // Also check that dependent nodes do not have themselves as masters
+          //bool dependent_should_not_be_hanging = false;
+          for (unsigned m=0; m<dependent_node_pt[i]->hanging_pt()->nmaster(); m++)
           {
-            if (slave_node_pt[i] == slave_node_pt[i]->hanging_pt()->master_node_pt(m))
+            if (dependent_node_pt[i] == dependent_node_pt[i]->hanging_pt()->master_node_pt(m))
             {
               // This shouldn't happen!
               throw OomphLibError(
-                "Slave node has itself as a master!",
+                "Dependent node has itself as a master!",
                 "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
                 OOMPH_EXCEPTION_LOCATION);
             }
-            if (slave_node_pt[i]->hanging_pt()->master_node_pt(m)->is_hanging())
+            if (dependent_node_pt[i]->hanging_pt()->master_node_pt(m)->is_hanging())
             {
               // Check if node is master of master
-              Node* new_nod_pt = slave_node_pt[i]->hanging_pt()->master_node_pt(m);
+              Node* new_nod_pt = dependent_node_pt[i]->hanging_pt()->master_node_pt(m);
               for (unsigned mm=0; mm<new_nod_pt->hanging_pt()->nmaster(); mm++)
               {
-                if (slave_node_pt[i] == new_nod_pt->hanging_pt()->master_node_pt(mm))
+                if (dependent_node_pt[i] == new_nod_pt->hanging_pt()->master_node_pt(mm))
                 {
                   std::cout << "++++++++++++++++++++++++++++++++++++++++" << std::endl;
-                  std::cout << "          Slave node: "
-                            << slave_node_pt[i] << " = "
-                            << slave_node_pt[i]->x(0) << " "
-                            << slave_node_pt[i]->x(1) << " "
-                            << slave_node_pt[i]->x(2) << " " << std::endl;
+                  std::cout << "          Dependent node: "
+                            << dependent_node_pt[i] << " = "
+                            << dependent_node_pt[i]->x(0) << " "
+                            << dependent_node_pt[i]->x(1) << " "
+                            << dependent_node_pt[i]->x(2) << " " << std::endl;
                   std::cout << "         Master node: "
-                            << slave_node_pt[i]->hanging_pt()->master_node_pt(m) << " = "
-                            << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->x(0) << " "
-                            << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->x(1) << " "
-                            << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->x(2) << " " << std::endl;
+                            << dependent_node_pt[i]->hanging_pt()->master_node_pt(m) << " = "
+                            << dependent_node_pt[i]->hanging_pt()->master_node_pt(m)->x(0) << " "
+                            << dependent_node_pt[i]->hanging_pt()->master_node_pt(m)->x(1) << " "
+                            << dependent_node_pt[i]->hanging_pt()->master_node_pt(m)->x(2) << " " << std::endl;
                   std::cout << "Master's master node: "
-                            << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->hanging_pt()->master_node_pt(mm) << " = "
-                            << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->hanging_pt()->master_node_pt(mm)->x(0) << " "
-                            << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->hanging_pt()->master_node_pt(mm)->x(1) << " "
-                            << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->hanging_pt()->master_node_pt(mm)->x(2) << " " << std::endl;
+                            << dependent_node_pt[i]->hanging_pt()->master_node_pt(m)->hanging_pt()->master_node_pt(mm) << " = "
+                            << dependent_node_pt[i]->hanging_pt()->master_node_pt(m)->hanging_pt()->master_node_pt(mm)->x(0) << " "
+                            << dependent_node_pt[i]->hanging_pt()->master_node_pt(m)->hanging_pt()->master_node_pt(mm)->x(1) << " "
+                            << dependent_node_pt[i]->hanging_pt()->master_node_pt(m)->hanging_pt()->master_node_pt(mm)->x(2) << " " << std::endl;
 
 
 
                   // Print out hanging scheme
                   std::cout << "Hanging node: "
-                            << slave_node_pt[i]->x(0) << "  "
-                            << slave_node_pt[i]->x(1) << "  "
-                            << slave_node_pt[i]->x(2) << "  "
+                            << dependent_node_pt[i]->x(0) << "  "
+                            << dependent_node_pt[i]->x(1) << "  "
+                            << dependent_node_pt[i]->x(2) << "  "
                             << std::endl;
-                  for (unsigned m_tmp=0; m_tmp<slave_node_pt[i]->hanging_pt()->nmaster(); m_tmp++)
+                  for (unsigned m_tmp=0; m_tmp<dependent_node_pt[i]->hanging_pt()->nmaster(); m_tmp++)
                   {
                     std::cout << "   m = " << m_tmp << ": "
-                              << slave_node_pt[i]->hanging_pt()->master_node_pt(m_tmp)->x(0) << "  "
-                              << slave_node_pt[i]->hanging_pt()->master_node_pt(m_tmp)->x(1) << "  "
-                              << slave_node_pt[i]->hanging_pt()->master_node_pt(m_tmp)->x(2) << "  "
-                              << "w = " << slave_node_pt[i]->hanging_pt()->master_weight(m_tmp) << "  "
+                              << dependent_node_pt[i]->hanging_pt()->master_node_pt(m_tmp)->x(0) << "  "
+                              << dependent_node_pt[i]->hanging_pt()->master_node_pt(m_tmp)->x(1) << "  "
+                              << dependent_node_pt[i]->hanging_pt()->master_node_pt(m_tmp)->x(2) << "  "
+                              << "w = " << dependent_node_pt[i]->hanging_pt()->master_weight(m_tmp) << "  "
                               << std::endl;
                   }
 
@@ -10094,7 +10096,7 @@ namespace oomph
 
                   // This shouldn't happen!
                   throw OomphLibError(
-                    "Slave node has itself as a master of a master!",
+                    "Dependent node has itself as a master of a master!",
                     "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
                     OOMPH_EXCEPTION_LOCATION);
                 }
@@ -10109,7 +10111,7 @@ namespace oomph
           bool is_master = false;
           for (unsigned n=0; n<n_master_nodes; n++)
           {
-            if (slave_node_pt[i]==master_node_pt[n])
+            if (dependent_node_pt[i]==master_node_pt[n])
             {
               // Node is a master
               is_master = true;
@@ -10122,7 +10124,7 @@ namespace oomph
             //// Throw error
             //std::ostringstream error_string;
             //error_string
-            // << "This node in the slave element is neither" << std::endl
+            // << "This node in the dependent element is neither" << std::endl
             // << "hanging or shared with a master element." << std::endl;
             //
             //throw OomphLibError(
@@ -10134,24 +10136,24 @@ namespace oomph
       }
 #endif
 
-      // Finally, Loop over all slave nodes and fine-tune their positions
+      // Finally, Loop over all dependent nodes and fine-tune their positions
       //-----------------------------------------------------------------
       // Here we simply set the node's positions to be consistent
       // with the hanging scheme. This is not strictly necessary
       // because it is done in the mesh adaptation before the node
       // becomes non-hanging later on. We make no attempt to ensure
       // (strong) continuity in the position across the mortar.
-      for (unsigned i=0; i<n_slave_nodes; i++)
+      for (unsigned i=0; i<n_dependent_nodes; i++)
       {
         // Only fine-tune hanging nodes
-        if (slave_node_pt[i]->is_hanging())
+        if (dependent_node_pt[i]->is_hanging())
         {
           //If we are doing the position, then
           if (value_id==-1)
           {
-            // Get the local coordinate of this slave node
+            // Get the local coordinate of this dependent node
             Vector<double> s_local(3);
-            this->local_coordinate_of_node(slave_node_number[i],s_local);
+            this->local_coordinate_of_node(dependent_node_number[i],s_local);
 
             // Get the position from interpolation in this element via
             // the hanging scheme
@@ -10160,9 +10162,9 @@ namespace oomph
 
             // Fine adjust the coordinates (macro map will pick up boundary
             // accurately but will lead to different element edges)
-            slave_node_pt[i]->x(0)=x_in_neighb[0];
-            slave_node_pt[i]->x(1)=x_in_neighb[1];
-            slave_node_pt[i]->x(2)=x_in_neighb[2];
+            dependent_node_pt[i]->x(0)=x_in_neighb[0];
+            dependent_node_pt[i]->x(1)=x_in_neighb[1];
+            dependent_node_pt[i]->x(2)=x_in_neighb[2];
           }
         }
       }

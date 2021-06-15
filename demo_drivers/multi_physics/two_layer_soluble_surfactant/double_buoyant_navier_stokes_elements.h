@@ -157,6 +157,10 @@ public:
     dRdC(1,0) = -dRdC(0,0); dRdC(1,1) = -dRdC(0,1);
   }
 
+
+  //Compute norm overload to NS version
+  void compute_norm(double &norm)
+  {QCrouzeixRaviartElement<DIM>::compute_norm(norm);}
   
  ///  Overload the standard output function with the broken default
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
@@ -677,6 +681,10 @@ public:
     dRdC(1,0) = -dRdC(0,0); dRdC(1,1) = -dRdC(0,1);
   }
 
+//Compute norm overload to NS version
+  void compute_norm(double &norm)
+  {QCrouzeixRaviartElement<DIM>::compute_norm(norm);}
+  
   
  ///  Overload the standard output function with the broken default
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
@@ -724,6 +732,8 @@ public:
   } //End of output function
 
 
+
+ 
  /// \short C-style output function: Broken default
  void output(FILE* file_pt)
   {FiniteElement::output(file_pt);}

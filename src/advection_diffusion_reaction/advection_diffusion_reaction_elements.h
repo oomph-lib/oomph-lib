@@ -38,6 +38,7 @@
 #endif
 
 //OOMPH-LIB headers
+#include "../generic/projection.h"
 #include "../generic/nodes.h"
 #include "../generic/Qelements.h"
 #include "../generic/oomph_utilities.h"
@@ -240,7 +241,10 @@ public:
     OOMPH_EXCEPTION_LOCATION);
   }
 
-
+ /// \short Compute norm of the solution:
+ /// sum of squares of the L2 norm for each reagent
+ void compute_norm(double &norm);
+ 
  /// Get error against and norm of exact solution
  void compute_error(std::ostream &outfile, 
                     FiniteElement::SteadyExactSolutionFctPt 
@@ -526,15 +530,15 @@ public:
    shape(s,psi);
 
    //Initialise value of u
-   double interpolated_u = 0.0;
+   double interpolated_c = 0.0;
 
    //Loop over the local nodes and sum
    for(unsigned l=0;l<n_node;l++) 
     {
-     interpolated_u += nodal_value(l,c_nodal_index)*psi[l];
+     interpolated_c += nodal_value(l,c_nodal_index)*psi[l];
     }
 
-   return(interpolated_u);
+   return(interpolated_c);
   }
 
 
@@ -546,6 +550,9 @@ public:
 
 protected:
 
+ //Static variable that holds the number of reagents
+ static const unsigned N_reagent;
+ 
 
  /// \short Shape/test functions and derivs w.r.t. to global coords at 
  /// local coord. s; return  Jacobian of mapping
@@ -829,6 +836,149 @@ class FaceGeometry<QAdvectionDiffusionReactionElement<NREAGENT,1,NNODE_1D> >:
  FaceGeometry() : PointElement() {}
 
 };
+
+
+
+//==========================================================
+/// AdvectionDiffusionReaction upgraded to become projectable
+//==========================================================
+template<class ADR_ELEMENT>
+ class ProjectableAdvectionDiffusionReactionElement : 
+  public virtual ProjectableElement<ADR_ELEMENT>
+ {
+
+ public:
+
+  /// \short Specify the values associated with field fld. 
+  /// The information is returned in a vector of pairs which comprise 
+  /// the Data object and the value within it, that correspond to field fld. 
+  Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld)
+   { 
+    // Create the vector
+    unsigned nnod=this->nnode();
+    Vector<std::pair<Data*,unsigned> > data_values(nnod);
+   
+    // Loop over all nodes
+    for (unsigned j=0;j<nnod;j++)
+     {
+      // Add the data value associated field: The node itself
+      data_values[j]=std::make_pair(this->node_pt(j),fld);
+     }
+   
+    // Return the vector
+    return data_values;
+   }
+
+  /// \short Number of fields to be projected: Just one
+  unsigned nfields_for_projection()
+   {
+    return this->N_reagent;
+   }
+ 
+  /// \short Number of history values to be stored for fld-th field
+  /// (includes current value!)
+  unsigned nhistory_values_for_projection(const unsigned &fld)
+  {
+   return this->node_pt(0)->ntstorage();   
+  }
+  
+  ///\short Number of positional history values
+  /// (Note: count includes current value!)
+  unsigned nhistory_values_for_coordinate_projection()
+   {
+    return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
+   }
+  
+  /// \short Return Jacobian of mapping and shape functions of field fld
+  /// at local coordinate s
+  double jacobian_and_shape_of_field(const unsigned &fld, 
+                                     const Vector<double> &s, 
+                                     Shape &psi)
+   {
+    unsigned n_dim=this->dim();
+    unsigned n_node=this->nnode();
+    Shape test(n_node); 
+    DShape dpsidx(n_node,n_dim), dtestdx(n_node,n_dim);
+    double J=this->dshape_and_dtest_eulerian_adv_diff_react(s,psi,dpsidx,
+                                                            test,dtestdx);
+    return J;
+   }
+
+
+
+  /// \short Return interpolated field fld at local coordinate s, at time level
+  /// t (t=0: present; t>0: history values)
+  double get_field(const unsigned &t, 
+                   const unsigned &fld,
+                   const Vector<double>& s)
+   {
+    //Find the index at which the variable is stored
+    unsigned c_nodal_index = this->c_index_adv_diff_react(fld);
+    
+      //Local shape function
+    unsigned n_node=this->nnode();
+    Shape psi(n_node);
+    
+    //Find values of shape function
+    this->shape(s,psi);
+    
+    //Initialise value of c
+    double interpolated_c = 0.0;
+    
+    //Sum over the local nodes
+    for(unsigned l=0;l<n_node;l++) 
+     {
+      interpolated_c += this->nodal_value(t,l,c_nodal_index)*psi[l];
+     }
+    return interpolated_c;     
+   }
+
+
+  ///Return number of values in field fld: One per node
+  unsigned nvalue_of_field(const unsigned &fld)
+   {
+    return this->nnode();
+   }
+
+ 
+  ///Return local equation number of value j in field fld.
+  int local_equation(const unsigned &fld,
+                     const unsigned &j)
+   {
+    const unsigned c_nodal_index = this->c_index_adv_diff_react(fld);
+    return this->nodal_local_eqn(j,c_nodal_index);     
+   }
+  
+ };
+
+
+//=======================================================================
+/// Face geometry for element is the same as that for the underlying
+/// wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<ProjectableAdvectionDiffusionReactionElement<ELEMENT> > 
+  : public virtual FaceGeometry<ELEMENT>
+ {
+ public:
+  FaceGeometry() : FaceGeometry<ELEMENT>() {}
+ };
+
+
+//=======================================================================
+/// Face geometry of the Face Geometry for element is the same as 
+/// that for the underlying wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<FaceGeometry<ProjectableAdvectionDiffusionReactionElement<ELEMENT> > >
+  : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
+ {
+ public:
+  FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {}
+ };
+
+
+
 
 }
 
