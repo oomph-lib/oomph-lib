@@ -383,7 +383,16 @@ template<unsigned DIM>
  /// constant (Newtonian) viscosity -- assumed to be always positive
  double* Critical_second_invariant_pt;
  
+ /// We use a quadratic function to smoothly blend from the Herschel Bulkley
+ /// model at the cut-off to zero strain rate; this way we avoid the
+ /// discontinuity of the gradient at the cut-off, which is present in the
+ /// classic Tanner Milthorpe regularisation
+ /// The coefficient b in the quadratic function is always zero to ensure
+ /// zero gradient at zero strain rate, so that we are only left with a and c
+ double a;
+ double c;
 
+ 
   public:
 
 
@@ -393,9 +402,18 @@ template<unsigned DIM>
    double* critical_second_invariant_pt) : 
   GeneralisedNewtonianConstitutiveEquation<DIM>(), 
    Yield_stress_pt(yield_stress_pt), Flow_index_pt(flow_index_pt),
-   Critical_second_invariant_pt(critical_second_invariant_pt)
+    Critical_second_invariant_pt(critical_second_invariant_pt), a(0.0), c(0.0)
    {
-
+    if (fabs(*Critical_second_invariant_pt) > 0.0)
+     {
+      a = pow(2.0, *Flow_index_pt - 3.0)*(*Flow_index_pt - 1.0)*
+	pow(fabs(*Critical_second_invariant_pt), (*Flow_index_pt - 1.0)/2.0 - 2.0) -
+	(*Yield_stress_pt)/(8.0*pow(fabs(*Critical_second_invariant_pt), 5.0/2.0));
+      c = (*Yield_stress_pt)/(2.0*sqrt(fabs(*Critical_second_invariant_pt))) +
+	pow(2.0*sqrt(fabs(*Critical_second_invariant_pt)), *Flow_index_pt - 1.0) -
+	a*pow(fabs(*Critical_second_invariant_pt), 2.0);
+     }
+     
     /// get the cutoff viscosity
     double cut_off_viscosity=calculate_cutoff_viscosity();
 
@@ -425,30 +443,17 @@ template<unsigned DIM>
    // Calculate the Newtonian cutoff viscosity from the constitutive
    // equation and the cutoff value of the second invariant
    return (*Yield_stress_pt)/
-    (2.0*sqrt((*Critical_second_invariant_pt)))+
-    pow((2.0*sqrt((*Critical_second_invariant_pt))),
+     (2.0*sqrt(max(fabs(*Critical_second_invariant_pt), DBL_EPSILON)))+
+     pow((2.0*sqrt(max(fabs(*Critical_second_invariant_pt), DBL_EPSILON))),
         *Flow_index_pt-1.0);
-  }
-
-  /// Offset by how much the zero shear rate viscosity lies
-  /// above the viscosity at I2_cutoff
-  /// Hard-coded to a value that ensures a smooth transition
-  double calculate_viscosity_offset_at_zero_shear(double& cut_off_viscosity)
-  {
-   return cut_off_viscosity/5.0;
   }
 
   /// Function that calculates the viscosity at zero I2
   double calculate_zero_shear_viscosity()
   {
-   // get the viscosity at the cutoff point
-   double cut_off_viscosity=calculate_cutoff_viscosity();
-
-   /// Offset by how much the zero shear rate viscosity lies
-   /// above the viscosity at I2_cutoff
-   double epsilon=calculate_viscosity_offset_at_zero_shear(cut_off_viscosity);
-
-   return cut_off_viscosity+epsilon;
+   // The maximum of either c (from the quadratic equation) or the cut-off
+   // viscosity for a cut-off of zero
+   return max(c, calculate_cutoff_viscosity());
   }
 
   /// Report cutoff values
@@ -459,124 +464,32 @@ template<unsigned DIM>
    cut_off_invariant=*Critical_second_invariant_pt;
    cut_off_viscosity=calculate_cutoff_viscosity();
    zero_shear_viscosity=calculate_zero_shear_viscosity();
-  }
-   
-  // Calculate the fitting parameters for the cubic blending
-  void calculate_fitting_parameters_of_cubic(double& a, double& b)
-  {
-   // get the viscosity at the cutoff invariant
-   double Cut_off_viscosity=calculate_cutoff_viscosity();
-
-   // calculate the offset at zero shear
-   double epsilon=calculate_viscosity_offset_at_zero_shear(Cut_off_viscosity);
-
-   a=-1.0/pow((*Critical_second_invariant_pt),4.0)*
-     (pow((*Critical_second_invariant_pt),2.0)*
-      (-pow(2.0,((*Flow_index_pt)-2.0))*((*Flow_index_pt)-1.0)*
-       pow((*Critical_second_invariant_pt),
-           (((*Flow_index_pt)-1.0)/2.0-1.0))+
-       (*Yield_stress_pt)/(4.0*pow((*Critical_second_invariant_pt),
-                                   (3.0/2.0))))-
-      2.0*(*Critical_second_invariant_pt)*
-      (Cut_off_viscosity+epsilon-pow(2.0,((*Flow_index_pt)-1.0))*
-       pow((*Critical_second_invariant_pt),(((*Flow_index_pt)-1.0)/2.0))-
-       (*Yield_stress_pt)/(2.0*sqrt((*Critical_second_invariant_pt)))));
-
-    b=-1.0/(8.0*pow((*Critical_second_invariant_pt),5.0)*
-            pow((*Critical_second_invariant_pt),(7.0/2.0)))*
-     (24.0*epsilon*pow((*Critical_second_invariant_pt),3.0)*
-      pow((*Critical_second_invariant_pt),(7.0/2.0))+
-      24.0*Cut_off_viscosity*pow((*Critical_second_invariant_pt),3.0)*
-      pow((*Critical_second_invariant_pt),(7.0/2.0))-
-      pow(2.0,((*Flow_index_pt)+1.0))*
-      pow((*Critical_second_invariant_pt),4.0)*
-      pow((*Critical_second_invariant_pt),(((*Flow_index_pt)+4.0)/2.0))+
-      pow(2.0,((*Flow_index_pt)+1.0))*(*Flow_index_pt)*
-      pow((*Critical_second_invariant_pt),4.0)*
-      pow((*Critical_second_invariant_pt),(((*Flow_index_pt)+4.0)/2.0))-
-      12.0*pow(2.0,(*Flow_index_pt))*pow((*Critical_second_invariant_pt),3.0)*
-      pow((*Critical_second_invariant_pt),(((*Flow_index_pt)+6.0)/2.0))-
-      2.0*(*Yield_stress_pt)*pow((*Critical_second_invariant_pt),4.0)*
-      pow((*Critical_second_invariant_pt),2.0)-12.0*(*Yield_stress_pt)*
-      pow((*Critical_second_invariant_pt),3.0)*
-      pow((*Critical_second_invariant_pt),3.0));
-  }
-             
+  }          
 
   /// Viscosity ratio as a fct of strain rate invariant
   double viscosity(const double& 
                    second_invariant_of_rate_of_strain_tensor)
   {
-   // Get the parameters of the cubic
-   double a;
-   double b;
-
-   calculate_fitting_parameters_of_cubic(a,b);
-
-   double zero_shear_viscosity=calculate_zero_shear_viscosity();
-
-   // Pre-multiply the second invariant with +/-1 depending on whether it's
-   // positive or not
-   double sign=-1.0;   
-   if(second_invariant_of_rate_of_strain_tensor >= 0.0)
+   if (fabs(second_invariant_of_rate_of_strain_tensor) < fabs(*Critical_second_invariant_pt))
     {
-     sign=1.0;
+     return a*pow(fabs(second_invariant_of_rate_of_strain_tensor), 2.0) + c;
     }
-   
-   // if the second invariant is below the cutoff we have a constant, Newtonian
-   // viscosity
-   if(sign*second_invariant_of_rate_of_strain_tensor < 
-      (*Critical_second_invariant_pt))
-    {
-     return a*pow(sign*second_invariant_of_rate_of_strain_tensor,3.0)+
-      b*pow(sign*second_invariant_of_rate_of_strain_tensor,2.0)+
-      zero_shear_viscosity;
-    }
-   else
-    {
-     // Calculate the square root of the absolute value of the 
-     // second invariant of the rate of strain tensor
-     double measure_of_rate_of_strain=
-      sqrt(sign*second_invariant_of_rate_of_strain_tensor);
 
-     return (*Yield_stress_pt)/(2.0*measure_of_rate_of_strain)+
-      pow((2.0*measure_of_rate_of_strain),*Flow_index_pt-1.0);
-    }
+   return (*Yield_stress_pt)/(2.0*sqrt(fabs(second_invariant_of_rate_of_strain_tensor))) + pow(2.0*sqrt(fabs(second_invariant_of_rate_of_strain_tensor)), *Flow_index_pt - 1.0);
   }
   
   /// Deriv of viscosity w.r.t. strain rate invariant
   double dviscosity_dinvariant
    (const double& second_invariant_of_rate_of_strain_tensor)
   {
-   // Get the parameters of the cubic
-   double a;
-   double b;
-
-   calculate_fitting_parameters_of_cubic(a,b);
-
-   // Pre-multiply the second invariant with +/-1 depending on whether it's
-   // positive or not
-   double sign=-1.0;   
-   if(second_invariant_of_rate_of_strain_tensor >= 0.0)
+   if (fabs(second_invariant_of_rate_of_strain_tensor) < fabs(*Critical_second_invariant_pt))
     {
-     sign=1.0;
+     return 2.0*a*fabs(second_invariant_of_rate_of_strain_tensor);
     }
 
-   if(sign*second_invariant_of_rate_of_strain_tensor < 
-      (*Critical_second_invariant_pt))
-    {
-     return sign*3.0*a*pow(sign*second_invariant_of_rate_of_strain_tensor,2.0)+
-      2.0*b*second_invariant_of_rate_of_strain_tensor;
-    }
-   else
-    {
-     return pow(2.0,(*Flow_index_pt)-2.0)*((*Flow_index_pt)-1.0)*
-      second_invariant_of_rate_of_strain_tensor*
-      pow(sign*second_invariant_of_rate_of_strain_tensor,
-          ((*Flow_index_pt)-1.0)/2.0-2.0)-
-      (*Yield_stress_pt)*second_invariant_of_rate_of_strain_tensor/
-      (4.0*pow(sign*second_invariant_of_rate_of_strain_tensor,5.0/2.0));
-    }
+   return pow(2.0, *Flow_index_pt - 2.0)*(*Flow_index_pt - 1.0)*
+	pow(fabs(second_invariant_of_rate_of_strain_tensor), (*Flow_index_pt - 1.0)/2.0 - 1.0) -
+	(*Yield_stress_pt)/(4.0*pow(fabs(*Critical_second_invariant_pt), 3.0/2.0));
   }
 
 };
