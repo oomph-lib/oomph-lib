@@ -443,8 +443,8 @@ template<unsigned DIM>
    // Calculate the Newtonian cutoff viscosity from the constitutive
    // equation and the cutoff value of the second invariant
    return (*Yield_stress_pt)/
-     (2.0*sqrt(max(fabs(*Critical_second_invariant_pt), DBL_EPSILON)))+
-     pow((2.0*sqrt(max(fabs(*Critical_second_invariant_pt), DBL_EPSILON))),
+    (2.0*sqrt(std::max(fabs(*Critical_second_invariant_pt), DBL_EPSILON)))+
+    pow((2.0*sqrt(std::max(fabs(*Critical_second_invariant_pt), DBL_EPSILON))),
         *Flow_index_pt-1.0);
   }
 
