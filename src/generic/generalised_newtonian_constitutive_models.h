@@ -365,7 +365,7 @@ template<unsigned DIM>
 /// A GeneralisedNewtonianConstitutiveEquation class 
 /// defining a Herschel-Bulkley fluid 
 /// using Tanner and Milthorpe's (1983) regularisation
-/// with a smooth transition using a cubic
+/// with a smooth transition using a quadratic
 //==================================================================
 template<unsigned DIM>
  class HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation : 
@@ -384,13 +384,17 @@ template<unsigned DIM>
  double* Critical_second_invariant_pt;
  
  /// We use a quadratic function to smoothly blend from the Herschel Bulkley
- /// model at the cut-off to zero strain rate; this way we avoid the
+ /// model at the cut-off to a constant viscosity as the strain rate
+ ////approaches zero; this way we avoid the
  /// discontinuity of the gradient at the cut-off, which is present in the
  /// classic Tanner Milthorpe regularisation
- /// The coefficient b in the quadratic function is always zero to ensure
- /// zero gradient at zero strain rate, so that we are only left with a and c
  double a;
+ double b;
  double c;
+
+ /// Fraction of the cut-off strain rate below which the viscosity is constant
+ /// 0 <= \alpha < 1
+ double alpha;
 
  
   public:
@@ -402,18 +406,24 @@ template<unsigned DIM>
    double* critical_second_invariant_pt) : 
   GeneralisedNewtonianConstitutiveEquation<DIM>(), 
    Yield_stress_pt(yield_stress_pt), Flow_index_pt(flow_index_pt),
-    Critical_second_invariant_pt(critical_second_invariant_pt), a(0.0), c(0.0)
+    Critical_second_invariant_pt(critical_second_invariant_pt),
+    a(0.0), b(0.0), c(0.0)
    {
+    /// Blend over one order of magnitude
+    alpha = 0.1;
+
+    /// Calculate the coefficients of the quadratic equation
     if (fabs(*Critical_second_invariant_pt) > 0.0)
      {
-      a = pow(2.0, *Flow_index_pt - 3.0)*(*Flow_index_pt - 1.0)*
+      a = (pow(2.0, *Flow_index_pt - 3.0)*(*Flow_index_pt - 1.0)*
 	pow(fabs(*Critical_second_invariant_pt), (*Flow_index_pt - 1.0)/2.0 - 2.0) -
-	(*Yield_stress_pt)/(8.0*pow(fabs(*Critical_second_invariant_pt), 5.0/2.0));
+	    (*Yield_stress_pt)/(8.0*pow(fabs(*Critical_second_invariant_pt), 5.0/2.0)))/(1.0 - alpha);
+      b = -2.0*a*alpha*fabs(*Critical_second_invariant_pt);
       c = (*Yield_stress_pt)/(2.0*sqrt(fabs(*Critical_second_invariant_pt))) +
 	pow(2.0*sqrt(fabs(*Critical_second_invariant_pt)), *Flow_index_pt - 1.0) -
-	a*pow(fabs(*Critical_second_invariant_pt), 2.0);
+	a*pow(fabs(*Critical_second_invariant_pt), 2.0) - b*fabs(*Critical_second_invariant_pt);
      }
-     
+    
     /// get the cutoff viscosity
     double cut_off_viscosity=calculate_cutoff_viscosity();
 
@@ -451,9 +461,11 @@ template<unsigned DIM>
   /// Function that calculates the viscosity at zero I2
   double calculate_zero_shear_viscosity()
   {
-   // The maximum of either c (from the quadratic equation) or the cut-off
+   // The maximum of either the viscosity at alpha*cut-off or the cut-off
    // viscosity for a cut-off of zero
-   return max(c, calculate_cutoff_viscosity());
+    return max(a*pow(alpha, 2.0)*pow(fabs(*Critical_second_invariant_pt), 2.0) +
+	       b*alpha*fabs(*Critical_second_invariant_pt) + c,
+	       calculate_cutoff_viscosity());
   }
 
   /// Report cutoff values
@@ -470,9 +482,14 @@ template<unsigned DIM>
   double viscosity(const double& 
                    second_invariant_of_rate_of_strain_tensor)
   {
-   if (fabs(second_invariant_of_rate_of_strain_tensor) < fabs(*Critical_second_invariant_pt))
+   if (fabs(second_invariant_of_rate_of_strain_tensor) < alpha*fabs(*Critical_second_invariant_pt))
     {
-     return a*pow(fabs(second_invariant_of_rate_of_strain_tensor), 2.0) + c;
+     return calculate_zero_shear_viscosity();
+    }
+   else if (fabs(second_invariant_of_rate_of_strain_tensor) < fabs(*Critical_second_invariant_pt))
+    {
+     return a*pow(fabs(second_invariant_of_rate_of_strain_tensor), 2.0) +
+       b*fabs(second_invariant_of_rate_of_strain_tensor) + c;
     }
 
    return (*Yield_stress_pt)/(2.0*sqrt(fabs(second_invariant_of_rate_of_strain_tensor))) + pow(2.0*sqrt(fabs(second_invariant_of_rate_of_strain_tensor)), *Flow_index_pt - 1.0);
@@ -482,14 +499,18 @@ template<unsigned DIM>
   double dviscosity_dinvariant
    (const double& second_invariant_of_rate_of_strain_tensor)
   {
-   if (fabs(second_invariant_of_rate_of_strain_tensor) < fabs(*Critical_second_invariant_pt))
+   if (fabs(second_invariant_of_rate_of_strain_tensor) < alpha*fabs(*Critical_second_invariant_pt))
     {
-     return 2.0*a*fabs(second_invariant_of_rate_of_strain_tensor);
+     return 0.0;
+    }
+   else if (fabs(second_invariant_of_rate_of_strain_tensor) < fabs(*Critical_second_invariant_pt))
+    {
+     return 2.0*a*fabs(second_invariant_of_rate_of_strain_tensor) + b;
     }
 
    return pow(2.0, *Flow_index_pt - 2.0)*(*Flow_index_pt - 1.0)*
 	pow(fabs(second_invariant_of_rate_of_strain_tensor), (*Flow_index_pt - 1.0)/2.0 - 1.0) -
-	(*Yield_stress_pt)/(4.0*pow(fabs(*Critical_second_invariant_pt), 3.0/2.0));
+	(*Yield_stress_pt)/(4.0*pow(fabs(second_invariant_of_rate_of_strain_tensor), 3.0/2.0));
   }
 
 };
