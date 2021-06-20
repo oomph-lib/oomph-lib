@@ -80,7 +80,7 @@ template<class ELEMENT>
     }
 
 
-    private:
+    protected:
     
     /// \short Specialised constructor used during adaptation only.
     /// Element sizes are specified by vector tetgen_io is passed in
@@ -157,63 +157,20 @@ template<class ELEMENT>
      
      //Store the boundary
      this->Outer_boundary_pt = outer_boundary_pt;
-     
-     // Setup reverse lookup scheme
-     {
-      unsigned n_facet=this->Outer_boundary_pt->nfacet();
-      for (unsigned f=0;f<n_facet;f++)
-       {
-        unsigned b=this->Outer_boundary_pt->one_based_facet_boundary_id(f);
-        if (b!=0) 
-         {
-          this->Tet_mesh_faceted_surface_pt[b-1]=this->Outer_boundary_pt;
-          this->Tet_mesh_facet_pt[b-1]=this->Outer_boundary_pt->facet_pt(f);
-         }
-        else
-         {
-          std::ostringstream error_message;
-          error_message << "Boundary IDs have to be one-based. Yours is " 
-                        << b << "\n";
-          throw OomphLibError(error_message.str(),
-                              OOMPH_CURRENT_FUNCTION,
-                              OOMPH_EXCEPTION_LOCATION);
-         }
-       }
-     }
-     
+     //Setup the reverse lookup scheme
+     this->setup_reverse_lookup_schemes_for_faceted_surface(
+      this->Outer_boundary_pt);
      //Store the internal boundary
      this->Internal_surface_pt = internal_surface_pt;
-     
-     // Setup reverse lookup scheme
+     //Setup the reverse lookup schemes
      {
       unsigned n=this->Internal_surface_pt.size();
       for (unsigned i=0;i<n;i++)
        {
-        unsigned n_facet=this->Internal_surface_pt[i]->nfacet();
-        for (unsigned f=0;f<n_facet;f++)
-         {
-          unsigned b=this->Internal_surface_pt[i]->
-           one_based_facet_boundary_id(f);
-          if (b!=0) 
-           {
-            this->Tet_mesh_faceted_surface_pt[b-1]=
-             this->Internal_surface_pt[i];    
-            this->Tet_mesh_facet_pt[b-1]=
-             this->Internal_surface_pt[i]->facet_pt(f);
-           }
-          else
-           {
-            std::ostringstream error_message;
-            error_message << "Boundary IDs have to be one-based. Yours is " 
-                          << b << "\n";
-            throw OomphLibError(error_message.str(),
-                                OOMPH_CURRENT_FUNCTION,
-                                OOMPH_EXCEPTION_LOCATION);
-           }
-         }
+        this->setup_reverse_lookup_schemes_for_faceted_surface(
+         this->Internal_surface_pt[i]);
        }
      }
-     
      
      // Setup boundary coordinates for boundaries
      unsigned nb=nboundary();
@@ -292,6 +249,17 @@ template<class ELEMENT>
     /// By default we project solution onto new mesh during adaptation
     Projection_is_disabled=false;
    }
+
+   //Update the surface
+   void update_faceted_surface_using_face_mesh(
+    TetMeshFacetedSurface* &faceted_surface_pt);
+
+   //Update the inner hole
+   void surface_remesh_for_inner_hole_boundaries();
+
+   /// \short Snap the boundary nodes onto any curvilinear boundaries
+   void snap_nodes_onto_boundary(RefineableTetgenMesh<ELEMENT>* &new_mesh_pt,
+                                 const unsigned &b);
   
    /// Disable projection of solution onto new mesh during adaptation
    bool Projection_is_disabled;
@@ -305,6 +273,68 @@ template<class ELEMENT>
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
+
+
+
+ 
+//=========================================================================
+// Unstructured refineable Tetgen Mesh upgraded to solid mesh
+//=========================================================================
+ template<class ELEMENT>
+  class RefineableSolidTetgenMesh : 
+  public virtual RefineableTetgenMesh<ELEMENT>,
+public virtual SolidMesh
+ {
+  
+   public:
+  
+  /// \short Build mesh, based on closed curve that specifies
+  /// the outer boundary of the domain and any number of internal
+  /// closed curves. Specify target area for uniform element size.
+  RefineableSolidTetgenMesh(
+    TetMeshFacetedClosedSurface* const &outer_boundary_pt,
+    Vector<TetMeshFacetedSurface*>& internal_closed_surface_pt,
+    const double &element_volume,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+    const bool &use_attributes = false,
+    const bool& split_corner_elements = false) :
+   TetgenMesh<ELEMENT>(outer_boundary_pt,internal_closed_surface_pt,
+                       element_volume,time_stepper_pt,use_attributes,
+                       split_corner_elements),
+    RefineableTetgenMesh<ELEMENT>(outer_boundary_pt,internal_closed_surface_pt,
+                                 element_volume,time_stepper_pt,use_attributes,
+                                 split_corner_elements)
+   
+   {
+    //Assign the Lagrangian coordinates
+    set_lagrangian_nodal_coordinates();
+   }
+  
+     
+   /// \short Build mesh from specified triangulation and
+   /// associated target areas for elements in it.
+  RefineableSolidTetgenMesh(
+   const Vector<double> &target_volume,
+   tetgenio* const &tetgen_io_pt,
+   TetMeshFacetedClosedSurface* const &outer_boundary_pt,
+   Vector<TetMeshFacetedSurface*>& internal_surface_pt,
+   TimeStepper* time_stepper_pt=
+   &Mesh::Default_TimeStepper,
+   const bool &use_attributes=false) :
+   RefineableTetgenMesh<ELEMENT>(target_volume, tetgen_io_pt, outer_boundary_pt,
+                                 internal_surface_pt,
+                                 time_stepper_pt,use_attributes)
+
+   {
+    //Assign the Lagrangian coordinates
+    set_lagrangian_nodal_coordinates();
+   }
+  
+  /// Empty Destructor
+  virtual ~RefineableSolidTetgenMesh() {}
+  
+ };
+
 
 }
 

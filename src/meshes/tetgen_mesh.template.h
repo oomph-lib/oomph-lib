@@ -281,62 +281,20 @@ public:
 
     // Copy across
     Outer_boundary_pt=outer_boundary_pt;
- 
-    // Setup reverse lookup scheme
-    {
-     unsigned n_facet=Outer_boundary_pt->nfacet();
-     for (unsigned f=0;f<n_facet;f++)
-      {
-       unsigned b=Outer_boundary_pt->one_based_facet_boundary_id(f);
-       if (b!=0) 
-        {
-         Tet_mesh_faceted_surface_pt[b-1]=Outer_boundary_pt;
-         Tet_mesh_facet_pt[b-1]=Outer_boundary_pt->facet_pt(f);
-        }
-       else
-        {
-         std::ostringstream error_message;
-         error_message << "Boundary IDs have to be one-based. Yours is " 
-                       << b << "\n";
-         throw OomphLibError(error_message.str(),
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-      }
-    }
-
-
+    //Setup the reverse lookup scheme
+    this->setup_reverse_lookup_schemes_for_faceted_surface(Outer_boundary_pt);
     //Store the internal boundary
     Internal_surface_pt = internal_surface_pt;
-
-    // Setup reverse lookup scheme
+    //Setup the reverse lookup schemes
     {
-     unsigned n=Internal_surface_pt.size();
+     unsigned n=this->Internal_surface_pt.size();
      for (unsigned i=0;i<n;i++)
       {
-       unsigned n_facet=Internal_surface_pt[i]->nfacet();
-       for (unsigned f=0;f<n_facet;f++)
-        {
-         unsigned b=Internal_surface_pt[i]->one_based_facet_boundary_id(f);
-         if (b!=0) 
-          {
-           Tet_mesh_faceted_surface_pt[b-1]=Internal_surface_pt[i];   
-           Tet_mesh_facet_pt[b-1]=Internal_surface_pt[i]->facet_pt(f);
-          }
-         else
-          {
-           std::ostringstream error_message;
-           error_message << "Boundary IDs have to be one-based. Yours is " 
-                         << b << "\n";
-           throw OomphLibError(error_message.str(),
-                               OOMPH_CURRENT_FUNCTION,
-                               OOMPH_EXCEPTION_LOCATION);
-          }
-        }
+       this->setup_reverse_lookup_schemes_for_faceted_surface(
+        Internal_surface_pt[i]);
       }
     }
-
-
+    
     //Tetgen data structure for the input and output
     tetgenio in;
     this->build_tetgenio(outer_boundary_pt,
@@ -720,7 +678,11 @@ public:
  void build_from_scaffold(TimeStepper* time_stepper_pt, 
                           const bool &use_attributes);
 
- /// Temporary scaffold mesh
+ /// \short Function to setup the reverse look-up schemes
+ void setup_reverse_lookup_schemes_for_faceted_surface(
+  TetMeshFacetedSurface* const &faceted_surface_pt);
+
+/// Temporary scaffold mesh
  TetgenScaffoldMesh* Tmp_mesh_pt;
 
  /// \short Boolean to indicate whether a tetgenio representation of the
