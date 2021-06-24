@@ -421,11 +421,14 @@ namespace oomph
           // Reset fd step
           unknowns[i]=backup;
         }
-
-        // oomph_info << "\n\nJacobian: "<< std::endl;
-        // jacobian.sparse_indexed_output(std::cout);
-        // oomph_info << std::endl;
-
+        
+        if (Doc_Progress)
+         {
+          oomph_info << "\n\nJacobian: "<< std::endl;
+          jacobian.sparse_indexed_output(*(oomph_info.stream_pt()));
+          oomph_info << std::endl;
+         }
+        
         // Get gradient
         if (Use_step_length_control)
         {
