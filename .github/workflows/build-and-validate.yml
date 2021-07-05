@@ -15,3 +15,8 @@ jobs:
       run: ./non_interactive_autogen.sh -s
     - name: Validate
       run: make check -k -s
+    - name: Upload validation log file
+      uses: actions/upload-artifact@v2
+      with:
+        name: Validation log file
+        path: ./validation.log
