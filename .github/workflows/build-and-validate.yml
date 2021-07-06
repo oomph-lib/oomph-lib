@@ -9,15 +9,15 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            install-script: sudo apt-get install
+            install-script: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++ 
           - os: macos-latest
-            install-script: brew install
+            install-script: brew install make automake libtool autoconf doxygen gfortran
 
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
     - name: Install requirements
-      run: ${{ matrix.install-script }} make automake libtool libtool-bin autoconf doxygen gfortran g++ 
+      run: ${{ matrix.install-script }}
     - name: Build
       run: ./non_interactive_autogen.sh -s
     - name: Validate
