@@ -1,32 +1,32 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented,
-//LIC// multi-physics finite-element library, available
-//LIC// at http://www.oomph-lib.org.
-//LIC//
-//LIC//    Version 1.0; svn revision $LastChangedRevision: 1182 $
-//LIC//
-//LIC// $LastChangedDate: 2016-05-20 16:50:20 +0100 (Fri, 20 May 2016) $
-//LIC//
-//LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
-//LIC//
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC//
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC//
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC//
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC//
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC//    Version 1.0; svn revision $LastChangedRevision: 1182 $
+// LIC//
+// LIC// $LastChangedDate: 2016-05-20 16:50:20 +0100 (Fri, 20 May 2016) $
+// LIC//
+// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 // Header file for SpaceTimeUnsteadyHeat elements
 #ifndef OOMPH_GENERAL_PURPOSE_SPACETIME_BLOCK_PRECONDITIONABLE_ELEMENTS_HEADER
 #define OOMPH_GENERAL_PURPOSE_SPACETIME_BLOCK_PRECONDITIONABLE_ELEMENTS_HEADER
@@ -54,7 +54,6 @@ namespace oomph
     public virtual GeneralisedElement
   {
   public:
-
     /// Constructor (empty)
     BlockPreconditionableSpaceTimeElementBase() {}
 
@@ -68,18 +67,18 @@ namespace oomph
       // an impulsive start so there are no dofs in the first time slice
       // of the first elemental time slice of the first but there are proper
       // dofs in the final time slice of the first elemental time slice.
-      if (time_slice_id<-1)
+      if (time_slice_id < -1)
       {
         // Throw an error
-        throw OomphLibError("Time slice ID must be greater than or equal to -1!",
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
+        throw OomphLibError(
+          "Time slice ID must be greater than or equal to -1!",
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
       }
 
       // Return the value that is currently stored
-      Time_slab_id=time_slice_id;
+      Time_slab_id = time_slice_id;
     } // End of set_time_slab_id
-
 
     /// \short Access function to assign the number of dof types in the mesh
     /// NOTE: We have an access function for this as N_dof_types relies
@@ -88,9 +87,8 @@ namespace oomph
     void set_ndof_types(const unsigned& n_dof_types)
     {
       // Return the value that is currently stored
-      N_dof_types=n_dof_types;
+      N_dof_types = n_dof_types;
     } // End of set_ndof_types
-
 
     /// \short Return the number of "DOF types" that the degrees of freedom in
     /// this element are sub-divided into
@@ -100,17 +98,15 @@ namespace oomph
       return this->N_dof_types;
     } // End of ndof_types
 
-
     /// \short Pure virtual function to be implemented in a derived class.
     /// Create a list of pairs for all unknowns in this element,
     /// so the first entry in each pair contains the global equation
     /// number of the unknown, while the second one contains the number
     /// of the "DOF type" that this unknown is associated with.
     virtual void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const=0;
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const = 0;
 
   protected:
-
     /// The number of time slices in the mesh
     unsigned N_dof_types;
 

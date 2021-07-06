@@ -1,32 +1,32 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented,
-//LIC// multi-physics finite-element library, available
-//LIC// at http://www.oomph-lib.org.
-//LIC//
-//LIC//    Version 1.0; svn revision $LastChangedRevision: 1097 $
-//LIC//
-//LIC// $LastChangedDate: 2015-12-17 11:53:17 +0000 (Thu, 17 Dec 2015) $
-//LIC//
-//LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
-//LIC//
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC//
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC//
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC//
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC//
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC//    Version 1.0; svn revision $LastChangedRevision: 1097 $
+// LIC//
+// LIC// $LastChangedDate: 2015-12-17 11:53:17 +0000 (Thu, 17 Dec 2015) $
+// LIC//
+// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 // Driver for space-time pulsatile Poiseuille flow
 
 // Extra files necessary for std::strcpy on other machines
@@ -74,8 +74,10 @@ namespace oomph
     /// \short Pure virtual function in which we specify the
     /// values to be pinned (and set to zero) on the outer edge of
     /// the "pml" layer. None since we're not using this as pml functionality
-    void values_to_be_pinned_on_outer_pml_boundary(Vector<unsigned>& values_to_pin)
-    {}
+    void values_to_be_pinned_on_outer_pml_boundary(
+      Vector<unsigned>& values_to_pin)
+    {
+    }
   };
 
   //======start_of_PMLLayerElement============================================
@@ -88,8 +90,7 @@ namespace oomph
   public:
     /// \short Constructor: Call the constructor for the
     /// appropriate QElement
-    PMLLayerElement() : MyRefineableQTaylorHoodElement()
-    {}
+    PMLLayerElement() : MyRefineableQTaylorHoodElement() {}
   };
 
   //======start_of_FaceGeometry===============================================
@@ -98,11 +99,11 @@ namespace oomph
   //==========================================================================
   template<>
   class FaceGeometry<MyRefineableQTaylorHoodElement> :
-    public virtual QElement<1,3>
+    public virtual QElement<1, 3>
   {
   public:
     /// \short Constructor: Call the constructor for the 1D quadratic element
-    FaceGeometry() : QElement<1,3>() {}
+    FaceGeometry() : QElement<1, 3>() {}
   };
 } // End of namespace oomph
 
@@ -118,14 +119,13 @@ class OscillatingCylinder : public GeomObject
 public:
   /// \short Constructor: Pass in the radius, the amplitude of the cylinder
   /// motion, the simulation Strouhal number and a pointer to time object.
-  OscillatingCylinder(double* radius_pt,
-                      double* amplitude_pt,
-                      Time* time_pt) :
-    GeomObject(1,2),
+  OscillatingCylinder(double* radius_pt, double* amplitude_pt, Time* time_pt) :
+    GeomObject(1, 2),
     Radius_pt(radius_pt),
     Amplitude_pt(amplitude_pt),
     Time_pt(time_pt)
-  {}
+  {
+  }
 
   /// Destructor: Empty
   virtual ~OscillatingCylinder() {}
@@ -146,14 +146,13 @@ public:
 
   /// \short Current position vector to material point at Lagrangian
   /// coordinate xi (steady version)
-  void position(const Vector<double>& xi,
-                Vector<double>& r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     // X-coordinate
-    r[0]=(*Radius_pt)*cos(xi[0]);
+    r[0] = (*Radius_pt) * cos(xi[0]);
 
     // Y-coordinate
-    r[1]=(*Radius_pt)*sin(xi[0]);
+    r[1] = (*Radius_pt) * sin(xi[0]);
   } // End of position
 
   /// \short Current position vector to material point at Lagrangian
@@ -167,7 +166,7 @@ public:
                 Vector<double>& r) const
   {
     // We can only use this if t=0
-    if (t!=0)
+    if (t != 0)
     {
       // Create an output stream
       std::ostringstream error_message_stream;
@@ -184,19 +183,19 @@ public:
     }
 
     // Calculate the coordinate before translation
-    position(xi,r);
+    position(xi, r);
 
     // Get current time
-    double time=Time_pt->time(t);
+    double time = Time_pt->time(t);
 
     // Scaling factor
-    double arg=2.0*MathematicalConstants::Pi;
+    double arg = 2.0 * MathematicalConstants::Pi;
 
     // Calculate the translation
-    double translation=(*Amplitude_pt)*sin(arg*time);
+    double translation = (*Amplitude_pt) * sin(arg * time);
 
     // Update the y-coordinate
-    r[1]+=translation;
+    r[1] += translation;
   } // End of position
 
   /// \short Parametrised position on object: r(zeta). Evaluated at
@@ -206,33 +205,32 @@ public:
                         Vector<double>& r) const
   {
     // Calculate the coordinate before translation
-    position(xi,r);
+    position(xi, r);
 
     // Scaling factor
-    double arg=2.0*MathematicalConstants::Pi;
+    double arg = 2.0 * MathematicalConstants::Pi;
 
     // Calculate the translation
-    double translation=(*Amplitude_pt)*sin(arg*t);
+    double translation = (*Amplitude_pt) * sin(arg * t);
 
     // Update the y-coordinate
-    r[1]+=translation;
+    r[1] += translation;
   } // End of position
 
   /// \short Velocity at any given point on the rigid cylinder at time, t
-  virtual void velocity(const double& t,Vector<double>& u) const
+  virtual void velocity(const double& t, Vector<double>& u) const
   {
     // Scaling factor
-    double arg=2.0*MathematicalConstants::Pi;
+    double arg = 2.0 * MathematicalConstants::Pi;
 
     // Zero velocity component in the x-direction
-    u[0]=0.0;
+    u[0] = 0.0;
 
     // Calculate the (non-zero) velocity component in the y-direction
-    u[1]=arg*(*Amplitude_pt)*cos(arg*t);
+    u[1] = arg * (*Amplitude_pt) * cos(arg * t);
   } // End of velocity
 
 private:
-
   /// Radius of the cylinder
   double* Radius_pt;
 
@@ -259,46 +257,46 @@ namespace NodeReordering
   inline bool node_global_position_comparison(Node* nd1_pt, Node* nd2_pt)
   {
     // If we're comparing a node with itself
-    if (nd1_pt==nd2_pt)
+    if (nd1_pt == nd2_pt)
     {
       // Don't do anything (passing true makes std::sort break...)
       return false;
     }
 
     // Get the number of dimensions stored by the node
-    unsigned n_dim=nd1_pt->ndim();
+    unsigned n_dim = nd1_pt->ndim();
 
     // A vector containing the indices in the order to check them. Order by
     // time slices first, then order the nodes in each time-slice by their x
     // position and finally order the nodes by their y-position (3D version)
-    unsigned chosen_index[]= {2,0,1};
+    unsigned chosen_index[] = {2, 0, 1};
 
     // The coordinate indices in the order to check them (2D version)
-    unsigned chosen_index_2d[]= {0,1};
+    unsigned chosen_index_2d[] = {0, 1};
 
     // Allocate space for the index we're going to order by
-    unsigned j=0;
+    unsigned j = 0;
 
     // Loop over the spatial coordinates
-    for (unsigned i=0; i<n_dim; i++)
+    for (unsigned i = 0; i < n_dim; i++)
     {
       // If we're in 3D (space-time)
-      if (n_dim==3)
+      if (n_dim == 3)
       {
         // The index we're going to order by
-        j=chosen_index[i];
+        j = chosen_index[i];
       }
       else
       {
         // The index we're going to order by
-        j=chosen_index_2d[i];
+        j = chosen_index_2d[i];
       }
 
       // Check to see if the points occupy the same position (in index j)
-      if (std::abs(nd1_pt->x(j)-nd2_pt->x(j))>1e-10)
+      if (std::abs(nd1_pt->x(j) - nd2_pt->x(j)) > 1e-10)
       {
         // Check to see if node 1 is before node 2
-        if (nd1_pt->x(j)<nd2_pt->x(j))
+        if (nd1_pt->x(j) < nd2_pt->x(j))
         {
           // Node 1 is before node 2 so return true
           return true;
@@ -318,14 +316,13 @@ namespace NodeReordering
     // Construct the error message
     error_message_stream << "Nodes are at the same point to ~1e-10! "
                          << "The difference is "
-                         << std::abs(nd1_pt->x(j)-nd2_pt->x(j)) << std::endl;
+                         << std::abs(nd1_pt->x(j) - nd2_pt->x(j)) << std::endl;
 
     // Throw the error message
     throw OomphLibError(error_message_stream.str(),
                         OOMPH_EXCEPTION_LOCATION,
                         OOMPH_CURRENT_FUNCTION);
   } // End of node_global_position_comparison
-
 
   /// \short Get a vector of the nodes in the order in which they are
   /// encountered when stepping through the elements (similar to
@@ -338,54 +335,54 @@ namespace NodeReordering
     if (use_old_ordering)
     {
       // Setup map to check if nodes have been done yet
-      std::map<Node*,bool> done;
+      std::map<Node*, bool> done;
 
       // Loop over all nodes
-      unsigned nnod=mesh_pt->nnode();
+      unsigned nnod = mesh_pt->nnode();
 
       // Initialise the vector
-      reordering.assign(nnod,0);
+      reordering.assign(nnod, 0);
 
       // Return immediately if there are no nodes: Note assumption:
       // Either all the elements' nodes stored here or none. If only a subset
       // is stored in the Node_pt vector we'll get a range checking error below
       // (only if run with range checking, of course).
-      if (nnod==0)
+      if (nnod == 0)
       {
         // Return immediately
         return;
       }
 
       // Loop over the nodes in the mesh
-      for (unsigned j=0; j<nnod; j++)
+      for (unsigned j = 0; j < nnod; j++)
       {
         // Indicate whether or not the node has been swapped
-        done[mesh_pt->node_pt(j)]=false;
+        done[mesh_pt->node_pt(j)] = false;
       }
 
       // Initialise counter for number of nodes
-      unsigned long count=0;
+      unsigned long count = 0;
 
       // Get the number of elements in the mesh
-      unsigned nel=mesh_pt->nelement();
+      unsigned nel = mesh_pt->nelement();
 
       // Loop over all elements
-      for (unsigned e=0; e<nel; e++)
+      for (unsigned e = 0; e < nel; e++)
       {
         // Upcase FiniteElement (or derived) class object
-        FiniteElement* el_pt=mesh_pt->finite_element_pt(e);
+        FiniteElement* el_pt = mesh_pt->finite_element_pt(e);
 
         // If the upcast was successful
-        if (el_pt!=0)
+        if (el_pt != 0)
         {
           // Get the number of nodes in this element
-          unsigned nnod=el_pt->nnode();
+          unsigned nnod = el_pt->nnode();
 
           // Loop over nodes in element
-          for (unsigned j=0; j<nnod; j++)
+          for (unsigned j = 0; j < nnod; j++)
           {
             // Get a pointer to the j-th node in the element
-            Node* nod_pt=el_pt->node_pt(j);
+            Node* nod_pt = el_pt->node_pt(j);
 
             // Has node been done yet?
             if (!done[nod_pt])
@@ -399,10 +396,10 @@ namespace NodeReordering
               // any case... For this reason we don't range check here by
               // default (not even under paranoia) but force you turn on proper
               // (costly) range checking to track this down...
-              reordering[count]=nod_pt;
+              reordering[count] = nod_pt;
 
               // Indicate that the node has been done
-              done[nod_pt]=true;
+              done[nod_pt] = true;
 
               // Increase counter
               count++;
@@ -412,63 +409,61 @@ namespace NodeReordering
       } // for (unsigned e=0;e<nel;e++)
 
       // Sanity check
-      if (count!=nnod)
+      if (count != nnod)
       {
         // Create an error message
-        std::string error_message="Trouble: Number of nodes hasn't stayed ";
+        std::string error_message = "Trouble: Number of nodes hasn't stayed ";
 
         // Finish off the message
-        error_message+="constant during reordering!\n";
+        error_message += "constant during reordering!\n";
 
         // Throw an error
-        throw OomphLibError(error_message,
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
+        throw OomphLibError(
+          error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
     }
     else
     {
       // Copy node vector out
-      unsigned n_node=mesh_pt->nnode();
+      unsigned n_node = mesh_pt->nnode();
 
       // Resize the node ordering vector
       reordering.resize(n_node);
 
       // Loop over the nodes
-      for (unsigned i=0; i<n_node; i++)
+      for (unsigned i = 0; i < n_node; i++)
       {
         // Assign the i-th node pointer entry
-        reordering[i]=mesh_pt->node_pt(i);
+        reordering[i] = mesh_pt->node_pt(i);
       }
 
       // Now sort the nodes lexicographically
-      std::sort(reordering.begin(),reordering.end(),
-                &node_global_position_comparison);
+      std::sort(
+        reordering.begin(), reordering.end(), &node_global_position_comparison);
     } // if (use_old_ordering)
   } // End of get_node_reordering
 
-
   /// \short Reorder nodes in the order in which they are encountered when
   /// stepping through the elements
-  void reorder_nodes(Mesh* mesh_pt,const bool& use_old_ordering)
+  void reorder_nodes(Mesh* mesh_pt, const bool& use_old_ordering)
   {
     // Create storage for the reordered nodes
     Vector<Node*> reordering;
 
     // Get the reordered nodes (without altering the mesh's node vector)
-    get_node_reordering(mesh_pt,reordering,use_old_ordering);
+    get_node_reordering(mesh_pt, reordering, use_old_ordering);
 
     // Get the number of nodes in the mesh
-    unsigned n_node=mesh_pt->nnode();
+    unsigned n_node = mesh_pt->nnode();
 
     // Loop over all of the nodes
-    for (unsigned i=0; i<n_node; i++)
+    for (unsigned i = 0; i < n_node; i++)
     {
       // Replace the Mesh's i-th node pointer with the reordered node pointer
-      mesh_pt->node_pt(i)=reordering[i];
+      mesh_pt->node_pt(i) = reordering[i];
     }
   } // End of reorder_nodes
-} // End of NodeReordering
+} // namespace NodeReordering
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -483,16 +478,16 @@ namespace GlobalParameters
   /// \short Amplitude of the cylinder motion used by Williamson & Roshko
   /// (1988). As a side note, since the (simulation) cylinder has unit
   /// diameter (i.e. D=1) this is actually the dimensionless amplitude.
-  double Amplitude=0.25;
+  double Amplitude = 0.25;
 
   /// \short The target amplitude; used if we're going to do a parameter
   /// sweep through the amplitude-wavelength plane. This is generally the
   /// second parameter for which parameter continuation is used (if, of
   /// course, the value of Amplitude is different to Amplitude_target).
-  double Amplitude_target=0.50;
+  double Amplitude_target = 0.50;
 
   /// The number of steps used to reach the target amplitude
-  unsigned N_amplitude_step=5;
+  unsigned N_amplitude_step = 5;
 
   /// \short The ratio between the cylinder excitation period, T_e, and
   /// the stationary cylinder vortex-shedding period, T_s. Explicitly,
@@ -505,19 +500,18 @@ namespace GlobalParameters
   /// Leontini et al. 2006) to match the x-axis in the experimental
   /// phase diagram of Williamson & Roshko (1988) (with the y-axis given
   /// by the non-dimensionalised amplitude parameter).
-  double Period_ratio=1.0;
+  double Period_ratio = 1.0;
 
   /// \short The target Period_ratio value; used if we're going to do a
   /// parameter sweep through the amplitude-wavelength plane. This will
   /// normally be the last parameter for which parameter continuation is
   /// used (again, if the value of Period_ratio is different to
   /// Period_ratio_target).
-  double Period_ratio_target=1.0;
+  double Period_ratio_target = 1.0;
 
   /// The number of steps used to reach the target Period_ratio value
-  unsigned N_period_ratio_step=1;
+  unsigned N_period_ratio_step = 1;
   ///--------------------------Cylinder Motion----------------------------
-
 
   ///---------------------Navier-Stokes Parameters------------------------
   /// \short Set the (current) Reynolds number. A pointer to this variable
@@ -526,21 +520,21 @@ namespace GlobalParameters
   ///                 update_physical_parameter(),
   /// (defined in this namespace) MUST be called immediately after editing
   /// the value of this variable.
-  double Re=2.0;
+  double Re = 2.0;
 
   /// \short The target Reynolds number used in simulations. If this is
   /// different to the current Reynolds number then the first part of this
   /// simulation will (or at least, should) work to reach the target
   /// Reynolds number. Also, the value this number takes dictates the
   /// choice of Strouhal number (=St).
-  double Re_target=10.0;
+  double Re_target = 10.0;
 
   /// \short The number of steps used to reach the target Reynolds number.
   /// In general the target Reynolds number will be reached using natural
   /// parameter continuation as pseudo-arc-length continuation doesn't
   /// seem to be a reliable method for it (or at least that's what was
   /// observed in coarse-grid simulations).
-  unsigned N_re_step=2;
+  unsigned N_re_step = 2;
 
   /// \short The Strouhal number, St, is normally defined as
   ///                             St=L/UT,
@@ -582,14 +576,14 @@ namespace GlobalParameters
   ///            u_{node}=(D/UT_{e})*dr_{cyl}/dt
   ///                    =St_{oomph}*dr_{cyl}/dt
   ///                    =(St_{vort}/Period_ratio)*dr_{cyl}/dt.
-  double St=1.0;
+  double St = 1.0;
 
   /// \short The Womersley number (=Re*St), otherwise denoted as ReSt,
   /// is dependent on the value of the Reynolds number and the Strouhal
   /// number. If either value is changed then the function
   ///                 update_physical_parameter(),
   /// will be called which, in turn, updates the Womersley number value.
-  double ReSt=Re*St;
+  double ReSt = Re * St;
 
   /// \short Function to calculate the Strouhal number appropriate for
   /// this simulation. The value chosen corresponds to the Strouhal
@@ -615,22 +609,22 @@ namespace GlobalParameters
   double calculate_strouhal_number(const double& re)
   {
     // The min. Reynolds number
-    double min_re=46.0;
+    double min_re = 46.0;
 
     // The max. Reynolds number
-    double max_re=180.0;
+    double max_re = 180.0;
 
     // The first coefficient of the Re-St polynomial
-    double a=-3.3265;
+    double a = -3.3265;
 
     // The second coefficient of the Re-St polynomial
-    double b=0.1816;
+    double b = 0.1816;
 
     // The third coefficient of the Re-St polynomial
-    double c=0.00016;
+    double c = 0.00016;
 
     // If we're above the maximum Reynolds number
-    if (re>max_re)
+    if (re > max_re)
     {
       // Throw an error
       throw OomphLibError("Don't know what to do for this Reynolds number!",
@@ -638,16 +632,16 @@ namespace GlobalParameters
                           OOMPH_EXCEPTION_LOCATION);
     }
     // If we're below the minimum Reynolds number
-    else if (re<min_re)
+    else if (re < min_re)
     {
       // Just return the Strouhal value at the minimum Reynolds number
-      return a/min_re+b+c*min_re;
+      return a / min_re + b + c * min_re;
     }
     // Otherwise, use the relationship in the Williamson paper
     else
     {
       // Return the Strouhal value at this Reynolds number
-      return a/re+b+c*re;
+      return a / re + b + c * re;
     }
   } // End of calculate_strouhal_number
 
@@ -659,43 +653,43 @@ namespace GlobalParameters
   void update_physical_parameters()
   {
     // Update the Strouhal number
-    St=calculate_strouhal_number(Re)/Period_ratio;
+    St = calculate_strouhal_number(Re) / Period_ratio;
 
     // Update the Womersley number
-    ReSt=Re*St;
+    ReSt = Re * St;
   } // End of update_physical_parameters
   ///---------------------Navier-Stokes Parameters------------------------
 
   ///-------------------------Domain Properties---------------------------
   /// Radius of the cylinder
-  double Radius=0.5;
+  double Radius = 0.5;
 
   /// Pointer to the cylinder
-  OscillatingCylinder* Cylinder_pt=0;
+  OscillatingCylinder* Cylinder_pt = 0;
 
   /// The radius of the annular region surrounding the cylinder
-  double Annular_region_radius=1.0;
+  double Annular_region_radius = 1.0;
 
   /// Height of domain
-  double Height=20.0;
+  double Height = 20.0;
 
   /// X-coordinate of upstream end of domain
-  double X_left=-10.0;
+  double X_left = -10.0;
 
   /// X-coordinate of downstream end of domain
-  double X_right=40.0;
+  double X_right = 40.0;
 
   /// Length of square central box domain
-  double Length_of_central_box=10.0;
+  double Length_of_central_box = 10.0;
 
   /// Number of uniform refinements before the mesh extrusion
-  unsigned N_uniform_refinement_before_solve=1;
+  unsigned N_uniform_refinement_before_solve = 1;
 
   /// The length of the mesh in the time direction
-  double L_t=1.0;
+  double L_t = 1.0;
 
   /// The number of elements in the time direction
-  unsigned N_t=25;
+  unsigned N_t = 25;
 
   /// \short Update mesh parameters. This is (and only needs to be)
   /// once per simulation, during the setup of the mesh. This decides
@@ -705,7 +699,7 @@ namespace GlobalParameters
   void update_mesh_parameters()
   {
     // Sanity check: N_t has to be odd!
-    if ((N_t%2)==0)
+    if ((N_t % 2) == 0)
     {
       // Throw an error
       OomphLibWarning("Method requires an odd number of time slices!\n",
@@ -716,21 +710,21 @@ namespace GlobalParameters
     // Update the radius of the annular region from the updated parameter
     // values. NOTE: The annular rings are used to resolve the boundary
     // layers so they should not be made too large (hence the use of std::min)
-    Annular_region_radius=
-      Radius+std::min(2.0*Radius,0.5*((0.5*Length_of_central_box)-Radius));
+    Annular_region_radius =
+      Radius +
+      std::min(2.0 * Radius, 0.5 * ((0.5 * Length_of_central_box) - Radius));
   } // End of update_mesh_parameters
   ///-------------------------Domain Properties---------------------------
-
 
   ///----------------------------Solver Info------------------------------
   /// \short Variable to choose which preconditioner to use. The actual
   /// preconditioner we choose to use is defined by the enumeration class
   /// implemented in the problem
-  unsigned Preconditioner=0;
+  unsigned Preconditioner = 0;
 
   /// \short Storage for the number of dof types in the mesh. Will be
   /// assigned in the function assign_time_slice_id()
-  unsigned N_dof_type=0;
+  unsigned N_dof_type = 0;
 
   /// \short Helper function which sets up the mapping between DOF types
   /// and which block they should be assigned to. This relies on the concept
@@ -742,7 +736,7 @@ namespace GlobalParameters
     dof_to_block_map.resize(N_dof_type);
 
     // Loop over the dofs
-    for (unsigned i=0; i<N_dof_type; i++)
+    for (unsigned i = 0; i < N_dof_type; i++)
     {
       // How many unique dof types are there per element? i.e. The velocities
       // and pressure in the first time slice constitute the first 3 then the
@@ -751,24 +745,24 @@ namespace GlobalParameters
       // pressure in the final time slice of the element are not included
       // because they are stored as the first 3 dof types in the next element
       // (in the time direction).
-      unsigned n_unique_dof_per_element=3;
+      unsigned n_unique_dof_per_element = 3;
 
       // How many unique dof types are there per element after we've aggregated
       // the velocity components together? i.e. the velocities and pressure in
       // the first time slice in the element constitute one (aggregated) dof
-      unsigned n_unique_aggregated_dof_per_element=1;
+      unsigned n_unique_aggregated_dof_per_element = 1;
 
       // What (local) elemental dof does this (global) dof correspond to?
-      unsigned i_local_dof=i%n_unique_dof_per_element;
+      unsigned i_local_dof = i % n_unique_dof_per_element;
 
       // Which elemental time slice does this dof correspond to?
-      unsigned i_temporal=(i-i_local_dof)/n_unique_dof_per_element;
+      unsigned i_temporal = (i - i_local_dof) / n_unique_dof_per_element;
 
       // The first time slice in the element (u,v and p)
-      if ((i_local_dof==0)||(i_local_dof==1)||(i_local_dof==2))
+      if ((i_local_dof == 0) || (i_local_dof == 1) || (i_local_dof == 2))
       {
         // Calculate the i-th entry
-        dof_to_block_map[i]=i_temporal*n_unique_aggregated_dof_per_element;
+        dof_to_block_map[i] = i_temporal * n_unique_aggregated_dof_per_element;
       }
       else
       {
@@ -776,9 +770,10 @@ namespace GlobalParameters
         std::ostringstream error_message_stream;
 
         // Create an error message
-        error_message_stream << "There should only be 3 unique dofs per element. "
-                             << "Instead, you have " << n_unique_dof_per_element
-                             << " unique dofs per element." << std::endl;
+        error_message_stream
+          << "There should only be 3 unique dofs per element. "
+          << "Instead, you have " << n_unique_dof_per_element
+          << " unique dofs per element." << std::endl;
 
         // Throw the error message
         throw OomphLibError(error_message_stream.str(),
@@ -789,7 +784,6 @@ namespace GlobalParameters
   } // End of set_up_dof_to_block_mapping
   ///----------------------------Solver Info------------------------------
 
-
   ///-----------------------Documentation Helpers-------------------------
   // DocInfo object for documentation
   DocInfo Doc_info;
@@ -798,10 +792,10 @@ namespace GlobalParameters
   std::ofstream Trace_file;
 
   /// Helper variable to indicate whether or not to document the solution
-  bool Document_solution=true;
+  bool Document_solution = true;
 
   /// Number of plot points (in each direction)
-  unsigned N_plot_point=2;
+  unsigned N_plot_point = 2;
 
   /// Document the maximum deformation inside the central box
   void doc_maximum_central_box_deformation()
@@ -810,15 +804,15 @@ namespace GlobalParameters
     // box boundary. NOTE: We check from the annular ring because the
     // region between the cylinder and annular ring is made rigid so
     // no compression occurs there.
-    double compression_region_width=(Length_of_central_box/2.0-
-                                     Annular_region_radius);
+    double compression_region_width =
+      (Length_of_central_box / 2.0 - Annular_region_radius);
 
     // Calculate the current compression of the inner box
-    double compression_ratio=((compression_region_width-Amplitude)/
-                              compression_region_width);
+    double compression_ratio =
+      ((compression_region_width - Amplitude) / compression_region_width);
 
     // If the compression is too large for the mesh
-    if (compression_ratio<0.0)
+    if (compression_ratio < 0.0)
     {
       // Used to create an error message
       std::ostringstream error_message_stream;
@@ -834,18 +828,17 @@ namespace GlobalParameters
                           OOMPH_EXCEPTION_LOCATION);
     }
     // If the compression is large then warn the user
-    else if (compression_ratio<0.5)
+    else if (compression_ratio < 0.5)
     {
       // Used to create a warning message
       std::ostringstream warning_message_stream;
 
       // Create a warning message
-      warning_message_stream << "Maximal mesh compression results in elements "
-                             << "being reduced\nto "
-                             << compression_ratio*100.0
-                             << "% of their original width. It is therefore\n"
-                             << "recommended the central box be made larger."
-                             << std::endl;
+      warning_message_stream
+        << "Maximal mesh compression results in elements "
+        << "being reduced\nto " << compression_ratio * 100.0
+        << "% of their original width. It is therefore\n"
+        << "recommended the central box be made larger." << std::endl;
 
       // Throw a warning to the user
       OomphLibWarning(warning_message_stream.str(),
@@ -858,8 +851,7 @@ namespace GlobalParameters
       // the text in bold red)
       oomph_info << "\033[1;31m"
                  << "\nMaximum element compression ratio inside central box: "
-                 << "\033[0m"
-                 << compression_ratio*100.0 << "%" << std::endl;
+                 << "\033[0m" << compression_ratio * 100.0 << "%" << std::endl;
     }
   } // End of doc_maximum_central_box_deformation
 
@@ -870,17 +862,17 @@ namespace GlobalParameters
   std::string parameter_to_string(const double* const parameter_pt)
   {
     // Are we dealing with the Reynolds number?
-    if (parameter_pt==&Re)
+    if (parameter_pt == &Re)
     {
       // Return a string to denote the Reynolds number
       return "Re";
     }
-    else if (parameter_pt==&Amplitude)
+    else if (parameter_pt == &Amplitude)
     {
       // Return a string to denote the amplitude
       return "A";
     }
-    else if (parameter_pt==&Period_ratio)
+    else if (parameter_pt == &Period_ratio)
     {
       // Return a string to denote the period ratio
       return "T_e/T_s";
@@ -906,7 +898,6 @@ namespace GlobalParameters
   } // End of parameter_to_string
   ///-----------------------Documentation Helpers-------------------------
 
-
   ///---------------------------Miscellaneous-----------------------------
   /// Find a node on the centerline
   /// N.B. We are modifying the *pointer* el_centerline_pt not the actual
@@ -919,50 +910,50 @@ namespace GlobalParameters
                                unsigned& node_index)
   {
     // Number of elements in the mesh
-    unsigned n_element=mesh_pt->nelement();
+    unsigned n_element = mesh_pt->nelement();
 
     // Number of nodes in an element
-    unsigned n_el_node=mesh_pt->finite_element_pt(0)->nnode();
+    unsigned n_el_node = mesh_pt->finite_element_pt(0)->nnode();
 
     // Number of spatial dimensions
-    unsigned n_spatial_dim=2;
+    unsigned n_spatial_dim = 2;
 
     // Eulerian position
-    Vector<double> x(n_spatial_dim+1,0.0);
+    Vector<double> x(n_spatial_dim + 1, 0.0);
 
     // Loop over the nodes in the mesh
-    for (unsigned i=0; i<n_element; i++)
+    for (unsigned i = 0; i < n_element; i++)
     {
       // Get a pointer to this element
-      FiniteElement* el_pt=mesh_pt->finite_element_pt(i);
+      FiniteElement* el_pt = mesh_pt->finite_element_pt(i);
 
       // Loop over the nodes in the i-th element
-      for (unsigned j=0; j<n_el_node; j++)
+      for (unsigned j = 0; j < n_el_node; j++)
       {
         // Get a pointer to the j-th node in the i-th element
-        Node* nod_pt=el_pt->node_pt(j);
+        Node* nod_pt = el_pt->node_pt(j);
 
-        // Might want pressure information later too so make sure it's not pinned
+        // Might want pressure information later too so make sure it's not
+        // pinned
         if (!(nod_pt->is_pinned(n_spatial_dim)))
         {
           // Loop over the coordinates
-          for (unsigned k=0; k<n_spatial_dim+1; k++)
+          for (unsigned k = 0; k < n_spatial_dim + 1; k++)
           {
             // Get the i-th coordinate
-            x[k]=nod_pt->x(k);
+            x[k] = nod_pt->x(k);
           }
 
           // Check if the node lies on the centerline, outside the central box
           // and on the initial time-boundary
-          if ((x[0]>(0.5*Length_of_central_box))&&
-              (std::abs(x[1])<1.0e-10)&&
-              (std::abs(x[2])<1.0e-10))
+          if ((x[0] > (0.5 * Length_of_central_box)) &&
+              (std::abs(x[1]) < 1.0e-10) && (std::abs(x[2]) < 1.0e-10))
           {
             // Store a pointer to the chosen element
-            (*el_centerline_pt)=el_pt;
+            (*el_centerline_pt) = el_pt;
 
             // Store the local nodal number
-            node_index=j;
+            node_index = j;
 
             // We're done; we only need one node
             return;
@@ -976,10 +967,10 @@ namespace GlobalParameters
   double round(const double& d)
   {
     // Round it
-    return std::floor(d+0.5);
+    return std::floor(d + 0.5);
   } // End of round
   ///---------------------------Miscellaneous-----------------------------
-} // End of GlobalParameters
+} // namespace GlobalParameters
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -1001,7 +992,6 @@ namespace SubsidiaryPreconditionerHelper
   } // End of get_new_preconditioner
 } // End of namespace SubsidiaryPreconditionerHelper
 
-
 //=====start_of_problem_class=========================================
 /// NavierStokes problem
 //====================================================================
@@ -1009,7 +999,6 @@ template<class ELEMENT>
 class NavierStokesProblem : public Problem
 {
 public:
-
   /// Constructor
   NavierStokesProblem();
 
@@ -1065,10 +1054,9 @@ public:
                                 const unsigned& max_n_parameter_step);
 
   /// Doc the solution
-  void doc_solution(const bool& doc_spacetime_soln=false);
+  void doc_solution(const bool& doc_spacetime_soln = false);
 
 private:
-
   /// Oomph-lib iterative linear solver
   IterativeLinearSolver* Solver_pt;
 
@@ -1078,8 +1066,8 @@ private:
   // Enumeration of the preconditioners
   enum
   {
-    Diagonal_preconditioner=0,
-    Lower_triangular_preconditioner=1
+    Diagonal_preconditioner = 0,
+    Lower_triangular_preconditioner = 1
   };
 
   /// Pointer to the space-time mesh
@@ -1089,8 +1077,8 @@ private:
   /// retain a pointer to the Domain which will tell the ExtrudedDomain
   /// how to move the nodes when we want to do a parameter sweep in the
   /// cylinder oscillation amplitude...
-  RefineableQuadMeshWithMovingCylinder<
-  MyRefineableQTaylorHoodElement>* Spatial_mesh_pt;
+  RefineableQuadMeshWithMovingCylinder<MyRefineableQTaylorHoodElement>*
+    Spatial_mesh_pt;
 
   // Boolean variable to check if periodicity has been set up
   bool Periodicity_has_been_enforced;
@@ -1098,16 +1086,15 @@ private:
   // Enumeration of the boundaries of the space-time mesh
   enum
   {
-    Lower_wall_boundary_id=0,
-    Outflow_boundary_id=1,
-    Upper_wall_boundary_id=2,
-    Inflow_boundary_id=3,
-    Cylinder_surface_boundary_id=4,
-    Initial_time_boundary_id=5,
-    Final_time_boundary_id=6
+    Lower_wall_boundary_id = 0,
+    Outflow_boundary_id = 1,
+    Upper_wall_boundary_id = 2,
+    Inflow_boundary_id = 3,
+    Cylinder_surface_boundary_id = 4,
+    Initial_time_boundary_id = 5,
+    Final_time_boundary_id = 6
   };
 }; // End of NavierStokesProblem class
-
 
 //========start_of_constructor============================================
 /// Constructor for NavierStokes problem in cubic domain
@@ -1141,11 +1128,11 @@ NavierStokesProblem<ELEMENT>::NavierStokesProblem() :
   complete_problem_setup();
 
   // Make it pseudo-traction-free
-  SpaceTimeNavierStokesMixedOrderEquations<2>::Gamma[0]=0.0;
-  SpaceTimeNavierStokesMixedOrderEquations<2>::Gamma[1]=0.0;
+  SpaceTimeNavierStokesMixedOrderEquations<2>::Gamma[0] = 0.0;
+  SpaceTimeNavierStokesMixedOrderEquations<2>::Gamma[1] = 0.0;
 
   // Use the block lower triangular preconditioner
-  GlobalParameters::Preconditioner=Lower_triangular_preconditioner;
+  GlobalParameters::Preconditioner = Lower_triangular_preconditioner;
 
   // Call the auxiliary solver setup function
   set_up_spacetime_solver();
@@ -1154,7 +1141,6 @@ NavierStokesProblem<ELEMENT>::NavierStokesProblem() :
   oomph_info << "\nNumber of equations: " << assign_eqn_numbers() << std::endl;
 } // End of NavierStokesProblem
 
-
 //========start_of_destructor=============================================
 /// Destructor for NavierStokes problem in cubic domain
 //========================================================================
@@ -1162,26 +1148,26 @@ template<class ELEMENT>
 NavierStokesProblem<ELEMENT>::~NavierStokesProblem()
 {
   // If the user is NOT using the default linear solver
-  if (dynamic_cast<SuperLUSolver*>(linear_solver_pt())==0)
+  if (dynamic_cast<SuperLUSolver*>(linear_solver_pt()) == 0)
   {
     // Assign the linear solver
     delete linear_solver_pt();
 
     // Make it a null pointer
-    linear_solver_pt()=0;
+    linear_solver_pt() = 0;
 
     // Make the (privately stored) solver pointer a null pointer
-    Solver_pt=0;
+    Solver_pt = 0;
 
     // We would only use a preconditioner if we're not using SuperLU so
     // check here if the preconditioner pointer has been set
-    if (Prec_pt!=0)
+    if (Prec_pt != 0)
     {
       // Delete the preconditioner
       delete Prec_pt;
 
       // Make it a null pointer
-      Prec_pt=0;
+      Prec_pt = 0;
     }
   } // if (dynamic_cast<SuperLUSolver*>(linear_solver_pt())==0)
 
@@ -1189,32 +1175,31 @@ NavierStokesProblem<ELEMENT>::~NavierStokesProblem()
   delete Bulk_mesh_pt;
 
   // Make the pointer null
-  Bulk_mesh_pt=0;
+  Bulk_mesh_pt = 0;
 
   // Delete the spatial mesh
   delete Spatial_mesh_pt;
 
   // Make the pointer null
-  Spatial_mesh_pt=0;
+  Spatial_mesh_pt = 0;
 
   // Delete the cylinder
   delete GlobalParameters::Cylinder_pt;
 
   // Make it a null pointer
-  GlobalParameters::Cylinder_pt=0;
+  GlobalParameters::Cylinder_pt = 0;
 } // End of ~NavierStokesProblem
-
 
 //=====start_of_actions_after_parameter_increase============================
 /// Update the problem specs after an increase in a parameter
 //==========================================================================
 template<class ELEMENT>
-void NavierStokesProblem<ELEMENT>::
-actions_after_parameter_increase(double* const& parameter_pt)
+void NavierStokesProblem<ELEMENT>::actions_after_parameter_increase(
+  double* const& parameter_pt)
 {
   // If we have been passed a pointer to the Reynolds number or period ratio
-  if ((parameter_pt==&GlobalParameters::Re)||
-      (parameter_pt==&GlobalParameters::Period_ratio))
+  if ((parameter_pt == &GlobalParameters::Re) ||
+      (parameter_pt == &GlobalParameters::Period_ratio))
   {
     // Call the physical parameters update function
     GlobalParameters::update_physical_parameters();
@@ -1223,7 +1208,7 @@ actions_after_parameter_increase(double* const& parameter_pt)
     // the cylinder boundary)
     apply_boundary_conditions();
   }
-  else if (parameter_pt==&GlobalParameters::Amplitude)
+  else if (parameter_pt == &GlobalParameters::Amplitude)
   {
     // Update the nodal positions
     Bulk_mesh_pt->node_update();
@@ -1238,7 +1223,8 @@ actions_after_parameter_increase(double* const& parameter_pt)
     oomph_info << "\nCalled actions_after_parameter_increase(...) but I"
                << "\ndon't know what to do for this parameter. I'm going to "
                << "\nassume I'm not meant to do anything here. I hope you know"
-               << "\nwhat you're doing...\n" << std::endl;
+               << "\nwhat you're doing...\n"
+               << std::endl;
   }
 } // End of actions_after_parameter_increase
 
@@ -1252,35 +1238,34 @@ template<class ELEMENT>
 void NavierStokesProblem<ELEMENT>::create_spacetime_mesh()
 {
   // Storage for the start time
-  double start_t=0.0;
+  double start_t = 0.0;
 
   //--------------------------
   // Generate 2D spatial mesh:
   //--------------------------
   // Record the start time
-  start_t=TimingHelpers::timer();
+  start_t = TimingHelpers::timer();
 
   // Use BDF2
   add_time_stepper_pt(new Steady<0>);
 
   // Make a new cylinder
-  GlobalParameters::Cylinder_pt=
-    new OscillatingCylinder(&GlobalParameters::Radius,
-                            &GlobalParameters::Amplitude,
-                            time_pt());
+  GlobalParameters::Cylinder_pt = new OscillatingCylinder(
+    &GlobalParameters::Radius, &GlobalParameters::Amplitude, time_pt());
 
   // Make a new mesh and assign its pointer
-  Spatial_mesh_pt=
+  Spatial_mesh_pt =
     new RefineableQuadMeshWithMovingCylinder<MyRefineableQTaylorHoodElement>(
-    GlobalParameters::Cylinder_pt,
-    GlobalParameters::Annular_region_radius,
-    GlobalParameters::Length_of_central_box,
-    GlobalParameters::X_left,
-    GlobalParameters::X_right,
-    GlobalParameters::Height);
+      GlobalParameters::Cylinder_pt,
+      GlobalParameters::Annular_region_radius,
+      GlobalParameters::Length_of_central_box,
+      GlobalParameters::X_left,
+      GlobalParameters::X_right,
+      GlobalParameters::Height);
 
   // Loop over the refinements
-  for (unsigned i=0; i<GlobalParameters::N_uniform_refinement_before_solve; i++)
+  for (unsigned i = 0; i < GlobalParameters::N_uniform_refinement_before_solve;
+       i++)
   {
     // Refine the mesh
     Spatial_mesh_pt->refine_uniformly();
@@ -1292,7 +1277,7 @@ void NavierStokesProblem<ELEMENT>::create_spacetime_mesh()
              << "\nNumber of elements in spatial mesh: "
              << Spatial_mesh_pt->nelement()
              << "\nTime taken to generate refined spatial mesh [sec]: "
-             << TimingHelpers::timer()-start_t << std::endl;
+             << TimingHelpers::timer() - start_t << std::endl;
 
   //---------------------------------
   // Generate the 3D space-time mesh:
@@ -1301,24 +1286,25 @@ void NavierStokesProblem<ELEMENT>::create_spacetime_mesh()
   MeshExtrusionHelpers::Mesh_extrusion_helper.enable_doc_mesh_setup_time();
 
   // Create the extruded mesh
-  Bulk_mesh_pt=new ExtrudedCubeMeshFromQuadMesh<ELEMENT>
-  (Spatial_mesh_pt,GlobalParameters::N_t,GlobalParameters::L_t);
+  Bulk_mesh_pt = new ExtrudedCubeMeshFromQuadMesh<ELEMENT>(
+    Spatial_mesh_pt, GlobalParameters::N_t, GlobalParameters::L_t);
 
   // The created space-time mesh is the only mesh so assign it
-  Problem::mesh_pt()=Bulk_mesh_pt;
+  Problem::mesh_pt() = Bulk_mesh_pt;
 
   // Record the start time
-  start_t=TimingHelpers::timer();
+  start_t = TimingHelpers::timer();
 
   // Pin the redundant temporal nodes
   pin_redundant_temporal_nodes();
 
   // Reorder the nodes (don't use the regular setup ordering)
-  NodeReordering::reorder_nodes(Bulk_mesh_pt,false);
+  NodeReordering::reorder_nodes(Bulk_mesh_pt, false);
 
   // Document the setup time
-  oomph_info << "\nTime taken for redundant node pinning/node reordering [sec]: "
-             << TimingHelpers::timer()-start_t << std::endl;
+  oomph_info
+    << "\nTime taken for redundant node pinning/node reordering [sec]: "
+    << TimingHelpers::timer() - start_t << std::endl;
 
   // Check the maximum deformation of the mesh due to the cylinder motion
   GlobalParameters::doc_maximum_central_box_deformation();
@@ -1326,7 +1312,6 @@ void NavierStokesProblem<ELEMENT>::create_spacetime_mesh()
   // Tell the user we've finished
   oomph_info << "\nCompleted mesh generation and documentation!" << std::endl;
 } // End of create_spacetime_mesh
-
 
 //=====start_of_pin_redundant_temporal_nodes================================
 /// \short The mixed order elements use linear interpolation in time so the
@@ -1339,13 +1324,13 @@ template<class ELEMENT>
 void NavierStokesProblem<ELEMENT>::pin_redundant_temporal_nodes()
 {
   // Number of nodes in each direction
-  unsigned n_node_1d=Bulk_mesh_pt->finite_element_pt(0)->nnode_1d();
+  unsigned n_node_1d = Bulk_mesh_pt->finite_element_pt(0)->nnode_1d();
 
   // Number of nodes in a space-time element
-  unsigned n_el_node=Bulk_mesh_pt->finite_element_pt(0)->nnode();
+  unsigned n_el_node = Bulk_mesh_pt->finite_element_pt(0)->nnode();
 
   // Sanity check: only works for 3D space-time elements (2D space + 1D time)
-  if (n_el_node!=std::pow(n_node_1d,3))
+  if (n_el_node != std::pow(n_node_1d, 3))
   {
     // Throw an error
     throw OomphLibError("Can currently only deal with 3D space-time elements!",
@@ -1354,34 +1339,34 @@ void NavierStokesProblem<ELEMENT>::pin_redundant_temporal_nodes()
   }
 
   // Get the number of elements in the mesh
-  unsigned n_element=Bulk_mesh_pt->nelement();
+  unsigned n_element = Bulk_mesh_pt->nelement();
 
   // Loop over the elements
-  for (unsigned i=0; i<n_element; i++)
+  for (unsigned i = 0; i < n_element; i++)
   {
     // Loop over the nodes
-    for (unsigned j=0; j<n_el_node; j++)
+    for (unsigned j = 0; j < n_el_node; j++)
     {
       // Storage for the local time slice ID (0<=i_temporal<=NNODE_1D-1)
-      unsigned j_temporal=0;
+      unsigned j_temporal = 0;
 
       // The spatial node number
-      unsigned j_spatial=j%(n_node_1d*n_node_1d);
+      unsigned j_spatial = j % (n_node_1d * n_node_1d);
 
       // Which local time slice are we in?
-      j_temporal=(j-j_spatial)/(n_node_1d*n_node_1d);
+      j_temporal = (j - j_spatial) / (n_node_1d * n_node_1d);
 
       // If we're not on first/final elemental time slice
-      if ((j_temporal!=0)&&(j_temporal!=n_node_1d-1))
+      if ((j_temporal != 0) && (j_temporal != n_node_1d - 1))
       {
         // Get a pointer to the j-th node in the i-th element
-        Node* node_pt=Bulk_mesh_pt->finite_element_pt(i)->node_pt(j);
+        Node* node_pt = Bulk_mesh_pt->finite_element_pt(i)->node_pt(j);
 
         // Get the number of unknowns at this node
-        unsigned n_value=node_pt->nvalue();
+        unsigned n_value = node_pt->nvalue();
 
         // Loop over the unknowns
-        for (unsigned k=0; k<n_value; k++)
+        for (unsigned k = 0; k < n_value; k++)
         {
           // Pin the k-th unknown at this node
           node_pt->pin(k);
@@ -1391,7 +1376,6 @@ void NavierStokesProblem<ELEMENT>::pin_redundant_temporal_nodes()
   } // for (unsigned i=0;i<n_element;i++)
 } // End of pin_redundant_temporal_nodes
 
-
 //========================================================================
 /// Set up the solver for this Problem
 //========================================================================
@@ -1399,55 +1383,56 @@ template<class ELEMENT>
 void NavierStokesProblem<ELEMENT>::set_up_spacetime_solver()
 {
   // Create oomph-lib iterative linear solver
-  Solver_pt=new GMRES<CRDoubleMatrix>;
+  Solver_pt = new GMRES<CRDoubleMatrix>;
 
   // Use RHS preconditioning
-  //dynamic_cast<GMRES<CRDoubleMatrix>*>(Solver_pt)->set_preconditioner_RHS();
+  // dynamic_cast<GMRES<CRDoubleMatrix>*>(Solver_pt)->set_preconditioner_RHS();
   dynamic_cast<GMRES<CRDoubleMatrix>*>(Solver_pt)->set_preconditioner_LHS();
 
   // Set the tolerance
-  Solver_pt->tolerance()=1.0e-10;
+  Solver_pt->tolerance() = 1.0e-10;
 
   // Maximum number of iterations
-  Solver_pt->max_iter()=200;
+  Solver_pt->max_iter() = 200;
 
   // Set linear solver
-  linear_solver_pt()=Solver_pt;
+  linear_solver_pt() = Solver_pt;
 
   //-----------------------------------------
   // Create the master-level preconditioners:
   //-----------------------------------------
   // Do we want to document the memory usage?
-  bool document_memory_usage=true;
+  bool document_memory_usage = true;
 
   // Solve the diagonal blocks associated with each time-slice separately
-  if (GlobalParameters::Preconditioner==Diagonal_preconditioner)
+  if (GlobalParameters::Preconditioner == Diagonal_preconditioner)
   {
     // Create a new instance of the space-time preconditioner
-    Prec_pt=new BlockDiagonalPreconditioner<CRDoubleMatrix>;
+    Prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
   }
   // Solve the block lower-triangular part of the system matrix
-  else if (GlobalParameters::Preconditioner==Lower_triangular_preconditioner)
+  else if (GlobalParameters::Preconditioner == Lower_triangular_preconditioner)
   {
     // Create a new instance of the space-time preconditioner
-    Prec_pt=new BandedBlockTriangularPreconditioner<CRDoubleMatrix>;
+    Prec_pt = new BandedBlockTriangularPreconditioner<CRDoubleMatrix>;
 
     // Indicate that we're using a block lower triangular solve
-    dynamic_cast<BandedBlockTriangularPreconditioner<CRDoubleMatrix>*>
-    (Prec_pt)->lower_triangular();
+    dynamic_cast<BandedBlockTriangularPreconditioner<CRDoubleMatrix>*>(Prec_pt)
+      ->lower_triangular();
 
     // The order of the interpolation in the time direction (linear)
-    unsigned temporal_order=1;
+    unsigned temporal_order = 1;
 
     // Provide the bandwidth; only subdiagonal block entries
-    dynamic_cast<BandedBlockTriangularPreconditioner<CRDoubleMatrix>*>
-    (Prec_pt)->set_block_bandwidth(temporal_order);
+    dynamic_cast<BandedBlockTriangularPreconditioner<CRDoubleMatrix>*>(Prec_pt)
+      ->set_block_bandwidth(temporal_order);
 
     // If we want to document the memory usage
     if (document_memory_usage)
     {
-      dynamic_cast<BandedBlockTriangularPreconditioner<CRDoubleMatrix>*>
-      (Prec_pt)->enable_doc_memory_usage();
+      dynamic_cast<BandedBlockTriangularPreconditioner<CRDoubleMatrix>*>(
+        Prec_pt)
+        ->enable_doc_memory_usage();
     }
   }
   // If the user provided an invalid input
@@ -1467,7 +1452,7 @@ void NavierStokesProblem<ELEMENT>::set_up_spacetime_solver()
   GlobalParameters::set_up_dof_to_block_mapping(dof_to_block_map);
 
   // Create an upcasted pointer to the master preconditioner
-  GeneralPurposeBlockPreconditioner<CRDoubleMatrix>* upcasted_master_prec_pt=
+  GeneralPurposeBlockPreconditioner<CRDoubleMatrix>* upcasted_master_prec_pt =
     dynamic_cast<GeneralPurposeBlockPreconditioner<CRDoubleMatrix>*>(Prec_pt);
 
   // Build silently!
@@ -1484,9 +1469,8 @@ void NavierStokesProblem<ELEMENT>::set_up_spacetime_solver()
   upcasted_master_prec_pt->add_mesh(Bulk_mesh_pt);
 
   // Now assign the preconditioner to the linear solver
-  Solver_pt->preconditioner_pt()=Prec_pt;
+  Solver_pt->preconditioner_pt() = Prec_pt;
 } // End of set_up_spacetime_solver
-
 
 //========================================================================
 /// Complete problem setup: pass pointers to physical variables.
@@ -1495,22 +1479,21 @@ template<class ELEMENT>
 void NavierStokesProblem<ELEMENT>::complete_problem_setup()
 {
   // Get the number of elements in the bulk mesh
-  unsigned n_bulk_element=Bulk_mesh_pt->nelement();
+  unsigned n_bulk_element = Bulk_mesh_pt->nelement();
 
   // Loop over the bulk elements
-  for (unsigned e=0; e<n_bulk_element; e++)
+  for (unsigned e = 0; e < n_bulk_element; e++)
   {
     // Upcast to a fluid element
-    ELEMENT* el_pt=dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number (set equal to the Womersley number)
-    el_pt->re_pt()=&GlobalParameters::Re;
+    el_pt->re_pt() = &GlobalParameters::Re;
 
     // Set the Strouhal number
-    el_pt->re_st_pt()=&GlobalParameters::ReSt;
+    el_pt->re_st_pt() = &GlobalParameters::ReSt;
   }
 } // End of complete_problem_setup
-
 
 //=========start_of_element_to_ijk_map_setup==============================
 /// \short Set up the map which maps a given element e to it's (i,j,k)
@@ -1521,41 +1504,41 @@ template<class ELEMENT>
 void NavierStokesProblem<ELEMENT>::assign_time_slice_id()
 {
   // Number of dimensions
-  unsigned n_dim=3;
+  unsigned n_dim = 3;
 
   // Space for the local coordinates (at the center of the element)
-  Vector<double> s(n_dim,0.0);
+  Vector<double> s(n_dim, 0.0);
 
   // The ID of the coordinate we want, i.e. the ID of the time-direction
-  unsigned time_index=n_dim-1;
+  unsigned time_index = n_dim - 1;
 
   // Storage for the time coordinate
-  double t=0.0;
+  double t = 0.0;
 
   // Get the number of elements in the mesh
-  unsigned n_element=Bulk_mesh_pt->nelement();
+  unsigned n_element = Bulk_mesh_pt->nelement();
 
   // Loop over the elements
-  for (unsigned i=0; i<n_element; i++)
+  for (unsigned i = 0; i < n_element; i++)
   {
     // Get the Eulerian coordinates at the center of the element
-    t=Bulk_mesh_pt->finite_element_pt(i)->interpolated_x(s,time_index);
+    t = Bulk_mesh_pt->finite_element_pt(i)->interpolated_x(s, time_index);
 
     // The length of an element in the time direction
-    double el_length=GlobalParameters::L_t/double(GlobalParameters::N_t);
+    double el_length = GlobalParameters::L_t / double(GlobalParameters::N_t);
 
     // Subtract the length of half an element off (since we're at the centre
     // of the element using s=(0,0,0))
-    t-=el_length/2.0;
+    t -= el_length / 2.0;
 
     // Divide by the length of an element
-    t/=el_length;
+    t /= el_length;
 
     // Store it (have to round first otherwise 0.999 would become 0)
-    unsigned id=unsigned(GlobalParameters::round(t));
+    unsigned id = unsigned(GlobalParameters::round(t));
 
     // Upcast the element
-    ELEMENT* el_pt=dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
     // Assign the time slice ID
     el_pt->set_time_slab_id(id);
@@ -1566,13 +1549,12 @@ void NavierStokesProblem<ELEMENT>::assign_time_slice_id()
     // or periodic boundary conditions (the dofs in the final time slice
     // are the dofs in the first time slice) so the actual number of dof
     // types is always the same
-    GlobalParameters::N_dof_type=3*GlobalParameters::N_t;
+    GlobalParameters::N_dof_type = 3 * GlobalParameters::N_t;
 
     // Finally, tell it how many dof types there are in the mesh
     el_pt->set_ndof_types(GlobalParameters::N_dof_type);
   } // for (unsigned i=0;i<n_element;i++)
 } // End of assign_time_slice_id
-
 
 //=========start_of_apply_boundary_conditions====================
 /// \short Assign the appropriate boundary conditions, i.e. periodicity
@@ -1589,36 +1571,36 @@ template<class ELEMENT>
 void NavierStokesProblem<ELEMENT>::apply_boundary_conditions()
 {
   // Get the start time
-  double start_t=TimingHelpers::timer();
+  double start_t = TimingHelpers::timer();
 
   // Number of SPATIAL dimensions
-  unsigned n_dim=3;
+  unsigned n_dim = 3;
 
   // Storage for the spatial coordinates
-  Vector<double> spatial_coordinates(n_dim-1,0.0);
+  Vector<double> spatial_coordinates(n_dim - 1, 0.0);
 
   // Storage for the solution (also passes the pressure field)
-  Vector<double> u_exact(n_dim,0.0);
+  Vector<double> u_exact(n_dim, 0.0);
 
   // Number of nodes on t=0 boundary
-  unsigned n_boundary0_node=Bulk_mesh_pt->
-                            nboundary_node(Initial_time_boundary_id);
+  unsigned n_boundary0_node =
+    Bulk_mesh_pt->nboundary_node(Initial_time_boundary_id);
 
   // Number of nodes on t=1 boundary
-  unsigned n_boundary1_node=Bulk_mesh_pt->
-                            nboundary_node(Final_time_boundary_id);
+  unsigned n_boundary1_node =
+    Bulk_mesh_pt->nboundary_node(Final_time_boundary_id);
 
   // Get the number of boundaries in the mesh
-  unsigned n_boundary=Bulk_mesh_pt->nboundary();
+  unsigned n_boundary = Bulk_mesh_pt->nboundary();
 
   // Loop over the boundaries
-  for (unsigned b=0; b<n_boundary; b++)
+  for (unsigned b = 0; b < n_boundary; b++)
   {
     // Get the number of nodes on the b-th boundary
-    unsigned n_node=Bulk_mesh_pt->nboundary_node(b);
+    unsigned n_node = Bulk_mesh_pt->nboundary_node(b);
 
     // If we're on either of the time boundaries
-    if ((b==Initial_time_boundary_id)||(b==Final_time_boundary_id))
+    if ((b == Initial_time_boundary_id) || (b == Final_time_boundary_id))
     {
       // If we need to set up periodicity
       if (!Periodicity_has_been_enforced)
@@ -1628,7 +1610,7 @@ void NavierStokesProblem<ELEMENT>::apply_boundary_conditions()
         //----------------------------
         // Make sure there are as many nodes on boundary 0 as there are on
         // boundary (n_boundary-1)
-        if (n_boundary0_node!=n_boundary1_node)
+        if (n_boundary0_node != n_boundary1_node)
         {
           // Create an output stream
           std::ofstream output_file;
@@ -1637,11 +1619,11 @@ void NavierStokesProblem<ELEMENT>::apply_boundary_conditions()
           output_file.open("RESLT/nodes_b0.csv");
 
           // Loop over the nodes on the t=0 boundary
-          for (unsigned i=0; i<n_boundary0_node; i++)
+          for (unsigned i = 0; i < n_boundary0_node; i++)
           {
             // Output the coordinates of the i-th node on the t=0 boundary
-            Bulk_mesh_pt->boundary_node_pt(Initial_time_boundary_id,i)->
-            output(output_file);
+            Bulk_mesh_pt->boundary_node_pt(Initial_time_boundary_id, i)
+              ->output(output_file);
           }
 
           // Close the file
@@ -1651,11 +1633,11 @@ void NavierStokesProblem<ELEMENT>::apply_boundary_conditions()
           output_file.open("RESLT/nodes_b1.csv");
 
           // Loop over the nodes on the t=0 boundary
-          for (unsigned i=0; i<n_boundary1_node; i++)
+          for (unsigned i = 0; i < n_boundary1_node; i++)
           {
             // Output the coordinates of the i-th node on the t=1 boundary
-            Bulk_mesh_pt->boundary_node_pt(Final_time_boundary_id,i)->
-            output(output_file);
+            Bulk_mesh_pt->boundary_node_pt(Final_time_boundary_id, i)
+              ->output(output_file);
           }
 
           // Close the file
@@ -1667,10 +1649,10 @@ void NavierStokesProblem<ELEMENT>::apply_boundary_conditions()
           // Create an error message
           error_message_stream << "Different number of nodes on t=0 and t=1 "
                                << "boundary!\nThere are " << n_boundary0_node
-                               << " nodes on boundary " << Initial_time_boundary_id
-                               << " and " << n_boundary1_node
-                               << " nodes on boundary " << Final_time_boundary_id
-                               << "!" << std::endl;
+                               << " nodes on boundary "
+                               << Initial_time_boundary_id << " and "
+                               << n_boundary1_node << " nodes on boundary "
+                               << Final_time_boundary_id << "!" << std::endl;
 
           // Throw an error
           throw OomphLibError(error_message_stream.str(),
@@ -1679,50 +1661,52 @@ void NavierStokesProblem<ELEMENT>::apply_boundary_conditions()
         }
 
         // Loop over the nodes on the t=0 boundary
-        for (unsigned i=0; i<n_boundary0_node; i++)
+        for (unsigned i = 0; i < n_boundary0_node; i++)
         {
           // Get the pointer to the associated node
-          Node* node0_pt=Bulk_mesh_pt->boundary_node_pt(Initial_time_boundary_id,i);
+          Node* node0_pt =
+            Bulk_mesh_pt->boundary_node_pt(Initial_time_boundary_id, i);
 
           // Boolean to indicate whether or not the neighbour has been found
-          bool has_neighbour_node_been_found=false;
+          bool has_neighbour_node_been_found = false;
 
           // Loop over the nodes on the t=1 boundary
-          for (unsigned j=0; i<n_boundary1_node; j++)
+          for (unsigned j = 0; i < n_boundary1_node; j++)
           {
             // Get the pointer to the associated node
-            Node* node1_pt=Bulk_mesh_pt->boundary_node_pt(Final_time_boundary_id,j);
+            Node* node1_pt =
+              Bulk_mesh_pt->boundary_node_pt(Final_time_boundary_id, j);
 
             // Distance value
-            double distance=0.0;
+            double distance = 0.0;
 
             // Loop over the entries of x
-            for (unsigned k=0; k<n_dim-1; k++)
+            for (unsigned k = 0; k < n_dim - 1; k++)
             {
               // Update the distance (2 norm)
-              distance+=pow(((node0_pt->x(k))-(node1_pt->x(k))),2.0);
+              distance += pow(((node0_pt->x(k)) - (node1_pt->x(k))), 2.0);
             }
 
             // Square root it
-            distance=std::sqrt(distance);
+            distance = std::sqrt(distance);
 
             // Check if it matches to within a reasonable tolerance
-            if (std::fabs(distance)<Tree::max_neighbour_finding_tolerance())
+            if (std::fabs(distance) < Tree::max_neighbour_finding_tolerance())
             {
-              // Make the nodes periodic; the node on the t=1 boundary now points
-              // to the node on the t=0 boundary.
+              // Make the nodes periodic; the node on the t=1 boundary now
+              // points to the node on the t=0 boundary.
               node1_pt->make_periodic(node0_pt);
 
               // We've found the neighbouring node
-              has_neighbour_node_been_found=true;
+              has_neighbour_node_been_found = true;
 
               // We're done; break out!
               break;
             }
           } // for (unsigned i=0;i<n_boundary0_node;i++)
 
-          // If we get here and we haven't found the neighbouring node, something's
-          // wrong so throw an error
+          // If we get here and we haven't found the neighbouring node,
+          // something's wrong so throw an error
           if (!has_neighbour_node_been_found)
           {
             // Throw an error
@@ -1733,49 +1717,49 @@ void NavierStokesProblem<ELEMENT>::apply_boundary_conditions()
         } // for (unsigned i=0;i<n_boundary0_node;i++)
 
         // If we've got here then the periodicity has been set up
-        Periodicity_has_been_enforced=true;
+        Periodicity_has_been_enforced = true;
       } // if (!Periodicity_has_been_enforced)
     }
     // If we're not on the time boundaries
     else
     {
       // If we're on the lower/upper wall
-      if ((b==Lower_wall_boundary_id)||(b==Upper_wall_boundary_id))
+      if ((b == Lower_wall_boundary_id) || (b == Upper_wall_boundary_id))
       {
         // Loop over the nodes on the b-th boundary
-        for (unsigned n=0; n<n_node; n++)
+        for (unsigned n = 0; n < n_node; n++)
         {
           // Get a pointer to the n-th node on the b-th boundary
-          Node* node_pt=Bulk_mesh_pt->boundary_node_pt(b,n);
+          Node* node_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
 
           // Loop over the velocity components
-          for (unsigned i=0; i<n_dim-1; i++)
+          for (unsigned i = 0; i < n_dim - 1; i++)
           {
             // Pin the i-th velocity component
             node_pt->pin(i);
           }
 
           // Apply tow-tank boundary conditions (nonzero horizontal velocity)
-          node_pt->set_value(0,1.0);
+          node_pt->set_value(0, 1.0);
 
           // Apply tow-tank boundary conditions (no vertical velocity)
-          node_pt->set_value(1,0.0);
+          node_pt->set_value(1, 0.0);
         } // for (unsigned n=0;n<n_node;n++)
       }
       // If we're at the outflow boundary
-      else if (b==Outflow_boundary_id)
+      else if (b == Outflow_boundary_id)
       {
         // Don't actually do anything; it's better than forcing parallel flow
         // at the outlet (no numerical oscillations/boundary layer near exit)
       }
       // If we're at the inflow boundary
-      else if (b==Inflow_boundary_id)
+      else if (b == Inflow_boundary_id)
       {
         // Loop over the nodes
-        for (unsigned n=0; n<n_node; n++)
+        for (unsigned n = 0; n < n_node; n++)
         {
           // Pointer to the boundary node
-          Node* boundary_node_pt=Bulk_mesh_pt->boundary_node_pt(b,n);
+          Node* boundary_node_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
 
           // Pin the horizontal velocity
           boundary_node_pt->pin(0);
@@ -1784,20 +1768,20 @@ void NavierStokesProblem<ELEMENT>::apply_boundary_conditions()
           boundary_node_pt->pin(1);
 
           // Uniform flow
-          boundary_node_pt->set_value(0,1.0);
+          boundary_node_pt->set_value(0, 1.0);
 
           // Parallel flow means no vertical velocity component
-          boundary_node_pt->set_value(1,0.0);
+          boundary_node_pt->set_value(1, 0.0);
         }
       }
       // If we're dealing with the cylinder surface (apply no-slip conditions)
-      else if (b==Cylinder_surface_boundary_id)
+      else if (b == Cylinder_surface_boundary_id)
       {
         // Loop over the nodes
-        for (unsigned i_nod=0; i_nod<n_node; i_nod++)
+        for (unsigned i_nod = 0; i_nod < n_node; i_nod++)
         {
           // Pointer to the boundary node
-          Node* boundary_node_pt=Bulk_mesh_pt->boundary_node_pt(b,i_nod);
+          Node* boundary_node_pt = Bulk_mesh_pt->boundary_node_pt(b, i_nod);
 
           // Pin the horizontal velocity at every node
           boundary_node_pt->pin(0);
@@ -1806,13 +1790,13 @@ void NavierStokesProblem<ELEMENT>::apply_boundary_conditions()
           boundary_node_pt->pin(1);
 
           // Get the time value associated with this node
-          double time=boundary_node_pt->x(n_dim-1);
+          double time = boundary_node_pt->x(n_dim - 1);
 
           // Storage for the cylinder velocity
-          Vector<double> u(2,0.0);
+          Vector<double> u(2, 0.0);
 
           // Get the velocity of the cylinder at this point in time
-          GlobalParameters::Cylinder_pt->velocity(time,u);
+          GlobalParameters::Cylinder_pt->velocity(time, u);
 
           //--------------------------------------------------------------------
           // Apply no-slip condition for NS on a moving wall node noting:
@@ -1820,26 +1804,25 @@ void NavierStokesProblem<ELEMENT>::apply_boundary_conditions()
           // where the Strouhal number is defined as St = D/(UT_e).
           //--------------------------------------------------------------------
           // Set the horizontal velocity value
-          boundary_node_pt->set_value(0,GlobalParameters::St*u[0]);
+          boundary_node_pt->set_value(0, GlobalParameters::St * u[0]);
 
           // Set the vertical velocity value
-          boundary_node_pt->set_value(1,GlobalParameters::St*u[1]);
+          boundary_node_pt->set_value(1, GlobalParameters::St * u[1]);
         }
       } // if ((b==Lower_wall_boundary_id)||(b==Upper_wall_boundary_id))
     } // if ((b==Initial_time_boundary_id)||(b==Final_time_boundary_id))
   } // for (unsigned b=0;b<n_bound;b++)
 
   // Record the end time
-  double end_t=TimingHelpers::timer();
+  double end_t = TimingHelpers::timer();
 
   // Compute the time taken
-  double boundary_condition_application_time=end_t-start_t;
+  double boundary_condition_application_time = end_t - start_t;
 
   // Output the setup time to the screen
   oomph_info << "Time taken for application of boundary conditions [sec]: "
              << boundary_condition_application_time << std::endl;
 } // End of apply_boundary_conditions
-
 
 //=======start_of_run_natural_continuation=================================
 /// \short Use continuation in a particular parameter. This should make
@@ -1861,71 +1844,73 @@ void NavierStokesProblem<ELEMENT>::apply_boundary_conditions()
 ///            each step.
 //=========================================================================
 template<class ELEMENT>
-void NavierStokesProblem<ELEMENT>::
-run_natural_continuation(double& parameter,
-                         const double& parameter_target,
-                         const unsigned& max_n_parameter_step)
+void NavierStokesProblem<ELEMENT>::run_natural_continuation(
+  double& parameter,
+  const double& parameter_target,
+  const unsigned& max_n_parameter_step)
 {
   // If we can actually do anything
-  if ((std::fabs(parameter_target-parameter)>=1.0e-14)&&
-      (max_n_parameter_step!=0))
+  if ((std::fabs(parameter_target - parameter) >= 1.0e-14) &&
+      (max_n_parameter_step != 0))
   {
     // Store the string used to denote the input parameter
-    std::string parameter_string=
+    std::string parameter_string =
       GlobalParameters::parameter_to_string(&parameter);
 
     // Copy the initial parameter value
-    double initial_parameter=parameter;
+    double initial_parameter = parameter;
 
     // The size of the amplitude value increment
-    double parameter_increment=((parameter_target-parameter)/
-                                double(max_n_parameter_step));
+    double parameter_increment =
+      ((parameter_target - parameter) / double(max_n_parameter_step));
 
     // Tell the user what we're doing
     oomph_info << ANSIEscapeCode::Red
                << "\nStarting natural continuation process for "
                << parameter_string << "!" << ANSIEscapeCode::Reset
                << "\n\nInitial " << parameter_string << " value: " << parameter
-               << "\nTarget " << parameter_string << " value: "
-               << parameter_target << "\nMax. number of parameter steps: "
-               << max_n_parameter_step << "\n\n"
-               << ANSIEscapeCode::Red
-               << "Parameter value cases (" << parameter_string << "): "
-               << ANSIEscapeCode::Reset << std::endl;
+               << "\nTarget " << parameter_string
+               << " value: " << parameter_target
+               << "\nMax. number of parameter steps: " << max_n_parameter_step
+               << "\n\n"
+               << ANSIEscapeCode::Red << "Parameter value cases ("
+               << parameter_string << "): " << ANSIEscapeCode::Reset
+               << std::endl;
 
     // Loop over the increments
-    for (unsigned i=0; i<max_n_parameter_step+1; i++)
+    for (unsigned i = 0; i < max_n_parameter_step + 1; i++)
     {
       // Tell the user
       oomph_info << " (" << i << ") "
-                 << initial_parameter+i*parameter_increment
-                 << std::endl;
+                 << initial_parameter + i * parameter_increment << std::endl;
     } // for (unsigned i=0;i<max_n_parameter_step+1;i++)
 
     // Vector to contain the Problem dofs
     DoubleVector dofs_backup;
 
     // The maximum number of times tono halve the parameter increment
-    unsigned max_n_reattempt=30;
+    unsigned max_n_reattempt = 30;
 
     // The number of times we've halved the parameter increment
-    unsigned n_reattempt=0;
+    unsigned n_reattempt = 0;
 
     // Loop over the increments
-    while (std::fabs(parameter_target-parameter)>1.0e-14)
+    while (std::fabs(parameter_target - parameter) > 1.0e-14)
     {
       // Get the dofs
       get_dofs(dofs_backup);
 
       // Increment the parameter value
-      parameter+=parameter_increment;
+      parameter += parameter_increment;
 
       // Tell the user
-      oomph_info << "\n" << ANSIEscapeCode::Red
-                 << "Solving for " << parameter_string << " value: "
-                 << ANSIEscapeCode::Reset << parameter << std::endl;
+      oomph_info << "\n"
+                 << ANSIEscapeCode::Red << "Solving for " << parameter_string
+                 << " value: " << ANSIEscapeCode::Reset << parameter
+                 << std::endl;
 
-      // Update anything that needs to be changed after a change in this parameter
+      // Update anything that needs to be changed after a change in this
+      // parameter
       actions_after_parameter_increase(&parameter);
 
       // Try doing a solve
@@ -1938,10 +1923,10 @@ run_natural_continuation(double& parameter,
       catch (NewtonSolverError& error)
       {
         // Make sure we haven't had to try too many times
-        if (n_reattempt<max_n_reattempt)
+        if (n_reattempt < max_n_reattempt)
         {
           // Decrement the parameter value
-          parameter-=parameter_increment;
+          parameter -= parameter_increment;
 
           // Make all the necessary updates after a change in this parameter
           actions_after_parameter_increase(&parameter);
@@ -1950,14 +1935,14 @@ run_natural_continuation(double& parameter,
           set_dofs(dofs_backup);
 
           // Half the parameter increment
-          parameter_increment*=0.5;
+          parameter_increment *= 0.5;
 
           // Tell the user
-          oomph_info << "\n" << ANSIEscapeCode::Red
-                     << "Solve failed! Re-attempt " << n_reattempt+1
+          oomph_info << "\n"
+                     << ANSIEscapeCode::Red << "Solve failed! Re-attempt "
+                     << n_reattempt + 1
                      << " -- halving parameter increment (for "
-                     << parameter_string << ") to: "
-                     << ANSIEscapeCode::Reset;
+                     << parameter_string << ") to: " << ANSIEscapeCode::Reset;
 
           // The parameter increment is actually just this increment
           oomph_info << parameter_increment << std::endl;
@@ -1988,7 +1973,6 @@ run_natural_continuation(double& parameter,
   } // if ((std::fabs(parameter_target-parameter)>1.0e-10)&&(max...
 } // End of run_natural_continuation
 
-
 //=======start_of_doc_solution============================================
 /// Document the solution
 //========================================================================
@@ -1996,7 +1980,7 @@ template<class ELEMENT>
 void NavierStokesProblem<ELEMENT>::doc_solution(const bool& doc_spacetime_soln)
 {
   // Start the clock
-  double timer_s=TimingHelpers::timer();
+  double timer_s = TimingHelpers::timer();
 
   // Make an ofstream object to output the solution
   std::ofstream some_file;
@@ -2005,13 +1989,14 @@ void NavierStokesProblem<ELEMENT>::doc_solution(const bool& doc_spacetime_soln)
   char filename[100];
 
   // Number of plot points to use for the big space-time solution
-  unsigned n_plot_point=3;
+  unsigned n_plot_point = 3;
 
   //-----------------
   // Output solution:
   //-----------------
   // Create the filename suffix
-  sprintf(filename,"%s/soln%i",
+  sprintf(filename,
+          "%s/soln%i",
           GlobalParameters::Doc_info.directory().c_str(),
           GlobalParameters::Doc_info.number());
 
@@ -2019,10 +2004,10 @@ void NavierStokesProblem<ELEMENT>::doc_solution(const bool& doc_spacetime_soln)
   std::string filename_as_string(filename);
 
   // Replace all dots with the string "pt"
-  std::replace(filename_as_string.begin(),filename_as_string.end(),'.','p');
+  std::replace(filename_as_string.begin(), filename_as_string.end(), '.', 'p');
 
   // Now append the filename extension
-  filename_as_string+=".dat";
+  filename_as_string += ".dat";
 
   // Open a file with the constructed filename
   some_file.open(filename_as_string.c_str());
@@ -2031,14 +2016,14 @@ void NavierStokesProblem<ELEMENT>::doc_solution(const bool& doc_spacetime_soln)
   some_file.precision(20);
 
   // Output the (numerically) approximated solution
-  Bulk_mesh_pt->output(some_file,n_plot_point);
+  Bulk_mesh_pt->output(some_file, n_plot_point);
 
   // We're done; close the file
   some_file.close();
 
   // Finally, output the time taken
   oomph_info << "Total time for documentation [sec]: "
-             << TimingHelpers::timer()-timer_s << std::endl;
+             << TimingHelpers::timer() - timer_s << std::endl;
 
   // Increment counter for solutions
   GlobalParameters::Doc_info.number()++;
@@ -2051,19 +2036,19 @@ void NavierStokesProblem<ELEMENT>::doc_solution(const bool& doc_spacetime_soln)
 //=======start_of_main====================================================
 /// Driver code for unsteady heat equation
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
   // Initialise MPI
-  MPI_Helpers::init(argc,argv);
+  MPI_Helpers::init(argc, argv);
 
   // Switch off output modifier
-  oomph_info.output_modifier_pt()=&default_output_modifier;
+  oomph_info.output_modifier_pt() = &default_output_modifier;
 
   // Switch off oomph_info output for all processors but rank 0
-  if (MPI_Helpers::communicator_pt()->my_rank()!=0)
+  if (MPI_Helpers::communicator_pt()->my_rank() != 0)
   {
-    oomph_info.stream_pt()=&oomph_nullstream;
+    oomph_info.stream_pt() = &oomph_nullstream;
     OomphLibWarning::set_stream_pt(&oomph_nullstream);
     OomphLibError::set_stream_pt(&oomph_nullstream);
   }
@@ -2087,7 +2072,7 @@ int main(int argc, char **argv)
   typedef BlockPrecQTaylorHoodMixedOrderSpaceTimeElement ELEMENT;
 
   // Start the clock
-  double timer_s=TimingHelpers::timer();
+  double timer_s = TimingHelpers::timer();
 
   // Build problem
   NavierStokesProblem<ELEMENT> problem;
@@ -2095,16 +2080,14 @@ int main(int argc, char **argv)
   // Tell the user
   oomph_info << ANSIEscapeCode::Red
              << "\nSolving with the following problem parameters:"
-             << ANSIEscapeCode::Reset
-             << ANSIEscapeCode::Red << "\n - Re: " << ANSIEscapeCode::Reset
-             << GlobalParameters::Re
+             << ANSIEscapeCode::Reset << ANSIEscapeCode::Red
+             << "\n - Re: " << ANSIEscapeCode::Reset << GlobalParameters::Re
              << ANSIEscapeCode::Red << "\n - ReSt: " << ANSIEscapeCode::Reset
-             << GlobalParameters::ReSt
-             << ANSIEscapeCode::Red << "\n - A: " << ANSIEscapeCode::Reset
-             << GlobalParameters::Amplitude
-             << ANSIEscapeCode::Red << "\n - T_e/T_s: " << ANSIEscapeCode::Reset
-             << GlobalParameters::Period_ratio
-             << std::endl;
+             << GlobalParameters::ReSt << ANSIEscapeCode::Red
+             << "\n - A: " << ANSIEscapeCode::Reset
+             << GlobalParameters::Amplitude << ANSIEscapeCode::Red
+             << "\n - T_e/T_s: " << ANSIEscapeCode::Reset
+             << GlobalParameters::Period_ratio << std::endl;
 
   // Solve the problem again
   problem.newton_solve();
@@ -2130,7 +2113,7 @@ int main(int argc, char **argv)
 
   // Tell the user we're done
   oomph_info << "\nSimulation complete!\nTotal time for simulation [sec]: "
-             << TimingHelpers::timer()-timer_s << std::endl;
+             << TimingHelpers::timer() - timer_s << std::endl;
 
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::finalize();

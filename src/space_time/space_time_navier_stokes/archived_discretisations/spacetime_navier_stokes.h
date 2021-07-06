@@ -1,5 +1,5 @@
-#include "spacetime_navier_stokes_elements.h" 
-#include "spacetime_navier_stokes_elements.cc" 
+#include "spacetime_navier_stokes_elements.h"
+#include "spacetime_navier_stokes_elements.cc"
 #include "refineable_spacetime_navier_stokes_elements.h"
 #include "refineable_spacetime_navier_stokes_elements.cc"
 #include "spacetime_fluid_traction_elements.h"

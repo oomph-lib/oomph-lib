@@ -1,32 +1,32 @@
-//LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
-//LIC// at http://www.oomph-lib.org.
-//LIC// 
-//LIC//    Version 1.0; svn revision $LastChangedRevision$
-//LIC//
-//LIC// $LastChangedDate$
-//LIC// 
-//LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
-//LIC// 
-//LIC// This library is free software; you can redistribute it and/or
-//LIC// modify it under the terms of the GNU Lesser General Public
-//LIC// License as published by the Free Software Foundation; either
-//LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
-//LIC// This library is distributed in the hope that it will be useful,
-//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//LIC// Lesser General Public License for more details.
-//LIC// 
-//LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
-//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
-//LIC// 
-//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
-//LIC//====================================================================
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC//    Version 1.0; svn revision $LastChangedRevision$
+// LIC//
+// LIC// $LastChangedDate$
+// LIC//
+// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
 // Header for an element that couples a linearised axisymmetric
 // Navier-Stokes element to a non-linear axisymmetric Navier-Stokes
 // element via a multi domain approach
@@ -40,13 +40,9 @@
 // Use the oomph namespace
 using namespace oomph;
 
-
-
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-
-
 
 //======================================================================
 /// Build a LinearisedAxisymmetricQTaylorHood element that inherits from
@@ -54,21 +50,19 @@ using namespace oomph;
 /// axisymmetric Navier-Stokes element that provides the base flow
 /// velocities and their derivatives w.r.t. global coordinates (r and z)
 //======================================================================
-class LinearisedAxisymmetricQTaylorHoodMultiDomainElement : 
-public virtual LinearisedAxisymmetricQTaylorHoodElement,
- public virtual ElementWithExternalElement
+class LinearisedAxisymmetricQTaylorHoodMultiDomainElement :
+  public virtual LinearisedAxisymmetricQTaylorHoodElement,
+  public virtual ElementWithExternalElement
 {
-  public:
- 
- /// Constructor: call the underlying constructors
- LinearisedAxisymmetricQTaylorHoodMultiDomainElement() :
-  LinearisedAxisymmetricQTaylorHoodElement(),
-  ElementWithExternalElement()
-   {
-    // There are two interactions: the base flow velocities and their 
+public:
+  /// Constructor: call the underlying constructors
+  LinearisedAxisymmetricQTaylorHoodMultiDomainElement() :
+    LinearisedAxisymmetricQTaylorHoodElement(), ElementWithExternalElement()
+  {
+    // There are two interactions: the base flow velocities and their
     // derivatives w.r.t. global coordinates
     this->set_ninteraction(2);
-    
+
     // Do not include any external interaction data when computing
     // the element's Jacobian
     ElementWithExternalElement::ignore_external_interaction_data();
@@ -76,8 +70,8 @@ public virtual LinearisedAxisymmetricQTaylorHoodElement,
     /// Do not include any external geometric data when computing
     /// the element's Jacobian.
     ElementWithExternalElement::ignore_external_geometric_data();
-   }
-  
+  }
+
   /// \short Overload get_base_flow_u(...) to return the external
   /// element's velocity components at the integration point
   virtual void get_base_flow_u(const double& time,
@@ -85,27 +79,27 @@ public virtual LinearisedAxisymmetricQTaylorHoodElement,
                                const Vector<double>& x,
                                Vector<double>& result) const
   {
-   // Set interaction index to 0
-   const unsigned interaction = 0;
-   
-   // Get a pointer to the external element that computes the base flow.
-   // We know that it's an axisymmetric Navier-Stokes element.
-   const AxisymmetricQTaylorHoodElement* base_flow_el_pt =
-    dynamic_cast<AxisymmetricQTaylorHoodElement*>(
-     external_element_pt(interaction,ipt));
+    // Set interaction index to 0
+    const unsigned interaction = 0;
 
-   // Provide storage for local coordinates in the external element
-   // which correspond to the integration point ipt
-   Vector<double> s_external(2);
+    // Get a pointer to the external element that computes the base flow.
+    // We know that it's an axisymmetric Navier-Stokes element.
+    const AxisymmetricQTaylorHoodElement* base_flow_el_pt =
+      dynamic_cast<AxisymmetricQTaylorHoodElement*>(
+        external_element_pt(interaction, ipt));
 
-   // Determine local coordinates in the external element which correspond
-   // to the integration point ipt
-   s_external = external_element_local_coord(interaction,ipt);
+    // Provide storage for local coordinates in the external element
+    // which correspond to the integration point ipt
+    Vector<double> s_external(2);
 
-   // Get the three velocity components interpolated from the external element
-   for(unsigned i=0;i<3;i++)
+    // Determine local coordinates in the external element which correspond
+    // to the integration point ipt
+    s_external = external_element_local_coord(interaction, ipt);
+
+    // Get the three velocity components interpolated from the external element
+    for (unsigned i = 0; i < 3; i++)
     {
-     result[i] = base_flow_el_pt->interpolated_u_axi_nst(s_external,i);
+      result[i] = base_flow_el_pt->interpolated_u_axi_nst(s_external, i);
     }
 
   } // End of overloaded get_base_flow_u function
@@ -118,60 +112,53 @@ public virtual LinearisedAxisymmetricQTaylorHoodElement,
                                   const Vector<double>& x,
                                   DenseMatrix<double>& result) const
   {
-   // Set interaction index to 1
-   const unsigned interaction = 1;
-   
-   // Get a pointer to the external element that computes the base flow.
-   // We know that it's an axisymmetric Navier-Stokes element.
-   const AxisymmetricQTaylorHoodElement* base_flow_el_pt =
-    dynamic_cast<AxisymmetricQTaylorHoodElement*>(
-     external_element_pt(interaction,ipt));
-   
-   // Provide storage for local coordinates in the external element
-   // which correspond to the integration point ipt
-   Vector<double> s_external(2);
-   
-   // Determine local coordinates in the external element which correspond
-   // to the integration point ipt
-   s_external = external_element_local_coord(interaction,ipt);
-   
-   // Loop over velocity components
-   for(unsigned i=0;i<3;i++)
+    // Set interaction index to 1
+    const unsigned interaction = 1;
+
+    // Get a pointer to the external element that computes the base flow.
+    // We know that it's an axisymmetric Navier-Stokes element.
+    const AxisymmetricQTaylorHoodElement* base_flow_el_pt =
+      dynamic_cast<AxisymmetricQTaylorHoodElement*>(
+        external_element_pt(interaction, ipt));
+
+    // Provide storage for local coordinates in the external element
+    // which correspond to the integration point ipt
+    Vector<double> s_external(2);
+
+    // Determine local coordinates in the external element which correspond
+    // to the integration point ipt
+    s_external = external_element_local_coord(interaction, ipt);
+
+    // Loop over velocity components
+    for (unsigned i = 0; i < 3; i++)
     {
-     // Loop over coordinate directions and get derivatives of velocity
-     // components from the external element
-     for(unsigned j=0;j<2;j++)
+      // Loop over coordinate directions and get derivatives of velocity
+      // components from the external element
+      for (unsigned j = 0; j < 2; j++)
       {
-       result(i,j)
-        = base_flow_el_pt->interpolated_dudx_axi_nst(s_external,i,j);
+        result(i, j) =
+          base_flow_el_pt->interpolated_dudx_axi_nst(s_external, i, j);
       }
     }
 
   } // End of overloaded get_base_flow_dudx function
 
-
-
   /// \short Compute the element's residual vector and the Jacobian matrix
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
-   // Get the analytical contribution from the basic linearised element
-   LinearisedAxisymmetricQTaylorHoodElement::
-    fill_in_contribution_to_jacobian(residuals,jacobian);
-   
-   // Get the off-diagonal terms by finite differencing
-   this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);
+    // Get the analytical contribution from the basic linearised element
+    LinearisedAxisymmetricQTaylorHoodElement::fill_in_contribution_to_jacobian(
+      residuals, jacobian);
+
+    // Get the off-diagonal terms by finite differencing
+    this->fill_in_jacobian_from_external_interaction_by_fd(residuals, jacobian);
   }
-  
 };
 
-
-
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-
-
 
 //======================================================================
 /// Build a LinearisedAxisymmetricQCrouzeixRaviart element that inherits
@@ -179,21 +166,20 @@ public virtual LinearisedAxisymmetricQTaylorHoodElement,
 /// axisymmetric Navier-Stokes element that provides the base flow
 /// velocities and their derivatives w.r.t. global coordinates (r and z)
 //======================================================================
-class LinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement : 
-public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
- public virtual ElementWithExternalElement
+class LinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement :
+  public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
+  public virtual ElementWithExternalElement
 {
 public:
-
- /// Constructor: call the underlying constructors
- LinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement() :
-  LinearisedAxisymmetricQCrouzeixRaviartElement(),
-  ElementWithExternalElement()
-   {
-    // There are two interactions: the base flow velocities and their 
+  /// Constructor: call the underlying constructors
+  LinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement() :
+    LinearisedAxisymmetricQCrouzeixRaviartElement(),
+    ElementWithExternalElement()
+  {
+    // There are two interactions: the base flow velocities and their
     // derivatives w.r.t. global coordinates
     this->set_ninteraction(2);
-    
+
     // Do not include any external interaction data when computing
     // the element's Jacobian
     ElementWithExternalElement::ignore_external_interaction_data();
@@ -201,8 +187,8 @@ public:
     /// Do not include any external geometric data when computing
     /// the element's Jacobian.
     ElementWithExternalElement::ignore_external_geometric_data();
-   }
-  
+  }
+
   /// \short Overload get_base_flow_u(...) to return the external
   /// element's velocity components at the integration point
   virtual void get_base_flow_u(const double& time,
@@ -210,27 +196,27 @@ public:
                                const Vector<double>& x,
                                Vector<double>& result) const
   {
-   // Set interaction index to 0
-   const unsigned interaction = 0;
-   
-   // Get a pointer to the external element that computes the base flow.
-   // We know that it's an axisymmetric Navier-Stokes element.
-   const AxisymmetricQCrouzeixRaviartElement* base_flow_el_pt =
-    dynamic_cast<AxisymmetricQCrouzeixRaviartElement*>(
-     external_element_pt(interaction,ipt));
+    // Set interaction index to 0
+    const unsigned interaction = 0;
 
-   // Provide storage for local coordinates in the external element
-   // which correspond to the integration point ipt
-   Vector<double> s_external(2);
+    // Get a pointer to the external element that computes the base flow.
+    // We know that it's an axisymmetric Navier-Stokes element.
+    const AxisymmetricQCrouzeixRaviartElement* base_flow_el_pt =
+      dynamic_cast<AxisymmetricQCrouzeixRaviartElement*>(
+        external_element_pt(interaction, ipt));
 
-   // Determine local coordinates in the external element which correspond
-   // to the integration point ipt
-   s_external = external_element_local_coord(interaction,ipt);
+    // Provide storage for local coordinates in the external element
+    // which correspond to the integration point ipt
+    Vector<double> s_external(2);
 
-   // Get the three velocity components interpolated from the external element
-   for(unsigned i=0;i<3;i++)
+    // Determine local coordinates in the external element which correspond
+    // to the integration point ipt
+    s_external = external_element_local_coord(interaction, ipt);
+
+    // Get the three velocity components interpolated from the external element
+    for (unsigned i = 0; i < 3; i++)
     {
-     result[i] = base_flow_el_pt->interpolated_u_axi_nst(s_external,i);
+      result[i] = base_flow_el_pt->interpolated_u_axi_nst(s_external, i);
     }
 
   } // End of overloaded get_base_flow_u function
@@ -243,60 +229,53 @@ public:
                                   const Vector<double>& x,
                                   DenseMatrix<double>& result) const
   {
-   // Set interaction index to 1
-   const unsigned interaction = 1;
-   
-   // Get a pointer to the external element that computes the base flow.
-   // We know that it's an axisymmetric Navier-Stokes element.
-   const AxisymmetricQCrouzeixRaviartElement* base_flow_el_pt =
-    dynamic_cast<AxisymmetricQCrouzeixRaviartElement*>(
-     external_element_pt(interaction,ipt));
-   
-   // Provide storage for local coordinates in the external element
-   // which correspond to the integration point ipt
-   Vector<double> s_external(2);
-   
-   // Determine local coordinates in the external element which correspond
-   // to the integration point ipt
-   s_external = external_element_local_coord(interaction,ipt);
-   
-   // Loop over velocity components
-   for(unsigned i=0;i<3;i++)
+    // Set interaction index to 1
+    const unsigned interaction = 1;
+
+    // Get a pointer to the external element that computes the base flow.
+    // We know that it's an axisymmetric Navier-Stokes element.
+    const AxisymmetricQCrouzeixRaviartElement* base_flow_el_pt =
+      dynamic_cast<AxisymmetricQCrouzeixRaviartElement*>(
+        external_element_pt(interaction, ipt));
+
+    // Provide storage for local coordinates in the external element
+    // which correspond to the integration point ipt
+    Vector<double> s_external(2);
+
+    // Determine local coordinates in the external element which correspond
+    // to the integration point ipt
+    s_external = external_element_local_coord(interaction, ipt);
+
+    // Loop over velocity components
+    for (unsigned i = 0; i < 3; i++)
     {
-     // Loop over coordinate directions and get derivatives of velocity
-     // components from the external element
-     for(unsigned j=0;j<2;j++)
+      // Loop over coordinate directions and get derivatives of velocity
+      // components from the external element
+      for (unsigned j = 0; j < 2; j++)
       {
-       result(i,j)
-        = base_flow_el_pt->interpolated_dudx_axi_nst(s_external,i,j);
+        result(i, j) =
+          base_flow_el_pt->interpolated_dudx_axi_nst(s_external, i, j);
       }
     }
 
   } // End of overloaded get_base_flow_dudx function
 
-
-
   /// \short Compute the element's residual vector and the Jacobian matrix
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
-   // Get the analytical contribution from the basic linearised element
-   LinearisedAxisymmetricQCrouzeixRaviartElement::
-    fill_in_contribution_to_jacobian(residuals,jacobian);
-   
-   // Get the off-diagonal terms by finite differencing
-   this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);
+    // Get the analytical contribution from the basic linearised element
+    LinearisedAxisymmetricQCrouzeixRaviartElement::
+      fill_in_contribution_to_jacobian(residuals, jacobian);
+
+    // Get the off-diagonal terms by finite differencing
+    this->fill_in_jacobian_from_external_interaction_by_fd(residuals, jacobian);
   }
-  
 };
 
-
-
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-
-
 
 //======================================================================
 /// \short Build a RefineableLinearisedAxisymmetricQTaylorHood element
@@ -305,21 +284,20 @@ public:
 /// provides the base flow velocities and their derivatives w.r.t.
 /// global coordinates (r and z)
 //======================================================================
-class RefineableLinearisedAxisymmetricQTaylorHoodMultiDomainElement : 
-public virtual RefineableLinearisedAxisymmetricQTaylorHoodElement,
- public virtual ElementWithExternalElement
+class RefineableLinearisedAxisymmetricQTaylorHoodMultiDomainElement :
+  public virtual RefineableLinearisedAxisymmetricQTaylorHoodElement,
+  public virtual ElementWithExternalElement
 {
-  public:
- 
- /// Constructor: call the underlying constructors
- RefineableLinearisedAxisymmetricQTaylorHoodMultiDomainElement() :
-  RefineableLinearisedAxisymmetricQTaylorHoodElement(),
-  ElementWithExternalElement()
-   {
-    // There are two interactions: the base flow velocities and their 
+public:
+  /// Constructor: call the underlying constructors
+  RefineableLinearisedAxisymmetricQTaylorHoodMultiDomainElement() :
+    RefineableLinearisedAxisymmetricQTaylorHoodElement(),
+    ElementWithExternalElement()
+  {
+    // There are two interactions: the base flow velocities and their
     // derivatives w.r.t. global coordinates
     this->set_ninteraction(2);
-    
+
     // Do not include any external interaction data when computing
     // the element's Jacobian
     ElementWithExternalElement::ignore_external_interaction_data();
@@ -327,8 +305,8 @@ public virtual RefineableLinearisedAxisymmetricQTaylorHoodElement,
     /// Do not include any external geometric data when computing
     /// the element's Jacobian.
     ElementWithExternalElement::ignore_external_geometric_data();
-   }
-  
+  }
+
   /// \short Overload get_base_flow_u(...) to return the external
   /// element's velocity components at the integration point
   virtual void get_base_flow_u(const double& time,
@@ -336,27 +314,27 @@ public virtual RefineableLinearisedAxisymmetricQTaylorHoodElement,
                                const Vector<double>& x,
                                Vector<double>& result) const
   {
-   // Set interaction index to 0
-   const unsigned interaction = 0;
-   
-   // Get a pointer to the external element that computes the base flow.
-   // We know that it's an axisymmetric Navier-Stokes element.
-   const AxisymmetricQTaylorHoodElement* base_flow_el_pt =
-    dynamic_cast<AxisymmetricQTaylorHoodElement*>(
-     external_element_pt(interaction,ipt));
+    // Set interaction index to 0
+    const unsigned interaction = 0;
 
-   // Provide storage for local coordinates in the external element
-   // which correspond to the integration point ipt
-   Vector<double> s_external(2);
+    // Get a pointer to the external element that computes the base flow.
+    // We know that it's an axisymmetric Navier-Stokes element.
+    const AxisymmetricQTaylorHoodElement* base_flow_el_pt =
+      dynamic_cast<AxisymmetricQTaylorHoodElement*>(
+        external_element_pt(interaction, ipt));
 
-   // Determine local coordinates in the external element which correspond
-   // to the integration point ipt
-   s_external = external_element_local_coord(interaction,ipt);
+    // Provide storage for local coordinates in the external element
+    // which correspond to the integration point ipt
+    Vector<double> s_external(2);
 
-   // Get the three velocity components interpolated from the external element
-   for(unsigned i=0;i<3;i++)
+    // Determine local coordinates in the external element which correspond
+    // to the integration point ipt
+    s_external = external_element_local_coord(interaction, ipt);
+
+    // Get the three velocity components interpolated from the external element
+    for (unsigned i = 0; i < 3; i++)
     {
-     result[i] = base_flow_el_pt->interpolated_u_axi_nst(s_external,i);
+      result[i] = base_flow_el_pt->interpolated_u_axi_nst(s_external, i);
     }
 
   } // End of overloaded get_base_flow_u function
@@ -369,60 +347,53 @@ public virtual RefineableLinearisedAxisymmetricQTaylorHoodElement,
                                   const Vector<double>& x,
                                   DenseMatrix<double>& result) const
   {
-   // Set interaction index to 1
-   const unsigned interaction = 1;
-   
-   // Get a pointer to the external element that computes the base flow.
-   // We know that it's an axisymmetric Navier-Stokes element.
-   const AxisymmetricQTaylorHoodElement* base_flow_el_pt =
-    dynamic_cast<AxisymmetricQTaylorHoodElement*>(
-     external_element_pt(interaction,ipt));
-   
-   // Provide storage for local coordinates in the external element
-   // which correspond to the integration point ipt
-   Vector<double> s_external(2);
-   
-   // Determine local coordinates in the external element which correspond
-   // to the integration point ipt
-   s_external = external_element_local_coord(interaction,ipt);
-   
-   // Loop over velocity components
-   for(unsigned i=0;i<3;i++)
+    // Set interaction index to 1
+    const unsigned interaction = 1;
+
+    // Get a pointer to the external element that computes the base flow.
+    // We know that it's an axisymmetric Navier-Stokes element.
+    const AxisymmetricQTaylorHoodElement* base_flow_el_pt =
+      dynamic_cast<AxisymmetricQTaylorHoodElement*>(
+        external_element_pt(interaction, ipt));
+
+    // Provide storage for local coordinates in the external element
+    // which correspond to the integration point ipt
+    Vector<double> s_external(2);
+
+    // Determine local coordinates in the external element which correspond
+    // to the integration point ipt
+    s_external = external_element_local_coord(interaction, ipt);
+
+    // Loop over velocity components
+    for (unsigned i = 0; i < 3; i++)
     {
-     // Loop over coordinate directions and get derivatives of velocity
-     // components from the external element
-     for(unsigned j=0;j<2;j++)
+      // Loop over coordinate directions and get derivatives of velocity
+      // components from the external element
+      for (unsigned j = 0; j < 2; j++)
       {
-       result(i,j)
-        = base_flow_el_pt->interpolated_dudx_axi_nst(s_external,i,j);
+        result(i, j) =
+          base_flow_el_pt->interpolated_dudx_axi_nst(s_external, i, j);
       }
     }
 
   } // End of overloaded get_base_flow_dudx function
 
-
-
   /// \short Compute the element's residual vector and the Jacobian matrix
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
-   // Get the analytical contribution from the basic patricklinearised element
-   RefineableLinearisedAxisymmetricQTaylorHoodElement::
-    fill_in_contribution_to_jacobian(residuals,jacobian);
-   
-   // Get the off-diagonal terms by finite differencing
-   this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);
+    // Get the analytical contribution from the basic patricklinearised element
+    RefineableLinearisedAxisymmetricQTaylorHoodElement::
+      fill_in_contribution_to_jacobian(residuals, jacobian);
+
+    // Get the off-diagonal terms by finite differencing
+    this->fill_in_jacobian_from_external_interaction_by_fd(residuals, jacobian);
   }
-  
 };
 
-
-
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-
-
 
 //======================================================================
 /// \short Build a RefineableLinearisedAxisymmetricQCrouzeixRaviart element
@@ -431,21 +402,20 @@ public virtual RefineableLinearisedAxisymmetricQTaylorHoodElement,
 /// provides the base flow velocities and their derivatives w.r.t.
 /// global coordinates (r and z)
 //======================================================================
-class RefineableLinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement : 
-public virtual RefineableLinearisedAxisymmetricQCrouzeixRaviartElement,
- public virtual ElementWithExternalElement
+class RefineableLinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement :
+  public virtual RefineableLinearisedAxisymmetricQCrouzeixRaviartElement,
+  public virtual ElementWithExternalElement
 {
-  public:
- 
- /// Constructor: call the underlying constructors
- RefineableLinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement() :
-  RefineableLinearisedAxisymmetricQCrouzeixRaviartElement(),
-  ElementWithExternalElement()
-   {
-    // There are two interactions: the base flow velocities and their 
+public:
+  /// Constructor: call the underlying constructors
+  RefineableLinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement() :
+    RefineableLinearisedAxisymmetricQCrouzeixRaviartElement(),
+    ElementWithExternalElement()
+  {
+    // There are two interactions: the base flow velocities and their
     // derivatives w.r.t. global coordinates
     this->set_ninteraction(2);
-    
+
     // Do not include any external interaction data when computing
     // the element's Jacobian
     ElementWithExternalElement::ignore_external_interaction_data();
@@ -453,8 +423,8 @@ public virtual RefineableLinearisedAxisymmetricQCrouzeixRaviartElement,
     /// Do not include any external geometric data when computing
     /// the element's Jacobian.
     ElementWithExternalElement::ignore_external_geometric_data();
-   }
-  
+  }
+
   /// \short Overload get_base_flow_u(...) to return the external
   /// element's velocity components at the integration point
   virtual void get_base_flow_u(const double& time,
@@ -462,27 +432,27 @@ public virtual RefineableLinearisedAxisymmetricQCrouzeixRaviartElement,
                                const Vector<double>& x,
                                Vector<double>& result) const
   {
-   // Set interaction index to 0
-   const unsigned interaction = 0;
-   
-   // Get a pointer to the external element that computes the base flow.
-   // We know that it's an axisymmetric Navier-Stokes element.
-   const AxisymmetricQCrouzeixRaviartElement* base_flow_el_pt =
-    dynamic_cast<AxisymmetricQCrouzeixRaviartElement*>(
-     external_element_pt(interaction,ipt));
+    // Set interaction index to 0
+    const unsigned interaction = 0;
 
-   // Provide storage for local coordinates in the external element
-   // which correspond to the integration point ipt
-   Vector<double> s_external(2);
+    // Get a pointer to the external element that computes the base flow.
+    // We know that it's an axisymmetric Navier-Stokes element.
+    const AxisymmetricQCrouzeixRaviartElement* base_flow_el_pt =
+      dynamic_cast<AxisymmetricQCrouzeixRaviartElement*>(
+        external_element_pt(interaction, ipt));
 
-   // Determine local coordinates in the external element which correspond
-   // to the integration point ipt
-   s_external = external_element_local_coord(interaction,ipt);
+    // Provide storage for local coordinates in the external element
+    // which correspond to the integration point ipt
+    Vector<double> s_external(2);
 
-   // Get the three velocity components interpolated from the external element
-   for(unsigned i=0;i<3;i++)
+    // Determine local coordinates in the external element which correspond
+    // to the integration point ipt
+    s_external = external_element_local_coord(interaction, ipt);
+
+    // Get the three velocity components interpolated from the external element
+    for (unsigned i = 0; i < 3; i++)
     {
-     result[i] = base_flow_el_pt->interpolated_u_axi_nst(s_external,i);
+      result[i] = base_flow_el_pt->interpolated_u_axi_nst(s_external, i);
     }
 
   } // End of overloaded get_base_flow_u function
@@ -495,49 +465,46 @@ public virtual RefineableLinearisedAxisymmetricQCrouzeixRaviartElement,
                                   const Vector<double>& x,
                                   DenseMatrix<double>& result) const
   {
-   // Set interaction index to 1
-   const unsigned interaction = 1;
-   
-   // Get a pointer to the external element that computes the base flow.
-   // We know that it's an axisymmetric Navier-Stokes element.
-   const AxisymmetricQCrouzeixRaviartElement* base_flow_el_pt =
-    dynamic_cast<AxisymmetricQCrouzeixRaviartElement*>(
-     external_element_pt(interaction,ipt));
-   
-   // Provide storage for local coordinates in the external element
-   // which correspond to the integration point ipt
-   Vector<double> s_external(2);
-   
-   // Determine local coordinates in the external element which correspond
-   // to the integration point ipt
-   s_external = external_element_local_coord(interaction,ipt);
-   
-   // Loop over velocity components
-   for(unsigned i=0;i<3;i++)
+    // Set interaction index to 1
+    const unsigned interaction = 1;
+
+    // Get a pointer to the external element that computes the base flow.
+    // We know that it's an axisymmetric Navier-Stokes element.
+    const AxisymmetricQCrouzeixRaviartElement* base_flow_el_pt =
+      dynamic_cast<AxisymmetricQCrouzeixRaviartElement*>(
+        external_element_pt(interaction, ipt));
+
+    // Provide storage for local coordinates in the external element
+    // which correspond to the integration point ipt
+    Vector<double> s_external(2);
+
+    // Determine local coordinates in the external element which correspond
+    // to the integration point ipt
+    s_external = external_element_local_coord(interaction, ipt);
+
+    // Loop over velocity components
+    for (unsigned i = 0; i < 3; i++)
     {
-     // Loop over coordinate directions and get derivatives of velocity
-     // components from the external element
-     for(unsigned j=0;j<2;j++)
+      // Loop over coordinate directions and get derivatives of velocity
+      // components from the external element
+      for (unsigned j = 0; j < 2; j++)
       {
-       result(i,j)
-        = base_flow_el_pt->interpolated_dudx_axi_nst(s_external,i,j);
+        result(i, j) =
+          base_flow_el_pt->interpolated_dudx_axi_nst(s_external, i, j);
       }
     }
 
   } // End of overloaded get_base_flow_dudx function
 
-
-
   /// \short Compute the element's residual vector and the Jacobian matrix
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
-   // Get the analytical contribution from the basic patricklinearised element
-   RefineableLinearisedAxisymmetricQCrouzeixRaviartElement::
-    fill_in_contribution_to_jacobian(residuals,jacobian);
-   
-   // Get the off-diagonal terms by finite differencing
-   this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);
+    // Get the analytical contribution from the basic patricklinearised element
+    RefineableLinearisedAxisymmetricQCrouzeixRaviartElement::
+      fill_in_contribution_to_jacobian(residuals, jacobian);
+
+    // Get the off-diagonal terms by finite differencing
+    this->fill_in_jacobian_from_external_interaction_by_fd(residuals, jacobian);
   }
-  
 };
