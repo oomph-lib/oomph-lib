@@ -4,13 +4,20 @@ on: push
 
 jobs:
   build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            install-script: sudo apt-get install
+          - os: macos-latest
+            install-script: brew install
 
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
     - name: Install requirements
-      run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++ 
+      run: ${{ matrix.install-script }} make automake libtool libtool-bin autoconf doxygen gfortran g++ 
     - name: Build
       run: ./non_interactive_autogen.sh -s
     - name: Validate
