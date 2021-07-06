@@ -16,6 +16,7 @@ jobs:
     - name: Validate
       run: make check -k -s
     - name: Upload validation log file
+      if: ${{ always() }}
       uses: actions/upload-artifact@v2
       with:
         name: Validation log file
