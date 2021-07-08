@@ -1,13 +1,22 @@
 ######################################################################
 # Below is mostly taken from the web. Common things to ignore for C++
 ######################################################################
-# Ignore all files then un-ignore those that have an extension; this has the
-# effect of ignoring all executables.
-#        **THESE THREE LINES MUST STAY AT THE TOP OF THE FILE.**
+# ---------------------------------------------------------------------
+# Non-trivial recipe used to globally ignore the possible addition of 
+# any binaries/executables. These lines MUST(!) remain at the top of 
+# the file.
+# ---------------------------------------------------------------------
+#     **THE THREE RULES BELOW MUST STAY AT THE TOP OF THE FILE.**
+# ---------------------------------------------------------------------
+# Ignore all files
 *
-!*.*
-!*/
 
+# Unignore all files that have an extension
+!*.*
+
+# Unignore all directories
+!*/
+# ---------------------------------------------------------------------
 # Compiled files
 *.d
 *.slo
@@ -36,6 +45,7 @@
 *~
 *#
 .#*
+*.tmp
 
 # Backup files
 *.bk
@@ -83,10 +93,7 @@ doc/index/oomph_index.txt
 doc/picture_show/rotate_gifs.php
 doc/preconditioners/lgr_navier_stokes/lgr_navier_stokes_old.txt
 doc/preconditioners/lgr_navier_stokes/lgr_navier_stokes_old2.txt
-doc/preconditioners/lsc_navier_stokes/.lsc_navier_stokes.txt.swo
-
-# Temporary files
-*.tmp
+*.swo
 
 # User drivers should go in your own version control I guess
 user_drivers/
@@ -160,9 +167,6 @@ demo_drivers/interaction/fsi_channel_seg_and_precond/STEADY_SEGREGATED_*
 # first glob statement. Generated using the command:
 #             git ls-files --other --exclude-standard | xclip"
 ################################################################
-
-bin/minimal_mpi_test.out
-
 demo_drivers/heat_transfer_and_melting/OUTPUT
 demo_drivers/heat_transfer_and_melting/result_spring_contact_kuhn_tucker.dat
 demo_drivers/heat_transfer_and_melting/two_d_unsteady_heat_melt/OUTPUT
