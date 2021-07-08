@@ -34,7 +34,6 @@
 # format CMake files. Do not delete them.
 # ==============================================================================
 # cmake-format: on
-# TODO: Tie the project version number to the Git tag number
 cmake_minimum_required(VERSION 3.16..3.20 FATAL_ERROR)
 project(
   oomphlib
@@ -63,14 +62,11 @@ include(OomphSilenceWarnings)
 
 # ----------------------[ Find required/desired packages ]----------------------
 
-# TODO: actually do something with this. Built-in module to find out whether
-# certain packages are installed
+# Built-in modules to find out whether certain packages are installed
 find_package(BLAS)
-# find_package(CUDA)
 find_package(Doxygen)
 find_package(Git)
 find_package(LAPACK)
-# find_package(Eigen3)
 find_package(Python3 REQUIRED)
 
 # ------------------------------[ Build options ]-------------------------------
@@ -184,6 +180,12 @@ if(OOMPH_ENABLE_MPI)
   include(OomphMPI)
 endif()
 
+# Set up CUDA functionality (nothing in the library uses CUDA at the moment, so
+# I'm just doing the bare minimum to incorporate it for now)
+if(OOMPH_ENABLE_CUDA)
+  find_package(CUDA REQUIRED)
+endif()
+
 # --------------------------[ Find required headers ]---------------------------
 
 include(OomphCheckForRequiredHeaders)
@@ -217,27 +219,18 @@ message(VERBOSE "<====== Finished oomph-lib library build ======>")
 # Now export the package so it can be found using find_package(...)
 include(OomphExportPackage)
 
-# -----------------------------[ Non-build folders ]----------------------------
-
-# Handle the inclusion of private, demo_drivers and user_drivers. At the moment,
-# these directories are not specified via the add_subdirectory() command as they
-# do not need to be built. PM: I think I can delete this now. I'll remove this
-# when I'm absolutely sure
-
-# cmake-format: off
-# if(BUILD_DEMO_DRIVERS)
-#   add_subdirectory(demo_drivers)
-# endif()
-# if(EXISTS ${CMAKE_SOURCE_DIR}/private)
-#   add_subdirectory(private EXCLUDE_FROM_ALL)
-# endif()
-# add_subdirectory(user_drivers EXCLUDE_FROM_ALL)
-# cmake-format: on
-
 # ---------------------------------[ Testing ]----------------------------------
+
+# The last part to the build is compiling tests. The demo_drivers are currently
+# working when run *outside* the library build. The integration of their build
+# with the build of the library itself has not yet been tested. I think they
+# should be fine, but there might be an issue with find_package(oomphlib). Note
+# that private/ and user_src/ and user_drivers/ are not built with the library.
 
 # Enable testing for the current directory and all child directories
 if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) AND OOMPH_ENABLE_TESTING)
+  add_subdirectory(demo_drivers)
+  add_subdirectory(self_tests)
   find_package(Doctest)
   enable_testing()
   add_subdirectory(tests)

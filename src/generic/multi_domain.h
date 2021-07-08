@@ -515,6 +515,5 @@ namespace oomph
 
 } // namespace oomph
 
-// PM: Why did including this not work? (Can't remember right now...)
 #include "multi_domain.tpp"
 #endif

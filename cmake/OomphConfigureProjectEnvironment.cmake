@@ -14,8 +14,9 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
 endif()
 
 # Configuration variables; store as custom variables to avoid issues with
-# regular variables being overriden by third-party libraries. Variable names
-# similar to the template used by the nlohmann JSON library here:
+# regular variables being overriden by third-party libraries or by parties that
+# import this library. The variable names used here follow a similar template to
+# that used by the nlohmann JSON library here:
 # https://github.com/nlohmann/json/blob/develop/CMakeLists.txt
 set(OOMPH_ROOT_DIR "${PROJECT_SOURCE_DIR}")
 set(OOMPH_CONFIG_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
