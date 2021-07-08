@@ -42,9 +42,9 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/Qelements.h"
-#include "../generic/Telements.h"
-#include "../generic/projection.h"
+#include "generic/Qelements.h"
+#include "generic/Telements.h"
+#include "generic/projection.h"
 
 namespace oomph
 {

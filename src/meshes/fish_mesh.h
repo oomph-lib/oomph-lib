@@ -31,18 +31,18 @@
 #define OOMPH_FISH_MESH_HEADER
 
 // Headers
-#include "../generic/refineable_quad_mesh.h"
-#include "../generic/macro_element.h"
-#include "../generic/domain.h"
-#include "../generic/algebraic_elements.h"
-#include "../generic/quad_mesh.h"
-#include "../generic/macro_element_node_update_element.h"
+#include "generic/refineable_quad_mesh.h"
+#include "generic/macro_element.h"
+#include "generic/domain.h"
+#include "generic/algebraic_elements.h"
+#include "generic/quad_mesh.h"
+#include "generic/macro_element_node_update_element.h"
 
 // Include algebraic elements
-#include "../generic/algebraic_elements.h"
+#include "generic/algebraic_elements.h"
 
 // Include the macro element node update elements
-#include "../generic/macro_element_node_update_element.h"
+#include "generic/macro_element_node_update_element.h"
 
 // Include the headers file for domain
 #include "fish_domain.h"

@@ -31,7 +31,7 @@
 #define OOMPH_HORIZONTAL_SINGLE_LAYER_SPINE_MESH_HEADER
 
 // oomph-lib includes
-#include "../generic/spines.h"
+#include "generic/spines.h"
 #include "rectangular_quadmesh.h"
 
 // Created by Francisco

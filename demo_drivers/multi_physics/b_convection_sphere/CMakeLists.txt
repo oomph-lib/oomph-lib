@@ -20,6 +20,8 @@ oomph_add_executable(
   LIBRARIES oomph::axisym_advection_diffusion oomph::axisym_navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME multi_physics.b_convection_sphere
   TARGET_DEPENDENCIES b_convection_sphere multi_domain_b_convect_sph

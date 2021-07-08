@@ -60,7 +60,9 @@ set(TEMPLATE_HEADERS
     rectangle_with_hole_mesh.h
     quad_from_triangle_mesh.h
     refineable_tetgen_mesh.h
-    gmsh_tet_mesh.h)
+    gmsh_tet_mesh.h
+    rectangle_with_moving_cylinder_mesh.h
+    extruded_cube_mesh_from_quad_mesh_with_macro_elements.h)
 
 # Define the template implementation headers (these are not source files as
 # we're not trying to build them)
@@ -102,7 +104,9 @@ set(TEMPLATE_IMPL_HEADERS
     rectangle_with_hole_mesh.tpp
     quad_from_triangle_mesh.tpp
     refineable_tetgen_mesh.tpp
-    gmsh_tet_mesh.tpp)
+    gmsh_tet_mesh.tpp
+    rectangle_with_moving_cylinder_mesh.tpp
+    extruded_cube_mesh_from_quad_mesh_with_macro_elements.tpp)
 
 # Define the non-mesh headers
 set(NON_MESH_HEADERS

@@ -28,7 +28,7 @@
 // LIC//
 // LIC//====================================================================
 // Non-inline functions for NS elements
-#include "mixed_order_petrov_galerkin_space_time_navier_stokes_elements.h"
+#include <mixed_order_petrov_galerkin_space_time_navier_stokes_elements.h>
 
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////

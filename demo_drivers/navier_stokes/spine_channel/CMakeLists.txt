@@ -24,6 +24,8 @@ oomph_add_executable(
   LIBRARIES oomph::navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME navier_stokes.spine_channel
   TARGET_DEPENDENCIES simple_spine_channel spine_channel spine_channel2

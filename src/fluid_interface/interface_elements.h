@@ -37,10 +37,10 @@
 #include <oomph-lib-config.h>
 #endif
 
-#include "../generic/elements.h"
-#include "../generic/spines.h"
-#include "../generic/shape.h"
-#include "../generic/hijacked_elements.h"
+#include "generic/elements.h"
+#include "generic/spines.h"
+#include "generic/shape.h"
+#include "generic/hijacked_elements.h"
 
 namespace oomph
 {

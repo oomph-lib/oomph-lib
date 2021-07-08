@@ -37,8 +37,8 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/Qelements.h"
-#include "../generic/hermite_elements.h"
+#include "generic/Qelements.h"
+#include "generic/hermite_elements.h"
 #include "../constitutive/constitutive_laws.h"
 
 namespace oomph

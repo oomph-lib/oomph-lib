@@ -31,6 +31,8 @@ oomph_add_executable(
             oomph::navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME interaction.fourier_decomposed_acoustic_fsi
   TARGET_DEPENDENCIES

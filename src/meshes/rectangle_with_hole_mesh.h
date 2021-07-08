@@ -36,10 +36,10 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/mesh.h"
-#include "../generic/quadtree.h"
-#include "../generic/quad_mesh.h"
-#include "../generic/refineable_quad_mesh.h"
+#include "generic/mesh.h"
+#include "generic/quadtree.h"
+#include "generic/quad_mesh.h"
+#include "generic/refineable_quad_mesh.h"
 #include "rectangle_with_hole_domain.h"
 
 namespace oomph

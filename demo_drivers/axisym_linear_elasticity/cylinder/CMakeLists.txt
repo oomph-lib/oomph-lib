@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::axisym_linear_elasticity
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME axisym_linear_elasticity.cylinder
   TARGET_DEPENDENCIES cylinder

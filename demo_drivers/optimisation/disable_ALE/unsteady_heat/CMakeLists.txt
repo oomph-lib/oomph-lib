@@ -18,6 +18,8 @@ oomph_add_executable(
   LIBRARIES oomph::unsteady_heat
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME optimisation.unsteady_heat
   TARGET_DEPENDENCIES two_d_unsteady_heat two_d_unsteady_heat_adapt

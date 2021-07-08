@@ -31,13 +31,13 @@
 #define OOMPH_PSEUDO_ELASTIC_FSI_PRECONDITIONER
 
 // includes
-#include "../generic/problem.h"
-#include "../generic/block_preconditioner.h"
-#include "../generic/preconditioner.h"
-#include "../generic/SuperLU_preconditioner.h"
-#include "../generic/matrix_vector_product.h"
+#include "generic/problem.h"
+#include "generic/block_preconditioner.h"
+#include "generic/preconditioner.h"
+#include "generic/SuperLU_preconditioner.h"
+#include "generic/matrix_vector_product.h"
 #include "../navier_stokes/navier_stokes_preconditioners.h"
-#include "../generic/general_purpose_block_preconditioners.h"
+#include "generic/general_purpose_block_preconditioners.h"
 #include "pseudo_elastic_preconditioner.h"
 
 namespace oomph

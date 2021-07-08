@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME interaction.turek_flag
   TARGET_DEPENDENCIES turek_flag

@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::spherical_navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME spherical_navier_stokes.spherical_couette
   TARGET_DEPENDENCIES spherical_couette

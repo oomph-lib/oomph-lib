@@ -47,10 +47,10 @@
 #include <string.h>
 #include <iomanip>
 
-#include "../generic/problem.h"
-#include "../generic/triangle_scaffold_mesh.h"
-#include "../generic/triangle_mesh.h"
-#include "../generic/refineable_mesh.h"
+#include "generic/problem.h"
+#include "generic/triangle_scaffold_mesh.h"
+#include "generic/triangle_mesh.h"
+#include "generic/refineable_mesh.h"
 #include "../rigid_body/immersed_rigid_body_elements.h"
 
 namespace oomph

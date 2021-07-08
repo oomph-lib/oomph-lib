@@ -32,7 +32,7 @@
 #define OOMPH_FULL_CIRCLE_MESH_HEADER
 
 // Headers
-#include "../generic/refineable_quad_mesh.h"
+#include "generic/refineable_quad_mesh.h"
 
 // Include the headers file for domain
 #include "full_circle_domain.h"

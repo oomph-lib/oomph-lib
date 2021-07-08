@@ -18,6 +18,8 @@ oomph_add_executable(
   LIBRARIES oomph::axisym_advection_diffusion
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME axisym_advection_diffusion.pipe
   TARGET_DEPENDENCIES pipe pipe_variable_diff

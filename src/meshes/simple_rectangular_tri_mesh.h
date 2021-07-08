@@ -39,8 +39,8 @@
 #endif
 
 // Oomph-lib includes
-#include "../generic/mesh.h"
-#include "../generic/triangle_mesh.h"
+#include "generic/mesh.h"
+#include "generic/triangle_mesh.h"
 
 namespace oomph
 {

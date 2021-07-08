@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::foeppl_von_karman
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME foeppl_von_karman.circular_disk
   TARGET_DEPENDENCIES circular_disk

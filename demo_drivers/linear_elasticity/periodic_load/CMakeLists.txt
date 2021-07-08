@@ -18,6 +18,8 @@ oomph_add_executable(
   LIBRARIES oomph::linear_elasticity
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME linear_elasticity.periodic_load
   TARGET_DEPENDENCIES periodic_load refineable_periodic_load

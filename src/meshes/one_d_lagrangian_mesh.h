@@ -31,9 +31,9 @@
 #define OOMPH_ONE_D_LAGRANGIAN_MESH_HEADER
 
 // OOMPH-LIB headers
-#include "../generic/mesh.h"
-#include "../generic/geom_objects.h"
-#include "../generic/fsi.h"
+#include "generic/mesh.h"
+#include "generic/geom_objects.h"
+#include "generic/fsi.h"
 
 // Include the header for the one dimensional mesh
 #include "one_d_mesh.h"

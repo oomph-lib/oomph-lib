@@ -42,8 +42,8 @@
 //#include "generic.h"
 #include "generalised_newtonian_axisym_navier_stokes_elements.h"
 
-#include "../generic/Telements.h"
-#include "../generic/error_estimator.h"
+#include "generic/Telements.h"
+#include "generic/error_estimator.h"
 
 namespace oomph
 {

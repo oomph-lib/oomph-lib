@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::solid oomph::constitutive
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME solid.compressed_square
   TARGET_DEPENDENCIES compressed_square

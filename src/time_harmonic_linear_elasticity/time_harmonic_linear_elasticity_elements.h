@@ -45,11 +45,11 @@
 #include <complex>
 
 // OOMPH-LIB headers
-#include "../generic/Qelements.h"
-#include "../generic/mesh.h"
-#include "../generic/hermite_elements.h"
+#include "generic/Qelements.h"
+#include "generic/mesh.h"
+#include "generic/hermite_elements.h"
 #include "./time_harmonic_elasticity_tensor.h"
-#include "../generic/projection.h"
+#include "generic/projection.h"
 
 namespace oomph
 {

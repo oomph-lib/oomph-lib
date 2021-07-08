@@ -26,6 +26,8 @@ oomph_add_executable(
             oomph::constitutive oomph::axisym_advection_diffusion
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME multi_physics.rayleigh_instability_surfactant
   TARGET_DEPENDENCIES

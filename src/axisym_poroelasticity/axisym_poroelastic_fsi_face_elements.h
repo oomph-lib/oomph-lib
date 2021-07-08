@@ -37,9 +37,9 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/shape.h"
-#include "../generic/elements.h"
-#include "../generic/element_with_external_element.h"
+#include "generic/shape.h"
+#include "generic/elements.h"
+#include "generic/element_with_external_element.h"
 
 #include "axisym_poroelasticity_elements.h"
 

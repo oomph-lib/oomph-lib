@@ -37,9 +37,9 @@
 #endif
 
 // oomph-lib includes
-#include "generic/iterative_linear_solver.h"
-#include "generic/block_preconditioner.h"
-#include "generic/matrices.h"
+#include <generic/iterative_linear_solver.h>
+#include <generic/block_preconditioner.h>
+#include <generic/matrices.h>
 
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////

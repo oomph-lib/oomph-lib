@@ -38,10 +38,10 @@
 #endif
 
 // Oomph-lib headers
-#include "../generic/refineable_quad_element.h"
-#include "../generic/refineable_brick_element.h"
-#include "../generic/hp_refineable_elements.h"
-#include "../generic/error_estimator.h"
+#include "generic/refineable_quad_element.h"
+#include "generic/refineable_brick_element.h"
+#include "generic/hp_refineable_elements.h"
+#include "generic/error_estimator.h"
 #include "navier_stokes_elements.h"
 
 namespace oomph

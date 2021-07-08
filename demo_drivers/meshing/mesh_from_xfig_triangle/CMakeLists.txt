@@ -32,6 +32,8 @@ add_custom_target(
           ../../../../scripts/fig2poly
   DEPENDS fig2poly)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME meshing.mesh_from_xfig_triangle
   TARGET_DEPENDENCIES fig2poly mesh_from_xfig_poisson

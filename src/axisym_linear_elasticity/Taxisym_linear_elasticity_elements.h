@@ -37,11 +37,11 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/nodes.h"
-#include "../generic/oomph_utilities.h"
-#include "../generic/Telements.h"
+#include "generic/nodes.h"
+#include "generic/oomph_utilities.h"
+#include "generic/Telements.h"
 #include "axisym_linear_elasticity_elements.h"
-#include "../generic/error_estimator.h"
+#include "generic/error_estimator.h"
 
 namespace oomph
 {

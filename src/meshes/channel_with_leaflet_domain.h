@@ -31,9 +31,9 @@
 #define OOMPH_CHANNEL_WITH_LEAFLET_DOMAIN_HEADER
 
 // Generic includes
-#include "../generic/geom_objects.h"
-#include "../generic/domain.h"
-#include "../generic/macro_element.h"
+#include "generic/geom_objects.h"
+#include "generic/domain.h"
+#include "generic/macro_element.h"
 
 namespace oomph
 {

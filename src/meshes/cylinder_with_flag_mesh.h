@@ -34,11 +34,11 @@
 #include "cylinder_with_flag_domain.h"
 
 // Generic includes
-#include "../generic/refineable_quad_mesh.h"
-#include "../generic/quad_mesh.h"
+#include "generic/refineable_quad_mesh.h"
+#include "generic/quad_mesh.h"
 
 // Include algebraic elements
-#include "../generic/algebraic_elements.h"
+#include "generic/algebraic_elements.h"
 
 namespace oomph
 {

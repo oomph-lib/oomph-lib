@@ -35,10 +35,10 @@
 #include <oomph-lib-config.h>
 #endif
 
-#include "../generic/elements.h"
-#include "../generic/shape.h"
-#include "../generic/error_estimator.h"
-#include "../generic/projection.h"
+#include "generic/elements.h"
+#include "generic/shape.h"
+#include "generic/error_estimator.h"
+#include "generic/projection.h"
 
 namespace oomph
 {

@@ -36,8 +36,8 @@
 
 #include <algorithm>
 
-#include "../generic/Telements.h"
-#include "../generic/map_matrix.h"
+#include "generic/Telements.h"
+#include "generic/map_matrix.h"
 
 namespace oomph
 {

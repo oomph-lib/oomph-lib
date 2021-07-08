@@ -124,21 +124,19 @@ function(oomph_library_config)
   # Create an alias library name, e.g. generic can be linked with oomph::generic
   add_library(${PROJECT_NAMESPACE}::${LIBNAME} ALIAS ${LIBNAME})
 
-  # ~~~
-  # TODO: Delete. If we want to place everything in a single directory, e.g.
-  # # Make sure everything gets placed in specific subdirectory of the build/
-  # directory associated with the project being built
-  # set_target_properties(
-  #   ${LIBNAME} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
-  #                         LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
-  # ~~~
-
-  # Specify the location of the library headers at build-time/install-time. Need
-  # to add the folder above in the build/ directory as that's where the combined
-  # header associated with the library will be placed. We need to know where
-  # this is so that libraries linking against know where to look for the header
+  # Specify the location of the library headers at build-time/install-time. Add
+  # these build-time directories for the following reasons:
+  #
+  # * CMAKE_CURRENT_SOURCE_DIR: To get direct access to the sources
+  # * CMAKE_CURRENT_SOURCE_DIR/../: To access to the sources through the
+  #   enclosing folder
+  # * CMAKE_CURRENT_BINARY_DIR/../: To get access to the combined headers (which
+  #   are placed in the build directory so they don't pollute the source tree).
   target_include_directories(
-    ${LIBNAME} ${INCLUDE_TYPE} $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    ${LIBNAME}
+    ${INCLUDE_TYPE}
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/../>
     $<INSTALL_INTERFACE:include/${PROJECT_NAME}>)
 

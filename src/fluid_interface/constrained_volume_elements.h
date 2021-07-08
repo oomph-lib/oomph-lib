@@ -40,8 +40,8 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/Qelements.h"
-#include "../generic/spines.h"
+#include "generic/Qelements.h"
+#include "generic/spines.h"
 #include "../axisym_navier_stokes/axisym_navier_stokes_elements.h"
 
 //-------------------------------------------

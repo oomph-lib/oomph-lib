@@ -13,6 +13,8 @@ oomph_add_executable(
             oomph::steady_axisym_advection_diffusion
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME multi_physics.thermal_fibre
   TARGET_DEPENDENCIES thermal_fibre

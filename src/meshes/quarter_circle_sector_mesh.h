@@ -30,12 +30,12 @@
 #ifndef OOMPH_QUARTER_CIRCLE_SECTOR_MESH_HEADER
 #define OOMPH_QUARTER_CIRCLE_SECTOR_MESH_HEADER
 
-#include "../generic/refineable_quad_mesh.h"
-#include "../generic/macro_element.h"
-#include "../generic/domain.h"
-#include "../generic/algebraic_elements.h"
-#include "../generic/quad_mesh.h"
-#include "../generic/macro_element_node_update_element.h"
+#include "generic/refineable_quad_mesh.h"
+#include "generic/macro_element.h"
+#include "generic/domain.h"
+#include "generic/algebraic_elements.h"
+#include "generic/quad_mesh.h"
+#include "generic/macro_element_node_update_element.h"
 
 // Include the headers file for domain
 #include "quarter_circle_sector_domain.h"

@@ -37,9 +37,9 @@
 #endif
 
 // oomph-lib headers
-#include "../generic/refineable_quad_element.h"
-#include "../generic/refineable_brick_element.h"
-#include "../generic/error_estimator.h"
+#include "generic/refineable_quad_element.h"
+#include "generic/refineable_brick_element.h"
+#include "generic/error_estimator.h"
 #include "linear_wave_elements.h"
 
 namespace oomph

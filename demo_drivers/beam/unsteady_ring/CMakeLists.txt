@@ -18,6 +18,8 @@ oomph_add_executable(
   LIBRARIES oomph::beam
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME beam.unsteady_ring
   TARGET_DEPENDENCIES lin_unsteady_ring unsteady_ring

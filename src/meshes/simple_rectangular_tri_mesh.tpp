@@ -36,7 +36,7 @@
 
 #include <algorithm>
 
-#include "../generic/Telements.h"
+#include "generic/Telements.h"
 
 // Simple 2D triangle mesh class
 

@@ -36,10 +36,10 @@
 #endif
 
 // Include the OOMPH-LIB header files
-#include "../generic/mesh.h"
-#include "../generic/matrices.h"
-#include "../generic/brick_mesh.h"
-#include "../generic/refineable_brick_mesh.h"
+#include "generic/mesh.h"
+#include "generic/matrices.h"
+#include "generic/brick_mesh.h"
+#include "generic/refineable_brick_mesh.h"
 
 namespace oomph
 {

@@ -42,13 +42,13 @@
 #include <iomanip>
 
 // The mesh
-#include "../generic/problem.h"
-#include "../generic/quad_mesh.h"
+#include "generic/problem.h"
+#include "generic/quad_mesh.h"
 #include "triangle_mesh.h"
-#include "../generic/triangle_scaffold_mesh.h"
-#include "../generic/unstructured_two_d_mesh_geometry_base.h"
-#include "../generic/refineable_quad_mesh.h"
-#include "../generic/Qelements.h"
+#include "generic/triangle_scaffold_mesh.h"
+#include "generic/unstructured_two_d_mesh_geometry_base.h"
+#include "generic/refineable_quad_mesh.h"
+#include "generic/Qelements.h"
 
 using namespace std;
 using namespace oomph;

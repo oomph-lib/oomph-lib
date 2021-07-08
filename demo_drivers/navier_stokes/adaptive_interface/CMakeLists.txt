@@ -13,6 +13,8 @@ oomph_add_executable(
             oomph::constitutive
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME navier_stokes.adaptive_interface
   TARGET_DEPENDENCIES adaptive_interface

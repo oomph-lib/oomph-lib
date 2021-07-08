@@ -50,7 +50,8 @@ set(SRC_SUBDIRS
     linearised_axisym_navier_stokes
     linearised_navier_stokes
     generalised_newtonian_navier_stokes
-    generalised_newtonian_axisym_navier_stokes)
+    generalised_newtonian_axisym_navier_stokes
+    space_time)
 
 # Add each subdirectory target to the build
 foreach(SUBDIR ${SRC_SUBDIRS})

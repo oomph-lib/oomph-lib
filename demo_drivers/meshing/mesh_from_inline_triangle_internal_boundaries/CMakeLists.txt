@@ -18,6 +18,8 @@ oomph_add_executable(
   LIBRARIES oomph::poisson
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME meshing.mesh_from_inline_triangle_internal_boundaries
   TARGET_DEPENDENCIES mesh_from_inline_triangle_internal_boundaries

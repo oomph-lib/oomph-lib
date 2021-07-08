@@ -94,7 +94,7 @@ option(OOMPH_ENABLE_TESTING "Build unit tests" OFF)
 
 # Multiprocessing/GPU usage. Note: CUDA functionality is current very(!) limited
 # and only accessible through certain third-party libraries
-option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" ON)
+option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 option(OOMPH_ENABLE_CUDA "Enable the use of CUDA where possible" OFF)
 
 # Optionally build third-party libraries

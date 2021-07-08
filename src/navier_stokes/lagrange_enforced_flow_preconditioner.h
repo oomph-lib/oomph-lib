@@ -36,20 +36,20 @@
 #endif
 
 // oomphlib headers
-#include "../generic/matrices.h"
-#include "../generic/assembly_handler.h"
-#include "../generic/problem.h"
-#include "../generic/block_preconditioner.h"
-#include "../generic/preconditioner.h"
-#include "../generic/SuperLU_preconditioner.h"
-#include "../generic/matrix_vector_product.h"
-#include "../generic/general_purpose_preconditioners.h"
-#include "../generic/general_purpose_block_preconditioners.h"
+#include "generic/matrices.h"
+#include "generic/assembly_handler.h"
+#include "generic/problem.h"
+#include "generic/block_preconditioner.h"
+#include "generic/preconditioner.h"
+#include "generic/SuperLU_preconditioner.h"
+#include "generic/matrix_vector_product.h"
+#include "generic/general_purpose_preconditioners.h"
+#include "generic/general_purpose_block_preconditioners.h"
 #ifdef OOMPH_HAS_HYPRE
-#include "../generic/hypre_solver.h"
+#include "generic/hypre_solver.h"
 #endif
 #ifdef OOMPH_HAS_TRILINOS
-#include "../generic/trilinos_solver.h"
+#include "generic/trilinos_solver.h"
 #endif
 
 namespace oomph

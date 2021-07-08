@@ -38,8 +38,8 @@
 #endif
 
 #include "flux_transport_elements.h"
-#include "../generic/Qspectral_elements.h"
-#include "../generic/dg_elements.h"
+#include "generic/Qspectral_elements.h"
+#include "generic/dg_elements.h"
 
 namespace oomph
 {

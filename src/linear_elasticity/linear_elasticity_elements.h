@@ -39,11 +39,11 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/Qelements.h"
-#include "../generic/mesh.h"
-#include "../generic/hermite_elements.h"
+#include "generic/Qelements.h"
+#include "generic/mesh.h"
+#include "generic/hermite_elements.h"
 #include "./elasticity_tensor.h"
-#include "../generic/projection.h"
+#include "generic/projection.h"
 
 namespace oomph
 {

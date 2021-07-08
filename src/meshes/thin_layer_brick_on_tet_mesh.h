@@ -30,8 +30,8 @@
 #ifndef OOMPH_THIN_LAYER_BRICK_ON_TET_MESH_HEADER
 #define OOMPH_THIN_LAYER_BRICK_ON_TET_MESH_HEADER
 
-#include "../generic/brick_mesh.h"
-#include "../generic/refineable_brick_mesh.h"
+#include "generic/brick_mesh.h"
+#include "generic/refineable_brick_mesh.h"
 
 namespace oomph
 {

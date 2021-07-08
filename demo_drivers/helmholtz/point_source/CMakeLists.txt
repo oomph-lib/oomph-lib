@@ -19,6 +19,8 @@ oomph_add_executable(
   LIBRARIES oomph::helmholtz
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME helmholtz.point_source
   TARGET_DEPENDENCIES adaptive_helmholtz_point_source helmholtz_point_source

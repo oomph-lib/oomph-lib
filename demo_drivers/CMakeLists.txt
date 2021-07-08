@@ -68,17 +68,16 @@ set(SUBDIRS
     generalised_newtonian_navier_stokes
     generalised_newtonian_axisym_navier_stokes
     multigrid
-    all_foeppl_von_karman)
+    all_foeppl_von_karman
+    extrude_quad_mesh_to_cube_mesh)
 
 if(OOMPH_HAS_MPI)
   list(APPEND SUBDIRS mpi)
 endif()
 
-# cmake-format: off
 foreach(SUBDIR ${SUBDIRS})
   add_subdirectory(${SUBDIR})
 endforeach()
-# cmake-format: on
 # add_subdirectory(poisson)
 
 message(VERBOSE "Leaving demo_drivers subdirectory")

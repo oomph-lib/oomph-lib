@@ -37,7 +37,7 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/nodes.h"
+#include "generic/nodes.h"
 #include "../navier_stokes/navier_stokes_surface_power_elements.h"
 
 namespace oomph

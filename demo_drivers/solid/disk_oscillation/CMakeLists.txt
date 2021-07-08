@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::solid oomph::constitutive
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME solid.disk_oscillation
   TARGET_DEPENDENCIES disk_oscillation

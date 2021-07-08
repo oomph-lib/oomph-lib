@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::unsteady_heat oomph::solid oomph::constitutive
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME multi_physics.thermo
   TARGET_DEPENDENCIES thermo

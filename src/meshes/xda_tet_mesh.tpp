@@ -34,7 +34,7 @@
 #error __FILE__ should only be included from xda_tet_mesh.h.
 #endif // OOMPH_XDA_TET_MESH_HEADER
 
-#include "../generic/Telements.h"
+#include "generic/Telements.h"
 
 namespace oomph
 {

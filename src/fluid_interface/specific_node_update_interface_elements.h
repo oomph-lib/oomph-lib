@@ -39,9 +39,9 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/Qelements.h"
-#include "../generic/spines.h"
-#include "../generic/hijacked_elements.h"
+#include "generic/Qelements.h"
+#include "generic/spines.h"
+#include "generic/hijacked_elements.h"
 #include "interface_elements.h"
 
 namespace oomph

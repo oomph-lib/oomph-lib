@@ -13,6 +13,8 @@ oomph_add_executable(
             oomph::solid
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME navier_stokes.falling_jet
   TARGET_DEPENDENCIES falling_jet

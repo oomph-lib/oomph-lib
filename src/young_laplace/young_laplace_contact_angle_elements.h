@@ -39,7 +39,7 @@
 #endif
 
 // oomph-lib ncludes
-#include "../generic/Qelements.h"
+#include "generic/Qelements.h"
 
 namespace oomph
 {

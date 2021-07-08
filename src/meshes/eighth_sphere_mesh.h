@@ -31,11 +31,11 @@
 #define OOMPH_EIGHTH_SPHERE_MESH_HEADER
 
 // Headers
-#include "../generic/refineable_brick_mesh.h"
-#include "../generic/macro_element.h"
-#include "../generic/domain.h"
-#include "../generic/algebraic_elements.h"
-#include "../generic/brick_mesh.h"
+#include "generic/refineable_brick_mesh.h"
+#include "generic/macro_element.h"
+#include "generic/domain.h"
+#include "generic/algebraic_elements.h"
+#include "generic/brick_mesh.h"
 
 // Include the headers file for domain
 #include "eighth_sphere_domain.h"

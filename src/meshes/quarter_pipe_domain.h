@@ -32,9 +32,9 @@
 #define OOMPH_QUARTER_PIPE_DOMAIN_HEADER
 
 // Generic oomph-lib includes
-#include "../generic/octree.h"
-#include "../generic/domain.h"
-#include "../generic/geom_objects.h"
+#include "generic/octree.h"
+#include "generic/domain.h"
+#include "generic/geom_objects.h"
 
 namespace oomph
 {

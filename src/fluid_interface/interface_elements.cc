@@ -31,7 +31,7 @@
 
 // OOMPH-LIB headers
 #include "interface_elements.h"
-#include "../generic/integral.h"
+#include "generic/integral.h"
 
 namespace oomph
 {

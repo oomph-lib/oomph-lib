@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::beam
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME beam.steady_ring
   TARGET_DEPENDENCIES steady_ring

@@ -39,8 +39,8 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/Qelements.h"
-#include "../generic/element_with_external_element.h"
+#include "generic/Qelements.h"
+#include "generic/element_with_external_element.h"
 
 namespace oomph
 {

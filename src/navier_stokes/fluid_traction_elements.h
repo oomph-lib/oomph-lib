@@ -40,8 +40,8 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/Qelements.h"
-#include "../generic/Telements.h"
+#include "generic/Qelements.h"
+#include "generic/Telements.h"
 
 namespace oomph
 {

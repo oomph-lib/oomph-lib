@@ -106,7 +106,9 @@ set(HEADERS
     sample_point_container.h
     sample_point_parameters.h
     sparse_vector.h
-    geom_obj_with_boundary.h)
+    geom_obj_with_boundary.h
+    extruded_macro_element.h
+    extruded_domain.h)
 
 if(OOMPH_HAS_STACKTRACE)
   list(APPEND HEADERS stacktrace.h)
@@ -192,7 +194,9 @@ set(SOURCES
     unstructured_two_d_mesh_geometry_base.cc
     sample_point_container.cc
     sample_point_parameters.cc
-    geometric_multigrid.cc)
+    geometric_multigrid.cc
+    extruded_macro_element.cc
+    extruded_domain.cc)
 
 # Need to worry about these for dependency but they shouldn't be included into
 # the include directory

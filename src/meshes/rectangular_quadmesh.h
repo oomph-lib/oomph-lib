@@ -37,9 +37,9 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/mesh.h"
-#include "../generic/quad_mesh.h"
-#include "../generic/refineable_quad_mesh.h"
+#include "generic/mesh.h"
+#include "generic/quad_mesh.h"
+#include "generic/refineable_quad_mesh.h"
 
 namespace oomph
 {

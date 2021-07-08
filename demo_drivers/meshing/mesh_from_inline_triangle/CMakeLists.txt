@@ -25,6 +25,8 @@ oomph_add_executable(
   CXX_DEFINITIONS OUTER_POLYGON
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME meshing.mesh_from_inline_triangle
   TARGET_DEPENDENCIES

@@ -38,7 +38,7 @@
 
 // Simple 3D tetrahedral mesh class
 
-#include "../generic/map_matrix.h"
+#include "generic/map_matrix.h"
 #include <algorithm>
 
 namespace oomph

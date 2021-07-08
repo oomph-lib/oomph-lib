@@ -31,7 +31,7 @@
 #define OOMPH_CHANNEL_SPINE_MESH_HEADER
 
 // oomph-lib includes
-#include "../generic/spines.h"
+#include "generic/spines.h"
 #include "rectangular_quadmesh.h"
 
 namespace oomph

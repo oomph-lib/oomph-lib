@@ -46,6 +46,8 @@ oomph_add_executable(
   CXX_DEFINITIONS USE_BL_SQUASH_FCT
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME navier_stokes.collapsible_channel
   TARGET_DEPENDENCIES

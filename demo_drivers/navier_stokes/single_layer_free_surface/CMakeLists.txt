@@ -19,6 +19,8 @@ oomph_add_executable(
   LIBRARIES oomph::navier_stokes oomph::fluid_interface
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME navier_stokes.single_layer_free_surface
   TARGET_DEPENDENCIES elastic_single_layer spine_single_layer

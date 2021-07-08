@@ -39,8 +39,8 @@
 #endif
 
 // oomph-lib headers
-#include "../generic/hermite_elements.h"
-#include "../generic/mesh.h"
+#include "generic/hermite_elements.h"
+#include "generic/mesh.h"
 
 // Include the domain header
 #include "topologically_rectangular_domain.h"

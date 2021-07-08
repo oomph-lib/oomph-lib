@@ -37,10 +37,10 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/nodes.h"
-#include "../generic/oomph_utilities.h"
-#include "../generic/Telements.h"
-#include "../generic/error_estimator.h"
+#include "generic/nodes.h"
+#include "generic/oomph_utilities.h"
+#include "generic/Telements.h"
+#include "generic/error_estimator.h"
 
 #include "displacement_based_foeppl_von_karman_elements.h"
 

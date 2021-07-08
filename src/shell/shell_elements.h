@@ -37,11 +37,11 @@
 #endif
 
 // OOMPH-LIB header
-#include "../generic/hermite_elements.h"
-#include "../generic/geom_objects.h"
-#include "../generic/fsi.h"
-#include "../generic/stored_shape_function_elements.h"
-#include "../generic/matrices.h"
+#include "generic/hermite_elements.h"
+#include "generic/geom_objects.h"
+#include "generic/fsi.h"
+#include "generic/stored_shape_function_elements.h"
+#include "generic/matrices.h"
 
 namespace oomph
 {

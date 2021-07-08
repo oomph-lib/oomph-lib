@@ -20,6 +20,8 @@ oomph_add_executable(
             oomph::fluid_interface
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME multi_physics.marangoni_convection
   TARGET_DEPENDENCIES marangoni_convection marangoni_convection_box

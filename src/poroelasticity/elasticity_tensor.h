@@ -39,7 +39,7 @@
 #include <oomph-lib-config.h>
 #endif
 
-#include "../generic/oomph_utilities.h"
+#include "generic/oomph_utilities.h"
 
 namespace oomph
 {

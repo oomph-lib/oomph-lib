@@ -40,11 +40,11 @@
 #endif
 
 // oomph-lib headers
-#include "../generic/Vector.h"
-#include "../generic/macro_element.h"
-#include "../generic/oomph_utilities.h"
-#include "../generic/quadtree.h"
-#include "../generic/octree.h"
+#include "generic/Vector.h"
+#include "generic/macro_element.h"
+#include "generic/oomph_utilities.h"
+#include "generic/quadtree.h"
+#include "generic/octree.h"
 
 namespace oomph
 {

@@ -14,7 +14,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <malloc.h>
+// PM: deprecated and should be replaced with stdlib.h:
+// https://stackoverflow.com/questions/56463049/should-mac-osx-have-a-malloc-h-file
+// #include <malloc.h>
 #include <string.h>
 #include <ctype.h>
 #include <math.h>

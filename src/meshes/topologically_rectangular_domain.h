@@ -37,7 +37,7 @@
 #endif
 
 // oomph-lib headers
-#include "../generic/domain.h"
+#include "generic/domain.h"
 
 namespace oomph
 {

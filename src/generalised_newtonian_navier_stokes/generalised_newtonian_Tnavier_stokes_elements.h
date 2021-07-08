@@ -38,9 +38,9 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/Telements.h"
+#include "generic/Telements.h"
 #include "generalised_newtonian_navier_stokes_elements.h"
-#include "../generic/error_estimator.h"
+#include "generic/error_estimator.h"
 
 namespace oomph
 {

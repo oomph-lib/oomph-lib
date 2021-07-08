@@ -37,11 +37,11 @@
 #endif
 
 // Oomph-lib headers
-#include "generic/iterative_linear_solver.h"
-#include "generic/general_purpose_block_preconditioners.h"
+#include <generic/iterative_linear_solver.h>
+#include <generic/general_purpose_block_preconditioners.h>
 
 // Add in the subsidiary preconditioners
-#include "general_purpose_space_time_subsidiary_block_preconditioner.h"
+#include <general_purpose_space_time_subsidiary_block_preconditioner.h>
 
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////

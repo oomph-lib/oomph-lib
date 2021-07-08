@@ -22,6 +22,8 @@ oomph_add_executable(
   LIBRARIES oomph::linear_elasticity
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME homogenisation.two_dim
   TARGET_DEPENDENCIES two_dim two_dim_hex

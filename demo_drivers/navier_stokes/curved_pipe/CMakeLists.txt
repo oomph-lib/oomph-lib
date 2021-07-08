@@ -18,6 +18,8 @@ oomph_add_executable(
   LIBRARIES oomph::navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME navier_stokes.curved_pipe
   TARGET_DEPENDENCIES curved_pipe helical_pipe

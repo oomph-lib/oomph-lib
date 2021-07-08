@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::steady_axisym_advection_diffusion
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME steady_axisym_advection_diffusion.steady_axisym_advection_diffusion
   TARGET_DEPENDENCIES steady_axisym_advection_diffusion

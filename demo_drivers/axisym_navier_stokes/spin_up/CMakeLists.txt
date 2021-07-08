@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME axisym_navier_stokes.spin_up
   TARGET_DEPENDENCIES spin_up

@@ -33,16 +33,16 @@
 #define OOMPH_FSI_DRIVEN_CAVITY_MESH_HEADER
 
 // Generic includes
-#include "../generic/refineable_quad_mesh.h"
-#include "../generic/macro_element.h"
-#include "../generic/domain.h"
-#include "../generic/quad_mesh.h"
+#include "generic/refineable_quad_mesh.h"
+#include "generic/macro_element.h"
+#include "generic/domain.h"
+#include "generic/quad_mesh.h"
 
 // Mesh is based on simple_rectangular_quadmesh
 #include "simple_rectangular_quadmesh.h"
 
 // Include algebraic elements
-#include "../generic/algebraic_elements.h"
+#include "generic/algebraic_elements.h"
 
 namespace oomph
 {

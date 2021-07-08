@@ -28,10 +28,10 @@
 // LIC//
 // LIC//====================================================================
 // Header file
-#include "general_purpose_space_time_subsidiary_block_preconditioner.h"
+#include <general_purpose_space_time_subsidiary_block_preconditioner.h>
 
 #ifdef OOMPH_HAS_HYPRE
-#include "../../generic/hypre_solver.h"
+#include <generic/hypre_solver.h>
 #endif
 
 ////////////////////////////////////////////////////////////////////////

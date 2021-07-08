@@ -1,0 +1,34 @@
+# ------------------------------------------------------------------------------
+list(APPEND CMAKE_MESSAGE_INDENT " ")
+message(
+  VERBOSE
+  "Entered space_time_unsteady_heat_equal_order_galerkin_petrov subdirectory")
+
+# Define the headers
+set(HEADERS discontinuous_galerkin_space_time_unsteady_heat_elements.h
+    refineable_discontinuous_galerkin_space_time_unsteady_heat_elements.h
+    space_time_unsteady_heat_block_preconditionable_elements.h)
+
+# Define the sources
+set(SOURCES discontinuous_galerkin_space_time_unsteady_heat_elements.cc
+    refineable_discontinuous_galerkin_space_time_unsteady_heat_elements.cc
+    space_time_unsteady_heat_block_preconditionable_elements.cc)
+
+# Set the name of the library
+set(LIBNAME space_time_unsteady_heat_equal_order_galerkin_petrov)
+
+# We depend on the generic library
+set(LINKLIBS generic space_time_block_preconditioner)
+
+# Import the OomphLibraryConfig module to handle the library creation
+include(OomphLibraryConfig)
+oomph_library_config(
+  LIBNAME ${LIBNAME}
+  HEADERS ${HEADERS}
+  SOURCES ${SOURCES}
+  LINKLIBS ${LINKLIBS})
+
+message(
+  VERBOSE
+  "Leaving space_time_unsteady_heat_equal_order_galerkin_petrov subdirectory")
+# ------------------------------------------------------------------------------

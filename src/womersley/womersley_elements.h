@@ -38,11 +38,11 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/nodes.h"
-#include "../generic/Qelements.h"
-#include "../generic/mesh.h"
-#include "../generic/problem.h"
-#include "../generic/oomph_utilities.h"
+#include "generic/nodes.h"
+#include "generic/Qelements.h"
+#include "generic/mesh.h"
+#include "generic/problem.h"
+#include "generic/oomph_utilities.h"
 #include "../navier_stokes/navier_stokes_flux_control_elements.h"
 
 namespace oomph

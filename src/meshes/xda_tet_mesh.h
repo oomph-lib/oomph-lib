@@ -44,8 +44,8 @@
 #include <iterator>
 #include <algorithm>
 
-#include "../generic/mesh.h"
-#include "../generic/tet_mesh.h"
+#include "generic/mesh.h"
+#include "generic/tet_mesh.h"
 
 namespace oomph
 {

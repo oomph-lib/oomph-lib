@@ -30,7 +30,7 @@
 #ifndef OOMPH_GEOMPACK_MESH_HEADER
 #define OOMPH_GEOMPACK_MESH_HEADER
 
-#include "../generic/geompack_scaffold_mesh.h"
+#include "generic/geompack_scaffold_mesh.h"
 
 namespace oomph
 {

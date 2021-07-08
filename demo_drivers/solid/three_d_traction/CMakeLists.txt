@@ -19,6 +19,8 @@ oomph_add_executable(
   CXX_DEFINITIONS NOREFINE
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME solid.three_d_traction
   TARGET_DEPENDENCIES three_d_traction three_d_traction_non_adapt

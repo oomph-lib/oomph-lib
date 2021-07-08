@@ -38,7 +38,7 @@
 #endif
 
 // oomph-lib includes
-#include "../generic/Qelements.h"
+#include "generic/Qelements.h"
 
 namespace oomph
 {

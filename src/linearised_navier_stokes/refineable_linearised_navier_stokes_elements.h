@@ -38,8 +38,8 @@
 #endif
 
 // oomph-lib includes
-#include "../generic/refineable_quad_element.h"
-#include "../generic/error_estimator.h"
+#include "generic/refineable_quad_element.h"
+#include "generic/error_estimator.h"
 #include "linearised_navier_stokes_elements.h"
 
 namespace oomph

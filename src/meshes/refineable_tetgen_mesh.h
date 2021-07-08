@@ -36,9 +36,9 @@
 #include <oomph-lib-config.h>
 #endif
 
-#include "../generic/tetgen_scaffold_mesh.h"
-#include "../generic/tet_mesh.h"
-#include "../generic/refineable_mesh.h"
+#include "generic/tetgen_scaffold_mesh.h"
+#include "generic/tet_mesh.h"
+#include "generic/refineable_mesh.h"
 #include "tetgen_mesh.h"
 
 namespace oomph

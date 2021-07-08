@@ -19,6 +19,8 @@ oomph_add_executable(
             oomph::constitutive
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME navier_stokes.three_d_static_cap
   TARGET_DEPENDENCIES 3d_static_cap 3d_static_cap_elastic

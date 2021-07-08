@@ -18,6 +18,8 @@ oomph_add_executable(
   LIBRARIES oomph::polar_navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME polar_navier_stokes.jeffery_hamel
   TARGET_DEPENDENCIES jeffery_hamel

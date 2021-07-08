@@ -44,8 +44,8 @@
 
 // Oomph-lib headers
 // Should already be looking in build/include/ for generic.h
-#include "../generic/refineable_quad_element.h"
-#include "../generic/error_estimator.h"
+#include "generic/refineable_quad_element.h"
+#include "generic/error_estimator.h"
 #include "polar_navier_stokes_elements.h"
 
 namespace oomph

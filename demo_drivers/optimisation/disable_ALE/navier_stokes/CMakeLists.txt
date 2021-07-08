@@ -18,6 +18,8 @@ oomph_add_executable(
   LIBRARIES oomph::navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME optimisation.navier_stokes
   TARGET_DEPENDENCIES rayleigh_channel rayleigh_circular_driven_cavity_adapt

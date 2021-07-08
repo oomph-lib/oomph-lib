@@ -30,9 +30,9 @@
 #ifndef OOMPH_SEGREGATED_FSI_SOLVER
 #define OOMPH_SEGREGATED_FSI_SOLVER
 
-#include "../generic/problem.h"
-#include "../generic/geom_objects.h"
-#include "../generic/mesh.h"
+#include "generic/problem.h"
+#include "generic/geom_objects.h"
+#include "generic/mesh.h"
 
 namespace oomph
 {

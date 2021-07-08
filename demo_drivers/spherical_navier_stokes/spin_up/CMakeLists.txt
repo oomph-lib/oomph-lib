@@ -30,6 +30,8 @@ oomph_add_executable(
   LIBRARIES oomph::axisym_navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME spherical_navier_stokes.spin_up
   TARGET_DEPENDENCIES refineable_spin_up refineable_spin_up_cyl spin_up

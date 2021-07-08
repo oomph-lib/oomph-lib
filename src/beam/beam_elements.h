@@ -37,10 +37,10 @@
 #endif
 
 // OOMPH-LIB header files
-#include "../generic/hermite_elements.h"
-#include "../generic/geom_objects.h"
-#include "../generic/fsi.h"
-#include "../generic/block_preconditioner.h"
+#include "generic/hermite_elements.h"
+#include "generic/geom_objects.h"
+#include "generic/fsi.h"
+#include "generic/block_preconditioner.h"
 
 namespace oomph
 {

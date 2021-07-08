@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::axisym_foeppl_von_karman
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME axisym_foeppl_von_karman.axisym_foeppl_von_karman
   TARGET_DEPENDENCIES axisym_fvk

@@ -18,6 +18,8 @@ oomph_add_executable(
   LIBRARIES oomph::pml_time_harmonic_linear_elasticity
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME
     pml_time_harmonic_linear_elasticity.pml_time_harmonic_linear_elasticity

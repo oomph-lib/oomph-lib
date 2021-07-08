@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::spherical_advection_diffusion oomph::spherical_navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME multi_physics.spherical_shell_convection
   TARGET_DEPENDENCIES spherical_shell_convection

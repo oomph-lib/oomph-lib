@@ -27,11 +27,15 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-// Add in the header file
-#include "rectangle_with_moving_cylinder_mesh.template.h"
+#ifndef OOMPH_RECTANGLE_WITH_MOVING_CYLINDER_MESH_TEMPLATE_HEADER
+#define OOMPH_RECTANGLE_WITH_MOVING_CYLINDER_MESH_TEMPLATE_HEADER
+
+#ifndef OOMPH_RECTANGLE_WITH_MOVING_CYLINDER_MESH_TEMPLATE_HEADER
+#error __FILE__ should only be included from rectangle_with_moving_cylinder_mesh.h.
+#endif // OOMPH_RECTANGLE_WITH_MOVING_CYLINDER_MESH_TEMPLATE_HEADER
 
 // PML mesh helpers
-#include "../generic/pml_meshes.h"
+#include "generic/pml_meshes.h"
 
 // Namespace extension
 namespace oomph
@@ -1768,3 +1772,4 @@ namespace oomph
     Central_mesh_pt->flush_element_and_node_storage();
   } // End of RefineableQuadMeshWithMovingCylinder
 } // namespace oomph
+#endif

@@ -19,6 +19,8 @@ oomph_add_executable(
   CXX_DEFINITIONS DONT_USE_SINGULARITY
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME poisson.poisson_with_singularity
   TARGET_DEPENDENCIES two_d_poisson

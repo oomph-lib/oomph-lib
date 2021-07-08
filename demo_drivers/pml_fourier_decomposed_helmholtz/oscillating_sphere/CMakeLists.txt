@@ -19,6 +19,8 @@ oomph_add_executable(
   LIBRARIES oomph::pml_fourier_decomposed_helmholtz
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME pml_fourier_decomposed_helmholtz.oscillating_sphere
   TARGET_DEPENDENCIES adaptive_oscillating_sphere oscillating_sphere

@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::shell
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME shell.oscillating_shell
   TARGET_DEPENDENCIES oscillating_shell

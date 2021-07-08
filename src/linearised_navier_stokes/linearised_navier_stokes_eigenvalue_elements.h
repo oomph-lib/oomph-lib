@@ -40,7 +40,7 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/elements.h"
+#include "generic/elements.h"
 
 namespace oomph
 {

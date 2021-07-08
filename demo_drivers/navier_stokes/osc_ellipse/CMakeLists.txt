@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME navier_stokes.osc_ellipse
   TARGET_DEPENDENCIES osc_quarter_ellipse

@@ -28,10 +28,10 @@
 // LIC//
 // LIC//====================================================================
 // Oomph-lib headers
-#include "generic/SuperLU_preconditioner.h"
+#include <SuperLU_preconditioner.h>
 
 // Header file
-#include "general_purpose_space_time_block_preconditioner.h"
+#include <general_purpose_space_time_block_preconditioner.h>
 
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////

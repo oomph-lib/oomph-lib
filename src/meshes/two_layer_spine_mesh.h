@@ -31,7 +31,7 @@
 #define OOMPH_TWO_LAYER_SPINE_MESH_HEADER
 
 // The mesh
-#include "../generic/spines.h"
+#include "generic/spines.h"
 #include "rectangular_quadmesh.h"
 
 namespace oomph

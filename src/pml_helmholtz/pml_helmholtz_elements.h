@@ -40,12 +40,12 @@
 #include <complex>
 
 // OOMPH-LIB headers
-#include "../generic/nodes.h"
-#include "../generic/Qelements.h"
-#include "../generic/oomph_utilities.h"
-#include "../generic/pml_meshes.h"
-#include "../generic/projection.h"
-#include "../generic/pml_mapping_functions.h"
+#include "generic/nodes.h"
+#include "generic/Qelements.h"
+#include "generic/oomph_utilities.h"
+#include "generic/pml_meshes.h"
+#include "generic/projection.h"
+#include "generic/pml_mapping_functions.h"
 
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////

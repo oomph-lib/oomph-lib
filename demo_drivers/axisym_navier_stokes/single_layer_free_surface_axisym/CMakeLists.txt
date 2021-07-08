@@ -13,6 +13,8 @@ oomph_add_executable(
             oomph::fluid_interface
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME axisym_navier_stokes.single_layer_free_surface_axisym
   TARGET_DEPENDENCIES single_layer_free_surface_axisym

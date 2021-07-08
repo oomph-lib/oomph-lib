@@ -38,8 +38,8 @@
 #endif
 
 // oomph-lib includes
-#include "../generic/Qelements.h"
-#include "../generic/fsi.h"
+#include "generic/Qelements.h"
+#include "generic/fsi.h"
 
 #include "./linearised_navier_stokes_eigenvalue_elements.h"
 

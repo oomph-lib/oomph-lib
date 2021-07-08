@@ -13,6 +13,8 @@ oomph_add_executable(
             oomph::rigid_body
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME navier_stokes.jeffery_orbit
   TARGET_DEPENDENCIES jeffery_orbit

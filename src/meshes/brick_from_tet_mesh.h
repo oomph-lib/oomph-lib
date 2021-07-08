@@ -43,11 +43,11 @@
 #include <iterator>
 #include <algorithm>
 
-#include "../generic/mesh.h"
-#include "../generic/tet_mesh.h"
-#include "../generic/brick_mesh.h"
-#include "../generic/refineable_brick_mesh.h"
-#include "../generic/Telements.h"
+#include "generic/mesh.h"
+#include "generic/tet_mesh.h"
+#include "generic/brick_mesh.h"
+#include "generic/refineable_brick_mesh.h"
+#include "generic/Telements.h"
 #include "xda_tet_mesh.h"
 #include "tetgen_mesh.h"
 

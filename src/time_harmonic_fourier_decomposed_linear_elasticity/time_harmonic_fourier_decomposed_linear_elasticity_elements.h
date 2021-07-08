@@ -44,10 +44,10 @@
 #include <complex>
 
 // OOMPH-LIB headers
-#include "../generic/Qelements.h"
-#include "../generic/Telements.h"
-#include "../generic/projection.h"
-#include "../generic/error_estimator.h"
+#include "generic/Qelements.h"
+#include "generic/Telements.h"
+#include "generic/projection.h"
+#include "generic/error_estimator.h"
 
 namespace oomph
 {

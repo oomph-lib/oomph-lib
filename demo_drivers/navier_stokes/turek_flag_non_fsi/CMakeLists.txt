@@ -19,6 +19,8 @@ oomph_add_executable(
   CXX_DEFINITIONS USE_MACRO_ELEMENTS
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME navier_stokes.turek_flag_non_fsi
   TARGET_DEPENDENCIES turek_flag_non_fsi_alg turek_flag_non_fsi_macro

@@ -37,9 +37,9 @@
 #endif
 
 // Space-time block preconditionable elements machinery
-#include "space_time_unsteady_heat_elements.h"
-#include "refineable_space_time_unsteady_heat_elements.h"
-#include "../../space_time_block_preconditioner/general_purpose_space_time_block_preconditionable_elements.h"
+#include <space_time_unsteady_heat_elements.h>
+#include <refineable_space_time_unsteady_heat_elements.h>
+#include <space_time_block_preconditioner/general_purpose_space_time_block_preconditionable_elements.h>
 
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////

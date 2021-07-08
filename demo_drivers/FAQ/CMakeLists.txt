@@ -18,6 +18,8 @@ oomph_add_executable(
   LIBRARIES oomph::poisson
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME FAQ.FAQ
   TARGET_DEPENDENCIES broken_this_demo customising_output

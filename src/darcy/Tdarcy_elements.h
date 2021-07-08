@@ -36,7 +36,7 @@
 #endif
 
 #include "darcy_elements.h"
-#include "../generic/Telements.h"
+#include "generic/Telements.h"
 
 namespace oomph
 {

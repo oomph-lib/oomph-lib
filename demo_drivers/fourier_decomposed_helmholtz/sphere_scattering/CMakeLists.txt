@@ -25,6 +25,8 @@ oomph_add_executable(
   LIBRARIES oomph::fourier_decomposed_helmholtz
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME fourier_decomposed_helmholtz.sphere_scattering
   TARGET_DEPENDENCIES sphere_scattering unstructured_adaptive_sphere_scattering

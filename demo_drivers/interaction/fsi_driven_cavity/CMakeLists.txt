@@ -18,6 +18,8 @@ oomph_add_executable(
   LIBRARIES oomph::multi_physics oomph::beam oomph::navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME interaction.fsi_driven_cavity
   TARGET_DEPENDENCIES fsi_driven_cavity_driver

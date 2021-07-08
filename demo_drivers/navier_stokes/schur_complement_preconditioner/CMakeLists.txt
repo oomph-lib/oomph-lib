@@ -18,6 +18,8 @@ oomph_add_executable(
   LIBRARIES oomph::navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME navier_stokes.schur_complement_preconditioner
   TARGET_DEPENDENCIES three_d_fp two_d_fp

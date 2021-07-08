@@ -38,7 +38,7 @@
 
 // OOMPH-LIB headers
 #include "poisson_elements.h"
-#include "../generic/Qspectral_elements.h"
+#include "generic/Qspectral_elements.h"
 
 namespace oomph
 {

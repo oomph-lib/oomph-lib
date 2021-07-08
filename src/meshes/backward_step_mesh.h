@@ -38,7 +38,7 @@
 
 // OOMPH-LIB headers
 #include "rectangular_quadmesh.h"
-#include "../generic/refineable_quad_mesh.h"
+#include "generic/refineable_quad_mesh.h"
 
 namespace oomph
 {

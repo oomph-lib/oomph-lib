@@ -30,9 +30,9 @@
 #ifndef OOMPH_SIMPLE_CUBIC_TET_MESH_HEADER
 #define OOMPH_SIMPLE_CUBIC_TET_MESH_HEADER
 
-#include "../generic/Telements.h"
-#include "../generic/tet_mesh.h"
-#include "../generic/simple_cubic_scaffold_tet_mesh.h"
+#include "generic/Telements.h"
+#include "generic/tet_mesh.h"
+#include "generic/simple_cubic_scaffold_tet_mesh.h"
 
 namespace oomph
 {

@@ -27,8 +27,12 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-// Oomph-lib headers
-#include "extruded_cube_mesh_from_quad_mesh_with_macro_elements.template.h"
+#ifndef OOMPH_EXTRUDED_CUBE_MESH_FROM_QUAD_MESH_WITH_MACRO_ELEMENTS_TEMPLATE_HEADER
+#define OOMPH_EXTRUDED_CUBE_MESH_FROM_QUAD_MESH_WITH_MACRO_ELEMENTS_TEMPLATE_HEADER
+
+#ifndef OOMPH_EXTRUDED_CUBE_MESH_FROM_QUAD_MESH_WITH_MACRO_ELEMENTS_TEMPLATE_HEADER
+#error __FILE__ should only be included from extruded_cube_mesh_from_quad_mesh_with_macro_elements.h.
+#endif // OOMPH_EXTRUDED_CUBE_MESH_FROM_QUAD_MESH_WITH_MACRO_ELEMENTS_TEMPLATE_HEADER
 
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
@@ -1320,3 +1324,4 @@ namespace oomph
     }
   } // End of build_mesh
 } // End of namespace oomph
+#endif

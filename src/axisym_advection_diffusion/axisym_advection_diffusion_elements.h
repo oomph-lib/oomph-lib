@@ -38,10 +38,10 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/nodes.h"
-#include "../generic/Qelements.h"
-#include "../generic/refineable_elements.h"
-#include "../generic/oomph_utilities.h"
+#include "generic/nodes.h"
+#include "generic/Qelements.h"
+#include "generic/refineable_elements.h"
+#include "generic/oomph_utilities.h"
 
 namespace oomph
 {

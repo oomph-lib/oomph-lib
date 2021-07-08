@@ -13,6 +13,8 @@ oomph_add_executable(
             oomph::solid oomph::constitutive
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME optimisation.C_style_output
   TARGET_DEPENDENCIES c_style_output

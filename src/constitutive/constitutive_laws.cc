@@ -30,7 +30,7 @@
 // Non-inline functions for constitutive laws and strain-energy functions
 
 #include "constitutive_laws.h"
-#include "../generic/elements.h"
+#include "generic/elements.h"
 
 namespace oomph
 {

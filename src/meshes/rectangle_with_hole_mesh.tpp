@@ -34,7 +34,7 @@
 #error __FILE__ should only be included from rectangle_with_hole_mesh.h.
 #endif // OOMPH_RECTANGLE_WITH_HOLE_MESH_HEADER
 
-#include "../generic/Qelements.h"
+#include "generic/Qelements.h"
 
 namespace oomph
 {

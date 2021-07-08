@@ -41,8 +41,8 @@
 #include "mpi.h"
 #endif
 
-#include "../generic/tetgen_scaffold_mesh.h"
-#include "../generic/tet_mesh.h"
+#include "generic/tetgen_scaffold_mesh.h"
+#include "generic/tet_mesh.h"
 
 namespace oomph
 {

@@ -61,6 +61,8 @@ oomph_add_executable(
   LIBRARIES oomph::poisson
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME interaction.free_boundary_poisson
   TARGET_DEPENDENCIES

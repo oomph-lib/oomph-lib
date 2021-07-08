@@ -31,7 +31,7 @@
 #define OOMPH_SINGLE_LAYER_CUBIC_SPINE_MESH_HEADER
 
 // oomph-lib includes
-#include "../generic/spines.h"
+#include "generic/spines.h"
 #include "simple_cubic_mesh.h"
 
 namespace oomph

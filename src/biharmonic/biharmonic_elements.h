@@ -45,9 +45,9 @@
 #include <math.h>
 
 // oomph-lib headers
-#include "../generic/matrices.h"
-#include "../generic/elements.h"
-#include "../generic/hermite_elements.h"
+#include "generic/matrices.h"
+#include "generic/elements.h"
+#include "generic/hermite_elements.h"
 
 namespace oomph
 {

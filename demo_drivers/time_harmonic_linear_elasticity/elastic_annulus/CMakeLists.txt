@@ -32,6 +32,8 @@ oomph_add_executable(
   LIBRARIES oomph::time_harmonic_linear_elasticity
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME time_harmonic_linear_elasticity.elastic_annulus
   TARGET_DEPENDENCIES

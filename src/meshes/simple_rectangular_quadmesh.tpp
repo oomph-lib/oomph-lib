@@ -34,7 +34,7 @@
 #error __FILE__ should only be included from simple_rectangular_quadmesh.h.
 #endif // OOMPH_SIMPLE_RECTANGULAR_QUADMESH_HEADER
 
-#include "../generic/Qelements.h"
+#include "generic/Qelements.h"
 
 namespace oomph
 {

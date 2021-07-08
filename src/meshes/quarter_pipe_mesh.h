@@ -32,14 +32,14 @@
 #define OOMPH_QUARTER_PIPE_MESH_TEMPLATE_HEADER
 
 // Generic oomph-lib includes
-#include "../generic/mesh.h"
-#include "../generic/brick_mesh.h"
-#include "../generic/refineable_brick_mesh.h"
+#include "generic/mesh.h"
+#include "generic/brick_mesh.h"
+#include "generic/refineable_brick_mesh.h"
 #include "simple_cubic_mesh.h"
 #include "quarter_pipe_domain.h"
 
-#include "../generic/macro_element.h"
-#include "../generic/domain.h"
+#include "generic/macro_element.h"
+#include "generic/domain.h"
 
 namespace oomph
 {

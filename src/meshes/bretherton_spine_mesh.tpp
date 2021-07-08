@@ -34,8 +34,8 @@
 #error __FILE__ should only be included from bretherton_spine_mesh.h.
 #endif // OOMPH_BRETHERTON_SPINE_MESH_HEADER
 
-#include "../generic/mesh_as_geometric_object.h"
-#include "../generic/face_element_as_geometric_object.h"
+#include "generic/mesh_as_geometric_object.h"
+#include "generic/face_element_as_geometric_object.h"
 
 #include "single_layer_spine_mesh.h"
 #include "simple_rectangular_quadmesh.h"

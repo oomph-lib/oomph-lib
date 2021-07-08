@@ -25,6 +25,8 @@ oomph_add_executable(
   LIBRARIES oomph::solid oomph::constitutive
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME solid.airy_cantilever
   TARGET_DEPENDENCIES airy_cantilever airy_cantilever2_adapt

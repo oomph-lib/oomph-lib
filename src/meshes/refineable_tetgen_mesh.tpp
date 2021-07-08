@@ -42,9 +42,9 @@
 
 // OOMPH-LIB Headers
 
-#include "../generic/sample_point_parameters.h"
-#include "../generic/mesh_as_geometric_object.h"
-#include "../generic/projection.h"
+#include "generic/sample_point_parameters.h"
+#include "generic/mesh_as_geometric_object.h"
+#include "generic/projection.h"
 
 namespace oomph
 {

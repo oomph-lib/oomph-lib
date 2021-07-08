@@ -25,6 +25,8 @@ oomph_add_executable(
             oomph::navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME solid.prescribed_displ_lagr_mult
   TARGET_DEPENDENCIES prescribed_displ_lagr_mult prescribed_displ_lagr_mult2

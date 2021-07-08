@@ -21,6 +21,8 @@ oomph_add_executable(
   CXX_DEFINITIONS CR_ELEMENT
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME navier_stokes.inclined_plane
   TARGET_DEPENDENCIES inclined_plane inclined_plane2

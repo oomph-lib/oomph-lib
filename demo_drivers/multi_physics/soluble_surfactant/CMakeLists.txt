@@ -13,6 +13,8 @@ oomph_add_executable(
             oomph::fluid_interface
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME multi_physics.soluble_surfactant
   TARGET_DEPENDENCIES soluble_surfactant

@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::navier_stokes oomph::solid oomph::constitutive
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME solid.pseudo_solid_collapsible_channel
   TARGET_DEPENDENCIES pseudo_solid_collapsible_channel

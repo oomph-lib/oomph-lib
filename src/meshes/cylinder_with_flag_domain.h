@@ -31,9 +31,9 @@
 #define OOMPH_CYLINDER_WITH_FLAG_DOMAIN_HEADER
 
 // Generic includes
-#include "../generic/geom_objects.h"
-#include "../generic/macro_element.h"
-#include "../generic/domain.h"
+#include "generic/geom_objects.h"
+#include "generic/macro_element.h"
+#include "generic/domain.h"
 
 namespace oomph
 {

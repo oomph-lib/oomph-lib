@@ -20,6 +20,8 @@ oomph_add_executable(
             oomph::fluid_interface
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME navier_stokes.unstructured_adaptive_fs
   TARGET_DEPENDENCIES adaptive_bubble_in_channel adaptive_drop_in_channel

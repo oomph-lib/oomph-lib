@@ -36,10 +36,10 @@
 #include <oomph-lib-config.h>
 #endif
 
-#include "../generic/nodes.h"
-#include "../generic/Qelements.h"
-#include "../generic/oomph_utilities.h"
-#include "../generic/element_with_external_element.h"
+#include "generic/nodes.h"
+#include "generic/Qelements.h"
+#include "generic/oomph_utilities.h"
+#include "generic/element_with_external_element.h"
 
 namespace oomph
 {

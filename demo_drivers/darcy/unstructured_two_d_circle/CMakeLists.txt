@@ -19,6 +19,8 @@ oomph_add_executable(
   LIBRARIES oomph::darcy
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME darcy.unstructured_two_d_circle
   TARGET_DEPENDENCIES adaptive_unstructured_two_d_circle

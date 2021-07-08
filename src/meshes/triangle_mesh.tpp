@@ -36,10 +36,10 @@
 
 #include <iostream>
 
-#include "../generic/map_matrix.h"
-#include "../generic/multi_domain.h"
-#include "../generic/projection.h"
-#include "../generic/face_element_as_geometric_object.h"
+#include "generic/map_matrix.h"
+#include "generic/multi_domain.h"
+#include "generic/projection.h"
+#include "generic/face_element_as_geometric_object.h"
 
 namespace oomph
 {

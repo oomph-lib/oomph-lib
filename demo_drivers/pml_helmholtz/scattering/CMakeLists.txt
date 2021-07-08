@@ -25,6 +25,8 @@ oomph_add_executable(
   LIBRARIES oomph::pml_helmholtz
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME pml_helmholtz.scattering
   TARGET_DEPENDENCIES

@@ -12,6 +12,8 @@ oomph_add_executable(
   LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
   CXX_STANDARD 11)
 
+# ---------------------------------- TESTING ----------------------------------
+
 oomph_add_test(
   TEST_NAME interaction.unstructured_adaptive_fsi
   TARGET_DEPENDENCIES unstructured_adaptive_2d_fsi

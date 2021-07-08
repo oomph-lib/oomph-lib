@@ -39,8 +39,8 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/Qelements.h"
-#include "../generic/hermite_elements.h"
+#include "generic/Qelements.h"
+#include "generic/hermite_elements.h"
 
 namespace oomph
 {

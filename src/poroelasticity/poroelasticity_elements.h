@@ -35,8 +35,8 @@
 #include <oomph-lib-config.h>
 #endif
 
-#include "../generic/elements.h"
-#include "../generic/shape.h"
+#include "generic/elements.h"
+#include "generic/shape.h"
 
 #include "elasticity_tensor.h"
 

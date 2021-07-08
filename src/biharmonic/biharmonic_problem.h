@@ -45,8 +45,8 @@
 #include <math.h>
 
 // oomph-lib headers
-#include "../generic/problem.h"
-#include "../generic/hijacked_elements.h"
+#include "generic/problem.h"
+#include "generic/hijacked_elements.h"
 #include "../meshes/hermite_element_quad_mesh.h"
 #include "biharmonic_elements.h"
 #include "biharmonic_flux_elements.h"

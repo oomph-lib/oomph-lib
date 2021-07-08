@@ -37,7 +37,7 @@
 #include <oomph-lib-config.h>
 #endif
 
-#include "../generic/elements.h"
+#include "generic/elements.h"
 
 namespace oomph
 {

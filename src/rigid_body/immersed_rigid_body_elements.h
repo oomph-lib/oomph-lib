@@ -36,9 +36,9 @@
 #include <oomph-lib-config.h>
 #endif
 
-#include "../generic/elements.h"
-#include "../generic/triangle_mesh.h"
-#include "../generic/fsi.h"
+#include "generic/elements.h"
+#include "generic/triangle_mesh.h"
+#include "generic/fsi.h"
 
 namespace oomph
 {

@@ -36,8 +36,8 @@
 #endif
 
 // oomph-lib headers
-#include "../generic/line_mesh.h"
-#include "../generic/refineable_line_mesh.h"
+#include "generic/line_mesh.h"
+#include "generic/refineable_line_mesh.h"
 
 namespace oomph
 {

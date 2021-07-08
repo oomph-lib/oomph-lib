@@ -35,12 +35,12 @@
 #endif
 
 // Oomph-lib headers
-#include "../generic/mesh.h"
-#include "../generic/quad_mesh.h"
-#include "../generic/brick_mesh.h"
-#include "../generic/refineable_brick_mesh.h"
-#include "../generic/extruded_domain.h"
-#include "../generic/extruded_macro_element.h"
+#include "generic/mesh.h"
+#include "generic/quad_mesh.h"
+#include "generic/brick_mesh.h"
+#include "generic/refineable_brick_mesh.h"
+#include "generic/extruded_domain.h"
+#include "generic/extruded_macro_element.h"
 
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
@@ -256,4 +256,5 @@ namespace oomph
 
 } // End of namespace oomph
 
+#include "extruded_cube_mesh_from_quad_mesh_with_macro_elements.tpp"
 #endif

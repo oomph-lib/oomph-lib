@@ -39,13 +39,13 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../generic/Qelements.h"
-#include "../generic/Telements.h"
-#include "../generic/mesh.h"
-#include "../generic/hermite_elements.h"
+#include "generic/Qelements.h"
+#include "generic/Telements.h"
+#include "generic/mesh.h"
+#include "generic/hermite_elements.h"
 #include "../constitutive/constitutive_laws.h"
-#include "../generic/error_estimator.h"
-#include "../generic/projection.h"
+#include "generic/error_estimator.h"
+#include "generic/projection.h"
 
 namespace oomph
 {
