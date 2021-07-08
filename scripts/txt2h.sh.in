@@ -1,0 +1,284 @@
+# TEMPLATE FOR SHELL SCRIPT -- NEEDS TO BE PROCESSED BY AUTOMAKE
+# WHICH WILL INSERT THE CORRECT PATH FOR awk.
+
+
+mkdir .tmp
+
+#--------------------------------------------
+# Convert *.txt into doxygenable *.h file.
+#
+# Shorthands (all starting in first column)
+#
+# - Comments:
+#   Start line with #
+#   (careful -- if your \code example includes something like
+#   #include"...", you'll need to indent this by at least one column
+#
+# - End of file: 
+#   @@END@@
+#
+# - Images (in gif and eps format for html/latex output):
+#
+#   @I [w/h] size file_name_stem caption
+#
+#   Example:
+#
+#      @I w 3cm figure "This is a figure"
+#
+#   
+#
+
+#--------------------------------------------
+
+rm -f .tmp/.$1.aux00
+rm -f .tmp/.$1.aux0
+rm -f .tmp/.$1.aux1
+rm -f .tmp/.$1.aux2
+rm -f .tmp/.labels.sed
+touch .tmp/.labels.sed
+
+
+
+
+
+#--------------------------------------------
+# Ignore anything after a line with '@@END@@
+# is encountered.
+#--------------------------------------------
+
+AWK '
+
+#-------------------------------------------------
+# Initialise flag for end of text to be processed
+#-------------------------------------------------
+BEGIN{
+reached_end_of_input=0
+}
+
+
+{
+  # Are we past the end of the text to be processed?
+  if (reached_end_of_input!=1)
+   {
+    # Does the line start with comment '@@END@@' ?
+    end_flag=index($0,"@@END@@")
+    if (end_flag!=1)
+     {
+      print $0
+     }
+    else
+     {
+      reached_end_of_input=1
+      #print "COMMENT: ", $0 
+     }
+   }
+}
+
+' < $1 > .tmp/.$1.aux00
+
+
+#--------------------------------------------
+# Write images. Format in text:
+#
+# @I [w/h] size file_name_stem caption
+#
+# Example:
+#
+# @I w 3cm figure "This is a figure"
+#--------------------------------------------
+
+AWK '
+
+{
+  # Does line start with @I ?
+  image_start=index($0,"@I")
+  #print $0
+  #print "IMAGE START: ", image_start
+  if (image_start==1)
+   {
+    printf  "\\image html " $4 ".gif "
+    for (i=5;i<NF;i++) printf $i " "
+    print "\" "
+    printf  "\\image latex " $4 ".eps "
+    for (i=5;i<NF;i++) printf $i " "
+    if ($1=="w")
+      {
+       print "\" width=" $3
+      }
+    else
+      {
+       print "\" width=" $3
+      }
+   }
+  else
+   {
+    print $0
+   }
+}
+
+
+
+' <  .tmp/.$1.aux00 > .tmp/.$1.aux0
+
+
+
+
+#--------------------------------------------
+# Add /** at the start of the file 
+# and **/ at the end
+# to turn it into doxygen style comment.
+# Ignore any line that starts with "#"
+#
+#--------------------------------------------
+
+AWK '
+BEGIN {
+ print "/**\n";
+ }
+
+{
+  # Does the line start with comment '#' ?
+  comment_start=index($0,"#")
+  #print $0
+  #print "COMMENT START: ", comment_start
+  if (comment_start!=1)
+   {
+    #print "/// ", $0
+     print $0
+  }
+  else
+   {
+    #print "COMMENT: ", $0 
+   }
+}
+END { 
+print "**/\n";
+}
+' < .tmp/.$1.aux0 > .tmp/.$1.aux1
+
+   
+
+
+AWK ' 
+
+     
+#--------------------------------------------
+# Function to check if the argument is
+# a labeled equation number.
+#
+# In the source file labeled equation/algorithm 
+# numbers are represented by "@E[label]@"/"@A[label]@" 
+# where "label" is some (unique) label that can be 
+# referred to with a reference "@R[label]@"/"@RA[label]@"
+#
+# If the argument is a labeled equation/algorithm,
+# we assign an equation/algorithm number,
+# increment the counter for number of equations/algorithms
+# and store the equation/algorithm numbers and their 
+# labels in the arrays
+#
+#     eqn_label_array[]    alg_label_array[]
+#
+#    and 
+#
+#     eqn_number_array[]   alg_number_array[]
+#
+#--------------------------------------------
+function check_if_label(arg)
+{
+  # Is the argument a labeled equation?
+  start_of_label=index(arg,"@E[")
+  if (start_of_label!=0)
+   { 
+    # Extract the label from argument (label is enclosed 
+    # between square brackets)
+    start_of_label+=3
+    end_of_label=index(arg,"]")
+    end_of_label-=4
+    label=substr(arg,start_of_label,end_of_label)
+    # Add to arrays of labeled equation numbers
+    eqn_label_array[labeled_eqn_number_count]=label
+    eqn_number_array[labeled_eqn_number_count]=labeled_eqn_number_count
+    labeled_eqn_number_count++
+   }
+  # Is the argument a labeled algorithm?
+  start_of_label=index(arg,"@A[")
+  if (start_of_label!=0)
+   { 
+    # Extract the label from argument (label is enclosed 
+    # between square brackets)
+    start_of_label+=3
+    end_of_label=index(arg,"]")
+    end_of_label-=4
+    label=substr(arg,start_of_label,end_of_label)
+    # Add to arrays of labeled algorithm numbers
+    alg_label_array[labeled_alg_number_count]=label
+    alg_number_array[labeled_alg_number_count]=labeled_alg_number_count
+    labeled_alg_number_count++
+   }
+}
+
+
+#--------------------------------------------
+# Initialise the counter for the number
+# of labeled equations and algorithms
+#---------------------------------------------
+BEGIN{
+labeled_eqn_number_count=1;
+labeled_alg_number_count=1;
+}
+
+
+#---------------------------------------------
+# For every line in input file: Look at each
+# field and check if it s a label
+#---------------------------------------------
+{
+for (i=1;i<=NF;i++)
+ {
+  check_if_label($i)
+ } 
+print $0
+}
+
+
+
+
+#---------------------------------------------
+# Dump labeled equation numbers and their
+# labels into sed file
+#
+#   .tmp/labels.sed
+#
+#---------------------------------------------
+END{
+for (i=1;i<labeled_eqn_number_count;i++)
+ {
+  printf "s/\\@R\\[%s\\]\\@/%i/g \n", eqn_label_array[i],eqn_number_array[i] > ".tmp/.labels.sed"
+  printf "s/\\@E\\[%s\\]\\@/(%i)/g \n", eqn_label_array[i],eqn_number_array[i] > ".tmp/.labels.sed"
+
+ }
+
+for (i=1;i<labeled_alg_number_count;i++)
+ {
+  printf "s/\\@RA\\[%s\\]\\@/%i/g \n", alg_label_array[i],alg_number_array[i] > ".tmp/.labels.sed"
+  printf "s/\\@A\\[%s\\]\\@/%i/g \n", alg_label_array[i],alg_number_array[i] > ".tmp/.labels.sed"
+
+ }
+
+}
+' < .tmp/.$1.aux1 > .tmp/.$1.aux2
+
+
+
+sed -f .tmp/.labels.sed .tmp/.$1.aux2 > $1_doxygenified.h
+
+rm -f .tmp/.labels.sed
+rm -f .tmp/.$1.aux1
+rm -f .tmp/.$1.aux2
+rm -r -f .tmp
+
+
+
+
+

@@ -1,0 +1,23 @@
+repos:
+  - repo: local
+    hooks:
+      - id: cmake-format
+        name: cmake-format
+        entry: cmake-format
+        description: Format CMakeLists.txt files using cmake-format.
+        args: ["--in-place"]
+        language: python
+        types: [cmake]
+
+      # Run clang-format over all C++ files. We only want to format the src/
+      # directory and demo_drivers. We don't format files with a .c prefix which
+      # avoids C sources (which are likely not ours). However, files with a .h
+      # prefix may be confused with our C++ headers (e.g. src/generic/cfortran.h)
+      # so we have to ignore them explicitly by ignoring them in the regex.
+      - id: clang-format
+        name: clang-format
+        description: Format files with clang-format.
+        entry: clang-format -i
+        language: system
+        files: ^(src|demo_drivers)\/(?!.*(cfortran))(.+)\.(h|hpp|cc|cpp|tpp)$
+        args: ['-style=file']
